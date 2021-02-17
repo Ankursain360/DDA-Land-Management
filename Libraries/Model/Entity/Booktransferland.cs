@@ -15,9 +15,8 @@ namespace Libraries.Model.Entity
         public int? LocalityId { get; set; }
         public int? KhasraId { get; set; }
         public string Part { get; set; }
-        public decimal? Bigha { get; set; }
-        public decimal? Biswa { get; set; }
-        public decimal? Biswanshi { get; set; }
+        public decimal? Area { get; set; }
+       
         public string StatusOfLand { get; set; }
         public DateTime? DateofPossession { get; set; }
         public string Remarks { get; set; }

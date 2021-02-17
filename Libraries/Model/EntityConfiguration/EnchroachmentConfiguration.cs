@@ -35,6 +35,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(150)
                 .IsUnicode(false);
 
+            builder.Property(e => e.ActionTaken)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+
             builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.Biswa).HasColumnType("decimal(18,3)");
@@ -57,9 +62,13 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+           
 
-            builder.Property(e => e.KhasraId).HasColumnType("int(11)");
+            builder.Property(e => e.RecStatus)
+                 .HasMaxLength(100)
+                 .IsUnicode(false);
 
+           
             builder.Property(e => e.LandUse)
                 .IsRequired()
                 .HasMaxLength(100)

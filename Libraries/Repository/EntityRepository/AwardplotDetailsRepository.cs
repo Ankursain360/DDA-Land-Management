@@ -50,12 +50,116 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model)
         {
-            return await _dbContext.Awardplotdetails
+            //return await _dbContext.Awardplotdetails
+            //                            .Include(x => x.AwardMaster)
+            //                            .Include(x => x.Village)
+            //                            .Include(x => x.Khasra)
+            //                            .OrderByDescending(x => x.Id)
+            //                        .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize); 
+
+                var data = await _dbContext.Awardplotdetails
                                         .Include(x => x.AwardMaster)
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
-                                        .OrderByDescending(x => x.Id)
-                                    .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                                // .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name) && (x.IsActive == 1))
+                                .OrderByDescending(x => x.Id)
+                              .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("AWARD"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderBy(x => x.AwardMaster.AwardNumber)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderBy(x => x.Village.Name)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                       
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderBy(x => x.Khasra.Name)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                     case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderBy(x => x.IsActive==1)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("AWARD"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderByDescending(x => x.AwardMaster.AwardNumber)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderByDescending(x => x.Village.Name)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderByDescending(x => x.Khasra.Name)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
+                                .OrderByDescending(x => x.IsActive == 1)
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            return data;
         }
 
 

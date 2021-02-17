@@ -1,0 +1,109 @@
+﻿
+@model Libraries.Model.Entity.Awardplotdetails
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Award Plot Details</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" >
+    <div class="panel">
+        <div class="panel-heading dda-pageheading">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Award No.</label>
+                        <select class="form-control dda-dropdown" asp-for="AwardMasterId" asp-items="@(new SelectList(Model.AwardmasterList, "Id","AwardNumber"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="AwardMasterId" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Village Name</label>
+                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="VillageId" class="text-danger"></span>
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Khasra No</label>
+                        <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="KhasraId" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div id="Divclsification">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class="dda-innerheading">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Bigha</label>
+
+                            <input type="text" asp-for="Bigha" class="form-control" />
+
+                        </div>
+
+                        <div class="form-group col-md-4">
+
+                            <label class="control-label lb-sm">Biswa</label>
+
+                            <input type="text" asp-for="Biswa" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Biswanshi</label>
+                            <input type="text" asp-for="Biswanshi" class="form-control" placeholder="0" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea type="text" asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                         @Html.ActionLink("Back", "Index", "AwardPlotDetails", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

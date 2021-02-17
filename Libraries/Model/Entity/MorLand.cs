@@ -10,15 +10,22 @@ namespace Libraries.Model.Entity
     public class Morland : AuditableEntity<int>
     {
 
-       
+        [Required(ErrorMessage = " Land Notification name is mandatory")]
         public int LandNotificationId { get; set; }
+        [Required(ErrorMessage = " Notofication Date is mandatory")]
         public DateTime? NotificationDate { get; set; }
+        [Required(ErrorMessage = " Serial Number is mandatory")]
         public int SerialnumberId { get; set; }
+        [Required(ErrorMessage = " Property name is mandatory")]
         public string PropertySiteNo { get; set; }
+        [Required(ErrorMessage = " Location name is mandatory")]
         public string Name { get; set; }
         public string SiteDescription { get; set; }
+        [Required(ErrorMessage = " Bigha name is mandatory")]
         public decimal Bigha { get; set; }
+        [Required(ErrorMessage = " Biswa name is mandatory")]
         public decimal Biswa { get; set; }
+        [Required(ErrorMessage = " Biswansi name is mandatory")]
         public decimal Biswanshi { get; set; }
         public string StatusOfLand { get; set; }
         public string OccupiedBy { get; set; }

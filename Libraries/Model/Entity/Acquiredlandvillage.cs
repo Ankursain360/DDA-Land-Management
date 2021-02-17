@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Awardmasterdetail = new HashSet<Awardmasterdetail>();
         }
         [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
@@ -71,7 +72,7 @@ namespace Libraries.Model.Entity
 
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
 
-
+        public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
 
     }
 }

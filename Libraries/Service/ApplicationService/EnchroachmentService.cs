@@ -34,7 +34,7 @@ namespace Libraries.Service.ApplicationService
             _EnchroachmentRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
+       
         public async Task<Enchroachment> FetchSingleResult(int id)
         {
             var result = await _EnchroachmentRepository.FindBy(a => a.Id == id);
@@ -125,7 +125,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _EnchroachmentRepository.GetPagedEnchroachment(model);
         }
-
-
+        public async Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId)
+        {
+            // var EnchorcherList =
+                return await _EnchroachmentRepository.GetPagedEncrocherPeople(model, UserId);
+           // return EnchorcherList;
+        }
+       
     }
 }

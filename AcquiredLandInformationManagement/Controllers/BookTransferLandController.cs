@@ -139,19 +139,25 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == 0)
+            try
             {
-                return NotFound();
-            }
 
-            var form = await _booktransferlandService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
+                var result = await _booktransferlandService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
             }
-            var result = await _booktransferlandService.GetAllBooktransferland();
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View("Index", result);
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _booktransferlandService.GetAllBooktransferland();
+            return View("Index", list);
         }
 
         public async Task<IActionResult> View(int id)

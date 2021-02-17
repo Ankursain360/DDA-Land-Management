@@ -14,6 +14,7 @@ namespace Libraries.Model.Entity
         {
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Undersection4 = new HashSet<Undersection4>();
+            Awardmasterdetail = new HashSet<Awardmasterdetail>();
         }
 
         [Required]
@@ -44,7 +45,7 @@ namespace Libraries.Model.Entity
         public virtual Scheme Scheme { get; set; }
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public virtual ICollection<Undersection4> Undersection4 { get; set; }
-
+        public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
 
 
     }

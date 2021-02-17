@@ -1,150 +1,142 @@
 ﻿@model Libraries.Model.Entity.Booktransferland
-@{
-    ViewData["Title"] = "View";
-}
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left color-white" style="margin-top:5px;">Book Transfer Land </h6>
-                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Book Transfer Land" })
+<div class="pt-3">
+    <form asp-action="Edit" disabled="disabled" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId " asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="LandNotificationId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="LandNotificationId">Notification No.</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3 ">
+                    <span asp-validation-for="NotificationDate" class="text-danger"></span>
+                    <label class="floating-label" asp-for="NotificationDate">Notification Date</label>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<br />
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId " asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="LocalityId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="LocalityId">Locality Name (Village)</label>
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
+
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId " asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="KhasraId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="KhasraId">Khasra No.</label>
+
+                </div>
+
+            </div>
+
         </div>
-        <div class="panel-body">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="Part" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Notification No.</label>
-                        <select asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))"
-                                class="form-control dda-dropdown">
-                            <option value="0">---Select---</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Notification Date</label>
-                        <input asp-for="NotificationDate" type="date" class="form-control">
-
-                    </div>
+                    <span asp-validation-for="Part" class="text-danger"></span>
+                    <label class="floating-label" asp-for="Part">Part</label>
 
 
                 </div>
-                <div class="form-row">
+            </div>
+            <div class=" col-md-6">
 
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Locality Name (Village)</label>
-                        <select asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))"
-                                class="form-control dda-dropdown">
-                            <option value="0">---Select---</option>
+                <div class="floating-label-wrap">
+                    <input asp-for="Area" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Khasra No.</label>
-                        <select asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))"
-                                class="form-control dda-dropdown">
-                            <option value="0">---Select---</option>
+                    <span asp-validation-for="Area" class="text-danger"></span>
+                    <label class="floating-label" asp-for="Area">Area (Acre)</label>
 
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Part </label>
-                        <input asp-for="Part" type="text" class="form-control">
-
-                    </div>
                 </div>
 
-                <div id="Divclsification">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Used Area </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Bigha</label>
-                            <input asp-for="Bigha" type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Biswa</label>
-                            <input asp-for="Biswa" type="text" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Biswanshi</label>
-                            <input asp-for="Biswanshi" type="text" class="form-control" placeholder="0" />
-                        </div>
-                    </div>
-                </div>
+            </div>
 
-                <div id="Divclsification">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;"> Land Status Details </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Status Of Land</label>
-                            <input asp-for="StatusOfLand" type="text" class="form-control" placeholder="0" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Date Of Possession</label>
-                            <input asp-for="DateofPossession" type="date" class="form-control" placeholder="0" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
-                        <select asp-for="IsActive" class="form-control dda-dropdown">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
-                        <textarea asp-for="Remarks" type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
-                    </div>
-                </div>
-
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        @Html.ActionLink("Back", "Index", "BookTransferLand", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-
-            </form>
         </div>
-    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field  " placeholder="Name" name="grpLand" value="Allotted" id="A">Allotted
+                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field " placeholder="Name" name="grpLand" value="Vacant" id="V">Vacant
+                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Enchroched
+                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Green" id="G">Green
+
+                    <span asp-validation-for="StatusOfLand" class="text-danger"></span>
+                    <label class="floating-label" asp-for="StatusOfLand">Status Of Land</label>
+
+
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <input asp-for="DateofPossession" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+
+                    <span asp-validation-for="DateofPossession" class="text-danger"></span>
+                    <label class="floating-label" asp-for="DateofPossession">Date of Possession</label>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label asp-for="Remarks" class="floating-label">Remarks </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+
+                @Html.ActionLink("Back", "Index", "BookTransferLand", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+    </form>
 </div>
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/booktransferlandcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/booktransferlandcreate.min.js" asp-append-version="true"></script>
+</environment>

@@ -119,7 +119,7 @@ namespace Libraries.Model
 
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
-
+        public virtual DbSet<EncrocherPeople> EncrocherPeople { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -237,7 +237,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new EnchroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new LdolandConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
-            modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
@@ -353,6 +352,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GistrijunctionConfiguration());
             modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
+            modelBuilder.ApplyConfiguration(new AwardmasterdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
+            modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -81,7 +81,8 @@ namespace Libraries.Service.ApplicationService
             model.Bigha = awardplotdetails.Bigha;
             model.Biswa = awardplotdetails.Biswa;
             model.Biswanshi = awardplotdetails.Biswanshi;
-
+            model.Remarks = awardplotdetails.Remarks;
+            model.IsActive = awardplotdetails.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _awardplotDetailsRepository.Edit(model);
@@ -91,6 +92,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Awardplotdetails awardplotdetails)
         {
+            
             awardplotdetails.CreatedBy = 1;
             awardplotdetails.CreatedDate = DateTime.Now;
             awardplotdetails.IsActive = 1;
@@ -105,6 +107,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _awardplotDetailsRepository.GetPagedAwardplotdetails(model);
         }
+
 
 
 

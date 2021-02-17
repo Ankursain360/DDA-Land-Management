@@ -17,5 +17,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Reasons>> GetAllReasons();
         Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
         Task<List<Khasra>> BindKhasra();
+        Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId);
     }
 }

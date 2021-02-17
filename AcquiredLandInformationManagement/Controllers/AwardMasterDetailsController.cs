@@ -1,21 +1,206 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Core.Enum;
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using AcquiredLandInformationManagement.Filters;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Utility.Helper;
 
-namespace DDAPropertyREG.Controllers
+namespace AcquiredLandInformationManagement.Controllers
 {
-    public class AwardMasterDetailsController : Controller
+    public class AwardMasterDetailsController : BaseController
     {
+        public readonly IAwardmasterdetailsService _awardmasterdetailsService;
+        public AwardMasterDetailsController(IAwardmasterdetailsService awardmasterdetailsService)
+        {
+            _awardmasterdetailsService = awardmasterdetailsService;
+        }
         public IActionResult Index()
         {
+
             return View();
+        }
+        //   [AuthorizeContext(ViewAction.View)]
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] AwardMasterDetailsSearchDto model)
+        {
+            var result = await _awardmasterdetailsService.GetPagedawardmasterdetails(model);
+            return PartialView("_List", result);
         }
 
-        public IActionResult Create()
+       // [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            Awardmasterdetail model = new Awardmasterdetail();
+            model.IsActive = 1;
+            model.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
+            model.section17List = await _awardmasterdetailsService.Getundersection17();
+            model.section4List = await _awardmasterdetailsService.Getundersection4();
+            model.section6List = await _awardmasterdetailsService.Getundersection6();
+            model.purposalList = await _awardmasterdetailsService.GetPurposal();
+            return View(model);
         }
+        [HttpPost]
+        //    [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(Awardmasterdetail awardmasterdetail)
+        {
+            try
+            {
+                awardmasterdetail.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
+                awardmasterdetail.purposalList = await _awardmasterdetailsService.GetPurposal();
+                awardmasterdetail.section6List = await _awardmasterdetailsService.Getundersection6();
+                awardmasterdetail.section4List = await _awardmasterdetailsService.Getundersection4();
+                awardmasterdetail.section17List = await _awardmasterdetailsService.Getundersection17();
+                if (ModelState.IsValid)
+                {
+                    var result = await _awardmasterdetailsService.Create(awardmasterdetail);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _awardmasterdetailsService.Getawardmasterdetails();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(awardmasterdetail);
+                    }
+                }
+                else
+                {
+                    return View(awardmasterdetail);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(awardmasterdetail);
+            }
+        }
+         //   [AuthorizeContext(ViewAction.Edit)]
+            public async Task<IActionResult> Edit(int id)
+            {
+                var Data = await _awardmasterdetailsService.FetchSingleResult(id);
+                 Data.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
+                 Data.purposalList = await _awardmasterdetailsService.GetPurposal();
+                  Data.section6List = await _awardmasterdetailsService.Getundersection6();
+                  Data.section4List = await _awardmasterdetailsService.Getundersection4();
+                   Data.section17List = await _awardmasterdetailsService.Getundersection17();
+            if (Data == null)
+                {
+                    return NotFound();
+                }
+                return View(Data);
+            }
+
+         //   [AuthorizeContext(ViewAction.View)]
+            public async Task<IActionResult> View(int id)
+            {
+            var Data = await _awardmasterdetailsService.FetchSingleResult(id);
+            Data.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
+            Data.purposalList = await _awardmasterdetailsService.GetPurposal();
+            Data.section6List = await _awardmasterdetailsService.Getundersection6();
+            Data.section4List = await _awardmasterdetailsService.Getundersection4();
+            Data.section17List = await _awardmasterdetailsService.Getundersection17();
+            if (Data == null)
+                {
+                    return NotFound();
+                }
+                return View(Data);
+            }
+        [HttpPost]
+    //    [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, Awardmasterdetail awardmasterdetail)
+        {
+            awardmasterdetail.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
+            awardmasterdetail.purposalList = await _awardmasterdetailsService.GetPurposal();
+            awardmasterdetail.section6List = await _awardmasterdetailsService.Getundersection6();
+            awardmasterdetail.section4List = await _awardmasterdetailsService.Getundersection4();
+            awardmasterdetail.section17List = await _awardmasterdetailsService.Getundersection17();
+            if (ModelState.IsValid)
+            {
+                var result = await _awardmasterdetailsService.Update(id, awardmasterdetail);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    var list = await _awardmasterdetailsService.Getawardmasterdetails();
+                    return View("Index", list);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(awardmasterdetail);
+                }
+            }
+            else
+            {
+                return View(awardmasterdetail);
+            }
+        }
+    //    [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality 
+        {
+            var result = await _awardmasterdetailsService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _awardmasterdetailsService.Getawardmasterdetails();
+            return View("Index", list);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExistName(int Id, string Name)
+        {
+            var result = await _awardmasterdetailsService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Awatd Number: {Name} already exist");
+            }
+        }
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExistCode(int Id, string name)
+        {
+            var result = await _awardmasterdetailsService.CheckUniqueName(Id, name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Award Number : {name} already exist");
+            }
+        }
+
+       
+    //    [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Awardmasterdetail> result = await _awardmasterdetailsService.GetAll();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"AwardMaster.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
+
     }
 }

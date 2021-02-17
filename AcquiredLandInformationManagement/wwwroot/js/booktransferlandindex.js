@@ -1,34 +1,65 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 2;
+var currentPageSize = 5;
+var sortby = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetBooktransferland(currentPageNumber, currentPageSize);
+    GetAward(currentPageNumber, currentPageSize, sortby);
 });
 
-function GetBooktransferland(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+
+function GetAward(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/bookTransferLand/List`, 'html', param, function (response) {
         $('#divBooktransferlandTable').html("");
         $('#divBooktransferlandTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+$("#btnSearch").click(function () {
+    GetAward(currentPageNumber, currentPageSize, sortby);
+});
+
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortby = 1;//for Ascending
+    GetAward(currentPageNumber, currentPageSize, sortby);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortby = 2;//for Descending
+    GetAward(currentPageNumber, currentPageSize, sortby);
+});
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtCode').val('');
+    GetAward(currentPageNumber, currentPageSize, sortby);
+});
+
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+     //   localityCode: $('#txtCode').val(),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
 function onPaging(pageNo) {
-    GetBooktransferland(pageNo, currentPageSize);
+    GetAward(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetBooktransferland(currentPageNumber, pageSize);
+    GetAward(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }
-

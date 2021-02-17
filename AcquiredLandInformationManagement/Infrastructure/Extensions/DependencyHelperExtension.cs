@@ -38,7 +38,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IUndersection22Repository, Undersection22Repository>();
             services.AddScoped<IAwardplotDetailsRepository, AwardplotDetailsRepository>();
-           
+            services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
+
             services.AddScoped<IDisposallandtypeRepository, DisposallandtypeRepository>();
             services.AddScoped<INazulRepository, NazulRepository>();
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();
@@ -86,7 +87,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<ILdolandService, LdolandService>();
 
-            services.AddScoped<IBooktransferlandService, BooktransferlandService>();
+            
             services.AddScoped<ISakanidetailService, SakanidetailService>(); //added by Nikita
             services.AddScoped<IJaraidetailService, JaraidetailService>(); 
             services.AddScoped<IUndersection17Service, Undersection17Service>();
@@ -102,7 +103,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandService, DisposallandService>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
             services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
-
+            services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
+            services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
+            services.AddScoped<IBooktransferlandService, BooktransferlandService>();
         }
     }
 }

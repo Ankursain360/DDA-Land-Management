@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\encharochmentcreate - Copy.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
@@ -80,6 +84,20 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Home\ExceptionLog.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\AwardMasterDetails\Create.cshtml" />
+    <None Include="Views\AwardMasterDetails\Edit.cshtml" />
+    <None Include="Views\AwardMasterDetails\Index.cshtml" />
+    <None Include="Views\AwardMasterDetails\View.cshtml" />
+    <None Include="Views\AwardMasterDetails\_List.cshtml" />
+    <None Include="Views\AwardPlotDetails\Create.cshtml" />
+    <None Include="Views\AwardPlotDetails\Createold.cshtml" />
+    <None Include="Views\AwardPlotDetails\Edit.cshtml" />
+    <None Include="Views\AwardPlotDetails\Index.cshtml" />
+    <None Include="Views\AwardPlotDetails\View.cshtml" />
+    <None Include="Views\AwardPlotDetails\_List.cshtml" />
   </ItemGroup>
 
 </Project>
