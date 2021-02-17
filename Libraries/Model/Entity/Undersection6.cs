@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public Undersection6()
         {
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
+            Awardmasterdetail = new HashSet<Awardmasterdetail>();
         }
         [Required]
         public string Number { get; set; }
