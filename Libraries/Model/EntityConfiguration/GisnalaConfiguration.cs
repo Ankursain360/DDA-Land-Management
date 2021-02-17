@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class GisnalaConfiguration : IEntityTypeConfiguration<GISnala>
+    public class GisnalaConfiguration : IEntityTypeConfiguration<Gisnala>
     {
-        public void Configure(EntityTypeBuilder<GISnala> entity)
+        public void Configure(EntityTypeBuilder<Gisnala> entity)
         {
             entity.ToTable("gisnala", "lms");
 

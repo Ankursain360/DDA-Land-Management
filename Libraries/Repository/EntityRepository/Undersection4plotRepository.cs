@@ -35,11 +35,30 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
        {
-           List<Khasra> KhasraList = await _dbContext.Khasra.Where(x=>x.IsActive==1).ToListAsync();
-            return KhasraList;
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
+            return khasraList;
         }
+
+
+
+
+
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
+
+
+
+
+
+
+
+
+
+
 
 
         public async Task<List<Undersection4plot>> GetAllUndersection4Plot()
@@ -49,9 +68,110 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model)
         {
-            return await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
-                .Include(x=>x.Village).Include(x=>x.Khasra)
-                .OrderByDescending(x => x.Id).GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+                .Include(x=>x.Village).Include(x=>x.Khasra) .Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+
+               ).
+
+
+
+
+                GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+
+
+
+
+
+
+
+
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("UNDERSECTION4NO"):
+                        data = null;
+                        data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+                .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                   && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+
+               )
+                                .OrderBy(s => s.UnderSection4.Number)
+                                .GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+                   .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                      && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+
+                  )
+                                    .OrderBy(s => s.Village.Name)
+                                .GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+               .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                  && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+
+              )
+                           .OrderByDescending(s => s.IsActive)
+                                .GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("UNDERSECTION4NO"):
+                        data = null;
+                        data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+                .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                   && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+
+               )
+                                .OrderByDescending(s => s.UnderSection4.Number)
+                                .GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+                   .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                      && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+
+                  )
+                                    .OrderByDescending(s => s.Village.Name)
+                                .GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+               .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification4) || x.UnderSection4.Number.Contains(model.numbernotification4))
+                  && (string.IsNullOrEmpty(model.villageid) || x.Village.Name.Contains(model.villageid))
+
+              )
+                           .OrderBy(s => s.IsActive)
+                                .GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+
+
+            return data;
+
+
         }
 
 

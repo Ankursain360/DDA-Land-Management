@@ -45,7 +45,7 @@ namespace AcquiredLandInformationManagement.Controllers
             model.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(model.AcquiredlandvillageId);
             //var Data = await _undersection22plotdetailsService.FetchSingleKhasraResult(Convert.ToInt32(model.KhasraId));
             //model.Khasra = Data;
-           
+            model.IsActive = 1;
             return View(model);
         }
         [HttpPost]
@@ -59,11 +59,12 @@ namespace AcquiredLandInformationManagement.Controllers
             us22plot.Undersection17List = await _undersection22plotdetailsService.GetAllUndersection17();
             us22plot.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             us22plot.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(us22plot.AcquiredlandvillageId);
-            var Data = await _undersection22plotdetailsService.FetchSingleKhasraResult(Convert.ToInt32(us22plot.KhasraId));
-            us22plot.Khasra = Data;
-            us22plot.Bigha = Convert.ToDecimal( us22plot.Khasra.Bigha);
-            us22plot.Biswa = Convert.ToDecimal(us22plot.Khasra.Biswa);
-            us22plot.Biswanshi = Convert.ToDecimal(us22plot.Khasra.Biswanshi);
+            us22plot.IsActive = 1;
+            // var Data = await _undersection22plotdetailsService.FetchSingleKhasraResult(Convert.ToInt32(us22plot.KhasraId));
+            //us22plot.Khasra = Data;
+            //us22plot.Bigha = Convert.ToDecimal( us22plot.Khasra.Bigha);
+            //us22plot.Biswa = Convert.ToDecimal(us22plot.Khasra.Biswa);
+            //us22plot.Biswanshi = Convert.ToDecimal(us22plot.Khasra.Biswanshi);
             if (ModelState.IsValid)
                 {
                     var result = await _undersection22plotdetailsService.Create(us22plot);
@@ -179,35 +180,5 @@ namespace AcquiredLandInformationManagement.Controllers
             return Json(await _undersection22plotdetailsService.GetAllKhasra(Convert.ToInt32(villageId)));
         }
 
-        //public async Task<JsonResult> GetKhasraAreaDetails(Undersection22plotdetails us22plot)
-        //{
-            
-        //     var Data = await _undersection22plotdetailsService.FetchSingleKhasraResult(Convert.ToInt32(us22plot.KhasraId));
-        //    us22plot.Khasra = Data;
-        //    us22plot.Bigha = Convert.ToDecimal( us22plot.Khasra.Bigha);
-        //    us22plot.Biswa = Convert.ToDecimal(us22plot.Khasra.Biswa);
-        //    us22plot.Biswanshi = Convert.ToDecimal(us22plot.Khasra.Biswanshi);
-        //    //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
-        //    return Json(data.Select(x => new
-        //    {
-        //        x.Id,
-        //        x.Name,
-        //        x.FatherName,
-        //        x.Gender,
-        //        x.Address,
-        //        x.MobileNo,
-        //        x.EmailId,
-        //        x.AadharNoFilePath,
-        //        x.PanNoFilePath,
-        //        x.PhotographPath,
-        //        x.SignaturePath,
-        //        x.AadharNo,
-        //        x.PanNo
-        //    }));
-        //}
-        //async Task BindDropDown(Zone zone)
-        //{
-        //    zone.DepartmentList = await _zoneService.GetDropDownList();
-        //}
     }
 }

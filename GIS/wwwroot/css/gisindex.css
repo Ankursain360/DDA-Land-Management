@@ -54,7 +54,61 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.nlLabelDimentionText {
+    color: #F11613;
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 11px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
+.nlLabelCloseText {
+    color: #F6F906;
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 11px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nlLabelVillageText {
+    color: #7C4D81;
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 11px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nlLabelKhasraNo {
+    color: #7C4D81;
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 11px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .nlLabelKhasraText:hover {
     font-size: 18px;
 }
@@ -68,5 +122,20 @@
 }
 
 .nlLabelState:hover {
+    font-size: 18px;
+}
+.nlLabelDimentionText:hover {
+    font-size: 18px;
+}
+
+.nlLabelCloseText:hover {
+    font-size: 18px;
+}
+
+.nlLabelVillageText:hover {
+    font-size: 18px;
+}
+
+.nlLabelKhasraNo:hover {
     font-size: 18px;
 }

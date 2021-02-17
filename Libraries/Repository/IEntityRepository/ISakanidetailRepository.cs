@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface ISakanidetailRepository : IGenericRepository<Sakanidetail>
+    public interface ISakanidetailRepository : IGenericRepository<Saknidetails>
     {
-        Task<PagedResult<Sakanidetail>> GetPagedSakanidetail(SakaniDetailsSearchDto model);
-        Task<List<Sakanidetail>> GetSakanidetail();
+        Task<PagedResult<Saknidetails>> GetPagedSakanidetail(SakaniDetailsSearchDto model);
+        Task<List<Saknidetails>> GetSakanidetail();
         Task<List<Khewat>> GetAllKhewat();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Khasra>> BindKhasra();

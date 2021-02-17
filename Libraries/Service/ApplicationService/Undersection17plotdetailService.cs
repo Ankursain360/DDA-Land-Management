@@ -55,9 +55,9 @@ namespace Libraries.Service.ApplicationService
             List<Acquiredlandvillage> villageList = await _undersection17plotdetailRepository.GetAllVillageList();
             return villageList;
         }
-        public async Task<List<Khasra>> GetAllKhasraList()
+        public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
         {
-            List<Khasra> khasraList = await _undersection17plotdetailRepository.GetAllKhasraList();
+            List<Khasra> khasraList = await _undersection17plotdetailRepository.GetAllKhasraList(villageId);
             return khasraList;
         }
         

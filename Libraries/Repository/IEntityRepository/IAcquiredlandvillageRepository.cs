@@ -16,5 +16,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Tehsil>> GetAllTehsil();
         Task<List<Zone>> GetAllZone();
         Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model);
+        Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model);
+        Task<List<Acquiredlandvillage>> GetAllVillageList();
+
     }
 }

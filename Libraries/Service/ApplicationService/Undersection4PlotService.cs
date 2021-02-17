@@ -50,11 +50,13 @@ namespace Libraries.Service.ApplicationService
             List<Undersection4> notificationList = await _undersection4plotRepository.GetAllNotificationNo();
             return notificationList;
         }
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _undersection4plotRepository.BindKhasra();
+            List<Khasra> khasraList = await _undersection4plotRepository.BindKhasra(villageId);
             return khasraList;
         }
+
+
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
             List<Acquiredlandvillage>  villageList = await _undersection4plotRepository.GetAllVillage();
@@ -81,11 +83,12 @@ namespace Libraries.Service.ApplicationService
             Undersection4plot model = result.FirstOrDefault();
             model.UnderSection4Id = undersection4plot.UnderSection4Id;
            model.VillageId = undersection4plot.VillageId;
-          //  model.KhasraId = undersection4plot.KhasraId;
+            model.KhasraId = undersection4plot.KhasraId;
             model.Bigha = undersection4plot.Bigha;
             model.Biswa = undersection4plot.Biswa;
             model.Biswanshi = undersection4plot.Biswanshi;
-
+            model.Remarks = undersection4plot.Remarks;
+            model.IsActive = undersection4plot.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _undersection4plotRepository.Edit(model);
@@ -112,7 +115,10 @@ namespace Libraries.Service.ApplicationService
 
 
 
-
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _undersection4plotRepository.FetchSingleKhasraResult(khasraId);
+        }
 
 
 

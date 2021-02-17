@@ -10,9 +10,11 @@ namespace Libraries.Model.Entity
 {
     public  class Undersection4plot: AuditableEntity<int>
     {
-      
+        [Required]
         public int? UnderSection4Id { get; set; }
+        [Required]
         public int? VillageId { get; set; }
+        [Required]
         public int? KhasraId { get; set; }
         public decimal Bigha { get; set; }
         public decimal Biswa { get; set; }

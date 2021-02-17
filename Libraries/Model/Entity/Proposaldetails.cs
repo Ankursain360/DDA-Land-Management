@@ -21,7 +21,7 @@ namespace Libraries.Model.Entity
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "ProposalDetails", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required]
+        [Required (ErrorMessage ="Scheme is mandatory feild")]
         public int? SchemeId { get; set; }
         [Required]
         public string RequiredAgency { get; set; }

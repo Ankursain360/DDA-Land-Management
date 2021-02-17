@@ -8,15 +8,15 @@ namespace Libraries.Service.IApplicationService
 {
     public interface ISakanidetailService
     {
-        Task<PagedResult<Sakanidetail>> GetPagedSakanidetail(SakaniDetailsSearchDto model);
-        Task<List<Sakanidetail>> GetSakanidetail();
+        Task<PagedResult<Saknidetails>> GetPagedSakanidetail(SakaniDetailsSearchDto model);
+        Task<List<Saknidetails>> GetSakanidetail();
         Task<List<Khewat>> GetAllKhewat();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Khasra>> BindKhasra();
-        Task<List<Sakanidetail>> GetSakanidetailUsingRepo();
-        Task<bool> Update(int id, Sakanidetail sakanidetail);
-        Task<bool> Create(Sakanidetail sakanidetail);
-        Task<Sakanidetail> FetchSingleResult(int id);
+        Task<List<Saknidetails>> GetSakanidetailUsingRepo();
+        Task<bool> Update(int id, Saknidetails sakanidetail);
+        Task<bool> Create(Saknidetails sakanidetail);
+        Task<Saknidetails> FetchSingleResult(int id);
         Task<bool> Delete(int id);
 
 

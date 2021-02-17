@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
 
         Task<List<Undersection4plot>> GetAllUndersection4Plot();
-       Task<List<Khasra>> BindKhasra();
+       Task<List<Khasra>> BindKhasra(int? villageId);
         Task<List<Undersection4>> GetAllNotificationNo();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Undersection4plot>> GetUndersection4PlotUsingRepo();
@@ -21,6 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Undersection4plot undersection4plot);
         Task<Undersection4plot> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model);
 
     }

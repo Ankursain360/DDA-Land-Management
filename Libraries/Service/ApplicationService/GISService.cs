@@ -28,14 +28,29 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetBurjiDetails(villageId);
         }
 
-        public async Task<List<GISClean>> GetCleanDetails(int villageId)
+        public async Task<List<Gisclean>> GetCleanDetails(int villageId)
         {
             return await _iGISSRepository.GetCleanDetails(villageId);
         }
 
-        public async Task<List<GisCleanText>> GetCleantextDetails(int villageId)
+        public async Task<List<Giscleantext>> GetCleantextDetails(int villageId)
         {
             return await _iGISSRepository.GetCleantextDetails(villageId);
+        }
+
+        public async Task<List<Gisclose>> GetCloseDetails(int villageId)
+        {
+            return await _iGISSRepository.GetCloseDetails(villageId);
+        }
+
+        public async Task<List<Gisclosetext>> GetCloseTextDetails(int villageId)
+        {
+            return await _iGISSRepository.GetCloseTextDetails(villageId);
+        }
+
+        public async Task<List<Gisdashed>> GetDashedDetails(int villageId)
+        {
+            return await _iGISSRepository.GetDashedDetails(villageId);
         }
 
         public async Task<List<Gisdim>> GetDimDetails(int villageId)
@@ -43,9 +58,19 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetDimDetails(villageId);
         }
 
-        public async Task<List<GISEncroachment>> GetEncroachmentDetails(int villageId)
+        public async Task<List<Gisdimtext>> GetDimTextDetails(int villageId)
+        {
+            return await _iGISSRepository.GetDimTextDetails(villageId);
+        }
+
+        public async Task<List<Gisencroachment>> GetEncroachmentDetails(int villageId)
         {
             return await _iGISSRepository.GetEncroachmentDetails(villageId);
+        }
+        
+        public async Task<List<Gisfieldboun>> GetFieldBounDetails(int villageId)
+        {
+            return await _iGISSRepository.GetFieldBounDetails(villageId);
         }
 
         public async Task<List<Gisgosha>> GetGoshaDetails(int villageId)
@@ -63,14 +88,64 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetInitiallyStateDetails();
         }
 
-        public async Task<List<GISnala>> GetNalaDetails(int villageId)
+        public async Task<List<Gisinner>> GetInnerDetails(int villageId)
+        {
+            return await _iGISSRepository.GetInnerDetails(villageId);
+        }
+
+        public async Task<List<Giskachapakaline>> GetKachaPakaLineDetails(int villageId)
+        {
+            return await _iGISSRepository.GetKachaPakaLineDetails(villageId);
+        }
+
+        public async Task<List<Giskhasraboundary>> GetKhasraBoundaryDetails(int villageId)
+        {
+            return await _iGISSRepository.GetKhasraBoundaryDetails(villageId);
+        }
+
+        public async Task<List<Giskhasraline>> GetKhasraLineDetails(int villageId)
+        {
+            return await _iGISSRepository.GetKhasraLineDetails(villageId);
+        }
+
+        public async Task<List<Giskhasrano>> GetKhasraNoDetails(int villageId)
+        {
+            return await _iGISSRepository.GetKhasraNoDetails(villageId);
+        }
+
+        public async Task<List<Giskilla>> GetKillaDetails(int villageId)
+        {
+            return await _iGISSRepository.GetKillaDetails(villageId);
+        }
+
+        public async Task<List<Gisnala>> GetNalaDetails(int villageId)
         {
             return await _iGISSRepository.GetNalaDetails(villageId);
+        }
+
+        public async Task<List<Gisnali>> GetNaliDetails(int villageId)
+        {
+            return await _iGISSRepository.GetNaliDetails(villageId);
         }
 
         public async Task<List<Plot>> GetPlotList(int VillageId)
         {
             return await _iGISSRepository.GetPlotList(VillageId);
+        }
+
+        public async Task<List<Gisrailwayline>> GetRailwayLineDetails(int villageId)
+        {
+            return await _iGISSRepository.GetRailwayLineDetails(villageId);
+        }
+
+        public async Task<List<Gisroad>> GetRoadDetails(int villageId)
+        {
+            return await _iGISSRepository.GetRoadDetails(villageId);
+        }
+
+        public async Task<List<Gissaheda>> GetSahedaDetails(int villageId)
+        {
+            return await _iGISSRepository.GetSahedaDetails(villageId);
         }
 
         public async Task<List<Gistext>> GetTextDetails(int villageId)
@@ -83,6 +158,11 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetTriJunctionDetails(villageId);
         }
 
+        public async Task<List<Gisvillageboundary>> GetVillageBoundaryDetails(int villageId)
+        {
+            return await _iGISSRepository.GetVillageBoundaryDetails(villageId);
+        }
+
         public async Task<List<Village>> GetVillageDetails(int villageId, int zoneId)
         {
             return await _iGISSRepository.GetVillageDetails(villageId, zoneId);
@@ -91,6 +171,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Village>> GetVillageList(int ZoneId)
         {
             return await _iGISSRepository.GetVillageList(ZoneId);
+        }
+
+        public async Task<List<Gisvillagetext>> GetVillageTextDetails(int villageId)
+        {
+            return await _iGISSRepository.GetVillageTextDetails(villageId);
+        }
+
+        public async Task<List<Giszero>> GetZeroDetails(int villageId)
+        {
+            return await _iGISSRepository.GetZeroDetails(villageId);
         }
 
         public async Task<List<Zone>> GetZoneDetails(int zoneId)

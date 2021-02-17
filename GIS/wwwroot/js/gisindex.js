@@ -15,7 +15,24 @@ var NALA_LAYER = [];
 var TEXT_LAYER = [];
 var TRIJUNCTION_LAYER = [];
 var STATE_LAYER = [];
-
+var ZERO_LAYER = [];
+var NALI_LAYER = [];
+var RAILWAYLINE_LAYER = [];
+var FIELDBOUN_LAYER = [];
+var KILLA_LAYER = [];
+var CLOSE_LAYER = [];
+var SAHEDA_LAYER = [];
+var KACHAPAKALINE_LAYER = [];
+var KHASRALINE_LAYER = [];
+var KHASRABOUNDARY_LAYER = [];
+var ROAD_LAYER = [];
+var DASHED_LAYER = [];
+var INNER_LAYER = [];
+var VILLAGEBOUNDARY_LAYER = [];
+var DIMENTIONTEXT_LAYER = [];
+var CLOSETEXT_LAYER = [];
+var VILLAGETEXT_LAYER = [];
+var KHASRANO_LAYER = [];
 
 $(document).ready(function () {
     console.log('f9');
@@ -23,7 +40,7 @@ $(document).ready(function () {
         var html = '';
         for (var i = 0; i < response.length; i++) {
             var check = 0;
-            html = html + '<div class="accordion-item"><h5 class="accordion-header" id="heading' + response[i].id + '"><button id="Z' + response[i].id + '" class="accordion-button collapsed" type="button" onclick="showZone(this.id)" data-bs-toggle="collapse" data-bs-target="#collapse' + response[i].id + '" aria-expanded="true" aria-controls="collapse' + response[i].id + '"><i class="ri-arrow-right-s-fill"></i>' + response[i].name + '</button></h5><div id="collapse' + response[i].id + '" class="accordion-collapse collapse" aria-labelledby="heading' + response[i].id + '" data-bs-parent="#accordionData"><div class="accordion-body"><div class="list-group">';
+            html = html + '<div class="accordion-item"><h5 class="accordion-header" id="heading' + response[i].id + '"><button id="Z' + response[i].id + '" class="accordion-button py-2 bg-primary text-white" type="button" onclick="showZone(this.id)" data-bs-toggle="collapse" data-bs-target="#collapse' + response[i].id + '" aria-expanded="true" aria-controls="collapse' + response[i].id + '"><i class="ri-arrow-right-s-fill text-white"></i>' + response[i].name + '</button></h5><div id="collapse' + response[i].id + '" class="accordion-collapse collapse" aria-labelledby="heading' + response[i].id + '" data-bs-parent="#accordionData"><div class="accordion-body"><div class="list-group">';
             if (response[i].village.length > 0) {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
@@ -219,6 +236,64 @@ function showvillagelayers(villageid) {
     HttpGet(`/GIS/GetTriJunctionDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesTriJunction(response);
     });
+    HttpGet(`/GIS/GetZeroDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesZero(response);
+    });
+    HttpGet(`/GIS/GetNaliDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesNali(response);
+    });
+
+    HttpGet(`/GIS/GetRailwayLineDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesRailwayLine(response);
+    });
+
+    HttpGet(`/GIS/GetFieldBounDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesFieldBoun(response);
+    });
+    HttpGet(`/GIS/GetKillaDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesKilla(response);
+    });
+    HttpGet(`/GIS/GetCloseDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesClose(response);
+    });
+    HttpGet(`/GIS/GetSahedaDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesSaheda(response);
+    });
+    HttpGet(`/GIS/GetKachaPakaLineDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesKachaPakaLine(response);
+    });
+    HttpGet(`/GIS/GetKhasraLineDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesKhasraLine(response);
+    });
+
+    HttpGet(`/GIS/GetKhasraBoundaryDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesKhasraBoundary(response);
+    });
+
+    HttpGet(`/GIS/GetRoadDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesRoad(response);
+    });
+    HttpGet(`/GIS/GetDashedDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesDashed(response);
+    });
+    HttpGet(`/GIS/GetInnerDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesInner(response);
+    });
+    HttpGet(`/GIS/GetVillageBoundaryDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesVillageBoundary(response);
+    });
+    HttpGet(`/GIS/GetDimTextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesDimentionText(response);
+    });
+    HttpGet(`/GIS/GetCloseTextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesCloseText(response);
+    });
+    HttpGet(`/GIS/GetVillageTextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesVillageText(response);
+    });
+    HttpGet(`/GIS/GetKhasraNoDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesKhasraNo(response);
+    });
 }
 
 function showDisBoundariesAbadi(response) {
@@ -263,52 +338,196 @@ function showDisBoundariesEncroachment(response) {
 }
 function showDisBoundariesGrid(response) {
     var grid = $.map(response, function (el) { return el; })
-    for (j = 0; j < grid.length; j++) {
-        var ln = createLine(getLatLongArr(grid[j].polygon));
+    for (k = 0; k < grid.length; k++) {
+        var ln = createLine(getLatLongArr(grid[k].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#15EAFB' });
         GRID_LAYER.push(ln);
     }
 }
 function showDisBoundariesNala(response) {
     var nala = $.map(response, function (el) { return el; })
-    for (j = 0; j < nala.length; j++) {
-        var ln = createLine(getLatLongArr(nala[j].polygon));
+    for (m = 0; m < nala.length; m++) {
+        var ln = createLine(getLatLongArr(nala[m].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#252A2A' });
         NALA_LAYER.push(ln);
     }
 }
+function showDisBoundariesTriJunction(response) {
+    var trijunction = $.map(response, function (el) { return el; })
+    for (n = 0; n < trijunction.length; n++) {
+        var ln = createLine(getLatLongArr(trijunction[n].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#DC2A32 ' });
+        TRIJUNCTION_LAYER.push(ln);
+    }
+}
+function showDisBoundariesZero(response) {
+    var zero = $.map(response, function (el) { return el; })
+    for (o = 0; o < zero.length; o++) {
+        var ln = createLine(getLatLongArr(zero[o].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#9FE2BF' });
+        ZERO_LAYER.push(ln);
+    }
+}
+function showDisBoundariesNali(response) {
+    var nali = $.map(response, function (el) { return el; })
+    for (p = 0; p < nali.length; p++) {
+        var ln = createLine(getLatLongArr(nali[p].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#3C5D4C' });
+        NALI_LAYER.push(ln);
+    }
+}
+function showDisBoundariesRailwayLine(response) {
+    var railwayline = $.map(response, function (el) { return el; })
+    for (q = 0; q < railwayline.length; q++) {
+        var ln = createLine(getLatLongArr(railwayline[q].polygon));
+        ln.setOptions({ strokeWeight: 1, strokeColor: '#BA4A00' });
+        RAILWAYLINE_LAYER.push(ln);
+    }
+}
+function showDisBoundariesFieldBoun(response) {
+    var fieldboun = $.map(response, function (el) { return el; })
+    for (r = 0; r < fieldboun.length; r++) {
+        var ln = createLine(getLatLongArr(fieldboun[r].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#E59866' });
+        FIELDBOUN_LAYER.push(ln);
+    }
+}
+function showDisBoundariesKilla(response) {
+    var killa = $.map(response, function (el) { return el; })
+    for (s = 0; s < killa.length; s++) {
+        var ln = createLine(getLatLongArr(killa[s].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#D35400' });
+        KILLA_LAYER.push(ln);
+    }
+}
+function showDisBoundariesClose(response) {
+    var close = $.map(response, function (el) { return el; })
+    for (t = 0; t < close.length; t++) {
+        var ln = createLine(getLatLongArr(close[t].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#A569BD' });
+        CLOSE_LAYER.push(ln);
+    }
+}
+function showDisBoundariesSaheda(response) {
+    var saheda = $.map(response, function (el) { return el; })
+    for (u = 0; u < saheda.length; u++) {
+        var ln = createLine(getLatLongArr(saheda[u].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#85C1E9' });
+        SAHEDA_LAYER.push(ln);
+    }
+}
+function showDisBoundariesKachaPakaLine(response) {
+    var kachapakaline = $.map(response, function (el) { return el; })
+    for (v = 0; v < kachapakaline.length; v++) {
+        var ln = createLine(getLatLongArr(kachapakaline[v].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#B9770E' });
+        KACHAPAKALINE_LAYER.push(ln);
+    }
+}
+function showDisBoundariesKhasraLine(response) {
+    var khasraline = $.map(response, function (el) { return el; })
+    for (w = 0; w < khasraline.length; w++) {
+        var ln = createLine(getLatLongArr(khasraline[w].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#16A085' });
+        KHASRALINE_LAYER.push(ln);
+    }
+}
+function showDisBoundariesKhasraBoundary(response) {
+    var khasraboundary = $.map(response, function (el) { return el; })
+    for (x = 0; x < khasraboundary.length; x++) {
+        var ln = createLine(getLatLongArr(khasraboundary[x].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#ABEBC6' });
+        KHASRABOUNDARY_LAYER.push(ln);
+    }
+}
+function showDisBoundariesRoad(response) {
+    var road = $.map(response, function (el) { return el; })
+    for (y = 0; y < road.length; y++) {
+        var ln = createLine(getLatLongArr(road[y].polygon));
+        ln.setOptions({ strokeWeight: 1, strokeColor: '#707B7C' });
+        ROAD_LAYER.push(ln);
+    }
+}
+function showDisBoundariesDashed(response) {
+    var dashed = $.map(response, function (el) { return el; })
+    for (z = 0; z < dashed.length; z++) {
+        var ln = createLine(getLatLongArr(dashed[z].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#F7F9F9' });
+        DASHED_LAYER.push(ln);
+    }
+}
+function showDisBoundariesInner(response) {
+    var inner = $.map(response, function (el) { return el; })
+    for (ab = 0; ab < inner.length; ab++) {
+        var ln = createLine(getLatLongArr(inner[ab].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#424949' });
+        INNER_LAYER.push(ln);
+    }
+}
+function showDisBoundariesVillageBoundary(response) {
+    var villageboundary = $.map(response, function (el) { return el; })
+    for (ac = 0; ac < villageboundary.length; ac++) {
+        var ln = createLine(getLatLongArr(villageboundary[ac].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#7B7D7D' });
+        VILLAGEBOUNDARY_LAYER.push(ln);
+    }
+}
 function showDisBoundariesCleantext(response) {
     var cleantext = $.map(response, function (el) { return el; })
-    for (g = 0; g < cleantext.length; g++) {
+    for (ad = 0; ad < cleantext.length; ad++) {
         //var ln = createPoint(getLatLongArr(cleantext[g].polygon)[0]);
         //ln.setOptions({ strokeWeight: 3, strokeColor: '#AF4167 ' });
-        var lp = new google.maps.LatLng(parseFloat(cleantext[g].ycoordinate), parseFloat(cleantext[g].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 20, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelCleantext', position: lp, text: cleantext[g].label });
+        var lp = new google.maps.LatLng(parseFloat(cleantext[ad].ycoordinate), parseFloat(cleantext[ad].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 20, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelCleantext', position: lp, text: cleantext[ad].label });
         CLEANTEXT_LAYER.push(_label);
     }
 }
 function showDisBoundariesGosha(response) {
     var gosha = $.map(response, function (el) { return el; })
-    for (g = 0; g < gosha.length; g++) {
-        var lp = new google.maps.LatLng(parseFloat(gosha[g].ycoordinate), parseFloat(gosha[g].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: gosha[g].label }); 9
+    for (ae = 0; ae < gosha.length; ae++) {
+        var lp = new google.maps.LatLng(parseFloat(gosha[ae].ycoordinate), parseFloat(gosha[ae].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: gosha[ae].label }); 
         GOSHA_LAYER.push(_label);
     }
 }
 function showDisBoundariesText(response) {
     var textla = $.map(response, function (el) { return el; })
-    for (g = 0; g < textla.length; g++) {
-        var lp = new google.maps.LatLng(parseFloat(textla[g].ycoordinate), parseFloat(textla[g].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelKhasraText', position: lp, text: textla[g].label });
+    for (af = 0; af < textla.length; af++) {
+        var lp = new google.maps.LatLng(parseFloat(textla[af].ycoordinate), parseFloat(textla[af].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelKhasraText', position: lp, text: textla[af].label });
         TEXT_LAYER.push(_label);
     }
 }
-function showDisBoundariesTriJunction(response) {
-    var trijunction = $.map(response, function (el) { return el; })
-    for (j = 0; j < trijunction.length; j++) {
-        var ln = createLine(getLatLongArr(trijunction[j].polygon));
-        ln.setOptions({ strokeWeight: 3, strokeColor: '#DC2A32 ' });
-        TRIJUNCTION_LAYER.push(ln);
+function showDisBoundariesDimentionText(response) {
+    var dimentiontext = $.map(response, function (el) { return el; })
+    for (ag = 0; ag < dimentiontext.length; ag++) {
+        var lp = new google.maps.LatLng(parseFloat(dimentiontext[ag].ycoordinate), parseFloat(dimentiontext[ag].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 20, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelDimentionText', position: lp, text: dimentiontext[ag].label });
+        DIMENTIONTEXT_LAYER.push(_label);
+    }
+}
+function showDisBoundariesCloseText(response) {
+    var closetext = $.map(response, function (el) { return el; })
+    for (ah = 0; ah < closetext.length; ah++) {
+        var lp = new google.maps.LatLng(parseFloat(closetext[ah].ycoordinate), parseFloat(closetext[ah].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelCloseText', position: lp, text: closetext[ah].label }); 
+        CLOSETEXT_LAYER.push(_label);
+    }
+}
+function showDisBoundariesVillageText(response) {
+    var villagetext = $.map(response, function (el) { return el; })
+    for (ai = 0; ai < villagetext.length; ai++) {
+        var lp = new google.maps.LatLng(parseFloat(villagetext[ai].ycoordinate), parseFloat(villagetext[ai].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelVillageText', position: lp, text: villagetext[ai].label });
+        VILLAGETEXT_LAYER.push(_label);
+    }
+}
+function showDisBoundariesKhasraNo(response) {
+    var khasrano = $.map(response, function (el) { return el; })
+    for (aj = 0; aj < khasrano.length; aj++) {
+        var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: khasrano[aj].label });
+        KHASRANO_LAYER.push(_label);
     }
 }
 /*Village Boundary End*/

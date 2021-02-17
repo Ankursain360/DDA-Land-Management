@@ -20,15 +20,15 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<Disposalland>> GetDisposalland()
-        {
-            return await _dbContext.Disposalland.ToListAsync();
-        }
+        //public async Task<List<Disposalland>> GetDisposalland()
+        //{
+        //    return await _dbContext.Disposalland.ToListAsync();
+        //}
         public async Task<List<Disposalland>> GetAllDisposalland()
         {
             //return await _dbContext.Disposalland.Include(x => x.Village).Include(x => x.Khasra).Include(x => x.Utilizationtype).Include(x => x.TransferToWhichDept).Include(x => x.AreaDisposed).Include(x => x.DateOfDisposed).Include(x => x.TransferTo).Include(x => x.TransferBy).Include(x => x.FileNoRefNo).Include(x => x.Remarks).ToListAsync();
-            //return await _dbContext.Disposalland.Include(x => x.Village).Include(x => x.Khasra).Include(x => x.Utilizationtype).ToListAsync();
-            return await _dbContext.Disposalland.OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Disposalland.Include(x => x.Village).Include(x => x.Khasra).Include(x => x.Utilizationtype).OrderByDescending(x => x.Id).ToListAsync();
+            //return await _dbContext.Disposalland.OrderByDescending(x => x.Id).ToListAsync();
 
         }
         public async Task<List<Utilizationtype>> GetAllUtilizationtype()
@@ -54,68 +54,47 @@ namespace Libraries.Repository.EntityRepository
                                       .Include(x => x.Village)
                                       .Include(x => x.Khasra)
                                       .Include(x => x.Utilizationtype)
-                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
-                                      && (string.IsNullOrEmpty(model.name) || x.Khasra.Name.Contains(model.name))
-                                      && (string.IsNullOrEmpty(model.name) || x.Utilizationtype.Name.Contains(model.name))
-                                      && (string.IsNullOrEmpty(model.name) || x.FileNoRefNo.Contains(model.name))
+
+                                      .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                      //&& (string.IsNullOrEmpty(model.utilizationtype) || x.Utilizationtype.Name.Contains(model.utilizationtype))
                                       )
                                       .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
-                switch (model.SortBy.ToUpper())
-                {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Disposalland
-                             .Include(x => x.Village)
+                data = null;
+                data = await _dbContext.Disposalland
+                                      .Include(x => x.Village)
                                       .Include(x => x.Khasra)
                                       .Include(x => x.Utilizationtype)
-                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
-                             /*&& model.proposalDate == x.ProposalDate*/)
-                             .OrderBy(a => a.Village.Name)
-                             .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("KHASRA"):
-                        data = null;
-                        data = await _dbContext.Disposalland
-                             .Include(x => x.Village)
-                                     .Include(x => x.Khasra)
-                                     .Include(x => x.Utilizationtype)
-                             .Where(x => (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
-                             /*&& model.proposalDate == x.ProposalDate*/)
-                             .OrderBy(a => a.Khasra.Name)
-                             .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
-                        break;
-                }
+                                      .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                       && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                      //&& (string.IsNullOrEmpty(model.utilizationtype) || x.Utilizationtype.Name.Contains(model.utilizationtype))
+                                      )
+                                .OrderBy(s =>
+                                (model.SortBy.ToUpper() == "VILLAGE" ? ( s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRA" ? (s.Khasra == null ? null : s.Khasra.Name)
+                                : s.Village.Name)
+                                )
+                                .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
             }
             else if (SortOrder == 2)
             {
-                switch (model.SortBy.ToUpper())
-                {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Disposalland
-                             .Include(x => x.Village)
+                data = null;
+                data = await _dbContext.Disposalland
+                                      .Include(x => x.Village)
                                       .Include(x => x.Khasra)
                                       .Include(x => x.Utilizationtype)
-                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
-                             /*&& model.proposalDate == x.ProposalDate*/)
-                             .OrderBy(a => a.Village.Name)
-                             .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("KHASRA"):
-                        data = null;
-                        data = await _dbContext.Disposalland
-                              .Include(x => x.Village)
-                                      .Include(x => x.Khasra)
-                                      .Include(x => x.Utilizationtype)
-                             .Where(x => (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
-                             /*&& model.proposalDate == x.ProposalDate*/)
-                             .OrderBy(a => a.Khasra.Name)
-                             .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
-                        break;
-                }
+                                      .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                       && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                      //&& (string.IsNullOrEmpty(model.utilizationtype) || x.Utilizationtype.Name.Contains(model.utilizationtype))
+                                      )
+                                .OrderByDescending(s =>
+                                (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRA" ? (s.Khasra == null ? null : s.Khasra.Name) : s.Village.Name)
+                                )
+                                .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
             }
             return data;
         }

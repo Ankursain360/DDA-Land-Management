@@ -17,7 +17,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("nazul", "lms");
 
             builder.HasIndex(e => e.VillageId)
-                   .HasName("VillageId");
+                .HasName("fkNazulvillageId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -27,9 +27,13 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.JaraiSakni).HasColumnType("int(11)");
+            builder.Property(e => e.JaraiSakani)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
-            builder.Property(e => e.Language).HasColumnType("int(11)");
+            builder.Property(e => e.Language)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.LastMutationNo)
                 .IsRequired()
@@ -38,11 +42,6 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Remarks)
-                .IsRequired()
-                .HasMaxLength(500)
-                .IsUnicode(false);
-
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
 
             builder.Property(e => e.YearOfConsolidation).HasColumnType("date");
@@ -50,10 +49,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.YearOfJamabandi).HasColumnType("date");
 
             builder.HasOne(d => d.Village)
-                .WithMany(p => p.Nazul)
-                .HasForeignKey(d => d.VillageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("VillageId");
+                    .WithMany(p => p.Nazul)
+                    .HasForeignKey(d => d.VillageId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fkNazulvillageId_idx");
         }
     }
 }

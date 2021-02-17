@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class GisCleanTextConfiguration : IEntityTypeConfiguration<GisCleanText>
+    public class GisCleanTextConfiguration : IEntityTypeConfiguration<Giscleantext>
     {
-        public void Configure(EntityTypeBuilder<GisCleanText> entity)
+        public void Configure(EntityTypeBuilder<Giscleantext> entity)
         {
             entity.ToTable("giscleantext", "lms");
 

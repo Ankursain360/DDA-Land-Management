@@ -11,7 +11,7 @@ namespace Libraries.Service.IApplicationService
     public interface IJointsurveyService
     {
         Task<List<Jointsurvey>> GetAllJointSurvey();
-      
+
         Task<List<Khasra>> BindKhasra();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Jointsurvey>> GetJointSurveyUsingRepo();

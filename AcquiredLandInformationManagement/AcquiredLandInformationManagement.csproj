@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\encharochmentcreate - Copy.js" />
+    <Content Remove="wwwroot\js\reliefreportindex.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="NLog" Version="4.7.5" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.3" />
     <PackageReference Include="MySql.Data" Version="8.0.22" />
@@ -26,6 +26,10 @@
 
   <ItemGroup>
     <Content Update="Views\Dashboard\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\DemandListDetails\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -46,6 +50,14 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Views\Login\ForgetPassword.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Mutation\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\PossessionReport\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -84,20 +96,6 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Home\ExceptionLog.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\AwardMasterDetails\Create.cshtml" />
-    <None Include="Views\AwardMasterDetails\Edit.cshtml" />
-    <None Include="Views\AwardMasterDetails\Index.cshtml" />
-    <None Include="Views\AwardMasterDetails\View.cshtml" />
-    <None Include="Views\AwardMasterDetails\_List.cshtml" />
-    <None Include="Views\AwardPlotDetails\Create.cshtml" />
-    <None Include="Views\AwardPlotDetails\Createold.cshtml" />
-    <None Include="Views\AwardPlotDetails\Edit.cshtml" />
-    <None Include="Views\AwardPlotDetails\Index.cshtml" />
-    <None Include="Views\AwardPlotDetails\View.cshtml" />
-    <None Include="Views\AwardPlotDetails\_List.cshtml" />
   </ItemGroup>
 
 </Project>

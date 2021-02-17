@@ -53,11 +53,11 @@ namespace Libraries.Service.ApplicationService
             return await _nazulRepository.GetAllNazul();
         }
 
-        
 
-        public async Task<List<Village>> GetAllVillage()
+
+        public async Task<List<Acquiredlandvillage>> GetAllVillageList()
         {
-            List<Village> villageList = await _nazulRepository.GetAllVillage();
+            List<Acquiredlandvillage> villageList = await _nazulRepository.GetAllVillageList();
             return villageList;
         }
 
@@ -71,12 +71,12 @@ namespace Libraries.Service.ApplicationService
             var result = await _nazulRepository.FindBy(a => a.Id == id);
             Nazul model = result.FirstOrDefault();
             model.VillageId = nazul.VillageId;
-            model.JaraiSakni = nazul.JaraiSakni;
+            model.JaraiSakani = nazul.JaraiSakani;
             model.Language = nazul.Language;
             model.YearOfConsolidation = nazul.YearOfConsolidation;
             model.YearOfJamabandi = nazul.YearOfJamabandi;
             model.LastMutationNo = nazul.LastMutationNo;
-            model.Remarks = nazul.Remarks;
+           
 
             
 
@@ -90,7 +90,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Nazul nazul)
         {
-            nazul.CreatedBy = 1;
+            nazul.CreatedBy = nazul.CreatedBy;
             nazul.CreatedDate = DateTime.Now;
 
             _nazulRepository.Add(nazul);

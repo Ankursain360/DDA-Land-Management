@@ -7,6 +7,8 @@ namespace Dto.Search
 {
     public class JaraiDetailsSearchDto : BaseSearchDto
     {
-        public string Name { get; set; }
+       
+        public string locality { get; set; }
+        public string khasra { get; set; }
     }
 }

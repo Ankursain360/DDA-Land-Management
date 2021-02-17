@@ -106,7 +106,10 @@ namespace AcquiredLandInformationManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Khasra khasra)
+
         {
+            khasra.VillageList = await _khasraService.GetAllVillageList();
+            khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
             if (ModelState.IsValid)
             {
                 try
