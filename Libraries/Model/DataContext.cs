@@ -420,7 +420,9 @@ namespace Libraries.Model
 
             modelBuilder.ApplyConfiguration(new MutationConfiguration());
             modelBuilder.ApplyConfiguration(new MutationParticularsConfiguration());
-
+            modelBuilder.ApplyConfiguration(new AwardmasterdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
+            modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
