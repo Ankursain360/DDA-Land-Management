@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\AwardReport\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="Views\Dashboard\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -50,6 +54,10 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Views\Mutation\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\PossessionReport\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
@@ -88,6 +96,20 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Home\ExceptionLog.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\AwardMasterDetails\Create.cshtml" />
+    <None Include="Views\AwardMasterDetails\Edit.cshtml" />
+    <None Include="Views\AwardMasterDetails\Index.cshtml" />
+    <None Include="Views\AwardMasterDetails\View.cshtml" />
+    <None Include="Views\AwardMasterDetails\_List.cshtml" />
+    <None Include="Views\AwardPlotDetails\Create.cshtml" />
+    <None Include="Views\AwardPlotDetails\Createold.cshtml" />
+    <None Include="Views\AwardPlotDetails\Edit.cshtml" />
+    <None Include="Views\AwardPlotDetails\Index.cshtml" />
+    <None Include="Views\AwardPlotDetails\View.cshtml" />
+    <None Include="Views\AwardPlotDetails\_List.cshtml" />
   </ItemGroup>
 
 </Project>

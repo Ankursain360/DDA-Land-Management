@@ -1,235 +1,226 @@
-﻿
-@model Libraries.Model.Entity.Enchroachment
+﻿@model Libraries.Model.Entity.Enchroachment
+@await Component.InvokeAsync("PageHeader", new { pageName = "Enchroachment Details" })
+
+<div class="pt-3">
 
 
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Encroachment Details Form</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+    <form asp-action="Create" method="post" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="VillageId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="VillageId">Village Name</label>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="KhasraId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="KhasraId">KhasraId Name</label>
+
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<br />
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LandUse">
+                        <option value="Yes"> Yes</option>
+                        <option value="No"> No</option>
+                    </select>
+                    <span asp-validation-for="LandUse" class="text-danger"></span>
+                    <label class="floating-label" asp-for="LandUse">LandUse</label>
 
-<br />
-<div class="container-fluid">
-    <div class="panel">
-        <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">View Details </h6>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="floating-label-wrap">
+                    <input asp-for="DateofDetection" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name">
+
+                    <span asp-validation-for="DateofDetection" class="text-danger"></span>
+                    <label asp-for="DateofDetection" class="floating-label">DateofDetection </label>
+                </div>
+
+
+            </div>
         </div>
-        <div class="panel-body">
-            <form asp-action="View">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                @*<h4 class="pull-left" >Area Encroached</h4>*@
 
-                <div id="DivSection">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Encroachment Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="floating-label-wrap">
+                    <input asp-for="Bigha" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+
+                    <span asp-validation-for="Bigha" class="text-danger"></span>
+                    <label asp-for="Bigha" class="floating-label">Bigha </label>
+
+                </div>
+                <div class="floating-label-wrap">
+                    <input asp-for="Biswa" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+
+                    <span asp-validation-for="Biswa" class="text-danger"></span>
+                    <label asp-for="Biswa" class="floating-label">Biswa </label>
+
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="NatureofencroachmentId" asp-items="@(new SelectList(Model.NencroachmentList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="NatureofencroachmentId" class="text-danger"></span>
+                    <label asp-for="NatureofencroachmentId" class="floating-label">Nature Of Encroachment </label>
+
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Village Name</label>
-                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="VillageId" class="text-danger"></span>
+            </div>
 
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Khasra No</label>
-                        <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="KhasraId" class="text-danger"></span>
-
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Land Use(As Per Plan)</label>
-                        <select style="height:30px; background-color: #dddddd;" asp-for="LandUse" id="" required="" class="form-control">
-                            <option value="0">Yes</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Date Of Detection</label>
-                        <input type="Date" asp-for="DateofDetection" class="form-control" />
-                    </div>
-                </div>
-                <div id="DivArea">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Area Encroached</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Bigha</label>
-
-                            <input type="text" asp-for="Bigha" class="form-control" />
-
-                        </div>
-
-                        <div class="form-group col-md-4">
-
-                            <label class="control-label lb-sm">Biswa</label>
-
-                            <input type="text" asp-for="Biswa" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Biswanshi</label>
-                            <input type="text" asp-for="Biswanshi" class="form-control" placeholder="0" />
-                        </div>
-                    </div>
-                    @*<div id="DivNotificationTaken">
-                        <div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class=" myapp-hed2">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Taken</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Nature Of Encroachment</label>
-                            <select class="form-control dda-dropdown" asp-for="NatureofencroachmentId" asp-items="@(new SelectList(Model.NencroachmentList, "Id","Name"))">
-                                <option>Select</option>
-                            </select>
-                            <span asp-validation-for="NatureofencroachmentId" class="text-danger"></span>
-
-
-                        </div>
-                        @*<div id="DivNotificationTaken">
-                            <div class="row" style="margin-bottom:35px;">
-                                <div class="col-sm-12">
-                                    <div class=" myapp-hed2">
-                                        <div class="col-md-12">
-                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Taken</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
-                        <div class="form-group col-md-4">
-
-                            <label class="control-label lb-sm">Reference No/File No</label>
-                            <input type="Text" asp-for="FileNo" class="form-control" />
-                        </div>
-                    </div>
-                    <div id="DivNotificationTaken">
-                        <div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class="dda-innerheading">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Action Taken</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Action Date</label>
-                                <input type="Date" class="form-control" asp-for="ActionDate" />
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Reasons</label>
-                                <select class="form-control dda-dropdown" asp-for="ReasonsId" asp-items="@(new SelectList(Model.ReasonsList, "Id","Name"))">
-                                    <option>Select</option>
-                                </select>
-                                <span asp-validation-for="ReasonsId" class="text-danger"></span>
-
-                            </div>
-                            <br />
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Damage Area</label>
-                                <label class="radio-inline">
-                                    <input type="radio" asp-for="DamageArea" value="Yes" />Yes
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" asp-for="DamageArea" value="No" />No
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label class="control-label lb-sm">Remarks</label>
-                            <textarea type="text" asp-for="ActionRemarks" class="form-control" style=" background-color: #dddddd;"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Name Encroacher</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Name</label>
-                            <input type="text" asp-for="Name" class="form-control" />
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Address</label>
-                            <input type="text" asp-for="Address" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Payment Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Payment</label>
-                            <input type="text" asp-for="Payment" class="form-control" />
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Address</label>
-                            <input type="text" asp-for="PaymentAddress" class="form-control">
-                        </div>
-                    </div>
-
-
-                    <div class="form-row ">
-                        <div class="form-group col-md-12" style="margin-bottom:40px;">
-                              @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                            @Html.ActionLink("Back", "Index", "EncroachmentDetails", null, new { @class = "btn btn-primary dda-pageheading" })
-                        </div>
-                    </div>
-
-            </form>
         </div>
-    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="FileNo" type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+
+                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                    <label asp-for="FileNo" class="floating-label">Reference No / FileNo </label>
+
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    @*<input asp-for="ActionTaken" type="radio" id="ActionYes" value="Yes" name="grpAction">Yes
+                        <input asp-for="ActionTaken" type="radio" id="ActionNo" value="No" name="grpAction">No
+                        <span asp-validation-for="ActionTaken" class="text-danger"></span>
+                        <label asp-for="ActionTaken" class="floating-label">Action Taken </label>*@
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="ActionDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+
+                    <span asp-validation-for="ActionDate" class="text-danger"></span>
+                    <label asp-for="ActionDate" class="floating-label">ActionDate </label>
+
+                </div>
+
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ReasonsId" asp-items="@(new SelectList(Model.NencroachmentList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="ReasonsId" class="text-danger"></span>
+                    <label asp-for="ReasonsId" class="floating-label">Reason </label>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <input type="hidden" asp-for="DamageArea" id="DamageArea" value="Yes" />
+                <label class="control-label lb-sm" asp-for="DamageArea">Damage Area</label>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline  ">
+                            <input type="radio" id="Dyes" asp-for="DamageArea" value="Yes" name="grpDamageArea" checked="checked" />Yes
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline ">
+                            <input type="radio" id="DNo" asp-for="DamageArea" value="No" name="grpDamageArea" />No
+
+                            <span asp-validation-for="DamageArea" class="text-danger"></span>
+
+                    </div>
+
+                </div>
+                <div class=" col-md-6">
+
+                    <div class="floating-label-wrap">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <label class="control-label lb-sm">Remarks</label>
+            <textarea type="text" asp-for="ActionRemarks" class="form-control" style=" background-color: #dddddd;"></textarea>
+
+        </div>
+
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "EnchroachmentDetails", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+
+    </form>
+
+    @*<div id="Divclsification">
+
+            <h2 class="my-3 sub-heading">Name Encrocher</h2>
+            <div class="row pt-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input id="NameE" placeholder="Bigha" class="floating-label-field floating-label-field--s3" />
+                        <span class="text-danger"></span>
+
+                        <label class="floating-label">Name</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input id="AddressE" placeholder="Biswa" class="floating-label-field floating-label-field--s3" />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Address</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <button class="btn btn-theme " type="submit" id="btnAddEName">Add</button>
+
+                    </div>
+                </div>
+            </div>
+            <div id="divEncrocherNameDetails">
+
+            </div>
+        </div>*@
+
 </div>
 
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/enchorchernamecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/enchorchernamecreate.min.js" asp-append-version="true"></script>
+</environment>
 

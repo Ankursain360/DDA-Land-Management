@@ -23,6 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<Enchroachment> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
+        Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId);
 
     }
 }

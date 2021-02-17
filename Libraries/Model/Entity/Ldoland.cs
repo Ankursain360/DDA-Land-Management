@@ -21,11 +21,7 @@ namespace Libraries.Model.Entity
         [Required]
         public string SiteDescription { get; set; }
         [Required]
-        public decimal? Bigha { get; set; }
-        [Required]
-        public decimal? Biswa { get; set; }
-        [Required]
-        public decimal? Biswanshi { get; set; }
+        public decimal? Area { get; set; }
         [Required]
         public string StatusOfLand { get; set; }
         [Required]

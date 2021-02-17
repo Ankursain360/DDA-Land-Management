@@ -55,10 +55,8 @@ namespace Libraries.Service.ApplicationService
 
 
             model.Part = booktransferland.Part;
-            model.Bigha  = booktransferland.Bigha;
-            model.Biswa  = booktransferland.Biswa;
-            model.Biswanshi  = booktransferland.Biswanshi;
-
+            model.Area  = booktransferland.Area;
+           
 
 
             model.StatusOfLand = booktransferland.StatusOfLand;

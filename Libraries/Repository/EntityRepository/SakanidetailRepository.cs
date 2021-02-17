@@ -4,37 +4,147 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class SakanidetailRepository : GenericRepository<Saknidetails>,ISakanidetailRepository
-        { 
+    public class SakanidetailRepository : GenericRepository<Saknidetails>, ISakanidetailRepository
+    {
 
         public SakanidetailRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
+       
+        public async Task<PagedResult<Saknidetails>> GetPagedSaknidetail(SakaniDetailsSearchDto model)
+        {
+            var data = await _dbContext.Saknidetails
+                                   .Include(x => x.Village)
+                                   .Include(x => x.Khasra)
+                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                   .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
 
-        public async Task<PagedResult<Saknidetails>> GetPagedSakanidetail(SakaniDetailsSearchDto model)
-        {
-            return await _dbContext.Saknidetails.GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
-        }
-        public async Task<List<Khewat>> GetAllKhewat()
-        {
-            List<Khewat> awardList = await _dbContext.Khewat.Where(x => x.IsActive == 1).ToListAsync();
-            return awardList;
-        }
-        public async Task<List<Saknidetails>> GetSakanidetail()
-        {
-            return await _dbContext.Saknidetails.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderBy(a => a.Village.Name)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderBy(a => a.Khasra.Name)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("YEAR"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderBy(a => a.YearOfjamabandi)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderByDescending(a => a.IsActive)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderByDescending(a => a.Village.Name)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderByDescending(a => a.Khasra.Name)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("YEAR"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderByDescending(a => a.YearOfjamabandi)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Saknidetails
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderBy(a => a.IsActive)
+                                                .GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
+
+
+                        break;
+
+                }
+            }
+            return data;
         }
 
+
+        public async Task<List<Saknidetails>> GetAllSaknidetail()
+        {
+            return await _dbContext.Saknidetails.Include(x => x.Village).Include(x => x.Khasra).ToListAsync();
+        }
 
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
@@ -42,18 +152,68 @@ namespace Libraries.Repository.EntityRepository
             return villageList;
         }
 
-
-
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> GetAllKhasra(int? villageId)
         {
-            List<Khasra> KhasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
-            return KhasraList;
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
+            return khasraList;
         }
 
 
 
+        //********* rpt ! Owner Details **********
+        public async Task<bool> SaveOwner(Sakniowner owner)
+        {
+            _dbContext.Sakniowner.Add(owner);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Sakniowner>> GetAllOwner(int id)
+        {
+            return await _dbContext.Sakniowner.Where(x => x.SakniDetailId == id && x.IsActive == 1).ToListAsync();
+        }
 
+        public async Task<bool> DeleteOwner(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Sakniowner.Where(x => x.SakniDetailId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
 
+        //********* rpt ! Lessee Details **********
+        public async Task<bool> Savelessee(Saknilessee lessee)
+        {
+            _dbContext.Saknilessee.Add(lessee);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Saknilessee>> GetAllSaknilessee(int id)
+        {
+            return await _dbContext.Saknilessee.Where(x => x.SakniDetailId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> Deletelessee(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Saknilessee.Where(x => x.SakniDetailId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
 
+        //********* rpt ! Tenant Details **********
+
+        public async Task<bool> SaveTenant(Saknitenant tenant)
+        {
+            _dbContext.Saknitenant.Add(tenant);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Saknitenant>> GetAllTenant(int id)
+        {
+            return await _dbContext.Saknitenant.Where(x => x.SakniDetailId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> DeleteTenant(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Saknitenant.Where(x => x.SakniDetailId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 }

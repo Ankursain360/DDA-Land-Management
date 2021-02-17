@@ -1,5 +1,37 @@
 ﻿$(document).ready(function () {
-
+    $(".IsValidData").keyup(function () {
+        debugger;
+        var title = $('#Title').val();
+        if ($('#Title').val() == "") {
+        } else {
+            checkresult = true;
+            $("#TitleMsg").hide();
+        }
+        var address = $('#PropertyNoAddress').val();
+        if (address == "") {
+        } else {
+            checkresult = true;
+            $("#PropertyNoAddressMsg").hide();
+        }
+        var allotte = $('#AlloteeName').val();
+        if (allotte == "") {
+        } else {
+            checkresult = true;
+            $("#AlloteeNameMsg").hide();
+        }
+        var fileno = $('#FileNo').val();
+        if (fileno == "") {
+        } else {
+            checkresult = true;
+            $("#FileNoMsg").hide();
+        }
+        var filepath = $('#FilePath').val();
+        if (filepath == "") {
+        } else {
+            checkresult = true;
+            $("#FilePathMsg").hide();
+        }
+    });
 });
 
 $('#FileUpload').change(function () {

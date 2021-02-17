@@ -12,9 +12,11 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Helper;
+
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class EncroachmentDetailsController : Controller
+    public class EncroachmentDetailsController : BaseController
     {
         private readonly IEnchroachmentService _enchroachmentService;
 
@@ -186,13 +188,44 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> GetEnchorcherNameDetails([FromBody] EncrocherNameSearchDto model)
+        {
+            int UserId = SiteContext.UserId;
+            var result = await _enchroachmentService.GetPagedEncrocherPeople(model,UserId);
+            return PartialView("_ListEName", result);
+            //if (result != null)
+            //{
+            //    return PartialView("_ListEName", result);
+            //}
+            //else
+            //{
+            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            //    return PartialView();
+            //}
+        }
+       
+        //public async Task<IActionResult> DeleteEName(int id)
+        //{
+        //    try
+        //    {
 
-
-
-
-
-
-
-
+        //        var result = await _enchroachmentService.DeleteEName(id);
+        //        if (result == true)
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //    }
+        //    var list = await _enchroachmentService.GetAllEnchroachment();
+        //    return View("Index", list);
+        //}
     }
 }

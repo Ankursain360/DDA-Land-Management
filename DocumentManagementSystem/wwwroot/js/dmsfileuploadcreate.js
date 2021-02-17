@@ -7,6 +7,41 @@
         $("#divBulkFileUpload").show();
         callSelect2();
     }
+
+    $(".IsValidData").keyup(function () {
+        debugger;
+        var title = $('#Title').val();
+        if ($('#Title').val() == "") {
+        } else {
+            checkresult = true;
+            $("#TitleMsg").hide();
+        }
+        var address = $('#PropertyNoAddress').val();
+        if (address == "") {
+        } else {
+            checkresult = true;
+            $("#PropertyNoAddressMsg").hide();
+        }
+        var allotte = $('#AlloteeName').val();
+        if (allotte == "") {
+        } else {
+            checkresult = true;
+            $("#AlloteeNameMsg").hide();
+        }
+        var fileno = $('#FileNo').val();
+        if (fileno == "") {
+        } else {
+            checkresult = true;
+            $("#FileNoMsg").hide();
+        }
+        var filepath = $('#FilePath').val();
+        if (filepath == "") {
+        } else {
+            checkresult = true;
+            $("#FilePathMsg").hide();
+        }
+    });
+
 });
 
 $('#FileUpload').change(function () {
@@ -15,6 +50,14 @@ $('#FileUpload').change(function () {
     var filePath = fileInput.value;
     const size = (FileUpload.files[0].size);
     fileValidation(filePath, fileInput, size);
+    if (fileInput.value != "") {
+        $("#FilePath").val("filePath");
+        $("#FilePathMsg").hide();
+    }
+    else {
+        $("#FilePath").val('');
+        $("#FilePathMsg").show();
+    }
 });
 
 
@@ -160,9 +203,16 @@ function CheckFileValidation() {/* -----------check validation before create cli
         checkresult = true;
         $("#FileNoMsg").hide();
     }
+    var filepath = $('#FilePath').val();
+    if (filepath == "") {
+        checkresult = false;
+        $("#FilePathMsg").show();
+    } else {
+        checkresult = true;
+        $("#FilePathMsg").hide();
+    }
 
-
-    if (title == "" || address == "" || allotte == "" || fileno == "") {
+    if (title == "" || address == "" || allotte == "" || fileno == "" || filepath == "") {
 
         checkresult = false;
     }

@@ -1,40 +1,76 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Awardplotdetails>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Award Plot Details" })
 
-@{int rowNo = 0; }
 
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Award Plot Details</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Action" />
+                    <label  class="floating-label">Award Number</label>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme" type="submit" id="btnSearch">Search</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br />
-<br />
-<div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>
-    @*@Html.ActionLink("Add New", "Create", "District", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
-</div>
-<br />
-<br />
-<div class="container-fluid">
-    <div class="card  table-card" style="overflow:scroll;">
-        <div id="divAwardPlotDetails">
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="Award">Award Number</option>
+                        <option value="Village">Village Name</option>
+                        <option value="Khasra">Khasra Number</option>
+                        <option value="Status">Status</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/AwardPlotDetails/create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="/AwardPlotDetails/download" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive px-2" id="divAwardPlotDetails">
 
         </div>
-
-
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/awardplotdetailsindex.js"></script>
+    <script src="~/js/awardplotindex.js"></script>
 
 </environment>
 <environment exclude="Development">
-    <script src="~/js/awardplotdetailsindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/awardplotindex.min.js" asp-append-version="true"></script>
 </environment>
