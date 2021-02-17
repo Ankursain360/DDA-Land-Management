@@ -124,5 +124,13 @@ namespace Libraries.Service.ApplicationService
             return villageList;
         }
 
+
+
+        public async Task<List<VillageDetailsLitDataDto>> GetPagedvillagedetailsList(VillagedetailsSearchDto model)
+        {
+            return await _acquiredlandvillageRepository.GetPagedvillagedetailsList(model);
+        }
+
+
     }
 }

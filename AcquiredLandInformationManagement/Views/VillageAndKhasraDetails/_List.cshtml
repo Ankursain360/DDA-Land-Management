@@ -1,0 +1,128 @@
+﻿
+@*@model IEnumerable<Dto.Search.VillageDetailsLitDataDto>*@
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+
+        <tr>
+
+            <th>
+                Village Name :
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+
+        <tr>
+
+            <th>
+                Khasra No :
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+        <tr>
+
+            <th>
+                Area (Bigha - Biswa - Biswansi)(ACRE) :
+
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+
+
+
+
+        <tr>
+
+            <th>
+                Notification(s) US-4 :
+
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+
+        <tr>
+
+            <th>
+                Notification(s) US-6 :
+
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+        <tr>
+
+            <th>
+                Notification(s) US-17 :
+
+
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+
+
+
+        <tr>
+
+            <th>
+                Award(s) :
+
+
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+
+
+
+
+        <tr>
+
+            <th>
+                Notification(s) US-22 :
+
+
+            </th>
+            <td></td>
+
+
+
+
+        </tr>
+
+
+
+    </thead>
+   
+
+</table>
+
+
+
+
+
+@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@
