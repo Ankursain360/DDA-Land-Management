@@ -12,10 +12,10 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select   class="floating-label-field floating-label-field--s3"
+                    <select class="floating-label-field floating-label-field--s3"
                             asp-for="VillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option disabled="disabled">Select</option>
+                        <option value="0" disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
@@ -127,6 +127,7 @@
                             <th>Lessee Name</th>
                             <th>Father's Name</th>
                             <th>Address</th>
+                            <th>Lessee Share</th>
                             <th>Mortgage Details</th>
                             <th>Action</th>
                         </tr>
@@ -137,8 +138,8 @@
                         <tr id="">
                             <td style="text-align:center;"><span class="sn1">1</span></td>
                             <td>
-                                <input asp-for="LesseeName" type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
-                                <span asp-validation-for="LesseeName" class="d-block text-danger field-validation-valid msg"></span>
+                                <input asp-for="LesseeName" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LesseeName" class="d-block text-danger field-validation-valid "></span>
                             </td>
                             <td>
                                 <input asp-for="LFather" type="text" class="floating-label-field floating-label-field--s3" />
@@ -146,18 +147,18 @@
 
                             </td>
                             <td>
-                                <input asp-for="LAddress" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
-                                <span asp-validation-for="LAddress" class="d-block text-danger field-validation-valid msg2"></span>
+                                <input asp-for="LAddress" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LAddress" class="d-block text-danger field-validation-valid "></span>
 
                             </td>
                             <td>
-                                <input asp-for="LShare" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
-                                <span asp-validation-for="LShare" class="d-block text-danger field-validation-valid msg2"></span>
+                                <input asp-for="LShare" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LShare" class="d-block text-danger field-validation-valid "></span>
 
                             </td>
                             <td>
-                                <input asp-for="LMortgage" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
-                                <span asp-validation-for="LMortgage" class="d-block text-danger field-validation-valid msg2"></span>
+                                <input asp-for="LMortgage" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LMortgage" class="d-block text-danger field-validation-valid "></span>
 
                             </td>
 
@@ -184,7 +185,7 @@
                     <thead class="text-nowrap">
                         <tr>
                             <th>Sr.No</th>
-                            <th>Farmer Name</th>
+                            <th>Tenant Name</th>
                             <th>Father's Name</th>
                             <th>Address</th>
                             <th>Action</th>
@@ -197,17 +198,17 @@
 
                             <td style="text-align:center;"><span class="sn2">1</span></td>
                             <td>
-                                <input asp-for="TName" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
+                                <input asp-for="TName" type="text" class="floating-label-field floating-label-field--s3"  />
                                 <span asp-validation-for="TName" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <input asp-for="TFatherName" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFather" />
+                                <input asp-for="TFatherName" type="text" class="floating-label-field floating-label-field--s3"  />
                                 <span asp-validation-for="TFatherName" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <input asp-for="TAddress" type="text" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
+                                <input asp-for="TAddress" type="text" class="floating-label-field floating-label-field--s3"  />
                                 <span asp-validation-for="TAddress" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
@@ -288,8 +289,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/jaraicreate.js"></script>
+    <script src="~/js/saknicreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/jaraicreate.min.js" asp-append-version="true"></script>
+    <script src="~/js/saknicreate.min.js" asp-append-version="true"></script>
 </environment>

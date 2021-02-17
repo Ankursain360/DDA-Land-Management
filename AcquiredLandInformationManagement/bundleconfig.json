@@ -184,5 +184,35 @@
     "inputFiles": [
       "wwwroot/js/demandlistdetailsindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jaraicreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/jaraicreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jaraiedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/jaraiedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/saknicreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/saknicreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/sakniedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/sakniedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/sakniindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/sakniindex.js"
+    ]
   }
 ]
