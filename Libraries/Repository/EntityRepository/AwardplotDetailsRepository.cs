@@ -10,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Dto.Master;
+using Repository.Common;
+
 namespace Libraries.Repository.EntityRepository
 {
   public  class AwardplotDetailsRepository: GenericRepository<Awardplotdetails>, IAwardplotDetailsRepository
@@ -162,6 +165,63 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<List<AwardReportDtoProfile>> BindAwardNoDateList()
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("BindDropdownForAwardReport")
+                                            .WithOutParams()
+                                            .ExecuteStoredProcedureAsync<AwardReportDtoProfile>();
 
+                return (List<AwardReportDtoProfile>)data;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<PagedResult<Awardplotdetails>> GetPagedPossessionReport(AwardReportSearchDto model)
+        {
+            var data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.AwardMasterId == (model.Id == 0 ? x.AwardMasterId : model.Id)
+                                        )
+                                        .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                data = null;
+                data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.AwardMasterId == (model.Id == 0 ? x.AwardMasterId : model.Id)
+                                        )
+                                .OrderBy(s =>
+                                (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRA" ? (s.Khasra != null ? s.Khasra.Name : null) : (s.Village == null ? null : s.Village.Name))
+                                )
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+            }
+            else if (SortOrder == 2)
+            {
+                data = null;
+                data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.AwardMasterId == (model.Id == 0 ? x.AwardMasterId : model.Id)
+                                        )
+                                .OrderByDescending(s =>
+                                 (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRA" ? (s.Khasra != null ? s.Khasra.Name : null) : (s.Village == null ? null : s.Village.Name))
+                                )
+                                .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+            }
+            return data;
+        }
     }
 }

@@ -33,7 +33,7 @@ $("#btnReset").click(function () {
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    HttpPost(`/PossessionReport/GetDetails`, 'html', param, function (response) {
+    HttpPost(`/AwardReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });

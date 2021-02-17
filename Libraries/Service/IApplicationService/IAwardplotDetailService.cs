@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
 using Libraries.Repository.Common;
+using Dto.Master;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -20,7 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<Awardplotdetails> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model);
-
-
+        Task<List<AwardReportDtoProfile>> BindAwardNoDateList();
+        Task<PagedResult<Awardplotdetails>> GetPagedPossessionReport(AwardReportSearchDto model);
     }
 }
