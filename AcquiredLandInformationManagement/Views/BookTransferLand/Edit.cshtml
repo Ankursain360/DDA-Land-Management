@@ -2,7 +2,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Book Transfer Land" })
 
 <div class="pt-3">
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3 ">
+                    <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3 " required>
                     <span asp-validation-for="NotificationDate" class="text-danger"></span>
                     <label class="floating-label" asp-for="NotificationDate">Notification Date</label>
                 </div>
@@ -63,7 +63,7 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="Area" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input asp-for="Area" type="number" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="20" >
 
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label" asp-for="Area">Area (Acre)</label>
@@ -76,9 +76,11 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
+                    <input type="hidden" asp-for="StatusOfLand" id="StatusOfLand" value="Green" />
+
                     <input asp-for="StatusOfLand" type="radio" class="floating-label-field  " placeholder="Name" name="grpLand" value="Allotted" id="A">Allotted
                     <input asp-for="StatusOfLand" type="radio" class="floating-label-field " placeholder="Name" name="grpLand" value="Vacant" id="V">Vacant
-                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Enchroched
+                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Encroached
                     <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Green" id="G">Green
 
                     <span asp-validation-for="StatusOfLand" class="text-danger"></span>

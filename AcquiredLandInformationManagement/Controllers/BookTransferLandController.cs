@@ -90,8 +90,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
 
             var Data = await _booktransferlandService.FetchSingleResult(id);
-
-            
+                       
             Data.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
             Data.LocalityList = await _booktransferlandService.GetAllLocality();
             Data.KhasraList = await _booktransferlandService.GetAllKhasra();
@@ -108,6 +107,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Edit(int id, Booktransferland booktransferland)
         {
+            booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
+            booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
+            booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
             if (ModelState.IsValid)
             {
                 try

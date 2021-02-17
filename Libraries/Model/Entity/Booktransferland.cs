@@ -2,6 +2,7 @@
 using Libraries.Model.Entity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
@@ -9,12 +10,15 @@ namespace Libraries.Model.Entity
     public class Booktransferland : AuditableEntity<int>
    
     {
-       
+        
         public int? LandNotificationId { get; set; }
+        [Required(ErrorMessage = "  Notification Date is mandatory")]
         public DateTime? NotificationDate { get; set; }
         public int? LocalityId { get; set; }
         public int? KhasraId { get; set; }
+        [Required(ErrorMessage = " Part is mandatory")]
         public string Part { get; set; }
+   //  [Required(ErrorMessage = " Area is mandatory")]
         public decimal? Area { get; set; }
        
         public string StatusOfLand { get; set; }

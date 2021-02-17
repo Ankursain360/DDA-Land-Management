@@ -63,7 +63,7 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="Area" type="number" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="20" required>
+                    <input asp-for="Area" type="number" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="20" >
 
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label" asp-for="Area">Area (Acre)</label>
@@ -76,9 +76,11 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
+                    <input type="hidden" asp-for="StatusOfLand" id="StatusOfLand" value="Green" />
+                    
                     <input asp-for="StatusOfLand" type="radio" class="floating-label-field  " placeholder="Name" name="grpLand" value="Allotted" id="A">Allotted
                     <input asp-for="StatusOfLand" type="radio" class="floating-label-field " placeholder="Name" name="grpLand" value="Vacant" id="V">Vacant
-                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Enchroched
+                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Encroached
                     <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Green" id="G">Green
 
                     <span asp-validation-for="StatusOfLand" class="text-danger"></span>
