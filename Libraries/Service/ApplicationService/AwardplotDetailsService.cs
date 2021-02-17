@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Dto.Master;
+
 namespace Libraries.Service.ApplicationService
 {
    public class AwardplotDetailsService : EntityService<Awardplotdetails>, IAwardplotDetailService
@@ -108,11 +110,15 @@ namespace Libraries.Service.ApplicationService
             return await _awardplotDetailsRepository.GetPagedAwardplotdetails(model);
         }
 
+        public async Task<List<AwardReportDtoProfile>> BindAwardNoDateList()
+        {
+            return await _awardplotDetailsRepository.BindAwardNoDateList();
+        }
 
-
-
-
-
+        public async Task<PagedResult<Awardplotdetails>> GetPagedAwardReport(AwardReportSearchDto model)
+        {
+            return await _awardplotDetailsRepository.GetPagedAwardReport(model);
+        }
     }
 }
 

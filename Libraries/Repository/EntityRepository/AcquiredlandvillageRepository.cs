@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
 
+using Repository.Common;
+
 namespace Libraries.Repository.EntityRepository
 {
   public  class AcquiredlandvillageRepository:GenericRepository<Acquiredlandvillage>,IAcquiredlandvillageRepository
@@ -254,8 +256,33 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Acquiredlandvillage>> GetAllVillageList()
         {
-            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.ToListAsync();
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
             return villageList;
         }
+
+
+        public async Task<List<VillageDetailsLitDataDto>> GetPagedvillagedetailsList(VillagedetailsSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("villagedetails")
+                                            .WithSqlParams(("S_villageId", model.village))
+
+
+
+                                            .ExecuteStoredProcedureAsync<VillageDetailsLitDataDto>();
+
+                return (List<VillageDetailsLitDataDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

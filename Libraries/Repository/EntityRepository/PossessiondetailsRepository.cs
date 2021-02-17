@@ -144,7 +144,8 @@ namespace Libraries.Repository.IEntityRepository
             var data = await _dbContext.Possessiondetails
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
-                                        .Where(x => x.PossDate ==( model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate) )
+                                        .Where(x => x.PossDate ==( model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
+                                        && x.IsActive == 1
                                         )
                                         .GetPaged<Possessiondetails>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -155,6 +156,7 @@ namespace Libraries.Repository.IEntityRepository
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                         .Where(x => x.PossDate == (model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
+                                        && x.IsActive == 1
                                         )
                                 .OrderBy(s =>
                                 (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
@@ -169,6 +171,7 @@ namespace Libraries.Repository.IEntityRepository
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                         .Where(x => x.PossDate == (model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
+                                        && x.IsActive == 1
                                         )
                                 .OrderByDescending(s =>
                                  (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)

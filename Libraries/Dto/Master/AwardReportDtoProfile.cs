@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dto.Master
 {
-    public class PossessionReportDtoProfile
+    public class AwardReportDtoProfile
     {
-        public string ID { get; set; }
-        public string POSSDATE { get; set; }
+        public int Id { get; set; }
+        public string AwardName { get; set; }
     }
 }

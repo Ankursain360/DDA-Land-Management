@@ -24,7 +24,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model);
         Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model);
 
-
+        Task<List<VillageDetailsLitDataDto>> GetPagedvillagedetailsList(VillagedetailsSearchDto model);
 
 
     }

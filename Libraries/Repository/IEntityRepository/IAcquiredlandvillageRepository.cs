@@ -18,6 +18,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model);
         Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model);
         Task<List<Acquiredlandvillage>> GetAllVillageList();
-
+        Task<List<VillageDetailsLitDataDto>> GetPagedvillagedetailsList(VillagedetailsSearchDto model);
     }
 }

@@ -196,5 +196,11 @@
     "inputFiles": [
       "wwwroot/js/possessionreportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardindex.js"
+    ]
   }
 ]

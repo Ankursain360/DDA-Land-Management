@@ -1,6 +1,6 @@
-﻿@model Dto.Master.PossessionReportDtoProfile
+﻿@model Dto.Master.AwardReportDtoProfile
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Possession Report" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Award Report" })
     <div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
 
@@ -8,10 +8,10 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" id="possessionDate"  asp-items="@(new SelectList( @ViewBag.PossessionDateList, "ID","POSSDATE"))">
+                    <select class="floating-label-field floating-label-field--s3" id="awardDate"  asp-items="@(new SelectList( @ViewBag.AwardNoDateList, "Id","AwardName"))">
                         <option value="0">All</option>
                     </select>
-                    <label class="floating-label">Possession Date</label>
+                    <label class="floating-label">Award No.(Date)</label>
                 </div>
             </div>
             
@@ -64,8 +64,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/possessionreportindex.js"></script>
+    <script src="~/js/awardreportindex.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/possessionreportindex.js" asp-append-version="true"></script>
+    <script src="~/js/awardreportindex.js" asp-append-version="true"></script>
 </environment>

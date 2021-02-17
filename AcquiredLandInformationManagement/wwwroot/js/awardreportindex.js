@@ -27,13 +27,13 @@ $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
-    $('#possessionDate').val('0').trigger('change');
+    $('#awardDate').val('0').trigger('change');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    HttpPost(`/PossessionReport/GetDetails`, 'html', param, function (response) {
+    HttpPost(`/AwardReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
@@ -41,7 +41,7 @@ function GetDetails(pageNumber, pageSize) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        PossessionDate: ($('#possessionDate').val()),
+        Id: parseInt($('#awardDate').val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
