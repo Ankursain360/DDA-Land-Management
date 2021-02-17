@@ -24,6 +24,16 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
         Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId);
+        //********* repeater ! Owner Details **********
+
+        Task<bool> SaveEName(EncrocherPeople encrocherPeople);
+        Task<List<EncrocherPeople>> GetAllOwner(int id);
+        Task<bool> DeleteOwner(int Id);
+        //********* repeater ! Payment Details **********
+
+        Task<bool> SavePayment(Enchroachmentpayment enchroachmentpayment);
+        Task<List<Enchroachmentpayment>> GetAllPayment(int id);
+        Task<bool> DeletePayment(int Id);
 
     }
 }

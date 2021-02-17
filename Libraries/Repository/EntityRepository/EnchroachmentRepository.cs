@@ -55,7 +55,78 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model)
         {
-            return await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra).Include(x => x.Natureofencroachment).Include(x => x.Reasons).OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+            //return await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+            //    .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+            //    .OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+
+            var data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+                .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+                .OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+                                .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                .OrderBy(s => s.Village.Name)
+                                .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+                                            break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+                                .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                .OrderBy(s => s.Khasra.Name)
+                                .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+                                .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                               .OrderBy(x => x.IsActive == 0)
+                                .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+                            
+                        break;
+                      }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+                                .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                .OrderByDescending(s => s.Village.Name)
+                                .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+                                .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                .OrderByDescending(s => s.Khasra.Name)
+                                .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+                                .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
+                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                               .OrderByDescending(x => x.IsActive == 0)
+                                .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+
+                        break;
+                }
+            }
+            return data;
         }
         public async Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId)
         {
@@ -74,6 +145,43 @@ namespace Libraries.Repository.EntityRepository
             return (List<EncrochpeopleListDataDto>)data;
         }
 
+        //********* repeater ! Owner Details **********
 
+        public async Task<bool> SaveEName(EncrocherPeople encrocherPeople)
+        {
+            _dbContext.EncrocherPeople.Add(encrocherPeople);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<EncrocherPeople>> GetAllOwner(int id)
+        {
+            return await _dbContext.EncrocherPeople.Where(x => x.EnchId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> DeleteOwner(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.EncrocherPeople.Where(x => x.EnchId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        //********* repeater ! Payment Details **********
+
+        public async Task<bool> SavePayment(Enchroachmentpayment enchroachmentpayment)
+        {
+            _dbContext.Enchroachmentpayment.Add(enchroachmentpayment);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Enchroachmentpayment>> GetAllPayment(int id)
+        {
+            return await _dbContext.Enchroachmentpayment.Where(x => x.EnchId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> DeletePayment(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Enchroachmentpayment.Where(x => x.EnchId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 }

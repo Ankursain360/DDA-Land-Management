@@ -71,7 +71,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IPossessiondetailsRepository, PossessiondetailsRepository>();
             services.AddScoped<IDemandListDetailsRepository, DemandListDetailsRepository>();
             services.AddScoped<IMutationRepository, MutationRepository>();
-
+           
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();

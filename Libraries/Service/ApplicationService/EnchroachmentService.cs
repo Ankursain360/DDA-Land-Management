@@ -113,7 +113,7 @@ namespace Libraries.Service.ApplicationService
         {
             enchroachment.CreatedBy =1;
             enchroachment.CreatedDate = DateTime.Now;
-            enchroachment.LandUse = "Yes";
+          //  enchroachment.LandUse = "Yes";
             enchroachment.IsActive =1;
            // enchroachment.NEncroachmentId = 1;
 
@@ -131,6 +131,41 @@ namespace Libraries.Service.ApplicationService
                 return await _EnchroachmentRepository.GetPagedEncrocherPeople(model, UserId);
            // return EnchorcherList;
         }
-       
+        //********* repeater Encroacher Name Details **********
+
+        public async Task<bool> SaveEName(EncrocherPeople encrocherPeople)
+        {
+            encrocherPeople.CreatedBy = encrocherPeople.CreatedBy;
+            encrocherPeople.CreatedDate = DateTime.Now;
+            encrocherPeople.IsActive = 1;
+            encrocherPeople.FileNo = "0";
+            return await _EnchroachmentRepository.SaveEName(encrocherPeople);
+        }
+        public async Task<List<EncrocherPeople>> GetAllOwner(int id)
+        {
+            return await _EnchroachmentRepository.GetAllOwner(id);
+        }
+        public async Task<bool> DeleteOwner(int Id)
+        {
+            return await _EnchroachmentRepository.DeleteOwner(Id);
+        }
+        //********* repeater Payment Details **********
+
+        public async Task<bool> SavePayment(Enchroachmentpayment enchroachmentpayment)
+        {
+            enchroachmentpayment.CreatedBy = enchroachmentpayment.CreatedBy;
+            enchroachmentpayment.CreatedDate = DateTime.Now;
+            enchroachmentpayment.IsActive = 1;
+            return await _EnchroachmentRepository.SavePayment(enchroachmentpayment);
+        }
+        public async Task<List<Enchroachmentpayment>> GetAllPayment(int id)
+        {
+            return await _EnchroachmentRepository.GetAllPayment(id);
+        }
+        public async Task<bool> DeletePayment(int Id)
+        {
+            return await _EnchroachmentRepository.DeletePayment(Id);
+        }
+
     }
 }

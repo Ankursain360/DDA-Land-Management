@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Enchroachment>
-@await Component.InvokeAsync("PageHeader", new { pageName = "Enchrochment Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Encroachment Details" })
 
 
 <div class="pt-3">
@@ -9,7 +9,7 @@
             <div class="col-md-3    ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Action" />
-                    <label class="floating-label">Award Number</label>
+                    <label class="floating-label">Village Name</label>
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Name">Award Number</option>
+                        @*<option value="Name">Award Number</option>*@
                         <option value="Village">Village Name</option>
                         <option value="Khasra">Khasra Number</option>
                         <option value="Status">Status</option>

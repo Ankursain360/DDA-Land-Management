@@ -77,6 +77,7 @@ namespace Libraries.Model
         public virtual DbSet<Jaraifarmer> Jaraifarmer { get; set; }
         public virtual DbSet<Jarailessee> Jarailessee { get; set; }
         public virtual DbSet<Jaraiowner> Jaraiowner { get; set; }
+        public virtual DbSet<EncrocherPeople> EncrocherPeople { get; set; }
         public virtual DbSet<Undersection6> Undersection6 { get; set; }
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         public virtual DbSet<Landtransfer> Landtransfer { get; set; }
@@ -154,6 +155,7 @@ namespace Libraries.Model
         public virtual DbSet<Datastoragedetails> Datastoragedetails { get; set; }
 
         public virtual DbSet<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
+        public virtual DbSet<Enchroachmentpayment> Enchroachmentpayment { get; set; }
 
         //**********  Damage Payee **********
 
@@ -281,6 +283,7 @@ namespace Libraries.Model
 
             modelBuilder.ApplyConfiguration(new JaraidetailsConfiguration());
             modelBuilder.ApplyConfiguration(new JaraiownerConfiguration());
+            modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());
             modelBuilder.ApplyConfiguration(new JarailesseeConfiguration());
             modelBuilder.ApplyConfiguration(new JaraifarmerConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());
@@ -423,6 +426,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new AwardmasterdetailConfiguration());
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());
+            modelBuilder.ApplyConfiguration(new EnchroachmentpaymentConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }
