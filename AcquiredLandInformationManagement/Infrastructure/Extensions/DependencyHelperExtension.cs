@@ -39,6 +39,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IUndersection22Repository, Undersection22Repository>();
             services.AddScoped<IAwardplotDetailsRepository, AwardplotDetailsRepository>();
+            services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
 
             services.AddScoped<IDisposallandtypeRepository, DisposallandtypeRepository>();
             services.AddScoped<INazulRepository, NazulRepository>();
@@ -120,6 +121,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUnderSection6Service, UnderSection6Service>();
             services.AddScoped<IDemandListDetailsService, DemandListDetailsService>();
             services.AddScoped<IMutationService, MutationService>();
+            services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
 
         }
     }

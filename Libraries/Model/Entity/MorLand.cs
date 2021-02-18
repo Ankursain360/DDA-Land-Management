@@ -19,14 +19,15 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Property name is mandatory")]
         public string PropertySiteNo { get; set; }
         [Required(ErrorMessage = " Location name is mandatory")]
+        [Remote(action: "Exist", controller: "MorLands", AdditionalFields = "Id")]
         public string Name { get; set; }
         public string SiteDescription { get; set; }
-        [Required(ErrorMessage = " Bigha name is mandatory")]
+        [Required(ErrorMessage = " Area is mandatory")]
+        public decimal Area { get; set; }
         public decimal Bigha { get; set; }
-        [Required(ErrorMessage = " Biswa name is mandatory")]
+       
         public decimal Biswa { get; set; }
-        [Required(ErrorMessage = " Biswansi name is mandatory")]
-        public decimal Biswanshi { get; set; }
+         public decimal Biswanshi { get; set; }
         public string StatusOfLand { get; set; }
         public string OccupiedBy { get; set; }
         public string Developed { get; set; }

@@ -163,16 +163,16 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> ExistName(int Id, string Name)
+        public async Task<IActionResult> Exist(int Id, string AwardNumber)
         {
-            var result = await _awardmasterdetailsService.CheckUniqueName(Id, Name);
+            var result = await _awardmasterdetailsService.CheckUniqueName(Id, AwardNumber);
             if (result == false)
             {
                 return Json(true);
             }
             else
             {
-                return Json($"Awatd Number: {Name} already exist");
+                return Json($"Award Number : {AwardNumber} already exist");
             }
         }
         [AcceptVerbs("Get", "Post")]

@@ -28,7 +28,8 @@ namespace Libraries.Repository.EntityRepository
             //   // .Where(x => x.IsActive == 1)
             //    .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
             var data = await _dbContext.Booktransferland
-                  .Include(x => x.Locality)
+                 .Include(x => x.Locality)
+                
                 .Include(x => x.Khasra)
                 .Include(x => x.LandNotification)
                 // .Where(x => x.IsActive == 1)
@@ -185,9 +186,9 @@ namespace Libraries.Repository.EntityRepository
         }
       
        
-        public async Task<List<Locality>> GetAllLocality()
+        public async Task<List<Acquiredlandvillage>> GetAllLocality()
         {
-            List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            List<Acquiredlandvillage> localityList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
             return localityList;
         }
         public async Task<List<Khasra>> GetAllKhasra()
