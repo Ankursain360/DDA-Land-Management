@@ -48,18 +48,19 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<LandCategory> LandCategoryList { get; set; }
         public virtual LandCategory LandCategory { get; set; }
-
+        [NotMapped]
+        public List<Khasra> KhasraList { get; set; }
 
 
         //[NotMapped]
         //public List<Locality> LocalityList { get; set; }
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
-        [NotMapped]
-        public virtual Acquiredlandvillage Village { get; set; }
+
+        public Acquiredlandvillage Acquiredlandvillage { get; set; }
 
         //public virtual Locality Locality { get; set; }
-        public virtual Acquiredlandvillage Acquiredlandvillage { get; set; }
+        
         public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
         public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
         public virtual ICollection<Enchroachment> Enchroachment { get; set; }

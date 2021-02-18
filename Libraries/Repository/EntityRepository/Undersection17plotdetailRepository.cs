@@ -192,7 +192,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Undersection17plotdetail.Include(x => x.UnderSection17).Include(x => x.Khasra).Include(x => x.Acquiredlandvillage).OrderByDescending(x => x.Id).ToListAsync();
         }
 
-
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
 
 
 

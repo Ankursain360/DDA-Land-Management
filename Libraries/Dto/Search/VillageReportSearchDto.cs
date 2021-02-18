@@ -8,6 +8,6 @@ namespace Dto.Search
     
         public class VillageReportSearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public int Name { get; set; }
     }
 }

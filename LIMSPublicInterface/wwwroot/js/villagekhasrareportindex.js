@@ -6,7 +6,8 @@ $(document).ready(function () {
         debugger;
         var result = ValidateForm();
         var name = $('#Name option:selected').val();
-       
+        var villageid = $('#AcquiredlandvillageId option:selected').val();
+
 
         //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
         if (result) {
@@ -26,7 +27,7 @@ $(document).ready(function () {
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     debugger
-    HttpPost(`/VillageReport/GetDetails`, 'html', param, function (response) {
+    HttpPost(`/VillageKhasraReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
@@ -35,13 +36,14 @@ function GetDetails(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
     var name = $('#Name option:selected').val();
-  
+    var villageid = $('#AcquiredlandvillageId option:selected').val();
+
     var model = {
         name: "report",
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
         name: parseInt(name),
-       
+        villageId: parseInt(villageid),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
     }
@@ -63,11 +65,11 @@ $("#btnDescending").click(function () {
 });
 
 $("#btnReset").click(function () {
-
+    $('#AcquiredlandvillageId').val('0').trigger('change');
     $('#Name').val('0').trigger('change');
-  
 
-    //GetDetails(currentPageNumber, currentPageSize, sortby);
+
+    GetDetails(currentPageNumber, currentPageSize, sortby);
 
 });
 
@@ -80,3 +82,17 @@ function onChangePageSize(pageSize) {
     GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }
+
+
+function onChange(id) {
+
+    HttpGet(`/VillageKhasraReport/GetAllKhasraList/?AcquiredlandvillageId=${id}`, 'json', function (response) {
+        var html = '<option value="0">All</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+
+        $("#Name").val('0').trigger('change');
+        $("#Name").html(html);
+    });
+};

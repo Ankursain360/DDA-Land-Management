@@ -182,7 +182,21 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? villageId)
+        {
+            villageId = villageId ?? 0;
+            return Json(await _undersection17plotdetailService.GetAllKhasraList(Convert.ToInt32(villageId)));
+        }
 
+
+        [HttpGet]
+        public async Task<JsonResult> GetAreaList(int? khasraid)
+        {
+            khasraid = khasraid ?? 0;
+
+            return Json(await _undersection17plotdetailService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
+        }
 
 
     }

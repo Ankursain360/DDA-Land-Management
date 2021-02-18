@@ -171,7 +171,43 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<PagedResult<Nazul>> GetNazulReportData(NazulVillageReportSearchDto nazulVillageReportSearchDto)
+        {
+            var data = await _dbContext.Nazul
+                .Include(x => x.Village)
 
+                .Where(x => (x.VillageId == (nazulVillageReportSearchDto.villageId == 0 ? x.VillageId : nazulVillageReportSearchDto.villageId)))
+              
+                .OrderByDescending(x => x.Id).GetPaged(nazulVillageReportSearchDto.PageNumber, nazulVillageReportSearchDto.PageSize);
+
+            int SortOrder = (int)nazulVillageReportSearchDto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (nazulVillageReportSearchDto.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderBy(x => x.Village.Name).ToList();
+                        break;
+
+                   
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (nazulVillageReportSearchDto.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Village.Name).ToList();
+                        break;
+
+
+                }
+            }
+            return data;
+        }
 
 
 

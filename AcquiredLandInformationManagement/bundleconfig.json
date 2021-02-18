@@ -202,5 +202,239 @@
     "inputFiles": [
       "wwwroot/js/awardindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/acquiredvillagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/acquiredvillagereportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/appealdetailcreateedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/appealdetailcreateedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/appealdetailindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/appealdetailindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardmastercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardmastercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardplotindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardplotindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/booktransferlandcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/booktransferlandcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/disposallandindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/disposallandindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/disposallandtypeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/disposallandtypeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/encharochmentcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/encharochmentcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/enchorchernamecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/enchorchernamecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/encroachmentedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/encroachmentedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jaraicreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/jaraicreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jaraiedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/jaraiedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/JointSurveyView.min.js",
+    "inputFiles": [
+      "wwwroot/js/JointSurveyView.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/nazulcreateedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/nazulcreateedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/nazulindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/nazulindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/nazulvillagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/nazulvillagereportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentdetailindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentdetailindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possessiondetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/possessiondetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possessiondetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/possessiondetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/saknicreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/saknicreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/sakniedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/sakniedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/sakniindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/sakniindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/tehsilindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/tehsilindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection17index.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection17index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection17plotdetailcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection17plotdetailcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection17plotdetailindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection17plotdetailindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection4plotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection4plotcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UnderSection4PlotIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/UnderSection4PlotIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection6masterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection6masterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection6plotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection6plotcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UnderSection6PlotIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/UnderSection6PlotIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/us22plotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/us22plotcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/us22plotindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/us22plotindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villagekhasrareportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villagekhasrareportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villagedetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villagedetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villageandkhasradetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/villageandkhasradetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/proposalplotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/proposalplotcreate.js"
+    ]
   }
 ]

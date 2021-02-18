@@ -25,7 +25,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Undersection17plotdetail>> GetPagedUndersection17plotdetail(Undersection17plotdetailSearchDto model);
 
-
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
 
 
 

@@ -100,7 +100,17 @@ namespace Libraries.Service.ApplicationService
             _khasraRepository.Add(khasra);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<PagedResult<Khasra>> GetPagedVillageKhasraReport(VillageDetailsKhasraWiseReportSearchDto model)
+        {
+            return await _khasraRepository.GetPagedVillageKhasraReport(model);
 
-        
+        }
+        public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
+        {
+            List<Khasra> khasraList = await _khasraRepository.GetAllKhasraList(villageId);
+            return khasraList;
+        }
+
+
     }
 }
