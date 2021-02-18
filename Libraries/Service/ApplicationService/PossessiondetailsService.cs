@@ -132,5 +132,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _possessiondetailsRepository.BindPossessionDateList();
         }
+
+        public async Task<List<VillageAndKhasraDetailListDto>> GetPagedvillageAndKhasradetailsList(VillageAndKhasraDetailsSearchDto model)
+        {
+            return await _possessiondetailsRepository.GetPagedvillageAndKhasradetailsList(model);
+        }
+
     }
 }

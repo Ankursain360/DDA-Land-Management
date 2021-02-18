@@ -11,9 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using LIMSPublicInterface.Filters;
 using Dto.Search;
 
-namespace AcquiredLandInformationManagement.Controllers
+namespace LIMSPublicInterface.Controllers
 {
     public class VillageAndKhasraDetailsController : Controller
     {

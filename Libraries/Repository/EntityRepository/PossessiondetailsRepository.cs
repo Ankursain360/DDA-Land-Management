@@ -198,5 +198,38 @@ namespace Libraries.Repository.IEntityRepository
                 return null;
             }
         }
+
+
+
+
+        public async Task<List<VillageAndKhasraDetailListDto>> GetPagedvillageAndKhasradetailsList(VillageAndKhasraDetailsSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("villageandkhasradetails")
+                                            .WithSqlParams(("P_khasraId", model.Khasraid))
+
+
+
+                                            .ExecuteStoredProcedureAsync<VillageAndKhasraDetailListDto>();
+
+                return (List<VillageAndKhasraDetailListDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+
+
+
+
     }
 }
