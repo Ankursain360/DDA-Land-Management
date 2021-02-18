@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Master;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -42,5 +43,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Gissaheda>> GetSahedaDetails(int villageId);
         Task<List<Gisvillageboundary>> GetVillageBoundaryDetails(int villageId);
         Task<List<Giszero>> GetZeroDetails(int villageId);
+        Task<List<Village>> GetVillageAutoCompleteDetails(string prefix);
     }
 }

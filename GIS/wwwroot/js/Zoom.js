@@ -14,12 +14,11 @@
     var zoomouticon = document.createElement('i');
     zoomouticon.className = "ri-subtract-line";
     zoomout.appendChild(zoomouticon);
-    zoomout.append('   ');
-    zoomout.append('    |  ');
     controlDiv.appendChild(zoomout);
 
-
-
+    var space = document.createElement('a');
+    space.append(' | ');
+    controlDiv.appendChild(space);
     //zoom in
     var zoomin = document.createElement('a');
     zoomin.title = 'Click to zoom in';

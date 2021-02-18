@@ -99,3 +99,60 @@ $(document).on('click', '#maphybrid', function (e) {
     });
     map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
 });
+
+$(function () {
+    var availableTags = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+    ];
+    $("#txtSearch").autocomplete({
+        source: availableTags
+    });
+});
+
+$(function () {
+    $("#txtSearch").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '/GIS/AutoComplete/',
+                data: { "prefix": request.term },
+                type: "POST",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.name, value: item.name };
+                    }))  
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        },
+        select: function (e, i) {
+           // $("#hfCustomer").val(i.item.val);
+        },
+        minLength: 1
+    });
+});

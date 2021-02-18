@@ -127,10 +127,7 @@ function initialize() {
     var rightdiv = document.getElementById('rightsidebuttons');
     rightdiv.appendChild(zoomDiv);
   // this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(zoomDiv);
-    //var fullscreen = new FullScreenControl(map, 'Full Screen', 'Exit Full Screen');
-    //var rightActiondiv = document.getElementById('topRightActionButton');
-    //rightActiondiv.appendChild(fullscreen);
-    this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(FullScreenControl(map, 'Full Screen', 'Exit Full Screen'));
+ //   this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(FullScreenControl(map, 'Full Screen', 'Exit Full Screen'));
     //End of Code 
     // showLegend();
     //$('.statsDIv .close').click(function () { $('.statsDIv').hide(); });
@@ -555,3 +552,7 @@ $('#LeftNavTab a').on('click', function (e) {
 $('.MenuToggle').on('click', function (e) {
     $('#leftSection').toggleClass('goleft');
 });
+
+function printMaps() {
+    window.print();
+}
