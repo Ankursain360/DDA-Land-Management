@@ -4,6 +4,7 @@ $(document).ready(function () {
     FillOwnerAtEdit();
     FillLesseeAtEdit();
     FillTenantAtEdit();
+    FillKhasraAtEdit();
 });
 
 function onChange(id) {
@@ -285,3 +286,25 @@ $(document).delegate('a.delete-record2', 'click', function (e) {
         return false;
     }
 });
+
+
+
+// fill khasra 
+
+
+function FillKhasraAtEdit() {
+
+
+    HttpGet(`/SakaniDetails/GetSakniKhasra/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+       
+        $("#KhasraId").val(data.khasraId);
+        $("#Plot").val(data.plotNo);
+        $("#Area").val(data.areaSqYard);
+        $("#Category").val(data.category);
+        $("#LeaseAmount").val(data.leaseAmount);
+        $("#RenewalDate").val(data.renewalDate);
+           
+      
+    });
+}

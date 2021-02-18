@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
             Jaraidetails = new HashSet<Jaraidetails>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Saknidetails = new HashSet<Saknidetails>();
+            Saknikhasra = new HashSet<Saknikhasra>();
             Undersection4plot = new HashSet<Undersection4plot>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
             Watchandward = new HashSet<Watchandward>();
@@ -69,6 +70,7 @@ namespace Libraries.Model.Entity
         public ICollection<Jaraidetails> Jaraidetails { get; set; }
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
         public ICollection<Saknidetails> Saknidetails { get; set; }
+        public ICollection<Saknikhasra> Saknikhasra { get; set; }
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
