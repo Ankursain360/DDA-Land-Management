@@ -16,7 +16,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<LandNotification>> GetAllLandNotification();
        
-        Task<List<Locality>> GetAllLocality();
+        Task<List<Acquiredlandvillage>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
 
         Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model);

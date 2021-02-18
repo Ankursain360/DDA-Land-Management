@@ -31,7 +31,10 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-
+        public async Task<bool> Any(int id, string Name)
+        {
+            return await _dbContext.Morland.AnyAsync(t => t.Id != id && t.Name.ToLower() == Name.ToLower());
+        }
 
         public async Task<List<Morland>> GetAllMorland()
         {

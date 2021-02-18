@@ -81,9 +81,9 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<bool> CheckUniqueName(int id, string name)
+        public async Task<bool> CheckUniqueName(int id, string AwardNumber)
         {
-            bool result = await _awardmasterdetailsRepository.Any(id, name);
+            bool result = await _awardmasterdetailsRepository.Any(id, AwardNumber);
             //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
             return result;
         }

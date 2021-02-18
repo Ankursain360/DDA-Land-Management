@@ -36,7 +36,20 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _morlandService.GetPagedMorland(model);
             return PartialView("_List", result);
         }
-
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            var result = await _morlandService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Location/Village Name : {Name} already exist");
+            }
+        }
 
         public async Task<IActionResult> Create()
 

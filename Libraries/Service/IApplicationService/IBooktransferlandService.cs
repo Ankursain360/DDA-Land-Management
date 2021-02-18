@@ -16,7 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Booktransferland>> GetBooktransferlandUsingRepo();
 
         Task<List<LandNotification>> GetAllLandNotification();
-        Task<List<Locality>> GetAllLocality();
+        Task<List<Acquiredlandvillage>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<bool> Update(int id, Booktransferland booktransferland);
 
