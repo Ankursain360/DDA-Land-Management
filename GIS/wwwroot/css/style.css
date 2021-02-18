@@ -81,12 +81,12 @@ a.no-dec {
     width: 100%;
 }
 
-.map-section .liveMap iframe {
-    position: relative;
-    min-height: 100vh;
-    width: 100%;
-    display: block;
-}
+    .map-section .liveMap iframe {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        display: block;
+    }
 
 .actionBtn {
     position: relative;
@@ -100,18 +100,19 @@ a.no-dec {
     box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2)
 }
 
-.actionBtn .actionBtn {
-    background: #fff;
-    color: #666;
-    display: inline-block;
-    border-radius: 10px;
-    margin-left: 6px;
-    padding: 5px 10px;
-    font-size: 1.15rem;
-    box-shadow: none;
-}
+    .actionBtn .actionBtn {
+        background: #fff;
+        color: #666;
+        display: inline-block;
+        border-radius: 10px;
+        margin-left: 6px;
+        padding: 5px 10px;
+        font-size: 1.15rem;
+        box-shadow: none;
+    }
 
-.actionBtn:hover {}
+    .actionBtn:hover {
+    }
 
 .TopActionBtns {
     position: fixed;
@@ -159,17 +160,17 @@ a.no-dec {
     min-width: 160px;
 }
 
-.TransparencyMap small {
-    font-size: .7rem;
-    text-align: left;
-    color: #4c4c4c;
-    margin-bottom: 3px;
-}
+    .TransparencyMap small {
+        font-size: .7rem;
+        text-align: left;
+        color: #4c4c4c;
+        margin-bottom: 3px;
+    }
 
-.TransparencyMap input {
-    width: 100%;
-    display: block;
-}
+    .TransparencyMap input {
+        width: 100%;
+        display: block;
+    }
 
 .MapOption figure {
     display: block;
@@ -178,18 +179,18 @@ a.no-dec {
     margin: 0 auto;
 }
 
-.MapOption figure img {
-    display: block;
-}
+    .MapOption figure img {
+        display: block;
+    }
 
-.MapOption figure figcaption {
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-    font-size: .65rem;
-    width: 100%;
-    text-align: center;
-}
+    .MapOption figure figcaption {
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        font-size: .65rem;
+        width: 100%;
+        text-align: center;
+    }
 
 .leftSection {
     position: absolute;
@@ -204,13 +205,13 @@ a.no-dec {
     height: calc(100vh - 2rem);
 }
 
-.leftSection.goleft {
-    left: -342px
-}
+    .leftSection.goleft {
+        left: -342px
+    }
 
-.leftSection.goleft .MenuToggle i {
-    transform: rotate(180deg);
-}
+        .leftSection.goleft .MenuToggle i {
+            transform: rotate(180deg);
+        }
 
 #LeftNavTab .nav-link {
     font-size: .7rem;
@@ -218,10 +219,10 @@ a.no-dec {
     padding: 8px 11px;
 }
 
-#LeftNavTab .nav-link.active {
-    background: #fcfcfc;
-    border-bottom-color: transparent;
-}
+    #LeftNavTab .nav-link.active {
+        background: #fcfcfc;
+        border-bottom-color: transparent;
+    }
 
 #LeftNavTabContent .tab-pane {
     background: #fcfcfc;
@@ -276,14 +277,14 @@ a.no-dec {
     overflow: hidden;
 }
 
-#LeftNavTabContent .accordion-item .accordion-button {
-    border: 0rem;
-    padding: .45rem .45rem .45rem 2.5rem;
-    font-size: .8rem;
-    color: #4c4c4c;
-    background: #fff;
-    box-shadow: none !important;
-}
+    #LeftNavTabContent .accordion-item .accordion-button {
+        border: 0rem;
+        padding: .45rem .45rem .45rem 2.5rem;
+        font-size: .8rem;
+        color: #4c4c4c;
+        background: #fff;
+        box-shadow: none !important;
+    }
 
 #LeftNavTabContent .accordion-collapse {
     border: none;
@@ -329,18 +330,18 @@ a.no-dec {
     padding-left: 2.2rem;
 }
 
-#LeftNavTabContent .list-group-item i {
-    top: 5px;
-}
+    #LeftNavTabContent .list-group-item i {
+        top: 5px;
+    }
 
-#LeftNavTabContent .list-group-item.active {
-    color: #4c4c4c;
-    background-color: #f9f9f9;
-}
+    #LeftNavTabContent .list-group-item.active {
+        color: #4c4c4c;
+        background-color: #f9f9f9;
+    }
 
-#LeftNavTabContent .list-group-item:last-child {
-    border-bottom: none;
-}
+    #LeftNavTabContent .list-group-item:last-child {
+        border-bottom: none;
+    }
 
 #leftSection .MenuToggle {
     position: absolute;
@@ -357,22 +358,21 @@ a.no-dec {
     /*    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);*/
 }
 
-#leftSection .MenuToggle i {
-    position: relative;
-    left: 0;
-    margin: 0 9px 0 -5px;
-
-}
+    #leftSection .MenuToggle i {
+        position: relative;
+        left: 0;
+        margin: 0 9px 0 -5px;
+    }
 
 #LeftNavTabContent .tab-pane {
     height: calc(100vh - 140px);
     overflow: auto;
 }
 
-#LeftNavTabContent .tab-pane .tab-pane {
-    height: auto;
-    overflow: visible;
-}
+    #LeftNavTabContent .tab-pane .tab-pane {
+        height: auto;
+        overflow: visible;
+    }
 
 .LogoBottom {
     position: absolute;

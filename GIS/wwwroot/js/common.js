@@ -55,3 +55,47 @@ function getLatLongArr(pgString) {
     }
     return latLngArr;
 }
+
+//Map option click events
+$(document).on('click', '#mapsatellite', function (e) {
+
+    map.setOptions({
+        styles: [{
+            'featureType': 'all',
+            'elementType': 'labels',
+            'stylers': [{
+                'visibility': 'off'
+            }]
+        }]
+    });
+
+
+    map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+});
+$(document).on('click', '#maproad', function (e) {
+
+    map.setOptions({
+        styles: [{
+            'featureType': 'all',
+            'elementType': 'labels',
+            'stylers': [{
+                'visibility': 'on'
+            }]
+        }]
+    });
+
+    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+});
+$(document).on('click', '#maphybrid', function (e) {
+
+    map.setOptions({
+        styles: [{
+            'featureType': 'all',
+            'elementType': 'labels',
+            'stylers': [{
+                'visibility': 'on'
+            }]
+        }]
+    });
+    map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+});
