@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using AcquiredLandInformationManagement.Filters;
+using LIMSPublicInterface.Filters;
 using Core.Enum;
-namespace AcquiredLandInformationManagement.Controllers
+namespace LIMSPublicInterface.Controllers
 {
-    public class VillageKhasraReportController : Controller
+    public class VillageKhasraReportController : BaseController
     {
         private readonly IKhasraService _khasraService;
 

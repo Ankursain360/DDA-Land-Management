@@ -29,7 +29,9 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+            services.AddScoped<INazulRepository, NazulRepository>();
+            services.AddScoped<IKhasraRepository, KhasraRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -41,6 +43,9 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
+            services.AddScoped<INazulService, NazulService>();
+            services.AddScoped<IKhasraService, KhasraService>();
         }
     }
 }

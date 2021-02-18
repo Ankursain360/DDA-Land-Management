@@ -1,5 +1,4 @@
 ﻿
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,34 +10,34 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using AcquiredLandInformationManagement.Filters;
+using LIMSPublicInterface.Filters;
 using Core.Enum;
-namespace AcquiredLandInformationManagement.Controllers
+namespace LIMSPublicInterface.Controllers
 {
-    public class NazulVillageReportController : Controller
+    public class VillageReportController : BaseController
     {
-        private readonly INazulService _nazulService;
+        private readonly IAcquiredlandvillageService _acquiredlandvillageService;
 
-        public NazulVillageReportController(INazulService nazulService)
+        public VillageReportController(IAcquiredlandvillageService acquiredlandvillageService)
         {
-            _nazulService = nazulService;
+            _acquiredlandvillageService = acquiredlandvillageService;
         }
 
 
-
+        
         public async Task<IActionResult> Index()
         {
-            Nazul model = new Nazul();
+            Acquiredlandvillage model = new Acquiredlandvillage();
 
 
-            model.VillageList = await _nazulService.GetAllVillageList();
+            model.VillageList = await _acquiredlandvillageService.GetAllVillageList();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody] NazulVillageReportSearchDto model)
+        public async Task<PartialViewResult> GetDetails([FromBody] VillageReportSearchDto model)
         {
-            var result = await _nazulService.GetNazulReportData(model);
+            var result = await _acquiredlandvillageService.GetPagedVillageReport(model);
             if (result != null)
             {
                 return PartialView("_List", result);
