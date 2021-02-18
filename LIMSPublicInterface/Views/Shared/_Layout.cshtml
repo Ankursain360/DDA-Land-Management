@@ -1,218 +1,122 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--LIMS Public Interface -->
+    <meta charset="utf-8">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin Dashboard</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!--font css-->
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/styles.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-   
-    <style>
-        .canvasjs-chart-credit {
-            display: none !important;
-        }
+    <link href="~/lib/select2/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/select2.js"></script>
 
-        .btn {
-            width: 100px;
-        }
-
-        .nav li {
-            background: #3e4a9a;
-        }
-    </style>
-
-    <style>
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 50px;
-            margin-top: 50px;
-            margin-bottom: -10px;
-        }
-    </style>
 </head>
-
-<body style="font-family:sans-serif">
-    <header class="navbar navbar-custom navbar-fixed-top" style="min-height:30px;height:30px; Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); " role="navigation">
-        <div class="col-md-offset-11" style="color:#fff; padding-top:6px; font-size:13px">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle"
-                        style="background-color:#991141; border:#991141; margin-top:-25px; margin-left:-20px; color:white;"
-                        type="button" id="dropdownMenu1"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="true">
-                    <i class="fa-user-circle fa"></i> Hi, DDA
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="/Login/Create">Logout</a></li>
-                    <li><a href="#">Profile</a></li>
-                </ul>
-            </div>
-            @*<a data-toggle="collapse" href="#sub-item-4" style="Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); ">
-                     Hi DDA <span data-toggle="collapse" href="#sub-item-4" ><i class="fa-angle-down fa"></i></span>
-                </a>
-                <ul class="children collapse" id="sub-item-4">
-                    <li>
-                        <a class="" href="/PropertyRegistration/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Property Registration
-                        </a>
-                    </li>
-                </ul>*@
-
-            @*<i class="fa-user-circle fa"></i> Hi, DDA <i class="fa-angle-down fa"></i>*@
-        </div>
-    </header>
-    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 col-md-2 sidebar" style="position: fixed;Font-size: 14px; color: #ffffff; Background: #2c3091;margin-top:-30px;">
-        <div role="separator" class="divider">
-            <img src="~/images/DDAL.JPG" height="70" class="img-responsive" alt="">
-        </div>
-        <hr style="color:darkblue; border-top: 1px solid #534e9a ;" />
-        <div style="padding-left:10px; padding-right:10px;">
-            <a href="/Dashboard/Index"><h4 style="color:#fff;">Dashboard <span data-toggle="collapse" href="#sub-item-0" class="icon pull-right"><em class="fa-dashboard fa"></em></span></h4>  </a>
-        </div>
-        <ul class="nav menu" style="font-family:sans-serif; font-size:13px!important;">
-            @*<li class=""><a href="#"><h4 style="color:#fff;">Dashboard <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa-dashboard fa"></em></span></h4>  </a></li>*@
-            <li class=""></li>
-
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-1">
-                    <em class="fa fa-asterisk">&nbsp;</em> Details <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-
-                    <li>
-                        <a class="" href="/Villages/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Villages
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Khasra/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Khasra
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Zone/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Nazul
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Zone/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>ENH.NCOMP.
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Massavi/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>MASSAVI
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Reports/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Reports
-                        </a>
-                    </li>
-
-
-
-                </ul>
-            </li>
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-2">
-                    <em class="fa fa-barcode">&nbsp;</em>Notification  <span data-toggle="collapse" href="#sub-item-7" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-2">
-                    <li>
-                        <a class="" href="/PINotification/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>US4
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/US6/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>US6
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/US17/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>US17
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/US22/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>US22
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-3">
-                    <em class="fa fa-barcode">&nbsp;</em>Award  <span data-toggle="collapse" href="#sub-item-7" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-3">
-                    <li>
-                        <a class="" href="/Award/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Award
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Possession/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Possession
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
-        </ul>
+<body class="bg-gray">
+    <div style="display:none;">
+        <div class="body-loading loader-active"></div>
     </div>
+    <div class="top-header">
+        <header>
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <div class="menu mr-3 p-2 text-white order-md-2 mr-md-auto open" id="mobileMenu">
+                        <i class="ri-menu-fold-line"></i>
+                        <i class="ri-menu-unfold-line"></i>
+                    </div>
+                    <div class="logo py-1 mr-auto mr-md-4 order-md-1">
+                        <a href="/" class="d-block">
+                            <figure class="m-0">
+                                <img src="~/images/header-logo.png" alt="" class="img-fluid">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="dropdown noti text-white my-2  mr-3 order-md-3">
+                        <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
+                            <i class="ri-notification-2-line"></i>
+                            <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
+                            <ul class="list-unstyled m-0 p-0">
+                                <li class="px-3">
+                                    <a href="#" class="d-flex align-items-center py-2 border-bottom">
+                                        <div class="noti-time text-center pr-2">
+                                            <i class="ri-discuss-line"></i>
+                                            <small class="d-block w-100">12:00</small>
+                                        </div>
+                                        <p class="m-0 text-truncate text-left">
+                                            Some notification message new message
+                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="px-3">
+                                    <a href="#" class="d-flex align-items-center py-2 border-bottom read">
+                                        <div class="noti-time text-center pr-2">
+                                            <i class="ri-discuss-line"></i>
+                                            <small class="d-block w-100">2 Days</small>
+                                        </div>
+                                        <p class="m-0 text-truncate text-left">
+                                            Some notification message new message
+                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @await Component.InvokeAsync("SignInProfile")
+                </div>
+            </div>
+        </header>
+    </div>
+    <aside class="left-menu small slow" id="leftMenu">
+        <ul class="accordion list-unstyled mb-0">
+            @await Component.InvokeAsync("SideNav")
+        </ul>
+    </aside>
 
     <partial name="_CookieConsentPartial" />
-    <div class="col-lg-10 col-md-10 col-md-offset-2" style="padding-left:0; margin-top:-2%;">
-        <div class="row">
-            <img src="http://res.cloudinary.com/deb9cwxor/image/upload/v1595791041/oy34mzpbprqa1fwnbxgd.jpg" height="75" style="position: relative; z-index: 0; width:100%;" />
+    <section id="rightSection" class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0">
+                @RenderBody()
+            </div>
         </div>
-        @RenderBody()
-    </div>
-
-    <footer style="background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091); Color: #ffffff; Font-size: 0.80rem; Font-Family: Open SansRegular;">
-        <div class="col-sm-12" style="color: #f8f8f8; float: none; font-family:sans-serif; font-size:11px; line-height: 150%; padding: 5px 25px 0px 10px; text-align: left; width: auto; ">
-            <div class="pull-left">
-                Terms & Conditions | Privacy Policy | Copyright Policy | Hyperlink policy |  Accessibility Statement | Help <br />
-                © Content Owned by DDA, Government of India.
-            </div>
-
-            <div class="pull-right" style="padding-left:40%; text-align: right; width: auto; ">
-                <table>
-                    <tr>
-                        <td>
-                            <a href="#" style="color:#fff;">
-                                Contact with us: &nbsp; <i class="fa fa-facebook" style="color:#ffffff;"></i> &nbsp; <i class="fa fa-twitter" style="color:#ffffff;"></i>&nbsp; <i class="fa fa-youtube" style="color:#ffffff;"></i><br /><span>Visitors: 137713714, last Updated On: 31/07/2020</span>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+    </section>
+    <footer class="footer slow">
+        <div class="container-fluid">
+            <p class="my-0 py-2">
+                <a href="#">Terms & Conditions</a>
+                | <a href="#">Privacy Policy</a>
+                | <a href="#">Copyright Policy</a>
+                | <a href="#">Hyperlink policy</a>
+                | <a href="#">Accessibility Statement</a>
+                | <a href="#">Help</a><br>
+                &copy; Content Owned by DDA, Government of India.
+            </p>
         </div>
     </footer>
 
-
-    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
-    @*<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script src="~/lib/toaster/toastr.min.js"></script>
+
     <environment include="Development">
         <script src="~/js/site.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
     @Html.Raw(ViewBag.Message)
 </body>
