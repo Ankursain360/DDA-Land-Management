@@ -190,9 +190,9 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Awardmasterdetail.Where(x => x.IsActive == 1).ToListAsync();
             //return await _dbContext.casenature.OrderByDescending(s => s.IsActive).ToListAsync();
         }
-        public async Task<bool> Any(int id, string name)
+        public async Task<bool> Any(int id, string AwardNumber)
         {
-            return await _dbContext.Awardmasterdetail.AnyAsync(t => t.Id != id && t.AwardNumber.ToLower() == name.ToLower());
+           return await _dbContext.Awardmasterdetail.AnyAsync(t => t.Id != id && t.AwardNumber.ToLower() == AwardNumber.ToLower());
         }
         public async Task<List<Acquiredlandvillage>> Getvillage()
         {

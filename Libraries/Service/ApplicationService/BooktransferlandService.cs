@@ -86,9 +86,9 @@ namespace Libraries.Service.ApplicationService
             return landNotificationList;
         }
        
-        public async Task<List<Locality>> GetAllLocality()
+        public async Task<List<Acquiredlandvillage>> GetAllLocality()
         {
-            List<Locality> localityList = await _booktransferlandRepository.GetAllLocality();
+            List<Acquiredlandvillage> localityList = await _booktransferlandRepository.GetAllLocality();
             return localityList;
         }
         public async Task<List<Khasra>> GetAllKhasra()

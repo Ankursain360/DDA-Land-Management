@@ -105,14 +105,20 @@ namespace Libraries.Service.ApplicationService
         {
             morland.CreatedBy = 1;
             morland.CreatedDate = DateTime.Now;
-
+            morland.Bigha = 0;
+            morland.Biswa = 0;
+            morland.Biswanshi = 0;
             _morlandRepository.Add(morland);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
 
 
-
+        public async Task<bool> CheckUniqueName(int id, string Name)
+        {
+            bool result = await _morlandRepository.Any(id, Name);
+            return result;
+        }
 
 
 

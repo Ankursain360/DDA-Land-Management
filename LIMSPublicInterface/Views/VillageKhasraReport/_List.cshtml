@@ -1,0 +1,53 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Khasra>
+@{int rowNo = 0;}
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+
+        <tr>
+            <th rowspan="2">Sr.No</th>
+            <th rowspan="2">Village</th>
+            <th rowspan="2">Khasra No </th>
+           
+            <th rowspan="2">Rect No </th>
+
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+        <tr>
+            <td>@(rowNo += 1)</td>
+
+
+            <td>@item.Acquiredlandvillage.Name</td>
+
+            <td>@item.Name</td>
+          
+            <td>@item.RectNo</td>
+
+
+            @*asp-action="View" asp-route-id="@item.Id"*@
+            @*<td>
+            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+
+        </td>*@
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="13" style="text-align:center"> Data Not Available </th>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

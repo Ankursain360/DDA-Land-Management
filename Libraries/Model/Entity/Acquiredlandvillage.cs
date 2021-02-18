@@ -26,6 +26,7 @@ namespace Libraries.Model.Entity
             Undersection4plot = new HashSet<Undersection4plot>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
+            Booktransferland = new HashSet<Booktransferland>();
         }
         [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
@@ -83,6 +84,7 @@ namespace Libraries.Model.Entity
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
 
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
+        public ICollection<Booktransferland> Booktransferland { get; set; }
         public ICollection<Nazul> Nazul { get; set; }
         public ICollection<Mutation> Mutation { get; set; }
         public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
