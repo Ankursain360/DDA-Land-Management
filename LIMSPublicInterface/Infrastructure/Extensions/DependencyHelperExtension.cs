@@ -32,6 +32,8 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
             services.AddScoped<INazulRepository, NazulRepository>();
             services.AddScoped<IKhasraRepository, KhasraRepository>();
+            services.AddScoped<IAwardplotDetailsRepository, AwardplotDetailsRepository>();
+            services.AddScoped<IPossessiondetailsRepository, PossessiondetailsRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -44,8 +46,8 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
-            services.AddScoped<INazulService, NazulService>();
-            services.AddScoped<IKhasraService, KhasraService>();
+            services.AddScoped<IAwardplotDetailService, AwardplotDetailsService>();
+            services.AddScoped<IPossessiondetailsService, PossessiondetailsService>();
         }
     }
 }
