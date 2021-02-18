@@ -1,6 +1,6 @@
 using System;
 
-namespace LandAcquisition.Models
+namespace LIMSPublicInterface.Models
 {
     public class ErrorViewModel
     {
