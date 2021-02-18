@@ -8,8 +8,12 @@
             <th rowspan="2">Sr.No</th>
             <th rowspan="2">Village</th>
             <th rowspan="2">Khasra No </th>
+           
+            <th rowspan="2">Rect No </th>
 
-            
+
+
+
         </tr>
     </thead>
     <tbody>
@@ -17,21 +21,23 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@(rowNo += 1)</td>
+        <tr>
+            <td>@(rowNo += 1)</td>
 
-                   
-                    <td>@item.Acquiredlandvillage.Name</td>
 
-                    <td>@item.Name</td>
-                   
+            <td>@item.Acquiredlandvillage.Name</td>
 
-                    @*asp-action="View" asp-route-id="@item.Id"*@
-                    @*<td>
-                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+            <td>@item.Name</td>
+          
+            <td>@item.RectNo</td>
 
-                        </td>*@
-                </tr>
+
+            @*asp-action="View" asp-route-id="@item.Id"*@
+            @*<td>
+            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+
+        </td>*@
+        </tr>
             }
         }
         else
