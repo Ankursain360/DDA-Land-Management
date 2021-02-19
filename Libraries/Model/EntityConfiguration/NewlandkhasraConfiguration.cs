@@ -7,13 +7,13 @@ using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class KhasraConfiguration : IEntityTypeConfiguration<Khasra>
+    public class NewlandkhasraConfiguration : IEntityTypeConfiguration<Newlandkhasra>
     {
-        public void Configure(EntityTypeBuilder<Khasra> builder)
+        public void Configure(EntityTypeBuilder<Newlandkhasra> builder)
         {
-            builder.ToTable("khasra", "lms");
+            builder.ToTable("newlandkhasra", "lms");
 
-            builder.HasIndex(e => e.AcquiredlandvillageId)
+            builder.HasIndex(e => e.NewLandvillageId)
                 .HasName("fkKhasraLocality_idx");
 
             builder.HasIndex(e => e.LandCategoryId)
@@ -25,7 +25,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.AcquiredlandvillageId).HasColumnType("int(11)");
+            builder.Property(e => e.NewLandvillageId).HasColumnType("int(11)");
 
             builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
 
@@ -57,18 +57,17 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.Acquiredlandvillage)
-                .WithMany(p => p.Khasra)
-                .HasForeignKey(d => d.AcquiredlandvillageId)
-                .HasConstraintName("fkAcqvillageId");
+            builder.HasOne(d => d.Newlandvillage)
+                .WithMany(p => p.Newlandkhasra)
+                .HasForeignKey(d => d.NewLandvillageId)
+                .HasConstraintName("fk_VillageId");
 
-            //builder.HasOne(d => d.LandCategory)
-            //    .WithMany(p => p.Khasra)
-            //    .HasForeignKey(d => d.LandCategoryId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("fkKhasraLandCategory");
-       
+            builder.HasOne(d => d.LandCategory)
+                .WithMany(p => p.Newlandkhasra)
+                .HasForeignKey(d => d.LandCategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkLandCategory");
+
         }
     }
-
 }

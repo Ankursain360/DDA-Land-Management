@@ -133,6 +133,8 @@ namespace Libraries.Model
 
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
+        public virtual DbSet<Newlandvillage> Newlandvillage { get; set; }
+        public virtual DbSet<Newlandkhasra> Newlandkhasra { get; set; }
 
 
         //**********  Court case management**********
@@ -427,6 +429,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());
             modelBuilder.ApplyConfiguration(new EnchroachmentpaymentConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandkhasraConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandvillageConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

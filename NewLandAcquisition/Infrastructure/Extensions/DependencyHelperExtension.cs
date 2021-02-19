@@ -29,6 +29,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -41,6 +42,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<INewlandvillageService, NewlandvillageService>();
         }
     }
 }

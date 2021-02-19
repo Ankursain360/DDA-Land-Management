@@ -10,6 +10,6 @@ namespace Libraries.Model.Entity
 
         public string Name { get; set; }
         public byte? IsActive { get; set; }
-        public ICollection<Khasra> Khasra { get; set; }
+        public ICollection<Newlandkhasra> Newlandkhasra { get; set; }
     }
 }
