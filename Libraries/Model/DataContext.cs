@@ -235,6 +235,8 @@ namespace Libraries.Model
 
         //***************  New Land Acquisition  *****************
         public virtual DbSet<Newlandus4plot> Newlandus4plot { get; set; }
+        public virtual DbSet<Newlandvillage> Newlandvillage { get; set; }
+        public virtual DbSet<Newlandkhasra> Newlandkhasra { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -435,6 +437,8 @@ namespace Libraries.Model
 
             //***************  New Land Acquisition  *****************
             modelBuilder.ApplyConfiguration(new Newlandus4plotConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandvillageConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandkhasraConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
