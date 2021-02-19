@@ -40,7 +40,7 @@ $(document).ready(function () {
         var html = '';
         for (var i = 0; i < response.length; i++) {
             var check = 0;
-            html = html + '<div class="accordion-item"><h5 class="accordion-header" id="heading' + response[i].id + '"><button id="Z' + response[i].id + '" class="accordion-button py-2 bg-primary text-white" type="button" onclick="showZone(this.id)" data-bs-toggle="collapse" data-bs-target="#collapse' + response[i].id + '" aria-expanded="true" aria-controls="collapse' + response[i].id + '"><i class="ri-arrow-right-s-fill text-white"></i>' + response[i].name + '</button></h5><div id="collapse' + response[i].id + '" class="accordion-collapse collapse" aria-labelledby="heading' + response[i].id + '" data-bs-parent="#accordionData"><div class="accordion-body"><div class="list-group">';
+            html = html + '<div class="accordion-item"><h5 class="accordion-header" id="heading' + response[i].id + '"><button id="Z' + response[i].id + '" class="accordion-button collapsed py-2 bg-primary text-white" type="button" onclick="showZone(this.id)" data-bs-toggle="collapse" data-bs-target="#collapse' + response[i].id + '" aria-expanded="true" aria-controls="collapse' + response[i].id + '"><i class="ri-arrow-right-s-fill text-white"></i>' + response[i].name + '</button></h5><div id="collapse' + response[i].id + '" class="accordion-collapse collapse" aria-labelledby="heading' + response[i].id + '" data-bs-parent="#accordionData"><div class="accordion-body"><div class="list-group">';
             if (response[i].village.length > 0) {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
@@ -90,7 +90,7 @@ function initialize() {
         zoom: 10,
         disableDefaultUI: true,
         mapTypeId: 'coordinate',
-        //mapTypeId: google.maps.MapTypeId.ROADMAP,//SATELLITE
+        //   mapTypeId: google.maps.MapTypeId.ROADMAP,//SATELLITE
         scaleControl: false,
         disableDefaultUI: true,
         zoomControl: false,
@@ -109,7 +109,7 @@ function initialize() {
         }],
 
         fullscreenControl: false,
-        center: new google.maps.LatLng(28.6614731487349, 77.32841229395385), 
+        center: new google.maps.LatLng(28.6508954, 76.9201811),
         //scaleControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER }
 
     };
@@ -124,8 +124,10 @@ function initialize() {
     var zoomDiv = document.createElement('div');
     var renderZoomControls = new ZoomControl(zoomDiv, this.map);
     zoomDiv.index = 1;
-    this.map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomDiv);
-    this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(FullScreenControl(map, 'Full Screen', 'Exit Full Screen'));
+    var rightdiv = document.getElementById('rightsidebuttons');
+    rightdiv.appendChild(zoomDiv);
+  // this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(zoomDiv);
+ //   this.map.controls[google.maps.ControlPosition.BOTTOM_RIGHT].push(FullScreenControl(map, 'Full Screen', 'Exit Full Screen'));
     //End of Code 
     // showLegend();
     //$('.statsDIv .close').click(function () { $('.statsDIv').hide(); });
@@ -149,7 +151,7 @@ function setStateboundary(response) {
         ln.setOptions({ visibleZoom: 7, fillColor: arr[i].colorcode, hideZoom: 9, visible: true, map: map, strokeWeight: 1, strokeColor: '#47C4C8', fillOpacity: 0.3, clickable: !1 });
         var lp = new google.maps.LatLng(parseFloat(arr[i].ycoordinate), parseFloat(arr[i].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 0, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelState', position: lp, text: arr[i].label });
-        
+
         STATE_LAYER.push(_label);
     }
 
@@ -486,7 +488,7 @@ function showDisBoundariesGosha(response) {
     var gosha = $.map(response, function (el) { return el; })
     for (ae = 0; ae < gosha.length; ae++) {
         var lp = new google.maps.LatLng(parseFloat(gosha[ae].ycoordinate), parseFloat(gosha[ae].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: gosha[ae].label }); 
+        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: gosha[ae].label });
         GOSHA_LAYER.push(_label);
     }
 }
@@ -510,7 +512,7 @@ function showDisBoundariesCloseText(response) {
     var closetext = $.map(response, function (el) { return el; })
     for (ah = 0; ah < closetext.length; ah++) {
         var lp = new google.maps.LatLng(parseFloat(closetext[ah].ycoordinate), parseFloat(closetext[ah].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelCloseText', position: lp, text: closetext[ah].label }); 
+        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelCloseText', position: lp, text: closetext[ah].label });
         CLOSETEXT_LAYER.push(_label);
     }
 }
@@ -550,3 +552,7 @@ $('#LeftNavTab a').on('click', function (e) {
 $('.MenuToggle').on('click', function (e) {
     $('#leftSection').toggleClass('goleft');
 });
+
+function printMaps() {
+    window.print();
+}

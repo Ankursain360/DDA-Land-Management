@@ -8,9 +8,9 @@ using Notification.OptionEnums;
 using System;
 using Dto.Search;
 using Dto.Master;
-using AcquiredLandInformationManagement.Filters;
+using LIMSPublicInterface.Filters;
 using Core.Enum;
-namespace AcquiredLandInformationManagement.Controllers
+namespace LIMSPublicInterface.Controllers
 {
     public class PossessionReportController : BaseController
     {

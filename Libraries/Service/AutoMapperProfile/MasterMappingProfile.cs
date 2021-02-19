@@ -10,6 +10,7 @@ namespace Service.AutoMapperProfile
         public MasterMappingProfile()
         {
             CreateMap<Country, CoutryDto>().ReverseMap();
+            CreateMap<Village, VillageDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
             CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<District, DistrictDto>().ReverseMap();

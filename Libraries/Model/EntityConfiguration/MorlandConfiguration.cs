@@ -22,6 +22,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
+            builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
             builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.Biswa).HasColumnType("decimal(18,3)");

@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
         {
 
             Damagecalculation = new HashSet<Damagecalculation>();
-            Booktransferland = new HashSet<Booktransferland>();
+           // Booktransferland = new HashSet<Booktransferland>();
            
             Watchandward = new HashSet<Watchandward>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
@@ -58,7 +58,7 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
       
-        public ICollection<Booktransferland> Booktransferland { get; set; }
+     //   public ICollection<Booktransferland> Booktransferland { get; set; }
        
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }

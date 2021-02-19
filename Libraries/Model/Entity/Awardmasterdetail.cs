@@ -1,24 +1,32 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
     public class Awardmasterdetail : AuditableEntity<int>
     {
-
+        [Required(ErrorMessage = "Award Number is mandatory")]
+        [Remote(action: "Exist", controller: "Awardmasterdetails", AdditionalFields = "Id")]
         public string AwardNumber { get; set; }
+        [Required(ErrorMessage = "Award Date is mandatory")]
         public DateTime? AwardDate { get; set; }
         public int VillageId { get; set; }
         public int ProposalId { get; set; }
+        [Required(ErrorMessage = "Compensation is mandatory")]
         public string Compensation { get; set; }
+
         public string Rate1 { get; set; }
         public string Rate2 { get; set; }
         public string Rate3 { get; set; }
         public string Rate4 { get; set; }
         public string Type { get; set; }
+        [Required(ErrorMessage = "Nature is mandatory")]
         public string Nature { get; set; }
+        [Required(ErrorMessage = "Purpose is mandatory")]
         public string Purpose { get; set; }
         public int Us4id { get; set; }
         public int Us6id { get; set; }

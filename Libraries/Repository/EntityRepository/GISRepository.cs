@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Master;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -233,6 +234,13 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Gistrijunction
                                 .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                 .ToListAsync();
+        }
+
+        public async Task<List<Village>> GetVillageAutoCompleteDetails(string prefix)
+        {
+            var data = await _dbContext.Village.Where(x => x.Name.Contains(prefix)).ToListAsync();
+            return data;
+
         }
 
         public async Task<List<Gisvillageboundary>> GetVillageBoundaryDetails(int villageId)

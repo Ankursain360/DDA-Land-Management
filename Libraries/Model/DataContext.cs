@@ -68,6 +68,7 @@ namespace Libraries.Model
         public virtual DbSet<Restoreproperty> Restoreproperty { get; set; }
         public virtual DbSet<Khewat> Khewat { get; set; }
         public virtual DbSet<Saknidetails> Saknidetails { get; set; }
+        public virtual DbSet<Saknikhasra> Saknikhasra { get; set; }
         public virtual DbSet<Saknilessee> Saknilessee { get; set; }
         public virtual DbSet<Sakniowner> Sakniowner { get; set; }
         public virtual DbSet<Saknitenant> Saknitenant { get; set; }
@@ -278,6 +279,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
 
             modelBuilder.ApplyConfiguration(new SaknidetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new SaknikhasraConfiguration());
             modelBuilder.ApplyConfiguration(new SaknilesseeConfiguration());
             modelBuilder.ApplyConfiguration(new SakniownerConfiguration());
             modelBuilder.ApplyConfiguration(new SaknitenantConfiguration());

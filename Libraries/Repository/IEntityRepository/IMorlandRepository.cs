@@ -15,7 +15,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<LandNotification>> GetAllLandNotification();
         Task<List<Serialnumber>> GetAllSerialnumber();
-
+        Task<bool> Any(int id, string Name);
 
     }
 }

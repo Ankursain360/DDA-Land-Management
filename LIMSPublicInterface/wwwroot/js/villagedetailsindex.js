@@ -3,7 +3,13 @@ var currentPageSize = 10;
 
 $(document).ready(function () {
    
-  
+
+    var param = GetSearchParam(currentPageNumber, currentPageSize);
+
+    HttpPost(`/Villagealldetails/GetDetails`, 'html', param, function (response) {
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
+    });
    
 
 })
@@ -27,6 +33,23 @@ function GetDetails(pageNumber, pageSize) {
         });
     
 }
+
+
+$("#btnReset").click(function () {
+
+    $('#Name').val('0').trigger('change');
+
+
+    GetDetails(currentPageNumber, currentPageSize);
+
+
+});
+
+
+
+
+
+
 
 
 function GetSearchParam(pageNumber, pageSize) {

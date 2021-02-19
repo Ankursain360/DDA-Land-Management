@@ -48,77 +48,97 @@
         {
             @foreach (var item in Model)
             {
-                <tr>
+        <tr>
+        
+            <td>
+                @(item.un4_Number == null? "-" :item.un4_Number)
 
-                    <td>
-                        @item.un4_Number
-                    </td>
-                    <td>
-                        @item.un6_Number
-                    </td>
+            </td>
+            <td>
+                @(item.un6_Number == null?"-":item.un6_Number)
+              
+            </td>
 
-                    <td>
-                        @item.AwardNumber
-                    </td>
+            <td>
+                @(item.AwardNumber == null?"-":item.AwardNumber)
+              
+            </td>
 
-                    <td>
-                    </td>
+            <td>
+            </td>
 
-                </tr>
+        </tr>
 
        
                 <tr>
 
                     <td>
-                        @item.um4Date.ToString("dd-MM-yyyy")
+                        @(item.um4Date.ToString("dd-MM-yyyy") == null?"-":item.um4Date.ToString("dd-MM-yyyy"))
+                     
                     </td>
                     <td>
-                        @item.um6Date.ToString("dd-MM-yyyy")
-                    </td>
-
-                    <td>
-                        @item.AwardDate.ToString("dd-MM-yyyy")
+                        @(item.um6Date.ToString("dd-MM-yyyy") == null?"-":item.um6Date.ToString("dd-MM-yyyy"))
+                       
                     </td>
 
                     <td>
-                        @item.PossDate.ToString("dd-MM-yyyy")
+                        @(item.AwardDate.ToString("dd-MM-yyyy") == null?"-":item.AwardDate.ToString("dd-MM-yyyy"))
+                     
+                    </td>
+
+                    <td>
+                        @(item.PossDate.ToString("dd-MM-yyyy") == null?"-":item.PossDate.ToString("dd-MM-yyyy"))
+
                     </td>
 
                 </tr>
-           
+         
 
                 <tr>
 
                     <td>
-                        @item.Bigha ,  @item.Biswa ,
-                                    @item.Biswanshi
-                
-                  </td>
+                        @(item.Bigha == null?0:item.Bigha)
+                        @(item.Biswa == null?0:item.Biswa)
+                        @(item.Biswanshi == null?0:item.Biswanshi)
+
+
+
+
+                    </td>
                  
                     
                     
                     <td>
 
+                        @(item.un6_bigha == null?0:item.un6_bigha)
+                        @(item.un6_Biswa == null?0:item.un6_Biswa)
+                        @(item.un6_Bidwanshi == null?0:item.un6_Bidwanshi)
 
-                        @item.un6_bigha,@item.un6_Biswa,@item.un6_Bidwanshi
+                      
+
+
                     </td>
                     <td>
-                        @item.ad_Bigha,
-                        @item.awardbiswa,
-                        @item.awardBiswanshi,
+
+                        @(item.ad_Bigha == null?0:item.ad_Bigha)
+                        @(item.awardbiswa == null?0:item.awardbiswa)
+                        @(item.awardBiswanshi == null?0:item.awardBiswanshi)
+
+                      
+
+
                     </td>
                     <td>
-                        @item.p_bigha
+                        @(item.p_bigha == null?0:item.p_bigha)
+                        @(item.p_Biswa == null?0:item.p_Biswa)
                     
 
 
-
-
-                  
-                   @item.p_Biswa</td>
+                    </td>
 
 
                 </tr>
+                <tr><td colspan="4" style="background-color:#D0D0D0;"></td></tr>
 
             }
         }

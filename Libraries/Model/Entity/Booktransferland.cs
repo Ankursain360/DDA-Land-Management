@@ -34,8 +34,8 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public List<Locality> LocalityList { get; set; }
-        public virtual Locality Locality { get; set; }
+        public List<Acquiredlandvillage> LocalityList { get; set; }
+        public virtual Acquiredlandvillage Locality { get; set; }
        
 
 

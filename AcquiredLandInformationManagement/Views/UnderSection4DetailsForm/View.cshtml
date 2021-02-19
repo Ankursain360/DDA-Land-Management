@@ -4,7 +4,7 @@
 
 
 <div class="pt-3">
-    <form asp-action="View" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
 
         <h3 class="mb-3 d-flex">View Details</h3>
 
@@ -18,7 +18,7 @@
                             asp-items="@(new SelectList(Model.ProposalList, "Id","Name"))" disabled>
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
 
-                    </select>
+                    </select >
                     <span asp-validation-for="ProposalId" class="text-danger"></span>
                     <label asp-for="ProposalId" class="floating-label">Proposal Name </label>
                 </div>
@@ -29,7 +29,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="text" asp-for="Number" placeholder="Notification No" class="floating-label-field floating-label-field--s3" disabled />
+                    <input type="text" asp-for="Number" placeholder="Notification No" class="floating-label-field floating-label-field--s3" disabled/>
+                    <span asp-validation-for="Number" class="text-danger"></span>
                     <label class="floating-label">Notification No</label>
                 </div>
             </div>
@@ -40,7 +41,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="Date" asp-for="Ndate" placeholder="Notification Date" class="floating-label-field floating-label-field--s3" disabled />
+                    <input type="Date" asp-for="Ndate" placeholder="Notification Date" class="floating-label-field floating-label-field--s3" disabled/>
+                    <span asp-validation-for="Ndate" class="text-danger"></span>
                     <label class="floating-label">Notification Date</label>
                 </div>
             </div>
@@ -48,13 +50,16 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="text" asp-for="Npurpose" placeholder="Purpose" class="floating-label-field floating-label-field--s3" disabled />
+                    <input type="text" asp-for="Npurpose" placeholder="Purpose" class="floating-label-field floating-label-field--s3" disabled/>
+                    <span asp-validation-for="Npurpose" class="text-danger"></span>
                     <label class="floating-label">Purpose</label>
                 </div>
             </div>
 
 
         </div>
+
+
 
 
         <div class="row mt-md-3">
@@ -70,6 +75,7 @@
                 </div>
             </div>
         </div>
+
 
 
         <div class="pt-3">
@@ -104,25 +110,43 @@
             </div>
         </div>
 
+        @if (Model.TypeDetails == "Boundary")
+        {
+            <div class="row mt-md-3" id="boundary_div">
 
-        <div class="row mt-md-3" id="boundary_div" style="display:none">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea type="text" asp-for="BoundaryDescription" placeholder="Boundary Description" class="floating-label-field floating-label-field--s3" disabled></textarea>
+                        <label class="floating-label">Boundary Description</label>
+                    </div>
 
-                    <textarea type="text" asp-for="BoundaryDescription" placeholder="Boundary Description" class="floating-label-field floating-label-field--s3" disabled></textarea>
-                    <label class="floating-label">Boundary Description</label>
+
                 </div>
-
-
             </div>
-        </div>
+
+        }
+        else
+        {
+            <div class="row mt-md-3" id="boundary_div" style="display:none">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <textarea type="text" asp-for="BoundaryDescription" placeholder="Boundary Description" class="floating-label-field floating-label-field--s3" disabled></textarea>
+                        <label class="floating-label">Boundary Description</label>
+                    </div>
+
+
+                </div>
+            </div>
+        }
 
 
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-
+             
                 @Html.ActionLink("Back", "Index", "UnderSection4DetailsForm", null, new { @class = "btn btn-theme " })
             </div>
         </div>
@@ -130,6 +154,9 @@
 
     </form>
 </div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
 <script>
 

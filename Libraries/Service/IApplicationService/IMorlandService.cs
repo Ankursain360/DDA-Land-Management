@@ -21,10 +21,6 @@ namespace Libraries.Service.IApplicationService
         Task<Morland> FetchSingleResult(int id);
         Task<bool> Delete(int id);
 
-
-
-
-
-
+        Task<bool> CheckUniqueName(int id, string Name);
     }
 }
