@@ -29,12 +29,15 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }
 
-        //public int LocalityId { get; set; }
-        public int AcquiredlandvillageId { get; set; }
-        public int LandCategoryId { get; set; }
-       
+        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
+        public int? AcquiredlandvillageId { get; set; }
+        [Required(ErrorMessage = "Land Category is Mandatory Field", AllowEmptyStrings = false)]
+        public int? LandCategoryId { get; set; }
+        [Required(ErrorMessage = "Bigha is mandatory")]
         public string Bigha { get; set; }
+        [Required(ErrorMessage = "Biswa is mandatory")]
         public string Biswa { get; set; }
+        [Required(ErrorMessage = "Biswanshi is mandatory")]
         public string Biswanshi { get; set; }
         public string Description { get; set; }
         [Required(ErrorMessage = "Rect No is mandatory")]
