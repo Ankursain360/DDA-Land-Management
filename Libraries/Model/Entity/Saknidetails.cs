@@ -47,7 +47,6 @@ namespace Libraries.Model.Entity
         public ICollection<Sakniowner> Sakniowner { get; set; }
         public ICollection<Saknitenant> Saknitenant { get; set; }
 
-
         //****** Owner details *****
 
         [NotMapped]

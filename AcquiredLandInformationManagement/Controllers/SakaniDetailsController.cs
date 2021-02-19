@@ -219,8 +219,8 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             Id = Id ?? 0;
             var data = await _sakanidetailService.FetchSingleSaknikhasra(Convert.ToInt32(Id));
-          //Convert.ToDateTime(data.RenewalDate);
-         //   Convert.ToDateTime(data.RenewalDate).ToString("dd-MMM-yyyy");
+            //Convert.ToDateTime(data.RenewalDate);
+            //   Convert.ToDateTime(data.RenewalDate).ToString("dd-MMM-yyyy");
             return Json(data);
            
         }

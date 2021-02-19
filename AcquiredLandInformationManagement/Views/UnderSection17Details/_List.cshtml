@@ -17,7 +17,8 @@
         <tr>
 
             <td>@item.Number</td>
-            <td>@item.NotificationDate</td>
+            @*<td>@item.NotificationDate</td>*@
+            <td>@(Convert.ToDateTime(item.NotificationDate).ToString("dd-MMM-yyyy"))</td>
             @*<td>@item.UnderSection6.Number</td>*@
             <td> @(item.UnderSection6 == null?"": item.UnderSection6.Number)</td>
 

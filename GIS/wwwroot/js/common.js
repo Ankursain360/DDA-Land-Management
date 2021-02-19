@@ -36,7 +36,7 @@ function createLine(_path) {
 function createPoint(pos) {
     var pt = new google.maps.Marker({
         position: pos,
-       // icon: 'images/marker.png',
+        // icon: 'images/marker.png',
         map: map,
         clickable: !1
     });
@@ -139,8 +139,8 @@ $(function () {
                 type: "POST",
                 success: function (data) {
                     response($.map(data, function (item) {
-                        return { label: item.name, value: item.name };
-                    }))  
+                        return { label: item.name, value: item.id };
+                    }))
                 },
                 error: function (response) {
                     alert(response.responseText);
@@ -150,9 +150,63 @@ $(function () {
                 }
             });
         },
-        select: function (e, i) {
-           // $("#hfCustomer").val(i.item.val);
+        select: function (event, ui) {
+            event.preventDefault();
+            $("#txtSearch").val(ui.item.label);
+            HttpGet(`/GIS/GetVillageDetails?VillageId=${parseInt(ui.item.value)}`, 'json', function (response) {
+                showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
+            });
         },
         minLength: 1
     });
 });
+
+function printMaps() {
+    var body = $('body');
+    var mapContainer = $('#map-canvas');
+    var mapContainerParent = mapContainer.parent();
+    var printContainer = $('<div>');
+
+    printContainer
+        .addClass('print-container')
+        //.css('position', 'fixed')
+        .height(mapContainer.height())
+        .append(mapContainer)
+        .prependTo(body);
+
+    var content = body
+        .children()
+        .not('script')
+        .not(printContainer)
+        .detach();
+
+    // Patch for some Bootstrap 3.3.x `@*@media*@ print` styles. :|
+    var patchedStyle = $('<style>')
+        .attr('media', 'print')
+        .text('img { max-width: none !important; }' +
+            'a[href]:after { content: ""; }')
+        .appendTo('head');
+
+    window.print();
+
+    body.prepend(content);
+    mapContainerParent.prepend(mapContainer);
+
+    printContainer.remove();
+    patchedStyle.remove();
+}
+
+$(document).on('change', '#OpacityRange', function () {
+    var Value = $(this).val() * 100;
+    Value = Value.toFixed(0);
+    $('#demo').html(Value);
+
+    var Opacity = ($('#demo').html() / 100);
+
+    for (var i = 0; i < Polys.length; i++) {
+        var Poly = Polys[i];
+        Poly.setOptions({ fillOpacity: Opacity });
+    }
+});
+
+

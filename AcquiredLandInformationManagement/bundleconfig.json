@@ -436,5 +436,11 @@
     "inputFiles": [
       "wwwroot/js/proposalplotcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/mutationcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/mutationcreate.js"
+    ]
   }
 ]

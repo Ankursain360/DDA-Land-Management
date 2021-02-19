@@ -12,7 +12,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Village>> GetVillageList(int ZoneId);
         Task<List<Plot>> GetPlotList(int VillageId);
         Task<List<Zone>> GetZoneDetails(int zoneId);
-        Task<List<Village>> GetVillageDetails(int villageId, int zoneId);
+        Task<List<Village>> GetVillageDetails(int villageId);
         Task<List<Gisaabadi>> GetAbadiDetails(int villageId);
         Task<List<Gisburji>> GetBurjiDetails(int villageId);
         Task<List<Gisclean>> GetCleanDetails(int villageId);

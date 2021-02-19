@@ -230,7 +230,7 @@
         <div class="row mt-md-3 pt-4">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
+                    <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
                         <option disabled="disabled">Select</option>
                     </select>
@@ -240,7 +240,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Plot" placeholder="NaamMalik" type="text"
+                    <input disabled asp-for="Plot" placeholder="NaamMalik" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Plot" class="text-danger"></span>
                     <label class="floating-label">Plot No.    </label>
@@ -250,7 +250,7 @@
         <div class="row mt-md-3 ">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Area" placeholder="NaamMalik"
+                    <input disabled asp-for="Area" placeholder="NaamMalik"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label">Area(Sq.Yard)    </label>
@@ -258,7 +258,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Category" placeholder="NaamMalik" type="text"
+                    <input disabled asp-for="Category" placeholder="NaamMalik" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Category" class="text-danger"></span>
                     <label class="floating-label">Category    </label>
@@ -268,7 +268,7 @@
         <div class="row mt-md-3 ">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="LeaseAmount" placeholder="NaamMalik"
+                    <input disabled asp-for="LeaseAmount" placeholder="NaamMalik"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="LeaseAmount" class="text-danger"></span>
                     <label class="floating-label">Lease Amount   </label>
@@ -276,7 +276,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="RenewalDate" placeholder="RenewalDate" type="date"
+                    <input disabled asp-for="RenewalDate" placeholder="RenewalDate" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="RenewalDate" class="text-danger"></span>
                     <label class="floating-label">Renewal Date    </label>
@@ -286,7 +286,7 @@
         <div class="row mt-md-3 pt-4">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input disabled asp-for="Mortgage" placeholder="NaamMalik" type="text"
+                    <input  disabled asp-for="Mortgage" placeholder="NaamMalik" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Mortgage" class="text-danger"></span>
                     <label class="floating-label">Mortgage    </label>
