@@ -30,7 +30,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="DistrictId" asp-items="@(new SelectList(Model.DistrictList, "Id","Name"))">
-                        <option >Select</option>
+                        <option disabled="disabled" selected  >Select</option>
                     </select>
                     <span asp-validation-for="DistrictId" class="text-danger"></span>
                     <label asp-for="DistrictId" class="floating-label">District Name </label>
@@ -39,9 +39,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
-                            asp-for="TehsilId" asp-items="@(new SelectList(Model.TehsilList, "Id","Name"))">
-
-                        <option >Select</option>
+                            asp-for="TehsilId" asp-items="@(new SelectList(Model.TehsilList, "Id","Name"))" >
+                        <option disabled="disabled" selected>Select</option>
                     </select>
                     <span asp-validation-for="TehsilId" class="text-danger"></span>
                     <label asp-for="TehsilId" class="floating-label">Tehsil Name </label>
@@ -73,8 +72,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
-
-                        <option >Select</option>
+                        <option disabled="disabled" selected >Select</option>
                     </select>
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>

@@ -48,6 +48,8 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<IAwardplotDetailService, AwardplotDetailsService>();
             services.AddScoped<IPossessiondetailsService, PossessiondetailsService>();
+            services.AddScoped<INazulService, NazulService>();
+            services.AddScoped<IKhasraService, KhasraService>();
         }
     }
 }

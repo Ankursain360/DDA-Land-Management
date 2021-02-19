@@ -4,6 +4,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -215,5 +216,54 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+
+        //*********  sakni Khasra Details **********
+
+        public async Task<bool> SaveSaknikhasra(Saknikhasra sakniKhasra)
+        {
+            _dbContext.Saknikhasra.Add(sakniKhasra);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> UpdateKhasra(int id, Saknikhasra skh)
+        {
+            var result = await FetchSingleSaknikhasra(id);
+            Saknikhasra model = result;
+            model.KhasraId = skh.KhasraId;
+            model.PlotNo = skh.PlotNo;
+            model.Category = skh.Category;
+            model.AreaSqYard = skh.AreaSqYard;
+            model.LeaseAmount = skh.LeaseAmount;
+            model.RenewalDate = skh.RenewalDate;
+
+
+            model.IsActive = skh.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = skh.ModifiedBy;
+          
+            _dbContext.Saknikhasra.Update(model);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+        public async Task<List<Saknikhasra>> GetAllSaknikhasra(int id)
+        {
+            return await _dbContext.Saknikhasra.Where(x => x.SakniDetailId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> DeleteSaknikhasra(int Id)
+        {
+            _dbContext.Remove(_dbContext.Sakniowner.Where(x => x.SakniDetailId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<Saknikhasra> FetchSingleSaknikhasra(int id)
+        {
+            return await _dbContext.Saknikhasra.Where(x => x.SakniDetailId == id)
+                                   .OrderByDescending(s => s.Id)
+                                   .FirstOrDefaultAsync();
+        }
+       
+       
     }
 }

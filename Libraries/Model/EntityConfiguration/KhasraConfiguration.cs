@@ -62,11 +62,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.AcquiredlandvillageId)
                 .HasConstraintName("fkAcqvillageId");
 
-            builder.HasOne(d => d.LandCategory)
-                .WithMany(p => p.Khasra)
-                .HasForeignKey(d => d.LandCategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fkKhasraLandCategory");
+            //builder.HasOne(d => d.LandCategory)
+            //    .WithMany(p => p.Khasra)
+            //    .HasForeignKey(d => d.LandCategoryId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("fkKhasraLandCategory");
        
         }
     }

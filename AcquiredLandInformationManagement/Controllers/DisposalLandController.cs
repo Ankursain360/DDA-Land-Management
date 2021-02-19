@@ -108,6 +108,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Edit(int id, Disposalland disposalland)
         {
+            disposalland.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
+            disposalland.VillageList = await _disposallandService.GetAllVillage();
+            disposalland.KhasraList = await _disposallandService.GetAllKhasra();
             if (ModelState.IsValid)
             {
                 try

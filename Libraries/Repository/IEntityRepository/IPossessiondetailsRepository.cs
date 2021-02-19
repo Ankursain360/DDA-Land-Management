@@ -20,5 +20,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model);
         Task<PagedResult<Possessiondetails>> GetPagedPossessionReport(PossessionReportSearchDto model);
         Task<List<PossessionReportDtoProfile>> BindPossessionDateList();
+        Task<List<VillageAndKhasraDetailListDto>> GetPagedvillageAndKhasradetailsList(VillageAndKhasraDetailsSearchDto model);
     }
 }
