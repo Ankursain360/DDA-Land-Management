@@ -33,6 +33,14 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Saknitenant>> GetAllTenant(int id);
         Task<bool> DeleteTenant(int Id);
 
+        //*********  sakni Khasra Details **********
+
+        Task<bool> SaveSaknikhasra(Saknikhasra sakniKhasra);
+        Task<List<Saknikhasra>> GetAllSaknikhasra(int id);
+        Task<bool> DeleteSaknikhasra(int Id);
+        Task <Saknikhasra> FetchSingleSaknikhasra(int id);
+
+        Task<bool> UpdateKhasra(int id, Saknikhasra skh);
 
     }
 }

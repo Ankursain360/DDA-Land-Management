@@ -15,13 +15,13 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="VillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option disabled="disabled">Select</option>
+                        <option disabled="disabled" selected>Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
                 </div>
             </div>
-            <div class="col-md-6">
+            @*<div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
@@ -30,7 +30,7 @@
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
                 </div>
-            </div>
+            </div>*@
 
         </div>
         <div class="row mt-md-3">
@@ -198,12 +198,12 @@
 
                             <td style="text-align:center;"><span class="sn2">1</span></td>
                             <td>
-                                <input asp-for="TName" type="text" class="floating-label-field floating-label-field--s3"  />
+                                <input asp-for="TName" type="text" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="TName" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <input asp-for="TFatherName" type="text" class="floating-label-field floating-label-field--s3"  />
+                                <input asp-for="TFatherName" type="text" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="TFatherName" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
@@ -223,6 +223,66 @@
 
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+
+        <h3 class="my-3 d-flex sub-heading pt-4">Khasra Details </h3>
+
+        <div class="row mt-md-3 pt-4">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                          asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <option disabled="disabled">Select</option>
+                    </select>
+                    <span asp-validation-for="KhasraId" class="text-danger"></span>
+                    <label asp-for="KhasraId" class="floating-label">Khasra No </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Plot" placeholder="NaamMalik" type="text" 
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Plot" class="text-danger"></span>
+                    <label class="floating-label">Plot No.    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3 ">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Area" placeholder="NaamMalik"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Area" class="text-danger"></span>
+                    <label class="floating-label">Area(Sq.Yard)    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Category" placeholder="NaamMalik" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                    <label class="floating-label">Category    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3 ">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="LeaseAmount" placeholder="NaamMalik"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="LeaseAmount" class="text-danger"></span>
+                    <label class="floating-label">Lease Amount   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="RenewalDate" placeholder="RenewalDate" type="date" 
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="RenewalDate" class="text-danger"></span>
+                    <label class="floating-label">Renewal Date    </label>
+                </div>
             </div>
         </div>
         <div class="row mt-md-3 pt-4">

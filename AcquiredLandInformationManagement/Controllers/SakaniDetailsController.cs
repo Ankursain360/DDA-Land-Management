@@ -161,7 +161,28 @@ namespace AcquiredLandInformationManagement.Controllers
                             }
                         }
                     }
+                    //************ Save Khasra  ************  
 
+                    if (
+                        sakni.Plot != null &&
+                        sakni.Area != null &&
+                        sakni.Category != null &&
+                        sakni.LeaseAmount != null &&
+                        sakni.RenewalDate != null
+                        )
+                    {
+                        Saknikhasra Khsra = new Saknikhasra();
+
+                        Khsra.KhasraId = sakni.KhasraId;
+                        Khsra.PlotNo = sakni.Plot;
+                        Khsra.AreaSqYard = sakni.Area;
+                        Khsra.Category = sakni.Category;
+                        Khsra.LeaseAmount = sakni.LeaseAmount;
+                        Khsra.RenewalDate = sakni.RenewalDate;
+                        Khsra.SakniDetailId = sakni.Id;
+                        Khsra.CreatedBy = SiteContext.UserId;
+                        result = await _sakanidetailService.SaveSaknikhasra(Khsra);
+                    }
 
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     var list = await _sakanidetailService.GetAllSaknidetail();
@@ -193,6 +214,15 @@ namespace AcquiredLandInformationManagement.Controllers
                 x.FatherName,
                 x.Address
             }));
+        }
+        public async Task<JsonResult> GetSakniKhasra(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _sakanidetailService.FetchSingleSaknikhasra(Convert.ToInt32(Id));
+            //Convert.ToDateTime(data.RenewalDate);
+            //   Convert.ToDateTime(data.RenewalDate).ToString("dd-MMM-yyyy");
+            return Json(data);
+           
         }
         public async Task<JsonResult> GetDetailslesssee(int? Id)
         {
@@ -239,7 +269,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             sakni.AcquiredlandvillageList = await _sakanidetailService.GetAllVillage();
             sakni.KhasraList = await _sakanidetailService.GetAllKhasra(sakni.VillageId);
-
+           
             if (ModelState.IsValid)
             {
                
@@ -353,7 +383,28 @@ namespace AcquiredLandInformationManagement.Controllers
                             }
                         }
                     }
+                    //************ Save Khasra  ************  
 
+                    if (
+                        sakni.Plot != null &&
+                        sakni.Area != null &&
+                        sakni.Category != null &&
+                        sakni.LeaseAmount != null &&
+                        sakni.RenewalDate != null
+                        )
+                    {
+                        Saknikhasra Khsra = new Saknikhasra();
+
+                        Khsra.KhasraId = sakni.KhasraId;
+                        Khsra.PlotNo = sakni.Plot;
+                        Khsra.AreaSqYard = sakni.Area;
+                        Khsra.Category = sakni.Category;
+                        Khsra.LeaseAmount = sakni.LeaseAmount;
+                        Khsra.RenewalDate = sakni.RenewalDate;
+                        Khsra.SakniDetailId = sakni.Id;
+                        Khsra.CreatedBy = SiteContext.UserId;
+                        result = await _sakanidetailService.UpdateKhasra(id,Khsra);
+                    }
 
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     var list = await _sakanidetailService.GetAllSaknidetail();

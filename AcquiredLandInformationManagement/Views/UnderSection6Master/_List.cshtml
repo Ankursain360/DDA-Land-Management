@@ -20,9 +20,11 @@
         <tr>
             <td>@item.Undersection4.Number</td>
             <td>@item.Number</td>
-         
-            <td>@item.Ndate</td>
-            
+            <td>@(Convert.ToDateTime(item.Ndate).ToString("dd-MMM-yyyy"))</td>
+
+          
+          
+
 
             <td>
                 @if (item.IsActive == 1)

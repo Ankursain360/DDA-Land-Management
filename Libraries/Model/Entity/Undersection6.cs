@@ -15,13 +15,14 @@ namespace Libraries.Model.Entity
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
         }
-        [Required]
+        [Required(ErrorMessage = "The Notification Number field is required")]
         public string Number { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Notification Date field is required")]
         public DateTime? Ndate { get; set; }
         public byte IsActive { get; set; }
+    
 
-         [Required]
+        [Required(ErrorMessage ="The Notification field is required")]
         public int? Undersection4Id { get; set; }
         [NotMapped]
         public List<Undersection4> NotificationList { get; set; }

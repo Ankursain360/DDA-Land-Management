@@ -9,14 +9,14 @@ namespace Libraries.Model.Entity
     public class Disposalland : AuditableEntity<int>
   
     {
-        public Disposalland()
-        {
-        }
+        //public Disposalland()
+        //{
+        //}
 
         [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
-        public int VillageId { get; set; }
+        public int? VillageId { get; set; }
         [Required(ErrorMessage = "Khasra is Mandatory Field", AllowEmptyStrings = false)]
-        public int KhasraId { get; set; }
+        public int? KhasraId { get; set; }
         [Required(ErrorMessage = "Transfer To Which Dept is Mandatory Field")]
 
         public string TransferToWhichDept { get; set; }

@@ -68,6 +68,7 @@ namespace Libraries.Model
         public virtual DbSet<Restoreproperty> Restoreproperty { get; set; }
         public virtual DbSet<Khewat> Khewat { get; set; }
         public virtual DbSet<Saknidetails> Saknidetails { get; set; }
+        public virtual DbSet<Saknikhasra> Saknikhasra { get; set; }
         public virtual DbSet<Saknilessee> Saknilessee { get; set; }
         public virtual DbSet<Sakniowner> Sakniowner { get; set; }
         public virtual DbSet<Saknitenant> Saknitenant { get; set; }
@@ -133,9 +134,8 @@ namespace Libraries.Model
 
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
-        public virtual DbSet<Newlandvillage> Newlandvillage { get; set; }
-        public virtual DbSet<Newlandkhasra> Newlandkhasra { get; set; }
-
+        //**********  New land acquisition**********
+        public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -232,6 +232,9 @@ namespace Libraries.Model
         public virtual DbSet<Demandlistdetails> Demandlistdetails { get; set; }
         public virtual DbSet<Mutation> Mutation { get; set; }
         public virtual DbSet<Mutationparticulars> Mutationparticulars { get; set; }
+
+        //***************  New Land Acquisition  *****************
+        public virtual DbSet<Newlandus4plot> Newlandus4plot { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -279,6 +282,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
 
             modelBuilder.ApplyConfiguration(new SaknidetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new SaknikhasraConfiguration());
             modelBuilder.ApplyConfiguration(new SaknilesseeConfiguration());
             modelBuilder.ApplyConfiguration(new SakniownerConfiguration());
             modelBuilder.ApplyConfiguration(new SaknitenantConfiguration());
@@ -422,15 +426,15 @@ namespace Libraries.Model
 
             //**********  GIS End**********
 
-
             modelBuilder.ApplyConfiguration(new MutationConfiguration());
             modelBuilder.ApplyConfiguration(new MutationParticularsConfiguration());
             modelBuilder.ApplyConfiguration(new AwardmasterdetailConfiguration());
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());
             modelBuilder.ApplyConfiguration(new EnchroachmentpaymentConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandkhasraConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandvillageConfiguration());
+
+            //***************  New Land Acquisition  *****************
+            modelBuilder.ApplyConfiguration(new Newlandus4plotConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

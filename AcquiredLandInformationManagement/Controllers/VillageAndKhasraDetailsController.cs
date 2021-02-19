@@ -46,7 +46,20 @@ namespace AcquiredLandInformationManagement.Controllers
             return Json(await _Possessiondetailservice.BindKhasra(Convert.ToInt32(villageId)));
         }
 
-
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] VillageAndKhasraDetailsSearchDto model)
+        {
+            var result = await _Possessiondetailservice.GetPagedvillageAndKhasradetailsList(model);
+            if (result != null)
+            {
+                return PartialView("_List", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
+        }
 
     }
 }

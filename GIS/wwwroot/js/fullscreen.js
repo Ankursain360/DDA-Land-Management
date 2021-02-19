@@ -1,6 +1,47 @@
 ﻿/// <reference path="../Scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/google.maps.d.ts" />
 function googleMapButton(text, className) {
+    //"use strict";
+    //var controlDiv = document.createElement("div");
+    //controlDiv.className = "text-right TopActionBtns";
+    ////controlDiv.index = 1;
+    ////controlDiv.style.padding = "10px";
+    //// set CSS for the control border.
+    //var controlUi = document.createElement("a");
+    //controlUi.className = "btn actionBtn slow";
+    //controlUi.title = 'Full Screen';
+
+    ////icon
+    //var controlText = document.createElement('i');
+    //controlText.className = text;
+    //controlUi.appendChild(controlText);
+    //controlDiv.appendChild(controlUi);
+    ////controlUi.style.backgroundColor = "rgb(255, 255, 255)";
+    ////controlUi.style.color = "#565656";
+    ////controlUi.style.cursor = "pointer";
+    ////controlUi.style.textAlign = "center";
+    ////controlUi.style.boxShadow = "rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px";
+    //// controlDiv.appendChild(controlUi);
+    //// set CSS for the control interior.
+    ////var controlText = document.createElement("div");
+    ////controlText.style.fontFamily = "Roboto,Arial,sans-serif";
+    ////controlText.style.fontSize = "11px";
+    ////controlText.style.paddingTop = "8px";
+    ////controlText.style.paddingBottom = "8px";
+    ////controlText.style.paddingLeft = "8px";
+    ////controlText.style.paddingRight = "8px";
+    ////controlText.style.border = "1px solid black";
+    ////controlText.innerHTML = text;
+    ////controlUi.appendChild(controlText);
+    //$(controlUi).on("mouseenter", function () {
+    //    controlUi.style.backgroundColor = "rgb(235, 235, 235)";
+    //    // controlUi.style.color = "#000";
+    //});
+    //$(controlUi).on("mouseleave", function () {
+    //    controlUi.style.backgroundColor = "rgb(255, 255, 255)";
+    //    //  controlUi.style.color = "#565656";
+    //});
+    //return controlDiv;
     "use strict";
     var controlDiv = document.createElement("div");
     controlDiv.className = className;

@@ -15,9 +15,12 @@ namespace Libraries.Model.Entity
         public int? VillageId { get; set; }
         [Required(ErrorMessage = " Khasra is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
-            public decimal Bigha { get; set; }
-            public decimal Biswa { get; set; }
-            public decimal Biswanshi { get; set; }
+        [Required(ErrorMessage = "Bigha is mandatory")]
+        public decimal Bigha { get; set; }
+        [Required(ErrorMessage = "Biswa is mandatory")]
+        public decimal Biswa { get; set; }
+        [Required(ErrorMessage = "Biswanshi is mandatory")]
+        public decimal Biswanshi { get; set; }
             public string Remarks { get; set; }
           
             public byte IsActive { get; set; }

@@ -2,10 +2,6 @@
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Disposal Land Master" })
 
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 <div class="pt-3">
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details</h3>
@@ -97,7 +93,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="UtilizationtypeId"
                             asp-items="@(new SelectList(Model.UtilizationtypeList, "Id","Name"))">
-                        <option value="0">Select</option>
+                        <option>Select</option>
                     </select>
                     <span asp-validation-for="UtilizationtypeId" class="text-danger"></span>
                     <label asp-for="UtilizationtypeId" class="floating-label">Utilization type</label>

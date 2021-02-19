@@ -40,5 +40,11 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/acquiredvillagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/acquiredvillagereportindex.js"
+    ]
   }
 ]

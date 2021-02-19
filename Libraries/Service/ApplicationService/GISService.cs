@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using AutoMapper;
+using Dto.Master;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -12,10 +14,13 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGISSRepository _iGISSRepository;
-        public GISService(IUnitOfWork unitOfWork, IGISSRepository iGisSRepository) : base(unitOfWork, iGisSRepository)
+        private readonly IMapper _mapper;
+        public GISService(IUnitOfWork unitOfWork, IGISSRepository iGisSRepository, IMapper mapper) : base(unitOfWork, iGisSRepository)
         {
             _unitOfWork = unitOfWork;
             _iGISSRepository = iGisSRepository;
+            _mapper = mapper;
+
         }
 
         public async Task<List<Gisaabadi>> GetAbadiDetails(int villageId)
@@ -156,6 +161,13 @@ namespace Libraries.Service.ApplicationService
         public async  Task<List<Gistrijunction>> GetTriJunctionDetails(int villageId)
         {
             return await _iGISSRepository.GetTriJunctionDetails(villageId);
+        }
+
+        public async Task<List<VillageDto>> GetVillageAutoCompleteDetails(string prefix)
+        {
+            var villages = await _iGISSRepository.GetVillageAutoCompleteDetails(prefix);
+            var result = _mapper.Map<List<VillageDto>>(villages);
+            return result;
         }
 
         public async Task<List<Gisvillageboundary>> GetVillageBoundaryDetails(int villageId)

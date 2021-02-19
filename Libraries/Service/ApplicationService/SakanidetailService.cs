@@ -149,7 +149,32 @@ namespace Libraries.Service.ApplicationService
             return await _sakanidetailRepository.DeleteTenant(Id);
         }
 
+        //*********  sakni Khasra Details **********
 
+        public async Task<bool> SaveSaknikhasra(Saknikhasra sakniKhasra)
+        {
+            sakniKhasra.CreatedBy = sakniKhasra.CreatedBy;
+            sakniKhasra.CreatedDate = DateTime.Now;
+            sakniKhasra.IsActive = 1;
+            return await _sakanidetailRepository.SaveSaknikhasra(sakniKhasra);
+        }
+        public async Task<List<Saknikhasra>> GetAllSaknikhasra(int id)
+        {
+            return await _sakanidetailRepository.GetAllSaknikhasra(id);
+        }
+        public async Task<bool> DeleteSaknikhasra(int Id)
+        {
+            return await _sakanidetailRepository.DeleteSaknikhasra(Id);
+        }
 
+        public async Task<Saknikhasra> FetchSingleSaknikhasra(int id)
+        {
+            return await _sakanidetailRepository.FetchSingleSaknikhasra(id);
+        }
+        public async Task<bool> UpdateKhasra(int id, Saknikhasra skh)
+        {
+           
+            return await _sakanidetailRepository.UpdateKhasra(id,skh);
+        }
     }
 }

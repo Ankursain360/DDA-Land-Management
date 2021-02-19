@@ -32,21 +32,21 @@
             @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d448181.163741622!2d76.81306442366602!3d28.64727993557044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1612367296523!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>*@
         </div>
         <!--live map end-->
-        <div class="container-fluid p-4 MapContent position-relative">
+        <div class="container-fluid p-4 MapContent position-relative" id="topRightActionButton">
             <!--top buttons-->
             <div class="text-right TopActionBtns">
-                <a href="#" class="btn actionBtn slow" title="Home">
+                <a href="/GIS/Index" class="btn actionBtn slow" title="Home">
                     <i class="ri-home-4-line"></i>
                 </a>
-                <a href="#" class="btn actionBtn slow" title="Print">
+                <a href="#" class="btn actionBtn slow" title="Print" onclick="printMaps();" id="printDocMob">
                     <i class="ri-printer-line"></i>
                 </a>
-                <a href="#" class="btn actionBtn slow" title="Full Screen">
-                    <i class="ri-fullscreen-line"></i>
-                </a>
-                <a href="#" class="btn actionBtn slow" title="User">
-                    <i class="ri-login-circle-line"></i>
-                </a>
+                @*<a href="#" class="btn actionBtn slow" title="Full Screen">
+                        <i class="ri-fullscreen-line"></i>
+                    </a>*@
+                @*<a href="#" class="btn actionBtn slow" title="User">
+                        <i class="ri-login-circle-line"></i>
+                    </a>*@
             </div>
             <!--top buttons end-->
             <div id="leftSection" class="leftSection slow">
@@ -76,7 +76,7 @@
                         <form class="search">
                             <div class="form-group">
                                 <i class="ri-search-line"></i>
-                                <input type="search" class="form-control form-control-sm" placeholder="Search Area Name">
+                                <input type="search" class="form-control form-control-sm" placeholder="Search Area Name" id="txtSearch">
                             </div>
                         </form>
                         <!--search from end-->
@@ -100,7 +100,7 @@
                 </p>
             </div>
             <!--bottom btns-->
-            <div class="text-right BottomActionBtns">
+            <div class="text-right BottomActionBtns" id="rightsidebuttons">
                 <div class="btn actionBtn slow" id="TransparencyRange">
                     <i class="ri-search-eye-line"></i>
                     <div class="TransparencyMap openAction">
@@ -113,28 +113,34 @@
                     <div class="openAction MapOption">
                         <div class="mapImg">
                             <a href="#" class="d-block mb-2" title="Road Map">
-                                <figure class="rounded">
+                                <figure class="rounded" id="maproad">
                                     <img src="~/img/Roadmap.jpg" alt="Road Map" />
                                     <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Road Map</figcaption>
                                 </figure>
                             </a>
-                            <a href="#" class="d-block" title="Topographic Map">
-                                <figure class="rounded">
+                            <a href="#" class="d-block mb-2" title="Topographic Map">
+                                <figure class="rounded" id="maphybrid">
                                     <img src="~/img/Topographicmap.jpg" alt="Topographic Map" />
                                     <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Topographic Map</figcaption>
+                                </figure>
+                            </a>
+                            <a href="#" class="d-block" title="Satallite Map">
+                                <figure class="rounded" id="mapsatellite">
+                                    <img src="~/img/satelite.jpg" alt="Satallite Map" />
+                                    <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
                                 </figure>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="btn actionBtn p-0">
-                    <a href="#" class="btn actionBtn m-0">
-                        <i class="ri-subtract-line"></i>
-                    </a>|
-                    <a href="#" class="btn actionBtn m-0">
-                        <i class="ri-add-fill"></i>
-                    </a>
-                </div>
+                @*<div class="btn actionBtn p-0">
+                        <a href="#" class="btn actionBtn m-0">
+                            <i class="ri-subtract-line"></i>
+                        </a>|
+                        <a href="#" class="btn actionBtn m-0">
+                            <i class="ri-add-fill"></i>
+                        </a>
+                    </div>*@
             </div>
             <!--bottom btns end-->
         </div>
@@ -187,8 +193,10 @@
         <script src="~/js/common.min.js" asp-append-version="true"></script>
     </environment>
     <script src="~/lib/toaster/toastr.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @*<script src="~/js/main.js"></script>
         <script src="~/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/js.js"></script>

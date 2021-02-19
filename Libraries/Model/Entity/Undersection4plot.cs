@@ -10,14 +10,17 @@ namespace Libraries.Model.Entity
 {
     public  class Undersection4plot: AuditableEntity<int>
     {
-        [Required]
+        [Required(ErrorMessage = "The Notification field is required")]
         public int? UnderSection4Id { get; set; }
         [Required]
         public int? VillageId { get; set; }
         [Required]
         public int? KhasraId { get; set; }
+        [Required]
         public decimal Bigha { get; set; }
+        [Required]
         public decimal Biswa { get; set; }
+        [Required]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
