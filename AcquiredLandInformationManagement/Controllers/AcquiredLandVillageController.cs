@@ -52,6 +52,7 @@ namespace AcquiredLandInformationManagement.Controllers
             acquiredlandvillage.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
             acquiredlandvillage.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
             acquiredlandvillage.ZoneList = await _acquiredlandvillageService.GetAllZone();
+            
             return View(acquiredlandvillage);
         }
 

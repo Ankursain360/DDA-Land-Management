@@ -303,8 +303,6 @@ function FillKhasraAtEdit() {
         $("#Area").val(data.areaSqYard);
         $("#Category").val(data.category);
         $("#LeaseAmount").val(data.leaseAmount);
-        $("#RenewalDate").val(data.renewalDate);
-           
-      
+        $("#RenewalDate").val(data.renewalDate.split('T')[0]);
     });
 }

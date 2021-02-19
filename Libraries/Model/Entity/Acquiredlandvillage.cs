@@ -28,7 +28,7 @@ namespace Libraries.Model.Entity
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
             Booktransferland = new HashSet<Booktransferland>();
         }
-        [Required(ErrorMessage = "Village name is mandatory feild")]
+        [Required(ErrorMessage = "Village name is mandatory ")]
         public string Name { get; set; }
 
         public string Code { get; set; }
