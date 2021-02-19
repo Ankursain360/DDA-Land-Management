@@ -20,7 +20,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("FKnotifus4_idx");
 
             builder.HasIndex(e => e.VillageId)
-                .HasName("Fknewlandvilage_idx");
+                .HasName("fkNLAvil_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -50,18 +50,23 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
 
-            //builder.HasOne(d => d.Khasra)
-            //    .WithMany(p => p.Newlandus4plot)
-            //    .HasForeignKey(d => d.KhasraId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("Fknewlandkhasra");
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Newlandus4plot)
+                .HasForeignKey(d => d.KhasraId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fknewlandkhasra");
 
-            //builder.HasOne(d => d.Notification)
-            //    .WithMany(p => p.Newlandus4plot)
-            //    .HasForeignKey(d => d.NotificationId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FKnotifus4");
+            builder.HasOne(d => d.Notification)
+                .WithMany(p => p.Newlandus4plot)
+                .HasForeignKey(d => d.NotificationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FKnotifus4");
 
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Newlandus4plot)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkNLAvil");
         }
     }
 }

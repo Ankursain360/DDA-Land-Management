@@ -16,9 +16,10 @@ namespace Libraries.Model.Entity
         public decimal? Biswanshi { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
-       
 
-        //public Newlandkhasra Khasra { get; set; }
-        //public Landnotification Notification { get; set; }
+
+        public Newlandkhasra Khasra { get; set; }
+        public LandNotification Notification { get; set; }
+        public Newlandvillage Village { get; set; }
     }
 }
