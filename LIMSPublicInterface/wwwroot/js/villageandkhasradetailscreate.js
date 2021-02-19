@@ -10,14 +10,23 @@ $(document).ready(function () {
 })
 
 $("#btnGenerate").click(function () {
+    var VillageId = $("#VillageId").val();
+    var KhasraId = $("#KhasraId").val();
+  
+    if (VillageId == 0) {
+        alert("Please Select Village");
+    } else if (KhasraId == 0) {
+        alert("Please Select Khasra No");
+    } else {
+   
+        debugger;
+        var param = GetSearchParam(currentPageNumber, currentPageSize);
 
-    debugger;
-    var param = GetSearchParam(currentPageNumber, currentPageSize);
-    alert(JSON.stringify(param));
-    HttpPost(`/VillageAndKhasraDetails/GetDetails`, 'html', param, function (response) {
-        $('#LoadReportView').html("");
-        $('#LoadReportView').html(response);
-    });
+        HttpPost(`/VillageAndKhasraDetails/GetDetails`, 'html', param, function (response) {
+            $('#LoadReportView').html("");
+            $('#LoadReportView').html(response);
+        });
+    } 
 
 });
 function GetDetails(pageNumber, pageSize) {
@@ -32,10 +41,11 @@ function GetDetails(pageNumber, pageSize) {
 
 $("#btnReset").click(function () {
 
-    $('#Name').val('0').trigger('change');
+    $('#VillageId').val('0').trigger('change');
+    $('#KhasraId').val('0').trigger('change');
+    location.reload();
 
-
-    GetDetails(currentPageNumber, currentPageSize);
+    //GetDetails(currentPageNumber, currentPageSize);
 
 
 });

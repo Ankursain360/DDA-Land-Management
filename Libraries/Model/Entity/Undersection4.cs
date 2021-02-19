@@ -17,13 +17,13 @@ namespace Libraries.Model.Entity
             Undersection6 = new HashSet<Undersection6>();
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
         }
-        [Required]
+        [Required(ErrorMessage = "The Proposal field is required")]
         public int ProposalId { get; set; }
         [Required]
         public string Number { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Notification Date field is required")]
         public DateTime? Ndate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Purpose field is required")]
         public string Npurpose { get; set; }
         public string TypeDetails { get; set; }
         public byte IsActive { get; set; }
