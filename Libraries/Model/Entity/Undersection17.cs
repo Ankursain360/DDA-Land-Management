@@ -16,7 +16,9 @@ namespace Libraries.Model.Entity
 
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
         }
+        [Required(ErrorMessage = "Notification 6 is Mandatory Field", AllowEmptyStrings = false)]
         public int? UnderSection6Id { get; set; }
+        [Required(ErrorMessage = "Notification 17 is mandatory")]
         public string Number { get; set; }
         public DateTime? NotificationDate { get; set; }
         public byte IsActive { get; set; }
