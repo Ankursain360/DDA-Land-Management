@@ -231,6 +231,9 @@ namespace Libraries.Model
         public virtual DbSet<Demandlistdetails> Demandlistdetails { get; set; }
         public virtual DbSet<Mutation> Mutation { get; set; }
         public virtual DbSet<Mutationparticulars> Mutationparticulars { get; set; }
+
+        //***************  New Land Acquisition  *****************
+        public virtual DbSet<Newlandus4plot> Newlandus4plot { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -422,13 +425,15 @@ namespace Libraries.Model
 
             //**********  GIS End**********
 
-
             modelBuilder.ApplyConfiguration(new MutationConfiguration());
             modelBuilder.ApplyConfiguration(new MutationParticularsConfiguration());
             modelBuilder.ApplyConfiguration(new AwardmasterdetailConfiguration());
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());
             modelBuilder.ApplyConfiguration(new EnchroachmentpaymentConfiguration());
+
+            //***************  New Land Acquisition  *****************
+            modelBuilder.ApplyConfiguration(new Newlandus4plotConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
