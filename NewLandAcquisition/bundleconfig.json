@@ -16,5 +16,17 @@
     "inputFiles": [
       "wwwroot/js/us4plotindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus4plotedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus4plotedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus4plotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus4plotcreate.js"
+    ]
   }
 ]
