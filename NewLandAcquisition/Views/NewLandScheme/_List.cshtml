@@ -1,4 +1,4 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Scheme>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Newlandscheme>
     <table class="table table-sm table-bordered mb-0 table-striped">
 
         <thead class="text-nowrap">
@@ -20,8 +20,8 @@
 
                 <td>@item.Name</td>
                 <td>@item.Code</td>
-
                 <td>@(Convert.ToDateTime(item.SchemeDate).ToString("dd-MMM-yyyy"))</td>
+                @*<td>@item.SchemeDate</td>*@
                 <td>@item.FileNo</td>
                 <td>@item.Description</td>
 
