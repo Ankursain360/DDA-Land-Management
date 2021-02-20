@@ -1,21 +1,22 @@
 ﻿using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
 
+
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface INewlandkhasra : IGenericRepository<Khasra>
+    public interface INewlandkhasraRepository : IGenericRepository<Newlandkhasra>
     {
-        Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model);
-        Task<List<Khasra>> GetAllKhasra();
-
+        Task<PagedResult<Newlandkhasra>> GetPagedKhasra(NewlandkhasraSearchDto model);
+        Task<List<Newlandkhasra>> GetAllKhasra();
         Task<List<LandCategory>> GetAllLandCategory();
-        Task<List<Acquiredlandvillage>> GetAllVillageList();
-        Task<List<Khasra>> GetAllKhasraList(int? villageId);
-        Task<PagedResult<Khasra>> GetPagedVillageKhasraReport(VillageDetailsKhasraWiseReportSearchDto model);
-
+        Task<List<Newlandvillage>> GetAllVillageList();
+        Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
+      
 
     }
 }

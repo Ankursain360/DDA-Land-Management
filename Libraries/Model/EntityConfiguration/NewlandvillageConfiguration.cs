@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class NewlandvillageConfiguration : IEntityTypeConfiguration<Acquiredlandvillage>
+    public class NewlandvillageConfiguration : IEntityTypeConfiguration<Newlandvillage>
     {
 
 
-        public void Configure(EntityTypeBuilder<Acquiredlandvillage> builder)
+        public void Configure(EntityTypeBuilder<Newlandvillage> builder)
     {
 
         builder.ToTable("newlandvillage", "lms");

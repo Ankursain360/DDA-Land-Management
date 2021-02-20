@@ -7,6 +7,10 @@ namespace Libraries.Model.Entity
 {
     public class LandCategory : AuditableEntity<int>
     {
+        public LandCategory()
+        {
+            Newlandkhasra = new HashSet<Newlandkhasra>();
+        }
 
         public string Name { get; set; }
         public byte? IsActive { get; set; }

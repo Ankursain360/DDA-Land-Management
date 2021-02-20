@@ -134,6 +134,11 @@ namespace Libraries.Model
 
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
+
+
+
+
+
         //**********  New land acquisition**********
         public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
         public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
