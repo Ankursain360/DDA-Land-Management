@@ -134,8 +134,14 @@ namespace Libraries.Model
 
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
+
+
+
+
+
         //**********  New land acquisition**********
         public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
+        public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -439,6 +445,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Newlandus4plotConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandvillageConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandkhasraConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandschemeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

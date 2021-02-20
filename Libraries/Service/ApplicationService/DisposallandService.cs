@@ -82,14 +82,14 @@ namespace Libraries.Service.ApplicationService
             List<Utilizationtype> utilizationtypeList = await _disposallandRepository.GetAllUtilizationtype();
             return utilizationtypeList;
         }
-        public async Task<List<Village>> GetAllVillage()
+        public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
-            List<Village> villageList = await _disposallandRepository.GetAllVillage();
+            List<Acquiredlandvillage> villageList = await _disposallandRepository.GetAllVillage();
             return villageList;
         }
-        public async Task<List<Khasra>> GetAllKhasra()
+        public async Task<List<Khasra>> GetAllKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _disposallandRepository.GetAllKhasra();
+            List<Khasra> khasraList = await _disposallandRepository.GetAllKhasra(villageId);
             return khasraList;
         }
         public async Task<bool> Delete(int id)

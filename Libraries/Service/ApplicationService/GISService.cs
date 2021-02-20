@@ -175,9 +175,9 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetVillageBoundaryDetails(villageId);
         }
 
-        public async Task<List<Village>> GetVillageDetails(int villageId, int zoneId)
+        public async Task<List<Village>> GetVillageDetails(int villageId)
         {
-            return await _iGISSRepository.GetVillageDetails(villageId, zoneId);
+            return await _iGISSRepository.GetVillageDetails(villageId);
         }
 
         public async Task<List<Village>> GetVillageList(int ZoneId)
