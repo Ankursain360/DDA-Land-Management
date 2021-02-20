@@ -142,6 +142,7 @@ namespace Libraries.Model
         //**********  New land acquisition**********
         public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
         public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
+        public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }

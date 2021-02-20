@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
     {
         public Newlandkhasra()
         {
-           
+            Newlandacquistionproposalplotdetails = new HashSet<Newlandacquistionproposalplotdetails>();
             Newlandus4plot = new HashSet<Newlandus4plot>();
         }
 
@@ -28,6 +28,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Rect No is mandatory")]
         public string RectNo { get; set; }
         public byte IsActive { get; set; }
+        public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
 
 
 
