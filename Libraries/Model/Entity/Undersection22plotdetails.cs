@@ -8,7 +8,7 @@ namespace Libraries.Model.Entity
 {
     public  class Undersection22plotdetails : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "Notification No  US 22 is mandatory feild")]
+        [Required(ErrorMessage = "Notification No  US 22 is mandatory field")]
         public int? UnderSection22Id { get; set; }
         public int? UnderSection4Id { get; set; }
         public int? UnderSection6Id { get; set; }

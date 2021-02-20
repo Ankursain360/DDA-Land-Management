@@ -10,5 +10,11 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/us4plotindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/us4plotindex.js"
+    ]
   }
 ]
