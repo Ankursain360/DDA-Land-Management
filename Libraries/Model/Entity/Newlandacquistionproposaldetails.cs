@@ -9,7 +9,11 @@ namespace Libraries.Model.Entity
 {
     public class Newlandacquistionproposaldetails : AuditableEntity<int>
     {
-       
+        public Newlandacquistionproposaldetails()
+        {
+            Newlandacquistionproposalplotdetails = new HashSet<Newlandacquistionproposalplotdetails>();
+        }
+
         [Remote(action: "Exist", controller: "NewLandProposalDetails", AdditionalFields = "Id")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Scheme is mandatory feild")]
@@ -35,5 +39,6 @@ namespace Libraries.Model.Entity
         public List<Scheme> SchemeList { get; set; }
 
         public Scheme Scheme { get; set; }
+        public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         public byte? IsActive { get; set; }
         public virtual ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
-
+        public ICollection<Newlandvillage> Newlandvillage { get; set; }
 
     }
 }
