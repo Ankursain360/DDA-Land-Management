@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("newlandkhasra", "lms");
 
             builder.HasIndex(e => e.NewLandvillageId)
-                .HasName("fkKhasraLocality_idx");
+                .HasName("fkAcqvillageId_idx");
 
             builder.HasIndex(e => e.LandCategoryId)
                 .HasName("fkKhasraLandCategory_idx");
@@ -65,8 +65,13 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasOne(d => d.LandCategory)
                 .WithMany(p => p.Newlandkhasra)
                 .HasForeignKey(d => d.LandCategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fkLandCategory");
+
+            //builder.HasOne(d => d.LandCategory)
+            //    .WithMany(p => p.Newlandkhasra)
+            //    .HasForeignKey(d => d.LandCategoryId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("fkLandCategory");
 
         }
     }

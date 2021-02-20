@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
         public Newlandvillage()
         {
 
-            //  Newlandkhasra = new HashSet<Newlandkhasra>();
+         Newlandkhasra = new HashSet<Newlandkhasra>();
         }
         [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
@@ -46,7 +46,8 @@ namespace Libraries.Model.Entity
         public District District { get; set; }
         public Tehsil Tehsil { get; set; }
         public Zone Zone { get; set; }
-        public ICollection<Newlandkhasra> Newlandkhasra { get; set; }
-        // public virtual Newlandkhasra Newlandkhasra { get; set; }
+       // public ICollection<Newlandkhasra> Newlandkhasra { get; set; }
+       
+      public virtual ICollection<Newlandkhasra> Newlandkhasra { get; set; }
     }
     }

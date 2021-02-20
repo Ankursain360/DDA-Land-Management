@@ -95,109 +95,109 @@ namespace NewLandAcquisition.Controllers
 
 
 
-        //[AuthorizeContext(ViewAction.Edit)]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var Data = await _acquiredlandvillageService.FetchSingleResult(id);
-        //    Data.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
-        //    Data.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-        //    Data.ZoneList = await _acquiredlandvillageService.GetAllZone();
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
+      //  [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _newlandvillageService.FetchSingleResult(id);
+            Data.DistrictList = await _newlandvillageService.GetAllDistrict();
+            Data.TehsilList = await _newlandvillageService.GetAllTehsil();
+            Data.ZoneList = await _newlandvillageService.GetAllZone();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Edit)]
-        //public async Task<IActionResult> Edit(int id, Acquiredlandvillage acquiredlandvillage)
-        //{
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+      //  [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, Newlandvillage newlandvillage)
+        {
 
-        //    acquiredlandvillage.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
-        //    acquiredlandvillage.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-        //    acquiredlandvillage.ZoneList = await _acquiredlandvillageService.GetAllZone();
+            newlandvillage.DistrictList = await _newlandvillageService.GetAllDistrict();
+            newlandvillage.TehsilList = await _newlandvillageService.GetAllTehsil();
+            newlandvillage.ZoneList = await _newlandvillageService.GetAllZone();
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            acquiredlandvillage.ModifiedBy = SiteContext.UserId;
-        //            var result = await _acquiredlandvillageService.Update(id, acquiredlandvillage);
-        //            if (result == true)
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-        //                var list = await _acquiredlandvillageService.GetAcquiredlandvillage();
-        //                return View("Index", list);
-        //            }
-        //            else
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //                return View(acquiredlandvillage);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(acquiredlandvillage);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View(acquiredlandvillage);
-        //    }
-        //}
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    newlandvillage.ModifiedBy = SiteContext.UserId;
+                    var result = await _newlandvillageService.Update(id, newlandvillage);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var list = await _newlandvillageService.GetNewlandvillage();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(newlandvillage);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(newlandvillage);
+                }
+            }
+            else
+            {
+                return View(newlandvillage);
+            }
+        }
 
 
-        //[AuthorizeContext(ViewAction.Delete)]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
+     //   [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
 
-        //        var result = await _acquiredlandvillageService.Delete(id);
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //    }
-        //    var list = await _acquiredlandvillageService.GetAcquiredlandvillage();
-        //    return View("Index", list);
-        //}
+                var result = await _newlandvillageService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _newlandvillageService.GetNewlandvillage();
+            return View("Index", list);
+        }
 
 
         //[AuthorizeContext(ViewAction.View)]
-        //public async Task<IActionResult> View(int id)
-        //{
-        //    var Data = await _acquiredlandvillageService.FetchSingleResult(id);
-        //    Data.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
-        //    Data.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-        //    Data.ZoneList = await _acquiredlandvillageService.GetAllZone();
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _newlandvillageService.FetchSingleResult(id);
+            Data.DistrictList = await _newlandvillageService.GetAllDistrict();
+            Data.TehsilList = await _newlandvillageService.GetAllTehsil();
+            Data.ZoneList = await _newlandvillageService.GetAllZone();
 
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
 
-        //public async Task<IActionResult> Download()
-        //{
-        //    List<Acquiredlandvillage> result = await _acquiredlandvillageService.GetAcquiredlandvillage();
-        //    var memory = ExcelHelper.CreateExcel(result);
-        //    string sFileName = @"Acquiredlandvillage.xlsx";
-        //    return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+        public async Task<IActionResult> Download()
+        {
+            List<Newlandvillage> result = await _newlandvillageService.GetNewlandvillage();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"village.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
-        //}
+        }
 
     }
 }
