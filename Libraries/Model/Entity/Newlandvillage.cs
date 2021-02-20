@@ -40,9 +40,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Tehsil> TehsilList { get; set; }
-        //[NotMapped]
-        //public List<LandCategory> LandCategory { get; set; }
-        //  public ICollection<Mutation> Mutation { get; set; }
+        
         public ICollection<LandCategory> LandCategory { get; set; }
         public District District { get; set; }
         public Tehsil Tehsil { get; set; }
