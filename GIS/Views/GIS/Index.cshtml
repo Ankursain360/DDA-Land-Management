@@ -86,7 +86,357 @@
                         <!--data accordion end -->
                     </div>
                     <div class="tab-pane fade" id="navQuery" role="tabpanel" aria-labelledby="navQuerytab">2</div>
-                    <div class="tab-pane fade" id="navLayers" role="tabpanel" aria-labelledby="navLayerstab">3</div>
+                    <div class="tab-pane fade" id="navLayers" role="tabpanel" aria-labelledby="navLayerstab">
+                        <div class="accordion" id="navLayersdata">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button px-3 py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Infrastructure" aria-expanded="true" aria-controls="Infrastructure">
+                                        Important Infrastructure
+                                    </button>
+                                </h2>
+                                <div id="Infrastructure" class="accordion-collapse collapse show" data-bs-parent="#navLayersdata">
+                                    <div class="accordion-body p-2">
+                                        <table class="table table-sm mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="chkAllImpInfra">
+                                                            <label class="form-check-label" for="AllSelectImportant">
+                                                                Select All
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="chkAbadi" checked="checked">
+                                                            <label class="form-check-label" for="chkAbadi">
+                                                                Abadi
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #900C3F"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Water_Connection">
+                                                            <label class="form-check-label" for="Water_Connection">
+                                                                Water Connection
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-drop-fill" style="color: #8BBDEB"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="HT_Line">
+                                                            <label class="form-check-label" for="HT_Line">
+                                                                HT Line
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-subtract-line" style="color: #4679BD;"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Electricity_Pole">
+                                                            <label class="form-check-label" for="Electricity_Pole">
+                                                                Electricity Pole
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-lightbulb-flash-fill" style="color: #333"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Railway_Track">
+                                                            <label class="form-check-label" for="Railway_Track">
+                                                                Railway Track
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-subtract-fill" style="color: #333"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Sewerage_Connection">
+                                                            <label class="form-check-label" for="Sewerage_Connection">
+                                                                Sewerage Connection
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #5B5BA2"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Gas_Connection">
+                                                            <label class="form-check-label" for="Gas_Connection">
+                                                                Gas Connection
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-database-2-fill" style="color: #333"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Utility">
+                                                            <label class="form-check-label" for="Utility">
+                                                                Utility
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #AF7AC5"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed px-3 py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Additional" aria-expanded="false" aria-controls="Additional">
+                                        Additional Infrastructure
+                                    </button>
+                                </h2>
+                                <div id="Additional" class="accordion-collapse collapse" data-bs-parent="#navLayersdata">
+                                    <div class="accordion-body p-2">
+                                        <table class="table table-sm mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="AllSelectAdditional">
+                                                            <label class="form-check-label" for="AllSelectAdditional">
+                                                                Select All
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Bridge">
+                                                            <label class="form-check-label" for="Bridge">
+                                                                Bridge
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-gradienter-fill" style="color: #4679BD"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Green_Belt">
+                                                            <label class="form-check-label" for="Green_Belt">
+                                                                Green Belt
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #55E82D"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Footpath">
+                                                            <label class="form-check-label" for="Footpath">
+                                                                Footpath
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #BFC0C0;"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Lamp_Post">
+                                                            <label class="form-check-label" for="Lamp_Post">
+                                                                Lamp Post
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-map-pin-3-fill" style="color: #FF0000"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Metro_Station">
+                                                            <label class="form-check-label" for="Metro_Station">
+                                                                Metro Station
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-train-fill" style="color: #cc00ff"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed px-3 py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Miscellaneous" aria-expanded="false" aria-controls="Miscellaneous">
+                                        Miscellaneous
+                                    </button>
+                                </h2>
+                                <div id="Miscellaneous" class="accordion-collapse collapse" data-bs-parent="#navLayersdata">
+                                    <div class="accordion-body p-2">
+                                        <table class="table table-sm mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="AllSelectMiscellaneous">
+                                                            <label class="form-check-label" for="AllSelectMiscellaneous">
+                                                                Select All
+                                                            </label>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Boundary">
+                                                            <label class="form-check-label" for="Boundary">
+                                                                Boundary
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #333;"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Sector">
+                                                            <label class="form-check-label" for="Sector">
+                                                                Sector
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #393939;"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Others">
+                                                            <label class="form-check-label" for="Others">
+                                                                Others
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #ffc34d"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Water_Tanks">
+                                                            <label class="form-check-label" for="Water_Tanks">
+                                                                Water HEAD Tanks
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-water-flash-fill" style="color: #b3b3ff"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Parking">
+                                                            <label class="form-check-label" for="Parking">
+                                                                Parking
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-car-fill" style="color: #bf80ff"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Water_Body">
+                                                            <label class="form-check-label" for="Water_Body">
+                                                                Water Body
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-drop-fill" style="color: #B2D1EA"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Nala">
+                                                            <label class="form-check-label" for="Nala">
+                                                                Nala
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #99ffcc"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Police_Station">
+                                                            <label class="form-check-label" for="Police_Station">
+                                                                Police Station
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-secure-payment-fill" style="color: #F76085"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Fire_Stations">
+                                                            <label class="form-check-label" for="Fire_Stations">
+                                                                Fire Stations
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-fire-fill" style="color: #cc0000"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Telecom_Towers">
+                                                            <label class="form-check-label" for="Telecom_Towers">
+                                                                Telecom Towers
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-cellphone-fill" style="color: #009688;"></i></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="Encroachment_Area">
+                                                            <label class="form-check-label" for="Encroachment_Area">
+                                                                Encroachment Area
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #afaf45"></i></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="tab-pane fade" id="navLegends" role="tabpanel" aria-labelledby="navLegendstab">4</div>
                     <div class="tab-pane fade" id="navInformation" role="tabpanel" aria-labelledby="navInformationtab">5</div>
                 </div>
@@ -104,8 +454,8 @@
                 <div class="btn actionBtn slow" id="TransparencyRange">
                     <i class="ri-search-eye-line"></i>
                     <div class="TransparencyMap openAction">
-                        <small class="d-block">Transparency : <strong>50%</strong></small>
-                        <input type="range" class="form-range" min="0" max="5">
+                        <small class="d-block">Transparency : <strong id="demo">30</strong>%</small>
+                        <input type="range" min="0.0" max="1.0" value="0.30" step="0.01" class="slider" id="OpacityRange">
                     </div>
                 </div>
                 <div class="btn actionBtn slow" id="MapOption">
@@ -194,9 +544,12 @@
     </environment>
     <script src="~/lib/toaster/toastr.min.js"></script>
 
+    @*Jquery for Autocomplete Start*@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @*Jquery for Autocomplete End*@
+
     @*<script src="~/js/main.js"></script>
         <script src="~/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/js.js"></script>

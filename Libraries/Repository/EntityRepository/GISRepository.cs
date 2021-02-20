@@ -250,10 +250,10 @@ namespace Libraries.Repository.EntityRepository
                                       .ToListAsync();
         }
 
-        public async Task<List<Village>> GetVillageDetails(int villageId, int zoneId)
+        public async Task<List<Village>> GetVillageDetails(int villageId)
         {
             return await _dbContext.Village
-                                    .Where(x => x.ZoneId == zoneId && x.IsActive == 1 && x.Id == villageId)
+                                    .Where(x =>  x.IsActive == 1 && x.Id == villageId)
                                     .ToListAsync();
         }
 

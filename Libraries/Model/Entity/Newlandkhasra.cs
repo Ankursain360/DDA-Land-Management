@@ -9,6 +9,12 @@ namespace Libraries.Model.Entity
 {
    public class Newlandkhasra : AuditableEntity<int>
     {
+        public Newlandkhasra()
+        {
+           
+            Newlandus4plot = new HashSet<Newlandus4plot>();
+        }
+
         [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }
                 
@@ -36,9 +42,9 @@ namespace Libraries.Model.Entity
         public List<Newlandvillage> VillageList { get; set; }
 
         public virtual Newlandvillage Newlandvillage { get; set; }
+        public ICollection<Newlandus4plot> Newlandus4plot { get; set; }
 
-        
 
-        
+
     }
 }

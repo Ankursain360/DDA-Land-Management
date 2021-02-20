@@ -19,8 +19,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Disposalland disposalland);
         Task<bool> Create(Disposalland disposalland);
         Task<List<Utilizationtype>> GetAllUtilizationtype();
-        Task<List<Village>> GetAllVillage();
-        Task<List<Khasra>> GetAllKhasra();
+        Task<List<Acquiredlandvillage>> GetAllVillage();
+        Task<List<Khasra>> GetAllKhasra(int? villageId);
         Task<bool> Delete(int id);
         Task<PagedResult<Disposalland>> GetPagedDisposalLand(DisposalLandSearchDto model);
     }

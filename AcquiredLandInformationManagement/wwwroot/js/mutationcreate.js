@@ -68,6 +68,7 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 });
 
 function GetOtherDetails(id) {
+    debugger;
     HttpGet(`/Mutation/KhasraView/?Id=${id}`, 'html', function (response) {
         $('#KhasraDetailsDiv').html("");
         $('#KhasraDetailsDiv').html(response);
