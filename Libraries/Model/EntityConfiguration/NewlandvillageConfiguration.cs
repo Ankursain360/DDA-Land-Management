@@ -75,17 +75,17 @@ namespace Libraries.Model.EntityConfiguration
         builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 
         builder.HasOne(d => d.District)
-            .WithMany(p => p.Acquiredlandvillage)
+            .WithMany(p => p.Newlandvillage)
             .HasForeignKey(d => d.DistrictId)
             .HasConstraintName("fkAcqDistrictId");
 
         builder.HasOne(d => d.Tehsil)
-            .WithMany(p => p.Acquiredlandvillage)
+            .WithMany(p => p.Newlandvillage)
             .HasForeignKey(d => d.TehsilId)
             .HasConstraintName("fkAcqTehsilId");
 
         builder.HasOne(d => d.Zone)
-            .WithMany(p => p.Acquiredlandvillage)
+            .WithMany(p => p.Newlandvillage)
             .HasForeignKey(d => d.ZoneId)
             .HasConstraintName("fkAcqZoneId");
 
