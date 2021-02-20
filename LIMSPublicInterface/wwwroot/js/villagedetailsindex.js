@@ -46,12 +46,6 @@ $("#btnReset").click(function () {
 });
 
 
-
-
-
-
-
-
 function GetSearchParam(pageNumber, pageSize) {
 
 
@@ -81,6 +75,8 @@ function onChangePageSize(pageSize) {
     GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }
+
+
 
 $("#btnSaveBottom").click(function () {
     var arrRight = [];

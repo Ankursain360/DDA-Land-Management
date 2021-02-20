@@ -16,5 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Khasra>> BindKhasra(int? villageId);
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model);
+
+        Task<List<Unotification4detailsListDto>> GetPagednotification4detailsList(Unotification4detailsSearchDto model);
     }
 }
