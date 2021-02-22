@@ -24,7 +24,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Newlandacquistionproposaldetails>> GetAllProposaldetails();
         Task<List<Newlandacquistionproposaldetails>> GetProposaldetailsUsingRepo();
-        Task<List<Scheme>> GetAllScheme(); 
+        Task<List<Newlandscheme>> GetAllScheme(); 
         Task<bool> Update(int id, Newlandacquistionproposaldetails newlandacquistionproposaldetails);
 
         Task<bool> Create(Newlandacquistionproposaldetails newlandacquistionproposaldetails);

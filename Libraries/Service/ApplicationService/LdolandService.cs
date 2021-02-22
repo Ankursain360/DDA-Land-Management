@@ -49,7 +49,7 @@ namespace Libraries.Service.ApplicationService
 
             model.LandNotificationId = ldoland.LandNotificationId;
             model.NotificationDate = ldoland.NotificationDate;
-            model.SerialnumberId = ldoland.SerialnumberId;
+            model.SerialNumber = ldoland.SerialNumber;
 
             model.PropertySiteNo = ldoland.PropertySiteNo;
             model.Location = ldoland.Location;
@@ -81,11 +81,11 @@ namespace Libraries.Service.ApplicationService
             List<LandNotification> landNotificationList = await _ldolandRepository.GetAllLandNotification();
             return landNotificationList;
         }
-        public async Task<List<Serialnumber>> GetAllSerialnumber()
-        {
-            List<Serialnumber> serialnumberList = await _ldolandRepository.GetAllSerialnumber();
-            return serialnumberList;
-        }
+        //public async Task<List<Serialnumber>> GetAllSerialnumber()
+        //{
+        //    List<Serialnumber> serialnumberList = await _ldolandRepository.GetAllSerialnumber();
+        //    return serialnumberList;
+        //}
 
         //public async Task<bool> CheckUniqueName(int id, string page)
         //{

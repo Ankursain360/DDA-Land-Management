@@ -17,13 +17,13 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("newlandacquistionproposalplotdetails", "lms");
 
             builder.HasIndex(e => e.AcquiredlandvillageId)
-                    .HasName("fknewVillage_idx");
+                .HasName("fknewVillage_idx");
 
             builder.HasIndex(e => e.KhasraId)
-                    .HasName("fknewProposalKhasra_idx");
+                .HasName("fknewProposalKhasra_idx");
 
             builder.HasIndex(e => e.ProposaldetailsId)
-                    .HasName("fknewProposalDetails_idx");
+                .HasName("fknewProposalDetails_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -40,8 +40,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.IsActive)
-                    .HasColumnType("tinyint(4)")
-                    .HasDefaultValueSql("1");
+                .HasColumnType("tinyint(4)")
+                .HasDefaultValueSql("1");
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
@@ -50,19 +50,19 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ProposaldetailsId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Acquiredlandvillage)
-                    .WithMany(p => p.Newlandacquistionproposalplotdetails)
-                    .HasForeignKey(d => d.AcquiredlandvillageId)
-                    .HasConstraintName("fknewVillage");
+                .WithMany(p => p.Newlandacquistionproposalplotdetails)
+                .HasForeignKey(d => d.AcquiredlandvillageId)
+                .HasConstraintName("fknewVillage");
 
             builder.HasOne(d => d.Khasra)
-                    .WithMany(p => p.Newlandacquistionproposalplotdetails)
-                    .HasForeignKey(d => d.KhasraId)
-                    .HasConstraintName("fknewProposalKhasra");
+                .WithMany(p => p.Newlandacquistionproposalplotdetails)
+                .HasForeignKey(d => d.KhasraId)
+                .HasConstraintName("fknewProposalKhasra");
 
             builder.HasOne(d => d.Proposaldetails)
-                    .WithMany(p => p.Newlandacquistionproposalplotdetails)
-                    .HasForeignKey(d => d.ProposaldetailsId)
-                    .HasConstraintName("fknewProposalDetails");
+                .WithMany(p => p.Newlandacquistionproposalplotdetails)
+                .HasForeignKey(d => d.ProposaldetailsId)
+                .HasConstraintName("fknewProposalDetails");
         }
     }
 }

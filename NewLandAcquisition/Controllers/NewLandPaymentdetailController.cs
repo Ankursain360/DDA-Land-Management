@@ -12,77 +12,69 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-namespace AcquiredLandInformationManagement.Controllers
+namespace NewLandAcquisition.Controllers
 {
-    public class KhasraController : Controller
+    public class NewLandPaymentdetailController : Controller
     {
-        private readonly INewlandkhasraService _khasraService;
+        private readonly INewLandPaymentdetailService _newLandPaymentdetailService;
 
 
-        public KhasraController(INewlandkhasraService khasraService)
+        public NewLandPaymentdetailController(INewLandPaymentdetailService newLandPaymentdetailService)
         {
-            _khasraService = khasraService;
+            _newLandPaymentdetailService = newLandPaymentdetailService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var list = await _khasraService.GetAllKhasra();
+            var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
             return View(list);
         }
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] NewlandkhasraSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] NewLandPaymentDetailSearchDto model)
         {
-            var result = await _khasraService.GetPagedKhasra(model);
+            var result = await _newLandPaymentdetailService.GetPagedPaymentdetail(model);
             return PartialView("_List", result);
         }
 
-    public async Task<IActionResult> Create()
-        
+        public IActionResult Create()
         {
-            Newlandkhasra khasra = new Newlandkhasra();
-            khasra.IsActive = 1;
-            khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
-           
-            khasra.VillageList = await _khasraService.GetAllVillageList();
-            return View(khasra);
+            return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Newlandkhasra khasra)
+        public async Task<IActionResult> Create(Newlandpaymentdetail newlandpaymentdetail)
         {
             try
             {
-                khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
 
-                khasra.VillageList = await _khasraService.GetAllVillageList();
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _khasraService.Create(khasra);
+                    var result = await _newLandPaymentdetailService.Create(newlandpaymentdetail);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _khasraService.GetAllKhasra();
+                        var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(khasra);
+                        return View(newlandpaymentdetail);
                     }
                 }
                 else
                 {
-                    return View(khasra);    
+                    return View(newlandpaymentdetail);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(khasra);
+                return View(newlandpaymentdetail);
             }
         }
 
@@ -91,10 +83,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _khasraService.FetchSingleResult(id);
-            Data.LandCategoryList = await _khasraService.GetAllLandCategory();
-          
-            Data.VillageList = await _khasraService.GetAllVillageList();
+            var Data = await _newLandPaymentdetailService.FetchSingleResult(id);
 
             if (Data == null)
             {
@@ -105,37 +94,34 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Newlandkhasra khasra)
-
+        public async Task<IActionResult> Edit(int id, Newlandpaymentdetail newlandpaymentdetail)
         {
-            khasra.VillageList = await _khasraService.GetAllVillageList();
-            khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _khasraService.Update(id, khasra);
+                    var result = await _newLandPaymentdetailService.Update(id, newlandpaymentdetail);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _khasraService.GetAllKhasra();
+                        var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(khasra);
+                        return View(_newLandPaymentdetailService);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(khasra);
+                    return View(_newLandPaymentdetailService);
                 }
             }
             else
             {
-                return View(khasra);
+                return View(newlandpaymentdetail);
             }
         }
 
@@ -144,7 +130,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
 
-                var result = await _khasraService.Delete(id);
+                var result = await _newLandPaymentdetailService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -158,16 +144,15 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _khasraService.GetAllKhasra();
+            var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
             return View("Index", list);
         }
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _khasraService.FetchSingleResult(id);
-           
-            Data.LandCategoryList = await _khasraService.GetAllLandCategory();
-            Data.VillageList = await _khasraService.GetAllVillageList();
+            var Data = await _newLandPaymentdetailService.FetchSingleResult(id);
+
+
 
 
             if (Data == null)
@@ -182,3 +167,4 @@ namespace AcquiredLandInformationManagement.Controllers
 
     }
 }
+
