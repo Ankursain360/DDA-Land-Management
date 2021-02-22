@@ -8,7 +8,7 @@ $(document).ready(function () {
 
 function GetProposalplotdetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Khasra/List`, 'html', param, function (response) {
+    HttpPost(`/NewlandKhasra/List`, 'html', param, function (response) {
         $('#divKhasraTable').html("");
         $('#divKhasraTable').html(response);
     });

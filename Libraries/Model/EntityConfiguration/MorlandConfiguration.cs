@@ -17,17 +17,17 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("Name");
                 
 
-            builder.HasIndex(e => e.SerialnumberId)
-                .HasName("SerialnumberId");
+            //builder.HasIndex(e => e.SerialnumberId)
+            //    .HasName("SerialnumberId");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
-            builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
+            //builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.Biswa).HasColumnType("decimal(18,3)");
+            //builder.Property(e => e.Biswa).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.Biswanshi).HasColumnType("decimal(18,3)");
+            //builder.Property(e => e.Biswanshi).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -62,10 +62,12 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
+                .HasMaxLength(300)
+                .IsUnicode(false);
+            builder.Property(e => e.SerialNumber)
                 .HasMaxLength(200)
                 .IsUnicode(false);
-
-            builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
+           //  builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
 
             builder.Property(e => e.SiteDescription)
                 .HasMaxLength(200)
@@ -82,11 +84,11 @@ namespace Libraries.Model.EntityConfiguration
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("LandNotificationId");
 
-            builder.HasOne(d => d.Serialnumber)
-                .WithMany(p => p.Morland)
-                .HasForeignKey(d => d.SerialnumberId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("SerialnumberId");
+            //builder.HasOne(d => d.Serialnumber)
+            //    .WithMany(p => p.Morland)
+            //    .HasForeignKey(d => d.SerialnumberId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("SerialnumberId");
         }
     }
 

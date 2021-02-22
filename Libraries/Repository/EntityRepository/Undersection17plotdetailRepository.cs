@@ -10,6 +10,8 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 
+using Repository.Common;
+
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -195,6 +197,30 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
         {
             return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
+
+
+        public async Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("BindUnderSection17Details")
+                                            .WithSqlParams(("P_UnSec17Id", model.notification17))
+
+
+
+                                            .ExecuteStoredProcedureAsync<Unotification17detailsListDto>();
+
+                return (List<Unotification17detailsListDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
 

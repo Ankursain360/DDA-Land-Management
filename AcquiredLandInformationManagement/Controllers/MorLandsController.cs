@@ -58,7 +58,7 @@ namespace AcquiredLandInformationManagement.Controllers
             morland.IsActive = 1;
             morland.LandNotificationList = await _morlandService.GetAllLandNotification();
 
-            morland.SerialnumberList = await _morlandService.GetAllSerialnumber();
+           // morland.SerialnumberList = await _morlandService.GetAllSerialnumber();
             return View(morland);
         }
 
@@ -71,7 +71,7 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 morland.LandNotificationList = await _morlandService.GetAllLandNotification();
 
-                morland.SerialnumberList = await _morlandService.GetAllSerialnumber();
+             //   morland.SerialnumberList = await _morlandService.GetAllSerialnumber();
 
                 if (ModelState.IsValid)
                 {
@@ -109,7 +109,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _morlandService.FetchSingleResult(id);
             Data.LandNotificationList = await _morlandService.GetAllLandNotification();
 
-            Data.SerialnumberList = await _morlandService.GetAllSerialnumber();
+          //  Data.SerialnumberList = await _morlandService.GetAllSerialnumber();
 
             if (Data == null)
             {
@@ -179,7 +179,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _morlandService.FetchSingleResult(id);
 
             Data.LandNotificationList = await _morlandService.GetAllLandNotification();
-            Data.SerialnumberList = await _morlandService.GetAllSerialnumber();
+           // Data.SerialnumberList = await _morlandService.GetAllSerialnumber();
 
 
             if (Data == null)
