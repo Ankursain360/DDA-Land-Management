@@ -26,7 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Undersection17plotdetail>> GetPagedUndersection17plotdetail(Undersection17plotdetailSearchDto model);
 
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
-
+        Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model);
 
 
     }
