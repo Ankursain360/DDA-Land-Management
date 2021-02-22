@@ -72,7 +72,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IPossessiondetailsRepository, PossessiondetailsRepository>();
             services.AddScoped<IDemandListDetailsRepository, DemandListDetailsRepository>();
             services.AddScoped<IMutationRepository, MutationRepository>();
-           
+            services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
+            services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -122,6 +124,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDemandListDetailsService, DemandListDetailsService>();
             services.AddScoped<IMutationService, MutationService>();
             services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
+            services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
+            services.AddScoped<INewlandnotificationService, NewlandnotificationService>();
 
         }
     }
