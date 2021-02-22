@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
 
+using Repository.Common;
+
 namespace Libraries.Repository.EntityRepository
 {
    public class Undersection6plotRepository : GenericRepository<Undersection6plot>, IUndersection6plotRepository
@@ -165,6 +167,33 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
+
+
+
+        public async Task<List<Unotification6detailsListDto>> GetPagednotification6detailsList(Unotification6detailsSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("BindUnderSection6Details")
+                                            .WithSqlParams(("P_UnSec6Id", model.notification6))
+
+
+
+                                            .ExecuteStoredProcedureAsync<Unotification6detailsListDto>();
+
+                return (List<Unotification6detailsListDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
 
 
 

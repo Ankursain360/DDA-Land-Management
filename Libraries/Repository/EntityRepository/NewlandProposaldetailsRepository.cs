@@ -198,9 +198,9 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
-        public async Task<List<Scheme>> GetAllScheme()
+        public async Task<List<Newlandscheme>> GetAllScheme()
         {
-            List<Scheme> schemeList = await _dbContext.Scheme.Where(x => x.IsActive == 1).ToListAsync();
+            List<Newlandscheme> schemeList = await _dbContext.Newlandscheme.Where(x => x.IsActive == 1).ToListAsync();
             return schemeList;
         }
         public async Task<bool> Any(int id, string name)

@@ -28,6 +28,7 @@ namespace Libraries.Service.IApplicationService
         Task<Undersection22plotdetails> FetchSingleResult(int id);
 
         Task<bool> Delete(int id);
+        Task<List<Unotification22detailsListDto>> GetPagednotification22detailsList(Unotification22detailsSearchDto model);
 
     }
 }

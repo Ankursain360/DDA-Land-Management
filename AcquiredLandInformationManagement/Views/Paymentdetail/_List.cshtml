@@ -28,8 +28,9 @@
                 <td>@item.BankName</td>
                 <td>@item.VoucherNo</td>
                 <td>@item.ChequeNo</td>
-                <td>@item.ChequeDate</td>
                
+                <td>@(Convert.ToDateTime(item.ChequeDate).ToString("dd/MMM/yyyy"))</td>
+
                 <td>@item.PercentPaid</td>
 
                 <td>

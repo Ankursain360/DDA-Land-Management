@@ -23,6 +23,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Undersection6plot>> GetPagedNoUndersection6plot(NotificationUndersection6plotDto model);
+        Task<List<Unotification6detailsListDto>> GetPagednotification6detailsList(Unotification6detailsSearchDto model);
+
+
 
     }
 }
