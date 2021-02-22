@@ -108,6 +108,7 @@ namespace NewLandAcquisition.Controllers
         //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandacquistionproposaldetails newlandacquistionproposaldetails)
         {
+            newlandacquistionproposaldetails.SchemeList = await _newlandProposaldetailsService.GetAllScheme();
             if (ModelState.IsValid)
             {
                 try

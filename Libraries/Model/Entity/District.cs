@@ -31,7 +31,7 @@ namespace Libraries.Model.Entity
         public ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public ICollection<Newlandvillage> Newlandvillage { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
-        public ICollection<Newlandvillage> Newlandvillage { get; set; }
+       
 
 
     }

@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface INewlandProposaldetailsRepository : IGenericRepository<Newlandacquistionproposaldetails>
     {
         Task<List<Newlandacquistionproposaldetails>> GetProposaldetails();
-        Task<List<Scheme>> GetAllScheme();
+        Task<List<Newlandscheme>> GetAllScheme();
         Task<bool> Any(int id, string name);
         Task<List<Newlandacquistionproposaldetails>> GetAllProposaldetails();
         Task<PagedResult<Newlandacquistionproposaldetails>> GetPagedProposaldetails(NewlandacquistionproposaldetailsSearchDto model);
