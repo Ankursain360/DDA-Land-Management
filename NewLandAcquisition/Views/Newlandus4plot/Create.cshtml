@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Newlandus4plot
-@await Component.InvokeAsync("PageHeader", new { pageName = "Sakni Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Under Section 4 Plot" })
 
 
 <div class="pt-3">
@@ -15,11 +15,9 @@
                         <option selected disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="NotificationId" class="text-danger"></span>
-                    <label asp-for="NotificationId" class="floating-label">Notification Name </label>
+                    <label asp-for="NotificationId" class="floating-label">Notification No</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
@@ -31,6 +29,9 @@
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
+
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
@@ -41,7 +42,16 @@
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
                 </div>
             </div>
-
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label class="floating-label">Status </label>
+                </div>
+            </div>
         </div>
 
         <h3 class="my-3 d-flex sub-heading pt-4">Area </h3>
@@ -74,19 +84,6 @@
         </div>
 
 
-          
-        <div class="row mt-md-3">
-            <div class=" col-md-6">
-                <div class="floating-label-wrap">
-                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label class="floating-label">Status </label>
-                </div>
-            </div>
-        </div>
         <div class="row mt-md-3">
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -99,7 +96,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit" >Create</button>
                 @Html.ActionLink("Back", "Index", "Newlandus4plot", null, new { @class = "btn btn-theme " })
 
             </div>

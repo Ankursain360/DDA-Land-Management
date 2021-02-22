@@ -7,13 +7,8 @@
                 <th>Serial No</th>
                 <th>Property/Site No.</th>
                 <th>Location Name(Village)</th>
-                <th>Site Description(With Khasra No)</th>
-
-                <th>Area</th>
-                 <th>Status of Land</th>
-                <th>Occupied By</th>
-                <th>Date of Possession</th>
-                <th>Remarks</th>
+                
+               
                 <th>Status</th>
                 <th style="min-width:110px;">Operations</th>
             </tr>
@@ -27,19 +22,12 @@
                 <td> @(item.LandNotification == null?"": item.LandNotification.Name)</td>
 
                 <td>@(Convert.ToDateTime(item.NotificationDate).ToString("dd-MMM-yyyy"))</td>
-                <td> @(item.Serialnumber == null? ' ' : item.Serialnumber.SerialNo)</td>
+                <td> @(item.SerialNumber == null? ' ' : item.SerialNumber)</td>
                
                 <td>@item.PropertySiteNo</td>
                 <td>@item.Location</td>
-                <td>@item.SiteDescription</td>
-
-                <td>@item.Area</td>
-                
-                <td>@item.StatusOfLand</td>
-                <td>@item.OccupiedBy</td>
-                <td>@(Convert.ToDateTime(item.DateofPossession).ToString("dd-MMM-yyyy"))</td>
-
-                <td>@item.Remarks</td>
+               
+               
 
                 <td>
                     @if (item.IsActive == 1)

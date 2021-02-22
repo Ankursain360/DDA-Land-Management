@@ -5,31 +5,31 @@ namespace Dto.Search
 {
     public class VillageDetailsLitDataDto : AuditableDto<int>
     {
-        public decimal Bigha { get; set; }
-        public decimal Biswa { get; set; }
-        public decimal Biswanshi { get; set; }
+        public string Bigha { get; set; }
+        public string Biswa { get; set; }
+        public string Biswanshi { get; set; }
 
-        public decimal un6_bigha { get; set; }
-        public decimal un6_Biswa { get; set; }
-        public decimal un6_Bidwanshi { get; set; }
+        public string un6_bigha { get; set; }
+        public string un6_Biswa { get; set; }
+        public string un6_Bidwanshi { get; set; }
 
-        public decimal awardBiswanshi { get; set; }
-        public decimal awardbiswa { get; set; }
+        public string awardBiswanshi { get; set; }
+        public string awardbiswa { get; set; }
 
-        public decimal p_bigha { get; set; }
-        public decimal p_Biswa { get; set; }
-        public decimal ad_Bigha { get; set; }
+        public string p_bigha { get; set; }
+        public string p_Biswa { get; set; }
+        public string ad_Bigha { get; set; }
 
 
         public string un4_Number { get; set; }
         public string un6_Number { get; set; }
         public string AwardNumber { get; set; }
 
-        public DateTime um4Date { get; set; }
-        public DateTime um6Date { get; set; }
-        public DateTime AwardDate { get; set; }
+        public string um4Date { get; set; }
+        public string um6Date { get; set; }
+        public string AwardDate { get; set; }
 
-        public DateTime PossDate { get; set; }
+        public string PossDate { get; set; }
      
 
      

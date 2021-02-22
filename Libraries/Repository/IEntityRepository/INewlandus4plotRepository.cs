@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
             Task<List<LandNotification>> GetAllNotification();
             Task<List<Newlandvillage>> GetAllVillage();
             Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
+            Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
         }
 }

@@ -13,10 +13,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.LandNotificationId)
                 .HasName("fkLdoNotification_idx");
 
-            builder.HasIndex(e => e.SerialnumberId)
-                .HasName("fkLdoSerialNo_idx");
-
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
 
@@ -49,8 +46,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Remarks)
                 .HasMaxLength(200)
                 .IsUnicode(false);
-
-            builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
+            builder.Property(e => e.SerialNumber)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            //  builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
 
             builder.Property(e => e.SiteDescription)
                 .HasMaxLength(200)
@@ -65,10 +64,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.LandNotificationId)
                 .HasConstraintName("fkLdoNotification");
 
-            builder.HasOne(d => d.Serialnumber)
-                .WithMany(p => p.Ldoland)
-                .HasForeignKey(d => d.SerialnumberId)
-                .HasConstraintName("fkLdoSerialNo");
+            
         }
 
     }

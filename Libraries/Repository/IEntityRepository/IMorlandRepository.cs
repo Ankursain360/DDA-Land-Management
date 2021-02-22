@@ -14,7 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Morland>> GetAllMorland();
 
         Task<List<LandNotification>> GetAllLandNotification();
-        Task<List<Serialnumber>> GetAllSerialnumber();
+      // Task<List<Serialnumber>> GetAllSerialnumber();
         Task<bool> Any(int id, string Name);
 
     }

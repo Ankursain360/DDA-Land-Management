@@ -23,9 +23,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Newlandkhasra>> GetPagedKhasra(NewlandkhasraSearchDto model)
         {
-            //return await _dbContext.Khasra.
-            //    Where(x => x.IsActive == 1).Include(x => x.Acquiredlandvillage).
-            //    Include(x => x.LandCategory).GetPaged<Khasra>(model.PageNumber, model.PageSize);
+   
             var data = await _dbContext.Newlandkhasra
                          .Include(x => x.Newlandvillage)
                          .Include(x => x.LandCategory)
@@ -54,7 +52,7 @@ namespace Libraries.Repository.EntityRepository
                                    
                         break;
 
-                    case ("ACQUIREDLANDVILLAGE"):
+                    case ("VILLAGE"):
                         data = null;
                         data = await _dbContext.Newlandkhasra
                          .Include(x => x.Newlandvillage)
@@ -86,7 +84,7 @@ namespace Libraries.Repository.EntityRepository
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                           && (string.IsNullOrEmpty(model.village) || x.Newlandvillage.Name.Contains(model.village))
                           && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
-                             .OrderByDescending(a => a.IsActive==0)
+                             .OrderByDescending(a => a.IsActive)
                            .GetPaged<Newlandkhasra>(model.PageNumber, model.PageSize);
                         break;
 
@@ -141,7 +139,7 @@ namespace Libraries.Repository.EntityRepository
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                           && (string.IsNullOrEmpty(model.village) || x.Newlandvillage.Name.Contains(model.village))
                           && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
-                             .OrderBy(a => a.IsActive == 0)
+                           .OrderBy(a => a.IsActive)
                            .GetPaged<Newlandkhasra>(model.PageNumber, model.PageSize);
                         break;
 
