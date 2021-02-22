@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dto.Search
 {
-    public class Newlandus4plotSearchDto : BaseSearchDto
+    public class Newlandus17plotSearchDto : BaseSearchDto
     {
         public string notification { get; set; }
         public string locality { get; set; }

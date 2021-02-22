@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
@@ -29,5 +30,12 @@ namespace Libraries.Model.Entity
         public Newlandkhasra Khasra { get; set; }
         public LandNotification Notification { get; set; }
         public Newlandvillage Village { get; set; }
+
+        [NotMapped]
+        public List<LandNotification> NotificationList { get; set; }
+        [NotMapped]
+        public List<Newlandvillage> VillageList { get; set; }
+        [NotMapped]
+        public List<Newlandkhasra> KhasraList { get; set; }
     }
 }
