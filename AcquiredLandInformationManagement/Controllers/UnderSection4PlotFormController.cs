@@ -207,7 +207,5 @@ namespace AcquiredLandInformationManagement.Controllers
             return Json(await _undersection4PlotService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
-
-
     }
 }

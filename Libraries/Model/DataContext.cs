@@ -143,7 +143,6 @@ namespace Libraries.Model
         public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
         public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
         public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
-        public virtual DbSet<NewlandNotificationtype> NewlandNotificationtype { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -245,8 +244,8 @@ namespace Libraries.Model
         public virtual DbSet<Newlandus4plot> Newlandus4plot { get; set; }
         public virtual DbSet<Newlandvillage> Newlandvillage { get; set; }
         public virtual DbSet<Newlandkhasra> Newlandkhasra { get; set; }
-        public virtual DbSet<Newlandnotification> Newlandnotification { get; set; }
-
+        public virtual DbSet<Newlandus17plot> Newlandus17plot { get; set; }
+        public virtual DbSet<Newlandus6plot> Newlandus6plot { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -259,7 +258,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new VillageConfiguration());
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
             modelBuilder.ApplyConfiguration(new ModuleConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
+            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
             modelBuilder.ApplyConfiguration(new InterestConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyTypeConfiguration());
             modelBuilder.ApplyConfiguration(new LocalityConfiguration());
@@ -288,7 +287,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NatureofencroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new EnchroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new LdolandConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
+            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
@@ -450,9 +449,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewlandvillageConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandkhasraConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandschemeConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandnotificationConfiguration());
-
+            modelBuilder.ApplyConfiguration(new Newlandus6plotConfiguration());
+            modelBuilder.ApplyConfiguration(new Newlandus17plotConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

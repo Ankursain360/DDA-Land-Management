@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using Dto.Search;
 
 
+using Repository.Common;
+
+
 namespace Libraries.Repository.EntityRepository
 {
     public class Undersection4plotRepository :  GenericRepository<Undersection4plot>, IUnderSection4PlotRepository
@@ -173,6 +176,34 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+
+
+
+
+        public async Task<List<Unotification4detailsListDto>> GetPagednotification4detailsList(Unotification4detailsSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("BindUnderSection4Details")
+                                            .WithSqlParams(("P_UnSec4Id", model.notification4))
+
+
+
+                                            .ExecuteStoredProcedureAsync<Unotification4detailsListDto>();
+
+                return (List<Unotification4detailsListDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
 
 
 

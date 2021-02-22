@@ -86,5 +86,10 @@ namespace Libraries.Service.ApplicationService
             List<Newlandkhasra> khasraList = await _newlandus4plotRepository.GetAllKhasra(villageId);
             return khasraList;
         }
+        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _newlandus4plotRepository.FetchSingleKhasraResult(khasraId);
+        }
+
     }
 }
