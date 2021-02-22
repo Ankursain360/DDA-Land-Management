@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using NewLandAcquisition.Filters;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -19,6 +22,7 @@ namespace NewLandAcquisition.Controllers
         {
             _newlandus6plotService = newlandus6plotService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -29,6 +33,7 @@ namespace NewLandAcquisition.Controllers
             var result = await _newlandus6plotService.GetPagedUS6Plot(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandus6plot us4plot = new Newlandus6plot();
@@ -41,7 +46,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
 
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandus6plot us6plot)
         {
             us6plot.NotificationList = await _newlandus6plotService.GetAllNotification();
@@ -72,6 +77,7 @@ namespace NewLandAcquisition.Controllers
             }
 
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newlandus6plotService.FetchSingleResult(id);
@@ -86,6 +92,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandus6plot us6plot)
         {
             us6plot.NotificationList = await _newlandus6plotService.GetAllNotification();
@@ -112,6 +119,7 @@ namespace NewLandAcquisition.Controllers
             }
             return View(us6plot);
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newlandus6plotService.FetchSingleResult(id);
@@ -125,7 +133,7 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
 
@@ -141,6 +149,15 @@ namespace NewLandAcquisition.Controllers
 
             var list = await _newlandus6plotService.GetAllUS6Plot();
             return View("Index", list);
+        }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Newlandus6plot> result = await _newlandus6plotService.GetAllUS6Plot();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Newlandus6plot.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
 
         [HttpGet]

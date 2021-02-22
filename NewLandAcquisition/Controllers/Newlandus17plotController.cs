@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using NewLandAcquisition.Filters;
+using Microsoft.AspNetCore.Authorization;
+using Utility.Helper;
+using Core.Enum;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -19,6 +23,7 @@ namespace NewLandAcquisition.Controllers
         {
             _newlandus17plotService = newlandus17plotService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -29,6 +34,7 @@ namespace NewLandAcquisition.Controllers
             var result = await _newlandus17plotService.GetPagedUS17Plot(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandus17plot us17plot = new Newlandus17plot();
@@ -41,7 +47,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
 
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandus17plot us17plot)
         {
             us17plot.NotificationList = await _newlandus17plotService.GetAllNotification();
@@ -72,6 +78,7 @@ namespace NewLandAcquisition.Controllers
             }
 
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newlandus17plotService.FetchSingleResult(id);
@@ -86,6 +93,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandus17plot us17plot)
         {
             us17plot.NotificationList = await _newlandus17plotService.GetAllNotification();
@@ -112,6 +120,7 @@ namespace NewLandAcquisition.Controllers
             }
             return View(us17plot);
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newlandus17plotService.FetchSingleResult(id);
@@ -125,7 +134,7 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
 
@@ -143,6 +152,15 @@ namespace NewLandAcquisition.Controllers
             return View("Index", list);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Newlandus17plot> result = await _newlandus17plotService.GetAllUS17Plot();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Newlandus17plot.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
         [HttpGet]
         public async Task<JsonResult> GetKhasraList(int? villageId)
         {

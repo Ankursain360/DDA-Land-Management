@@ -38,6 +38,10 @@ namespace NewLandAcquisition.Infrastructure.Extensions
 
             services.AddScoped<INewlandus4plotRepository, Newlandus4plotRepository>();
 
+            services.AddScoped<INewlandus6plotRepository, Newlandus6plotRepository>();
+            services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
+
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -59,6 +63,9 @@ namespace NewLandAcquisition.Infrastructure.Extensions
 
             services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
 
+
+            services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
+            services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
 
         }
     }
