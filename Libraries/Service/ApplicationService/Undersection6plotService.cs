@@ -126,7 +126,10 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-
+        public async Task<List<Unotification6detailsListDto>> GetPagednotification6detailsList(Unotification6detailsSearchDto model)
+        {
+            return await _undersection6plotRepository.GetPagednotification6detailsList(model);
+        }
 
 
     }

@@ -42,21 +42,20 @@ namespace AcquiredLandInformationManagement.Controllers
 
             disposalland.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
             disposalland.VillageList = await _disposallandService.GetAllVillage();
-            disposalland.KhasraList = await _disposallandService.GetAllKhasra();
+            disposalland.KhasraList = await _disposallandService.GetAllKhasra(disposalland.VillageId);
 
             return View(disposalland);
         }
 
 
         [HttpPost]
-
         public async Task<IActionResult> Create(Disposalland disposalland)
         {
             try
             {
                 disposalland.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
                 disposalland.VillageList = await _disposallandService.GetAllVillage();
-                disposalland.KhasraList = await _disposallandService.GetAllKhasra();
+                disposalland.KhasraList = await _disposallandService.GetAllKhasra(disposalland.VillageId);
                 if (ModelState.IsValid)
                 {
 
@@ -94,7 +93,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Data.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
             Data.VillageList = await _disposallandService.GetAllVillage();
-            Data.KhasraList = await _disposallandService.GetAllKhasra();
+            Data.KhasraList = await _disposallandService.GetAllKhasra(Data.VillageId);
 
 
             if (Data == null)
@@ -110,7 +109,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             disposalland.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
             disposalland.VillageList = await _disposallandService.GetAllVillage();
-            disposalland.KhasraList = await _disposallandService.GetAllKhasra();
+            disposalland.KhasraList = await _disposallandService.GetAllKhasra(disposalland.VillageId);
             if (ModelState.IsValid)
             {
                 try
@@ -138,8 +137,6 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(disposalland);
         }
 
-       
-
         public async Task<IActionResult> Delete(int id)
         {
             if (id == 0)
@@ -163,7 +160,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Data.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
             Data.VillageList = await _disposallandService.GetAllVillage();
-            Data.KhasraList = await _disposallandService.GetAllKhasra();
+            Data.KhasraList = await _disposallandService.GetAllKhasra(Data.VillageId);
             if (Data == null)
             {
                 return NotFound();
@@ -178,6 +175,13 @@ namespace AcquiredLandInformationManagement.Controllers
             string sFileName = @"LandDisposal.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? villageId)
+        {
+            villageId = villageId ?? 0;
+            return Json(await _disposallandService.GetAllKhasra(Convert.ToInt32(villageId)));
         }
     }
 }

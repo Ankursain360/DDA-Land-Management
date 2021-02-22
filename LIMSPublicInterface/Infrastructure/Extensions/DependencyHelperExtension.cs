@@ -34,6 +34,10 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IKhasraRepository, KhasraRepository>();
             services.AddScoped<IAwardplotDetailsRepository, AwardplotDetailsRepository>();
             services.AddScoped<IPossessiondetailsRepository, PossessiondetailsRepository>();
+            services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
+            services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
+            services.AddScoped<IUndersection17plotdetailRepository, Undersection17plotdetailRepository>();
+            services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -50,6 +54,10 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IPossessiondetailsService, PossessiondetailsService>();
             services.AddScoped<INazulService, NazulService>();
             services.AddScoped<IKhasraService, KhasraService>();
+            services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
+            services.AddScoped<IUndersection6plotService, Undersection6plotService>();
+            services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
+            services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
         }
     }
 }

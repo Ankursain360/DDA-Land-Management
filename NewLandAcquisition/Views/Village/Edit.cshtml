@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Acquiredlandvillage
+﻿@model Libraries.Model.Entity.Newlandvillage
 @await Component.InvokeAsync("PageHeader", new { pageName = "Village" })
 
 <div class="pt-3">
@@ -31,7 +31,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="DistrictId" asp-items="@(new SelectList(Model.DistrictList, "Id","Name"))">
-                        <option >Select</option>
+                        <option disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="DistrictId" class="text-danger"></span>
                     <label asp-for="DistrictId" class="floating-label">District Name </label>
@@ -42,7 +42,7 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="TehsilId" asp-items="@(new SelectList(Model.TehsilList, "Id","Name"))">
 
-                        <option >Select</option>
+                        <option disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="TehsilId" class="text-danger"></span>
                     <label asp-for="TehsilId" class="floating-label">Tehsil Name </label>
@@ -75,7 +75,7 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
 
-                        <option >Select</option>
+                        <option disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
@@ -162,7 +162,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>
-                @Html.ActionLink("Back", "Index", "AcquiredLandVillage", null, new { @class = "btn btn-theme " })
+                @Html.ActionLink("Back", "Index", "Village", null, new { @class = "btn btn-theme " })
             </div>
         </div>
 
@@ -173,8 +173,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/acqvillagecreateedit.js"></script>
+    <script src="~/js/villagecreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/acqvillagecreateedit.min.js" asp-append-version="true"></script>
+    <script src="~/js/villagecreate.js" asp-append-version="true"></script>
 </environment>

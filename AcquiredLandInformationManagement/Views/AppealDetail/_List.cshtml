@@ -25,7 +25,8 @@
                 <td>@item.EnmSno</td>
                 <td>@item.AppealNo</td>
                 <td>@item.AppealByDept</td>
-                <td>@item.DateOfAppeal</td>
+                <td>@(Convert.ToDateTime(item.DateOfAppeal).ToString("dd/MMM/yyyy"))</td>
+              
                 <td>@item.PanelLawer</td>
 
                 <td>

@@ -37,8 +37,8 @@ namespace Libraries.Model.Entity
         [Required]
         public byte? IsActive { get; set; }
         [NotMapped]
-        public List<Village> VillageList { get; set; }
-        public virtual Village Village { get; set; }
+        public List<Acquiredlandvillage> VillageList { get; set; }
+        public virtual Acquiredlandvillage Village { get; set; }
 
         [NotMapped]
         public List<Utilizationtype> UtilizationtypeList { get; set; }

@@ -11,11 +11,13 @@ namespace Libraries.Model.Entity
     {
         public Newlandvillage()
         {
-           
+            Newlandacquistionproposalplotdetails = new HashSet<Newlandacquistionproposalplotdetails>();
             Newlandkhasra = new HashSet<Newlandkhasra>();
             Newlandus4plot = new HashSet<Newlandus4plot>();
+            Newlandus17plot = new HashSet<Newlandus17plot>();
+            Newlandus6plot = new HashSet<Newlandus6plot>();
         }
-        [Required(ErrorMessage = "Village name is mandatory feild")]
+        [Required(ErrorMessage = "Village name is mandatory field")]
         public string Name { get; set; }
 
         public string Code { get; set; }
@@ -40,15 +42,16 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Tehsil> TehsilList { get; set; }
-        //[NotMapped]
-        //public List<LandCategory> LandCategory { get; set; }
-        //  public ICollection<Mutation> Mutation { get; set; }
-        public ICollection<LandCategory> LandCategory { get; set; }
+        
+   //     public  ICollection<LandCategory> LandCategory { get; set; }
         public District District { get; set; }
         public Tehsil Tehsil { get; set; }
         public Zone Zone { get; set; }
         
         public ICollection<Newlandkhasra> Newlandkhasra { get; set; }
         public ICollection<Newlandus4plot> Newlandus4plot { get; set; }
+        public ICollection<Newlandus17plot> Newlandus17plot { get; set; }
+        public ICollection<Newlandus6plot> Newlandus6plot { get; set; }
+        public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
     }
     }

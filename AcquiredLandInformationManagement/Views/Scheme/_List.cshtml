@@ -21,7 +21,7 @@
                 <td>@item.Name</td>
                 <td>@item.Code</td>
 
-                <td>@item.SchemeDate</td>
+                <td>@(Convert.ToDateTime(item.SchemeDate).ToString("dd-MMM-yyyy"))</td>
                 <td>@item.FileNo</td>
                 <td>@item.Description</td>
 

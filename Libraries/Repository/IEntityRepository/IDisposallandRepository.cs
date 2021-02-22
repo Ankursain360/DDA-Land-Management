@@ -15,8 +15,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Disposalland>> GetAllDisposalland();
 
         Task<List<Utilizationtype>> GetAllUtilizationtype();
-        Task<List<Village>> GetAllVillage();
-        Task<List<Khasra>> GetAllKhasra();
+        Task<List<Acquiredlandvillage>> GetAllVillage();
+        Task<List<Khasra>> GetAllKhasra(int? villageId);
 
         Task<PagedResult<Disposalland>> GetPagedDisposalLand(DisposalLandSearchDto model);
 

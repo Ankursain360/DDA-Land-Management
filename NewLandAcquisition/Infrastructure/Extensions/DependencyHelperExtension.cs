@@ -31,6 +31,18 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<INewlandProposaldetailsRepository, NewlandProposaldetailsRepository>();
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
+            services.AddScoped<INewlandSchemeRepository, NewlandSchemeRepository>();
+
+            services.AddScoped<INewLandProposalPlotDetailsRepository, NewLandProposalPlotDetailsRepository>();
+            services.AddScoped<INewLandPaymentDetailRepository, NewLandPaymentDetailRepository>();
+
+            services.AddScoped<INewlandus4plotRepository, Newlandus4plotRepository>();
+
+            services.AddScoped<INewlandus6plotRepository, Newlandus6plotRepository>();
+            services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
+
+
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -44,6 +56,16 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<INewlandProposaldetailsService, NewlandProposaldetailsService>();
             services.AddScoped<INewlandvillageService, NewlandvillageService>();
+            services.AddScoped<INewlandSchemeService, NewlandSchemeService>();
+
+            services.AddScoped<INewLandProposalPlotDetailsService, NewLandProposalPlotDetailsService>();
+            services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
+
+            services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
+
+
+            services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
+            services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
 
         }
     }

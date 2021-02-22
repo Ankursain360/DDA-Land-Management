@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
     {
         public Scheme()
         {
-            Newlandacquistionproposaldetails = new HashSet<Newlandacquistionproposaldetails>();
+           
             Proposaldetails = new HashSet<Proposaldetails>();
         }
 
@@ -27,7 +27,7 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
 
 
-        public ICollection<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
+       
         public ICollection<Proposaldetails> Proposaldetails { get; set; }
     }
 }

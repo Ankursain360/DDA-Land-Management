@@ -129,7 +129,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-                                   .OrderBy(a => a.IsActive)
+                                   .OrderByDescending(a => a.IsActive)
                                    .GetPaged<Newlandvillage>(model.PageNumber, model.PageSize);
                         break;
 
@@ -200,7 +200,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-                                   .OrderByDescending(a => a.IsActive)
+                                   .OrderBy(a => a.IsActive)
                                    .GetPaged<Newlandvillage>(model.PageNumber, model.PageSize);
                         break;
                 }

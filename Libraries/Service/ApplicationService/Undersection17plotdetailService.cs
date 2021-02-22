@@ -113,7 +113,10 @@ namespace Libraries.Service.ApplicationService
             return await _undersection17plotdetailRepository.FetchSingleKhasraResult(khasraId);
         }
 
-
+        public async Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model)
+        {
+            return await _undersection17plotdetailRepository.GetPagednotification17detailsList(model);
+        }
     }
 }
 

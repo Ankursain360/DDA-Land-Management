@@ -12,7 +12,10 @@ namespace Libraries.Repository.IEntityRepository
         {
             Task<PagedResult<Newlandus4plot>> GetPagedUS4Plot(Newlandus4plotSearchDto model);
             Task<List<Newlandus4plot>> GetAllUS4Plot();
-            Task<List<Acquiredlandvillage>> GetAllVillage();
-            Task<List<Khasra>> GetAllKhasra(int? villageId);
+        
+            Task<List<LandNotification>> GetAllNotification();
+            Task<List<Newlandvillage>> GetAllVillage();
+            Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
+            Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
         }
 }
