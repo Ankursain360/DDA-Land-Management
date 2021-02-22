@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
         [Required]
         public DateTime? NotificationDate { get; set; }
         [Required]
-        public int? SerialnumberId { get; set; }
+        public int? SerialNumber{ get; set; }
         [Required]
         public string PropertySiteNo { get; set; }
         [Required]
@@ -36,9 +36,9 @@ namespace Libraries.Model.Entity
         public List<LandNotification> LandNotificationList { get; set; }
         public virtual LandNotification LandNotification { get; set; }
 
-        [NotMapped]
-        public List<Serialnumber> SerialnumberList { get; set; }
-        public virtual Serialnumber Serialnumber { get; set; }
+        //[NotMapped]
+        //public List<Serialnumber> SerialnumberList { get; set; }
+        //public virtual Serialnumber Serialnumber { get; set; }
         
     }
 }

@@ -12,14 +12,15 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-namespace AcquiredLandInformationManagement.Controllers
+
+namespace NewLandAcquisition.Controllers
 {
-    public class KhasraController : Controller
+    public class NewlandKhasraController : Controller
     {
         private readonly INewlandkhasraService _khasraService;
 
 
-        public KhasraController(INewlandkhasraService khasraService)
+        public NewlandKhasraController(INewlandkhasraService khasraService)
         {
             _khasraService = khasraService;
         }
@@ -37,7 +38,6 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
     public async Task<IActionResult> Create()
-        
         {
             Newlandkhasra khasra = new Newlandkhasra();
             khasra.IsActive = 1;

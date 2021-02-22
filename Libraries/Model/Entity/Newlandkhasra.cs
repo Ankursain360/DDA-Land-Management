@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         {
             Newlandacquistionproposalplotdetails = new HashSet<Newlandacquistionproposalplotdetails>();
             Newlandus4plot = new HashSet<Newlandus4plot>();
+
         }
 
         [Required(ErrorMessage = "Khasra is mandatory")]
@@ -31,18 +32,15 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
 
 
-
-
+        public LandCategory LandCategory { get; set; }
+        public Newlandvillage Newlandvillage { get; set; }
 
         [NotMapped]
         public List<LandCategory> LandCategoryList { get; set; }
-        public virtual LandCategory LandCategory { get; set; }
-        [NotMapped]
-        public List<Newlandkhasra> KhasraList { get; set; }
+       
         [NotMapped]
         public List<Newlandvillage> VillageList { get; set; }
-
-        public virtual Newlandvillage Newlandvillage { get; set; }
+       
         public ICollection<Newlandus4plot> Newlandus4plot { get; set; }
 
 
