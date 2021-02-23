@@ -7,7 +7,6 @@ namespace Dto.Search
 {
     public class Newlandus4plotSearchDto : BaseSearchDto
     {
-        
         public string notification { get; set; }
         public string locality { get; set; }
         public string khasra { get; set; }

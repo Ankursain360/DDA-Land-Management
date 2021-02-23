@@ -13,7 +13,7 @@
                 <div class="floating-label-wrap">
                     <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","Name"))">
-                        <option selected disabled="disabled">Select</option>
+                        <option selected disabled="disabled"value="">Select</option>
                     </select>
                     <span asp-validation-for="NotificationId" class="text-danger"></span>
                     <label asp-for="NotificationId" class="floating-label">Notification No </label>
@@ -24,7 +24,7 @@
                     <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option selected disabled="disabled">Select</option>
+                        <option selected disabled="disabled"value="">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
@@ -37,7 +37,7 @@
                 <div class="floating-label-wrap">
                     <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                        <option disabled="disabled"value="">Select</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>

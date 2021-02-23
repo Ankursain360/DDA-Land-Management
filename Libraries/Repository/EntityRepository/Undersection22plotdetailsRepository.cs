@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -233,6 +234,33 @@ namespace Libraries.Repository.EntityRepository
             }
             return data;
         }
+
+
+
+        public async Task<List<Unotification22detailsListDto>> GetPagednotification22detailsList(Unotification22detailsSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("BindUnderSection22Details")
+                                            .WithSqlParams(("P_UnSec22Id", model.notification22))
+
+
+
+                                            .ExecuteStoredProcedureAsync<Unotification22detailsListDto>();
+
+                return (List<Unotification22detailsListDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
 
     }
 }
