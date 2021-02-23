@@ -37,6 +37,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewLandPaymentDetailRepository, NewLandPaymentDetailRepository>();
 
             services.AddScoped<INewlandus4plotRepository, Newlandus4plotRepository>();
+            services.AddScoped<INewLandEnhanceCompensationRepository, NewLandEnhanceCompensationRepository>();
 
             services.AddScoped<INewlandus6plotRepository, Newlandus6plotRepository>();
             services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
@@ -62,6 +63,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
 
             services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
+            services.AddScoped<INewLandEnhanceCompensationService, NewLandEnhanceCompensationService>();
 
 
             services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
