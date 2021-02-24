@@ -14,20 +14,22 @@ namespace LIMSPublicInterface.Components
     {
         private readonly IPermissionsService _permissionsService;
         private readonly IConfiguration _configuration;
-        private readonly ISiteContext _siteContext;
+    
 
         public SideNavViewComponent(IPermissionsService permissionsService,
-            IConfiguration configuration,
-            ISiteContext siteContext)
+            IConfiguration configuration)
+         
         {
             _permissionsService = permissionsService;
             _configuration = configuration;
-            _siteContext = siteContext;
+        
         }
 
+
+        //20 For LIMS Public Interface
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var result = await _permissionsService.GetMappedMenu(_configuration.GetValue<string>("ModuleId"), _siteContext.RoleId.Value);
+            var result = await _permissionsService.GetMappedMenu(_configuration.GetValue<string>("ModuleId"), 20);
 			var menu = GetMenu(result, 0);
 			return View("SideNav", menu);
         }

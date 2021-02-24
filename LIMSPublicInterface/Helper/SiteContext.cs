@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace LIMSPublicInterface.Helper
 {
-    public class SiteContext : ISiteContext
+    public class SiteContext
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserProfileService _userProfileService;
@@ -17,15 +17,7 @@ namespace LIMSPublicInterface.Helper
             _userProfileService = userProfileService;
         }
 
-        public int UserId { 
-            get {
-                string userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(a=>a.Type=="sub").Value;
-                return Convert.ToInt32(userId);
-            }
-            set {
-                
-            } 
-        }
+        
 
         public int ProfileId { 
             get {
