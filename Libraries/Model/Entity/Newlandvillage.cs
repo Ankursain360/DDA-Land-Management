@@ -15,6 +15,7 @@ namespace Libraries.Model.Entity
             Newlandkhasra = new HashSet<Newlandkhasra>();
             Newlandus4plot = new HashSet<Newlandus4plot>();
             Newlandus17plot = new HashSet<Newlandus17plot>();
+            Newlandus22plot = new HashSet<Newlandus22plot>();
             Newlandus6plot = new HashSet<Newlandus6plot>();
             Newlandenhancecompensation = new HashSet<Newlandenhancecompensation>();
         }
@@ -53,6 +54,7 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandus4plot> Newlandus4plot { get; set; }
         public ICollection<Newlandus17plot> Newlandus17plot { get; set; }
         public ICollection<Newlandus6plot> Newlandus6plot { get; set; }
+        public ICollection<Newlandus22plot> Newlandus22plot { get; set; }
         public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
         public ICollection<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }

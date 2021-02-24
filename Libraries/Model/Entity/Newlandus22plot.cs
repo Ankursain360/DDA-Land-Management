@@ -6,13 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
-    public class Newlandus6plot : AuditableEntity<int>
+    public  class Newlandus22plot : AuditableEntity<int>
     {
-        public Newlandus6plot()
-        {
-            Newlandus22plot = new HashSet<Newlandus22plot>();
-        }
-
         [Required(ErrorMessage = " Notification no is mandatory")]
         public int NotificationId { get; set; }
         [Required(ErrorMessage = " Village name is mandatory")]
@@ -26,19 +21,19 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Biswa is mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+
         public decimal? Biswa { get; set; }
         [Required(ErrorMessage = " Biswanshi is mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+
         public decimal? Biswanshi { get; set; }
+        public int? Us4Id { get; set; }
+        public int? Us6Id { get; set; }
+        public int? Us17Id { get; set; }
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
-       
-
-        public Newlandkhasra Khasra { get; set; }
-        public LandNotification Notification { get; set; }
-        public Newlandvillage Village { get; set; }
 
         [NotMapped]
         public List<LandNotification> NotificationList { get; set; }
@@ -47,6 +42,20 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Newlandkhasra> KhasraList { get; set; }
 
-        public ICollection<Newlandus22plot> Newlandus22plot { get; set; }
+        [NotMapped]
+        public List<Newlandus4plot> Us4List { get; set; }
+
+        [NotMapped]
+        public List<Newlandus6plot> Us6List { get; set; }
+
+        [NotMapped]
+        public List<Newlandus17plot> Us17List { get; set; }
+
+        public Newlandkhasra Khasra { get; set; }
+        public LandNotification Notification { get; set; }
+        public Newlandus17plot Us17 { get; set; }
+        public Newlandus4plot Us4 { get; set; }
+        public Newlandus6plot Us6 { get; set; }
+        public Newlandvillage Village { get; set; }
     }
 }
