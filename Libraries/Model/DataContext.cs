@@ -251,8 +251,7 @@ namespace Libraries.Model
         public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
         public virtual DbSet<Newlandpaymentdetail> Newlandpaymentdetail { get; set; }
         public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
-        public virtual DbSet<Newlandus22plot> Newlandus22plot { get; set; }
-
+        public virtual DbSet<Request> Request { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -461,7 +460,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandnotificationConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandjointsurveyConfiguration());
-            modelBuilder.ApplyConfiguration(new Newlandus22plotConfiguration());
+            modelBuilder.ApplyConfiguration(new RequestConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
