@@ -8,6 +8,11 @@ namespace Libraries.Model.Entity
 {
     public class Newlandus4plot : AuditableEntity<int>
     {
+        public Newlandus4plot()
+        {
+            Newlandus22plot = new HashSet<Newlandus22plot>();
+        }
+
         [Required(ErrorMessage = " Notification no is mandatory")]
         public int NotificationId { get; set; }
         [Required(ErrorMessage = " Village name is mandatory")]
@@ -44,5 +49,6 @@ namespace Libraries.Model.Entity
         public List<Newlandvillage> VillageList { get; set; }
         [NotMapped]
         public List<Newlandkhasra> KhasraList { get; set; }
+        public ICollection<Newlandus22plot> Newlandus22plot { get; set; }
     }
 }
