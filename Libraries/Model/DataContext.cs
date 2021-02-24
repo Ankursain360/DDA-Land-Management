@@ -248,6 +248,7 @@ namespace Libraries.Model
         public virtual DbSet<Newlandus6plot> Newlandus6plot { get; set; }
         public virtual DbSet<Newlandnotification> Newlandnotification { get; set; }
         public virtual DbSet<NewlandNotificationtype> NewlandNotificationtype { get; set; }
+        public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -457,6 +458,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Newlandus17plotConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandnotificationConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandjointsurveyConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
