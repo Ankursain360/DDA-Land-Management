@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Khasra no is mandatory")]
         public int KhasraId { get; set; }
         public int? YearOfjamabandi { get; set; }
+       
         public int? NoOfKhewat { get; set; }
         public int? NoOfKhatauni { get; set; }
         public string NaamPatti { get; set; }

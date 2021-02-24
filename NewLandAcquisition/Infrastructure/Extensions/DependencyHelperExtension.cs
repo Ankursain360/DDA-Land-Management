@@ -37,7 +37,11 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewLandPaymentDetailRepository, NewLandPaymentDetailRepository>();
 
             services.AddScoped<INewlandus4plotRepository, Newlandus4plotRepository>();
-            services.AddScoped<INewlandjointsurveyRepository, NewlandjointsurveyRepository>();
+            services.AddScoped<INewLandEnhanceCompensationRepository, NewLandEnhanceCompensationRepository>();
+
+            services.AddScoped<INewlandus6plotRepository, Newlandus6plotRepository>();
+            services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
+
 
 
             /* Application Services */
@@ -57,10 +61,13 @@ namespace NewLandAcquisition.Infrastructure.Extensions
 
             services.AddScoped<INewLandProposalPlotDetailsService, NewLandProposalPlotDetailsService>();
             services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
-            services.AddScoped<INewlandjointsurveyService, NewlandjointsurveyService>();
 
             services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
+            services.AddScoped<INewLandEnhanceCompensationService, NewLandEnhanceCompensationService>();
 
+
+            services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
+            services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
 
         }
     }

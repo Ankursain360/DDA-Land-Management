@@ -139,11 +139,8 @@ namespace Libraries.Model
 
 
 
-        //**********  New land acquisition**********
-        public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
-        public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
-        public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
-        public virtual DbSet<Newlandpaymentdetail> Newlandpaymentdetail { get; set; }
+        
+       
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
@@ -248,9 +245,11 @@ namespace Libraries.Model
         public virtual DbSet<Newlandus6plot> Newlandus6plot { get; set; }
         public virtual DbSet<Newlandnotification> Newlandnotification { get; set; }
         public virtual DbSet<NewlandNotificationtype> NewlandNotificationtype { get; set; }
-        public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
-
-
+        public virtual DbSet<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
+        public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
+        public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
+        public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
+        public virtual DbSet<Newlandpaymentdetail> Newlandpaymentdetail { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -458,7 +457,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Newlandus17plotConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandnotificationConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandjointsurveyConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
