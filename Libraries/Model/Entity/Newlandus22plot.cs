@@ -50,6 +50,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Newlandus17plot> Us17List { get; set; }
+        //[NotMapped]
+        //public List<LandNotification> Name { get; set; }
 
         public Newlandkhasra Khasra { get; set; }
         public LandNotification Notification { get; set; }
