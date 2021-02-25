@@ -18,5 +18,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Undersection17>> GetAllUndersection17List();
 
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
+        Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model);
+
     }
 }

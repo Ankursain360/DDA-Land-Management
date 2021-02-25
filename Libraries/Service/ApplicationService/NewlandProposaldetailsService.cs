@@ -73,9 +73,9 @@ namespace Libraries.Service.ApplicationService
             _newlandProposaldetailsRepository.Add(newlandacquistionproposaldetails);
             return await _unitOfWork.CommitAsync() > 0;
         }
-        public async Task<List<Scheme>> GetAllScheme()
+        public async Task<List<Newlandscheme>> GetAllScheme()
         {
-            List<Scheme> schemeList = await _newlandProposaldetailsRepository.GetAllScheme();
+            List<Newlandscheme> schemeList = await _newlandProposaldetailsRepository.GetAllScheme();
             return schemeList;
         }
 

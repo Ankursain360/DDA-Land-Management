@@ -44,7 +44,7 @@ namespace AcquiredLandInformationManagement.Controllers
             ldoland.IsActive = 1;
 
             ldoland.LandNotificationList = await _ldolandService.GetAllLandNotification();
-            ldoland.SerialnumberList = await _ldolandService.GetAllSerialnumber();
+          //  ldoland.SerialnumberList = await _ldolandService.GetAllSerialnumber();
             return View(ldoland);
         }
 
@@ -56,7 +56,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
                 ldoland.LandNotificationList = await _ldolandService.GetAllLandNotification();
-                ldoland.SerialnumberList = await _ldolandService.GetAllSerialnumber();
+             //   ldoland.SerialnumberList = await _ldolandService.GetAllSerialnumber();
                 if (ModelState.IsValid)
                 {
 
@@ -94,7 +94,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             var Data = await _ldolandService.FetchSingleResult(id);
             Data.LandNotificationList = await _ldolandService.GetAllLandNotification();
-            Data.SerialnumberList = await _ldolandService.GetAllSerialnumber();
+       //     Data.SerialnumberList = await _ldolandService.GetAllSerialnumber();
             if (Data == null)
             {
                 return NotFound();
@@ -158,7 +158,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _ldolandService.FetchSingleResult(id);
            
             Data.LandNotificationList = await _ldolandService.GetAllLandNotification();
-            Data.SerialnumberList = await _ldolandService.GetAllSerialnumber();
+           // Data.SerialnumberList = await _ldolandService.GetAllSerialnumber();
             if (Data == null)
             {
                 return NotFound();

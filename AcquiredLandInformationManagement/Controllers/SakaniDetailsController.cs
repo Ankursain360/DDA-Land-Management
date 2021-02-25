@@ -255,6 +255,8 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _sakanidetailService.FetchSingleResult(id);
             Data.AcquiredlandvillageList = await _sakanidetailService.GetAllVillage();
             Data.KhasraList = await _sakanidetailService.GetAllKhasra(Data.VillageId);
+            Saknidetails sakni = new Saknidetails();
+            sakni.IsActive = sakni.IsActive;
             if (Data == null)
             {
                 return NotFound();
@@ -383,6 +385,9 @@ namespace AcquiredLandInformationManagement.Controllers
                             }
                         }
                     }
+
+
+
                     //************ Save Khasra  ************  
 
                     if (

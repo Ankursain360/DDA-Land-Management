@@ -72,5 +72,7 @@ namespace Libraries.Model.Entity
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
         public ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
+        public ICollection<Newlandvillage> Newlandvillage { get; set; }
+        public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
     }
 }

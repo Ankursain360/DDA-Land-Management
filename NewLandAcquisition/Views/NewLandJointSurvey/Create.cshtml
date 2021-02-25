@@ -1,0 +1,180 @@
+﻿@model Libraries.Model.Entity.Newlandjointsurvey
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Joint Survey Details" })
+<div class="pt-3">
+    <form asp-action="Create" autocomplete="off" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="mb-3 d-flex">Add Details</h3>
+
+        <div class="row" mt-md-3">
+
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3" onchange="return onChange(this.options[this.selectedIndex].value);"
+                            asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))">
+                        <option value="">---Select---</option>
+
+                    </select>
+                    <span asp-validation-for="ZoneId" class="text-danger "></span>
+                    <label class="floating-label">Zone </label>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select asp-for="VillageId" id="vvv" class="floating-label-field floating-label-field--s3" onchange="return onChange_village(this.options[this.selectedIndex].value);">
+                        <option value="">---Select---</option>
+
+                    </select>
+                    <span asp-validation-for="VillageId" class="text-danger "></span>
+                    <label class="floating-label">Village </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select asp-for="KhasraId" id="kkk" class="floating-label-field floating-label-field--s3"
+                            asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
+                        <option value="">---Select---</option>
+
+                    </select>
+                    <span asp-validation-for="KhasraId" class="text-danger "></span>
+                    <label class="floating-label">Khasra </label>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <h3 class="my-3 d-flex sub-heading">Site Position</h3>
+
+        <div class="row">
+            <div class="col-md-3">
+                <input type="hidden" asp-for="SitePosition" id="Type" value="B" />
+
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="builtup" value="B" checked>
+                    <label class="form-check-label" for="radio">
+                        Built Up
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="Partialbuiltup" value="P">
+                    <label class="form-check-label" for="radio">
+                        Partial Built Up
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="vacant" value="V">
+                    <label class="form-check-label" for="radio">
+                        Vacant
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="boundry" value="W">
+                    <label class="form-check-label" for="radio">
+                        Boundry Wall
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="my-3 d-flex sub-heading">Area</h3>
+        <div class="row" mt-md-3">
+
+
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AreaInBigha" type="text" class="floating-label-field floating-label-field--s3 numbers " placeholder="Name" />
+
+                    <span asp-validation-for="AreaInBigha" class="text-danger "></span>
+                    <label class="floating-label">Area in Bigha</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AreaInBiswa" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Name" />
+
+                    <span asp-validation-for="AreaInBiswa" class="text-danger "></span>
+                    <label class="floating-label">Area in Biswa</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="NatureOfStructure" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="NatureOfStructure" class="text-danger "></span>
+                    <label class="floating-label">Nature of Structure</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="JointSurveyDate" type="date" class="floating-label-field floating-label-field--s3">
+                    <span asp-validation-for="JointSurveyDate" class="text-danger "></span>
+                    <label class="floating-label">Joint Survey Date</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" mt-md-3">
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3" limit="500">
+                    <span asp-validation-for="Remarks" class="text-danger "></span>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+            <div class=" col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row" mt-md-3">
+
+        </div>
+        <div class="col-md-12">
+            <input type="submit" value="Create" class="btn btn-theme" />
+
+            @Html.ActionLink("Back", "Index", "JointSurvey", null, new { @class = "btn btn-theme" })
+        </div>
+
+
+
+
+
+
+    </form>
+
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/NewlandJointSurveyCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/NewlandJointSurveyCreate.min.js" asp-append-version="true"></script>
+</environment>

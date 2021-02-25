@@ -5,23 +5,13 @@
         <tr>
             <th>Sr.No</th>
             <th>Notification No.</th>
-            <th>Notification Date</th>
-            @*<th>Serial Number</th>*@
             <th>Property Site No</th>
             <th>Location Name(Village)</th>
-            <th>Site Description(With Khasra No)</th>
-
-
-
-            <th>Area</th>
-          
-            <th>Status Of Land</th>
-            <th>Occupied By</th>
-            <th>Developed</th>
-            <th>Land Type</th>
-            <th>Remarks</th>
-
-            <th>Status</th>
+            <th>Site Description</th>
+             <th>Area</th>
+             <th>Status Of Land</th>
+            
+             <th>Status</th>
             <th>Operations</th>
         </tr>
     </thead>
@@ -32,24 +22,14 @@
             <td>@(rowNo += 1)</td>
             @*<td>@item.LandNotification.Name</td>*@
             <td> @(item.LandNotification == null?"": item.LandNotification.Name)</td>
-            <td>@item.NotificationDate</td>
-            @*<td>@item.Serialnumber</td>*@
-            @*<td> @(item.Serialnumber == null?"": item.Serialnumber.SerialNo)</td>*@
-            <td>@item.PropertySiteNo</td>
+                     <td>@item.PropertySiteNo</td>
             <td>@item.Name</td>
             <td>@item.SiteDescription</td>
-
-
-
-
-            <td>@item.Area</td>
+             <td>@item.Area</td>
             
             <td>@item.StatusOfLand</td>
-            <td>@item.OccupiedBy</td>
-            <td>@item.Developed</td>
-            <td>@item.LandType</td>
-            <td>@item.Remarks</td>
-            <td>
+          
+                    <td>
                 @if (item.IsActive == 1)
                 {
                     <span class="badge badge-primary px-2 py-1">Active</span> }
@@ -57,11 +37,7 @@
                 {
                     <span class="badge badge-danger px-2 py-1">Inactive</span>}
             </td>
-            @*<td>
-            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-        </td>*@
+           
             <td>
                 <div class="action-btns">
                     <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>

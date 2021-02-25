@@ -33,6 +33,8 @@ var DIMENTIONTEXT_LAYER = [];
 var CLOSETEXT_LAYER = [];
 var VILLAGETEXT_LAYER = [];
 var KHASRANO_LAYER = [];
+var Polys = [];
+var VILLAGEID_UNIVERSAL = [];
 
 $(document).ready(function () {
     console.log('f9');
@@ -44,7 +46,7 @@ $(document).ready(function () {
             if (response[i].village.length > 0) {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
-                        html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id, ' + response[i].id + ')"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
+                        html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
                         check++;
                     }
                 }
@@ -153,6 +155,7 @@ function setStateboundary(response) {
         var _label = new google.maps.Label({ visibleZoom: 0, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelState', position: lp, text: arr[i].label });
 
         STATE_LAYER.push(_label);
+        Polys.push(ln);
     }
 
     // }
@@ -179,9 +182,9 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
 /*Zone Boundary End*/
 
 /*Village Boundary Start*/
-function showVillage(maxima, zoneId) {
+function showVillage(maxima) {
     var villageid = maxima.replace('V', '');
-    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid) + "&ZoneId=" + zoneId, 'json', function (response, villageid) {
+    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
         showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
     });
 }
@@ -195,108 +198,191 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
     zoomvillage.push(sl);
     map.setZoom(14);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
+
     showvillagelayers(villageid);
 }
 function showvillagelayers(villageid) {
 
+    GetAbadiDetails(villageid);
+    GetBurjiDetails(villageid);
+    GetCleanDetails(villageid);
+    GetCleantextDetails(villageid);
+    GetDimDetails(villageid);
+    GetEncroachmentDetails(villageid);
+    GetGoshaDetails(villageid);
+    GetGridDetails(villageid);
+    GetNalaDetails(villageid);
+    GetTextDetails(villageid);
+    GetTriJunctionDetails(villageid);
+    GetZeroDetails(villageid);
+    GetNaliDetails(villageid);
+    GetRailwayLineDetails(villageid);
+    GetFieldBounDetails(villageid);
+    GetKillaDetails(villageid);
+    GetCloseDetails(villageid);
+    GetSahedaDetails(villageid);
+    GetKachaPakaLineDetails(villageid);
+    GetKhasraLineDetails(villageid);
+    GetKhasraBoundaryDetails(villageid);
+    GetRoadDetails(villageid);
+    GetDashedDetails(villageid);
+    GetInnerDetails(villageid);
+    GetVillageBoundaryDetails(villageid);
+    GetDimTextDetails(villageid);
+    GetCloseTextDetails(villageid);
+    GetVillageTextDetails(villageid);
+    GetKhasraNoDetails(villageid);
+    GetRoadDetails(villageid);
+
+    VILLAGEID_UNIVERSAL.push(villageid);
+}
+
+function GetAbadiDetails(villageid) {
     HttpGet(`/GIS/GetAbadiDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesAbadi(response);
     });
-
+}
+function GetBurjiDetails(villageid) {
     HttpGet(`/GIS/GetBurjiDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesBurji(response);
     });
+}
+function GetCleanDetails(villageid) {
     HttpGet(`/GIS/GetCleanDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesClean(response);
     });
-
+}
+function GetCleantextDetails(villageid) {
     HttpGet(`/GIS/GetCleantextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesCleantext(response);
     });
-
+}
+function GetDimDetails(villageid) {
     HttpGet(`/GIS/GetDimDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesDim(response);
     });
-
+}
+function GetEncroachmentDetails(villageid) {
     HttpGet(`/GIS/GetEncroachmentDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesEncroachment(response);
     });
-
+}
+function GetGoshaDetails(villageid) {
     HttpGet(`/GIS/GetGoshaDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesGosha(response);
     });
-
+}
+function GetGridDetails(villageid) {
     HttpGet(`/GIS/GetGridDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesGrid(response);
     });
+}
+function GetNalaDetails(villageid) {
     HttpGet(`/GIS/GetNalaDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesNala(response);
     });
+}
+function GetTextDetails(villageid) {
     HttpGet(`/GIS/GetTextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesText(response);
     });
+}
+function GetTriJunctionDetails(villageid) {
     HttpGet(`/GIS/GetTriJunctionDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesTriJunction(response);
     });
+}
+function GetZeroDetails(villageid) {
     HttpGet(`/GIS/GetZeroDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesZero(response);
     });
+}
+function GetNaliDetails(villageid) {
     HttpGet(`/GIS/GetNaliDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesNali(response);
     });
-
+}
+function GetRailwayLineDetails(villageid) {
     HttpGet(`/GIS/GetRailwayLineDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesRailwayLine(response);
     });
-
+}
+function GetFieldBounDetails(villageid) {
     HttpGet(`/GIS/GetFieldBounDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesFieldBoun(response);
     });
+}
+function GetKillaDetails(villageid) {
     HttpGet(`/GIS/GetKillaDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesKilla(response);
     });
+}
+function GetCloseDetails(villageid) {
     HttpGet(`/GIS/GetCloseDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesClose(response);
     });
+}
+function GetSahedaDetails(villageid) {
     HttpGet(`/GIS/GetSahedaDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesSaheda(response);
     });
+}
+function GetKachaPakaLineDetails(villageid) {
     HttpGet(`/GIS/GetKachaPakaLineDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesKachaPakaLine(response);
     });
+}
+function GetKhasraLineDetails(villageid) {
     HttpGet(`/GIS/GetKhasraLineDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesKhasraLine(response);
     });
-
+}
+function GetKhasraBoundaryDetails(villageid) {
     HttpGet(`/GIS/GetKhasraBoundaryDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesKhasraBoundary(response);
     });
-
+}
+function GetRoadDetails(villageid) {
     HttpGet(`/GIS/GetRoadDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesRoad(response);
     });
+}
+function GetDashedDetails(villageid) {
     HttpGet(`/GIS/GetDashedDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesDashed(response);
     });
+}
+function GetInnerDetails(villageid) {
     HttpGet(`/GIS/GetInnerDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesInner(response);
     });
+}
+function GetVillageBoundaryDetails(villageid) {
     HttpGet(`/GIS/GetVillageBoundaryDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesVillageBoundary(response);
     });
+}
+function GetDimTextDetails(villageid) {
     HttpGet(`/GIS/GetDimTextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesDimentionText(response);
     });
+}
+function GetCloseTextDetails(villageid) {
     HttpGet(`/GIS/GetCloseTextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesCloseText(response);
     });
+}
+function GetVillageTextDetails(villageid) {
     HttpGet(`/GIS/GetVillageTextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesVillageText(response);
     });
+}
+function GetKhasraNoDetails(villageid) {
     HttpGet(`/GIS/GetKhasraNoDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
         showDisBoundariesKhasraNo(response);
     });
 }
+
 
 function showDisBoundariesAbadi(response) {
     var abadi = $.map(response, function (el) { return el; })
@@ -304,6 +390,7 @@ function showDisBoundariesAbadi(response) {
         var ln = createLine(getLatLongArr(abadi[i].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#900C3F' });
         ABADI_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesBurji(response) {
@@ -312,6 +399,7 @@ function showDisBoundariesBurji(response) {
         var ln = createLine(getLatLongArr(burji[e].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#83FF33' });
         BURJI_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesClean(response) {
@@ -320,6 +408,7 @@ function showDisBoundariesClean(response) {
         var ln = createLine(getLatLongArr(clean[f].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: '#C6C03A' });
         CLEAN_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesDim(response) {
@@ -328,6 +417,7 @@ function showDisBoundariesDim(response) {
         var ln = createLine(getLatLongArr(dim[h].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#41AF78' });
         DIM_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesEncroachment(response) {
@@ -336,6 +426,7 @@ function showDisBoundariesEncroachment(response) {
         var ln = createLine(getLatLongArr(encroachment[j].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#AB3975' });
         ENCROACHMENT_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesGrid(response) {
@@ -344,6 +435,7 @@ function showDisBoundariesGrid(response) {
         var ln = createLine(getLatLongArr(grid[k].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#15EAFB' });
         GRID_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesNala(response) {
@@ -352,6 +444,7 @@ function showDisBoundariesNala(response) {
         var ln = createLine(getLatLongArr(nala[m].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#252A2A' });
         NALA_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesTriJunction(response) {
@@ -360,6 +453,7 @@ function showDisBoundariesTriJunction(response) {
         var ln = createLine(getLatLongArr(trijunction[n].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#DC2A32 ' });
         TRIJUNCTION_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesZero(response) {
@@ -368,6 +462,7 @@ function showDisBoundariesZero(response) {
         var ln = createLine(getLatLongArr(zero[o].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#9FE2BF' });
         ZERO_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesNali(response) {
@@ -376,6 +471,7 @@ function showDisBoundariesNali(response) {
         var ln = createLine(getLatLongArr(nali[p].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#3C5D4C' });
         NALI_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesRailwayLine(response) {
@@ -384,6 +480,7 @@ function showDisBoundariesRailwayLine(response) {
         var ln = createLine(getLatLongArr(railwayline[q].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: '#BA4A00' });
         RAILWAYLINE_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesFieldBoun(response) {
@@ -392,6 +489,7 @@ function showDisBoundariesFieldBoun(response) {
         var ln = createLine(getLatLongArr(fieldboun[r].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#E59866' });
         FIELDBOUN_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesKilla(response) {
@@ -400,6 +498,7 @@ function showDisBoundariesKilla(response) {
         var ln = createLine(getLatLongArr(killa[s].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#D35400' });
         KILLA_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesClose(response) {
@@ -408,6 +507,7 @@ function showDisBoundariesClose(response) {
         var ln = createLine(getLatLongArr(close[t].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#A569BD' });
         CLOSE_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesSaheda(response) {
@@ -416,6 +516,7 @@ function showDisBoundariesSaheda(response) {
         var ln = createLine(getLatLongArr(saheda[u].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#85C1E9' });
         SAHEDA_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesKachaPakaLine(response) {
@@ -424,6 +525,7 @@ function showDisBoundariesKachaPakaLine(response) {
         var ln = createLine(getLatLongArr(kachapakaline[v].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#B9770E' });
         KACHAPAKALINE_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesKhasraLine(response) {
@@ -432,6 +534,7 @@ function showDisBoundariesKhasraLine(response) {
         var ln = createLine(getLatLongArr(khasraline[w].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#16A085' });
         KHASRALINE_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesKhasraBoundary(response) {
@@ -440,6 +543,7 @@ function showDisBoundariesKhasraBoundary(response) {
         var ln = createLine(getLatLongArr(khasraboundary[x].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#ABEBC6' });
         KHASRABOUNDARY_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesRoad(response) {
@@ -448,6 +552,7 @@ function showDisBoundariesRoad(response) {
         var ln = createLine(getLatLongArr(road[y].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: '#707B7C' });
         ROAD_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesDashed(response) {
@@ -456,6 +561,7 @@ function showDisBoundariesDashed(response) {
         var ln = createLine(getLatLongArr(dashed[z].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#F7F9F9' });
         DASHED_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesInner(response) {
@@ -464,6 +570,7 @@ function showDisBoundariesInner(response) {
         var ln = createLine(getLatLongArr(inner[ab].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#424949' });
         INNER_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesVillageBoundary(response) {
@@ -472,6 +579,7 @@ function showDisBoundariesVillageBoundary(response) {
         var ln = createLine(getLatLongArr(villageboundary[ac].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: '#7B7D7D' });
         VILLAGEBOUNDARY_LAYER.push(ln);
+        Polys.push(ln);
     }
 }
 function showDisBoundariesCleantext(response) {
@@ -482,6 +590,8 @@ function showDisBoundariesCleantext(response) {
         var lp = new google.maps.LatLng(parseFloat(cleantext[ad].ycoordinate), parseFloat(cleantext[ad].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 20, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelCleantext', position: lp, text: cleantext[ad].label });
         CLEANTEXT_LAYER.push(_label);
+
+        Polys.push(_label);
     }
 }
 function showDisBoundariesGosha(response) {
@@ -490,6 +600,8 @@ function showDisBoundariesGosha(response) {
         var lp = new google.maps.LatLng(parseFloat(gosha[ae].ycoordinate), parseFloat(gosha[ae].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: gosha[ae].label });
         GOSHA_LAYER.push(_label);
+
+        Polys.push(_label);
     }
 }
 function showDisBoundariesText(response) {
@@ -498,6 +610,8 @@ function showDisBoundariesText(response) {
         var lp = new google.maps.LatLng(parseFloat(textla[af].ycoordinate), parseFloat(textla[af].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelKhasraText', position: lp, text: textla[af].label });
         TEXT_LAYER.push(_label);
+
+        Polys.push(_label);
     }
 }
 function showDisBoundariesDimentionText(response) {
@@ -506,6 +620,8 @@ function showDisBoundariesDimentionText(response) {
         var lp = new google.maps.LatLng(parseFloat(dimentiontext[ag].ycoordinate), parseFloat(dimentiontext[ag].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 20, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelDimentionText', position: lp, text: dimentiontext[ag].label });
         DIMENTIONTEXT_LAYER.push(_label);
+
+        Polys.push(_label);
     }
 }
 function showDisBoundariesCloseText(response) {
@@ -514,6 +630,8 @@ function showDisBoundariesCloseText(response) {
         var lp = new google.maps.LatLng(parseFloat(closetext[ah].ycoordinate), parseFloat(closetext[ah].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelCloseText', position: lp, text: closetext[ah].label });
         CLOSETEXT_LAYER.push(_label);
+
+        Polys.push(_label);
     }
 }
 function showDisBoundariesVillageText(response) {
@@ -522,6 +640,8 @@ function showDisBoundariesVillageText(response) {
         var lp = new google.maps.LatLng(parseFloat(villagetext[ai].ycoordinate), parseFloat(villagetext[ai].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelVillageText', position: lp, text: villagetext[ai].label });
         VILLAGETEXT_LAYER.push(_label);
+
+        Polys.push(_label);
     }
 }
 function showDisBoundariesKhasraNo(response) {
@@ -530,6 +650,8 @@ function showDisBoundariesKhasraNo(response) {
         var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: khasrano[aj].label });
         KHASRANO_LAYER.push(_label);
+
+        Polys.push(_label);
     }
 }
 /*Village Boundary End*/
@@ -553,6 +675,143 @@ $('.MenuToggle').on('click', function (e) {
     $('#leftSection').toggleClass('goleft');
 });
 
-function printMaps() {
-    window.print();
-}
+$(document).on('change', '#chkAllImpInfra', function (e) {
+    e.preventDefault();
+    $(this).closest('table').find('td input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+    if (this.checked) {
+        $('#chkAllImpInfra').attr("checked", "checked");
+        $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').prop('checked', true);
+    }
+    else {
+        $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').prop('checked', false);
+        $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').removeAttr('checked');
+    }
+    //abadi
+    if ($("#chkAbadi").prop('checked') == true) {
+        for (i = 0; i < VILLAGEID_UNIVERSAL.length; i++) {
+            var villageid = VILLAGEID_UNIVERSAL[i];
+            GetAbadiDetails(villageid);
+        }
+    }
+    else {
+        for (i = 0; i < RDS_LAYER.length; i++) {
+            RDS_LAYER[i].setMap(null);
+        }
+    }
+    //Water Connection
+    if ($("#chkWaterSupplyLine").prop('checked') == true) {
+        for (i = 0; i < CITY_NAME.length; i++) {
+            var beach = CITY_NAME[i];
+            getWatercreate(beach);
+        }
+    }
+    else {
+        for (i = 0; i < WTR_LAYER.length; i++) {
+            WTR_LAYER[i].setMap(null);
+        }
+    }
+    //Electric Line
+
+    if ($("#chkElectricityLine").prop('checked') == true) {
+        for (i = 0; i < CITY_NAME.length; i++) {
+            var beach = CITY_NAME[i];
+            getElinecreate(beach);
+
+        }
+    }
+    else {
+        for (i = 0; i < ELINE_LAYER.length; i++) {
+            ELINE_LAYER[i].setMap(null);
+        }
+
+    }
+
+    //RailwayTrack
+    if ($("#chkRailwayTrack").prop('checked') == true) {
+        for (i = 0; i < CITY_NAME.length; i++) {
+            var beach = CITY_NAME[i];
+            getRailwaycreate(beach);
+
+        }
+    }
+    else {
+        for (i = 0; i < RAILWAY_LAYER.length; i++) {
+            RAILWAY_LAYER[i].setMap(null);
+        }
+
+    }
+    //Electric pole
+    if ($("#chkElectricityPole").prop('checked') == true) {
+        for (i = 0; i < CITY_NAME.length; i++) {
+            var beach = CITY_NAME[i];
+            getEPolecreate(beach);
+
+        }
+    }
+    else {
+        for (i = 0; i < EPOLE_LAYER.length; i++) {
+            EPOLE_LAYER[i].setMap(null);
+        }
+
+    }
+
+    //Man Hole
+
+    if ($("#chkManHoles").prop('checked') == true) {
+        for (i = 0; i < CITY_NAME.length; i++) {
+            var beach = CITY_NAME[i];
+            getmanholecreate(beach);
+
+        }
+    }
+    else {
+        for (i = 0; i < MANHOLE_LAYER.length; i++) {
+            MANHOLE_LAYER[i].setMap(null);
+        }
+
+    }
+    //Gas
+    if ($("#chkgas").prop('checked') == true) {
+        for (i = 0; i < CITY_NAME.length; i++) {
+            var beach = CITY_NAME[i];
+            getgascreate(beach);
+
+        }
+    }
+    else {
+        for (i = 0; i < GAS_LAYER.length; i++) {
+            GAS_LAYER[i].setMap(null);
+        }
+
+    }
+
+    //Utitlity
+
+    if ($("#chkutitlity").prop('checked') == true) {
+        for (i = 0; i < CITY_NAME.length; i++) {
+            var beach = CITY_NAME[i];
+            getutilitycreate(beach);
+
+        }
+    }
+    else {
+        for (i = 0; i < MISC_LAYER.length; i++) {
+            MISC_LAYER[i].setMap(null);
+        }
+    }
+});
+
+$(document).on('change', '#chkAbadi', function (e) {
+    e.preventDefault();
+    if (this.checked) {
+        for (i = 0; i < VILLAGEID_UNIVERSAL.length; i++) {
+            var villageid = VILLAGEID_UNIVERSAL[i];
+            GetAbadiDetails(villageid);
+        }
+    }
+    else {
+        for (i = 0; i < ABADI_LAYER.length; i++) {
+            ABADI_LAYER[i].setMap(null);
+        }
+    }
+});

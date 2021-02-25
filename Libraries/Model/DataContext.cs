@@ -134,9 +134,13 @@ namespace Libraries.Model
 
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
-        //**********  New land acquisition**********
-        public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
 
+
+
+
+
+        
+       
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
@@ -235,8 +239,21 @@ namespace Libraries.Model
 
         //***************  New Land Acquisition  *****************
         public virtual DbSet<Newlandus4plot> Newlandus4plot { get; set; }
-       
-        public virtual DbSet<Newlandappealdetail> Newlandappealdetail { get; set; }
+        public virtual DbSet<Newlandvillage> Newlandvillage { get; set; }
+        public virtual DbSet<Newlandkhasra> Newlandkhasra { get; set; }
+        public virtual DbSet<Newlandus17plot> Newlandus17plot { get; set; }
+        public virtual DbSet<Newlandus6plot> Newlandus6plot { get; set; }
+        public virtual DbSet<Newlandnotification> Newlandnotification { get; set; }
+        public virtual DbSet<NewlandNotificationtype> NewlandNotificationtype { get; set; }
+        public virtual DbSet<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
+        public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
+        public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
+        public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
+        public virtual DbSet<Newlandpaymentdetail> Newlandpaymentdetail { get; set; }
+        public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
+        public virtual DbSet<Newlandus22plot> Newlandus22plot { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -437,7 +454,17 @@ namespace Libraries.Model
 
             //***************  New Land Acquisition  *****************
             modelBuilder.ApplyConfiguration(new Newlandus4plotConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandappealdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandvillageConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandkhasraConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandschemeConfiguration());
+            modelBuilder.ApplyConfiguration(new Newlandus6plotConfiguration());
+            modelBuilder.ApplyConfiguration(new Newlandus17plotConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandnotificationConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandjointsurveyConfiguration());
+            modelBuilder.ApplyConfiguration(new RequestConfiguration());
+            modelBuilder.ApplyConfiguration(new Newlandus22plotConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

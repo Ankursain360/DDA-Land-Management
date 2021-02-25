@@ -36,15 +36,15 @@ namespace Libraries.Repository.EntityRepository
             List<Utilizationtype> utilizationtypeList = await _dbContext.Utilizationtype.Where(x => x.IsActive == 1).ToListAsync();
             return utilizationtypeList;
         }
-        public async Task<List<Village>> GetAllVillage()
+        public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
-            List<Village> villageList = await _dbContext.Village.Where(x => x.IsActive == 1).ToListAsync();
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
             return villageList;
         }
 
-        public async Task<List<Khasra>> GetAllKhasra()
+        public async Task<List<Khasra>> GetAllKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId &&  x.IsActive == 1).ToListAsync();
             return khasraList;
         }
 

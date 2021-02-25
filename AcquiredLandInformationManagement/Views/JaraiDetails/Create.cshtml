@@ -15,7 +15,7 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="VillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option disabled="disabled">Select</option>
+                        <option selected disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
@@ -36,8 +36,9 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="YearOfjamabandi" placeholder="Notification" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="YearOfjamabandi" placeholder="Notification" type="text" limit="4">
+                    class="floating-label-field floating-label-field--s3" />
+
                     <span asp-validation-for="YearOfjamabandi" class="text-danger"></span>
                     <label class="floating-label">Year Of Jamabandi    </label>
                 </div>

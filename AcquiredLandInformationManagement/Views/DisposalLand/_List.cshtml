@@ -5,13 +5,13 @@
         <tr>
             <th>Village Name</th>
             <th>Khasra No</th>
-            <th>Transfer to which dept</th>
+            @*<th>Transfer to which dept</th>*@
             <th>Area Disposed</th>
             <th>Date of Disposed</th>
             <th>Transfer to</th>
             <th>Transfer By</th>
             <th>FileNoRefNo</th>
-            <th>Utilization type</th>
+            @*<th>Utilization type</th>*@
             <th>Status</th>
             <th>Operations</th>
         </tr>
@@ -22,13 +22,13 @@
         <tr>
             <td> @(item.Village == null?"": item.Village.Name)</td>
             <td> @(item.Khasra == null?"": item.Khasra.Name)</td>
-            <td>@item.TransferToWhichDept</td>
+            @*<td>@item.TransferToWhichDept</td>*@
             <td>@item.AreaDisposed</td>
             <td>@(Convert.ToDateTime(item.DateOfDisposed).ToString("dd-MMM-yyyy"))</td>
             <td>@item.TransferTo</td>
             <td>@item.TransferBy</td>
             <td>@item.FileNoRefNo</td>
-            <td> @(item.Utilizationtype == null?"": item.Utilizationtype.Name)</td>
+            @*<td> @(item.Utilizationtype == null?"": item.Utilizationtype.Name)</td>*@
             <td>
                 @if (item.IsActive == 1)
                 {

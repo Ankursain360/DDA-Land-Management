@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
 using Libraries.Repository.Common;
+using Libraries.Service.Common;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface IUndersection17plotdetailService
+    public interface IUndersection17plotdetailService : IEntityService<Undersection17plotdetail>
     {
 
        
@@ -26,7 +27,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Undersection17plotdetail>> GetPagedUndersection17plotdetail(Undersection17plotdetailSearchDto model);
 
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
-
+        Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model);
 
 
     }
