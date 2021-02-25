@@ -12,7 +12,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select disabled class="floating-label-field floating-label-field--s3"
-                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","Name"))">
+                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","Name"))"
+                            onchange="return onNotificationChange(this.options[this.selectedIndex].value);">
                         <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="NotificationId" class="text-danger"></span>
@@ -25,6 +26,8 @@
                             asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
                         <option selected disabled="disabled" value="">Select</option>
+
+
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
