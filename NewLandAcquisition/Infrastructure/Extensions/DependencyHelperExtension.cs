@@ -46,7 +46,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
             services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
             services.AddScoped<InewlandawardplotdetailsRepository, NewlandawardplotdetailsRepository>();
-            
+            services.AddScoped<INewlandAppealdetailRepository, NewlandAppealdetailRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
