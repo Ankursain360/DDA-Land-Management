@@ -71,6 +71,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
             services.AddScoped<INewlandjointsurveyService, NewlandjointsurveyService>();
             services.AddScoped<INewlandus22plotService, Newlandus22plotService>();
+            services.AddScoped<INewlandAppealdetailservice, NewlandAppealdetailService>();
         }
     }
 }
