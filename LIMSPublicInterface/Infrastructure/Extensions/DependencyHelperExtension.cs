@@ -9,6 +9,7 @@ using Repository.IEntityRepository;
 using Service.ApplicationService;
 using Service.IApplicationService;
 using LIMSPublicInterface.Helper;
+
 namespace LIMSPublicInterface.Infrastructure.Extensions
 {
     public static class DependencyHelperExtension
@@ -17,7 +18,7 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
         {
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ISiteContext, SiteContext>();
+            //services.AddScoped<ISiteContext, SiteContext>();
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();

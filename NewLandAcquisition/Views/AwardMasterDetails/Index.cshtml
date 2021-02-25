@@ -1,63 +1,77 @@
-﻿
-
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IEnumerable<Libraries.Model.Entity.Newlandawardmasterdetail>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Award Master Details" })
 
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Award Master Details</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Action" />
+                    <label for="txtName" class="floating-label">Award Number</label>
+                </div>
+            </div>
+           
+           
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme" type="submit" id="btnSearch">Search</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br />
-<br />
-<div>
-    @Html.ActionLink("Add New", "Create", "AwardMasterDetails", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
-</div>
-<br />
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="card  table-card" style="overflow:scroll;">
 
-        <table class="table table-responsive table-bordered table-card">
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="Name">Award Number</option>
+                        <option value="AwardDate">Award Date</option>
+                        <option value="Village">Village Name</option>
+                        <option value="Proposal">Proposal Name</option>
+                        <option value="Status">Status</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
 
-            <thead class="thead">
-                <tr>
-                    <th>Sr.No</th>
-                    <th>Award No.</th>
-                    <th>Award Date</th>
-                    <th>Village Name</th>
-                    <th>Proposal Name</th>
-                    <th>Status</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                <tr>
-                    <td>1</td>
-                    <td>1404</td>
-                    <td>29-Oct-2019</td>
-                    <td>Nimri</td>
-                    <td>SPECIAL INDUSTRIAL</td>
-                    <td>Active</td>
-                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></td>
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/AwardMasterDetails/create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="/AwardMasterDetails/download" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive px-2" id="divAwardTable">
 
-                </tr>
-
-
-            </tbody>
-
-        </table>
-
+        </div>
     </div>
 </div>
-<br />
-<br />
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/awardindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/awardindex.js" asp-append-version="true"></script>
+</environment>

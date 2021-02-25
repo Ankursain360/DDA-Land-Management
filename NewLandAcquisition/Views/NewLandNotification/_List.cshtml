@@ -1,19 +1,14 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Newlandkhasra>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Newlandnotification>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Village</th>
-            <th>Rect No</th>
-            <th>Land Category</th>
-            <th>Khasra No</th>
-
-
-
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
-            <th>Status</th>
+            <th>Notification Type</th>
+            <th>Notification No</th>
+            <th>Date</th>
+            <th>Updated Gazette Notification</th>
+            <th>Remark</th>
+           <th>Status</th>
             <th>Operations</th>
         </tr>
     </thead>
@@ -22,16 +17,16 @@
         {
         <tr>
     
-            <td> @(item.Newlandvillage == null?"": item.Newlandvillage.Name)</td>
-            <td>@item.RectNo</td>
+            @*<td> @(item.NotificationTypeId == 0?"": item.NotificationTypeId)</td>*@
+            <td> @(item.NotificationTypeId)</td>
+            <td>@item.NotificationNo</td>
             
-            <td> @(item.LandCategory == null?"": item.LandCategory.Name)</td>
+            <td> @(item.Date)</td>
+            @*<td> @(item.Date == null?"": item.Date)</td>*@
 
 
-            <td>@item.Name</td>
-            <td>@item.Bigha</td>
-            <td>@item.Biswa</td>
-            <td>@item.Biswanshi</td>
+            <td>@item.GazetteNotificationFilePath</td>
+            <td>@item.Remarks</td>
             <td>
                 @if (item.IsActive == 1)
                 {

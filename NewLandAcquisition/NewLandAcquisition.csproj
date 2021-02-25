@@ -4,6 +4,33 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\AwardMasterDetails\Create.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\Edit.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\Index.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\View.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\_List.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\Create.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\Edit.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\Index.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\View.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\_List.cshtml" />
+    <Content Remove="wwwroot\js\awardmastercreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\AwardMasterDetails\Create.cshtml" />
+    <None Include="Views\AwardMasterDetails\Edit.cshtml" />
+    <None Include="Views\AwardMasterDetails\Index.cshtml" />
+    <None Include="Views\AwardMasterDetails\View.cshtml" />
+    <None Include="Views\AwardMasterDetails\_List.cshtml" />
+    <None Include="Views\AwardPlotDetails\Create.cshtml" />
+    <None Include="Views\AwardPlotDetails\Edit.cshtml" />
+    <None Include="Views\AwardPlotDetails\Index.cshtml" />
+    <None Include="Views\AwardPlotDetails\View.cshtml" />
+    <None Include="Views\AwardPlotDetails\_List.cshtml" />
+  </ItemGroup>
+
 	<ItemGroup> 
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" /> 
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" /> 
@@ -22,6 +49,14 @@
 
   <ItemGroup>
     <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\AwardMasterDetails\_List.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
   </ItemGroup>
 
 </Project>
