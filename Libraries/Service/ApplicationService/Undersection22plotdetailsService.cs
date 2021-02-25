@@ -112,5 +112,11 @@ namespace Libraries.Service.ApplicationService
             _undersection22plotdetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<Unotification22detailsListDto>> GetPagednotification22detailsList(Unotification22detailsSearchDto model)
+        {
+            return await _undersection22plotdetailsRepository.GetPagednotification22detailsList(model);
+        }
+
     }
 }

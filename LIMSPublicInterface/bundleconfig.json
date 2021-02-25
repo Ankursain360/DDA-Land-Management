@@ -46,5 +46,65 @@
     "inputFiles": [
       "wwwroot/js/acquiredvillagereportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villageandkhasradetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/villageandkhasradetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villagedetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villagedetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villagekhasrareportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villagekhasrareportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villagereportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/nazulvillagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/nazulvillagereportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/notification17details.min.js",
+    "inputFiles": [
+      "wwwroot/js/notification17details.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/notification22details.min.js",
+    "inputFiles": [
+      "wwwroot/js/notification22details.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/notification4details.min.js",
+    "inputFiles": [
+      "wwwroot/js/notification4details.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/notification6details.min.js",
+    "inputFiles": [
+      "wwwroot/js/notification6details.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possessionreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/possessionreportindex.js"
+    ]
   }
 ]

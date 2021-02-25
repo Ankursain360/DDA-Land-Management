@@ -32,13 +32,18 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandProposaldetailsRepository, NewlandProposaldetailsRepository>();
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
             services.AddScoped<INewlandSchemeRepository, NewlandSchemeRepository>();
+
+            services.AddScoped<INewLandProposalPlotDetailsRepository, NewLandProposalPlotDetailsRepository>();
+            services.AddScoped<INewLandPaymentDetailRepository, NewLandPaymentDetailRepository>();
+
             services.AddScoped<INewlandus4plotRepository, Newlandus4plotRepository>();
-            services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
-            services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
-            services.AddScoped<InewlandawardplotdetailsRepository, NewlandawardplotdetailsRepository>();
-            //services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
-            
-            
+            services.AddScoped<INewLandEnhanceCompensationRepository, NewLandEnhanceCompensationRepository>();
+
+            services.AddScoped<INewlandus6plotRepository, Newlandus6plotRepository>();
+            services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
+            services.AddScoped<INewlandjointsurveyRepository,NewlandjointsurveyRepository>();
+            services.AddScoped<INewlandus22plotRepository, Newlandus22plotRepository>();
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -54,12 +59,19 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandProposaldetailsService, NewlandProposaldetailsService>();
             services.AddScoped<INewlandvillageService, NewlandvillageService>();
             services.AddScoped<INewlandSchemeService, NewlandSchemeService>();
-            services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
-            services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
-            services.AddScoped<INewlandawardmasterdetailService, NewlandawardmasterdetailsService>();
-            services.AddScoped<INewlandawardplotdetailsService, NewlandawardplotdetailsService>();
-            //services.AddScoped<INewlandnotificationService, INewlandnotificationService>();
 
+            services.AddScoped<INewLandProposalPlotDetailsService, NewLandProposalPlotDetailsService>();
+            services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
+
+            services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
+            services.AddScoped<INewLandEnhanceCompensationService, NewLandEnhanceCompensationService>();
+
+
+            services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
+            services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
+            services.AddScoped<INewlandjointsurveyService, NewlandjointsurveyService>();
+            services.AddScoped<INewlandus22plotService, Newlandus22plotService>();
+            services.AddScoped<INewlandAppealdetailservice, NewlandAppealdetailService>();
         }
     }
 }
