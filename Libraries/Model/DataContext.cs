@@ -250,9 +250,11 @@ namespace Libraries.Model
         public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
         public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
         public virtual DbSet<Newlandpaymentdetail> Newlandpaymentdetail { get; set; }
-        public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
+        public virtual DbSet<Newjointsurveyattendancedetail> Newjointsurveyattendancedetail { get; set; }
+        public virtual DbSet<Newjointsurveyreportdetail> Newjointsurveyreportdetail { get; set; }
         public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<Newlandus22plot> Newlandus22plot { get; set; }
+        public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
