@@ -1,21 +1,185 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Core.Enum;
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using NewLandAcquisition.Filters;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Utility.Helper;
+using NewLandAcquisition.Controllers;
 
-namespace NewLandAcquisition.Controllers
+namespace AcquiredLandInformationManagement.Controllers
 {
-    public class AwardPlotDetailsController : Controller
+    public class AwardPlotDetailsController : BaseController
     {
-        public IActionResult Index()
+
+        private readonly INewlandawardplotdetailsService _awardplotDetailService;
+        public AwardPlotDetailsController(INewlandawardplotdetailsService awardplotDetailService)
         {
+            _awardplotDetailService = awardplotDetailService;
+        }
+
+
+        public async Task<IActionResult> Index()
+        {
+
             return View();
         }
 
-        public IActionResult Create()
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] NewlandawardplotdetailsSearchDto model)
         {
-            return View();
+            var result = await _awardplotDetailService.GetPagedAwardplotdetails(model);
+
+            return PartialView("_List", result);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            Newlandawardplotdetails awardplotdetails = new Newlandawardplotdetails();
+            awardplotdetails.IsActive = 1;
+            awardplotdetails.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+            awardplotdetails.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+            awardplotdetails.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
+
+            return View(awardplotdetails);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Newlandawardplotdetails awardplotdetails)
+        {
+            try
+            {
+                awardplotdetails.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+                awardplotdetails.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+                awardplotdetails.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
+
+                if (ModelState.IsValid)
+                {
+                    var result = await _awardplotDetailService.Create(awardplotdetails);
+                      if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _awardplotDetailService.GetAwardplotdetails();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(awardplotdetails);
+                    }
+                }
+                else
+                {
+                    return View(awardplotdetails);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(awardplotdetails);
+            }
+        }
+
+
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _awardplotDetailService.FetchSingleResult(id);
+
+
+            Data.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+            Data.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+            Data.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Newlandawardplotdetails awardplotdetails)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _awardplotDetailService.Update(id, awardplotdetails);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var list = await _awardplotDetailService.GetAwardplotdetails();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(awardplotdetails);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(awardplotdetails);
+                }
+            }
+            else
+            {
+                return View(awardplotdetails);
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+
+                var result = await _awardplotDetailService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _awardplotDetailService.GetAwardplotdetails();
+            return View("Index", list);
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _awardplotDetailService.FetchSingleResult(id);
+            Data.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+            Data.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+            Data.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+
+
     }
 }

@@ -53,6 +53,6 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandus6plot> Newlandus6plot { get; set; }
         public ICollection<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
-
+        public virtual ICollection<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
     }
 }

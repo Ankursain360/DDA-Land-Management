@@ -11,10 +11,12 @@ using Libraries.Model;
 using Dto.Search;
 using AutoMapper;
 using Dto.Master;
+using Service.IApplicationService;
 
 namespace Libraries.Service.ApplicationService
 {
-   public class NewlandnotificationService : EntityService<Newlandnotification>, INewlandnotificationService
+
+    public class NewlandnotificationService : EntityService<Newlandnotification>,INewlandnotificationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INewlandnotificationRepository _newlandnotificationRepository;
@@ -28,7 +30,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Newlandnotification>> GetNewlandnotification()
         {
             return await _newlandnotificationRepository.GetNewlandnotificationdetails();
-           
+
         }
         public async Task<PagedResult<Newlandnotification>> GetPagedNewlandnotificationdetails(NewlandnotificationSearchDto model)
         {
@@ -48,7 +50,7 @@ namespace Libraries.Service.ApplicationService
             model.NotificationNo = newlandnotification.NotificationNo;
             model.Date = newlandnotification.Date;
             model.GazetteNotificationFilePath = newlandnotification.GazetteNotificationFilePath;
-             model.IsActive = newlandnotification.IsActive;
+            model.IsActive = newlandnotification.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _newlandnotificationRepository.Edit(model);
@@ -77,7 +79,7 @@ namespace Libraries.Service.ApplicationService
             return notificationtypelist;
         }
     }
-    
+
 
 }
 
