@@ -1,0 +1,127 @@
+﻿@model Libraries.Model.Entity.Newlandappealdetail
+@await Component.InvokeAsync("PageHeader", new { pageName = "Appeal Detail" })
+
+<div class="pt-3">
+    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="DemandListNo" placeholder="Demand List No" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="30" />
+
+                    <span asp-validation-for="DemandListNo" class="text-danger"></span>
+
+                    <label class="floating-label">Demand List No </label>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="EnmSno" placeholder="Enm Sno" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="30" />
+
+                    <span asp-validation-for="EnmSno" class="text-danger"></span>
+
+                    <label class="floating-label">Enm Sno </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="AppealNo" placeholder="Appeal No" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="30" />
+
+                    <span asp-validation-for="AppealNo" class="text-danger"></span>
+
+                    <label class="floating-label">Appeal No </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Appeal By Department:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="hidden" asp-for="AppealByDept" />
+
+                        <div class="form-check theme">
+                            <input disabled  class="form-check-input"  type="radio" asp-for="AppealByDept" name="villageradio" id="rUOI" value="UOI" checked="checked">
+                            <label class="form-check-label" for="radio">
+                                UOI
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input disabled class="form-check-input" type="radio" asp-for="AppealByDept" name="villageradio" id="rDDA" value="DDA">
+                            <label class="form-check-label" for="radio">
+                                DDA
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+      
+        <div class="row mt-md-3">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="DateOfAppeal" placeholder="Date Of Appeal" type="Date"
+                           class="floating-label-field floating-label-field--s3" limit="30" />
+
+                    <span asp-validation-for="DateOfAppeal" class="text-danger"></span>
+
+                    <label class="floating-label">Date Of Appeal </label>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="PanelLawer" placeholder="Panel Lawyer" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="30" />
+
+                    <span asp-validation-for="PanelLawer" class="text-danger"></span>
+
+                    <label class="floating-label">Panel Lawyer </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+
+                @Html.ActionLink("Back", "Index", "Newlandappealdetail", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/newlandappealdetailcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/newlandappealdetailcreate.js" asp-append-version="true"></script>
+</environment>
+
+

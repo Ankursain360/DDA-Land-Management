@@ -30,6 +30,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<INewlandProposaldetailsRepository, NewlandProposaldetailsRepository>();
+            services.AddScoped<INewlandAppealdetailRepository, NewlandAppealdetailRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -43,6 +44,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<INewlandProposaldetailsService, NewlandProposaldetailsService>();
+            services.AddScoped<INewlandAppealdetailservice, NewlandAppealdetailService>();
         }
     }
 }
