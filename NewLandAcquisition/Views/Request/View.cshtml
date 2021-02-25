@@ -1,0 +1,171 @@
+﻿
+@model Libraries.Model.Entity.Request
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Request" })
+
+
+<div class="pt-3">
+
+
+    <form asp-action="View" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+
+        <h3 class="mb-3 d-flex">View Details</h3>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="PproposalName" />
+                    <span asp-validation-for="PproposalName" class="text-danger"></span>
+                    <label class="floating-label">Proposal Name  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="PfileNo" />
+                    <span asp-validation-for="PfileNo" class="text-danger"></span>
+                    <label class="floating-label">File No </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="RequiringBody" />
+                    <span asp-validation-for="RequiringBody" class="text-danger"></span>
+                    <label class="floating-label">Requiring Body  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="AreaLocality" />
+                    <span asp-validation-for="AreaLocality" class="text-danger"></span>
+                    <label class="floating-label">Area/Locality </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="pt-3">
+            <h3 class="mb-3 d-flex">Total Area Under Request</h3>
+
+            <div class="row">
+
+
+
+                <div class="col-md-3">
+                    <div class="form-check theme">
+
+
+                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="HA" checked />    <label class="radio-inline">
+                            HA
+                        </label>
+                    </div>
+                </div>   <div class="col-md-3">
+                    <div class="form-check theme">
+
+
+                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="Acre" />
+                        <label class="radio-inline">
+                            Acre
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check theme">
+
+
+                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="SqMeter" />
+                        <label class="radio-inline">
+                            Sq. Meter
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Date" asp-for="UnitArea" />
+                    <span asp-validation-for="UnitArea" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea type="text" asp-for="PurposeOfAcquistion" class="floating-label-field floating-label-field--s3" placeholder="Description"></textarea>
+
+                    <label class="floating-label">Purpose Of Acquistion</label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" class="floating-label-field floating-label-field--s3" asp-for="RequestPhotos" />
+                    <span asp-validation-for="LayoutPlan" class="text-danger"></span>
+                    <label class="floating-label">Layout Plan/Zonal Plan/Master Plan  </label>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Description"></textarea>
+
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "Request", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
+
+

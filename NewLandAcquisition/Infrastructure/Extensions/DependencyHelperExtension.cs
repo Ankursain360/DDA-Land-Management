@@ -42,8 +42,11 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandus6plotRepository, Newlandus6plotRepository>();
             services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
             services.AddScoped<INewlandjointsurveyRepository,NewlandjointsurveyRepository>();
-
-
+            services.AddScoped<IRequestRepository,RequestRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -66,11 +69,14 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
             services.AddScoped<INewLandEnhanceCompensationService, NewLandEnhanceCompensationService>();
 
-
+            services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
             services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
             services.AddScoped<INewlandjointsurveyService, NewlandjointsurveyService>();
-
+            services.AddScoped<IRequestService, RequestService>();
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IActionsService, ActionsService>();
         }
     }
 }
