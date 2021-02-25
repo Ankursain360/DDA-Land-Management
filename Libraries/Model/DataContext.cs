@@ -248,8 +248,9 @@ namespace Libraries.Model
         public virtual DbSet<Newlandus6plot> Newlandus6plot { get; set; }
         public virtual DbSet<Newlandnotification> Newlandnotification { get; set; }
         public virtual DbSet<NewlandNotificationtype> NewlandNotificationtype { get; set; }
-
-
+        public virtual DbSet<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
+        public virtual DbSet<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -457,6 +458,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Newlandus17plotConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandnotificationConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandawardmasterdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandawardplotDetailsConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

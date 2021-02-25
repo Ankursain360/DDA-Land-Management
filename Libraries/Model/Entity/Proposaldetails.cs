@@ -15,6 +15,7 @@ namespace Libraries.Model.Entity
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Undersection4 = new HashSet<Undersection4>();
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
+            Newlandawardmasterdetail = new HashSet<Newlandawardmasterdetail>();
         }
 
         [Required]
@@ -46,7 +47,7 @@ namespace Libraries.Model.Entity
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public virtual ICollection<Undersection4> Undersection4 { get; set; }
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
-
+        public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
 
     }
 }

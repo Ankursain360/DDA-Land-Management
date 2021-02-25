@@ -49,6 +49,7 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandus17plot> Newlandus17plot { get; set; }
         public ICollection<Newlandus6plot> Newlandus6plot { get; set; }
 
+        public virtual ICollection<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
 
     }
 }
