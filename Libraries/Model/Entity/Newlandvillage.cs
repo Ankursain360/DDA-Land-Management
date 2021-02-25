@@ -17,6 +17,8 @@ namespace Libraries.Model.Entity
             Newlandus17plot = new HashSet<Newlandus17plot>();
             Newlandus22plot = new HashSet<Newlandus22plot>();
             Newlandus6plot = new HashSet<Newlandus6plot>();
+            Newlandawardmasterdetail = new HashSet<Newlandawardmasterdetail>();
+
             Newlandenhancecompensation = new HashSet<Newlandenhancecompensation>();
         }
         [Required(ErrorMessage = "Village name is mandatory field")]
@@ -58,5 +60,8 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
         public ICollection<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
+        public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
+        public virtual ICollection<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
+
     }
-    }
+}
