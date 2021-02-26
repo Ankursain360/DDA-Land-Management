@@ -16,6 +16,8 @@
     <Content Remove="Views\AwardPlotDetails\View.cshtml" />
     <Content Remove="Views\AwardPlotDetails\_List.cshtml" />
     <Content Remove="wwwroot\js\awardmastercreate.min.js" />
+    <Content Remove="wwwroot\js\newlandschemeindex.min.js" />
+    <Content Remove="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +31,8 @@
     <None Include="Views\AwardPlotDetails\Index.cshtml" />
     <None Include="Views\AwardPlotDetails\View.cshtml" />
     <None Include="Views\AwardPlotDetails\_List.cshtml" />
+    <None Include="wwwroot\js\newlandschemeindex.min.js" />
+    <None Include="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
 	<ItemGroup> 
@@ -57,6 +61,8 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newlandschemeindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
 </Project>
