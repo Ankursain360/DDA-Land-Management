@@ -126,7 +126,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Appealdetail> Appealdetail { get; set; }
         public virtual DbSet<Paymentdetail> Paymentdetail { get; set; }
-      
+
         public virtual DbSet<Undersection6plot> Undersection6plot { get; set; }
         public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
 
@@ -139,8 +139,8 @@ namespace Libraries.Model
 
 
 
-        
-       
+
+
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
@@ -250,15 +250,18 @@ namespace Libraries.Model
         public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
         public virtual DbSet<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
         public virtual DbSet<Newlandpaymentdetail> Newlandpaymentdetail { get; set; }
-        public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
+        public virtual DbSet<Newjointsurveyattendancedetail> Newjointsurveyattendancedetail { get; set; }
+        public virtual DbSet<Newjointsurveyreportdetail> Newjointsurveyreportdetail { get; set; }
         public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<Newlandus22plot> Newlandus22plot { get; set; }
+
+        public virtual DbSet<Newlandjointsurvey> Newlandjointsurvey { get; set; }
+
         public virtual DbSet<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
         public virtual DbSet<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
 
-        public virtual DbSet<Newlandappealdetail> Newlandappealdetail  { get; set; }
-        public virtual DbSet<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
-        public virtual DbSet<Newlandidentificationkhasradetailsannx1> Newlandidentificationkhasradetailsannx1 { get; set; }
+
+        public virtual DbSet<Newlandappealdetail> Newlandappealdetail { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
