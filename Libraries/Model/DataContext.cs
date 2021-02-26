@@ -262,6 +262,10 @@ namespace Libraries.Model
 
 
         public virtual DbSet<Newlandappealdetail> Newlandappealdetail { get; set; }
+
+        public virtual DbSet<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
+        public virtual DbSet<Newlandidentificationkhasradetailsannx1> Newlandidentificationkhasradetailsannx1 { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
