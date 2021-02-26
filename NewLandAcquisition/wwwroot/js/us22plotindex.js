@@ -56,9 +56,12 @@ $("#btnDescending").click(function () {
     sortOrder = 2;//for Descending
     GetUS22Plot(currentPageNumber, currentPageSize, sortOrder);
 });
+
 $('#ddlSort').change(function () {
+
     GetUS22Plot(currentPageNumber, currentPageSize, sortOrder);
 });
+
 
 function onPaging(pageNo) {
     GetUS22Plot(parseInt(pageNo), parseInt(currentPageSize), sortOrder);

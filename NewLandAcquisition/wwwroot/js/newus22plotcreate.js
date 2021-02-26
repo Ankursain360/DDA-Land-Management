@@ -33,7 +33,7 @@ function onNotificationChange(id) {
     HttpGet(`/Newlandus22plot/GetAllUS4Plot/?notificationId=${id}`, 'json', function (response) {
         var html = '<option></option>';
         for (var i = 0; i < response.length; i++) {
-            html = html + '<option selected  value=' + response[i].id + '>' + response[i].notification.name + '</option>';
+            html = html + '<option  value=' + response[i].id + '>' + response[i].notification.name + '</option>';
         }
 
         $("#Us4Id").select2('val', '')
