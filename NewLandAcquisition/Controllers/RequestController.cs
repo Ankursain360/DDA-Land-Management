@@ -84,6 +84,7 @@ namespace NewLandAcquisition.Controllers
 
                     var result = await _requestService.Create(request);
                     var DataFlow = await dataAsync();
+                    
                     for (int i = 0; i < DataFlow.Count; i++)
                     {
                         if (!DataFlow[i].parameterSkip)
@@ -111,6 +112,8 @@ namespace NewLandAcquisition.Controllers
 
 
                             }
+
+                            break;
                         }
 
                     }

@@ -45,5 +45,14 @@ namespace Libraries.Model.Entity
         public IFormFile RequestPhotos { get; set; }
 
 
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+
+
+
     }
 }

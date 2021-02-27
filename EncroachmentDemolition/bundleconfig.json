@@ -310,5 +310,11 @@
     "inputFiles": [
       "wwwroot/js/MonthlyRoasterEdit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/onlinecomplaintcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/onlinecomplaintcreate.js"
+    ]
   }
 ]
