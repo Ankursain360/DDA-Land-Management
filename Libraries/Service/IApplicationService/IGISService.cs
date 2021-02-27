@@ -44,5 +44,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Gisvillagetext>> GetVillageTextDetails(int villageId);
         Task<List<Gisvillageboundary>> GetVillageBoundaryDetails(int villageId);
         Task<List<VillageDto>> GetVillageAutoCompleteDetails(string prefix);
+        Task<List<Giscolorcode>> GetInfrastructureDetails(int villageId);
     }
 }

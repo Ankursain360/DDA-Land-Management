@@ -429,7 +429,8 @@ function showDisBoundariesEncroachment(response) {
         Polys.push(ln);
     }
 }
-function showDisBoundariesGrid(response) {
+function showDisBoundariesGrid(
+) {
     var grid = $.map(response, function (el) { return el; })
     for (k = 0; k < grid.length; k++) {
         var ln = createLine(getLatLongArr(grid[k].polygon));
@@ -694,20 +695,20 @@ $(document).on('change', '#chkAllImpInfra', function (e) {
         }
     }
     else {
-        for (i = 0; i < RDS_LAYER.length; i++) {
-            RDS_LAYER[i].setMap(null);
+        for (i = 0; i < ABADI_LAYER.length; i++) {
+            ABADI_LAYER[i].setMap(null);
         }
     }
-    //Water Connection
-    if ($("#chkWaterSupplyLine").prop('checked') == true) {
-        for (i = 0; i < CITY_NAME.length; i++) {
-            var beach = CITY_NAME[i];
-            getWatercreate(beach);
+    //Burji
+    if ($("#chkBurji").prop('checked') == true) {
+        for (i = 0; i < VILLAGEID_UNIVERSAL.length; i++) {
+            var villageid = VILLAGEID_UNIVERSAL[i];
+            GetBurjiDetails(villageid);
         }
     }
     else {
-        for (i = 0; i < WTR_LAYER.length; i++) {
-            WTR_LAYER[i].setMap(null);
+        for (i = 0; i < BURJI_LAYER.length; i++) {
+            BURJI_LAYER[i].setMap(null);
         }
     }
     //Electric Line
@@ -815,3 +816,39 @@ $(document).on('change', '#chkAbadi', function (e) {
         }
     }
 });
+
+$(document).on('change', '#chkBurji', function (e) {
+    e.preventDefault();
+    if (this.checked) {
+        for (i = 0; i < VILLAGEID_UNIVERSAL.length; i++) {
+            var villageid = VILLAGEID_UNIVERSAL[i];
+            GetBurjiDetails(villageid);
+        }
+    }
+    else {
+        for (i = 0; i < BURJI_LAYER.length; i++) {
+            BURJI_LAYER[i].setMap(null);
+        }
+    }
+});
+
+$('#navLayerstab').on('click', function (e) {
+    for (i = 0; i < VILLAGEID_UNIVERSAL.length; i++) {
+        var villageid = VILLAGEID_UNIVERSAL[i];
+        GetInfrastructureDetails(villageid);
+    }
+});
+
+function GetInfrastructureDetails(villageid) {
+    
+    HttpGet(`/GIS/GetInfrastructureDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        var html = '';
+        for (var i = 0; i < response.length; i++) {
+            var check = 0;
+            html = html + '<tr>  <td> <div class="form-check"><input class="form-check-input" type="checkbox" id="chk' + response[i].code + '" checked="checked"> <label class="form-check-label" for="chkAbadi"> ' + response[i].name + '</label> </div> </td><td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: ' + response[i].color + '"></i></td> </tr>';
+           
+        }
+        $("#infrastructureData").html('');
+        $("#infrastructureData").html(html);
+    });
+}

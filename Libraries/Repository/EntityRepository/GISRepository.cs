@@ -4,6 +4,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,6 +130,23 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Gisgrid
                                  .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                  .ToListAsync();
+        }
+
+        public async Task<List<Giscolorcode>> GetInfrastructureDetails(int villageId)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("GISInfrastructureColorCodeBind")
+                                            .WithSqlParams( ("p_villageid", villageId)
+                                            )
+                                            .ExecuteStoredProcedureAsync<Giscolorcode>();
+
+                return (List<Giscolorcode>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<List<State>> GetInitiallyStateDetails()
