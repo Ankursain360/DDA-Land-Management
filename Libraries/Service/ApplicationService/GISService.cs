@@ -88,6 +88,11 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetGridDetails(villageId);
         }
 
+        public async  Task<List<Giscolorcode>> GetInfrastructureDetails(int villageId)
+        {
+            return await _iGISSRepository.GetInfrastructureDetails(villageId);
+        }
+
         public async Task<List<State>> GetInitiallyStateDetails()
         {
             return await _iGISSRepository.GetInitiallyStateDetails();
