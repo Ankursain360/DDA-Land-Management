@@ -48,6 +48,7 @@ namespace EncroachmentDemolition.Controllers
 
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<PartialViewResult> List([FromBody] OnlinecomplaintApprovalSearchDto model)
         {
             try

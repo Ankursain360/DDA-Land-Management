@@ -48,99 +48,104 @@
         {
             @foreach (var item in Model)
             {
-        <tr>
-        
-            <td>
-                @(item.un4_Number == null? "-" :item.un4_Number)
-
-            </td>
-            <td>
-                @(item.un6_Number == null?"-":item.un6_Number)
-              
-            </td>
-
-            <td>
-                @(item.AwardNumber == null?"-":item.AwardNumber)
-              
-            </td>
-
-            <td>
-            </td>
-
-        </tr>
-
-       
                 <tr>
 
                     <td>
-                        @item.um4Date
-                     
-                    </td>
-                    <td>
-                        @item.um6Date
-                       
-                    </td>
+                        @(item.un4_Number == null? "-" :item.un4_Number)
 
+                    </td>
                     <td>
-                        @item.AwardDate
-                     
+                        @(item.un6_Number == null?"-":item.un6_Number)
+
                     </td>
 
                     <td>
-                        @item.PossDate
+                        @(item.AwardNumber == null?"-":item.AwardNumber)
 
+                    </td>
+
+                    <td>
                     </td>
 
                 </tr>
-         
 
-                <tr>
+            @*<td> @(item.UnderSection22 == null?"": item.UnderSection22.NotificationNo)</td>*@
 
-                    <td>
-                        @item.Bigha
-                        @item.Biswa
-                        @item.Biswanshi
+            <tr>
 
+                <td>
+                    @(item.um4Date== "-"?"-":Convert.ToDateTime(item.um4Date).ToString("dd/MMM/yyyy"))
 
-
-
-                    </td>
-                 
-                    
-                    
-                    <td>
-
-                        @item.un6_bigha
-                        @item.un6_Biswa
-                        @item.un6_Bidwanshi
-
-                      
+                    @*@(Convert.ToDateTime(item.um4Date).ToString("dd/MMM/yyyy"))*@
 
 
-                    </td>
-                    <td>
+                </td>
+                <td>
+                
+                    @(item.um6Date == "-"?"-":Convert.ToDateTime(item.um6Date).ToString("dd/MMM/yyyy"))
 
-                        @item.ad_Bigha
-                        @item.awardbiswa
-                        @item.awardBiswanshi
+                </td>
 
-                      
+                <td>
+                 @(item.AwardDate == "-"?"-":Convert.ToDateTime(item.AwardDate).ToString("dd/MMM/yyyy"))
 
+                </td>
 
-                    </td>
-                    <td>
-                        @item.p_bigha
-                        @item.p_Biswa
-                    
+                <td>
+                
+                    @(item.PossDate == "-"?"-":Convert.ToDateTime(item.PossDate).ToString("dd/MMM/yyyy"))
+                </td>
 
-
-                    </td>
+            </tr>
 
 
-                </tr>
-                <tr><td colspan="4" style="background-color:#D0D0D0;"></td></tr>
+            <tr>
 
-            }
+                <td>
+                    @item.Bigha
+                    @item.Biswa
+                    @item.Biswanshi
+
+
+
+
+                </td>
+
+
+
+                <td>
+
+                    @item.un6_bigha
+                    @item.un6_Biswa
+                    @item.un6_Bidwanshi
+
+
+
+
+                </td>
+                <td>
+
+                    @item.ad_Bigha
+                    @item.awardbiswa
+                    @item.awardBiswanshi
+
+
+
+
+                </td>
+                <td>
+                    @item.p_bigha
+                    @item.p_Biswa
+
+
+
+                </td>
+
+
+            </tr>
+            <tr><td colspan="4" style="background-color:#D0D0D0;"></td></tr>
+
+        }
         }
         else
         {
@@ -153,9 +158,9 @@
 
 
 
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
 
 
 
