@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
 {
-     public class Newlandus22plotService : EntityService<Newlandus22plot>, INewlandus22plotService
+    public class Newlandus22plotService : EntityService<Newlandus22plot>, INewlandus22plotService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INewlandus22plotRepository _newlandus22plotRepository;
@@ -33,6 +33,11 @@ namespace Libraries.Service.ApplicationService
             model.Bigha = us22.Bigha;
             model.Biswa = us22.Biswa;
             model.Biswanshi = us22.Biswanshi;
+
+            model.Us4Id = us22.Us4Id;
+            model.Us6Id = us22.Us6Id;
+            model.Us17Id = us22.Us17Id;
+
             model.Remarks = us22.Remarks;
             model.IsActive = us22.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -71,24 +76,32 @@ namespace Libraries.Service.ApplicationService
         {
             return await _newlandus22plotRepository.GetAllUS22Plot();
         }
-        public async Task<List<Newlandus4plot>> GetAllUS4Plot()
+        public async Task<List<Newlandus4plot>> GetAllUS4Plot(int? notificationId)
         {
-            List<Newlandus4plot> notificationList = await _newlandus22plotRepository.GetAllUS4Plot();
+            List<Newlandus4plot> notificationList = await _newlandus22plotRepository.GetAllUS4Plot(notificationId);
             return notificationList;
         }
-        public async Task<List<Newlandus6plot>> GetAllUS6Plot()
+        public async Task<List<Newlandus6plot>> GetAllUS6Plot(int? notificationId)
         {
-            List<Newlandus6plot> notificationList = await _newlandus22plotRepository.GetAllUS6Plot();
+            List<Newlandus6plot> notificationList = await _newlandus22plotRepository.GetAllUS6Plot(notificationId);
             return notificationList;
         }
-        public async Task<List<Newlandus17plot>> GetAllUS17Plot()
+        public async Task<List<Newlandus17plot>> GetAllUS17Plot(int? notificationId)
         {
-            List<Newlandus17plot> notificationList = await _newlandus22plotRepository.GetAllUS17Plot();
+            List<Newlandus17plot> notificationList = await _newlandus22plotRepository.GetAllUS17Plot(notificationId);
             return notificationList;
+        }
+        public async Task<Newlandus4plot> FetchUS4Plot(int? notificationId)
+        {
+            return await _newlandus22plotRepository.FetchUS4Plot(notificationId);
         }
         public async Task<Newlandus6plot> FetchUS6Plot(int? notificationId)
         {
             return await _newlandus22plotRepository.FetchUS6Plot(notificationId);
+        }
+        public async Task<Newlandus17plot> FetchUS17Plot(int? notificationId)
+        {
+            return await _newlandus22plotRepository.FetchUS17Plot(notificationId);
         }
         public async Task<List<LandNotification>> GetAllNotification()
         {

@@ -17,6 +17,9 @@ namespace Libraries.Model.Entity
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Userprofile = new HashSet<Userprofile>();
             Newlandvillage = new HashSet<Newlandvillage>();
+            //Newlandidentificationannx1 = new HashSet<Newlandidentificationannx1>();
+            
+           
           
         }
         [Required(ErrorMessage = "District name is Mandatory")]
@@ -32,7 +35,7 @@ namespace Libraries.Model.Entity
         public ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public ICollection<Newlandvillage> Newlandvillage { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
-       
+        //public ICollection<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
 
 
     }
