@@ -63,5 +63,6 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
         public ICollection<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
+        public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
     }
 }
