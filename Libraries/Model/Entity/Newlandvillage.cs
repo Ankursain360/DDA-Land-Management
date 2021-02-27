@@ -64,5 +64,7 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
         public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
+        public virtual ICollection<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
+
     }
 }
