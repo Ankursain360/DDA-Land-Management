@@ -9,16 +9,16 @@ namespace Libraries.Model.Entity
 {
     public class Muncipality : AuditableEntity<int>
     {
-        public Muncipality()
-        {
-            Newlandidentificationannx1 = new HashSet<Newlandidentificationannx1>();
-        }
+        //public Muncipality()
+        //{
+        //    Newlandidentificationannx1 = new HashSet<Newlandidentificationannx1>();
+        //}
 
        
         public string Name { get; set; }   
         
         public byte IsActive { get; set; }
 
-        public ICollection<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
+        //public ICollection<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
     }
 }

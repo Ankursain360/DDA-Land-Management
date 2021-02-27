@@ -389,12 +389,12 @@ namespace AcquiredLandInformationManagement.Controllers
 
                     //************ Save Khasra  ************  
 
-                    if (
-                        sakni.Plot != null &&
-                        sakni.Area != null &&
-                        sakni.Category != null &&
-                        sakni.LeaseAmount != null &&
-                        sakni.RenewalDate != null
+                    if (sakni.KhasraId != null
+                       // sakni.Plot != null
+                        // && sakni.Area != null &&
+                        //sakni.Category != null &&
+                        //sakni.LeaseAmount != null &&
+                        //sakni.RenewalDate != null
                         )
                     {
                        
