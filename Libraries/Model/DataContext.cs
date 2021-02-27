@@ -266,6 +266,7 @@ namespace Libraries.Model
         //public virtual DbSet<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
         //public virtual DbSet<Newlandidentificationkhasradetailsannx1> Newlandidentificationkhasradetailsannx1 { get; set; }
 
+        public virtual DbSet<Giscolorcode> Giscolorcode { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -479,6 +480,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewlandappealdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandawardmasterdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandawardplotDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new GiscColorCodeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
