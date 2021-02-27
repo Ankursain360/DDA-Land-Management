@@ -15,7 +15,7 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="VillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option disabled="disabled" selected>Select</option>
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
@@ -36,8 +36,8 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="YearOfjamabandi" placeholder="Notification" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="YearOfjamabandi" placeholder="Notification" type="text" limit="4"
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="YearOfjamabandi" class="text-danger"></span>
                     <label class="floating-label">Year Of Jamabandi    </label>
                 </div>
@@ -45,7 +45,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NoOfKhewat" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="NoOfKhewat" class="text-danger"></span>
                     <label class="floating-label">No Of Khewat </label>
                 </div>
@@ -55,7 +55,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NoOfKhatauni" placeholder="NoOfKhatauni" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="NoOfKhatauni" class="text-danger"></span>
                     <label class="floating-label">No Of Khatauni    </label>
                 </div>
@@ -233,8 +233,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
-                          asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                            asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
@@ -253,7 +253,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Area" placeholder="NaamMalik"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label">Area(Sq.Yard)    </label>
                 </div>
@@ -271,7 +271,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="LeaseAmount" placeholder="NaamMalik"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="LeaseAmount" class="text-danger"></span>
                     <label class="floating-label">Lease Amount   </label>
                 </div>
@@ -279,7 +279,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="RenewalDate" placeholder="RenewalDate" type="date" 
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3" value="" />
                     <span asp-validation-for="RenewalDate" class="text-danger"></span>
                     <label class="floating-label">Renewal Date    </label>
                 </div>
@@ -289,7 +289,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Mortgage" placeholder="NaamMalik" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3"  />
                     <span asp-validation-for="Mortgage" class="text-danger"></span>
                     <label class="floating-label">Mortgage    </label>
                 </div>
@@ -297,7 +297,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="RentAmount" placeholder="Revenue" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="RentAmount" class="text-danger"></span>
                     <label class="floating-label">Rent Amount </label>
                 </div>

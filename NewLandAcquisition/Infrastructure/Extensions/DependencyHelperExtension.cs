@@ -37,11 +37,26 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewLandPaymentDetailRepository, NewLandPaymentDetailRepository>();
 
             services.AddScoped<INewlandus4plotRepository, Newlandus4plotRepository>();
+            services.AddScoped<INewLandEnhanceCompensationRepository, NewLandEnhanceCompensationRepository>();
 
             services.AddScoped<INewlandus6plotRepository, Newlandus6plotRepository>();
             services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
 
 
+
+
+           
+            services.AddScoped<INewlandus22plotRepository, Newlandus22plotRepository>();
+            services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
+            services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
+            services.AddScoped<InewlandawardplotdetailsRepository, NewlandawardplotdetailsRepository>();
+            services.AddScoped<INewlandAppealdetailRepository, NewlandAppealdetailRepository>();
+
+            services.AddScoped<IRequestRepository, RequestRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -62,10 +77,24 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
 
             services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
+            services.AddScoped<INewLandEnhanceCompensationService, NewLandEnhanceCompensationService>();
+            services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
+            services.AddScoped<INewlandawardmasterdetailService, NewlandawardmasterdetailsService>();
+            services.AddScoped<INewlandawardplotdetailsService, NewlandawardplotdetailsService>();
 
 
             services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
             services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
+
+          
+            services.AddScoped<INewlandus22plotService, Newlandus22plotService>();
+            services.AddScoped<INewlandAppealdetailservice, NewlandAppealdetailService>();
+
+
+            services.AddScoped<IRequestService, RequestService>();
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IActionsService, ActionsService>();
 
         }
     }

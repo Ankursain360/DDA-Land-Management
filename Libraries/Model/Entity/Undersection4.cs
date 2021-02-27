@@ -16,6 +16,7 @@ namespace Libraries.Model.Entity
             Undersection4plot = new HashSet<Undersection4plot>();
             Undersection6 = new HashSet<Undersection6>();
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
+            Newlandawardmasterdetail = new HashSet<Newlandawardmasterdetail>();
         }
         [Required(ErrorMessage = "The Proposal field is required")]
         public int ProposalId { get; set; }
@@ -39,5 +40,6 @@ namespace Libraries.Model.Entity
         public ICollection<Undersection4plot> Undersection4plot { get; set; }
         public ICollection<Undersection6> Undersection6 { get; set; }
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
+        public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
     }
 }

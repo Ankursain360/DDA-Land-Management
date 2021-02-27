@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = " Village name is mandatory")]
         public int VillageId { get; set; }
-        [Required(ErrorMessage = " Khasra no is mandatory")]
+        [Required(ErrorMessage = "Khasra No is Mandatory Field", AllowEmptyStrings = false)]
         public int KhasraId { get; set; }
         public int? YearOfjamabandi { get; set; }
         public int? NoOfKhewat { get; set; }
@@ -29,9 +29,11 @@ namespace Libraries.Model.Entity
         public string Mortgage { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+
         public decimal? RentAmount { get; set; }
         public string OldMutationNo { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
 
         [NotMapped]
@@ -99,9 +101,11 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string Category { get; set; }
         [NotMapped]
-       
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? LeaseAmount { get; set; }
         [NotMapped]
+        
         public DateTime RenewalDate { get; set; }
     }
 }

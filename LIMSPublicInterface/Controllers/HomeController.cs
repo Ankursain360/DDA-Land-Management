@@ -10,20 +10,11 @@ namespace LIMSPublicInterface.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ISiteContext _siteContext;
-        private readonly IUserProfileService _userProfileService;
-
-        public HomeController(ISiteContext siteContext,
-           IUserProfileService userProfileService)
-        {
-            _siteContext = siteContext;
-            _userProfileService = userProfileService;
-        }
-
+        
         public async Task<IActionResult> Index()
         {
-            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
-            return View(user);
+        
+            return View();
         }
 
         public IActionResult Privacy()
@@ -42,10 +33,7 @@ namespace LIMSPublicInterface.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult UnAuthorized()
-        {
-            return View();
-        }
+        
 
         public IActionResult ExceptionLog()
         {
