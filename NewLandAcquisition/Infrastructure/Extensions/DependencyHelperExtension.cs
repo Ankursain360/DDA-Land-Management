@@ -43,7 +43,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandus17plotRepository, Newlandus17plotRepository>();
             services.AddScoped<INewlandjointsurveyRepository,NewlandjointsurveyRepository>();
             services.AddScoped<INewlandus22plotRepository, Newlandus22plotRepository>();
-
+            services.AddScoped<INewlandAppealdetailRepository, NewlandAppealdetailRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();

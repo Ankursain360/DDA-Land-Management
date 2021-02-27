@@ -121,5 +121,11 @@ namespace Libraries.Service.ApplicationService
         {
             throw new NotImplementedException();
         }
+
+        public async Task<PagedResult<Newlandvillage>> GetPagedNewLandVillageReport(NewlandVillageReportSearchDto model)
+        {
+            return await _newlandvillageRepository.GetPagedNewLandVillageReport(model);
+
+        }
     }
 }

@@ -34,5 +34,11 @@
     "inputFiles": [
       "wwwroot/js/us17plotindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandvillagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandvillagereportindex.js"
+    ]
   }
 ]

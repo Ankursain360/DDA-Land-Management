@@ -208,7 +208,64 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-      
+        public async Task<PagedResult<Newlandvillage>> GetPagedNewLandVillageReport(NewlandVillageReportSearchDto model)
+        {
+            var data = await _dbContext.Newlandvillage
+
+
+                  .Where(x => (x.IsActive == 1)
+                                   && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+
+
+
+                                   .OrderByDescending(x => x.Id)
+                               .GetPaged<Newlandvillage>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+
+                    case ("CONSOLIDATION"):
+                        data.Results = data.Results.OrderBy(x => x.YearofConsolidation).ToList();
+                        break;
+                    case ("SHEET"):
+                        data.Results = data.Results.OrderBy(x => x.TotalNoOfSheet).ToList();
+                        break;
+                    case ("ACQUIRED"):
+                        data.Results = data.Results.OrderBy(x => x.Acquired).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+
+                    case ("CONSOLIDATION"):
+                        data.Results = data.Results.OrderByDescending(x => x.YearofConsolidation).ToList();
+                        break;
+                    case ("SHEET"):
+                        data.Results = data.Results.OrderByDescending(x => x.TotalNoOfSheet).ToList();
+                        break;
+                    case ("ACQUIRED"):
+                        data.Results = data.Results.OrderByDescending(x => x.Acquired).ToList();
+                        break;
+                }
+            }
+            return data;
+        }
+
 
     }
 }
