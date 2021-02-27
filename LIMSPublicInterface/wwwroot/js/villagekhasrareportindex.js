@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
@@ -91,7 +91,7 @@ function onChange(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-
+       
         $("#Name").val('0').trigger('change');
         $("#Name").html(html);
     });

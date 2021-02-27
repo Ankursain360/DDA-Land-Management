@@ -6,21 +6,15 @@ $(document).ready(function () {
         debugger;
         var result = ValidateForm();
         var name = $('#Name option:selected').val();
-
-
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
-        if (result) {
+      if (result) {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
+       
     });
 
-    $(".linkdisabled").click(function () {
-        return false;
-    });
+    //$(".linkdisabled").click(function () {
+    //    return false;
+    //});
 });
 
 function GetDetails(pageNumber, pageSize, order) {

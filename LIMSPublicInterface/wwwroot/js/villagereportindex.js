@@ -1,21 +1,17 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
 var sortby = 1;//default Ascending 
+
+
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
         var result = ValidateForm();
         var name = $('#Name option:selected').val();
-       
-
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
         if (result) {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
+        
     });
 
     $(".linkdisabled").click(function () {
@@ -59,6 +55,11 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortby = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
+$('#ddlSort').change(function () {
+   
     GetDetails(currentPageNumber, currentPageSize, sortby);
 });
 
