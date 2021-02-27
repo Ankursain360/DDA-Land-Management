@@ -28,7 +28,7 @@
 
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select asp-for="VillageId" id="vvv" class="floating-label-field floating-label-field--s3" onchange="return onChange_village(this.options[this.selectedIndex].value);">
+                    <select asp-for="VillageId" class="floating-label-field floating-label-field--s3" onchange="return onChange_village(this.options[this.selectedIndex].value);">
                         <option value="">---Select---</option>
 
                     </select>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select asp-for="KhasraId" id="kkk" class="floating-label-field floating-label-field--s3"
+                    <select asp-for="KhasraId" class="floating-label-field floating-label-field--s3"
                             asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
                         <option value="">---Select---</option>
 
@@ -97,17 +97,25 @@
 
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaInBigha" type="text" class="floating-label-field floating-label-field--s3 numbers " placeholder="Name" />
+                    <input asp-for="Bigha" type="text" class="floating-label-field floating-label-field--s3 numbers " placeholder="Name" />
 
-                    <span asp-validation-for="AreaInBigha" class="text-danger "></span>
+                    <span asp-validation-for="Bigha" class="text-danger "></span>
                     <label class="floating-label">Area in Bigha</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaInBiswa" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Name" />
+                    <input asp-for="Biswa" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Name" />
 
-                    <span asp-validation-for="AreaInBiswa" class="text-danger "></span>
+                    <span asp-validation-for="Biswa" class="text-danger "></span>
+                    <label class="floating-label">Area in Biswa</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Biswanshi" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Name" />
+
+                    <span asp-validation-for="Biswanshi" class="text-danger "></span>
                     <label class="floating-label">Area in Biswa</label>
                 </div>
             </div>

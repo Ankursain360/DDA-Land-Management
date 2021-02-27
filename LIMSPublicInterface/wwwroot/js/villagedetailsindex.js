@@ -17,13 +17,17 @@ $(document).ready(function () {
 $("#btnGenerate").click(function () {
   
     debugger;
+    var UnderSection4Id = $("#Name").val();
+    if (UnderSection4Id) {
     var param = GetSearchParam(currentPageNumber, currentPageSize);
 
     HttpPost(`/Villagealldetails/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
-
+    } else {
+        alert("Please Select Village Name");
+    }
 });
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);

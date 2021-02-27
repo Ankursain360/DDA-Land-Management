@@ -1,13 +1,15 @@
 ﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using Libraries.Service.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface INewlandnotificationService
+
+    public interface INewlandnotificationService : IEntityService<Newlandnotification>
     {
         Task<List<NewlandNotificationtype>> GetNotificationType();
         Task<bool> Delete(int id);
@@ -18,5 +20,5 @@ namespace Libraries.Service.IApplicationService
         Task<List<Newlandnotification>> GetNewlandnotification();
 
 
-        }
+    }
 }

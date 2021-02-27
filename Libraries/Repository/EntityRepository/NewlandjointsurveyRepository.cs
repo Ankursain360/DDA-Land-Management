@@ -1,25 +1,133 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Dto.Search;
-
-using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class NewlandjointsurveyRepository : GenericRepository<Newlandjointsurvey>, INewlandjointsurveyRepository
+    public class NewLandJointSurveyRepository : GenericRepository<Newlandjointsurvey>, INewLandJointSurveyRepository
     {
-        public NewlandjointsurveyRepository(DataContext dbContext) : base(dbContext)
+
+        public NewLandJointSurveyRepository(DataContext dbContext) : base(dbContext)
         {
 
+        }
+
+        public async Task<PagedResult<Newlandjointsurvey>> GetPagedNewLandJointSurvey(NewLandJointSurveySearchDto model)
+        {
+            var data = await _dbContext.Newlandjointsurvey
+
+                                   .Include(x => x.Village)
+                                    .Include(x => x.Zone)
+                                   .Include(x => x.Khasra)
+                                   .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                   .GetPaged<Newlandjointsurvey>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Newlandjointsurvey
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                 .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderBy(a => a.Village.Name)
+                                                .GetPaged<Newlandjointsurvey>(model.PageNumber, model.PageSize);
+
+
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Newlandjointsurvey
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                 .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderBy(a => a.Khasra.Name)
+                                                .GetPaged<Newlandjointsurvey>(model.PageNumber, model.PageSize);
+
+                        break;
+                   
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Newlandjointsurvey
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderByDescending(a => a.IsActive)
+                                                .GetPaged<Newlandjointsurvey>(model.PageNumber, model.PageSize);
+
+
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Newlandjointsurvey
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderByDescending(a => a.Village.Name)
+                                                .GetPaged<Newlandjointsurvey>(model.PageNumber, model.PageSize);
+
+
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Newlandjointsurvey
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                 .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderByDescending(a => a.Khasra.Name)
+                                                .GetPaged<Newlandjointsurvey>(model.PageNumber, model.PageSize);
+
+                        break;
+                   
+
+                       
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Newlandjointsurvey
+                                                .Include(x => x.Village)
+                                                .Include(x => x.Khasra)
+                                                .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)) && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                                .OrderBy(a => a.IsActive)
+                                                .GetPaged<Newlandjointsurvey>(model.PageNumber, model.PageSize);
+
+
+                        break;
+
+                }
+            }
+            return data;
+        }
+
+
+        public async Task<List<Newlandjointsurvey>> GetAllNewLandJointSurvey()
+        {
+            return await _dbContext.Newlandjointsurvey.Include(x => x.Village).Include(x => x.Khasra).ToListAsync();
         }
 
         public async Task<List<Zone>> GetAllZone()
@@ -27,91 +135,70 @@ namespace Libraries.Repository.EntityRepository
             List<Zone> zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
             return zoneList;
         }
-
-      
-
         public async Task<List<Newlandvillage>> GetAllVillage(int zoneId)
         {
-            List<Newlandvillage> villageList = await _dbContext.Newlandvillage.Where(x =>x.ZoneId==zoneId && x.IsActive == 1).ToListAsync();
+            List<Newlandvillage> villageList = await _dbContext.Newlandvillage.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
             return villageList;
         }
 
-
-
-        public async Task<List<Newlandkhasra>> GetAllKhasra(int villageId)
+        public async Task<List<Newlandkhasra>> GetAllKhasra(int? villageId)
         {
             List<Newlandkhasra> khasraList = await _dbContext.Newlandkhasra.Where(x => x.NewLandvillageId == villageId && x.IsActive == 1).ToListAsync();
             return khasraList;
         }
 
 
+        //********* rpt ! Attendance Details **********
 
-        public async Task<List<Newlandjointsurvey>> GetAllJointSurvey()
+        public async Task<bool> SaveAttendance(Newjointsurveyattendancedetail attendance)
         {
-            return await _dbContext.Newlandjointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
+            _dbContext.Newjointsurveyattendancedetail.Add(attendance);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Newjointsurveyattendancedetail>> GetAllattendance(int id)
+        {
+            return await _dbContext.Newjointsurveyattendancedetail.Where(x => x.JointSurveyId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> DeleteAttendance(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Newjointsurveyattendancedetail.Where(x => x.JointSurveyId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
 
+        //********* rpt ! Survey Report **********
 
-
-        public async Task<Newlandkhasra> FetchSingleKhasraResult(int khasraId)
+      
+        public async Task<bool> SaveSurveyReport(Newjointsurveyreportdetail newjointsurveyreportdetail)
         {
-            return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+            _dbContext.Newjointsurveyreportdetail.Add(newjointsurveyreportdetail);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
 
+        public async Task<List<Newjointsurveyreportdetail>> GetNewjointsurveyreportdetail(int id)
+        {
+            return await _dbContext.Newjointsurveyreportdetail.Where(x => x.JointSurveyId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> DeleteSurveyReport(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Newjointsurveyreportdetail.Where(x => x.JointSurveyId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
 
-
-
-        //public async Task<PagedResult<Newlandjointsurvey>> GetPagedJointsurvey(JointSurveySearchDto model)
-        //{
-        //    var data = await _dbContext.Jointsurvey
-        //                                .Include(x => x.Village)
-        //                                .Include(x => x.Khasra)
-        //                                .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
-        //                                && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
-        //                                ).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
-        //    int SortOrder = (int)model.SortOrder;
-        //    if (SortOrder == 1)
-        //    {
-        //        data = null;
-        //        data = await _dbContext.Jointsurvey
-        //                                .Include(x => x.Village)
-        //                                .Include(x => x.Khasra)
-        //                                .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
-        //                                && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
-        //                                )
-        //                        .OrderBy(s =>
-        //                        (
-        //                          model.SortBy.ToUpper() == "VILLAGENAME" ? (s.Village != null ? s.Village.Name : null)
-        //                        : model.SortBy.ToUpper() == "KHASRANAME" ? (s.Khasra != null ? s.Khasra.Name : null) : s.Village.Name)
-        //                        )
-        //                        .GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
-        //    }
-
-        //    else if (SortOrder == 2)
-        //    {
-        //        data = null;
-        //        data = await _dbContext.Jointsurvey
-        //                                .Include(x => x.Village)
-        //                                .Include(x => x.Khasra)
-        //                                .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
-        //                                && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
-        //                                )
-        //                        .OrderByDescending(s =>
-        //                        (
-        //                        model.SortBy.ToUpper() == "villagename" ? (s.Village != null ? s.Village.Name : null)
-        //                        : model.SortBy.ToUpper() == "khasraname" ? (s.Khasra != null ? s.Khasra.Name : null) : s.Village.Name)
-        //                        )
-        //                        .GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
-        //    }
-
-        //    return data;
-
-
-
-        //    //return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
-        //}
-
+        public async Task<Newjointsurveyreportdetail> GetNewjointsurveyreportdetailFilePath(int Id)
+        {
+            return await _dbContext.Newjointsurveyreportdetail.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Newjointsurveyreportdetail> GetUploadDocumentFilePath(int Id)
+        {
+            return await _dbContext.Newjointsurveyreportdetail.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+       
 
 
     }
 }
+

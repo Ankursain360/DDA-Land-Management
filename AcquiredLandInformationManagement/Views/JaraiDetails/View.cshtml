@@ -15,7 +15,7 @@
                     <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="VillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option disabled="disabled">Select</option>
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
@@ -25,7 +25,7 @@
                 <div class="floating-label-wrap">
                     <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
@@ -36,8 +36,8 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input disabled asp-for="YearOfjamabandi" placeholder="Notification" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="YearOfjamabandi" placeholder="Notification" type="text"limit="4"
+                           class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="YearOfjamabandi" class="text-danger"></span>
                     <label class="floating-label">Year Of Jamabandi    </label>
                 </div>
@@ -45,7 +45,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input disabled asp-for="NoOfKhewat" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="NoOfKhewat" class="text-danger"></span>
                     <label class="floating-label">No Of Khewat </label>
                 </div>
@@ -55,7 +55,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input disabled asp-for="NoOfKhatauni" placeholder="NoOfKhatauni" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="NoOfKhatauni" class="text-danger"></span>
                     <label class="floating-label">No Of Khatauni    </label>
                 </div>
@@ -231,51 +231,51 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input disabled asp-for="Revenue" placeholder="Revenue" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="Revenue" class="text-danger"></span>
                     <label class="floating-label">Mutaliba va Tashrih Mamla va Soni (Revenue)  </label>
                 </div>
             </div>
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input disabled asp-for="OldMutationNo" placeholder="OldMutationNo" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="OldMutationNo" class="text-danger"></span>
-                    <label class="floating-label">Old Mutation No.  </label>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input disabled asp-for="OldMutationNo" placeholder="OldMutationNo" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="OldMutationNo" class="text-danger"></span>
+                        <label class="floating-label">Old Mutation No.  </label>
+                    </div>
+                </div>
+                <div class=" col-md-6">
+                    <div class="floating-label-wrap">
+                        <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <label class="floating-label">Status </label>
+                    </div>
                 </div>
             </div>
-            <div class=" col-md-6">
-                <div class="floating-label-wrap">
-                    <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label class="floating-label">Status </label>
+            <div class="row mt-md-3">
+                <div class="col-md-12">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea disabled asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                        <label class="floating-label">Kaifiat(Remarks)  </label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-12">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea disabled asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+            <div class="row mt-md-3">
+                <div class=" col-md-12">
 
-                    <span asp-validation-for="Remarks" class="text-danger"></span>
-                    <label class="floating-label">Kaifiat(Remarks)  </label>
+                    @Html.ActionLink("Back", "Index", "JaraiDetails", null, new { @class = "btn btn-theme " })
+
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class=" col-md-12">
 
-                @Html.ActionLink("Back", "Index", "JaraiDetails", null, new { @class = "btn btn-theme " })
-
-            </div>
-        </div>
-
-    </form>
+</form>
 
 </div>
 

@@ -26,26 +26,19 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Address)
+                .IsRequired()
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.Property(e => e.AnyOtherDocument)
-                .HasMaxLength(500)
-                .IsUnicode(false);
+            builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.AreaInBigha).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.Biswa).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.AreaInBiswa).HasColumnType("decimal(18,3)");
-
-            builder.Property(e => e.Attendance).HasColumnType("int(11)");
+            builder.Property(e => e.Biswanshi).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-            builder.Property(e => e.Designation)
-                .HasMaxLength(30)
-                .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
@@ -55,12 +48,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Name)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-
             builder.Property(e => e.NatureOfStructure)
-                .HasMaxLength(200)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
@@ -68,11 +57,8 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.SitePosition)
+                .IsRequired()
                 .HasMaxLength(50)
-                .IsUnicode(false);
-
-            builder.Property(e => e.SurveyReport)
-                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
@@ -96,8 +82,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.ZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk1zoneid1");
-
-
         }
         }
 }

@@ -56,7 +56,7 @@ function getLatLongArr(pgString) {
     return latLngArr;
 }
 
-//Map option click events
+//Map option click events 
 $(document).on('click', '#mapsatellite', function (e) {
 
     map.setOptions({

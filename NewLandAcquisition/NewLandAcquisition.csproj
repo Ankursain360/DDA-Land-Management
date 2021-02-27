@@ -5,15 +5,34 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\newlandvillagereportindex.min.js" />
+    <Content Remove="Views\AwardMasterDetails\Create.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\Edit.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\Index.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\View.cshtml" />
+    <Content Remove="Views\AwardMasterDetails\_List.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\Create.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\Edit.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\Index.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\View.cshtml" />
+    <Content Remove="Views\AwardPlotDetails\_List.cshtml" />
+    <Content Remove="wwwroot\js\awardmastercreate.min.js" />
+    <Content Remove="wwwroot\js\newlandschemeindex.min.js" />
+    <Content Remove="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\js\newlandvillagereportindex.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\newlandvillagereportindex.min.js" />
+    <None Include="Views\AwardMasterDetails\Create.cshtml" />
+    <None Include="Views\AwardMasterDetails\Edit.cshtml" />
+    <None Include="Views\AwardMasterDetails\Index.cshtml" />
+    <None Include="Views\AwardMasterDetails\View.cshtml" />
+    <None Include="Views\AwardMasterDetails\_List.cshtml" />
+    <None Include="Views\AwardPlotDetails\Create.cshtml" />
+    <None Include="Views\AwardPlotDetails\Edit.cshtml" />
+    <None Include="Views\AwardPlotDetails\Index.cshtml" />
+    <None Include="Views\AwardPlotDetails\View.cshtml" />
+    <None Include="Views\AwardPlotDetails\_List.cshtml" />
+    <None Include="wwwroot\js\newlandschemeindex.min.js" />
+    <None Include="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
 	<ItemGroup> 
@@ -34,6 +53,16 @@
 
   <ItemGroup>
     <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\AwardMasterDetails\_List.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newlandschemeindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
 </Project>

@@ -30,5 +30,6 @@ namespace Libraries.Model.Entity
         public Acquiredlandvillage Acquiredlandvillage { get; set; }
         public Khasra Khasra { get; set; }
         public Proposaldetails Proposaldetails { get; set; }
+
     }
 }

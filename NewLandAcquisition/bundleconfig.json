@@ -36,9 +36,147 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/newlandvillagereportindex.min.js",
+    "outputFileName": "wwwroot/js/awardindex.min.js",
     "inputFiles": [
-      "wwwroot/js/newlandvillagereportindex.js"
+      "wwwroot/js/awardindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardplotdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardplotdetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardplotindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardplotindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/khasramasterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/khasramasterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandappealdetailcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandappealdetailcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandappealdetailindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandappealdetailindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandawardmastercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandawardmastercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandenhancecompensationcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandenhancecompensationcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandenhancecompensationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandenhancecompensationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/NewlandJointSurveyCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/NewlandJointSurveyCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandpaymentdetailindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandpaymentdetailindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandproposaldetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandproposaldetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandproposalplotdetailcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandproposalplotdetailcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandproposalplotdetailindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandproposalplotdetailindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandschemeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandschemeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus17plotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus17plotcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus22plotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus22plotcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus6plotcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus6plotcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus6plotedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus6plotedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/us22plotindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/us22plotindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/us6plotindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/us6plotindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villagecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/villagecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villageindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villageindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
     ]
   }
 ]
