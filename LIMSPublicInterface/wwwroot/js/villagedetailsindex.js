@@ -16,14 +16,27 @@ $(document).ready(function () {
 
 $("#btnGenerate").click(function () {
   
+  
     debugger;
+    var UnderSection4Id = $("#Name").val();
+    var element = $("#Name").find('option:selected');
+    var myTag = element.attr("mytag");
+    if (myTag) {
+        $('#village_tag').html("Village Name - " + myTag);
+    } else {
+        $('#village_tag').html("Village Name - ");
+        location.reload();
+    }
+    if (UnderSection4Id) {
     var param = GetSearchParam(currentPageNumber, currentPageSize);
 
     HttpPost(`/Villagealldetails/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
-
+    } else {
+        alert("Please Select Village Name");
+    }
 });
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
@@ -36,9 +49,9 @@ function GetDetails(pageNumber, pageSize) {
 
 
 $("#btnReset").click(function () {
+    $('#village_tag').html('Village Name - All');
 
     $('#Name').val('0').trigger('change');
-
 
     GetDetails(currentPageNumber, currentPageSize);
 

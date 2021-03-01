@@ -221,8 +221,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Data.AcquiredlandvillageList = await _jaraidetailService.GetAllVillage();
             Data.KhasraList = await _jaraidetailService.GetAllKhasra(Data.VillageId);
+            Jaraidetails jarai = new Jaraidetails();
+            jarai.IsActive = jarai.IsActive;
 
-          
 
             if (Data == null)
             {

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-   public class Newlandus22plotRepository : GenericRepository<Newlandus22plot>, INewlandus22plotRepository
+    public class Newlandus22plotRepository : GenericRepository<Newlandus22plot>, INewlandus22plotRepository
     {
 
         public Newlandus22plotRepository(DataContext dbContext) : base(dbContext)
@@ -200,30 +200,38 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Us17)
                                    .ToListAsync();
         }
-        public async Task<List<Newlandus4plot>> GetAllUS4Plot()
+        public async Task<List<Newlandus4plot>> GetAllUS4Plot(int? notificationId)
         {
             List<Newlandus4plot> notificationList = await _dbContext.Newlandus4plot
                 .Include(x => x.Notification)
-                .Where(x => x.IsActive == 1).ToListAsync();
+                .Where(x => x.NotificationId == notificationId && x.IsActive == 1).ToListAsync();
             return notificationList;
         }
-        public async Task<List<Newlandus6plot>> GetAllUS6Plot()
+        public async Task<List<Newlandus6plot>> GetAllUS6Plot(int? notificationId)
         {
             List<Newlandus6plot> notificationList = await _dbContext.Newlandus6plot
                 .Include(x => x.Notification)
-                .Where(x => x.IsActive == 1).ToListAsync();
+                .Where(x => x.NotificationId == notificationId && x.IsActive == 1).ToListAsync();
             return notificationList;
         }
-        public async Task<List<Newlandus17plot>> GetAllUS17Plot()
+        public async Task<List<Newlandus17plot>> GetAllUS17Plot(int? notificationId)
         {
             List<Newlandus17plot> notificationList = await _dbContext.Newlandus17plot
                 .Include(x => x.Notification)
-                .Where(x => x.IsActive == 1).ToListAsync();
+               .Where(x => x.NotificationId == notificationId && x.IsActive == 1).ToListAsync();
             return notificationList;
+        }
+        public async Task<Newlandus4plot> FetchUS4Plot(int? notificationId)
+        {
+            return await _dbContext.Newlandus4plot.Include(x => x.Notification).Where(x => x.NotificationId == notificationId).FirstOrDefaultAsync();
         }
         public async Task<Newlandus6plot> FetchUS6Plot(int? notificationId)
         {
-            return await _dbContext.Newlandus6plot.Where(x => x.NotificationId == notificationId).SingleOrDefaultAsync();
+            return await _dbContext.Newlandus6plot.Include(x => x.Notification).Where(x => x.NotificationId == notificationId).FirstOrDefaultAsync();
+        }
+        public async Task<Newlandus17plot> FetchUS17Plot(int? notificationId)
+        {
+            return await _dbContext.Newlandus17plot.Include(x => x.Notification).Where(x => x.NotificationId == notificationId).FirstOrDefaultAsync();
         }
         public async Task<List<LandNotification>> GetAllNotification()
         {

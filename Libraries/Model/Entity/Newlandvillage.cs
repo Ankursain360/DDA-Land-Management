@@ -46,8 +46,11 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Tehsil> TehsilList { get; set; }
-        
-   //     public  ICollection<LandCategory> LandCategory { get; set; }
+
+        [NotMapped]
+        public List<Newlandvillage> VillageList { get; set; }
+
+        //     public  ICollection<LandCategory> LandCategory { get; set; }
         public District District { get; set; }
         public Tehsil Tehsil { get; set; }
         public Zone Zone { get; set; }

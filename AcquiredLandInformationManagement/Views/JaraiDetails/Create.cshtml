@@ -15,7 +15,7 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="VillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option selected disabled="disabled">Select</option>
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name </label>
@@ -25,7 +25,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                        <option disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
@@ -36,8 +36,8 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="YearOfjamabandi" placeholder="Notification" type="text" limit="4">
-                    class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="YearOfjamabandi" placeholder="Notification" type="text" limit="4"
+                    class="floating-label-field floating-label-field--s3 onlynumbers" />
 
                     <span asp-validation-for="YearOfjamabandi" class="text-danger"></span>
                     <label class="floating-label">Year Of Jamabandi    </label>
@@ -46,7 +46,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NoOfKhewat" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="NoOfKhewat" class="text-danger"></span>
                     <label class="floating-label">No Of Khewat </label>
                 </div>
@@ -56,7 +56,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NoOfKhatauni" placeholder="NoOfKhatauni" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="NoOfKhatauni" class="text-danger"></span>
                     <label class="floating-label">No Of Khatauni    </label>
                 </div>
@@ -160,7 +160,7 @@
                             <td>
                                 <div class="action-btns">
                                     <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record1" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    <a class="view add-record1" data-added1="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -232,7 +232,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Revenue" placeholder="Revenue" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="Revenue" class="text-danger"></span>
                     <label class="floating-label">Mutaliba va Tashrih Mamla va Soni (Revenue)  </label>
                 </div>

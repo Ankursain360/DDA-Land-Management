@@ -41,9 +41,9 @@ namespace NewLandAcquisition.Controllers
             us22plot.NotificationList = await _newlandus22plotService.GetAllNotification();
             us22plot.VillageList = await _newlandus22plotService.GetAllVillage();
             us22plot.KhasraList = await _newlandus22plotService.GetAllKhasra(us22plot.VillageId);
-            us22plot.Us4List = await _newlandus22plotService.GetAllUS4Plot();
-            us22plot.Us6List = await _newlandus22plotService.GetAllUS6Plot();
-            us22plot.Us17List = await _newlandus22plotService.GetAllUS17Plot();
+            us22plot.Us4List = await _newlandus22plotService.GetAllUS4Plot(us22plot.NotificationId);
+            us22plot.Us6List = await _newlandus22plotService.GetAllUS6Plot(us22plot.NotificationId);
+            us22plot.Us17List = await _newlandus22plotService.GetAllUS17Plot(us22plot.NotificationId);
             return View(us22plot);
         }
 
@@ -55,10 +55,10 @@ namespace NewLandAcquisition.Controllers
             us22plot.NotificationList = await _newlandus22plotService.GetAllNotification();
             us22plot.VillageList = await _newlandus22plotService.GetAllVillage();
             us22plot.KhasraList = await _newlandus22plotService.GetAllKhasra(us22plot.VillageId);
-            us22plot.Us4List = await _newlandus22plotService.GetAllUS4Plot();
-            us22plot.Us4List = await _newlandus22plotService.GetAllUS4Plot();
-            us22plot.Us6List = await _newlandus22plotService.GetAllUS6Plot();
-            us22plot.Us17List = await _newlandus22plotService.GetAllUS17Plot();
+
+            us22plot.Us4List = await _newlandus22plotService.GetAllUS4Plot(us22plot.NotificationId);
+            us22plot.Us6List = await _newlandus22plotService.GetAllUS6Plot(us22plot.NotificationId);
+            us22plot.Us17List = await _newlandus22plotService.GetAllUS17Plot(us22plot.NotificationId);
             if (ModelState.IsValid)
             {
                 us22plot.CreatedBy = SiteContext.UserId;
@@ -90,9 +90,9 @@ namespace NewLandAcquisition.Controllers
             Data.NotificationList = await _newlandus22plotService.GetAllNotification();
             Data.VillageList = await _newlandus22plotService.GetAllVillage();
             Data.KhasraList = await _newlandus22plotService.GetAllKhasra(Data.VillageId);
-            Data.Us4List = await _newlandus22plotService.GetAllUS4Plot();
-            Data.Us6List = await _newlandus22plotService.GetAllUS6Plot();
-            Data.Us17List = await _newlandus22plotService.GetAllUS17Plot();
+            Data.Us4List = await _newlandus22plotService.GetAllUS4Plot(Data.NotificationId);
+            Data.Us6List = await _newlandus22plotService.GetAllUS6Plot(Data.NotificationId);
+            Data.Us17List = await _newlandus22plotService.GetAllUS17Plot(Data.NotificationId);
             if (Data == null)
             {
                 return NotFound();
@@ -106,9 +106,9 @@ namespace NewLandAcquisition.Controllers
             us22plot.NotificationList = await _newlandus22plotService.GetAllNotification();
             us22plot.VillageList = await _newlandus22plotService.GetAllVillage();
             us22plot.KhasraList = await _newlandus22plotService.GetAllKhasra(us22plot.VillageId);
-            us22plot.Us4List = await _newlandus22plotService.GetAllUS4Plot();
-            us22plot.Us6List = await _newlandus22plotService.GetAllUS6Plot();
-            us22plot.Us17List = await _newlandus22plotService.GetAllUS17Plot();
+            us22plot.Us4List = await _newlandus22plotService.GetAllUS4Plot(us22plot.NotificationId);
+            us22plot.Us6List = await _newlandus22plotService.GetAllUS6Plot(us22plot.NotificationId);
+            us22plot.Us17List = await _newlandus22plotService.GetAllUS17Plot(us22plot.NotificationId);
             if (ModelState.IsValid)
             {
                 us22plot.ModifiedBy = SiteContext.UserId;
@@ -136,9 +136,9 @@ namespace NewLandAcquisition.Controllers
             Data.NotificationList = await _newlandus22plotService.GetAllNotification();
             Data.VillageList = await _newlandus22plotService.GetAllVillage();
             Data.KhasraList = await _newlandus22plotService.GetAllKhasra(Data.VillageId);
-            Data.Us4List = await _newlandus22plotService.GetAllUS4Plot();
-            Data.Us6List = await _newlandus22plotService.GetAllUS6Plot();
-            Data.Us17List = await _newlandus22plotService.GetAllUS17Plot();
+            Data.Us4List = await _newlandus22plotService.GetAllUS4Plot(Data.NotificationId);
+            Data.Us6List = await _newlandus22plotService.GetAllUS6Plot(Data.NotificationId);
+            Data.Us17List = await _newlandus22plotService.GetAllUS17Plot(Data.NotificationId);
             if (Data == null)
             {
                 return NotFound();
@@ -188,11 +188,26 @@ namespace NewLandAcquisition.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> FetchUS6Plot(int? notificationId)
+        public async Task<JsonResult> GetAllUS4Plot(int? notificationId)
         {
             notificationId = notificationId ?? 0;
 
-            return Json(await _newlandus22plotService.FetchSingleKhasraResult(Convert.ToInt32(notificationId)));
+            return Json(await _newlandus22plotService.GetAllUS4Plot(Convert.ToInt32(notificationId)));
         }
+        [HttpGet]
+        public async Task<JsonResult> GetAllUS6Plot(int? notificationId)
+        {
+            notificationId = notificationId ?? 0;
+
+            return Json(await _newlandus22plotService.GetAllUS6Plot(Convert.ToInt32(notificationId)));
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAllUS17Plot(int? notificationId)
+        {
+            notificationId = notificationId ?? 0;
+
+            return Json(await _newlandus22plotService.GetAllUS17Plot(Convert.ToInt32(notificationId)));
+        }
+
     }
 }

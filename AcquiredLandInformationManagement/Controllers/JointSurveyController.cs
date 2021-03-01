@@ -106,9 +106,6 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(jointsurvey);
         }
-
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Jointsurvey jointsurvey)
