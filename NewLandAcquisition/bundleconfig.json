@@ -178,5 +178,23 @@
     "inputFiles": [
       "wwwroot/js/common.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestapprovalprocess.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestapprovalprocess.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestapprovalprocessindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestapprovalprocessindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestindex.js"
+    ]
   }
 ]

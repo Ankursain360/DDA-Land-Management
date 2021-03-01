@@ -15,7 +15,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                         @foreach (var item in Model.NotificationList)
                         {
-                            <option value="@item.Id">@item.Number (  @(Convert.ToDateTime(item.Ndate).ToString("dd-MMM-yyyy"))) </option>
+                            <option value="@item.Id" mytag="@item.Number (  @(Convert.ToDateTime(item.Ndate).ToString("dd-MMM-yyyy")))">@item.Number (  @(Convert.ToDateTime(item.Ndate).ToString("dd-MMM-yyyy"))) </option>
                         }
 
                     </select>
@@ -54,9 +54,11 @@
     <div class="table-section bg-white border shadow rounded">
       
         <div class="table-responsive px-2">
-            <div id="LoadReportView">
+            <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+                <p> <h3 class="mb-3 d-flex" style="text-align:center;" id="village_tag">  </h3></p>
+                <div id="LoadReportView">
 
-            </div>
+                </div></form>
         </div>
     </div>
 

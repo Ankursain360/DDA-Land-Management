@@ -16,8 +16,17 @@ $(document).ready(function () {
 
 $("#btnGenerate").click(function () {
   
+  
     debugger;
     var UnderSection4Id = $("#Name").val();
+    var element = $("#Name").find('option:selected');
+    var myTag = element.attr("mytag");
+    if (myTag) {
+        $('#village_tag').html("Village Name - " + myTag);
+    } else {
+        $('#village_tag').html("Village Name - ");
+        location.reload();
+    }
     if (UnderSection4Id) {
     var param = GetSearchParam(currentPageNumber, currentPageSize);
 
@@ -40,9 +49,9 @@ function GetDetails(pageNumber, pageSize) {
 
 
 $("#btnReset").click(function () {
+    $('#village_tag').html('Village Name - All');
 
     $('#Name').val('0').trigger('change');
-
 
     GetDetails(currentPageNumber, currentPageSize);
 

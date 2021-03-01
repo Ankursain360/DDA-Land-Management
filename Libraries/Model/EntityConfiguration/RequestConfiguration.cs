@@ -53,7 +53,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
-                .HasMaxLength(500)
+                .HasMaxLength(2000)
                 .IsUnicode(false);
 
             builder.Property(e => e.RequiringBody)

@@ -2,7 +2,7 @@
 
 
 $(document).ready(function () {
-    alert("test");
+  
     var id = parseInt($('#Id').val());
     GetOtherDetails(id);
     GetHistoryDetails(id);

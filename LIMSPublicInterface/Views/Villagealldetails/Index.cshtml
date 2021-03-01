@@ -9,8 +9,18 @@
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="Name"
-                            asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                          >
                         <option value="0">All</option>
+
+
+
+                        @foreach (var item in Model.VillageList)
+                        {
+                            <option value="@item.Id" mytag="@item.Name">@item.Name </option>
+                        }
+
+
+
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Name"></span>
                     <label asp-for="Name" class="floating-label">Village </label>
@@ -40,10 +50,18 @@
 
     <div class="table-section bg-white border shadow rounded">
      
-        <div class="table-responsive px-2">
-            <div id="LoadReportView">
 
-            </div>
+        <div class="table-responsive px-2">
+            <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+            <p> <h3 class="mb-3 d-flex" style="text-align:center;" id="village_tag"> Village Name - All</h3></p>    
+
+
+
+
+                <div id="LoadReportView">
+
+                </div>
+            </form>
         </div>
     </div>
 
