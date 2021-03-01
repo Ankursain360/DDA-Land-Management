@@ -4,17 +4,26 @@ var sortby = 1;//default Ascending
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
-        var result = ValidateForm();
+      
+        var sort = $('#ddlSort option:selected').val();
         var name = $('#Name option:selected').val();
-      if (result) {
+        if (name == null)
+        {
+            alert("Please select village")
+        }
+        else
+        if (sort == null) {
+            alert("Please select valid sort by option");
+            $('#ddlSort option:selected').val('Village');
+        }
+        else
+        {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
-       
+
+
     });
 
-    //$(".linkdisabled").click(function () {
-    //    return false;
-    //});
 });
 
 function GetDetails(pageNumber, pageSize, order) {
@@ -42,35 +51,84 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     return model;
 }
 $("#btnAscending").click(function () {
-    $("#btnDescending").removeClass("active");
-    $("#btnAscending").addClass("active");
     sortby = 1;//for Ascending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else {
+        $("#btnDescending").removeClass("active");
+        $("#btnAscending").addClass("active");
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
+
 });
 
 
 $("#btnDescending").click(function () {
-    $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
+  
     sortby = 2;//for Descending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else {
+        $("#btnAscending").removeClass("active");
+        $("#btnDescending").addClass("active");
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+
+    }
 });
+
+
 
 $("#btnReset").click(function () {
+    var sort = $('#ddlSort option:selected').val();
 
-    $('#Name').val('0').trigger('change');
+    if (sort == null) {
+        alert("Please select valid sort by option");
 
-
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    } else {
+        $('#Name').val('0').trigger('change');
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
 
 });
 
+$('#ddlSort').change(function () {
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else {
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
+
+});
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
-    currentPageNumber = pageNo;
+   
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    } else {
+        GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
+        currentPageNumber = pageNo;
+    }
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
-    currentPageSize = pageSize;
+   
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else {
+        GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+        currentPageSize = pageSize;
+    }
 }
