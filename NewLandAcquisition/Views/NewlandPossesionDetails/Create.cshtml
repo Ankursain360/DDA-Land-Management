@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Possessiondetails
+﻿@model Libraries.Model.Entity.Newlandpossessiondetails
 @await Component.InvokeAsync("PageHeader", new { pageName = "Possession Detail" })
 
 <div class="container-fluid" id="MainContentForm">
@@ -14,7 +14,7 @@
                         <div class="floating-label-wrap">
                             <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
                                     onchange="return onChange(this.options[this.selectedIndex].value);">
-                                <option value="">Select</option>
+                                <option value="" disabled>Select</option>
                             </select>
                             <span asp-validation-for="VillageId" class="text-danger"></span>
                             <label asp-for="VillageId" class="floating-label">Village Name</label>
@@ -26,22 +26,13 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
                             <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                                <option  value="">Select</option>
+                                <option value="" disabled>Select</option>
                             </select>
                             <span asp-validation-for="KhasraId" class="text-danger"></span>
                             <label class="floating-label">Khasra No</label>
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
 
                 <div class="pt-3">
                     <h3 class="mb-3 d-flex">Type of possession</h3>
@@ -133,10 +124,11 @@
 
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="text" asp-for="PlotNo" placeholder="Plot No" class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="PlotNo" class="text-danger"></span>
-                            <label class="floating-label">Plot No</label>
+                            <select class="floating-label-field floating-label-field--s3" asp-for="PossKhasraId" asp-items="@(new SelectList(Model.PossKhasraList, "Id","Name"))">
+                                <option value="" disabled>Select</option>
+                            </select>
+                            <span asp-validation-for="PossKhasraId" class="text-danger"></span>
+                            <label class="floating-label" asp-for="PossKhasraId">Possesion Khasra No</label>
                         </div>
                     </div>
 
@@ -171,11 +163,59 @@
                                 <label class="floating-label">Biswa</label>
                             </div>
                         </div>
+                        <div class="form-group col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                                <input type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3" placeholder="Biswanshi" />
+                                <label class="floating-label">Biswanshi</label>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
 
+                <div id="DivNotification">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class="dda-innerheading">
+                                <div class="col-md-12">
+                                    <h3 class="pull-left" style="margin-top:5px;">Notification Detais</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <select class="floating-label-field floating-label-field--s3" asp-for="Us4id" asp-items="@(new SelectList(Model.us4List, "Id","Number"))">
+                                <option value="" disabled>Select</option>
+                            </select>
+                            <span asp-validation-for="Us4id" class="text-danger"></span>
+                            <label asp-for="Us4id" class="floating-label">Under section 4 </label>
+                        </div>
 
+                        <div class="form-group col-md-6">
+                            <select class="floating-label-field floating-label-field--s3" asp-for="Us6id" asp-items="@(new SelectList(Model.us6List, "Id","Number"))">
+                                <option value="" disabled>Select</option>
+                            </select>
+                            <span asp-validation-for="Us6id" class="text-danger"></span>
+                            <label asp-for="Us6id" class="floating-label">Under section 6 </label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.us17List, "Id","Number"))">
+                            <option value="" disabled>Select</option>
+                        </select>
+                        <span asp-validation-for="Us17id" class="text-danger"></span>
+                        <label asp-for="Us17id" class="floating-label">Under section 17 </label>
+                    </div>
+
+
+
+                </div>
 
 
                 <div class="form-row">
@@ -208,51 +248,7 @@
                 </div>
 
 
-                @*<div id="DivNotification">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Detais</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Under Section No. 4</label>
-                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                        <option value="0">---Select---</option>
-                        <option value="1">F.1(13)/62-L&H</option>
-                    </select>
-                </div>
 
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Under Section No. 6</label>
-                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                        <option value="0">---Select---</option>
-                        <option value="1">F.1(13)/62-L&H</option>
-                    </select>
-                </div>
-
-            </div>
-
-            <div class="form-row ">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Under Section No. 17</label>
-                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                        <option value="0">---Select---</option>
-                        <option value="1">F.1(13)/62-L&H</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm ">Document<span style="color:red">*</span></label>
-                    <input type="file" class="form-control" />
-                </div>
-
-            </div>
-        </div>*@
 
 
 
@@ -261,7 +257,7 @@
                 <div class="row mt-md-3">
                     <div class=" col-md-12">
                         <button class="btn btn-theme " type="submit">Create</button>
-                        @Html.ActionLink("Back", "Index", "PossessionDetail", null, new { @class = "btn btn-theme " })
+                        @Html.ActionLink("Back", "Index", "NewlandPossesionDetails", null, new { @class = "btn btn-theme " })
                     </div>
                 </div>
 

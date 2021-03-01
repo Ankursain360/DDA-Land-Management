@@ -255,6 +255,7 @@ namespace Libraries.Model
         public virtual DbSet<Newlandus22plot> Newlandus22plot { get; set; }
         public virtual DbSet<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
         public virtual DbSet<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
+        public virtual DbSet<Newlandpossessiondetails> Newlandpossessiondetails { get; set; }
 
         public virtual DbSet<Newlandappealdetail> Newlandappealdetail  { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -470,6 +471,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewlandappealdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandawardmasterdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandawardplotDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandpossesiondetailsConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

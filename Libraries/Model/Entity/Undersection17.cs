@@ -37,5 +37,7 @@ namespace Libraries.Model.Entity
         public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
         public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
+        public ICollection<Newlandpossessiondetails> Newlandpossessiondetails { get; set; }
+
     }
 }

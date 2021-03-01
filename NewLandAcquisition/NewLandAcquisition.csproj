@@ -49,6 +49,18 @@
 
   <ItemGroup>
     <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="Views\PossessionDetail\Create.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\PossessionDetail\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\PossessionDetail\View.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -57,6 +69,16 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PossessionDetail\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\PossessionDetail\_List.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\PossessionDetail\_List.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\PossessionDetail\Edit.cshtml" />
   </ItemGroup>
 
 </Project>
