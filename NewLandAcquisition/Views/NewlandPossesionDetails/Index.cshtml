@@ -1,17 +1,21 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Newlandnotification>
-@await Component.InvokeAsync("PageHeader", new { pageName = "New land Notification" })
+﻿@model IEnumerable<Libraries.Model.Entity.Newlandpossessiondetails>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Possession Detail" })
+
 <div class="pt-3">
+
 
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
-            <div class="col-md-3">
+         
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Notification Number" />
-                    <label for="txtName" class="floating-label"> Notification Number</label>
+                    <input type="text" id="txtNotificationN" class="floating-label-field floating-label-field--s3" placeholder="Code" />
+                    <label for="txtCode" class="floating-label">Village Name</label>
                 </div>
             </div>
-        
+
+
 
         </div>
         <div class="row mt-md-3">
@@ -29,13 +33,15 @@
             </div>
         </div>
     </div>
+
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Type">Notification Type</option>
-                        <option value="Number">Notification No </option>
+                     
+                        <option value="VILLAGE">Village</option>
+
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
@@ -47,30 +53,43 @@
             </div>
 
 
+
+
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/NewlandNotification/create" class="d-flex align-items-center btn btn-primary mr-2">
+                <a href="/NewlandPossesionDetails/create" class="d-flex align-items-center btn btn-primary mr-2">
                     <i class="ri-add-fill mr-2 mr-lg-1"></i>
                     <small>Add More</small>
                 </a>
-                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <a href="/NewlandPossesionDetails/download" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
                 </a>
             </div>
+
         </div>
 
-        <div class="table-responsive px-2" id="divNotificationMasterTable">
+        <div class="table-responsive px-2" id="divPossessionDetail">
 
         </div>
 
 
     </div>
 
+
+
+
+
 </div>
+
+
+
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/newlandnotificationindex.js"></script>
+    
+    <script src="~/js/possessiondetailsindex.js"></script>
+
 </environment>
 <environment exclude="Development">
-    <script src="~/js/newlandnotificationindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/possessiondetailsindex.min.js" asp-append-version="true"></script>
 </environment>

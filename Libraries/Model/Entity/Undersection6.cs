@@ -33,5 +33,6 @@ namespace Libraries.Model.Entity
         public ICollection<Undersection6plot> Undersection6plot { get; set; }
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
         public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
+        public ICollection<Newlandpossessiondetails> NewlandPossessiondetails { get; set; }
     }
 }

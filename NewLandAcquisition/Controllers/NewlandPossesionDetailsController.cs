@@ -13,13 +13,14 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
 
-namespace AcquiredLandInformationManagement.Controllers
+namespace NewLandAcquisition.Controllers
 {
-    public class PossessionDetailController : Controller
+    
+   public class NewlandPossesionDetailsController : Controller
     {
-        private readonly IPossessiondetailsService _Possessiondetailservice;
+        private readonly INewlandpossessiondetailsService _Possessiondetailservice;
 
-        public PossessionDetailController(IPossessiondetailsService possessiondetailsService)
+        public NewlandPossesionDetailsController(INewlandpossessiondetailsService possessiondetailsService)
         {
             _Possessiondetailservice = possessiondetailsService;
         }
@@ -32,7 +33,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] PossessiondetailsSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] NewlandpossesiondetailsSearchDto model)
         {
             var result = await _Possessiondetailservice.GetPagedNoPossessiondetails(model);
 
@@ -44,29 +45,35 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Create()
         {
-            Possessiondetails undersection4plot = new Possessiondetails();
-            undersection4plot.IsActive = 1;
-         
-            undersection4plot.KhasraList = await _Possessiondetailservice.BindKhasra(undersection4plot.VillageId);
-            undersection4plot.VillageList = await _Possessiondetailservice.GetAllVillage();
+            Newlandpossessiondetails newlandpossessiondetails = new Newlandpossessiondetails();
+            newlandpossessiondetails.IsActive = 1;
 
-            return View(undersection4plot);
+            newlandpossessiondetails.KhasraList = await _Possessiondetailservice.BindKhasra(newlandpossessiondetails.VillageId);
+            newlandpossessiondetails.VillageList = await _Possessiondetailservice.GetAllVillage();
+            newlandpossessiondetails.PossKhasraList = await _Possessiondetailservice.GetAllPossKhasra();
+            newlandpossessiondetails.us17List = await _Possessiondetailservice.GetAllus17();
+            newlandpossessiondetails.us4List = await _Possessiondetailservice.GetAllus4();
+            newlandpossessiondetails.us6List = await _Possessiondetailservice.GetAllus6();
+            return View(newlandpossessiondetails);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Possessiondetails undersection4plot)
+        public async Task<IActionResult> Create(Newlandpossessiondetails newlandpossessiondetails)
         {
             try
             {
-             
-                undersection4plot.KhasraList = await _Possessiondetailservice.BindKhasra(undersection4plot.VillageId);
-                undersection4plot.VillageList = await _Possessiondetailservice.GetAllVillage();
 
+                newlandpossessiondetails.KhasraList = await _Possessiondetailservice.BindKhasra(newlandpossessiondetails.VillageId);
+                newlandpossessiondetails.VillageList = await _Possessiondetailservice.GetAllVillage();
+                newlandpossessiondetails.PossKhasraList = await _Possessiondetailservice.GetAllPossKhasra();
+                newlandpossessiondetails.us17List = await _Possessiondetailservice.GetAllus17();
+                newlandpossessiondetails.us4List = await _Possessiondetailservice.GetAllus4();
+                newlandpossessiondetails.us6List = await _Possessiondetailservice.GetAllus6();
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _Possessiondetailservice.Create(undersection4plot);
+                    var result = await _Possessiondetailservice.Create(newlandpossessiondetails);
 
                     if (result == true)
                     {
@@ -77,18 +84,18 @@ namespace AcquiredLandInformationManagement.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4plot);
+                        return View(newlandpossessiondetails);
                     }
                 }
                 else
                 {
-                    return View(undersection4plot);
+                    return View(newlandpossessiondetails);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(undersection4plot);
+                return View(newlandpossessiondetails);
             }
         }
 
@@ -99,10 +106,13 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _Possessiondetailservice.FetchSingleResult(id);
 
 
-         
+
             Data.KhasraList = await _Possessiondetailservice.BindKhasra(Data.VillageId);
             Data.VillageList = await _Possessiondetailservice.GetAllVillage();
-
+            Data.PossKhasraList = await _Possessiondetailservice.GetAllPossKhasra();
+            Data.us17List = await _Possessiondetailservice.GetAllus17();
+            Data.us4List = await _Possessiondetailservice.GetAllus4();
+            Data.us6List = await _Possessiondetailservice.GetAllus6();
 
             if (Data == null)
             {
@@ -113,38 +123,42 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Possessiondetails undersection4plot)
+        public async Task<IActionResult> Edit(int id, Newlandpossessiondetails newlandpossessiondetails)
         {
 
-            undersection4plot.KhasraList = await _Possessiondetailservice.BindKhasra(undersection4plot.VillageId);
-            undersection4plot.VillageList = await _Possessiondetailservice.GetAllVillage();
-
+            newlandpossessiondetails.KhasraList = await _Possessiondetailservice.BindKhasra(newlandpossessiondetails.VillageId);
+            newlandpossessiondetails.VillageList = await _Possessiondetailservice.GetAllVillage();
+            newlandpossessiondetails.PossKhasraList = await _Possessiondetailservice.GetAllPossKhasra();
+            newlandpossessiondetails.us17List = await _Possessiondetailservice.GetAllus17();
+            newlandpossessiondetails.us4List = await _Possessiondetailservice.GetAllus4();
+            newlandpossessiondetails.us6List = await _Possessiondetailservice.GetAllus6();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _Possessiondetailservice.Update(id, undersection4plot);
+                    var result = await _Possessiondetailservice.Update(id, newlandpossessiondetails);
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _Possessiondetailservice.GetAllPossessiondetails();
                         return View("Index", list);
+                        // return View("Index");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4plot);
+                        return View(newlandpossessiondetails);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(undersection4plot);
+                    return View(newlandpossessiondetails);
                 }
             }
             else
             {
-                return View(undersection4plot);
+                return View(newlandpossessiondetails);
             }
         }
 
@@ -174,10 +188,13 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _Possessiondetailservice.FetchSingleResult(id);
-         
+
             Data.KhasraList = await _Possessiondetailservice.BindKhasra(Data.VillageId);
             Data.VillageList = await _Possessiondetailservice.GetAllVillage();
-
+            Data.PossKhasraList = await _Possessiondetailservice.GetAllPossKhasra();
+            Data.us17List = await _Possessiondetailservice.GetAllus17();
+            Data.us4List = await _Possessiondetailservice.GetAllus4();
+            Data.us6List = await _Possessiondetailservice.GetAllus6();
 
             if (Data == null)
             {
