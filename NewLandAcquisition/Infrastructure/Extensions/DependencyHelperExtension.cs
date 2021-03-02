@@ -57,6 +57,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
+            services.AddScoped<INewLandJointSurveyRepository, NewLandJointSurveyRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -95,6 +96,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<INewLandJointSurveyService, NewLandJointSurveyService>();
 
         }
     }

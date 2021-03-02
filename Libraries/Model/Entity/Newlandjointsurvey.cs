@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Libraries.Model.Common;
-using Microsoft.AspNetCore.Mvc;
 
 
 namespace Libraries.Model.Entity
@@ -44,7 +44,24 @@ namespace Libraries.Model.Entity
         public List<Newlandvillage> VillageList { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
+          //****** Attendance details *****
 
+        [NotMapped]
+        public List<string> AName { get; set; }
+
+        [NotMapped]
+        public List<string> ADesignation { get; set; }
+
+        [NotMapped]
+        public List<string> AAttendance { get; set; }
+        [NotMapped]
+
+        public List<string> DocumentName { get; set; }
+        [NotMapped]
+
+        public List<string> UploadFilePath { get; set; }
+        [NotMapped]
+        public List<IFormFile> Document { get; set; }
 
 
     }

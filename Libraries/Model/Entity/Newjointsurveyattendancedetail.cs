@@ -19,5 +19,6 @@ namespace Libraries.Model.Entity
        
 
         public Newlandjointsurvey JointSurvey { get; set; }
+
     }
 }

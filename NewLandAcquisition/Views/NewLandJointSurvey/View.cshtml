@@ -1,13 +1,12 @@
 ﻿@model Libraries.Model.Entity.Newlandjointsurvey
-@await Component.InvokeAsync("PageHeader", new { pageName = "Joint survey" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "New Land Joint Survey" })
 
 
 <div class="pt-3">
-
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+        <input type="hidden" asp-for="Id" />
         <div class="row pt-3">
 
             <div class="col-md-6">
@@ -22,14 +21,17 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select asp-for="VillageId" class="floating-label-field floating-label-field--s3" onchange="return onChangeVillage(this.options[this.selectedIndex].value);">
-                        <option value="">---Select---</option>
 
+            <div class="col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId"
+                            asp-items="@(new SelectList(Model.VillageList,"Id","Name"))"
+                            onchange="return onChangeVillage(this.options[this.selectedIndex].value)" required="required" requiredMsg="The Village field is required">
+                        <option selected="selected" value="">--Select-- </option>
                     </select>
-                    <span asp-validation-for="VillageId" class="text-danger "></span>
-                    <label class="floating-label">Village </label>
+                    <label asp-validation-for="VillageId" class="error"></label>
+                    <label asp-for="VillageId" class="floating-label">Village </label>
                 </div>
             </div>
         </div>
@@ -61,7 +63,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <label>
-                            Case involves to which Court:
+                            Site Position:
                         </label>
                     </div>
                     <div class="col-md-2">
@@ -180,6 +182,7 @@
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a id="viewDocumentId" asp-action="ViewSurveyReportFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="UploadFilePath" />
 
                                         <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3 " />
@@ -187,6 +190,7 @@
 
                                     </div>
                                 </td>
+
                                 <td>
                                     <div class="action-btns">
                                         <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
@@ -245,6 +249,7 @@
 
                             </td>
 
+
                             <td>
                                 <div class="action-btns">
                                     <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
@@ -279,11 +284,8 @@
                 </div>
             </div>
         </div>
-
-
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
                 @Html.ActionLink("Back", "Index", "NewLandJointSurvey", null, new { @class = "btn btn-theme " })
 
             </div>
@@ -295,10 +297,11 @@
 
 
 
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/newjointsurveycreate.js"></script>
+    <script src="~/js/newjointsurveyedit.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/newjointsurveycreate.min.js" asp-append-version="true"></script>
+    <script src="~/js/newjointsurveyedit.min.js" asp-append-version="true"></script>
 </environment>
