@@ -245,8 +245,6 @@ namespace Libraries.Model
         public virtual DbSet<Newlandus6plot> Newlandus6plot { get; set; }
         public virtual DbSet<Newlandnotification> Newlandnotification { get; set; }
         public virtual DbSet<NewlandNotificationtype> NewlandNotificationtype { get; set; }
-        public virtual DbSet<Newlandnotificationfilepath> Newlandnotificationfilepath { get; set; }
-
         public virtual DbSet<Newlandenhancecompensation> Newlandenhancecompensation { get; set; }
         public virtual DbSet<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
         public virtual DbSet<Newlandscheme> Newlandscheme { get; set; }
@@ -261,14 +259,10 @@ namespace Libraries.Model
 
         public virtual DbSet<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
         public virtual DbSet<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
-
-
         public virtual DbSet<Newlandappealdetail> Newlandappealdetail { get; set; }
+        public virtual DbSet<Newlandannexure1> Newlandannexure1 { get; set; }
+        public virtual DbSet<Newlandannexure1khasrarpt> Newlandannexure1khasrarpt { get; set; }
         public virtual DbSet<Newlandpossessiondetails> Newlandpossessiondetails { get; set; }
-
-        //public virtual DbSet<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
-        //public virtual DbSet<Newlandidentificationkhasradetailsannx1> Newlandidentificationkhasradetailsannx1 { get; set; }
-
         public virtual DbSet<Giscolorcode> Giscolorcode { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -477,7 +471,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Newlandus17plotConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandNotificationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandnotificationConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandnotificationfilepathConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandjointsurveyConfiguration());
             modelBuilder.ApplyConfiguration(new RequestConfiguration());
             modelBuilder.ApplyConfiguration(new Newlandus22plotConfiguration());
@@ -485,7 +478,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewlandawardmasterdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandawardplotDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new GiscColorCodeConfiguration());
-            modelBuilder.ApplyConfiguration(new NewlandpossesiondetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new Newlandannexure1Configuration());
+            modelBuilder.ApplyConfiguration(new Newlandannexure1khasrarptConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
