@@ -1,2 +1,8 @@
 ﻿Build started...
-1>------ Build started: Project: NewLandAcquisition, Configuration: Debug Any CPU ------
+1>------ Build started: Project: Model, Configuration: Debug Any CPU ------
+1>C:\Users\Parul\DDA-Land-Management\Libraries\Model\Entity\Currentstatusoflandhistory.cs(26,22,26,23): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+1>C:\Users\Parul\DDA-Land-Management\Libraries\Model\Entity\GISClean.cs(7,20,7,22): warning CS0114: 'Gisclean.Id' hides inherited member 'Entity<int>.Id'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+1>C:\Users\Parul\DDA-Land-Management\Libraries\Model\Entity\Departmenttarget.cs(17,20,17,22): warning CS0114: 'Departmenttarget.Id' hides inherited member 'Entity<int>.Id'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+1>Model -> C:\Users\Parul\DDA-Land-Management\Libraries\Model\bin\Debug\netcoreapp3.1\Model.dll
+1>Done building project "Model.csproj".
+2>------ Build started: Project: Repository, Configuration: Debug Any CPU ------

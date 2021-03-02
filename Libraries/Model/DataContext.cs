@@ -263,7 +263,9 @@ namespace Libraries.Model
         public virtual DbSet<Newlandannexure1> Newlandannexure1 { get; set; }
         public virtual DbSet<Newlandannexure1khasrarpt> Newlandannexure1khasrarpt { get; set; }
         public virtual DbSet<Newlandpossessiondetails> Newlandpossessiondetails { get; set; }
-        public virtual DbSet<Muncipality> Muncipality { get; set; }
+       
+        public virtual DbSet<Newlandnotificationfilepath> Newlandnotificationfilepath { get; set; }
+      
         public virtual DbSet<Giscolorcode> Giscolorcode { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -481,6 +483,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GiscColorCodeConfiguration());
             modelBuilder.ApplyConfiguration(new Newlandannexure1Configuration());
             modelBuilder.ApplyConfiguration(new Newlandannexure1khasrarptConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandpossesiondetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new NewlandnotificationfilepathConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

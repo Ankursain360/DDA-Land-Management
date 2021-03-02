@@ -19,6 +19,15 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Newlandnotification>> GetPagedNewlandnotificationdetails(NewlandnotificationSearchDto model);
         Task<List<Newlandnotification>> GetNewlandnotification();
 
+        Task<bool> DeleteNewlandnotification(int Id);
+        Task<bool> Deletefiledetails(int Id);
+        
+        Task<bool> Any(int id, string name);
+        Task<List<Newlandnotification>> GetAllNewlandNotification();
+        Task<List<NewlandNotificationtype>> GetAllNotificationType();
+        Task<List<Newlandnotificationfilepath>> GetAllfiledetails(int Id);
+        Task<bool> SaveNewlandNotification(Newlandnotification newlandnotification);
+        Task<bool> Savefiledetails(Newlandnotificationfilepath newlandnotificationfilepath);
 
     }
 }
