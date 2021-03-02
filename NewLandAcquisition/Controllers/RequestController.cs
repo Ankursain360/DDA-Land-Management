@@ -71,6 +71,9 @@ namespace NewLandAcquisition.Controllers
         {
             try
             {
+                var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
+                request.ReferenceNo = "TRN" + finalString;
+
                 documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
                 if (ModelState.IsValid)
                 {
@@ -84,6 +87,7 @@ namespace NewLandAcquisition.Controllers
 
                     var result = await _requestService.Create(request);
                     var DataFlow = await dataAsync();
+                    
                     for (int i = 0; i < DataFlow.Count; i++)
                     {
                         if (!DataFlow[i].parameterSkip)
@@ -111,6 +115,8 @@ namespace NewLandAcquisition.Controllers
 
 
                             }
+
+                            break;
                         }
 
                     }
@@ -157,11 +163,20 @@ namespace NewLandAcquisition.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Request scheme)
         {
+            documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
             if (ModelState.IsValid)
             {
+                FileHelper file = new FileHelper();
+                if (scheme.RequestPhotos != null)
+                {
+                    scheme.LayoutPlan = file.SaveFile(documentPhotoPathLayout, scheme.RequestPhotos);
+                }
+
+
+
                 try
                 {
                     var result = await _requestService.Update(id, scheme);
@@ -230,6 +245,32 @@ namespace NewLandAcquisition.Controllers
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
         }
+
+
+
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            try
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _requestService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.LayoutPlan;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+            catch (Exception ex)
+            {
+
+                FileHelper file = new FileHelper();
+                var Data = await _requestService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.LayoutPlan;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+
+            }
+        }
+
+
 
     }
 }

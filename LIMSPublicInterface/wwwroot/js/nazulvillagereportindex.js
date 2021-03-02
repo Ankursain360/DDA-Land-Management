@@ -4,23 +4,24 @@ var sortby = 1;//default Ascending
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
-        var result = ValidateForm();
-        var villageid = $('#VillageId option:selected').val();
-       
-
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
-        if (result) {
+        var sort = $('#ddlSort option:selected').val();
+        var vil = $('#VillageId option:selected').val();
+        if (vil == null) {
+            alert("Please select village")
+        }
+        else
+        if (sort == null)
+        {
+            alert("Please select valid sort by option");
+            $('#ddlSort option:selected').val('Village');
+        }
+        else
+        {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
+      
     });
 
-    $(".linkdisabled").click(function () {
-        return false;
-    });
 });
 
 function GetDetails(pageNumber, pageSize, order) {
@@ -48,35 +49,79 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     return model;
 }
 $("#btnAscending").click(function () {
-    $("#btnDescending").removeClass("active");
-    $("#btnAscending").addClass("active");
     sortby = 1;//for Ascending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else {
+        $("#btnDescending").removeClass("active");
+        $("#btnAscending").addClass("active");
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
 });
 
 
 $("#btnDescending").click(function () {
-    $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
     sortby = 2;//for Descending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else {
+        $("#btnAscending").removeClass("active");
+        $("#btnDescending").addClass("active");
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
 });
 
 $("#btnReset").click(function () {
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
 
-    $('#VillageId').val('0').trigger('change');
-   
-
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    } else {
+        $('#VillageId').val('0').trigger('change');
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
 
 });
 
+$('#ddlSort').change(function () {
+   
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else {
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
+});
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
-    currentPageNumber = pageNo;
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    } else
+    {
+        GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
+        currentPageNumber = pageNo;
+    }
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
-    currentPageSize = pageSize;
+  
+    var sort = $('#ddlSort option:selected').val();
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+    else
+    {
+        GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+        currentPageSize = pageSize;
+    }
 }

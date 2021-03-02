@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="AwardMasterId" asp-items="@(new SelectList(Model.NewlandAwardmasterList, "Id","AwardNumber"))">
-                        <option disabled="disabled" selected="selected">Select</option>
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="AwardMasterId" class="text-danger"></span>
                     <label class="floating-label" asp-for="AwardMasterId">Award No.</label>
@@ -107,7 +107,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit" id="btnSubmit">Create</button>
+                <button class="btn btn-theme " type="submit" id="btnSubmit" >Create</button>
                 @Html.ActionLink("Back", "Index", "AwardPlotDetails", null, new { @class = "btn btn-theme " })
 
             </div>
@@ -121,17 +121,3 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 
-@*<script>
-    $(document).ready(function () {
-        $("#formcreate").submit(function (e) {
-
-            //stop submitting the form to see the disabled button effect
-           // e.preventDefault();
-
-            //disable the submit button
-            $("#btnSubmit").attr("disabled", true);
-
-            return true;
-        });
-    });
-</script>*@

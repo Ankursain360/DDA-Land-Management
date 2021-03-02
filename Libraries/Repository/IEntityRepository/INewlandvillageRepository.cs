@@ -19,6 +19,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Zone>> GetAllZone();
         Task<PagedResult<Newlandvillage>> GetPagedNewlandvillage(NewlandvillageSearchDto model);
 
+        Task<PagedResult<Newlandvillage>> GetPagedNewLandVillageReport(NewlandVillageReportSearchDto model);
+
 
     }
 }

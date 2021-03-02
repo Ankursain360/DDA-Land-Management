@@ -53,7 +53,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
-                .HasMaxLength(500)
+                .HasMaxLength(2000)
                 .IsUnicode(false);
 
             builder.Property(e => e.RequiringBody)
@@ -75,6 +75,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
             builder.Property(e => e.PendingAt).HasColumnType("int(11)");
 
+            builder.Property(e => e.ReferenceNo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
         }
         }

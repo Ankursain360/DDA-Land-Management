@@ -166,5 +166,11 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetVillageAutoCompleteDetails(prefix));
         }
+
+       
+        public async Task<JsonResult> GetInfrastructureDetails(int VillageId)
+        {
+            return Json(await _GISService.GetInfrastructureDetails(VillageId));
+        }
     }
 }

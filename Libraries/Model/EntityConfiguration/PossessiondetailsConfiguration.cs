@@ -70,7 +70,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.VillageId)
                 .HasConstraintName("fkpvillageid");
 
-
+          
         }
         }
     }

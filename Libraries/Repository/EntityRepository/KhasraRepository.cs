@@ -246,7 +246,9 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
         {
-            List<Khasra> khasraList = await _dbContext.Khasra.ToListAsync();
+            List<Khasra> khasraList = await _dbContext.Khasra
+                .Where(x => (x.AcquiredlandvillageId == villageId && x.IsActive == 1))
+                 .ToListAsync();
             return khasraList;
         }
 

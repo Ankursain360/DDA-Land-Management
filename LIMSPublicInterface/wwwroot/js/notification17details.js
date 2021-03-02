@@ -5,6 +5,17 @@ var currentPageSize = 10;
 
 $("#btnGenerate").click(function () {
     var UnderSection4Id = $("#UnderSection17Id").val();
+
+    var element = $("#UnderSection17Id").find('option:selected');
+    var myTag = element.attr("mytag");
+    // alert(myTag);
+    if (myTag) {
+        $('#village_tag').html("Notification No / Date - " + myTag);
+    } else {
+        $('#village_tag').html("Notification No / Date - ");
+    }
+
+
     if (UnderSection4Id) {
         debugger;
         var param = GetSearchParam(currentPageNumber, currentPageSize);

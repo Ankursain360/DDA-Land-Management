@@ -21,5 +21,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Request>> GetPagedRequest(RequestSearchDto model);
         Task<bool> UpdateBeforeApproval(int id, Request request);
+        Task<List<TrackingListDataDto>> GetPagedTrackingList(TrackingListSearchDto model);
     }
 }

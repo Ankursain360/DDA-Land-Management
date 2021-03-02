@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dto.Search;
+﻿using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-using Repository.IEntityRepository;
+using Model.Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -19,14 +20,42 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<bool> DeleteNewlandnotification(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Newlandnotification.Where(x => x.Id == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<bool> Deletefiledetails(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Newlandnotificationfilepath.Where(x => x.NewlandNotificationId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<Newlandnotification> FetchSingleResult(int id)
+        {
+            return await _dbContext.Newlandnotification
+                            .Include(x => x.Newlandnotificationfilepath)
+                            .Include(x => x.notificationtypeList)
+                              .Where(x => x.Id == id)
+                            .FirstOrDefaultAsync();
+        }
+
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Newlandnotification.AnyAsync(t => t.Id != id && t.NotificationNo.ToLower() == name.ToLower());
         }
-        public async Task<List<Newlandnotification>> GetNewlandnotificationdetails()
+        public async Task<List<Newlandnotification>> GetAllNewlandNotification()
         {
             return await _dbContext.Newlandnotification.Where(x => x.IsActive == 1).ToListAsync();
-            //return await _dbContext.casenature.OrderByDescending(s => s.IsActive).ToListAsync();
+        }
+        public async Task<List<NewlandNotificationtype>> GetAllNotificationType()
+        {
+            return await _dbContext.NewlandNotificationtype.Where(x => x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<Newlandnotificationfilepath>> GetAllfiledetails(int Id)
+        {
+            return await _dbContext.Newlandnotificationfilepath.Where(x => x.Id == Id && x.IsActive == 1).ToListAsync();
         }
         public async Task<List<NewlandNotificationtype>> GetNotificationType()
         {
@@ -37,11 +66,8 @@ namespace Libraries.Repository.EntityRepository
         {
 
             var data = await _dbContext.Newlandnotification
-                              // .Include(x => x.Noti)
-                              //.Include(x=>x.Us17)
-                              //.Include(x=>x.Us4)
-                              //.Include(x=>x.Us6)
-                             // .Include(x => x.Proposal)
+                              .Include(x=>x.Newlandnotificationfilepath)
+                             .Include(x=>x.NewlandNotificationtype)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name) )
                               .OrderByDescending(s => s.IsActive)
                              .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
@@ -50,40 +76,32 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
+                    case ("TYPE"):
                         data = null;
                         data = await _dbContext.Newlandnotification
-                                 // .Include(x => x.Noti)
-                                 //.Include(x=>x.Us17)
-                                 //.Include(x=>x.Us4)
-                                 //.Include(x=>x.Us6)
+                              .Include(x => x.Newlandnotificationfilepath)
+                             .Include(x => x.NewlandNotificationtype)
                                  // .Include(x => x.Proposal)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
-                              .OrderBy(s => s.NotificationNo)
+                              .OrderBy(s => s.NotificationType)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Newlandnotification
-                                   // .Include(x => x.Noti)
-                                   //.Include(x=>x.Us17)
-                                   //.Include(x=>x.Us4)
-                                   //.Include(x=>x.Us6)
-                                   // .Include(x => x.Proposal)
+                              .Include(x => x.Newlandnotificationfilepath)
+                             .Include(x => x.NewlandNotificationtype)
                                    .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
                                 .OrderByDescending(s => s.IsActive)
                                  .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
-                    case ("DATE"):
+                    case ("NUMBER"):
                         data = null;
                         data = await _dbContext.Newlandnotification
-                                  // .Include(x => x.Noti)
-                                  //.Include(x=>x.Us17)
-                                  //.Include(x=>x.Us4)
-                                  //.Include(x=>x.Us6)
-                                  // .Include(x => x.Proposal)
+                              .Include(x => x.Newlandnotificationfilepath)
+                             .Include(x => x.NewlandNotificationtype)
                                   .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
-                               .OrderBy(s => s.Date)
+                               .OrderBy(s => s.NotificationNo)
                                 .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize); break;
                     
                 }
@@ -92,40 +110,31 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
+                    case ("TYPE"):
                         data = null;
                         data = await _dbContext.Newlandnotification
-                                 // .Include(x => x.Noti)
-                                 //.Include(x=>x.Us17)
-                                 //.Include(x=>x.Us4)
-                                 //.Include(x=>x.Us6)
-                                 // .Include(x => x.Proposal)
+                              .Include(x => x.Newlandnotificationfilepath)
+                             .Include(x => x.NewlandNotificationtype)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
-                              .OrderByDescending(s => s.NotificationNo)
+                              .OrderByDescending(s => s.NotificationType)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Newlandnotification
-                                 // .Include(x => x.Noti)
-                                 //.Include(x=>x.Us17)
-                                 //.Include(x=>x.Us4)
-                                 //.Include(x=>x.Us6)
-                                 // .Include(x => x.Proposal)
+                              .Include(x => x.Newlandnotificationfilepath)
+                             .Include(x => x.NewlandNotificationtype)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
                               .OrderBy(s => s.IsActive)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
-                    case ("DATE"):
+                    case ("NUMBET"):
                         data = null;
                         data = await _dbContext.Newlandnotification
-                                 // .Include(x => x.Noti)
-                                 //.Include(x=>x.Us17)
-                                 //.Include(x=>x.Us4)
-                                 //.Include(x=>x.Us6)
-                                 // .Include(x => x.Proposal)
+                              .Include(x => x.Newlandnotificationfilepath)
+                             .Include(x => x.NewlandNotificationtype)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
-                              .OrderByDescending(s => s.Date)
+                              .OrderByDescending(s => s.NotificationNo)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
 
@@ -134,5 +143,20 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+
+        public async Task<bool> SaveNewlandNotification(Newlandnotification newlandnotification)
+        {
+            _dbContext.Newlandnotification.Add(newlandnotification);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<bool> Savefiledetails(Newlandnotificationfilepath newlandnotificationfilepath)
+        {
+            _dbContext.Newlandnotificationfilepath.Add(newlandnotificationfilepath);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        
     }
 }

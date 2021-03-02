@@ -21,8 +21,10 @@ namespace Libraries.Service.IApplicationService
         Task<Newlandvillage> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         //  Task<bool> CheckUniqueLoginName(int id, string loginname);
-        Task<PagedResult<Newlandvillage>> GetPagedNewlandvillage(NewlandvillageSearchDto model)
-;
+        Task<PagedResult<Newlandvillage>> GetPagedNewlandvillage(NewlandvillageSearchDto model);
+
+        Task<PagedResult<Newlandvillage>> GetPagedNewLandVillageReport(NewlandVillageReportSearchDto model);
+
 
     }
 }

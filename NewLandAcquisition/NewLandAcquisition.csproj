@@ -2,34 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>b818242d-0eed-4b3d-b626-18075a6e1a79</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="Views\AwardMasterDetails\Create.cshtml" />
-    <Content Remove="Views\AwardMasterDetails\Edit.cshtml" />
-    <Content Remove="Views\AwardMasterDetails\Index.cshtml" />
-    <Content Remove="Views\AwardMasterDetails\View.cshtml" />
-    <Content Remove="Views\AwardMasterDetails\_List.cshtml" />
-    <Content Remove="Views\AwardPlotDetails\Create.cshtml" />
-    <Content Remove="Views\AwardPlotDetails\Edit.cshtml" />
-    <Content Remove="Views\AwardPlotDetails\Index.cshtml" />
-    <Content Remove="Views\AwardPlotDetails\View.cshtml" />
-    <Content Remove="Views\AwardPlotDetails\_List.cshtml" />
-    <Content Remove="wwwroot\js\awardmastercreate.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\AwardMasterDetails\Create.cshtml" />
-    <None Include="Views\AwardMasterDetails\Edit.cshtml" />
-    <None Include="Views\AwardMasterDetails\Index.cshtml" />
-    <None Include="Views\AwardMasterDetails\View.cshtml" />
-    <None Include="Views\AwardMasterDetails\_List.cshtml" />
-    <None Include="Views\AwardPlotDetails\Create.cshtml" />
-    <None Include="Views\AwardPlotDetails\Edit.cshtml" />
-    <None Include="Views\AwardPlotDetails\Index.cshtml" />
-    <None Include="Views\AwardPlotDetails\View.cshtml" />
-    <None Include="Views\AwardPlotDetails\_List.cshtml" />
-  </ItemGroup>
 
 	<ItemGroup> 
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" /> 
@@ -57,6 +31,8 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newlandschemeindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
 </Project>

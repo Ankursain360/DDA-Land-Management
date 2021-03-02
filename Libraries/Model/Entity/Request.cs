@@ -15,34 +15,44 @@ namespace Libraries.Model.Entity
     {
 
 
-     [Required]
+     [Required (ErrorMessage = "The Proposal Name field is required")]
         public string PproposalName { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The File No field is required")]
         public string PfileNo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Requiring Body field is required")]
         public string RequiringBody { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Area/Locality field is required")]
         public string AreaLocality { get; set; }
-        [Required]
+      //  [Required(ErrorMessage = "The ProposalName field is required")]
         public string TaunderRequest { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Unit Area field is required")]
         public string UnitArea { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Purpose of Acquistion field is required")]
         public string PurposeOfAcquistion { get; set; }
  
         public string LayoutPlan { get; set; }
-        [Required]
+       
         public string Remarks { get; set; }
         [Required]
         public byte IsActive { get; set; }
 
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
+        public string ReferenceNo { get; set; }
+
+        [NotMapped]
+    //    [Required(ErrorMessage = "The Layout Plan field is required")]
+    //    [DataType(DataType.Upload)]
+        public IFormFile RequestPhotos { get; set; }
 
 
 
         [NotMapped]
-        public IFormFile RequestPhotos { get; set; }
+        public string ApprovalRemarks { get; set; }
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+
 
 
     }

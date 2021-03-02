@@ -12,9 +12,11 @@ $(document).ready(function () {
 $("#btnGenerate").click(function () {
     var VillageId = $("#VillageId").val();
     var KhasraId = $("#KhasraId").val();
-  
-    if (VillageId == 0) {
+   // alert(VillageId);
+    if (VillageId == 0 || VillageId == null) {
+       $('#KhasraId').val('0').trigger('change');
         alert("Please Select Village");
+        window.location.reload();
     } else if (KhasraId == 0) {
         alert("Please Select Khasra No");
     } else {

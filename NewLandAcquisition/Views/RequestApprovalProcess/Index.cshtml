@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Request Approval Process" })
+
+<form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Filter</h3>
+
+    <div class="row mt-md-3">
+
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="0" checked>
+                <label class="form-check-label" for="radio">
+                    Pending
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
+                <label class="form-check-label" for="radio">
+                    Approved
+                </label>
+            </div>
+        </div>
+
+    </div>
+</form>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" id="Sortbyd">
+
+                    <option value="Name">Proposal Name</option>
+
+                    <option value="FileNo">File No</option>
+                    <option value="Area">Area Locality</option>
+
+
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
+                <input type="hidden" name="sortdesc" id="sortdesc" value="1">
+            </div>
+            <div class="short-btn d-flex align-items-center">
+                <span class="btn slow active" id="descId" title="Ascending order">    <i class="ri-sort-asc">    </i></span>
+                <span class="btn slow" id="ascId" title="Descending order">  <i class="ri-sort-desc"></i></span>
+            </div>
+        </div>
+
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive px-2" id="divOnlineComplaintTable">
+
+    </div>
+</div>
+
+<br />
+<br />
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/requestapprovalprocessindex.js"></script>
+   
+</environment>
+<environment exclude="Development">
+    <script src="~/js/requestapprovalprocessindex.min.js" asp-append-version="true"></script>
+</environment>

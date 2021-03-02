@@ -219,8 +219,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             Id = Id ?? 0;
             var data = await _sakanidetailService.FetchSingleSaknikhasra(Convert.ToInt32(Id));
-            //Convert.ToDateTime(data.RenewalDate);
-            //   Convert.ToDateTime(data.RenewalDate).ToString("dd-MMM-yyyy");
+           
             return Json(data);
            
         }
@@ -390,14 +389,15 @@ namespace AcquiredLandInformationManagement.Controllers
 
                     //************ Save Khasra  ************  
 
-                    if (
-                        sakni.Plot != null &&
-                        sakni.Area != null &&
-                        sakni.Category != null &&
-                        sakni.LeaseAmount != null &&
-                        sakni.RenewalDate != null
+                    if (sakni.KhasraId != null
+                       // sakni.Plot != null
+                        // && sakni.Area != null &&
+                        //sakni.Category != null &&
+                        //sakni.LeaseAmount != null &&
+                        //sakni.RenewalDate != null
                         )
                     {
+                       
                         Saknikhasra Khsra = new Saknikhasra();
 
                         Khsra.KhasraId = sakni.KhasraId;
@@ -408,10 +408,11 @@ namespace AcquiredLandInformationManagement.Controllers
                         Khsra.RenewalDate = sakni.RenewalDate;
                         Khsra.SakniDetailId = sakni.Id;
                         Khsra.CreatedBy = SiteContext.UserId;
-                        result = await _sakanidetailService.UpdateKhasra(id,Khsra);
+                        
+                       result = await _sakanidetailService.UpdateKhasra(id,Khsra);
                     }
 
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                     var list = await _sakanidetailService.GetAllSaknidetail();
                     return View("Index", list);
 

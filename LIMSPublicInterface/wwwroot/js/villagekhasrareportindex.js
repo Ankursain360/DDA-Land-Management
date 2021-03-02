@@ -1,27 +1,32 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
-        var result = ValidateForm();
+        var sort = $('#ddlSort option:selected').val();
+        var vil = $('#AcquiredlandvillageId option:selected').val();
         var name = $('#Name option:selected').val();
-        var villageid = $('#AcquiredlandvillageId option:selected').val();
+        if (vil == null) {
+            alert("Please select village")
+            
+        }else
+            if (name == null)
+            {
+                alert("Please select khasra no")
+            } else
+                if (sort == null)
+                {
+                    alert("Please select valid sort by option");
+                    $('#ddlSort option:selected').val('Village');
+                }
 
-
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
-        if (result) {
+           else {
             GetDetails(currentPageNumber, currentPageSize, sortby);
-        }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
+                }
+
     });
 
-    $(".linkdisabled").click(function () {
-        return false;
-    });
 });
 
 function GetDetails(pageNumber, pageSize, order) {
@@ -50,37 +55,161 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     return model;
 }
 $("#btnAscending").click(function () {
-    $("#btnDescending").removeClass("active");
-    $("#btnAscending").addClass("active");
+  
     sortby = 1;//for Ascending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    var sort = $('#ddlSort option:selected').val();
+ 
+    var sort = $('#ddlSort option:selected').val();
+    var vil = $('#AcquiredlandvillageId option:selected').val();
+    var name = $('#Name option:selected').val();
+    if (vil == null) {
+        alert("Please select village")
+
+    } else
+        if (name == null) {
+            alert("Please select khasra no")
+        } else
+            if (sort == null) {
+                alert("Please select valid sort by option");
+                $('#ddlSort option:selected').val('Village');
+            }
+
+            else {
+                $("#btnDescending").removeClass("active");
+                $("#btnAscending").addClass("active");
+                GetDetails(currentPageNumber, currentPageSize, sortby);
+            }
+
 });
 
 
 $("#btnDescending").click(function () {
-    $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
+   
     sortby = 2;//for Descending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+  
+    var sort = $('#ddlSort option:selected').val();
+    var vil = $('#AcquiredlandvillageId option:selected').val();
+    var name = $('#Name option:selected').val();
+    if (vil == null) {
+        alert("Please select village")
+
+    } else
+        if (name == null) {
+            alert("Please select khasra no")
+        } else
+            if (sort == null) {
+                alert("Please select valid sort by option");
+                $('#ddlSort option:selected').val('Village');
+            }
+
+            else {
+                $("#btnAscending").removeClass("active");
+                $("#btnDescending").addClass("active");
+                GetDetails(currentPageNumber, currentPageSize, sortby);
+            }
 });
 
 $("#btnReset").click(function () {
-    $('#AcquiredlandvillageId').val('0').trigger('change');
-    $('#Name').val('0').trigger('change');
+
+    var sort = $('#ddlSort option:selected').val();
+    var vil = $('#AcquiredlandvillageId option:selected').val();
+    var name = $('#Name option:selected').val();
+
+    if (sort == null) {
+        alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('Village');
+    }
+      else
+            if (vil == null) {
+                // alert("Please select village")
+                $('#AcquiredlandvillageId').val('0').trigger('change');
+                $('#Name').val('0').trigger('change');
+                GetDetails(currentPageNumber, currentPageSize, sortby);
+
+            } else
+                if (name == null) {
+                    $('#AcquiredlandvillageId').val('0').trigger('change');
+                    $('#Name').val('0').trigger('change');
+                    GetDetails(currentPageNumber, currentPageSize, sortby);
+                    //alert("Please select khasra no")
+                }
+
+            else {
+                $('#AcquiredlandvillageId').val('0').trigger('change');
+                $('#Name').val('0').trigger('change');
+                GetDetails(currentPageNumber, currentPageSize, sortby);
+            }
+});
 
 
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+$('#ddlSort').change(function () {
+  
+
+    var sort = $('#ddlSort option:selected').val();
+    var vil = $('#AcquiredlandvillageId option:selected').val();
+    var name = $('#Name option:selected').val();
+    if (vil == null) {
+        alert("Please select village")
+
+    } else
+        if (name == null) {
+            alert("Please select khasra no")
+        } else
+            if (sort == null) {
+                alert("Please select valid sort by option");
+                $('#ddlSort option:selected').val('Village');
+            }
+
+            else {
+                GetDetails(currentPageNumber, currentPageSize, sortby);
+            }
 
 });
 
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
-    currentPageNumber = pageNo;
+    var sort = $('#ddlSort option:selected').val();
+    var vil = $('#AcquiredlandvillageId option:selected').val();
+    var name = $('#Name option:selected').val();
+    if (vil == null) {
+        alert("Please select village")
+
+    } else
+        if (name == null) {
+            alert("Please select khasra no")
+        } else
+            if (sort == null) {
+                alert("Please select valid sort by option");
+                $('#ddlSort option:selected').val('Village');
+            }
+
+            else {
+                GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
+                currentPageNumber = pageNo;
+            }
+
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
-    currentPageSize = pageSize;
+    var sort = $('#ddlSort option:selected').val();
+    var vil = $('#AcquiredlandvillageId option:selected').val();
+    var name = $('#Name option:selected').val();
+    if (vil == null) {
+        alert("Please select village")
+
+    } else
+        if (name == null) {
+            alert("Please select khasra no")
+        } else
+            if (sort == null) {
+                alert("Please select valid sort by option");
+                $('#ddlSort option:selected').val('Village');
+            }
+
+            else {
+                GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+                currentPageSize = pageSize;
+            }
+
 }
 
 
@@ -91,7 +220,7 @@ function onChange(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-
+       
         $("#Name").val('0').trigger('change');
         $("#Name").html(html);
     });
