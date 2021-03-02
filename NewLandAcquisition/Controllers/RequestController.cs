@@ -71,6 +71,9 @@ namespace NewLandAcquisition.Controllers
         {
             try
             {
+                var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
+                request.ReferenceNo = "TRN" + finalString;
+
                 documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
                 if (ModelState.IsValid)
                 {

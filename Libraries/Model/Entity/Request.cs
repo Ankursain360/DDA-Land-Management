@@ -38,7 +38,7 @@ namespace Libraries.Model.Entity
 
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
-
+        public string ReferenceNo { get; set; }
 
         [NotMapped]
     //    [Required(ErrorMessage = "The Layout Plan field is required")]
