@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Request>> GetAllRequest();
         Task<PagedResult<Request>> GetPagedRequest(RequestSearchDto model);
+        Task<List<TrackingListDataDto>> GetPagedTrackingList(TrackingListSearchDto model);
 
     }
 }

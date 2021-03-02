@@ -25,6 +25,7 @@ namespace Libraries.Model.Entity
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             Mutationdetails = new HashSet<Mutationdetails>();
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
+            Newlandjointsurvey = new HashSet<Newlandjointsurvey>();
         }
 
         [Required(ErrorMessage = " Department is mandatory", AllowEmptyStrings = false)]

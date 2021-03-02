@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 using Dto.Search;
 
 
+using Repository.Common;
+
+
 namespace Libraries.Repository.EntityRepository
 {
   public  class RequestRepository : GenericRepository<Request>, IRequestRepository
@@ -160,6 +163,34 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+
+
+
+
+
+        public async Task<List<TrackingListDataDto>> GetPagedTrackingList(TrackingListSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("BindTrackingDetails")
+                                            .WithSqlParams(("P_ReferenceId", model.referenceNo))
+
+
+
+                                            .ExecuteStoredProcedureAsync<TrackingListDataDto>();
+
+                return (List<TrackingListDataDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
 
 
 

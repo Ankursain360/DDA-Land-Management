@@ -32,7 +32,8 @@ namespace Libraries.Repository.IEntityRepository
 
        
         Task<Newjointsurveyreportdetail> GetUploadDocumentFilePath(int Id);
-      
+        Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
+
 
     }
 }

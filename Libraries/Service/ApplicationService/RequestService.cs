@@ -106,7 +106,10 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
+        public async Task<List<TrackingListDataDto>> GetPagedTrackingList(TrackingListSearchDto model)
+        {
+            return await _requestRepository.GetPagedTrackingList(model);
+        }
 
     }
 }

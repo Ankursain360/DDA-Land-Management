@@ -46,7 +46,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
 
 
 
-           
+
             services.AddScoped<INewlandus22plotRepository, Newlandus22plotRepository>();
             services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
             services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
@@ -58,10 +58,14 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
+
+            services.AddScoped<INewLandJointSurveyRepository, NewLandJointSurveyRepository>();
+
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IRequestApprovalProcessRepository, RequestApprovalProcessRepository>();
             services.AddScoped<INewlandpossesiondetailsRepository, NewlandpossesiondetailsRepository>();
-            services.AddScoped<INewlandannexure1Repository, Newlandannexure1Repository>();
+
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -90,7 +94,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandus6plotService, Newlandus6plotService>();
             services.AddScoped<INewlandus17plotService, Newlandus17plotService>();
 
-          
+
             services.AddScoped<INewlandus22plotService, Newlandus22plotService>();
             services.AddScoped<INewlandAppealdetailservice, NewlandAppealdetailService>();
             services.AddScoped<INewlandnotificationService, NewlandnotificationService>();
@@ -100,11 +104,15 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IActionsService, ActionsService>();
+
+            services.AddScoped<INewLandJointSurveyService, NewLandJointSurveyService>();
+
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IRequestApprovalProcessService, RequestApprovalProcessService>();
             services.AddScoped<INewlandpossessiondetailsService, NewlandpossesiondetailsService>();
-            services.AddScoped<INewlandannexure1Service, Newlandannexure1Service>();
+
+
         }
     }
 }

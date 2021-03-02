@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+
 
 
 namespace Libraries.Model.Entity
@@ -15,7 +16,7 @@ namespace Libraries.Model.Entity
         public string DocumentName { get; set; }
         public string UploadFilePath { get; set; }
         public byte? IsActive { get; set; }
-       
+        
 
         public Newlandjointsurvey JointSurvey { get; set; }
     }
