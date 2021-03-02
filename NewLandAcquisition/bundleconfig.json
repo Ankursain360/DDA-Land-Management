@@ -196,5 +196,23 @@
     "inputFiles": [
       "wwwroot/js/requestindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/referencetrackingindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/referencetrackingindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possessiondetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/possessiondetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possessiondetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/possessiondetailscreate.js"
+    ]
   }
 ]
