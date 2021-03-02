@@ -259,11 +259,10 @@ namespace Libraries.Model
 
         public virtual DbSet<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
         public virtual DbSet<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
-
-
         public virtual DbSet<Newlandappealdetail> Newlandappealdetail { get; set; }
-
-       
+        public virtual DbSet<Newlandannexure1> Newlandannexure1 { get; set; }
+        public virtual DbSet<Newlandannexure1khasrarpt> Newlandannexure1khasrarpt { get; set; }
+        public virtual DbSet<Newlandpossessiondetails> Newlandpossessiondetails { get; set; }
         public virtual DbSet<Giscolorcode> Giscolorcode { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -479,6 +478,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewlandawardmasterdetailConfiguration());
             modelBuilder.ApplyConfiguration(new NewlandawardplotDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new GiscColorCodeConfiguration());
+            modelBuilder.ApplyConfiguration(new Newlandannexure1Configuration());
+            modelBuilder.ApplyConfiguration(new Newlandannexure1khasrarptConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

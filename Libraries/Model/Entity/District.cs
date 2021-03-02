@@ -15,12 +15,9 @@ namespace Libraries.Model.Entity
         {
             Acquiredlandvillage = new HashSet<Acquiredlandvillage>();
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
-            Userprofile = new HashSet<Userprofile>();
+            Newlandannexure1 = new HashSet<Newlandannexure1>();
             Newlandvillage = new HashSet<Newlandvillage>();
-            //Newlandidentificationannx1 = new HashSet<Newlandidentificationannx1>();
-            
-           
-          
+            Userprofile = new HashSet<Userprofile>();
         }
         [Required(ErrorMessage = "District name is Mandatory")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
@@ -31,12 +28,10 @@ namespace Libraries.Model.Entity
         [Required]
         public byte IsActive { get; set; }
 
-        public virtual ICollection<Userprofile> Userprofile { get; set; }
         public ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
-        public ICollection<Newlandvillage> Newlandvillage { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
-        //public ICollection<Newlandidentificationannx1> Newlandidentificationannx1 { get; set; }
-
-
+        public ICollection<Newlandannexure1> Newlandannexure1 { get; set; }
+        public ICollection<Newlandvillage> Newlandvillage { get; set; }
+        public ICollection<Userprofile> Userprofile { get; set; }
     }
 }
