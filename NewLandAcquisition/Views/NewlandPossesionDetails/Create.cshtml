@@ -14,7 +14,7 @@
                         <div class="floating-label-wrap">
                             <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
                                     onchange="return onChange(this.options[this.selectedIndex].value);">
-                                <option value="" disabled>Select</option>
+                                <option value="" selected="selected" disabled>Select</option>
                             </select>
                             <span asp-validation-for="VillageId" class="text-danger"></span>
                             <label asp-for="VillageId" class="floating-label">Village Name</label>
@@ -125,7 +125,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <select class="floating-label-field floating-label-field--s3" asp-for="PossKhasraId" asp-items="@(new SelectList(Model.PossKhasraList, "Id","Name"))">
-                                <option value="" disabled>Select</option>
+                                <option value="" selected="selected" disabled>Select</option>
                             </select>
                             <span asp-validation-for="PossKhasraId" class="text-danger"></span>
                             <label class="floating-label" asp-for="PossKhasraId">Possesion Khasra No</label>
@@ -148,7 +148,7 @@
 
 
 
-                                <input type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3" />
+                                <input type="number"  asp-for="Bigha" class="floating-label-field floating-label-field--s3" />
                                 <label class="floating-label">Bigha</label>
 
                             </div>
@@ -159,7 +159,7 @@
 
 
 
-                                <input type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3" placeholder="Biswa" />
+                                <input type="number" asp-for="Biswa"  class="floating-label-field floating-label-field--s3" placeholder="Biswa" />
                                 <label class="floating-label">Biswa</label>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
 
 
 
-                                <input type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3" placeholder="Biswanshi" />
+                                <input type="number"  asp-for="Biswanshi" class="floating-label-field floating-label-field--s3" placeholder="Biswanshi" />
                                 <label class="floating-label">Biswanshi</label>
                             </div>
                         </div>
@@ -189,7 +189,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <select class="floating-label-field floating-label-field--s3" asp-for="Us4id" asp-items="@(new SelectList(Model.us4List, "Id","Number"))">
-                                <option value="" disabled>Select</option>
+                                <option value="" selected="selected" disabled>Select</option>
                             </select>
                             <span asp-validation-for="Us4id" class="text-danger"></span>
                             <label asp-for="Us4id" class="floating-label">Under section 4 </label>
@@ -197,7 +197,7 @@
 
                         <div class="form-group col-md-6">
                             <select class="floating-label-field floating-label-field--s3" asp-for="Us6id" asp-items="@(new SelectList(Model.us6List, "Id","Number"))">
-                                <option value="" disabled>Select</option>
+                                <option value="" disabled selected="selected">Select</option>
                             </select>
                             <span asp-validation-for="Us6id" class="text-danger"></span>
                             <label asp-for="Us6id" class="floating-label">Under section 6 </label>
@@ -207,7 +207,7 @@
 
                     <div class="form-group col-md-6">
                         <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.us17List, "Id","Number"))">
-                            <option value="" disabled>Select</option>
+                            <option value="" selected="selected" disabled>Select</option>
                         </select>
                         <span asp-validation-for="Us17id" class="text-danger"></span>
                         <label asp-for="Us17id" class="floating-label">Under section 17 </label>
