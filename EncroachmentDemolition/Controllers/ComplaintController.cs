@@ -88,16 +88,12 @@ namespace EncroachmentDemolition.Controllers
                 if (ModelState.IsValid)
                 {
                     targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
-                    // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+                   
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
                     {
                         onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
-                     //   var LattitudeValue = TempData["LattitudeValue"] as string;
-                      //  onlinecomplaint.Lattitude = LattitudeValue;
-                      //  var LongitudeValue = TempData["LongitudeValue"] as string;
-                      //  onlinecomplaint.Longitude = LongitudeValue;
-                        // var lattlongurlvalue = TempData["url"] as string;
+                   
                     }
 
 
