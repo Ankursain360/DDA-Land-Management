@@ -1,0 +1,108 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Core.Enum;
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Mvc;
+using NewLandAcquisition.Filters;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using Utility.Helper;
+
+namespace NewLandAcquisition.Controllers
+{
+     public class Newlandannexure1Controller : BaseController
+     {
+          private readonly INewlandannexure1Service _newlandannexure1Service;
+          public Newlandannexure1Controller(INewlandannexure1Service newlandannexure1Service)
+          {
+            _newlandannexure1Service = newlandannexure1Service;
+          }
+          public IActionResult Index()
+          {
+            return View();
+          }
+        public async Task<IActionResult> Create()
+        {
+            Newlandannexure1 Annexure1 = new Newlandannexure1();
+            Annexure1.IsActive = 1;
+            Annexure1.MunicipalityList = await _newlandannexure1Service.GetAllMunicipality();
+            Annexure1.DistrictList = await _newlandannexure1Service.GetAllDistrict();
+            return View(Annexure1);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Newlandannexure1 Annexure1)
+        {
+
+            Annexure1.MunicipalityList = await _newlandannexure1Service.GetAllMunicipality();
+            Annexure1.DistrictList = await _newlandannexure1Service.GetAllDistrict();
+
+            if (ModelState.IsValid)
+            {
+                Annexure1.CreatedBy = SiteContext.UserId;
+                var result = await _newlandannexure1Service.Create(Annexure1);
+
+                if (result == true)
+                {
+                    //************ Save Khasra  ************  
+                    if (Annexure1.KhasaNo != null &&
+                        Annexure1.Bigha != null &&
+                        Annexure1.Biswa != null)
+
+                    {
+                        if (Annexure1.KhasaNo.Count > 0 &&
+                            Annexure1.Bigha.Count > 0 &&
+                            Annexure1.Biswa.Count > 0
+                           )
+
+                        {
+                            List<Newlandannexure1khasrarpt> khasra = new List<Newlandannexure1khasrarpt>();
+                            for (int i = 0; i < Annexure1.OwnerName.Count; i++)
+                            {
+                                khasra.Add(new Newlandannexure1khasrarpt
+                                {
+                                    KhasaNo = Annexure1.KhasaNo.Count <= i ? string.Empty : Annexure1.KhasaNo[i],
+                                    Bigha = Annexure1.Bigha.Count <= i ? 0: Annexure1.Bigha[i],
+                                    Biswa = Annexure1.Biswa.Count <= i ? 0 : Annexure1.Biswa[i],
+                                    Biswanshi = Annexure1.Biswanshi.Count <= i ? 0: Annexure1.Biswanshi[i],
+                                    OwnershipStatus = Annexure1.OwnershipStatus.Count <= i ? string.Empty : Annexure1.OwnershipStatus[i],
+                                    OwnerName = Annexure1.OwnerName.Count <= i ? string.Empty : Annexure1.OwnerName[i],
+                                    NewLandAnnexure1Id = Annexure1.Id,
+                                    CreatedBy = SiteContext.UserId,
+                                    IsActive=1
+                                });
+                            }
+                            foreach (var item in khasra)
+                            {
+                                result = await _newlandannexure1Service.SaveKhasraRpt(item);
+                            }
+                        }
+                    }
+
+
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    var list = await _newlandannexure1Service.GetAllNewlandannexure1();
+                    return View("Index", list);
+
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(Annexure1);
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(Annexure1);
+            }
+
+        }
+    }
+}

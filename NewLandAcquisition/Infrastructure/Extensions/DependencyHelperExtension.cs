@@ -61,7 +61,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IRequestApprovalProcessRepository, RequestApprovalProcessRepository>();
             services.AddScoped<INewlandpossesiondetailsRepository, NewlandpossesiondetailsRepository>();
-
+            services.AddScoped<INewlandannexure1Repository, Newlandannexure1Repository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -104,7 +104,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IRequestApprovalProcessService, RequestApprovalProcessService>();
             services.AddScoped<INewlandpossessiondetailsService, NewlandpossesiondetailsService>();
-
+            services.AddScoped<INewlandannexure1Service, Newlandannexure1Service>();
         }
     }
 }
