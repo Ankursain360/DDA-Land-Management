@@ -1,28 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Model.Entity;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Dto.Search;
+using Utility.Helper;
 using NewLandAcquisition.Filters;
 using Core.Enum;
-using System.Data;
-using Newtonsoft.Json;
-using Utility.Helper;
-using System.Collections.Generic;
 
 
 namespace NewLandAcquisition.Controllers
 {
     public class NewlandNotificationController : BaseController
     {
-        private readonly INewlandnotificationService _newlandnotificationService;
-        public NewlandNotificationController(INewlandnotificationService newlandnotificationService)
+        public IConfiguration _configuration;
+        public readonly INewlandnotificationService _newlandnotificationService;
+
+
+        public NewlandNotificationController(INewlandnotificationService newlandnotificationService, IConfiguration configuration)
         {
             _newlandnotificationService = newlandnotificationService;
+            _configuration = configuration;
         }
         public IActionResult Index()
         {
@@ -38,32 +44,57 @@ namespace NewLandAcquisition.Controllers
         public async Task<IActionResult> Create()
         {
             Newlandnotification newlandnotification = new Newlandnotification();
-            newlandnotification.IsActive = 1;
-         //   newlandnotification.notificationtypeList = await _newlandnotificationService.GetNotificationType();
-           
+            newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
             return View(newlandnotification);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       // [ValidateAntiForgeryToken]
         // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandnotification newlandnotification)
         {
             try
             {
-                newlandnotification.notificationtypeList = await _newlandnotificationService.GetNotificationType();
-               
+                newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
+                string NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+
                 if (ModelState.IsValid)
                 {
-                    newlandnotification.CreatedBy = SiteContext.UserId;
+                  //  newlandnotification.CreatedBy = SiteContext.UserId;
                     var result = await _newlandnotificationService.Create(newlandnotification);
 
-                    if (result == true)
+                    if (result)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _newlandnotificationService.GetNewlandnotification();
+                        FileHelper fileHelper = new FileHelper();
+
+                        ///for notification file:
+
+
+                        if (newlandnotification.NewlandNotificationFile != null && newlandnotification.NewlandNotificationFile.Count > 0)
+                        {
+                            List<Newlandnotificationfilepath> newlandnotificationfilepath = new List<Newlandnotificationfilepath>();
+                            for (int i = 0; i < newlandnotification.NewlandNotificationFile.Count; i++)
+                            {
+                                string FilePath = fileHelper.SaveFile(NewlandNotificationFilePath, newlandnotification.NewlandNotificationFile[i]);
+                                newlandnotificationfilepath.Add(new Newlandnotificationfilepath
+                                {
+                                    NewlandNotificationId = newlandnotification.Id,
+                                    FilePath = FilePath
+                                });
+                            }
+                            foreach (var item in newlandnotificationfilepath)
+                            {
+                                result = await _newlandnotificationService.Savefiledetails(item);
+                            }
+                        }
+                    }
+
+                        if (result)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _newlandnotificationService.GetAllNewlandNotification();
                           
-                        return View("Index");
+                        return View("Index",list);
                     }
                     else
                     {

@@ -11,10 +11,11 @@ namespace Libraries.Model.Entity
     {
         public NewlandNotificationtype()
         {
-            Newlandnotification= new HashSet<Newlandnotification>();
+            Newlandnotification = new HashSet<Newlandnotification>();
         }
-        public int NotificationType { get; set; }
-        public byte IsActive { get; set; }
-        public virtual ICollection<Newlandnotification> Newlandnotification { get; set; }
+        public string NotificationType { get; set; }
+        public byte? IsActive { get; set; }
+
+        public ICollection<Newlandnotification> Newlandnotification { get; set; }
     }
     }

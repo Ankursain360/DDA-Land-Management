@@ -32,6 +32,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandProposaldetailsRepository, NewlandProposaldetailsRepository>();
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
             services.AddScoped<INewlandSchemeRepository, NewlandSchemeRepository>();
+            services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
 
             services.AddScoped<INewLandProposalPlotDetailsRepository, NewLandProposalPlotDetailsRepository>();
             services.AddScoped<INewLandPaymentDetailRepository, NewLandPaymentDetailRepository>();
@@ -59,6 +60,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IRequestApprovalProcessRepository, RequestApprovalProcessRepository>();
+            services.AddScoped<INewlandpossesiondetailsRepository, NewlandpossesiondetailsRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -91,6 +93,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
           
             services.AddScoped<INewlandus22plotService, Newlandus22plotService>();
             services.AddScoped<INewlandAppealdetailservice, NewlandAppealdetailService>();
+            services.AddScoped<INewlandnotificationService, NewlandnotificationService>();
 
 
             services.AddScoped<IRequestService, RequestService>();
@@ -100,6 +103,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IRequestService, RequestService>();
             services.AddScoped<IRequestApprovalProcessService, RequestApprovalProcessService>();
+            services.AddScoped<INewlandpossessiondetailsService, NewlandpossesiondetailsService>();
 
         }
     }
