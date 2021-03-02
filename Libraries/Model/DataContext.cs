@@ -261,6 +261,7 @@ namespace Libraries.Model
         public virtual DbSet<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
         public virtual DbSet<Newlandappealdetail> Newlandappealdetail { get; set; }
         public virtual DbSet<Newlandannexure1> Newlandannexure1 { get; set; }
+        public virtual DbSet<Muncipality> Muncipality { get; set; }
         public virtual DbSet<Newlandannexure1khasrarpt> Newlandannexure1khasrarpt { get; set; }
         public virtual DbSet<Newlandpossessiondetails> Newlandpossessiondetails { get; set; }
        
