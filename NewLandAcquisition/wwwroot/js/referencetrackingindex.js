@@ -14,14 +14,7 @@ $("#btnGenerate").click(function () {
     debugger;
     var UnderSection4Id = $("#ReferenceNo").val();
     alert(UnderSection4Id);
-    //var element = $("#Name").find('option:selected');
-    //var myTag = element.attr("mytag");
-    //if (myTag) {
-    //    $('#village_tag').html("Village Name - " + myTag);
-    //} else {
-    //    $('#village_tag').html("Village Name - ");
-    //    location.reload();
-    //}
+    
     if (UnderSection4Id) {
         var param = GetSearchParam(currentPageNumber, currentPageSize);
 
@@ -55,8 +48,6 @@ $("#btnReset").click(function () {
 
 
 function GetSearchParam(pageNumber, pageSize) {
-
-
 
     var VillageId = $('#ReferenceNo').val();
  //   name: $('#txtName').val(),
