@@ -66,7 +66,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("RECTNO"):
                         data = null;
                         data = await _dbContext.Newlandkhasra
-                         .Include(x => x.Newlandvillage)
+                         .Include(x => x.Newlandvillage) 
                          .Include(x => x.LandCategory)
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                           && (string.IsNullOrEmpty(model.village) || x.Newlandvillage.Name.Contains(model.village))
@@ -177,7 +177,75 @@ namespace Libraries.Repository.EntityRepository
             return khasraList;
         }
 
-      
+        public async Task<PagedResult<Newlandkhasra>> GetPagednewlandVillageKhasraReport(NewlandVillageDetailsKhasraWiseReportSearchDto model)
+        {
+            var data = await _dbContext.Newlandkhasra
+                .Include(x => x.Newlandvillage)
+                 .Where(x => (x.NewLandvillageId == (model.villageId == 0 ? x.NewLandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                 .GetPaged<Newlandkhasra>(model.PageNumber, model.PageSize);
 
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    //case ("VILLAGE"):
+                    //    data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                    //    break;
+                    //case ("KHASRA"):
+                    //    data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                    //    break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Newlandkhasra
+                                   .Include(x => x.Newlandvillage)
+                 .Where(x => (x.NewLandvillageId == (model.villageId == 0 ? x.NewLandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderBy(a => a.Newlandvillage.Name)
+                                   .GetPaged<Newlandkhasra>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Newlandkhasra
+                                   .Include(x => x.Newlandvillage)
+                 .Where(x => (x.NewLandvillageId == (model.villageId == 0 ? x.NewLandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderBy(a => a.Name)
+                                   .GetPaged<Newlandkhasra>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Newlandkhasra
+                                   .Include(x => x.Newlandvillage)
+                 .Where(x => (x.NewLandvillageId == (model.villageId == 0 ? x.NewLandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderByDescending(a => a.Newlandvillage.Name)
+                                   .GetPaged<Newlandkhasra>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Newlandkhasra
+                                   .Include(x => x.Newlandvillage)
+                 .Where(x => (x.NewLandvillageId == (model.villageId == 0 ? x.NewLandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderByDescending(a => a.Name)
+                                   .GetPaged<Newlandkhasra>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
         }
+
+
+    }
 }
