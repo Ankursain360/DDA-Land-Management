@@ -406,7 +406,7 @@ function showDisBoundariesClean(response) {
     var clean = $.map(response, function (el) { return el; })
     for (f = 0; f < clean.length; f++) {
         var ln = createLine(getLatLongArr(clean[f].polygon));
-        ln.setOptions({ strokeWeight: 1, strokeColor: '#C6C03A' });
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#C6C03A' });
         CLEAN_LAYER.push(ln);
         Polys.push(ln);
     }
@@ -479,7 +479,7 @@ function showDisBoundariesRailwayLine(response) {
     var railwayline = $.map(response, function (el) { return el; })
     for (q = 0; q < railwayline.length; q++) {
         var ln = createLine(getLatLongArr(railwayline[q].polygon));
-        ln.setOptions({ strokeWeight: 1, strokeColor: '#BA4A00' });
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#BA4A00' });
         RAILWAYLINE_LAYER.push(ln);
         Polys.push(ln);
     }
