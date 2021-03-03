@@ -37,7 +37,7 @@ $(document).ready(function () {
             }
         }
     });
-    var forbiddenWords = ['iframe', 'Script', 'Video', 'Audio', 'Alert', '<', '>', '/>'];
+    var forbiddenWords = ['iframe', 'Video', 'Audio', 'Alert', '<', '>', '/>'];
     var Bool = "False";
     $('input,textarea').on('keyup', function (e) {
         forbiddenWords.forEach(function (val, index) {
@@ -45,11 +45,11 @@ $(document).ready(function () {
                 e.target.value = e.target.value.replace(new RegExp("(" + val + ")", 'gi'), '');
                 Bool = "True";
             }
-        }); /*if (Bool == "True") {*/
-        //    Bool = "False";
-        //    alert("Special character not allowed");
-        //    return false;
-        //};
+        }); if (Bool == "True") {
+            Bool = "False";
+            alert("Special character not allowed");
+            return false;
+        };
     });
     $('input,textarea,select').on('keyup keypress change', function () {
         ValidateForm();
