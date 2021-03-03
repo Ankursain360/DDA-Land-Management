@@ -32,7 +32,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnType("tinyint(4)")
                 .HasDefaultValueSql("1");
 
-            builder.Property(e => e.KhasaNo)
+            builder.Property(e => e.KhasraNo)
                 .IsRequired()
                 .HasMaxLength(45)
                 .IsUnicode(false);

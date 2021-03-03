@@ -18,17 +18,26 @@ namespace NewLandAcquisition.Controllers
      public class Newlandannexure1Controller : BaseController
      {
           private readonly INewlandannexure1Service _newlandannexure1Service;
-          public Newlandannexure1Controller(INewlandannexure1Service newlandannexure1Service)
+          private readonly IRequestService _requestService;
+        public Newlandannexure1Controller(INewlandannexure1Service newlandannexure1Service, IRequestService requestService)
           {
             _newlandannexure1Service = newlandannexure1Service;
-          }
+            _requestService = requestService;
+        }
           public IActionResult Index()
           {
             return View();
           }
-        public async Task<IActionResult> Create()
+        public async Task<PartialViewResult> RequestView(int id)
+        {
+            var Data = await _requestService.FetchSingleResult(id);
+             return PartialView("_Request", Data);
+        }
+
+        public async Task<IActionResult> Create(int id)
         {
             Newlandannexure1 Annexure1 = new Newlandannexure1();
+            Annexure1.RequestId = id;
             Annexure1.IsActive = 1;
             Annexure1.MunicipalityList = await _newlandannexure1Service.GetAllMunicipality();
             Annexure1.DistrictList = await _newlandannexure1Service.GetAllDistrict();
@@ -37,7 +46,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Newlandannexure1 Annexure1)
+        public async Task<IActionResult> Create(int id,Newlandannexure1 Annexure1)
         {
 
             Annexure1.MunicipalityList = await _newlandannexure1Service.GetAllMunicipality();
@@ -45,18 +54,21 @@ namespace NewLandAcquisition.Controllers
 
             if (ModelState.IsValid)
             {
+                Annexure1.Id = 0;
                 Annexure1.CreatedBy = SiteContext.UserId;
+                Annexure1.RequestId = id;
+               
                 var result = await _newlandannexure1Service.Create(Annexure1);
 
                 if (result == true)
                 {
                     //************ Save Khasra  ************  
-                    if (Annexure1.KhasaNo != null &&
+                    if (Annexure1.KhasraNo != null &&
                         Annexure1.Bigha != null &&
                         Annexure1.Biswa != null)
 
                     {
-                        if (Annexure1.KhasaNo.Count > 0 &&
+                        if (Annexure1.KhasraNo.Count > 0 &&
                             Annexure1.Bigha.Count > 0 &&
                             Annexure1.Biswa.Count > 0
                            )
@@ -67,7 +79,7 @@ namespace NewLandAcquisition.Controllers
                             {
                                 khasra.Add(new Newlandannexure1khasrarpt
                                 {
-                                    KhasaNo = Annexure1.KhasaNo.Count <= i ? string.Empty : Annexure1.KhasaNo[i],
+                                    KhasraNo = Annexure1.KhasraNo.Count <= i ? string.Empty : Annexure1.KhasraNo[i],
                                     Bigha = Annexure1.Bigha.Count <= i ? 0: Annexure1.Bigha[i],
                                     Biswa = Annexure1.Biswa.Count <= i ? 0 : Annexure1.Biswa[i],
                                     Biswanshi = Annexure1.Biswanshi.Count <= i ? 0: Annexure1.Biswanshi[i],
@@ -87,9 +99,9 @@ namespace NewLandAcquisition.Controllers
 
 
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var list = await _newlandannexure1Service.GetAllNewlandannexure1();
-                    return View("Index", list);
-
+                    //var list = await _newlandannexure1Service.GetAllNewlandannexure1();
+                    // return View("Index", list);
+                    return View(Annexure1);
                 }
                 else
                 {

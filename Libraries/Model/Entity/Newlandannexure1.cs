@@ -66,7 +66,9 @@ namespace Libraries.Model.Entity
         public string OthersDesc { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
+        public int RequestId { get; set; }
 
+        public Request Request { get; set; }
         public District District { get; set; }
         public Muncipality Municipality { get; set; }
         public ICollection<Newlandannexure1khasrarpt> Newlandannexure1khasrarpt { get; set; }
@@ -79,7 +81,7 @@ namespace Libraries.Model.Entity
         //****** Khasra details repeater *****
 
         [NotMapped]
-        public List<string> KhasaNo { get; set; }
+        public List<string> KhasraNo { get; set; }
 
         [NotMapped]
         public List<decimal> Bigha { get; set; }
