@@ -22,9 +22,9 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Newlandjointsurvey>> GetPagedNewLandJointSurvey(NewLandJointSurveySearchDto model)
         {
             var data = await _dbContext.Newlandjointsurvey
-
+                .Include(x => x.Zone)
                                    .Include(x => x.Village)
-                                    .Include(x => x.Zone)
+                                    
                                    .Include(x => x.Khasra)
                                    .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
@@ -196,7 +196,11 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newjointsurveyreportdetail.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-       
+
+        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
 
 
     }
