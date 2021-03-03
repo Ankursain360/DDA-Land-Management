@@ -36,6 +36,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Type)
+               .IsRequired()
+               .HasMaxLength(45)
+               .IsUnicode(false);
+
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");

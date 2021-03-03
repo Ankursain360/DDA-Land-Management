@@ -118,6 +118,23 @@ namespace Libraries.Repository.EntityRepository
                                      .ToListAsync();
         }
 
+        public async Task<List<Gisdata>> GetGisDataLayersDetails(int villageId)
+        {
+            try
+            {
+                var data = await _dbContext.Gisdata
+                                        .Include(x => x.GisLayer)
+                                         .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                         .ToListAsync();
+                return data;
+
+            }
+            catch(Exception ex)
+            {
+               return  null;
+            }
+        }
+
         public async Task<List<Gisgosha>> GetGoshaDetails(int villageId)
         {
             return await _dbContext.Gisgosha
