@@ -66,11 +66,11 @@ namespace Libraries.Repository.EntityRepository
         {
 
             var data = await _dbContext.Newlandnotification
-                              .Include(x=>x.Newlandnotificationfilepath)
-                             .Include(x=>x.NewlandNotificationtype)
+                             // .Include(x => x.Newlandnotificationfilepath)
+                             //.Include(x => x.NewlandNotificationtype)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name) )
                               .OrderByDescending(s => s.IsActive)
-                             .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
+                               .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -79,9 +79,9 @@ namespace Libraries.Repository.EntityRepository
                     case ("TYPE"):
                         data = null;
                         data = await _dbContext.Newlandnotification
-                              .Include(x => x.Newlandnotificationfilepath)
-                             .Include(x => x.NewlandNotificationtype)
-                                 // .Include(x => x.Proposal)
+                             // .Include(x => x.Newlandnotificationfilepath)
+                             //.Include(x => x.NewlandNotificationtype)
+                             //    // .Include(x => x.Proposal)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
                               .OrderBy(s => s.NotificationType)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);

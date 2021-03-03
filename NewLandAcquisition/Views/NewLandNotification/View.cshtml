@@ -2,27 +2,27 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Notification Master Details" })
 
 <div class="pt-3">
-    <form asp-action="View" disablesd="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="View" method="post" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
         <h3 class="mb-3 d-flex">View Details</h3>
-
-
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
 
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="NotificationTypeId" asp-items="@(new SelectList(Model.notificationtypeList, "Id","NotificationType"))" required>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="NotificationTypeId" disabled>
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="NotificationTypeId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="NotificationTypeId">Village</label>
+                    <label class="floating-label" asp-for="NotificationTypeId">Notification Type</label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="NotificationNo" class="floating-label-field floating-label-field--s3" placeholder="Notification No" />
+                    <input asp-for="NotificationNo" class="floating-label-field floating-label-field--s3" placeholder="Notification No" disabled/>
                     <span asp-validation-for="NotificationNo" class="text-danger"></span>
                     <label class="floating-label">Notification No.</label>
                 </div>
@@ -32,16 +32,16 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="Date" class="floating-label-field floating-label-field--s3" placeholder="Notification No" type="date" />
+                    <input asp-for="Date" class="floating-label-field floating-label-field--s3" placeholder="Notification No" type="date" disabled/>
                     <span asp-validation-for="Date" class="text-danger"></span>
                     <label class="floating-label">Date</label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="GazetteNotificationFilePath" placeholder="Khasra No." class="floating-label-field floating-label-field--s3" type="file" />
-                    <span asp-validation-for="GazetteNotificationFilePath" class="text-danger"></span>
-                    <label class="floating-label" asp-for="GazetteNotificationFilePath"> Upload Gazette Notification</label>
+                    <input id="fileupload" asp-for="NewlandNotificationFile" class="floating-label-field floating-label-field--s3" type="file" multiple />
+                    <span asp-validation-for="NewlandNotificationFile" class="text-danger"></span>
+                    <label class="floating-label" asp-for="NewlandNotificationFile"> Upload Gazette Notification</label>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3" disabled>
                         <option value="1">Active</option>
                         <option value="0">InActive</option>
                     </select>
@@ -74,9 +74,7 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                
-
-                @Html.ActionLink("Back", "Index", "NewlandNotification", null, new { @class = "btn btn-theme " })
+                        @Html.ActionLink("Back", "Index", "NewlandNotification", null, new { @class = "btn btn-theme " })
             </div>
         </div>
 
