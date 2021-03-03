@@ -105,7 +105,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IActionsService, ActionsService>();
 
-           // services.AddScoped<INewLandJointSurveyService, NewLandJointSurveyService>();
+            services.AddScoped<INewLandJointSurveyService, NewLandJointSurveyService>();
 
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IRequestService, RequestService>();

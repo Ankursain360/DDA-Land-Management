@@ -16,7 +16,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<LandCategory>> GetAllLandCategory();
         Task<List<Newlandvillage>> GetAllVillageList();
         Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
-      
+
+        Task<PagedResult<Newlandkhasra>> GetPagednewlandVillageKhasraReport(NewlandVillageDetailsKhasraWiseReportSearchDto model);
 
     }
 }
