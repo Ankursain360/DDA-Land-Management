@@ -132,16 +132,16 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
-        public async Task<List<Giscolorcode>> GetInfrastructureDetails(int villageId)
+        public async Task<List<Gislayer>> GetInfrastructureDetails(int villageId)
         {
             try
             {
                 var data = await _dbContext.LoadStoredProcedure("GISInfrastructureColorCodeBind")
                                             .WithSqlParams( ("p_villageid", villageId)
                                             )
-                                            .ExecuteStoredProcedureAsync<Giscolorcode>();
+                                            .ExecuteStoredProcedureAsync<Gislayer>();
 
-                return (List<Giscolorcode>)data;
+                return (List<Gislayer>)data;
             }
             catch (Exception ex)
             {
