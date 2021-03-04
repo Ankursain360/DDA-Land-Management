@@ -10,11 +10,7 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("newlandannexure2", "lms");
 
-            builder.HasIndex(e => e.ReqId)
-                .HasName("ReqId_UNIQUE")
-                .IsUnique();
-
-            builder.Property(e => e.ReqId).HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -53,7 +49,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.ReqId).HasColumnType("int(11)");
 
             builder.Property(e => e.Sn10val)
                 .HasColumnName("SN10val")

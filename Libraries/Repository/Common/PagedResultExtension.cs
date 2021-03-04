@@ -21,6 +21,8 @@ namespace Libraries.Repository.Common
                 result.RowCount = await query.CountAsync();
                 result.CurrentPage = page;
                 int skip = (page - 1) * pageSize;
+                if (result.RowCount < skip)
+                    skip = 0;
                 result.Results = await query.AsNoTracking().Skip(skip).Take(pageSize).ToListAsync();
                 result.PazeSize = pageSize;
                 return result;

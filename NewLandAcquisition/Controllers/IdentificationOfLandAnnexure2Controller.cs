@@ -28,7 +28,7 @@ namespace NewLandAcquisition.Controllers
             _configuration = configuration;
         }
 
-        // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             
@@ -37,12 +37,12 @@ namespace NewLandAcquisition.Controllers
             return View(model);
         }
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Newlandannexure2 newlandannexure2)
+       // [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id,Newlandannexure2 newlandannexure2)
         {
             try
             {
-               // newlandannexure2.ReqId = ReqId;
+               
                 string Sn7FilePath = _configuration.GetSection("FilePaths:NewlandAnnx2:SN7").Value.ToString();
                 string Sn8FilePath = _configuration.GetSection("FilePaths:NewlandAnnx2:SN8").Value.ToString();
                 string Sn9FilePath = _configuration.GetSection("FilePaths:NewlandAnnx2:SN9").Value.ToString();
@@ -67,6 +67,8 @@ namespace NewLandAcquisition.Controllers
                     {
                         newlandannexure2.Sn12filePath = fileHelper.SaveFile(Sn12FilePath, newlandannexure2.Sn12File);
                     }
+                    newlandannexure2.Id = 0;
+                    newlandannexure2.ReqId = id;
                     newlandannexure2.CreatedBy = SiteContext.UserId;
                     var result = await _newlandannexure2Service.Create(newlandannexure2);
 
