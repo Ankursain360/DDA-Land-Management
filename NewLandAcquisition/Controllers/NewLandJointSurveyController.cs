@@ -176,8 +176,8 @@ namespace NewLandAcquisition.Controllers
             Data.ZoneList = await _newLandJointSurveyService.GetAllZone();
             Data.VillageList = await _newLandJointSurveyService.GetAllVillage(Data.ZoneId);
             Data.KhasraList = await _newLandJointSurveyService.GetAllKhasra(Data.VillageId);
-            Saknidetails sakni = new Saknidetails();
-            sakni.IsActive = sakni.IsActive;
+            Newlandjointsurvey newlandjointsurvey = new Newlandjointsurvey();
+            newlandjointsurvey.IsActive = newlandjointsurvey.IsActive;
             if (Data == null)
             {
                 return NotFound();

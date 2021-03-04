@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <label>
-                            Case involves to which Court:
+                            Site Position:
                         </label>
                     </div>
                     <div class="col-md-2">
@@ -107,24 +107,24 @@
         <div class="row pt-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Bigha" placeholder="Notification"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input value="" asp-for="Bigha" placeholder="Notification"
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="Bigha" class="text-danger"></span>
                     <label class="floating-label">Bigha    </label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Biswa" placeholder="Name"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input value="" asp-for="Biswa" placeholder="Name"
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="Biswa" class="text-danger"></span>
                     <label class="floating-label">Biswa </label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Biswanshi" placeholder="NoOfKhatauni"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input value="" asp-for="Biswanshi" placeholder="NoOfKhatauni"
+                           class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                     <span asp-validation-for="Biswanshi" class="text-danger"></span>
                     <label class="floating-label">Biswanshi </label>
                 </div>
@@ -142,7 +142,7 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="JointSurveyDate" type="date"
+                    <input value="" asp-for="JointSurveyDate" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="JointSurveyDate" class="text-danger"></span>
                     <label class="floating-label">JointSurveyDate </label>
@@ -215,7 +215,7 @@
                             <th> Name</th>
                             <th>Designation</th>
                             <th>Attendance</th>
-                            <th>Action</th>
+                            <th>Operation</th>
                         </tr>
                     </thead>
                     <tbody id="tbl_posts2_body">
@@ -235,8 +235,8 @@
 
                             </td>
                             <td>
-                                <select asp-for="AAttendance" required class="floating-label-field floating-label-field--s3">
-                                    <option value="0">---Select---</option>
+                                <select asp-for="AAttendance" class="floating-label-field floating-label-field--s3">
+                                    <option disabled selected="selected">---Select---</option>
                                     <option value="1">Present</option>
                                     <option value="2">Absent</option>
 
@@ -247,8 +247,8 @@
 
                             <td>
                                 <div class="action-btns">
-                                    <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record1" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                    <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                 </div>
                             </td>
                         </tr>
