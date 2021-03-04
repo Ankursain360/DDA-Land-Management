@@ -11,7 +11,7 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3" onchange="return onChange(this.options[this.selectedIndex].value);"
+                    <select disabled asp-for="ZoneId" class="floating-label-field floating-label-field--s3" onchange="return onChange(this.options[this.selectedIndex].value);"
                             asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))">
                         <option value="">---Select---</option>
 
@@ -25,7 +25,7 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="VillageId"
                             asp-items="@(new SelectList(Model.VillageList,"Id","Name"))"
                             onchange="return onChangeVillage(this.options[this.selectedIndex].value)" required="required" requiredMsg="The Village field is required">
                         <option selected="selected" value="">--Select-- </option>
@@ -38,7 +38,7 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="KhasraId" class="floating-label-field floating-label-field--s3"
+                    <select disabled asp-for="KhasraId" class="floating-label-field floating-label-field--s3"
                             asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
                         <option value="">---Select---</option>
 
@@ -50,7 +50,7 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Address" placeholder="NaamPatti" type="text"
+                    <input disabled asp-for="Address" placeholder="NaamPatti" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Address" class="text-danger"></span>
                     <label class="floating-label">Address </label>
@@ -70,7 +70,7 @@
 
 
                         <div class="form-check theme">
-                            <input asp-for="SitePosition" class="form-check-input" type="radio" value="Built Up" checked="checked">
+                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Built Up" checked="checked">
                             <label class="form-check-label" for="radio">
                                 Built Up
                             </label>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-check theme">
-                            <input asp-for="SitePosition" class="form-check-input" type="radio" value="Partial Built Up">
+                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Partial Built Up">
                             <label class="form-check-label" for="radio">
                                 Partial Built Up
                             </label>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-check theme">
-                            <input asp-for="SitePosition" class="form-check-input" type="radio" value="Vacant">
+                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Vacant">
                             <label class="form-check-label" for="radio">
                                 Vacant
                             </label>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="form-check theme">
-                            <input asp-for="SitePosition" class="form-check-input" type="radio" value="Boundary wall">
+                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Boundary wall">
                             <label class="form-check-label" for="radio">
                                 Boundary wall
                             </label>
@@ -109,7 +109,7 @@
         <div class="row pt-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Bigha" placeholder="Notification"
+                    <input disabled asp-for="Bigha" placeholder="Notification"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Bigha" class="text-danger"></span>
                     <label class="floating-label">Bigha    </label>
@@ -117,7 +117,7 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Biswa" placeholder="Name"
+                    <input disabled asp-for="Biswa" placeholder="Name"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Biswa" class="text-danger"></span>
                     <label class="floating-label">Biswa </label>
@@ -125,7 +125,7 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Biswanshi" placeholder="NoOfKhatauni"
+                    <input disabled asp-for="Biswanshi" placeholder="NoOfKhatauni"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Biswanshi" class="text-danger"></span>
                     <label class="floating-label">Biswanshi </label>
@@ -135,7 +135,7 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="NatureOfStructure" placeholder="NatureOfStructure" type="text"
+                    <input disabled asp-for="NatureOfStructure" placeholder="NatureOfStructure" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="NatureOfStructure" class="text-danger"></span>
                     <label class="floating-label">Nature Of Structure </label>
@@ -144,7 +144,7 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="JointSurveyDate" type="date"
+                    <input disabled asp-for="JointSurveyDate" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="JointSurveyDate" class="text-danger"></span>
                     <label class="floating-label">JointSurveyDate </label>
@@ -163,7 +163,7 @@
                                 <th>Sr.No</th>
                                 <th>Document Name</th>
                                 <th>Upload Document</th>
-                                <th>Operation</th>
+                                @*<th>Operation</th>*@
                             </tr>
                         </thead>
                         <tbody id="tbl_posts_body">
@@ -176,7 +176,7 @@
 
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input asp-for="DocumentName" type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input disabled asp-for="DocumentName" type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="DocumentName" class="d-block text-danger field-validation-valid"></span>
                                     </div>
                                 </td>
@@ -191,12 +191,12 @@
                                     </div>
                                 </td>
 
-                                <td>
+                                @*<td>
                                     <div class="action-btns">
                                         <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
                                         <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
-                                </td>
+                                </td>*@
 
                             </tr>
 
@@ -219,7 +219,7 @@
                             <th> Name</th>
                             <th>Designation</th>
                             <th>Attendance</th>
-                            <th>Action</th>
+                            @*<th>Operation</th>*@
                         </tr>
                     </thead>
                     <tbody id="tbl_posts2_body">
@@ -229,18 +229,18 @@
 
                             <td style="text-align:center;"><span class="sn2">1</span></td>
                             <td>
-                                <input asp-for="AName" type="text" class="floating-label-field floating-label-field--s3" />
+                                <input disabled asp-for="AName" type="text" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="AName" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <input asp-for="ADesignation" type="text" class="floating-label-field floating-label-field--s3" />
+                                <input disabled asp-for="ADesignation" type="text" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="ADesignation" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <select asp-for="AAttendance" required class="floating-label-field floating-label-field--s3">
-                                    <option value="0">---Select---</option>
+                                <select disabled asp-for="AAttendance" class="floating-label-field floating-label-field--s3">
+                                    <option disabled selected="selected">---Select---</option>
                                     <option value="1">Present</option>
                                     <option value="2">Absent</option>
 
@@ -250,12 +250,12 @@
                             </td>
 
 
-                            <td>
+                            @*<td>
                                 <div class="action-btns">
                                     <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
                                     <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                 </div>
-                            </td>
+                            </td>*@
                         </tr>
 
                     </tbody>
@@ -266,7 +266,7 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea disabled asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
 
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label class="floating-label">Remarks  </label>
@@ -275,7 +275,7 @@
 
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                    <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>

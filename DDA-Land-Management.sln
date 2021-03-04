@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandingPage", "LandingPage\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DamagePayeePublicInterface", "DamagePayeePublicInterface\DamagePayeePublicInterface.csproj", "{AE65A948-E63F-401A-BB75-5E08700601BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GIS", "GIS\GIS.csproj", "{4179D057-34C9-4DF7-806C-5C787CB84DFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GIS", "GIS\GIS.csproj", "{4179D057-34C9-4DF7-806C-5C787CB84DFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
