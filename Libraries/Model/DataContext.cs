@@ -269,6 +269,8 @@ namespace Libraries.Model
 
         public virtual DbSet<Gislayer> Gislayer { get; set; }
         public virtual DbSet<Gisdata> Gisdata { get; set; }
+       
+        public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -488,6 +490,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NewlandnotificationfilepathConfiguration());
             modelBuilder.ApplyConfiguration(new GisDataConfiguartion());
             modelBuilder.ApplyConfiguration(new GisLayerConfiguration());
+            modelBuilder.ApplyConfiguration(new Newlandannexure2Configuration());
+            
 
             base.OnModelCreating(modelBuilder);
         }
