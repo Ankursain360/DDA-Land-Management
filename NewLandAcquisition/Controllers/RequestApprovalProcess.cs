@@ -52,6 +52,7 @@ namespace NewLandAcquisition.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _requestApprovalProcessService.FetchSingleResult(id);
+            var DataFlow = await DataAsync();
 
             if (Data == null)
             {
@@ -104,6 +105,7 @@ namespace NewLandAcquisition.Controllers
                                 {
                                     request.ApprovedStatus = 1;
                                     request.PendingAt = 0;
+                                    ViewBag.result = true;
                                 }
                                 else
                                 {
@@ -188,6 +190,31 @@ namespace NewLandAcquisition.Controllers
             }
             return Json(DataFlow);
         }
+
+
+
+        [HttpGet]
+        public async Task<JsonResult> getannexuredetails()  //Bind Dropdown of Approval Status
+        {
+            var DataFlow = await DataAsync();
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (i == DataFlow.Count - 1)
+                {
+                  
+                    ViewBag.result = true;
+                }
+                else
+                {
+                    ViewBag.result = false;
+                }
+
+            }
+            return Json(DataFlow);
+        }
+
+
 
 
 

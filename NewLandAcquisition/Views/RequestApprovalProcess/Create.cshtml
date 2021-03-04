@@ -27,6 +27,29 @@
                 <label class="floating-label">Status<span style="color:red">*</span></label>
             </div>
         </div>
+
+        <div id="testview">
+
+        @if (ViewBag.result == true)
+        {
+            <div class="row pt-3">
+                <div class="col-md-4 my-3 d-flex sub-heading">
+                    <a asp-action="Create" asp-controller="Newlandannexure1"> Annexure 1 </a>
+                </div>
+
+
+                <div class="col-md-4 my-3 d-flex sub-heading">
+                    <div><a asp-action="Create" asp-controller="IdentificationOfLandAnnexure2">Click here to go Annexure 2 </a></div>
+                </div>
+            </div>}
+
+        else
+        {
+
+        }
+
+
+    </div>
     </div>
     <div class="row pt-3">
         <div class="col-md-12">
@@ -40,14 +63,6 @@
     <br />
 
 
-
-    <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1" style="font-size:35px;"> Annexure 1 </a>
-
-    <div class="row pt-3">
-        <div class="col-md-12">
-            <div><a asp-action="Create" asp-route-id="@Model.Id" asp-controller="IdentificationOfLandAnnexure2">Click here to go Annexure 2 </a></div>
-        </div>
-    </div>
     <div class="row pt-3">
         <div class="col-md-12">
 
@@ -57,8 +72,8 @@
                     @Html.ActionLink("Back", "Index", "RequestApprovalProcess", null, new { @class = "btn btn-theme " })
                 </div>
             </div>
-            </div>
-            </div>
+        </div>
+    </div>
 </form>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
