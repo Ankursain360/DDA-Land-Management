@@ -61,8 +61,8 @@
                             <td>Whether the request is filed under section 2(1) of the Act by the Government or Department for its own use hold and control </td>
                             <td>
                                 <select style="height:30px;  background-color: #dddddd;" id="drp1" class="floating-label-field floating-label-field--s3 " asp-for="Sn1val">
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
                                 </select>
 
                                 <textarea asp-for="Sn1Remark" type="text" placeholder="Description" class="floating-label-field floating-label-field--s3" id="txt1" style="display:none; margin-top:10px;"></textarea>
@@ -73,8 +73,8 @@
                             <td>Whether the request is filed under section 2(1)(a) to 2(1)(f) of the Act</td>
                             <td>
                                 <select style="height:30px; background-color: #dddddd;" id="drp2" required="" class="floating-label-field floating-label-field--s3" asp-for="Sn2val">
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
                                 </select>
 
                                 <textarea type="text" placeholder="Description" class="form-control" id="txt2" style="display:none;margin-top:10px;" asp-for="Sn2Remark"></textarea>
@@ -85,8 +85,8 @@
                             <td>Whether the request is filed under section 2(2)(a) to (b) of the Act</td>
                             <td>
                                 <select style="height:30px; background-color: #dddddd;" id="drp3" required="" class="floating-label-field floating-label-field--s3" asp-for="Sn3val">
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
                                 </select>
 
                                 <textarea type="text" asp-for="Sn3Remark" placeholder="Description" class="floating-label-field floating-label-field--s3" id="txt3" style="display:none;margin-top:10px;"></textarea>
@@ -102,8 +102,8 @@
                             <td>Whether request is filed under section 40 of the Act </td>
                             <td>
                                 <select style="height:30px; background-color: #dddddd;" id="drp4" asp-for="Sn5val" required="" class="floating-label-field floating-label-field--s3" onchange="drp4change()">
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
                                 </select>
 
                                 <textarea type="text" placeholder="Description" class="floating-label-field floating-label-field--s3" asp-for="Sn5Remark" id="txt4" style="display:none;margin-top:10px;"></textarea>
@@ -119,8 +119,8 @@
                             <td>Has the land for the project been partially purchased from the owners by private negotiation?</td>
                             <td>
                                 <select style="height:30px; background-color: #dddddd;" id="drpHasLand" required="" class="floating-label-field floating-label-field--s3" asp-for="Sn7val" onselect="drpHasLandchange()">
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
                                 </select>
 
                                 <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateLand" placeholder="Date" style="display:none;margin-top:10px;" asp-for="Sn7Date" />
@@ -211,7 +211,8 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Create</button>
-                @*@Html.ActionLink("Back", "Index", "IdentificationOfLandAnnexure2", null, new { @class = "btn btn-theme " })*@
+                
+                @Html.ActionLink("Back", "Index", "RequestApprovalProcess", null, new { @class = "btn btn-theme " })
 
             </div>
         </div>
