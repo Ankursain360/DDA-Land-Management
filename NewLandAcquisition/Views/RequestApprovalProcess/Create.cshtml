@@ -37,13 +37,16 @@
             </div>
         </div>
     </div>
-
     <div class="row pt-3">
         <div class="col-md-12">
-            <input type="submit" value="Submit" class="btn btn-theme " />
-            @Html.ActionLink("Back", "Index", "RequestApprovalProcess", null, new { @class = "btn btn-theme " })
-        </div>
-    </div>
+            <div><a asp-action="Create" asp-route-id="@Model.Id" asp-controller="IdentificationOfLandAnnexure2" >Click here to go Annexure 2 </a></div>
+            </div></div>
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <input type="submit" value="Submit" class="btn btn-theme " />
+                    @Html.ActionLink("Back", "Index", "RequestApprovalProcess", null, new { @class = "btn btn-theme " })
+                </div>
+            </div>
 </form>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
