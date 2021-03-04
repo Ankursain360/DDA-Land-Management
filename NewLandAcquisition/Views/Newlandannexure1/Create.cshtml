@@ -1,13 +1,16 @@
 ﻿@model Libraries.Model.Entity.Newlandannexure1
 @await Component.InvokeAsync("PageHeader", new { pageName = "Identification of Land Submitted by LM Dept (Annexure I)" })
-
-
+<input type="hidden" asp-for="RequestId" />
 <div class="pt-3">
 
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        @*<input type="hidden" asp-for="RequestId" value="asp-routeid" />*@
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <h3 class="my-3 d-flex sub-heading pt-4"> Project Details </h3>
+        <div id="RequestView" class="mt-md-3">
+
+        </div>
+        <h3 class="my-3 d-flex sub-heading pt-4">  Details </h3>
         <div>
             <div class="row mt-md-3">
                 <div class="col-md-6">
@@ -21,8 +24,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Address" placeholder="Address" type="text"
-                               class="floating-label-field floating-label-field--s3 " />
+                        <textarea asp-for="Address" placeholder="Address" class="floating-label-field floating-label-field--s3"></textarea>
+
                         <span asp-validation-for="Address" class="text-danger"></span>
                         <label class="floating-label">Address </label>
                     </div>
@@ -41,7 +44,6 @@
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3"
                                 asp-for="MunicipalityId" asp-items="@(new SelectList(Model.MunicipalityList, "Id","Name"))">
-
                             <option selected disabled="disabled" value="">Select</option>
                         </select>
                         <span asp-validation-for="MunicipalityId" class="text-danger"></span>
@@ -87,8 +89,8 @@
                             <tr id="">
                                 <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
-                                    <input asp-for="KhasaNo" type="text" class="floating-label-field floating-label-field--s3" />
-                                    <span asp-validation-for="KhasaNo" class="d-block text-danger field-validation-valid "></span>
+                                    <input asp-for="KhasraNo" type="text" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="KhasraNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <input asp-for="Bigha" type="text" class="floating-label-field floating-label-field--s3" />
@@ -267,16 +269,16 @@
                     Area Unit
                 </label>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <input type="hidden" asp-for="AreaUnit" value="HA" />
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="unit" id="rdbHA" value="HA">
+                    <input class="form-check-input" type="radio" name="unit" id="rdbHA" value="HA" checked>
                     <label class="form-check-label" for="radio">
                         HA
                     </label>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <div class="form-check theme">
                     <input class="form-check-input" type="radio" name="unit" id="rdbAcre" value="Acre">
                     <label class="form-check-label" for="radio">
@@ -292,7 +294,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Area" placeholder="Area"
                            class="floating-label-field floating-label-field--s3 " />
@@ -302,9 +304,7 @@
                 </div>
             </div>
         </div>
-        @*<div class="row mt-md-3">
-           
-        </div>*@
+
         <h3 class="my-3 d-flex sub-heading pt-4"> Boundaries of the Area to be Acquired </h3>
         <div class="row mt-md-3">
             <div class="col-md-6">
@@ -353,7 +353,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="AgriculturalLandArea" placeholder="AgriculturalLandArea" type="text"
-                           class="floating-label-field floating-label-field--s3" value=""/>
+                           class="floating-label-field floating-label-field--s3" value="" />
                     <span asp-validation-for="AgriculturalLandArea" class="text-danger"></span>
                     <label class="floating-label">Area of the Agricultural & Irrigated Multi Cropped Land (in HA/ACRE/Sq.mtr)    </label>
                 </div>
@@ -397,8 +397,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/jaraicreate.js"></script>
+    <script src="~/js/newlandannexure1reate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/jaraicreate.min.js" asp-append-version="true"></script>
+    <script src="~/js/newlandannexure1reate.min.js" asp-append-version="true"></script>
 </environment>

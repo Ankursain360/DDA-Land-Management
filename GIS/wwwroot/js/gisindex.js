@@ -203,36 +203,42 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
 }
 function showvillagelayers(villageid) {
 
-    GetAbadiDetails(villageid);
-    GetBurjiDetails(villageid);
-    GetCleanDetails(villageid);
-    GetCleantextDetails(villageid);
-    GetDimDetails(villageid);
-    GetEncroachmentDetails(villageid);
-    GetGoshaDetails(villageid);
-    GetGridDetails(villageid);
-    GetNalaDetails(villageid);
-    GetTextDetails(villageid);
-    GetTriJunctionDetails(villageid);
-    GetZeroDetails(villageid);
-    GetNaliDetails(villageid);
-    GetRailwayLineDetails(villageid);
-    GetFieldBounDetails(villageid);
-    GetKillaDetails(villageid);
-    GetCloseDetails(villageid);
-    GetSahedaDetails(villageid);
-    GetKachaPakaLineDetails(villageid);
-    GetKhasraLineDetails(villageid);
-    GetKhasraBoundaryDetails(villageid);
-    GetRoadDetails(villageid);
-    GetDashedDetails(villageid);
-    GetInnerDetails(villageid);
-    GetVillageBoundaryDetails(villageid);
-    GetDimTextDetails(villageid);
-    GetCloseTextDetails(villageid);
-    GetVillageTextDetails(villageid);
-    GetKhasraNoDetails(villageid);
-    GetRoadDetails(villageid);
+    HttpGet("/GIS/GetGisDataLayersDetails?VillageId=" + parseInt(villageid), 'json', function (response) {
+
+        var Abadi = response.filter((x) => x.gisLayerId === 1);
+        showDisBoundariesAbadi(Abadi);
+    });
+
+    //GetAbadiDetails(villageid);
+    //GetBurjiDetails(villageid);
+    //GetCleanDetails(villageid);
+    //GetCleantextDetails(villageid);
+    //GetDimDetails(villageid);
+    //GetEncroachmentDetails(villageid);
+    //GetGoshaDetails(villageid);
+    //GetGridDetails(villageid);
+    //GetNalaDetails(villageid);
+    //GetTextDetails(villageid);
+    //GetTriJunctionDetails(villageid);
+    //GetZeroDetails(villageid);
+    //GetNaliDetails(villageid);
+    //GetRailwayLineDetails(villageid);
+    //GetFieldBounDetails(villageid);
+    //GetKillaDetails(villageid);
+    //GetCloseDetails(villageid);
+    //GetSahedaDetails(villageid);
+    //GetKachaPakaLineDetails(villageid);
+    //GetKhasraLineDetails(villageid);
+    //GetKhasraBoundaryDetails(villageid);
+    //GetRoadDetails(villageid);
+    //GetDashedDetails(villageid);
+    //GetInnerDetails(villageid);
+    //GetVillageBoundaryDetails(villageid);
+    //GetDimTextDetails(villageid);
+    //GetCloseTextDetails(villageid);
+    //GetVillageTextDetails(villageid);
+    //GetKhasraNoDetails(villageid);
+    //GetRoadDetails(villageid);
 
     VILLAGEID_UNIVERSAL.push(villageid);
 }
@@ -383,12 +389,35 @@ function GetKhasraNoDetails(villageid) {
     });
 }
 
+function showVillageBoundaries(response) {
+    var data = $.map(response, function (el) { return el; })
+    for (i = 0; i < data.length; i++) {
+        switch (data) {
+            case (data[i].type == "Line"):
+                var ln = createLine(getLatLongArr(data[i].polygon));
+                ln.setOptions({ strokeWeight: 3, strokeColor: data[i].fillColor });
+                ABADI_LAYER.push(ln);
+                Polys.push(ln);
 
+                break;
+
+            case (data[i].type == "Point"):
+                var lp = new google.maps.LatLng(parseFloat(data[i].ycoordinate), parseFloat(data[i].xcoordinate));
+                var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: data[i].label });
+                GOSHA_LAYER.push(_label);
+                Polys.push(_label);
+
+                break;
+        }
+         
+       
+    }
+}
 function showDisBoundariesAbadi(response) {
     var abadi = $.map(response, function (el) { return el; })
     for (i = 0; i < abadi.length; i++) {
         var ln = createLine(getLatLongArr(abadi[i].polygon));
-        ln.setOptions({ strokeWeight: 3, strokeColor: '#900C3F' });
+        ln.setOptions({ strokeWeight: 3, strokeColor: abadi[i].fillColor });
         ABADI_LAYER.push(ln);
         Polys.push(ln);
     }

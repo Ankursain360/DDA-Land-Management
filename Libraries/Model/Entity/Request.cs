@@ -14,8 +14,12 @@ namespace Libraries.Model.Entity
   public  class Request : AuditableEntity<int>
     {
 
+        public Request()
+        {
+            Newlandannexure1 = new HashSet<Newlandannexure1>();
+        }
 
-     [Required (ErrorMessage = "The Proposal Name field is required")]
+        [Required (ErrorMessage = "The Proposal Name field is required")]
         public string PproposalName { get; set; }
         [Required(ErrorMessage = "The File No field is required")]
         public string PfileNo { get; set; }
@@ -53,7 +57,7 @@ namespace Libraries.Model.Entity
         public string ApprovalStatus { get; set; }
 
 
-
+        public ICollection<Newlandannexure1> Newlandannexure1 { get; set; }
 
     }
 }
