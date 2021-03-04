@@ -20,6 +20,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.MunicipalityId)
                 .HasName("FkAnexx1Municipality_idx");
 
+            builder.HasIndex(e => e.RequestId)
+                .HasName("fkAmexxRequestId_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Address)
@@ -86,6 +89,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.RequestId).HasColumnType("int(11)");
+
             builder.Property(e => e.TalukName)
                 .IsRequired()
                 .HasMaxLength(100)
@@ -139,6 +144,12 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.MunicipalityId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FkAnexx1Municipality");
+
+            builder.HasOne(d => d.Request)
+                .WithMany(p => p.Newlandannexure1)
+                .HasForeignKey(d => d.RequestId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkreqid");
         }
     }
 }

@@ -43,8 +43,7 @@ namespace NewLandAcquisition.Controllers
             Newlandjointsurvey newlandjointsurvey = new Newlandjointsurvey();
             newlandjointsurvey.IsActive = 1;
             newlandjointsurvey.ZoneList = await _newLandJointSurveyService.GetAllZone();
-
-            newlandjointsurvey.VillageList = await _newLandJointSurveyService.GetAllVillage(newlandjointsurvey.ZoneId);
+             newlandjointsurvey.VillageList = await _newLandJointSurveyService.GetAllVillage(newlandjointsurvey.ZoneId);
             newlandjointsurvey.KhasraList = await _newLandJointSurveyService.GetAllKhasra(newlandjointsurvey.VillageId);
             newlandjointsurvey.VillageId = 0;
             return View(newlandjointsurvey);

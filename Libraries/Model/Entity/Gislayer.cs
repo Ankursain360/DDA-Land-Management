@@ -6,11 +6,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Libraries.Model.Entity
 {
-    public class Giscolorcode : AuditableEntity<int>
+    public class Gislayer : AuditableEntity<int>
     {
+        public Gislayer()
+        {
+            Gisdata = new HashSet<Gisdata>();
+        }
         public string Name { get; set; }
         public string Code { get; set; }
-        public string Color { get; set; }
+        public string FillColor { get; set; }
+        public string StrokeColor { get; set; }
+        public string Type { get; set; }
         public byte? IsActive { get; set; }
+        public ICollection<Gisdata> Gisdata { get; set; }
     }
 }

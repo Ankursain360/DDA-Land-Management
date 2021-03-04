@@ -10,7 +10,6 @@ namespace Libraries.Model.Entity
     {
         public Village()
         {
-            //Nazul = new HashSet<Nazul>();
             Plot = new HashSet<Plot>();
             Gisaabadi = new HashSet<Gisaabadi>();
             Gisburji = new HashSet<Gisburji>();
@@ -19,6 +18,7 @@ namespace Libraries.Model.Entity
             Gisclose = new HashSet<Gisclose>();
             Gisclosetext = new HashSet<Gisclosetext>();
             Gisdashed = new HashSet<Gisdashed>();
+            Gisdata = new HashSet<Gisdata>();
             Gisdim = new HashSet<Gisdim>();
             Gisdimtext = new HashSet<Gisdimtext>();
             Gisencroachment = new HashSet<Gisencroachment>();
@@ -73,6 +73,7 @@ namespace Libraries.Model.Entity
         public ICollection<Gisclose> Gisclose { get; set; }
         public ICollection<Gisclosetext> Gisclosetext { get; set; }
         public ICollection<Gisdashed> Gisdashed { get; set; }
+        public ICollection<Gisdata> Gisdata { get; set; }
         public ICollection<Gisdim> Gisdim { get; set; }
         public ICollection<Gisdimtext> Gisdimtext { get; set; }
         public ICollection<Gisencroachment> Gisencroachment { get; set; }

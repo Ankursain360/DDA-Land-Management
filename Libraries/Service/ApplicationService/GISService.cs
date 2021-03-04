@@ -78,6 +78,11 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetFieldBounDetails(villageId);
         }
 
+        public async Task<List<Gisdata>> GetGisDataLayersDetails(int villageId)
+        {
+            return await _iGISSRepository.GetGisDataLayersDetails(villageId);
+        }
+
         public async Task<List<Gisgosha>> GetGoshaDetails(int villageId)
         {
             return await _iGISSRepository.GetGoshaDetails(villageId);
@@ -88,7 +93,7 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetGridDetails(villageId);
         }
 
-        public async  Task<List<Giscolorcode>> GetInfrastructureDetails(int villageId)
+        public async  Task<List<Gislayer>> GetInfrastructureDetails(int villageId)
         {
             return await _iGISSRepository.GetInfrastructureDetails(villageId);
         }

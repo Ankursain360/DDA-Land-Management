@@ -4,13 +4,21 @@ using System.Text;
 using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
 namespace Libraries.Model.EntityConfiguration
 {
-    public class GiscColorCodeConfiguration : IEntityTypeConfiguration<Giscolorcode>
+
+
+    public class GisLayerConfiguration : IEntityTypeConfiguration<Gislayer>
     {
-        public void Configure(EntityTypeBuilder<Giscolorcode> builder)
+
+        public void Configure(EntityTypeBuilder<Gislayer> builder)
         {
-            builder.ToTable("giscolorcode", "lms");
+            builder.ToTable("gislayer", "lms");
+
+            builder.HasIndex(e => e.Code)
+                .HasName("Code_UNIQUE")
+                .IsUnique();
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -19,14 +27,19 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Color)
+            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            builder.Property(e => e.FillColor)
                 .IsRequired()
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
-
-            builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(e => e.Type)
+               .IsRequired()
+               .HasMaxLength(45)
+               .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
@@ -37,6 +50,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.StrokeColor)
+                .HasMaxLength(45)
+                .IsUnicode(false);
         }
     }
 }
