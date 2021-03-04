@@ -37,7 +37,6 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Type)
-               .IsRequired()
                .HasMaxLength(45)
                .IsUnicode(false);
 

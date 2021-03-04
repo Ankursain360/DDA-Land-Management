@@ -44,7 +44,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Gisvillageboundary>> GetVillageBoundaryDetails(int villageId);
         Task<List<Giszero>> GetZeroDetails(int villageId);
         Task<List<Village>> GetVillageAutoCompleteDetails(string prefix);
-        Task<List<Gislayer>> GetInfrastructureDetails(int villageId);
+        Task<List<gisDataTemp>> GetInfrastructureDetails(int villageId);
         Task<List<Gisdata>> GetGisDataLayersDetails(int villageId);
     }
 }
