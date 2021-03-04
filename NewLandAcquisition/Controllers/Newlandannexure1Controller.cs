@@ -97,11 +97,10 @@ namespace NewLandAcquisition.Controllers
                         }
                     }
 
+                     ViewBag.Message =  Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
 
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    //var list = await _newlandannexure1Service.GetAllNewlandannexure1();
-                    // return View("Index", list);
-                    return View(Annexure1);
+                    return RedirectToAction("Index", "RequestApprovalProcess");
+                   
                 }
                 else
                 {
