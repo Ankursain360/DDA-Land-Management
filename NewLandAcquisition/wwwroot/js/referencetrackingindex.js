@@ -13,7 +13,7 @@ $("#btnGenerate").click(function () {
 
     debugger;
     var UnderSection4Id = $("#ReferenceNo").val();
-    alert(UnderSection4Id);
+   // alert(UnderSection4Id);
     
     if (UnderSection4Id) {
         var param = GetSearchParam(currentPageNumber, currentPageSize);
@@ -23,7 +23,7 @@ $("#btnGenerate").click(function () {
             $('#LoadReportView').html(response);
         });
     } else {
-        alert("Please Select Village Name");
+        alert("Please Enter Reference No");
     }
 });
 function GetDetails(pageNumber, pageSize) {
@@ -50,6 +50,7 @@ $("#btnReset").click(function () {
 function GetSearchParam(pageNumber, pageSize) {
 
     var VillageId = $('#ReferenceNo').val();
+    //alert(VillageId);
  //   name: $('#txtName').val(),
 
     var test = [];
@@ -60,7 +61,7 @@ function GetSearchParam(pageNumber, pageSize) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
 
-        referenceNo: parseInt(VillageId),
+        referenceNo: VillageId,
 
     }
     test.push(model);

@@ -5,7 +5,7 @@ namespace Dto.Search
  public   class TrackingListSearchDto : BaseSearchDto
     {
 
-        public int referenceNo { get; set; }
+        public string referenceNo { get; set; }
 
     }
 }
