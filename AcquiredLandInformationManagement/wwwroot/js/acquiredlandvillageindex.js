@@ -68,5 +68,5 @@ function onPaging(pageNo) {
 
 function onChangePageSize(pageSize) {
     GetAcquiredLandVillage(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
-    currentPageSize = pageSize;
+  
 }
