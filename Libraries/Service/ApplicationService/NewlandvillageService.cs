@@ -112,9 +112,10 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public Task<List<Newlandvillage>> GetAllVillageList()
+        public async Task<List<Newlandvillage>> GetAllVillageList()
         {
-            throw new NotImplementedException();
+            List<Newlandvillage> villageList = await _newlandvillageRepository.GetAllVillageList();
+            return villageList;
         }
 
         public Task<List<Newlandvillage>> GetACquiredlandvillageUsingRepo()
@@ -125,6 +126,12 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<Newlandvillage>> GetPagedNewLandVillageReport(NewlandVillageReportSearchDto model)
         {
             return await _newlandvillageRepository.GetPagedNewLandVillageReport(model);
+
+        }
+
+        public async Task<PagedResult<Newlandvillage>> GetPagedNewlandAcquiredVillageReport(NewlandAcquiredVillageReportSearchDto model)
+        {
+            return await _newlandvillageRepository.GetPagedNewlandAcquiredVillageReport(model);
 
         }
     }

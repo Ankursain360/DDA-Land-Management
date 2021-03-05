@@ -266,6 +266,50 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<PagedResult<Newlandvillage>> GetPagedNewlandAcquiredVillageReport(NewlandAcquiredVillageReportSearchDto model)
+        {
+            var data = await _dbContext.Newlandvillage
+
+                 .Where(x => (x.IsActive == 1)
+                   &&(x.Acquired == "yes")
+                                    && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+
+
+
+                                    .OrderByDescending(x => x.Id)
+                                .GetPaged<Newlandvillage>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+
+                }
+            }
+            return data;
+        }
+
+        public async Task<List<Newlandvillage>> GetAllVillageList()
+        {
+            List<Newlandvillage> villageList = await _dbContext.Newlandvillage.Where(x => x.IsActive == 1).ToListAsync();
+            return villageList;
+        }
+
 
     }
 }
