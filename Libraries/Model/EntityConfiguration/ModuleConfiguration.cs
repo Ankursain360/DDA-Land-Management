@@ -35,7 +35,6 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
-
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
