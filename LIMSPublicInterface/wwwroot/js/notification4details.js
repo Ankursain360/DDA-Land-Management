@@ -41,7 +41,7 @@ function GetDetails(pageNumber, pageSize) {
 
 $("#btnReset").click(function () {
 
-    $('#UnderSection4Id').trigger('change');
+    //$('#UnderSection4Id').trigger('change');
     location.reload();
 
   
