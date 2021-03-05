@@ -173,44 +173,57 @@ namespace NewLandAcquisition.Controllers
 
 
 
-        [HttpGet]
-        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
-        {
-            var DataFlow = await DataAsync();
+        //[HttpGet]
+        //public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        //{
+        //    var DataFlow = await DataAsync();
 
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                {
-                    var dropdown = DataFlow[i].parameterAction;
-                    return Json(dropdown);
-                    break;
-                }
+        //    for (int i = 0; i < DataFlow.Count; i++)
+        //    {
+        //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+        //        {
+        //            var dropdown = DataFlow[i].parameterAction;
+        //            return Json(dropdown);
+        //            break;
+        //        }
 
-            }
-            return Json(DataFlow);
-        }
+        //    }
+        //    return Json(DataFlow);
+        //}
 
 
 
         [HttpGet]
         public async Task<JsonResult> getannexuredetails()  //Bind Dropdown of Approval Status
         {
+            var result = false;
             var DataFlow = await DataAsync();
 
             for (int i = 0; i < DataFlow.Count; i++)
             {
-                if (i == DataFlow.Count - 1)
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
                 {
-                  
-                    ViewBag.result = true;
-                }
-                else
-                {
-                    ViewBag.result = false;
-                }
+                    result = true;
+                    if (result)
+                    {
 
+                        if (i == DataFlow.Count - 1)
+                        {
+
+                          
+                            return Json(ViewBag.data = true);
+                        }
+                        else
+                        {
+                            ViewBag.data = 0;
+                        }
+                        break;
+                    }
+
+
+                }
             }
+           
             return Json(DataFlow);
         }
 
