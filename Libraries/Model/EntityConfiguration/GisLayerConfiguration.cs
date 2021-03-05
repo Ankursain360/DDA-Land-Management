@@ -44,6 +44,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
+            builder.Property(e => e.CheckedStatus).HasColumnType("int(11)");
+
             builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(45)
