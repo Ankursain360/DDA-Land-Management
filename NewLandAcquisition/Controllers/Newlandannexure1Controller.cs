@@ -70,7 +70,7 @@ namespace NewLandAcquisition.Controllers
             }
             else
             {
-                //Annexure1.RequestId = id;
+               
                 ViewBag.Anexx1Id = 0;
                 await BindDropDown(Annexure1);
                 return View(Annexure1);
@@ -84,16 +84,15 @@ namespace NewLandAcquisition.Controllers
         {
 
             await BindDropDown(Annexure1);
-            //var Data = await _newlandannexure1Service.FetchSingleResult(id);
-            //Annexure1.Id = Data.Id;
+           
             if (ModelState.IsValid)
             {
                 
                 if (Annexure1.Id == 0)
                 {
-                    //Annexure1.Id = 0;
+                   
                     Annexure1.CreatedBy = SiteContext.UserId;
-                    //Annexure1.RequestId = id;
+                    
                     var result = await _newlandannexure1Service.Create(Annexure1);
 
                     if (result == true)
