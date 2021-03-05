@@ -4,6 +4,10 @@ $(document).ready(function () {
     
     FillAttendanceAtEdit();
     FillRepeatorAtEdit();
+   
+   $('#AAttendance').removeAttr('multiple');
+      
+
     
 });
 
@@ -60,7 +64,7 @@ function FillAttendanceAtEdit() {
             $("#tbl_posts2 #add2 #AName").val(data[i].name);
             $("#tbl_posts2 #add2 #ADesignation").val(data[i].designation);
             $("#tbl_posts2 #add2 #AAttendance").val(data[i].attendance);
-            $('#tbl_posts #add #AAttendance').trigger('change');
+            $('#tbl_posts2 #add2 #AAttendance').trigger('change');
             if (i < data.length - 1) {
                 var Gender = $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val();
                 var content = jQuery('#tbl_posts2 #add2 tr'),
@@ -74,6 +78,7 @@ function FillAttendanceAtEdit() {
                 element.find('.sn2').html(size);
                 $("#tbl_posts2 #add2 .sn2").text($('#tbl_posts2 >tbody >tr').length);
                 $("#tbl_posts2 #add2 .add").remove();
+                //$("#tbl_posts2 #add2 #AAttendance").select2('val', '');
                 $("#tbl_posts2 #tbl_posts2_body .floating-label-field").attr("readonly", true);
                 element.find(".add-record2").hide();
                 element.find(".delete-record2").show();
@@ -81,15 +86,19 @@ function FillAttendanceAtEdit() {
         }
     });
 }
+$(document).ready(function () {
+    $('#AAttendance').removeAttr('multiple');
+    //$('#AAttendance').removeAttr('multiple');
 
+});
 
 $(document).delegate('a.add-record2', 'click', function (e) {
  
 
     if ($("#tbl_posts2 #add2 #AName").val() != ''
         && $("#tbl_posts2 #add2 #ADesignation").val() != ''
-        && $("#tbl_posts #add2 #AAttendance").children("option:selected").val() != ''
-        && $("#tbl_posts #add2 #AAttendance").children("option:selected").val() != undefined
+        && $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val() != ''
+        && $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val() != undefined
     ) {
         var Gender = $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val();
         e.preventDefault();
@@ -105,6 +114,7 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         element.find('.sn2').html(size);
         $("#tbl_posts2 #add2 .sn2").text($('#tbl_posts2 >tbody >tr').length);
         $("#tbl_posts2 #add2 .add").remove();
+        $("#tbl_posts2 #add2 #AAttendance").select2('val', '');
         $("#tbl_posts2 #tbl_posts2_body .floating-label-field").attr("readonly", true);
         element.find(".add-record2").hide();
         element.find(".delete-record2").show();
@@ -149,13 +159,30 @@ function FillRepeatorAtEdit() {
            
 
 
-            if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
+            if (data[i].uploadFilePath != "" && data[i].uploadFilePath != null) {
                 $("#tbl_posts #add #viewDocumentId").attr('href', '/NewLandJointSurvey/ViewSurveyReportFile/' + data[i].id)
                 $("#tbl_posts #add #viewDocumentId").show();
             } else {
                 $("#tbl_posts #add #viewDocumentId").hide();
             }
+
            
+            if (i < data.length - 1) {
+                var content = jQuery('#tbl_posts #add tr'),
+                    size = jQuery('#tbl_posts >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_posts_body');
+
+                element.find('.sn').html(size);
+                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                $("#tbl_posts #add .add").remove();
+                $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+                element.find(".add-record").hide();
+                element.find(".delete-record").show();
+            }
         }
     });
 
@@ -165,7 +192,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
     debugger
 
     if 
-        ($("#tbl_posts #add #EmailId").val() != ''
+        ($("#tbl_posts #add #DocumentName").val() != ''
 
     ) {
        

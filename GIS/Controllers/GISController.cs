@@ -1,5 +1,7 @@
-﻿using Libraries.Service.IApplicationService;
+﻿using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GIS.Controllers
@@ -167,10 +169,43 @@ namespace GIS.Controllers
             return Json(await _GISService.GetVillageAutoCompleteDetails(prefix));
         }
 
-       
+
         public async Task<JsonResult> GetInfrastructureDetails(int VillageId)
         {
             return Json(await _GISService.GetInfrastructureDetails(VillageId));
+        }
+
+        public async Task<JsonResult> GetGisDataLayersDetails(int VillageId)
+        {
+            var data = await _GISService.GetGisDataLayersDetails(VillageId);
+            List<gisDataTemp> temp = new List<gisDataTemp>();
+
+            if(data != null)
+            {
+                for (int i = 0; i < data.Count; i++)
+                {
+                    temp.Add(new gisDataTemp
+                    {
+                        Id = data[i].Id,
+                        VillageId = data[i].VillageId,
+                        GisLayerId = data[i].GisLayerId,
+                        Xcoordinate = data[i].Xcoordinate,
+                        Ycoordinate = data[i].Ycoordinate,
+                        Polygon = data[i].Polygon,
+                        Label = data[i].Label,
+                        LabelXcoordinate = data[i].LabelXcoordinate,
+                        LabelYcoordinate = data[i].LabelYcoordinate,
+                        Name = data[i].GisLayer.Name,
+                        Code = data[i].GisLayer.Code,
+                        FillColor = data[i].GisLayer.FillColor,
+                        StrokeColor = data[i].GisLayer.StrokeColor,
+                        Type = data[i].GisLayer.Type
+
+                    });
+                }
+            }
+            var result = Json(temp);
+            return result;
         }
     }
 }

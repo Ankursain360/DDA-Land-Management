@@ -9,6 +9,7 @@
             <th>Send To </th>
 
             <th>Remarks </th>
+            <th>Send Date </th>
          
 
 
@@ -25,12 +26,13 @@
                  
 
 
-                    <td>@item.SendFrom</td>
+                    <td>@item.From_User</td>
 
-                    <td>@item.SendTo</td>
+                    <td>@item.To_User</td>
 
                     <td>@item.Remarks</td>
-                    
+                  
+                    <td>@(Convert.ToDateTime(item.Send_Date).ToString("dd/MMM/yyyy"))</td>
 
 
                 </tr>

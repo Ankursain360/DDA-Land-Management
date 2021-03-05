@@ -214,5 +214,53 @@
     "inputFiles": [
       "wwwroot/js/possessiondetailscreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newjointsurveycreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newjointsurveycreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newjointsurveyedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/newjointsurveyedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newjointsurveyindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newjointsurveyindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandnotificationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandnotificationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandvillagekhasrareportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandvillagekhasrareportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandvillagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandvillagereportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandannexure1reate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandannexure1reate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandannx2.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandannx2.js"
+    ]
   }
 ]

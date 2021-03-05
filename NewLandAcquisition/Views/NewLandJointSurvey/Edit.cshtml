@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-           
+
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
@@ -183,34 +183,36 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @*<div class="floating-label-wrap mb-3 mb-md-0">
-            <a id="viewDocumentId" asp-action="ViewSurveyReportFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-            <input type="hidden" asp-for="UploadFilePath" />
-
-            <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3 " />
-            <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span>
-
-        </div>*@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        @{ if (Model.UploadFilePath != null)
-                                            {
-                                                <a class="badge badge-primary px-2" asp-action="ViewSurveyReportFile" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                        <a id="viewDocumentId" asp-action="ViewSurveyReportFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <input type="hidden" asp-for="UploadFilePath" />
 
-                                                <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" asp-for="Document" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                                <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span> }
-                                            else
-                                            {
-                                                <input type="file" asp-for="Document" class="floating-label-field floating-label-field--s3" placeholder="Property Photo">
-                                                <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span>
-                                                <label for="field-1" class="floating-label">Upload Photograph of Property </label> } }
+                                        <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span>
 
                                     </div>
+                                    @*<div class="floating-label-wrap mb-3 mb-md-0">
+                                            @{ if (Model.UploadFilePath != null)
+                                                {
+                                                    <a class="badge badge-primary px-2" asp-action="ViewSurveyReportFile" asp-route-id="@Model.Id"> (View Existing Document)</a>
+
+                                                    <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" asp-for="Document" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                                    <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span> }
+                                                else
+                                                {
+                                                    <input type="file" asp-for="Document" class="floating-label-field floating-label-field--s3" placeholder="Property Photo">
+                                                    <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span>
+
+                                                }
+                                                }
+
+                                        </div>*@
                                 </td>
-                               
+
                                 <td>
                                     <div class="action-btns">
-                                        <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                        <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                        <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
                                 </td>
 
@@ -235,7 +237,7 @@
                             <th> Name</th>
                             <th>Designation</th>
                             <th>Attendance</th>
-                            <th>Action</th>
+                            <th>Operation</th>
                         </tr>
                     </thead>
                     <tbody id="tbl_posts2_body">
@@ -256,7 +258,7 @@
                             </td>
                             <td>
                                 <select asp-for="AAttendance" required class="floating-label-field floating-label-field--s3">
-                                    <option value="0">---Select---</option>
+                                    <option disabled selected="selected">---Select---</option>
                                     <option value="1">Present</option>
                                     <option value="2">Absent</option>
 
@@ -264,7 +266,7 @@
                                 <span asp-validation-for="AAttendance" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
-                           
+
 
                             <td>
                                 <div class="action-btns">

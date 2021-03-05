@@ -6,6 +6,7 @@ $(document).ready(function () {
     var id = parseInt($('#Id').val());
     GetOtherDetails(id);
     GetHistoryDetails(id);
+    GetOtherDetails1();
 
     HttpGet(`/RequestApprovalProcess/GetApprovalDropdownList`, 'html', function (response) {
        
@@ -25,6 +26,17 @@ $(document).ready(function () {
     });
 
 });
+
+
+function GetOtherDetails1() {
+    HttpGet(`/RequestApprovalProcess/getannexuredetails`, 'html', function (response) {
+        response = JSON.parse(response);
+    });
+};
+
+
+
+
 
 
 function GetOtherDetails(id) {

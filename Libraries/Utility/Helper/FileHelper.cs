@@ -75,6 +75,11 @@ namespace Utility.Helper
                 {".csv", "text/csv"}
             };
         }
+
+        public string SaveFile(string sn7FilePath, List<IFormFile> sn7Filep)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }
