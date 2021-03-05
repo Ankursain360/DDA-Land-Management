@@ -250,5 +250,17 @@
     "inputFiles": [
       "wwwroot/js/newlandvillagereportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandannexure1reate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandannexure1reate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandannx2.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandannx2.js"
+    ]
   }
 ]
