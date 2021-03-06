@@ -42,24 +42,31 @@
         </div>
     </div>
     <br />
-
-  @{
-        @if (@ViewBag.data == true)
-        {
-            <div class="row pt-3">
-                <div class="col-md-4 my-3 d-flex sub-heading">
-                    <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
-                </div>
-                <div class="col-md-4 my-3 d-flex sub-heading">
-                    <div><a asp-action="Create" asp-controller="IdentificationOfLandAnnexure2">Click here to go Annexure 2 </a></div>
-                </div>
-            </div>
-         }
+    @if (ViewBag.userid == 1)
+    {
+        <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
     }
+    else
+    {
+        <a asp-action="View" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
+    }
+
+    @*@{
+            @if (@ViewBag.data == true)
+            {
+                <div class="row pt-3">
+                    <div class="col-md-4 my-3 d-flex sub-heading">
+                        <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
+                    </div>
+                    <div class="col-md-4 my-3 d-flex sub-heading">
+                        <div><a asp-action="Create" asp-controller="IdentificationOfLandAnnexure2">Click here to go Annexure 2 </a></div>
+                    </div>
+                </div>
+             }
+        }*@
 
     <div class="row pt-3">
         <div class="col-md-12">
-
             <div class="row pt-3">
                 <div class="col-md-12">
                     <input type="submit" value="Submit" class="btn btn-theme " />

@@ -53,7 +53,7 @@ namespace NewLandAcquisition.Controllers
         {
             var Data = await _requestApprovalProcessService.FetchSingleResult(id);
             var DataFlow = await DataAsync();
-
+            ViewBag.userid = SiteContext.UserId;
             if (Data == null)
             {
                 return NotFound();
