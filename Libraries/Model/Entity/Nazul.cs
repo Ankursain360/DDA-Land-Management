@@ -24,6 +24,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Last Mutation No is Mandatory Field")]
         public string LastMutationNo { get; set; }
+        [Required(ErrorMessage = " Status is mandatory")]
         public byte IsActive { get; set; }
       
 

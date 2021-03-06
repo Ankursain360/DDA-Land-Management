@@ -12,9 +12,13 @@ namespace Libraries.Model.Entity
         public int? ProposaldetailsId { get; set; }
         public int? AcquiredlandvillageId { get; set; }
         public int? KhasraId { get; set; }
+        [Required(ErrorMessage = "Bigha is mandatory")]
         public decimal Bigha { get; set; }
+        [Required(ErrorMessage = "Biswa is mandatory")]
         public decimal Biswa { get; set; }
+        [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
 
         [NotMapped]

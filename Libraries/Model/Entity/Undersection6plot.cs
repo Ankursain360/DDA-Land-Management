@@ -11,19 +11,19 @@ namespace Libraries.Model.Entity
     public class Undersection6plot : AuditableEntity<int>
     {
 
-        [Required(ErrorMessage = "The Notification6 field is required")]
+        [Required(ErrorMessage = "Notification6 is mandatory", AllowEmptyStrings = false)]
         public int? UnderSection6Id { get; set; }
-        [Required(ErrorMessage = "The Village field is required")]
+        [Required(ErrorMessage = "Village is required mandatory", AllowEmptyStrings = false)]
         public int? VillageId { get; set; }
-        [Required(ErrorMessage = "The Khasra No field is required")]
+        [Required(ErrorMessage = "Khasra No field is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bigha field is mandatory")]
         public decimal Bigha { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Biswa field is mandatory")]
         public decimal Biswa { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Biswanshi field is mandatory")]
         public decimal Biswanshi { get; set; }
-      
+        [Required(ErrorMessage = "Status field is mandatory")]
         public byte IsActive { get; set; }
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }

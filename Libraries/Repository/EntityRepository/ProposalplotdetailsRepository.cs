@@ -183,10 +183,10 @@ namespace Libraries.Repository.EntityRepository
             return khasraList;
         }
 
-        //public async Task<bool> Any(int id, string name)
-        //{
-        //    return await _dbContext.Proposaldetails.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
-        //}
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
 
 
     }

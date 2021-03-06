@@ -10,19 +10,20 @@ namespace Libraries.Model.Entity
 {
     public  class Undersection4plot: AuditableEntity<int>
     {
-        [Required(ErrorMessage = "The Notification field is required")]
+        [Required(ErrorMessage = "Notification field is mandatory")]
         public int? UnderSection4Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Village is mandatory", AllowEmptyStrings = false)]
         public int? VillageId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Khasra No is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bigha is mandatory")]
         public decimal Bigha { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Biswa is mandatory")]
         public decimal Biswa { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
 
