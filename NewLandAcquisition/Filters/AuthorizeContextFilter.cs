@@ -6,6 +6,7 @@ using Libraries.Service.IApplicationService;
 using NewLandAcquisition.Helper;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Routing;
+using System;
 
 namespace NewLandAcquisition.Filters
 {
@@ -28,19 +29,31 @@ namespace NewLandAcquisition.Filters
 
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
-            var controllerName = context.ActionDescriptor.RouteValues["controller"];
-            var actionName = context.ActionDescriptor.RouteValues["action"];
-            string url = "/" + controllerName + "/" ;
-            bool hasPermission = await _permissionsService.ValidatePermission(_viewAction,
-                                _siteContext.RoleId.Value, _configuration.GetSection("ModuleId").Value,url);
-            if (!hasPermission)
+            try
             {
+                var controllerName = context.ActionDescriptor.RouteValues["controller"];
+                var actionName = context.ActionDescriptor.RouteValues["action"];
+                string url = "/" + controllerName + "/";
+                bool hasPermission = await _permissionsService.ValidatePermission(_viewAction,
+                                    _siteContext.RoleId.Value, _configuration.GetSection("ModuleId").Value, url);
+
+                if (!hasPermission)
+                {
+                    context.Result = new RedirectToRouteResult(
+                            new RouteValueDictionary(new
+                            {
+                                controller = "Home",
+                                action = "UnAuthorized",
+                            }));
+                }
+            }
+            catch (Exception e) {
                 context.Result = new RedirectToRouteResult(
-                        new RouteValueDictionary(new
-                        {
-                            controller = "Home",
-                            action = "UnAuthorized",
-                        }));
+                                new RouteValueDictionary(new
+                                {
+                                    controller = "Home",
+                                    action = "UnAuthorized",
+                                }));
             }
         }
     }

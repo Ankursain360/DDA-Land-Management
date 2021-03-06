@@ -28,7 +28,7 @@ namespace NewLandAcquisition.Controllers
             _configuration = configuration;
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+       // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             
@@ -77,12 +77,13 @@ namespace NewLandAcquisition.Controllers
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         //var list = await _newlandannexure2Service.Getawardmasterdetails();
                         //return View("Index", list);
-                        return View(newlandannexure2);
+                        return RedirectToAction("Index", "RequestApprovalProcess");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(newlandannexure2);
+                        // return View(newlandannexure2);
+                        return RedirectToAction("Index", "RequestApprovalProcess");
                     }
                 }
                 else
@@ -93,9 +94,129 @@ namespace NewLandAcquisition.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(newlandannexure2);
+                //  return View(newlandannexure2);
+                return RedirectToAction("Index", "RequestApprovalProcess");
             }
         }
+        public async Task<IActionResult> Edit(int id)
+        {
 
+            var Data = await _newlandannexure2Service.FetchSingleResultAnnx2(id);
+            ViewBag.ExistSn9File = Data.Sn9filePath;
+            ViewBag.ExistSn8File = Data.Sn8filePath;
+            ViewBag.ExistSn7File = Data.Sn7File;
+            ViewBag.ExistSn12File = Data.Sn12filePath;
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".txt", "text/plain"},
+                {".pdf", "application/pdf"},
+                {".doc", "application/vnd.ms-word"},
+                {".docx", "application/vnd.ms-word"},
+                {".xls", "application/vnd.ms-excel"},
+                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"},
+                {".csv", "text/csv"}
+            };
+        }
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+        public async Task<IActionResult> S7Download(int Id)
+        {
+            string filename = _newlandannexure2Service.GetS7Download(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> S8Download(int Id)
+        {
+            string filename = _newlandannexure2Service.GetS8Download(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> S9Download(int Id)
+        {
+            string filename = _newlandannexure2Service.GetS9Download(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> S12Download(int Id)
+        {
+            string filename = _newlandannexure2Service.GetS12Download(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _newlandannexure2Service.FetchSingleResultAnnx2(id);
+            ViewBag.ExistSn9File = Data.Sn9filePath;
+            ViewBag.ExistSn8File = Data.Sn8filePath;
+            ViewBag.ExistSn7File = Data.Sn7File;
+            ViewBag.ExistSn12File = Data.Sn12filePath;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        [HttpPost]
+        //    [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, Newlandannexure2 newlandannexure2)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                var result = await _newlandannexure2Service.Update(id, newlandannexure2);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                   // var list = await _newlandawardmasterdetailService.Getawardmasterdetails();
+                    return RedirectToAction("Index", "RequestApprovalProcess");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return RedirectToAction("Index", "RequestApprovalProcess");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "RequestApprovalProcess");
+            }
+        }
     }
 }

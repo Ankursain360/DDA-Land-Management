@@ -2,12 +2,13 @@
 
 
 $(document).ready(function () {
-  
+
     var id = parseInt($('#Id').val());
     GetOtherDetails(id);
     GetHistoryDetails(id);
-      HttpGet(`/RequestApprovalProcess/GetApprovalDropdownList`, 'html', function (response) {
-       
+    GetReqIdHistory(id);
+    HttpGet(`/RequestApprovalProcess/GetApprovalDropdownList`, 'html', function (response) {
+
         response = JSON.parse(response);
         $('#ApprovalStatus option').each(function () {
             if (response.length > 0) {
@@ -24,7 +25,55 @@ $(document).ready(function () {
     });
 
 });
+function setRouteParameter() {
+    var newhref = $("#addActivityPrice").attr('href') + '/' + g_id;
+    $("#addActivityPrice").attr("href", newhref);
+}
 
+function GetReqIdHistory(id) {
+    HttpGet(`/RequestApprovalProcess/RequestIdHistory/?Id=${id}`, 'json', function (data) {
+
+      //  debugger
+        try {
+
+            if ((data[0].id) != 0) {
+                var x = data[0].id;
+                
+                if (((data[0].ReqId) == 0)  || ((data[0].createdBy) == 0))  {
+
+
+                    $("viewlink").attr("asp-route-id", x);
+                    var newhref = $("#viewlink").attr('href') + '/' + x;
+                    $("#viewlink").attr("href", newhref);
+                    document.getElementById("viewlink").text = "Click me to open annexure 2 view link!";
+
+                   
+                }
+                
+            else
+                {
+                    $("editlink").attr("asp-route-id", x);
+                    var newhref = $("#editlink").attr('href') + '/' + x;
+                    $("#editlink").attr("href", newhref);
+
+                    document.getElementById("editlink").text = "Click me to open annexure 2 edit link!";
+                }
+            }
+            else
+            {
+                document.getElementById("createlink").text = "Click me to open annexure 2 create link!";
+              
+            }
+        } catch
+        { document.getElementById("createlink").text = "Click me to open annexure 2 create link!"; }
+
+        // $("#tbl_posts #add #EName").val(Data[0].Id);
+        // $("#tbl_posts #add #EAddress").val(data[i].address);
+
+        //$('#RequestIdHistoryDiv').val("");
+        //$('#RequestIdHistoryDiv').val(response);
+    });
+};
 
 function GetOtherDetails(id) {
     HttpGet(`/RequestApprovalProcess/RequestView/?Id=${id}`, 'html', function (response) {

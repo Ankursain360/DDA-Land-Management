@@ -25,6 +25,37 @@ namespace Libraries.Repository.EntityRepository
 
             return data;
         }
+        public string GetS7Download(int id)
+        {
+            var File = (from f in _dbContext.Newlandannexure2
+                        where f.Id == id
+                        select f.Sn7File).First();
 
+            return File;
+        }
+        public string GetS8Download(int id)
+        {
+            var File = (from f in _dbContext.Newlandannexure2
+                        where f.Id == id
+                        select f.Sn8filePath).First();
+
+            return File;
+        }
+        public string GetS9Download(int id)
+        {
+            var File = (from f in _dbContext.Newlandannexure2
+                        where f.Id == id
+                        select f.Sn9filePath).First();
+
+            return File;
+        }
+        public string GetS12Download(int id)
+        {
+            var File = (from f in _dbContext.Newlandannexure2
+                        where f.Id == id
+                        select f.Sn12filePath).First();
+
+            return File;
+        }
     }
 }
