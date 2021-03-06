@@ -176,7 +176,8 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Nazul
                 .Include(x => x.Village)
 
-                .Where(x => (x.VillageId == (nazulVillageReportSearchDto.villageId == 0 ? x.VillageId : nazulVillageReportSearchDto.villageId)))
+                .Where(x => (x.VillageId == (nazulVillageReportSearchDto.villageId == 0 ? x.VillageId : nazulVillageReportSearchDto.villageId))
+                && (x.IsActive == 1))
               
                 .OrderByDescending(x => x.Id).GetPaged(nazulVillageReportSearchDto.PageNumber, nazulVillageReportSearchDto.PageSize);
 

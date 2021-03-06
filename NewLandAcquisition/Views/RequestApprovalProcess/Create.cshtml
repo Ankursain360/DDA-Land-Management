@@ -28,29 +28,10 @@
             </div>
         </div>
 
-        <div id="testview">
-
-        @if (ViewBag.result == true)
-        {
-            <div class="row pt-3">
-                <div class="col-md-4 my-3 d-flex sub-heading">
-                    <a asp-action="Create" asp-controller="Newlandannexure1"> Annexure 1 </a>
-                </div>
-
-
-                <div class="col-md-4 my-3 d-flex sub-heading">
-                    <div><a asp-action="Create" asp-controller="IdentificationOfLandAnnexure2">Click here to go Annexure 2 </a></div>
-                </div>
-            </div>}
-
-        else
-        {
-
-        }
 
 
     </div>
-    </div>
+
     <div class="row pt-3">
         <div class="col-md-12">
             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -62,7 +43,30 @@
     </div>
     <br />
 
+    @{
+        @if (@ViewBag.data == true)
+        {
+            <div class="row pt-3">
+                <div class="col-md-4 my-3 d-flex sub-heading">
+                    <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
+                </div>
 
+            </div>
+        }
+    }
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <p id="demo"></p>
+            <input type="hidden" asp-for="Id" />
+
+            <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="IdentificationOfLandAnnexure2" id="createlink"></a>
+            <a asp-action="View" asp-controller="IdentificationOfLandAnnexure2" id="viewlink"></a>
+            <a asp-action="Edit" asp-controller="IdentificationOfLandAnnexure2" id="editlink"></a>
+
+
+        </div>
+    </div>
+   
     <div class="row pt-3">
         <div class="col-md-12">
 

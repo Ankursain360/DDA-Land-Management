@@ -27,16 +27,18 @@ namespace NewLandAcquisition.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
+        private readonly INewlandannexure2Service _newlandannexure2Service;
 
 
 
-        public RequestApprovalProcess(IRequestApprovalProcessService requestApprovalProcessService, IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IRequestService requestService)
+        public RequestApprovalProcess(IRequestApprovalProcessService requestApprovalProcessService, IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IRequestService requestService, INewlandannexure2Service newlandannexure2Service)
         {
             _workflowtemplateService = workflowtemplateService;
             _requestApprovalProcessService = requestApprovalProcessService;
             _requestService = requestService;
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
+            _newlandannexure2Service = newlandannexure2Service;
         }
 
 
@@ -53,7 +55,7 @@ namespace NewLandAcquisition.Controllers
         {
             var Data = await _requestApprovalProcessService.FetchSingleResult(id);
             var DataFlow = await DataAsync();
-
+            ViewBag.userid = SiteContext.UserId;
             if (Data == null)
             {
                 return NotFound();
@@ -162,55 +164,121 @@ namespace NewLandAcquisition.Controllers
 
         public async Task<PartialViewResult> RequestView(int id)
         {
+
             var Data = await _requestService.FetchSingleResult(id);
 
          
             return PartialView("_RequestView", Data);
         }
-
-
-
-
-
-
-        [HttpGet]
-        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        
+        public async Task<JsonResult> RequestIdHistory(int id)
         {
-            var DataFlow = await DataAsync();
+           
+            int ReqId = 0;
+            int CreatedBy = 0;
+            int UserId = SiteContext.UserId;
 
-            for (int i = 0; i < DataFlow.Count; i++)
+            var ReqExists = await _newlandannexure2Service.CheckReqExists(id);
+            var CheckReqExistancy = ReqExists.Select(a => new { a.Id});
+            if (ReqExists.Count == 0)
             {
-                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                {
-                    var dropdown = DataFlow[i].parameterAction;
-                    return Json(dropdown);
-                    break;
-                }
+                return Json(ReqExists.Select(a=>new { a.Id,a.ReqId,a.CreatedBy})); }
+            else
+            {
+                var Data = await _newlandannexure2Service.FetchSingleResultForReqId(id, UserId);
+               
+                if (Data.Count == 0)
+                { return Json(ReqExists.Select(a => new { a.Id , ReqId, CreatedBy })); }
+               
+                else {
+                    int UserCheck = Data[0].CreatedBy;
+                    if (UserCheck == UserId)
+                    {
+                        return Json(Data.Select(x => new
+                        {
+                            x.Id,
+                            ReqId,
+                            x.CreatedBy
 
+                        }));
+                    }
+                    else
+                    {
+                        return Json(Data.Select(x => new
+                        {
+                            x.Id,
+                            x.ReqId,
+                            x.CreatedBy
+
+                        }));
+                    }
+
+
+                }
             }
-            return Json(DataFlow);
+
+            
+
+           
+
+            //return PartialView("RequestIdHistoryDiv", Data);
         }
+
+
+
+
+
+        //[HttpGet]
+        //public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        //{
+        //    var DataFlow = await DataAsync();
+
+        //    for (int i = 0; i < DataFlow.Count; i++)
+        //    {
+        //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+        //        {
+        //            var dropdown = DataFlow[i].parameterAction;
+        //            return Json(dropdown);
+        //            break;
+        //        }
+
+        //    }
+        //    return Json(DataFlow);
+        //}
 
 
 
         [HttpGet]
         public async Task<JsonResult> getannexuredetails()  //Bind Dropdown of Approval Status
         {
+            var result = false;
             var DataFlow = await DataAsync();
 
             for (int i = 0; i < DataFlow.Count; i++)
             {
-                if (i == DataFlow.Count - 1)
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
                 {
-                  
-                    ViewBag.result = true;
-                }
-                else
-                {
-                    ViewBag.result = false;
-                }
+                    result = true;
+                    if (result)
+                    {
 
+                        if (i == DataFlow.Count - 1)
+                        {
+
+                          
+                            return Json(ViewBag.data = true);
+                        }
+                        else
+                        {
+                            ViewBag.data = 0;
+                        }
+                        break;
+                    }
+
+
+                }
             }
+           
             return Json(DataFlow);
         }
 

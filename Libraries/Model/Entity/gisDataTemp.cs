@@ -23,5 +23,6 @@ namespace Libraries.Model.Entity
         public string FillColor { get; set; }
         public string StrokeColor { get; set; }
         public string Type { get; set; }
+        public int CheckedStatus { get; set; }
     }
 }

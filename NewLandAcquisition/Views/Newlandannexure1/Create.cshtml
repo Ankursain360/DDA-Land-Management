@@ -1,11 +1,19 @@
 ﻿@model Libraries.Model.Entity.Newlandannexure1
 @await Component.InvokeAsync("PageHeader", new { pageName = "Identification of Land Submitted by LM Dept (Annexure I)" })
-<input type="hidden" asp-for="RequestId" />
 <div class="pt-3">
 
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-       
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <input type="hidden" asp-for="RequestId" />
+        <input type="hidden" asp-for="Id" value="@ViewBag.Anexx1Id" />
+        @if (ViewBag.Anexx1Id == 0)
+        {
+            <h3 class="mb-3 d-flex">Add Details</h3>
+        }
+        else
+        {
+            <h3 class="mb-3 d-flex">Edit Details</h3>
+        }
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div id="RequestView" class="mt-md-3">
 
@@ -86,8 +94,8 @@
                         <tbody id="tbl_posts_body">
                         </tbody>
                         <tbody class="tbody" id="add">
-                            <tr  id="">
-                               
+                            <tr id="">
+
                                 <td class="py-3" style="text-align:center;"><span class="sn">1</span></td>
                                 <td class="py-3">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -96,39 +104,40 @@
 
                                         <label class="floating-label"> Khasra No  </label>
                                     </div>
-                                    </td>
+                                </td>
                                 <td class="py-3">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <input required asp-for="Bigha" placeholder="Bigha" type="text" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="Bigha" class="d-block text-danger field-validation-valid"></span>
                                         <label class="floating-label"> Bigha </label>
                                     </div>
-                                        <br />
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input required asp-for="Biswa" type="text" placeholder="Biswa" class="floating-label-field floating-label-field--s3 numbers" />
-                                            <span asp-validation-for="Biswa" class="d-block text-danger field-validation-valid "></span>
-                                            <label class="floating-label"> Biswa </label>
-                                        </div>
-                                            <br />
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input required asp-for="Biswanshi" placeholder="Biswanshi" type="text" class="floating-label-field floating-label-field--s3 numbers" />
-                                                <span asp-validation-for="Biswanshi" class="d-block text-danger field-validation-valid"></span>
-                                                <label class="floating-label"> Biswanshi   </label>
-                                            </div>
-                                                <br />
+                                    <br />
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input required asp-for="Biswa" type="text" placeholder="Biswa" class="floating-label-field floating-label-field--s3 numbers" />
+                                        <span asp-validation-for="Biswa" class="d-block text-danger field-validation-valid "></span>
+                                        <label class="floating-label"> Biswa </label>
+                                    </div>
+                                    <br />
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input required asp-for="Biswanshi" placeholder="Biswanshi" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                                        <span asp-validation-for="Biswanshi" class="d-block text-danger field-validation-valid"></span>
+                                        <label class="floating-label"> Biswanshi   </label>
+                                    </div>
+                                    <br />
 
-</td>
+                                </td>
                                 <td class="py-3">
                                     <div class="floating-label-wrap">
                                         <select asp-for="OwnershipStatus" placeholder="Ownership Status" class="floating-label-field floating-label-field--s3">
-                                            <option selected value="Public">Public</option>
+                                            <option disabled selected="selected">---Select---</option>
+                                            <option value="Public">Public</option>
                                             <option value="Private">Private</option>
                                         </select>
                                         <span asp-validation-for="OwnershipStatus" class="text-danger"></span>
                                         <label class="floating-label"> Ownership Status   </label>
                                     </div>
                                     <br />
-                                
+
                                 </td>
                                 <td class="py-3">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -170,7 +179,7 @@
                                 <td>1</td>
                                 <td>Building</td>
                                 <td>
-                                    <input asp-for="BuildingNo"  class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input asp-for="BuildingNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="BuildingNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
@@ -185,7 +194,7 @@
                                 <td>1</td>
                                 <td>Tanks</td>
                                 <td>
-                                    <input asp-for="TanksNo"  class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input asp-for="TanksNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="TanksNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
@@ -200,7 +209,7 @@
                                 <td>1</td>
                                 <td>Wells</td>
                                 <td>
-                                    <input asp-for="WellsNo"  class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input asp-for="WellsNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="WellsNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
@@ -245,7 +254,7 @@
                                 <td>1</td>
                                 <td>Graveyard or Tomb</td>
                                 <td>
-                                    <input asp-for="TombNo"  class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input asp-for="TombNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="TombNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
@@ -260,7 +269,7 @@
                                 <td>1</td>
                                 <td>Others</td>
                                 <td>
-                                    <input asp-for="OthersNo"  class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input asp-for="OthersNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="OthersNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
@@ -291,7 +300,7 @@
             <div class="col-md-1">
                 <input type="hidden" asp-for="AreaUnit" value="HA" />
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="unit" id="rdbHA" value="HA" checked>
+                    <input asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbHA" value="HA">
                     <label class="form-check-label" for="radio">
                         HA
                     </label>
@@ -299,7 +308,7 @@
             </div>
             <div class="col-md-1">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="unit" id="rdbAcre" value="Acre">
+                    <input asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbAcre" value="Acre">
                     <label class="form-check-label" for="radio">
                         Acre
                     </label>
@@ -307,7 +316,7 @@
             </div>
             <div class="col-md-2">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="unit" id="rdbSqm" value="Sq Meters">
+                    <input asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbSqm" value="Sq Meters">
                     <label class="form-check-label" for="radio">
                         Sq. Meters
                     </label>
@@ -316,7 +325,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Area" placeholder="Area"
-                           class="floating-label-field floating-label-field--s3 numbers" value="" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
 
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label">Area   </label>
@@ -372,7 +381,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="AgriculturalLandArea" placeholder="AgriculturalLandArea" type="text"
-                           class="floating-label-field floating-label-field--s3 numbers" value="" />
+                           class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="AgriculturalLandArea" class="text-danger"></span>
                     <label class="floating-label">Area of the Agricultural & Irrigated Multi Cropped Land (in HA/ACRE/Sq.mtr)    </label>
                 </div>
@@ -402,7 +411,14 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                @if (ViewBag.Anexx1Id == 0)
+                {
+                    <button class="btn btn-theme " type="submit">Create</button>
+                }
+                else
+                {
+                    <button class="btn btn-theme " type="submit">Update</button>
+                }
                 @Html.ActionLink("Back", "Index", "RequestApprovalProcess", null, new { @class = "btn btn-theme " })
 
             </div>

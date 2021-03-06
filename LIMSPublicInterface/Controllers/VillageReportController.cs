@@ -29,7 +29,6 @@ namespace LIMSPublicInterface.Controllers
         {
             Acquiredlandvillage model = new Acquiredlandvillage();
 
-
             model.VillageList = await _acquiredlandvillageService.GetAllVillageList();
             return View(model);
         }
