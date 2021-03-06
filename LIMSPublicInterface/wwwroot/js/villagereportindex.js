@@ -12,8 +12,8 @@ $(document).ready(function () {
         }
         else
         if (sort == null) {
-            alert("Please select valid sort by option");
-            $('#ddlSort option:selected').val('Village');
+           // alert("Please select valid sort by option");
+            $('#ddlSort option:selected').val('VILLAGE');
         }
         else
         {
@@ -51,8 +51,8 @@ $("#btnAscending").click(function () {
     sortby = 1;//for Ascending
     var sort = $('#ddlSort option:selected').val();
     if (sort == null) {
-        alert("Please select valid sort by option");
-        $('#ddlSort option:selected').val('Village');
+       // alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('VILLAGE');
     }
     else {
         $("#btnDescending").removeClass("active");
@@ -67,8 +67,8 @@ $("#btnDescending").click(function () {
     sortby = 2;//for Descending
     var sort = $('#ddlSort option:selected').val();
     if (sort == null) {
-        alert("Please select valid sort by option");
-        $('#ddlSort option:selected').val('Village');
+        //alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('VILLAGE');
     }
     else {
         $("#btnAscending").removeClass("active");
@@ -80,8 +80,8 @@ $("#btnDescending").click(function () {
 $('#ddlSort').change(function () {
     var sort = $('#ddlSort option:selected').val();
     if (sort == null) {
-        alert("Please select valid sort by option");
-        $('#ddlSort option:selected').val('Village');
+       // alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('VILLAGE');
     }
     else {
         GetDetails(currentPageNumber, currentPageSize, sortby);
@@ -93,8 +93,8 @@ $("#btnReset").click(function () {
     var sort = $('#ddlSort option:selected').val();
 
     if (sort == null) {
-        alert("Please select valid sort by option");
-       
+      //  alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('VILLAGE');
     } else {
         $('#Name').val('0').trigger('change');
         GetDetails(currentPageNumber, currentPageSize, sortby);
@@ -105,8 +105,8 @@ $("#btnReset").click(function () {
 function onPaging(pageNo) {
     var sort = $('#ddlSort option:selected').val();
     if (sort == null) {
-        alert("Please select valid sort by option");
-        $('#ddlSort option:selected').val('Village');
+       // alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('VILLAGE');
     } else {
         GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
         currentPageNumber = pageNo;
@@ -118,8 +118,8 @@ function onChangePageSize(pageSize) {
     var sort = $('#ddlSort option:selected').val();
     if (sort == null)
     {
-        alert("Please select valid sort by option");
-        $('#ddlSort option:selected').val('Village');
+       // alert("Please select valid sort by option");
+        $('#ddlSort option:selected').val('VILLAGE');
     }
     else
     {
