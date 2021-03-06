@@ -128,7 +128,7 @@ namespace Libraries.Repository.EntityRepository
                               .OrderBy(s => s.IsActive)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
-                    case ("NUMBET"):
+                    case ("NUMBER"):
                         data = null;
                         data = await _dbContext.Newlandnotification
                               .Include(x => x.Newlandnotificationfilepath)

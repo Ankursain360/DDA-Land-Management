@@ -249,6 +249,7 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+
         public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
         {
             List<Khasra> khasraList = await _dbContext.Khasra

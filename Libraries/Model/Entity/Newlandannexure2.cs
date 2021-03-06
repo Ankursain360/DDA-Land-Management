@@ -17,14 +17,19 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Purpose of Acquition is mandatory")]
         public string PurposeOfAcqDetails { get; set; }
         public string Sn1val { get; set; }
+        public string Sn1Remark { get; set; }
         public string Sn2val { get; set; }
+        public string Sn2Remark { get; set; }
         public string Sn3val { get; set; }
-    
+        public string Sn3Remark { get; set; }
         public string Sn4val { get; set; }
         public string Sn5val { get; set; }
-      
+        public string Sn5Remark { get; set; }
         public string Sn6val { get; set; }
         public string Sn7val { get; set; }
+        public string Sn7Remark { get; set; }
+        public DateTime? Sn7Date { get; set; }
+        public string Sn7File { get; set; }
         public DateTime? Sn8date { get; set; }
         public string Sn8remarks { get; set; }
         public string Sn8filePath { get; set; }
@@ -42,13 +47,9 @@ namespace Libraries.Model.Entity
         public string OtherRemarks { get; set; }
         public byte? IsActive { get; set; }
         public int ReqId { get; set; }
-        public string Sn1Remark { get; set; }
-        public string Sn2Remark { get; set; }
-        public string Sn3Remark { get; set; }
-        public string Sn5Remark { get; set; }
-        public string Sn7Remark { get; set; }
-        public DateTime? Sn7Date { get; set; }
-        public string Sn7File { get; set; }
+            
+       
+       
         [NotMapped]
         public IFormFile Sn7Filep { get; set; }
         [NotMapped]
