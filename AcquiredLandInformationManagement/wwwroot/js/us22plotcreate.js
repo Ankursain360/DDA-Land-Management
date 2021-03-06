@@ -9,3 +9,17 @@
         $("#KhasraId").html(html);
     });
 };
+
+$("#KhasraId").change(function () {
+    var kid = $(this).val();
+    if (kid) {
+        HttpGet(`/UnderSection22PlotDetails/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+
+            $("#Bigha").val(response.bigha);
+            $("#Biswa").val(response.biswa);
+            $("#Biswanshi").val(response.biswanshi);
+            // alert(JSON.stringify(response));
+        });
+
+    }
+});
