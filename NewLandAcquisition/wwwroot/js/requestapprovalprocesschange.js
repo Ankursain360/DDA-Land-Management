@@ -1,7 +1,4 @@
-﻿
-
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     var id = parseInt($('#Id').val());
     GetOtherDetails(id);
@@ -33,7 +30,7 @@ function setRouteParameter() {
 function GetReqIdHistory(id) {
     HttpGet(`/RequestApprovalProcess/RequestIdHistory/?Id=${id}`, 'json', function (data) {
 
-      //  debugger
+        debugger
         try {
 
             if ((data[0].id) != 0) {
