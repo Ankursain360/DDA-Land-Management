@@ -39,8 +39,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
-                            asp-for="TehsilId" asp-items="@(new SelectList(Model.TehsilList, "Id","Name"))" >
-                        <option disabled="disabled" selected>Select</option>
+                            asp-for="TehsilId" asp-items="@(new SelectList(Model.TehsilList, "Id","Name"))">
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="TehsilId" class="text-danger"></span>
                     <label asp-for="TehsilId" class="floating-label">Tehsil Name </label>
@@ -51,8 +51,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="YearofConsolidation" placeholder="Name"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="YearofConsolidation" placeholder="Year of Consolidation"
+                         type="text"  class="floating-label-field floating-label-field--s3 onlynumbers" limit="4" />
                     <span asp-validation-for="YearofConsolidation" class="text-danger"></span>
                     <label class="floating-label">Year of Consolidation   </label>
                 </div>
@@ -60,7 +60,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="TotalNoOfSheet" placeholder="Name" type="text"
+                    <input asp-for="TotalNoOfSheet" placeholder="Total No Of Sheet" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="TotalNoOfSheet" class="text-danger"></span>
                     <label class="floating-label">Total No Of Sheet </label>
