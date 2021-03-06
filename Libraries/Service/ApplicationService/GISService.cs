@@ -113,6 +113,11 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetKachaPakaLineDetails(villageId);
         }
 
+        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetails(int villageId, string khasraNo)
+        {
+            return await _iGISSRepository.GetKhasraBasisOtherDetails(villageId, khasraNo);
+        }
+
         public async Task<List<Giskhasraboundary>> GetKhasraBoundaryDetails(int villageId)
         {
             return await _iGISSRepository.GetKhasraBoundaryDetails(villageId);
