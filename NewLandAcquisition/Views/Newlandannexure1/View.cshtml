@@ -5,14 +5,9 @@
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <input type="hidden" asp-for="RequestId" />
         <input type="hidden" asp-for="Id" value="@ViewBag.Anexx1Id" />
-        @if (ViewBag.Anexx1Id == 0)
-        {
-            <h3 class="mb-3 d-flex">Add Details</h3>
-        }
-        else
-        {
-            <h3 class="mb-3 d-flex">Edit Details</h3>
-        }
+      
+            <h3 class="mb-3 d-flex">View Details</h3>
+       
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div id="RequestView" class="mt-md-3">
@@ -23,7 +18,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="VillageName" placeholder="VillageName" type="text"
+                        <input disabled asp-for="VillageName" placeholder="VillageName" type="text"
                                class="floating-label-field floating-label-field--s3 " />
 
                         <span asp-validation-for="VillageName" class="text-danger"></span>
@@ -32,7 +27,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Address" placeholder="Address" class="floating-label-field floating-label-field--s3"></textarea>
+                        <textarea disabled asp-for="Address" placeholder="Address" class="floating-label-field floating-label-field--s3"></textarea>
 
                         <span asp-validation-for="Address" class="text-danger"></span>
                         <label class="floating-label">Address </label>
@@ -42,7 +37,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="TalukName" placeholder="TalukName" type="text"
+                        <input disabled asp-for="TalukName" placeholder="TalukName" type="text"
                                class="floating-label-field floating-label-field--s3 " />
                         <span asp-validation-for="TalukName" class="text-danger"></span>
                         <label class="floating-label">Name of Taluk/Sub-Division/Tehsil/Block(As Applicable) </label>
@@ -50,7 +45,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3"
+                        <select disabled class="floating-label-field floating-label-field--s3"
                                 asp-for="MunicipalityId" asp-items="@(new SelectList(Model.MunicipalityList, "Id","Name"))">
                             <option selected disabled="disabled" value="">Select</option>
                         </select>
@@ -62,7 +57,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3"
+                        <select disabled class="floating-label-field floating-label-field--s3"
                                 asp-for="DistrictId" asp-items="@(new SelectList(Model.DistrictList, "Id","Name"))">
                             <option disabled="disabled" selected value="">Select</option>
                         </select>
@@ -88,7 +83,7 @@
                                 <th>Area</th>
                                 <th>Ownership Status</th>
                                 <th>Owner Name</th>
-                                <th>Action</th>
+                               
                             </tr>
                         </thead>
                         <tbody id="tbl_posts_body">
@@ -99,27 +94,27 @@
                                 <td class="py-3" style="text-align:center;"><span class="sn">1</span></td>
                                 <td class="py-3">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input required asp-for="KhasraNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Khasra No" />
+                                        <input disabled required asp-for="KhasraNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Khasra No" />
                                         <span asp-validation-for="KhasraNo" class="d-block text-danger field-validation-valid "></span>
 
                                         <label class="floating-label"> Khasra No  </label>
                                     </div>
                                 </td>
                                 <td class="py-3">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input required asp-for="Bigha" placeholder="Bigha" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <div  class="floating-label-wrap mb-3 mb-md-0">
+                                        <input disabled required asp-for="Bigha" placeholder="Bigha" type="text" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="Bigha" class="d-block text-danger field-validation-valid"></span>
                                         <label class="floating-label"> Bigha </label>
                                     </div>
                                     <br />
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input required asp-for="Biswa" type="text" placeholder="Biswa" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <div  class="floating-label-wrap mb-3 mb-md-0">
+                                        <input disabled required asp-for="Biswa" type="text" placeholder="Biswa" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="Biswa" class="d-block text-danger field-validation-valid "></span>
                                         <label class="floating-label"> Biswa </label>
                                     </div>
                                     <br />
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input required asp-for="Biswanshi" placeholder="Biswanshi" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <div  class="floating-label-wrap mb-3 mb-md-0">
+                                        <input disabled required asp-for="Biswanshi" placeholder="Biswanshi" type="text" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="Biswanshi" class="d-block text-danger field-validation-valid"></span>
                                         <label class="floating-label"> Biswanshi   </label>
                                     </div>
@@ -128,7 +123,7 @@
                                 </td>
                                 <td class="py-3">
                                     <div class="floating-label-wrap">
-                                        <select asp-for="OwnershipStatus" placeholder="Ownership Status" class="floating-label-field floating-label-field--s3">
+                                        <select disabled asp-for="OwnershipStatus" placeholder="Ownership Status" class="floating-label-field floating-label-field--s3">
                                             <option disabled selected="selected">---Select---</option>
                                             <option value="Public">Public</option>
                                             <option value="Private">Private</option>
@@ -141,17 +136,12 @@
                                 </td>
                                 <td class="py-3">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input asp-for="OwnerName" placeholder="OwnerName" type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input disabled asp-for="OwnerName" placeholder="OwnerName" type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="OwnerName" class="d-block text-danger field-validation-valid"></span>
                                         <label class="floating-label"> Owner Name  </label>
                                     </div>
                                 </td>
-                                <td class="py-3">
-                                    <div class="action-btns">
-                                        <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                        <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                    </div>
-                                </td>
+                              
                             </tr>
 
                         </tbody>
@@ -179,12 +169,12 @@
                                 <td>1</td>
                                 <td>Building</td>
                                 <td>
-                                    <input asp-for="BuildingNo" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input disabled asp-for="BuildingNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="BuildingNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea asp-for="BuildingDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea disabled asp-for="BuildingDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="BuildingDesc" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -194,12 +184,12 @@
                                 <td>1</td>
                                 <td>Tanks</td>
                                 <td>
-                                    <input asp-for="TanksNo" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input disabled asp-for="TanksNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="TanksNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea asp-for="TanksDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea disabled asp-for="TanksDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="TanksDesc" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -209,12 +199,12 @@
                                 <td>1</td>
                                 <td>Wells</td>
                                 <td>
-                                    <input asp-for="WellsNo" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input disabled asp-for="WellsNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="WellsNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea asp-for="WellsDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea disabled asp-for="WellsDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="WellsDesc" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -224,12 +214,12 @@
                                 <td>1</td>
                                 <td>Trees</td>
                                 <td>
-                                    <input asp-for="TreesNo" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input disabled asp-for="TreesNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="TreesNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea asp-for="TreesDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea disabled asp-for="TreesDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="TreesDesc" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -239,12 +229,12 @@
                                 <td>1</td>
                                 <td>Religious Building</td>
                                 <td>
-                                    <input asp-for="ReligiousBuildingNo" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input disabled asp-for="ReligiousBuildingNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="ReligiousBuildingNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea asp-for="ReligiousBuildingDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea disabled asp-for="ReligiousBuildingDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="ReligiousBuildingDesc" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -254,12 +244,12 @@
                                 <td>1</td>
                                 <td>Graveyard or Tomb</td>
                                 <td>
-                                    <input asp-for="TombNo" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input disabled asp-for="TombNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="TombNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea asp-for="TombDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea disabled asp-for="TombDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="TombDesc" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -269,12 +259,12 @@
                                 <td>1</td>
                                 <td>Others</td>
                                 <td>
-                                    <input asp-for="OthersNo" class="floating-label-field floating-label-field--s3 numbers" />
+                                    <input disabled asp-for="OthersNo" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="OthersNo" class="d-block text-danger field-validation-valid "></span>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea asp-for="OthersDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea disabled asp-for="OthersDesc" placeholder="BuildingDesc" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="OthersDesc" class="text-danger"></span>
                                     </div>
                                 </td>
@@ -300,7 +290,7 @@
             <div class="col-md-1">
                 <input type="hidden" asp-for="AreaUnit" value="HA" />
                 <div class="form-check theme">
-                    <input asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbHA" value="HA">
+                    <input disabled asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbHA" value="HA">
                     <label class="form-check-label" for="radio">
                         HA
                     </label>
@@ -308,7 +298,7 @@
             </div>
             <div class="col-md-1">
                 <div class="form-check theme">
-                    <input asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbAcre" value="Acre">
+                    <input disabled asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbAcre" value="Acre">
                     <label class="form-check-label" for="radio">
                         Acre
                     </label>
@@ -316,7 +306,7 @@
             </div>
             <div class="col-md-2">
                 <div class="form-check theme">
-                    <input asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbSqm" value="Sq Meters">
+                    <input disabled asp-for="AreaUnit" class="form-check-input" type="radio" name="unit" id="rdbSqm" value="Sq Meters">
                     <label class="form-check-label" for="radio">
                         Sq. Meters
                     </label>
@@ -324,7 +314,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Area" placeholder="Area"
+                    <input disabled asp-for="Area" placeholder="Area"
                            class="floating-label-field floating-label-field--s3 numbers" />
 
                     <span asp-validation-for="Area" class="text-danger"></span>
@@ -337,7 +327,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaAcquiredEast" placeholder="AreaAcquiredEast"
+                    <input disabled asp-for="AreaAcquiredEast" placeholder="AreaAcquiredEast"
                            class="floating-label-field floating-label-field--s3 numbers" />
 
                     <span asp-validation-for="AreaAcquiredEast" class="text-danger"></span>
@@ -346,7 +336,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaAcquiredWest" placeholder="AreaAcquiredWest"
+                    <input disabled asp-for="AreaAcquiredWest" placeholder="AreaAcquiredWest"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="AreaAcquiredWest" class="text-danger"></span>
                     <label class="floating-label">West</label>
@@ -356,7 +346,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaAcquiredNorth" placeholder="AreaAcquiredNorth"
+                    <input disabled asp-for="AreaAcquiredNorth" placeholder="AreaAcquiredNorth"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="AreaAcquiredNorth" class="text-danger"></span>
                     <label class="floating-label">North   </label>
@@ -364,7 +354,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaAcquiredSouth" placeholder="AreaAcquiredSouth" type="text"
+                    <input disabled asp-for="AreaAcquiredSouth" placeholder="AreaAcquiredSouth" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="AreaAcquiredSouth" class="text-danger"></span>
                     <label class="floating-label">South </label>
@@ -380,7 +370,7 @@
         <div class="row mt-md-3 pt-4">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AgriculturalLandArea" placeholder="AgriculturalLandArea" type="text"
+                    <input disabled asp-for="AgriculturalLandArea" placeholder="AgriculturalLandArea" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="AgriculturalLandArea" class="text-danger"></span>
                     <label class="floating-label">Area of the Agricultural & Irrigated Multi Cropped Land (in HA/ACRE/Sq.mtr)    </label>
@@ -388,7 +378,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Reasons" placeholder="Reasons" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea disabled asp-for="Reasons" placeholder="Reasons" class="floating-label-field floating-label-field--s3"></textarea>
 
                     <span asp-validation-for="Reasons" class="text-danger"></span>
                     <label class="floating-label">Reasons For Inclusion of Agricultural & Irrigated Multi Cropped Land  </label>
@@ -399,7 +389,7 @@
 
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                    <select  disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
@@ -411,14 +401,7 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                @if (ViewBag.Anexx1Id == 0)
-                {
-                    <button class="btn btn-theme " type="submit">Create</button>
-                }
-                else
-                {
-                    <button class="btn btn-theme " type="submit">Update</button>
-                }
+              
                 @Html.ActionLink("Back", "Index", "RequestApprovalProcess", null, new { @class = "btn btn-theme " })
 
             </div>
