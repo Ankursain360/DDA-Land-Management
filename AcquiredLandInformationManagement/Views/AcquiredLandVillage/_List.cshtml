@@ -10,8 +10,8 @@
                 <th>Year Of Consolidation</th>
                 <th>Zone Name</th>
                 <th>Acquired</th>
-                <th>Circle</th>
-                <th>Working Village</th>
+                @*<th>Circle</th>*@
+                @*<th>Working Village</th>*@
                 <th>Village Type</th>
                 <th>Status</th>
                 <th>Operations</th>
@@ -30,8 +30,8 @@
                 <td>@item.YearofConsolidation</td>
                 <td>@(item.Zone == null?"": item.Zone.Name)</td>
                 <td>@item.Acquired</td>
-                <td>@item.Circle</td>
-                <td>@item.WorkingVillage</td>
+                @*<td>@item.Circle</td>*@
+                @*<td>@item.WorkingVillage</td>*@
                 <td>@item.VillageType</td>
                 <td>
                     @if (item.IsActive == 1)

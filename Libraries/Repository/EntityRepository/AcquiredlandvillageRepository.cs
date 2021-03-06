@@ -274,7 +274,8 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Acquiredlandvillage
 
 
-                   .Where(x => (x.Acquired == "yes")
+                   .Where(x => (x.IsActive == 1)
+                   && (x.Acquired == "yes")
                                     && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
 
 

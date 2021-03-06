@@ -10,6 +10,9 @@ namespace Libraries.Repository.IEntityRepository
     public interface INewlandannexure2Repository : IGenericRepository<Newlandannexure2>
     {
         Task<PagedResult<Newlandannexure2>> GetPagedNewlandannexure2(Newlandannexure1SearchDto model);
-
+        string GetS7Download(int id);
+        string GetS8Download(int id);
+        string GetS9Download(int id);
+        string GetS12Download(int id);
     }
 }
