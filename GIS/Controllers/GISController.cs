@@ -180,26 +180,30 @@ namespace GIS.Controllers
             var data = await _GISService.GetGisDataLayersDetails(VillageId);
             List<gisDataTemp> temp = new List<gisDataTemp>();
 
-            for (int i = 0; i < data.Count; i++)
+            if(data != null)
             {
-                temp.Add(new gisDataTemp
+                for (int i = 0; i < data.Count; i++)
                 {
-                    Id = data[i].Id,
-                    VillageId = data[i].VillageId,
-                    GisLayerId = data[i].GisLayerId,
-                    Xcoordinate = data[i].Xcoordinate,
-                    Ycoordinate = data[i].Ycoordinate,
-                    Polygon = data[i].Polygon,
-                    Label = data[i].Label,
-                    LabelXcoordinate = data[i].LabelXcoordinate,
-                    LabelYcoordinate = data[i].LabelYcoordinate,
-                    Name = data[i].GisLayer.Name,
-                    Code = data[i].GisLayer.Code,
-                    FillColor = data[i].GisLayer.FillColor,
-                    StrokeColor = data[i].GisLayer.StrokeColor,
-                    Type = data[i].GisLayer.Type
+                    temp.Add(new gisDataTemp
+                    {
+                        Id = data[i].Id,
+                        VillageId = data[i].VillageId,
+                        GisLayerId = data[i].GisLayerId,
+                        Xcoordinate = data[i].Xcoordinate,
+                        Ycoordinate = data[i].Ycoordinate,
+                        Polygon = data[i].Polygon,
+                        Label = data[i].Label,
+                        LabelXcoordinate = data[i].LabelXcoordinate,
+                        LabelYcoordinate = data[i].LabelYcoordinate,
+                        Name = data[i].GisLayer.Name,
+                        Code = data[i].GisLayer.Code,
+                        FillColor = data[i].GisLayer.FillColor,
+                        StrokeColor = data[i].GisLayer.StrokeColor,
+                        Type = data[i].GisLayer.Type,
+                        CheckedStatus = data[i].GisLayer.CheckedStatus
 
-                });
+                    });
+                }
             }
             var result = Json(temp);
             return result;

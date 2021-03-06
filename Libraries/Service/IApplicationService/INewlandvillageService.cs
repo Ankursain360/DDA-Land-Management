@@ -25,6 +25,8 @@ namespace Libraries.Service.IApplicationService
 
         Task<PagedResult<Newlandvillage>> GetPagedNewLandVillageReport(NewlandVillageReportSearchDto model);
 
+        Task<PagedResult<Newlandvillage>> GetPagedNewlandAcquiredVillageReport(NewlandAcquiredVillageReportSearchDto model);
+
 
     }
 }

@@ -1,5 +1,5 @@
-﻿@model Libraries.Model.Entity.Acquiredlandvillage
-@await Component.InvokeAsync("PageHeader", new { pageName = "Village Report" })
+﻿@model Libraries.Model.Entity.Newlandvillage
+@await Component.InvokeAsync("PageHeader", new { pageName = " Acquired Village Report" })
 
 
 <div class="pt-3">
@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap">
-                        <select required class="floating-label-field floating-label-field--s3"  asp-for="Name"
+                        <select required class="floating-label-field floating-label-field--s3" asp-for="Name"
                                 asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
                             <option value="0">All</option>
                         </select>
@@ -30,7 +30,7 @@
                         <div class="col-6 col-md-7 col-xl-6">
 
                             <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
-                           
+
                         </div>
                     </div>
                 </div>
@@ -43,13 +43,9 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select id="ddlSort" required class="floating-label-field floating-label-field--s3">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="VILLAGE"> Village</option>
                       
-                        <option selected="selected" value="VILLAGE">Village</option>
-                        <option value="CONSOLIDATION"> Year Of Consolidation</option>
-                        <option value="ACQUIRED">Acquired</option>
-                        <option value="SHEET"> Total No of sheet</option>
-
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
@@ -61,7 +57,7 @@
 
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-               
+
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
@@ -80,8 +76,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/villagereportindex.js"></script>
+    <script src="~/js/newlandacquiredvillagereportindex.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/villagereportindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/newlandacquiredvillagereportindex.min.js" asp-append-version="true"></script>
 </environment>

@@ -14,7 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Newlandannexure1>> GetAllNewlandannexure1();
         Task<List<Muncipality>> GetAllMunicipality();
         Task<List<District>> GetAllDistrict();
-      
+        Task<Newlandannexure1> FetchSingleResult(int id);
 
         //********* rpt ! Khasra Details **********
 

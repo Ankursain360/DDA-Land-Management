@@ -54,9 +54,7 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<Newlandannexure1> FetchSingleResult(int id)
         {
-            var result = await _newlandannexure1Repository.FindBy(a => a.Id == id);
-            Newlandannexure1 model = result.FirstOrDefault();
-            return model;
+            return await _newlandannexure1Repository.FetchSingleResult(id);
         }
 
         public async Task<bool> Update(int id, Newlandannexure1 Annexure1)

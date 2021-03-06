@@ -93,7 +93,7 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetGridDetails(villageId);
         }
 
-        public async  Task<List<Gislayer>> GetInfrastructureDetails(int villageId)
+        public async  Task<List<gisDataTemp>> GetInfrastructureDetails(int villageId)
         {
             return await _iGISSRepository.GetInfrastructureDetails(villageId);
         }

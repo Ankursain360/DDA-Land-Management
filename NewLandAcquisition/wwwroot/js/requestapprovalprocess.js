@@ -6,7 +6,10 @@ $(document).ready(function () {
     var id = parseInt($('#Id').val());
     GetOtherDetails(id);
     GetHistoryDetails(id);
-      HttpGet(`/RequestApprovalProcess/GetApprovalDropdownList`, 'html', function (response) {
+    GetOtherDetails1();
+ 
+
+    HttpGet(`/RequestApprovalProcess/GetApprovalDropdownList`, 'html', function (response) {
        
         response = JSON.parse(response);
         $('#ApprovalStatus option').each(function () {
@@ -24,6 +27,19 @@ $(document).ready(function () {
     });
 
 });
+
+
+function GetOtherDetails1() {
+    HttpGet(`/RequestApprovalProcess/getannexuredetails`, 'html', function (response) {
+        alert(response);
+        response = JSON.parse(response);
+      
+    });
+};
+
+
+
+
 
 
 function GetOtherDetails(id) {

@@ -1,8 +1,10 @@
 ﻿
 
 $(document).ready(function () {
+    $('#OwnershipStatus').removeAttr('multiple');
     var id = parseInt($('#RequestId').val());
     GetRequestData(id);
+    FillKhasraAtEdit();
 });
 
 
@@ -16,12 +18,53 @@ $("input[name='unit']").click(function () {
 
 //****************** code for saving khasra details Rpt ************************
 
+
+function FillKhasraAtEdit() {
+
+
+    HttpGet(`/Newlandannexure1/GetDetailsKhasra/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_posts #add #KhasraNo").val(data[i].khasraNo);
+            $("#tbl_posts #add #Bigha").val(data[i].bigha);
+            $("#tbl_posts #add #Biswa").val(data[i].biswa);
+            $("#tbl_posts #add #Biswanshi").val(data[i].biswanshi);
+            $("#tbl_posts #add #OwnershipStatus").val(data[i].ownershipStatus);
+            $('#tbl_posts #add #OwnershipStatus').trigger('change');
+            $("#tbl_posts #add #OwnerName").val(data[i].ownerName);
+
+            $("#tbl_posts #add #Address").val(data[i].address);
+           var status = $("#tbl_posts #add #OwnershipStatus").children("option:selected").val();
+           
+            if (i < data.length - 1) {
+                var content = jQuery('#tbl_posts #add tr'),
+                    size = jQuery('#tbl_posts >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_posts_body');
+                $('#tbl_posts_body #rec-' + size + ' #OwnershipStatus').val(status);
+               
+                element.find('.sn').html(size);
+                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                $("#tbl_posts #add .add").remove();
+                $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+                element.find(".add-record").hide();
+                element.find(".delete-record").show();
+            }
+        }
+    });
+
+
+}
+
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
 
     if ($("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != ''
         && $("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != undefined
-        && $("#tbl_posts #add #KhasaNo").val() != ''
+        && $("#tbl_posts #add #KhasraNo").val() != ''
         && $("#tbl_posts #add #Bigha").val() != ''
         && $("#tbl_posts #add #Biswa").val() != ''
         && $("#tbl_posts #add #Biswanshi").val() != ''
@@ -42,6 +85,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
+        $("#tbl_posts #add #OwnershipStatus").select2('val', '');
         $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();

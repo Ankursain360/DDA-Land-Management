@@ -41,12 +41,6 @@
                 <a href="#" class="btn actionBtn slow" title="Print" onclick="printMaps();" id="printDocMob">
                     <i class="ri-printer-line"></i>
                 </a>
-                @*<a href="#" class="btn actionBtn slow" title="Full Screen">
-                        <i class="ri-fullscreen-line"></i>
-                    </a>*@
-                @*<a href="#" class="btn actionBtn slow" title="User">
-                        <i class="ri-login-circle-line"></i>
-                    </a>*@
             </div>
             <!--top buttons end-->
             <div id="leftSection" class="leftSection slow">
@@ -85,7 +79,163 @@
                         </div>
                         <!--data accordion end -->
                     </div>
-                    <div class="tab-pane fade" id="navQuery" role="tabpanel" aria-labelledby="navQuerytab">2</div>
+                    <div class="tab-pane fade" id="navQuery" role="tabpanel" aria-labelledby="navQuerytab">
+                        <div class="accordion" id="navQueryData">
+                            <!--                            Query accordion-->
+                            <div class="accordion-item">
+                                <h5 class="accordion-header" id="Query1">
+                                    <button class="accordion-button collapsed py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Query" aria-expanded="true" aria-controls="Query">
+                                        <i class="ri-search-line text-white"></i>Query
+                                    </button>
+                                </h5>
+                                <div id="Query" class="accordion-collapse collapse" aria-labelledby="Query1" data-bs-parent="#navQueryData">
+                                    <div class="p-3">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <a href="#Zone" class="nav-link active" id="Zone-tab" data-bs-toggle="tab" data-bs-target="#Zone" type="button" role="tab" aria-controls="Zone" aria-selected="true">Zone wise</a>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <a href="#Allottee" class="nav-link" id="Allottee-tab" data-bs-toggle="tab" data-bs-target="#Allottee" type="button" role="tab" aria-controls="Allottee" aria-selected="false">Allottee wise</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="Zone" role="tabpanel" aria-labelledby="Zone-tab">
+                                                <form id="searchWise">
+                                                    <div class="mb-2">
+                                                        <label for="ZoneSelectList" class="form-label mb-1 small">Zone :</label>
+                                                        <select class="form-select form-select-sm" id="ZoneSelectList">
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="LocalitySelectList" class="form-label mb-1 small">Locality :</label>
+                                                        <select class="form-select form-select-sm" id="LocalitySelectList">
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="PlotSelectList" class="form-label mb-1 small">Plot :</label>
+                                                        <select class="form-select form-select-sm" id="PlotSelectList">
+                                                            <option>---Select Plot---</option>
+                                                            <option>---Select Plot---</option>
+                                                            <option>---Select Plot---</option>
+                                                            <option>---Select Plot---</option>
+                                                            <option>---Select Plot---</option>
+                                                            <option>---Select Plot---</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mt-3 text-center">
+                                                        <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="Allottee" role="tabpanel" aria-labelledby="Allottee-tab">
+                                                <form id="searchWise">
+                                                    <div class="mb-2">
+                                                        <label for="ZoneSelectList2" class="form-label mb-1 small">Zone :</label>
+                                                        <select class="form-select form-select-sm" id="ZoneSelectList2">
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                            <option>---Select Zone---</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="LocalitySelectList2" class="form-label mb-1 small">Locality :</label>
+                                                        <select class="form-select form-select-sm" id="LocalitySelectList2">
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                            <option>---Select Locality---</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-2">
+                                                        <label for="AllotteeSelectList" class="form-label mb-1 small">Allottee :</label>
+                                                        <select class="form-select form-select-sm" id="AllotteeSelectList">
+                                                            <option>---Select Allottee---</option>
+                                                            <option>---Select Allottee---</option>
+                                                            <option>---Select Allottee---</option>
+                                                            <option>---Select Allottee---</option>
+                                                            <option>---Select Allottee---</option>
+                                                            <option>---Select Allottee---</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mt-3 text-center">
+                                                        <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            Query accordion end-->
+                            <!--                            Find Routes accordion-->
+                            <div class="accordion-item">
+                                <h5 class="accordion-header" id="Routes1">
+                                    <button class="accordion-button collapsed  py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Routes" aria-expanded="true" aria-controls="Routes">
+                                        <i class="ri-road-map-line text-white"></i>Find Routes
+                                    </button>
+                                </h5>
+                                <div id="Routes" class="accordion-collapse collapse" aria-labelledby="Routes1" data-bs-parent="#navQueryData">
+                                    <div class="p-3">
+                                        <form id="searchWise">
+                                            <div class="mb-2">
+                                                <label for="TravelList" class="form-label mb-1 small">Travel :</label>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-check position-relative d-flex-align-items-center">
+                                                            <input class="form-check-input" type="radio" name="Travel" id="Driving1">
+                                                            <label class="form-check-label" for="Driving1">
+                                                                <i class="ri-roadster-line position-relative" style="left: -2px"></i> Driving
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-check position-relative d-flex-align-items-center">
+                                                            <input class=" form-check-input" type="radio" name="Travel" id="Transit2">
+                                                            <label class="form-check-label" for="Transit2">
+                                                                <i class="ri-bus-2-line position-relative" style="left: -2px"></i> Transit
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Source" class="form-label mb-1 small">Source :</label>
+                                                <input class="form-control form-control-sm" id="Source" type="text" placeholder="Source" aria-label="Source" />
+                                            </div>
+                                            <div class="mb-2">
+                                                <label for="Source" class="form-label mb-1 small">Destination :</label>
+                                                <input class="form-control form-control-sm" id="Destination" type="text" placeholder="Destination" aria-label="Destination" />
+                                            </div>
+                                            <div class="mt-3 text-center">
+                                                <a href="javascript:;" id="RouteDetail" class="btn d-block w-100 small btn-sm btn-info text-white">Get Route</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--                            Find Routes accordion end-->
+
+
+                        </div>
+                    </div>
+
                     <div class="tab-pane fade" id="navLayers" role="tabpanel" aria-labelledby="navLayerstab">
                         <div class="accordion" id="navLayersdata">
                             <div class="accordion-item">
@@ -100,8 +250,8 @@
                                             <thead>
                                                 <tr>
                                                     <th colspan="2">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="chkAllImpInfra">
+                                                        <div class="form-check" id="chkSelectAll" style="display:none;">
+                                                            <input class="form-check-input" type="checkbox" id="chkAllImpInfra" checked="checked">
                                                             <label class="form-check-label" for="AllSelectImportant">
                                                                 Select All
                                                             </label>
@@ -109,335 +259,15 @@
                                                     </th>
                                                 </tr>
                                             </thead>
-                                           
+
                                             <tbody id="infrastructureData">
-                                                @*<tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="chkAbadi" checked="checked">
-                                                            <label class="form-check-label" for="chkAbadi">
-                                                                Abadi
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #900C3F"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Water_Connection">
-                                                            <label class="form-check-label" for="Water_Connection">
-                                                                Water Connection
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-drop-fill" style="color: #8BBDEB"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="HT_Line">
-                                                            <label class="form-check-label" for="HT_Line">
-                                                                HT Line
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-subtract-line" style="color: #4679BD;"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Electricity_Pole">
-                                                            <label class="form-check-label" for="Electricity_Pole">
-                                                                Electricity Pole
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-lightbulb-flash-fill" style="color: #333"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Railway_Track">
-                                                            <label class="form-check-label" for="Railway_Track">
-                                                                Railway Track
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-subtract-fill" style="color: #333"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Sewerage_Connection">
-                                                            <label class="form-check-label" for="Sewerage_Connection">
-                                                                Sewerage Connection
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #5B5BA2"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Gas_Connection">
-                                                            <label class="form-check-label" for="Gas_Connection">
-                                                                Gas Connection
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-database-2-fill" style="color: #333"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Utility">
-                                                            <label class="form-check-label" for="Utility">
-                                                                Utility
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #AF7AC5"></i></td>
-                                                </tr>*@
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            @*<div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed px-3 py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Additional" aria-expanded="false" aria-controls="Additional">
-                                        Additional Infrastructure
-                                    </button>
-                                </h2>
-                                <div id="Additional" class="accordion-collapse collapse" data-bs-parent="#navLayersdata">
-                                    <div class="accordion-body p-2">
-                                        <table class="table table-sm mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="AllSelectAdditional">
-                                                            <label class="form-check-label" for="AllSelectAdditional">
-                                                                Select All
-                                                            </label>
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Bridge">
-                                                            <label class="form-check-label" for="Bridge">
-                                                                Bridge
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-gradienter-fill" style="color: #4679BD"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Green_Belt">
-                                                            <label class="form-check-label" for="Green_Belt">
-                                                                Green Belt
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #55E82D"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Footpath">
-                                                            <label class="form-check-label" for="Footpath">
-                                                                Footpath
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #BFC0C0;"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Lamp_Post">
-                                                            <label class="form-check-label" for="Lamp_Post">
-                                                                Lamp Post
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-map-pin-3-fill" style="color: #FF0000"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Metro_Station">
-                                                            <label class="form-check-label" for="Metro_Station">
-                                                                Metro Station
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-train-fill" style="color: #cc00ff"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed px-3 py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Miscellaneous" aria-expanded="false" aria-controls="Miscellaneous">
-                                        Miscellaneous
-                                    </button>
-                                </h2>
-                                <div id="Miscellaneous" class="accordion-collapse collapse" data-bs-parent="#navLayersdata">
-                                    <div class="accordion-body p-2">
-                                        <table class="table table-sm mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th colspan="2">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="AllSelectMiscellaneous">
-                                                            <label class="form-check-label" for="AllSelectMiscellaneous">
-                                                                Select All
-                                                            </label>
-                                                        </div>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Boundary">
-                                                            <label class="form-check-label" for="Boundary">
-                                                                Boundary
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #333;"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Sector">
-                                                            <label class="form-check-label" for="Sector">
-                                                                Sector
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #393939;"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Others">
-                                                            <label class="form-check-label" for="Others">
-                                                                Others
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #ffc34d"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Water_Tanks">
-                                                            <label class="form-check-label" for="Water_Tanks">
-                                                                Water HEAD Tanks
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-water-flash-fill" style="color: #b3b3ff"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Parking">
-                                                            <label class="form-check-label" for="Parking">
-                                                                Parking
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-car-fill" style="color: #bf80ff"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Water_Body">
-                                                            <label class="form-check-label" for="Water_Body">
-                                                                Water Body
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-drop-fill" style="color: #B2D1EA"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Nala">
-                                                            <label class="form-check-label" for="Nala">
-                                                                Nala
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #99ffcc"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Police_Station">
-                                                            <label class="form-check-label" for="Police_Station">
-                                                                Police Station
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-secure-payment-fill" style="color: #F76085"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Fire_Stations">
-                                                            <label class="form-check-label" for="Fire_Stations">
-                                                                Fire Stations
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-fire-fill" style="color: #cc0000"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Telecom_Towers">
-                                                            <label class="form-check-label" for="Telecom_Towers">
-                                                                Telecom Towers
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-cellphone-fill" style="color: #009688;"></i></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" value="" id="Encroachment_Area">
-                                                            <label class="form-check-label" for="Encroachment_Area">
-                                                                Encroachment Area
-                                                            </label>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right" align="right"><i class="ri-checkbox-blank-fill" style="color: #afaf45"></i></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>*@
                         </div>
                     </div>
-
-
                     <div class="tab-pane fade" id="navLegends" role="tabpanel" aria-labelledby="navLegendstab">4</div>
                     <div class="tab-pane fade" id="navInformation" role="tabpanel" aria-labelledby="navInformationtab">5</div>
                 </div>
@@ -495,6 +325,23 @@
             </div>
             <!--bottom btns end-->
         </div>
+
+        <div id="RouteDetailShow" style="display: none;">
+            <div class="card">
+                <div class="card-header text-white bg-primary small px-2 py-1 d-flex align-items-center">
+                    Find Routes <a href="javascript:;" id="HideRouteDetail" class="close text-white ms-auto badge bg-danger" style="text-decoration: none">X</a>
+                </div>
+                <div class="card-body p-1">
+                    <ul class="list-unstyled small">
+                        <li>
+                            <p class="m-0">Khasra No : <strong id="tagKhasra">52.1 km</strong></p> 
+                        </li>
+                        <li>not design yet</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
     </section>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS , any custom js-->
@@ -550,13 +397,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @*Jquery for Autocomplete End*@
-
-    @*<script src="~/js/main.js"></script>
-        <script src="~/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/js.js"></script>
-        <script src="~/js/site.js"></script>
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/js/Zoom.js"></script>
-        <script src="~/js/fullscreen.js"></script>*@
+   
 </body>
 </html>

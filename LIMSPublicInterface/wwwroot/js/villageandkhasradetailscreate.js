@@ -43,8 +43,8 @@ function GetDetails(pageNumber, pageSize) {
 
 $("#btnReset").click(function () {
 
-    $('#VillageId').val('0').trigger('change');
-    $('#KhasraId').val('0').trigger('change');
+    //$('#VillageId').val('0').trigger('change');
+    //$('#KhasraId').val('0').trigger('change');
     location.reload();
 
     //GetDetails(currentPageNumber, currentPageSize);

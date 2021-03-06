@@ -145,6 +145,15 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandannexure1.Include(x => x.District).Include(x => x.Municipality).ToListAsync();
         }
+        public async Task<Newlandannexure1> FetchSingleResult(int id)
+        {
+            return await _dbContext.Newlandannexure1
+                                     .Include(x => x.District)
+                                     .Include(x => x.Municipality)
+                                   .Where(x => x.RequestId == id)
+                                   .OrderByDescending(s => s.Id)
+                                   .FirstOrDefaultAsync();
+        }
         public async Task<List<Muncipality>> GetAllMunicipality()
         {
             List<Muncipality> list = await _dbContext.Muncipality.Where(x => x.IsActive == 1).ToListAsync();

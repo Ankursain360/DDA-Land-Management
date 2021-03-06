@@ -38,16 +38,20 @@ $("#KhasraId").change(function () {
 
 
 //****************** code for Attendance  details Rpt ************************
-
+$(document).ready(function () {
+    $('#AAttendance').removeAttr('multiple');
+    //$('#AAttendance').removeAttr('multiple');
+ 
+});
 $(document).delegate('a.add-record2', 'click', function (e) {
     debugger
 
     if ($("#tbl_posts2 #add2 #AName").val() != ''
         && $("#tbl_posts2 #add2 #ADesignation").val() != ''
-        && $("#tbl_posts #add #AAttendance").children("option:selected").val() != ''
-        && $("#tbl_posts #add #AAttendance").children("option:selected").val() != undefined
+        && $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val() != ''
+        && $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val() != undefined
     ){
-        var Gender = $("#tbl_posts #add #AAttendance").children("option:selected").val();
+        var Gender = $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts2 #add2 tr'),
             size = jQuery('#tbl_posts2 >tbody >tr').length,
@@ -57,10 +61,11 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         element.find('.delete-record2').attr('data-id', size);
         element.appendTo('#tbl_posts2_body');
 
-        $('#tbl_posts_body #rec-' + size + ' #AAttendance').val(Gender);
+        $('#tbl_posts2_body #rec-' + size + ' #AAttendance').val(Gender);
         element.find('.sn2').html(size);
         $("#tbl_posts2 #add2 .sn2").text($('#tbl_posts2 >tbody >tr').length);
         $("#tbl_posts2 #add2 .add").remove();
+        $("#tbl_posts2 #add2 #AAttendance").select2('val', '');
         $("#tbl_posts2 #tbl_posts2_body .floating-label-field").attr("readonly", true);
         element.find(".add-record2").hide();
         element.find(".delete-record2").show();
@@ -90,6 +95,7 @@ $(document).delegate('a.delete-record2', 'click', function (e) {
         return false;
     }
 });
+
 //****************** code for survey Rpt ************************
 
 $(document).delegate('a.add-record', 'click', function (e) {

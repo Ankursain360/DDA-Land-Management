@@ -17,7 +17,8 @@ namespace Libraries.Model.Entity
         public string FillColor { get; set; }
         public string StrokeColor { get; set; }
         public string Type { get; set; }
-        public byte? IsActive { get; set; }
+        public int CheckedStatus { get; set; }
+        public byte IsActive { get; set; }
         public ICollection<Gisdata> Gisdata { get; set; }
     }
 }

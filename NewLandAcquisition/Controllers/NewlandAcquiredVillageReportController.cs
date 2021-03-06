@@ -10,33 +10,34 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using LIMSPublicInterface.Filters;
+using NewLandAcquisition.Filters;
 using Core.Enum;
-namespace LIMSPublicInterface.Controllers
+namespace NewLandAcquisition.Controllers
 {
-    public class VillageReportController : BaseController
+    public class NewlandAcquiredVillageReportController : BaseController
     {
-        private readonly IAcquiredlandvillageService _acquiredlandvillageService;
+        private readonly INewlandvillageService _NewlandvillageService;
 
-        public VillageReportController(IAcquiredlandvillageService acquiredlandvillageService)
+        public NewlandAcquiredVillageReportController(INewlandvillageService NewlandvillageService)
         {
-            _acquiredlandvillageService = acquiredlandvillageService;
+            _NewlandvillageService = NewlandvillageService;
         }
 
 
-        
+
         public async Task<IActionResult> Index()
         {
-            Acquiredlandvillage model = new Acquiredlandvillage();
+            Newlandvillage model = new Newlandvillage();
 
-            model.VillageList = await _acquiredlandvillageService.GetAllVillageList();
+
+            model.VillageList = await _NewlandvillageService.GetAllVillageList();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody] VillageReportSearchDto model)
+        public async Task<PartialViewResult> GetDetails([FromBody] NewlandAcquiredVillageReportSearchDto model)
         {
-            var result = await _acquiredlandvillageService.GetPagedVillageReport(model);
+            var result = await _NewlandvillageService.GetPagedNewlandAcquiredVillageReport(model);
             if (result != null)
             {
                 return PartialView("_List", result);
@@ -49,3 +50,4 @@ namespace LIMSPublicInterface.Controllers
         }
     }
 }
+
