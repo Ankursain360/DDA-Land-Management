@@ -208,5 +208,11 @@ namespace GIS.Controllers
             var result = Json(temp);
             return result;
         }
+
+        public async Task<JsonResult> GetKhasraBasisOtherDetails(int VillageId, string KhasraNo)
+        {
+            var data = await _GISService.GetKhasraBasisOtherDetails(VillageId, KhasraNo);
+            return Json(data);
+        }
     }
 }

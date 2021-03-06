@@ -55,7 +55,7 @@ namespace NewLandAcquisition.Controllers
         {
             var Data = await _requestApprovalProcessService.FetchSingleResult(id);
             var DataFlow = await DataAsync();
-
+            ViewBag.userid = SiteContext.UserId;
             if (Data == null)
             {
                 return NotFound();
@@ -180,7 +180,7 @@ namespace NewLandAcquisition.Controllers
 
             var ReqExists = await _newlandannexure2Service.CheckReqExists(id);
             var CheckReqExistancy = ReqExists.Select(a => new { a.Id});
-            if (ReqExists.Count == 0)
+            if ((ReqExists.Count == 0) || (ReqExists == null))
             {
                 return Json(ReqExists.Select(a=>new { a.Id,a.ReqId,a.CreatedBy})); }
             else

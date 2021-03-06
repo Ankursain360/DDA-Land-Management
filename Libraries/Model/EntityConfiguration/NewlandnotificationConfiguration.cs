@@ -38,7 +38,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Remarks).HasColumnType("longtext");
 
-            builder.HasOne(d => d.NotificationType)
+            builder.HasOne(d => d.NewlandNotificationType)
                 .WithMany(p => p.Newlandnotification)
                 .HasForeignKey(d => d.NotificationTypeId)
                 .HasConstraintName("fk_NotificationType");
