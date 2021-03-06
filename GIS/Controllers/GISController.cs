@@ -199,7 +199,8 @@ namespace GIS.Controllers
                         Code = data[i].GisLayer.Code,
                         FillColor = data[i].GisLayer.FillColor,
                         StrokeColor = data[i].GisLayer.StrokeColor,
-                        Type = data[i].GisLayer.Type
+                        Type = data[i].GisLayer.Type,
+                        CheckedStatus = data[i].GisLayer.CheckedStatus
 
                     });
                 }

@@ -7,6 +7,7 @@ $(document).ready(function () {
     GetOtherDetails(id);
     GetHistoryDetails(id);
     GetOtherDetails1();
+ 
 
     HttpGet(`/RequestApprovalProcess/GetApprovalDropdownList`, 'html', function (response) {
        
@@ -30,7 +31,9 @@ $(document).ready(function () {
 
 function GetOtherDetails1() {
     HttpGet(`/RequestApprovalProcess/getannexuredetails`, 'html', function (response) {
+        alert(response);
         response = JSON.parse(response);
+      
     });
 };
 

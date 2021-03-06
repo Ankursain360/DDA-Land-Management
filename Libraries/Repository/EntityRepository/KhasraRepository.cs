@@ -177,7 +177,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Khasra>> GetPagedVillageKhasraReport(VillageDetailsKhasraWiseReportSearchDto model)
         {
-            var data = await _dbContext.Khasra
+            var data = await _dbContext.Khasra 
                 .Include(x => x.Acquiredlandvillage)
                  .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))
