@@ -190,6 +190,9 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+     
+
+
         [HttpGet]
         public async Task<JsonResult> GetAreaList(int? khasraid)
         {
