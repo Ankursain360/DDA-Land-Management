@@ -5,7 +5,15 @@
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <input type="hidden" asp-for="RequestId" />
         <input type="hidden" asp-for="Id" value="@ViewBag.Anexx1Id" />
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        @if (ViewBag.Anexx1Id == 0)
+        {
+            <h3 class="mb-3 d-flex">Add Details</h3>
+        }
+        else
+        {
+            <h3 class="mb-3 d-flex">Edit Details</h3>
+        }
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div id="RequestView" class="mt-md-3">
 

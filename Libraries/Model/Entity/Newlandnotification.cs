@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
         public Newlandnotification()
         {
             Newlandnotificationfilepath = new HashSet<Newlandnotificationfilepath>();
-            NewlandNotificationtype = new HashSet<NewlandNotificationtype>();
+          //  NewlandNotificationtype = new HashSet<NewlandNotificationtype>();
         }
         public int? NotificationTypeId { get; set; }
         public string NotificationNo { get; set; }
@@ -22,9 +22,9 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public string Remarks { get; set; }
 
-        public NewlandNotificationtype NotificationType { get; set; }
+        public NewlandNotificationtype NewlandNotificationType { get; set; }
         public ICollection<Newlandnotificationfilepath> Newlandnotificationfilepath { get; set; }
-        public ICollection<NewlandNotificationtype> NewlandNotificationtype { get; set; }
+      //  public ICollection<NewlandNotificationtype> NewlandNotificationtype { get; set; }
 
         [NotMapped]
         public List<NewlandNotificationtype> notificationtypeList { get; set; }

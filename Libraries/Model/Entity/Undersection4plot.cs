@@ -16,10 +16,16 @@ namespace Libraries.Model.Entity
         public int? VillageId { get; set; }
         [Required]
         public int? KhasraId { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
         [Required]
         public decimal Bigha { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Biswa; Max 18 digits")]
         [Required]
         public decimal Biswa { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Biswanshi; Max 18 digits")]
         [Required]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }

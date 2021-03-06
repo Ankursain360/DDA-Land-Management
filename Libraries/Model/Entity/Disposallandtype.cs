@@ -15,7 +15,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         [Required]
         public string Remarks { get; set; }
-
+        [Required(ErrorMessage = "The Status field is required")]
         public byte? IsActive { get; set; }
         [Required]
         public string LandCode { get; set; }
