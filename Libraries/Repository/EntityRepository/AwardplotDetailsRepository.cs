@@ -32,22 +32,20 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Awardplotdetails.Include(x => x.AwardMaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
-       
+
 
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
-            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage
-                                                                        .Where(x => x.IsActive == 1)
-                                                                        .ToListAsync();
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
             return villageList;
         }
 
 
 
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
         {
-            List<Khasra> KhasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
-            return KhasraList;
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
+            return khasraList;
         }
 
 
@@ -226,5 +224,11 @@ namespace Libraries.Repository.EntityRepository
             }
             return data;
         }
+
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
+
     }
 }

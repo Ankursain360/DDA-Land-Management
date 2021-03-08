@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="AwardMasterId" asp-items="@(new SelectList(Model.AwardmasterList, "Id","AwardNumber"))">
-                        <option disabled="disabled">Select</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="AwardMasterId" class="text-danger"></span>
                     <label class="floating-label" asp-for="AwardMasterId">Award No.</label>
@@ -22,8 +22,9 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
+                             onchange="return onChange(this.options[this.selectedIndex].value);">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label class="floating-label" asp-for="VillageId">Village Name</label>
@@ -33,10 +34,10 @@
         </div>
         <div class="row mt-md-3">
             <div class="col-md-6">
-                         <div class="floating-label-wrap">
-                             <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                                 <option selected="selected" disabled="disabled" value=""> Select</option>
-                             </select>
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label class="floating-label" asp-for="KhasraId">Khasra No</label>
 
@@ -44,7 +45,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                      <label class="floating-label"> </label>
+                    <label class="floating-label"> </label>
 
                 </div>
             </div>
@@ -56,7 +57,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input asp-for="Bigha" placeholder="Bigha" class="floating-label-field floating-label-field--s3" />
+                        <input value="" asp-for="Bigha" placeholder="Bigha" class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Bigha" class="text-danger"></span>
 
                         <label class="floating-label">Bigha</label>
@@ -64,7 +65,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswa" placeholder="Biswa" class="floating-label-field floating-label-field--s3" />
+                        <input value="" asp-for="Biswa" placeholder="Biswa" class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Biswa" class="text-danger"></span>
                         <label class="floating-label">Biswa</label>
                     </div>
@@ -72,7 +73,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input asp-for="Biswanshi" class="floating-label-field floating-label-field--s3" placeholder="Biswanshi" />
+                        <input value="" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswanshi" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
                         <label class="floating-label">Biswanshi</label>
                     </div>
@@ -81,40 +82,52 @@
         </div>
 
 
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
-                            <span asp-validation-for="Remarks" class="text-danger"></span>
-                            <label asp-for="Remarks" class="floating-label">Remarks </label>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-
-                        <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
-                            <span asp-validation-for="IsActive" class="text-danger"></span>
-                            <label asp-for="IsActive" class="floating-label">Status </label>
-                        </div>
-
-                    </div>
-
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label asp-for="Remarks" class="floating-label">Remarks </label>
                 </div>
-                <div class="row mt-md-3">
-                    <div class=" col-md-12">
-                        <button class="btn btn-theme " type="submit">Create</button>
-                        @Html.ActionLink("Back", "Index", "AwardPlotDetails", null, new { @class = "btn btn-theme " })
+            </div>
+            <div class=" col-md-6">
 
-                    </div>
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
                 </div>
 
-</form>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "AwardPlotDetails", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
 
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+<environment include="Development">
+
+    <script src="~/js/awardplotdetailscreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/awardplotdetailscreate.min.js" asp-append-version="true"></script>
+</environment>
+
+
+
+

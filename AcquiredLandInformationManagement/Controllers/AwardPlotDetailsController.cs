@@ -43,7 +43,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Awardplotdetails awardplotdetails = new Awardplotdetails();
             awardplotdetails.IsActive = 1;
             awardplotdetails.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-            awardplotdetails.KhasraList = await _awardplotDetailService.BindKhasra();
+            awardplotdetails.KhasraList = await _awardplotDetailService.BindKhasra(awardplotdetails.VillageId); 
             awardplotdetails.VillageList = await _awardplotDetailService.GetAllVillage();
 
             return View(awardplotdetails);
@@ -56,7 +56,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
                 awardplotdetails.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-                awardplotdetails.KhasraList = await _awardplotDetailService.BindKhasra();
+                awardplotdetails.KhasraList = await _awardplotDetailService.BindKhasra(awardplotdetails.VillageId);
                 awardplotdetails.VillageList = await _awardplotDetailService.GetAllVillage();
 
                 if (ModelState.IsValid)
@@ -95,7 +95,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
             Data.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-            Data.KhasraList = await _awardplotDetailService.BindKhasra();
+            Data.KhasraList = await _awardplotDetailService.BindKhasra(Data.VillageId);
             Data.VillageList = await _awardplotDetailService.GetAllVillage();
 
 
@@ -110,6 +110,12 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Awardplotdetails awardplotdetails)
         {
+
+
+            awardplotdetails.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+            awardplotdetails.KhasraList = await _awardplotDetailService.BindKhasra(awardplotdetails.VillageId);
+            awardplotdetails.VillageList = await _awardplotDetailService.GetAllVillage();
+
             if (ModelState.IsValid)
             {
                 try
@@ -166,7 +172,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _awardplotDetailService.FetchSingleResult(id);
             Data.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-            Data.KhasraList = await _awardplotDetailService.BindKhasra();
+            Data.KhasraList = await _awardplotDetailService.BindKhasra(Data.VillageId);
             Data.VillageList = await _awardplotDetailService.GetAllVillage();
 
 
@@ -176,6 +182,24 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? VillageId)
+        {
+            VillageId = VillageId ?? 0;
+            return Json(await _awardplotDetailService.BindKhasra(Convert.ToInt32(VillageId)));
+        }
+
+      
+        [HttpGet]
+        public async Task<JsonResult> GetAreaList(int? khasraid)
+        {
+            khasraid = khasraid ?? 0;
+
+            return Json(await _awardplotDetailService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
+        }
+
 
 
 
