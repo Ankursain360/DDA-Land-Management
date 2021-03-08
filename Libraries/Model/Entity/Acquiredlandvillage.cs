@@ -27,6 +27,7 @@ namespace Libraries.Model.Entity
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
             Booktransferland = new HashSet<Booktransferland>();
+            Courtcasesmapping = new HashSet<Courtcasesmapping>();
         }
         [Required(ErrorMessage = "Village name is mandatory ")]
         public string Name { get; set; }
@@ -89,6 +90,7 @@ namespace Libraries.Model.Entity
         public ICollection<Nazul> Nazul { get; set; }
         public ICollection<Mutation> Mutation { get; set; }
         public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
-        
+        public ICollection<Courtcasesmapping> Courtcasesmapping { get; set; }
+
     }
 }

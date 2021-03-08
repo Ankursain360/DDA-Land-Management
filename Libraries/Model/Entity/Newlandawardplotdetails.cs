@@ -26,6 +26,8 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
         public virtual Newlandawardmasterdetail NewlandAwardMaster { get; set; }

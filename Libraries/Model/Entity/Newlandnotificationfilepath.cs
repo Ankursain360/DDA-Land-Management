@@ -11,6 +11,7 @@ namespace Libraries.Model.Entity
 
         public int NewlandNotificationId { get; set; }
         public string FilePath { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
          public Newlandnotification NewlandNotification { get; set; }

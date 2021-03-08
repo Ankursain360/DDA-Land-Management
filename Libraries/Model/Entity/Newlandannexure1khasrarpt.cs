@@ -1,6 +1,7 @@
 ﻿using Libraries.Model.Common;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Libraries.Model.Entity
 {
@@ -15,7 +16,8 @@ namespace Libraries.Model.Entity
         public decimal Biswanshi { get; set; }
         public string OwnershipStatus { get; set; }
         public string OwnerName { get; set; }
-       
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
         public Newlandannexure1 NewLandAnnexure1 { get; set; }

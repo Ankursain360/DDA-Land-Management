@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Dto.Master
 {
-    public class GISKhasraBasisOtherDetailsDto : AuditableDto<int>
+    public class GISKhasraBasisOtherDetailsDto 
     {
         public string VillageName { get; set; }
         public string KhasraNo { get; set; }

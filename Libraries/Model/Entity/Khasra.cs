@@ -26,6 +26,7 @@ namespace Libraries.Model.Entity
             Watchandward = new HashSet<Watchandward>();
             Demandlistdetails = new HashSet<Demandlistdetails>();
             Mutation = new HashSet<Mutation>();
+            Courtcasesmapping = new HashSet<Courtcasesmapping>();
         }
         [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }
@@ -85,5 +86,6 @@ namespace Libraries.Model.Entity
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
         public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
         public ICollection<Mutation> Mutation { get; set; }
+        public ICollection<Courtcasesmapping> Courtcasesmapping { get; set; }
     }
 }

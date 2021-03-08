@@ -19,6 +19,8 @@ namespace Libraries.Model.Entity
         public string NotificationNo { get; set; }
         public DateTime? Date { get; set; }
         public string GazetteNotificationFilePath { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public string Remarks { get; set; }
 

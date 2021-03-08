@@ -10,16 +10,17 @@ namespace Libraries.Model.Entity
     public class Newlandacquistionproposalplotdetails : AuditableEntity<int>
     {
 
-        [Required(ErrorMessage = "Proposal plot is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Proposal plot is Mandatory", AllowEmptyStrings = false)]
         public int? ProposaldetailsId { get; set; }
-        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village is Mandatory", AllowEmptyStrings = false)]
         public int? AcquiredlandvillageId { get; set; }
-        [Required(ErrorMessage = "Khasra is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra is Mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
         public decimal Bigha { get; set; }
         public decimal Biswa { get; set; }
         public decimal Biswanshi { get; set; }
-       
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<Newlandacquistionproposaldetails> ProposaldetailsList { get; set; }
