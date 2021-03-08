@@ -29,26 +29,22 @@ function setRouteParameter() {
 
 function GetReqIdHistory(id) {
     HttpGet(`/RequestApprovalProcess/RequestIdHistory/?Id=${id}`, 'json', function (data) {
-
         debugger
         try {
-
             if ((data[0].id) != 0) {
                 var x = data[0].id;
                 
-                if (((data[0].ReqId) == 0)  || ((data[0].createdBy) == 0))  {
-
-
+            if (((data[0].ReqId) == 0)  || ((data[0].createdBy) == 0))  
+				{
                     $("viewlink").attr("asp-route-id", x);
                     var newhref = $("#viewlink").attr('href') + '/' + x;
                     $("#viewlink").attr("href", newhref);
                     document.getElementById("viewlink").text = "Click me to open annexure 2 view link!";
-
-                   
-                }
-                
+             
+				}
+    
             else
-                {
+				{
                     $("editlink").attr("asp-route-id", x);
                     var newhref = $("#editlink").attr('href') + '/' + x;
                     $("#editlink").attr("href", newhref);
@@ -61,14 +57,12 @@ function GetReqIdHistory(id) {
                 document.getElementById("createlink").text = "Click me to open annexure 2 create link!";
               
             }
-        } catch
-        { document.getElementById("createlink").text = "Click me to open annexure 2 create link!"; }
-
-        // $("#tbl_posts #add #EName").val(Data[0].Id);
-        // $("#tbl_posts #add #EAddress").val(data[i].address);
-
-        //$('#RequestIdHistoryDiv').val("");
-        //$('#RequestIdHistoryDiv').val(response);
+        } 
+        catch (err)
+        {
+            document.getElementById("createlink").text = "Click me to open annexure 2 create link!"               ;
+        }
+        
     });
 };
 

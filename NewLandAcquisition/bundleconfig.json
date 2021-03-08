@@ -262,5 +262,11 @@
     "inputFiles": [
       "wwwroot/js/newlandannx2.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestapprovalprocesschange.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestapprovalprocesschange.js"
+    ]
   }
 ]
