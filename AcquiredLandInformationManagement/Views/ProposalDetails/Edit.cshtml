@@ -11,7 +11,7 @@
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="SchemeId" asp-items="@(new SelectList(Model.SchemeList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="SchemeId" class="text-danger"></span>
                     <label asp-for="SchemeId" class="floating-label">Scheme </label>
