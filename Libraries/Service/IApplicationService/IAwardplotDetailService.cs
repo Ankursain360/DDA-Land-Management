@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Awardplotdetails>> GetAwardplotdetails();
         Task<List<Awardmasterdetail>> GetAllAWardmaster();
-        Task<List<Khasra>> BindKhasra();
+        Task<List<Khasra>> BindKhasra(int? villageId);
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Awardplotdetails>> GetAwardplotdetailsUsingRepo();
         Task<bool> Update(int id, Awardplotdetails awardplotdetails);
@@ -23,5 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model);
         Task<List<AwardReportDtoProfile>> BindAwardNoDateList();
         Task<PagedResult<Awardplotdetails>> GetPagedAwardReport(AwardReportSearchDto model);
+
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
     }
 }
