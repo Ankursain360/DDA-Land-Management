@@ -23,6 +23,8 @@ namespace Libraries.Model.Entity
         [Required]
         public string FileNo { get; set; }
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
         public ICollection<Newlandacquistionproposaldetails> Newlandacquistionproposaldetails { get; set; }
 

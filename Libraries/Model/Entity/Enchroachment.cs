@@ -10,9 +10,11 @@ namespace Libraries.Model.Entity
     {
         public Enchroachment()
         {
-         //   EncrocherPeople = new HashSet<EncrocherPeople>();
+            Enchroachmentpayment = new HashSet<Enchroachmentpayment>();
+            EncrocherPeople = new HashSet<EncrocherPeople>();
         }
-        
+
+
         public int VillageId { get; set; }
         public int KhasraId { get; set; }
       //  [Required(ErrorMessage = " LandUse is mandatory")]
@@ -51,36 +53,22 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
         public string RecStatus { get; set; } 
         public string ActionTaken { get; set; }
-
         [NotMapped]
         public List<Natureofencroachment> NencroachmentList { get; set; }
         public virtual Natureofencroachment Natureofencroachment { get; set; }
-
-
         [NotMapped]
         public List<Reasons> ReasonsList { get; set; }
         public virtual Reasons Reasons { get; set; }
-
-
-
-
-
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }
         public virtual Khasra Khasra { get; set; }
-
-
-
-
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
         public virtual Acquiredlandvillage Village { get; set; }
-        //-------enchroacher Name--------
-    //    public ICollection<EncrocherPeople> EncrocherPeople { get; set; }
-        
+        public ICollection<Enchroachmentpayment> Enchroachmentpayment { get; set; }
+        public ICollection<EncrocherPeople> EncrocherPeople { get; set; }
         [NotMapped]
         public List<string> EName { get; set; }
-              
         [NotMapped]
         public List<string> EAddress { get; set; }
         [NotMapped]

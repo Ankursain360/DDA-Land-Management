@@ -29,6 +29,7 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
             List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();

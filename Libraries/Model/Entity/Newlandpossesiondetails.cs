@@ -31,6 +31,8 @@ namespace Libraries.Model.Entity
         public int Us4id { get; set; }
         public int Us6id { get; set; }
         public int Us17id { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
         [NotMapped]
         public List<Newlandkhasra> KhasraList { get; set; }

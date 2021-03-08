@@ -14,6 +14,8 @@ namespace Libraries.Model.Entity
             Newlandnotification = new HashSet<Newlandnotification>();
         }
         public string NotificationType { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
 
         public ICollection<Newlandnotification> Newlandnotification { get; set; }

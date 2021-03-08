@@ -40,7 +40,8 @@ namespace Libraries.Model.Entity
         public decimal Biswa { get; set; }
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
-       
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
         public Newlandkhasra Khasra { get; set; }

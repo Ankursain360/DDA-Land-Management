@@ -31,6 +31,8 @@ namespace Libraries.Model.Entity
         public string Description { get; set; }
         [Required(ErrorMessage = "Rect No is mandatory")]
         public string RectNo { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
         public ICollection<Newlandacquistionproposalplotdetails> Newlandacquistionproposalplotdetails { get; set; }
 
