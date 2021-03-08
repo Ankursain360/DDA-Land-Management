@@ -1,288 +1,292 @@
-﻿
-@model Libraries.Model.Entity.Morland
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.Morland
+
 @await Component.InvokeAsync("PageHeader", new { pageName = "Mor Lands" })
 
+
 <div class="pt-3">
-    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-      
-
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-
-
-                        <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
-                            <option disabled="disabled">Select</option>
-                        </select>
-                        <span asp-validation-for="LandNotificationId" class="text-danger"></span>
-                        <label class="floating-label">Notification No.</label>
-                    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId"
+                            asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                        <option value="" selected="selected" disabled="disabled">Select</option>
+                    </select>
+                    <span asp-validation-for="LandNotificationId" class="text-danger"></span>
+                    <label asp-for="LandNotificationId" class="floating-label">Notification No </label>
                 </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="NotificationDate" class="text-danger"></span>
-                        <label class="floating-label">Notification Date</label>
-
-                    </div>
-                </div>
-
-
             </div>
+            <!--<div class="col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId"
+                        asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                    <option value="" selected="selected" disabled="disabled">--Select--</option>
+                </select>-->
+            @*<select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                <option disabled="disabled" value="" selected="selected">Select</option>
 
-            <div class="row pt-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        @*<select asp-for="SerialnumberId" asp-items="@(new SelectList(Model.SerialnumberList, "Id","SerialNo"))"
-                class="floating-label-field floating-label-field--s3">
-            <option disabled="disabled">---Select---</option>
+            </select>*@
+            <!--<span asp-validation-for="LandNotificationId" class="text-danger"></span>
+                <label class="floating-label">Notification No.</label>
+            </div>
+        </div>-->
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-        </select>*@
-                        <input asp-for="SerialNumber" placeholder="Serial No" class="floating-label-field floating-label-field--s3" />
-
-                        <span asp-validation-for="SerialNumber" class="text-danger"></span>
-                        <label class="floating-label" asp-for="SerialNumber">Serial No</label>
-
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input asp-for="PropertySiteNo" placeholder="Property/Site No" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
-                        <label class="floating-label">Property/Site No.</label>
-
-                    </div>
-
+                    <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="NotificationDate" class="text-danger"></span>
+                    <label class="floating-label">Notification Date</label>
 
                 </div>
             </div>
 
 
-            <div class="row pt-3">
+        </div>
 
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
 
-                        <input asp-for="Name" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                        <label class="floating-label">Location Name(Village)</label>
+                    <input asp-for="SerialNumber" placeholder="Serial No" class="floating-label-field floating-label-field--s3" />
 
-                    </div>
+                    <span asp-validation-for="SerialNumber" class="text-danger"></span>
+                    <label class="floating-label" asp-for="SerialNumber">Serial No</label>
+
                 </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
+                    <input asp-for="PropertySiteNo" placeholder="Property/Site No" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
+                    <label class="floating-label">Property/Site No.</label>
 
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input placeholder="Site Description" asp-for="SiteDescription" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="SiteDescription" class="text-danger"></span>
-                        <label class="floating-label">Site Description</label>
-
-                    </div>
                 </div>
 
 
             </div>
-
-            <div id="Divclsification">
-
-                <h2 class="my-3 sub-heading">Area</h2>
-                <div class="row pt-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="Area" placeholder="Bigha" class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="Area" class="text-danger"></span>
-
-                            <label class="floating-label">(Sq. Yards)</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="OccupiedBy" placeholder="Occupied By" class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="OccupiedBy" class="text-danger"></span>
-                            <label class="floating-label">Occupied By</label>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="Divclsification">
-                <h2 class="my-3 sub-heading">
-                    <label class="control-label lb-sm" asp-for="StatusOfLand">   Status of Land</label>
-                </h2>
-
-                <div class="row pt-3">
-
-                    <div class="col-md-6">
-                        <input type="hidden" asp-for="StatusOfLand" id="StatusOfLand" value="Green" />
-                        <span asp-validation-for="StatusOfLand" class="text-danger"></span>
-
-                        <div class="form-row">
-
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field  " placeholder="Name" name="grpLand" value="Allotted" id="A">Allotted
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field " placeholder="Name" name="grpLand" value="Vacant" id="V">Vacant
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Encroached
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Green" id="G">Green
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div id="Divclsification">
-                <h2 class="my-3 sub-heading">
-                    Developed
-                    <label class="floating-label" asp-for="Developed">Developed</label>
-
-                </h2>
-
-                <div class="row pt-3">
-
-                    <div class="col-md-6">
-                        <input type="hidden" asp-for="Developed" id="Developed" value="Yes" />
+        </div>
 
 
-                        @*<input asp-for="Developed" placeholder="Developed" class="floating-label-field floating-label-field--s3" />*@
-                        <span asp-validation-for="Developed" class="text-danger"></span>
+        <div class="row pt-3">
 
-                        <div class="form-row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="Developed" type="radio" class="floating-label-field floating-label-field--s3" placeholder="Name" name="grpDevloped" value="Yes" id="Yes">Yes
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="Developed" type="radio" class="floating-label-field floating-label-field--s3" placeholder="Name" name="grpDevloped" value="No" id="No">No
-                                </label>
-                            </div>
-
-
-                        </div>
-                    </div>
+                    <input asp-for="Name" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label class="floating-label">Location Name(Village)</label>
 
                 </div>
             </div>
 
 
-            <div id="Divclsification">
-                <h2 class="my-3 sub-heading">Land Type
-                    <label class="floating-label" asp-for="LandType">Land Type</label>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                </h2>
-
-                <div class="row pt-3">
-
-                    <div class="col-md-6">
-                        <input type="hidden" asp-for="LandType" id="LandType" value="Surveied" />
-                                                                    
-                        <span asp-validation-for="LandType" class="text-danger"></span>
-                        <div class="form-row">
-
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="LandType" type="radio" class="floating-label-field  floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Surveied" id="Surveied">Surveied
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Retained" id="Retained">Retained
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="UnSurveied" id="UnSurveied">Un-Surveied
-                                </label>
-                            </div>
-
-
-                        </div>
-                    </div>
+                    <input placeholder="Site Description" asp-for="SiteDescription" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="SiteDescription" class="text-danger"></span>
+                    <label class="floating-label">Site Description</label>
 
                 </div>
             </div>
 
-            <div class="row pt-3">
 
+        </div>
 
+        <div id="Divclsification">
 
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        
-
-                    </div>
-                </div>
-
-
-            </div>
+            <h2 class="my-3 sub-heading">Area</h2>
             <div class="row pt-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                            <option value="1">Active</option>
-                            <option value="0">InActive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                        <label class="floating-label"> Status</label>
+                        <input asp-for="Area" placeholder="Bigha" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="Area" class="text-danger"></span>
+
+                        <label class="floating-label">(Sq. Yards)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input asp-for="OccupiedBy" placeholder="Occupied By" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="OccupiedBy" class="text-danger"></span>
+                        <label class="floating-label">Occupied By</label>
+
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <div id="Divclsification">
+            <h2 class="my-3 sub-heading">
+                <label class="control-label lb-sm" asp-for="StatusOfLand">   Status of Land</label>
+            </h2>
 
             <div class="row pt-3">
-                <div class="col-md-12">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
-                        <span asp-validation-for="Remarks" class="text-danger"></span>
-                        <label class="floating-label">Remarks</label>
+
+                <div class="col-md-6">
+                    <input type="hidden" asp-for="StatusOfLand" id="StatusOfLand" value="Green" />
+                    <span asp-validation-for="StatusOfLand" class="text-danger"></span>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field  " placeholder="Name" name="grpLand" value="Allotted" id="A">Allotted
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field " placeholder="Name" name="grpLand" value="Vacant" id="V">Vacant
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Encroached
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Green" id="G" checked="checked">Green
+                            </label>
+                        </div>
+
                     </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="Divclsification">
+            <h2 class="my-3 sub-heading">
+                Developed
+                <label class="floating-label" asp-for="Developed">Developed</label>
+
+            </h2>
+
+            <div class="row pt-3">
+
+                <div class="col-md-6">
+                    <input type="hidden" asp-for="Developed" id="Developed" value="Yes" />
+
+
+                    @*<input asp-for="Developed" placeholder="Developed" class="floating-label-field floating-label-field--s3" />*@
+                    <span asp-validation-for="Developed" class="text-danger"></span>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="Developed" type="radio" class="floating-label-field floating-label-field--s3" placeholder="Name" name="grpDevloped" value="Yes" id="Yes" checked="checked">Yes
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="Developed" type="radio" class="floating-label-field floating-label-field--s3" placeholder="Name" name="grpDevloped" value="No" id="No">No
+                            </label>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="Divclsification">
+            <h2 class="my-3 sub-heading">
+                Land Type
+                <label class="floating-label" asp-for="LandType">Land Type</label>
+
+            </h2>
+
+            <div class="row pt-3">
+
+                <div class="col-md-6">
+                    <input type="hidden" asp-for="LandType" id="LandType" value="Surveied" />
+
+                    <span asp-validation-for="LandType" class="text-danger"></span>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="LandType" type="radio" class="floating-label-field  floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Surveied" id="Surveied" checked="checked">Surveied
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Retained" id="Retained">Retained
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="radio-inline  ">
+                                <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="UnSurveied" id="UnSurveied">Un-Surveied
+                            </label>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row pt-3">
+
+
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
                 </div>
             </div>
 
-            <div class="row mt-md-3">
-                    <div class=" col-md-12">
-                        <input type="submit" value="Create" class="btn btn-theme " />
-                       
-                        @Html.ActionLink("Back", "Index", "MorLands", null, new { @class = "btn btn-theme " })
 
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-
-
-                    </div>
+                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">InActive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label class="floating-label"> Status</label>
                 </div>
-</form>
+            </div>
+        </div>
+
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <input type="submit" value="Create" class="btn btn-theme " />
+
+                @Html.ActionLink("Back", "Index", "MorLands", null, new { @class = "btn btn-theme " })
+
+
+
+
+            </div>
+        </div>
+    </form>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
@@ -305,7 +309,7 @@
                 $("#DivForDocumentName").show();
                 $("#DivForGenerate").hide();
             }
-           
+
         });
     });
 

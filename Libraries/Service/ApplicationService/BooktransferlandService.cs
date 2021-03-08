@@ -24,6 +24,12 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _booktransferlandRepository = booktransferlandRepository;
         }
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
+        {
+            List<Khasra> khasraList = await _booktransferlandRepository.BindKhasra(villageId);
+            return khasraList;
+        }
+
 
         public async Task<List<Booktransferland>> GetAllBooktransferland()
         {

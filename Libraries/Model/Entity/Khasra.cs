@@ -30,9 +30,9 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village is mandatory", AllowEmptyStrings = false)]
         public int? AcquiredlandvillageId { get; set; }
-        [Required(ErrorMessage = "Land Category is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Land Category is mandatory", AllowEmptyStrings = false)]
         public int? LandCategoryId { get; set; }
         [Required(ErrorMessage = "Bigha is mandatory")]
         public string Bigha { get; set; }
@@ -43,6 +43,7 @@ namespace Libraries.Model.Entity
         public string Description { get; set; }
         [Required(ErrorMessage = "Rect No is mandatory")]
         public string RectNo { get; set; }
+        [Required(ErrorMessage = "Status is mandatory ")]
         public byte IsActive { get; set; }
 
 

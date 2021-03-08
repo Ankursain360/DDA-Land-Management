@@ -34,6 +34,7 @@ namespace Libraries.Model.Entity
         public string LandType { get; set; }
         public string Remarks { get; set; }
         public string SerialNumber { get; set; }
+        [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
 
 

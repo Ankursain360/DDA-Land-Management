@@ -22,8 +22,8 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
             public string Remarks { get; set; }
-          
-            public byte IsActive { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
+        public byte IsActive { get; set; }
 
             public Khasra Khasra { get; set; }
             public Undersection17 UnderSection17 { get; set; }

@@ -49,19 +49,22 @@ namespace Libraries.Service.ApplicationService
             return await _undersection17plotdetailRepository.GetAllUndersection17plotdetail();
         }
 
-       
+
+        
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
+        {
+            List<Khasra> khasraList = await _undersection17plotdetailRepository.BindKhasra(villageId);
+            return khasraList;
+        }
+
+
         public async Task<List<Acquiredlandvillage>> GetAllVillageList()
         {
             List<Acquiredlandvillage> villageList = await _undersection17plotdetailRepository.GetAllVillageList();
             return villageList;
         }
-        public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
-        {
-            List<Khasra> khasraList = await _undersection17plotdetailRepository.GetAllKhasraList(villageId);
-            return khasraList;
-        }
-        
-             public async Task<List<Undersection17>> GetAllUndersection17List()
+
+        public async Task<List<Undersection17>> GetAllUndersection17List()
 
         {
             List<Undersection17> undersection17List = await _undersection17plotdetailRepository.GetAllUndersection17List();
@@ -108,6 +111,7 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+       
         public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
         {
             return await _undersection17plotdetailRepository.FetchSingleKhasraResult(khasraId);

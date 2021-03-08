@@ -216,11 +216,6 @@ namespace NewLandAcquisition.Controllers
 
                 }
             }
-
-            
-
-           
-
             //return PartialView("RequestIdHistoryDiv", Data);
         }
 
@@ -228,59 +223,57 @@ namespace NewLandAcquisition.Controllers
 
 
 
-        [HttpGet]
-        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
-        {
-            var DataFlow = await DataAsync();
-
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                {
-                    var dropdown = DataFlow[i].parameterAction;
-                    return Json(dropdown);
-                    break;
-                }
-
-            }
-            return Json(DataFlow);
-        }
-
-
-
         //[HttpGet]
-        //public async Task<JsonResult> getannexuredetails()  //Bind Dropdown of Approval Status
+        //public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
         //{
-        //    var result = false;
         //    var DataFlow = await DataAsync();
 
         //    for (int i = 0; i < DataFlow.Count; i++)
         //    {
         //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
         //        {
-        //            result = true;
-        //            if (result)
-        //            {
-
-        //                if (i == DataFlow.Count - 1)
-        //                {
-
-                          
-        //                    return Json(ViewBag.data = true);
-        //                }
-        //                else
-        //                {
-        //                    ViewBag.data = 0;
-        //                }
-        //                break;
-        //            }
-
-
+        //            var dropdown = DataFlow[i].parameterAction;
+        //            return Json(dropdown);
+        //            break;
         //        }
+
         //    }
-           
         //    return Json(DataFlow);
         //}
+
+
+
+        [HttpGet]
+        public async Task<JsonResult> getannexuredetails()  //Bind Dropdown of Approval Status
+        {
+            var result = false;
+            var DataFlow = await DataAsync();
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                {
+                    result = true;
+                    if (result)
+                    {
+
+                        if (i == DataFlow.Count - 1)
+                        {
+
+                          
+                            return Json(ViewBag.data = true);
+                        }
+                        else
+                        {
+                            ViewBag.data = 0;
+                        }
+                        break;
+                    }
+                }
+            }
+           
+            return Json(DataFlow);
+        }
 
 
 
@@ -315,9 +308,6 @@ namespace NewLandAcquisition.Controllers
 
             }
         }
-
-
-
 
     }
 }

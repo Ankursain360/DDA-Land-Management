@@ -9,8 +9,8 @@
                 <th>Tehsil Name</th>
                
                 <th>Zone Name</th>
-              
-                <th>Working Village</th>
+                <th>Acquired</th>
+                
                 <th>Village Type</th>
                 <th>Status</th>
                 <th>Operations</th>
@@ -29,7 +29,14 @@
                
                 <td>@(item.Zone == null?"": item.Zone.Name)</td>
                
-                <td>@item.WorkingVillage</td>
+                <td>
+                    @if (item.Acquired == "yes")
+                    {
+                        <span>Yes</span> }
+                    else
+                    {
+                        <span>No</span>}
+                </td>
                 <td>@item.VillageType</td>
                 <td>
                     @if (item.IsActive == 1)

@@ -24,6 +24,7 @@ namespace Libraries.Model.Entity
         public string StatusOfLand { get; set; }
         public DateTime? DateofPossession { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
 
 

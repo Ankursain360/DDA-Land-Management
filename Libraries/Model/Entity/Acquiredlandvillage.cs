@@ -45,6 +45,7 @@ namespace Libraries.Model.Entity
         public string WorkingVillage { get; set; }
         //  [Required(ErrorMessage = "Village type is mandatory ")]
         public string VillageType { get; set; }
+        [Required(ErrorMessage = "Status is mandatory ")]
         public byte? IsActive { get; set; }
 
 

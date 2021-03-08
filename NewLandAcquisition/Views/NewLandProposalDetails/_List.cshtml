@@ -8,9 +8,10 @@
             <th>Required Agency</th>
             <th>Proposal No./ File No</th>
             <th>Proposal Date</th>
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
+            <th>Area</th>
+            @*<th>Bigha</th>
+        <th>Biswa</th>
+        <th>Biswanshi</th>*@
             @*<th>Description</th>*@
             <th>Status</th>
             <th>Operations</th>
@@ -27,9 +28,14 @@
 
                 <td>@(Convert.ToDateTime(item.ProposalDate).ToString("dd-MMM-yyyy"))</td>
 
-                <td>@item.Bigha</td>
-                <td>@item.Biswa</td>
-                <td>@item.Biswanshi</td>
+                <td>
+                    @item.Bigha
+                    -
+                    @item.Biswa-
+                    @item.Biswanshi
+                </td>
+                @*<td>@item.Biswa</td>
+                <td>@item.Biswanshi</td>*@
                 @*<td>@item.Description</td>*@
                 <td>
                     @if (item.IsActive == 1)

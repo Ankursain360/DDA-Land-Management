@@ -37,10 +37,10 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
         {
-            List<Khasra> KhasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
-            return KhasraList;
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
+            return khasraList;
         }
         public async Task<List<Reasons>> GetAllReasons()
         {

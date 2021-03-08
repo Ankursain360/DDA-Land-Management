@@ -41,10 +41,12 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             Undersection17plotdetail undersection17plotdetail = new Undersection17plotdetail();
             undersection17plotdetail.IsActive = 1;
-           
 
+
+            //undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
+            //undersection17plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17plotdetail.VillageId);
+            undersection17plotdetail.KhasraList = await _undersection17plotdetailService.BindKhasra(undersection17plotdetail.VillageId);
             undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-            undersection17plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17plotdetail.VillageId);
             undersection17plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
             return View(undersection17plotdetail);
         }
@@ -56,10 +58,13 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
+                Undersection17plotdetail undersection17plotdetail = new Undersection17plotdetail();
                 undersection17Plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
 
-                undersection17Plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-                undersection17Plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17Plotdetail.VillageId);
+                //undersection17Plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
+                //undersection17Plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17Plotdetail.VillageId);
+                undersection17plotdetail.KhasraList = await _undersection17plotdetailService.BindKhasra(undersection17plotdetail.VillageId);
+                undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
 
                 if (ModelState.IsValid)
                 {
@@ -97,8 +102,10 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _undersection17plotdetailService.FetchSingleResult(id);
             Data.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
 
+            //Data.VillageList = await _undersection17plotdetailService.GetAllVillageList();
+            //Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(Data.VillageId);
+            Data.KhasraList = await _undersection17plotdetailService.BindKhasra(Data.VillageId);
             Data.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-            Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(Data.VillageId);
 
             if (Data == null)
             {
@@ -112,8 +119,10 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Edit(int id, Undersection17plotdetail undersection17plotdetail)
         {
             undersection17plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
+            //undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
+            //undersection17plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17plotdetail.VillageId);
+            undersection17plotdetail.KhasraList = await _undersection17plotdetailService.BindKhasra(undersection17plotdetail.VillageId);
             undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-            undersection17plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17plotdetail.VillageId);
             if (ModelState.IsValid)
             {
                 try
@@ -171,9 +180,10 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _undersection17plotdetailService.FetchSingleResult(id);
 
             Data.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
+            //Data.VillageList = await _undersection17plotdetailService.GetAllVillageList();
+            //Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(Data.VillageId);
+            Data.KhasraList = await _undersection17plotdetailService.BindKhasra(Data.VillageId);
             Data.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-            Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(Data.VillageId);
-
 
             if (Data == null)
             {
@@ -186,7 +196,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<JsonResult> GetKhasraList(int? villageId)
         {
             villageId = villageId ?? 0;
-            return Json(await _undersection17plotdetailService.GetAllKhasraList(Convert.ToInt32(villageId)));
+            return Json(await _undersection17plotdetailService.BindKhasra(Convert.ToInt32(villageId)));
         }
 
 

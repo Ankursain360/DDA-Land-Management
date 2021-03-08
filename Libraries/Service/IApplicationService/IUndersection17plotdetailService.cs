@@ -12,9 +12,11 @@ namespace Libraries.Service.IApplicationService
     public interface IUndersection17plotdetailService : IEntityService<Undersection17plotdetail>
     {
 
+
        
         Task<List<Acquiredlandvillage>> GetAllVillageList();
-        Task<List<Khasra>> GetAllKhasraList(int? villageId);
+        Task<List<Khasra>> BindKhasra(int? villageId);
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<List<Undersection17>> GetAllUndersection17List();
 
         Task<List<Undersection17plotdetail>> GetUndersection17plotdetailUsingRepo();
@@ -26,7 +28,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Undersection17plotdetail>> GetPagedUndersection17plotdetail(Undersection17plotdetailSearchDto model);
 
-        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
+       
         Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model);
 
 

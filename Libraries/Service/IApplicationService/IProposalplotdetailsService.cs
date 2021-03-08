@@ -23,7 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Proposalplotdetails proposalplotdetails);
 
         Task<Proposalplotdetails> FetchSingleResult(int id);
-
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<bool> Delete(int id);
 
         Task<PagedResult<Proposalplotdetails>> GetPagedProposalplotdetails(ProposalplotdetailSearchDto model);

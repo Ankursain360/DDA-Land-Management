@@ -16,7 +16,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Natureofencroachment>> GetAllNencroachment();
         Task<List<Reasons>> GetAllReasons();
         Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
-        Task<List<Khasra>> BindKhasra();
+        // Task<List<Khasra>> BindKhasra();
+        Task<List<Khasra>> BindKhasra(int? villageId);
         Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId);
         //********* repeater ! Owner Details **********
 
