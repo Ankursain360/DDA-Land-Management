@@ -40,9 +40,16 @@ namespace AcquiredLandInformationManagement.Controllers
             //proposalplotdetails.IsActive = 1;
             booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
             booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
-            booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
-
+            //  booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
+            booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
+          
             return View(booktransferland);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? LocalityId)
+        {
+            LocalityId = LocalityId ?? 0;
+            return Json(await _booktransferlandService.BindKhasra(Convert.ToInt32(LocalityId)));
         }
 
 
@@ -54,8 +61,7 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
                 booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
-                booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
-
+                booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
                 if (ModelState.IsValid)
                 {
 
@@ -93,7 +99,7 @@ namespace AcquiredLandInformationManagement.Controllers
                        
             Data.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
             Data.LocalityList = await _booktransferlandService.GetAllLocality();
-            Data.KhasraList = await _booktransferlandService.GetAllKhasra();
+            Data.KhasraList = await _booktransferlandService.BindKhasra(Data.LocalityId);
 
 
             if (Data == null)
@@ -109,7 +115,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
             booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
-            booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
+            booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
             if (ModelState.IsValid)
             {
                 try
@@ -168,7 +174,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Data.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
             Data.LocalityList = await _booktransferlandService.GetAllLocality();
-            Data.KhasraList = await _booktransferlandService.GetAllKhasra();
+            Data.KhasraList = await _booktransferlandService.BindKhasra(Data.LocalityId);
             if (Data == null)
             {
                 return NotFound();

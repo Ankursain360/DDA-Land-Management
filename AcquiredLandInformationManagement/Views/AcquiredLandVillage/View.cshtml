@@ -53,8 +53,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input disabled asp-for="YearofConsolidation" placeholder="Name"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="YearofConsolidation" placeholder="Year of Consolidation"
+                           type="text" class="floating-label-field floating-label-field--s3 onlynumbers" limit="4" />
                     <span asp-validation-for="YearofConsolidation" class="text-danger"></span>
                     <label class="floating-label">Year of Consolidation   </label>
                 </div>
@@ -82,13 +82,15 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input disabled asp-for="Acquired" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+           
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="Acquired">
+                        <option value="yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
                     <span asp-validation-for="Acquired" class="text-danger"></span>
-                    <label class="floating-label">Acquired</label>
+                    <label asp-for="Acquired" class="floating-label">Acquired </label>
                 </div>
             </div>
         </div>

@@ -18,7 +18,7 @@ namespace Libraries.Repository.IEntityRepository
        
         Task<List<Acquiredlandvillage>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
-
+        Task<List<Khasra>> BindKhasra(int? villageId);
         Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model);
 
     }

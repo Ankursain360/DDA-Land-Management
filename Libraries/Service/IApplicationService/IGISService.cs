@@ -46,5 +46,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<VillageDto>> GetVillageAutoCompleteDetails(string prefix);
         Task<List<gisDataTemp>> GetInfrastructureDetails(int villageId);
         Task<List<Gisdata>> GetGisDataLayersDetails(int villageId);
+        Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetails(int villageId, string khasraNo);
     }
 }

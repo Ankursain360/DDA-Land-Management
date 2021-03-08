@@ -1,12 +1,12 @@
 ﻿function onChange(id) {
 
     HttpGet(`/UnderSection4PlotForm/GetKhasraList/?villageId=${id}`, 'json', function (response) {
-        var html = '<option value="0"></option>';
+        var html = '<option value=""> select</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
 
-        $("#KhasraId").select2('val', '')
+       // $("#KhasraId").select2('val', '')
         $("#KhasraId").html(html);
     });
 };

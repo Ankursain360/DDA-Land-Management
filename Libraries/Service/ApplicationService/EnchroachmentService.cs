@@ -42,13 +42,17 @@ namespace Libraries.Service.ApplicationService
             return model;
         }
 
-
-
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _EnchroachmentRepository.BindKhasra();
+            List<Khasra> khasraList = await _EnchroachmentRepository.BindKhasra(villageId);
             return khasraList;
         }
+
+        //public async Task<List<Khasra>> BindKhasra()
+        //{
+        //    List<Khasra> khasraList = await _EnchroachmentRepository.BindKhasra();
+        //    return khasraList;
+        //}
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
             List<Acquiredlandvillage> villageList = await _EnchroachmentRepository.GetAllVillage();

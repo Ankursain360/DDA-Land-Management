@@ -25,10 +25,10 @@ namespace Libraries.Model.Entity
         public string PayableAppealable { get; set; }
         public DateTime? AwardDate { get; set; }
 
-        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village is Mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
 
-        [Required(ErrorMessage = "Khasra is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra is Mandatory", AllowEmptyStrings = false)]
         public int? KhasraNoId { get; set; }
         public string AwardNo { get; set; }
         public string PartyName { get; set; }
@@ -57,6 +57,7 @@ namespace Libraries.Model.Entity
         public string ReasonForNonPay { get; set; }
         public string Remarks { get; set; }
         public Khasra KhasraNo { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public Acquiredlandvillage Village { get; set; }
         [NotMapped]

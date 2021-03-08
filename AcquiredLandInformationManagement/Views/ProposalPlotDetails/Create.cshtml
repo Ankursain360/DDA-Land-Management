@@ -11,7 +11,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ProposaldetailsId" asp-items="@(new SelectList(Model.ProposaldetailsList, "Id","Name"))">
-                        <option>Select</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="ProposaldetailsId" class="text-danger"></span>
                     <label asp-for="ProposaldetailsId" class="floating-label">Proposal Name </label>
@@ -21,9 +21,9 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="AcquiredlandvillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
-                             onchange="return onChange(this.options[this.selectedIndex].value);">
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
 
-                        <option>Select</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
                     <label asp-for="AcquiredlandvillageId" class="floating-label">Village Name </label>
@@ -36,7 +36,7 @@
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
 
-                        <option>Select</option>
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
@@ -62,7 +62,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         <input asp-for="Bigha" placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3" />
+                              value="" class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Bigha" class="text-danger"></span>
                         <label class="floating-label">Bigha    </label>
                     </div>
@@ -71,7 +71,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         <input asp-for="Biswa" placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3" />
+                             value=""  class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Biswa" class="text-danger"></span>
                         <label class="floating-label">Biswa  </label>
                     </div>
@@ -80,7 +80,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         <input asp-for="Biswanshi" placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3" />
+                              value="" class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
                         <label class="floating-label">Biswanshi </label>
                     </div>

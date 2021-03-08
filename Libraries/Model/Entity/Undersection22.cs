@@ -11,11 +11,11 @@ namespace Libraries.Model.Entity
         {
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
         }
-        [Required]
+        [Required(ErrorMessage = "Notification  is mandatory")]
         public string NotificationNo { get; set; }
         [Required]
         public DateTime? NotificationDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
     }

@@ -16,5 +16,59 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/casenatureindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/casenatureindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/caseyearindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/caseyearindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/lawyerindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/lawyerindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/legalmanagementsystemcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/legalmanagementsystemcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/legalmanagementsystemedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/legalmanagementsystemedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/legalmanagementsystemindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/legalmanagementsystemindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/legalmanagementsytemreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/legalmanagementsytemreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/legalreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/legalreportindex.js"
+    ]
   }
 ]

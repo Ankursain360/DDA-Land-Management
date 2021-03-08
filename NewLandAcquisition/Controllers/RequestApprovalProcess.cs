@@ -180,7 +180,7 @@ namespace NewLandAcquisition.Controllers
 
             var ReqExists = await _newlandannexure2Service.CheckReqExists(id);
             var CheckReqExistancy = ReqExists.Select(a => new { a.Id});
-            if (ReqExists.Count == 0)
+            if ((ReqExists.Count == 0) || (ReqExists == null))
             {
                 return Json(ReqExists.Select(a=>new { a.Id,a.ReqId,a.CreatedBy})); }
             else
@@ -216,11 +216,6 @@ namespace NewLandAcquisition.Controllers
 
                 }
             }
-
-            
-
-           
-
             //return PartialView("RequestIdHistoryDiv", Data);
         }
 
@@ -274,8 +269,6 @@ namespace NewLandAcquisition.Controllers
                         }
                         break;
                     }
-
-
                 }
             }
            
@@ -315,9 +308,6 @@ namespace NewLandAcquisition.Controllers
 
             }
         }
-
-
-
 
     }
 }

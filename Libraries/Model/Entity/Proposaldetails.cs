@@ -22,24 +22,30 @@ namespace Libraries.Model.Entity
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "ProposalDetails", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required (ErrorMessage ="Scheme is mandatory feild")]
+        [Required (ErrorMessage ="Scheme is mandatory")]
         public int? SchemeId { get; set; }
         [Required]
         public string RequiredAgency { get; set; }
         [Required]
         public string ProposalFileNo { get; set; }
-        [Required]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        [Required(ErrorMessage = "Bigha is mandatory")]
         public decimal Bigha { get; set; }
-        [Required]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        [Required(ErrorMessage = "Biswa is mandatory")]
         public decimal Biswa { get; set; }
-        [Required]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
         [Required]
 
         public string Description { get; set; }
         [Required]
         public DateTime? ProposalDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Status is mandatory ")]
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<Scheme> SchemeList { get; set; }

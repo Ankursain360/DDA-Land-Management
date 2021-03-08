@@ -13,28 +13,28 @@ namespace Libraries.Model.Entity
         //{
         //}
 
-        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village is Mandatory", AllowEmptyStrings = false)]
         public int? VillageId { get; set; }
-        [Required(ErrorMessage = "Khasra is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra is Mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
-        [Required(ErrorMessage = "Transfer To Which Dept is Mandatory Field")]
+        [Required(ErrorMessage = "Transfer To Which Dept is Mandatory")]
 
         public string TransferToWhichDept { get; set; }
-        [Required(ErrorMessage = "Area Disposed is Mandatory Field")]
+        [Required(ErrorMessage = "Area Disposed is Mandatory")]
         public decimal AreaDisposed { get; set; }
-        [Required(ErrorMessage = "Date Of Disposed is Mandatory Field")]
+        [Required(ErrorMessage = "Date Of Disposed is Mandatory")]
         public DateTime? DateOfDisposed { get; set; }
-        [Required(ErrorMessage = "Transfer To is Mandatory Field")]
+        [Required(ErrorMessage = "Transfer To is Mandatory")]
         public string TransferTo { get; set; }
-        [Required(ErrorMessage = "Transfer By is Mandatory Field")]
+        [Required(ErrorMessage = "Transfer By is Mandatory")]
         public string TransferBy { get; set; }
-        [Required(ErrorMessage = "Utilization Type is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Utilization Type is Mandatory", AllowEmptyStrings = false)]
         public int? UtilizationtypeId { get; set; }
-        [Required(ErrorMessage = "FileNo/RefNo is Mandatory Field")]
+        [Required(ErrorMessage = "FileNo/RefNo is Mandatory")]
         public string FileNoRefNo { get; set; }
         [Required]
         public string Remarks { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }

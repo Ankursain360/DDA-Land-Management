@@ -1,6 +1,6 @@
 ﻿$(function () {
     $("input[name='grpLand']").click(function () {
-        debugger
+       
         if ($("#A").is(":checked")) {
             $('#StatusOfLand').val('Alloted');
         }
@@ -19,7 +19,19 @@
         }
     });
 });
+function onChange(id) {
+    debugger
+    HttpGet(`/bookTransferLand/GetKhasraList/?LocalityId=${id}`, 'json', function (response) {
+        debugger
+        var html = '<option value=""> select</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
 
+        // $("#KhasraId").select2('val', '')
+        $("#KhasraId").html(html);
+    });
+};
 $("input[name='grpLand']").click(function () {
     var selected = $("input[type='radio'][name='grpLand']:checked");
     $("#StatusOfLand").val(selected.val());

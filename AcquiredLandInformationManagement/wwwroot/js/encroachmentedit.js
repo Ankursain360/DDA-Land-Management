@@ -8,7 +8,18 @@ $(document).ready(function () {
    
 });
 
+function onChange(id) {
+    //debugger
+    HttpGet(`/EncroachmentDetails/GetKhasraList/?VillageId=${id}`, 'json', function (response) {
+        var html = '<option value=""> select</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
 
+        // $("#KhasraId").select2('val', '')
+        $("#KhasraId").html(html);
+    });
+};
 //****************** code for saving owner Rpt ************************
 
 
@@ -103,9 +114,10 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 
 
 function FillPaymentAtEdit() {
-
     
     HttpGet(`/EncroachmentDetails/GetDetailsPayment/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+     //   HttpGet(`/EncroachmentDetails/GetDetailsPayment/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
        
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts1 #add1 #Amount").val(data[i].amount);
@@ -136,8 +148,8 @@ $(document).delegate('a.add-record1', 'click', function (e) {
     
 
     if ($("#tbl_posts1 #add1 #Amount").val() != ''
-        && $("#tbl_posts1 #add1 #ChequeNo").val() != ''
-        && $("#tbl_posts1 #add1 #ChequeDate").val() != ''     ) {
+        || $("#tbl_posts1 #add1 #ChequeNo").val() != ''
+        || $("#tbl_posts1 #add1 #ChequeDate").val() != ''     ) {
 
         e.preventDefault();
         var content = jQuery('#tbl_posts1 #add1 tr'),

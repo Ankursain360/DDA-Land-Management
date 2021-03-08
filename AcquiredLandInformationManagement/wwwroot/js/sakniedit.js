@@ -133,7 +133,7 @@ function FillLesseeAtEdit() {
                     size = jQuery('#tbl_posts1 >tbody >tr').length,
                     element = null,
                     element = content.clone();
-                element.attr('id', 'rec-' + size);
+                element.attr('id', 'rec1-' + size);
                 element.find('.delete-record1').attr('data-id', size);
                 element.appendTo('#tbl_posts1_body');
 
@@ -162,7 +162,7 @@ $(document).delegate('a.add-record1', 'click', function (e) {
             size = jQuery('#tbl_posts1 >tbody >tr').length,
             element = null,
             element = content.clone();
-        element.attr('id', 'rec-' + size);
+        element.attr('id', 'rec1-' + size);
         element.find('.delete-record1').attr('data-id', size);
         element.appendTo('#tbl_posts1_body');
         // $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
@@ -187,7 +187,7 @@ $(document).delegate('a.delete-record1', 'click', function (e) {
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#rec1-' + id).remove();
         //regnerate index number on table
         $('#tbl_posts1_body tr').each(function (index) {
             //alert(index);
@@ -221,7 +221,7 @@ function FillTenantAtEdit() {
                     size = jQuery('#tbl_posts2 >tbody >tr').length,
                     element = null,
                     element = content.clone();
-                element.attr('id', 'rec-' + size);
+                element.attr('id', 'rec2-' + size);
                 element.find('.delete-record2').attr('data-id', size);
                 element.appendTo('#tbl_posts2_body');
 
@@ -249,7 +249,7 @@ $(document).delegate('a.add-record2', 'click', function (e) {
             size = jQuery('#tbl_posts2 >tbody >tr').length,
             element = null,
             element = content.clone();
-        element.attr('id', 'rec-' + size);
+        element.attr('id', 'rec2-' + size);
         element.find('.delete-record2').attr('data-id', size);
         element.appendTo('#tbl_posts2_body');
 
@@ -274,7 +274,7 @@ $(document).delegate('a.delete-record2', 'click', function (e) {
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#rec2-' + id).remove();
         //regnerate index number on table
         $('#tbl_posts2_body tr').each(function (index) {
             //alert(index);

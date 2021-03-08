@@ -55,11 +55,11 @@
                 <!--tab nav bar-->
                 <nav>
                     <div class="nav nav-tabs d-flex justify-content-between" id="LeftNavTab" role="tablist">
-                        <a class="nav-item nav-link active" id="navListtab" data-toggle="tab" href="#navList" role="tab" aria-controls="navList" aria-selected="true">List</a>
+                        <a class="nav-item nav-link active" id="navListtab" data-toggle="tab" href="#navList" role="tab" aria-controls="navList" aria-selected="true">Village List</a>
                         <a class="nav-item nav-link" id="navQuerytab" data-toggle="tab" href="#navQuery" role="tab" aria-controls="navQuery" aria-selected="false">Query</a>
                         <a class="nav-item nav-link" id="navLayerstab" data-toggle="tab" href="#navLayers" role="tab" aria-controls="navLayers" aria-selected="false">Layers</a>
                         <a class="nav-item nav-link" id="navLegendstab" data-toggle="tab" href="#navLegends" role="tab" aria-controls="navLegends" aria-selected="false">Legends</a>
-                        <a class="nav-item nav-link" id="navInformationtab" data-toggle="tab" href="#navInformation" role="tab" aria-controls="navInformation" aria-selected="false">Information</a>
+                        @*<a class="nav-item nav-link" id="navInformationtab" data-toggle="tab" href="#navInformation" role="tab" aria-controls="navInformation" aria-selected="false">Information</a>*@
                     </div>
                 </nav>
                 <!--tab nav bar end-->
@@ -70,7 +70,7 @@
                         <form class="search">
                             <div class="form-group">
                                 <i class="ri-search-line"></i>
-                                <input type="search" class="form-control form-control-sm" placeholder="Search Area Name" id="txtSearch">
+                                <input type="search" class="form-control form-control-sm" placeholder="Search Village Name" id="txtSearch">
                             </div>
                         </form>
                         <!--search from end-->
@@ -185,51 +185,51 @@
                             </div>
                             <!--                            Query accordion end-->
                             <!--                            Find Routes accordion-->
-                            <div class="accordion-item">
-                                <h5 class="accordion-header" id="Routes1">
-                                    <button class="accordion-button collapsed  py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Routes" aria-expanded="true" aria-controls="Routes">
-                                        <i class="ri-road-map-line text-white"></i>Find Routes
-                                    </button>
-                                </h5>
-                                <div id="Routes" class="accordion-collapse collapse" aria-labelledby="Routes1" data-bs-parent="#navQueryData">
-                                    <div class="p-3">
-                                        <form id="searchWise">
-                                            <div class="mb-2">
-                                                <label for="TravelList" class="form-label mb-1 small">Travel :</label>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <div class="form-check position-relative d-flex-align-items-center">
-                                                            <input class="form-check-input" type="radio" name="Travel" id="Driving1">
-                                                            <label class="form-check-label" for="Driving1">
-                                                                <i class="ri-roadster-line position-relative" style="left: -2px"></i> Driving
-                                                            </label>
+                            @*<div class="accordion-item">
+                                    <h5 class="accordion-header" id="Routes1">
+                                        <button class="accordion-button collapsed  py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Routes" aria-expanded="true" aria-controls="Routes">
+                                            <i class="ri-road-map-line text-white"></i>Find Routes
+                                        </button>
+                                    </h5>
+                                    <div id="Routes" class="accordion-collapse collapse" aria-labelledby="Routes1" data-bs-parent="#navQueryData">
+                                        <div class="p-3">
+                                            <form id="searchWise">
+                                                <div class="mb-2">
+                                                    <label for="TravelList" class="form-label mb-1 small">Travel :</label>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-check position-relative d-flex-align-items-center">
+                                                                <input class="form-check-input" type="radio" name="Travel" id="Driving1">
+                                                                <label class="form-check-label" for="Driving1">
+                                                                    <i class="ri-roadster-line position-relative" style="left: -2px"></i> Driving
+                                                                </label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <div class="form-check position-relative d-flex-align-items-center">
-                                                            <input class=" form-check-input" type="radio" name="Travel" id="Transit2">
-                                                            <label class="form-check-label" for="Transit2">
-                                                                <i class="ri-bus-2-line position-relative" style="left: -2px"></i> Transit
-                                                            </label>
+                                                        <div class="col-6">
+                                                            <div class="form-check position-relative d-flex-align-items-center">
+                                                                <input class=" form-check-input" type="radio" name="Travel" id="Transit2">
+                                                                <label class="form-check-label" for="Transit2">
+                                                                    <i class="ri-bus-2-line position-relative" style="left: -2px"></i> Transit
+                                                                </label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="Source" class="form-label mb-1 small">Source :</label>
-                                                <input class="form-control form-control-sm" id="Source" type="text" placeholder="Source" aria-label="Source" />
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="Source" class="form-label mb-1 small">Destination :</label>
-                                                <input class="form-control form-control-sm" id="Destination" type="text" placeholder="Destination" aria-label="Destination" />
-                                            </div>
-                                            <div class="mt-3 text-center">
-                                                <a href="javascript:;" id="RouteDetail" class="btn d-block w-100 small btn-sm btn-info text-white">Get Route</a>
-                                            </div>
-                                        </form>
+                                                <div class="mb-2">
+                                                    <label for="Source" class="form-label mb-1 small">Source :</label>
+                                                    <input class="form-control form-control-sm" id="Source" type="text" placeholder="Source" aria-label="Source" />
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="Source" class="form-label mb-1 small">Destination :</label>
+                                                    <input class="form-control form-control-sm" id="Destination" type="text" placeholder="Destination" aria-label="Destination" />
+                                                </div>
+                                                <div class="mt-3 text-center">
+                                                    <a href="javascript:;" id="RouteDetail" class="btn d-block w-100 small btn-sm btn-info text-white">Get Route</a>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div>*@
                             <!--                            Find Routes accordion end-->
 
 
@@ -269,7 +269,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="navLegends" role="tabpanel" aria-labelledby="navLegendstab">4</div>
-                    <div class="tab-pane fade" id="navInformation" role="tabpanel" aria-labelledby="navInformationtab">5</div>
+                    @*<div class="tab-pane fade" id="navInformation" role="tabpanel" aria-labelledby="navInformationtab">5</div>*@
                 </div>
                 <!--tab nav content end-->
                 <!--                tab nav content end-->
@@ -326,17 +326,63 @@
             <!--bottom btns end-->
         </div>
 
-        <div id="RouteDetailShow" style="display: none;">
+        <div id="RouteDetailShow" style="display: none; ">
             <div class="card">
                 <div class="card-header text-white bg-primary small px-2 py-1 d-flex align-items-center">
-                    Find Routes <a href="javascript:;" id="HideRouteDetail" class="close text-white ms-auto badge bg-danger" style="text-decoration: none">X</a>
+                    Information <a href="javascript:;" id="HideRouteDetail" class="close text-white ms-auto badge bg-danger" style="text-decoration: none">X</a>
                 </div>
                 <div class="card-body p-1">
                     <ul class="list-unstyled small">
                         <li>
-                            <p class="m-0">Khasra No : <strong id="tagKhasra">52.1 km</strong></p> 
+                            <table style="border-collapse: collapse; font-size:11px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive">
+                                <tr> <td> <p class="m-0">Village Name : <strong id="tagVillageName"></strong></p></td> </tr>
+                                <tr><td><p class="m-0">Khasra No : <strong id="tagKhasra"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Area (Bigha - Biswa - Biswansi)(ACRE) : <strong id="tagArea"></strong></p></td></tr>
+                                <tr><td> <p class="m-0">Notification(s) US-4 : <strong id="tagUs4"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Notification(s) US-6 : <strong id="tagUs6"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Notification(s) US-17 : <strong id="tagUs17"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Notification(s) US-22 : <strong id="tagUs22"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Award(s) : <strong id="tagAward"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Date of Possession : <strong id="tagPossessionDate"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Date of Allotment : <strong id="tagAllotmentDate"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Transfer Department : <strong id="tagTransferDepartment"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Scheme Transfer : <strong id="tagSchemeTransfer"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Remarks : <strong id="tagRemarks"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Party Name : <strong id="tagPartyName"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Demand List No. : <strong id="tagDemandListNo"></strong></p></td></tr>
+                                <tr><td><p class="m-0">L&B No - Date : <strong id="tagLBDate"></strong></p></td></tr>
+                                <tr><td><p class="m-0">L.A.C. No : <strong id="tagLACNo"></strong></p></td></tr>
+                                <tr><td><p class="m-0">R.F.A.No : <strong id="tagRFANo"></strong></p></td></tr>
+                                <tr><td><p class="m-0">S.L.P. No : <strong id="tagSLANo"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Court Involved : <strong id="tagCourt"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Payble Amount : <strong id="tagPayableAmt"></strong></p></td></tr>
+                                <tr><td><p class="m-0">Appealable Amount : <strong id="tagAppealableAmt"></strong></p></td></tr>
+                            </table>
+                            @*<p class="m-0">Village Name : <strong id="tagVillageName"></strong></p>
+                            <p class="m-0">Khasra No : <strong id="tagKhasra"></strong></p>
+                            <p class="m-0">Area (Bigha - Biswa - Biswansi)(ACRE) : <strong id="tagArea"></strong></p>
+                            <p class="m-0">Notification(s) US-4 : <strong id="tagUs4"></strong></p>
+                            <p class="m-0">Notification(s) US-6 : <strong id="tagUs6"></strong></p>
+                            <p class="m-0">Notification(s) US-17 : <strong id="tagUs17"></strong></p>
+                            <p class="m-0">Notification(s) US-22 : <strong id="tagUs22"></strong></p>
+                            <p class="m-0">Award(s) : <strong id="tagAward"></strong></p>
+                            <p class="m-0">Date of Possession : <strong id="tagPossessionDate"></strong></p>
+                            <p class="m-0">Date of Allotment : <strong id="tagAllotmentDate"></strong></p>
+                            <p class="m-0">Transfer Department : <strong id="tagTransferDepartment"></strong></p>
+                            <p class="m-0">Scheme Transfer : <strong id="tagSchemeTransfer"></strong></p>
+                            <p class="m-0">Remarks : <strong id="tagRemarks"></strong></p>
+                            <p class="m-0">Party Name : <strong id="tagPartyName"></strong></p>
+                            <p class="m-0">Demand List No. : <strong id="tagDemandListNo"></strong></p>
+                            <p class="m-0">L&B No - Date : <strong id="tagLBDate"></strong></p>
+                            <p class="m-0">L.A.C. No : <strong id="tagLACNo"></strong></p>
+                            <p class="m-0">R.F.A.No : <strong id="tagRFANo"></strong></p>
+                            <p class="m-0">S.L.P. No : <strong id="tagSLANo"></strong></p>
+                            <p class="m-0">Court Involved : <strong id="tagCourt"></strong></p>
+                            <p class="m-0">Payble Amount : <strong id="tagPayableAmt"></strong></p>
+                            <p class="m-0">Appealable Amount : <strong id="tagAppealableAmt"></strong></p>*@
+
                         </li>
-                        <li>not design yet</li>
+
                     </ul>
                 </div>
             </div>
@@ -397,6 +443,6 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @*Jquery for Autocomplete End*@
-   
+
 </body>
 </html>

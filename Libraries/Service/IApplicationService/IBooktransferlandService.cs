@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Acquiredlandvillage>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<bool> Update(int id, Booktransferland booktransferland);
-
+        Task<List<Khasra>> BindKhasra(int? villageId);
         Task<bool> Create(Booktransferland booktransferland);
 
         Task<Booktransferland> FetchSingleResult(int id);
