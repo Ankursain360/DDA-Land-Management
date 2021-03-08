@@ -87,12 +87,10 @@ namespace Libraries.Service.ApplicationService
             return khasraList;
         }
 
-        //public async Task<bool> CheckUniqueName(int id, string proposaldetails)
-        //{
-        //    bool result = await _proposaldetailsRepository.Any(id, proposaldetails);
-        //    //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
-        //    return result;
-        //}
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _proposalplotdetailsRepository.FetchSingleKhasraResult(khasraId);
+        }
 
         public async Task<bool> Delete(int id)
         {

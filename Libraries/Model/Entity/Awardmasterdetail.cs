@@ -32,6 +32,7 @@ namespace Libraries.Model.Entity
         public int Us6id { get; set; }
         public int Us17id { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
        // public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
         

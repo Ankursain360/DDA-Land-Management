@@ -9,14 +9,20 @@ namespace Libraries.Model.Entity
 {
     public class Awardplotdetails : AuditableEntity<int>
     {
-       
+        [Required(ErrorMessage = "Award  is mandatory")]
         public int AwardMasterId { get; set; }
+        [Required(ErrorMessage = "Village  is mandatory")]
         public int VillageId { get; set; }
+        [Required(ErrorMessage = "Khasra is mandatory")]
         public int KhasraId { get; set; }
+        [Required(ErrorMessage = "Bigha  is mandatory")]
         public decimal Bigha { get; set; }
+        [Required(ErrorMessage = "Biswa is mandatory")]
         public decimal Biswa { get; set; }
+        [Required(ErrorMessage = "Biswanshi  is mandatory")]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
         public virtual Awardmasterdetail AwardMaster{ get; set; }

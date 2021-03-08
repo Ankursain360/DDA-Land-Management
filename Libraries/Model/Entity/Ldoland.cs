@@ -8,21 +8,21 @@ namespace Libraries.Model.Entity
 {
     public  class Ldoland : AuditableEntity<int>
     {
-        [Required]
+        [Required(ErrorMessage = " Notification is mandatory")]
         public int? LandNotificationId { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Date is mandatory")]
         public DateTime? NotificationDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Serial Number is mandatory")]
         public int? SerialNumber{ get; set; }
-        [Required]
+        [Required(ErrorMessage = " Site No is mandatory")]
         public string PropertySiteNo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Location is mandatory")]
         public string Location { get; set; }
         [Required]
         public string SiteDescription { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Area is mandatory")]
         public decimal? Area { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Status is mandatory")]
         public string StatusOfLand { get; set; }
         [Required]
         public string OccupiedBy { get; set; }
@@ -30,7 +30,7 @@ namespace Libraries.Model.Entity
         public DateTime? DateofPossession { get; set; }
         [Required]
         public string Remarks { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<LandNotification> LandNotificationList { get; set; }
