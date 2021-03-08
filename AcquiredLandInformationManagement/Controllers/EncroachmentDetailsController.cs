@@ -43,14 +43,20 @@ namespace AcquiredLandInformationManagement.Controllers
             Enchroachment enchroachment = new Enchroachment();
             enchroachment.IsActive = 1;
 
-            enchroachment.KhasraList = await _enchroachmentService.BindKhasra();
+          //  enchroachment.KhasraList = await _enchroachmentService.BindKhasra();
             enchroachment.VillageList = await _enchroachmentService.GetAllVillage();
-           enchroachment.NencroachmentList = await _enchroachmentService.GetAllNencroachment();
+            enchroachment.KhasraList = await _enchroachmentService.BindKhasra(enchroachment.VillageId);
+            enchroachment.NencroachmentList = await _enchroachmentService.GetAllNencroachment();
             enchroachment.ReasonsList = await _enchroachmentService.GetAllReasons();
 
             return View(enchroachment);
         }
-
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? VillageId)
+        {
+            VillageId = VillageId ?? 0;
+            return Json(await _enchroachmentService.BindKhasra(Convert.ToInt32(VillageId)));
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Enchroachment enchroachment)
@@ -58,7 +64,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
 
-                enchroachment.KhasraList = await _enchroachmentService.BindKhasra();
+                enchroachment.KhasraList = await _enchroachmentService.BindKhasra(enchroachment.VillageId);
                 enchroachment.VillageList = await _enchroachmentService.GetAllVillage();
                 enchroachment.NencroachmentList = await _enchroachmentService.GetAllNencroachment();
                 enchroachment.ReasonsList = await _enchroachmentService.GetAllReasons();
@@ -157,14 +163,17 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
+            
             var Data = await _enchroachmentService.FetchSingleResult(id);
 
             Data.NencroachmentList = await _enchroachmentService.GetAllNencroachment();
             Data.ReasonsList = await _enchroachmentService.GetAllReasons();
-
-            Data.KhasraList = await _enchroachmentService.BindKhasra();
+            Data.KhasraList = await _enchroachmentService.BindKhasra(Data.VillageId);
+           // Data.KhasraList = await _enchroachmentService.BindKhasra();
             Data.VillageList = await _enchroachmentService.GetAllVillage();
 
+            Enchroachment enchroachment = new Enchroachment();
+            enchroachment.IsActive = enchroachment.IsActive;
 
             if (Data == null)
             {
@@ -186,7 +195,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 {
                     enchroachment.NencroachmentList = await _enchroachmentService.GetAllNencroachment();
                     enchroachment.ReasonsList = await _enchroachmentService.GetAllReasons();
-                    enchroachment.KhasraList = await _enchroachmentService.BindKhasra();
+                    enchroachment.KhasraList = await _enchroachmentService.BindKhasra(enchroachment.VillageId);
                     enchroachment.VillageList = await _enchroachmentService.GetAllVillage();
                     var result = await _enchroachmentService.Update(id, enchroachment);
                     if (result == true)
@@ -315,7 +324,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Data.NencroachmentList = await _enchroachmentService.GetAllNencroachment();
             Data.ReasonsList = await _enchroachmentService.GetAllReasons();
 
-            Data.KhasraList = await _enchroachmentService.BindKhasra();
+            Data.KhasraList = await _enchroachmentService.BindKhasra(Data.VillageId);
             Data.VillageList = await _enchroachmentService.GetAllVillage();
 
 

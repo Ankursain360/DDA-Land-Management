@@ -12,8 +12,8 @@ namespace Libraries.Service.IApplicationService
     {
 
         Task<List<Enchroachment>> GetAllEnchroachment();
-
-        Task<List<Khasra>> BindKhasra();
+        Task<List<Khasra>> BindKhasra(int? villageId);
+        //Task<List<Khasra>> BindKhasra();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Natureofencroachment>> GetAllNencroachment();
         Task<List<Reasons>> GetAllReasons();

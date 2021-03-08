@@ -184,8 +184,12 @@ namespace Libraries.Repository.EntityRepository
             List<LandNotification> landNotificationList = await _dbContext.LandNotification.Where(x => x.IsActive == 1).ToListAsync();
             return landNotificationList;
         }
-      
-       
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
+        {
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
+            return khasraList;
+        }
+
         public async Task<List<Acquiredlandvillage>> GetAllLocality()
         {
             List<Acquiredlandvillage> localityList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
