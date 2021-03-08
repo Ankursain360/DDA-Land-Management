@@ -271,6 +271,9 @@ namespace Libraries.Model
         public virtual DbSet<Gisdata> Gisdata { get; set; }
        
         public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
+
+        // Lease Details module
+        public virtual DbSet<Premiumrate> Premiumrate { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -491,7 +494,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisDataConfiguartion());
             modelBuilder.ApplyConfiguration(new GisLayerConfiguration());
             modelBuilder.ApplyConfiguration(new Newlandannexure2Configuration());
-            
+
+            // Lease Details module
+
+            modelBuilder.ApplyConfiguration(new PremiumrateConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
