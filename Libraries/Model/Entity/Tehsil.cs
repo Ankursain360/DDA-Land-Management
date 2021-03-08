@@ -12,8 +12,9 @@ namespace Libraries.Model.Entity
         {
             Acquiredlandvillage = new HashSet<Acquiredlandvillage>();
         }
-        [Required(ErrorMessage ="Please enter Tehsil Name")]
+        [Required(ErrorMessage = "Tehsil Name is mandatory ")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Status is mandatory ")]
         public byte? IsActive { get; set; }
         public virtual ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public ICollection<Newlandvillage> Newlandvillage { get; set; }

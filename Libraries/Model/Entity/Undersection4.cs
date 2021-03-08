@@ -18,15 +18,16 @@ namespace Libraries.Model.Entity
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
             Newlandawardmasterdetail = new HashSet<Newlandawardmasterdetail>();
         }
-        [Required(ErrorMessage = "The Proposal field is required")]
+        [Required(ErrorMessage = "Proposal is mandatory")]
         public int ProposalId { get; set; }
         [Required]
         public string Number { get; set; }
-        [Required(ErrorMessage = "The Notification Date field is required")]
+        [Required(ErrorMessage = "The Notification is mandatory")]
         public DateTime? Ndate { get; set; }
-        [Required(ErrorMessage = "The Purpose field is required")]
+        [Required(ErrorMessage = "Purpose is rmandatory")]
         public string Npurpose { get; set; }
         public string TypeDetails { get; set; }
+        [Required(ErrorMessage = "Status is rmandatory")]
         public byte IsActive { get; set; }
 
         public string BoundaryDescription { get; set; }

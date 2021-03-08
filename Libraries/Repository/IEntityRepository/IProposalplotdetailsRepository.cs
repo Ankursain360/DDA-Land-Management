@@ -17,7 +17,7 @@ namespace Libraries.Repository.IEntityRepository
         
         Task<List<Khasra>> GetAllKhasra( int? villageId);
 
-        //Task<bool> Any(int id, string name);
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<List<Proposalplotdetails>> GetAllProposalplotdetails();
         Task<PagedResult<Proposalplotdetails>> GetPagedProposalplotdetails(ProposalplotdetailSearchDto model);
     }

@@ -23,9 +23,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Undersection17plotdetail>> GetPagedUndersection17plotdetail(Undersection17plotdetailSearchDto model)
         {
-            //return await _dbContext.Undersection17plotdetail.
-            //    Where(x => x.IsActive == 1).Include(x => x.UnderSection17).Include(x => x.Khasra).Include(x => x.Acquiredlandvillage)
-            //    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+           
             var data = await _dbContext.Undersection17plotdetail
                        .Include(x => x.UnderSection17)
                        .Include(x => x.Khasra)
@@ -170,15 +168,28 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+        
         public async Task<List<Acquiredlandvillage>> GetAllVillageList()
         {
-            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.ToListAsync();
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
             return villageList;
         }
-        public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
+
+
+
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _dbContext.Khasra.ToListAsync();
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
             return khasraList;
+        }
+
+
+
+
+
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
         public async Task<List<Undersection17>> GetAllUndersection17List()
         {
@@ -194,10 +205,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Undersection17plotdetail.Include(x => x.UnderSection17).Include(x => x.Khasra).Include(x => x.Acquiredlandvillage).OrderByDescending(x => x.Id).ToListAsync();
         }
 
-        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
-        {
-            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
-        }
+       
 
 
         public async Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model)

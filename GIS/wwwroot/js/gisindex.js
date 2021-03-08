@@ -580,7 +580,7 @@ function showDisBoundariesDimentionText(response) {
     var dimentiontext = $.map(response, function (el) { return el; })
     for (ag = 0; ag < dimentiontext.length; ag++) {
         var lp = new google.maps.LatLng(parseFloat(dimentiontext[ag].ycoordinate), parseFloat(dimentiontext[ag].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 20, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelDimentionText', position: lp, text: dimentiontext[ag].label });
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelDimentionText', position: lp, text: dimentiontext[ag].label });
         DIMENTIONTEXT_LAYER.push(_label);
 
         Polys.push(_label);
@@ -610,13 +610,11 @@ function showDisBoundariesKhasraNo(response) {
     var khasrano = $.map(response, function (el) { return el; })
     for (aj = 0; aj < khasrano.length; aj++) {
         var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: khasrano[aj].label, color: khasrano[aj].fillColor, clickable: !0 });
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 22, visible: true, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: khasrano[aj].label, color: khasrano[aj].fillColor, clickable: !0 });
         _label.khasrano = khasrano[aj].label;
-        _label.villageid = 13;
+        _label.villageid = VILLAGEID_UNIVERSAL[0];
         google.maps.event.addListener(_label, 'click', function () {
-            // getInfo(this.khasrano, this.villageid);
-            $('#tagKhasra').empty().append(this.khasrano);
-            $('#RouteDetailShow').show();
+            getInfo(this.villageid, this.khasrano);
         });
         KHASRANO_LAYER.push(_label);
 
@@ -627,7 +625,7 @@ function showDisBoundariesRectWithKhasraNo(response) {
     var rectkhasrano = $.map(response, function (el) { return el; })
     for (ak = 0; ak < rectkhasrano.length; ak++) {
         var lp = new google.maps.LatLng(parseFloat(rectkhasrano[ak].ycoordinate), parseFloat(rectkhasrano[ak].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: rectkhasrano[ak].label, color: rectkhasrano[ak].fillColor });
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 22, visible: true, map: map, cssName: 'nlLabelRectWithKhasraNo', position: lp, text: rectkhasrano[ak].label, color: rectkhasrano[ak].fillColor });
 
         RECTWITHKHASRANO_LAYER.push(_label);
 
@@ -635,6 +633,48 @@ function showDisBoundariesRectWithKhasraNo(response) {
     }
 }
 /*Village Boundary End*/
+
+function getInfo(villageid, khasrano) {
+
+    HttpGet("/GIS/GetKhasraBasisOtherDetails?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano, 'json', function (response) {
+        showKhasraBasisOtherDetails(response);
+    });
+}
+
+function showKhasraBasisOtherDetails(resp) {
+    debugger;
+
+    if (resp.length > 0) {
+        $('#tagVillageName').empty().append(resp[0].villageName);
+        $('#tagKhasra').empty().append(resp[0].khasraNo);
+        $('#tagArea').empty().append(resp[0].area);
+        $('#tagUs4').empty().append(resp[0].us4);
+        $('#tagUs6').empty().append(resp[0].us6);
+        $('#tagUs17').empty().append(resp[0].us17);
+        $('#tagUs22').empty().append(resp[0].us22);
+        $('#tagAward').empty().append(resp[0].award);
+        $('#tagPossessionDate').empty().append(resp[0].possessionDate);
+        $('#tagAllotmentDate').empty().append(resp[0].allotmentDate);
+        $('#tagTransferDepartment').empty().append(resp[0].transferDepartment);
+        $('#tagSchemeTransfer').empty().append(resp[0].schemeTransfer);
+        $('#tagRemarks').empty().append(resp[0].remarks);
+        $('#tagPartyName').empty().append(resp[0].partyName);
+        $('#tagDemandListNo').empty().append(resp[0].demandListNo);
+        $('#tagLBDate').empty().append(resp[0].lBNo);
+        $('#tagLACNo').empty().append(resp[0].lACNo);
+        $('#tagRFANo').empty().append(resp[0].rFANo);
+        $('#tagSLANo').empty().append(resp[0].sLPNo);
+        $('#tagCourt').empty().append(resp[0].court);
+        $('#tagPayableAmt').empty().append(resp[0].payableAmt);
+        $('#tagAppealableAmt').empty().append(resp[0].appealableAmt);
+        $('#RouteDetailShow').show();
+    }
+    else {
+        $('#RouteDetailShow').hide();
+    }
+
+}
+
 
 $('#TransparencyRange, #MapOption').on('click', function () {
     if ($(this).hasClass('show')) {
@@ -1039,7 +1079,6 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
     debugger;
     e.preventDefault();
     var id = $(this).attr("id");
-    var villageid = VILLAGEID_UNIVERSAL[0];
     var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
     if ($(this).is(":checked")) {
 

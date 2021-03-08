@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
         public DateTime? DateOfAppeal { get; set; }
         
         public string PanelLawer { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
        
     }

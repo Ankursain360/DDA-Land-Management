@@ -21,7 +21,7 @@ namespace Libraries.Model.Entity
 
             Newlandenhancecompensation = new HashSet<Newlandenhancecompensation>();
         }
-        [Required(ErrorMessage = "Village name is mandatory field")]
+        [Required(ErrorMessage = "Village name is mandatory")]
         public string Name { get; set; }
 
         public string Code { get; set; }
@@ -38,6 +38,7 @@ namespace Libraries.Model.Entity
         public string WorkingVillage { get; set; }
 
         public string VillageType { get; set; }
+        [Required(ErrorMessage = "Status is mandatory ")]
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<District> DistrictList { get; set; }

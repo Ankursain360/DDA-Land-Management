@@ -24,6 +24,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "VoucherNo is Mandatory")]
         public string VoucherNo { get; set; }
         public decimal PercentPaid { get; set; }
+        [Required(ErrorMessage = "Status is Mandatory")]
         public byte IsActive { get; set; }
        
     }
