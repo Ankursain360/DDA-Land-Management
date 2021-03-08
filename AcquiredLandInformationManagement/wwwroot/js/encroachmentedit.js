@@ -30,7 +30,7 @@ function FillOwnerAtEdit() {
     HttpGet(`/EncroachmentDetails/GetDetailsOwner/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
        
         for (var i = 0; i < data.length; i++) {
-            debugger
+           
             $("#tbl_posts #add #EName").val(data[i].name);
             $("#tbl_posts #add #EAddress").val(data[i].address);
             if (i < data.length - 1) {
@@ -78,7 +78,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();
-        debugger
+        
 
         $("#tbl_posts #add .floating-label-field").val('');
     }
@@ -106,17 +106,13 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 });
 
 
-
-
-
-
 //****************** code for payment details Rpt ************************
 
 
 function FillPaymentAtEdit() {
     
     HttpGet(`/EncroachmentDetails/GetDetailsPayment/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
+       
      //   HttpGet(`/EncroachmentDetails/GetDetailsPayment/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
        
         for (var i = 0; i < data.length; i++) {
@@ -129,7 +125,7 @@ function FillPaymentAtEdit() {
                     size = jQuery('#tbl_posts1 >tbody >tr').length,
                     element = null,
                     element = content.clone();
-                element.attr('id', 'rec-' + size);
+                element.attr('id', 'rec1-' + size);
                 element.find('.delete-record1').attr('data-id', size);
                 element.appendTo('#tbl_posts1_body');
 
@@ -156,10 +152,10 @@ $(document).delegate('a.add-record1', 'click', function (e) {
             size = jQuery('#tbl_posts1 >tbody >tr').length,
             element = null,
             element = content.clone();
-        element.attr('id', 'rec-' + size);
+        element.attr('id', 'rec1-' + size);
         element.find('.delete-record1').attr('data-id', size);
         element.appendTo('#tbl_posts1_body');
-        // $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+        // $('#tbl_posts_body #rec1-' + size + ' #Gender').val(Gender);
 
         element.find('.sn1').html(size);
         $("#tbl_posts1 #add1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
@@ -167,7 +163,7 @@ $(document).delegate('a.add-record1', 'click', function (e) {
         $("#tbl_posts1 #tbl_posts1_body .floating-label-field").attr("readonly", true);
         element.find(".add-record1").hide();
         element.find(".delete-record1").show();
-        debugger
+       
 
         $("#tbl_posts1 #add1 .floating-label-field").val('');
     }
@@ -181,7 +177,7 @@ $(document).delegate('a.delete-record1', 'click', function (e) {
     if (didConfirm == true) {
         var id = jQuery(this).attr('data-id');
         var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+        jQuery('#rec1-' + id).remove();
         //regnerate index number on table
         $('#tbl_posts1_body tr').each(function (index) {
             //alert(index);
@@ -196,7 +192,7 @@ $(document).delegate('a.delete-record1', 'click', function (e) {
 
 $(function ()
 {
-    debugger
+   
     $("input[name='grpDamageArea']").click(function () {
         if ($("#Dyes").is(":checked")) {
             $('#DamageArea').val('yes');

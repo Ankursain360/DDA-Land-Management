@@ -175,9 +175,7 @@
                             <th>Sr.No</th>
                             <th> Name</th>
                             <th>Address</th>
-
-                            <th>Action</th>
-                        </tr>
+                                   </tr>
                     </thead>
                     <tbody id="tbl_posts_body">
                     </tbody>
@@ -194,13 +192,7 @@
                             </td>
 
 
-                            <td>
-                                @*<div class="action-btns">
-                                    <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                </div>*@
-                            </td>
-                        </tr>
+                              </tr>
 
                     </tbody>
                 </table>
@@ -218,8 +210,7 @@
                             <th>Amount</th>
                             <th>Cheque Number</th>
                             <th>Cheque Date</th>
-
-                            <th>Action</th>
+                                                      
                         </tr>
                     </thead>
                     <tbody id="tbl_posts1_body">
@@ -228,8 +219,8 @@
                         <tr id="">
                             <td style="text-align:center;"><span class="sn1">1</span></td>
                             <td>
-                                <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
-                                <span asp-validation-for="Amount" class="d-block text-danger field-validation-valid msg"></span>
+                                <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="Amount" class="d-block text-danger field-validation-valid "></span>
                             </td>
                             <td>
                                 <input asp-for="ChequeNo" type="text" class="floating-label-field floating-label-field--s3" />
@@ -237,17 +228,12 @@
 
                             </td>
                             <td>
-                                <input asp-for="ChequeDate" type="datetime class="floating-label-field floating-label-field--s3 NoCheck" />
-                                <span asp-validation-for="ChequeDate" class="d-block text-danger field-validation-valid msg2"></span>
+                                <input asp-for="ChequeDate" type="text class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="ChequeDate" class="d-block text-danger field-validation-valid "></span>
 
                             </td>
 
-                            <td>
-                                @*<div class="action-btns">
-                                    <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record1" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                </div>*@
-                            </td>
+                           
                         </tr>
                     </tbody>
                 </table>
