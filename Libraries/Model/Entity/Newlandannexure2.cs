@@ -45,6 +45,8 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Project cost is mandatory")]
         public decimal? ProjectCost { get; set; }
         public string OtherRemarks { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public int ReqId { get; set; }
             

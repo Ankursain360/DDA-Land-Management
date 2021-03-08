@@ -38,7 +38,7 @@ namespace Libraries.Model.Entity
         public string WorkingVillage { get; set; }
 
         public string VillageType { get; set; }
-        [Required(ErrorMessage = "Status is mandatory ")]
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<District> DistrictList { get; set; }

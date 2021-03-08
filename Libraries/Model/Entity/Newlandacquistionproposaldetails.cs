@@ -40,7 +40,7 @@ namespace Libraries.Model.Entity
         public string Description { get; set; }
         [Required]
         public DateTime? ProposalDate { get; set; }
-        [Required(ErrorMessage = "Status is mandatory ")]
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<Newlandscheme> SchemeList { get; set; }

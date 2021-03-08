@@ -18,13 +18,13 @@ namespace Libraries.Model.Entity
             Newjointsurveyreportdetail = new HashSet<Newjointsurveyreportdetail>();
         }
 
-        [Required(ErrorMessage = "Zone is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Zone is Mandatory", AllowEmptyStrings = false)]
         public int ZoneId { get; set; }
-        [Required(ErrorMessage = "Village  is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village  is Mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
-        [Required(ErrorMessage = "Khasra No is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra No is Mandatory", AllowEmptyStrings = false)]
         public int KhasraId { get; set; }
-        [Required(ErrorMessage = "Address is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Address is Mandatory", AllowEmptyStrings = false)]
         public string Address { get; set; }
         public string SitePosition { get; set; }
         public decimal Bigha { get; set; }
@@ -34,6 +34,8 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Joint Survey Date is mandatory")]
         public DateTime JointSurveyDate { get; set; }
         public string Remarks { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
        
 
