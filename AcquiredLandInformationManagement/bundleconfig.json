@@ -442,5 +442,29 @@
     "inputFiles": [
       "wwwroot/js/mutationcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardplotdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardplotdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/mutationedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/mutationedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/mutationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/mutationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/morlandcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/morlandcreate.js"
+    ]
   }
 ]

@@ -45,8 +45,8 @@ namespace Libraries.Model.Entity
         public string ReferenceNo { get; set; }
 
         [NotMapped]
-    //    [Required(ErrorMessage = "The Layout Plan field is required")]
-    //    [DataType(DataType.Upload)]
+        [Required]
+        [DataType(DataType.Upload)]
         public IFormFile RequestPhotos { get; set; }
 
 

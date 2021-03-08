@@ -271,6 +271,7 @@ namespace Libraries.Model
         public virtual DbSet<Gisdata> Gisdata { get; set; }
        
         public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
+        public virtual DbSet<Courtcasesmapping> Courtcasesmapping { get; set; }
 
         // Lease Details module
         public virtual DbSet<Premiumrate> Premiumrate { get; set; }
@@ -462,6 +463,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisVillageTextConfiguration());
             modelBuilder.ApplyConfiguration(new GisZeroConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
+            modelBuilder.ApplyConfiguration(new CourtCasesMappingConfiguration());
 
             //**********  GIS End**********
 

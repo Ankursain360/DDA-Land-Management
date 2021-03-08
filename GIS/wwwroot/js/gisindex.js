@@ -643,30 +643,39 @@ function getInfo(villageid, khasrano) {
 
 function showKhasraBasisOtherDetails(resp) {
     debugger;
+    var tbl = $('#RouteDetailShow table').empty();
+    tbl.empty();
 
     if (resp.length > 0) {
-        $('#tagVillageName').empty().append(resp[0].villageName);
-        $('#tagKhasra').empty().append(resp[0].khasraNo);
-        $('#tagArea').empty().append(resp[0].area);
-        $('#tagUs4').empty().append(resp[0].us4);
-        $('#tagUs6').empty().append(resp[0].us6);
-        $('#tagUs17').empty().append(resp[0].us17);
-        $('#tagUs22').empty().append(resp[0].us22);
-        $('#tagAward').empty().append(resp[0].award);
-        $('#tagPossessionDate').empty().append(resp[0].possessionDate);
-        $('#tagAllotmentDate').empty().append(resp[0].allotmentDate);
-        $('#tagTransferDepartment').empty().append(resp[0].transferDepartment);
-        $('#tagSchemeTransfer').empty().append(resp[0].schemeTransfer);
-        $('#tagRemarks').empty().append(resp[0].remarks);
-        $('#tagPartyName').empty().append(resp[0].partyName);
-        $('#tagDemandListNo').empty().append(resp[0].demandListNo);
-        $('#tagLBDate').empty().append(resp[0].lBNo);
-        $('#tagLACNo').empty().append(resp[0].lACNo);
-        $('#tagRFANo').empty().append(resp[0].rFANo);
-        $('#tagSLANo').empty().append(resp[0].sLPNo);
-        $('#tagCourt').empty().append(resp[0].court);
-        $('#tagPayableAmt').empty().append(resp[0].payableAmt);
-        $('#tagAppealableAmt').empty().append(resp[0].appealableAmt);
+        $.each(resp[0], function (indx, itm) {
+            debugger;
+            if (itm != null && itm!="")
+            tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
+            
+        });
+
+        //$('#tagVillageName').empty().append(resp[0].villageName);
+        //$('#tagKhasra').empty().append(resp[0].khasraNo);
+        //$('#tagArea').empty().append(resp[0].area);
+        //$('#tagUs4').empty().append(resp[0].us4);
+        //$('#tagUs6').empty().append(resp[0].us6);
+        //$('#tagUs17').empty().append(resp[0].us17);
+        //$('#tagUs22').empty().append(resp[0].us22);
+        //$('#tagAward').empty().append(resp[0].award);
+        //$('#tagPossessionDate').empty().append(resp[0].possessionDate);
+        //$('#tagAllotmentDate').empty().append(resp[0].allotmentDate);
+        //$('#tagTransferDepartment').empty().append(resp[0].transferDepartment);
+        //$('#tagSchemeTransfer').empty().append(resp[0].schemeTransfer);
+        //$('#tagRemarks').empty().append(resp[0].remarks);
+        //$('#tagPartyName').empty().append(resp[0].partyName);
+        //$('#tagDemandListNo').empty().append(resp[0].demandListNo);
+        //$('#tagLBDate').empty().append(resp[0].lBNo);
+        //$('#tagLACNo').empty().append(resp[0].lACNo);
+        //$('#tagRFANo').empty().append(resp[0].rFANo);
+        //$('#tagSLANo').empty().append(resp[0].sLPNo);
+        //$('#tagCourt').empty().append(resp[0].court);
+        //$('#tagPayableAmt').empty().append(resp[0].payableAmt);
+        //$('#tagAppealableAmt').empty().append(resp[0].appealableAmt);
         $('#RouteDetailShow').show();
     }
     else {

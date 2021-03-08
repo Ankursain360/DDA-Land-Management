@@ -414,6 +414,14 @@ a.no-dec {
 .table-sm > :not(caption) > * > * {
     padding: .35rem .35rem;
 }
+#RouteDetailShow .card-header {
+    cursor: move;
+}
+
+#RouteDetailShow .table {
+    height: calc(100vh - 140px);
+    overflow: auto;
+}
 
 /*
 
