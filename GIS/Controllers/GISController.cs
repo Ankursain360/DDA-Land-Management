@@ -214,5 +214,10 @@ namespace GIS.Controllers
             var data = await _GISService.GetKhasraBasisOtherDetails(VillageId, KhasraNo);
             return Json(data);
         }
+        public async Task<JsonResult> GetKhasraBasisOtherDetailsForCourtCases(int VillageId, string KhasraNo)
+        {
+            var data = await _GISService.GetKhasraBasisOtherDetailsForCourtCases(VillageId, KhasraNo);
+            return Json(data);
+        }
     }
 }
