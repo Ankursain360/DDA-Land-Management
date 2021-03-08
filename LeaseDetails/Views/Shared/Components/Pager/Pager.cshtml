@@ -1,0 +1,60 @@
+﻿@model Utility.Helper.PagerHelper
+<div class="table-footer d-flex align-items-center">
+    <div class="result d-md-flex align-items-center py-3 px-2 mr-auto">
+        <p class="mt-0 mb-2 my-md-0"> Showing @((Model.CurrentPage - 1) * Model.PageSize + 1) to @(Model.CurrentPage * Model.PageSize >= Model.TotalItems ? Model.TotalItems : Model.CurrentPage * Model.PageSize) of @Model.TotalItems entries</p>
+        @*<p class="mt-0 mb-2 my-md-0">Show Result</p>*@
+        <div class="floating-label-wrap mx-md-3">
+            @{
+                int[] arrPageSize = { 5, 50, 100, 200 };
+            }
+            <select class="floating-label-field floating-label-field--s3" id="ddlPageSize" onchange="onChangePageSize(this.value)">
+                @foreach (var item in arrPageSize)
+                {
+                    if (item == Model.PageSize)
+                    {
+                        <option value="@item" selected="selected">@item</option>
+                    }
+                    else
+                    {
+                        <option value="@item">@item</option>
+                    }
+                }
+            </select>
+            <!--                                <label for="field-1" class="floating-label">Result</label>-->
+        </div>
+    </div>
+    <div class="pagination justify-content-end">
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm  justify-content-end mb-0">
+                @if (Model.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" onclick="onPaging(1)"  href="javascript:void(0)" tabindex="-1">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item pageId">
+                        <a class="page-link" onclick="onPaging(@(Model.CurrentPage - 1))"  href="javascript:void(0)">Previous</a>
+                    </li>
+                }
+                @for (var page2 = Model.StartPage; page2 <= Model.EndPage; page2++)
+                {
+                    <li class="@(page2 == Model.CurrentPage ? "active page-item pageId" : "page-item pageId")" "@(page2 == Model.CurrentPage ? "aria-current=page" : "")" id="pagingli_@page2">
+                        <a class="page-link" id="page_@page2" onclick="onPaging(@page2)" href="javascript:void(0)">@page2</a>
+                    </li>
+                }
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <li class="page-item pageId">
+                        <a class="page-link" onclick="onPaging(@(Model.CurrentPage + 1))" href="javascript:void(0)">Next</a>
+                    </li>
+                    <li class="page-item pageId">
+                        <a class="page-link" onclick="onPaging(@(Model.TotalPages))" href="javascript:void(0)"> <span aria-hidden="true">&raquo;</span></a>
+                    </li>
+                }
+                
+            </ul>
+        </nav>
+    </div>
+</div>
+

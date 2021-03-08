@@ -216,11 +216,6 @@ namespace NewLandAcquisition.Controllers
 
                 }
             }
-
-            
-
-           
-
             //return PartialView("RequestIdHistoryDiv", Data);
         }
 
@@ -274,8 +269,6 @@ namespace NewLandAcquisition.Controllers
                         }
                         break;
                     }
-
-
                 }
             }
            
@@ -315,9 +308,6 @@ namespace NewLandAcquisition.Controllers
 
             }
         }
-
-
-
 
     }
 }
