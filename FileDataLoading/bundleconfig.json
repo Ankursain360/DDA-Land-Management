@@ -46,5 +46,161 @@
     "inputFiles": [
       "wwwroot/js/displaylabelindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/almirahindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/almirahindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/CaptchaCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/CaptchaCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeapprovalcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeapprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeapprovalindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregistercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregistercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregisteredit.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregisteredit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregisterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregisterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregistrationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregistrationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DataStoragecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/DataStoragecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/datastorageindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/datastorageindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DataStorageView.min.js",
+    "inputFiles": [
+      "wwwroot/js/DataStorageView.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/doortodoorsurvey.min.js",
+    "inputFiles": [
+      "wwwroot/js/doortodoorsurvey.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/filestatusreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/filestatusreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/listoftotaldocreportuserwiseindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/listoftotaldocreportuserwiseindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/listoftotalreportuserwise.min.js",
+    "inputFiles": [
+      "wwwroot/js/listoftotalreportuserwise.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticegenerationreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticegenerationreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticetodamagepayeeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticetodamagepayeeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticetodamagepayeelist.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticetodamagepayeelist.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/searchbyparticulardocindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/searchbyparticulardocindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/searchbyparticularedocview.min.js",
+    "inputFiles": [
+      "wwwroot/js/searchbyparticularedocview.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/searchbyparticularindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/searchbyparticularindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/searchbyparticularview.min.js",
+    "inputFiles": [
+      "wwwroot/js/searchbyparticularview.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/selfassessmentdamagecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/selfassessmentdamagecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SubstitutionMutationDetailsCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/SubstitutionMutationDetailsCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SubstitutionMutationDetailsIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/SubstitutionMutationDetailsIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/weeklyfilereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/weeklyfilereportindex.js"
+    ]
   }
 ]
