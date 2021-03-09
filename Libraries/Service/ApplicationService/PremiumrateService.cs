@@ -30,7 +30,11 @@ namespace Libraries.Service.ApplicationService
             return await _premiumrateRepository.GetAllPremiumrate();
         }
 
-
+        public async Task<List<PropertyType>> GetAllPropertyType()
+        {
+            List<PropertyType> list = await _premiumrateRepository.GetAllPropertyType();
+            return list;
+        }
 
         public async Task<Premiumrate> FetchSingleResult(int id)
         {

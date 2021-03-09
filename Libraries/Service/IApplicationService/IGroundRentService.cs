@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 namespace Libraries.Service.IApplicationService
 {
 
-    public interface IGroundRent : IEntityService<Groundrent>
+    public interface IGroundRentService : IEntityService<Groundrent>
     {
         Task<List<Groundrent>> GetAllGroundRent();
-
+        Task<List<PropertyType>> GetAllPropertyTypeList();
         Task<bool> Update(int id, Groundrent rent);
         Task<bool> Create(Groundrent rate);
         Task<Groundrent> FetchSingleResult(int id);

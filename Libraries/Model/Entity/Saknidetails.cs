@@ -18,7 +18,7 @@ namespace Libraries.Model.Entity
             Saknitenant = new HashSet<Saknitenant>();
         }
 
-        [Required(ErrorMessage = " Village name is mandatory")]
+        [Required(ErrorMessage = " Village name is mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
         [Required(ErrorMessage = "Khasra No is Mandatory Field", AllowEmptyStrings = false)]
         public int KhasraId { get; set; }

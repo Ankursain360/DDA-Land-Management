@@ -7,8 +7,20 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                        <label for="txtName" class="floating-label"> Structure Name</label>
+                        <input type="text" id="txtProperty" class="floating-label-field floating-label-field--s3" placeholder="Property Type" />
+                        <label for="txtProperty" class="floating-label">Property Type</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
+                        <label for="txtFromDate" class="floating-label">From Date</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
+                        <label for="txtToDate" class="floating-label">To Date</label>
                     </div>
                 </div>
 
@@ -33,7 +45,10 @@
                 <div class="p-3 d-flex align-items-end mr-auto">
                     <div class="floating-label-wrap">
                         <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                            <option value="Name">Structure Name</option>
+                            <option value="Type">Property Type </option>
+                            <option value="Rate">Premium Rate </option>
+                            <option value="From">From Date </option>
+                            <option value="To">To Date </option>
                             <option value="Status">Status</option>
                         </select>
                         <label for="field-1" class="floating-label">Sort by</label>
@@ -46,11 +61,11 @@
 
 
                 <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                    <a href="/Structure/create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <a href="/Premiumrate/create" class="d-flex align-items-center btn btn-primary mr-2">
                         <i class="ri-add-fill mr-2 mr-lg-1"></i>
                         <small>Add More</small>
                     </a>
-                    <a href="/Structure/Download" class="d-flex align-items-center btn btn-success">
+                    <a href="/Premiumrate/Download" class="d-flex align-items-center btn btn-success">
                         <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                         <small>Download</small>
                     </a>
@@ -58,7 +73,7 @@
             </div>
 
             <div class="table-responsive px-2">
-                <div id="divStructureTable"></div>
+                <div id="divPremiumrateTable"></div>
             </div>
 
 
@@ -68,8 +83,8 @@
 
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
-        <script src="~/js/structureindex.js"></script>
+        <script src="~/js/premiumrateindex.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/structureindex.min.js" asp-append-version="true"></script>
+        <script src="~/js/premiumrateindex.min.js" asp-append-version="true"></script>
     </environment>
