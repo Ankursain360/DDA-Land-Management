@@ -25,7 +25,7 @@ namespace LeaseDetails.Controllers
         {
             _premiumrateService = premiumrateService;
         }
-        [AuthorizeContext(ViewAction.View)]
+      //  [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -39,25 +39,29 @@ namespace LeaseDetails.Controllers
             var result = await _premiumrateService.GetPagedPremiumrate(model);
             return PartialView("_List", result);
         }
-        [AuthorizeContext(ViewAction.Add)]
-        public IActionResult Create()
+        //   [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            Premiumrate rate = new Premiumrate();
+            rate.IsActive = 1;
+            rate.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+            return View(rate);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+      //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Premiumrate rate)
         {
+            rate.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
             try
             {
 
                 if (ModelState.IsValid)
                 {
 
-
+                   
                     var result = await _premiumrateService.Create(rate);
 
                     if (result == true)
@@ -85,10 +89,11 @@ namespace LeaseDetails.Controllers
                 return View(rate);
             }
         }
-        [AuthorizeContext(ViewAction.Edit)]
+       // [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _premiumrateService.FetchSingleResult(id);
+            Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
             if (Data == null)
             {
                 return NotFound();
@@ -97,10 +102,11 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Edit)]
+      //  [ValidateAntiForgeryToken]
+      //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Premiumrate rate)
         {
+            rate.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
             if (ModelState.IsValid)
             {
                 try
@@ -130,7 +136,7 @@ namespace LeaseDetails.Controllers
             return View(rate);
         }
        
-        [AuthorizeContext(ViewAction.Delete)]
+      //  [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _premiumrateService.Delete(id);
@@ -148,10 +154,11 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        [AuthorizeContext(ViewAction.View)]
+      //  [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _premiumrateService.FetchSingleResult(id);
+            Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
             if (Data == null)
             {
                 return NotFound();
@@ -159,7 +166,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-        [AuthorizeContext(ViewAction.Download)]
+      //  [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Premiumrate> result = await _premiumrateService.GetAllPremiumrate();

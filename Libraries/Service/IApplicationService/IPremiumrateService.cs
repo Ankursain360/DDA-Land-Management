@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     public interface IPremiumrateService : IEntityService<Premiumrate>
     {
         Task<List<Premiumrate>> GetAllPremiumrate();
-       
+        Task<List<PropertyType>> GetAllPropertyType();
         Task<bool> Update(int id, Premiumrate rate);
         Task<bool> Create(Premiumrate rate);
         Task<Premiumrate> FetchSingleResult(int id);
