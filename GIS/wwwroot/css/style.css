@@ -414,6 +414,7 @@ a.no-dec {
 .table-sm > :not(caption) > * > * {
     padding: .35rem .35rem;
 }
+
 #RouteDetailShow .card-header {
     cursor: move;
 }
@@ -423,6 +424,22 @@ a.no-dec {
     overflow: auto;
 }
 
+#CourtCaseDetailShow {
+    position: fixed;
+    z-index: 99999;
+    right: 0;
+    max-width: 320px;
+    min-width: 320px;
+}
+
+    #CourtCaseDetailShow .card-header {
+        cursor: move;
+    }
+
+    #CourtCaseDetailShow .table {
+        height: calc(100vh - 140px);
+        overflow: auto;
+    }
 /*
 
 @media(min-width:576px) {}
