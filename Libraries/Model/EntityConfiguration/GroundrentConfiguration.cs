@@ -7,11 +7,11 @@ using System.Text;
 
 namespace Model.EntityConfiguration
 {
-    public class GoldrateConfiguration : IEntityTypeConfiguration<Goldrate>
+    public class GroundrentConfiguration : IEntityTypeConfiguration<Groundrent>
     {
-        public void Configure(EntityTypeBuilder<Goldrate> builder)
+        public void Configure(EntityTypeBuilder<Groundrent> builder)
         {
-            builder.ToTable("goldrate", "lms");
+            builder.ToTable("groundrent", "lms");
 
             builder.HasIndex(e => e.PropertyTypeId)
                 .HasName("fkpropertytype_idx");
@@ -24,7 +24,7 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.FromDate).HasColumnType("date");
 
-            builder.Property(e => e.GoldRate1)
+            builder.Property(e => e.GroundRate)
                 .HasColumnName("GoldRate")
                 .HasColumnType("decimal(18,3)");
 

@@ -12,8 +12,18 @@
                     <label class="floating-label">Village Name</label>
                 </div>
             </div>
-
-
+            <div class="col-md-3    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtKhasra" class="floating-label-field floating-label-field--s3" placeholder="Action" />
+                    <label class="floating-label">Khasra Name</label>
+                </div>
+            </div>
+            <div class="col-md-3    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtRefernceNo" class="floating-label-field floating-label-field--s3" placeholder="Action" />
+                    <label class="floating-label">Refernce Number</label>
+                </div>
+            </div>
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
@@ -35,7 +45,7 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        @*<option value="Name">Award Number</option>*@
+                       
                         <option value="Village">Village Name</option>
                         <option value="Khasra">Khasra Number</option>
                         <option value="Status">Status</option>
@@ -65,34 +75,6 @@
     </div>
 </div>
 
-
-<!--<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Enchroachment</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<br />
-<div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>-->
-    @*@Html.ActionLink("Add New", "Create", "District", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
-<!--</div>
-<br />
-<br />
-<div class="container-fluid">
-    <div class="card  table-card" style="overflow:scroll;">
-        <div id="divEncroachment">
-
-        </div>
-
-
-    </div>
-</div>-->
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/encroachmentindex.js"></script>

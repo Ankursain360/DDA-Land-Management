@@ -5,10 +5,10 @@ using Libraries.Model.Common;
 
 namespace Libraries.Model.Entity
 {
-    public class Goldrate : AuditableEntity<int>
+    public class Groundrent : AuditableEntity<int>
     {
         public int PropertyTypeId { get; set; }
-        public decimal GoldRate1 { get; set; }
+        public decimal GroundRate { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public byte? IsActive { get; set; }

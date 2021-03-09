@@ -125,7 +125,7 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model)
+        public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentDetailsSearchDto model)
         {
             return await _EnchroachmentRepository.GetPagedEnchroachment(model);
         }
