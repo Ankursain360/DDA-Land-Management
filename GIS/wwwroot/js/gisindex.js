@@ -371,13 +371,7 @@ function showDisBoundariesDim(response) {
     }
     for (h = 0; h < dim.length; h++) {
         var poly = createPolygon(getLatLongArr(dim[h].polygon));
-        poly.khasrano = "1";
-        poly.villageid = 13;
         poly.setOptions({ strokeWeight: 1, strokeColor: dim[h].fillColor, fillOpacity: 0, clickable: !0 });
-        //google.maps.event.addListener(poly, 'click', function () {
-        //    // getInfo(this.khasrano, this.villageid);
-        //    $('#RouteDetailShow').show();
-        //});
         DIM_LAYER.push(poly);
         map.panTo(new google.maps.LatLng(dim[h].ycoordinate, dim[h].xcoordinate));
     }
@@ -1454,4 +1448,64 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
 
 
 
+});
+
+
+function GetVillageList(id) {
+    HttpGet(`/GIS/GetVillageList/?zoneId=${id}`, 'json', function (response) {
+        $("#VillageId").val('0').trigger('change');
+        var html = '<option value="0">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#VillageId").html(html);
+        $("#KhasraId").val('0').trigger('change');
+    });
+
+    HttpGet(`/GIS/GetZoneDetails?ZoneId=${parseInt(id)}`, 'json', function (response) {
+        showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
+    });
+};
+
+function GetKhasraList(id) {
+    HttpGet(`/GIS/GetKhasraList/?villageId=${id}`, 'json', function (response) {
+        var html = '<option value="0">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].label + '</option>';
+        }
+        $("#KhasraId").val('0').trigger('change');
+        $("#KhasraId").html(html);
+    });
+
+    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(id), 'json', function (response) {
+        if (response.length > 0)
+        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
+    });
+};
+
+$(document).on('change', '#KhasraId', function (e) {
+    e.preventDefault();
+    var khasrano = $('#KhasraId option:selected').val();
+
+    if (khasrano != '') {
+
+        HttpGet("/GIS/GetKhasraNoPolygon?gisDataId=" + parseInt(khasrano), 'json', function (response) {
+             var khasrano = $.map(response, function (el) { return el; })
+            for (h = 0; h < KHASRANO_LAYER.length; h++) {
+                KHASRANO_LAYER[h].setMap(null);
+            }
+            for (aj = 0; aj < khasrano.length; aj++) {
+                var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
+                var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 22, strokeColor: '#007DC5', visible: true, map: map,  position: lp, text: khasrano[aj].label,  clickable: !0 });
+                _label.khasrano = khasrano[aj].label;
+                _label.villageid = VILLAGEID_UNIVERSAL[0];
+                google.maps.event.addListener(_label, 'click', function () {
+                    getInfo(this.villageid, this.khasrano);
+                });
+                KHASRANO_LAYER.push(_label);
+                map.setZoom(17);
+                Polys.push(_label);
+            }
+        });
+    }
 });
