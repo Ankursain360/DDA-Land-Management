@@ -28,5 +28,13 @@ namespace Dto.Master
         public string Court { get; set; }
         public string PayableAmt { get; set; }
         public string AppealableAmt { get; set; }
+        public string Status { get; set; }
+        public string CourtCaseNumber { get; set; }
+        public string Title { get; set; }
+        public string CaseFiledDate { get; set; }
+        public string Lawyer { get; set; }
+        public string CurrentStatus { get; set; }
+        public string NextHearingDate { get; set; }
+        public string CourtName { get; set; }
     }
 }
