@@ -3,7 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+           
             <th>Village Name</th>
             <th>Khasra No</th>
             <th>Land Use</th>
@@ -18,12 +18,12 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@(rowNo += 1)</td>
+            
             <td>@item.Village.Name</td>
             <td>@item.Khasra.Name</td>
             <td>@item.LandUse</td>
             <td>@item.FileNo</td>
-            @*<td>@item.ActionDate</td>*@
+           
 
             <td>@(Convert.ToDateTime(item.ActionDate).ToString("dd-MMM-yyyy"))</td>
             <td>

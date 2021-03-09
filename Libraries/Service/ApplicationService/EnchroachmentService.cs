@@ -48,11 +48,7 @@ namespace Libraries.Service.ApplicationService
             return khasraList;
         }
 
-        //public async Task<List<Khasra>> BindKhasra()
-        //{
-        //    List<Khasra> khasraList = await _EnchroachmentRepository.BindKhasra();
-        //    return khasraList;
-        //}
+       
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
             List<Acquiredlandvillage> villageList = await _EnchroachmentRepository.GetAllVillage();
@@ -117,9 +113,9 @@ namespace Libraries.Service.ApplicationService
         {
             enchroachment.CreatedBy =1;
             enchroachment.CreatedDate = DateTime.Now;
-          //  enchroachment.LandUse = "Yes";
+          
             enchroachment.IsActive =1;
-           // enchroachment.NEncroachmentId = 1;
+          
 
             _EnchroachmentRepository.Add(enchroachment);
             return await _unitOfWork.CommitAsync() > 0;
@@ -131,9 +127,9 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId)
         {
-            // var EnchorcherList =
+           
                 return await _EnchroachmentRepository.GetPagedEncrocherPeople(model, UserId);
-           // return EnchorcherList;
+           
         }
         //********* repeater Encroacher Name Details **********
 

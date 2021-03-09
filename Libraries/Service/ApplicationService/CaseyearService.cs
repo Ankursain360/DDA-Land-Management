@@ -76,7 +76,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> CheckUniqueName(int id, string caseyear)
         {
             bool result = await _caseyearRepository.Any(id, caseyear);
-            //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
+          
             return result;
         }
 

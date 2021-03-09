@@ -51,19 +51,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model)
         {
-            //return await _dbContext.Awardplotdetails
-            //                            .Include(x => x.AwardMaster)
-            //                            .Include(x => x.Village)
-            //                            .Include(x => x.Khasra)
-            //                            .OrderByDescending(x => x.Id)
-            //                        .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize); 
-
+            
                 var data = await _dbContext.Awardplotdetails
                                         .Include(x => x.AwardMaster)
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
-                                // .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name) && (x.IsActive == 1))
-                                .OrderByDescending(x => x.Id)
+                                          .OrderByDescending(x => x.Id)
                               .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)

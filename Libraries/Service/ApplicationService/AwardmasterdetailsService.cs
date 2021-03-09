@@ -28,9 +28,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Awardmasterdetail>> Getawardmasterdetails()
         {
             return await _awardmasterdetailsRepository.Getawardmasterdetails();
-            //var awardmasterdetails = await _awardmasterdetailsRepository.FindBy(a => a.IsActive == 1);
-            //var result = _mapper.Map<List<AwardMasterDetailsSearchDto>>(awardmasterdetails);
-            //return result;
+          
         }
         public async Task<PagedResult<Awardmasterdetail>> GetPagedawardmasterdetails(AwardMasterDetailsSearchDto model)
         {
@@ -49,7 +47,7 @@ namespace Libraries.Service.ApplicationService
             Awardmasterdetail model = result.FirstOrDefault();
             model.AwardNumber = awardmasterdetail.AwardNumber;
             model.AwardDate = awardmasterdetail.AwardDate;
-            //model.Awardplotdetails = awardmasterdetail.Awardplotdetails;
+          
             model.Compensation = awardmasterdetail.Compensation;
             model.VillageId = awardmasterdetail.VillageId;
             model.Us6id = awardmasterdetail.Us6id;
@@ -84,7 +82,8 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> CheckUniqueName(int id, string AwardNumber)
         {
             bool result = await _awardmasterdetailsRepository.Any(id, AwardNumber);
-            //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
+        
+        
             return result;
         }
 
