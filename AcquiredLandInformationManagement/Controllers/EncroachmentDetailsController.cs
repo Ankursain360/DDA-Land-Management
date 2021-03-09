@@ -30,7 +30,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] EnchroachmentSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] EnchroachmentDetailsSearchDto model)
         {
             var result = await _enchroachmentService.GetPagedEnchroachment(model);
 
