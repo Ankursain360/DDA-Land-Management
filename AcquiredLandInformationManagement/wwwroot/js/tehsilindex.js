@@ -13,9 +13,7 @@ $("#btnSearch").click(function () {
 $("#btnReset").click(function () {
 
     $('#txtName').val('');
-   // $('#txtBody').val(''),
-   //$('#txtFile').val(''),
-    //$('#txtDate').val(''),
+  
         GetTehsil(currentPageNumber, currentPageSize, sortOrder);
 });
 
