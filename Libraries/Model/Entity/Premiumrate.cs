@@ -12,8 +12,6 @@ namespace Libraries.Model.Entity
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public byte? IsActive { get; set; }
-       
-
         public PropertyType PropertyType { get; set; }
     }
 }
