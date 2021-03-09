@@ -17,10 +17,9 @@ namespace Libraries.Service.ApplicationService
     public class GroundRentService : EntityService<Groundrent>, IGroundRentService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IGroundRentService _groundRentRepository;
+        private readonly IGroundRentRepository _groundRentRepository;
 
-        public GroundRentService(IUnitOfWork unitOfWork, IGroundRentService groundRentRepository)
-        : base(unitOfWork, groundRentRepository)
+        public GroundRentService(IUnitOfWork unitOfWork, IGroundRentRepository groundRentRepository)  : base(unitOfWork, groundRentRepository)
         {
             _unitOfWork = unitOfWork;
             _groundRentRepository = groundRentRepository;
@@ -30,7 +29,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _groundRentRepository.GetAllGroundRent();
         }
-
+        public async Task<List<PropertyType>> GetAllPropertyTypeList()
+        {
+            return await _groundRentRepository.GetAllPropertyTypeList();
+        }
 
 
         public async Task<Groundrent> FetchSingleResult(int id)
@@ -75,54 +77,9 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<PagedResult<Groundrent>> GetPagedPremiumrate(GroundrentSearchDto model)
+        public async Task<PagedResult<Groundrent>> GetPagedGroundRent(GroundrentSearchDto model)
         {
             return await _groundRentRepository.GetPagedGroundRent(model);
-        }
-
-        public Task<PagedResult<Groundrent>> GetPagedGroundRent(GroundrentSearchDto model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Groundrent>> FindBy(Expression<Func<Groundrent, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Groundrent Add(Groundrent entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        Groundrent IGenericRepository<Groundrent>.Delete(Groundrent entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Edit(Groundrent entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task AddRange(List<Groundrent> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<int> Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Groundrent>> ExecuteQuery(string procedureName, params object[] parameters)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveRange(List<Groundrent> entities)
-        {
-            throw new NotImplementedException();
         }
     }
 }

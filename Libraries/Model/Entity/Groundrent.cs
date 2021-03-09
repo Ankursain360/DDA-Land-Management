@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Libraries.Model.Common;
 
@@ -15,5 +16,8 @@ namespace Libraries.Model.Entity
        
 
         public PropertyType PropertyType { get; set; }
+        [NotMapped]
+        public List<PropertyType> PropertyTypeList { get; set; }
     }
 }
+
