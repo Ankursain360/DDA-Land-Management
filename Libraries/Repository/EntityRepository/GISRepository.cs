@@ -204,6 +204,23 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("GISKhasraBasisCourtCasesDetails")
+                                            .WithSqlParams(("P_villageid", villageId), ("P_KhasraNo", khasraNo)
+                                            )
+                                            .ExecuteStoredProcedureAsync<GISKhasraBasisOtherDetailsDto>();
+
+                return (List<GISKhasraBasisOtherDetailsDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<Giskhasraboundary>> GetKhasraBoundaryDetails(int villageId)
         {
             return await _dbContext.Giskhasraboundary

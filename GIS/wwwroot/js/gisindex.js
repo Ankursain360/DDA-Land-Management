@@ -303,7 +303,7 @@ function showvillagelayers(villageid) {
             showDisBoundariesKhasraNo(KhasraNo);
 
         var RectWithKhasraNo = response.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
-        if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].RectWithKhasraNo == 1)
+        if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].checkedStatus == 1)
             showDisBoundariesRectWithKhasraNo(RectWithKhasraNo);
     });
     VILLAGEID_UNIVERSAL = [];
@@ -550,7 +550,7 @@ function showDisBoundariesCleantext(response) {
         //var ln = createPoint(getLatLongArr(cleantext[g].polygon)[0]);
         //ln.setOptions({ strokeWeight: 3, strokeColor: '#AF4167 ' });
         var lp = new google.maps.LatLng(parseFloat(cleantext[ad].ycoordinate), parseFloat(cleantext[ad].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 20, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelCleantext', position: lp, text: cleantext[ad].label });
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelCleantext', position: lp, text: cleantext[ad].label });
         CLEANTEXT_LAYER.push(_label);
 
         Polys.push(_label);
@@ -560,7 +560,7 @@ function showDisBoundariesGosha(response) {
     var gosha = $.map(response, function (el) { return el; })
     for (ae = 0; ae < gosha.length; ae++) {
         var lp = new google.maps.LatLng(parseFloat(gosha[ae].ycoordinate), parseFloat(gosha[ae].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: gosha[ae].label });
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 26, visible: true, map: map, cssName: 'nlLabelGosha', position: lp, text: gosha[ae].label });
         GOSHA_LAYER.push(_label);
 
         Polys.push(_label);
@@ -590,7 +590,7 @@ function showDisBoundariesCloseText(response) {
     var closetext = $.map(response, function (el) { return el; })
     for (ah = 0; ah < closetext.length; ah++) {
         var lp = new google.maps.LatLng(parseFloat(closetext[ah].ycoordinate), parseFloat(closetext[ah].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 18, hideZoom: 20, visible: true, map: map, cssName: 'nlLabelCloseText', position: lp, text: closetext[ah].label });
+        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 26, visible: true, map: map, cssName: 'nlLabelCloseText', position: lp, text: closetext[ah].label });
         CLOSETEXT_LAYER.push(_label);
 
         Polys.push(_label);
@@ -639,6 +639,10 @@ function getInfo(villageid, khasrano) {
     HttpGet("/GIS/GetKhasraBasisOtherDetails?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano, 'json', function (response) {
         showKhasraBasisOtherDetails(response);
     });
+
+    //HttpGet("/GIS/GetKhasraBasisOtherDetailsForCourtCases?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano, 'json', function (response) {
+    //    showKhasraBasisOtherDetailsForCourtCases(response);
+    //});
 }
 
 function showKhasraBasisOtherDetails(resp) {
@@ -646,9 +650,9 @@ function showKhasraBasisOtherDetails(resp) {
     var tbl = $('#RouteDetailShow table').empty();
     tbl.empty();
 
-    if (resp.length > 0) {
+    if (resp.length > 0 && resp[0].status == 'true') {
+
         $.each(resp[0], function (indx, itm) {
-            debugger;
             if (itm != null && itm!="")
             tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
             
@@ -676,6 +680,27 @@ function showKhasraBasisOtherDetails(resp) {
         //$('#tagCourt').empty().append(resp[0].court);
         //$('#tagPayableAmt').empty().append(resp[0].payableAmt);
         //$('#tagAppealableAmt').empty().append(resp[0].appealableAmt);
+        $('#RouteDetailShow').show();
+    }
+    else {
+        $('#RouteDetailShow').hide();
+        InfoMessage('No Data Found');
+    }
+
+}
+
+function showKhasraBasisOtherDetailsForCourtCases(resp) {
+    debugger;
+    var tbl = $('#RouteDetailShow table');
+
+
+    if (resp.length > 0) {
+        $.each(resp[0], function (indx, itm) {
+            debugger;
+            if (itm != null && itm != "")
+                tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
+
+        });
         $('#RouteDetailShow').show();
     }
     else {
@@ -1208,7 +1233,7 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
             showDisBoundariesKhasraNo(KhasraNo);
 
         var RectWithKhasraNo = data.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
-        if (RectWithKhasraNo.length > 0 && Dim[0].RectWithKhasraNo == 1)
+        if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].code == id)
             showDisBoundariesRectWithKhasraNo(RectWithKhasraNo);
     }
     else {
@@ -1416,7 +1441,7 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         }
 
         var RectWithKhasraNo = data.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
-        if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].RectWithKhasraNo == 1) {
+        if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].code == id) {
             for (h = 0; h < RECTWITHKHASRANO_LAYER.length; h++) {
                 RECTWITHKHASRANO_LAYER[h].setMap(null);
             }
