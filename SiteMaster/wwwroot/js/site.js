@@ -19,8 +19,8 @@ $(document).ready(function () {
 
     $(".ParameterActionListClass").attr("multiple", "");
     $("select[id!='ddlPageSize']").select2({
-        placeholder: "--Select--",
-        allowClear: true
+        //placeholder: "--Select--",
+        //allowClear: true
     });
     if ($("form").is("[disabled]")) {
         if ($("form").attr('disabled') == 'disabled') {

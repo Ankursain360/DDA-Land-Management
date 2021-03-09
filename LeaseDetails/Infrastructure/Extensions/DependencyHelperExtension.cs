@@ -28,9 +28,8 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
-            services.AddScoped<IGroundRentRepository, GroundRentRepository>();
+            services.AddScoped<IPremiumrateRepository, PremiumrateRepository>();
 
-          
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -42,9 +41,8 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<IGroundRentService, GroundRentService>();
-           
-          
+            services.AddScoped<IPremiumrateService, PremiumrateService>();
+
 
         }
     }

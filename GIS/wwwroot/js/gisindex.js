@@ -175,7 +175,7 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
     var sl = createPolygon(getLatLongArr(ploygn));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#FF5733', fillOpacity: 0, clickable: !1 });
     zoomvillage.push(sl);
-    map.setZoom(14);
+    map.setZoom(15);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
 
     showvillagelayers(villageid);
@@ -640,9 +640,9 @@ function getInfo(villageid, khasrano) {
         showKhasraBasisOtherDetails(response);
     });
 
-    //HttpGet("/GIS/GetKhasraBasisOtherDetailsForCourtCases?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano, 'json', function (response) {
-    //    showKhasraBasisOtherDetailsForCourtCases(response);
-    //});
+    HttpGet("/GIS/GetKhasraBasisOtherDetailsForCourtCases?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano, 'json', function (response) {
+        showKhasraBasisOtherDetailsForCourtCases(response);
+    });
 }
 
 function showKhasraBasisOtherDetails(resp) {
@@ -650,12 +650,12 @@ function showKhasraBasisOtherDetails(resp) {
     var tbl = $('#RouteDetailShow table').empty();
     tbl.empty();
 
-    if (resp.length > 0 && resp[0].status == 'true') {
+    if (resp.length > 0) {
 
         $.each(resp[0], function (indx, itm) {
-            if (itm != null && itm!="")
-            tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
-            
+            if (itm != null && itm != "")
+                tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
+
         });
 
         //$('#tagVillageName').empty().append(resp[0].villageName);
@@ -691,16 +691,20 @@ function showKhasraBasisOtherDetails(resp) {
 
 function showKhasraBasisOtherDetailsForCourtCases(resp) {
     debugger;
-    var tbl = $('#RouteDetailShow table');
-
-
+    var html = '';
+    var tbl = '';
     if (resp.length > 0) {
-        $.each(resp[0], function (indx, itm) {
-            debugger;
-            if (itm != null && itm != "")
-                tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
+        for (var i = 0; i < resp.length; i++) {
+            html = html + '<div class="accordion-item"><h5 class="accordion-header" id="headingCourt' + i + '"><button id="ZCourt' + i + '" class="accordion-button collapsed py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCourt' + i + '" aria-expanded="true" aria-controls="collapseCourt' + i + '"><i class="ri-arrow-right-s-fill text-white"></i> Case No : ' + resp[i].name + '</button></h5><div id="collapseCourt' + i + '" class="accordion-collapse collapse" aria-labelledby="headingCourt' + i + '" data-bs-parent="#accordionData"><div class="accordion-body"><div class="list-group"><table style="border-collapse: collapse; font-size:11px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive"><tbody>';
+            $.each(resp[i], function (indx, itm) {
+                if (itm != null && itm != "" && indx != 'name')
+                    html = html + '<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>';
 
-        });
+            });
+            html = html + '</tbody></table></div></div></div></div>';
+        }
+        $("#CourtCaseData").html('');
+        $("#CourtCaseData").html(html);
         $('#RouteDetailShow').show();
     }
     else {

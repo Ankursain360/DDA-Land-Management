@@ -14,8 +14,8 @@ $(document).ready(function () {
 	$("select").each(function () {
 		if ($(this).hasClass("select2destroy") == false) {
 			$(this).select2({
-				placeholder: "Select",
-				allowClear: true
+				//placeholder: "Select",
+				//allowClear: true
 			});
 		}
 	});
@@ -23,8 +23,8 @@ $(document).ready(function () {
 		$("select").each(function () {
 			if ($(this).hasClass("select2destroy") == false) {
 				$(this).select2({
-					placeholder: "Select",
-					allowClear: true
+					//placeholder: "Select",
+					//allowClear: true
 				});
 			}
 		});
