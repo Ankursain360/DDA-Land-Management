@@ -4,7 +4,7 @@
 
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+            
             <th>Award No.</th>
             <th>Village Name</th>
             <th>Khasra No.</th>
@@ -16,7 +16,7 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td>@(rowNo += 1)</td>
+                
                 <td>@item.AwardMaster.AwardNumber</td>
                 <td>@item.Village.Name</td>
                 <td>@item.Khasra.Name</td>

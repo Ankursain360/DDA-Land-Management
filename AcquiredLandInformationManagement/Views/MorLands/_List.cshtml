@@ -3,7 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+            
             <th>Notification No.</th>
             <th>Property Site No</th>
             <th>Location Name(Village)</th>
@@ -19,8 +19,8 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@(rowNo += 1)</td>
-            @*<td>@item.LandNotification.Name</td>*@
+            
+           
             <td> @(item.LandNotification == null?"": item.LandNotification.Name)</td>
                      <td>@item.PropertySiteNo</td>
             <td>@item.Name</td>

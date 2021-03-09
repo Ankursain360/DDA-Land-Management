@@ -22,8 +22,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Groundrent>> GetPagedGroundRent(GroundrentSearchDto model)
         {
             var data = await _dbContext.Groundrent
-
-                            //.Where(x => (string.IsNullOrEmpty(model.name) || x..Contains(model.name)))
+                                        
                             .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
 
             //int SortOrder = (int)model.SortOrder;

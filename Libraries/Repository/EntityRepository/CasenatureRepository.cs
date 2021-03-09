@@ -23,7 +23,7 @@ namespace Libraries.Repository.EntityRepository
           
            var  data= await _dbContext.Casenature
                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                            // .OrderByDescending(s => s.IsActive)
+                           
                             .GetPaged<Casenature>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)

@@ -62,11 +62,8 @@ namespace Libraries.Service.ApplicationService
             return landnotificationList;
         }
 
-        //public async Task<List<Serialnumber>> GetAllSerialnumber()
-        //{
-        //    List<Serialnumber> serialnumberList = await _morlandRepository.GetAllSerialnumber();
-        //    return serialnumberList;
-        //}
+        
+        
 
         public async Task<List<Morland>> GetMorlandUsingRepo()
         {
@@ -79,13 +76,11 @@ namespace Libraries.Service.ApplicationService
             Morland model = result.FirstOrDefault();
             model.LandNotificationId = morland.LandNotificationId;
             model.NotificationDate = morland.NotificationDate;
-          //  model.SerialnumberId = morland.SerialnumberId;
+          
             model.PropertySiteNo = morland.PropertySiteNo;
             model.Name = morland.Name;
             model.SiteDescription = morland.SiteDescription;
-            //model.Bigha = morland.Bigha;
-            //model.Biswa = morland.Biswa;
-            //model.Biswanshi = morland.Biswanshi;
+           
 
             model.StatusOfLand = morland.StatusOfLand;
             model.OccupiedBy = morland.OccupiedBy;
@@ -105,10 +100,7 @@ namespace Libraries.Service.ApplicationService
         {
             morland.CreatedBy = 1;
             morland.CreatedDate = DateTime.Now;
-            //morland.Bigha = 0;
-            //morland.Biswa = 0;
-            //morland.Biswanshi = 0;
-            //morland.SerialnumberId = 0;
+           
             _morlandRepository.Add(morland);
             return await _unitOfWork.CommitAsync() > 0;
         }

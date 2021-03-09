@@ -21,19 +21,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model)
         {
-            //return await _dbContext.Booktransferland
-            //      .Include(x => x.Locality)
-            //    .Include(x => x.Khasra)
-            //    .Include(x => x.LandNotification)
-            //   // .Where(x => x.IsActive == 1)
-            //    .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
             var data = await _dbContext.Booktransferland
                  .Include(x => x.Locality)
                 
                 .Include(x => x.Khasra)
                 .Include(x => x.LandNotification)
-                // .Where(x => x.IsActive == 1)
-                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                             .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {

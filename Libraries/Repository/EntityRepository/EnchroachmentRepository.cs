@@ -56,11 +56,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentDetailsSearchDto model)
         {
-            //return await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
-            //    .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-            //    .OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
-
-            var data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+              var data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
                 .OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -143,9 +139,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId)
         {
-            //return await _dbContext.EncrocherPeople
-            //    .Where(x => x.FileNo == model.fileno)
-            //    .OrderByDescending(x => x.Id).GetPaged<EncrocherPeople>(model.PageNumber, model.PageSize);
+    
             int SortOrder = (int)model.SortOrder;
             var data = await _dbContext.LoadStoredProcedure("BindEncrocmentpeople")
                                              .WithSqlParams(("File_No", model.fileno),
