@@ -83,7 +83,7 @@ namespace SiteMaster.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Exist(int Id, string Name)
         {
-            //var result = await _roleService.FindByNameAsync(Name);
+            
             var result = await _userProfileService.ValidateUniqueRoleName(Id, Name);
             if (result == false)
             {
@@ -129,17 +129,11 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                //if (ModelState.IsValid)
-                //{
+               
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
                     var list = await _userProfileService.DeleteRole(model);
                     return View("Index", list);
-                //}
-                //else
-                //{
-                //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                //    return View(model);
-                //}
+                
             }
             catch (Exception ex)
             {

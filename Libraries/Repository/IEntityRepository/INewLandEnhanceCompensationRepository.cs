@@ -12,9 +12,12 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Newlandenhancecompensation>> GetPagedNewlandenhancecompensation(NewlandenhancecompensationSearchDto model);
         Task<List<Newlandenhancecompensation>> GetAllNewlandenhancecompensation();
 
-        Task<List<Newlandvillage>> GetAllVillageList();
-        Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
-        
+        //Task<List<Newlandvillage>> GetAllVillageList();
+        //Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
+
+        //Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
+        Task<List<Newlandvillage>> GetAllVillage();
+        Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
         Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
     }
 }

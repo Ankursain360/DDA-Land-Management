@@ -50,18 +50,22 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<List<Newlandvillage>> GetAllVillageList()
+        public async Task<List<Newlandvillage>> GetAllVillage()
         {
-            List<Newlandvillage> villageList = await _newLandEnhanceCompensationRepository.GetAllVillageList();
+            List<Newlandvillage> villageList = await _newLandEnhanceCompensationRepository.GetAllVillage();
             return villageList;
         }
-        public async Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId)
+        public async Task<List<Newlandkhasra>> GetAllKhasra(int? villageId)
         {
-            List<Newlandkhasra> khasraList = await _newLandEnhanceCompensationRepository.GetAllKhasraList(villageId);
+            List<Newlandkhasra> khasraList = await _newLandEnhanceCompensationRepository.GetAllKhasra(villageId);
             return khasraList;
         }
+        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _newLandEnhanceCompensationRepository.FetchSingleKhasraResult(khasraId);
+        }
 
-       
+
 
         public async Task<List<Newlandenhancecompensation>> GetNewlandenhancecompensationUsingRepo()
         {
@@ -117,10 +121,10 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
-        {
-            return await _newLandEnhanceCompensationRepository.FetchSingleKhasraResult(khasraId);
-        }
+        //public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        //{
+        //    return await _newLandEnhanceCompensationRepository.FetchSingleKhasraResult(khasraId);
+        //}
 
 
     }

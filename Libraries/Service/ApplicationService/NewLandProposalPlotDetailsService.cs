@@ -77,14 +77,14 @@ namespace Libraries.Service.ApplicationService
             return proposaldetailsList;
         }
 
-        public async Task<List<Newlandvillage>> GetAllVillageList()
+        public async Task<List<Newlandvillage>> GetAllVillage()
         {
-            List<Newlandvillage> villageList = await _newLandProposalPlotDetailsRepository.GetAllVillageList();
+            List<Newlandvillage> villageList = await _newLandProposalPlotDetailsRepository.GetAllVillage();
             return villageList;
         }
-        public async Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId)
+        public async Task<List<Newlandkhasra>> GetAllKhasra(int? villageId)
         {
-            List<Newlandkhasra> khasraList = await _newLandProposalPlotDetailsRepository.GetAllKhasraList(villageId);
+            List<Newlandkhasra> khasraList = await _newLandProposalPlotDetailsRepository.GetAllKhasra(villageId);
             return khasraList;
         }
         public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)

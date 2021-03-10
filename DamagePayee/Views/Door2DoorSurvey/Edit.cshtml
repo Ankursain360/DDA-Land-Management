@@ -140,7 +140,7 @@
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-
+                <input type="hidden" asp-for="CaelectricityNo" />
                 <input type="text" asp-for="CaelectricityNo" placeholder="CA-Number of Electricity Connection" class="floating-label-field floating-label-field--s3" limit="30" />
                 <span asp-validation-for="CaelectricityNo" class="text-danger"></span>
 
@@ -149,7 +149,7 @@
         </div>
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-
+                <input type="hidden" asp-for="KwaterNo" />
                 <input type="text" asp-for="KwaterNo" placeholder="K-Number of Water Connection(s)" class="floating-label-field floating-label-field--s3" limit="30" />
                 <span asp-validation-for="KwaterNo" class="text-danger"></span>
                 <label class="floating-label">K-Number of Water Connection(s)</label>

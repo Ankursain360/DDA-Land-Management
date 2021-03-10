@@ -1,10 +1,9 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Landuse>
-@{int rowNo = 0; }
 <table class="table table-sm table-bordered mb-0 table-striped">
 
     <thead class="thead">
         <tr class="myapp-hed1">
-            <th>Sr.No</th>
+           
             <th>Name</th>
             <th>Status</th>
             <th>Operations</th>
@@ -14,9 +13,9 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@(rowNo += 1)</td>
+           
             <td>@item.Name</td>
-            @*<td>@(item.IsActive == 1 ? "Active" : "InActive")</td>*@
+           
             <td>
                 @if (item.IsActive == 1)
                 {

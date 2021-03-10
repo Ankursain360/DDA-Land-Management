@@ -18,6 +18,7 @@ namespace Service.AutoMapperProfile
             CreateMap<ApplicationRole, RoleDto>().ReverseMap();
             CreateMap<ApplicationUser, UserDto>().ReverseMap();
             CreateMap<Userprofile, UserProfileDto>();
+            CreateMap<Gisdata, GISKhasraDto>();
         }
     }
 }

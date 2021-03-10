@@ -3,7 +3,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    // debugger;
+   
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 

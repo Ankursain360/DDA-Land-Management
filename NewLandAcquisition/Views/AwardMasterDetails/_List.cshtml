@@ -21,18 +21,7 @@
            
             <td> @(Convert.ToDateTime(item.AwardDate).ToString("dd-MMM-yyyy"))</td>
             <td>@item.Newlandvillage.Name</td>
-            @*<td>
-            @if (@item.VillageId == null)
-            {
-                <span>No Record Available</span>
-            }
-            else
-            {
-        <span>@item.VillageId</span>
-            }
-
-        </td>*@
-            @*<td>@item.Proposal.Name</td>*@
+          
             <td>
                 @if (@item.ProposalId == null)
                 {

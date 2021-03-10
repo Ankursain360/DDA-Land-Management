@@ -45,12 +45,11 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<List<Newlandkhasra>> BindKhasra()
+        public async Task<List<Newlandkhasra>> GetAllKhasra(int? villageId)
         {
-            List<Newlandkhasra> KhasraList = await _dbContext.Newlandkhasra.Where(x => x.IsActive == 1).ToListAsync();
-            return KhasraList;
+            List<Newlandkhasra> khasraList = await _dbContext.Newlandkhasra.Where(x => x.NewLandvillageId == villageId && x.IsActive == 1).ToListAsync();
+            return khasraList;
         }
-
 
         public async Task<PagedResult<Newlandawardplotdetails>> GetPagedAwardplotdetails(NewlandawardplotdetailsSearchDto model)
         {
@@ -165,6 +164,15 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-       
+
+
+        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
+
+
+
+
     }
 }

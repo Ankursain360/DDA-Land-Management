@@ -157,19 +157,7 @@ namespace SiteMaster.Controllers
                 var result1 = await _classificationoflandService.GetAllClassificationOfLand();
                 return View("Index", result1);
             }
-            //if (id == 0)
-            //{
-            //    return NotFound();
-            //}
-
-            //var form = await _classificationoflandService.Delete(id);
-            //if (form == false)
-            //{
-            //    return NotFound();
-            //}
-
-            //ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            //return View(form);
+           
         }
       
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu

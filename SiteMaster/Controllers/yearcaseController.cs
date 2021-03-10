@@ -35,11 +35,7 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
-        //public async Task<PartialViewResult> List([FromBody] CaseyearSearchDto model)
-        //{
-        //    var result = await _caseService.GetPagedCaseyear(model);
-        //    return PartialView("_List",result);
-        //}
+       
 
 
         [AuthorizeContext(ViewAction.Add)]
@@ -66,13 +62,12 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //return View();
+                       
 
                         var list = await _caseService.GetAll();
                         return View("Index", list);
 
-                        //var list = await _caseService.GetAllCaseyear();
-                        return View("Index");
+                       
 
                     }
                     else
@@ -131,8 +126,7 @@ namespace SiteMaster.Controllers
                         var list = await _caseService.GetAll();
                         return View("Index", list);
 
-                       // var list = await _caseService.GetAllCaseyear();
-                        return View("Index");
+                      
 
                     }
                     else
@@ -191,8 +185,7 @@ namespace SiteMaster.Controllers
             var list = await _caseService.GetAll();
             return View("Index", list);
 
-            //var list = await _caseService.GetAllCaseyear();
-            return View("Index");
+           
 
         }
 

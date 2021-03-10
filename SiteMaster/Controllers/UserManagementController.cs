@@ -62,9 +62,9 @@ namespace SiteMaster.Controllers
             AddUserDto model = new AddUserDto()
             {
                 DepartmentList = await _departmentService.GetDepartment(),
-              //  ZoneList = await _zoneService.GetZone(),
+             
                 RoleList = await _userProfileService.GetRole(),
-               // BranchList = await _branchService.GetBranch()
+               
             };
             return View(model);
         }

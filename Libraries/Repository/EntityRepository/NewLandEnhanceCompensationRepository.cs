@@ -175,18 +175,23 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<List<Newlandvillage>> GetAllVillageList()
-        {
-            List<Newlandvillage> villageList = await _dbContext.Newlandvillage.ToListAsync();
-            return villageList;
-        }
-        public async Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId)
-        {
-            List<Newlandkhasra> khasraList = await _dbContext.Newlandkhasra.ToListAsync();
-            return khasraList;
-        }
        
 
+        public async Task<List<Newlandvillage>> GetAllVillage()
+        {
+            List<Newlandvillage> villageList = await _dbContext.Newlandvillage.Where(x => x.IsActive == 1).ToListAsync();
+            return villageList;
+        }
+        public async Task<List<Newlandkhasra>> GetAllKhasra(int? villageId)
+        {
+            List<Newlandkhasra> khasraList = await _dbContext.Newlandkhasra.Where(x => x.NewLandvillageId == villageId && x.IsActive == 1).ToListAsync();
+            return khasraList;
+        }
+
+        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
 
 
 
@@ -195,11 +200,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Newlandenhancecompensation.Include(x => x.Khasra).Include(x => x.Village).OrderByDescending(x => x.Id).ToListAsync();
         }
 
-        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
-        {
-            return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
-        }
-
+        
 
 
 

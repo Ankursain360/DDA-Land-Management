@@ -13,14 +13,16 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Newlandawardplotdetails>> GetAwardplotdetails();
         Task<List<Newlandawardmasterdetail>> GetAllAWardmaster();
-        Task<List<Newlandkhasra>> BindKhasra();
+     
         Task<List<Newlandvillage>> GetAllVillage();
+        Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
         Task<List<Newlandawardplotdetails>> GetAwardplotdetailsUsingRepo();
         Task<bool> Update(int id, Newlandawardplotdetails awardplotdetails);
         Task<bool> Create(Newlandawardplotdetails awardplotdetails);
         Task<Newlandawardplotdetails> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Newlandawardplotdetails>> GetPagedAwardplotdetails(NewlandawardplotdetailsSearchDto model);
-      
+
+        Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
     }
 }

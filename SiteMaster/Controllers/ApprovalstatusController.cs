@@ -138,23 +138,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
-        //public async Task<IActionResult> Delete(int id)  //Not in use
-        //{
-        //   if (id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var form = await _approvalstatusService.Delete(id);
-        //   if (form == false)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //    return View(form);
-        //}
-
+       
 
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  

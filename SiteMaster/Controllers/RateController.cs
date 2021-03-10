@@ -30,11 +30,7 @@ namespace SiteMaster.Controllers
             _rateService = rateService;
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var result = await _rateService.GetAllRate();
-        //    return View(result);
-        //}
+       
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {

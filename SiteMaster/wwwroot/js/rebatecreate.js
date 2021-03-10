@@ -1,13 +1,13 @@
 ﻿
 
 $(document).ready(function () {
-    // $("#FromDate").val("");
+   
     var id = $("input[name='IsRebateOn']:checked").val();
     $.ajax({
         type: 'GET',
         url: '/Rebate/GetFromDate',
         data: { propertyId: id },
-        // dataType: 'json',
+       
         success: function (data) {
             if (data != null) {
                 if (data != "") {
@@ -33,7 +33,7 @@ $("input[name='IsRebateOn']").click(function () {
         type: 'GET',
         url: '/Rebate/GetFromDate',
         data: { propertyId: id },
-        // dataType: 'json',
+        
         success: function (data) {
             if (data != null) {
                 if (data == "") {
@@ -104,7 +104,7 @@ $('#myForm').validate({
         }
     },
     submitHandler: function (form) {
-        // alert('Form validated and submitted ok.');
+        
         return true;
     }
 });

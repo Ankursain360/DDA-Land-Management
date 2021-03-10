@@ -27,7 +27,7 @@
         }
     },
     submitHandler: function (form) {
-        // alert('Form validated and submitted ok.');
+      
         return true;
     }
 });

@@ -10,9 +10,8 @@
 
 
 
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
+            <th>Area</th>
+            
             <th>Status</th>
             <th>Operations</th>
         </tr>
@@ -29,9 +28,12 @@
 
 
             <td>@item.Name</td>
-            <td>@item.Bigha</td>
-            <td>@item.Biswa</td>
-            <td>@item.Biswanshi</td>
+            <td>
+                @item.Bigha
+                -
+                @item.Biswa-
+                @item.Biswanshi
+            </td>
             <td>
                 @if (item.IsActive == 1)
                 {

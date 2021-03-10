@@ -2,27 +2,37 @@
 var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
-    $("#btnGenerate").click(function () {
 
-        debugger;
-        var result = ValidateForm();
-        var name = $('#Name option:selected').val();
-
-
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
-        if (result) {
-            GetDetails(currentPageNumber, currentPageSize, sortby);
-        }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
+    var param = GetSearchParam(currentPageNumber, currentPageSize, sortby);
+    debugger
+    HttpPost(`/NewlandVillageReport/GetDetails`, 'html', param, function (response) {
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
     });
 
 
-    $(".linkdisabled").click(function () {
-        return false;
-    });
+})
+
+$("#btnGenerate").click(function () {
+
+    debugger;
+    var result = ValidateForm();
+    var name = $('#Name option:selected').val();
+
+
+    //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
+    if (result) {
+        GetDetails(currentPageNumber, currentPageSize, sortby);
+    }
+    //}
+    //else {
+    //    alert('Please Fill All Fields');
+    //}
+});
+
+
+$(".linkdisabled").click(function () {
+    return false;
 });
 
 function GetDetails(pageNumber, pageSize, order) {

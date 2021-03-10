@@ -8,12 +8,6 @@
     $("input[type='hidden'][name='ParameterSkipList[0]']").remove();
 });
 
-//$(function () {
-//    $('#paramenterSkip').bootstrapToggle();
-//})
-//$('#ddlOperationType').change(function () {
-//    BindDropdown();
-//});
 
 
 function BindDropdown() {
@@ -27,10 +21,7 @@ function BindDropdown() {
         for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
             $(".ParameterNameListClass").html(html);
 
-            //$(".nameClass").each(function () {
-            //    var value = $('#ddlOperationType option:selected').val();
-            //    $(this).html(value + ' Name');
-            //});
+           
         }
 
     });
@@ -133,10 +124,10 @@ function GetLevelDetails() {
 
 function GetSearchParam() {
     var count = $('.myWebsiteTable').find('table').length;
-    // var value = $('#ddlOperationType option:selected').val();
+  
     var model = {
         size: count
-        // opertaionId: value
+        
     }
     return model;
 }
