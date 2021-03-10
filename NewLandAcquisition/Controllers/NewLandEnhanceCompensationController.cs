@@ -43,9 +43,9 @@ namespace NewLandAcquisition.Controllers
             newlandenhancecompensation.IsActive = 1;
 
 
-            newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
-            newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(newlandenhancecompensation.VillageId);
-           
+            newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillage();
+            newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasra(newlandenhancecompensation.VillageId);
+
             return View(newlandenhancecompensation);
         }
 
@@ -58,8 +58,10 @@ namespace NewLandAcquisition.Controllers
             {
 
 
-                newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
-                newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(newlandenhancecompensation.VillageId);
+                //newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
+                //newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(newlandenhancecompensation.VillageId);
+                newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillage();
+                newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasra(newlandenhancecompensation.VillageId);
 
                 if (ModelState.IsValid)
                 {
@@ -95,10 +97,12 @@ namespace NewLandAcquisition.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newLandEnhanceCompensationService.FetchSingleResult(id);
-           
 
-            Data.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
-            Data.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(Data.VillageId);
+
+            //Data.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
+            //Data.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(Data.VillageId);
+            Data.VillageList = await _newLandEnhanceCompensationService.GetAllVillage();
+            Data.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasra(Data.VillageId);
 
             if (Data == null)
             {
@@ -112,8 +116,10 @@ namespace NewLandAcquisition.Controllers
         public async Task<IActionResult> Edit(int id, Newlandenhancecompensation newlandenhancecompensation)
         {
 
-            newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
-            newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(newlandenhancecompensation.VillageId);
+            //newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
+            //newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(newlandenhancecompensation.VillageId);
+            newlandenhancecompensation.VillageList = await _newLandEnhanceCompensationService.GetAllVillage();
+            newlandenhancecompensation.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasra(newlandenhancecompensation.VillageId);
             if (ModelState.IsValid)
             {
                 try
@@ -170,9 +176,11 @@ namespace NewLandAcquisition.Controllers
         {
             var Data = await _newLandEnhanceCompensationService.FetchSingleResult(id);
 
-           
-            Data.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
-            Data.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(Data.VillageId);
+
+            //Data.VillageList = await _newLandEnhanceCompensationService.GetAllVillageList();
+            //Data.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasraList(Data.VillageId);
+            Data.VillageList = await _newLandEnhanceCompensationService.GetAllVillage();
+            Data.KhasraList = await _newLandEnhanceCompensationService.GetAllKhasra(Data.VillageId);
 
 
             if (Data == null)
@@ -182,16 +190,30 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
 
+        //[HttpGet]
+        //public async Task<JsonResult> GetKhasraList(int? villageId)
+        //{
+        //    villageId = villageId ?? 0;
+        //    return Json(await _newLandEnhanceCompensationService.GetAllKhasraList(Convert.ToInt32(villageId)));
+        //}
+
+
+        //[HttpGet]
+        //public async Task<JsonResult> GetAreaList(int? khasraid)
+        //{
+        //    khasraid = khasraid ?? 0;
+
+        //    return Json(await _newLandEnhanceCompensationService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
+        //}
         [HttpGet]
         public async Task<JsonResult> GetKhasraList(int? villageId)
         {
             villageId = villageId ?? 0;
-            return Json(await _newLandEnhanceCompensationService.GetAllKhasraList(Convert.ToInt32(villageId)));
+            return Json(await _newLandEnhanceCompensationService.GetAllKhasra(Convert.ToInt32(villageId)));
         }
 
-
         [HttpGet]
-        public async Task<JsonResult> GetAreaList(int? khasraid)
+        public async Task<JsonResult> GetKhasraAreaList(int? khasraid)
         {
             khasraid = khasraid ?? 0;
 

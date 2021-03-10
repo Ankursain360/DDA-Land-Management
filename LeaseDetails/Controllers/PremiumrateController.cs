@@ -61,8 +61,8 @@ namespace LeaseDetails.Controllers
                 if (ModelState.IsValid)
                 {
 
-                   
-                    var result = await _premiumrateService.Create(rate);
+                    rate.CreatedBy = SiteContext.UserId;
+                     var result = await _premiumrateService.Create(rate);
 
                     if (result == true)
                     {
@@ -111,6 +111,7 @@ namespace LeaseDetails.Controllers
             {
                 try
                 {
+                    rate.ModifiedBy = SiteContext.UserId;
                     var result = await _premiumrateService.Update(id, rate);
                     if (result == true)
                     {

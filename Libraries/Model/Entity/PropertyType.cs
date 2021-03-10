@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
             Interest = new HashSet<Interest>();
             Rate = new HashSet<Rate>();
             Premiumrate = new HashSet<Premiumrate>();
+            Documentcharges = new HashSet<Documentcharges>();
             Damagecalculation = new HashSet<Damagecalculation>();
             Goldrate = new HashSet<Groundrent>();
         }
@@ -23,5 +24,6 @@ namespace Libraries.Model.Entity
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
         public ICollection<Premiumrate> Premiumrate { get; set; }
         public ICollection<Groundrent> Goldrate { get; set; }
+        public ICollection<Documentcharges> Documentcharges { get; set; }
     }
 }

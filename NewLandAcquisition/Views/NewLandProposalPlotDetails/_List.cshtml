@@ -7,9 +7,8 @@
                 <th>Proposal Name</th>
                 <th>Village Name </th>
                 <th>Khasra No.</th>
-                <th>Bigha</th>
-                <th>Biswa</th>
-                <th>Biswanshi</th>
+                <th>Area</th>
+               
                 <th>Status</th>
                 <th>Operations</th>
             </tr>
@@ -22,9 +21,12 @@
                 <td> @(item.Proposaldetails == null?"": item.Proposaldetails.Name)</td>
                 <td> @(item.Acquiredlandvillage == null?"": item.Acquiredlandvillage.Name)</td>
                 <td> @(item.Khasra == null?"": item.Khasra.Name)</td>
-                <td>@item.Bigha</td>
-                <td>@item.Biswa</td>
-                <td>@item.Biswanshi</td>
+                <td>
+                    @item.Bigha
+                    -
+                    @item.Biswa-
+                    @item.Biswanshi
+                </td>
                 <td>
                     @if (item.IsActive == 1)
                     {

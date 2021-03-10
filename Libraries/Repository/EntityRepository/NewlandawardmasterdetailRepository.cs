@@ -42,16 +42,26 @@ namespace Libraries.Repository.EntityRepository
                             .ThenBy(s => s.Proposal.Name)
                         .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
                         break;
+                    //case ("STATUS"):
+                    //    data = null;
+                    //    data = await _dbContext.Newlandawardmasterdetail
+                    //           .Include(x => x.Newlandvillage)
+                    //            .Include(x => x.Proposal)
+                    //           .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
+                    //        .OrderByDescending(s => s.IsActive)
+                    //         .ThenBy(s => s.Newlandvillage.Name)
+                    //        .ThenBy(s => s.Proposal.Name)
+                    //    .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
+                    //    break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Newlandawardmasterdetail
                                .Include(x => x.Newlandvillage)
                                 .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
-                            .OrderByDescending(s => s.IsActive)
-                             .ThenBy(s => s.Newlandvillage.Name)
-                            .ThenBy(s => s.Proposal.Name)
-                        .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
+                        
+                                    .OrderByDescending(a => a.IsActive)
+                                    .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
                         break;
                     case ("AWARDDATE"):
                         data = null;
@@ -107,10 +117,9 @@ namespace Libraries.Repository.EntityRepository
                                .Include(x => x.Newlandvillage)
                                 .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
-                            .OrderByDescending(s => s.IsActive)
-                             .ThenBy(s => s.Newlandvillage.Name)
-                            .ThenBy(s => s.Proposal.Name)
-                        .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
+
+                                    .OrderBy(a => a.IsActive)
+                                    .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
                         break;
                     case ("AWARDDATE"):
                         data = null;
@@ -118,10 +127,13 @@ namespace Libraries.Repository.EntityRepository
                                  .Include(x => x.Newlandvillage)
                                   .Include(x => x.Proposal)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
-                              .OrderBy(s => s.AwardDate)
-                               .ThenBy(s => s.Newlandvillage.Name)
-                              .ThenBy(s => s.Proposal.Name)
-                          .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
+                               //.OrderBy(s => s.AwardDate)
+                               .OrderByDescending(a => a.AwardDate)
+                                    .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
+
+                        //     .ThenBy(s => s.Newlandvillage.Name)
+                        //    .ThenBy(s => s.Proposal.Name)
+                        //.GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
                         break;
                     case ("VILLAGE"):
                         data = null;
@@ -129,10 +141,13 @@ namespace Libraries.Repository.EntityRepository
                                .Include(x => x.Newlandvillage)
                                 .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
-                            .OrderBy(s => s.Newlandvillage.Name)
-                             .ThenBy(s => s.Newlandvillage.Name)
-                            .ThenBy(s => s.Proposal.Name)
-                        .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize); break;
+                        //    .OrderBy(s => s.Newlandvillage.Name)
+                        //     .ThenBy(s => s.Newlandvillage.Name)
+                        //    .ThenBy(s => s.Proposal.Name)
+                        //.GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize); 
+                         .OrderByDescending(a => a.Newlandvillage.Name)
+                                    .GetPaged<Newlandawardmasterdetail>(model.PageNumber, model.PageSize);
+                        break;
                         
                     case ("PROPOSAL"):
                         data = null;
