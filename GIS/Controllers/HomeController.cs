@@ -1,5 +1,7 @@
-﻿using Libraries.Service.IApplicationService;
+﻿using GIS.Models;
+using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace GIS.Controllers
@@ -31,6 +33,21 @@ namespace GIS.Controllers
         public async Task<JsonResult> GetZoneList()
         {
             return Json(await _GISService.GetZoneList());
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult UnAuthorized()
+        {
+            return View();
+        }
+
+        public IActionResult ExceptionLog()
+        {
+            return View();
         }
     }
 }

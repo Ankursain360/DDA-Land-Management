@@ -1,13 +1,13 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Newlandnotification>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Groundrent>
 @{int rowNo = 0; }
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th> Sr. No</th>
-            <th> Award Number </th>
-            <th> Award date </th>
-            <th> Village Name</th>
-            <th> Proposal Name</th>
+            
+            <th> Property Type</th>
+            <th>Ground Rate </th>
+            <th>From Date</th>
+            <th>To Date</th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -16,12 +16,12 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td>@(rowNo += 1)</td>
-                <td>@item.NewlandNotificationType.NotificationType</td>
-
                 
-               
-               
+                <td>@item.PropertyType.Name</td>
+
+                <td>@item.GroundRate</td>
+                <td>@item.FromDate</td>
+                <td>@item.ToDate</td>
                 <td>
                     @if (item.IsActive == 1)
                     {
@@ -40,7 +40,6 @@
                     </div>
 
                 </td>
-
             </tr>
         }
     </tbody>

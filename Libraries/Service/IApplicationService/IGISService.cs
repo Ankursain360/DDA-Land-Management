@@ -48,5 +48,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Gisdata>> GetGisDataLayersDetails(int villageId);
         Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetails(int villageId, string khasraNo);
         Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo);
+        Task<List<GISKhasraDto>> GetKhasraList(int villageId);
+        Task<List<Gisdata>> GetKhasraNoPolygon(int gisDataId);
     }
 }

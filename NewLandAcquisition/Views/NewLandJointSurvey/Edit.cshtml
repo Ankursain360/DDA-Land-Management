@@ -191,22 +191,7 @@
                                         <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span>
 
                                     </div>
-                                    @*<div class="floating-label-wrap mb-3 mb-md-0">
-                                            @{ if (Model.UploadFilePath != null)
-                                                {
-                                                    <a class="badge badge-primary px-2" asp-action="ViewSurveyReportFile" asp-route-id="@Model.Id"> (View Existing Document)</a>
-
-                                                    <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" asp-for="Document" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                                    <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span> }
-                                                else
-                                                {
-                                                    <input type="file" asp-for="Document" class="floating-label-field floating-label-field--s3" placeholder="Property Photo">
-                                                    <span asp-validation-for="Document" class="d-block text-danger field-validation-valid"></span>
-
-                                                }
-                                                }
-
-                                        </div>*@
+                                   
                                 </td>
 
                                 <td>
@@ -257,8 +242,8 @@
 
                             </td>
                             <td>
-                                <select asp-for="AAttendance" required class="floating-label-field floating-label-field--s3">
-                                    <option disabled selected="selected">---Select---</option>
+                                <select asp-for="AAttendance" class="floating-label-field floating-label-field--s3">
+                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
                                     <option value="1">Present</option>
                                     <option value="2">Absent</option>
 
