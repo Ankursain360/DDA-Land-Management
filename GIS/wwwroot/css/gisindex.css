@@ -152,3 +152,19 @@
 .nlLabelKhasraNo:hover {
     font-size: 18px;
 }
+.nlLabelKhasraNoHighlights {
+   /* color: #2a0af7;*/
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 15px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+    .nlLabelKhasraNoHighlights:hover {
+        font-size: 18px;
+    }

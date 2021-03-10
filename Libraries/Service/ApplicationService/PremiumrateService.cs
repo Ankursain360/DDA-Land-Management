@@ -54,14 +54,14 @@ namespace Libraries.Service.ApplicationService
             
             model.IsActive = rate.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = rate.ModifiedBy;
             _premiumrateRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public async Task<bool> Create(Premiumrate rate)
         {
-            rate.CreatedBy = 1;
+            rate.CreatedBy = rate.CreatedBy;
             rate.CreatedDate = DateTime.Now;
             _premiumrateRepository.Add(rate);
             return await _unitOfWork.CommitAsync() > 0;
