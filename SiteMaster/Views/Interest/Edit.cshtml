@@ -20,7 +20,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                    
                     <input asp-for="FromDate" placeholder="From Date" type="date"
                            class="floating-label-field floating-label-field--s3" limit="100" />
 
@@ -34,7 +34,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                  
                     <input asp-for="ToDate" type="date" class="floating-label-field floating-label-field--s3" placeholder="To Date"
                            limit="100">
                     <span asp-validation-for="ToDate" class="text-danger "></span>
@@ -43,7 +43,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="Percentage" type="text"  class="floating-label-field floating-label-field--s3" placeholder="To Date"
                            limit="18">
                     <span asp-validation-for="Percentage" class="text-danger "></span>
@@ -77,12 +77,6 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-@*<environment include="Development">
-        <script src="~/js/common.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/common.min.js" asp-append-version="true"></script>
-    </environment>*@
 
 <environment include="Development">
     <script src="~/js/interestcreate.js"></script>

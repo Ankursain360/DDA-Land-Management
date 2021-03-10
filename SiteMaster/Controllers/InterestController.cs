@@ -30,11 +30,7 @@ namespace SiteMaster.Controllers
             _interestService = interestService;
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    var result = await _interestService.GetAllInterest();
-        //    return View(result);
-        //}
+      
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
