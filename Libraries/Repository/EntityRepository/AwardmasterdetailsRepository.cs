@@ -20,10 +20,7 @@ namespace Libraries.Repository.EntityRepository
 
             var data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                                 //.Include(x=>x.Us17)
-                                 //.Include(x=>x.Us4)
-                                 //.Include(x=>x.Us6)
-                              .Include( x => x.Proposal)
+                                  .Include( x => x.Proposal)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name) && (x.IsActive == 1))
                               .OrderByDescending(s => s.IsActive)
                               .ThenBy(s => s.Acquiredlandvillage.Name)
@@ -38,10 +35,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                               //.Include(x => x.Us17)
-                               //.Include(x => x.Us4)
-                               //.Include(x => x.Us6)
-                              .Include(x => x.Proposal)
+                               .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderBy(s => s.AwardNumber)
                              .ThenBy(s => s.Acquiredlandvillage.Name)
@@ -52,10 +46,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                            .Include(x => x.Acquiredlandvillage)
-                               //.Include(x => x.Us17)
-                               //.Include(x => x.Us4)
-                               //.Include(x => x.Us6)
-                              .Include(x => x.Proposal)
+                                .Include(x => x.Proposal)
                              .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderBy(x => x.IsActive == 0)
                              .ThenBy(s => s.Acquiredlandvillage.Name)
@@ -66,10 +57,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                              //.Include(x => x.Us17)
-                              //.Include(x => x.Us4)
-                              //.Include(x => x.Us6)
-                              .Include(x => x.Proposal)
+                                 .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderBy(s => s.AwardDate)
                              .ThenBy(s => s.Acquiredlandvillage.Name)
@@ -80,10 +68,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                              //.Include(x => x.Us17)
-                              //.Include(x => x.Us4)
-                              //.Include(x => x.Us6)
-                              .Include(x => x.Proposal)
+                                      .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderBy(s => s.Acquiredlandvillage.Name)
                              .ThenBy(s => s.Acquiredlandvillage.Name)
@@ -94,9 +79,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                              //.Include(x => x.Us17)
-                              //.Include(x => x.Us4)
-                              //.Include(x => x.Us6)
+                              
                               .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderBy(s => s.Proposal.Name)
@@ -114,9 +97,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                            .Include(x => x.Acquiredlandvillage)
-                               //.Include(x => x.Us17)
-                               //.Include(x => x.Us4)
-                               //.Include(x => x.Us6)
+                               
                                .Include(x => x.Proposal)
                              .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderByDescending(x => x.AwardNumber)
@@ -128,9 +109,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                            .Include(x => x.Acquiredlandvillage)
-                               //.Include(x => x.Us17)
-                               //.Include(x => x.Us4)
-                               //.Include(x => x.Us6)
+                              
                                .Include(x => x.Proposal)
                              .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                              .OrderByDescending(x => x.IsActive == 0)
@@ -142,10 +121,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                              //.Include(x => x.Us17)
-                              //.Include(x => x.Us4)
-                              //.Include(x => x.Us6)
-                              .Include(x => x.Proposal)
+                                  .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderByDescending(s => s.AwardDate)
                              .ThenBy(s => s.Acquiredlandvillage.Name)
@@ -156,10 +132,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                              //.Include(x => x.Us17)
-                              //.Include(x => x.Us4)
-                              //.Include(x => x.Us6)
-                              .Include(x => x.Proposal)
+                                   .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderByDescending(s => s.Acquiredlandvillage.Name)
                              .ThenBy(s => s.Acquiredlandvillage.Name)
@@ -170,9 +143,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Awardmasterdetail
                                .Include(x => x.Acquiredlandvillage)
-                              //.Include(x => x.Us17)
-                              //.Include(x => x.Us4)
-                              //.Include(x => x.Us6)
+                             
                               .Include(x => x.Proposal)
                                .Where(x => string.IsNullOrEmpty(model.name) || x.AwardNumber.Contains(model.name))
                             .OrderByDescending(s => s.Proposal.Name)
@@ -188,7 +159,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Awardmasterdetail>> Getawardmasterdetails()
         {
             return await _dbContext.Awardmasterdetail.Where(x => x.IsActive == 1).ToListAsync();
-            //return await _dbContext.casenature.OrderByDescending(s => s.IsActive).ToListAsync();
+          
         }
         public async Task<bool> Any(int id, string AwardNumber)
         {

@@ -8,6 +8,26 @@ $(document).ready(function () {
         $('footer').toggleClass('menu-close');
     });
 
+
+    $("select").each(function () {
+        if ($(this).hasClass("select2destroy") == false) {
+            $(this).select2({
+                //placeholder: "Select",
+                //allowClear: true
+            });
+        }
+    });
+    function callSelect2() {
+        $("select").each(function () {
+            if ($(this).hasClass("select2destroy") == false) {
+                $(this).select2({
+                    //placeholder: "Select",
+                    //allowClear: true
+                });
+            }
+        });
+    }
+
     $('.numbers').keyup(function () {
         this.value = this.value.replace(/[^0-9\.]/g, '');
     });
@@ -19,8 +39,8 @@ $(document).ready(function () {
 
     $(".ParameterActionListClass").attr("multiple", "");
     $("select[id!='ddlPageSize']").select2({
-        placeholder: "--Select--",
-        allowClear: true
+        //placeholder: "--Select--",
+        //allowClear: true
     });
     if ($("form").is("[disabled]")) {
         if ($("form").attr('disabled') == 'disabled') {

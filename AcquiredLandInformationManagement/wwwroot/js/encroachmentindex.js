@@ -29,7 +29,8 @@ $("#btnDescending").click(function () {
 
 $("#btnReset").click(function () {
     $('#txtName').val('');
-    $('#txtCode').val('');
+    $('#txtKhasra').val('');
+    $('#txtRefernceNo').val('');
     GetAward(currentPageNumber, currentPageSize, sortby);
 });
 
@@ -46,7 +47,8 @@ function GetAward(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: $('#txtName').val(),
-       // localityCode: $('#txtCode').val(),
+        khasra: $('#txtKhasra').val(),
+        refernceno: $('#txtRefernceNo').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

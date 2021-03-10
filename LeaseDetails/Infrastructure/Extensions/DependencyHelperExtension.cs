@@ -29,7 +29,6 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
 
-          
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();

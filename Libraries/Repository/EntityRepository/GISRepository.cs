@@ -204,6 +204,23 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("GISKhasraBasisCourtCasesDetails")
+                                            .WithSqlParams(("P_villageid", villageId), ("P_KhasraNo", khasraNo)
+                                            )
+                                            .ExecuteStoredProcedureAsync<GISKhasraBasisOtherDetailsDto>();
+
+                return (List<GISKhasraBasisOtherDetailsDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<Giskhasraboundary>> GetKhasraBoundaryDetails(int villageId)
         {
             return await _dbContext.Giskhasraboundary
@@ -218,10 +235,24 @@ namespace Libraries.Repository.EntityRepository
                                      .ToListAsync();
         }
 
+        public async Task<List<Gisdata>> GetKhasraList(int villageId)
+        {
+            return await _dbContext.Gisdata
+                                    .Where(x => x.VillageId == villageId && x.IsActive == 1 && x.GisLayerId == 29)
+                                    .ToListAsync();
+        }
+
         public async Task<List<Giskhasrano>> GetKhasraNoDetails(int villageId)
         {
             return await _dbContext.Giskhasrano
                                      .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                     .ToListAsync();
+        }
+
+        public async Task<List<Gisdata>> GetKhasraNoPolygon(int gisDataId)
+        {
+            return await _dbContext.Gisdata
+                                     .Where(x => x.Id == gisDataId )
                                      .ToListAsync();
         }
 

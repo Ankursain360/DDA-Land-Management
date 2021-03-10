@@ -16,7 +16,11 @@ namespace Libraries.Model.Entity
         public string ChequeNo { get; set; }
         public string ChequeDate { get; set; }
         public byte RecState { get; set; }
-        public byte IsActive { get; set; }
+        
         //        public ICollection<Enchroachment> Enchroachments { get; set; }
+        
+        public byte? IsActive { get; set; }
+
+        public Enchroachment Enchroachment { get; set; }
     }
 }

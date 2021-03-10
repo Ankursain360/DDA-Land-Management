@@ -44,8 +44,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Create()
         {
             Tehsil tehsil = new Tehsil();
-            tehsil.IsActive = 1;
-            //tehsil.SchemeList = await _tehsilService.GetAllScheme();
+            tehsil.IsActive = 1;           
             return View(tehsil);
         }
 
@@ -56,7 +55,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-                //tehsil.SchemeList = await _tehsilService.GetAllScheme();
+            
                 if (ModelState.IsValid)
                 {
 

@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Master;
+using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -14,9 +15,11 @@ namespace GIS.Controllers
         {
             _GISService = GISService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            GISDtoProfile gis = new GISDtoProfile();
+            ViewBag.ZoneList = await _GISService.GetZoneList();
+            return View(gis);
         }
         public IActionResult Privacy()
         {
@@ -213,6 +216,19 @@ namespace GIS.Controllers
         {
             var data = await _GISService.GetKhasraBasisOtherDetails(VillageId, KhasraNo);
             return Json(data);
+        }
+        public async Task<JsonResult> GetKhasraBasisOtherDetailsForCourtCases(int VillageId, string KhasraNo)
+        {
+            var data = await _GISService.GetKhasraBasisOtherDetailsForCourtCases(VillageId, KhasraNo);
+            return Json(data);
+        }
+        public async Task<JsonResult> GetKhasraList(int? VillageId)
+        {
+            return Json(await _GISService.GetKhasraList(VillageId ?? 0));
+        }
+        public async Task<JsonResult> GetKhasraNoPolygon(int? gisDataId)
+        {
+            return Json(await _GISService.GetKhasraNoPolygon(gisDataId ?? 0));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Enchroachment enchroachment);
         Task<Enchroachment> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-        Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
+        Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentDetailsSearchDto model);
         Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId);
         //********* repeater ! Owner Details **********
 

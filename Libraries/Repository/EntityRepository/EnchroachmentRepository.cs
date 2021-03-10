@@ -29,6 +29,7 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
             List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
@@ -53,13 +54,9 @@ namespace Libraries.Repository.EntityRepository
             return NencroachmentList;
         }
 
-        public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model)
+        public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentDetailsSearchDto model)
         {
-            //return await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
-            //    .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-            //    .OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
-
-            var data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
+              var data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
                 .OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -71,7 +68,9 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                 && (string.IsNullOrEmpty(model.refernceno) || x.FileNo.Contains(model.refernceno)))
                                 .OrderBy(s => s.Village.Name)
                                 .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
                                             break;
@@ -79,7 +78,9 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                 && (string.IsNullOrEmpty(model.refernceno) || x.FileNo.Contains(model.refernceno)))
                                 .OrderBy(s => s.Khasra.Name)
                                 .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
                         break;
@@ -87,8 +88,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
-                               .OrderBy(x => x.IsActive == 0)
+                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                 && (string.IsNullOrEmpty(model.refernceno) || x.FileNo.Contains(model.refernceno)))
+                               .OrderByDescending(x => x.IsActive)
                                 .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
                             
                         break;
@@ -103,7 +106,9 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                 && (string.IsNullOrEmpty(model.refernceno) || x.FileNo.Contains(model.refernceno)))
                                 .OrderByDescending(s => s.Village.Name)
                                 .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
                         break;
@@ -111,7 +116,9 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                 && (string.IsNullOrEmpty(model.refernceno) || x.FileNo.Contains(model.refernceno)))
                                 .OrderByDescending(s => s.Khasra.Name)
                                 .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
                         break;
@@ -119,8 +126,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra)
                                 .Include(x => x.Natureofencroachment).Include(x => x.Reasons)
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
-                               .OrderByDescending(x => x.IsActive == 0)
+                                .Where(x => (string.IsNullOrEmpty(model.name) || x.Village.Name.Contains(model.name))
+                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                 && (string.IsNullOrEmpty(model.refernceno) || x.FileNo.Contains(model.refernceno)))
+                               .OrderBy(x => x.IsActive)
                                 .GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
 
                         break;
@@ -130,9 +139,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId)
         {
-            //return await _dbContext.EncrocherPeople
-            //    .Where(x => x.FileNo == model.fileno)
-            //    .OrderByDescending(x => x.Id).GetPaged<EncrocherPeople>(model.PageNumber, model.PageSize);
+    
             int SortOrder = (int)model.SortOrder;
             var data = await _dbContext.LoadStoredProcedure("BindEncrocmentpeople")
                                              .WithSqlParams(("File_No", model.fileno),

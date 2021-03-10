@@ -1,4 +1,5 @@
-﻿@{Layout = null;}
+﻿@model Dto.Master.GISDtoProfile
+@{Layout = null;}
 <!doctype html>
 <html lang="en">
 <head>
@@ -58,7 +59,7 @@
                         <a class="nav-item nav-link active" id="navListtab" data-toggle="tab" href="#navList" role="tab" aria-controls="navList" aria-selected="true">Village List</a>
                         <a class="nav-item nav-link" id="navQuerytab" data-toggle="tab" href="#navQuery" role="tab" aria-controls="navQuery" aria-selected="false">Query</a>
                         <a class="nav-item nav-link" id="navLayerstab" data-toggle="tab" href="#navLayers" role="tab" aria-controls="navLayers" aria-selected="false">Layers</a>
-                        <a class="nav-item nav-link" id="navLegendstab" data-toggle="tab" href="#navLegends" role="tab" aria-controls="navLegends" aria-selected="false">Legends</a>
+                        @*<a class="nav-item nav-link" id="navLegendstab" data-toggle="tab" href="#navLegends" role="tab" aria-controls="navLegends" aria-selected="false">Legends</a>*@
                         @*<a class="nav-item nav-link" id="navInformationtab" data-toggle="tab" href="#navInformation" role="tab" aria-controls="navInformation" aria-selected="false">Information</a>*@
                     </div>
                 </nav>
@@ -88,97 +89,40 @@
                                         <i class="ri-search-line text-white"></i>Query
                                     </button>
                                 </h5>
-                                <div id="Query" class="accordion-collapse collapse" aria-labelledby="Query1" data-bs-parent="#navQueryData">
+                                <div id="Query" class="accordion-collapse collapse show" aria-labelledby="Query1" data-bs-parent="#navQueryData">
                                     <div class="p-3">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item" role="presentation">
                                                 <a href="#Zone" class="nav-link active" id="Zone-tab" data-bs-toggle="tab" data-bs-target="#Zone" type="button" role="tab" aria-controls="Zone" aria-selected="true">Zone wise</a>
-                                            </li>
-                                            <li class="nav-item" role="presentation">
-                                                <a href="#Allottee" class="nav-link" id="Allottee-tab" data-bs-toggle="tab" data-bs-target="#Allottee" type="button" role="tab" aria-controls="Allottee" aria-selected="false">Allottee wise</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="Zone" role="tabpanel" aria-labelledby="Zone-tab">
                                                 <form id="searchWise">
                                                     <div class="mb-2">
-                                                        <label for="ZoneSelectList" class="form-label mb-1 small">Zone :</label>
-                                                        <select class="form-select form-select-sm" id="ZoneSelectList">
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
+                                                        <label for="ddlZone" class="form-label mb-1 small">Zone :</label>
+                                                        <select class="form-select form-select-sm" id="ZoneId" asp-items="@(new SelectList( @ViewBag.ZoneList, "Id","Name"))" onchange="return GetVillageList(this.options[this.selectedIndex].value);">
+                                                            <option selected="selected" value="0">--Select-- </option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-2">
-                                                        <label for="LocalitySelectList" class="form-label mb-1 small">Locality :</label>
-                                                        <select class="form-select form-select-sm" id="LocalitySelectList">
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
+                                                        <label for="ddlVillage" class="form-label mb-1 small">Village :</label>
+                                                        <select class="form-select form-select-sm" id="VillageId" onchange="return GetKhasraList(this.options[this.selectedIndex].value);">
+                                                           <option selected="selected" value="0">--Select-- </option>
                                                         </select>
                                                     </div>
                                                     <div class="mb-2">
-                                                        <label for="PlotSelectList" class="form-label mb-1 small">Plot :</label>
-                                                        <select class="form-select form-select-sm" id="PlotSelectList">
-                                                            <option>---Select Plot---</option>
-                                                            <option>---Select Plot---</option>
-                                                            <option>---Select Plot---</option>
-                                                            <option>---Select Plot---</option>
-                                                            <option>---Select Plot---</option>
-                                                            <option>---Select Plot---</option>
+                                                        <label for="ddlKhasra" class="form-label mb-1 small">Khasra :</label>
+                                                        <select class="form-select form-select-sm" id="KhasraId">
+                                                            <option selected="selected" value="0">--Select-- </option>
                                                         </select>
                                                     </div>
-                                                    <div class="mt-3 text-center">
+                                                    @*<div class="mt-3 text-center">
                                                         <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
-                                                    </div>
+                                                    </div>*@
                                                 </form>
                                             </div>
-                                            <div class="tab-pane fade" id="Allottee" role="tabpanel" aria-labelledby="Allottee-tab">
-                                                <form id="searchWise">
-                                                    <div class="mb-2">
-                                                        <label for="ZoneSelectList2" class="form-label mb-1 small">Zone :</label>
-                                                        <select class="form-select form-select-sm" id="ZoneSelectList2">
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                            <option>---Select Zone---</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <label for="LocalitySelectList2" class="form-label mb-1 small">Locality :</label>
-                                                        <select class="form-select form-select-sm" id="LocalitySelectList2">
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                            <option>---Select Locality---</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <label for="AllotteeSelectList" class="form-label mb-1 small">Allottee :</label>
-                                                        <select class="form-select form-select-sm" id="AllotteeSelectList">
-                                                            <option>---Select Allottee---</option>
-                                                            <option>---Select Allottee---</option>
-                                                            <option>---Select Allottee---</option>
-                                                            <option>---Select Allottee---</option>
-                                                            <option>---Select Allottee---</option>
-                                                            <option>---Select Allottee---</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="mt-3 text-center">
-                                                        <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
-                                                    </div>
-                                                </form>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -335,7 +279,7 @@
                     <ul class="list-unstyled small">
                         <li>
                             <table style="border-collapse: collapse; font-size:11px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive">
-                                <tbody >
+                                <tbody>
                                     <tr> <td> <p class="m-0">Village Name : <strong id="tagVillageName"></strong></p></td> </tr>
                                     <tr><td><p class="m-0">Khasra No : <strong id="tagKhasra"></strong></p></td></tr>
                                     <tr><td><p class="m-0">Area (Bigha - Biswa - Biswansi)(ACRE) : <strong id="tagArea"></strong></p></td></tr>
@@ -360,31 +304,12 @@
                                     <tr><td><p class="m-0">Appealable Amount : <strong id="tagAppealableAmt"></strong></p></td></tr>
                                 </tbody>
                             </table>
-                            @*<p class="m-0">Village Name : <strong id="tagVillageName"></strong></p>
-                            <p class="m-0">Khasra No : <strong id="tagKhasra"></strong></p>
-                            <p class="m-0">Area (Bigha - Biswa - Biswansi)(ACRE) : <strong id="tagArea"></strong></p>
-                            <p class="m-0">Notification(s) US-4 : <strong id="tagUs4"></strong></p>
-                            <p class="m-0">Notification(s) US-6 : <strong id="tagUs6"></strong></p>
-                            <p class="m-0">Notification(s) US-17 : <strong id="tagUs17"></strong></p>
-                            <p class="m-0">Notification(s) US-22 : <strong id="tagUs22"></strong></p>
-                            <p class="m-0">Award(s) : <strong id="tagAward"></strong></p>
-                            <p class="m-0">Date of Possession : <strong id="tagPossessionDate"></strong></p>
-                            <p class="m-0">Date of Allotment : <strong id="tagAllotmentDate"></strong></p>
-                            <p class="m-0">Transfer Department : <strong id="tagTransferDepartment"></strong></p>
-                            <p class="m-0">Scheme Transfer : <strong id="tagSchemeTransfer"></strong></p>
-                            <p class="m-0">Remarks : <strong id="tagRemarks"></strong></p>
-                            <p class="m-0">Party Name : <strong id="tagPartyName"></strong></p>
-                            <p class="m-0">Demand List No. : <strong id="tagDemandListNo"></strong></p>
-                            <p class="m-0">L&B No - Date : <strong id="tagLBDate"></strong></p>
-                            <p class="m-0">L.A.C. No : <strong id="tagLACNo"></strong></p>
-                            <p class="m-0">R.F.A.No : <strong id="tagRFANo"></strong></p>
-                            <p class="m-0">S.L.P. No : <strong id="tagSLANo"></strong></p>
-                            <p class="m-0">Court Involved : <strong id="tagCourt"></strong></p>
-                            <p class="m-0">Payble Amount : <strong id="tagPayableAmt"></strong></p>
-                            <p class="m-0">Appealable Amount : <strong id="tagAppealableAmt"></strong></p>*@
-
                         </li>
 
+                        <li>
+                            <div class="accordion" id="CourtCaseData">
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -16,7 +16,7 @@ using Dto.Search;
 namespace NewLandAcquisition.Controllers
 {
     
-   public class NewlandPossesionDetailsController : Controller
+   public class NewlandPossesionDetailsController : BaseController
     {
         private readonly INewlandpossessiondetailsService _Possessiondetailservice;
 

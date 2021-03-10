@@ -94,10 +94,7 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    @*<input asp-for="ActionTaken" type="radio" id="ActionYes" value="Yes" name="grpAction">Yes
-                    <input asp-for="ActionTaken" type="radio" id="ActionNo" value="No" name="grpAction">No
-                    <span asp-validation-for="ActionTaken" class="text-danger"></span>
-                    <label asp-for="ActionTaken" class="floating-label">Action Taken </label>*@
+                  
                 </div>
 
             </div>
@@ -232,7 +229,7 @@
                         <tr id="">
                             <td style="text-align:center;"><span class="sn1">1</span></td>
                             <td>
-                                <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
+                                <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3 " />
                                 <span asp-validation-for="Amount" class="d-block text-danger field-validation-valid msg"></span>
                             </td>
                             <td>
@@ -241,7 +238,7 @@
 
                             </td>
                             <td>
-                                <input asp-for="ChequeDate" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                <input asp-for="ChequeDate" type="date" class="floating-label-field floating-label-field--s3 " />
                                 <span asp-validation-for="ChequeDate" class="d-block text-danger field-validation-valid msg2"></span>
 
                             </td>

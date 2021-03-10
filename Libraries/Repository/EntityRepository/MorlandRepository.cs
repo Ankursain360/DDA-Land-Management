@@ -20,17 +20,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<LandNotification>> GetAllLandNotification()
         {
-            List<LandNotification> notificationList = await _dbContext.LandNotification//.Where(x=>x.IsActive==1)
+            List<LandNotification> notificationList = await _dbContext.LandNotification.Where(x => x.IsActive == 1)
                 .ToListAsync();
             return notificationList;
         }
 
-        //public async Task<List<Serialnumber>> GetAllSerialnumber()
-        //{
-        //    List<Serialnumber> serialnumberlist = await _dbContext.Serialnumber//.Where(x => x.IsActive == 1)
-        //        .ToListAsync();
-        //    return serialnumberlist;
-        //}
+      
 
 
         public async Task<bool> Any(int id, string Name)
@@ -41,13 +36,13 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Morland>> GetAllMorland()
         {
             return await _dbContext.Morland.Include(x => x.LandNotification)
-                //.Include(x => x.Serialnumber)
+               
                 .OrderByDescending(x => x.Id).ToListAsync();
         }
 
         public async Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model)
         {
-            // return await _dbContext.Morland.GetPaged<Morland>(model.PageNumber, model.PageSize);
+           
             var data = await _dbContext.Morland
                                         .Include(x => x.LandNotification)
 

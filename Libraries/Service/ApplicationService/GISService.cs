@@ -118,6 +118,11 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetKhasraBasisOtherDetails(villageId, khasraNo);
         }
 
+        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo)
+        {
+            return await _iGISSRepository.GetKhasraBasisOtherDetailsForCourtCases(villageId, khasraNo);
+        }
+
         public async Task<List<Giskhasraboundary>> GetKhasraBoundaryDetails(int villageId)
         {
             return await _iGISSRepository.GetKhasraBoundaryDetails(villageId);
@@ -128,9 +133,21 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetKhasraLineDetails(villageId);
         }
 
+        public async Task<List<GISKhasraDto>> GetKhasraList(int villageId)
+        {
+            var khasra = await _iGISSRepository.GetKhasraList(villageId);
+            var result = _mapper.Map<List<GISKhasraDto>>(khasra);
+            return result;
+        }
+
         public async Task<List<Giskhasrano>> GetKhasraNoDetails(int villageId)
         {
             return await _iGISSRepository.GetKhasraNoDetails(villageId);
+        }
+
+        public async Task<List<Gisdata>> GetKhasraNoPolygon(int gisDataId)
+        {
+            return await _iGISSRepository.GetKhasraNoPolygon(gisDataId);
         }
 
         public async Task<List<Giskilla>> GetKillaDetails(int villageId)

@@ -27,7 +27,7 @@ namespace Libraries.Repository.EntityRepository
                  .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                            /* && ( x.ProposalDate==model.proposalDate??x.ProposalDate)*/)
+                           )
                 .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -42,7 +42,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo)))
-                            //&& (model.proposalDate == x.ProposalDate? model.proposalDate: x.ProposalDate))
+                           
                              .OrderBy(a => a.Scheme.Name)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -54,7 +54,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                             /*&& model.proposalDate == x.ProposalDate*/)
+                            )
                              .OrderBy(a => a.Name)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
                            
@@ -66,7 +66,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                            /* && model.proposalDate == x.ProposalDate*/)
+                            )
                              .OrderBy(a => a.RequiredAgency)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -78,7 +78,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                             /*&& model.proposalDate == x.ProposalDate*/)
+                            )
                              .OrderBy(a => a.ProposalFileNo)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -90,7 +90,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                            /* && model.proposalDate == x.ProposalDate*/)
+                      )
                              .OrderBy(a => a.ProposalDate)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -102,7 +102,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                             /*&& model.proposalDate == x.ProposalDate*/)
+                            )
                             .OrderByDescending(a => a.IsActive)
                             .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
                         break;
@@ -120,7 +120,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo)))
-                             //&& (model.proposalDate == x.ProposalDate? model.proposalDate: x.ProposalDate))
+                             
                              .OrderByDescending(a => a.Scheme.Name)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -132,7 +132,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                            /* && model.proposalDate == x.ProposalDate*/)
+                  )
                              .OrderByDescending(a => a.Name)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -144,7 +144,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                             /*&& model.proposalDate == x.ProposalDate*/)
+                     )
                              .OrderByDescending(a => a.RequiredAgency)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -156,7 +156,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                            /* && model.proposalDate == x.ProposalDate*/)
+                            )
                              .OrderByDescending(a => a.ProposalFileNo)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -168,7 +168,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                             /*&& model.proposalDate == x.ProposalDate*/)
+                        )
                              .OrderByDescending(a => a.ProposalDate)
                              .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
@@ -180,7 +180,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                             /*&& model.proposalDate == x.ProposalDate*/)
+                           )
                             .OrderBy(a => a.IsActive)
                             .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
                         break;
