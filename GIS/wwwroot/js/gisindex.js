@@ -498,7 +498,7 @@ function showDisBoundariesKhasraBoundary(response) {
     var khasraboundary = $.map(response, function (el) { return el; })
     for (x = 0; x < khasraboundary.length; x++) {
         var ln = createLine(getLatLongArr(khasraboundary[x].polygon));
-        ln.setOptions({ strokeWeight: 3, strokeColor: khasraboundary[x].fillColor });
+        ln.setOptions({ strokeWeight: 1, strokeColor: khasraboundary[x].fillColor });
         KHASRABOUNDARY_LAYER.push(ln);
         Polys.push(ln);
     }

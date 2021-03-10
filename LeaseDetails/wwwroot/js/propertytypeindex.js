@@ -4,21 +4,17 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    GetPropertyType(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    GetPropertyType(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
 
     $('#txtProperty').val('');
-   
-    $('#txtFromDate').val('');
-    $('#txtToDate').val('');
-   
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    GetPropertyType(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -26,7 +22,7 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    GetPropertyType(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -34,14 +30,14 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    GetPropertyType(currentPageNumber, currentPageSize, sortOrder);
 });
 $('#ddlSort').change(function () {
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    GetPropertyType(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetPremiumrate(pageNumber, pageSize, order) {
+function GetPropertyType(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Premiumrate/List`, 'html', param, function (response) {
+    HttpPost(`/PropertyType/List`, 'html', param, function (response) {
         $('#divPremiumrateTable').html("");
         $('#divPremiumrateTable').html(response);
     });
@@ -49,10 +45,9 @@ function GetPremiumrate(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        
+
         name: $('#txtProperty').val(),
-        FromDate: ($("#txtFromDate").val()),
-        ToDate: ($("#txtToDate").val()),
+       
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -62,11 +57,11 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 function onPaging(pageNo) {
-    GetPremiumrate(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetPropertyType(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetPremiumrate(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetPropertyType(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

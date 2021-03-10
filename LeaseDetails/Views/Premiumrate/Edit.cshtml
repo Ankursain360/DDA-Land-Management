@@ -68,4 +68,12 @@
 </div>
 
 
+
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/premiumrate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/premiumrate.min.js" asp-append-version="true"></script>
+</environment>

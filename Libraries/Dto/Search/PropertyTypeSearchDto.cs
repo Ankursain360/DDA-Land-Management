@@ -5,12 +5,9 @@ using System.Text;
 
 namespace Dto.Search
 {
-    public class GroundrentSearchDto : BaseSearchDto
+  public  class PropertyTypeSearchDto : BaseSearchDto
     {
         public string name { get; set; }
-        public string FromDate { get; set; }
-        public string ToDate { get; set; }
-
-
+   
     }
 }
