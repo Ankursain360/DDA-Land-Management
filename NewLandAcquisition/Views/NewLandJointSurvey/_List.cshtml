@@ -7,9 +7,8 @@
             <th>Village Name</th>
             <th>Khasra No.</th>
             <th>Address</th>
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
+            <th>Area</th>
+           
             <th>Joint Survey Date</th>
             
 
@@ -26,9 +25,12 @@
             <td> @(item.Village==null?"": item.Village.Name)</td>
             <td> @(item.Khasra == null?"": item.Khasra.Name)</td>
             <td>@item.Address  </td>
-            <td>@item.Bigha   </td>
-            <td>@item.Biswa  </td>
-            <td>@item.Biswanshi  </td>
+            <td>
+                @item.Bigha
+                -
+                @item.Biswa-
+                @item.Biswanshi
+            </td>
             <td>@(Convert.ToDateTime(item.JointSurveyDate).ToString("dd-MMM-yyyy"))</td>
            
 

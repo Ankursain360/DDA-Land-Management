@@ -6,9 +6,8 @@
             <th>Notification No</th>
             <th>Village Name</th>
             <th>Khasra No.</th>
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
+            <th>Area</th>
+            
             <th>Remarks</th>
             <th>Status</th>
             <th>Operations</th>
@@ -22,9 +21,12 @@
             <td>@(item.Notification==null?"": item.Notification.Name)</td>
             <td>@(item.Village==null?"": item.Village.Name)</td>
             <td>@(item.Khasra == null?"": item.Khasra.Name)</td>
-            <td>@item.Bigha </td>
-            <td>@item.Biswa </td>
-            <td>@item.Biswanshi</td>
+            <td>
+                @item.Bigha
+                -
+                @item.Biswa-
+                @item.Biswanshi
+            </td>
 
             <td>@item.Remarks  </td>
             <td>

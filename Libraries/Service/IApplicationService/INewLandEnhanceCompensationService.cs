@@ -11,10 +11,12 @@ namespace Libraries.Service.IApplicationService
     {
 
 
-        Task<List<Newlandvillage>> GetAllVillageList();
-        Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
-        
+        //Task<List<Newlandvillage>> GetAllVillageList();
+        //Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
 
+        Task<List<Newlandvillage>> GetAllVillage();
+        Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
+        Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
         Task<List<Newlandenhancecompensation>> GetNewlandenhancecompensationUsingRepo();
         Task<List<Newlandenhancecompensation>> GetAllNewlandenhancecompensation();
 
@@ -24,7 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Newlandenhancecompensation>> GetPagedNewlandenhancecompensation(NewlandenhancecompensationSearchDto model);
 
-        Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
+        //Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
 
 
 
