@@ -13,10 +13,12 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Newlandacquistionproposalplotdetails>> GetProposalplotdetails();
         Task<List<Newlandacquistionproposaldetails>> GetAllProposaldetails();
-        Task<List<Newlandvillage>> GetAllVillageList();
-        Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
+        //Task<List<Newlandvillage>> GetAllVillageList();
+        //Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
+        //Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
+        Task<List<Newlandvillage>> GetAllVillage();
+        Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
         Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
-
 
         //Task<bool> Any(int id, string name);
         Task<List<Newlandacquistionproposalplotdetails>> GetAllProposalplotdetails();

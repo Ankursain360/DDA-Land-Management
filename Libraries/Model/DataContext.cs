@@ -276,6 +276,7 @@ namespace Libraries.Model
 
         // Lease Details module
         public virtual DbSet<Premiumrate> Premiumrate { get; set; }
+        public virtual DbSet<Licencefees> Licencefees { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
