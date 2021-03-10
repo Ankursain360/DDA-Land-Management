@@ -24,5 +24,6 @@ namespace Libraries.Service.IApplicationService
 
         Task<PagedResult<Newlandkhasra>> GetPagednewlandVillageKhasraReport(NewlandVillageDetailsKhasraWiseReportSearchDto model);
         Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId);
+        
     }
 }

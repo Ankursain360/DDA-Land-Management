@@ -48,9 +48,9 @@ namespace Libraries.Service.ApplicationService
             List<Newlandawardmasterdetail> awardList = await _newlandawardplotdetailsRepository.GetAllAWardmaster();
             return awardList;
         }
-        public async Task<List<Newlandkhasra>> BindKhasra()
+        public async Task<List<Newlandkhasra>> GetAllKhasra(int? villageId)
         {
-            List<Newlandkhasra> khasraList = await _newlandawardplotdetailsRepository.BindKhasra();
+            List<Newlandkhasra> khasraList = await _newlandawardplotdetailsRepository.GetAllKhasra(villageId);
             return khasraList;
         }
         public async Task<List<Newlandvillage>> GetAllVillage()
@@ -59,6 +59,10 @@ namespace Libraries.Service.ApplicationService
             return villageList;
         }
 
+        public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _newlandawardplotdetailsRepository.FetchSingleKhasraResult(khasraId);
+        }
 
         public async Task<List<Newlandawardplotdetails>> GetAwardplotdetails()
         {

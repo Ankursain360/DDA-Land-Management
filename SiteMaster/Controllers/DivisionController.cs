@@ -38,10 +38,7 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.View)]
         public  IActionResult Index()
         {
-            //var result = await _divisionService.GetAllDivision();
-            //return View(result);
-
-          //  List<Division> list = await _divisionService.GetAllDivision();
+           
             return View();
 
         }

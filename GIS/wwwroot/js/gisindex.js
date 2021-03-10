@@ -142,6 +142,7 @@ function setStateboundary(response) {
 /*Zone Boundary Start*/
 function showZone(maxima) {
     var newdis_id = maxima.replace('Z', '');
+    SetMapNull();
     HttpGet(`/GIS/GetZoneDetails?ZoneId=${parseInt(newdis_id)}`, 'json', function (response) {
         showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
     });
@@ -497,7 +498,7 @@ function showDisBoundariesKhasraBoundary(response) {
     var khasraboundary = $.map(response, function (el) { return el; })
     for (x = 0; x < khasraboundary.length; x++) {
         var ln = createLine(getLatLongArr(khasraboundary[x].polygon));
-        ln.setOptions({ strokeWeight: 3, strokeColor: khasraboundary[x].fillColor });
+        ln.setOptions({ strokeWeight: 1, strokeColor: khasraboundary[x].fillColor });
         KHASRABOUNDARY_LAYER.push(ln);
         Polys.push(ln);
     }
@@ -1479,33 +1480,65 @@ function GetKhasraList(id) {
 
     HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(id), 'json', function (response) {
         if (response.length > 0)
-        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
+            showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
     });
 };
 
 $(document).on('change', '#KhasraId', function (e) {
     e.preventDefault();
     var khasrano = $('#KhasraId option:selected').val();
-
+    var mesalearraay = [];
+    var markerarray = [];
     if (khasrano != '') {
 
         HttpGet("/GIS/GetKhasraNoPolygon?gisDataId=" + parseInt(khasrano), 'json', function (response) {
-             var khasrano = $.map(response, function (el) { return el; })
+            var khasrano = $.map(response, function (el) { return el; })
             for (h = 0; h < KHASRANO_LAYER.length; h++) {
                 KHASRANO_LAYER[h].setMap(null);
             }
             for (aj = 0; aj < khasrano.length; aj++) {
                 var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
-                var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 22, strokeColor: '#007DC5', visible: true, map: map,  position: lp, text: khasrano[aj].label,  clickable: !0 });
-                _label.khasrano = khasrano[aj].label;
-                _label.villageid = VILLAGEID_UNIVERSAL[0];
-                google.maps.event.addListener(_label, 'click', function () {
+                var measle = new google.maps.Marker({
+                    position: lp,
+                    map: map,
+                    icon: {
+                        url: "https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle.png",
+                        size: new google.maps.Size(7, 7),
+                        anchor: new google.maps.Point(4, 4)
+                    }
+                });
+                var marker = new google.maps.Marker({
+                    position: lp,
+                    map: map,
+                    icon: {
+                        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                        labelOrigin: new google.maps.Point(6, -4),
+                        //size: new google.maps.Size(32, 32),
+                        anchor: new google.maps.Point(16, 32)
+                    },
+                    label: {
+                        text: khasrano[aj].label,
+                        color: "#C70E20",
+                        fontWeight: "bold"
+                    }
+                });
+                marker.khasrano = khasrano[aj].label;
+                marker.villageid = VILLAGEID_UNIVERSAL[0];
+                google.maps.event.addListener(marker, 'click', function () {
                     getInfo(this.villageid, this.khasrano);
                 });
-                KHASRANO_LAYER.push(_label);
+                KHASRANO_LAYER.push(marker);
+                KHASRANO_LAYER.push(measle);
                 map.setZoom(17);
-                Polys.push(_label);
+                Polys.push(marker);
+                map.panTo(new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)));
             }
         });
     }
 });
+
+function SetMapNull() {
+    for (h = 0; h < KHASRANO_LAYER.length; h++) {
+        KHASRANO_LAYER[h].setMap(null);
+    }
+}

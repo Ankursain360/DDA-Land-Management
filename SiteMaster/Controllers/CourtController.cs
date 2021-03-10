@@ -60,7 +60,7 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //return View();
+                       
                         var list = await _courtService.GetAllCourt();
                         return View("Index", list);
                     }

@@ -41,8 +41,10 @@ namespace LeaseDetails.Controllers
         {
             Groundrent groundrent = new Groundrent();
             groundrent.IsActive = 1;
+            groundrent.CreatedBy = SiteContext.UserId;
             groundrent.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
             return View(groundrent);
+            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -59,8 +61,9 @@ namespace LeaseDetails.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _groundRentService.GetAllGroundRent();
-                        return View("Index", list);
+                        //var list = await _groundRentService.GetAllGroundRent();
+                        //return View("Index", list);
+                        return RedirectToAction("Index", "GroundRent");
                     }
                     else
                     {
@@ -94,7 +97,7 @@ namespace LeaseDetails.Controllers
         //    }
         //}
 
-        [AuthorizeContext(ViewAction.Edit)]
+      //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _groundRentService.FetchSingleResult(id);
@@ -115,12 +118,14 @@ namespace LeaseDetails.Controllers
             {
                 try
                 {
+                    groundrent.ModifiedBy = SiteContext.UserId;
                     var result = await _groundRentService.Update(id, groundrent);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _groundRentService.GetAllGroundRent();
-                        return View("Index", list);
+                        //var list = await _groundRentService.GetAllGroundRent();
+                        //return View("Index", list);
+                        return RedirectToAction("Index", "GroundRent");
                     }
                     else
                     {
@@ -143,7 +148,7 @@ namespace LeaseDetails.Controllers
 
 
       //  [AuthorizeContext(ViewAction.Delete)]
-        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        public async Task<IActionResult> DeleteConfirmed(int id)  
         {
             try
             {
@@ -162,8 +167,9 @@ namespace LeaseDetails.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-           var list = await _groundRentService.GetAllGroundRent();
-            return View("Index", list);
+            //var list = await _groundRentService.GetAllGroundRent();
+            // return View("Index", list);
+            return RedirectToAction("Index", "GroundRent");
         }
 
 

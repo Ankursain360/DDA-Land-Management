@@ -113,12 +113,7 @@
                         element = content.clone();
                     element.attr('id', 'rec-' + size);
                     element.appendTo('#tbl_posts_body');
-                    //$('#tbl_posts_body #rec-' + size + ' #ChkDisplay').val(ChkDisplay);
-                    //$('#tbl_posts_body #rec-' + size + ' #ChkDelete').val(ChkDelete);
-                    //$('#tbl_posts_body #rec-' + size + ' #ChkView').val(ChkView);
-                    //$('#tbl_posts_body #rec-' + size + ' #ChkEdit').val(ChkEdit);
-                    //$('#tbl_posts_body #rec-' + size + ' #ChkAdd').val(ChkAdd);
-
+                  
                     element.find('.sn').html(size);
                     $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
                     $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);

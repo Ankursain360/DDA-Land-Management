@@ -96,7 +96,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Unit Area" asp-for="UnitArea" />
+                    <input class="floating-label-field floating-label-field--s3 numbers" placeholder="Unit Area" asp-for="UnitArea" />
                     <span asp-validation-for="UnitArea" class="text-danger"></span>
                     <label class="floating-label">Unit Area</label>
                 </div>
@@ -117,11 +117,16 @@
             <div class="row mt-md-3">
 
                 <div class="col-md-6">
+                    <label class="err" style="color:red;">
+                        Only Upload 10 Mb File
+                    </label>
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="RequestPhotos" />
-                        <span asp-validation-for="RequestPhotos" class="text-danger"></span>
+                        <input type="file" onchange="upload_check();" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="RequestPhotos" />
+
+                     
                         <label class="floating-label">Layout Plan/Zonal Plan/Master Plan  </label>
+
                     </div>
                 </div>
 
@@ -167,3 +172,35 @@
 
 
 
+<script>
+
+
+    function upload_check() {
+        $('.err').show();
+        var upl = document.getElementById("file_id");
+        var filePath = upl.value; 
+   
+        //104857600
+  
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            upl.value = "";
+            return false;
+        }
+        else if (upl.files[0].size > 10535049) {
+            $('.err').hide();
+
+
+            upl.value = "";
+        } else {
+            $('.err').hide();
+        }
+    };
+
+
+   
+
+</script>

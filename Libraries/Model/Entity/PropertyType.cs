@@ -18,7 +18,9 @@ namespace Libraries.Model.Entity
             Goldrate = new HashSet<Groundrent>();
             Licencefees = new HashSet<Licencefees>();
         }
+        [Required(ErrorMessage = "Name is mandatory")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
         public ICollection<Interest> Interest { get; set; }
         public ICollection<Rate> Rate { get; set; }

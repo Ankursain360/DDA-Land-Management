@@ -53,14 +53,15 @@ namespace Libraries.Service.ApplicationService
 
             model.IsActive = rent.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = model.ModifiedBy;
             _groundRentRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public async Task<bool> Create(Groundrent rate)
         {
-            rate.CreatedBy = 1;
+            rate.CreatedBy = rate.CreatedBy;
+           
             rate.CreatedDate = DateTime.Now;
             _groundRentRepository.Add(rate);
             return await _unitOfWork.CommitAsync() > 0;

@@ -14,12 +14,14 @@ using Notification.OptionEnums;
 using Dto.Search;
 using NewLandAcquisition.Filters;
 using Microsoft.Extensions.Configuration;
-
+using System.IO;
 using Core.Enum;
 
 using Utility.Helper;
 
 using Dto.Common;
+
+
 
 namespace NewLandAcquisition.Controllers
 {
@@ -166,6 +168,8 @@ namespace NewLandAcquisition.Controllers
        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Request scheme)
         {
+            //ViewBag.viewDocFile = scheme.LayoutPlan;
+
             documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
             if (ModelState.IsValid)
             {

@@ -42,9 +42,7 @@ function GetDetails(pageNumber, pageSize, sortOrder) {
         $('#divTable').html(response);
     });
 
-    //if ($('table >tbody >tr').length <= 1) {
-    //    GetDetails(1, $("#ddlPageSize option:selected").val());
-    //}
+   
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {

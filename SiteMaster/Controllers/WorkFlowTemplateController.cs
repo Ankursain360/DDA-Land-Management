@@ -63,15 +63,9 @@ namespace SiteMaster.Controllers
         public async Task<PartialViewResult> GetDetails([FromBody] WorkflowLevelDto WorkflowLevelDto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
-            //  model.OperationId = WorkflowLevelDto.opertaionId;
-            //if (WorkflowLevelDto.opertaionId == "Role")
-            //{
+           
             ViewBag.Items = await _userProfileService.GetRole();
-            //}
-            //else
-            //{
-            //    ViewBag.Items = await _userProfileService.GetUser();
-            //}
+           
 
             return PartialView("_Levels", model);
         }
