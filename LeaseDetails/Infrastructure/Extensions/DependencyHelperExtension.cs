@@ -29,7 +29,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IPremiumrateRepository, PremiumrateRepository>();
-
+            services.AddScoped<IDocumentchargesRepository, DocumentchargesRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -42,7 +42,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IPremiumrateService, PremiumrateService>();
-
+            services.AddScoped<IDocumentchargesServices,DocumentchargesServices>();
 
         }
     }
