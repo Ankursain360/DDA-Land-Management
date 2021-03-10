@@ -1,8 +1,7 @@
 ﻿function onChange(id) {
 
     HttpGet(`/AwardPlotDetails/GetKhasraList/?villageId=${id}`, 'json', function (response) {
-        var html = '<option value=""> select</option>';
-      
+        var html = '<option></option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
@@ -11,6 +10,7 @@
         $("#KhasraId").html(html);
     });
 };
+
 
 $("#KhasraId").change(function () {
     var kid = $(this).val();

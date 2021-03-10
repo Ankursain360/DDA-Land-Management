@@ -2,6 +2,17 @@
 var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
+ 
+    var param = GetSearchParam(currentPageNumber, currentPageSize, sortby);
+  
+    HttpPost(`/NewlandAcquiredVillageReport/GetDetails`, 'html', param, function (response) {
+      
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
+    });
+
+
+})  
     $("#btnGenerate").click(function () {
         debugger;
 
@@ -22,7 +33,7 @@ $(document).ready(function () {
 
     });
 
-});
+
 
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);

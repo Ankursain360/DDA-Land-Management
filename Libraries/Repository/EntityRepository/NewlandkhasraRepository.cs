@@ -173,13 +173,14 @@ namespace Libraries.Repository.EntityRepository
         
         public async Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId)
         {
-            List<Newlandkhasra> khasraList = await _dbContext.Newlandkhasra.ToListAsync();
+            List<Newlandkhasra> khasraList = await _dbContext.Newlandkhasra
+                   .Where(x => (x.NewLandvillageId == villageId && x.IsActive == 1))
+                .ToListAsync();
             return khasraList;
         }
 
 
-
-
+       
 
 
 
