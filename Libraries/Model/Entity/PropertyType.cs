@@ -16,6 +16,7 @@ namespace Libraries.Model.Entity
             Documentcharges = new HashSet<Documentcharges>();
             Damagecalculation = new HashSet<Damagecalculation>();
             Goldrate = new HashSet<Groundrent>();
+            Licencefees = new HashSet<Licencefees>();
         }
         public string Name { get; set; }
         public byte IsActive { get; set; }
@@ -25,5 +26,6 @@ namespace Libraries.Model.Entity
         public ICollection<Premiumrate> Premiumrate { get; set; }
         public ICollection<Groundrent> Goldrate { get; set; }
         public ICollection<Documentcharges> Documentcharges { get; set; }
+        public ICollection<Licencefees> Licencefees { get; set; }
     }
 }
