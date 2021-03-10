@@ -37,11 +37,7 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    @*<select asp-for="SerialnumberId" asp-items="@(new SelectList(Model.SerialnumberList, "Id","SerialNo"))"
-                            class="floating-label-field floating-label-field--s3">
-                        <option disabled="disabled">---Select---</option>
-
-                    </select>*@
+                  
                     <input asp-for="SerialNumber" placeholder="Serial No" class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="SerialNumber" class="text-danger"></span>
@@ -167,8 +163,7 @@
                     <input type="hidden" asp-for="Developed" id="Developed" value="Yes" />
 
 
-                    @*<input asp-for="Developed" placeholder="Developed" class="floating-label-field floating-label-field--s3" />*@
-                    <span asp-validation-for="Developed" class="text-danger"></span>
+                   <span asp-validation-for="Developed" class="text-danger"></span>
 
                     <div class="form-row">
 

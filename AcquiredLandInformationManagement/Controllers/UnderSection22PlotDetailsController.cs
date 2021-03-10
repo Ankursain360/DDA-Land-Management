@@ -43,8 +43,7 @@ namespace AcquiredLandInformationManagement.Controllers
             model.Undersection17List = await _undersection22plotdetailsService.GetAllUndersection17();
             model.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             model.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(model.AcquiredlandvillageId);
-            //var Data = await _undersection22plotdetailsService.FetchSingleKhasraResult(Convert.ToInt32(model.KhasraId));
-            //model.Khasra = Data;
+           
             model.IsActive = 1;
             return View(model);
         }
@@ -60,11 +59,7 @@ namespace AcquiredLandInformationManagement.Controllers
             us22plot.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             us22plot.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(us22plot.AcquiredlandvillageId);
             us22plot.IsActive = 1;
-            // var Data = await _undersection22plotdetailsService.FetchSingleKhasraResult(Convert.ToInt32(us22plot.KhasraId));
-            //us22plot.Khasra = Data;
-            //us22plot.Bigha = Convert.ToDecimal( us22plot.Khasra.Bigha);
-            //us22plot.Biswa = Convert.ToDecimal(us22plot.Khasra.Biswa);
-            //us22plot.Biswanshi = Convert.ToDecimal(us22plot.Khasra.Biswanshi);
+           
             if (ModelState.IsValid)
                 {
                     var result = await _undersection22plotdetailsService.Create(us22plot);

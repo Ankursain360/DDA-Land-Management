@@ -24,9 +24,9 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _disposallandService = disposallandService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            //var result = await _disposallandService.GetAllDisposalland();
+            
             return View();
         }
         [HttpPost]
@@ -38,8 +38,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Create()
         {
             Disposalland disposalland = new Disposalland();
-            //proposalplotdetails.IsActive = 1;
-
+           
             disposalland.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
             disposalland.VillageList = await _disposallandService.GetAllVillage();
             disposalland.KhasraList = await _disposallandService.GetAllKhasra(disposalland.VillageId);
