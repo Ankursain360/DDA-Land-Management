@@ -1,5 +1,5 @@
-﻿@model Libraries.Model.Entity.Premiumrate
-@await Component.InvokeAsync("PageHeader", new { pageName = "Premium rate" })
+﻿@model Libraries.Model.Entity.Documentcharges
+@await Component.InvokeAsync("PageHeader", new { pageName = "Document charges" })
 
 <div class="pt-3">
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -19,9 +19,9 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="PremiumRate" placeholder="Name" type="text"
+                    <input asp-for="DocumentCharge" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="PremiumRate" class="text-danger"></span>
+                    <span asp-validation-for="DocumentCharge" class="text-danger"></span>
                     <label class="floating-label">Premium Rate   </label>
                 </div>
             </div>
@@ -59,10 +59,9 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>
-                @Html.ActionLink("Back", "Index", "Premiumrate", null, new { @class = "btn btn-theme " })
+                @Html.ActionLink("Back", "Index", "Documentcharges", null, new { @class = "btn btn-theme " })
             </div>
         </div>
-
     </form>
 
 </div>

@@ -13,9 +13,9 @@ namespace Libraries.Model.Entity
             Interest = new HashSet<Interest>();
             Rate = new HashSet<Rate>();
             Premiumrate = new HashSet<Premiumrate>();
+            Documentcharges = new HashSet<Documentcharges>();
             Damagecalculation = new HashSet<Damagecalculation>();
             Goldrate = new HashSet<Groundrent>();
-            Licencefees = new HashSet<Licencefees>();
         }
         public string Name { get; set; }
         public byte IsActive { get; set; }
@@ -24,6 +24,6 @@ namespace Libraries.Model.Entity
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
         public ICollection<Premiumrate> Premiumrate { get; set; }
         public ICollection<Groundrent> Goldrate { get; set; }
-        public ICollection<Licencefees> Licencefees { get; set; }
+        public ICollection<Documentcharges> Documentcharges { get; set; }
     }
 }
