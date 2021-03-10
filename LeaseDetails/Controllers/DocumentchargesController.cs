@@ -62,7 +62,7 @@ namespace LeaseDetails.Controllers
 
                 if (ModelState.IsValid)
                 {
-
+                   
                     charge.CreatedBy = SiteContext.UserId;
                     var result = await _documentchargesService.Create(charge);
 
@@ -113,6 +113,7 @@ namespace LeaseDetails.Controllers
             {
                 try
                 {
+
                     charge.ModifiedBy = SiteContext.UserId;
                     var result = await _documentchargesService.Update(id, charge);
                     if (result == true)
