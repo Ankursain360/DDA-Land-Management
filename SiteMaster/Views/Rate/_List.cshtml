@@ -1,11 +1,10 @@
 ﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Rate>*@
 @model IEnumerable<Libraries.Model.Entity.Rate>
-@{int rowNo = 0; }
 <table class="table table-bordered table-card">
 
     <thead class="thead">
         <tr class="myapp-hed1">
-            <th>Sr.No</th>
+            
             <th>Property Type </th>
             <th>From Date</th>
             <th>To Date</th>
@@ -18,7 +17,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@(rowNo += 1)</td>
+               
                 <td>@item.Property.Name</td>
                 <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
 

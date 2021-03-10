@@ -16,9 +16,7 @@
                         Rebate on Principal Amount
                     </label>
                 </div>
-                @*<label class="radio-inline ">
-                    <input type="radio" asp-for="IsRebateOn" id="rbdPricipal" value="0" />Rebate on Principal Amount
-                </label>*@
+               
             </div>
             <div class="form-group col-md-4">
                 <div class="form-check theme">
@@ -27,9 +25,7 @@
                         Rebate on Interest
                     </label>
                 </div>
-                @*<label class="radio-inline">
-            <input type="radio" asp-for="IsRebateOn" id="rbdInterest" value="1" />Rebate on Interest
-        </label>*@
+                
             </div>
             <div class="form-group col-md-4">
                 <div class="form-check theme">
@@ -38,9 +34,7 @@
                         Both
                     </label>
                 </div>
-                @*<label class="radio-inline">
-            <input type="radio" asp-for="IsRebateOn" id="rbdBoth" value="2" />Both
-        </label>*@
+               
             </div>
         </div>
 
@@ -48,7 +42,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="FromDate" value="" placeholder="From Date" type="date"
                            class="floating-label-field floating-label-field--s3" />
 
@@ -59,7 +53,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                  
                     <input asp-for="ToDate" type="date" value="" class="floating-label-field floating-label-field--s3" placeholder="To Date">
 
                     <span asp-validation-for="ToDate" class="text-danger "></span>
@@ -81,7 +75,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="Scheme" value="" type="text" class="floating-label-field floating-label-field--s3" placeholder="Scheme"
                            limit="100">
                     <span asp-validation-for="Scheme" class="text-danger "></span>
@@ -127,9 +121,3 @@
     <script src="~/js/rebatecreate.min.js" asp-append-version="true"></script>
 </environment>
 
-@*<environment include="Development">
-    <script src="~/js/common.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/common.min.js" asp-append-version="true"></script>
-</environment>*@

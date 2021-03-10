@@ -45,7 +45,7 @@ function GetStructure(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-       // name: "test",
+       
         name: $('#txtName').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),

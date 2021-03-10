@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Interest>
 @await Component.InvokeAsync("PageHeader", new { pageName = "Interest" })
-@*@{int rowNo = 0; }*@
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
@@ -11,24 +10,7 @@
                     <label for="txtProperty" class="floating-label">Property Type</label>
                 </div>
             </div>
-            @*<div class="col-md-3">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
-                <label for="txtFromDate" class="floating-label">From Date</label>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
-                <label for="txtToDate" class="floating-label">To Date</label>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="email" id="txtInterestPercentage" class="floating-label-field floating-label-field--s3" placeholder="Interest Percentage">
-                <label for="txtInterestPercentage" class="floating-label">Interest Percentage</label>
-            </div>
-        </div>*@
+           
         </div>
             <div class="row mt-md-3">
                 <div class="col-md-12 col-xl-3">

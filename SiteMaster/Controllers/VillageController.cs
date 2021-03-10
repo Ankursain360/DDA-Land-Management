@@ -32,7 +32,7 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-           // var list = await _villageService.GetAllVillage();
+           
             return View();
         }
         [HttpPost]

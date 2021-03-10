@@ -29,12 +29,7 @@ namespace SiteMaster.Controllers
         {
             _rebateService = rebateService;
         }
-        [AuthorizeContext(ViewAction.View)]
-        //public async Task<IActionResult> Index()
-        //{
-        //    var result = await _rebateService.GetAllRebate();
-        //    return View(result);
-        //}
+       
 
 
         [AuthorizeContext(ViewAction.View)]

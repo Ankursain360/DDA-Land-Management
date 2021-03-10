@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Rate>
 @await Component.InvokeAsync("PageHeader", new { pageName = "Rate" })
-@*@{int rowNo = 0; }*@
 
 <div class="pt-3">
 
@@ -64,46 +63,7 @@
         </div>
 
         <div class="table-responsive px-2" id="divTable">
-            @*<table class="table table-bordered table-card">
-
-                <thead class="thead">
-                    <tr class="myapp-hed1">
-                        <th>Sr.No</th>
-                        <th>Property Type </th>
-                        <th>From Date</th>
-                        <th>To Date</th>
-                        <th>Rate Percentage</th>
-                        <th>Active Status</th>
-                        <th>Operation</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody">
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@(rowNo += 1)</td>
-                            <td>@item.PropertyTypeName</td>
-                            <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
-
-                            <td>@item.ToDate.ToString("dd-MMM-yyyy")</td>
-                            <td>@item.RatePercentage</td>
-
-                            <td>@(item.IsActive == 1 ? "Active" : "InActive")</td>
-                            <td>
-                                <div class="action-btns">
-                                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                    }
-                </tbody>
-
-            </table>*@
+          
         </div>
 
 
