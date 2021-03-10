@@ -45,8 +45,8 @@ namespace Libraries.Model.Entity
         public string ReferenceNo { get; set; }
 
         [NotMapped]
-        [Required]
-        [DataType(DataType.Upload)]
+        //[Required]
+        //[DataType(DataType.Upload)] ------ Required Validation for image
         public IFormFile RequestPhotos { get; set; }
 
 

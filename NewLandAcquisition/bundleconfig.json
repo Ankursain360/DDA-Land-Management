@@ -268,5 +268,11 @@
     "inputFiles": [
       "wwwroot/js/requestapprovalprocesschange.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandawardplotdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandawardplotdetailscreate.js"
+    ]
   }
 ]

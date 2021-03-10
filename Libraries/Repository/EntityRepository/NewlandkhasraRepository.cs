@@ -177,6 +177,12 @@ namespace Libraries.Repository.EntityRepository
             return khasraList;
         }
 
+
+
+
+
+
+
         public async Task<PagedResult<Newlandkhasra>> GetPagednewlandVillageKhasraReport(NewlandVillageDetailsKhasraWiseReportSearchDto model)
         {
             var data = await _dbContext.Newlandkhasra

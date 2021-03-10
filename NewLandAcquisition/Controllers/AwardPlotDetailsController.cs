@@ -45,7 +45,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Newlandawardplotdetails awardplotdetails = new Newlandawardplotdetails();
             awardplotdetails.IsActive = 1;
             awardplotdetails.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-            awardplotdetails.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+            awardplotdetails.NewlandKhasraList = await _awardplotDetailService.GetAllKhasra(awardplotdetails.VillageId);
             awardplotdetails.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
 
             return View(awardplotdetails);
@@ -58,7 +58,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
                 awardplotdetails.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-                awardplotdetails.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+                awardplotdetails.NewlandKhasraList = await _awardplotDetailService.GetAllKhasra(awardplotdetails.VillageId);
                 awardplotdetails.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
 
                 if (ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
             Data.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-            Data.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+            Data.NewlandKhasraList = await _awardplotDetailService.GetAllKhasra(Data.VillageId);
             Data.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
 
 
@@ -167,7 +167,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _awardplotDetailService.FetchSingleResult(id);
             Data.NewlandAwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
-            Data.NewlandKhasraList = await _awardplotDetailService.BindKhasra();
+            Data.NewlandKhasraList = await _awardplotDetailService.GetAllKhasra(Data.VillageId);
             Data.NewlandVillageList = await _awardplotDetailService.GetAllVillage();
 
 
@@ -178,6 +178,27 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+
+
+
+
+
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? villageId)
+        {
+            villageId = villageId ?? 0;
+            return Json(await _awardplotDetailService.GetAllKhasra(Convert.ToInt32(villageId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraAreaList(int? khasraid)
+        {
+            khasraid = khasraid ?? 0;
+
+            return Json(await _awardplotDetailService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
+        }
 
 
 
