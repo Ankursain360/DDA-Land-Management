@@ -118,6 +118,19 @@ function initialize() {
     var rightdiv = document.getElementById('rightsidebuttons');
     rightdiv.appendChild(zoomDiv);
     getStateboundary();
+
+    $("select").each(function () {
+        if ($(this).hasClass("select2destroy") == false) {
+            $(this).select2();
+        }
+    });
+    $('.numbers').keyup(function () {
+        this.value = this.value.replace(/[^0-9\.]/g, '');
+    });
+    $('.onlynumbers').keyup(function () {
+        var $th = $(this);
+        $th.val($th.val().replace(/[^0-9]/g, ''));
+    });
 }
 
 function getStateboundary() {
@@ -1487,8 +1500,6 @@ function GetKhasraList(id) {
 $(document).on('change', '#KhasraId', function (e) {
     e.preventDefault();
     var khasrano = $('#KhasraId option:selected').val();
-    var mesalearraay = [];
-    var markerarray = [];
     if (khasrano != '') {
 
         HttpGet("/GIS/GetKhasraNoPolygon?gisDataId=" + parseInt(khasrano), 'json', function (response) {
@@ -1542,3 +1553,13 @@ function SetMapNull() {
         KHASRANO_LAYER[h].setMap(null);
     }
 }
+
+function callSelect2() {
+    $("select").select2();
+}
+$('#navQuerytab').on('click', function (e) {  
+
+    e.preventDefault();
+    callSelect2();
+    
+});
