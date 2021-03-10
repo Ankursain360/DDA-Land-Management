@@ -25,7 +25,7 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.FromDate).HasColumnType("date");
 
             builder.Property(e => e.GroundRate)
-                .HasColumnName("GoldRate")
+                .HasColumnName("GroundRate")
                 .HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");

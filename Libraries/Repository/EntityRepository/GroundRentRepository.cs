@@ -25,144 +25,137 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Groundrent>> GetPagedGroundRent(GroundrentSearchDto model)
         {
-            var data = await _dbContext.Groundrent
-                                        
+            var data = await _dbContext.Groundrent.Include(x => x.PropertyType)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                  x.FromDate == (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate == (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                             .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+            if (model.SortBy == null)
+            {
+                model.SortBy = "Type";
+            }
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("GROUNDRATE"):
-                   
+                    case ("TYPE"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderBy(x => x.GroundRate)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderBy(x => x.PropertyType.Name)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
-                    case ("FROMDATE"):
-                    
+                    case ("RATE"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderBy(x => x.FromDate)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                             .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                                .OrderBy(x => x.GroundRate)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
-                    case ("TODATE"):
-                         data = null;
+                    case ("FROM"):
+                        data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderBy(x => x.ToDate)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderBy(x => x.FromDate)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
-                    case ("PROPERTYTYPE"):
-                         data = null;
+                    case ("TO"):
+                        data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                                 //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                                 //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderBy(x => x.PropertyType.Name)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                                .OrderBy(x => x.ToDate)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderByDescending(x => x.IsActive)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderByDescending(x => x.IsActive)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
-                                    }
+
+
+                }
             }
             else if (SortOrder == 2)
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("GROUNDRATE"):
-
+                    case ("TYPE"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderByDescending(x => x.GroundRate)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderByDescending(x => x.PropertyType.Name)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
-                    case ("FROMDATE"):
-
+                    case ("RATE"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderByDescending(x => x.FromDate)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderByDescending(x => x.GroundRate)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
-                    case ("TODATE"):
+                    case ("FROM"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderByDescending(x => x.ToDate)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                                .OrderByDescending(x => x.FromDate)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
-                    case ("PROPERTYTYPE"):
+                    case ("TO"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderByDescending(x => x.PropertyType.Name)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderByDescending(x => x.ToDate)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Groundrent
-                               .Include(x => x.PropertyType)
-
-                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)))
-                               //&& (string.IsNullOrEmpty(model.fromdate) || x.FromDate.Contains(model.fromdate))
-                               //&& (string.IsNullOrEmpty(model.todate) || x.ToDate.Contains(model.todate)))
-                               .OrderBy(x => x.IsActive)
-                                .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
+                                               .Include(x => x.PropertyType)
+                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
+                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderBy(x => x.IsActive)
+                                               .GetPaged<Groundrent>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
             return data;
 
         }
-
-
-
         public async Task<List<Groundrent>> GetAllGroundRent()
         {
-            return await _dbContext.Groundrent.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Groundrent.Include(x => x.PropertyType).Where(x => x.IsActive == 1).ToListAsync();
         }
 
 

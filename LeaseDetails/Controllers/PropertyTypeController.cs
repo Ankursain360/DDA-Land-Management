@@ -15,78 +15,77 @@ using Utility.Helper;
 
 namespace LeaseDetails.Controllers
 {
-    public class GroundRentController : BaseController
+    public class PropertyTypeController : BaseController
     {
-        private readonly IGroundRentService _groundRentService;
-        public GroundRentController(IGroundRentService groundRentService)
+        private readonly IPropertyTypeService _PropertyTypeService;
+        public PropertyTypeController(IPropertyTypeService PropertyTypeService)
         {
-            _groundRentService = groundRentService;
+            _PropertyTypeService = PropertyTypeService;
         }
-       // [AuthorizeContext(ViewAction.View)]
+        // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-             var list =  _groundRentService.GetAllGroundRent();
+            var list = _PropertyTypeService.GetAllPropertyType();
             return View();
         }
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] GroundrentSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] PropertyTypeSearchDto model)
         {
-            var result = await _groundRentService.GetPagedGroundRent(model);
+            var result = await _PropertyTypeService.GetPagedPropertyType(model);
             return PartialView("_List", result);
         }
 
 
-     //   [AuthorizeContext(ViewAction.Add)]
+        //   [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Groundrent groundrent = new Groundrent();
-            groundrent.IsActive = 1;
-            groundrent.CreatedBy = SiteContext.UserId;
-            groundrent.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
-            return View(groundrent);
-            
+            PropertyType PropertyType = new PropertyType();
+            PropertyType.IsActive = 1;
+            PropertyType.CreatedBy = SiteContext.UserId;
+           
+            return View(PropertyType);
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Groundrent groundrent)
+        // [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(PropertyType PropertyType)
         {
             try
             {
-                groundrent.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+              
                 if (ModelState.IsValid)
                 {
-                    var result = await _groundRentService.Create(groundrent);
+                    var result = await _PropertyTypeService.Create(PropertyType);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //var list = await _groundRentService.GetAllGroundRent();
-                        //return View("Index", list);
-                        return RedirectToAction("Index", "GroundRent");
+                        var list = await _PropertyTypeService.GetAllPropertyType();
+                        return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(groundrent);
+                        return View(PropertyType);
                     }
                 }
                 else
                 {
-                    return View(groundrent);
+                    return View(PropertyType);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(groundrent);
+                return View(PropertyType);
             }
         }
         //[AcceptVerbs("Get", "Post")]
         //[AllowAnonymous]
         //public async Task<IActionResult> Exist(int Id, string Name)
         //{
-        //    var result = await _groundRentService.CheckUniqueName(Id, Name);
+        //    var result = await _PropertyTypeService.CheckUniqueName(Id, Name);
         //    if (result == false)
         //    {
         //        return Json(true);
@@ -97,11 +96,14 @@ namespace LeaseDetails.Controllers
         //    }
         //}
 
-      //  [AuthorizeContext(ViewAction.Edit)]
+        //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _groundRentService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+            PropertyType PropertyType = new PropertyType();
+            
+
+            var Data = await _PropertyTypeService.FetchSingleResult(id);
+          
 
             if (Data == null)
             {
@@ -111,49 +113,50 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Groundrent groundrent)
+        // [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, PropertyType PropertyType)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    groundrent.ModifiedBy = SiteContext.UserId;
-                    var result = await _groundRentService.Update(id, groundrent);
+                    PropertyType.ModifiedBy = SiteContext.UserId;
+                    
+                    var result = await _PropertyTypeService.Update(id, PropertyType);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        //var list = await _groundRentService.GetAllGroundRent();
+                        //var list = await _PropertyTypeService.GetAllPropertyType();
                         //return View("Index", list);
-                        return RedirectToAction("Index", "GroundRent");
+                        return RedirectToAction("Index", "PropertyType");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(groundrent);
+                        return View(PropertyType);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(groundrent);
+                    return View(PropertyType);
                 }
             }
             else
             {
-                return View(groundrent);
+                return View(PropertyType);
             }
         }
 
 
 
-      //  [AuthorizeContext(ViewAction.Delete)]
-        public async Task<IActionResult> DeleteConfirmed(int id)  
+        //  [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
             {
 
-                var result = await _groundRentService.Delete(id);
+                var result = await _PropertyTypeService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -167,18 +170,18 @@ namespace LeaseDetails.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            //var list = await _groundRentService.GetAllGroundRent();
-            // return View("Index", list);
-            return RedirectToAction("Index", "GroundRent");
+            //var list = await _PropertyTypeService.GetAllPropertyType();
+            //return View("Index", list);
+            return RedirectToAction("Index", "PropertyType");
         }
 
 
 
-       // [AuthorizeContext(ViewAction.View)]
+        // [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _groundRentService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+            var Data = await _PropertyTypeService.FetchSingleResult(id);
+         
 
             if (Data == null)
             {
@@ -186,14 +189,14 @@ namespace LeaseDetails.Controllers
             }
             return View(Data);
         }
-      
+
 
 
         public async Task<IActionResult> Download()
         {
-            List<Groundrent> result = await _groundRentService.GetAll();
+            List<PropertyType> result = await _PropertyTypeService.GetAll();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"GroundRent.xlsx";
+            string sFileName = @"PropertyType.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }

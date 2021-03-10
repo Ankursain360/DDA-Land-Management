@@ -1,13 +1,11 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Groundrent>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.PropertyType>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
 
-            <th> Property Type </th>
-            <th> Ground Rate</th>
-            <th> From Date</th>
-            <th> To Date</th>
+            <th> Property Type  </th>
+            
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -16,13 +14,9 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td> @(item.PropertyType == null?"": item.PropertyType.Name)</td>
+                <td> @(item.Name == null?"": item.Name)</td>
 
-                <td>@item.GroundRate</td>
-
-                <td>  @(Convert.ToDateTime(item.FromDate).ToString("dd-MMM-yyyy"))</td>
-                <td>  @(Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy"))</td>
-
+                
                 <td>
                     @if (item.IsActive == 1)
                     {
