@@ -24,7 +24,7 @@ namespace CourtCasesManagement.Controllers
 {
     public class LegalmanagementsystemController : BaseController
     {
-        //  private readonly ILegalmanagementsystemService _legalmanagementsystemService;
+        
         private readonly ILegalmanagementsystemservice _legalmanagementsystemService;
         public IConfiguration _configuration;
          public LegalmanagementsystemController(ILegalmanagementsystemservice legalmanagementsystemService, IConfiguration configuration)
@@ -241,39 +241,7 @@ namespace CourtCasesManagement.Controllers
                     legalmanagementsystem.StayInterimGrantedDocument = filePathS;
                 }
 
-                //  FileHelper fileHelper = new FileHelper();
-
-
-                //if (ExistDocFile != null || ExistDocFile != DocumentFilePathLayout && legalmanagementsystem.DocumentFile!=null)
-                //{
-                //    legalmanagementsystem.DocumentFilePath = fileHelper.SaveFile(DocumentFilePathLayout, legalmanagementsystem.DocumentFile);
-                //}
-                //else {
-                //    legalmanagementsystem.DocumentFilePath = ExistDocFile;
-                //}
-                //if ((legalmanagementsystem.DocumentFilePath != null) || (legalmanagementsystem.DocumentFile != null))
-                //    {
-                //    legalmanagementsystem.DocumentFilePath = fileHelper.SaveFile(DocumentFilePathLayout, legalmanagementsystem.DocumentFile);
-
-                //        }
-                //else if(ExistDocFile != null && legalmanagementsystem.DocumentFile==null)
-                //{
-                //    legalmanagementsystem.DocumentFilePath = legalmanagementsystem.DocumentFilePath;
-
-                //}
-                //if (legalmanagementsystem.DocumentFile != null)
-                //{
-                //    legalmanagementsystem.DocumentFilePath = fileHelper.SaveFile(DocumentFilePathLayout, legalmanagementsystem.DocumentFile);
-
-                //}
-                //if (legalmanagementsystem.JudgementFile != null)
-                //{
-                //    legalmanagementsystem.JudgementFilePath = fileHelper.SaveFile(JudgementFilePathLayout, legalmanagementsystem.JudgementFile);
-                //}
-                //if (legalmanagementsystem.StayFile != null)
-                //{
-                //    legalmanagementsystem.StayInterimGrantedDocument = fileHelper.SaveFile(StayFilePathLayout, legalmanagementsystem.StayFile);
-                //}
+               
 
                 var result = await _legalmanagementsystemService.Update(id, legalmanagementsystem);
                     if (result == true)

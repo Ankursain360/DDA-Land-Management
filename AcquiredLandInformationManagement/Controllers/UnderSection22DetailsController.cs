@@ -124,20 +124,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(undersection22);
         }
 
-        //[AcceptVerbs("Get", "Post")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Exist(int Id, string Name)
-        //{
-        //    var result = await _undersection22Service.CheckUniqueName(Id, Name);
-        //    if (result == false)
-        //    {
-        //        return Json(true);
-        //    }
-        //    else
-        //    {
-        //        return Json($"Module: {Name} already exist");
-        //    }
-        //}
+       
 
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)

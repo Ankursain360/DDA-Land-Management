@@ -97,8 +97,7 @@ namespace DamagePayee.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //var list = await _noticeToDamagePayeeService.GetAllNoticetoDamagePayee();
-                        // var F = noticetodamagepayee.FileNo;
+                       
                         return View("_List", noticetodamagepayee);
                     }
                     else

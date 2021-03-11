@@ -17,11 +17,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Khasra No is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
 
-        //[Required(ErrorMessage = "Bigha is mandatory")]
-        //public decimal Bigha { get; set; }
-        //[Required(ErrorMessage = "Biswa is mandatory")]
-        //public decimal Biswa { get; set; }
-        //[Required(ErrorMessage = "Biswanshi is mandatory")]
+        
 
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]

@@ -1,20 +1,9 @@
-﻿@*@model LMS_Encrochment_Management.Models.TblDemolation*@
-
+﻿
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-  /*  div.panel-heading {
-        height: 90px;
-        text-align: center;
-    }
-
-    input {
-        border: 0px;
-    }*/
-</style>
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
 <script src="~/js/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
@@ -30,21 +19,12 @@
 </div>
 <br />
 <br />
-@*<div>
-    @Html.ActionLink("Download ", "Create", "Demolition", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
-
-</div>*@
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  myapp-hed1">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
         </div>
-        @*<div class="panel-heading  myapp-hed1">
-            <h5 style="color:white;">Delhi Development Authority</h5>
-            <h6 style="color:white;">Land Protection Branch (SEZ)</h6>
-            <h6 style="color:white; text-decoration:underline; ">Demolition Report</h6>
-
-        </div>*@
+       
         <div class="panel-body">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -232,13 +212,7 @@
                     </div>
                 </div>
                 <br />
-                @*<div class="row form-group">
-
-                    <div class="col-md-6">
-                        <label class="control-label lb-sm">Office Incharge <br />Land Owning Agency:DDA</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </div>*@
+               
                 <br />
                 <div class="row">
                     <div class="row col-md-12" style="justify-content:center">

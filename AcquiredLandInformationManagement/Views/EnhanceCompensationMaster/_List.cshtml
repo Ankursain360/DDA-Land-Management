@@ -1,11 +1,10 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Enhancecompensation>
-@{int rowNo = 0; }
 
 <table class="table table-responsive table-bordered table-card">
 
     <thead class="thead">
         <tr>
-            <th>Sr.No</th>
+           
             <th>Demand List No </th>
             <th>ENM Sno.</th>
             <th>Status</th>
@@ -16,7 +15,7 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@(rowNo += 1)</td>
+           
             <td>@item.DemandListNo</td>
             <td>@item.Enmsno</td>
 

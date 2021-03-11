@@ -50,9 +50,6 @@ namespace DamagePayee.Controllers
             }
             return View(Data);
         }
-        //public IActionResult DuplicateDemandLetter()
-        //{
-        //    return PartialView();
-        //}
+       
     }
 }

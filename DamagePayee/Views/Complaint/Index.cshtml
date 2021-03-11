@@ -1,6 +1,4 @@
-﻿@*@model IEnumerable<LMS_Encrochment_Management.Models.TblOlComplaint>*@
-@{ int rowNo = 0;}
-@{
+﻿@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -33,7 +31,7 @@
                 <thead>
                     <tr class="myapp-hed1">
 
-                        <th>Sr. No</th>
+                       
                         <th rowspan="2">Complaint ID</th>
                         <th rowspan="2">Complaint Name</th>
                         <th rowspan="2">Contact No</th>
@@ -46,7 +44,7 @@
                 <tbody>
 
                     <tr>
-                        <td>@(rowNo += 1)</td>
+                       
                         <td>Cmp-102-04082020</td>
                         <td>Encroachment Complaint of ShakurBasti</td>
                         <td>9874561230</td>
@@ -64,32 +62,7 @@
                             <a asp-action="Delete" asp-controller="OlCmplnt" class="btn btn-danger"><i class="material-icons">Delete</i></a>
                         </td>
                     </tr>
-                    @*@if (@Model != null)
-                        {
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@(rowNo += 1)</td>
-                                    <td>@item.CmplntId</td>
-                                    <td>@item.CmplntName</td>
-                                    <td>@item.ContactNo</td>
-                                    <td>@item.AreaAddress</td>
-                                    <td>@item.CmplntType</td>
-                                    <td>@item.Location</td>
-                                    <td colspan="3">
-                                        @Html.ActionLink("Edit", "Edit", new { Id = item.Id, CmplntId = item.CmplntId }) |
-                                        @Html.ActionLink("Report", "Report", new { Id = item.Id, CmplntId = item.CmplntId }) |
-                                        @Html.ActionLink("Delete", "Delete", new { Id = item.Id, CmplntId = item.CmplntId })
-                                    </td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr>
-                                <td colspan="16"><b> <strong> Data Not Available</strong> </b></td>
-                            </tr>
-                        }*@
+                  
                 </tbody>
             </table>
         </div>

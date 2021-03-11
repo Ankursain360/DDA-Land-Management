@@ -37,7 +37,7 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.ToDate).HasColumnType("date");
 
             builder.HasOne(d => d.PropertyType)
-                .WithMany(p => p.Goldrate)
+                .WithMany(p => p.Groundrate)
                 .HasForeignKey(d => d.PropertyTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_propertytype");

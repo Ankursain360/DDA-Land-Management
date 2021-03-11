@@ -149,7 +149,7 @@
                         </label>
                     </div>
                 </div>
-                @*</div>*@
+               
 
             </div>
             <div class="col-md-6">
@@ -167,7 +167,7 @@
                         </label>
                     </div>
                 </div>
-                @*</div>*@
+               
             </div>
         </div>
         <div class="row mt-md-3">
@@ -261,13 +261,7 @@
             <label class="floating-label" asp-for="JudgementFile">Judgement Document (if any)</label>
             <input type="hidden" asp-for="JudgementFilePath" />
         </div>
-                @*<div class="floating-label-wrap mb-3 mb-md-0">
-                    <a target="_blank" href="/CourtCasesManagement/JDocDownload?path=@(Model.JudgementFilePath)">@(Model.JudgementFilePath == "" || Model.JudgementFilePath == string.Empty || Model.JudgementFilePath == null ? "": "View Document")</a>
-                    <input type="file" placeholder="Judgement Document" class="floating-label-field floating-label-field--s3 "
-                           asp-for="JudgementFilePath" />
-                    <span asp-validation-for="JudgementFilePath" class="text-danger lb-sm"></span>
-                    <label class="floating-label">Judgement Document (if any)</label>
-                </div>*@
+               
             </div>
             <div class="form-group col-md-6">
                 <label class="control-label lb-sm" asp-for="JudgementRemarks">Judgement Remarks</label>
@@ -296,7 +290,7 @@
         </div>
                 <div class="row ">
             <div class=" col-md-12">
-                @*<button class="btn btn-theme " type="Submit">Update</button>*@
+               
 
                 @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
 

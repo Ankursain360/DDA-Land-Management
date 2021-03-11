@@ -37,10 +37,10 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Create()
         {
             Booktransferland booktransferland = new Booktransferland();
-            //proposalplotdetails.IsActive = 1;
+            
             booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
             booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
-            //  booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
+           
             booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
           
             return View(booktransferland);

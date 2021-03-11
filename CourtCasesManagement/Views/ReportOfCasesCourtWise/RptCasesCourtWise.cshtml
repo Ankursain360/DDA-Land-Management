@@ -1,5 +1,4 @@
-﻿@*@model DDAPropertyREG.Models.Tblzonemaster*@
-
+﻿
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -145,30 +144,3 @@
 </div>
 
 
-
-@*@if (ViewData["Msg"] != null)
-    {
-        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-    }
-
-
-    <script>
-
-        $(function () {
-            var dtToday = new Date();
-
-            var month = dtToday.getMonth() + 1;
-            var day = dtToday.getDate();
-            var year = dtToday.getFullYear();
-            if (month < 10)
-                month = '0' + month.toString();
-            if (day < 10)
-                day = '0' + day.toString();
-
-            var maxDate = year + '-' + month + '-' + day;
-            //alert(maxDate);
-        });
-
-
-    </script>*@

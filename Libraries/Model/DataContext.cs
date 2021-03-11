@@ -236,7 +236,7 @@ namespace Libraries.Model
         public virtual DbSet<Demandlistdetails> Demandlistdetails { get; set; }
         public virtual DbSet<Mutation> Mutation { get; set; }
         public virtual DbSet<Mutationparticulars> Mutationparticulars { get; set; }
-        public virtual DbSet<Groundrent> Groundrent { get; set; }
+        
 
         //***************  New Land Acquisition  *****************
         public virtual DbSet<Newlandus4plot> Newlandus4plot { get; set; }
@@ -277,6 +277,13 @@ namespace Libraries.Model
         // Lease Details module
         public virtual DbSet<Premiumrate> Premiumrate { get; set; }
         public virtual DbSet<Documentcharges> Documentcharges { get; set; }
+        public virtual DbSet<Groundrent> Groundrent { get; set; }
+        public virtual DbSet<Interestrate> Interestrate { get; set; }
+
+        public virtual DbSet<Licencefees> Licencefees { get; set; }
+        public virtual DbSet<Documentchecklist> Documentchecklist { get; set; }
+
+        public virtual DbSet<Servicetype> Servicetype { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -505,7 +512,10 @@ namespace Libraries.Model
 
             modelBuilder.ApplyConfiguration(new PremiumrateConfiguration());
             modelBuilder.ApplyConfiguration(new GroundrentConfiguration());
+            modelBuilder.ApplyConfiguration(new InterestrateConfiguration());
             modelBuilder.ApplyConfiguration(new DocumentchargesConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DocumentCheckListConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

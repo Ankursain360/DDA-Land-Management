@@ -30,7 +30,7 @@ namespace Libraries.Model.EntityConfiguration
                         .HasColumnType("tinyint(4)")
                         .HasDefaultValueSql("1");
 
-            entity.Property(e => e.LicenceFees1)
+            entity.Property(e => e.LicenceFees)
                         .HasColumnName("LicenceFees")
                         .HasColumnType("decimal(18,3)");
 
@@ -40,11 +40,11 @@ namespace Libraries.Model.EntityConfiguration
 
             entity.Property(e => e.ToDate).HasColumnType("date");
 
-            //entity.HasOne(d => d.PropertyType)
-            //            .WithMany(p => p.Licencefees)
-            //            .HasForeignKey(d => d.PropertyTypeId)
-            //            .OnDelete(DeleteBehavior.ClientSetNull)
-            //            .HasConstraintName("fklicencefee");
+            entity.HasOne(d => d.PropertyType)
+                        .WithMany(p => p.Licencefees)
+                        .HasForeignKey(d => d.PropertyTypeId)
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fklicencefee");
 
         }
     }

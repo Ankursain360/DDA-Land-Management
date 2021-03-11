@@ -9,8 +9,11 @@ namespace Libraries.Model.Entity
 {
    public partial class Proposalplotdetails : AuditableEntity<int>
     {
+        [Required(ErrorMessage = "Proposal name is mandatory", AllowEmptyStrings = false)]
         public int? ProposaldetailsId { get; set; }
+        [Required(ErrorMessage = "Village name is mandatory", AllowEmptyStrings = false)]
         public int? AcquiredlandvillageId { get; set; }
+        [Required(ErrorMessage = "Khasra  No is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
         [Required(ErrorMessage = "Bigha is mandatory")]
         public decimal Bigha { get; set; }

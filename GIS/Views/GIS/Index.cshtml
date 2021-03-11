@@ -25,10 +25,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/css/style.css">
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link href="~/lib/select2/select2.css" rel="stylesheet" />
-    <script src="~/lib/select2/select2.js"></script>
+
 </head>
 <body>
     <section class="map-section">
@@ -93,7 +92,7 @@
                                         <i class="ri-search-line text-white"></i>Query
                                     </button>
                                 </h5>
-                                <div id="Query" class="accordion-collapse collapse show" aria-labelledby="Query1" data-bs-parent="#navQueryData">
+                                <div id="Query" class="accordion-collapse collapse " aria-labelledby="Query1" data-bs-parent="#navQueryData">
                                     <div class="p-3">
                                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                                             <li class="nav-item" role="presentation">
@@ -117,7 +116,7 @@
                                                     </div>
                                                     <div class="mb-2">
                                                         <label for="ddlKhasra" class="form-label mb-1 small">Khasra :</label>
-                                                        <select class="form-select form-select-sm" id="KhasraId">
+                                                        <select class="form-select form-select-sm" id="KhasraId" onchange="return ShowKhasraNo(this.options[this.selectedIndex].value);">
                                                             <option selected="selected" value="0">--Select-- </option>
                                                         </select>
                                                     </div>
@@ -366,12 +365,12 @@
     <environment exclude="Development">
         <script src="~/js/common.min.js" asp-append-version="true"></script>
     </environment>
-    <script src="~/lib/toaster/toastr.min.js"></script>
     @*Jquery for Autocomplete Start*@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     @*Jquery for Autocomplete End*@
-
+    <script src="~/lib/select2/select2.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
 </body>
 </html>
