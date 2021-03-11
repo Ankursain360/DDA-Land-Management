@@ -48,14 +48,7 @@ namespace DamagePayee.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<PartialViewResult> List([FromBody] DamagepayeeRegisterApprovalDto model)
-        //{
-        //    var IsUser = await CheckThisisUser();
-        //    var result = await _damagePayeeApprovalService.GetPagedDamagePayeeRegisterForApproval(model, IsUser);
-        //    ViewBag.IsApproved = model.StatusId;
-        //    return PartialView("_List", result);
-        //}
+       
         async Task BindDropDown(Damagepayeeregister damagepayeeregistertemp)
         {
             damagepayeeregistertemp.LocalityList = await _damagepayeeregisterService.GetLocalityList();
@@ -80,72 +73,7 @@ namespace DamagePayee.Controllers
         }
         [HttpPost]
 
-        //[AuthorizeContext(ViewAction.Add)]
-        //public async Task<IActionResult> Create(int id, Damagepayeeregister damagepayeeregistertemp)
-        //{
-        //    var result = false;
-
-           
-        //    #region Approval Proccess At Further level start Added by Renu 28 Dec 2020
-        //    var DataFlow = await DataAsync();
-        //    for (int i = 0; i < DataFlow.Count; i++)
-        //    {
-        //        if (!DataFlow[i].parameterSkip)
-        //        {
-        //            if ((DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId) || (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId))
-        //            {
-        //                result = true; 
-        //                if (result)
-        //                {
-        //                    var Count = ProccessWorkflowData();
-        //                    TransactionTemplateStructure obj = new TransactionTemplateStructure();
-        //                    obj.TaskRequestId = damagepayeeregistertemp.Id;
-        //                    obj.ActionByUserId = SiteContext.UserId;
-        //                    obj.Remarks = damagepayeeregistertemp.ApprovalRemarks;
-        //                    obj.Status = damagepayeeregistertemp.ApprovalStatus;
-        //                    obj.Level = Count+1;
-        //                    string JsonTransactionTemplateData = JsonSerializer.Serialize(obj);
-
-        //                    Processworkflow proccess = new Processworkflow();
-        //                    proccess.TransactionTemplate = JsonTransactionTemplateData;
-        //                    proccess.WorkflowTemplateId = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
-        //                    proccess.ActionId = SiteContext.UserId;
-        //                    proccess.CreatedBy = SiteContext.UserId;
-        //                    result = await _proccessWorkflowService.Create(proccess); //Create a row in ProccessWorkflow Table
-
-        //                    if (result)
-        //                    {
-        //                        if (i == DataFlow.Count - 1)// Last Level 
-        //                        {
-        //                            result =await UpdateTaskRequestedByTable(id, damagepayeeregistertemp);
-
-        //                            if (result)
-        //                            {
-        //                                /*For Damage Payee Replicate Temp Table to Approved table */
-        //                                result = await CreateAprrovedRecordsinActualTable(damagepayeeregistertemp);
-                                        
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //                break;
-        //            }
-        //            //else
-        //            //{
-        //            //    ViewBag.Message = Alert.Show("You are not allowed to Approve this record", "", AlertType.Success);
-        //            //    return View("Index");
-        //            //}
-
-        //        }
-
-
-        //    }
-
-        //    #endregion
-
-        //    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-        //    return View("Index");
-        //}
+       
         private async Task<bool> UpdateTaskRequestedByTable(int id, Damagepayeeregister damagepayeeregistertemp)
         {
             damagepayeeregistertemp.ApprovedStatus = 1;
@@ -371,36 +299,8 @@ namespace DamagePayee.Controllers
 
         #endregion
 
-        //#region Fetch workflow data for approval prrocess Added by Renu 28 Dec 2020
-        //private async Task<List<TemplateStructure>> DataAsync()
-        //{
-        //    var Data = await _workflowtemplateService.FetchSingleResult(1);
-        //    var template = Data.Template;
-        //    List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
-        //    return ObjList;
-        //}
-
-        //[HttpGet]
-        //public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
-        //{
-        //    var DataFlow = await DataAsync();
-
-        //    for (int i = 0; i < DataFlow.Count; i++)
-        //    {
-        //        if (DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId)
-        //        {
-        //            var dropdown = DataFlow[i].parameterAction;
-        //            return Json(dropdown);
-        //        }
-        //        else if (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-        //        {
-        //            var dropdown = DataFlow[i].parameterAction;
-        //            return Json(dropdown);
-        //        }
-        //    }
-        //    return Json(DataFlow);
-        //}
-        //#endregion
+       
+      
 
         #region Fetch ProccessWorkflow Data Added by Renu 28 Dec 2020
         private int ProccessWorkflowData()

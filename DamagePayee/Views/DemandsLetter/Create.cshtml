@@ -192,7 +192,7 @@
             <div class="row pt-3">
                 <div class="col-md-12">
                     <input type="submit" value="Generate" class="btn btn-theme " />
-                    @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                   
                     @Html.ActionLink("Back", "Index", "DemandsLetter", null, new { @class = "btn btn-theme " })
                 </div>
             </div>
@@ -264,18 +264,11 @@
                 $("#DivForPayeeName").show();
                 $("#DivForGenerate").show();
             }
-                //else {
-            //    $("#DivForFileName").hide();
-            //    $("#DivForPayeeName").hide();
-            //}
+             
         });
     });
 
 
-    @*on generate click show report*@
-    //$("#btnGenerate").click(function () {
-       // $("DivDemandReport").show();
-   // });
 
 
     $("#btnGenerate").click(function () {

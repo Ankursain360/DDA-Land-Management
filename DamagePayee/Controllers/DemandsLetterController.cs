@@ -29,7 +29,7 @@ namespace DamagePayee.Controllers
         async Task BindDropDownView(Demandletters demandletters)
         {
             demandletters.LocalityList = await _demandLetterService.GetLocalityList();
-            //demandletters.FileNoList = await _demandLetterService.GetFileNoList();
+           
         }
 
 
@@ -64,8 +64,7 @@ namespace DamagePayee.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //var list = await _noticeToDamagePayeeService.GetAllNoticetoDamagePayee();
-                        // var F = noticetodamagepayee.FileNo;
+                       
                         return View("_List", demandletter);
                     }
                     else

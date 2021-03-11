@@ -26,11 +26,7 @@ namespace DamagePayee.Controllers
             demandletters.LocalityList = await _demandLetterService.GetLocalityList();
             demandletters.FileNoList = await _demandLetterService.GetFileNoList();
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
+       
 
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()

@@ -1,5 +1,4 @@
-﻿@*@model LMS_Encrochment_Management.Models.TblOlComplaint*@
-@{
+﻿@{
     ViewData["Title"] = "Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -40,7 +39,7 @@
         <div class="panel-heading  myapp-hed1">
             <h5 style="color:white;">Delhi Development Authority</h5>
             <h6 style="color:white;">Online Complaint Report</h6>
-            @*<h6 class="pull-left" style="color:white; margin-top:-0.4%">New Complaint</h6>*@
+         
         </div>
         <div class="panel-body">
             <form asp-action="Create">
@@ -80,7 +79,7 @@
                     <div class="col-md-6">
                         <label class="control-label lb-sm">Location</label>
                         <select disabled class="form-control">
-                            @*<option value="">-Select-</option>*@
+                           
                             <option value="">Delhi</option>
                         </select>
                     </div>
@@ -114,82 +113,4 @@
     </div>
 </div>
 
-
-
-@*<div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h2 style="margin-top:2px;margin-bottom:2px;">Delhi Development Authority</h2>
-                <h3 style="margin-top:5px;">Online Complaint Report</h3>
-
-                <div class="card-body">
-                    <br />
-                    <div class="panel-container">
-                        <div class="col-md-12">
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Complaint ID</label>
-                                            <input class="form-control" type="text" disabled />
-                                        </div>
-                                        <div class="col-md-12">
-                                            <label>Name of Complaint</label>
-                                            <input class="form-control" type="text" disabled />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <img src="~/images/sign.png" height="150" width="150" class="center-block" style=" border:1px solid black;" />
-                                </div>
-
-                            </div>
-                            <div class="row form-group">
-
-                                <div class="col-md-6">
-                                    <label>Contact No.</label>
-                                    <input class="form-control" type="text" disabled />
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Area/Address of Complaint</label>
-                                    <input class="form-control" type="text" disabled />
-                                </div>
-                            </div>
-
-                            <div class="row form-group">
-                                <div class="col-md-6">
-                                    <label>Type of Complaint</label>
-                                    <select class="form-control">
-                                        <option value="0">--Select--</option>
-                                        <option value="0">Encroachment</option>
-                                        <option value="0">Uerhygenic</option>
-                                        <option value="0">Misuse</option>
-                                        <option value="0">Broken boundary wall/fencing</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Location</label>
-                                    <select class="form-control" disabled>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <div class="row form-group">
-                                <div class="col-md-6">
-                                    <label>Lattitude</label>
-                                    <input class="form-control" type="text" disabled />
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Longitude</label>
-                                    <input class="form-control" type="text" disabled />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
 
