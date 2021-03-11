@@ -65,7 +65,7 @@ namespace CourtCasesManagement.Controllers
                         if (result == true)
                         {
                             ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            //return View();
+                            
                             var list = await _caseyearService.GetAllcaseyear();
                             return View("Index", list);
                         }
@@ -154,8 +154,7 @@ namespace CourtCasesManagement.Controllers
 
     public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
             {
-                //try
-                //{
+                
 
                 var result = await _caseyearService.Delete(id);
                 if (result == true)
@@ -167,13 +166,7 @@ namespace CourtCasesManagement.Controllers
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 }
                 return RedirectToAction("Index", "CaseYear");
-                //}
-                //catch(Exception ex)
-                //{
-                //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
-                //    return View();
-                //}
-
+               
             }
 
 

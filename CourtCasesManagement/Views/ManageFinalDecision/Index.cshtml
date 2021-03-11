@@ -61,45 +61,7 @@
                     <th>Operation</th>
                 </tr>
 
-                @*<tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@(rowNo += 1)</td>
-
-                        <td>@item.CaseNo</td>
-                        <td>@item.CaseTitle</td>
-                        <td>@item.LegalFileNo</td>
-                        <td>@item.CourtName</td>
-
-                        <td>@(Convert.ToDateTime(item.DateOfFinalDecision).ToString("dd-MMM-yyyy"))</td>
-                        <td>@item.GistOfFinalDecision</td>
-                        <td>@item.DecisionType</td>
-                        <td>@item.NatureOfDecision</td>
-                        <td>@item.ToBeChallenged</td>
-                        <td>@item.WhetherAppealRevisionToBeFiledOrNot</td>
-
-                        <td>@(Convert.ToDateTime(item.DateOfFiling).ToString("dd-MMM-yyyy"))</td>
-
-                        <td>@(Convert.ToDateTime(item.DateByWhichOrderToBeCompiled).ToString("dd-MMM-yyyy"))</td>
-
-                        <td>@(Convert.ToDateTime(item.DateOfCompliance).ToString("dd-MMM-yyyy"))</td>
-
-                        <td>@item.Document</td>
-                        <td>@item.Remarks</td>
-
-                        <td>@item.ActiveStatus</td>
-
-
-
-
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ManagefinaldecisionRecNo" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-                            <a asp-action="Delete" asp-route-id="@item.ManagefinaldecisionRecNo" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>*@
+               
 
                 <tr>
                     <td>1</td>

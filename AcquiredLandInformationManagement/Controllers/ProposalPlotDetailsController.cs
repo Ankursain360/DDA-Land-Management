@@ -41,8 +41,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Create()
         {
             Proposalplotdetails proposalplotdetails = new Proposalplotdetails();
-            //proposalplotdetails.IsActive = 1;
-
+            
             proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
             proposalplotdetails.AcquiredlandvillageList = await _proposalplotdetailsService.GetAllVillage();
             proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra(proposalplotdetails.AcquiredlandvillageId);

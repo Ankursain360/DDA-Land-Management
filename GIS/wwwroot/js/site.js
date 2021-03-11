@@ -1,4 +1,4 @@
-﻿
+﻿ 
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }

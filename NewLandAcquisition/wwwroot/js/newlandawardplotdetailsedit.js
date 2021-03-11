@@ -1,7 +1,7 @@
 ﻿function onChange(id) {
 
     HttpGet(`/AwardPlotDetails/GetKhasraList/?villageId=${id}`, 'json', function (response) {
-        var html = '<option></option>';
+        var html ;
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }

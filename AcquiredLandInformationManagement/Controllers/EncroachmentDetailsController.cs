@@ -42,7 +42,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Enchroachment enchroachment = new Enchroachment();
             enchroachment.IsActive = 1;
 
-          //  enchroachment.KhasraList = await _enchroachmentService.BindKhasra();
+         
             enchroachment.VillageList = await _enchroachmentService.GetAllVillage();
             enchroachment.KhasraList = await _enchroachmentService.BindKhasra(enchroachment.VillageId);
             enchroachment.NencroachmentList = await _enchroachmentService.GetAllNencroachment();
@@ -90,8 +90,7 @@ namespace AcquiredLandInformationManagement.Controllers
                                     owner.Add(new EncrocherPeople
                                     {
                                         Name = enchroachment.EName.Count <= i ? string.Empty : enchroachment.EName[i],
-                                      //  FatherName = enchroachment.FatherName.Count <= i ? string.Empty : jarai.FatherName[i],
-                                       Address = enchroachment.EAddress.Count <= i ? string.Empty :enchroachment.EAddress[i],
+                                      Address = enchroachment.EAddress.Count <= i ? string.Empty :enchroachment.EAddress[i],
                                         EnchId = enchroachment.Id,
                                         CreatedBy = SiteContext.UserId
                                     });
@@ -119,8 +118,7 @@ namespace AcquiredLandInformationManagement.Controllers
                                     owner1.Add(new Enchroachmentpayment
                                     {
                                         Amount = enchroachment.Amount.Count <= i ? string.Empty : enchroachment.Amount[i],
-                                        //  FatherName = enchroachment.FatherName.Count <= i ? string.Empty : jarai.FatherName[i],
-                                        ChequeDate = enchroachment.ChequeDate.Count <= i ? string .Empty : enchroachment.ChequeDate[i],
+                                      ChequeDate = enchroachment.ChequeDate.Count <= i ? string .Empty : enchroachment.ChequeDate[i],
                                        ChequeNo=enchroachment.ChequeNo.Count<=i? string.Empty : enchroachment.ChequeNo[i],
                                         EnchId = enchroachment.Id,
                                         CreatedBy = SiteContext.UserId
@@ -208,7 +206,7 @@ namespace AcquiredLandInformationManagement.Controllers
                                 enchroachment.EAddress.Count > 0)
 
                                 {
-                                   // int epr = (enchroachment.EName.Count) - 1;
+                                  
 
                                     List<EncrocherPeople> owner = new List<EncrocherPeople>();
                                     result = await _enchroachmentService.DeleteOwner(id);
@@ -218,8 +216,7 @@ namespace AcquiredLandInformationManagement.Controllers
                                         owner.Add(new EncrocherPeople
                                         {
                                             Name = enchroachment.EName.Count <= i ? string.Empty : enchroachment.EName[i],
-                                            //  FatherName = enchroachment.FatherName.Count <= i ? string.Empty : jarai.FatherName[i],
-                                            Address = enchroachment.EAddress.Count <= i ? string.Empty : enchroachment.EAddress[i],
+                                          Address = enchroachment.EAddress.Count <= i ? string.Empty : enchroachment.EAddress[i],
                                             EnchId = enchroachment.Id,
                                             CreatedBy = SiteContext.UserId
                                         });

@@ -27,9 +27,9 @@ namespace AcquiredLandInformationManagement.Controllers
             _tehsilService = tehsilService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-           // var result = await _tehsilService.GetAllTehsil();
+          
             return View();
         }
 
@@ -91,7 +91,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
 
             var Data = await _tehsilService.FetchSingleResult(id);
-            //Data.SchemeList = await _tehsilService.GetAllScheme();
+           
             if (Data == null)
             {
                 return NotFound();
@@ -167,7 +167,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _tehsilService.FetchSingleResult(id);
-            //Data.SchemeList = await _tehsilService.GetAllScheme();
+           
             if (Data == null)
             {
                 return NotFound();

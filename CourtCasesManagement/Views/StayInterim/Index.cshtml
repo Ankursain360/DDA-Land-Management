@@ -59,42 +59,7 @@
                     <th>Operation</th>
                 </tr>
 
-                @*<tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@(rowNo += 1)</td>
-
-                        <td>@item.CaseNo</td>
-                        <td>@item.CaseTitle</td>
-                        <td>@item.LegalFileNo</td>
-                        <td>@item.CourtName</td>
-
-                        <td>@item.StayInterim</td>
-                        <td>@(Convert.ToDateTime(item.HearingDate).ToString("dd-MMM-yyyy"))</td>
-                        <td>@(Convert.ToDateTime(item.OrderDate).ToString("dd-MMM-yyyy"))</td>
-
-                        <td>@item.GistOfOrder</td>
-                        <td>@item.VacateModifyConfirm</td>
-                        <td>@(Convert.ToDateTime(item.DateOfVacateModifyConfirm).ToString("dd-MMM-yyyy"))</td>
-                        <td>@item.CompiledOrNot</td>
-                        <td>@(Convert.ToDateTime(item.DateOfCompliance).ToString("dd-MMM-yyyy"))</td>
-
-                        <td>@item.ByWhomToComply</td>
-                        <td>@item.ReasonForNonCompliance</td>
-                        <td>@item.AppealRevisionReviewIfFiled</td>
-                        <td>@(Convert.ToDateTime(item.DateOffillingappealRevisionReview).ToString("dd-MMM-yyyy"))</td>
-                        <td>@item.Document</td>
-                        <td>@item.ActiveStatus</td>
-
-                        <td>@(Convert.ToDateTime(item.StipulatedDate).ToString("dd-MMM-yyyy"))</td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.StayInterimRecNo" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-                            <a asp-action="Delete" asp-route-id="@item.StayInterimRecNo" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        </td>
-                    </tr>
-                }
-            </tbody>*@
+               
                 <tr>
                     <td>1</td>
                     <td>1111111</td>

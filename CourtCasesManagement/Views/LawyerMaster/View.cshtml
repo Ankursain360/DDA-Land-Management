@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
                            limit="100">
                     <span asp-validation-for="Name" class="text-danger "></span>
@@ -69,7 +69,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="PanNo" type="text" class="floating-label-field floating-label-field--s3" disabled="disabled" placeholder="Pan No"
                            limit="600">
                     <span asp-validation-for="PanNo" class="text-danger "></span>
@@ -82,7 +82,7 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                    
                     <input asp-for="ResidentailAddress" type="text" class="floating-label-field floating-label-field--s3" disabled="disabled" placeholder="Residentail Address"
                            limit="600">
                     <span asp-validation-for="ResidentailAddress" class="text-danger "></span>
@@ -91,7 +91,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="PhoneNo" type="number" class="floating-label-field floating-label-field--s3" disabled="disabled" placeholder="Phone No"
                            limit="600">
                     <span asp-validation-for="PhoneNo" class="text-danger "></span>
@@ -104,7 +104,7 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="ValidFrom" type="date" class="floating-label-field floating-label-field--s3" disabled="disabled" placeholder="Valid From"
                            limit="600">
                     <span asp-validation-for="ValidFrom" class="text-danger "></span>
@@ -113,7 +113,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
+                   
                     <input asp-for="ValidTo" type="date" class="floating-label-field floating-label-field--s3" disabled="disabled" placeholder="Valid To"
                            limit="600">
                     <span asp-validation-for="ValidTo" class="text-danger "></span>
@@ -149,10 +149,3 @@
 
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-@*<environment include="Development">
-        <script src="~/js/LocalityMaster.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/LocalityMaster.min.js" asp-append-version="true"></script>
-    </environment>*@
-

@@ -6,9 +6,7 @@
             <th>Notification U/S-17</th>
             <th>Village</th>
             <th>Khasra No</th>
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
+            <th>Area(Bigha-Biswa-Biswanshi)</th>
             <th>Status</th>
             <th>Operations</th>
         </tr>
@@ -19,15 +17,18 @@
         <tr>
             <td> @(item.UnderSection17 == null?"": item.UnderSection17.Number)</td>
             <td> @(item.Acquiredlandvillage == null?"": item.Acquiredlandvillage.Name)</td>
-           
-           
+
+
             <td> @(item.Khasra == null?"": item.Khasra.Name)</td>
 
 
-            
-            <td>@item.Bigha</td>
-            <td>@item.Biswa</td>
-            <td>@item.Biswanshi</td>
+
+            <td>
+                @item.Bigha
+                -
+                @item.Biswa-
+                @item.Biswanshi
+            </td>
             <td>
                 @if (item.IsActive == 1)
                 {
@@ -36,7 +37,7 @@
                 {
                     <span class="badge badge-danger px-2 py-1">Inactive</span>}
             </td>
-           
+
             <td>
                 <div class="action-btns">
                     <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
