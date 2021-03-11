@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using DDAPropertyREG.Models;
-//using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
+
 using Microsoft.AspNetCore.Mvc;
-//using BotDetect.Web.Mvc;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +16,7 @@ namespace CourtCasesManagement.Controllers
 {
     public class LoginController : Controller
     {
-        //private readonly lmsContext _context;
-        //static string Result = string.Empty;
-        //private readonly IHostingEnvironment _hostingEnvironment;
-
-        //public LoginController(lmsContext context, IHostingEnvironment en)
-        //{
-        //    _context = context;
-        //    _hostingEnvironment = en;
-        //}
+       
         public IActionResult Index()
         {
             return View();

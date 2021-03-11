@@ -1,5 +1,4 @@
-﻿@*@model DDAPropertyREG.Models.Tblzonemaster*@
-
+﻿
 @{
     ViewData["Title"] = "RptBranchLawyerStatusWise";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -87,14 +86,7 @@
                                 <div class="card  table-card table-responsive">
 
                                     <table class="table  table-bordered table-card">
-                                        @*<thead>
-                                <tr >
-                                    <th colspan="5">  Department/Branch Name : Engg </th>
-                                    <th colspan="5">Lawyer Name : Ajay Verma</th>
-                                    <th colspan="5">Status : Pending</th>
-                                </tr>
-
-                            </thead>*@
+                                     
 
                                         <thead class="thead">
                                             <tr class="myapp-hed1">
@@ -178,12 +170,4 @@
         </div>
     </div>
 </div>
-
-
-
-@*@if (ViewData["Msg"] != null)
-{
-    DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}*@
 
