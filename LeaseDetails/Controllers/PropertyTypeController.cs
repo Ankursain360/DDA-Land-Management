@@ -61,8 +61,9 @@ namespace LeaseDetails.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _PropertyTypeService.GetAllPropertyType();
-                        return View("Index", list);
+                        //var list = await _PropertyTypeService.GetAllPropertyType();
+                        //return View("Index", list);
+                        return RedirectToAction("Index", "PropertyType");
                     }
                     else
                     {

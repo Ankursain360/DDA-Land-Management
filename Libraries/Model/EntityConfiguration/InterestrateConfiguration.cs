@@ -1,17 +1,20 @@
-﻿using Libraries.Model.Entity;
+﻿using System;
+using System.Collections.Generic;
+using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Model.EntityConfiguration
+
+namespace Libraries.Model.EntityConfiguration
 {
-    public class GroundrentConfiguration : IEntityTypeConfiguration<Groundrent>
+    class InterestrateConfiguration : IEntityTypeConfiguration<Interestrate>
     {
-        public void Configure(EntityTypeBuilder<Groundrent> builder)
+        public void Configure(EntityTypeBuilder<Interestrate> builder)
         {
-            builder.ToTable("groundrent", "lms");
+            builder.ToTable("intersetrate", "lms");
 
             builder.HasIndex(e => e.PropertyTypeId)
                 .HasName("fkpropertytype_idx");
@@ -24,9 +27,7 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.FromDate).HasColumnType("date");
 
-            builder.Property(e => e.GroundRate)
-                .HasColumnName("GroundRate")
-                .HasColumnType("decimal(18,3)");
+            builder.Property(e => e.InterestRate).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
@@ -37,10 +38,10 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.ToDate).HasColumnType("date");
 
             builder.HasOne(d => d.PropertyType)
-                .WithMany(p => p.Groundrate)
-                .HasForeignKey(d => d.PropertyTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_propertytype");
-        }
+                        .WithMany(p => p.Intersetrate)
+                        .HasForeignKey(d => d.PropertyTypeId)
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_Intpropertytype");
         }
     }
+}
