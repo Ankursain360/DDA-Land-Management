@@ -38,7 +38,6 @@ var VILLAGEID_UNIVERSAL = [];
 var RECTWITHKHASRANO_LAYER = [];
 
 $(document).ready(function () {
-    console.log('f9');
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
         var html = '';
         for (var i = 0; i < response.length; i++) {
@@ -60,6 +59,7 @@ $(document).ready(function () {
         $("#accordionData").html('');
         $("#accordionData").html(html);
     });
+    callSelect2();
 });
 
 function CoordMapType() { }
@@ -1497,6 +1497,55 @@ function GetKhasraList(id) {
     });
 };
 
+function ShowKhasraNo(id) {
+    var khasrano = id;
+    if (khasrano != '') {
+
+        HttpGet("/GIS/GetKhasraNoPolygon?gisDataId=" + parseInt(khasrano), 'json', function (response) {
+            var khasrano = $.map(response, function (el) { return el; })
+            for (h = 0; h < KHASRANO_LAYER.length; h++) {
+                KHASRANO_LAYER[h].setMap(null);
+            }
+            for (aj = 0; aj < khasrano.length; aj++) {
+                var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
+                var measle = new google.maps.Marker({
+                    position: lp,
+                    map: map,
+                    icon: {
+                        url: "https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle.png",
+                        size: new google.maps.Size(7, 7),
+                        anchor: new google.maps.Point(4, 4)
+                    }
+                });
+                var marker = new google.maps.Marker({
+                    position: lp,
+                    map: map,
+                    icon: {
+                        url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                        labelOrigin: new google.maps.Point(6, -4),
+                        //size: new google.maps.Size(32, 32),
+                        anchor: new google.maps.Point(16, 32)
+                    },
+                    label: {
+                        text: khasrano[aj].label,
+                        color: "#C70E20",
+                        fontWeight: "bold"
+                    }
+                });
+                marker.khasrano = khasrano[aj].label;
+                marker.villageid = VILLAGEID_UNIVERSAL[0];
+                google.maps.event.addListener(marker, 'click', function () {
+                    getInfo(this.villageid, this.khasrano);
+                });
+                KHASRANO_LAYER.push(marker);
+                KHASRANO_LAYER.push(measle);
+                map.setZoom(17);
+                Polys.push(marker);
+                map.panTo(new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)));
+            }
+        });
+    }
+};
 $(document).on('change', '#KhasraId', function (e) {
     e.preventDefault();
     var khasrano = $('#KhasraId option:selected').val();
@@ -1557,7 +1606,7 @@ function SetMapNull() {
 function callSelect2() {
     $("select").select2();
 }
-$('#navQuerytab').on('click', function (e) {  
+$('#Query1').on('click', function (e) {  
 
     e.preventDefault();
     callSelect2();
