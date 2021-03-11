@@ -21,11 +21,18 @@ namespace Libraries.Model.Entity
         [Required]
         public DateTime PossDate { get; set; }
         public int PossKhasraId { get; set; }
-        [Required]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        [Required(ErrorMessage = " Bigha is mandatory")]
+        
         public decimal Bigha { get; set; }
-        [Required]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        [Required(ErrorMessage = "Biswa is mandatory")]
         public decimal Biswa { get; set; }
-        [Required]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
         public int Us4id { get; set; }
