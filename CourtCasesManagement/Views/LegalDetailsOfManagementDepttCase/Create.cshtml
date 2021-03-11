@@ -1,5 +1,4 @@
-﻿@*@model DDAPropertyREG.Models.Tblpropertyregistration*@
-
+﻿
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,15 +27,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div id="Divclsification">
-                    @* <div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class=" myapp-hed2">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;"></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
+                  
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -245,7 +236,7 @@
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                      
                         @Html.ActionLink("Back", "Index", "LegalDetailsOfManagementDepttCase", null, new { @class = "btn btn-primary myapp-hed1" })
                     </div>
                 </div>
@@ -307,19 +298,7 @@
 
 
 <script>
-    //$(function () {
-    //    $('#Division').change(function () {
-    //        var value = $('#Division').val();
-    //        if (value == "No") {
-    //            $('#t3').val('');
-    //            $("#divDivision").hide();
-    //        }
-    //        else {
-    //            $('#t3').val('');
-    //            $("#divDivision").show();
-    //        }
-    //    });
-    //});
+   
 
     $(function () {
         $('#Litigation').change(function () {

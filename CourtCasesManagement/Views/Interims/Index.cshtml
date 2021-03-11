@@ -44,38 +44,7 @@
                 <th>Operation</th>
             </tr>
 
-            @*<tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@(rowNo += 1)</td>
-
-                    <td>@item.CaseNo</td>
-                    <td>@item.CaseTitle</td>
-                    <td>@item.LegalFileNo</td>
-                    <td>@item.CourtName</td>
-
-                    <td>@(Convert.ToDateTime(item.DateOfInterimDirectionOrGist).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(Convert.ToDateTime(item.DateOrderToBeCompliedWith).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(Convert.ToDateTime(item.DateOfCompliance).ToString("dd-MMM-yyyy"))</td>
-
-                    <td>@item.NatureOfInterimDirection</td>
-                    <td>@item.Document</td>
-                    <td>@item.DetailsOinterimDirectionOrGist</td>
-                    <td>@item.ActiveStatus</td>
-
-
-
-                    <td>@(Convert.ToDateTime(item.StipulatedDate).ToString("dd-MMM-yyyy"))</td>
-
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.InterimsRecNo" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
-                        <a asp-action="Delete" asp-route-id="@item.InterimsRecNo" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </td>
-                </tr>
-
-            }
-        </tbody>*@
+           
             <tr>
                 <td>1</td>
                 <td>1111111</td>

@@ -1,7 +1,6 @@
 ﻿
 
 
-@*@model DDAPropertyREG.Models.Tblzonemaster*@
 
 @{
     ViewData["Title"] = "Create";
@@ -164,12 +163,4 @@
         </div>
     </div>
 </div>
-
-
-
-@*@if (ViewData["Msg"] != null)
-{
-    DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}*@
 

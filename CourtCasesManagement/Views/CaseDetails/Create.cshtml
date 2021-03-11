@@ -1,5 +1,4 @@
-﻿@*@model DDAPropertyREG.Models.Tblinterims*@
-
+﻿
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,21 +37,7 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                @*<div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Batch  No </label>
-                            <input required type="text" class="form-control">
-
-
-                        </div>
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Serial No  </label>
-                            <input required type="text" class="form-control">
-
-                        </div>
-                    </div>*@
-
+              
 
                 <div class="form-row">
                     <div class="form-group col-md-9">
@@ -272,7 +257,7 @@
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                       
                         @Html.ActionLink("Back", "Index", "CaseDetails", null, new { @class = "btn btn-primary myapp-hed1" })
                     </div>
                 </div>
@@ -282,12 +267,3 @@
 </div>
 
 
-
-
-
-
-@*@if (ViewData["Msg"] != null)
-    {
-        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-    }*@
