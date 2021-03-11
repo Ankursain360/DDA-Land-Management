@@ -5,6 +5,10 @@
     <UserSecretsId>b818242d-0eed-4b3d-b626-18075a6e1a79</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\js\newlandawardplotdetailsedit.min.js" />
+  </ItemGroup>
+
 	<ItemGroup> 
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" /> 
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" /> 
@@ -31,8 +35,13 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\newlandawardplotdetailsedit.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\newlandschemeindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\newus6plotcreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\newlandawardplotdetailsedit.min.js" />
   </ItemGroup>
 
 </Project>
