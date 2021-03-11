@@ -30,7 +30,7 @@ namespace DamagePayee.Controllers
 {
     public class DamagePayeeRegistrationController : BaseController
     {
-        //private readonly IDataProtector protector;
+       
         static string result = string.Empty;
         private readonly IHostingEnvironment _hostingEnvironment;
         public Microsoft.Extensions.Configuration.IConfiguration _configuration;
@@ -171,9 +171,7 @@ namespace DamagePayee.Controllers
                 {
                     payeeregistration.Id = UniqueId;
                     var result1 = await _damagePayeeRegistrationService.UpdateVerification(payeeregistration);
-                    //if (result1 == true)
-                    //    ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);
-
+                    
                     return View("RegistrationConfirmed");
                 }
                 else

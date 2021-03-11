@@ -274,5 +274,11 @@
     "inputFiles": [
       "wwwroot/js/newlandawardplotdetailscreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandawardplotdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandawardplotdetailsedit.js"
+    ]
   }
 ]

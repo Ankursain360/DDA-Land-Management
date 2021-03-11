@@ -55,7 +55,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Create()
         {
             Doortodoorsurvey doortodoorsurvey = new Doortodoorsurvey();
-            // doortodoorsurvey.IsActive = 1;
+           
             doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
             return View(doortodoorsurvey);
         }
@@ -139,8 +139,7 @@ namespace DamagePayee.Controllers
         {
             Id = Id ?? 0;
             var data = await _doortodoorsurveyService.GetFamilydetails(Convert.ToInt32(Id));
-            //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
-            return Json(data.Select(x => new {
+           return Json(data.Select(x => new {
                 x.Id,
                 x.Name,
                 x.FGender,

@@ -130,9 +130,7 @@
                                     <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
                                     <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
                                 </div>
-                                @*<a class="btn btn-xs delete-record" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                    <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>*@
-                            </td>
+                                 </td>
                         </tr>
 
                     </tbody>
@@ -141,7 +139,7 @@
             </div>
         </div>
     </div>
-    @*</div>*@
+   
 
     <div class="row pt-3">
         <div class="col-md-6">
@@ -290,7 +288,7 @@
     <div class="row pt-3">
         <div class="col-md-12">
             <input type="submit" value="Create" class="btn btn-theme " />
-            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+           
             @Html.ActionLink("Back", "Index", "Door2DoorSurvey", null, new { @class = "btn btn-theme " })
         </div>
     </div>
@@ -298,10 +296,6 @@
 </form>
 
 
-
-@*</div>
-        </div>
-    </div>*@
 
 <script>
 
@@ -315,17 +309,14 @@
     })
     $(document).delegate('a.add-record', 'click', function (e) {
         var name = $("#tbl_posts #add #txtPersonalName").val();
-        //var father = $("#tbl_posts #add #txtPersonalFatherName").val();
-        //var gender = $("#tbl_posts #add #drpPersonalGender").val();
+      
         debugger
         if ($("#tbl_posts #add #txtPersonalName").val() != '' && $("#tbl_posts #add #txtPersonalFatherName").val() != '' && $("#tbl_posts #add #GGender").val() != '0'
             && $("#tbl_posts #add #GGender").val() != '' && $("#tbl_posts #add #txtPersonalAddress").val() != ''
             && $("#tbl_posts #add #txtPersonalMobileNo").val() != '' && $("#tbl_posts #add #txtPersonalEmailid").val() != '')
              {
             var GGender = $("#tbl_posts #add #GGender").children("option:selected").val();
-            //alert(GGender)
-                    //var father = $("#tbl_posts #add #txtPersonalFatherName").children("option:selected").val();
-                    //var gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
+          
                     debugger
             e.preventDefault();
                     var content = jQuery('#tbl_posts #add tr'),
@@ -336,8 +327,7 @@
                     element.find('.delete-record').attr('data-id', size);
                     element.appendTo('#tbl_posts_body');
                     $('#tbl_posts_body #rec-' + size + ' #GGender').val(GGender);
-        //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
-        //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
+      
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
@@ -347,7 +337,7 @@
         debugger
             $("#tbl_posts #add .floating-label-field").val('');
             $("#tbl_posts #add .floating-label-field").val(null).trigger("change");
-          //  $('.unsel').selected = false;
+          
     }
         else {
             alert('Please fill record before add new record ');

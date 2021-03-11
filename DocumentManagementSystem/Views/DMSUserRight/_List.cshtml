@@ -1,6 +1,4 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Model.Entity.Userprofile>*@
-@*@model IEnumerable<Model.Entity.Userprofile>*@
-@model IEnumerable<Dto.Search.UserrightsListDataDto>
+﻿@model IEnumerable<Dto.Search.UserrightsListDataDto>
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
 
@@ -77,4 +75,3 @@
 
 
 
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

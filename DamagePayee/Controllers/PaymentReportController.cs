@@ -20,12 +20,7 @@ namespace DamagePayee.Controllers
         {
             _paymentverificationService = paymentverificationService;
         }
-        //public async Task<IActionResult> Create()
-        //{
-        //    Paymentverification paymentverification = new Paymentverification();
-        //    ViewBag.LocalityList = await _paymentverificationService.BindLocalityList();
-        //    return View(paymentverification);
-        //}
+       
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] PaymentverificationSearchDto model)
         {

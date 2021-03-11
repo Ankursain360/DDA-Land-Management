@@ -250,7 +250,7 @@ namespace DamagePayee.Controllers
                           damagepayeeregister.Amount != null)
                     {
 
-                        //damagepayeeregister.Reciept != null &&)
+                        
                         if (
                              damagepayeeregister.PaymntName.Count > 0 &&
                              damagepayeeregister.RecieptNo.Count > 0 &&
@@ -322,7 +322,7 @@ namespace DamagePayee.Controllers
 
                     }
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    //return View(damagepayeeregistertemp);
+                    
                     var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
                     return View("Index", result1);
                 }
@@ -344,8 +344,7 @@ namespace DamagePayee.Controllers
         {
             Id = Id ?? 0;
             var data = await _damagepayeeregisterService.GetPersonalInfo(Convert.ToInt32(Id));
-            //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
-            return Json(data.Select(x => new
+          return Json(data.Select(x => new
             {
                 x.Id,
                 x.Name,
@@ -457,7 +456,7 @@ namespace DamagePayee.Controllers
                 var result = await _damagepayeeregisterService.Update(id, damagepayeeregister);
                 if (result)
                 {
-                    //  FileHelper fileHelper = new FileHelper();
+                   
 
                     //****** code for saving  Damage payee personal info *****
 
@@ -563,7 +562,7 @@ namespace DamagePayee.Controllers
                           damagepayeeregister.Amount != null)
                     {
 
-                        //damagepayeeregister.Reciept != null &&)
+                        
                         if (
                              damagepayeeregister.PaymntName.Count > 0 &&
                              damagepayeeregister.RecieptNo.Count > 0 &&
@@ -591,8 +590,7 @@ namespace DamagePayee.Controllers
                                                                 damagepayeeregister.RecieptFilePath[i] : string.Empty,
                                     DamagePayeeRegisterTempId = damagepayeeregister.Id
 
-                                    //  RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
-
+                                    
 
                                 });
                             }
