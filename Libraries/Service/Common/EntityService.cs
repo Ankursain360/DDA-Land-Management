@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Libraries.Model.Common;
 using Libraries.Repository.Common;
+using Libraries.Repository.IEntityRepository;
 using Libraries.Service.IApplicationService;
 
 namespace Libraries.Service.Common
@@ -12,6 +13,7 @@ namespace Libraries.Service.Common
         private readonly IGenericRepository<T> _repository;
         private IUnitOfWork unitOfWork;
         private IPropertyRegistrationService propertyregistrationRepository;
+        private IDocumentCheckListRepository documentCheckListRepository;
 
         public EntityService(IUnitOfWork unitOfWork, IGenericRepository<T> repository)
         {
@@ -22,6 +24,12 @@ namespace Libraries.Service.Common
         {
             this.unitOfWork = unitOfWork;
             this.propertyregistrationRepository = propertyregistrationRepository;
+        }
+
+        public EntityService(IUnitOfWork unitOfWork, IDocumentCheckListRepository documentCheckListRepository)
+        {
+            this.unitOfWork = unitOfWork;
+            this.documentCheckListRepository = documentCheckListRepository;
         }
 
         public void Create(T entity)

@@ -34,6 +34,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
             services.AddScoped<ILicenceFeesRepository, LicenceFeesRepository>();
             services.AddScoped<IInterestrateRepository, InterestrateRepository>();
+            services.AddScoped<IDocumentCheckListRepository, DocumentCheckListRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -51,6 +52,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IPropertyTypeService, PropertyTypeService>();
             services.AddScoped<ILicenceFeesService, LicenceFeesService>();
             services.AddScoped<IInterestrateService, InterestrateService>();
+            services.AddScoped<IDocumentCheckListService, DocumentCheckListService>();
 
         }
     }
