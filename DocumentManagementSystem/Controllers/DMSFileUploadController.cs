@@ -251,9 +251,7 @@ namespace DocumentManagementSystem.Controllers
         {
             FileHelper file = new FileHelper();
             Dmsfileupload Data = await _dmsfileuploadService.FetchSingleResult(Id);
-            //string path = Data.FilePath;
-            //byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-            //return File(FileBytes, file.GetContentType(path));
+           
             string filename = Data.FilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
@@ -261,9 +259,7 @@ namespace DocumentManagementSystem.Controllers
         public async Task<IActionResult> DownloadCSVFormat()
         {
             FileHelper file = new FileHelper();
-            //string path = Data.FilePath;
-            //byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-            //return File(FileBytes, file.GetContentType(path));
+           
             string filename = _Configuration.GetSection("FilePaths:DownloadCSVFormat:DownloadCSVFormat").Value.ToString();
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
@@ -357,29 +353,7 @@ namespace DocumentManagementSystem.Controllers
                         }
                     }
                 }
-                //using (var fs = new StreamReader(dmsfileupload.FileName))
-                //{
-                //    data = new CsvReader((IParser)fs).GetRecords<DMSCSVTableDTO>().ToList();
-                //}
-
-                ////Csv data as Json string if needed
-                //jsonString = JsonConvert.SerializeObject(data);
-                //foreach (var details in data)
-                //{
-                //    dmsfileupload.FileNo = details.FileNo;
-                //    dmsfileupload.AlloteeName = details.AlloteeName;
-                //    dmsfileupload.LocalityId = details.LocalityId;
-                //    dmsfileupload.KhasraNoId = details.KhasraNoId;
-                //    dmsfileupload.PropertyNoAddress = details.PropertyNoAddress;
-                //    dmsfileupload.Title = details.Title;
-                //    dmsfileupload.AlmirahNo = details.AlmirahNo;
-                //    dmsfileupload.FileName = details.FileName;
-                //    dmsfileupload.FilePath = dmsfileupload.PdfLocationPath;
-                //    dmsfileupload.CreatedBy = SiteContext.UserId;
-                //    result = await _dmsfileuploadService.Create(dmsfileupload);
-                //}
-
-
+               
 
                 if (row)
                 {
@@ -402,7 +376,6 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.SummaryUniq = HtmlSummaryUniq.ToString();
                     ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning);
                     ViewBag.PdfGenerate = "Yes";
-                    //ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning,Position.BottomFullWidth,0,true,false);
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();

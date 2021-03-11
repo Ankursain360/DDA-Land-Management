@@ -103,7 +103,7 @@ namespace DamagePayeePublicInterface.Controllers
                 /* For Ats File Upload*/
                 string ATSFileName = "";
                 string atsfilePath = "";
-                // mutationDetails.AtsfilePathNew = agreementfilePath;
+               
                 if (mutationDetails.AtsfilePathNew != null)
                 {
                     if (!Directory.Exists(AtsfilePath))

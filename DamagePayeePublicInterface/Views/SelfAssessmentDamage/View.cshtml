@@ -514,8 +514,7 @@
                             <div class="form-group" id="DivForPayeeNo" style="display:none;">
                                 <label class="control-label lb-sm">Apply for mutation/ substitution</label>
                                 <input type="submit" value="Open Substitution Form" class="btn btn-theme" onclick="return CheckToApply();" disabled />
-                                @* <a class="badge badge-primary px-2 btn btn-theme" asp-action="Create" asp-controller="SubstitutionMutationDetails" asp-route-id="3" onclick="return CheckToApply();">Open Substitution Form</a>*@
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -682,8 +681,7 @@
 
             <div id="DivMainContentForm">
                 <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
-                @*@Html.ActionLink("Damage Calculator", "Index", "DamageCalculator", null, new { @class = "btn btn-theme", onclick = "javascript:return false;" })*@
-
+               
                 <a class="btn btn-theme" asp-action="Index" asp-controller="DamageCalculator" asp-route-id="@Model.LocalityId" onclick="javascript:return false;">Damage Calculator</a>
             </div>
             <div class="row mt-3 mb-3">

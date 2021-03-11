@@ -343,11 +343,6 @@ namespace DamagePayeePublicInterface.Controllers
                             {
                                 if (i > 0)
                                 {
-                                    //GridViewRow gv = Gridview2.Rows[e.Row.RowIndex - 1];
-                                    //TextBox txtCoumpound11 = (TextBox)gv.FindControl("txtCoumpound");
-                                    //TextBox txtdcharge11 = (TextBox)gv.FindControl("txtdcharge");
-                                    //txtCoumpound1.Text = Math.Round(((Convert.ToDouble(txtCoumpound11.Text) + Convert.ToDouble(txtdcharge1.Text) - Convert.ToDouble(txtPaidAmount1.Text))), 0).ToString();
-                                    //txtRemainAmount1.Text = Math.Round(((Convert.ToDouble(txtCoumpound1.Text) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
                                     listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) == 0 ? 0 : Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
                                     listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
 
@@ -362,11 +357,6 @@ namespace DamagePayeePublicInterface.Controllers
                             {
                                 if (i > 0)
                                 {
-                                    //GridViewRow gv = Gridview2.Rows[e.Row.RowIndex - 1];
-                                    //TextBox txtCoumpound11 = (TextBox)gv.FindControl("txtCoumpound");
-                                    //TextBox txtdcharge11 = (TextBox)gv.FindControl("txtdcharge");
-                                    //txtCoumpound1.Text = Math.Round(((Convert.ToDouble(txtCoumpound11.Text) + Convert.ToDouble(txtdcharge1.Text) - Convert.ToDouble(txtPaidAmount1.Text))), 0).ToString();
-                                    //txtRemainAmount1.Text = Math.Round(((Convert.ToDouble(txtCoumpound1.Text) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
                                     listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
                                     listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
                                 }
@@ -383,12 +373,7 @@ namespace DamagePayeePublicInterface.Controllers
                         {
                             if (i > 0)
                             {
-                                //GridViewRow gv = Gridview2.Rows[e.Row.RowIndex - 1];
-                                //TextBox txtCoumpound11 = (TextBox)gv.FindControl("txtCoumpound");
-                                //TextBox txtdcharge11 = (TextBox)gv.FindControl("txtdcharge");
-                                //txtCoumpound1.Text = Math.Round(((Convert.ToDouble(txtCoumpound11.Text) + Convert.ToDouble(txtdcharge1.Text) - Convert.ToDouble(txtPaidAmount1.Text))), 0).ToString();
-                                //txtRemainAmount1.Text = Math.Round((Convert.ToDouble(txtCoumpound1.Text) * 0.07 * ValMonth), 0).ToString();
-                                listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                 listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
                                 listRemainAmt = Math.Round((Convert.ToDouble(listCompoundAmt) * 0.07 * ValMonth), 0).ToString();
                             }
                             else
@@ -458,26 +443,17 @@ namespace DamagePayeePublicInterface.Controllers
                         {
                             var subEncroachersId = new[] { 1, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                            //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('1','4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('1','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                             }
                         else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 2, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                            //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('2','4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('2','4') and  colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                             }
                         else
                         {
                             var subEncroachersId = new[] { 3, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                            //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('3','4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('3','4') and  colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                            }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
@@ -485,28 +461,18 @@ namespace DamagePayeePublicInterface.Controllers
                         {
                             var subEncroachersId = new[] { 4 };
                             result1 = await _damagecalculationService.RateListTypeBSpecific(Convert.ToDateTime("31/03/2001"), Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEB " +
-                            //    "where (('31/03/2001' between start_dt and end_dt) or ('31/03/2002' between start_dt and end_dt))  and sub_encroachers_id in ('4') " +
-                            //    "and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEB where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                            }
                         else
                         {
                             var subEncroachersId = new[] { 4 };
                             result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEB " +
-                            //    "where ('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEB where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                             }
                     }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEC " +
-                        //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                        // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEC where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                    }
+                       }
                 }
                 else
                 {
@@ -519,18 +485,12 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 1, 4 };
                                 result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                                //    "where (('31/07/2001' between start_dt and end_dt) and sub_encroachers_id in ('1','4') and colony_id='" + Session["ColonyIDS"].ToString() + "') " +
-                                //    "or (('31/03/2002' between start_dt and end_dt) and sub_encroachers_id in ('1','4') and colony_id='" + Session["ColonyIDS"].ToString() + "')";
-                            }
+                                 }
                             else
                             {
                                 var subEncroachersId = new[] { 1, 4 };
                                 result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                                //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('1','4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                                // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('1','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                            }
+                                }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
@@ -539,44 +499,29 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 2, 4 };
                                 result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                                //    "where (('31/07/2001' between start_dt and end_dt) and sub_encroachers_id in ('2','4') and colony_id='" + Session["ColonyIDS"].ToString() + "') " +
-                                //    "or (('31/03/2002' between start_dt and end_dt) and sub_encroachers_id in ('2','4') and colony_id='" + Session["ColonyIDS"].ToString() + "')";
-                            }
+                               }
                             else
                             {
                                 var subEncroachersId = new[] { 2, 4 };
                                 result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                                //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('2','4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                                // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('2','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                            }
+                               }
                         }
                         else
                         {
                             var subEncroachersId = new[] { 3, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEA " +
-                            //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('3','4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('3','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                          }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEB " +
-                        //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                        // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEB where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                    }
+                         }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from RES_RATE_LST_TYPEC " +
-                        //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('4') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                        // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEC where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                    }
+                     }
                 }
 
             }
@@ -625,53 +570,33 @@ namespace DamagePayeePublicInterface.Controllers
                         {
                             var subEncroachersId = new[] { 1, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                            //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('1','5') and colony_id='" 
-                            //    + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('1','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                           }
                         else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 2, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                            //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('2','5') and colony_id='" + Session["ColonyIDS"].ToString() 
-                            //    + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('2','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                          }
                         else if (date1 >= Convert.ToDateTime("01/04/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 3, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                            //"where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('3','5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('2','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                           }
                         else
                         {
                             var subEncroachersId = new[] { 4, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                            //"where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('4','5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                            // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('3','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                        }
+                           }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEB " +
-                        //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                        // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEB where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                    }
+                        }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEC " +
-                        //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                        // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEC where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                    }
+                       }
                 }
                 else
                 {
@@ -684,19 +609,13 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 1, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //"where (('31/07/2001' between start_dt and end_dt) and sub_encroachers_id in ('1','5') and colony_id='" + Session["ColonyIDS"].ToString() + "') " +
-                                //"or (('31/03/2002' between start_dt and end_dt) and sub_encroachers_id in ('1','5') and colony_id='" + Session["ColonyIDS"].ToString() + "')";
-
+                              
                             }
                             else
                             {
                                 var subEncroachersId = new[] { 1, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //"where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('1','5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                                // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('1','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                            }
+                              }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//03/31/1981  1/4/1960
                         {
@@ -705,18 +624,12 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 2, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //    "where (('31/07/2001' between start_dt and end_dt) and sub_encroachers_id in ('2','5') and colony_id='" + Session["ColonyIDS"].ToString() + "') " +
-                                //    "or (('31/03/2002' between start_dt and end_dt) and sub_encroachers_id in ('2','5') and colony_id='" + Session["ColonyIDS"].ToString() + "')";
-                            }
+                                 }
                             else
                             {
                                 var subEncroachersId = new[] { 2, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('2','5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                                // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('2','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                            }
+                                }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//03/31/1981  1/4/1960
                         {
@@ -725,18 +638,12 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 3, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //    "where (('31/07/2001' between start_dt and end_dt) and sub_encroachers_id in ('3','5') and colony_id='" + Session["ColonyIDS"].ToString() + "') " +
-                                //    "or (('31/03/2002' between start_dt and end_dt) and sub_encroachers_id in ('3','5') and colony_id='" + Session["ColonyIDS"].ToString() + "')";
-                            }
+                               }
                             else
                             {
                                 var subEncroachersId = new[] { 3, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('3','5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                                // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('2','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                            }
+                              }
                         }
                         else
                         {
@@ -746,36 +653,24 @@ namespace DamagePayeePublicInterface.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 4, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //    "where (('31/07/2001' between start_dt and end_dt) and sub_encroachers_id in ('4','5') and colony_id='" + Session["ColonyIDS"].ToString() + "') " +
-                                //    "or (('31/03/2002' between start_dt and end_dt) and sub_encroachers_id in ('4','5') and colony_id='" + Session["ColonyIDS"].ToString() + "')";
-                            }
+                               }
                             else
                             {
                                 var subEncroachersId = new[] { 4, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEA " +
-                                //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('4','5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                                // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEA where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('2','4') and colony_id='" + ddllocality.SelectedValue + "'";
-                            }
+                               }
                         }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEB " +
-                        //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                        // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEB where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                    }
+                      }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        //strQuery1 = @" select to_date('" + txtENId.Text + "') as start_dt,to_date(end_dt) as end_dt,rate from COM_RES_RATE_LST_TYPEC " +
-                        //    "where('" + e_date + "' between start_dt and end_dt) and sub_encroachers_id in ('5') and colony_id='" + Session["ColonyIDS"].ToString() + "'";
-                        // union all select start_dt,end_dt,rate from RES_RATE_LST_TYPEC where start_dt>='" + txtENId.Text + "'  and sub_encroachers_id in ('4') and colony_id='" + ddllocality.SelectedValue + "'";
-                    }
+                      }
                 }
 
             }
@@ -808,25 +703,7 @@ namespace DamagePayeePublicInterface.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> Index(Damagecalculation damagecalculation)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        return RedirectToAction("DamageCalculate", "DamageCalculator", new { id = damagecalculation });
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return View(damagecalculation);
-        //    }
-        //}
-
-
-        //public async Task<PartialViewResult> DamageCalculate(Damagecalculation damagecalculation)
-        //{
-        //    return PartialView("_DamageCalculate", damagecalculation);
-        //}
+       
 
     }
 }

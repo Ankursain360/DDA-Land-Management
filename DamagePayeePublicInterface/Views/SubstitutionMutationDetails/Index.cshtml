@@ -1,5 +1,4 @@
 ﻿@model Libraries.Model.Entity.Mutationdetails
-@{int rowNo = 0;}
 @{int AtsgpadocumentPath = 0;}
 @{int AadharNoFilePath = 0;}
 @{int PanNoFilePath = 0; }
@@ -36,7 +35,7 @@
                     <thead class="text-nowrap">
 
                         <tr>
-                            <th>Sr.No</th>
+                            
                             <th>Name</th>
                             <th>Father's/Husband's Name</th>
                             <th style="min-width:100px;">Gender</th>
@@ -55,7 +54,7 @@
                         @foreach (var item in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                         {
                             <tr>
-                                <td>@(rowNo += 1)</td>
+                               
                                 <td>
                                     @item.Name
                                 </td>
@@ -210,7 +209,7 @@
                 <table class="table table-sm table-bordered mb-0 table-striped">
                     <thead class="text-nowrap">
                         <tr>
-                            <th>Sr.No</th>
+                           
                             <th>Name</th>
                             <th>Father's Name</th>
                             <th>Date of GPA/Will/Other Deed</th>
@@ -223,7 +222,7 @@
                         @foreach (var item in Model.DamagePayeeRegister.Allottetype)
                         {
                             <tr>
-                                <td>@(rowNo += 1)</td>
+                               
                                 <td>
                                     @item.Name
                                 </td>
@@ -372,7 +371,7 @@
                         }
                     }
 
-                    @*<a href="#" class="badge badge-primary px-2">View file</a>*@
+                  
                 </div>
             </div>
         </div>
