@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         [Required (ErrorMessage ="Scheme is mandatory")]
         public int? SchemeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Required Agency is mandatory")]
         public string RequiredAgency { get; set; }
         [Required]
         public string ProposalFileNo { get; set; }
@@ -40,7 +40,7 @@ namespace Libraries.Model.Entity
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
         [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Description  is mandatory")]
 
         public string Description { get; set; }
         [Required]
