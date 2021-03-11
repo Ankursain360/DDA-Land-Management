@@ -15,7 +15,8 @@ namespace Libraries.Model.Entity
             Premiumrate = new HashSet<Premiumrate>();
             Documentcharges = new HashSet<Documentcharges>();
             Damagecalculation = new HashSet<Damagecalculation>();
-            Goldrate = new HashSet<Groundrent>();
+            Groundrate = new HashSet<Groundrent>();
+            Intersetrate = new HashSet<Interestrate>();
             Licencefees = new HashSet<Licencefees>();
         }
         [Required(ErrorMessage = "Name is mandatory")]
@@ -26,7 +27,8 @@ namespace Libraries.Model.Entity
         public ICollection<Rate> Rate { get; set; }
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
         public ICollection<Premiumrate> Premiumrate { get; set; }
-        public ICollection<Groundrent> Goldrate { get; set; }
+        public ICollection<Groundrent> Groundrate { get; set; }
+        public ICollection<Interestrate> Intersetrate { get; set; }
         public ICollection<Documentcharges> Documentcharges { get; set; }
         public ICollection<Licencefees> Licencefees { get; set; }
     }
