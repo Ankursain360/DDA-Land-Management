@@ -28,4 +28,11 @@
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\DocumentChecklist\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

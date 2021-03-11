@@ -10,10 +10,9 @@ namespace Libraries.Repository.IEntityRepository
     public interface IDocumentCheckListRepository : IGenericRepository<Documentchecklist>
     {
 
-        Task<bool> Any(int id, string name);
-        Task<bool> anyCode(int id, string name);
-        Task<List<Department>> GetDepartmentList();
-        Task<List<Zone>> GetAllDetails();
-        Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model);
+        Task<bool> Any(int id, string name, int ServiceTypeId);
+        Task<List<Servicetype>> GetServiceTypeList();
+        Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
+        Task<Documentchecklist> FetchSingleResult(int id);
     }
 }
