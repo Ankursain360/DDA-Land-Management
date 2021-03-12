@@ -51,7 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
             LocalityId = LocalityId ?? 0;
             return Json(await _booktransferlandService.BindKhasra(Convert.ToInt32(LocalityId)));
         }
-
+       
 
         [HttpPost]
 

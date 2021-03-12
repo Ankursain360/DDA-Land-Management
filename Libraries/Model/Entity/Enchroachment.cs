@@ -17,9 +17,9 @@ namespace Libraries.Model.Entity
 
         public int VillageId { get; set; }
         public int KhasraId { get; set; }
-      //  [Required(ErrorMessage = " LandUse is mandatory")]
+      
         public string LandUse { get; set; }
-       // [Required(ErrorMessage = " Date of Detection is mandatory")]
+      
         public DateTime? DateofDetection { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
@@ -38,11 +38,11 @@ namespace Libraries.Model.Entity
         public int NatureofencroachmentId { get; set; }
         [Required(ErrorMessage = " File Number is mandatory")]
         public string FileNo { get; set; }
-      //  [Required(ErrorMessage = " Actions Date is mandatory")]
+      
         public DateTime? ActionDate { get; set; }
 
         public int ReasonsId { get; set; }
-       // [Required(ErrorMessage = " Damage Area is mandatory")]
+       
         public string DamageArea { get; set; }
 
         public string ActionRemarks { get; set; }
