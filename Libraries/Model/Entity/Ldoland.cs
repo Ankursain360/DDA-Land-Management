@@ -20,15 +20,17 @@ namespace Libraries.Model.Entity
         public string Location { get; set; }
         [Required]
         public string SiteDescription { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
         [Required(ErrorMessage = " Area is mandatory")]
         public decimal? Area { get; set; }
-        [Required(ErrorMessage = " Status is mandatory")]
+        [Required(ErrorMessage = " Status of Land is mandatory")]
         public string StatusOfLand { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Occupied By is mandatory")]
         public string OccupiedBy { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Date of Possesion is mandatory")]
         public DateTime? DateofPossession { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Status is mandatory")]
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }

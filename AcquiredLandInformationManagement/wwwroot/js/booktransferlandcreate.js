@@ -20,10 +20,11 @@
     });
 });
 function onChange(id) {
-    debugger
+ 
     HttpGet(`/bookTransferLand/GetKhasraList/?LocalityId=${id}`, 'json', function (response) {
         debugger
-        var html = '<option value=""> select</option>';
+        
+        var html = '<option val="">-- select-- </option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
@@ -32,6 +33,7 @@ function onChange(id) {
         $("#KhasraId").html(html);
     });
 };
+
 $("input[name='grpLand']").click(function () {
     var selected = $("input[type='radio'][name='grpLand']:checked");
     $("#StatusOfLand").val(selected.val());

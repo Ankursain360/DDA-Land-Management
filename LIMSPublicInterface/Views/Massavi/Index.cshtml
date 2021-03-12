@@ -29,7 +29,7 @@
         </div>
         <div class="panel-body">
             <form method="post" asp-action="Index" id="1">
-                @*asp-action="Create"*@
+                
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
            
 
@@ -53,7 +53,7 @@
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Result" class="btn btn-primary dda-pageheading" id="btnFind" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        
                         @Html.ActionLink("Back", "Index", "Villages", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
@@ -102,14 +102,6 @@
 
 
 
-
-
-@*<script>
-    $("#btnDisplay").click(function () {
-        window.open("@Url.Action("PrintLabel", "DisplayLabel")", "_blank",
-            "menubar=no, toolbar=no, resizable=no, top=100, left=200, width=500, height=500");
-    });
-</script>*@
 <script>
     $(function () {
         $("input[name='btnFind']").click(function () {

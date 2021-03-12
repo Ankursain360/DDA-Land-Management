@@ -1,11 +1,6 @@
 ﻿@model Libraries.Model.Entity.Issuereturnfile
 @await Component.InvokeAsync("PageHeader", new { pageName = "Issue File" })
 
-@*@{
-    ViewData["Title"] = "IssueFileData";
-    Layout = null;
-}*@
-
 <div class="pt-3">
     <form asp-action="IssueFileData" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" target="_blank">
         <h3 class="mb-3 d-flex">File Details</h3>
@@ -45,7 +40,7 @@
                             asp-items="@(new SelectList(Model.DataStorageDetails.AlmirahList,"Id","AlmirahNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    @*<span asp-validation-for="DataStorageDetails.AlmirahId" class="text-danger"></span>*@
+                  
                     <label class="floating-label">Almirah No    </label>
                 </div>
             </div>
@@ -57,7 +52,7 @@
                             asp-items="@(new SelectList(Model.DataStorageDetails.RowList, "Id","RowNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    @*<span asp-validation-for="DataStorageDetails.RowId" class="text-danger"></span>*@
+                   
                     <label class="floating-label">Row No  </label>
                 </div>
 
@@ -68,7 +63,7 @@
                             asp-items="@(new SelectList(Model.DataStorageDetails.ColumnList,"Id","ColumnNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    @*<span asp-validation-for="DataStorageDetails.ColumnId" class="text-danger"></span>*@
+                 
                     <label class="floating-label">Column No  </label>
                 </div>
 
@@ -81,7 +76,7 @@
                             asp-items="@(new SelectList(Model.DataStorageDetails.BundleList,"Id","BundleNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    @*<span asp-validation-for="DataStorageDetails.BundleId" class="text-danger"></span>*@
+                  
                     <label class="floating-label">Bundle No  </label>
                 </div>
 
@@ -145,11 +140,10 @@
                 <button class="btn btn-theme " type="submit" id="Issue" onclick="$(this).hide();">Issue</button>
                 @if (Model.Id != 0)
                 {
-                    @*<button class="btn btn-theme " type="submit" id="IssueReceipt" asp-route-id="@Model.Id" asp-action="IssueReceipt" >Issue Receipt</button>*@
-                    <a class="btn btn-theme " target="_blank" type="submit" id="IssueReceipt" asp-route-id="@Model.Id" asp-action="IssueReceipt">Issue Receipt</a>
+                   <a class="btn btn-theme " target="_blank" type="submit" id="IssueReceipt" asp-route-id="@Model.Id" asp-action="IssueReceipt">Issue Receipt</a>
 
                 }
-                @*<button class="btn btn-theme " type="submit">Return Receipt</button>*@
+               
                 @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-theme " })
 
             </div>

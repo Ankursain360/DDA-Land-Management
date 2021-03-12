@@ -3,7 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*@model Libraries.Model.Entity.Module*@
 <script src="~/js/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 
@@ -57,9 +56,7 @@
                 </div>
 
             </form>
-            @*@{
-        @if (ViewBag.IsShowData == "Yes")
-        {*@
+          
         <div id="divDataLoad">
             <div class="row" style="margin-bottom:35px;">
                 <div class="col-sm-12">
@@ -75,35 +72,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered" border="0">
                             <thead class="thead">
-                                @*<tr>
-                                    <th>Village Name</th>
-                                    <th>Khasra No</th>
-                                    <th>Area (Bigha - Biswa - Biswansi)(ACRE)</th>
-                                    <th>Notification(s) US-4</th>
-                                    <th>Notification(s) US-6</th>
-                                    <th>Notification(s) US-17</th>
-
-                                    <th>Award(s)</th>
-                                    <th>Notification(s) US-22</th>
-                                    <th>Date of Possesion</th>
-                                    <th>Date of Allotement</th>
-                                    <th>Transfer Department</th>
-
-                                    <th>Scheme Transfer</th>
-                                    <th>Remarks</th>
-                                    <th>Party Name</th>
-                                    <th>Demand List No.</th>
-                                    <th>L&B No - Date</th>
-                                    <th>L.A.C. No</th>
-                                    <th>R.F.A.No</th>
-                                    <th>S.L.P. No</th>
-                                    <th>Court Involved</th>
-
-                                    <th>Payble Amount</th>
-                                    <th>Appealable Amount</th>
-                                    
-
-                                </tr>*@
+                              
                                
                             </thead>
                            
@@ -230,32 +199,13 @@
 
             </div>
         </div>
-            @*}
-            else
-            {
-
-            }
-        }*@
+           
         </div>
     </div>
 </div>
 
-@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/designationmastercreate.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/designationmastercreate.js" asp-append-version="true"></script>
-    </environment>*@
 <script>
-    //$(function () {
-    //    $("#btnFind").click(function () {
-    //        $("#divDataLoad").show();
-    //        //$(this).toggleClass('class1')
-    //    });
-    //});
-
-
+  
 
     $(document).ready(function () {
         $("#btnFind").click(function () {

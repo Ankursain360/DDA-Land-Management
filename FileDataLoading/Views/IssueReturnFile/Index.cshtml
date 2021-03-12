@@ -10,14 +10,11 @@
                          asp-for="Id" asp-items="@(new SelectList(Model.FileNoList,"Id","FileNo"))">
                         <option  value="0">All </option>
                     </select>
-                    @*<span asp-validation-for="FileNo" class="text-danger"></span>*@
+                   
                     <label class="floating-label">File No </label>
                 </div>
 
-                @*<div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtName" class="floating-label"> Structure Name</label>
-                </div>*@
+               
             </div>
         </div>
         <div class="row mt-md-3">
@@ -68,10 +65,7 @@
                 </div>
             </div>
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                @*<a href="/Structure/create" class="d-flex align-items-center btn btn-primary mr-2">
-                <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                <small>Add More</small>
-            </a>*@
+              
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>

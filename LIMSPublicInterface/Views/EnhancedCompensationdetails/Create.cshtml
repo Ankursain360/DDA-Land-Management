@@ -49,7 +49,7 @@
         </div>
         <div class="panel-body">
             <form method="post" asp-action="Create" id="1">
-                @*asp-action="Create"*@
+               
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-row">
 
@@ -72,9 +72,7 @@
                                 <label class="radio-inline">
                                     <input type="radio" name="grpMainFile" id="rSubsequent" checked>Demand List Details
                                 </label>
-                                @*<label class="radio-inline">
-                                    <input type="radio" name="grpMainFile" id="rOriginal">No
-                                </label>*@
+                               
                             </div>
 
                         </div>
@@ -111,7 +109,7 @@
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Result" class="btn btn-primary dda-pageheading" id="btnFind" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        
                         @Html.ActionLink("Back", "Index", "EnhancedCompensationdetails", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
@@ -216,16 +214,15 @@
 
         $.ajax({
             url: "/IssueReturnFile/IssueFileData",
-            // type: "POST",
+           
             data: {},
             traditional: true,
-            //dataType: "Boolean",
-            //contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+          
             dataType: "text",
             contentType: "application/text; charset=utf-8",
             success: function (result) {
                 if (result) {
-                    //  alert("Done");
+                    
                     $('#myModaldelete').modal('show');
                 } else {
                     alert("Error occurs on the Database level!");
@@ -267,11 +264,7 @@
                 });
             },
             minLength: 2,
-            //select: function (event, ui) {
-            //    alert('you have selected ' + ui.item.label + ' ID: ' + ui.item.value);
-            //    $('#txtSearch').val(ui.item.label);
-            //    return false;
-            //}
+          
         });
     });
 </script>

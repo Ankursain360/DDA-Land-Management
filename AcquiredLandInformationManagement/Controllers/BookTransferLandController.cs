@@ -42,16 +42,18 @@ namespace AcquiredLandInformationManagement.Controllers
             booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
            
             booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
-          
+           
             return View(booktransferland);
         }
+        
+        
         [HttpGet]
         public async Task<JsonResult> GetKhasraList(int? LocalityId)
         {
             LocalityId = LocalityId ?? 0;
             return Json(await _booktransferlandService.BindKhasra(Convert.ToInt32(LocalityId)));
         }
-
+       
 
         [HttpPost]
 

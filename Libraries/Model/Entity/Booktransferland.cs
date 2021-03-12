@@ -10,15 +10,19 @@ namespace Libraries.Model.Entity
     public class Booktransferland : AuditableEntity<int>
    
     {
-        
+        [Required(ErrorMessage = " Notification No is mandatory")]
         public int? LandNotificationId { get; set; }
         [Required(ErrorMessage = "  Notification Date is mandatory")]
         public DateTime? NotificationDate { get; set; }
+        [Required(ErrorMessage = " Village is mandatory")]
         public int? LocalityId { get; set; }
+        [Required(ErrorMessage = " Khasra is mandatory")]
         public int? KhasraId { get; set; }
         [Required(ErrorMessage = " Part is mandatory")]
         public string Part { get; set; }
-   //  [Required(ErrorMessage = " Area is mandatory")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        
         public decimal? Area { get; set; }
        
         public string StatusOfLand { get; set; }
