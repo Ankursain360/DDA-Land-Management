@@ -28,7 +28,7 @@ namespace FileDataLoading.Controllers
         public async Task<IActionResult> Create()
         {
             SearchByParameterDtoProfile datastoragedetails = new SearchByParameterDtoProfile();
-           // ViewBag.FileNoList = await _dataStorageService.BindFileNoList();
+          
             ViewBag.LocalityList = await _dataStorageService.GetLocalities();
             ViewBag.departmentList = await _dataStorageService.GetDepartments();
             ViewBag.almirahList = await _dataStorageService.GetAlmirahs();
@@ -64,7 +64,7 @@ namespace FileDataLoading.Controllers
         //  [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-           //  var Data = await _dataStorageService.FetchSingleResult(id);
+           
            var Data = await _dataStorageService.GetDatastorageListName(id);
             if (Data == null)
             {
@@ -88,12 +88,7 @@ namespace FileDataLoading.Controllers
                 return PartialView();
             }
         }
-        //public async Task<PartialViewResult> List([FromBody] SearchByParticularSearchDto model)
-        //{
-        //    int UserId = SiteContext.UserId;
-        //    var result = await _dataStorageService.GetPagedListofSearchByParticular(model, UserId);
-        //    return PartialView("_List", result);
-        //}
+       
     }
 }
 

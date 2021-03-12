@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*@model Libraries.Model.Entity.Module*@
 
 <div class="row">
     <div class="col-sm-12">
@@ -31,7 +30,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Award Number(Date) </label>
-                        @*<input type="date" class="form-control" />*@
+                       
                         <select class="form-control">
 
                             <option value="awd-1859">1016 [DATE : 1960/05/26] </option>
@@ -50,9 +49,7 @@
                 </div>
 
             </form>
-            @*@{
-                @if (ViewBag.IsShowData == "Yes")
-                {*@
+           
         <div id="divDataLoad" >
 
 
@@ -94,24 +91,13 @@
 
             </div>
         </div>
-            @*}
-                    else
-                    {
-
-                    }
-                }*@
+          
         </div>
     </div>
 </div>
 
 <script>
-    //$(function () {
-    //    $("#btnFind").click(function () {
-    //        $("#divDataLoad").show();
-    //        //$(this).toggleClass('class1')
-    //    });
-    //});
-
+   
 
 
     $(document).ready(function () {

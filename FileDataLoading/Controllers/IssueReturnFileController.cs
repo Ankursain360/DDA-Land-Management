@@ -129,7 +129,7 @@ namespace FileDataLoading.Controllers
                     var result1 = await _issueReturnFileService.UpdateIssueFileStatus(id);
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     return  RedirectToAction("IssueReceipt", "IssueReturnFile", new { id = issuereturnfile.Id });
-                  //  return View(issuereturnfile);
+                  
 
                 }
                 else
@@ -180,7 +180,7 @@ namespace FileDataLoading.Controllers
 
                     ViewBag.Message =  Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                      return RedirectToAction("ReturnReceipt", "IssueReturnFile", new { id = issuereturnfile.Id });
-                //return View(issuereturnfile);
+               
                 }
                 else
                 {

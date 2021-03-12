@@ -78,8 +78,6 @@ namespace FileDataLoading.Controllers
                     dataStorageDetails.DepartmentId = SiteContext.DepartmentId;
 
                     var result = await _datastorageService.Create(dataStorageDetails);
-                    //For File No Add Category No,Header No,Sequence No,From Year and To Year//
-
                    
                     if (result)
                     {
@@ -277,8 +275,7 @@ namespace FileDataLoading.Controllers
         {
             Id = Id ?? 0;
             var data = await _datastorageService.GetDetailsOfPartFileDetails(Convert.ToInt32(Id));
-            //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
-            return Json(data);
+          return Json(data);
         }
 
 

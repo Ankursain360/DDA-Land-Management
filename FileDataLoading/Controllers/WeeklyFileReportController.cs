@@ -20,29 +20,20 @@ namespace FileDataLoading.Controllers
         {
             _departmenttargetService = departmenttargetService;
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
+       
         public async Task<IActionResult> Index()
         {
             WeeklyFileReportDtoProfile departmenttarget = new WeeklyFileReportDtoProfile();
             ViewBag.departmentList = await _departmenttargetService.GetAllDepartment();
             return View(departmenttarget);
-            //Departmenttarget model = new Departmenttarget();
-            //model.IsActive = 1;
-            //model.DepartmentList = await _departmenttargetService.GetAllDepartment();
-            //return View(model);
+           
         }
         public async Task<IActionResult> Create()
         {
             WeeklyFileReportDtoProfile departmenttarget = new WeeklyFileReportDtoProfile();
             ViewBag.departmentList = await _departmenttargetService.GetAllDepartment();
             return View(departmenttarget);
-            //Departmenttarget model = new Departmenttarget();
-            //model.IsActive = 1;
-            //model.DepartmentList = await _departmenttargetService.GetAllDepartment();
-            //return View(model);
+           
         }
         public async Task<PartialViewResult> List([FromBody] WeeklyFileReportSearchDto model)
         {

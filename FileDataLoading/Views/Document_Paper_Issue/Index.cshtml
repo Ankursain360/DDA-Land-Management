@@ -57,7 +57,7 @@
         </div>
         <div class="panel-body">
             <form method="post" asp-action="Index" id="1">
-                @*asp-action="Create"*@
+              
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-row">
 
@@ -76,7 +76,7 @@
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Find" class="btn btn-primary myapp-hed1" id="btnFind" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                       
                         @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" })
                     </div>
                 </div>
@@ -202,8 +202,7 @@
 
                                                 <td>
                                                     <a onclick="showInPopup('@Url.Action("IssueFileData","IssueReturnFile",null,Context.Request.Scheme)','Issue')" data-toggle="modal" data-target="#form-modal" class="btn btn-primary myapp-hed1">Issue</a>
-                                                    @*<a asp-action="IssueFileData" asp-controller="IssueReturnFile">Issue</a>*@
-                                                </td>
+                                               </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -274,16 +273,15 @@
 
         $.ajax({
             url: "/IssueReturnFile/IssueFileData",
-            // type: "POST",
+            
             data: {},
             traditional: true,
-            //dataType: "Boolean",
-            //contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+           
             dataType: "text",
             contentType: "application/text; charset=utf-8",
             success: function (result) {
                 if (result) {
-                    //  alert("Done");
+                  
                     $('#myModaldelete').modal('show');
                 } else {
                     alert("Error occurs on the Database level!");
@@ -325,11 +323,7 @@
                 });
             },
             minLength: 2,
-            //select: function (event, ui) {
-            //    alert('you have selected ' + ui.item.label + ' ID: ' + ui.item.value);
-            //    $('#txtSearch').val(ui.item.label);
-            //    return false;
-            //}
+           
         });
     });
 </script>

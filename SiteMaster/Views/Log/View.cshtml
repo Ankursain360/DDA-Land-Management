@@ -1,0 +1,109 @@
+﻿@model Libraries.Model.Entity.Log
+@await Component.InvokeAsync("PageHeader", new { pageName = "Audit Trill" })
+
+<div class="pt-3">
+    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="TraceId" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="TraceId" class="text-danger"></span>
+                    <label class="floating-label">TraceId </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Application" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Application" class="text-danger"></span>
+                    <label class="floating-label">Application    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Logged" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Logged" class="text-danger"></span>
+                    <label class="floating-label">Logged    </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Level" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Level" class="text-danger"></span>
+                    <label class="floating-label">Level   </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Message" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                    <label class="floating-label">Message   </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Logger" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Logger" class="text-danger"></span>
+                    <label class="floating-label">Logger   </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea disabled asp-for="Callsite" placeholder="Name" type="text"
+                              class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="Callsite" class="text-danger"></span>
+                    <label class="floating-label">Callsite   </label>
+                </div>
+            </div>
+        </div>
+        
+            <div class="row mt-md-3">
+                <div class="col-md-12">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <textarea disabled asp-for="Exception" placeholder="Name" type="text"
+                                  style="height:300px;width:1130px" class="floating-label-field floating-label-field--s3"></textarea>
+                        <span asp-validation-for="Exception" class="text-danger"></span>
+                        <label class="floating-label">Exception   </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-md-3">
+                <div class=" col-md-12">
+                    @Html.ActionLink("Back", "Index", "Log", null, new { @class = "btn btn-theme " })
+                </div>
+            </div>
+
+    </form>
+
+</div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

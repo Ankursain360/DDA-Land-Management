@@ -66,8 +66,7 @@
                 }
                 else
                 {
-                    @*<a onclick="showInPopup('@Url.Action("ReturnFileData","IssueReturnFile",null,Context.Request.Scheme)','Issue')"
-            data-toggle="modal" data-target="#form-modal"  class="btn btn-theme btn-block" style="color:white;">Return</a>*@
+                  
                     <div class="action-btns">
                           <a title="Return" class="remove" asp-action="ReturnFileData" asp-route-id="@item.Id"><i style="font-size:28px;" class="ri-file-download-fill"></i></a>
                     </div>

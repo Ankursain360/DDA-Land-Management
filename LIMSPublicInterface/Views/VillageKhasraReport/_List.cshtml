@@ -1,11 +1,10 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Khasra>
-@{int rowNo = 0;}
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
 
         <tr>
-            <th rowspan="2">Sr.No</th>
+           
             <th rowspan="2">Village</th>
             <th rowspan="2">Khasra No </th>
            
@@ -22,9 +21,7 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-            <td>@(rowNo += 1)</td>
-
-
+           
             <td>@item.Acquiredlandvillage.Name</td>
 
             <td>@item.Name</td>
