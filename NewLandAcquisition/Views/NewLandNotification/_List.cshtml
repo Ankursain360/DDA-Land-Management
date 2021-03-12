@@ -1,9 +1,8 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Newlandnotification>
-@{int rowNo = 0; }
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th> Sr. No</th>
+           
             <th> Award Number </th>
             <th> Award date </th>
             <th> Village Name</th>
@@ -16,7 +15,7 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td>@(rowNo += 1)</td>
+               
                 <td>@item.NewlandNotificationType.NotificationType</td>
 
                 

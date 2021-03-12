@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Village name is mandatory", AllowEmptyStrings = false)]
         public int? VillageId { get; set; }
-        [Required(ErrorMessage = "Khasra No name is mandatory", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra No  is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
         [Required(ErrorMessage = "Type of Possession name is mandatory")]
         public string PossType { get; set; }
@@ -30,8 +30,7 @@ namespace Libraries.Model.Entity
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal Biswa { get; set; }
-        [Required(ErrorMessage = " Biswanshi is mandatory")]
-
+       
        
         public string Remarks { get; set; }
   

@@ -21,27 +21,6 @@
     }
 </style>
 
-@*<script>
-        $(function () {
-            $("#txtDesignation").keypress(function (e) {
-                var keyCode = e.keyCode || e.which;
-
-                $("#lblError").html("");
-
-                //Regex for Valid Characters i.e. Alphabets and Numbers.
-                var regex = /^[A-Za-z0-9]+$/;
-
-                //Validate TextBox value against the Regex.
-                var isValid = regex.test(String.fromCharCode(keyCode));
-                if (!isValid) {
-                    $("#lblError").html("Only Alphabets and Numbers allowed.");
-                }
-
-                return isValid;
-            });
-        });
-
-    </script>*@
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
@@ -62,7 +41,7 @@
         </div>
         <div class="panel-body">
             <form method="post" asp-action="Index" id="1">
-                @*asp-action="Create"*@
+               
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
@@ -132,10 +111,7 @@
                 <div class="form-row " style="display:none;" id="DivForGenerate">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         @Html.ActionLink("Generate Letter", "PrintRequest", "PrintRequest", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
-                        @*<input type="submit" value="Generate" class="btn btn-primary myapp-hed1" id="btnprintreq" />*@
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @*@Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" })*@
-                    </div>
+                        </div>
                 </div>
 
 
@@ -144,19 +120,6 @@
         </div>
     </div>
 </div>
-
-
-
-@*@if (ViewData["Msg"] != null)
-    {
-        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-    }*@
-
-
-
-
-@*<script src="~/js/printrequestindex.js"></script>*@
 
 
 
