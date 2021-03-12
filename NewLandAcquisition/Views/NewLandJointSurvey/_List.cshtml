@@ -3,7 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            @*<th>Zone</th>*@
+           
             <th>Village Name</th>
             <th>Khasra No.</th>
             <th>Address</th>
@@ -21,7 +21,7 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            @*<td> @(item.Zone==null?"": item.Zone.Name)</td>*@
+           
             <td> @(item.Village==null?"": item.Village.Name)</td>
             <td> @(item.Khasra == null?"": item.Khasra.Name)</td>
             <td>@item.Address  </td>

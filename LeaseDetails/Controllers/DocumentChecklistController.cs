@@ -64,6 +64,7 @@ namespace LeaseDetails.Controllers
                 if (ModelState.IsValid)
                 {
                     await BindDropDown(documentchecklist);
+                    documentchecklist.CreatedBy = SiteContext.UserId;
                     var result = await _documentCheckListService.Create(documentchecklist);
 
                     if (result == true)
@@ -111,6 +112,7 @@ namespace LeaseDetails.Controllers
                 try
                 {
 
+                    documentchecklist.ModifiedBy = SiteContext.UserId;
                     var result = await _documentCheckListService.Update(id, documentchecklist);
                     if (result == true)
                     {

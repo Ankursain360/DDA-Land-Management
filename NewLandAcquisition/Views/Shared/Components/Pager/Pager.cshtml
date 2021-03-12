@@ -2,7 +2,7 @@
 <div class="table-footer d-flex align-items-center">
     <div class="result d-md-flex align-items-center py-3 px-2 mr-auto">
         <p class="mt-0 mb-2 my-md-0"> Showing @((Model.CurrentPage - 1) * Model.PageSize + 1) to @(Model.CurrentPage * Model.PageSize >= Model.TotalItems ? Model.TotalItems : Model.CurrentPage * Model.PageSize) of @Model.TotalItems entries</p>
-        @*<p class="mt-0 mb-2 my-md-0">Show Result</p>*@
+       
         <div class="floating-label-wrap mx-md-3">
             @{
                 int[] arrPageSize = { 5, 50, 100, 200 };
@@ -20,7 +20,7 @@
                     }
                 }
             </select>
-            <!--                                <label for="field-1" class="floating-label">Result</label>-->
+           
         </div>
     </div>
     <div class="pagination justify-content-end">

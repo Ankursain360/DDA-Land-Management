@@ -14,6 +14,7 @@ namespace Libraries.Service.Common
         private IUnitOfWork unitOfWork;
         private IPropertyRegistrationService propertyregistrationRepository;
         private IDocumentCheckListRepository documentCheckListRepository;
+        private ILeaseApplicationFormRepository leaseApplicationRepository;
 
         public EntityService(IUnitOfWork unitOfWork, IGenericRepository<T> repository)
         {
@@ -30,6 +31,12 @@ namespace Libraries.Service.Common
         {
             this.unitOfWork = unitOfWork;
             this.documentCheckListRepository = documentCheckListRepository;
+        }
+
+        public EntityService(IUnitOfWork unitOfWork, ILeaseApplicationFormRepository leaseApplicationRepository)
+        {
+            this.unitOfWork = unitOfWork;
+            this.leaseApplicationRepository = leaseApplicationRepository;
         }
 
         public void Create(T entity)

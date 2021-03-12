@@ -71,19 +71,6 @@ namespace LeaseDetails
             services.RegisterDependency();
             services.AddAutoMapperSetup();
 
-
-
-            //#if DEBUG
-            //            if (HostEnvironment.IsDevelopment())
-            //            {
-            //                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            //            }
-            //            else
-            //            {
-            //                services.AddControllersWithViews();
-            //            }
-            //#endif
-
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
             services.AddAuthentication(options =>

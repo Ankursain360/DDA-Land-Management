@@ -24,7 +24,7 @@ function onChange(id) {
     HttpGet(`/bookTransferLand/GetKhasraList/?LocalityId=${id}`, 'json', function (response) {
         debugger
         
-        var html = '';
+        var html = '<option val="">-- select-- </option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }

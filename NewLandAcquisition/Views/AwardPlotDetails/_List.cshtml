@@ -1,10 +1,9 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Newlandawardplotdetails>
-@{int rowNo = 0; }
 <table class="table table-sm table-bordered mb-0 table-striped">
 
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+           
             <th>Award No.</th>
             <th>Village Name</th>
             <th>Khasra No.</th>
@@ -16,7 +15,7 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td>@(rowNo += 1)</td>
+                
                 <td>@item.NewlandAwardMaster.AwardNumber</td>
                 <td>@item.NewlandVillage.Name</td>
                 <td>@item.NewlandKhasra.Name</td>
