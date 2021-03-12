@@ -9,7 +9,10 @@ namespace Libraries.Model.Entity
 {
     public class Documentchecklist : AuditableEntity<int>
     {
-
+        public Documentchecklist()
+        {
+            Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
+        }
         [Required(ErrorMessage = "Service Type is Mandatory")]
         public int ServiceTypeId { get; set; }
 
@@ -26,5 +29,6 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Servicetype> ServiceTypeList { get; set; }
+        public ICollection<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
     }
 }
