@@ -40,7 +40,7 @@
 
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId " asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                        <option disabled="disabled" value="" selected="selected">Select</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label class="floating-label" asp-for="KhasraId">Khasra No.</label>
@@ -53,7 +53,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="Part" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input asp-for="Part" type="text" class="floating-label-field floating-label-field--s3 "  limit="200">
 
                     <span asp-validation-for="Part" class="text-danger"></span>
                     <label class="floating-label" asp-for="Part">Part</label>
@@ -64,7 +64,7 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="Area" type="text" class="floating-label-field floating-label-field--s3 number " placeholder="Name" limit="20">
+                    <input asp-for="Area" type="text" class="floating-label-field floating-label-field--s3 number "  limit="20">
 
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label" asp-for="Area">Area (Acre)</label>
