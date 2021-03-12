@@ -1,5 +1,4 @@
-﻿@*@model DDAPropertyREG.Models.Tbllogin*@
-
+﻿
 @{
     ViewData["Title"] = "Create";
     Layout = "";
@@ -17,20 +16,14 @@
     <link rel="stylesheet" href="//cdn.muicss.com/mui-0.10.3/extra/mui-colors.min.css">
     <script src="//cdn.muicss.com/mui-0.10.3/extra/mui-combined.min.js"></script>
     <style>
-        /*.canvasjs-chart-credit {
-                  display: none !important;
-              }
-
-              .btn {
-                  width: 100px !important;
-              }*/
+       
 
         .body, html {
             background-image: url("/images/DDAbg.jpg");
             background-color: #cccccc;
             height: 100vh;
             width: 100vw;
-            /*background-position: center;*/
+            
             background-repeat: no-repeat;
             background-size: cover;
             z-index: 2000;
@@ -48,7 +41,7 @@
 
         .logo {
             height: 152px;
-            /*width: 83px;*/
+            
         }
 
         #login .container #login-row #login-column #login-box {
@@ -185,19 +178,14 @@
                         </div>
 
                         <div class="form-group">
-                            @*<a href="/Dashboard/Index"><button class="ButtonCssUpcoming ">Login</button></a>
-        <a href="/Dashboard/Index">
-            <input type="submit" value="Login" asp-action="create" class="ButtonCss" />
-        </a>*@
+                         
                             @Html.ActionLink("Login", "Index", "Dashboard", null, new { @class = "btn btn-primary ButtonCss" })
                         </div>
                         <div class="form-group">
                             <a style="color:black;" href="/Login/ForgetPassword">Forgot Password &nbsp; </a><span style="color:purple;">|</span><a style="color:black;" href="https://parichay.nic.in/Accounts/NIC/index.html?service=Accounts" target="_blank">E-Parichay</a>
 
                         </div>
-                        @*<div class="form-group">
-                                <button class="ButtonCssUpcoming"><a href="/Dashboard/Index">Upcoming:</a> </button>
-                            </div>*@
+                       
 
                     </form>
                 </div>
