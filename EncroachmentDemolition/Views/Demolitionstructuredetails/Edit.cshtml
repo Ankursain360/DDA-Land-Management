@@ -143,9 +143,7 @@
                 </div>
             </div>
             <div class="form-group col-md-6">
-                @*<label class="control-label lb-sm">Photographs Before Demolition</label>
-        <input type="file" class="form-control" asp-for="BeforePhotoFile" id="PhotoFile" multiple />
-        <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>*@
+              
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @{
                         if (Model.Demolitionstructurebeforedemolitionphotofiledetails != null && Model.Demolitionstructurebeforedemolitionphotofiledetails.Count > 0)
@@ -218,20 +216,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @*@foreach (var item in Model.DemolitionStructure)
-        {
-            <tr>
-                <td>@(recNo += 1)</td>
-                <td>@(item.Structure.Name)</td>
-                <td>
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="NoOfStructrure" type="text" value="@(item.NoOfStructrure)" placeholder="No Of Structrure"
-                               class="floating-label-field floating-label-field--s3" />
-                        <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
-                    </div>
-                </td>
-            </tr>
-        }*@
+                              
                                 @foreach (var item in Model.Demolitionstructure)
                                 {
                                     <tr>
@@ -277,7 +262,7 @@
                 <div class="row mt-md-4">
                     <div class="col-md-12">
                         <input type="submit" value="Update" class="btn btn-theme" />
-                        @*<a asp-action="Index" class="btn btn-theme">Back </a>*@
+                       
                         @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
 
                     </div>

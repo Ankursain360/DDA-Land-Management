@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
-//using AutoMapper.Configuration;
+
 using Utility.Helper;
 using Notification;
 using Notification.Constants;
@@ -193,26 +193,14 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            //  Watchandwardphotofiledetails watchandwardphotofiledetails = new Watchandwardphotofiledetails();
+            
             var Data = await _watchandwardService.FetchSingleResult(id);
-            //if (Data.Encroachment == 0)
-            //    Data.EncroachmentStatus = 0;
-            //else
-            //    Data.EncroachmentStatus = 1;
+          
 
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
-            //for (int i= 0 ; i< Data.Watchandwardphotofiledetails.Count; i++)
-            //{
-            //    if (!string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Lattitude) && !string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Longitude))
-            //    {
-            //        string latitdue = Data.Watchandwardphotofiledetails.First().Lattitude;
-            //        string longitude = Data.Watchandwardphotofiledetails.First().Longitude;
-            //        ViewBag.LattLongUrlList = $"https://www.google.com/maps/place/{latitdue},{longitude}";
-            //        watchandwardphotofiledetails.urlList = "https://www.google.com/maps/place/{latitdue},{longitude}";
-            //    }
-            //}
+          
 
             if (Data == null)
             {
@@ -234,9 +222,7 @@ namespace EncroachmentDemolition.Controllers
 
             if (ModelState.IsValid)
             {
-                //targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
-                //targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
-                if (watchandward.Encroachment == 0)
+                 if (watchandward.Encroachment == 0)
                     watchandward.Encroachment = 0;
                 else if (watchandward.Encroachment == 1)
                     watchandward.Encroachment = 1;
@@ -300,34 +286,7 @@ namespace EncroachmentDemolition.Controllers
 
                     if (result)
                     {
-                        //var DataFlow = await dataAsync();
-                        //for (int i = 0; i < DataFlow.Count; i++)
-                        //{
-                        //    if (!DataFlow[i].parameterSkip)
-                        //    {
-                        //        watchandward.ApprovedStatus = 0;
-                        //        watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                        //        result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);  //Update Table details 
-                        //        if (result)
-                        //        {
-                        //            Approvalproccess approvalproccess = new Approvalproccess();
-                        //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                        //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
-                        //            approvalproccess.ServiceId = watchandward.Id;
-                        //            approvalproccess.SendFrom = SiteContext.UserId;
-                        //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                        //            approvalproccess.PendingStatus = 1;   //1
-                        //            approvalproccess.Status = null;   //1
-                        //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                        //            approvalproccess.ModifiedBy = SiteContext.UserId;///May be Uncomment
-                        //            approvalproccess.ModifiedDate = DateTime.Now;///May be Uncomment
-                        //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                        //        }
-
-                        //        break;
-                        //    }
-                        //}
-
+                      
                         ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
                         var result1 = await _watchandwardService.GetAllWatchandward();
 

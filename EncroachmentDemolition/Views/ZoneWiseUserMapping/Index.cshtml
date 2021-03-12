@@ -1,8 +1,4 @@
-﻿@*@model IEnumerable<DDAPropertyREG.Models.Tblzonemaster>
-    @{int rowNo = 0; }*@
-
-
-
+﻿
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,7 +23,7 @@
 <br />
 <div>
     <a asp-action="Create" class="btn btn-primary pull-right myapp-hed1 " style="margin-top: -10px;">Add New</a>
-    @*@Html.ActionLink("Add New", "Create", "ZoneMaster", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
+  
 </div>
 <br />
 <br />
@@ -59,8 +55,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">zone  </label>
-                    @*<select required style="height:30px;  background-color: #dddddd;" class="form-control" asp-items="@(new SelectList( @ViewBag.DepartmentList, "DepartmentRecNo","DepartmentName"))">*@
-
+                  
                     <select required style="height:30px;  background-color: #dddddd;" class="form-control">
                         <option value="value">zone 1</option>
                         <option value="value">zone 2</option>
@@ -115,7 +110,7 @@
 
             <thead class="thead">
                 <tr class="myapp-hed1">
-                    <th>Sr.No</th>
+                   
                     <th>Zone  </th>
                     <th>Role </th>
                     <th> User  </th>
@@ -126,7 +121,7 @@
             <tbody class="tbody">
 
                 <tr>
-                    <td>1</td>
+                   
                     <td>zone1</td>
                     <td>role1</td>
                     <td>ishu</td>
@@ -145,8 +140,7 @@
                 </tr>
 
                 <tr>
-                    <td>2</td>
-
+                  
                     <td>zone2</td>
                     <td>role2</td>
                     <td>Nikita</td>
@@ -165,8 +159,7 @@
 
                 </tr>
                 <tr>
-                    <td>3</td>
-
+                   
                     <td>zone3</td>
                     <td>role3</td>
                     <td>shalini</td>

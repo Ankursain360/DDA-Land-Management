@@ -121,10 +121,8 @@ namespace EncroachmentDemolition.Controllers
                 result = await _annexureAService.Savefixingchecklist(item);
             }
             string DocumentFilePath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:DocumentFilePath").Value.ToString();
-            // targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             FileHelper fileHelper = new FileHelper();
-            //if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
-            //{
+           
             List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
             for (int i = 0; i < fixingdemolition.DemolitionDocumentId.Count; i++)
             {
@@ -142,7 +140,7 @@ namespace EncroachmentDemolition.Controllers
             {
                 result = await _annexureAService.SaveFixingdocument(item);
             }
-            //}
+           
             if (result)
             {
                 #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
