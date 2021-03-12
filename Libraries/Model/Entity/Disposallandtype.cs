@@ -21,9 +21,9 @@ namespace Libraries.Model.Entity
         
 
         public byte? IsActive { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Land code is mandatory")]
         public string LandCode { get; set; }
-        [Required]
+        [Required(ErrorMessage = "RecState is mandatory")]
 
         public string RecState { get; set; }
 

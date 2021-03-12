@@ -18,7 +18,7 @@ namespace Libraries.Model.Entity
         public string PropertySiteNo { get; set; }
         [Required(ErrorMessage = "Location is mandatory")]
         public string Location { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Site Description is mandatory")]
         public string SiteDescription { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
@@ -30,7 +30,7 @@ namespace Libraries.Model.Entity
         public string OccupiedBy { get; set; }
         [Required(ErrorMessage = " Date of Possesion is mandatory")]
         public DateTime? DateofPossession { get; set; }
-        [Required(ErrorMessage = " Status is mandatory")]
+        [Required(ErrorMessage = " Remarks is mandatory")]
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
@@ -38,9 +38,6 @@ namespace Libraries.Model.Entity
         public List<LandNotification> LandNotificationList { get; set; }
         public virtual LandNotification LandNotification { get; set; }
 
-        //[NotMapped]
-        //public List<Serialnumber> SerialnumberList { get; set; }
-        //public virtual Serialnumber Serialnumber { get; set; }
         
     }
 }

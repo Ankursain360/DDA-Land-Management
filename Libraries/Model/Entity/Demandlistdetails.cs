@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
 {
     public class Demandlistdetails : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "Demand List No. is Mandatory Field")]
+        [Required(ErrorMessage = "Demand List No. is Mandatory ")]
         public string DemandListNo { get; set; }
         public int? Enmsno { get; set; }
         public string LacfileNo { get; set; }
