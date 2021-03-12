@@ -1,11 +1,11 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Documentchecklist>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Leaseapplication>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Service Type </th>
-            <th> Document Name</th>
-            <th> Is Mandatory</th>
+            <th>Reference No.</th>
+            <th>Name</th>
+            <th>Address</th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -16,9 +16,9 @@
             @foreach (var item in Model.Results)
             {
                 <tr>
-                    <td>@item.ServiceType.Name</td>
+                    <td>@item.RefNo</td>
                     <td>@item.Name</td>
-                    <td>@(item.IsMandatory == 1 ? "Yes" : "No" )</td>
+                    <td>@item.Address</td>
                     <td>
                         @if (item.IsActive == 1)
                         {

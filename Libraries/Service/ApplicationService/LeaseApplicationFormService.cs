@@ -14,68 +14,80 @@ using AutoMapper;
 namespace Libraries.Service.ApplicationService
 {
 
-    public class LeaseApplicationFormService : EntityService<Documentchecklist>, ILeaseApplicationFormService
+    public class LeaseApplicationFormService : EntityService<Leaseapplication>, ILeaseApplicationFormService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IDocumentCheckListRepository _documentCheckListRepository;
+        private readonly ILeaseApplicationFormRepository _leaseApplicationRepository;
         private readonly IMapper _mapper;
         public LeaseApplicationFormService(IUnitOfWork unitOfWork,
-            IDocumentCheckListRepository documentCheckListRepository,
+            ILeaseApplicationFormRepository leaseApplicationRepository,
             IMapper mapper)
-        : base(unitOfWork, documentCheckListRepository)
+        : base(unitOfWork, leaseApplicationRepository)
         {
             _unitOfWork = unitOfWork;
-            _documentCheckListRepository = documentCheckListRepository;
+            _leaseApplicationRepository = leaseApplicationRepository;
             _mapper = mapper;
         }
-        public async Task<Documentchecklist> FetchSingleResult(int id)
+        //public async Task<Leaseapplication> FetchSingleResult(int id)
+        //{
+        //    return await _leaseApplicationRepository.FetchSingleResult(id);
+        //}
+        //public async Task<bool> Update(int id, Leaseapplication leaseapplication)
+        //{
+        //    var result = await _leaseApplicationRepository.FindBy(a => a.Id == id);
+        //    Leaseapplication model = result.FirstOrDefault();
+        //    model.ServiceTypeId = leaseapplication.ServiceTypeId;
+        //    model.Name = leaseapplication.Name;
+        //    model.Description = leaseapplication.Description;
+        //    model.IsMandatory = leaseapplication.IsMandatory;
+        //    model.IsActive = leaseapplication.IsActive;
+        //    model.ModifiedDate = DateTime.Now;
+        //    _leaseApplicationRepository.Edit(model);
+        //    return await _unitOfWork.CommitAsync() > 0;
+        //}
+
+        public async Task<bool> Create(Leaseapplication leaseapplication)
         {
-            return await _documentCheckListRepository.FetchSingleResult(id);
-        }
-        public async Task<bool> Update(int id, Documentchecklist documentchecklist)
-        {
-            var result = await _documentCheckListRepository.FindBy(a => a.Id == id);
-            Documentchecklist model = result.FirstOrDefault();
-            model.ServiceTypeId = documentchecklist.ServiceTypeId;
-            model.Name = documentchecklist.Name;
-            model.Description = documentchecklist.Description;
-            model.IsMandatory = documentchecklist.IsMandatory;
-            model.IsActive = documentchecklist.IsActive;
-            model.ModifiedDate = DateTime.Now;
-            _documentCheckListRepository.Edit(model);
+            leaseapplication.CreatedDate = DateTime.Now;
+            _leaseApplicationRepository.Add(leaseapplication);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> Create(Documentchecklist documentchecklist)
+
+        //public async Task<bool> CheckUniqueName(int id, string Name, int ServiceTypeId)
+        //{
+        //    bool result = await _leaseApplicationRepository.Any(id, Name, ServiceTypeId);
+        //    return result;
+        //}
+
+        //public async Task<bool> Delete(int id)
+        //{
+        //    var form = await _leaseApplicationRepository.FindBy(a => a.Id == id);
+        //    Leaseapplication model = form.FirstOrDefault();
+        //    model.IsActive = 0;
+        //    _leaseApplicationRepository.Edit(model);
+        //    return await _unitOfWork.CommitAsync() > 0;
+        //}
+        //public async Task<List<Servicetype>> GetServiceTypeList()
+        //{
+        //    return await _leaseApplicationRepository.GetServiceTypeList();
+        //}
+
+        //public async Task<PagedResult<Leaseapplication>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model)
+        //{
+        //    return await _leaseApplicationRepository.GetPagedDocumentChecklistData(model);
+        //}
+
+        public async Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid)
         {
-            documentchecklist.CreatedDate = DateTime.Now;
-            _documentCheckListRepository.Add(documentchecklist);
-            return await _unitOfWork.CommitAsync() > 0;
+            return await _leaseApplicationRepository.GetDocumentChecklistDetails(servicetypeid);
         }
 
-
-        public async Task<bool> CheckUniqueName(int id, string Name, int ServiceTypeId)
+        public async Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments)
         {
-            bool result = await _documentCheckListRepository.Any(id, Name, ServiceTypeId);
-            return result;
-        }
-
-        public async Task<bool> Delete(int id)
-        {
-            var form = await _documentCheckListRepository.FindBy(a => a.Id == id);
-            Documentchecklist model = form.FirstOrDefault();
-            model.IsActive = 0;
-            _documentCheckListRepository.Edit(model);
-            return await _unitOfWork.CommitAsync() > 0;
-        }
-        public async Task<List<Servicetype>> GetServiceTypeList()
-        {
-            return await _documentCheckListRepository.GetServiceTypeList();
-        }
-
-        public async Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model)
-        {
-            return await _documentCheckListRepository.GetPagedDocumentChecklistData(model);
+            leaseapplicationdocuments.ForEach(x => x.CreatedBy = 1);
+            leaseapplicationdocuments.ForEach(x => x.CreatedDate = DateTime.Now);
+            return await _leaseApplicationRepository.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
         }
     }
 }

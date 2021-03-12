@@ -92,8 +92,8 @@ namespace AcquiredLandInformationManagement.Controllers
                             {
                                 Name = mutation.Name.Count <= i ? string.Empty : mutation.Name[i],
                                 FatherName = mutation.FatherName.Count <= i ? string.Empty : mutation.FatherName[i],
-                                Share = mutation.Address.Count <= i ? string.Empty : mutation.Address[i],
-                                Address = mutation.Share.Count <= i ? string.Empty : mutation.Share[i],
+                                Share = mutation.Address.Count <= i ? string.Empty : mutation.Share[i],
+                                Address = mutation.Share.Count <= i ? string.Empty : mutation.Address[i],
                                 CreatedBy = SiteContext.UserId,
                                 MutationId = mutation.Id
                             });
@@ -167,8 +167,8 @@ namespace AcquiredLandInformationManagement.Controllers
                             {
                                 Name = mutation.Name.Count <= i ? string.Empty : mutation.Name[i],
                                 FatherName = mutation.FatherName.Count <= i ? string.Empty : mutation.FatherName[i],
-                                Share = mutation.Address.Count <= i ? string.Empty : mutation.Address[i],
-                                Address = mutation.Share.Count <= i ? string.Empty : mutation.Share[i],
+                                Share = mutation.Address.Count <= i ? string.Empty : mutation.Share[i],
+                                Address = mutation.Share.Count <= i ? string.Empty : mutation.Address[i],
                                 CreatedBy = SiteContext.UserId,
                                 MutationId = mutation.Id
                             });
