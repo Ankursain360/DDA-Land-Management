@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
-//using AutoMapper.Configuration;
+
 using Utility.Helper;
 using Notification;
 using Notification.Constants;

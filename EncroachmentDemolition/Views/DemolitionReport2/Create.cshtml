@@ -1,12 +1,6 @@
 ﻿@model Libraries.Model.Entity.Demolitionstructuredetails
 @await Component.InvokeAsync("PageHeader", new { pageName = "Demolition Report (Zone Division And Village wise)" })
 
-@*@model Libraries.Model.Entity.Nazulland*@
-<!--@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}-->
-
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
@@ -95,10 +89,7 @@
 
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                @*<a href="/Zone/create" class="d-flex align-items-center btn btn-primary mr-2">
-                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                        <small>Add More</small>
-                    </a>*@
+               
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
@@ -111,52 +102,7 @@
             </div>
         </div>
 
-            @*<table class="table table-sm table-bordered mb-0 table-striped">
-                <thead class="text-nowrap">
-                    <tr>
-                        <th>Sr.No</th>
-                        <th>Zone</th>
-                        <th>Division</th>
-                        <th>Village Name</th>
-                        <th>Khasra No.</th>
-                        <th>Demolition Date</th>
-                        <th>Status </th>
-                        <th>Area Reclaimed</th>
-                        <th>Reason of Demolition</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>LM/SHAHDRA 1</td>
-                        <td>WD-2 </td>
-                        <td>Bajitpur</td>
-                        <td>1234</td>
-                        <td>01-10-2020</td>
-                        <td>Executed</td>
-                        <td>80 sqm</td>
-                        <td>Reason stated</td>
-
-
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>LM/NORTH-WEST </td>
-                        <td>WD-8</td>
-                        <td>Narela</td>
-                        <td>456</td>
-                        <td>01-10-2020</td>
-                        <td>Non-Executed</td>
-                        <td>58 sqm</td>
-                        <td>Reason stated</td>
-
-                    </tr>
-
-
-                </tbody>
-
-            </table>*@
+          
         </div>
         
     </div>

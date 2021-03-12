@@ -34,8 +34,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">zone  </label>
-                        @*<select required style="height:30px;  background-color: #dddddd;" class="form-control" asp-items="@(new SelectList( @ViewBag.DepartmentList, "DepartmentRecNo","DepartmentName"))">*@
-
+                       
                         <select required style="height:30px;  background-color: #dddddd;" class="form-control">
                             <option value="value">zone 1</option>
                             <option value="value">zone 2</option>
@@ -112,8 +111,6 @@
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
                         <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />
-                            @Html.ActionLink("Back", "Index", "ZoneMaster", null, new { @class = "btn btn-primary myapp-hed1" })*@
                         <a asp-action="Index" class="btn btn-primary myapp-hed1">Back</a>
                     </div>
                 </div>
@@ -147,7 +144,7 @@
             day = '0' + day.toString();
 
         var maxDate = year + '-' + month + '-' + day;
-        //alert(maxDate);
+       
     });
 
 

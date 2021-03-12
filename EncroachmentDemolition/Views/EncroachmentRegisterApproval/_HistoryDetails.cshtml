@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Approvalproccess>
-@{int rowNo = 0; }
 
-@*<form asp-action="Edit" enctype="multipart/form-data" disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">*@
     <a data-toggle="collapse" href="#collapseHistoryApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval">
         <h3 class="my-3 d-flex sub-heading">Approval History Details</h3>
     </a>
@@ -9,7 +7,7 @@
         <table class="table table-sm table-bordered mb-0 table-striped">
             <thead class="text-nowrap">
                 <tr>
-                    <th>Sr.No</th>
+                  
                     <th>Send From </th>
                     <th>Send To</th>
                     <th>Date</th>
@@ -22,7 +20,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@(rowNo += 1)</td>
+                           
                             <td>
                                 @item.SendFrom
                             </td>
@@ -48,6 +46,6 @@
         </table>
 
     </div>
-@*</form>*@
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 

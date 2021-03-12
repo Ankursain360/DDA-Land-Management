@@ -56,8 +56,7 @@
                     @{
                         @if (Model.FilePath != null)
                         {
-                            @*@Html.ActionLink(" (View Uploaded Document)", "ViewLetter", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })*@
-                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                           <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         }
                         else
                         {
@@ -68,9 +67,7 @@
 
                     <span asp-validation-for="Document" class="text-danger" style="display:none;" id="MessageFileUpload">File Upload is Mandatory</span>
 
-                    @*<input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf,  application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                        <span asp-validation-for="Document" class="text-danger" style="display:none;" id="MessageFileUpload">File Upload is Mandatory</span>
-                        <label class="floating-label">Upload Document</label>*@
+                   
                 </div>
             </div>
             @{
