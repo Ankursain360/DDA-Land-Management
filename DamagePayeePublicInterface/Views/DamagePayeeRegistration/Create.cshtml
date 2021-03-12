@@ -16,7 +16,7 @@
                     </strong>
                 </div>
                 <form asp-action="Create" method="post" class="d-block px-2" id="form">
-                    @*<h3 class="mb-3 d-flex">Add Details</h3>*@
+                   
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="row">
 
@@ -50,16 +50,10 @@
                             <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Captcha *">
                         </div>
                     </div>
-                    @*<div class="row">
-
-                            <div class="capcha d-flex align-items-center">
-                                <img src="~/get-captcha-image" id="img-captcha">
-                                <i class="ri-refresh-line" id="refreshcaptcha"></i>
-                            </div>
-                        </div>*@
+                   
                     <div class="row">
                         <div>
-                            @*class="col-md-4 pull-right"*@
+                           
                             <div class="codeImg">
                                 <img id="img-captcha" src="~/get-captcha-image" />
                                 <span class="ri-refresh-line" style="font-size:26px;" id="refreshcaptcha"></span>

@@ -8,7 +8,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
-//using DamagePayee.Filters;
+
 using Core.Enum;
 
 
@@ -39,9 +39,7 @@ namespace DocumentManagementSystem.Controllers
         {
             Userprofile Model = new Userprofile();
 
-         //  Model.Downloadright = await _userrightService.GetDMSFileRight();
-          
-
+        
             AddUserDto model = new AddUserDto()
             {
                 DepartmentList = await _departmentService.GetDepartment(),
