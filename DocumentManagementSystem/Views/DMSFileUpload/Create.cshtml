@@ -132,7 +132,7 @@
 
             </div>
             <div id="divBulkFileUpload" style="display:none;">
-                @*divLoadData*@
+               
 
                 <form asp-action="CreateBulkUpload" method="post" id="frmInfo" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
                     <div>
@@ -162,8 +162,7 @@
                                     <input type="file" asp-for="BulkUpload" class="floating-label-field floating-label-field--s3" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                                     <span asp-validation-for="BulkUpload" id="BulkUploadMsg" class="text-danger" style="display:none;">Mandatory</span>
                                     <label for="field-1" class="floating-label">Upload CSV File</label>
-                                    @*<a class="badge badge-primary px-2" asp-action="DownloadCSVFormat"> (Download CSV Format)</a>*@
-
+                                 
                                 </div>
                             </div>
                             <a asp-action="DownloadCSVFormat" class="d-flex align-items-center btn btn-success">

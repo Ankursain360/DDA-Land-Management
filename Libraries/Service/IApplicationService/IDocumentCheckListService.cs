@@ -11,19 +11,16 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IDocumentCheckListService : IEntityService<Documentchecklist>
     {
-        Task<List<ZoneDto>> GetZone();
-        //Task<bool> Update(int id, Zone zone); // To Upadte Particular data added by renu
+        Task<bool> Update(int id, Documentchecklist documentchecklist); // To Upadte Particular data added by renu
 
-        //Task<bool> Create(Zone zone);
+        Task<bool> Create(Documentchecklist documentchecklist);
 
-        //Task<Zone> FetchSingleResult(int id);  // To fetch Particular data added by renu
+        Task<Documentchecklist> FetchSingleResult(int id);  // To fetch Particular data added by renu
 
-        //Task<bool> Delete(int id);    // To Delete Data  added by renu
+        Task<bool> Delete(int id);    // To Delete Data  added by renu
 
-        Task<bool> CheckUniqueName(int id, string zone);// To check Unique Value  for zone
-        Task<bool> CheckUniqueCode(int id, string code);// To check Unique Value  for zone
-        Task<List<Department>> GetDropDownList();
-        Task<List<Zone>> GetAllDetails();
-        Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model);
+        Task<bool> CheckUniqueName(int id, string zone,int ServiceTypeId);// To check Unique Value  for zone
+        Task<List<Servicetype>> GetServiceTypeList();
+        Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
     }
 }

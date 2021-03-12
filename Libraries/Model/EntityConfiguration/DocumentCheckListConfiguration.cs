@@ -7,11 +7,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-
-
     public class DocumentCheckListConfiguration : IEntityTypeConfiguration<Documentchecklist>
     {
-
         public void Configure(EntityTypeBuilder<Documentchecklist> builder)
         {
             builder.ToTable("documentchecklist", "lms");

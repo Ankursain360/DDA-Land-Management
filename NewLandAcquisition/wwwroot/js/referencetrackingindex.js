@@ -37,11 +37,7 @@ function GetDetails(pageNumber, pageSize) {
 
 
 $("#btnReset").click(function () {
-    $('#village_tag').html('Village Name - All');
-
-    $('#Name').val('0').trigger('change');
-
-    GetDetails(currentPageNumber, currentPageSize);
+    location.reload();
 
 
 });

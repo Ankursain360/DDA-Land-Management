@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LandingPage.Helper;
 
-//using LandingPage.Helper;
 
 namespace LandingPage.Controllers
 {

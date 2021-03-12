@@ -89,9 +89,7 @@ namespace DocumentManagementSystem.Controllers
             else
             {
                 Dmsfileupload Data = await _dmsfileuploadService.FetchSingleResult(Id);
-                //string path = Data.FilePath;
-                //byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-                //return File(FileBytes, file.GetContentType(path));
+              
                 string filename = Data.FilePath;
                 return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
             }

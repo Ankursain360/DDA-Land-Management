@@ -42,7 +42,7 @@
             <div class="floating-label-wrap">
 
                 <select asp-for="DivisionId" id="DivisionId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 DivisionClass" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))">
-                    @*onchange="return onChangeDivision(this.options[this.selectedIndex].value)"*@
+                   
                     <option value="value">Select</option>
                 </select>
                 <label asp-validation-for="DivisionId" class="error"></label>
@@ -183,12 +183,7 @@
                                     <input asp-for="CountOfStructure" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" id="CountOfStructure" />
                                 </div>
                             </td>
-                            @*<td>
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-            </div>
-        </td>*@
+                          
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>

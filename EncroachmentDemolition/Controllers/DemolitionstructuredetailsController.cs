@@ -36,7 +36,7 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemolitionstructuredetailsDto model)
         {
-            //var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetails(model);
+           
             var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetailsList(model);
             return PartialView("_List", result);
         }
@@ -62,7 +62,7 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
             demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId ?? 0));
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
-            //demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetStructure();
+          
             demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
             string AfterPhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:AfterPhotoFilePath").Value.ToString();
@@ -119,10 +119,7 @@ namespace EncroachmentDemolition.Controllers
                             result = await _demolitionstructuredetailsService.SaveDemolitionstructurebeforedemolitionphotofiledetails(item);
                         }
                     }
-                    //if (demolitionstructuredetails.NameOfStructure != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
-
-                    //if (demolitionstructuredetails.StructrureId != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
-                    if (demolitionstructuredetails.StructrureId != null)
+                 if (demolitionstructuredetails.StructrureId != null)
                     {
                         List<Demolitionstructure> demolitionstructure = new List<Demolitionstructure>();
                         for (int i = 0; i < demolitionstructuredetails.StructrureId.Count(); i++)
@@ -174,7 +171,7 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
             demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId ?? 0));
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
-            //demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
+          
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
 
             if (demolitionstructuredetails == null)
@@ -199,9 +196,7 @@ namespace EncroachmentDemolition.Controllers
 
             if (ModelState.IsValid)
             {
-                //string AfterPhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:AfterPhotoFilePath").Value.ToString();
-                //string BeforePhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:BeforePhotoFilePath").Value.ToString();
-
+                
 
                 var result = await _demolitionstructuredetailsService.Update(id, demolitionstructuredetails);
                 if (result)
@@ -304,7 +299,7 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
             demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId ?? 0));
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
-            //demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
+          
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
 
             if (demolitionstructuredetails == null)
