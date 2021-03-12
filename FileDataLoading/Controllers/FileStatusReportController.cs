@@ -30,7 +30,7 @@ namespace FileDataLoading.Controllers
         {
             FileStatusReportDtoProfile datastoragedetails = new FileStatusReportDtoProfile();
             var userDepartmentId = _datastorageService.GetDepartmentIdFromProfile(SiteContext.UserId);
-            //ViewBag.BranchList = await _datastorageService.GetBranch();
+            
             ViewBag.DepartmentList = await _datastorageService.GetDepartment(SiteContext.RoleId, userDepartmentId);
             ViewBag.RId = SiteContext.UserId;
             return View(datastoragedetails);

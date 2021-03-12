@@ -56,9 +56,5 @@ namespace FileDataLoading.Controllers
 
         }
 
-        //public IActionResult PrintLabel()
-        //{
-        //    return PartialView("PrintLabel");
-        //}
     }
 }

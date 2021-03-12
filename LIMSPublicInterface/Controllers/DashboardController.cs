@@ -13,7 +13,7 @@ namespace LIMSPublicInterface.Controllers
     {
         public IActionResult Index()
         {
-            //ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+            
             return View();
         }
     }

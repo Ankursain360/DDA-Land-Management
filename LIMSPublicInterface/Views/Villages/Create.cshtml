@@ -1,9 +1,4 @@
-﻿@*@{
-        ViewData["Title"] = "Create";
-    }
-
-    <h2>Create</h2>*@
-
+﻿
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -73,7 +68,7 @@
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Find" class="btn btn-primary dda-topheading" id="btnFind" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                       
                         @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary dda-topheading" })
                     </div>
                 </div>
@@ -242,16 +237,15 @@
 
         $.ajax({
             url: "/IssueReturnFile/IssueFileData",
-            // type: "POST",
+           
             data: {},
             traditional: true,
-            //dataType: "Boolean",
-            //contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+           
             dataType: "text",
             contentType: "application/text; charset=utf-8",
             success: function (result) {
                 if (result) {
-                    //  alert("Done");
+                    
                     $('#myModaldelete').modal('show');
                 } else {
                     alert("Error occurs on the Database level!");
@@ -293,11 +287,7 @@
                 });
             },
             minLength: 2,
-            //select: function (event, ui) {
-            //    alert('you have selected ' + ui.item.label + ' ID: ' + ui.item.value);
-            //    $('#txtSearch').val(ui.item.label);
-            //    return false;
-            //}
+           
         });
     });
 </script>
