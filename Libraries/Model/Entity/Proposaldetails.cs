@@ -43,7 +43,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Description  is mandatory")]
 
         public string Description { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Proposal Date is mandatory")]
         public DateTime? ProposalDate { get; set; }
         [Required(ErrorMessage = "Status is mandatory ")]
         public byte? IsActive { get; set; }

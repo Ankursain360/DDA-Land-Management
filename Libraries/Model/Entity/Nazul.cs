@@ -11,18 +11,18 @@ namespace Libraries.Model.Entity
     {
 
        
-        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village is Mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
         public string JaraiSakani { get; set; }
         public string Language { get; set; }
 
-        [Required(ErrorMessage = "Date of Consolidation is Mandatory Field")]
+        [Required(ErrorMessage = "Date of Consolidation is Mandatory")]
         public DateTime YearOfConsolidation { get; set; }
 
-        [Required(ErrorMessage = "Date of Jamabandi is Mandatory Field")]
+        [Required(ErrorMessage = "Date of Jamabandi is Mandatory")]
         public DateTime YearOfJamabandi { get; set; }
 
-        [Required(ErrorMessage = "Last Mutation No is Mandatory Field")]
+        [Required(ErrorMessage = "Last Mutation No is Mandatory")]
         public string LastMutationNo { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte IsActive { get; set; }

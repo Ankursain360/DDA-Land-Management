@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = " Village name is mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
-        [Required(ErrorMessage = "Khasra No is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra No is mandatory", AllowEmptyStrings = false)]
         public int KhasraId { get; set; }
         public int? YearOfjamabandi { get; set; }
         public int? NoOfKhewat { get; set; }
@@ -105,7 +105,7 @@ namespace Libraries.Model.Entity
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? LeaseAmount { get; set; }
         [NotMapped]
-        
+        [Required(ErrorMessage = " Renewal Date is mandatory")]
         public DateTime RenewalDate { get; set; }
     }
 }

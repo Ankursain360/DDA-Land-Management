@@ -14,8 +14,9 @@ namespace Libraries.Model.Entity
             EncrocherPeople = new HashSet<EncrocherPeople>();
         }
 
-
+        [Required(ErrorMessage = "Village is mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
+        [Required(ErrorMessage = "Khasra No is mandatory", AllowEmptyStrings = false)]
         public int KhasraId { get; set; }
       
         public string LandUse { get; set; }
@@ -34,13 +35,13 @@ namespace Libraries.Model.Entity
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Biswanshi; Max 18 digits")]
         [Required(ErrorMessage = " Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
-        
+        [Required(ErrorMessage = " Nature Of Encroachment is mandatory")]
         public int NatureofencroachmentId { get; set; }
         [Required(ErrorMessage = " File Number is mandatory")]
         public string FileNo { get; set; }
       
         public DateTime? ActionDate { get; set; }
-
+        [Required(ErrorMessage = "Reason is mandatory", AllowEmptyStrings = false)]
         public int ReasonsId { get; set; }
        
         public string DamageArea { get; set; }
@@ -68,14 +69,19 @@ namespace Libraries.Model.Entity
         public ICollection<Enchroachmentpayment> Enchroachmentpayment { get; set; }
         public ICollection<EncrocherPeople> EncrocherPeople { get; set; }
         [NotMapped]
+       
         public List<string> EName { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = " Address is mandatory")]
         public List<string> EAddress { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = " Amount is mandatory")]
         public List<string> Amount { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = " Cheque Number is mandatory")]
         public List<string> ChequeNo { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = " Cheque Date is mandatory")]
         public List<string> ChequeDate { get; set; }
     }
 }
