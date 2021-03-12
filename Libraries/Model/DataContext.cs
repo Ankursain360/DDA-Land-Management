@@ -282,7 +282,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Licencefees> Licencefees { get; set; }
         public virtual DbSet<Documentchecklist> Documentchecklist { get; set; }
-
+        public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<Servicetype> Servicetype { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
