@@ -90,7 +90,7 @@
                 <th>
                     Award(s) :-@item.AwardDate
 
-                    @*@(item.AwardDate == " "? "-":item.AwardDate)*@
+                  
                 </th>
 
 
@@ -327,8 +327,3 @@
 
 </table>
 
-
-
-
-
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

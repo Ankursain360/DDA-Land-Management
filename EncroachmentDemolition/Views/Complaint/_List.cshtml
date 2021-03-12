@@ -1,19 +1,15 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Onlinecomplaint>
-@{int rowNo = 0; }
 
 <table class="table table-sm table-bordered mb-0 table-striped">
 
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+           
             <th>Reference No</th>
             <th>Complaint Name</th>
             <th>Contact No</th>
             <th>Email</th>
-            @*<th>Area/Address</th>
-            <th>Complaint Type</th>
-            <th>Location</th>*@
-
+           
             <th>Approve Status</th>
             <th>Status</th>
             <th>Operation</th>
@@ -23,15 +19,12 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@(rowNo += 1)</td>
+            
             <td>@item.ReferenceNo</td>
             <td>@item.Name</td>
             <td>@item.Contact</td>
             <td>@item.Email</td>
-            @*<td>@item.AddressOfComplaint</td>
-            <td>@item.ComplaintType.Name</td>
-
-            <td>@item.Location.Name</td>*@
+           
 
             <td>
                 @if (item.ApprovedStatus == 0)

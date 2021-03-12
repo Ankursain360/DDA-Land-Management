@@ -282,8 +282,10 @@ namespace Libraries.Model
 
         public virtual DbSet<Licencefees> Licencefees { get; set; }
         public virtual DbSet<Documentchecklist> Documentchecklist { get; set; }
-
+        public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<Servicetype> Servicetype { get; set; }
+        public virtual DbSet<Leaseapplication> Leaseapplication { get; set; }
+        public virtual DbSet<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -516,6 +518,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DocumentchargesConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DocumentCheckListConfiguration());
+            modelBuilder.ApplyConfiguration(new LeaseApplicationConfiguration());
+            modelBuilder.ApplyConfiguration(new LeaseApplicationDocumentsConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

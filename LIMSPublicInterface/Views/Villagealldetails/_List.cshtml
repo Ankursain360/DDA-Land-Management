@@ -1,6 +1,4 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Model.Entity.Userprofile>*@
-@*@model IEnumerable<Model.Entity.Userprofile>*@
-@model IEnumerable<Dto.Search.VillageDetailsLitDataDto>
+﻿@model IEnumerable<Dto.Search.VillageDetailsLitDataDto>
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
 
@@ -69,15 +67,14 @@
 
                 </tr>
 
-            @*<td> @(item.UnderSection22 == null?"": item.UnderSection22.NotificationNo)</td>*@
+           
 
             <tr>
 
                 <td>
                     @(item.um4Date== "-"?"-":Convert.ToDateTime(item.um4Date).ToString("dd/MMM/yyyy"))
 
-                    @*@(Convert.ToDateTime(item.um4Date).ToString("dd/MMM/yyyy"))*@
-
+                  
 
                 </td>
                 <td>
@@ -162,8 +159,3 @@
 
     </table>
 
-
-
-
-
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

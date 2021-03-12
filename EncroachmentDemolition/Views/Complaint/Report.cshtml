@@ -1,34 +1,7 @@
-﻿@*@model LMS_Encrochment_Management.Models.TblOlComplaint*@
-@{
+﻿@{
     ViewData["Title"] = "Report";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@*<style>
-            div.panel-heading {
-                height: 90px;
-                text-align: center;
-            }
-
-            input {
-                border: 0px;
-            }
-        </style>
-    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-    <script src="~/js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="myapp-hed">
-                <div class="col-md-12">
-                    <h6 class="pull-left" style="color:white;margin-top:5px;">Online Complaint</h6>
-                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <br />*@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Online Complaint" })
 <div>
     @Html.ActionLink("Download ", "CmplntCreate", "OlCmplnt", null, new { @class = "btn btn-theme ", style = "margin-top: -10px;" })
@@ -41,7 +14,7 @@
         <div class="panel-heading  myapp-hed1">
             <h5 style="color:white;">Delhi Development Authority</h5>
             <h6 style="color:white;">Online Complaint Report</h6>
-            @*<h6 class="pull-left" style="color:white; margin-top:-0.4%">New Complaint</h6>*@
+           
         </div>
        
         <form asp-action="Create">
@@ -99,7 +72,7 @@
                     <div class="floating-label-wrap">
 
                         <select disabled class="floating-label-field floating-label-field--s3">
-                            @*<option value="">-Select-</option>*@
+                           
                             <option value="">Delhi</option>
                         </select>
                         <label class="floating-label">Location</label>

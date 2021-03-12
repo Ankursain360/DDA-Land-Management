@@ -1,14 +1,10 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Datastoragedetails>*@
-@model IEnumerable<Dto.Search.FileStatusReportListDataDto>
-@{int rowNo = 0;}
+﻿@model IEnumerable<Dto.Search.FileStatusReportListDataDto>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
 
         <tr>
-            <th rowspan="2">Sr.No</th>
-
-
+           
             <th rowspan="2">Department Name</th>
             <th rowspan="2">Branch Name</th>
             <th rowspan="2">Total Files</th>
@@ -22,9 +18,7 @@
             @foreach (var item in Model)
             {
         <tr>
-            <td>@(rowNo += 1)</td>
-
-
+           
             <td>@item.DepartmentName</td>
 
             <td>@item.BranchName</td>
@@ -49,4 +43,3 @@
     </tbody>
 
 </table>
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

@@ -1,6 +1,4 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Datastoragedetails>*@
-@model IEnumerable<Dto.Search.ListofTotalFileReportListDataDto>
-@{int rowNo = 0; }
+﻿@model IEnumerable<Dto.Search.ListofTotalFileReportListDataDto>
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
@@ -64,4 +62,3 @@
         }
     </tbody>
 </table>
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

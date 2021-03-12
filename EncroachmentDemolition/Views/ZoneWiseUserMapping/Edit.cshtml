@@ -29,14 +29,11 @@
         <div class="panel-body">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @*<input type="hidden" asp-for="ZoneId" />*@
-
-
+              
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">zone  </label>
-                        @*<select required style="height:30px;  background-color: #dddddd;" class="form-control" asp-items="@(new SelectList( @ViewBag.DepartmentList, "DepartmentRecNo","DepartmentName"))">*@
-
+                      
                         <select required style="height:30px;  background-color: #dddddd;" class="form-control">
                             <option value="value">zone 1</option>
                             <option value="value">zone 2</option>
@@ -112,9 +109,7 @@
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Update" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @*@Html.ActionLink("Back", "Index", "ModuleMaster", null, new { @class = "btn btn-primary myapp-hed1" })*@
-
+                     
                         <a asp-action="Index" class="btn btn-primary myapp-hed1">Back</a>
                     </div>
                 </div>

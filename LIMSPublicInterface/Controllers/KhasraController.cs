@@ -8,12 +8,7 @@ namespace LIMSPublicInterface.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public IActionResult Index(int id)
-        //{
-        //    ViewBag.IsShowData = "Yes";
-        //    return View();
-        //}
+       
         public IActionResult Create()
         {
             return View();

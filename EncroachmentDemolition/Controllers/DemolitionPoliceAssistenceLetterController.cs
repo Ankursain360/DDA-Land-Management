@@ -65,18 +65,11 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemolitionPoliceAssistenceLetterSearchDto model)
         {
-            //if(model.StatusId == 1)
-            //{
+            
                 var result = await _demolitionPoliceAssistenceLetterService.GetPagedApprovedAnnexureA(model, SiteContext.UserId);
                 ViewBag.IsApproved = model.StatusId;
                 return PartialView("_List", result);
-            //}
-            //else
-            //{
-            //    var result = await _demolitionPoliceAssistenceLetterService.GetPagedApprovedAnnexureAListedit(model, SiteContext.UserId);
-            //    ViewBag.IsApproved = model.StatusId;
-            //    return PartialView("_List2", result);
-            //}
+           
            
         }
         [AuthorizeContext(ViewAction.Add)]
