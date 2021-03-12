@@ -17,13 +17,21 @@
                 </div>
             </div>
         </div><div class="row mt-md-3">
-    <div class="col-md-12 col-xl-3">
-        <div class="col-6 col-md-7 col-xl-6">
+                  @*<div class="col-md-12 col-xl-3">*@
+                      <div class="col-md-2" >
 
-            <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
+                          <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
 
-        </div>
-        </div>
+                      </div>
+
+                      <div class="col-md-2">
+
+                          <input type="submit" value="Cancel" id="btnReset" class="btn btn-theme" />
+
+                      </div>
+
+
+                  @*</div>*@
     </div>
 </div>
     <div class="table-section bg-white border shadow rounded">
@@ -37,6 +45,8 @@
         </div>
         </div>
 
+
+     
 
         <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
         <environment include="Development">
