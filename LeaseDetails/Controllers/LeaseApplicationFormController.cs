@@ -80,27 +80,36 @@ namespace LeaseDetails.Controllers
                     leaseapplication.IsActive = 1;
                     var result = await _leaseApplicationFormService.Create(leaseapplication);
 
-                    if(result)
+                    if (result)
                     {
                         if (leaseapplication.DocumentName != null && leaseapplication.Mandatory != null)
                         {
-                            if (leaseapplication.DocumentName.Count > 0 && leaseapplication.Mandatory.Count > 0 )
+                            if (leaseapplication.DocumentName.Count > 0 && leaseapplication.Mandatory.Count > 0)
                             {
                                 List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
                                 for (int i = 0; i < leaseapplication.DocumentName.Count; i++)
                                 {
-                                    leaseapplicationdocuments.Add(new Leaseapplicationdocuments
+                                    if (leaseapplication.FileUploaded != null)
                                     {
-                                        DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
-                                        LeaseApplicationId = leaseapplication.Id,
-                                        DocumentFileName = leaseapplication.FileUploaded != null ?
-                                                                leaseapplication.FileUploaded.Count <= i ? string.Empty :
-                                                                fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
-                                                                leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
-                                                                leaseapplication.FileUploadedPath[i] : string.Empty
-                                    });
+                                        if (leaseapplication.FileUploadedPath[i] != "")
+                                        {
+                                            leaseapplicationdocuments.Add(new Leaseapplicationdocuments
+                                            {
+                                                DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
+                                                LeaseApplicationId = leaseapplication.Id,
+                                                DocumentFileName = leaseapplication.FileUploaded != null ?
+                                                                   leaseapplication.FileUploaded.Count <= i ? string.Empty :
+                                                                   fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
+                                                                   leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
+                                                                   leaseapplication.FileUploadedPath[i] : string.Empty
+                                            });
+                                        }
+
+                                    }
                                 }
-                                result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
+
+                                if (leaseapplicationdocuments.Count > 0)
+                                    result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
                             }
                         }
                     }
