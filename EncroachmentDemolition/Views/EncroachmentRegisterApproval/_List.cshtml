@@ -1,9 +1,8 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.EncroachmentRegisteration>
-@{int rowNo = 0; }
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+           
             <th>Date</th>
             <th>Locality(Village)</th>
             <th>Khasra No.</th>
@@ -17,8 +16,7 @@
             @foreach (var item in Model.Results)
             {
                 <tr>
-                    <td>@(rowNo += 1)</td>
-
+                   
                     <td> @(Convert.ToDateTime(item.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
                     <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
                     <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>

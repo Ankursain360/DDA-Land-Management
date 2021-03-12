@@ -9,27 +9,14 @@
   
         <div class="pt-3">
             <div class="row">
-                <!--<div class="col-md-4 col-xl-3 mb-4">
-                    <a href="#" class="project-box card slow">
-                        <div class="card-header d-flex">
-                            <i class="ri-notification-2-line project-img rounded-circle"></i>-->
-                            <!--                                    <img src="img/profile/face.jpg" class="project-img rounded-circle">-->
-                            <!--<small class="badge badge-primary px-2 py-0 slow">Open Project</small>
-                        </div>
-                        <div class="card-body">
-                            <p class="name">By : Founder Name</p>
-                            <h2 class="text-truncate">Name of Project</h2>
-                            <p class="pro-detail">Some detail of the project few words not more then 60 characters...</p>
-                        </div>
-                    </a>
-                </div>-->
+               
                 @foreach (var item in Model)
                 {
                     <div class="col-md-4 col-xl-3 mb-4">
                         <a href=@item.Url target=@item.Target class="project-box card slow">
                             <div class="card-header d-flex">
                                 <i class="@item.Icon project-img rounded-circle" ></i>
-                                @*<img src="img/profile/face.jpg" class="project-img rounded-circle">*@
+                               
                                 <small class="badge badge-primary px-2 py-0 slow"> Open</small>
                             </div>
                             <div class="card-body">

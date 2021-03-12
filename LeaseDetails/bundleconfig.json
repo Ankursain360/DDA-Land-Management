@@ -16,5 +16,89 @@
     "inputFiles": [
       "wwwroot/js/propertytypeindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/documentchecklistcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/documentchecklistcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/documentchecklistedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/documentchecklistedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/documentchecklistindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/documentchecklistindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leaseapplicationformcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/leaseapplicationformcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leaseapplicationformedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/leaseapplicationformedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leaseapplicationformindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/leaseapplicationformindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/licencefeesindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/licencefeesindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/documentcharges.min.js",
+    "inputFiles": [
+      "wwwroot/js/documentcharges.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/documentchargesindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/documentchargesindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/groundrateindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/groundrateindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/premiumrate.min.js",
+    "inputFiles": [
+      "wwwroot/js/premiumrate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/premiumrateindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/premiumrateindex.js"
+    ]
   }
 ]

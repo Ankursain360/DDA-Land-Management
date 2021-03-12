@@ -1,5 +1,4 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Paymentverification>*@
-@model IEnumerable<Dto.Search.PaymentTransactionReportListDataDto>
+﻿@model IEnumerable<Dto.Search.PaymentTransactionReportListDataDto>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
@@ -26,7 +25,7 @@
 
             <td>@item.FileNo</td>
             <td>@(item.LocalityName)</td>
-            @*<td>@item.FileNo.Distinct()</td>*@
+           
             <td>@item.PayeeName</td>
             <td>@item.PropertyNo</td>
             <td>@item.AmountPaid</td>
@@ -47,4 +46,3 @@
 
 </table>
 
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

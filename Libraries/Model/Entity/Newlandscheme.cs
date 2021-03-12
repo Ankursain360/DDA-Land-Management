@@ -14,13 +14,13 @@ namespace Libraries.Model.Entity
         {
             Newlandacquistionproposaldetails = new HashSet<Newlandacquistionproposaldetails>();
         }
-        [Required]
+        [Required(ErrorMessage = " Scheme is mandatory")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Code name is mandatory")]
         public string Code { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Scheme Date is mandatory")]
         public DateTime? SchemeDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = " File No is mandatory")]
         public string FileNo { get; set; }
         public string Description { get; set; }
 

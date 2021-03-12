@@ -20,14 +20,14 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "Proposal is mandatory")]
         public int ProposalId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Notificatio No is mandatory")]
         public string Number { get; set; }
         [Required(ErrorMessage = "The Notification is mandatory")]
         public DateTime? Ndate { get; set; }
-        [Required(ErrorMessage = "Purpose is rmandatory")]
+        [Required(ErrorMessage = "Purpose is mandatory")]
         public string Npurpose { get; set; }
         public string TypeDetails { get; set; }
-        [Required(ErrorMessage = "Status is rmandatory")]
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
         public string BoundaryDescription { get; set; }

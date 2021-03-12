@@ -39,7 +39,7 @@
         <div class="row pt-3">
             <div class="col-md-12" style="margin-bottom:40px;">
                 <input type="submit" value="Generate" class="btn btn-theme" />
-                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+               
                 @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-theme" })
             </div>
         </div>
@@ -48,15 +48,7 @@
             @if (ViewBag.IsShowData == "Yes")
             {
                 <div id="DivReportDetails">
-                    @*<div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class=" myapp-hed2">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Report</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
+                   
                     <h2 class="my-3 sub-heading">Report</h2>
                     <div class="table-section">
                         <div class="table-responsive px-2">
@@ -64,7 +56,7 @@
 
                                 <thead class="text-nowrap">
                                     <tr>
-                                        <th>Sr.No</th>
+                                       
                                         <th>Locality(Village)</th>
                                         <th>File No.</th>
                                         <th>Payee Name</th>
@@ -79,7 +71,7 @@
                                 </thead>
                                 <tbody class="tbody">
                                     <tr>
-                                        <td>1</td>
+                                       
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -92,7 +84,7 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
+                                       
                                         <td></td>
                                         <td></td>
                                         <td></td>

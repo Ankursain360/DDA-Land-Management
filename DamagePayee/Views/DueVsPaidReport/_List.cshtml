@@ -1,6 +1,4 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demandletters>*@
-@model IEnumerable<Dto.Search.PaymentTransactionReportListDataDto>
-@{int rowNo = 0; }
+﻿@model IEnumerable<Dto.Search.PaymentTransactionReportListDataDto>
 
 
 <table class="table table-sm table-bordered mb-0 table-striped">
@@ -12,9 +10,7 @@
             <th>Locality </th>
             <th>Payee Name</th>
             <th>Property No</th>
-            @*<th>Amount paid</th>
-            <th>Payment Date</th>
-            <th>Payment Mode</th>*@
+          
             <th>Property/Plot Area (Sq.Yrds)</th>
             <th>Demand No.</th>
             <th>Demand Date</th>
@@ -31,12 +27,10 @@
 
             <td>@item.FileNo</td>
             <td>@item.LocalityName</td>
-            @*<td>@item.FileNo.Distinct()</td>*@
+           
             <td>@item.PayeeName</td>
             <td>@item.PropertyNo</td>
-            @*<td>@item.AmountPaid</td>
-            <td>@item.CreatedDate</td>
-            <td>@item.PaymentMode</td>*@
+           
             <td>@item.PropertyArea</td>
             <td>@item.DemandNo</td>
             <td>@item.DemandDate</td>
@@ -54,4 +48,3 @@
 
 </table>
 
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

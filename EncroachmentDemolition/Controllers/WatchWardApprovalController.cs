@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
-//using AutoMapper.Configuration;
+
 using Utility.Helper;
 using Notification;
 using Notification.Constants;
@@ -54,9 +54,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
-            //Data.VillageList = await _watchAndWardApprovalService.GetAllVillage();
-            //Data.LocalityList = await _watchAndWardApprovalService.GetAllLocality();
-            //Data.KhasraList = await _watchAndWardApprovalService.GetAllKhasra();
+           
             if (Data == null)
             {
                 return NotFound();
@@ -82,12 +80,6 @@ namespace EncroachmentDemolition.Controllers
                 {
                     if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
                     {
-                        //int previousApprovalId = _approvalproccessService.GetPreviousApprovalId(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), watchandward.Id);
-                        //Approvalproccess approvalproccess1 = new Approvalproccess();
-                        //// approvalproccess1.Remarks = watchandward.ApprovalRemarks;  ///May be Uncomment
-                        //approvalproccess1.PendingStatus = 0;
-                        //approvalproccess1.Status = Convert.ToInt32(watchandward.ApprovalStatus);
-                        //result = await _approvalproccessService.UpdatePreviousApprovalProccess(previousApprovalId, approvalproccess1, SiteContext.UserId);
                         result = true;  ///May be comment
                         if (result)
                         {

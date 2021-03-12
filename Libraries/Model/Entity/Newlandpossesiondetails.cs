@@ -10,13 +10,13 @@ namespace Libraries.Model.Entity
     public class Newlandpossessiondetails : AuditableEntity<int>
     {
 
-        [Required]
+        [Required(ErrorMessage = " Village name is mandatory")]
         public int? VillageId { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Khasra No is mandatory")]
         public int? KhasraId { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Type Of Possession is mandatory")]
         public string PossType { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Reason  is mandatory")]
         public string ReasonNonPoss { get; set; }
         [Required]
         public DateTime PossDate { get; set; }

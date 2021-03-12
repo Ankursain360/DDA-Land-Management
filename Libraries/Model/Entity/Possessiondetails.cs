@@ -9,22 +9,30 @@ namespace Libraries.Model.Entity
 {
     public class Possessiondetails : AuditableEntity<int>
     {
-       
-        [Required]
+
+        [Required(ErrorMessage = "Village name is mandatory", AllowEmptyStrings = false)]
         public int? VillageId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Khasra No name is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Type of Possession name is mandatory")]
         public string PossType { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Reason is mandatory")]
         public string ReasonNonPoss { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Date is mandatory")]
         public DateTime PossDate { get; set; }
         public string PlotNo { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage = " Bigha is mandatory")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal Bigha { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Biswa is mandatory")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal Biswa { get; set; }
+        [Required(ErrorMessage = " Biswanshi is mandatory")]
+
+       
         public string Remarks { get; set; }
   
         public byte IsActive { get; set; }

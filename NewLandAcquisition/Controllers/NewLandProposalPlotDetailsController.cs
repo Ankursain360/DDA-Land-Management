@@ -211,7 +211,7 @@ namespace NewLandAcquisition.Controllers
 
 
         [HttpGet]
-        public async Task<JsonResult> GetAreaList(int? khasraid)
+        public async Task<JsonResult> GetKhasraAreaList(int? khasraid)
         {
             khasraid = khasraid ?? 0;
 

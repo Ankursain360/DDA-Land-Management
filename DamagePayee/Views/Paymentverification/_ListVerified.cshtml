@@ -18,7 +18,7 @@
             <th> Verified By</th>
             <th> Verified On</th>
             <th> Status</th>
-            @*<th>Operation</th>*@
+            
 
         </tr>
     </thead>
@@ -38,7 +38,7 @@
             <td>@item.PaymentMode </td>
             <td>@item.BankName </td>
 
-            @*<td>@item.IsVerified </td>*@
+          
             <td>
                 @if (item.IsVerified == 1)
                 {
@@ -57,21 +57,7 @@
                 {
                     <span class="badge badge-danger px-2 py-1">Inactive</span>}
             </td>
-            @*<td style="min-width:100px;">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input chkAction " /> &nbsp;&nbsp;
-                <label class="form-check-label"><button class="btn btn-theme">Verify</button></label>
-            </div>
-        </td>*@
-            <!--<td>
-        <div class="action-btns">
-            <span class="badge badge-primary px-2 py-1">Active</span>
-            <a asp-action="View" asp-route-id="@item.Id" title="verify" class="view"> </a>
-            <!--@*<a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
-            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>*@
-        <!--</div>
-
-    <!--</td>-->
+           
 
         </tr>
         }
