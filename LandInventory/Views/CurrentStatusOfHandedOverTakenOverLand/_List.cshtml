@@ -3,15 +3,12 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+           
             <th>Department</th>
             <th>Zone</th>
             <th>Division</th>
             <th>Locality(Village)</th>
-            @*<th>Handed Over By</th>
-            <th>Date of Hand Over</th>
-            <th>Taken Over By</th>
-            <th>Date of Taken Over</th>*@
+            
             <th style="min-width:150px;">Operation</th>
         </tr>
     </thead>
@@ -19,23 +16,12 @@
         @foreach (var item in Model.Results)
         {
 <tr>
-    <td>@(rowNo += 1)</td>
+  
     <td>@item.PropertyRegistration.Department.Name</td>
     <td>@item.PropertyRegistration.Zone.Name</td>
     <td>@item.PropertyRegistration.Division.Name</td>
     <td>@(item.PropertyRegistration.Locality==null?"": item.PropertyRegistration.Locality.Name)</td>
-    @*<td>
-        @item.HandedOverByNameDesingnation
-    </td>
-    <td>
-        @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
-    </td>
-    <td>
-        @item.TakenOverByNameDesingnation
-    </td>
-    <td>
-        @(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
-    </td>*@
+    
     <td style="min-width:150px;">
             <a asp-action="Create" asp-route-id="@item.Id" title="Add Status">Add Current Status </a>
     <a asp-action="History" asp-route-id="@item.Id" title="View History">&nbsp;|&nbsp; View History </a>

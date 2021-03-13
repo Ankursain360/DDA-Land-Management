@@ -235,22 +235,7 @@ namespace LandInventory.Controllers
             landtransfer.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(landtransfer == null ? 0 : landtransfer.TakenOverZoneId);
 
 
-            //landtransfer.PropertyRegistration = await _propertyregistrationService.FetchSingleResult(landtransfer.PropertyRegistrationId);
-            //landtransfer.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-            //landtransfer.Propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
-            //landtransfer.Propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
-            //landtransfer.Propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            //landtransfer.Propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(landtransfer.Propertyregistration.DepartmentId);
-            //landtransfer.Propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(landtransfer.Propertyregistration.DivisionId);
-            //landtransfer.Propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(landtransfer.Propertyregistration.ZoneId);
-
-            //landtransfer.Propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
-            //landtransfer.Propertyregistration.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(landtransfer.Propertyregistration.TakenOverDepartmentId ?? 0);
-            //landtransfer.Propertyregistration.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(landtransfer.Propertyregistration.TakenOverZoneId ?? 0);
-
-            //landtransfer.Propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-            //landtransfer.Propertyregistration.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(landtransfer.Propertyregistration.HandedOverDepartmentId ?? 0);
-            //landtransfer.Propertyregistration.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(landtransfer.Propertyregistration.HandedOverZoneId ?? 0);
+          
 
 
             landtransfer.LandTransferList = await _landTransferService.GetAllLandTransfer(landtransfer.PropertyRegistrationId);
@@ -354,22 +339,7 @@ namespace LandInventory.Controllers
             landtransfer.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(landtransfer == null ? 0 : landtransfer.HandedOverZoneId);
 
 
-            //landtransfer.PropertyRegistration = await _propertyregistrationService.FetchSingleResult(landtransfer.PropertyRegistrationId);
-            //landtransfer.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-            //landtransfer.Propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
-            //landtransfer.Propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
-            //landtransfer.Propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            //landtransfer.Propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(landtransfer.Propertyregistration.DepartmentId);
-            //landtransfer.Propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(landtransfer.Propertyregistration.DivisionId);
-            //landtransfer.Propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(landtransfer.Propertyregistration.ZoneId);
-
-            //landtransfer.Propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
-            //landtransfer.Propertyregistration.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(landtransfer.Propertyregistration.TakenOverDepartmentId ?? 0);
-            //landtransfer.Propertyregistration.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(landtransfer.Propertyregistration.TakenOverZoneId ?? 0);
-
-            //landtransfer.Propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-            //landtransfer.Propertyregistration.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(landtransfer.Propertyregistration.HandedOverDepartmentId ?? 0);
-            //landtransfer.Propertyregistration.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(landtransfer.Propertyregistration.HandedOverZoneId ?? 0);
+         
 
 
             landtransfer.LandTransferList = await _landTransferService.GetAllLandTransfer(landtransfer.PropertyRegistrationId);

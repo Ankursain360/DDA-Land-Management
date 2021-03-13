@@ -42,11 +42,7 @@ namespace LandInventory.Controllers
             _propertyregistrationService = propertyregistrationService;
             _Configuration = configuration;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    var result = await _propertyregistrationService.GetAllPropertyregistration(userId);
-        //    return View(result);
-        //}
+     
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
@@ -69,14 +65,13 @@ namespace LandInventory.Controllers
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
             propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
-            // propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-            //    propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
+          
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
             propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-            //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+          
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()

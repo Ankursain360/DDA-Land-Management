@@ -13,7 +13,7 @@ namespace LandInventory.Controllers
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-            //comment by nikita
+       
             return View();
         }
     }

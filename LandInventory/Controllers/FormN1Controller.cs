@@ -137,20 +137,7 @@ namespace LandInventory.Controllers
             return View(nazulland);
         }
 
-        //[AcceptVerbs("Get", "Post")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Exist(int Id, string Name)
-        //{
-        //    var result = await _pageService.CheckUniqueName(Id, Name);
-        //    if (result == false)
-        //    {
-        //        return Json(true);
-        //    }
-        //    else
-        //    {
-        //        return Json($"Page: {Name} already exist");
-        //    }
-        //}
+       
 
 
 

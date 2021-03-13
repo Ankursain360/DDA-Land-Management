@@ -22,7 +22,7 @@ namespace LandInventory.Controllers
         public readonly ILandTransferService _landTransferService;
         public readonly IPropertyRegistrationService _propertyregistrationService;
         public readonly ICurrentstatusoflandhistoryService _currentstatusoflandhistoryService;
-        //string targetPathLayout = string.Empty;
+     
         string surveyReportFilePath = string.Empty;
         string actionReportFilePath = string.Empty;
         public CurrentStatusOfHandedOverTakenOverLandController(ILandTransferService landTransferService, IConfiguration configuration, ICurrentstatusoflandhistoryService currentstatusoflandhistoryService, IPropertyRegistrationService propertyregistrationService)
@@ -41,8 +41,7 @@ namespace LandInventory.Controllers
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-            //List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
-            //return View(list);
+           
             return View();
         }
 
@@ -50,7 +49,7 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> Create(int id)
         {
             Currentstatusoflandhistory Model = new Currentstatusoflandhistory();
-            //var Data = await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
+           
             var Data = await _landTransferService.FetchSingleResult(id);
             Data.HandedOverZoneList = await _landTransferService.GetAllZone(Data.HandedOverDepartmentId ?? 0);
             Data.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(Data.HandedOverZoneId == null ? 0 : Data.HandedOverZoneId);
@@ -94,9 +93,7 @@ namespace LandInventory.Controllers
             {
                 return NotFound();
             }
-            //var errors = ModelState.Values.SelectMany(x => x.Errors);
-            //ModelState.Remove(null);
-            //if (ModelState.IsValid)
+          
             {
                 surveyReportFilePath = _configuration.GetSection("FilePaths:CurrentStatusOfLand:CurrentLandSurveyReport").Value.ToString();
                 actionReportFilePath = _configuration.GetSection("FilePaths:CurrentStatusOfLand:CurrentLandActionReport").Value.ToString();
@@ -139,15 +136,14 @@ namespace LandInventory.Controllers
 
             Currentstatusoflandhistory _obj = new Currentstatusoflandhistory();
             var Id = id;
-            // var Id = Request.Path.ToString().Split('/').LastOrDefault();
-            //var Id = Context.Request.Query["id"];
+         
             return View(_obj);
         }
 
         [HttpPost]
         public async Task<PartialViewResult> HistoryDetails([FromBody] CurrentstatusoflandhistorySearchDto model)
         {
-            // var Id = Request.Path.ToString().Split('/').LastOrDefault();
+           
             var result = await _currentstatusoflandhistoryService.GetPagedCurrentstatusoflandhistory(model);
             return PartialView("_HistoryDetails", result);
         }

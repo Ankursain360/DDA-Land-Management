@@ -57,19 +57,7 @@ namespace LandInventory.Controllers
         }
 
 
-        //public async Task<PartialViewResult> GetDetails(LandTransferSearchDto model)
-        //{
-        //    var result = await _landtransferService.GetPagedLandTransferReportData(model);
-
-        //    if (result != null)
-        //    {
-        //        return PartialView("_List", result);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return PartialView();
-        //    }
+       
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
         {
