@@ -60,7 +60,7 @@ namespace NewLandAcquisition.Controllers
 
                 if (ModelState.IsValid)
                 {
-                  //  newlandnotification.CreatedBy = SiteContext.UserId;
+                   newlandnotification.CreatedBy = SiteContext.UserId;
                     var result = await _newlandnotificationService.Create(newlandnotification);
 
                     if (result)

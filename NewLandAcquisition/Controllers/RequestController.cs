@@ -168,7 +168,7 @@ namespace NewLandAcquisition.Controllers
        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Request scheme)
         {
-            //ViewBag.viewDocFile = scheme.LayoutPlan;
+           
 
             documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
             if (ModelState.IsValid)
