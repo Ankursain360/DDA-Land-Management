@@ -53,26 +53,7 @@
             <th>Case No.</th>
             <th>Opposite Party</th>
             <th>Remarks</th>
-            @*<th>Department</th>
-            <th>Zone</th>
-            <th>Division</th>
-            <th>Name/Designation</th>
-            <th>Date</th>
-            <th>Mobile No.</th>
-            <th>Order No.</th>*@
-            @*<th>Copy of Order</th>*@
-            @*<th>Transfer order Issue Authority</th>
-            <th>Comments</th>
-            <th>Department</th>
-            <th>Zone</th>
-            <th>Division</th>
-            <th>Name/Designation</th>
-            <th>Date</th>
-            <th>Mobile No.</th>
-            <th>Comments</th>*@
-            @*<th>type</th>
-                <th>Date</th>
-                <th>Comments</th>*@
+           
 
         </tr>
     </thead>
@@ -114,7 +95,7 @@
                     <td>@item.Vacant</td>
                     <td>@item.ActionOnEncroachment</td>
                     <td>@item.EncraochmentDetails</td>
-                    @*<td>@item.TotalArea</td>*@
+                   
                     <td>@(item.Boundary == 0 ? "Boundary Wall" : item.AreaUnit == 1 ? "Fencing" :  "None")</td>
                     <td>@item.BoundaryAreaCovered</td>
                     <td>@item.BoundaryDimension</td>
@@ -125,46 +106,11 @@
                     <td>@item.CaseNo</td>
                     <td>@item.OppositeParty</td>
                     <td>@item.LitigationStatusRemarks</td>
-                    @*<td>@(item.LitigationStatus  == 0 ? "No" : "Yes")</td>*@
+                   
                     <td>@(item.GeoReferencing == 0 ? "No" : "Yes")</td>
-                    @*<td>
-                            @if (item.LayoutFilePath != null)
-                            {
-                                @Html.ActionLink("Download", "Download", new { id = item.Id })
-                            }
-                            else
-                            {
-                                <p class="text-danger">No Document</p>
-                            }
-                        </td>*@
-                    @*<td>@(item.HandedOverDepartmentId == null ? "" : item.HandedOverDepartment.Name)</td>
-                    <td>@(item.HandedOverZoneId == null ? "" :item.HandedOverZone.Name)</td>
-                    <td>@(item.HandedOverDivisionId == null ? "" : item.HandedOverDivision.Name)</td>
-                    <td>@item.HandedOverName</td>
-                    <td>@item.HandedOverDate</td>
-                    <td>@item.HandedOverMobileNo</td>
-                    <td>@item.HandedOverOrderNo</td>*@
-                    @*<td>@item.HandedOverCopyofOrderDoc</td>*@
-                    @*<td>@item.HandedTransferOrder</td>
-                    <td>@item.HandedOverComments</td>
-                    <td>@(item.TakenOverDepartmentId == null ? "" : item.TakenOverDepartment.Name)</td>
-                    <td>@(item.TakenOverZoneId == null ? "" : item.TakenOverZone.Name)</td>
-                    <td>@(item.TakenOverDivisionId == null ? "" : item.TakenOverDivision.Name)</td>
-                    <td>@item.TakenOverName</td>
-                    <td>@item.TakenOverDate</td>
-                    <td>@item.TakenOverMobileNo</td>
-                    <td>@item.TakenOverComments</td>*@
-                    @*<td>@item.DisposalType.Name</td>
-                        <td>@item.DisposalDate</td>
-                        <td>@item.DisposalComments</td>*@
+                   
                     <td>@item.Remarks</td>
-                    @*<td>
-                            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-
-                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-
-                            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-                        </td>*@
+                   
                 </tr>
             }
         }
@@ -175,72 +121,7 @@
             </tr>
         }
 
-        @*<tr>
-                <td>2</td>
-                <td>111</td>
-                <td>dwarka</td>
-                <td>1234</td>
-                <td>dwarka</td>
-                <td>yes</td>
-                <td>1258</td>
-                <td>no</td>
-                <td>yes</td>
-                <td>no</td>
-                <td>no</td>
-                <td>no</td>
-                <td>engg</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>lm</td>
-                <td>no</td>
-                <td>no</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>alloted</td>
-                <td>7aug2020</td>
-                <td>no comments</td>
-                <td>good to use</td>
-                <td>
-                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
-                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>111</td>
-                <td>dwarka</td>
-                <td>1234</td>
-                <td>dwarka</td>
-                <td>yes</td>
-                <td>1258</td>
-                <td>no</td>
-                <td>yes</td>
-                <td>no</td>
-                <td>no</td>
-                <td>no</td>
-                <td>engg</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>lm</td>
-                <td>no</td>
-                <td>no</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>alloted</td>
-                <td>7aug2020</td>
-                <td>no comments</td>
-                <td>good to use</td>
-                <td>
-                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
-                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </td>
-            </tr>*@
+        
     </tbody>
 
 </table>

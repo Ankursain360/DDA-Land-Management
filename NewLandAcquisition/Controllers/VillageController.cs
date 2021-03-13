@@ -25,7 +25,7 @@ namespace NewLandAcquisition.Controllers
             _newlandvillageService = newlandvillageService;
         }
 
-        // GET: VillageController
+        
         public IActionResult Index()
         {
 

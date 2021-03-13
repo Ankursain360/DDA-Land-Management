@@ -41,11 +41,8 @@ namespace NewLandAcquisition.Controllers
         public async Task<IActionResult> Create()
         {
             Newlandacquistionproposalplotdetails newlandacquistionproposalplotdetails = new Newlandacquistionproposalplotdetails();
-            //proposalplotdetails.IsActive = 1;
-
+            
             newlandacquistionproposalplotdetails.ProposaldetailsList = await _newLandProposalPlotDetailsService.GetAllProposaldetails();
-            //newlandacquistionproposalplotdetails.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillageList();
-            //newlandacquistionproposalplotdetails.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasraList(newlandacquistionproposalplotdetails.AcquiredlandvillageId);
             newlandacquistionproposalplotdetails.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillage();
             newlandacquistionproposalplotdetails.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasra(newlandacquistionproposalplotdetails.AcquiredlandvillageId);
 
@@ -61,8 +58,6 @@ namespace NewLandAcquisition.Controllers
             try
             {
                 newlandacquistionproposalplotdetails.ProposaldetailsList = await _newLandProposalPlotDetailsService.GetAllProposaldetails();
-                //newlandacquistionproposalplotdetails.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillageList();
-                //newlandacquistionproposalplotdetails.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasraList(newlandacquistionproposalplotdetails.AcquiredlandvillageId);
                 newlandacquistionproposalplotdetails.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillage();
                 newlandacquistionproposalplotdetails.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasra(newlandacquistionproposalplotdetails.AcquiredlandvillageId);
 
@@ -103,8 +98,7 @@ namespace NewLandAcquisition.Controllers
 
             var Data = await _newLandProposalPlotDetailsService.FetchSingleResult(id);
             Data.ProposaldetailsList = await _newLandProposalPlotDetailsService.GetAllProposaldetails();
-            //Data.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillageList();
-            //Data.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasraList(Data.AcquiredlandvillageId);
+           
             Data.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillage();
             Data.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasra(Data.AcquiredlandvillageId);
 
@@ -124,8 +118,6 @@ namespace NewLandAcquisition.Controllers
         {
 
             newlandacquistionproposalplotdetails.ProposaldetailsList = await _newLandProposalPlotDetailsService.GetAllProposaldetails();
-            //newlandacquistionproposalplotdetails.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillageList();
-            //newlandacquistionproposalplotdetails.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasraList(newlandacquistionproposalplotdetails.AcquiredlandvillageId);
             newlandacquistionproposalplotdetails.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillage();
             newlandacquistionproposalplotdetails.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasra(newlandacquistionproposalplotdetails.AcquiredlandvillageId);
 
@@ -182,8 +174,6 @@ namespace NewLandAcquisition.Controllers
            
             Data.ProposaldetailsList = await _newLandProposalPlotDetailsService.GetAllProposaldetails();
 
-            //Data.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillageList();
-            //Data.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasraList(Data.AcquiredlandvillageId);
             Data.AcquiredlandvillageList = await _newLandProposalPlotDetailsService.GetAllVillage();
             Data.KhasraList = await _newLandProposalPlotDetailsService.GetAllKhasra(Data.AcquiredlandvillageId);
 

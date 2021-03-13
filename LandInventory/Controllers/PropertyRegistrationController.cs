@@ -41,11 +41,7 @@ namespace LandInventory.Controllers
             _propertyregistrationService = propertyregistrationService;
             _Configuration = configuration;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    var result = await _propertyregistrationService.GetAllPropertyregistration(userId);
-        //    return View(result);
-        //}
+      
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
@@ -68,14 +64,13 @@ namespace LandInventory.Controllers
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
             propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-            // propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-            //    propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
+         
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
             propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-            //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+         
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
@@ -589,39 +584,7 @@ namespace LandInventory.Controllers
             }
             return View(propertyregistration);
         }
-        //[AuthorizeContext(ViewAction.Delete)]
-        //public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
-        //{
-        //    int userId = SiteContext.UserId;
-        //    var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
-
-        //    if (userId == 3)
-        //    {
-        //        var result = await _propertyregistrationService.Delete(id);
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //            ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-        //            ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-        //            return View("Index");
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-        //            ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-        //            return View("Index");
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
-        //        var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
-        //        return View("Index", result1);
-        //    }
-
-
-        //}
+        
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
@@ -858,15 +821,7 @@ namespace LandInventory.Controllers
                 return View("Index");
             }
         }
-        //[HttpPost]
-        //public async Task<PartialViewResult> List([FromBody] PropertyRegisterationSearchDto model)
-        //{
-        //    int userId = SiteContext.UserId;
-        //    var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model, userId);
-        //    ViewBag.IsDisposedRightsUser = SiteContext.UserId;
-        //    ViewBag.IsUserCanEdit = SiteContext.UserId;
-        //    return PartialView("_List", result);
-        //}
+       
         [AuthorizeContext(ViewAction.Download)]
         [HttpPost]
         public async Task<IActionResult> DownloadIndex([FromBody] PropertyRegisterationSearchDto model)
@@ -890,23 +845,7 @@ namespace LandInventory.Controllers
                     });
                 }
             }
-            //if (result != null)
-            //{
-            //    for (int i = 0; i < result.Count; i++)
-            //    {
-            //        data.Add(new PropertyRegisterationDownloadDto()
-            //        {
-            //            Id = result[i].Id,
-            //            InventoriedInId = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
-            //            PlannedUnplannedLand = result[i].PlannedUnplannedLand,
-            //            ClassificationOfLand = result[i].ClassificationOfLand.Name,
-            //            Department = result[i].Department.Name,
-            //            Zone = result[i].Zone.Name,
-            //            Division = result[i].Division == null ? "" : result[i].Division.Name,
-            //            PrimaryListNo = result[i].PrimaryListNo == null ? "" : result[i].PrimaryListNo
-            //        });
-            //    }
-            //}
+          
             var memory = ExcelHelper.CreateExcel(data);
             string sFileName = @"LandInventory.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");

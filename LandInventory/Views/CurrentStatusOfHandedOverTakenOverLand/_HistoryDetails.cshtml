@@ -3,7 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th rowspan="2">Sr.No</th>
+           
             <th rowspan="2">Department</th>
             <th rowspan="2">Zone</th>
             <th rowspan="2">Division</th>
@@ -38,13 +38,13 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-            <td>@(rowNo += 1)</td>
+         
             <td>@item.LandTransfer.PropertyRegistration.Department.Name</td>
             <td>@item.LandTransfer.PropertyRegistration.Zone.Name</td>
             <td>@item.LandTransfer.PropertyRegistration.Division.Name</td>
             <td>@(item.LandTransfer.PropertyRegistration.Locality == null ? ""  : item.LandTransfer.PropertyRegistration.Locality.Name)</td>
 
-            @*<td>@item.LandTransfer.PropertyRegistration.Locality.Name</td>*@
+         
             <td>@item.LandTransfer.PropertyRegistration.KhasraNo</td>
             <td>@item.Tsssurvey</td>
             <td>
@@ -60,7 +60,7 @@
 
 
 
-            @*<td>@item.SurveyReportFilePath</td>*@
+            
             <td>@item.Encroachment</td>
            
             <td>@item.EncroachementArea</td>
@@ -76,7 +76,7 @@
                 }
             </td>
 
-            @*<td>@item.ActionReportFilePath</td>*@
+          
             <td>@item.FencingBoundaryWall</td>
             <td>@item.AreaCovered</td>
             <td>@item.Dimension</td>

@@ -75,14 +75,13 @@ namespace NewLandAcquisition.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //var list = await _newlandannexure2Service.Getawardmasterdetails();
-                        //return View("Index", list);
+                       
                         return RedirectToAction("Index", "RequestApprovalProcess");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        // return View(newlandannexure2);
+                        
                         return RedirectToAction("Index", "RequestApprovalProcess");
                     }
                 }
@@ -94,7 +93,7 @@ namespace NewLandAcquisition.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                //  return View(newlandannexure2);
+              
                 return RedirectToAction("Index", "RequestApprovalProcess");
             }
         }
@@ -204,7 +203,7 @@ namespace NewLandAcquisition.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                   // var list = await _newlandawardmasterdetailService.Getawardmasterdetails();
+                  
                     return RedirectToAction("Index", "RequestApprovalProcess");
                 }
                 else
