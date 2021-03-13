@@ -41,7 +41,8 @@ function GetDetails(pageNumber, pageSize) {
 
 $("#btnReset").click(function () {
 
-    $('#UnderSection17Id').trigger('change');
+  
+    document.getElementById("UnderSection17Id").selectedIndex = "";
     location.reload();
 
 

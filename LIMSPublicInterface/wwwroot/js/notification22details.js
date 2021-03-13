@@ -42,10 +42,9 @@ function GetDetails(pageNumber, pageSize) {
 
 $("#btnReset").click(function () {
 
-    $('#UnderSection22Id').trigger('change');
+   
+    document.getElementById("UnderSection22Id").selectedIndex = "";
     location.reload();
-
-
 
 
 });

@@ -40,8 +40,9 @@ function GetDetails(pageNumber, pageSize) {
 
 
 $("#btnReset").click(function () {
-
-    //$('#UnderSection4Id').trigger('change');
+  //  alert("ffrr");
+   // $('#UnderSection4Id').trigger('change');
+    document.getElementById("UnderSection4Id").selectedIndex = "";
     location.reload();
 
   
