@@ -53,6 +53,11 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<Leaseapplication> FetchLeaseApplicationDetails(int id)
+        {
+            return await _leaseApplicationRepository.FetchLeaseApplicationDetails( id);
+        }
+
 
         //public async Task<bool> CheckUniqueName(int id, string Name, int ServiceTypeId)
         //{
@@ -81,6 +86,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid)
         {
             return await _leaseApplicationRepository.GetDocumentChecklistDetails(servicetypeid);
+        }
+
+        public async Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id)
+        {
+            return await _leaseApplicationRepository.LeaseApplicationDocumentDetails(id);
         }
 
         public async Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments)

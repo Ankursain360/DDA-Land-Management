@@ -16,5 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         //Task<Documentchecklist> FetchSingleResult(int id);
         Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
         Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments);
+        Task<Leaseapplication> FetchLeaseApplicationDetails(int id);
+        Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id);
     }
 }

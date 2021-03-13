@@ -89,5 +89,11 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<string> FileUploadedPath { get; set; }
 
+
+        [NotMapped]
+        public List<Documentchecklist> Documentchecklist { get; set; }
+
+        [NotMapped]
+        public List<Leaseapplicationdocuments> Leasedocuments { get; set; }
     }
 }
