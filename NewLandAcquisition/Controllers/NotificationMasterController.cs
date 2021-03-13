@@ -38,7 +38,7 @@ namespace NewLandAcquisition.Controllers
             return PartialView("_List", result);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             Newlandvillage newlandvillage = new Newlandvillage();
             newlandvillage.IsActive = 1;
