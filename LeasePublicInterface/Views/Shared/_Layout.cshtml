@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--LIMS Public Interface -->
+    <meta charset="utf-8">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Dashboard</title>
+    <!--font css-->
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/lib/select2/select2.css" rel="stylesheet" />
+    <script src="~/lib/select2/select2.js"></script>
+
+</head>
+<body class="bg-gray">
+    <div style="display:none;">
+        <div class="body-loading loader-active"></div>
+    </div>
+    <div class="top-header">
+        <header>
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <div class="menu mr-3 p-2 text-white order-md-2 mr-md-auto open" id="mobileMenu">
+                        <i class="ri-menu-fold-line"></i>
+                        <i class="ri-menu-unfold-line"></i>
+                    </div>
+                    <div class="logo py-1 mr-auto mr-md-4 order-md-1">
+                        <a href="/" class="d-block">
+                            <figure class="m-0">
+                                <img src="~/images/header-logo.png" alt="" class="img-fluid">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="dropdown noti text-white my-2  mr-3 order-md-3">
+                        <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
+                            <i class="ri-notification-2-line"></i>
+                            <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
+                            <ul class="list-unstyled m-0 p-0">
+                                <li class="px-3">
+                                    <a href="#" class="d-flex align-items-center py-2 border-bottom">
+                                        <div class="noti-time text-center pr-2">
+                                            <i class="ri-discuss-line"></i>
+                                            <small class="d-block w-100">12:00</small>
+                                        </div>
+                                        <p class="m-0 text-truncate text-left">
+                                            Some notification message new message
+                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="px-3">
+                                    <a href="#" class="d-flex align-items-center py-2 border-bottom read">
+                                        <div class="noti-time text-center pr-2">
+                                            <i class="ri-discuss-line"></i>
+                                            <small class="d-block w-100">2 Days</small>
+                                        </div>
+                                        <p class="m-0 text-truncate text-left">
+                                            Some notification message new message
+                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @*@await Component.InvokeAsync("SignInProfile")*@
+                </div>
+            </div>
+        </header>
+    </div>
+    <aside class="left-menu small slow" id="leftMenu">
+        <ul class="accordion list-unstyled mb-0">
+            @await Component.InvokeAsync("SideNav")
+        </ul>
+    </aside>
+
+    <partial name="_CookieConsentPartial" />
+    <section id="rightSection" class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0">
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+    <footer class="footer slow">
+        <div class="container-fluid">
+            <p class="my-0 py-2">
+                <a href="#">Terms & Conditions</a>
+                | <a href="#">Privacy Policy</a>
+                | <a href="#">Copyright Policy</a>
+                | <a href="#">Hyperlink policy</a>
+                | <a href="#">Accessibility Statement</a>
+                | <a href="#">Help</a><br>
+                &copy; Content Owned by DDA, Government of India.
+            </p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+
+    <environment include="Development">
+        <script src="~/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+    @RenderSection("Scripts", required: false)
+    @Html.Raw(ViewBag.Message)
+</body>
+</html>
