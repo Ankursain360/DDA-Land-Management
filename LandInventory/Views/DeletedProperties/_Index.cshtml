@@ -3,7 +3,7 @@
 @{int rowNo = 0; }
 
 
-@*<div class="card  table-card table-responsive">*@
+
 
 
 <table class="table table-sm table-bordered mb-0 table-striped">
@@ -46,7 +46,7 @@
                     <td>@item.PrimaryListNo</td>
                     <td>@(item.Reason == null ? "" : item.Deletedproperty.Reason)</td>
                     <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>
-                    @*<td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>*@
+                   
                     <td>
                         <div class="action-btns">
                             <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
@@ -55,11 +55,7 @@
 
                     </td>
 
-                    @*asp-action="View" asp-route-id="@item.Id"*@
-                    @*<td>
-                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
-
-                        </td>*@
+                  
                 </tr>
             }
             @if (Model.Results.Count <= 0)
@@ -81,6 +77,5 @@
 
 </table>
 
-@*</div>*@
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@
+
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

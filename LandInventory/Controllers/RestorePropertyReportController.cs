@@ -23,9 +23,9 @@ namespace LandInventory.Controllers
             }
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
-            //  propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
+        
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            //propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+          
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()

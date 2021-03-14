@@ -1,4 +1,5 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entity;
 using System;
@@ -15,9 +16,18 @@ namespace Libraries.Model.Entity
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
         }
         public string RefNo { get; set; }
+
+        [Required(ErrorMessage = "Name is Mandatory")]
         public string Name { get; set; }
         public string Address { get; set; }
+
+        [Required(ErrorMessage = "Mobile No/Telephone No. is Mandatory")]
         public string ContactNo { get; set; }
+
+        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "EmailId is not valid.")]
+        public string EmailId { get; set; }
+
+        [Required(ErrorMessage = "Registeration No. is Mandatory")]
         public string RegistrationNo { get; set; }
         public string Description { get; set; }
         public string LandPurpose { get; set; }
@@ -38,15 +48,52 @@ namespace Libraries.Model.Entity
         public string EstablishmentNameAddress { get; set; }
         public string FunctioningSinceWhen { get; set; }
         public string FunctioningActivityUndertaken { get; set; }
+
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid; Max 18 digits")]
         public decimal? FunctioningAreaSqMt { get; set; }
         public string RefNoOfAllotmentLetterDate { get; set; }
+
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid; Max 18 digits")]
         public decimal? AreaSqlMt { get; set; }
         public string Locality { get; set; }
         public string Purpose { get; set; }
+
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid; Max 18 digits")]
         public decimal? Rate { get; set; }
         public byte IsActive { get; set; }
         public int? ApprovedSataus { get; set; }
         public int? PendingAt { get; set; }
         public ICollection<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
+        //****** Document repeator *****
+
+        [NotMapped]
+        public List<string> DocumentName { get; set; }
+
+        [NotMapped]
+        public List<string> Mandatory { get; set; }
+
+        [NotMapped]
+        public List<int> IsMandatory { get; set; }
+
+        [NotMapped]
+        public List<int> DocumentChecklistId { get; set; }
+
+        [NotMapped]
+        public List<int> ServiceId { get; set; }
+
+        [NotMapped]
+        public List<IFormFile> FileUploaded { get; set; }
+        [NotMapped]
+        public List<string> FileUploadedPath { get; set; }
+
+
+        [NotMapped]
+        public List<Documentchecklist> Documentchecklist { get; set; }
+
+        [NotMapped]
+        public List<Leaseapplicationdocuments> Leasedocuments { get; set; }
     }
 }

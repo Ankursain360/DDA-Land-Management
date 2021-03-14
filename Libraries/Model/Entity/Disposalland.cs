@@ -9,10 +9,7 @@ namespace Libraries.Model.Entity
     public class Disposalland : AuditableEntity<int>
   
     {
-        //public Disposalland()
-        //{
-        //}
-
+       
         [Required(ErrorMessage = "Village is Mandatory", AllowEmptyStrings = false)]
         public int? VillageId { get; set; }
         [Required(ErrorMessage = "Khasra is Mandatory", AllowEmptyStrings = false)]
@@ -32,7 +29,7 @@ namespace Libraries.Model.Entity
         public int? UtilizationtypeId { get; set; }
         [Required(ErrorMessage = "FileNo/RefNo is Mandatory")]
         public string FileNoRefNo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Remarks is Mandatory")]
         public string Remarks { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }

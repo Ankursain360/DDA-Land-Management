@@ -10,17 +10,17 @@ namespace Libraries.Model.Entity
     public class Jointsurvey : AuditableEntity<int>
     {
 
-        [Required(ErrorMessage = "Village Name is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village Name is Mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
-        [Required(ErrorMessage = "Khasra no is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra no is Mandatory", AllowEmptyStrings = false)]
         public int KhasraId { get; set; }
 
         public string SitePosition { get; set; }
-        [Required(ErrorMessage = "Area in Bigha No is Mandatory Field")]
+        [Required(ErrorMessage = "Area in Bigha No is Mandatory")]
         public decimal AreaInBigha { get; set; }
 
         public string NatureOfStructure { get; set; }
-        [Required(ErrorMessage = "Joint Survey Date is Mandatory Field")]
+        [Required(ErrorMessage = "Joint Survey Date is Mandatory")]
         public DateTime? JointSurveyDate { get; set; }
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
@@ -32,7 +32,7 @@ namespace Libraries.Model.Entity
         public string Designation { get; set; }
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Area in Biswa No is Mandatory Field")]
+        [Required(ErrorMessage = "Area in Biswa No is Mandatory")]
         public decimal? AreaInBiswa { get; set; }
         public Khasra Khasra { get; set; }
         public Acquiredlandvillage Village { get; set; }

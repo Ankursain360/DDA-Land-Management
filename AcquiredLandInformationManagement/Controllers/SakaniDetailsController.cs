@@ -388,10 +388,10 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
                     //************ Save Khasra  ************  
+                    var data = await _sakanidetailService.FetchSingleSaknikhasra(id);
 
-                    if (sakni.KhasraId != null
-                      
-                        )
+                    if (data != null)
+                        
                     {
                        
                         Saknikhasra Khsra = new Saknikhasra();
@@ -404,8 +404,24 @@ namespace AcquiredLandInformationManagement.Controllers
                         Khsra.RenewalDate = sakni.RenewalDate;
                         Khsra.SakniDetailId = sakni.Id;
                         Khsra.CreatedBy = SiteContext.UserId;
-                        
+                        Khsra.IsActive = 1;
                        result = await _sakanidetailService.UpdateKhasra(id,Khsra);
+                    }else
+                    {
+
+                        Saknikhasra Khsra = new Saknikhasra();
+
+                        Khsra.KhasraId = sakni.KhasraId;
+                        Khsra.PlotNo = sakni.Plot;
+                        Khsra.AreaSqYard = sakni.Area;
+                        Khsra.Category = sakni.Category;
+                        Khsra.LeaseAmount = sakni.LeaseAmount;
+                        Khsra.RenewalDate = sakni.RenewalDate;
+                        Khsra.SakniDetailId = sakni.Id;
+                        Khsra.CreatedBy = SiteContext.UserId;
+                        Khsra.IsActive = 1;
+                        result = await _sakanidetailService.SaveSaknikhasra(Khsra);
+                       
                     }
 
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);

@@ -25,7 +25,7 @@ namespace NewLandAcquisition.Controllers
             _Possessiondetailservice = possessiondetailsService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             return View();

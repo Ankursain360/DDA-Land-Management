@@ -14,7 +14,9 @@ namespace Libraries.Model.Entity
         public string AwardNumber { get; set; }
         [Required(ErrorMessage = "Award Date is mandatory")]
         public DateTime? AwardDate { get; set; }
+        [Required(ErrorMessage = "Village is mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
+        [Required(ErrorMessage = "Proposal name is mandatory", AllowEmptyStrings = false)]
         public int ProposalId { get; set; }
         [Required(ErrorMessage = "Compensation is mandatory")]
         public string Compensation { get; set; }
@@ -37,9 +39,11 @@ namespace Libraries.Model.Entity
       
         
         public Proposaldetails Proposal { get; set; }
-       
+        [Required(ErrorMessage = "Undersection 17  is mandatory")]
         public Undersection17 Us17 { get; set; }
+        [Required(ErrorMessage = "Undersection 4 is mandatory")]
         public Undersection4 Us4 { get; set; }
+        [Required(ErrorMessage = "Undersection 6 is mandatory")]
         public Undersection6 Us6 { get; set; }
         public Acquiredlandvillage Acquiredlandvillage { get; set; }
         public ICollection<Awardplotdetails> Awardplotdetails { get; set; }

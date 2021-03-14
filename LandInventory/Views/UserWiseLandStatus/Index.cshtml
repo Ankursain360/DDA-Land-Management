@@ -1,63 +1,11 @@
 ﻿@await Component.InvokeAsync("PageHeader", new { pageName = "User Wise Land Status" })
 
-@*@{ ViewData["Title"] = "Index"; }
 
-
-<style>
-    .bg {
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-    }
-
-    .alert-info {
-        color: #31708F;
-        background-color: rebeccapurple;
-        border-color: #BCE8F1;
-    }
-
-    .hedingcss {
-        background-color: rebeccapurple;
-    }
-
-    .panel-default > .panel-heading-custom {
-        background: #2c3091;
-        color: #fff;
-        height: 44px;
-        margin-bottom: 2px;
-        font-size: 16px;
-    }
-
-    .alert-custom {
-        top: -10px;
-        color: #fff;
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-        position: relative;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .btn {
-        width: 143px !important;
-    }
-</style>
-
-
-<style>
-    .btn {
-        Background: linear-gradient(33deg, #8c1f47,#362c85);
-        Font-size: 1.0rem;
-        Font-Family: Open SansSemibold;
-        color: #ffffff
-    }
-</style>*@
 
 
 <div class="pt-3">
 
-    @*<div class="container-fluid" id="MainContentForm">*@
-    @*<div class="panel">
-
-        <div class="panel-body">*@
-
-    @*<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">*@
+   
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h3 class="mb-3 d-flex">User Wise Land Status Report</h3>
@@ -195,16 +143,13 @@
                 </a>
             </div>
         </div>
-        @*<div class="table-responsive px-2" id="LoadReportView">
+       
 
-            </div>*@
-
-
-        @*<div class="row mt-md-3">*@
+      
             <table class="table table-sm table-bordered mb-0 table-striped">
                 <thead class="text-nowrap">
                     <tr>
-                        <th>S.NO</th>
+                        
 
                         <th>ZONE </th>
                         <th> DIVISION </th>
@@ -217,7 +162,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
+                       
                         <td>LM/NORTH</td>
                         <td>    LM NZ</td>
                         <td>LM NZ 006</td>
@@ -228,7 +173,7 @@
 
                     </tr>
                     <tr>
-                        <td>2</td>
+                       
                         <td>LM/NORTH</td>
                         <td>    LM NZ</td>
                         <td>LM NZ 006</td>
@@ -242,7 +187,7 @@
 
 
                     <tr>
-                        <td>3</td>
+                       
                         <td>LM/NORTH</td>
                         <td>    LM NZ</td>
                         <td>LM NZ 006</td>
@@ -256,7 +201,7 @@
 
 
                     <tr>
-                        <td>4 </td>
+                       
                         <td>LM/NORTH</td>
                         <td>    LM NZ</td>
                         <td>LM NZ 006</td>
@@ -272,21 +217,8 @@
             </table>
 
         </div>
-        <!--<div class="row mt-md-3">-->
-        @*<div class="form-row">
-                <div class="col-md-12">
-                    <input type="submit" value="Export to Excel" class="btn btn-theme" />
-                </div>
-
-            </div>*@
-        <!--</div>-->
+       
 
 
     </div>
-@*</div>*@
-@*</div>
-
-        </div>
-    </div>*@
-    @*</div>*@
 

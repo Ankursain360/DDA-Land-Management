@@ -27,6 +27,8 @@ namespace NewLandAcquisition.Controllers
 
             return View();
         }
+
+
         //   [AuthorizeContext(ViewAction.View)]
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] NewlandawardmasterSearchDto model)

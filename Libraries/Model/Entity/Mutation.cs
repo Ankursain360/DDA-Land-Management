@@ -15,24 +15,24 @@ namespace Libraries.Model.Entity
             Mutationparticulars = new HashSet<Mutationparticulars>();
         }
 
-        [Required(ErrorMessage = "Village Name is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village Name is Mandatory", AllowEmptyStrings = false)]
         public int AcquiredVillageId { get; set; }
 
-        [Required(ErrorMessage = "Khasra is Mandatory Field", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Khasra is Mandatory", AllowEmptyStrings = false)]
         public int KhasraId { get; set; }
 
-        [Required(ErrorMessage = "Mutation Owner/Lessee is Mandatory Field")]
+        [Required(ErrorMessage = "Mutation Owner/Lessee is Mandatory")]
         public string MutationOwnerLessee { get; set; }
 
-        [Required(ErrorMessage = "Mutation No. is Mandatory Field")]
+        [Required(ErrorMessage = "Mutation No. is Mandatory")]
         public string MutationNo { get; set; }
 
-        [Required(ErrorMessage = "Mutation Fees is Mandatory Field")]
+        [Required(ErrorMessage = "Mutation Fees is Mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Mutation Fees; Max 18 digits")]
         public decimal MutationFees { get; set; }
 
-        [Required(ErrorMessage = "Mutation Date is Mandatory Field")]
+        [Required(ErrorMessage = "Mutation Date is Mandatory")]
         public DateTime MutationDate { get; set; }
         public string NewAccountCode { get; set; }
         public string JaraiSakniCode { get; set; }

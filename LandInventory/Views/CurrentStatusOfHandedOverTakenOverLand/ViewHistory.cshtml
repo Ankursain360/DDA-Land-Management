@@ -25,11 +25,7 @@
             <table class="table table-responsive table-bordered table-card">
                 <thead class="thead">
                     <tr class="myapp-hed1">
-                        <th rowspan="2">Sr.No</th>
-                        @*<th rowspan="2">Department</th>
-                        <th rowspan="2">Zone</th>
-                        <th rowspan="2">Division</th>
-                        <th rowspan="2">Locality(Village)</th>*@
+                       
                         <th rowspan="2">Khasra No</th>
                         <th colspan="2">TSS Survey</th>
                         <th colspan="4">Encroachment</th>
@@ -60,11 +56,8 @@
                         @foreach (var item in Model)
                         {
                     <tr>
-                        <td>@(rowNo += 1)</td>
-                        @*<td>@item.LandTransfer.Department.Name</td>
-        <td>@item.LandTransfer.Zone.Name</td>
-        <td>@item.LandTransfer.Division.Name</td>
-        <td>@item.LandTransfer.Locality.Name</td>*@
+                      
+                     
                         <td>@item.LandTransfer.PropertyRegistration.KhasraNo</td>
                         <td>@item.Tsssurvey</td>
                         <td>
@@ -76,7 +69,7 @@
 
 
 
-                        @*<td>@item.SurveyReportFilePath</td>*@
+                     
                         <td>@item.Encroachment</td>
                         <td>@item.EncroachementArea</td>
                         <td>@item.ActionOnEncroachment</td>
@@ -87,7 +80,7 @@
                             }
                         </td>
 
-                        @*<td>@item.ActionReportFilePath</td>*@
+                      
                         <td>@item.FencingBoundaryWall</td>
                         <td>@item.AreaCovered</td>
                         <td>@item.Dimension</td>

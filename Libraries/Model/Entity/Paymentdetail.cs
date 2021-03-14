@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
         public string BankName { get; set; }
         [Required(ErrorMessage = "VoucherNo is Mandatory")]
         public string VoucherNo { get; set; }
+        [Required(ErrorMessage = "Percent Paid is Mandatory")]
         public decimal PercentPaid { get; set; }
         [Required(ErrorMessage = "Status is Mandatory")]
         public byte IsActive { get; set; }

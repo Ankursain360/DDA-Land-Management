@@ -36,6 +36,7 @@ var KHASRANO_LAYER = [];
 var Polys = [];
 var VILLAGEID_UNIVERSAL = [];
 var RECTWITHKHASRANO_LAYER = [];
+var WELL_LAYER = [];
 
 $(document).ready(function () {
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
@@ -267,6 +268,10 @@ function showvillagelayers(villageid) {
         var KhasraLine = response.filter((x) => x.gisLayerId === 17);//KhasraLine
         if (KhasraLine.length > 0 && KhasraLine[0].checkedStatus == 1)
             showDisBoundariesKhasraLine(KhasraLine);
+
+        var Well = response.filter((x) => x.gisLayerId === 31);//Well
+        if (Well.length > 0 && Well[0].checkedStatus == 1)
+            showDisBoundariesWell(Well);
 
         var KhasraBoundary = response.filter((x) => x.gisLayerId === 18);//KhasraBoundary
         if (KhasraBoundary.length > 0 && KhasraBoundary[0].checkedStatus == 1)
@@ -640,6 +645,17 @@ function showDisBoundariesRectWithKhasraNo(response) {
         Polys.push(_label);
     }
 }
+
+function showDisBoundariesWell(response) {
+    var well = $.map(response, function (el) { return el; })
+    for (al = 0; al < well.length; al++) {
+        var ln = createLine(getLatLongArr(well[al].polygon));
+        ln.setOptions({ strokeWeight: 1, strokeColor: clean[al].fillColor });
+        WELL_LAYER.push(ln);
+        Polys.push(ln);
+    }
+}
+
 /*Village Boundary End*/
 
 function getInfo(villageid, khasrano) {
@@ -879,6 +895,9 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         if (RectWithKhasraNo.length > 0)
             showDisBoundariesRectWithKhasraNo(RectWithKhasraNo);
 
+        var Well = data.filter((x) => x.gisLayerId === 31);//Well
+        if (Well.length > 0)
+            showDisBoundariesWell(Well);
     }
     else {
         $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').prop('checked', false);
@@ -1094,6 +1113,14 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
             }
         }
 
+        var Well = data.filter((x) => x.gisLayerId === 31);//clean
+        if (Well.length > 0) {
+            for (h = 0; h < WELL_LAYER.length; h++) {
+                WELL_LAYER[h].setMap(null);
+            }
+        }
+
+
     }
 });
 
@@ -1247,6 +1274,11 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         var RectWithKhasraNo = data.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
         if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].code == id)
             showDisBoundariesRectWithKhasraNo(RectWithKhasraNo);
+
+        var Well = data.filter((x) => x.gisLayerId === 31);//Well
+        if (Well.length > 0 && Well[0].code == id)
+            showDisBoundariesWell(Well);
+
     }
     else {
         var Abadi = data.filter((x) => x.gisLayerId === 1);    //abadi
@@ -1458,10 +1490,15 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
                 RECTWITHKHASRANO_LAYER[h].setMap(null);
             }
         }
+
+        var Well = data.filter((x) => x.gisLayerId === 31);//Well
+        if (Well.length > 0 && Well[0].code == id) {
+            for (h = 0; h < WELL_LAYER.length; h++) {
+                WELL_LAYER[h].setMap(null);
+            }
+        }
+
     }
-
-
-
 });
 
 

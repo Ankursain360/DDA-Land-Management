@@ -347,14 +347,13 @@ namespace LandInventory.Controllers
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                     TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                
                     return RedirectToAction("Create");
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    //return View(propertyregistration);
-                    //  var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                  
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                     await BindDropDown(propertyregistration);

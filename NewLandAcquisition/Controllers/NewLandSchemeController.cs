@@ -26,7 +26,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             return View();
@@ -40,7 +40,7 @@ namespace NewLandAcquisition.Controllers
             return PartialView("_List", result);
         }
 
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             Newlandscheme scheme = new Newlandscheme();
             scheme.IsActive = 1;

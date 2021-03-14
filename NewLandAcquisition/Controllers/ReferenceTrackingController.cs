@@ -25,7 +25,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             Request request = new Request();
             request.IsActive = 1;

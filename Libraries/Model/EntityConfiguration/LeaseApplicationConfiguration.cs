@@ -22,6 +22,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.AreaSqlMt).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.ContactNo)
+                .IsRequired()
                 .HasMaxLength(12)
                 .IsUnicode(false);
 
@@ -30,6 +31,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.Description).HasColumnType("longtext");
+
+            builder.Property(e => e.EmailId)
+                .HasMaxLength(45)
+                .IsUnicode(false);
 
             builder.Property(e => e.EstablishmentNameAddress).HasColumnType("longtext");
 
@@ -78,6 +83,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
+                .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
 

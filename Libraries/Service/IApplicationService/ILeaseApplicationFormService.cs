@@ -9,18 +9,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface ILeaseApplicationFormService : IEntityService<Documentchecklist>
+    public interface ILeaseApplicationFormService : IEntityService<Leaseapplication>
     {
-        Task<bool> Update(int id, Documentchecklist documentchecklist); // To Upadte Particular data added by renu
+        //Task<bool> Update(int id, Documentchecklist documentchecklist); // To Upadte Particular data added by renu
 
-        Task<bool> Create(Documentchecklist documentchecklist);
+        Task<bool> Create(Leaseapplication leaseapplication);
 
-        Task<Documentchecklist> FetchSingleResult(int id);  // To fetch Particular data added by renu
+        //Task<Documentchecklist> FetchSingleResult(int id);  // To fetch Particular data added by renu
 
-        Task<bool> Delete(int id);    // To Delete Data  added by renu
+        //Task<bool> Delete(int id);    // To Delete Data  added by renu
 
-        Task<bool> CheckUniqueName(int id, string zone, int ServiceTypeId);// To check Unique Value  for zone
-        Task<List<Servicetype>> GetServiceTypeList();
-        Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
+        //Task<bool> CheckUniqueName(int id, string zone, int ServiceTypeId);// To check Unique Value  for zone
+      //  Task<List<Servicetype>> GetServiceTypeList();
+        //Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
+        Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
+        Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments);
+        Task<Leaseapplication> FetchLeaseApplicationDetails(int id);
+        Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id);
     }
 }
