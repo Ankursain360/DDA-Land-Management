@@ -1,20 +1,96 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using LeaseDetails.Models;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Dto.Search;
+using LeaseDetails.Filters;
+using Core.Enum;
+using Utility.Helper;
+using Microsoft.Extensions.Configuration;
+using Dto.Master;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace LeaseDetails.Controllers
 {
-    public class AllotmentLetterController : Controller
+    
+
+    public class AllotmentLetterController : BaseController
     {
-        public IActionResult Index()
+        private readonly ILeaseApplicationFormService _leaseApplicationFormService;
+        public IConfiguration _configuration;
+
+        public AllotmentLetterController(ILeaseApplicationFormService leaseApplicationFormService, IConfiguration configuration)
+        {
+            _leaseApplicationFormService = leaseApplicationFormService;
+            _configuration = configuration;
+           
+        }
+        public async Task<IActionResult> Index()
         {
             return View();
         }
-        public IActionResult Create()
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] DocumentChecklistSearchDto model)
         {
-            return View();
+            var result = await _leaseApplicationFormService.GetPagedAllotmentLetter(model);
+            return PartialView("_List", result);
         }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
+            
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        public async Task<IActionResult> Generate(int id)
+        {
+            var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+           
+            return PartialView("AllotmentLetter", Data);
+        }
+        public async Task<IActionResult> Create(Leaseapplication leaseapp)
+        {
+            try
+            {
+             
+                var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(leaseapp.Id);
+
+                if (Data == null)
+                {
+                    return NotFound();
+                }
+                return View("Create", Data);
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(leaseapp);
+            }
+        }
+
+       
     }
 }
