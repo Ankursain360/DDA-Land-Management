@@ -8,7 +8,7 @@ using Repository.EntityRepository;
 using Repository.IEntityRepository;
 using Service.ApplicationService;
 using Service.IApplicationService;
-using LeasePublicInterface.Helper;
+//using LeasePublicInterface.Helper;
 namespace LeasePublicInterface.Infrastructure.Extensions
 {
     public static class DependencyHelperExtension
@@ -17,7 +17,7 @@ namespace LeasePublicInterface.Infrastructure.Extensions
         {
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ISiteContext, SiteContext>();
+          
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
@@ -28,16 +28,7 @@ namespace LeasePublicInterface.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
-            services.AddScoped<IPremiumrateRepository, PremiumrateRepository>();
-            services.AddScoped<IDocumentchargesRepository, DocumentchargesRepository>();
-            services.AddScoped<IGroundRentRepository, GroundRentRepository>();
-            services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
-            services.AddScoped<ILicenceFeesRepository, LicenceFeesRepository>();
-            services.AddScoped<IInterestrateRepository, InterestrateRepository>();
-            services.AddScoped<IDocumentCheckListRepository, DocumentCheckListRepository>();
-            services.AddScoped<ILeaseApplicationFormRepository, LeaseApplicationFormRepository>();
-            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
-            services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
+            
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -47,17 +38,7 @@ namespace LeasePublicInterface.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
-            services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<IPremiumrateService, PremiumrateService>();
-            services.AddScoped<IDocumentchargesServices, DocumentchargesServices>();
-            services.AddScoped<IGroundRentService, GroundRentService>();
-            services.AddScoped<IPropertyTypeService, PropertyTypeService>();
-            services.AddScoped<ILicenceFeesService, LicenceFeesService>();
-            services.AddScoped<IInterestrateService, InterestrateService>();
-            services.AddScoped<IDocumentCheckListService, DocumentCheckListService>();
-            services.AddScoped<ILeaseApplicationFormService, LeaseApplicationFormService>();
-            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
 
         }

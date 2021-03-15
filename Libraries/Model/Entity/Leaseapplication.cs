@@ -15,6 +15,7 @@ namespace Libraries.Model.Entity
         {
             Allotmententry = new HashSet<Allotmententry>();
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
+            Allotmententry = new HashSet<Allotmententry>();
         }
         public string RefNo { get; set; }
 
@@ -68,6 +69,7 @@ namespace Libraries.Model.Entity
         public int? ApprovedSataus { get; set; }
         public int? PendingAt { get; set; }
         public ICollection<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
+        public ICollection<Allotmententry> Allotmententry { get; set; }
         //****** Document repeator *****
 
         [NotMapped]

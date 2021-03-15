@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-namespace LeasePublicInterface.Controllers
+namespace SiteMaster.Controllers
 {
-    public class DashboardController : BaseController
+    public class ApprovalProcessController : Controller
     {
         public IActionResult Index()
         {

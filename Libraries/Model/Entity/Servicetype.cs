@@ -12,8 +12,9 @@ namespace Libraries.Model.Entity
         {
             Documentchecklist = new HashSet<Documentchecklist>();
         }
-
+        [Required(ErrorMessage = "Name is mandatory ")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Status is mandatory ")]
         public byte IsActive { get; set; }
 
         public ICollection<Documentchecklist> Documentchecklist { get; set; }
