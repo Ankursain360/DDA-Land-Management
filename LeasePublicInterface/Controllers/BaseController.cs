@@ -6,7 +6,7 @@ namespace LeasePublicInterface.Controllers
 {
     public abstract class BaseController : Controller
     {
-        private ISiteContext _siteContext;
-        protected ISiteContext SiteContext => _siteContext ?? (_siteContext = HttpContext.RequestServices.GetService<ISiteContext>());
+    //    private ISiteContext _siteContext;
+    //    protected ISiteContext SiteContext => _siteContext ?? (_siteContext = HttpContext.RequestServices.GetService<ISiteContext>());
     }
 }
