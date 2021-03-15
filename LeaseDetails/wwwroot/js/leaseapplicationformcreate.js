@@ -33,7 +33,7 @@ function FillDocumentRepeator() {/* -----------Added by Renu  --------------- */
     });
 }
 
-$('#FileUploaded').change(function () {
+$('.FileUploaded').change(function () {
     var fileInput = document.getElementById('FileUploaded');
     var filePath = fileInput.value;
     const size = (FileUploaded.files[0].size);

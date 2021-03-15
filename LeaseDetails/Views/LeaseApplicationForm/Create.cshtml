@@ -409,7 +409,7 @@
         </div>
 
         <div id="DivDocument">
-            <h3 class="my-3 d-flex sub-heading">Document</h3>
+            <h3 class="my-3 d-flex sub-heading">Document Checklist</h3>
             @*<div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive ">
                     <table class="table table-sm table-bordered mb-0 table-striped">
@@ -454,7 +454,7 @@
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Document Name</th>
-                                <th>Upload Document</th>
+                                <th>Upload Document<span style="color:red;"> (pdf only)</span></th>
                                 <th>Mandatory</th>
                             </tr>
                         </thead>
@@ -472,9 +472,8 @@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="FileUploadedPath" value="" />
-                                        <input asp-for="FileUploaded" type="file" class="floating-label-field floating-label-field--s3 " accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg" />
+                                        <input asp-for="FileUploaded" type="file" class="floating-label-field floating-label-field--s3 FileUploaded" accept="application/pdf" />
                                         <span asp-validation-for="FileUploaded" class="d-block text-danger field-validation-valid"></span>
-
                                     </div>
                                 </td>
                                 <td>
@@ -497,15 +496,18 @@
     </div>
     <div class="row mt-md-3" align="center">
         <div class=" col-md-12">
-            <button class="btn btn-theme " type="submit" onclick="return DocumentValidation();">Submit</button>
-            @Html.ActionLink("Clear", "Create", "LeaseApplicationForm", null, new { @class = "btn btn-theme " })
-
-            @if (@ViewBag.IsPrintable == 1)
+            @if (@ViewBag.IsPrintable != 1)
             {
-                <a class="btn btn-theme" asp-action="Print" asp-controller="LeaseApplicationForm"  asp-route-id="@ViewBag.Id" target="_blank">Print</a>
+                <button class="btn btn-theme " type="submit" onclick="return DocumentValidation();">Submit</button>
             }
+                @Html.ActionLink("Clear", "Create", "LeaseApplicationForm", null, new { @class = "btn btn-theme " })
 
-        </div>
+                @if (@ViewBag.IsPrintable == 1)
+                {
+                    <a class="btn btn-theme" asp-action="Print" asp-controller="LeaseApplicationForm" asp-route-id="@ViewBag.Id" target="_blank">Print</a>
+                }
+
+            </div>
     </div>
 
 </form>
