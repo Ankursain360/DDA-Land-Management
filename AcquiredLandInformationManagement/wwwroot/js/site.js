@@ -71,92 +71,94 @@ $(document).ready(function () {
             return false;
         };
     });
-    $('input,textarea,select').on('keyup keypress change', function () {
-        ValidateForm();
-    });
+    //$('input,textarea,select').on('keyup keypress change', function () {
+    //    ValidateForm();
+    //});
 });
-function ValidateForm() {
-    var isFormValid = true;
-    $("input,select,textarea").each(function () {
-        var FieldId = "span_" + $(this).attr("id");
-        if ($.trim($(this).val()).length == 0) {
-            if ($(this).is("[required]")) {
-                if ($("#" + FieldId).length == 0) {
-                    var ValidationMsg = 'This Field is Mandatory';
-                    if ($(this).is('[requiredmsg]')) {
-                        $("#" + $(this).attr("id") + "-error")
-                        var ValidationMsg = $(this).attr('requiredmsg') == undefined && $(this).attr('requiredmsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredmsg');
-                    }
-                    $("<span class='help-block' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
-                    $(this).parent().closest('div').addClass('has-error');
-                }
-                if ($("#" + FieldId).css('display') == 'none') {
-                    $("#" + FieldId).fadeIn(250);
-                }
-                isFormValid = false;
-            }
-        }
-        else if ($(this).attr('type') == 'email' && $(this).val() != '' && $(this).val() != null) {
-            isFormValid = (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/).test($(this).val());
-            if (!isFormValid) {
-                $(this).parent().closest('div').removeClass("has-error");
-                $('#' + FieldId).remove();
-                $("#" + FieldId).fadeIn(250);
-                $("<span class='help-block' id='" + FieldId + "'>Please Enter Valid Email-Id</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
-                $(this).parent().closest('div').addClass('has-error');
-                isFormValid = false;
-            }
-            else {
-                $(this).parent().closest('div').removeClass("has-error");
-                if ($("#" + FieldId).length > 0) {
-                    $("#" + FieldId).fadeOut(250);
-                }
-            }
-        }
-        else if ($(this).attr('type') == 'password' && $(this).val() != '' && $(this).val() != null) {
-            isFormValid = (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/).test($(this).val());
-            if (!isFormValid) {
-                $(this).parent().closest('div').removeClass("has-error");
-                $('#' + FieldId).remove();
-                $("#" + FieldId).fadeIn(250);
-                $("<span class='help-block' id='" + FieldId + "'>Passwords must contain at least eight characters, including uppercase, lowercase letters, special character and numbers.</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
-                $(this).parent().closest('div').addClass('has-error');
-                isFormValid = false;
-            }
-            else {
-                $(this).parent().closest('div').removeClass("has-error");
-                if ($("#" + FieldId).length > 0) {
-                    $("#" + FieldId).fadeOut(250);
-                }
-            }
-        }
-        else if ($(this).is("[min-limit]")) {
-            if ($(this).attr("min-limit") != undefined && $(this).attr("min-limit") != null && $(this).attr("min-limit") != '') {
-                if (parseInt($(this).attr("min-limit")) > $(this).val().length && $(this).val().length > 0) {
-                    $(this).parent().closest('div').removeClass("has-error");
-                    $('#' + FieldId).remove();
-                    $("#" + FieldId).fadeIn(250);
-                    $("<span class='help-block' id='" + FieldId + "'>Please Enter Minimum " + parseInt($(this).attr("min-limit")) + " Characters</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"));
-                    $(this).parent().closest('div').addClass('has-error');
-                    isFormValid = false;
-                }
-                else {
-                    $(this).parent().closest('div').removeClass("has-error");
-                    $("#" + FieldId).remove();
-                }
-            }
-        }
-        else {
-            $(this).parent().closest('div').removeClass("has-error");
-            $("#" + FieldId).remove();
-            if ($("#" + FieldId).length > 0) {
-                $("#" + FieldId).fadeOut(250);
-            }
-        }
-    });
-    //$(".field-validation-valid").hide();
-    return isFormValid;
-};
+
+
+//function ValidateForm() {
+//    var isFormValid = true;
+//    $("input,select,textarea").each(function () {
+//        var FieldId = "span_" + $(this).attr("id");
+//        if ($.trim($(this).val()).length == 0) {
+//            if ($(this).is("[required]")) {
+//                if ($("#" + FieldId).length == 0) {
+//                    var ValidationMsg = 'This Field is Mandatory';
+//                    if ($(this).is('[requiredmsg]')) {
+//                        $("#" + $(this).attr("id") + "-error")
+//                        var ValidationMsg = $(this).attr('requiredmsg') == undefined && $(this).attr('requiredmsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredmsg');
+//                    }
+//                    $("<span class='help-block' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
+//                    $(this).parent().closest('div').addClass('has-error');
+//                }
+//                if ($("#" + FieldId).css('display') == 'none') {
+//                    $("#" + FieldId).fadeIn(250);
+//                }
+//                isFormValid = false;
+//            }
+//        }
+//        else if ($(this).attr('type') == 'email' && $(this).val() != '' && $(this).val() != null) {
+//            isFormValid = (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/).test($(this).val());
+//            if (!isFormValid) {
+//                $(this).parent().closest('div').removeClass("has-error");
+//                $('#' + FieldId).remove();
+//                $("#" + FieldId).fadeIn(250);
+//                $("<span class='help-block' id='" + FieldId + "'>Please Enter Valid Email-Id</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
+//                $(this).parent().closest('div').addClass('has-error');
+//                isFormValid = false;
+//            }
+//            else {
+//                $(this).parent().closest('div').removeClass("has-error");
+//                if ($("#" + FieldId).length > 0) {
+//                    $("#" + FieldId).fadeOut(250);
+//                }
+//            }
+//        }
+//        else if ($(this).attr('type') == 'password' && $(this).val() != '' && $(this).val() != null) {
+//            isFormValid = (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/).test($(this).val());
+//            if (!isFormValid) {
+//                $(this).parent().closest('div').removeClass("has-error");
+//                $('#' + FieldId).remove();
+//                $("#" + FieldId).fadeIn(250);
+//                $("<span class='help-block' id='" + FieldId + "'>Passwords must contain at least eight characters, including uppercase, lowercase letters, special character and numbers.</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
+//                $(this).parent().closest('div').addClass('has-error');
+//                isFormValid = false;
+//            }
+//            else {
+//                $(this).parent().closest('div').removeClass("has-error");
+//                if ($("#" + FieldId).length > 0) {
+//                    $("#" + FieldId).fadeOut(250);
+//                }
+//            }
+//        }
+//        else if ($(this).is("[min-limit]")) {
+//            if ($(this).attr("min-limit") != undefined && $(this).attr("min-limit") != null && $(this).attr("min-limit") != '') {
+//                if (parseInt($(this).attr("min-limit")) > $(this).val().length && $(this).val().length > 0) {
+//                    $(this).parent().closest('div').removeClass("has-error");
+//                    $('#' + FieldId).remove();
+//                    $("#" + FieldId).fadeIn(250);
+//                    $("<span class='help-block' id='" + FieldId + "'>Please Enter Minimum " + parseInt($(this).attr("min-limit")) + " Characters</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"));
+//                    $(this).parent().closest('div').addClass('has-error');
+//                    isFormValid = false;
+//                }
+//                else {
+//                    $(this).parent().closest('div').removeClass("has-error");
+//                    $("#" + FieldId).remove();
+//                }
+//            }
+//        }
+//        else {
+//            $(this).parent().closest('div').removeClass("has-error");
+//            $("#" + FieldId).remove();
+//            if ($("#" + FieldId).length > 0) {
+//                $("#" + FieldId).fadeOut(250);
+//            }
+//        }
+//    });
+//    //$(".field-validation-valid").hide();
+//    return isFormValid;
+//};
 
 
 
