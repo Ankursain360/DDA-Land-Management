@@ -20,7 +20,7 @@ namespace Libraries.Model.EntityConfiguration
 
                 builder.Property(e => e.Id).HasColumnType("int(11)");
 
-                //builder.Property(e => e.AllotedArea).HasColumnType("decimal(18,3)");
+                builder.Property(e => e.AllotedArea).HasColumnType("decimal(18,3)");
 
                 builder.Property(e => e.AllotmentDate).HasColumnType("date");
 
@@ -34,25 +34,25 @@ namespace Libraries.Model.EntityConfiguration
 
                 builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-                //builder.Property(e => e.PhaseNo)
-                //    .HasMaxLength(100)
-                //    .IsUnicode(false);
+                builder.Property(e => e.PhaseNo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
-                //builder.Property(e => e.PlotNo)
-                //    .HasMaxLength(100)
-                //    .IsUnicode(false);
+                builder.Property(e => e.PlotNo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
-                //builder.Property(e => e.PocketNo)
-                //    .HasMaxLength(100)
-                //    .IsUnicode(false);
+                builder.Property(e => e.PocketNo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
-                //builder.Property(e => e.Remarks)
-                //    .HasMaxLength(500)
-                //    .IsUnicode(false);
+                builder.Property(e => e.Remarks)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
 
-                //builder.Property(e => e.SectorNo)
-                //    .HasMaxLength(100)
-                //    .IsUnicode(false);
+                builder.Property(e => e.SectorNo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 builder.HasOne(d => d.Application)
                     .WithMany(p => p.Allotmententry)

@@ -11,6 +11,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface ILeaseApplicationFormApprovalService : IEntityService<Leaseapplication>
     {
-       
+        Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId);
+        Task<Leaseapplication> FetchSingleResult(int id);
     }
 }

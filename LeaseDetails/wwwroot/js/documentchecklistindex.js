@@ -32,7 +32,7 @@ $("#btnReset").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDetails(pageNumber, pageSize) {
+function GetDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/DocumentChecklist/List`, 'html', param, function (response) {
         $('#divTable').html("");
