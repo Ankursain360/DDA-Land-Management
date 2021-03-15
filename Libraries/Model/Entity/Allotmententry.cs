@@ -16,7 +16,9 @@ namespace Libraries.Model.Entity
         public DateTime AllotmentDate { get; set; }
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
-      
+
+        [NotMapped]
+        public List<Allotmententry> ApplicationList { get; set; }
 
         public Leaseapplication Application { get; set; }
     }
