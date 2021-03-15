@@ -111,6 +111,21 @@ namespace Utility.Helper
 
             return body;
         }
+
+        public string PopulateBodyLeaseRefernceNo(LeaseRefBodyDto element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{DisplayName}", element.displayName);
+            body = body.Replace("{RefNo}", element.RefNo);
+            body = body.Replace("{Link}", element.link);
+
+
+            return body;
+        }
         #endregion
 
         #region SMS

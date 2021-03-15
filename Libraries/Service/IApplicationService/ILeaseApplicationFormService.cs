@@ -24,5 +24,7 @@ namespace Libraries.Service.IApplicationService
         //Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
         Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
         Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments);
+        Task<Leaseapplication> FetchLeaseApplicationDetails(int id);
+        Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id);
     }
 }

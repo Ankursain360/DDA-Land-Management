@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LeasePublicInterface.Controllers
 {
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
         public IActionResult Index()
         {

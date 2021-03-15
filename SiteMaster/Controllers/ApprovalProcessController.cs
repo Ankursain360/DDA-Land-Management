@@ -4,15 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
-    public class AllotmentLetterController : Controller
+    public class ApprovalProcessController : Controller
     {
         public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult Create()
         {
             return View();
         }

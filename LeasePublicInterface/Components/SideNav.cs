@@ -14,7 +14,7 @@ namespace LeasePublicInterface.Components
     {
         private readonly IPermissionsService _permissionsService;
         private readonly IConfiguration _configuration;
-        private readonly ISiteContext _siteContext;
+        //private readonly ISiteContext _siteContext;
 
         public SideNavViewComponent(IPermissionsService permissionsService,
             IConfiguration configuration,
@@ -22,16 +22,21 @@ namespace LeasePublicInterface.Components
         {
             _permissionsService = permissionsService;
             _configuration = configuration;
-            _siteContext = siteContext;
+           // _siteContext = siteContext;
         }
 
+        //public async Task<IViewComponentResult> InvokeAsync()
+        //{
+        //    var result = await _permissionsService.GetMappedMenu(_configuration.GetValue<string>("ModuleId"), _siteContext.RoleId.Value);
+        //    var menu = GetMenu(result, 0);
+        //    return View("SideNav", menu);
+        //}
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var result = await _permissionsService.GetMappedMenu(_configuration.GetValue<string>("ModuleId"), _siteContext.RoleId.Value);
+            var result = await _permissionsService.GetMappedMenu(_configuration.GetValue<string>("ModuleId"), 20);
             var menu = GetMenu(result, 0);
             return View("SideNav", menu);
         }
-
         private IList<SideNavDto> GetMenu(IList<MenuDetailDto> menuList, int parentId)
         {
             var children = GetChildrenMenu(menuList, parentId);

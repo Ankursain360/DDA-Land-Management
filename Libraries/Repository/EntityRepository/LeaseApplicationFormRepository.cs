@@ -21,12 +21,30 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<Leaseapplication> FetchLeaseApplicationDetails(int id)
+        {
+            var data = await _dbContext.Leaseapplication
+                                        .Include(x => x.Leaseapplicationdocuments)
+                                        .Where(x => x.Id == id)
+                                        .FirstOrDefaultAsync();
+            return data;
+        }
+
         public async Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid)
         {
             return await _dbContext.Documentchecklist
                                         .Include(x => x.ServiceType)
                                         .Where(x => x.ServiceTypeId == servicetypeid)
+                                        .OrderByDescending(x => x.IsMandatory)
                                         .ToListAsync();
+        }
+
+        public async Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id)
+        {
+            return await _dbContext.Leaseapplicationdocuments
+                                       .Include(x => x.DocumentChecklist)
+                                       .Where(x => x.LeaseApplicationId == id)
+                                       .ToListAsync();
         }
 
         public async Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments)
