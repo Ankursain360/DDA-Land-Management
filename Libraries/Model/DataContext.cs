@@ -286,6 +286,7 @@ namespace Libraries.Model
         public virtual DbSet<Servicetype> Servicetype { get; set; }
         public virtual DbSet<Leaseapplication> Leaseapplication { get; set; }
         public virtual DbSet<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
+        public virtual DbSet<Allotmententry> Allotmententry { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
