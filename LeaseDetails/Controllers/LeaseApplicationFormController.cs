@@ -106,7 +106,7 @@ namespace LeaseDetails.Controllers
                 {
                     FileHelper fileHelper = new FileHelper();
                     leaseapplication.CreatedBy = 1;
-                    leaseapplication.ApprovedSataus = 0;
+                    leaseapplication.ApprovedStatus = 0;
                     leaseapplication.PendingAt = 1;
                     leaseapplication.IsActive = 1;
                     leaseapplication.Id = 0;
