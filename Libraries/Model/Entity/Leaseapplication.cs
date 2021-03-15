@@ -15,7 +15,7 @@ namespace Libraries.Model.Entity
         {
             Allotmententry = new HashSet<Allotmententry>();
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
-            Allotmententry = new HashSet<Allotmententry>();
+            
         }
         public string RefNo { get; set; }
 
@@ -98,6 +98,6 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Leaseapplicationdocuments> Leasedocuments { get; set; }
-        public ICollection<Allotmententry> Allotmententry { get; set; }
+        
     }
 }
