@@ -286,6 +286,7 @@ namespace Libraries.Model
         public virtual DbSet<Servicetype> Servicetype { get; set; }
         public virtual DbSet<Leaseapplication> Leaseapplication { get; set; }
         public virtual DbSet<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
+        public virtual DbSet<Possesionplan> Possesionplan { get; set; }
         public virtual DbSet<Allotmententry> Allotmententry { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -521,6 +522,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DocumentCheckListConfiguration());
             modelBuilder.ApplyConfiguration(new LeaseApplicationConfiguration());
             modelBuilder.ApplyConfiguration(new LeaseApplicationDocumentsConfiguration());
+            modelBuilder.ApplyConfiguration(new PossesionplanConfiguration());
+            modelBuilder.ApplyConfiguration(new AllotmententryConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -88,8 +88,7 @@
     } else if ($("#Other").is(":checked")) {
         $("#IsDocumentFor").val("Any Other");
     }
-
-    debugger;
+     
     /*Declaration Checked*/
     if (($('#Declaration1').val() == 1))
         $('#DeclarationStatus1').prop('checked', true);

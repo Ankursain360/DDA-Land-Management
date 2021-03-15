@@ -55,7 +55,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<Leaseapplication> FetchLeaseApplicationDetails(int id)
         {
-            return await _leaseApplicationRepository.FetchLeaseApplicationDetails( id);
+            return await _leaseApplicationRepository.FetchLeaseApplicationDetails(id);
         }
 
 
@@ -98,6 +98,10 @@ namespace Libraries.Service.ApplicationService
             leaseapplicationdocuments.ForEach(x => x.CreatedBy = 1);
             leaseapplicationdocuments.ForEach(x => x.CreatedDate = DateTime.Now);
             return await _leaseApplicationRepository.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
+        }
+        public async Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model)
+        {
+            return await _leaseApplicationRepository.GetPagedAllotmentLetter(model);
         }
     }
 }

@@ -26,5 +26,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments);
         Task<Leaseapplication> FetchLeaseApplicationDetails(int id);
         Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id);
+        Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model);
     }
 }
