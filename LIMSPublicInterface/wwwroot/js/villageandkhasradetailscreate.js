@@ -42,12 +42,10 @@ function GetDetails(pageNumber, pageSize) {
 
 
 $("#btnReset").click(function () {
-
-    //$('#VillageId').val('0').trigger('change');
-    //$('#KhasraId').val('0').trigger('change');
+    document.getElementById("VillageId").selectedIndex = "";
+   
     location.reload();
 
-    //GetDetails(currentPageNumber, currentPageSize);
 
 
 });
