@@ -11,6 +11,10 @@ namespace Libraries.Model.Entity
     public class Allotmententry : AuditableEntity<int>
    
     {
+        public Allotmententry()
+        {
+            Possesionplan = new HashSet<Possesionplan>();
+        }
 
         public int ApplicationId { get; set; }
         public decimal? AllotedArea { get; set; }
@@ -23,8 +27,8 @@ namespace Libraries.Model.Entity
         public decimal? BuildingArea { get; set; }
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
-      
 
+        public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
     }
 }
