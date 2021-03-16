@@ -63,101 +63,136 @@ namespace LeaseDetails.Controllers
         }
 
 
-        //[HttpPost]
+        [HttpPost]
 
-        //[AuthorizeContext(ViewAction.Add)]
-        //public async Task<IActionResult> Create(int id, EncroachmentRegisteration encroachmentRegisterations)
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id, Leaseapplication leaseapplication)
+        {
+            var result = false;
+            var Data = await _leaseApplicationFormApprovalService.FetchSingleResult(id);
+            string ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
+            FileHelper fileHelper = new FileHelper();
+            var Msgddl = leaseapplication.ApprovalStatus;
+            #region Approval Proccess At Further level start Added by Renu 16 march 2021
+            var DataFlow = await DataAsync();
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (!DataFlow[i].parameterSkip)
+                {
+                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                    {
+                        result = true;
+                        if (result)
+                        {
+                            Approvalproccess approvalproccess = new Approvalproccess();
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value);
+                            approvalproccess.ServiceId = leaseapplication.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.PendingStatus = 1;
+                            approvalproccess.Remarks = leaseapplication.ApprovalRemarks; ///May be comment
+                            approvalproccess.Status = Convert.ToInt32(leaseapplication.ApprovalStatus);
+                            approvalproccess.DocumentName = leaseapplication.ApprovalDocument == null ? null : fileHelper.SaveFile(ApprovalDocumentPath, leaseapplication.ApprovalDocument);
+
+                            if (i == DataFlow.Count - 1)
+                                approvalproccess.SendTo = null;
+                            else
+                            {
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                            }
+                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                            if (result)
+                            {
+                                if (i == DataFlow.Count - 1)
+                                {
+                                    leaseapplication.ApprovedStatus = 1;
+                                    leaseapplication.PendingAt = 0;
+                                }
+                                else
+                                {
+                                    leaseapplication.ApprovedStatus = 0;
+                                    leaseapplication.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                }
+                                result = await _leaseApplicationFormService.UpdateBeforeApproval(leaseapplication.Id, leaseapplication);  //Update Table details 
+                            }
+                        }
+                        break;
+                    }
+
+                }
+            }
+
+            #endregion
+
+
+            if (Msgddl == "3")
+            {
+                ViewBag.Message = Alert.Show(Messages.Approvedsuccesfuly, "", AlertType.Success);
+            }
+            else
+            {
+
+                ViewBag.Message = Alert.Show(Messages.Forwardsuccesfuly, "", AlertType.Success);
+            }
+            return View("Index");
+        }
+
+        #region History Details Only For Approval Page
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
+        }
+        #endregion
+                
+
+        #region EncroachmentRegisteration Details
+        public async Task<PartialViewResult> EncroachmentRegisterView(int id)
+        {
+            var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
+            Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
+            return PartialView("_LeaseApplicationFormView", Data);
+        }
+        //public async Task<IActionResult> DownloadFirfile(int Id)
         //{
-        //    var result = false;
-        //    var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
-        //    encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
-        //    encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
-        //    encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
-        //    encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-        //    encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
-        //    var Msgddl = encroachmentRegisterations.ApprovalStatus;
-        //    #region Approval Proccess At Further level start Added by Renu 4 Dec 2020
-        //    var DataFlow = await DataAsync();
-        //    for (int i = 0; i < DataFlow.Count; i++)
-        //    {
-        //        if (!DataFlow[i].parameterSkip)
-        //        {
-        //            if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-        //            {
-        //                result = true;
-        //                if (result)
-        //                {
-        //                    Approvalproccess approvalproccess = new Approvalproccess();
-        //                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-        //                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
-        //                    approvalproccess.ServiceId = encroachmentRegisterations.Id;
-        //                    approvalproccess.SendFrom = SiteContext.UserId;
-        //                    approvalproccess.PendingStatus = 1;
-        //                    approvalproccess.Remarks = encroachmentRegisterations.ApprovalRemarks; ///May be comment
-        //                    approvalproccess.Status = Convert.ToInt32(encroachmentRegisterations.ApprovalStatus);
-
-        //                    if (i == DataFlow.Count - 1)
-        //                        approvalproccess.SendTo = null;
-        //                    else
-        //                    {
-        //                        approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
-        //                    }
-        //                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-
-        //                    if (result)
-        //                    {
-        //                        if (i == DataFlow.Count - 1)
-        //                        {
-        //                            encroachmentRegisterations.ApprovedStatus = 1;
-        //                            encroachmentRegisterations.PendingAt = 0;
-        //                        }
-        //                        else
-        //                        {
-        //                            encroachmentRegisterations.ApprovedStatus = 0;
-        //                            encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
-        //                        }
-        //                        result = await _encroachmentRegisterationService.UpdateBeforeApproval(id, encroachmentRegisterations);
-        //                    }
-        //                }
-        //                break;
-        //            }
-
-        //        }
-        //    }
-
-        //    #endregion
-
-
-        //    if (Msgddl == "3")
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Approvedsuccesfuly, "", AlertType.Success);
-        //    }
-        //    else
-        //    {
-
-        //        ViewBag.Message = Alert.Show(Messages.Forwardsuccesfuly, "", AlertType.Success);
-        //    }
-        //    return View("Index");
+        //    FileHelper file = new FileHelper();
+        //    EncroachmentFirFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentFirFileDetails(Id);
+        //    string filename = Data.FirFilePath;
+        //    return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         //}
+        #endregion
 
-        //#region History Details Only For Approval Page
-        //public async Task<PartialViewResult> HistoryDetails(int id)
-        //{
-        //    var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
 
-        //    return PartialView("_HistoryDetails", Data);
-        //}
-        //#endregion
+        #region Fetch workflow data for approval prrocess Added by Renu 16 march 2021
+        private async Task<List<TemplateStructure>> DataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
 
-        //#region Watch & Ward  Details
-        //public async Task<PartialViewResult> WatchWardView(int id)
-        //{
-        //    var Data = await _watchandwardService.FetchSingleResult(id);
-        //    if (Data != null)
-        //        Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+        [HttpGet]
+        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        {
+            var DataFlow = await DataAsync();
 
-        //    return PartialView("_WatchWard", Data);
-        //}
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                {
+                    var dropdown = DataFlow[i].parameterAction;
+                    return Json(dropdown);
+                    break;
+                }
+
+            }
+            return Json(DataFlow);
+        }
+        #endregion
+
         //public async Task<FileResult> ViewDocument(int Id)
         //{
         //    FileHelper file = new FileHelper();
@@ -166,79 +201,5 @@ namespace LeaseDetails.Controllers
         //    byte[] FileBytes = System.IO.File.ReadAllBytes(path);
         //    return File(FileBytes, file.GetContentType(path));
         //}
-
-        //#endregion
-
-        //#region EncroachmentRegisteration Details
-        //public async Task<PartialViewResult> EncroachmentRegisterView(int id)
-        //{
-        //    var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
-        //    encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
-        //    encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
-        //    encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
-        //    encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-        //    encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
-
-        //    return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
-        //}
-        //public async Task<IActionResult> DownloadPhotoFile(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    EncroachmentPhotoFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentPhotoFileDetails(Id);
-        //    string filename = Data.PhotoFilePath;
-        //    return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
-        //}
-
-        //public async Task<JsonResult> DetailsOfRepeater(int? Id)
-        //{
-        //    Id = Id ?? 0;
-        //    var data = await _encroachmentRegisterationService.GetDetailsOfEncroachment(Convert.ToInt32(Id));
-        //    return Json(data.Select(x => new { x.CountOfStructure, x.DateOfEncroachment, x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus, x.ReligiousStructure }));
-        //}
-
-        //public async Task<IActionResult> DownloadFirfile(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    EncroachmentFirFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentFirFileDetails(Id);
-        //    string filename = Data.FirFilePath;
-        //    return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
-        //}
-        //public async Task<IActionResult> DownloadLocationMapFile(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    EncroachmentLocationMapFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentLocationMapFileDetails(Id);
-        //    string filename = Data.LocationMapFilePath;
-        //    return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
-        //}
-        //#endregion
-
-
-        //#region Fetch workflow data for approval prrocess Added by Renu 4 Dec 2020
-        //private async Task<List<TemplateStructure>> DataAsync()
-        //{
-        //    var Data = await _workflowtemplateService.FetchSingleResult(2);
-        //    var template = Data.Template;
-        //    List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
-        //    return ObjList;
-        //}
-
-        //[HttpGet]
-        //public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
-        //{
-        //    var DataFlow = await DataAsync();
-
-        //    for (int i = 0; i < DataFlow.Count; i++)
-        //    {
-        //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-        //        {
-        //            var dropdown = DataFlow[i].parameterAction;
-        //            return Json(dropdown);
-        //            break;
-        //        }
-
-        //    }
-        //    return Json(DataFlow);
-        //}
-        //#endregion
     }
 }

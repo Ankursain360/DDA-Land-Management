@@ -16,6 +16,7 @@ namespace Libraries.Model.Entity
         public int? PendingStatus { get; set; }
         public int? Status { get; set; }
         public string Remarks { get; set; }
-      //  public virtual ApplicationUser SendFromUser { get; set; }
+        public string DocumentName { get; set; }
+        //  public virtual ApplicationUser SendFromUser { get; set; }
     }
 }

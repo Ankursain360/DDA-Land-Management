@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.EncroachmentRegisteration
+﻿@model Libraries.Model.Entity.Leaseapplication
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +22,7 @@
     <div class="row pt-4">
         <div class="col-md-6">
             <div class="floating-label-wrap">
-                
+
                 <select class="floating-label-field floating-label-field--s3" asp-for="ApprovalStatus">
                     <option value="1">Forward</option>
                     <option value="2">Revert</option>
@@ -30,6 +30,13 @@
                 </select>
                 <label asp-validation-for="ApprovalStatus" class="error"></label>
                 <label class="floating-label">Status<span style="color:red">*</span></label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input asp-for="ApprovalDocument" type="file"  class="floating-label-field floating-label-field--s3"  accept="application/pdf" />
+                <span asp-validation-for="ApprovalDocument" class="text-danger"></span>
+                <label class="floating-label">Document<span style="color:red">*</span></label>
             </div>
         </div>
     </div>
