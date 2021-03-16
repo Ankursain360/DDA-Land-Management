@@ -55,7 +55,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<Leaseapplication> FetchLeaseApplicationDetails(int id)
         {
-            return await _leaseApplicationRepository.FetchLeaseApplicationDetails( id);
+            return await _leaseApplicationRepository.FetchLeaseApplicationDetails(id);
         }
 
 
@@ -98,6 +98,26 @@ namespace Libraries.Service.ApplicationService
             leaseapplicationdocuments.ForEach(x => x.CreatedBy = 1);
             leaseapplicationdocuments.ForEach(x => x.CreatedDate = DateTime.Now);
             return await _leaseApplicationRepository.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
+        }
+        public async Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model)
+        {
+            return await _leaseApplicationRepository.GetPagedAllotmentLetter(model);
+        }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Leaseapplication leaseapplication)
+        {
+            var result = await _leaseApplicationRepository.FindBy(a => a.Id == id);
+            Leaseapplication model = result.FirstOrDefault();
+
+            model.ApprovedStatus = leaseapplication.ApprovedStatus;
+            model.PendingAt = leaseapplication.PendingAt;
+            _leaseApplicationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id)
+        {
+            return await _leaseApplicationRepository.FetchLeaseApplicationDocumentDetails(id);
         }
     }
 }

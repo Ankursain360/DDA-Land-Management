@@ -1,7 +1,8 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
 
     /* -----------Start Call Repeator Added by Renu  --------------- */
-    FillDocumentRepeator();
+ //   FillDocumentRepeator();
 });
 
 function FillDocumentRepeator() {/* -----------Added by Renu  --------------- */
@@ -33,7 +34,7 @@ function FillDocumentRepeator() {/* -----------Added by Renu  --------------- */
     });
 }
 
-$('#FileUploaded').change(function () {
+$('.FileUploaded').change(function () {
     var fileInput = document.getElementById('FileUploaded');
     var filePath = fileInput.value;
     const size = (FileUploaded.files[0].size);
@@ -48,7 +49,7 @@ $('#FileUploaded').change(function () {
 
 
 function fileValidation(filePath, fileInput, size) {
-    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
+    var allowedExtensions = /(.pdf)$/i;
     if (!allowedExtensions.exec(filePath)) {
         alert('Invalid file type');
         fileInput.value = '';
@@ -81,4 +82,11 @@ function DocumentValidation() {/* -----------Check Validation Added by Renu  ---
         return false;
     }
 
+}
+
+function onDocumentChange(element) {
+    debugger;
+    var filePath = element.value;
+    const size = (element.files[0].size);
+    fileValidation(filePath, element, size);
 }

@@ -18,5 +18,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments);
         Task<Leaseapplication> FetchLeaseApplicationDetails(int id);
         Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id);
+        Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model);
+        Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id);
     }
 }

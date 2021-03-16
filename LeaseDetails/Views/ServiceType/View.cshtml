@@ -1,0 +1,48 @@
+﻿@model Libraries.Model.Entity.Servicetype
+@await Component.InvokeAsync("PageHeader", new { pageName = "Service Type" })
+
+<div class="pt-3">
+    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="Name" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="30" />
+
+                    <span asp-validation-for="Name" class="text-danger"></span>
+
+                    <label class="floating-label">Name </label>
+                </div>
+            </div>
+           
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+
+                @Html.ActionLink("Back", "Index", "ServiceType", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
+

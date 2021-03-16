@@ -53,6 +53,18 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model)
+        {
+            var data = await _dbContext.Leaseapplication
+                                                  .Where(x => x.IsActive==1)
+                                        .GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
+            return data;
+        }
+
+        public async Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id)
+        {
+            return await _dbContext.Leaseapplicationdocuments.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
         //public async Task<bool> Any(int id, string name, int ServiceTypeId)
         //{
         //    return await _dbContext.Documentchecklist.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower() && t.ServiceTypeId == ServiceTypeId);

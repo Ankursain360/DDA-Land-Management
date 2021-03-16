@@ -67,7 +67,7 @@ namespace LeaseDetails.Controllers
             if (Msg != null)
                 ViewBag.Message = Msg;
             Leaseapplication leaseapplication = new Leaseapplication();
-            //  leaseapplication.Documentchecklist = await _leaseApplicationFormService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdLeaseAppForm").Value));
+            leaseapplication.Documentchecklist = await _leaseApplicationFormService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdLeaseAppForm").Value));
             ViewBag.IsPrintable = 0;
             return View(leaseapplication);
         }
@@ -82,6 +82,7 @@ namespace LeaseDetails.Controllers
                 leaseapplication.RefNo = leaseapplication.RegistrationNo + leaseapplication.ContactNo + finalString;
                 string FilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
 
+                leaseapplication.Documentchecklist = await _leaseApplicationFormService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdLeaseAppForm").Value));
                 //Is Mandatory check
                 if (leaseapplication.DocumentName != null && leaseapplication.Mandatory != null)
                 {
@@ -106,7 +107,7 @@ namespace LeaseDetails.Controllers
                 {
                     FileHelper fileHelper = new FileHelper();
                     leaseapplication.CreatedBy = 1;
-                    leaseapplication.ApprovedSataus = 0;
+                    leaseapplication.ApprovedStatus = 0;
                     leaseapplication.PendingAt = 1;
                     leaseapplication.IsActive = 1;
                     leaseapplication.Id = 0;
@@ -114,51 +115,84 @@ namespace LeaseDetails.Controllers
 
                     if (result)
                     {
-                        //List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
-                        //for (int i = 0; i < leaseapplication.DocumentChecklistId.Count; i++)
-                        //{
-                        //    string filename = null;
-                        //    if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
-                        //        filename = fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]);
-                        //    leaseapplicationdocuments.Add(new Leaseapplicationdocuments
-                        //    {
-                        //        DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
-                        //        LeaseApplicationId = leaseapplication.Id,
-                        //        DocumentFileName = filename
-
-                        //    });
-                        //}
-                        //if (leaseapplicationdocuments.Count > 0)
-                        //    result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
-                        if (leaseapplication.DocumentName != null && leaseapplication.Mandatory != null)
+                        List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
+                        for (int i = 0; i < leaseapplication.DocumentChecklistId.Count; i++)
                         {
-                            if (leaseapplication.DocumentName.Count > 0 && leaseapplication.Mandatory.Count > 0)
+                            string filename = null;
+                            if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
+                                filename = leaseapplication.FileUploaded != null ?
+                                                                   leaseapplication.FileUploaded.Count <= i ? string.Empty :
+                                                                   fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
+                                                                   leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
+                                                                   leaseapplication.FileUploadedPath[i] : string.Empty;
+                            leaseapplicationdocuments.Add(new Leaseapplicationdocuments
                             {
-                                List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
-                                for (int i = 0; i < leaseapplication.DocumentName.Count; i++)
-                                {
-                                    if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
-                                    {
-                                        leaseapplicationdocuments.Add(new Leaseapplicationdocuments
-                                        {
-                                            DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
-                                            LeaseApplicationId = leaseapplication.Id,
-                                            DocumentFileName = leaseapplication.FileUploaded != null ?
-                                                               leaseapplication.FileUploaded.Count <= i ? string.Empty :
-                                                               fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
-                                                               leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
-                                                               leaseapplication.FileUploadedPath[i] : string.Empty
-                                        });
-                                    }
-                                }
+                                DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
+                                LeaseApplicationId = leaseapplication.Id,
+                                DocumentFileName = filename
 
-                                if (leaseapplicationdocuments.Count > 0)
-                                    result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
-                            }
+                            });
                         }
+                        if (leaseapplicationdocuments.Count > 0)
+                            result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
+                        //if (leaseapplication.DocumentName != null && leaseapplication.Mandatory != null)
+                        //{
+                        //    if (leaseapplication.DocumentName.Count > 0 && leaseapplication.Mandatory.Count > 0)
+                        //    {
+                        //        List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
+                        //        for (int i = 0; i < leaseapplication.DocumentName.Count; i++)
+                        //        {
+                        //            if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
+                        //            {
+                        //                leaseapplicationdocuments.Add(new Leaseapplicationdocuments
+                        //                {
+                        //                    DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
+                        //                    LeaseApplicationId = leaseapplication.Id,
+                        //                    DocumentFileName = leaseapplication.FileUploaded != null ?
+                        //                                       leaseapplication.FileUploaded.Count <= i ? string.Empty :
+                        //                                       fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
+                        //                                       leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
+                        //                                       leaseapplication.FileUploadedPath[i] : string.Empty
+                        //                });
+                        //            }
+                        //        }
+
+                        //        if (leaseapplicationdocuments.Count > 0)
+                        //            result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
+                        //    }
+                        //}
                     }
                     if (result == true)
                     {
+                        #region Approval Proccess At 1st level start Added by Renu 16 March 2021
+                        var DataFlow = await dataAsync();
+                        for (int i = 0; i < DataFlow.Count; i++)
+                        {
+                            if (!DataFlow[i].parameterSkip)
+                            {
+                                leaseapplication.ApprovedStatus = 0;
+                                leaseapplication.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                result = await _leaseApplicationFormService.UpdateBeforeApproval(leaseapplication.Id, leaseapplication);  //Update Table details 
+                                if (result)
+                                {
+                                    Approvalproccess approvalproccess = new Approvalproccess();
+                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value);
+                                    approvalproccess.ServiceId = leaseapplication.Id;
+                                    approvalproccess.SendFrom = SiteContext.UserId;
+                                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = null;   //1
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                }
+
+                                break;
+                            }
+                        }
+
+                        #endregion 
+
                         if (leaseapplication.EmailId != null)
                         {
                             #region Mail Generate
@@ -186,22 +220,22 @@ namespace LeaseDetails.Controllers
                             #endregion
 
                             if (sendMailResult)
-                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + " Login Details send on your Registered email and Mobile No, Please check and Login with details", "", AlertType.Success);
+                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + "  Your Request is sent for Approval and  Reference No.is send on your Registered email and Mobile No", "", AlertType.Success);
                             else
-                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + " Enable to send mail or sms ", "", AlertType.Info);
+                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + "  Your Request is sent for Approval but Enable to send Reference No. on your mail or sms due to network issue", "", AlertType.Info);
 
 
                             #endregion
                         }
                         else
                         {
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
+                            TempData["Message"] = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         }
 
                         ViewBag.IsPrintable = 1;
                         ViewBag.Id = leaseapplication.Id;
-                        return View("Create");
+                        return View("Create", leaseapplication);
                     }
                     else
                     {
@@ -249,5 +283,14 @@ namespace LeaseDetails.Controllers
 
         }
 
+        #region Fetch workflow data for approval prrocess Added by Renu 16 March 2021
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+        #endregion
     }
 }
