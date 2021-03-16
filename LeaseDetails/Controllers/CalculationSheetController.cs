@@ -30,7 +30,7 @@ namespace LeaseDetails.Controllers
         {
             Allotmententry entry = new Allotmententry();
           
-            entry.ApplicationList = await _calculationSheetService.GetAllApplications();
+           // entry.ApplicationList = await _calculationSheetService.GetAllApplications();
             return View(entry);
         }
     }

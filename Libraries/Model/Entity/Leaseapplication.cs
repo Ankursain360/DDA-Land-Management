@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace Libraries.Model.Entity
 {
@@ -15,7 +16,6 @@ namespace Libraries.Model.Entity
         {
             Allotmententry = new HashSet<Allotmententry>();
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
-            
         }
         public string RefNo { get; set; }
 
@@ -98,6 +98,16 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Leaseapplicationdocuments> Leasedocuments { get; set; }
-        
+
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+       
     }
 }

@@ -30,6 +30,8 @@ namespace LeaseDetails.Controllers
         {
             _documentCheckListService = documentCheckListService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             ViewBag.ServiceTypeList = await _documentCheckListService.GetServiceTypeList();
@@ -47,6 +49,7 @@ namespace LeaseDetails.Controllers
             documentchecklist.ServiceTypeList = await _documentCheckListService.GetServiceTypeList();
         }
 
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Documentchecklist documentchecklist = new Documentchecklist();
@@ -91,6 +94,8 @@ namespace LeaseDetails.Controllers
                 return View(documentchecklist);
             }
         }
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _documentCheckListService.FetchSingleResult(id);
@@ -165,6 +170,8 @@ namespace LeaseDetails.Controllers
             return View("Index");
 
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _documentCheckListService.FetchSingleResult(id);
