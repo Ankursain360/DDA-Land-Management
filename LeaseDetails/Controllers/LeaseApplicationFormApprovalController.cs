@@ -70,8 +70,8 @@ namespace LeaseDetails.Controllers
         {
             var result = false;
             var Data = await _leaseApplicationFormApprovalService.FetchSingleResult(id);
-            string ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
-
+            string ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
+            FileHelper fileHelper = new FileHelper();
             var Msgddl = leaseapplication.ApprovalStatus;
             #region Approval Proccess At Further level start Added by Renu 16 march 2021
             var DataFlow = await DataAsync();
@@ -92,6 +92,7 @@ namespace LeaseDetails.Controllers
                             approvalproccess.PendingStatus = 1;
                             approvalproccess.Remarks = leaseapplication.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(leaseapplication.ApprovalStatus);
+                            approvalproccess.DocumentName = leaseapplication.ApprovalDocument == null ? null : fileHelper.SaveFile(ApprovalDocumentPath, leaseapplication.ApprovalDocument);
 
                             if (i == DataFlow.Count - 1)
                                 approvalproccess.SendTo = null;
