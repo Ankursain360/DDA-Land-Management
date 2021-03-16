@@ -24,5 +24,11 @@ namespace Libraries.Repository.EntityRepository
             List<Allotmententry> list = await _dbContext.Allotmententry.Include(x => x.Application).ToListAsync();
             return list;
         }
+       
+
+        public async Task<Allotmententry> FetchSingleAppAreaDetails(int? ApplicationId)
+        {
+            return await _dbContext.Allotmententry.Where(x => x.ApplicationId == ApplicationId).SingleOrDefaultAsync();
+        }
     }
 }
