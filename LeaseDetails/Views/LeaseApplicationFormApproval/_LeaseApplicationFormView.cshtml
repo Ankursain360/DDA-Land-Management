@@ -17,21 +17,21 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3  " limit="200">
+                        <input disabled asp-for="Name" type="text" class="floating-label-field floating-label-field--s3  " limit="200">
                         <span asp-validation-for="Name" class="text-danger"></span>
                         <label class="floating-label">Society Name</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="ContactNo" type="text" class="floating-label-field floating-label-field--s3  onlynumbers" limit="10" min="10">
+                        <input disabled asp-for="ContactNo" type="text" class="floating-label-field floating-label-field--s3  onlynumbers" limit="10" min="10">
                         <span asp-validation-for="ContactNo" class="text-danger"></span>
                         <label class="floating-label">Mobile No/Telephone No.</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="EmailId" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
+                        <input disabled asp-for="EmailId" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
                         <span asp-validation-for="EmailId" class="text-danger"></span>
                         <label class="floating-label">Email-Id</label>
                     </div>
@@ -40,7 +40,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Address" type="text" class="floating-label-field floating-label-field--s3  " limit="4000"></textarea>
+                        <textarea disabled asp-for="Address" type="text" class="floating-label-field floating-label-field--s3  " limit="4000"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
                         <label class="floating-label">Address</label>
                     </div>
@@ -53,18 +53,18 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="RegistrationNo" type="text" class="floating-label-field floating-label-field--s3  " limit="200">
+                        <input disabled asp-for="RegistrationNo" type="text" class="floating-label-field floating-label-field--s3  " limit="200">
                         <span asp-validation-for="RegistrationNo" class="text-danger"></span>
                         <label class="floating-label">Registeration No.</label>
                     </div>
                 </div>
                 @*<div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AlloteeName" type="file" class="floating-label-field floating-label-field--s3  ">
-                    <span asp-validation-for="AlloteeName" class="text-danger"></span>
-                    <label class="floating-label">Document</label>
-                </div>
-            </div>*@
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  disabled asp-for="AlloteeName" type="file" class="floating-label-field floating-label-field--s3  ">
+                            <span asp-validation-for="AlloteeName" class="text-danger"></span>
+                            <label class="floating-label">Document</label>
+                        </div>
+                    </div>*@
             </div>
             <h3 class="my-3 d-flex sub-heading">
                 3.	सोसाइटी के संचालकों सदस्यों की सूचि  जिसमे उनके पते  और व्यवसाय दर्शाया हुआ हो तथा जो प्रत्येक सदस्य द्वारा  विधिवत हस्ताक्षरित हो | यदि वे सेवा में हों तो  कार्यालय का नाम एवं पता और पद लिखें : यदि व्यवसाय  करते हैं  तो संस्था   का नाम एवं  पता  लिखें<br />
@@ -73,7 +73,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Description" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="Description" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="Description" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
@@ -86,7 +86,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="LandPurpose" type="text" class="floating-label-field floating-label-field--s3  " limit="4000"></textarea>
+                        <textarea disabled asp-for="LandPurpose" type="text" class="floating-label-field floating-label-field--s3  " limit="4000"></textarea>
                         <span asp-validation-for="LandPurpose" class="text-danger"></span>
                     </div>
                 </div>
@@ -95,20 +95,20 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="LandDetailsArea" type="text" class="floating-label-field floating-label-field--s3  " limit="4000"></textarea>
+                        <textarea disabled asp-for="LandDetailsArea" type="text" class="floating-label-field floating-label-field--s3  " limit="4000"></textarea>
                         <span asp-validation-for="LandDetailsArea" class="text-danger"></span>
                     </div>
                 </div>
             </div>
             @*<h3 class="my-3 d-flex sub-heading">4. (iii)	 परियोजना रिपोर्ट संलग्न करें |<br />Enclose a copy of project report.</h3>
-        <div class="row mt-md-3">
-            <div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3  ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                </div>
-            </div>
-        </div>*@
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  disabled asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3  ">
+                            <span asp-validation-for="FileNo" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>*@
             <h3 class="my-3 d-flex sub-heading">
                 5. धारा ८० (जी ) के अंतर्गत आयकर छूट प्रमाणपत्र की वैधता की अवधि (प्रति संलग्न  करें )| यदि यह धर्मार्थ संस्था है , तो यह आवेदन की तिथि से कम से कम 1 वर्ष के  लिए वैध होनी चाहिए  | <br />
                 Period of validity of Income Tax Exemption Certificate under Section 80(G) (Enclose a copy). If it is a charitable organisation it should be valid for atleast 1 year from date of application).
@@ -116,18 +116,18 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="IncomeTaxDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="IncomeTaxDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="IncomeTaxDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
                 </div>
                 @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  disabled asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                            <span asp-validation-for="FileNo" class="text-danger"></span>
+                            <label class="floating-label">Document Upload</label>
+                        </div>
+                    </div>*@
             </div>
             <h3 class="my-3 d-flex sub-heading">
                 6. प्रायोजन के संदर्भ संख्या तथा तिथि जो या भारत सरकार  अथवा राष्ट्रीय राजधानी क्षेत्र दिल्ली सरकार  से हो | (प्रायोजन  (स्पॉन्सरशिप ) की मूल प्रति संलग्न करें |<br />
@@ -136,24 +136,24 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="SponsorshipDate" type="date" class="floating-label-field floating-label-field--s3 " />
+                        <input disabled asp-for="SponsorshipDate" type="date" class="floating-label-field floating-label-field--s3 " />
                         <span asp-validation-for="SponsorshipDate" class="text-danger"></span>
                         <label class="floating-label">Date</label>
                     </div>
                 </div>
 
                 @*<div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  disabled asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                            <span asp-validation-for="FileNo" class="text-danger"></span>
+                            <label class="floating-label">Document Upload</label>
+                        </div>
+                    </div>*@
             </div>
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="SponsorshipDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="SponsorshipDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="SponsorshipDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
@@ -166,7 +166,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="RecommendationDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="RecommendationDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="RecommendationDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
@@ -179,7 +179,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="LandAreaSqMt" type="text" class="floating-label-field floating-label-field--s3 numbers">
+                        <input disabled asp-for="LandAreaSqMt" type="text" class="floating-label-field floating-label-field--s3 numbers">
                         <span asp-validation-for="LandAreaSqMt" class="text-danger"></span>
                         <label class="floating-label">Area</label>
                     </div>
@@ -192,18 +192,18 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="NotarizedUndertakingDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="NotarizedUndertakingDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="NotarizedUndertakingDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
                 </div>
                 @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  disabled asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                            <span asp-validation-for="FileNo" class="text-danger"></span>
+                            <label class="floating-label">Document Upload</label>
+                        </div>
+                    </div>*@
             </div>
             <h3 class="my-3 d-flex sub-heading">
                 10. यदि आवेदन  संस्थान भूमि की किसी रियायती दरों पर आवेदन  कर रहा है तो वह चालू जोनल विभिन्न सांस्थानिक दरों  पर  भूमि की कीमत के बराबर एक छतिपूर्ति बंधपत्र संलग्न   करें , जिसमे यह छतिपूर्ति  करने का वचन दें  कि यदि आवेदन  किसी समय पर संस्थान  के धर्मार्थ  स्वरुप को बदलेगा तो वह भूमि की लागत का भुगतान बाज़ार दर पर करेगा |<br />
@@ -212,18 +212,18 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="IndemnityDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="IndemnityDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="IndemnityDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
                 </div>
                 @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  disabled asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                            <span asp-validation-for="FileNo" class="text-danger"></span>
+                            <label class="floating-label">Document Upload</label>
+                        </div>
+                    </div>*@
             </div>
             <h3 class="my-3 d-flex sub-heading">
                 11.	स्थान अथवा क्षेत्र जहां भूमि अपेक्षित है , वरीयता क्रम से (कम  से कम तीन स्थान दें )| <br />
@@ -232,21 +232,21 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Location1" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
+                        <input disabled asp-for="Location1" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
                         <span asp-validation-for="Location1" class="text-danger"></span>
                         <label class="floating-label">1.</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Location2" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
+                        <input disabled asp-for="Location2" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
                         <span asp-validation-for="Location2" class="text-danger"></span>
                         <label class="floating-label">2.</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Location3" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
+                        <input disabled asp-for="Location3" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
                         <span asp-validation-for="Location3" class="text-danger"></span>
                         <label class="floating-label">3.</label>
                     </div>
@@ -259,7 +259,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="LandAuthorisingDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="LandAuthorisingDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="LandAuthorisingDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
@@ -272,18 +272,18 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="FinancialPositionDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="FinancialPositionDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="FinancialPositionDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
                 </div>
                 @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  disabled asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                            <span asp-validation-for="FileNo" class="text-danger"></span>
+                            <label class="floating-label">Document Upload</label>
+                        </div>
+                    </div>*@
             </div>
             <h3 class="my-3 d-flex sub-heading">
                 14. भूमि और उस पर  निर्माण की लागत को किस प्रकार पूरा किए जाने का प्रस्ताव है |<br />
@@ -292,7 +292,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="ProposedDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="ProposedDescription" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="ProposedDescription" class="text-danger"></span>
                         <label class="floating-label">Description</label>
                     </div>
@@ -313,7 +313,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="EstablishmentNameAddress" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                        <textarea disabled asp-for="EstablishmentNameAddress" type="text" class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
                         <span asp-validation-for="EstablishmentNameAddress" class="text-danger"></span>
                         <label class="floating-label">Name & address of the establishment</label>
                     </div>
@@ -322,21 +322,21 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="FunctioningSinceWhen" type="text" class="floating-label-field floating-label-field--s3 " limit="500" />
+                        <input disabled asp-for="FunctioningSinceWhen" type="text" class="floating-label-field floating-label-field--s3 " limit="500" />
                         <span asp-validation-for="FunctioningSinceWhen" class="text-danger"></span>
                         <label class="floating-label">Since when</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="FunctioningActivityUndertaken" type="text" class="floating-label-field floating-label-field--s3 " limit="500" />
+                        <input disabled asp-for="FunctioningActivityUndertaken" type="text" class="floating-label-field floating-label-field--s3 " limit="500" />
                         <span asp-validation-for="FunctioningActivityUndertaken" class="text-danger"></span>
                         <label class="floating-label">Activity undertaken</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="FunctioningAreaSqMt" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                        <input disabled asp-for="FunctioningAreaSqMt" type="text" class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="FunctioningAreaSqMt" class="text-danger"></span>
                         <label class="floating-label">Area in sq.mtrs</label>
                     </div>
@@ -362,21 +362,21 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="RefNoOfAllotmentLetterDate" type="text" class="floating-label-field floating-label-field--s3 " limit="200" />
+                        <input disabled asp-for="RefNoOfAllotmentLetterDate" type="text" class="floating-label-field floating-label-field--s3 " limit="200" />
                         <span asp-validation-for="RefNoOfAllotmentLetterDate" class="text-danger"></span>
                         <label class="floating-label">Ref. no. of allotment letter & date</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="AreaSqlMt" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                        <input disabled asp-for="AreaSqlMt" type="text" class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="AreaSqlMt" class="text-danger"></span>
                         <label class="floating-label">Area in sq. mtrs.</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Locality" type="text" class="floating-label-field floating-label-field--s3 " limit="500" />
+                        <input disabled asp-for="Locality" type="text" class="floating-label-field floating-label-field--s3 " limit="500" />
                         <span asp-validation-for="Locality" class="text-danger"></span>
                         <label class="floating-label">Locality</label>
                     </div>
@@ -385,14 +385,14 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " limit="4000" />
+                        <input disabled asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " limit="4000" />
                         <span asp-validation-for="Purpose" class="text-danger"></span>
                         <label class="floating-label">Purpose</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Rate" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                        <input disabled asp-for="Rate" type="text" class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Rate" class="text-danger"></span>
                         <label class="floating-label">Rate</label>
                     </div>
@@ -413,24 +413,24 @@
                             <tbody class="tbody">
                                 @foreach (var item in Model.Leasedocuments)
                                 {
-                                <tr>
-                                    <td>
-                                        @item.DocumentChecklist.Name
-                                    </td>
-                                    @if (@item.DocumentChecklist.IsMandatory != 0)
+                                    <tr>
+                                        <td>
+                                            @item.DocumentChecklist.Name
+                                        </td>
+                                        @if (@item.DocumentFileName != "")
                                         {
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            @*<a class="badge badge-primary px-2" asp-action="ViewDocumentAnnexureA" asp-route-id="@item.Id"> (Enclosed)</a>*@
-                                            <a>Enclosed</a>
-                                        </div>
-                                    </td>
+                                            <td>
+                                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                                    <a class="badge badge-primary px-2" asp-action="ViewDocumentLeaseApplicationForm" asp-route-id="@item.Id" target="_blank"> (Enclosed)</a>
+                                                    @*<a>Enclosed</a>*@
+                                                </div>
+                                            </td>
                                         }
                                         else
                                         {
-                                    <td>  <a>N/A</a></td>
+                                            <td>  <a>N/A</a></td>
                                         }
-                                </tr>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

@@ -15,21 +15,42 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
 });
 
 $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
 });
 
 $('#ddlSort').change(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
 });
 
-function GetDetails(pageNumber, pageSize, sortOrder) {
+function GetDetails(pageNumber, pageSize, sortOrder, StatusId) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder, StatusId);
     HttpPost(`/LeaseApplicationFormApproval/List`, 'html', param, function (response) {
         $('#divTable').html("");
@@ -50,24 +71,40 @@ function GetSearchParam(pageNumber, pageSize, sortOrder, StatusId) {
 }
 
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder, StatusId);
-    currentPageNumber = pageNo;
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder, StatusId);
+        currentPageNumber = pageNo;
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder, StatusId);
+        currentPageNumber = pageNo;
+    }
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder, StatusId);
-    currentPageSize = pageSize;
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder, StatusId);
+        currentPageSize = pageSize;
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder, StatusId);
+        currentPageSize = pageSize;
+    }
 }
 
 $("input[name='radioStatus']").click(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-        GetLeaseApplicationFormApproval(currentPageNumber, currentPageSize, sortOrder, StatusId);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
 
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-        GetLeaseApplicationFormApproval(currentPageNumber, currentPageSize, sortOrder, StatusId);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
     }
 
 });

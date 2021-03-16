@@ -32,7 +32,14 @@
                                 @(item.CreatedDate!= null ? Convert.ToDateTime(item.CreatedDate).ToString("dd-MMM-yyyy h:mm tt") : "Not Available")
                             </td>
                             <td>
-
+                                @if (item.DocumentName != null)
+                                {
+                                    <a class="badge badge-primary px-2" asp-action="ViewDocumentApprovalProccess" asp-route-id="@item.Id" target="_blank"> (View)</a>
+                                }
+                                else
+                                {
+                                    <a>No Document</a>
+                                }
                             </td>
                             <td>
                                 @item.Remarks

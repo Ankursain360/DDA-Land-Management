@@ -67,7 +67,7 @@ namespace LeaseDetails.Controllers
             if (Msg != null)
                 ViewBag.Message = Msg;
             Leaseapplication leaseapplication = new Leaseapplication();
-            //  leaseapplication.Documentchecklist = await _leaseApplicationFormService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdLeaseAppForm").Value));
+            leaseapplication.Documentchecklist = await _leaseApplicationFormService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdLeaseAppForm").Value));
             ViewBag.IsPrintable = 0;
             return View(leaseapplication);
         }
@@ -82,6 +82,7 @@ namespace LeaseDetails.Controllers
                 leaseapplication.RefNo = leaseapplication.RegistrationNo + leaseapplication.ContactNo + finalString;
                 string FilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
 
+                leaseapplication.Documentchecklist = await _leaseApplicationFormService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdLeaseAppForm").Value));
                 //Is Mandatory check
                 if (leaseapplication.DocumentName != null && leaseapplication.Mandatory != null)
                 {
@@ -114,48 +115,52 @@ namespace LeaseDetails.Controllers
 
                     if (result)
                     {
-                        //List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
-                        //for (int i = 0; i < leaseapplication.DocumentChecklistId.Count; i++)
-                        //{
-                        //    string filename = null;
-                        //    if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
-                        //        filename = fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]);
-                        //    leaseapplicationdocuments.Add(new Leaseapplicationdocuments
-                        //    {
-                        //        DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
-                        //        LeaseApplicationId = leaseapplication.Id,
-                        //        DocumentFileName = filename
-
-                        //    });
-                        //}
-                        //if (leaseapplicationdocuments.Count > 0)
-                        //    result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
-                        if (leaseapplication.DocumentName != null && leaseapplication.Mandatory != null)
+                        List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
+                        for (int i = 0; i < leaseapplication.DocumentChecklistId.Count; i++)
                         {
-                            if (leaseapplication.DocumentName.Count > 0 && leaseapplication.Mandatory.Count > 0)
+                            string filename = null;
+                            if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
+                                filename = leaseapplication.FileUploaded != null ?
+                                                                   leaseapplication.FileUploaded.Count <= i ? string.Empty :
+                                                                   fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
+                                                                   leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
+                                                                   leaseapplication.FileUploadedPath[i] : string.Empty;
+                            leaseapplicationdocuments.Add(new Leaseapplicationdocuments
                             {
-                                List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
-                                for (int i = 0; i < leaseapplication.DocumentName.Count; i++)
-                                {
-                                    if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
-                                    {
-                                        leaseapplicationdocuments.Add(new Leaseapplicationdocuments
-                                        {
-                                            DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
-                                            LeaseApplicationId = leaseapplication.Id,
-                                            DocumentFileName = leaseapplication.FileUploaded != null ?
-                                                               leaseapplication.FileUploaded.Count <= i ? string.Empty :
-                                                               fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
-                                                               leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
-                                                               leaseapplication.FileUploadedPath[i] : string.Empty
-                                        });
-                                    }
-                                }
+                                DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
+                                LeaseApplicationId = leaseapplication.Id,
+                                DocumentFileName = filename
 
-                                if (leaseapplicationdocuments.Count > 0)
-                                    result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
-                            }
+                            });
                         }
+                        if (leaseapplicationdocuments.Count > 0)
+                            result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
+                        //if (leaseapplication.DocumentName != null && leaseapplication.Mandatory != null)
+                        //{
+                        //    if (leaseapplication.DocumentName.Count > 0 && leaseapplication.Mandatory.Count > 0)
+                        //    {
+                        //        List<Leaseapplicationdocuments> leaseapplicationdocuments = new List<Leaseapplicationdocuments>();
+                        //        for (int i = 0; i < leaseapplication.DocumentName.Count; i++)
+                        //        {
+                        //            if (leaseapplication.FileUploaded != null && leaseapplication.FileUploaded.Count > 0)
+                        //            {
+                        //                leaseapplicationdocuments.Add(new Leaseapplicationdocuments
+                        //                {
+                        //                    DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
+                        //                    LeaseApplicationId = leaseapplication.Id,
+                        //                    DocumentFileName = leaseapplication.FileUploaded != null ?
+                        //                                       leaseapplication.FileUploaded.Count <= i ? string.Empty :
+                        //                                       fileHelper.SaveFile1(FilePath, leaseapplication.FileUploaded[i]) :
+                        //                                       leaseapplication.FileUploaded[i] != null || leaseapplication.FileUploadedPath[i] != "" ?
+                        //                                       leaseapplication.FileUploadedPath[i] : string.Empty
+                        //                });
+                        //            }
+                        //        }
+
+                        //        if (leaseapplicationdocuments.Count > 0)
+                        //            result = await _leaseApplicationFormService.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
+                        //    }
+                        //}
                     }
                     if (result == true)
                     {
@@ -230,7 +235,7 @@ namespace LeaseDetails.Controllers
 
                         ViewBag.IsPrintable = 1;
                         ViewBag.Id = leaseapplication.Id;
-                        return View("Create");
+                        return View("Create", leaseapplication);
                     }
                     else
                     {

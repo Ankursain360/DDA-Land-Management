@@ -114,5 +114,10 @@ namespace Libraries.Service.ApplicationService
             _leaseApplicationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id)
+        {
+            return await _leaseApplicationRepository.FetchLeaseApplicationDocumentDetails(id);
+        }
     }
 }
