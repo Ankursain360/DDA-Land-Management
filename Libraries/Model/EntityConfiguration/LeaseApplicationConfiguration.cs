@@ -17,7 +17,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Address).HasColumnType("longtext");
 
-            builder.Property(e => e.ApprovedSataus).HasColumnType("int(11)");
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
             builder.Property(e => e.AreaSqlMt).HasColumnType("decimal(18,3)");
 

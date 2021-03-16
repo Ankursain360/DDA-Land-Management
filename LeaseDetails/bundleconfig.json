@@ -100,5 +100,23 @@
     "inputFiles": [
       "wwwroot/js/premiumrateindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leaseapplicationformapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/leaseapplicationformapprovalcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leaseapplicationformapprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/leaseapplicationformapprovalindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leaseapplicationformprint.min.js",
+    "inputFiles": [
+      "wwwroot/js/leaseapplicationformprint.js"
+    ]
   }
 ]

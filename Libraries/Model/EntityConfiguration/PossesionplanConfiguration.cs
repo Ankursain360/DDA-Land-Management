@@ -69,11 +69,11 @@ namespace Libraries.Model.EntityConfiguration
                         .HasMaxLength(200)
                         .IsUnicode(false);
 
-            builder.HasOne(d => d.Allotment)
-                        .WithMany(p => p.Possesionplan)
-                        .HasForeignKey(d => d.AllotmentId)
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_Allotmentid");
+            //builder.HasOne(d => d.Allotment)
+            //            .WithMany(p => p.Possesionplan)
+            //            .HasForeignKey(d => d.AllotmentId)
+            //            .OnDelete(DeleteBehavior.ClientSetNull)
+            //            .HasConstraintName("fk_Allotmentid");
 
         }
     }

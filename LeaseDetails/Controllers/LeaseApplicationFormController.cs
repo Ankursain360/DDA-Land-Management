@@ -106,7 +106,7 @@ namespace LeaseDetails.Controllers
                 {
                     FileHelper fileHelper = new FileHelper();
                     leaseapplication.CreatedBy = 1;
-                    leaseapplication.ApprovedSataus = 0;
+                    leaseapplication.ApprovedStatus = 0;
                     leaseapplication.PendingAt = 1;
                     leaseapplication.IsActive = 1;
                     leaseapplication.Id = 0;
@@ -159,6 +159,35 @@ namespace LeaseDetails.Controllers
                     }
                     if (result == true)
                     {
+                        #region Approval Proccess At 1st level start Added by Renu 16 March 2021
+                        var DataFlow = await dataAsync();
+                        for (int i = 0; i < DataFlow.Count; i++)
+                        {
+                            if (!DataFlow[i].parameterSkip)
+                            {
+                                leaseapplication.ApprovedStatus = 0;
+                                leaseapplication.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                result = await _leaseApplicationFormService.UpdateBeforeApproval(leaseapplication.Id, leaseapplication);  //Update Table details 
+                                if (result)
+                                {
+                                    Approvalproccess approvalproccess = new Approvalproccess();
+                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value);
+                                    approvalproccess.ServiceId = leaseapplication.Id;
+                                    approvalproccess.SendFrom = SiteContext.UserId;
+                                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = null;   //1
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                }
+
+                                break;
+                            }
+                        }
+
+                        #endregion 
+
                         if (leaseapplication.EmailId != null)
                         {
                             #region Mail Generate
@@ -186,17 +215,17 @@ namespace LeaseDetails.Controllers
                             #endregion
 
                             if (sendMailResult)
-                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + " Login Details send on your Registered email and Mobile No, Please check and Login with details", "", AlertType.Success);
+                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + "  Your Request is sent for Approval and  Reference No.is send on your Registered email and Mobile No", "", AlertType.Success);
                             else
-                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + " Enable to send mail or sms ", "", AlertType.Info);
+                                ViewBag.Message = Alert.Show("Dear User,<br/>" + leaseapplication.Name + "  Your Request is sent for Approval but Enable to send Reference No. on your mail or sms due to network issue", "", AlertType.Info);
 
 
                             #endregion
                         }
                         else
                         {
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
+                            TempData["Message"] = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         }
 
                         ViewBag.IsPrintable = 1;
@@ -249,5 +278,14 @@ namespace LeaseDetails.Controllers
 
         }
 
+        #region Fetch workflow data for approval prrocess Added by Renu 16 March 2021
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+        #endregion
     }
 }
