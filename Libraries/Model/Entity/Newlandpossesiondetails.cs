@@ -36,8 +36,11 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = "Undersection-4 is mandatory")]
         public int Us4id { get; set; }
+        [Required(ErrorMessage = "Undersection-6 is mandatory")]
         public int Us6id { get; set; }
+        [Required(ErrorMessage = "Undersection-17 is mandatory")]
         public int Us17id { get; set; }
 
         [Required(ErrorMessage = "Status is mandatory")]

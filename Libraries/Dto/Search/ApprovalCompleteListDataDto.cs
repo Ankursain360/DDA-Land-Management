@@ -9,6 +9,7 @@ namespace Dto.Search
         public Int64 TotalPendingReq { get; set; }
         public string ModuleName { get; set; }
         public string SubModuleName { get; set; }
+        public int workflowTemplateId { get; set; }
 
     }
 }

@@ -1,10 +1,15 @@
 ﻿@model Libraries.Model.Entity.Watchandward
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutApproval.cshtml";
 }
-
-@await Component.InvokeAsync("PageHeader", new { pageName = "Watch & Ward Approval Proccess" })
+<div class="row mt-md-3">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h6 class="pull-left" style="color:#007bff;margin-top:5px;">Watch & Ward Approval Proccess</h6>
+        </div>
+    </div>
+</div>
 <br />
 <br />
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">

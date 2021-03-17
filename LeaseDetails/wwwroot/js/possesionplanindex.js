@@ -46,7 +46,7 @@ function GetPremiumrate(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-
+        
         AllotmentId: $('#txtNotificationN').val(),
        
         sortBy: $("#ddlSort").children("option:selected").val(),
@@ -54,6 +54,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
+   
     return model;
 }
 
