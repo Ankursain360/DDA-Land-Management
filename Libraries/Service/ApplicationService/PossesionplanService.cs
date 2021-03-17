@@ -14,8 +14,7 @@ using Dto.Search;
 using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
-{
-   
+{   
    public class PossesionplanService : EntityService<Possesionplan>, IPossesionplanService
     {
         private readonly IUnitOfWork _unitOfWork;
