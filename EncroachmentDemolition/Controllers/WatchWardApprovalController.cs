@@ -189,5 +189,12 @@ namespace EncroachmentDemolition.Controllers
             return Json(DataFlow);
         }
         #endregion
+
+
+        [HttpPost]
+        public async Task<IActionResult> Back()
+        {
+            return Redirect(_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value.ToString());
+        }
     }
 }

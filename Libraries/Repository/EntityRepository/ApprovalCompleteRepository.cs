@@ -23,24 +23,16 @@ namespace Repository.EntityRepository
 
 
         public async Task<List<ApprovalCompleteListDataDto>> GetApprovalCompleteModule(ApprovalCompleteSearchDto model)
-
         {
             try
-            {
-                
-
+            {  
                 var data = await _dbContext.LoadStoredProcedure("BindPendingAtUserEnd")
                                             .WithSqlParams(("User_Id", model.userid))
-
-
-
                                             .ExecuteStoredProcedureAsync<ApprovalCompleteListDataDto>();
-
                 return (List<ApprovalCompleteListDataDto>)data;
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }
@@ -51,11 +43,9 @@ namespace Repository.EntityRepository
         {
             try
             {
-                //int SortOrder = (int)model.SortOrder;
                 var data = await _dbContext.LoadStoredProcedure("BindPendingAtUserEnd")
                                             .WithOutParams()
                                             .ExecuteStoredProcedureAsync<ApprovalCompleteListDataDto>();
-
                 return (List<ApprovalCompleteListDataDto>)data;
             }
             catch (Exception ex)
