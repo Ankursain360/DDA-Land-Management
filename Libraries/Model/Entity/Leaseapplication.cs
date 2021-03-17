@@ -107,7 +107,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile ApprovalDocument { get; set; }
+        
 
-       
     }
 }

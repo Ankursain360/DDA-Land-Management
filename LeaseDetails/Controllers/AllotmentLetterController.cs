@@ -52,12 +52,13 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
-            
+
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
+           // return View();
         }
         public async Task<IActionResult> Generate(int id)
         {
