@@ -71,5 +71,10 @@ namespace Libraries.Service.ApplicationService
         {
             return _approvalproccessRepository.CheckIsApprovalStart(proccessid, serviceid);
         }
+
+        public async Task<Approvalproccess> FetchApprovalProcessDocumentDetails(int id)
+        {
+            return await _approvalproccessRepository.FetchApprovalProcessDocumentDetails( id);
+        }
     }
 }

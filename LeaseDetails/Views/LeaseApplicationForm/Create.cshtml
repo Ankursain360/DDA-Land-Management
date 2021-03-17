@@ -1,7 +1,8 @@
 ﻿@model Libraries.Model.Entity.Leaseapplication
+@{int rowNo = 0; }
 <br />
 <br />
-<form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+<form asp-action="Create" id="needs-validation" method="post" novalidate class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
     <input type="hidden" asp-for="Id" />
     <table class="table" border="0" style="border:none; border-top: none;  ">
         <tr>
@@ -68,12 +69,12 @@
                 </div>
             </div>
             @*<div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AlloteeName" type="file" class="floating-label-field floating-label-field--s3  ">
-                    <span asp-validation-for="AlloteeName" class="text-danger"></span>
-                    <label class="floating-label">Document</label>
-                </div>
-            </div>*@
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="AlloteeName" type="file" class="floating-label-field floating-label-field--s3  ">
+                        <span asp-validation-for="AlloteeName" class="text-danger"></span>
+                        <label class="floating-label">Document</label>
+                    </div>
+                </div>*@
         </div>
         <h3 class="my-3 d-flex sub-heading">
             3.	सोसाइटी के संचालकों सदस्यों की सूचि  जिसमे उनके पते  और व्यवसाय दर्शाया हुआ हो तथा जो प्रत्येक सदस्य द्वारा  विधिवत हस्ताक्षरित हो | यदि वे सेवा में हों तो  कार्यालय का नाम एवं पता और पद लिखें : यदि व्यवसाय  करते हैं  तो संस्था   का नाम एवं  पता  लिखें<br />
@@ -110,14 +111,14 @@
             </div>
         </div>
         @*<h3 class="my-3 d-flex sub-heading">4. (iii)	 परियोजना रिपोर्ट संलग्न करें |<br />Enclose a copy of project report.</h3>
-        <div class="row mt-md-3">
-            <div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3  ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3  ">
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
         <h3 class="my-3 d-flex sub-heading">
             5. धारा ८० (जी ) के अंतर्गत आयकर छूट प्रमाणपत्र की वैधता की अवधि (प्रति संलग्न  करें )| यदि यह धर्मार्थ संस्था है , तो यह आवेदन की तिथि से कम से कम 1 वर्ष के  लिए वैध होनी चाहिए  | <br />
             Period of validity of Income Tax Exemption Certificate under Section 80(G) (Enclose a copy). If it is a charitable organisation it should be valid for atleast 1 year from date of application).
@@ -131,12 +132,12 @@
                 </div>
             </div>
             @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                        <label class="floating-label">Document Upload</label>
+                    </div>
+                </div>*@
         </div>
         <h3 class="my-3 d-flex sub-heading">
             6. प्रायोजन के संदर्भ संख्या तथा तिथि जो या भारत सरकार  अथवा राष्ट्रीय राजधानी क्षेत्र दिल्ली सरकार  से हो | (प्रायोजन  (स्पॉन्सरशिप ) की मूल प्रति संलग्न करें |<br />
@@ -150,14 +151,14 @@
                     <label class="floating-label">Date</label>
                 </div>
             </div>
-            
+
             @*<div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                        <label class="floating-label">Document Upload</label>
+                    </div>
+                </div>*@
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12">
@@ -207,12 +208,12 @@
                 </div>
             </div>
             @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                        <label class="floating-label">Document Upload</label>
+                    </div>
+                </div>*@
         </div>
         <h3 class="my-3 d-flex sub-heading">
             10. यदि आवेदन  संस्थान भूमि की किसी रियायती दरों पर आवेदन  कर रहा है तो वह चालू जोनल विभिन्न सांस्थानिक दरों  पर  भूमि की कीमत के बराबर एक छतिपूर्ति बंधपत्र संलग्न   करें , जिसमे यह छतिपूर्ति  करने का वचन दें  कि यदि आवेदन  किसी समय पर संस्थान  के धर्मार्थ  स्वरुप को बदलेगा तो वह भूमि की लागत का भुगतान बाज़ार दर पर करेगा |<br />
@@ -227,12 +228,12 @@
                 </div>
             </div>
             @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                        <label class="floating-label">Document Upload</label>
+                    </div>
+                </div>*@
         </div>
         <h3 class="my-3 d-flex sub-heading">
             11.	स्थान अथवा क्षेत्र जहां भूमि अपेक्षित है , वरीयता क्रम से (कम  से कम तीन स्थान दें )| <br />
@@ -287,12 +288,12 @@
                 </div>
             </div>
             @*<div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
-                    <label class="floating-label">Document Upload</label>
-                </div>
-            </div>*@
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FileNo" type="file" class="floating-label-field floating-label-field--s3 ">
+                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                        <label class="floating-label">Document Upload</label>
+                    </div>
+                </div>*@
         </div>
         <h3 class="my-3 d-flex sub-heading">
             14. भूमि और उस पर  निर्माण की लागत को किस प्रकार पूरा किए जाने का प्रस्ताव है |<br />
@@ -410,13 +411,13 @@
 
         <div id="DivDocument">
             <h3 class="my-3 d-flex sub-heading">Document Checklist</h3>
-            @*<div class="table-section bg-white border shadow rounded">
+            <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive ">
                     <table class="table table-sm table-bordered mb-0 table-striped">
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Document Name</th>
-                                <th>Upload Document</th>
+                                <th>Upload Document<span style="color:red;"> (pdf only)</span></th>
                                 <th>Mandatory</th>
                             </tr>
                         </thead>
@@ -427,69 +428,85 @@
                                     <td>
                                         @item.Name
                                     </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="FileUploaded" type="file" required class="floating-label-field floating-label-field--s3 " accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg" />
-                                            <span class="d-block text-danger field-validation-valid"></span>
+                                    @if (@item.IsMandatory == 1)
+                                    {
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="FileUploaded" type="file" id="@(rowNo += 1)" required class="floating-label-field floating-label-field--s3 " accept="application/pdf" onchange="onDocumentChange(this);" />
+                                                <span class="d-block text-danger field-validation-valid"></span>
+                                                <div class="invalid-feedback">Please select File</div>
 
-                                            <input type="hidden" asp-for="IsMandatory" value="@(item.IsMandatory)" />
-                                            <input type="hidden" asp-for="DocumentChecklistId" value="@(item.Id)" />
-                                            <input type="hidden" asp-for="ServiceId" value="@(item.ServiceTypeId)" />
-                                        </div>
+                                                <input type="hidden" asp-for="IsMandatory" value="@(item.IsMandatory)" />
+                                                <input type="hidden" asp-for="DocumentChecklistId" value="@(item.Id)" />
+                                                <input type="hidden" asp-for="ServiceId" value="@(item.ServiceTypeId)" />
+                                            </div>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="FileUploaded" type="file" class="form-control floating-label-field floating-label-field--s3 " accept="application/pdf" onchange="onDocumentChange(this);" />
+                                                <span class="d-block text-danger field-validation-valid"></span>
 
-                                    </td>
+                                                <input type="hidden" asp-for="IsMandatory" value="@(item.IsMandatory)" />
+                                                <input type="hidden" asp-for="DocumentChecklistId" value="@(item.Id)" />
+                                                <input type="hidden" asp-for="ServiceId" value="@(item.ServiceTypeId)" />
+                                            </div>
+                                        </td>
+                                    }
+
                                     <td>
                                         @(item.IsMandatory == 1 ? "Yes" : "No")
-
                                     </td>
                                 </tr>
                             }
                         </tbody>
                     </table>
                 </div>
-            </div>*@
-            <div class="table-section bg-white border shadow rounded">
-                <div class="table-responsive">
-                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
-                        <thead class="text-nowrap">
-                            <tr>
-                                <th>Document Name</th>
-                                <th>Upload Document<span style="color:red;"> (pdf only)</span></th>
-                                <th>Mandatory</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl_posts_body">
-                        </tbody>
-                        <tbody class="tbody" id="add" name="sn">
-                            <tr id="">
-                                <td>
-                                    <input type="hidden" asp-for="DocumentChecklistId" />
-                                    <input type="hidden" asp-for="ServiceId" />
-                                    <input asp-for="DocumentName" type="text" class="floating-label-field floating-label-field--s3 Namecheck" readonly="readonly" />
-                                    <span asp-validation-for="DocumentName" class="d-block text-danger field-validation-valid msg"></span>
-                                </td>
-                                <td>
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                        <input type="hidden" asp-for="FileUploadedPath" value="" />
-                                        <input asp-for="FileUploaded" type="file" class="floating-label-field floating-label-field--s3 FileUploaded" accept="application/pdf" />
-                                        <span asp-validation-for="FileUploaded" class="d-block text-danger field-validation-valid"></span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <input type="hidden" asp-for="IsMandatory" />
-                                    <input asp-for="Mandatory" type="text" class="floating-label-field floating-label-field--s3" readonly="readonly" />
-                                    <span asp-validation-for="Mandatory" class="d-block text-danger field-validation-valid"></span>
-
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-
             </div>
+            @*<div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                            <thead class="text-nowrap">
+                                <tr>
+                                    <th>Document Name</th>
+                                    <th>Upload Document<span style="color:red;"> (pdf only)</span></th>
+                                    <th>Mandatory</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_posts_body">
+                            </tbody>
+                            <tbody class="tbody" id="add" name="sn">
+                                <tr id="">
+                                    <td>
+                                        <input type="hidden" asp-for="DocumentChecklistId" />
+                                        <input type="hidden" asp-for="ServiceId" />
+                                        <input asp-for="DocumentName" type="text" class="floating-label-field floating-label-field--s3 Namecheck" readonly="readonly" />
+                                        <span asp-validation-for="DocumentName" class="d-block text-danger field-validation-valid msg"></span>
+                                    </td>
+                                    <td>
+                                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                            <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                            <input type="hidden" asp-for="FileUploadedPath" value="" />
+                                            <input asp-for="FileUploaded" type="file" class="floating-label-field floating-label-field--s3 FileUploaded" accept="application/pdf" />
+                                            <span asp-validation-for="FileUploaded" class="d-block text-danger field-validation-valid"></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" asp-for="IsMandatory" />
+                                        <input asp-for="Mandatory" type="text" class="floating-label-field floating-label-field--s3" readonly="readonly" />
+                                        <span asp-validation-for="Mandatory" class="d-block text-danger field-validation-valid"></span>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>*@
 
         </div>
 
@@ -498,22 +515,36 @@
         <div class=" col-md-12">
             @if (@ViewBag.IsPrintable != 1)
             {
-                <button class="btn btn-theme " type="submit" onclick="return DocumentValidation();">Submit</button>
+                <button class="btn btn-theme " type="submit">Submit</button>@*onclick = "return DocumentValidation();"*@
             }
-                @Html.ActionLink("Clear", "Create", "LeaseApplicationForm", null, new { @class = "btn btn-theme " })
+            @Html.ActionLink("Clear", "Create", "LeaseApplicationForm", null, new { @class = "btn btn-theme " })
 
-                @if (@ViewBag.IsPrintable == 1)
-                {
-                    <a class="btn btn-theme" asp-action="Print" asp-controller="LeaseApplicationForm" asp-route-id="@ViewBag.Id" target="_blank">Print</a>
-                }
+            @if (@ViewBag.IsPrintable == 1)
+            {
+                <a class="btn btn-theme" asp-action="Print" asp-controller="LeaseApplicationForm" asp-route-id="@ViewBag.Id" target="_blank">Print</a>
+            }
 
-            </div>
+        </div>
     </div>
 
 </form>
 
 
-
+<script type="text/javascript">
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var form = document.getElementById('needs-validation');
+            form.addEventListener('submit', function (event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        }, false);
+    })();
+</script>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

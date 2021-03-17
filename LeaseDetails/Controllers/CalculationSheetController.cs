@@ -33,5 +33,13 @@ namespace LeaseDetails.Controllers
            // entry.ApplicationList = await _calculationSheetService.GetAllApplications();
             return View(entry);
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetApplicationAreaDetails(int? ApplicationId)
+        {
+            ApplicationId = ApplicationId ?? 0;
+
+            return Json(await _calculationSheetService.FetchSingleAppAreaDetails(Convert.ToInt32(ApplicationId)));
+        }
     }
 }

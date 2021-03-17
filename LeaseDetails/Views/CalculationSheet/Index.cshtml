@@ -16,34 +16,34 @@
                         <label asp-for="ApplicationId" class="floating-label">Application Reference No  </label>*@
                     </div>
                 </div>
-                @*<div class="col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PremiumRate" placeholder="Name" type="text"
+                        <input asp-for="AllotedArea" placeholder="AllotedArea" type="text"
                                class="floating-label-field floating-label-field--s3 numbers" value="" />
-                        <span asp-validation-for="PremiumRate" class="text-danger"></span>
-                        <label class="floating-label">Premium Rate   </label>
+                        <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                        <label class="floating-label">Alloted Land Area    </label>
                     </div>
-                </div>*@
+                </div>
+            </div>
+         <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="BuildingArea" placeholder="BuildingArea" type="date"
+                               class="floating-label-field floating-label-field--s3 numbers " value="" />
+                        <span asp-validation-for="BuildingArea" class="text-danger"></span>
+                        <label class="floating-label">Building Area   </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PlayGroundArea" placeholder="PlayGroundArea" 
+                               class="floating-label-field floating-label-field--s3 numbers" value="" />
+                        <span asp-validation-for="PlayGroundArea" class="text-danger msg"></span>
+                        <label class="floating-label"> Play Ground Area   </label>
+                    </div>
+                </div>
             </div>
             @*<div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="FromDate" placeholder="Name" type="date"
-                               class="floating-label-field floating-label-field--s3 " value="" />
-                        <span asp-validation-for="FromDate" class="text-danger"></span>
-                        <label class="floating-label">From Date    </label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="ToDate" placeholder="Name" type="date"
-                               class="floating-label-field floating-label-field--s3 " value="" />
-                        <span asp-validation-for="ToDate" class="text-danger msg"></span>
-                        <label class="floating-label">  To Date   </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-md-3">
                 <div class=" col-md-6">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
@@ -68,8 +68,8 @@
 
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
-        <script src="~/js/premiumrate.js"></script>
+        <script src="~/js/calculationsheet.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/premiumrate.min.js" asp-append-version="true"></script>
+        <script src="~/js/calculationsheet.min.js" asp-append-version="true"></script>
     </environment>

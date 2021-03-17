@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
    
     {
         Task<List<Allotmententry>> GetAllApplications();
-       
+        
+        Task<Allotmententry> FetchSingleAppAreaDetails(int? ApplicationId);
     }
 }

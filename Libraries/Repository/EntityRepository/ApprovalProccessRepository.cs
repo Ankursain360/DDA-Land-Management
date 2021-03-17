@@ -49,5 +49,12 @@ namespace Libraries.Repository.EntityRepository
 
             return File;
         }
+
+        public async Task<Approvalproccess> FetchApprovalProcessDocumentDetails(int id)
+        {
+            return await _dbContext.Approvalproccess
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

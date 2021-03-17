@@ -14,5 +14,6 @@ namespace Libraries.Service.IApplicationService
     {
    
         Task<List<Allotmententry>> GetAllApplications();
+        Task<Allotmententry> FetchSingleAppAreaDetails(int? ApplicationId);
     }
 }

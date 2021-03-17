@@ -23,10 +23,11 @@ namespace LeaseDetails.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
-
+        string LeaseFilePath = "";
+        string ApprovalDocumentPath = "";
         public LeaseApplicationFormApprovalController(ILeaseApplicationFormApprovalService leaseApplicationFormApprovalService,
             ILeaseApplicationFormService leaseApplicationFormService,
-            IConfiguration configuration, IWatchandwardService watchandwardService,
+            IConfiguration configuration,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService)
         {
             _leaseApplicationFormApprovalService = leaseApplicationFormApprovalService;
@@ -34,6 +35,9 @@ namespace LeaseDetails.Controllers
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
             _workflowtemplateService = workflowtemplateService;
+            LeaseFilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
+            ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
+
         }
 
 
@@ -70,7 +74,6 @@ namespace LeaseDetails.Controllers
         {
             var result = false;
             var Data = await _leaseApplicationFormApprovalService.FetchSingleResult(id);
-            string ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
             FileHelper fileHelper = new FileHelper();
             var Msgddl = leaseapplication.ApprovalStatus;
             #region Approval Proccess At Further level start Added by Renu 16 march 2021
@@ -92,7 +95,7 @@ namespace LeaseDetails.Controllers
                             approvalproccess.PendingStatus = 1;
                             approvalproccess.Remarks = leaseapplication.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(leaseapplication.ApprovalStatus);
-                            approvalproccess.DocumentName = leaseapplication.ApprovalDocument == null ? null : fileHelper.SaveFile(ApprovalDocumentPath, leaseapplication.ApprovalDocument);
+                            approvalproccess.DocumentName = leaseapplication.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, leaseapplication.ApprovalDocument);
 
                             if (i == DataFlow.Count - 1)
                                 approvalproccess.SendTo = null;
@@ -141,27 +144,31 @@ namespace LeaseDetails.Controllers
         #region History Details Only For Approval Page
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
         #endregion
-                
 
-        #region EncroachmentRegisteration Details
-        public async Task<PartialViewResult> EncroachmentRegisterView(int id)
+
+        #region LeaseApplicationForm Details
+        public async Task<PartialViewResult> LeaseApplicationFormView(int id)
         {
             var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
             Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
             return PartialView("_LeaseApplicationFormView", Data);
         }
-        //public async Task<IActionResult> DownloadFirfile(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    EncroachmentFirFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentFirFileDetails(Id);
-        //    string filename = Data.FirFilePath;
-        //    return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
-        //}
+
+        public async Task<IActionResult> ViewDocumentLeaseApplicationForm(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Leaseapplicationdocuments Data = await _leaseApplicationFormService.FetchLeaseApplicationDocumentDetails(Id);
+            string filename = LeaseFilePath + Data.DocumentFileName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+            //string filename = Data.DocumentFileName;
+            //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
         #endregion
 
 
@@ -191,15 +198,18 @@ namespace LeaseDetails.Controllers
             }
             return Json(DataFlow);
         }
+        public async Task<IActionResult> ViewDocumentApprovalProccess(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Approvalproccess Data = await _approvalproccessService.FetchApprovalProcessDocumentDetails(Id);
+            string filename = ApprovalDocumentPath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+            //string filename = Data.DocumentFileName;
+            //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
         #endregion
 
-        //public async Task<FileResult> ViewDocument(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
-        //    string path = Data.PhotoFilePath;
-        //    byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-        //    return File(FileBytes, file.GetContentType(path));
-        //}
+
     }
 }

@@ -148,7 +148,7 @@
                                     Locality or area where the land is required, in order of preference (give atleast three loca­tions).
                                 </th>
                                 <td>
-                                    @Model.Location1 <br />  @Model.Location2 <br /> @Model.Location3
+                                   1.  @Model.Location1 <br /> 2.  @Model.Location2 <br /> 3. @Model.Location3
                                 </td>
                             </tr>
                             <tr>
@@ -193,8 +193,8 @@
                                     (iv) Area in sq.mtrs
                                 </th>
                                 <td>
-                                    @Model.EstablishmentNameAddress<br />  @Model.FunctioningSinceWhen
-                                    <br /> @Model.FunctioningActivityUndertaken <br /> @Model.FunctioningAreaSqMt
+                                    (i)   @Model.EstablishmentNameAddress<br /> (ii)  @Model.FunctioningSinceWhen
+                                    <br /> (iii)   @Model.FunctioningActivityUndertaken <br />(iv)  @Model.FunctioningAreaSqMt
                                 </td>
                             </tr>
                             <tr>
@@ -214,8 +214,8 @@
                                     (v) Rate
                                 </th>
                                 <td>
-                                    @Model.RefNoOfAllotmentLetterDate<br />  @Model.AreaSqlMt
-                                    <br /> @Model.Locality <br /> @Model.Purpose <br />@Model.Rate
+                                    (i)    @Model.RefNoOfAllotmentLetterDate<br />(ii)   @Model.AreaSqlMt
+                                    <br />(iii)  @Model.Locality <br />(iv)   @Model.Purpose <br />(v)  @Model.Rate
                                 </td>
                             </tr>
                         </tbody>
@@ -241,7 +241,7 @@
                                         <td>
                                             @item.DocumentChecklist.Name
                                         </td>
-                                        @if (@item.DocumentChecklist.IsMandatory != 0)
+                                        @if (@item.DocumentFileName != "")
                                         {
                                             <td>
                                                 <div class="floating-label-wrap mb-3 mb-md-0">

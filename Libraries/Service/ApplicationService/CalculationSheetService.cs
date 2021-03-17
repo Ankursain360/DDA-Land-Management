@@ -30,6 +30,9 @@ namespace Libraries.Service.ApplicationService
             List<Allotmententry> list = await _calculationSheetRepository.GetAllApplications();
             return list;
         }
-      
+        public async Task<Allotmententry> FetchSingleAppAreaDetails(int? ApplicationId)
+        {
+            return await _calculationSheetRepository.FetchSingleAppAreaDetails(ApplicationId);
+        }
     }
 }
