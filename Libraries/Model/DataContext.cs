@@ -523,7 +523,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LeaseApplicationConfiguration());
             modelBuilder.ApplyConfiguration(new LeaseApplicationDocumentsConfiguration());
             modelBuilder.ApplyConfiguration(new PossesionplanConfiguration());
-            modelBuilder.ApplyConfiguration(new AllotmentEntryConfiguration());
+            modelBuilder.ApplyConfiguration(new AllotmententryConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
         public string PlotNo { get; set; }
         public string PocketNo { get; set; }
         public decimal? PlayGroundArea { get; set; }
-        public decimal? BuildingArea { get; set; }
+        
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
         [NotMapped]
@@ -32,5 +32,6 @@ namespace Libraries.Model.Entity
 
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
+        
     }
 }

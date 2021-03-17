@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    debugger
+
     var kid = $("#AllotmentId").val();
     if (kid) {
         HttpGet(`/Possesionplan/BindLeaseApplicationDetails/?appId=${kid}`, 'json', function (response) {
@@ -14,7 +14,7 @@
     }
 });
 $("#AllotmentId").change(function () {
-    debugger
+ 
     var kid = $(this).val();
     if (kid) {
         HttpGet(`/Possesionplan/BindLeaseApplicationDetails/?appId=${kid}`, 'json', function (response) {

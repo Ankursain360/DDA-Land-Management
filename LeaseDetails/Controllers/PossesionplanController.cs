@@ -77,18 +77,18 @@ namespace LeaseDetails.Controllers
         {
             rate.AllotmententryList = await _possesionplanService.GetAllAllotmententry();
             rate.LeaseApplicationList = await _possesionplanService.GetAllLeaseApplication();
-            string StayFilePathLayout = _configuration.GetSection("FilePaths:Possesionplan:PossesionplanFilePath").Value.ToString();
+          string PossesionplanFilePath = _configuration.GetSection("FilePaths:Possesionplan:PossesionplanFilePath").Value.ToString();
 
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    //FileHelper fileHelper = new FileHelper();
-                    //if (rate.StayFile != null)
-                    //{
-                    //    rate.SitePlanFilePath = fileHelper.SaveFile(StayFilePathLayout, rate.StayFile);
-                    //}
+                    FileHelper fileHelper = new FileHelper();
+                    if (rate.StayFile != null)
+                    {
+                        rate.SitePlanFilePath = fileHelper.SaveFile(PossesionplanFilePath, rate.StayFile);
+                    }
                     rate.CreatedBy = SiteContext.UserId;
                     var result = await _possesionplanService.Create(rate);
 
@@ -146,23 +146,26 @@ namespace LeaseDetails.Controllers
                 /*.......For Stay Interim File .......*/
                 string FileNameS = "";
                 string filePathS = "";
-                //rate.StayFile = AssignSIfile;
-                //string StayFilePathLayout = _configuration.GetSection("FilePaths: Possesionplan:PossesionplanFilePath").Value.ToString();
-                //if (rate.StayFile != null)
-                //{
-                //    if (!Directory.Exists(StayFilePathLayout))
-                //    {
-                //        // Try to create the directory.
-                //        DirectoryInfo dij = Directory.CreateDirectory(StayFilePathLayout);
-                //    }
-                //    FileNameS = Guid.NewGuid().ToString() + "_" + rate.StayFile.FileName;
-                //    filePathS = Path.Combine(StayFilePathLayout, FileNameS);
-                //    using (var stream = new FileStream(filePathS, FileMode.Create))
-                //    {
-                //        rate.StayFile.CopyTo(stream);
-                //    }
-                //    rate.SitePlanFilePath = filePathS;
-                //}
+                rate.StayFile = AssignSIfile;
+                string PossesionplanFilePath = _configuration.GetSection("FilePaths:Possesionplan:PossesionplanFilePath").Value.ToString();
+
+
+
+                if (rate.StayFile != null)
+                {
+                    if (!Directory.Exists(PossesionplanFilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo dij = Directory.CreateDirectory(PossesionplanFilePath);
+                    }
+                    FileNameS = Guid.NewGuid().ToString() + "_" + rate.StayFile.FileName;
+                    filePathS = Path.Combine(PossesionplanFilePath, FileNameS);
+                    using (var stream = new FileStream(filePathS, FileMode.Create))
+                    {
+                        rate.StayFile.CopyTo(stream);
+                    }
+                    rate.SitePlanFilePath = filePathS;
+                }
                 try
                 {
 

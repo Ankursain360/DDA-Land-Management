@@ -7,7 +7,7 @@
         <div class="panel-body">
             <form asp-action="View" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h3 class="mb-3 d-flex">Add Details</h3>
+                <h3 class="mb-3 d-flex">View Details</h3>
 
                 <div class="row mt-md-3">
                     <div class="col-md-6">
@@ -113,21 +113,21 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        @*@{
+                        @{
                             @if (ViewBag.ExistStayFile != null)
                             {
 
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" disabled/>
                                 @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
                             }
                             else
                             {
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" disabled/>
                             }
                         }
                         <span asp-validation-for="StayFile" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label" asp-for="StayFile">Stay Interim Granted Document(if any)</label>
-                        <input type="hidden" asp-for="SitePlanFilePath" disabled />*@
+                        <input type="hidden" asp-for="SitePlanFilePath" disabled />
 
                     </div>
                 </div>

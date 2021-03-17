@@ -30,7 +30,7 @@ namespace Repository.EntityRepository
         }
         public async Task<List<Possesionplan>> GetAllPossesionplan()
         {
-            return await _dbContext.Possesionplan.Include(x => x.Allotmententry)
+            return await _dbContext.Possesionplan.Include(x => x.Allotment)
                 //.Where(x=> x.Id == Allotmententry.Id)
                 .OrderByDescending(x => x.Id).ToListAsync();
         }
@@ -63,8 +63,8 @@ namespace Repository.EntityRepository
         {
 
             var data = await _dbContext.Possesionplan
-                                      .Include(x => x.Allotmententry)
-                                      .OrderByDescending(x => x.Id)
+                                      .Include(x => x.Allotment)
+                                          .OrderByDescending(x => x.Id)
                           .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -74,18 +74,19 @@ namespace Repository.EntityRepository
                     case ("ALLOTMENTNUMBER"):
                         data = null;
                         data = await _dbContext.Possesionplan
-                                        .Include(x => x.Allotmententry)
-                                                                    
-                                .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotmententry.Application.RefNo.Contains(model.AllotmentId))
-                                .OrderBy(x => x.Allotmententry.Application.RefNo)
+                                        .Include(x => x.Allotment)
+                                       
+                                          .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
+                               
+                                .OrderBy(x => x.Allotment.Application.RefNo)
                                 .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
                         break;
                      case ("STATUS"):
                         data = null;
                         data = await _dbContext.Possesionplan
-                                        .Include(x => x.Allotmententry)
-
-                                .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotmententry.Application.RefNo.Contains(model.AllotmentId))
+                                        .Include(x => x.Allotment)
+                                         .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
+                                //  .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
 
                                 .OrderByDescending(x => x.IsActive)
                                 .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
@@ -99,19 +100,19 @@ namespace Repository.EntityRepository
                     case ("ALLOTMENTNUMBER"):
                         data = null;
                         data = await _dbContext.Possesionplan
-                                        .Include(x => x.Allotmententry)
-                                       
-
-                                .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotmententry.Application.RefNo.Contains(model.AllotmentId))
-                                .OrderByDescending(x => x.Allotmententry.Application.RefNo)
+                                        .Include(x => x.Allotment)
+                                        
+                                         .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
+                                // .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                .OrderByDescending(x => x.Allotment.Application.RefNo)
                                 .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Possesionplan
-                                        .Include(x => x.Allotmententry)
-
-                                .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotmententry.Application.RefNo.Contains(model.AllotmentId))
+                                        .Include(x => x.Allotment)
+                                         .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
+                                // .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
 
                                 .OrderBy(x => x.IsActive)
                                 .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);

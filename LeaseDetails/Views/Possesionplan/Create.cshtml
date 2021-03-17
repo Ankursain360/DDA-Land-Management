@@ -5,7 +5,7 @@
     <div class="panel">
 
         <div class="panel-body">
-            <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+            <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <h3 class="mb-3 d-flex">Add Details</h3>
 
@@ -22,19 +22,19 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" id="LAName"  placeholder="South East" class="floating-label-field floating-label-field--s3 numbers" />
+                        <input type="text" id="LAName"  placeholder="South East" class="floating-label-field floating-label-field--s3 " disabled />
                         <span class="text-danger"></span>
                         <label class="floating-label"> Name</label>
                     </div>
                 </div>
                 <div class="row mt-md-3">
                     <div class="col-md-6">
-                        <input type="text" id="LAContact" class="floating-label-field floating-label-field--s3 " />
+                        <input type="text" id="LAContact" class="floating-label-field floating-label-field--s3 " disabled />
                         <span class="text-danger"></span>
                         <label class="floating-label"> Contact No</label>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" id="LaAddress" class="floating-label-field floating-label-field--s3 " />
+                        <input type="text" id="LaAddress" class="floating-label-field floating-label-field--s3 " disabled />
                         <span  class="text-danger"></span>
                         <label class="floating-label"> Address</label>
                     </div>
@@ -97,7 +97,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="PossessionArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" id="txtPossesionArea"  value="" onblur="checkTextField(this);"/>
+                            <input type="text" asp-for="PossessionArea"  class="floating-label-field floating-label-field--s3 numbers" id="txtPossesionArea"  value="" onblur="checkTextField(this);"/>
                             <span asp-validation-for="PossessionArea" class="text-danger"></span>
                             <label class="floating-label">Possesion Area</label>
                         </div>
@@ -107,7 +107,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="DiffernceArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" id="txtDiffArea" />
+                            <input type="text" asp-for="DiffernceArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" id="txtDiffArea"  readonly/>
                             <span asp-validation-for="DiffernceArea" class="text-danger"></span>
                             <label class="floating-label">Difference Area</label>
                         </div>
@@ -115,7 +115,8 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <label class="control-label lb-sm">Site Plan Upload (if any)</label>
-                            <input type="file" asp-for="SitePlanFilePath" class="floating-label-field floating-label-field--s3" id="Stayfile" />
+                            <input type="file" asp-for="StayFile" class="floating-label-field floating-label-field--s3" id="Sfile" />
+                            <span asp-validation-for="StayFile" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
