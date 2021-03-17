@@ -19,8 +19,7 @@ $(function A() {
     var id4 = $("#drp4").val();
     if (id4 == "Yes") {
         $("#txt4").show();
-
-    }
+            }
     else {
         $("#txt4").hide();
     }
