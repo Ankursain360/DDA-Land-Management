@@ -80,8 +80,13 @@ namespace Libraries.Service.ApplicationService
             var result = await _allotmentEntryRepository.FindBy(a => a.Id == id);
             Allotmententry model = result.FirstOrDefault();
             model.ApplicationId = allotmententry.ApplicationId;
+            model.Name = allotmententry.Name;
+            model.Address = allotmententry.Address;
+            model.ContactNo = allotmententry.ContactNo;
+            model.LandAreaSqMt = allotmententry.LandAreaSqMt;
 
-            
+
+
             model.AllotmentDate = allotmententry.AllotmentDate;
             model.AllotedArea = allotmententry.AllotedArea;
             model.PhaseNo = allotmententry.PhaseNo;
@@ -89,7 +94,7 @@ namespace Libraries.Service.ApplicationService
             model.SectorNo = allotmententry.SectorNo;
             model.PlotNo = allotmententry.PlotNo;
             model.PocketNo = allotmententry.PocketNo;
-//model.BuildingArea = allotmententry.BuildingArea;
+            //model.BuildingArea = allotmententry.BuildingArea;
 
 
             model.IsActive = allotmententry.IsActive;
