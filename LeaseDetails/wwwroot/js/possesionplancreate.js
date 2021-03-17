@@ -46,3 +46,15 @@ function checkTextField(field) {
     
 
 }
+
+
+function checkDate(field) {
+    var flag = true;
+
+    if (($('#txtToDate').val()) < ($('#txtFromDate').val())) {
+        document.getElementById("error").innerText =
+            "Hand Over Date should be greater than or Equal to Possession Date";
+        alert("Hand Over Date should be greater than or Equal to Possession Date");
+    }
+
+}

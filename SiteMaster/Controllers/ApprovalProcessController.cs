@@ -23,7 +23,7 @@ using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
-   
+
     public class ApprovalProcessController : BaseController
     {
         public IConfiguration _configuration;
@@ -33,16 +33,14 @@ namespace SiteMaster.Controllers
         public ApprovalProcessController(IApprovalCompleteService approvalcompleteService, IConfiguration configuration)
         {
             _approvalCompleteService = approvalcompleteService;
-          
-           
-        }
 
+
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] ApprovalCompleteSearchDto report)
         {
-           
-            int  UserId = SiteContext.UserId;
+            int UserId = SiteContext.UserId;
             report.userid = UserId;
             var result = await _approvalCompleteService.GetApprovalCompleteModule(report);
             if (result != null)
@@ -56,19 +54,24 @@ namespace SiteMaster.Controllers
             }
         }
 
-
-
-    
-
-
-
-      
-
-
         public IActionResult Index()
         {
             // int a = SiteContext.UserId;
             return View();
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetApprovalProcessDetails(int? worktemplateId)
+        {
+            int worktemplateProcessId = Convert.ToInt32(worktemplateId);
+
+            if (worktemplateProcessId == 20)
+                return Json(_configuration.GetSection("ApprovalProccessPath:LeaseApplicationFormApproval").Value.ToString());
+            else if (worktemplateProcessId == 2)
+                return Json(_configuration.GetSection("ApprovalProccessPath:WatchWardApproval").Value.ToString());
+            else
+                return Json(_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value.ToString());
+        }
+
     }
 }
