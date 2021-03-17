@@ -23,7 +23,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
         {
             var result =await _dbContext.Approvalproccess
-                                   // .Include(x => x.SendFromUser)
+                                    .Include(x => x.SendFrom as user1)
                                     .Where(x => x.ProccessID == proccessid && x.ServiceId == id)
                                     .ToListAsync();
 

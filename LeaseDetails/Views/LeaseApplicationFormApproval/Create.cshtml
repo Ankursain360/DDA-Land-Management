@@ -1,10 +1,16 @@
 ﻿@model Libraries.Model.Entity.Leaseapplication
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutApproval.cshtml";
 }
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Application Form Approval" })
+<div class="row mt-md-3">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h6 class="pull-left" style="color:#007bff;margin-top:5px;">Lease Application Form Approval</h6>
+        </div>
+    </div>
+</div>
 <br />
 <br />
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">

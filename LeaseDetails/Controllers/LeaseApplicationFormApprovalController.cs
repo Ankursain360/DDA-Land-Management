@@ -210,6 +210,10 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
-
+        [HttpPost]
+        public async Task<IActionResult> Back()
+        {
+            return Redirect(_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value.ToString());
+        }
     }
 }
