@@ -51,6 +51,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<IDepartmenttargetRepository, DepartmenttargetRepository>();
             services.AddScoped<ILogRepository, LogRepository>();
+            services.AddScoped<IApprovalCompleteRepository, ApprovalCompleteRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -84,6 +85,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IBranchService, BranchService>();
             services.AddScoped<IDepartmenttargetService, DepartmenttargetService>();
             services.AddScoped<ILogService, LogService>();
+            services.AddScoped<IApprovalCompleteService, ApprovalCompleteService>();
         }
     }
 }

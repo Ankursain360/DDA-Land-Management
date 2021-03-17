@@ -1,14 +1,23 @@
-﻿
+﻿@model Dto.Search.ApprovalCompleteSearchDto
+
+
 @await Component.InvokeAsync("PageHeader", new { pageName = "Approval Process" })
 
 <div class="pt-3">
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Approval Process Details</h3>
-        <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-theme " type="submit">Module</button>
-            </div>
+      
+
+        <div  id="LoadReportView">
+
         </div>
     </form>
 
 </div>
+<environment include="Development">
+
+    <script src="~/js/approvalprocesscreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/approvalprocesscreate.min.js" asp-append-version="true"></script>
+</environment>

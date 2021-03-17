@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 
 namespace Libraries.Model.Entity
 {
@@ -15,7 +16,6 @@ namespace Libraries.Model.Entity
         {
             Allotmententry = new HashSet<Allotmententry>();
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
-            Allotmententry = new HashSet<Allotmententry>();
         }
         public string RefNo { get; set; }
 
@@ -66,7 +66,7 @@ namespace Libraries.Model.Entity
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid; Max 18 digits")]
         public decimal? Rate { get; set; }
         public byte IsActive { get; set; }
-        public int? ApprovedSataus { get; set; }
+        public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
         public ICollection<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
         public ICollection<Allotmententry> Allotmententry { get; set; }
@@ -98,6 +98,16 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Leaseapplicationdocuments> Leasedocuments { get; set; }
-        public ICollection<Allotmententry> Allotmententry { get; set; }
+
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+       
     }
 }

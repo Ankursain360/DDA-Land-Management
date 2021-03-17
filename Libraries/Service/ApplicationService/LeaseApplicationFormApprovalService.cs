@@ -17,16 +17,26 @@ namespace Libraries.Service.ApplicationService
     public class LeaseApplicationFormApprovalService : EntityService<Leaseapplication>, ILeaseApplicationFormApprovalService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILeaseApplicationFormRepository _leaseApplicationApprovalRepository;
+        private readonly ILeaseApplicationFormApprovalRepository _leaseApplicationApprovalRepository;
         private readonly IMapper _mapper;
         public LeaseApplicationFormApprovalService(IUnitOfWork unitOfWork,
-            ILeaseApplicationFormRepository leaseApplicationApprovalRepository,
+            ILeaseApplicationFormApprovalRepository leaseApplicationApprovalRepository,
             IMapper mapper)
         : base(unitOfWork, leaseApplicationApprovalRepository)
         {
             _unitOfWork = unitOfWork;
             _leaseApplicationApprovalRepository = leaseApplicationApprovalRepository;
             _mapper = mapper;
+        }
+
+        public async Task<Leaseapplication> FetchSingleResult(int id)
+        {
+            return await _leaseApplicationApprovalRepository.FetchSingleResult(id);
+        }
+
+        public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId)
+        {
+            return await _leaseApplicationApprovalRepository.GetPagedLeaseApplicationFormDetails( model,  userId);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface ILeaseApplicationFormApprovalRepository : IGenericRepository<Leaseapplication>
     {
-
+        Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId);
+        Task<Leaseapplication> FetchSingleResult(int id);
     }
 }

@@ -103,5 +103,21 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leaseApplicationRepository.GetPagedAllotmentLetter(model);
         }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Leaseapplication leaseapplication)
+        {
+            var result = await _leaseApplicationRepository.FindBy(a => a.Id == id);
+            Leaseapplication model = result.FirstOrDefault();
+
+            model.ApprovedStatus = leaseapplication.ApprovedStatus;
+            model.PendingAt = leaseapplication.PendingAt;
+            _leaseApplicationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id)
+        {
+            return await _leaseApplicationRepository.FetchLeaseApplicationDocumentDetails(id);
+        }
     }
 }

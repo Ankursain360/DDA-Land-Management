@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Dto.Search.ApprovalCompleteListDataDto>
+
+
+
+
+
+<table class="table-responsive px-2">
+    <tr>
+
+
+        @foreach (var item in Model)
+        {
+        <td>
+            @if (@item.TotalPendingReq == 0)
+            {
+                <button type="button" class="btn btn-primary" disabled>
+                    @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
+
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-primary">
+                    @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
+
+                </button>
+            }
+        </td>
+
+
+
+
+
+        }
+
+    </tr>
+</table>
+
+
+
+
+
+<div class="row mt-md-3">
+    <div class="col-md-6">
+        <select class="floating-label-field floating-label-field--s3">
+            <option value="">--select--</option>
+            @foreach (var item in Model)
+            {
+                <option value=" @item.ModuleName"> @item.ModuleName ( @item.SubModuleName )</option>
+            }
+        </select>
+    </div>
+</div>
+
+
+@*<div class="row">
+    <div class="col-md-6">
+        <div class="floating-label-wrap">
+
+            <select class="floating-label-field floating-label-field--s3" id="possessionDate" asp-items="@(new SelectList( @ViewBag.PossessionDateList, "User_Id","ModuleName"))">
+                <option value="0">All</option>
+            </select>
+            <label class="floating-label">Possession Date</label>
+        </div>
+    </div>
+
+</div>*@
+
+
+
+
+
+
+
+
+@*<table class="table table-sm table-bordered mb-0 table-striped">
+        <thead class="text-nowrap">
+
+            <tr>
+
+                <th>Module Name</th>
+                <th> Process Name</th>
+                <th>Pending Number</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+            <tr>
+                <td>
+                    @item.ModuleName
+
+                </td>
+                <td>@item.SubModuleName</td>
+                <td>@item.TotalPendingReq</td>
+
+
+
+
+
+
+
+
+
+
+            </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <th colspan="12" style="text-align:center"> No Record Available! </th>
+                </tr>
+            }
+
+
+
+
+
+        </tbody>
+
+    </table>*@
+
+
+
+
+
