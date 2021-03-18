@@ -11,6 +11,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IProceedingEvictionLetterService : IEntityService<Leaseapplication>
     {
-        
+        Task<List<RefNoNameDto>> BindRefNoNameList();
+        Task<string> GetLetterRefNo(int id);
     }
 }
