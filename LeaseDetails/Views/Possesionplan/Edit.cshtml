@@ -43,7 +43,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="SouthEast"  placeholder="South East" class="floating-label-field floating-label-field--s3 numbers" />
+                            <input type="text" asp-for="SouthEast" placeholder="South East" class="floating-label-field floating-label-field--s3 numbers" />
                             <span asp-validation-for="SouthEast" class="text-danger"></span>
                             <label class="floating-label"> South East</label>
                         </div>
@@ -88,7 +88,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="AllotedArea" placeholder="South East" class="floating-label-field floating-label-field--s3 numbers" readonly />
+                            <input type="text" asp-for="AllotedArea" class="floating-label-field floating-label-field--s3 numbers" id="txtAllotedArea" readonly />
                             <span asp-validation-for="AllotedArea" class="text-danger"></span>
                             <label class="floating-label"> Alloted Area</label>
                         </div>
@@ -97,7 +97,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="PossessionArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" />
+                            <input type="text" asp-for="PossessionArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" id="txtPossesionArea" onblur="checkTextField(this);" />
                             <span asp-validation-for="PossessionArea" class="text-danger"></span>
                             <label class="floating-label">Possesion Area</label>
                         </div>
@@ -107,7 +107,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="DiffernceArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" />
+                            <input type="text" asp-for="DiffernceArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" id="txtDiffArea" readonly />
                             <span asp-validation-for="DiffernceArea" class="text-danger"></span>
                             <label class="floating-label">Difference Area</label>
                         </div>
@@ -136,7 +136,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="PossessionTakenName"  placeholder="South East" class="floating-label-field floating-label-field--s3 " />
+                            <input type="text" asp-for="PossessionTakenName" placeholder="South East" class="floating-label-field floating-label-field--s3 " />
                             <span asp-validation-for="PossessionTakenName" class="text-danger"></span>
                             <label class="floating-label"> Possession Taken Over By Name</label>
                         </div>
@@ -145,7 +145,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="date" asp-for="PossessionTakenDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " id="txtFromDate"/>
+                            <input type="date" asp-for="PossessionTakenDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " id="txtFromDate" />
                             <span asp-validation-for="PossessionTakenDate" class="text-danger"></span>
                             <label class="floating-label">Possesion Taken Over By Date</label>
                         </div>
@@ -230,6 +230,7 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
 
 <environment include="Development">
     <script src="~/js/possesionplancreate.js"></script>

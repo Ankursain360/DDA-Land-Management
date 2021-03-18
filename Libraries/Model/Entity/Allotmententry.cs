@@ -48,6 +48,12 @@ namespace Libraries.Model.Entity
         public decimal? LandAreaSqMt { get; set; }
 
 
+        [NotMapped]
+        public DateTime Date { get; set; }
+        [NotMapped]
+        public decimal PremiumRate{ get; set; }
+        [NotMapped]
+        public decimal TotalPremiumAmount{ get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }

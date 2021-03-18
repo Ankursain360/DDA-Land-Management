@@ -217,7 +217,7 @@ namespace EncroachmentDemolition.Controllers
         #region Fetch workflow data for approval prrocess Added by Renu 4 Dec 2020
         private async Task<List<TemplateStructure>> DataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
