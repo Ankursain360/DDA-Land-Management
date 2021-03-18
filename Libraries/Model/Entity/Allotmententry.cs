@@ -50,5 +50,6 @@ namespace Libraries.Model.Entity
 
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
+        public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
     }
 }
