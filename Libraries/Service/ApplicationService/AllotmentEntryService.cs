@@ -89,7 +89,7 @@ namespace Libraries.Service.ApplicationService
             model.SectorNo = allotmententry.SectorNo;
             model.PlotNo = allotmententry.PlotNo;
             model.PocketNo = allotmententry.PocketNo;
-            model.BuildingArea = allotmententry.BuildingArea;
+           // model.BuildingArea = allotmententry.BuildingArea;
 
 
             model.IsActive = allotmententry.IsActive;

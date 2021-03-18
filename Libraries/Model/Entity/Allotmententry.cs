@@ -24,12 +24,18 @@ namespace Libraries.Model.Entity
         public string PlotNo { get; set; }
         public string PocketNo { get; set; }
         public decimal? PlayGroundArea { get; set; }
-        public decimal? BuildingArea { get; set; }
+        //public decimal? BuildingArea { get; set; }
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
         [NotMapped]
         public List<Allotmententry> ApplicationList { get; set; }
 
+        [NotMapped]
+        public DateTime Date { get; set; }
+        [NotMapped]
+        public decimal PremiumRate{ get; set; }
+        [NotMapped]
+        public decimal TotalPremiumAmount{ get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
     }
