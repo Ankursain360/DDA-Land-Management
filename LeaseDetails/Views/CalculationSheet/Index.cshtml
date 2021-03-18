@@ -1,75 +1,46 @@
 ﻿@model Libraries.Model.Entity.Allotmententry
-    @await Component.InvokeAsync("PageHeader", new { pageName = "Calculation Sheet" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Calculation Sheet" })
+<link href="~/css/PrintLabel.css" rel="stylesheet" />
 
-    <div class="pt-3">
-        <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-            <h3 class="mb-3 d-flex">Add Details</h3>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        @*<select class="floating-label-field floating-label-field--s3"
-                                asp-for="ApplicationId" asp-items="@(new SelectList(Model.ApplicationList, "Id","Application.RefNo"))">
-                            <option disabled="disabled" selected value="">Select</option>
-                        </select>
-                        <span asp-validation-for="ApplicationId" class="text-danger"></span>
-                        <label asp-for="ApplicationId" class="floating-label">Application Reference No  </label>*@
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="AllotedArea" placeholder="AllotedArea" type="text"
-                               class="floating-label-field floating-label-field--s3 numbers" value="" />
-                        <span asp-validation-for="AllotedArea" class="text-danger"></span>
-                        <label class="floating-label">Alloted Land Area    </label>
-                    </div>
+<div class="pt-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+       
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="ApplicationId" asp-items="@(new SelectList(Model.ApplicationList, "Id","Application.RefNo"))">
+                        <option disabled="disabled" selected value="">Select</option>
+                    </select>
+                    <span asp-validation-for="ApplicationId" class="text-danger"></span>
+                    <label asp-for="ApplicationId" class="floating-label">Application Reference No  </label>
                 </div>
             </div>
-         <div class="row mt-md-3">
-                <div class="col-md-6">
-                    @*<div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="BuildingArea" placeholder="BuildingArea" type="date"
-                               class="floating-label-field floating-label-field--s3 numbers " value="" />
-                        <span asp-validation-for="BuildingArea" class="text-danger"></span>
-                        <label class="floating-label">Building Area   </label>
-                    </div>*@
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PlayGroundArea" placeholder="PlayGroundArea" 
-                               class="floating-label-field floating-label-field--s3 numbers" value="" />
-                        <span asp-validation-for="PlayGroundArea" class="text-danger msg"></span>
-                        <label class="floating-label"> Play Ground Area   </label>
-                    </div>
-                </div>
-            </div>
-            @*<div class="row mt-md-3">
-                <div class=" col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                        <label asp-for="IsActive" class="floating-label">Status </label>
-                    </div>
-                </div>
-            </div>*@
-            <div class="row mt-md-3">
-                <div class=" col-md-12">
-                    <button class="btn btn-theme " type="submit">Generate</button>
-                   @*@Html.ActionLink("Back", "Index", "Premiumrate", null, new { @class = "btn btn-theme " })*@
-                </div>
-            </div>
-        </form>
-    </div>
+
+        </div>
+
+        <!--<div class="row mt-md-3">
+        <div class=" col-md-12">
+            <a class="btn btn-theme " type="submit" id="generate" asp-route-id="@Model.Id" asp-action="GetApplicationAreaDetails">generate</a>-->
+        @*<button class="btn btn-theme " type="submit">Generate</button>*@
+        @*@Html.ActionLink("Back", "Index", "Premiumrate", null, new { @class = "btn btn-theme " })*@
+        <!--</div>
+    </div>-->
+        <div id="View"></div>
+
+
+    </form>
+</div>
 
 
 
-    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/calculationsheet.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/calculationsheet.min.js" asp-append-version="true"></script>
-    </environment>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/calculationsheet.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/calculationsheet.min.js" asp-append-version="true"></script>
+</environment>

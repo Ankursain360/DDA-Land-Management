@@ -22,6 +22,8 @@ namespace AuthServer
 
             string connectionString = "server=49.50.87.108;port=3306;user=root;password=Google@123;database=authserver";
             string lmsConnection = "server=49.50.87.108;port=3306;user=root;password=Google@123;database=lms";
+            //string connectionString = "server=127.0.0.1;port=3306;user=root;password=Google@123;database=authserver";
+            //string lmsConnection = "server=127.0.0.1;port=3306;user=root;password=Google@123;database=lms";
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options =>

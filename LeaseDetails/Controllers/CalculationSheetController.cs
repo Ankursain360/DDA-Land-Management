@@ -30,16 +30,25 @@ namespace LeaseDetails.Controllers
         {
             Allotmententry entry = new Allotmententry();
           
-           // entry.ApplicationList = await _calculationSheetService.GetAllApplications();
+            entry.ApplicationList = await _calculationSheetService.GetAllApplications();
             return View(entry);
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetApplicationAreaDetails(int? ApplicationId)
-        {
-            ApplicationId = ApplicationId ?? 0;
+        //[HttpGet]
+        //public async Task<JsonResult> GetApplicationAreaDetails(int? ApplicationId)
+        //{
+        //    ApplicationId = ApplicationId ?? 0;
 
-            return Json(await _calculationSheetService.FetchSingleAppAreaDetails(Convert.ToInt32(ApplicationId)));
+        //    return Json(await _calculationSheetService.FetchSingleAppAreaDetails(Convert.ToInt32(ApplicationId)));
+        //}
+
+
+
+        public async Task<IActionResult> Receipt(int? ApplicationId)
+        {
+            Allotmententry entry = await _calculationSheetService.FetchSingleAppAreaDetails(ApplicationId??0);
+            entry.Date = DateTime.Now;
+            return PartialView("Receipt", entry);
         }
     }
 }
