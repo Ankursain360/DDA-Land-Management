@@ -7,6 +7,7 @@ namespace Dto.Search
 {
     public class ProceedingEvictionLetterSearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public int RefNoNameId { get; set; }
+        public string LetterReferenceNo { get; set; }
     }
 }

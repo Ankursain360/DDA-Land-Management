@@ -37,7 +37,7 @@ namespace LeaseDetails.Controllers
         {
             ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
             data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
-            return View();
+            return View(data);
         }
 
         [HttpPost]

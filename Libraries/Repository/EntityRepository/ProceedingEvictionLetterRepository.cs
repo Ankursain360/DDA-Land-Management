@@ -33,6 +33,7 @@ namespace Libraries.Repository.EntityRepository
 
                 return (List<RefNoNameDto>)data;
             }
+            
             catch (Exception ex)
             {
                 return null;
@@ -41,9 +42,10 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<string> GetLetterRefNo(int id)
         {
-            var Data =await (from f in _dbContext.Propertyregistration
-                        where f.Id == id
-                        select f.GeoFilePath).FirstOrDefaultAsync();
+            var Data =await (from f in _dbContext.Requestforproceeding
+                        where f.AllotmentId == id
+                        orderby f.Id descending
+                        select f.LetterReferenceNo).FirstOrDefaultAsync();
 
             return Data;
         }

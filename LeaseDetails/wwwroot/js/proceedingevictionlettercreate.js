@@ -1,7 +1,6 @@
 ﻿$(document).ready(function () {
 
-    GetDetails();
-
+   
 });
 
 function GetDetails() {
@@ -14,7 +13,8 @@ function GetDetails() {
 
 function GetSearchParam() {
     var model = {
-        name: "test"
+        LetterReferenceNo: $("#LetterReferenceNo").val(),
+        RefNoNameId: parseInt($("#LetterReferenceNo option:selected").val())
     }
     return model;
 }
@@ -22,13 +22,29 @@ function GetSearchParam() {
 function GetLetterRefNo(id) {
     debugger;
     HttpGet(`/ProceedingEvictionLetter/GetLetterRefNo/?Id=${id}`, 'json', function (response) {
-        $("#ZoneId").val('').trigger('change');
-        var html = '<option value="">---Select---</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+
+        if (response == null) {
+            $("#LetterReferenceNo").val(response);
+            $("#divLetterRefNo").show();
+            $("#btnGenerate").show();
+
         }
-        $("#ZoneId").html(html);
-        $("#DivisionId").val('').trigger('change');
-        $("#LocalityId").val('').trigger('change');
+        else {
+            $("#LetterReferenceNo").val(response);
+            $("#divLetterRefNo").show();
+            $("#btnGenerate").show();
+            $("#LetterReferenceNo").attr("readonly", "readonly")
+        }
+       
     });
 };
+
+$("#btnGenerate").click(function () {
+    if ($("#LetterReferenceNo").val() != "") {
+
+        GetDetails();
+    }
+    else {
+        WarningMessage('Please Fill Letter Reference No.');
+    }
+});
