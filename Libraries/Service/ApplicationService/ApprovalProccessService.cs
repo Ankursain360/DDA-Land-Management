@@ -76,5 +76,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _approvalproccessRepository.FetchApprovalProcessDocumentDetails( id);
         }
+
+        public async Task<List<Approvalstatus>> BindDropdownApprovalStatus(int[] actions)
+        {
+            return await _approvalproccessRepository.BindDropdownApprovalStatus(actions);
+        }
     }
 }

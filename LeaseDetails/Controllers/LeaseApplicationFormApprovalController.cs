@@ -59,13 +59,23 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _leaseApplicationFormApprovalService.FetchSingleResult(id);
+            var dropdownValue = await GetApprovalStatusDropdownList();
+            List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
+            Data.ApprovalStatusList =await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
+        public List<int> ConvertStringListToIntList(List<string> list)
+        {
+            List<int> resultList = new List<int>();
+            for (int i = 0; i < list.Count; i++)
+                resultList.Add(Convert.ToInt32(list[i]));
 
+            return resultList;
+        }
 
         [HttpPost]
 
@@ -175,7 +185,7 @@ namespace LeaseDetails.Controllers
         #region Fetch workflow data for approval prrocess Added by Renu 16 march 2021
         private async Task<List<TemplateStructure>> DataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
@@ -197,6 +207,24 @@ namespace LeaseDetails.Controllers
 
             }
             return Json(DataFlow);
+        }
+
+        public async Task<List<string>> GetApprovalStatusDropdownList()  //Bind Dropdown of Approval Status
+        {
+            var DataFlow = await DataAsync();
+            List<string> dropdown = null;
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                {
+                    dropdown = (List<string>)DataFlow[i].parameterAction;
+                    return (dropdown);
+                    break;
+                }
+
+            }
+            return (List<string>)dropdown;
         }
         public async Task<IActionResult> ViewDocumentApprovalProccess(int Id)
         {

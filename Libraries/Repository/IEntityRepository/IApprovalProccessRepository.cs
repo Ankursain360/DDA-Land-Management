@@ -13,5 +13,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id);
         int CheckIsApprovalStart(int proccessid, int serviceid);
         Task<Approvalproccess> FetchApprovalProcessDocumentDetails(int id);
+        Task<List<Approvalstatus>> BindDropdownApprovalStatus(int[] actions);
     }
 }
