@@ -18,8 +18,9 @@ namespace Libraries.Model.Entity
         public string PossType { get; set; }
         [Required(ErrorMessage = " Reason  is mandatory")]
         public string ReasonNonPoss { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Possesssion date  is mandatory")]
         public DateTime PossDate { get; set; }
+        [Required(ErrorMessage = " Possesssion Khasra No  is mandatory")]
         public int PossKhasraId { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
@@ -35,8 +36,11 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Biswanshi is mandatory")]
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = "Undersection-4 is mandatory")]
         public int Us4id { get; set; }
+        [Required(ErrorMessage = "Undersection-6 is mandatory")]
         public int Us6id { get; set; }
+        [Required(ErrorMessage = "Undersection-17 is mandatory")]
         public int Us17id { get; set; }
 
         [Required(ErrorMessage = "Status is mandatory")]

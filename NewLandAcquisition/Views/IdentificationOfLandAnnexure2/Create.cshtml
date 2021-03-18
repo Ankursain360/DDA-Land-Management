@@ -97,10 +97,12 @@
                             <td>5</td>
                             <td>Whether request is filed under section 40 of the Act </td>
                             <td>
-                                <select style="height:30px; background-color: #dddddd;" id="drp4" asp-for="Sn5val" required="" class="floating-label-field floating-label-field--s3" onchange="drp4change()">
+                                <select style="height:30px; background-color: #dddddd;" id="drp4" required="" class="floating-label-field floating-label-field--s3" asp-for="Sn5val">
                                     <option value="No">No</option>
                                     <option value="Yes">Yes</option>
                                 </select>
+
+                                
 
                                 <textarea type="text" placeholder="Description" class="floating-label-field floating-label-field--s3" asp-for="Sn5Remark" id="txt4" style="display:none;margin-top:10px;"></textarea>
                             </td>
@@ -149,7 +151,7 @@
                         <tr>
                             <td>11</td>
                             <td>By what time possession of the land is required(in months).</td>
-                            <td><input type="text" class="floating-label-field floating-label-field--s3 onlynumbers" Limit="3" placeholder="In Months (Number only)" asp-for="Sn11val" /></td>
+                            <td><input type="text" class="floating-label-field floating-label-field--s3 number" Limit="3" placeholder="In Months (Number only)" asp-for="Sn11val" /></td>
                         </tr>
                         <tr>
                             <td>12</td>

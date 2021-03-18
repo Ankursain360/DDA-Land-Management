@@ -6,157 +6,155 @@
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row mt-md-3">
-
-            @*<div class="floating-label-wrap mb-3 mb-md-0">
-
-                <input asp-for="ApplicationId" placeholder="Ref No" type="text"
-                       class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="ApplicationId" class="text-danger"></span>
-                <label class="floating-label">Ref No    </label>
-            </div>*@
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-                        <option value="1">Ref No1</option>
-                        <option value="0">Ref123</option>
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="ApplicationId" asp-items="@(new SelectList(Model.LeaseappList, "Id","Name"))">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Reference No </label>
+                    <span asp-validation-for="ApplicationId" class="text-danger"></span>
+                    <label asp-for="ApplicationId" class="floating-label">Applicant Name </label>
                 </div>
-
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="ApplicationId" placeholder="Name" type="text"
+                    <input disabled asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="ApplicationId" class="text-danger"></span>
+                    <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label"> Name    </label>
                 </div>
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PhaseNo" placeholder="Address" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="PhaseNo" class="text-danger"></span>
-                    <label class="floating-label"> Address    </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="SectorNo" placeholder="Contact No  " type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="SectorNo" class="text-danger"></span>
-                    <label class="floating-label"> Contact No    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AllotedArea" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
-                    <label class="floating-label">Alloted Area  </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="AllotmentDate" placeholder="AllotmentDate" type="date"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="AllotmentDate" class="text-danger"></span>
-                    <label class="floating-label"> Allotment Date    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PhaseNo" placeholder="Phase No" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="PhaseNo" class="text-danger"></span>
-                    <label class="floating-label"> Phase No    </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="SectorNo" placeholder="Sector No" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="SectorNo" class="text-danger"></span>
-                    <label class="floating-label"> SectorNo    </label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PlotNo" placeholder="Plot No"
-                           type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
-                    <span asp-validation-for="PlotNo" class="text-danger"></span>
-                    <label class="floating-label">Plot No   </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PocketNo" placeholder="Pocket No" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="PocketNo" class="text-danger"></span>
-                    <label class="floating-label">Pocket No </label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PlayGroundArea" placeholder="Building Area" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="PlayGroundArea" class="text-danger"></span>
-                    <label class="floating-label">Ground Area </label>
-                </div>
-            </div>
             <div class=" col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Address" placeholder="Address" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <label class="floating-label">Address    </label>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="ContactNo" placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    <label class="floating-label">Contact No    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="LandAreaSqMt" placeholder="Required Area"
+                         type="text"  class="floating-label-field floating-label-field--s3"/>
+                    <span asp-validation-for="LandAreaSqMt" class="text-danger"></span>
+                    <label class="floating-label">Required Area   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="AllotedArea" placeholder="Alloted Area" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                    <label class="floating-label">AllotedArea </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="PlayGroundArea" placeholder="Play Ground Area" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="PlayGroundArea" class="text-danger"></span>
+                    <label class="floating-label">Play Ground Area </label>
+                </div>
+
+            </div>
+
+           
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input value="" asp-for="AllotmentDate" placeholder="Allotment Date" type="date"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="AllotmentDate" class="text-danger"></span>
+                        <label class="floating-label">Allotment Date </label>
+                    </div>
+
+                </div>
+          
             </div>
             <div class="row mt-md-3">
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Remarks" type="text" placeholder="Remarks"
-                                  class="floating-label-field floating-label-field--s3"></textarea>
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
-                        <label class="floating-label">Remarks</label>
+                        <input asp-for="PhaseNo" placeholder="Phase No" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="PhaseNo" class="text-danger"></span>
+                        <label class="floating-label">Phase No  </label>
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="SectorNo" placeholder="Sector No" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="SectorNo" class="text-danger"></span>
+                        <label class="floating-label">Sector No  </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PocketNo" placeholder="Pocket No" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="PocketNo" class="text-danger"></span>
+                        <label class="floating-label">Pocket No  </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PlotNo" placeholder="Plot No" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="PlotNo" class="text-danger"></span>
+                        <label class="floating-label">Plot No  </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks">
+
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                        <label asp-for="Remarks" class="floating-label">Remarks </label>
+                    </div>
+                </div>
+                <div class=" col-md-6">
+
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <label asp-for="IsActive" class="floating-label">Status </label>
+                    </div>
+
                 </div>
 
             </div>
-
-
-
-
-
-
-
             <div class="row mt-md-3">
                 <div class=" col-md-12">
                     <button class="btn btn-theme " type="submit">Create</button>
-                    @Html.ActionLink("Back", "Index", "AcquiredLandVillage", null, new { @class = "btn btn-theme " })
+                    @Html.ActionLink("Back", "Index", "AllotmentEntry", null, new { @class = "btn btn-theme " })
                 </div>
             </div>
 </form>
@@ -165,8 +163,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/acqvillagecreateedit.js"></script>
+    <script src="~/js/allotmententrycreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/acqvillagecreateedit.min.js" asp-append-version="true"></script>
+    <script src="~/js/allotmententrycreate.min.js" asp-append-version="true"></script>
 </environment>

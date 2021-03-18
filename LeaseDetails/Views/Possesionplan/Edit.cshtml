@@ -1,0 +1,247 @@
+﻿@model Libraries.Model.Entity.Possesionplan
+@await Component.InvokeAsync("PageHeader", new { pageName = "Possession Plan" })
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+
+        <div class="panel-body">
+            <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h3 class="mb-3 d-flex">Edit Details</h3>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" asp-for="AllotmentId" asp-items="@(new SelectList(Model.AllotmententryList, "Id","Application.RefNo"))"
+                                    onchange="return onChange(this.options[this.selectedIndex].value);">
+
+                                <option disabled="disabled" selected value="">Select</option>
+                            </select>
+                            <span asp-validation-for="AllotmentId" class="text-danger"></span>
+                            <label asp-for="AllotmentId" class="floating-label">Allotment Number</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="LAName" placeholder="South East" class="floating-label-field floating-label-field--s3 numbers" />
+                        <span class="text-danger"></span>
+                        <label class="floating-label"> Name</label>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <input type="text" id="LAContact" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label"> Contact No</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="LaAddress" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label"> Address</label>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" asp-for="SouthEast" placeholder="South East" class="floating-label-field floating-label-field--s3 numbers" />
+                            <span asp-validation-for="SouthEast" class="text-danger"></span>
+                            <label class="floating-label"> South East</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" asp-for="NorthEast" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" />
+                            <span asp-validation-for="NorthEast" class="text-danger"></span>
+                            <label class="floating-label">North East</label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                            <input type="text" asp-for="SouthWest" class="floating-label-field floating-label-field--s3 numbers" />
+                            <span asp-validation-for="SouthWest" class="text-danger"></span>
+                            <label class="floating-label">South West</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" asp-for="NorthWest" class="floating-label-field floating-label-field--s3 numbers" />
+                            <span asp-validation-for="NorthWest" class="text-danger"></span>
+                            <label class="floating-label">North West</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" asp-for="AllotedArea" class="floating-label-field floating-label-field--s3 numbers" id="txtAllotedArea" readonly />
+                            <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                            <label class="floating-label"> Alloted Area</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" asp-for="PossessionArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" id="txtPossesionArea" onblur="checkTextField(this);" />
+                            <span asp-validation-for="PossessionArea" class="text-danger"></span>
+                            <label class="floating-label">Possesion Area</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" asp-for="DiffernceArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" id="txtDiffArea" readonly />
+                            <span asp-validation-for="DiffernceArea" class="text-danger"></span>
+                            <label class="floating-label">Difference Area</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @{
+                            @if (ViewBag.ExistStayFile != null)
+                            {
+
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                            }
+                            else
+                            {
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            }
+                        }
+                        <span asp-validation-for="StayFile" class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label" asp-for="StayFile">Stay Interim Granted Document(if any)</label>
+                        <input type="hidden" asp-for="SitePlanFilePath" disabled />
+
+                    </div>
+                </div>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" asp-for="PossessionTakenName" placeholder="South East" class="floating-label-field floating-label-field--s3 " />
+                            <span asp-validation-for="PossessionTakenName" class="text-danger"></span>
+                            <label class="floating-label"> Possession Taken Over By Name</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="date" asp-for="PossessionTakenDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " id="txtFromDate" />
+                            <span asp-validation-for="PossessionTakenDate" class="text-danger"></span>
+                            <label class="floating-label">Possesion Taken Over By Date</label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" asp-for="PossesionHandOverName" placeholder="South East" class="floating-label-field floating-label-field--s3 " />
+                            <span asp-validation-for="PossesionHandOverName" class="text-danger"></span>
+                            <label class="floating-label"> Possession Handed Over By Name</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="date" asp-for="PossesionHandOverDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " id="txtToDate" onblur="checkDate(this);" />
+                            <span asp-validation-for="PossesionHandOverDate" class="text-danger"></span>
+                            <p id="error" style="color:red;"></p>
+                            <label class="floating-label">Possesion Handed Over By Date</label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row mt-md-3">
+
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <textarea type="text" asp-for="Remark" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                            <label class="floating-label">Remarks</label>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class=" col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                            <label asp-for="IsActive" class="floating-label">Status </label>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="row mt-md-3">
+                    <div class=" col-md-12">
+                        <button class="btn btn-theme " type="submit">Update</button>
+                        @Html.ActionLink("Back", "Index", "Possesionplan", null, new { @class = "btn btn-theme " })
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
+<environment include="Development">
+    <script src="~/js/possesionplancreate.js"></script>
+
+
+</environment>
+<environment exclude="Development">
+    <script src="~/js/possesionplancreate.min.js" asp-append-version="true"></script>
+</environment>
+
+
+
+
+

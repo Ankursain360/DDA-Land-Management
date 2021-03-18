@@ -118,5 +118,17 @@
     "inputFiles": [
       "wwwroot/js/leaseapplicationformprint.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possesionplancreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/possesionplancreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possesionplanindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/possesionplanindex.js"
+    ]
   }
 ]

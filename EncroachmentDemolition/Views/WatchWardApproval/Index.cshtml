@@ -1,33 +1,45 @@
 ﻿@{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutApproval.cshtml";
 }
-@await Component.InvokeAsync("PageHeader", new { pageName = "Watch & Ward Approval Process" })
-
-    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Filter</h3>
-        
-        <div class="row mt-md-3">
-
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="0" checked>
-                    <label class="form-check-label" for="radio">
-                        Pending 
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
-                    <label class="form-check-label" for="radio">
-                        Approved
-                    </label>
-                </div>
-            </div>
-            
+<div class="row mt-md-3">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h6 class="pull-left" style="color:#007bff;margin-top:5px;">Watch & Ward Approval Proccess</h6>
         </div>
-    </form>
+    </div>
+</div>
+<form asp-action="Back" method="post">
+    <div class="row pt-3 mb-2">
+        <div class="col-md-12" align="right">
+            <button type="submit" class="btn btn-primary">Go To Main Approval Process</button>
+        </div>
+    </div>
+</form>
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Filter</h3>
+
+    <div class="row mt-md-3">
+
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="0" checked>
+                <label class="form-check-label" for="radio">
+                    Pending
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
+                <label class="form-check-label" for="radio">
+                    Approved
+                </label>
+            </div>
+        </div>
+
+    </div>
+</div>
 <div class="table-section bg-white border shadow rounded">
     <div class="short-section d-md-flex align-items-center">
         <div class="p-3 d-flex align-items-end mr-auto">
