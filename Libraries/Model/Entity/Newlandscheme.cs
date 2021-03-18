@@ -16,11 +16,11 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = " Scheme is mandatory")]
         public string Name { get; set; }
-        [Required(ErrorMessage = " Code name is mandatory")]
+        [Required(ErrorMessage = "Scheme Code is mandatory")]
         public string Code { get; set; }
         [Required(ErrorMessage = "Scheme Date is mandatory")]
         public DateTime? SchemeDate { get; set; }
-        [Required(ErrorMessage = " File No is mandatory")]
+        [Required(ErrorMessage = "Scheme File No is mandatory")]
         public string FileNo { get; set; }
         public string Description { get; set; }
 

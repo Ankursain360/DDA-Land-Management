@@ -19,19 +19,19 @@ namespace Libraries.Model.Entity
             Newlandannexure1 = new HashSet<Newlandannexure1>();
         }
 
-        [Required (ErrorMessage = "The Proposal Name field is required")]
+        [Required (ErrorMessage = "Proposal Name is mandatory")]
         public string PproposalName { get; set; }
-        [Required(ErrorMessage = "The File No field is required")]
+        [Required(ErrorMessage = "File No is mandatory")]
         public string PfileNo { get; set; }
-        [Required(ErrorMessage = "The Requiring Body field is required")]
+        [Required(ErrorMessage = "Requiring Body is mandatory")]
         public string RequiringBody { get; set; }
-        [Required(ErrorMessage = "The Area/Locality field is required")]
+        [Required(ErrorMessage = "Area/Locality is mandatory")]
         public string AreaLocality { get; set; }
       //  [Required(ErrorMessage = "The ProposalName field is required")]
         public string TaunderRequest { get; set; }
-        [Required(ErrorMessage = "The Unit Area field is required")]
+        [Required(ErrorMessage = "Unit Area is mandatory")]
         public string UnitArea { get; set; }
-        [Required(ErrorMessage = "The Purpose of Acquistion field is required")]
+        [Required(ErrorMessage = "Purpose of Acquistion is mandatory")]
         public string PurposeOfAcquistion { get; set; }
  
         public string LayoutPlan { get; set; }

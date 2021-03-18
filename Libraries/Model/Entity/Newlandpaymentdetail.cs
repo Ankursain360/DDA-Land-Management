@@ -13,12 +13,14 @@ namespace Libraries.Model.Entity
         public string DemandListNo { get; set; }
         [Required(ErrorMessage = "Enm  SNo is mandatory")]
         public string EnmSno { get; set; }
-        [Required(ErrorMessage = "Enm  SNo is mandatory")]
+        [Required(ErrorMessage = "Amound Paid is mandatory")]
         public decimal AmountPaid { get; set; }
+        [Required(ErrorMessage = "Cheque Date is mandatory")]
         public DateTime? ChequeDate { get; set; }
         public string ChequeNo { get; set; }
         public string BankName { get; set; }
         public string VoucherNo { get; set; }
+        [Required(ErrorMessage = "Percent Paid is mandatory")]
         public decimal PercentPaid { get; set; }
 
         [Required(ErrorMessage = "Status is mandatory")]
