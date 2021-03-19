@@ -9,35 +9,47 @@ using Microsoft.AspNetCore.Mvc;
 namespace Libraries.Model.Entity
 {
     public class Allotmententry : AuditableEntity<int>
-   
+
     {
         public Allotmententry()
         {
             Possesionplan = new HashSet<Possesionplan>();
+            //Requestforproceeding = new HashSet<Requestforproceeding>();
         }
-        [Required(ErrorMessage = "Applicant name is mandatory ")]
         public int ApplicationId { get; set; }
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
-        [Required(ErrorMessage = "AllotedArea is mandatory")]
-        public decimal? AllotedArea { get; set; }
-        [Required(ErrorMessage = "Allotment Date is mandatory ")]
+        public decimal AllotedArea { get; set; }
         public DateTime AllotmentDate { get; set; }
         public string PhaseNo { get; set; }
         public string SectorNo { get; set; }
         public string PlotNo { get; set; }
         public string PocketNo { get; set; }
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
-        [Required(ErrorMessage = "PlayGroundArea is mandatory")]
-        public decimal? PlayGroundArea { get; set; }
-        //public decimal? BuildingArea { get; set; }
+        public decimal PlayGroundArea { get; set; }
+        public string IsPlayground { get; set; }
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
+
+        public decimal? PremiumRate { get; set; }
+        public decimal? PremiumAmount { get; set; }
+        public decimal? AmountLicFee { get; set; }
+        public int? NoOfYears { get; set; }
+        public decimal? GroundRent { get; set; }
+        public decimal? DocumentCharges { get; set; }
+        public int? LeasesTypeId { get; set; }
+        public int? LeasePurposesTypeId { get; set; }
+        public int? LeaseSubPurposeId { get; set; }
         [NotMapped]
         public List<Allotmententry> ApplicationList { get; set; }
         [NotMapped]
         public List<Leaseapplication> LeaseappList { get; set; }
+        [NotMapped]
+        public List<Leasetype> LeaseTypeList { get; set; }
+        [NotMapped]
+        public List<Leasepurpose> LeasePurposeList { get; set; }
+        [NotMapped]
+        public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
+
+
+
         [NotMapped]
         public string Name { get; set; }
         [NotMapped]
@@ -50,12 +62,21 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public DateTime Date { get; set; }
+        //[NotMapped]
+        //public decimal PremiumRate { get; set; }
         [NotMapped]
-        public decimal PremiumRate{ get; set; }
-        [NotMapped]
-        public decimal TotalPremiumAmount{ get; set; }
+        public decimal TotalPremiumAmount { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
+
+
+        public Leasepurpose LeasePurposesType { get; set; }
+        public Leasesubpurpose LeaseSubPurpose { get; set; }
+        public Leasetype LeasesType { get; set; }
+
+        //public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
+
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
+
     }
 }
