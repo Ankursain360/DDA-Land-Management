@@ -22,8 +22,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
         {
-            var result =await _dbContext.Approvalproccess
-                                  //  .Include(x => x.SendFrom as user1)
+            var result = await _dbContext.Approvalproccess
+                                    //  .Include(x => x.SendFrom as user1)
                                     .Where(x => x.ProccessID == proccessid && x.ServiceId == id)
                                     .ToListAsync();
 
@@ -55,6 +55,13 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Approvalproccess
                                     .Where(x => x.Id == id)
                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Approvalstatus>> BindDropdownApprovalStatus(int[] actions)
+        {
+            return await _dbContext.Approvalstatus
+                                     .Where(x => x.IsActive == 1 && actions.Contains(x.Id))
+                                     .ToListAsync();
         }
     }
 }

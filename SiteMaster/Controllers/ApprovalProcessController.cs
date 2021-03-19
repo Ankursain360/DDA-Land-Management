@@ -33,8 +33,7 @@ namespace SiteMaster.Controllers
         public ApprovalProcessController(IApprovalCompleteService approvalcompleteService, IConfiguration configuration)
         {
             _approvalCompleteService = approvalcompleteService;
-
-
+            _configuration = configuration;
         }
 
         [HttpPost]

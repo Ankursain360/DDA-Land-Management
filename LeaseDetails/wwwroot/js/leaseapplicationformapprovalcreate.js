@@ -6,18 +6,10 @@
 
     HttpGet(`/LeaseApplicationFormApproval/GetApprovalDropdownList`, 'html', function (response) {
         response = JSON.parse(response);
-        $('#ApprovalStatus option').each(function () {
-            if (response.length > 0) {
-                for (var i = 0; i < response.length; i++) {
-                    if (response[i] == $(this).val()) {
-                        $(this).show().trigger('change');
-                    }
-                    else {
-                        $(this).remove().trigger('change');
-                    }
-                }
-            }
-        });
+        $('#ApprovalStatus option').filter(function () {
+            return $.inArray($(this).val(), response) == -1
+        }).remove();
+        callSelect2();
     });
 
 });

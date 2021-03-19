@@ -1,0 +1,178 @@
+﻿
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Request for procceding" })
+<div class="pt-3">
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Create</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="">--select--</option>
+
+                        <option> 001</option>
+
+                    </select>
+                    <label class="floating-label">File No</label>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input disabled type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
+
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Name Of the Society </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Use as per allotment letter/Lease Deed  </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <textarea type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks"></textarea>
+
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Subject </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Ground of violations  </label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Contact No" type="date" value=""
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="">--select--</option>
+
+                        <option>  Hon,ble LG or Comm.(LD)</option>
+
+                    </select>
+                    <label class="floating-label">Whether by Hon,ble LG or Comm.(LD)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Address" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Proceeding for eviction of possession Assessment of damage</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Court case if any   </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" id="file_id" class="floating-label-field floating-label-field--s3" />
+
+
+                    <label class="floating-label">Demand Letter </label>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" id="file_id" class="floating-label-field floating-label-field--s3" />
+
+
+                    <label class="floating-label">NOC</label>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" id="file_id" class="floating-label-field floating-label-field--s3" />
+
+
+                    <label class="floating-label">Cancellation Order </label>
+
+                </div>
+            </div>
+            </div>
+
+            <div class="row mt-md-3">
+                <div class=" col-md-12">
+                    <button class="btn btn-theme " type="submit">Create</button>
+                    @Html.ActionLink("Back", "Index", "RequestForProceedingEviction", null, new { @class = "btn btn-theme " })
+                </div>
+            </div>
+
+
+
+
+    </form>
+
+
+</div>
+
+

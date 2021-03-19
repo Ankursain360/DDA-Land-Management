@@ -1,0 +1,194 @@
+﻿
+@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Cancellation" })
+<div class="pt-3">
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Create</h3>
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="">--select--</option>
+
+                        <option> 001</option>
+
+                    </select>
+                    <label class="floating-label">Reference No</label>
+                </div>
+            </div>
+        </div><div class="mt-md-3">
+            <h3 class="mb-3 d-flex">Allotement Details</h3>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Address" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Name    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Address   </label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        <option> 001</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Applicant Name </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label"> Name    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Address" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Address    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Contact No    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Required Area"
+                           type="text" class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Required Area   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Alloted Area" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Alloted Area </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Play Ground Area" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Play Ground Area </label>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input value="" placeholder="Allotment Date" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Allotment Date </label>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Phase No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Phase No  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Sector No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Sector No  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Pocket No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Pocket No  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Plot No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Plot No  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks">
+
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Remarks </label>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="mt-md-3">
+            <h3 class="mb-3 d-flex">Payment Details</h3>
+        </div>
+
+
+
+
+    </form>
+
+
+</div>
