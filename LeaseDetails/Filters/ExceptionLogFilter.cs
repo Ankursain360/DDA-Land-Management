@@ -10,7 +10,7 @@ namespace LeaseDetails.Filters
     public class ExceptionLogFilter : IExceptionFilter
     {
         public void OnException(ExceptionContext filterContext)
-        {
+       {
             var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             string traceId = Guid.NewGuid().ToString();
             LogManager.Configuration.Variables["traceId"] = traceId;

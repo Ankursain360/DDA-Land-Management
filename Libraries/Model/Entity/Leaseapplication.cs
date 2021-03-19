@@ -110,5 +110,35 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        // Old Allotment entryfeilds
+
+
+        [NotMapped]
+        public decimal? AllotedArea { get; set; }
+       
+        [NotMapped]
+        public DateTime AllotmentDate { get; set; }
+        [NotMapped]
+        public string IsPlayground { get; set; }
+
+        [NotMapped]
+        public decimal? PlayGroundArea { get; set; }
+        [NotMapped]
+        public int PropertyTypeId { get; set; }
+        [NotMapped]
+        public List<PropertyType> PropertyTypeList { get; set; }
+        [NotMapped]
+        public int LeaseTypeId { get; set; }
+        [NotMapped]
+        public List<Leasetype> LeaseTypeList { get; set; }
+        [NotMapped]
+        public int PurposeId { get; set; }
+        [NotMapped]
+        public List<Leasepurpose> LeasePurposeList { get; set; }
+        [NotMapped]
+        public int SubPurposeId { get; set; }
+        [NotMapped]
+        public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
     }
 }
