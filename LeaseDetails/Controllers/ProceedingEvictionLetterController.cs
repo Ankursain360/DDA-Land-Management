@@ -18,6 +18,7 @@ using Dto.Search;
 using LeaseDetails.Filters;
 using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
 
 namespace LeaseDetails.Controllers
 {
@@ -29,6 +30,27 @@ namespace LeaseDetails.Controllers
         public ProceedingEvictionLetterController(IProceedingEvictionLetterService proceedingEvictionLetterService)
         {
             _proceedingEvictionLetterService = proceedingEvictionLetterService;
+        }
+
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
+        {
+            ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
+            data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
+            return View(data);
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> ViewLetter([FromBody] ProceedingEvictionLetterSearchDto model)
+        {
+            return PartialView("_ViewLetter");
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetLetterRefNo(int? Id)
+        {
+            Id = Id ?? 0;
+            return Json(await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(Id)));
         }
     }
 }

@@ -28,5 +28,15 @@ namespace Libraries.Service.ApplicationService
             _proceedingEvictionLetterRepository = proceedingEvictionLetterRepository;
             _mapper = mapper;
         }
+
+        public async Task<List<RefNoNameDto>> BindRefNoNameList()
+        {
+            return await _proceedingEvictionLetterRepository.BindRefNoNameList();
+        }
+
+        public async Task<string> GetLetterRefNo(int id)
+        {
+            return await _proceedingEvictionLetterRepository.GetLetterRefNo(id);
+        }
     }
 }
