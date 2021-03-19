@@ -81,5 +81,42 @@ namespace LeaseDetails.Controllers
             Id = Id ?? 0;
             return Json(await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(Id)));
         }
+
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> UploadLetter()
+        {
+            ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
+            data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
+            ViewBag.VisibleLetter = 0;
+            return View(data);
+        }
+
+       
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> UploadLetter(int id, Requestforproceeding requestforproceeding)
+        //{
+        //    try
+        //    {
+        //        requestforproceeding.ModifiedBy = SiteContext.UserId;
+        //        var result = await _proceedingEvictionLetterService.UpdateRequestProceedingUpload(id, requestforproceeding);
+        //        if (result == true)
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+        //            return View("Index");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //            return View(requestforproceeding);
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        return View(requestforproceeding);
+        //    }
+        //}
     }
 }
