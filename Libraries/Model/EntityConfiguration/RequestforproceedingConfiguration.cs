@@ -18,9 +18,16 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.AllotmentId)
                 .HasName("fkalltmentid_idx");
 
+            builder.HasIndex(e => e.HonebleLgOrCommon)
+                .HasName("fkhonbleid_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AllotmentId).HasColumnType("int(11)");
+
+            builder.Property(e => e.CancellationOrder)
+                .HasMaxLength(2000)
+                .IsUnicode(false);
 
             builder.Property(e => e.CourtCaseifAny)
                 .HasMaxLength(200)
@@ -30,13 +37,15 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+            builder.Property(e => e.DemandLetter)
+                .HasMaxLength(2000)
+                .IsUnicode(false);
+
             builder.Property(e => e.GroundOfViolations)
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.HonebleLgOrCommon)
-                .HasMaxLength(200)
-                .IsUnicode(false);
+            builder.Property(e => e.HonebleLgOrCommon).HasColumnType("int(11)");
 
             builder.Property(e => e.IsActive)
                 .HasColumnType("tinyint(4)")
@@ -47,6 +56,11 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.Noc)
+                .HasColumnName("NOC")
+                .HasMaxLength(2000)
+                .IsUnicode(false);
 
             builder.Property(e => e.ProceedingEvictionPossession)
                 .HasMaxLength(200)
@@ -61,7 +75,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.AllotmentId)
                 .HasConstraintName("fkalltmentid");
 
-
+            builder.HasOne(d => d.HonebleLgOrCommonNavigation)
+                .WithMany(p => p.Requestforproceeding)
+                .HasForeignKey(d => d.HonebleLgOrCommon)
+                .HasConstraintName("fkhonbleid");
 
 
         }

@@ -289,6 +289,7 @@ namespace Libraries.Model
         public virtual DbSet<Possesionplan> Possesionplan { get; set; }
         public virtual DbSet<Allotmententry> Allotmententry { get; set; }
         public virtual DbSet<Requestforproceeding> Requestforproceeding { get; set; }
+        public virtual DbSet<Honble> Honble { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -526,6 +527,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new PossesionplanConfiguration());
             modelBuilder.ApplyConfiguration(new AllotmententryConfiguration());
             modelBuilder.ApplyConfiguration(new RequestforproceedingConfiguration());
+            modelBuilder.ApplyConfiguration(new HonbleConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

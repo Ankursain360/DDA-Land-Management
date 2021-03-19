@@ -11,23 +11,26 @@ namespace Libraries.Model.Entity
     {
 
 
-
-
-    
         public int? AllotmentId { get; set; }
         public string LetterReferenceNo { get; set; }
         public string Subject { get; set; }
         public string GroundOfViolations { get; set; }
         public DateTime? DateOfCancellationofLease { get; set; }
-        public string HonebleLgOrCommon { get; set; }
+        public int? HonebleLgOrCommon { get; set; }
         public string ProceedingEvictionPossession { get; set; }
         public string CourtCaseifAny { get; set; }
+
+        public string DemandLetter { get; set; }
+        public string Noc { get; set; }
+        public string CancellationOrder { get; set; }
+
+
         public byte? IsActive { get; set; }
      
 
         public Allotmententry Allotment { get; set; }
 
-
+        public Honble HonebleLgOrCommonNavigation { get; set; }
 
 
     }
