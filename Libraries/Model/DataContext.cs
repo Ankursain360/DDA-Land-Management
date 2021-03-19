@@ -288,6 +288,9 @@ namespace Libraries.Model
         public virtual DbSet<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
         public virtual DbSet<Possesionplan> Possesionplan { get; set; }
         public virtual DbSet<Allotmententry> Allotmententry { get; set; }
+        public virtual DbSet<Leasepurpose> Leasepurpose { get; set; }
+        public virtual DbSet<Leasesubpurpose> Leasesubpurpose { get; set; }
+        public virtual DbSet<Leasetype> Leasetype { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());

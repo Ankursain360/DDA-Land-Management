@@ -33,13 +33,22 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        //public async Task<List<Khasra>> BindKhasra(int? villageId)
-        //{
-        //    List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
-        //    return khasraList;
-        //}
+        public async Task<List<Leasetype>> GetAllLeasetype()
+        {
+            List<Leasetype> leaseTypeList = await _dbContext.Leasetype.Where(x => x.IsActive == 1).ToListAsync();
+            return leaseTypeList;
+        }
 
-
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
+        {
+            List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
+            return leasePurposeList;
+        }
+        public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.IsActive == 1).ToListAsync();
+            return leaseSubPurposeList;
+        }
 
 
 

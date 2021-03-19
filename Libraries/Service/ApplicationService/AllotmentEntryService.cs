@@ -51,11 +51,7 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        //public async Task<List<Khasra>> BindKhasra(int? villageId)
-        //{
-        //    List<Khasra> khasraList = await _undersection17plotdetailRepository.BindKhasra(villageId);
-        //    return khasraList;
-        //}
+       
 
 
         public async Task<List<Leaseapplication>> GetAllLeaseapplication()
@@ -63,8 +59,23 @@ namespace Libraries.Service.ApplicationService
             List<Leaseapplication> leaseappList = await _allotmentEntryRepository.GetAllLeaseapplication();
             return leaseappList;
         }
+        public async Task<List<Leasetype>> GetAllLeasetype()
+        {
+            List<Leasetype> leaseTypeList = await _allotmentEntryRepository.GetAllLeasetype();
+            return leaseTypeList;
+        }
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
+        {
+            List<Leasepurpose> leasePurposeList = await _allotmentEntryRepository.GetAllLeasepurpose();
+            return leasePurposeList;
+        }
+        public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _allotmentEntryRepository.GetAllLeasesubpurpose();
+            return leaseSubPurposeList;
+        }
 
-       
+
 
         public async Task<List<Allotmententry>> GetAllotmententryUsingRepo()
         {
