@@ -30,7 +30,7 @@ $("#ApplicationId").change(function () {
     if (id) {
         HttpGet(`/CalculationSheet/Receipt/?ApplicationId=${id}`, 'html', function (response) {
 
-           // return response;
+           
             $('#View').html("");
             $('#View').html(response);
 
