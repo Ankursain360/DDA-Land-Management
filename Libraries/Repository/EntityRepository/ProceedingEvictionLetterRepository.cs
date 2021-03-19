@@ -15,7 +15,7 @@ using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class ProceedingEvictionLetterRepository : GenericRepository<Leaseapplication>, IProceedingEvictionLetterRepository
+    public class ProceedingEvictionLetterRepository : GenericRepository<Requestforproceeding>, IProceedingEvictionLetterRepository
     {
 
         public ProceedingEvictionLetterRepository(DataContext dbContext) : base(dbContext)
@@ -40,10 +40,19 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model)
+        {
+            return await _dbContext.Requestforproceeding
+                                    .Include(x => x.Allotment)
+                                    .Include(x => x.Allotment.Application)
+                                    .Where(x => x.Id == model.RefNoNameId)
+                                    .FirstOrDefaultAsync();
+        }
+
         public async Task<string> GetLetterRefNo(int id)
         {
             var Data =await (from f in _dbContext.Requestforproceeding
-                        where f.AllotmentId == id
+                        where f.Id == id
                         orderby f.Id descending
                         select f.LetterReferenceNo).FirstOrDefaultAsync();
 
