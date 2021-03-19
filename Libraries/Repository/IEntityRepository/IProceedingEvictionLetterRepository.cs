@@ -8,9 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IProceedingEvictionLetterRepository : IGenericRepository<Leaseapplication>
+    public interface IProceedingEvictionLetterRepository : IGenericRepository<Requestforproceeding>
     {
         Task<List<RefNoNameDto>> BindRefNoNameList();
         Task<string> GetLetterRefNo(int id);
+        Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model);
     }
 }

@@ -37,13 +37,42 @@ namespace LeaseDetails.Controllers
         {
             ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
             data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
+            ViewBag.VisibleLetter = 0;
             return View(data);
         }
 
         [HttpPost]
         public async Task<PartialViewResult> ViewLetter([FromBody] ProceedingEvictionLetterSearchDto model)
         {
-            return PartialView("_ViewLetter");
+            var result = false;
+            if(model !=  null)
+            {
+                var IsUpdate = await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(model.RefNoNameId));
+                if (IsUpdate == null)
+                {
+                    result = await _proceedingEvictionLetterService.UpdateRequestProceeding(model, SiteContext.UserId);
+                }
+                else
+                {
+                    if (model.RefNoNameId != 0 && model.LetterReferenceNo != null)
+                    {
+                        result = true;
+                    }
+                }
+            }
+
+            if(result)
+            {
+                var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(model);
+                ViewBag.VisibleLetter = 1;
+                return PartialView("_ViewLetter", data);
+            }
+            else
+            {
+                Requestforproceeding data = new Requestforproceeding();
+                ViewBag.Message = Alert.Show("No data Found", "", AlertType.Info);
+                return PartialView("_ViewLetter", data);
+            }
         }
 
         [HttpGet]

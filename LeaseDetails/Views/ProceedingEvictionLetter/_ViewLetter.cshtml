@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Leaseapplication
+﻿@model Libraries.Model.Entity.Requestforproceeding
 
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>
@@ -37,7 +37,7 @@
                         <tr>
 
                             <td align="left">
-                                No. F. 18(8)72/IL :     1532
+                                @Model.LetterReferenceNo
 
                             </td>
                             <td align="right">
@@ -60,7 +60,7 @@
                         1. Name of the Society
                     </th>
                     <td width="50%">
-                        Gyan Mandir Education Society
+                        @Model.Allotment.Application.Name
                     </td>
                 </tr>
                 <tr>
@@ -77,7 +77,7 @@
                         3. Ground of violation
                     </th>
                     <td>
-                        Free ship
+                        @Model.GroundOfViolations
                     </td>
                 </tr>
                 <tr>
@@ -140,235 +140,6 @@
                 </tr>
             </tbody>
         </table>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<div id="allDetails">
-            <div class="table-section bg-white  shadow rounded">
-                <div class="table-responsive ">
-                    <table class="table table-sm table-bordered mb-0">
-                        <tbody class="tbody">
-                            <tr>
-                                <th width="60%">
-                                    1.	सोसाइटी का नाम, पूरा स्थायी  पता  एवं टेलीफोन  नंबर<br />
-                                    Name of  the  Society with full permanent address and phone number.
-                                </th>
-                                <td width="40%">
-                                    @Model.Name<br />  @Model.Address <br /> @Model.ContactNo <br /> @Model.EmailId
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    2.	सोसाइटी पंजीकरण अधिनियम , १८६० के अंतर्गत सोसाइटी  की  पंजीकरण  संख्या सोसाइटी  के पंजीकरण प्रमाणपत्र  और नियमों के ज्ञापन  की  एक -एक  प्रति संलगन  करें <br />
-                                    Registration No. of the Society under Societies Registration Act 1860. Enclose a copy each of Registration Certificate of the Society & Memorandum and Articles of Association.
-
-                                </th>
-                                <td>
-                                    @Model.RegistrationNo
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    3.	सोसाइटी के संचालकों सदस्यों की सूचि  जिसमे उनके पते  और व्यवसाय दर्शाया हुआ हो तथा जो प्रत्येक सदस्य द्वारा  विधिवत हस्ताक्षरित हो | यदि वे सेवा में हों तो  कार्यालय का नाम एवं पता और पद लिखें : यदि व्यवसाय  करते हैं  तो संस्था   का नाम एवं  पता  लिखें<br />
-                                    List of members of the governing body of the Society showing their address and occupation duly signed by each member. If in service give name of office & address and position held; if in business give name and address of the establishment.
-
-                                </th>
-                                <td>
-                                    @Model.Description
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    4. (i)	 आवेदन किस उद्देश्य के लिए भूमि आवंटन करने के लिए है |<br />
-                                    Purpose for which land has been applied for.
-                                </th>
-                                <td>
-                                    @Model.LandPurpose
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    4. (ii)	 प्रत्येक कार्यकलाप, वर्ग मी. में अपेक्षित क्षेत्रफल का विस्तृत विवरण |<br />Detailed breakup of each activity and area required in sq. mt.
-                                </th>
-                                <td>
-                                    @Model.LandDetailsArea
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    5. धारा ८० (जी ) के अंतर्गत आयकर छूट प्रमाणपत्र की वैधता की अवधि (प्रति संलग्न  करें )| यदि यह धर्मार्थ संस्था है , तो यह आवेदन की तिथि से कम से कम 1 वर्ष के  लिए वैध होनी चाहिए  | <br />
-                                    Period of validity of Income Tax Exemption Certificate under Section 80(G) (Enclose a copy). If it is a charitable organisation it should be valid for atleast 1 year from date of application).
-
-                                </th>
-                                <td>
-                                    @Model.IncomeTaxDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    6. प्रायोजन के संदर्भ संख्या तथा तिथि जो या भारत सरकार  अथवा राष्ट्रीय राजधानी क्षेत्र दिल्ली सरकार  से हो | (प्रायोजन  (स्पॉन्सरशिप ) की मूल प्रति संलग्न करें |<br />
-                                    Refernce no. and date of sponsorship from wither Govt. of India/Govt. of NCT of Delhi(Enclose copy of original sponsorship).
-
-                                </th>
-                                <td>
-                                    @Model.SponsorshipDate<br />  @Model.SponsorshipDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    7. कार्यकलाप, क्षेत्रफल  और दर यदि कोई हो , के सम्बद्ध में प्रायोजक की अनुशंसा |<br />
-                                    Recommendation of sponsorer regarding activity, area and rates, if any
-                                </th>
-                                <td>
-                                    @Model.RecommendationDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    8. आवेदन की गई  भूमि का क्षेत्रफल  वर्ग मी. में |<br />
-                                    Area of land applied for in sq. mtrs.
-                                </th>
-                                <td>
-                                    @Model.LandAreaSqMt
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    9. प्रोफोर्मा के अनुसार न लाभ न हानि निधि और कि  सोसाइटी द्वारा परिसर का उपयोग आवेदन  में उल्लिखित उद्देश्य हेतु ही किया जायेगा , के संबंध में २/-  रू० के नॉन जुडिशियल स्टाम्प पेपर पर  विधिवत नोटरीकृत एक वचनबंध संलग्न करें | <br />
-                                    Enclose an undertaking on a non-judicial duly notarised stamp paper of Rs .2/- as per proforma regarding no profit no loss basis and that premises shall be exclusively used by the Society for the purpose stated in the application
-
-                                </th>
-                                <td>
-                                    @Model.NotarizedUndertakingDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    10. यदि आवेदन  संस्थान भूमि की किसी रियायती दरों पर आवेदन  कर रहा है तो वह चालू जोनल विभिन्न सांस्थानिक दरों  पर  भूमि की कीमत के बराबर एक छतिपूर्ति बंधपत्र संलग्न   करें , जिसमे यह छतिपूर्ति  करने का वचन दें  कि यदि आवेदन  किसी समय पर संस्थान  के धर्मार्थ  स्वरुप को बदलेगा तो वह भूमि की लागत का भुगतान बाज़ार दर पर करेगा |<br />
-                                    If the applicant institution is applying for any concessional rate of land enclose an indem­nity bond equal to the land value at current zonal variant institutional rates indemnifying that if the allottee at any time changes the charitable character of the institution it shall pay the cost of land at market rate.
-
-                                </th>
-                                <td>
-                                    @Model.IndemnityDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    11.	स्थान अथवा क्षेत्र जहां भूमि अपेक्षित है , वरीयता क्रम से (कम  से कम तीन स्थान दें )| <br />
-                                    Locality or area where the land is required, in order of preference (give atleast three loca­tions).
-                                </th>
-                                <td>
-                                    1.  @Model.Location1 <br /> 2.  @Model.Location2 <br /> 3. @Model.Location3
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    12.	भूमि की आवश्यकता और आवेदन   पत्र पर  हस्ताक्षर करने के लिए हस्ताक्षरकर्ता को अधिकृत करने वाले शासी निकाय के संकल्प की प्रति संलग्न करें |<br />
-                                    Enclose a copy of resolution of Governing Body for requirement of land and authorising the signature to sign application form.
-
-                                </th>
-                                <td>
-                                    @Model.LandAuthorisingDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    13. सोसाइटी की वर्तमान वित्तीय स्थिति  ( नवीनतम बैंक बकाया प्रमाण पत्र  की प्रति संलग्न करें )|<br />
-                                    Present financial position of Society (enclose a copy of latest bank balance certificate).
-                                </th>
-                                <td>
-                                    @Model.FinancialPositionDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    14. भूमि और उस पर  निर्माण की लागत को किस प्रकार पूरा किए जाने का प्रस्ताव है |<br />
-                                    How it is proposed to meet the cost of land and construction thereon
-                                </th>
-                                <td>
-                                    @Model.ProposedDescription
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    15. यदि पहले ही कार्यरत है , तो कृपया निर्ष्टि करें :-
-                                    १) प्रतिष्ठान(संस्थान )  का नाम एवं पता
-                                    २) कब से
-                                    ३) किये जाने वाले कार्यकलाप
-                                    ४) क्षेत्र वर्ग मीटर  में<br />
-                                    If already functioning , please indicate
-                                    (i)	Name & address of the establishment :
-                                    (ii) Since when :
-                                    (iii) Activity undertaken :
-                                    (iv) Area in sq.mtrs
-                                </th>
-                                <td>
-                                    (i)   @Model.EstablishmentNameAddress<br /> (ii)  @Model.FunctioningSinceWhen
-                                    <br /> (iii)   @Model.FunctioningActivityUndertaken <br />(iv)  @Model.FunctioningAreaSqMt
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    16. यदि इस सोसाइटी को दिल्ली विकास प्राधिकरण द्वारा पहले ही सांस्थानिक  भूमि आवंटित की गयी है , तो निम्न विवरण दें :
-                                    १) आवंटन पत्र की संदर्भ और दिनांक
-                                    २) क्षेत्र वर्ग मीटर  में
-                                    ३) स्थान
-                                    ५) उद्देश्य
-                                    ५) दर<br />
-                                    If  Institutional land has already been allotted
-                                    by DDA to this Society, give details :
-                                    (i)	Ref. no. of allotment letter & date
-                                    (ii)	Area in sq. mtrs.
-                                    (iii) Locality
-                                    (iv) Purpose
-                                    (v) Rate
-                                </th>
-                                <td>
-                                    (i)    @Model.RefNoOfAllotmentLetterDate<br />(ii)   @Model.AreaSqlMt
-                                    <br />(iii)  @Model.Locality <br />(iv)   @Model.Purpose <br />(v)  @Model.Rate
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="DivDocument">
-                <h3 class="my-3 d-flex sub-heading">Document</h3>
-                <div class="table-section bg-white border shadow rounded">
-                    <div class="table-responsive ">
-                        <table class="table table-sm table-bordered mb-0 table-striped">
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>Document Name</th>
-                                    <th>Uploaded Document</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tbody">
-                                @foreach (var item in Model.Leasedocuments)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.DocumentChecklist.Name
-                                        </td>
-                                        @if (@item.DocumentFileName != "")
-                                        {
-                                            <td>
-                                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                                   <a>Enclosed</a>
-                                                </div>
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td>  <a>N/A</a></td>
-                                        }
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>*@
     </div>
 </div>
 
@@ -382,12 +153,5 @@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 </environment>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-@*<environment include="Development">
-        <script src="~/js/leaseapplicationformprint.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/leaseapplicationformprint.min.js" asp-append-version="true"></script>
-    </environment>*@
-
 
 
