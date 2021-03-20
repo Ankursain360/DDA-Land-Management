@@ -72,7 +72,7 @@ namespace Libraries.Model.Entity
         public Leasepurpose LeasePurposesType { get; set; }
         public Leasesubpurpose LeaseSubPurpose { get; set; }
         public Leasetype LeasesType { get; set; }
-        //public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
+    
 
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
 
