@@ -45,7 +45,9 @@ namespace LeaseDetails.Controllers
 
            
             allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
-           
+            allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
+            allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
+            allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(allotmententry.PurposeId);
             return View(allotmententry);
         }
 
@@ -58,7 +60,9 @@ namespace LeaseDetails.Controllers
             {
                 //Allotmententry allotmententry = new Allotmententry();
                 allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
-              
+                allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
+                allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
+                allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(allotmententry.PurposeId);
 
                 if (ModelState.IsValid)
                 {
@@ -195,7 +199,12 @@ namespace LeaseDetails.Controllers
 
             return Json(await _allotmentEntryService.FetchSingleLeaseapplicationResult(Convert.ToInt32(applicationid)));
         }
-
+        [HttpGet]
+        public async Task<JsonResult> GetAllLeaseSubpurpose(int? PurposeId)
+        {
+            PurposeId = PurposeId ?? 0;
+            return Json(await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(PurposeId)));
+        }
 
     }
 }

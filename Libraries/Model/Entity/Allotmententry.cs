@@ -47,7 +47,8 @@ namespace Libraries.Model.Entity
         public List<Leasepurpose> LeasePurposeList { get; set; }
         [NotMapped]
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
-
+        [NotMapped]
+        public int PurposeId { get; set; }
 
 
         [NotMapped]
