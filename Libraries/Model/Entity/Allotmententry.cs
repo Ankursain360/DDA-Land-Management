@@ -69,7 +69,6 @@ namespace Libraries.Model.Entity
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
 
-
         public Leasepurpose LeasePurposesType { get; set; }
         public Leasesubpurpose LeaseSubPurpose { get; set; }
         public Leasetype LeasesType { get; set; }
