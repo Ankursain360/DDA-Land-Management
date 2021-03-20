@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 
+using Microsoft.AspNetCore.Http;
+
+
 namespace Libraries.Model.Entity
 {
    public class Requestforproceeding : AuditableEntity<int>
@@ -26,11 +29,35 @@ namespace Libraries.Model.Entity
 
 
         public byte? IsActive { get; set; }
-     
+
+
+
+        public int? UserId { get; set; }
+        public string ProcedingLetter { get; set; }
+        public int? IsGenerate { get; set; }
+        public int? IsUpload { get; set; }
+
+
+
 
         public Allotmententry Allotment { get; set; }
 
-        public Honble HonebleLgOrCommonNavigation { get; set; }
+        public Honble Honble { get; set; }
+        public ApplicationUser User { get; set; }
+
+        [NotMapped]
+        public List<Allotmententry> AllotmententryList { get; set; }
+        [NotMapped]
+        public List<Honble> HonbleList { get; set; }
+
+        [NotMapped]
+        public IFormFile DemandLetterPhoto { get; set; }
+
+        [NotMapped]
+        public IFormFile NocPhoto { get; set; }
+
+        [NotMapped]
+        public IFormFile CancellationPhoto { get; set; }
 
 
     }

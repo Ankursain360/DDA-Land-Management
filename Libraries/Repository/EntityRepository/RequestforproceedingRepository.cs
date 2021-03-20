@@ -25,8 +25,21 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Requestforproceeding>> GetAllRequestForProceeding()
         {
-            return await _dbContext.Requestforproceeding.Include(x => x.Allotment).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x=>x.Honble).OrderByDescending(x => x.Id).ToListAsync();
         }
+
+        public async Task<List<Honble>> GetAllHonble()
+        {
+            List<Honble> villageList = await _dbContext.Honble.Where(x => x.IsActive == 1).ToListAsync();
+            return villageList;
+        }
+
+        public async Task<List<Allotmententry>> GetAllAllotment()
+        {
+            List<Allotmententry> villageList = await _dbContext.Allotmententry.Include(x=>x.Application).Where(x => x.IsActive == 1).ToListAsync();
+            return villageList;
+        }
+
 
 
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)

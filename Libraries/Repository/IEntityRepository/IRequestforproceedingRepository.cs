@@ -10,6 +10,8 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IRequestforproceedingRepository : IGenericRepository<Requestforproceeding>
     {
+        Task<List<Allotmententry>> GetAllAllotment();
+        Task<List<Honble>> GetAllHonble();
         Task<List<Requestforproceeding>> GetAllRequestForProceeding();
         Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
     }

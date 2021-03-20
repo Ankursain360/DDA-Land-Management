@@ -1,21 +1,137 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using Dto.Search;
+
+
+using Microsoft.Extensions.Configuration;
+using Utility.Helper;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using LeaseDetails.Filters;
+using Core.Enum;
+
 namespace LeaseDetails.Controllers
 {
-    public class RequestForProceedingEviction : Controller
+    public class RequestForProceedingEviction : BaseController
     {
-        public IActionResult Index()
+        private readonly IRequestforproceedingService _undersection4PlotService;
+        public IConfiguration _configuration;
+        string DemandletterFilePath = string.Empty;
+        string NOCFilePath = string.Empty;
+        string CancellationOrderFilePath = string.Empty;
+
+        public RequestForProceedingEviction(IRequestforproceedingService undersection4PlotService)
         {
-            return View();
+            _undersection4PlotService = undersection4PlotService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var list = await _undersection4PlotService.GetAllRequestForProceeding();
+            return View(list);
         }
 
-        public IActionResult Create()
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
         {
-            return View();
+            var result = await _undersection4PlotService.GetPagedRequestForProceeding(model);
+
+            return PartialView("_List", result);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            Requestforproceeding undersection4plot = new Requestforproceeding();
+            undersection4plot.IsActive = 1;
+            undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
+          
+            undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
+
+            return View(undersection4plot);
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Requestforproceeding undersection4plot)
+        {
+          
+           
+
+
+            //DemandletterFilePath = _configuration.GetSection("FilePaths:Demandletter:DemandletterFilePath").Value.ToString();
+            //NOCFilePath = _configuration.GetSection("FilePaths:NOC:NOCFilePath").Value.ToString();
+            //CancellationOrderFilePath = _configuration.GetSection("FilePaths:CancellationOrder:CancellationOrderFilePath").Value.ToString();
+
+            try
+            {
+                undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
+
+                undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
+
+                if (ModelState.IsValid)
+                {
+                    FileHelper fileHelper = new FileHelper();
+                    //if (undersection4plot.DemandLetterPhoto != null)
+                    //{
+                    //    undersection4plot.DemandLetter = fileHelper.SaveFile(DemandletterFilePath, undersection4plot.DemandLetterPhoto);
+                    //}
+
+
+                    //if (undersection4plot.NocPhoto != null)
+                    //{
+                    //    undersection4plot.Noc = fileHelper.SaveFile(NOCFilePath, undersection4plot.NocPhoto);
+                    //}
+
+                    //if (undersection4plot.CancellationPhoto != null)
+                    //{
+                    //    undersection4plot.CancellationOrder = fileHelper.SaveFile(CancellationOrderFilePath, undersection4plot.CancellationPhoto);
+                    //}
+
+
+
+                    undersection4plot.CreatedBy = SiteContext.UserId;
+                    var result = await _undersection4PlotService.Create(undersection4plot);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _undersection4PlotService.GetAllRequestForProceeding();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(undersection4plot);
+                    }
+                }
+                else
+                {
+                    return View(undersection4plot);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(undersection4plot);
+            }
+        }
+
+
+
+
+
     }
 }
