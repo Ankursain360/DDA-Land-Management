@@ -3,7 +3,7 @@
 
 <div class="pt-3">
 
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Show Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row mt-md-3">
@@ -24,7 +24,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="LetterReferenceNo" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="200" />
+                               class="floating-label-field floating-label-field--s3" maxlength="200" />
                         <span asp-validation-for="LetterReferenceNo" class="text-danger"></span>
                         <label class="floating-label">Letter Reference No.</label>
                     </div>
@@ -40,18 +40,22 @@
             </div>
         </div>
 
-    </form>
-    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 ">
-        <input type="submit" value="Print" class="btn btn-theme" id="btnCreate" />
-        <div id="LetterData">
-            @*@{
-                    @if (ViewBag.DataLetter != null)
-                    {
-                        @Html.Raw(ViewBag.DataLetter);
-                    }
-                }*@
-        </div>
     </div>
+    @*@if (ViewBag.VisibleLetter == 1)
+    {*@
+        <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 " id="VisibleLetter" style="display:none;">
+            <input type="submit" value="Print" class="btn btn-theme" id="btnPrint"  style="display:none;"/>
+            <div id="LetterDataView">
+                @*@{
+                        @if (ViewBag.DataLetter != null)
+                        {
+                            @Html.Raw(ViewBag.DataLetter);
+                        }
+                    }*@
+            </div>
+        </div>
+
+    @*}*@
 
 </div>
 

@@ -236,7 +236,7 @@ namespace Libraries.Model
         public virtual DbSet<Demandlistdetails> Demandlistdetails { get; set; }
         public virtual DbSet<Mutation> Mutation { get; set; }
         public virtual DbSet<Mutationparticulars> Mutationparticulars { get; set; }
-        
+
 
         //***************  New Land Acquisition  *****************
         public virtual DbSet<Newlandus4plot> Newlandus4plot { get; set; }
@@ -265,12 +265,12 @@ namespace Libraries.Model
         public virtual DbSet<Muncipality> Muncipality { get; set; }
         public virtual DbSet<Newlandannexure1khasrarpt> Newlandannexure1khasrarpt { get; set; }
         public virtual DbSet<Newlandpossessiondetails> Newlandpossessiondetails { get; set; }
-       
+
         public virtual DbSet<Newlandnotificationfilepath> Newlandnotificationfilepath { get; set; }
 
         public virtual DbSet<Gislayer> Gislayer { get; set; }
         public virtual DbSet<Gisdata> Gisdata { get; set; }
-       
+
         public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
         public virtual DbSet<Courtcasesmapping> Courtcasesmapping { get; set; }
 
@@ -288,8 +288,14 @@ namespace Libraries.Model
         public virtual DbSet<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
         public virtual DbSet<Possesionplan> Possesionplan { get; set; }
         public virtual DbSet<Allotmententry> Allotmententry { get; set; }
+
+        public virtual DbSet<Leasepurpose> Leasepurpose { get; set; }
+        public virtual DbSet<Leasesubpurpose> Leasesubpurpose { get; set; }
+        public virtual DbSet<Leasetype> Leasetype { get; set; }
+
         public virtual DbSet<Requestforproceeding> Requestforproceeding { get; set; }
         public virtual DbSet<Honble> Honble { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -511,7 +517,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisDataConfiguartion());
             modelBuilder.ApplyConfiguration(new GisLayerConfiguration());
             modelBuilder.ApplyConfiguration(new Newlandannexure2Configuration());
-           
+
 
 
             // Lease Details module

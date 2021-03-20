@@ -14,7 +14,7 @@ using AutoMapper;
 namespace Libraries.Service.ApplicationService
 {
 
-    public class ProceedingEvictionLetterService : EntityService<Leaseapplication>, IProceedingEvictionLetterService
+    public class ProceedingEvictionLetterService : EntityService<Requestforproceeding>, IProceedingEvictionLetterService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProceedingEvictionLetterRepository _proceedingEvictionLetterRepository;
@@ -34,9 +34,25 @@ namespace Libraries.Service.ApplicationService
             return await _proceedingEvictionLetterRepository.BindRefNoNameList();
         }
 
+        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model)
+        {
+            return await _proceedingEvictionLetterRepository.FetchProceedingConvictionLetterData(model);
+        }
+
         public async Task<string> GetLetterRefNo(int id)
         {
             return await _proceedingEvictionLetterRepository.GetLetterRefNo(id);
+        }
+
+        public async Task<bool> UpdateRequestProceeding(ProceedingEvictionLetterSearchDto data, int UserId)
+        {
+            var result = await _proceedingEvictionLetterRepository.FindBy(a => a.Id == data.RefNoNameId);
+            Requestforproceeding model = result.FirstOrDefault();
+            model.LetterReferenceNo = data.LetterReferenceNo;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = UserId;
+            _proceedingEvictionLetterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
         }
     }
 }

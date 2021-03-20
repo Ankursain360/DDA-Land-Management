@@ -77,20 +77,62 @@
                 </div>
 
             </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="type">
+                        asp-for="LeasesTypeId" asp-items="@(new SelectList(Model.LeaseTypeList, "Id", "Type"))">
 
-           
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <option disabled="disabled" selected value="">Select</option>
 
-                        <input value="" asp-for="AllotmentDate" placeholder="Allotment Date" type="date"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="AllotmentDate" class="text-danger"></span>
-                        <label class="floating-label">Allotment Date </label>
-                    </div>
 
+
+                    </select>
+                    <span asp-validation-for="LeasesTypeId" class="text-danger"></span>
+                    <label class="floating-label">Lease Type </label>
                 </div>
-          
             </div>
+            </div>
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="type">
+                        asp-for="LeasePurposesTypeId" asp-items="@(new SelectList(Model.LeasePurposeList, "Id", "PurposeUse"))">
+
+                        <option disabled="disabled" selected value="">Select</option>
+
+
+
+                    </select>
+                    <span asp-validation-for="LeasePurposesTypeId" class="text-danger"></span>
+                    <label class="floating-label">Purpose </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="type">
+                        asp-for="LeaseSubPurposeId" asp-items="@(new SelectList(Model.LeaseSubPurposeList, "Id", "SubPurposeUse"))">
+
+                        <option disabled="disabled" selected value="">Select</option>
+
+
+
+                    </select>
+                    <span asp-validation-for="LeaseSubPurposeId" class="text-danger"></span>
+                    <label class="floating-label">SubPurpose </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input value="" asp-for="AllotmentDate" placeholder="Allotment Date" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="AllotmentDate" class="text-danger"></span>
+                    <label class="floating-label">Allotment Date </label>
+                </div>
+
+            </div>
+
+        </div>
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">

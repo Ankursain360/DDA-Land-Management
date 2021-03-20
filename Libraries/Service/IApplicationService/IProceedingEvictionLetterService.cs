@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface IProceedingEvictionLetterService : IEntityService<Leaseapplication>
+    public interface IProceedingEvictionLetterService : IEntityService<Requestforproceeding>
     {
         Task<List<RefNoNameDto>> BindRefNoNameList();
         Task<string> GetLetterRefNo(int id);
+        Task<bool> UpdateRequestProceeding(ProceedingEvictionLetterSearchDto model, int UserId);
+        Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model);
     }
 }

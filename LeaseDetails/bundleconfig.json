@@ -130,5 +130,17 @@
     "inputFiles": [
       "wwwroot/js/possesionplanindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/calculationsheet.min.js",
+    "inputFiles": [
+      "wwwroot/js/calculationsheet.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/oldallotmententrycreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/oldallotmententrycreate.js"
+    ]
   }
 ]
