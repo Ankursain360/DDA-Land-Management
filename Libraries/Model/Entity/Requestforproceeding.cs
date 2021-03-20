@@ -12,8 +12,6 @@ namespace Libraries.Model.Entity
 {
    public class Requestforproceeding : AuditableEntity<int>
     {
-
-
         public int? AllotmentId { get; set; }
         public string LetterReferenceNo { get; set; }
         public string Subject { get; set; }
@@ -36,6 +34,7 @@ namespace Libraries.Model.Entity
         public string ProcedingLetter { get; set; }
         public int? IsGenerate { get; set; }
         public int? IsUpload { get; set; }
+        public int? IsSend { get; set; }
 
 
 
@@ -61,6 +60,9 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile ProcedingLetterDocument { get; set; }
+
+        [NotMapped]
+        public int checkIsSend { get; set; }
 
 
     }

@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
         public Allotmententry()
         {
             Possesionplan = new HashSet<Possesionplan>();
-            //Requestforproceeding = new HashSet<Requestforproceeding>();
+            Requestforproceeding = new HashSet<Requestforproceeding>();
         }
         public int ApplicationId { get; set; }
         public decimal TotalArea { get; set; }

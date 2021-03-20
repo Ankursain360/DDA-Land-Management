@@ -24,3 +24,8 @@ function fileValidation(filePath, fileInput, size) {
     }
 
 }
+
+function checkSend() {
+    $("#checkIsSend").val(1);
+    return true;
+}

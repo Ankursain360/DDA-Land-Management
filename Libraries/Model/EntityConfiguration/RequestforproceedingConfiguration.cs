@@ -84,6 +84,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.IsGenerate).HasColumnType("int(11)");
 
             builder.Property(e => e.IsUpload).HasColumnType("int(11)");
+            builder.Property(e => e.IsSend).HasColumnType("int(11)");
             builder.Property(e => e.UserId).HasColumnType("int(11)");
             builder.HasOne(d => d.User)
                  .WithMany(p => p.Requestforproceeding)
