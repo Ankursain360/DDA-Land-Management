@@ -15,7 +15,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Leaseapplication>> GetAllLeaseapplication();
         Task<List<Leasetype>> GetAllLeasetype();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
-        Task<List<Leasesubpurpose>> GetAllLeasesubpurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
         Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
        
 

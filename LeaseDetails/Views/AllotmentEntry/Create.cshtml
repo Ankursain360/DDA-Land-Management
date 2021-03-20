@@ -51,7 +51,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input disabled asp-for="LandAreaSqMt" placeholder="Required Area"
-                         type="text"  class="floating-label-field floating-label-field--s3"/>
+                           type="text" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="LandAreaSqMt" class="text-danger"></span>
                     <label class="floating-label">Required Area   </label>
                 </div>
@@ -66,32 +66,100 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
+        @*<div class="row mt-md-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="LeasePurposesTypeId" asp-items="@(new SelectList(Model.LeasePurposeList, "Id","PurposeUse"))"
+                        onchange="return onChange(this.options[this.selectedIndex].value);">
+                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                </select>
+                <span asp-validation-for="LeasePurposesTypeId" class="text-danger"></span>
+                <label asp-for="LeasePurposesTypeId" class="floating-label">Purpose</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3"
+                        asp-for="LeaseSubPurposeId" asp-items="@(new SelectList(Model.LeaseSubPurposeList, "Id","SubPurposeUse"))">
+                    <option disabled="disabled" selected value="">Select</option>
+
+                </select>
+                <span asp-validation-for="LeaseSubPurposeId" class="text-danger"></span>
+                <label class="floating-label">Sub Purpose / Use </label>
+            </div>
+        </div>*@
+        @*</div>*@
+        @*<div id="DivJudgement" class="row mt-md-3">*@
+        <div class="row">
+            <div class="floating-label-wrap">
+                <select id="ddlJudgement" class="floating-label-field floating-label-field--s3"
+                        asp-for="LeasesTypeId" asp-items="@(new SelectList(Model.LeaseTypeList, "Id","Type"))">
+                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                </select>
+                <span asp-validation-for="LeasesTypeId" class="text-danger"></span>
+                <label asp-for="LeasesTypeId" class="floating-label">District Name </label>
+            </div>
+        </div>
+        <div style="display:none;" id="DivJudgement" class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="PlayGroundArea" placeholder="Play Ground Area" type="text"
+                    <input asp-for="PremiumAmount" placeholder="Premium Amount " type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="PlayGroundArea" class="text-danger"></span>
-                    <label class="floating-label">Play Ground Area </label>
+                    <span asp-validation-for="PremiumAmount" class="text-danger"></span>
+                    <label class="floating-label">Premium Amount </label>
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="type">
-                        asp-for="LeasesTypeId" asp-items="@(new SelectList(Model.LeaseTypeList, "Id", "Type"))">
-
-                        <option disabled="disabled" selected value="">Select</option>
 
 
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    </select>
-                    <span asp-validation-for="LeasesTypeId" class="text-danger"></span>
-                    <label class="floating-label">Lease Type </label>
+                    <input asp-for="GroundRent" placeholder="Ground Rent " type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="GroundRent" class="text-danger"></span>
+                    <label class="floating-label">Ground Rent </label>
                 </div>
+
             </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="DocumentCharges" placeholder="Document Charges " type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="DocumentCharges" class="text-danger"></span>
+                    <label class="floating-label">Document Charges </label>
+                </div>
+
             </div>
+        </div>
+        <div  id="DivJudgement2" class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="NoOfYears" placeholder="NoOfYears " type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="NoOfYears" class="text-danger"></span>
+                    <label class="floating-label">NoOfYears </label>
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="AmountLicFee" placeholder="Ground Rent " type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="AmountLicFee" class="text-danger"></span>
+                    <label class="floating-label">AmountLicFee </label>
+                </div>
+
+            </div>
+           
+        </div>
+
         <div class="row mt-md-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap">
@@ -133,73 +201,73 @@
             </div>
 
         </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PhaseNo" placeholder="Phase No" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="PhaseNo" class="text-danger"></span>
-                        <label class="floating-label">Phase No  </label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="SectorNo" placeholder="Sector No" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="SectorNo" class="text-danger"></span>
-                        <label class="floating-label">Sector No  </label>
-                    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PhaseNo" placeholder="Phase No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PhaseNo" class="text-danger"></span>
+                    <label class="floating-label">Phase No  </label>
                 </div>
             </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PocketNo" placeholder="Pocket No" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="PocketNo" class="text-danger"></span>
-                        <label class="floating-label">Pocket No  </label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PlotNo" placeholder="Plot No" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="PlotNo" class="text-danger"></span>
-                        <label class="floating-label">Plot No  </label>
-                    </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="SectorNo" placeholder="Sector No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="SectorNo" class="text-danger"></span>
+                    <label class="floating-label">Sector No  </label>
                 </div>
             </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks">
-
-                        <span asp-validation-for="Remarks" class="text-danger"></span>
-                        <label asp-for="Remarks" class="floating-label">Remarks </label>
-                    </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PocketNo" placeholder="Pocket No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PocketNo" class="text-danger"></span>
+                    <label class="floating-label">Pocket No  </label>
                 </div>
-                <div class=" col-md-6">
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PlotNo" placeholder="Plot No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PlotNo" class="text-danger"></span>
+                    <label class="floating-label">Plot No  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks">
 
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label asp-for="Remarks" class="floating-label">Remarks </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
 
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                        <label asp-for="IsActive" class="floating-label">Status </label>
-                    </div>
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
 
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
                 </div>
 
             </div>
-            <div class="row mt-md-3">
-                <div class=" col-md-12">
-                    <button class="btn btn-theme " type="submit">Create</button>
-                    @Html.ActionLink("Back", "Index", "AllotmentEntry", null, new { @class = "btn btn-theme " })
-                </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "AllotmentEntry", null, new { @class = "btn btn-theme " })
             </div>
-</form>
+        </div>
+    </form>
 </div>
 
 

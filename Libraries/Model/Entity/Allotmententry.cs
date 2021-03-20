@@ -47,7 +47,8 @@ namespace Libraries.Model.Entity
         public List<Leasepurpose> LeasePurposeList { get; set; }
         [NotMapped]
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
-
+        [NotMapped]
+        public int PurposeId { get; set; }
 
 
         [NotMapped]
@@ -72,9 +73,28 @@ namespace Libraries.Model.Entity
         public Leasepurpose LeasePurposesType { get; set; }
         public Leasesubpurpose LeaseSubPurpose { get; set; }
         public Leasetype LeasesType { get; set; }
-        //public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
+    
 
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
+
+        //[NotMapped]
+        //public string FullName
+        //{
+        //    get
+        //    {
+        //        return Application.RefNo + " (" + Application.Name + ")";
+        //    }
+        //}
+
+        [NotMapped]
+        public string LRefNo
+        {
+            get
+            {
+                return Application.RefNo ;
+            }
+        }
+
 
     }
 }

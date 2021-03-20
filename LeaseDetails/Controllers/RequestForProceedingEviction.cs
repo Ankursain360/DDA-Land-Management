@@ -53,9 +53,10 @@ namespace LeaseDetails.Controllers
         {
             Requestforproceeding undersection4plot = new Requestforproceeding();
             undersection4plot.IsActive = 1;
+            undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
             undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
           
-            undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
+        
 
             return View(undersection4plot);
         }
@@ -129,6 +130,56 @@ namespace LeaseDetails.Controllers
             }
         }
 
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _undersection4PlotService.FetchSingleResult(id);
+            Data.HonbleList = await _undersection4PlotService.GetAllHonble();
+            Data.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _undersection4PlotService.FetchSingleResult(id);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+
+                var result = await _undersection4PlotService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _undersection4PlotService.GetAllRequestForProceeding();
+            return View("Index", list);
+        }
 
 
 

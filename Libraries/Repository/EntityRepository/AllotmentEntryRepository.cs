@@ -39,17 +39,26 @@ namespace Libraries.Repository.EntityRepository
             return leaseTypeList;
         }
 
+        //public async Task<List<Leasepurpose>> GetAllLeasepurpose()
+        //{
+        //    List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
+        //    return leasePurposeList;
+        //}
+        //public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
+        //{
+        //    List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.IsActive == 1).ToListAsync();
+        //    return leaseSubPurposeList;
+        //}
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
             List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
             return leasePurposeList;
         }
-        public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId)
         {
-            List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.IsActive == 1).ToListAsync();
+            List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.PurposeUseId == purposeId && x.IsActive == 1).ToListAsync();
             return leaseSubPurposeList;
         }
-
 
 
         public async Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId)

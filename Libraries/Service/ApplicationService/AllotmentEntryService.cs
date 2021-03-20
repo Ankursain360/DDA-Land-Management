@@ -64,17 +64,27 @@ namespace Libraries.Service.ApplicationService
             List<Leasetype> leaseTypeList = await _allotmentEntryRepository.GetAllLeasetype();
             return leaseTypeList;
         }
+        //public async Task<List<Leasepurpose>> GetAllLeasepurpose()
+        //{
+        //    List<Leasepurpose> leasePurposeList = await _allotmentEntryRepository.GetAllLeasepurpose();
+        //    return leasePurposeList;
+        //}
+        //public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
+        //{
+        //    List<Leasesubpurpose> leaseSubPurposeList = await _allotmentEntryRepository.GetAllLeasesubpurpose();
+        //    return leaseSubPurposeList;
+        //}
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
             List<Leasepurpose> leasePurposeList = await _allotmentEntryRepository.GetAllLeasepurpose();
             return leasePurposeList;
         }
-        public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
+
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId)
         {
-            List<Leasesubpurpose> leaseSubPurposeList = await _allotmentEntryRepository.GetAllLeasesubpurpose();
+            List<Leasesubpurpose> leaseSubPurposeList = await _allotmentEntryRepository.GetAllLeaseSubpurpose(purposeId);
             return leaseSubPurposeList;
         }
-
 
 
         public async Task<List<Allotmententry>> GetAllotmententryUsingRepo()
