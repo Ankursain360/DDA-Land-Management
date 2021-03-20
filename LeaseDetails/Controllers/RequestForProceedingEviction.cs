@@ -37,6 +37,9 @@ namespace LeaseDetails.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            var Msg = TempData.Peek("Message");
+            if (Msg != null)
+                ViewBag.Message = Msg;
             var list = await _undersection4PlotService.GetAllRequestForProceeding();
             return View(list);
         }

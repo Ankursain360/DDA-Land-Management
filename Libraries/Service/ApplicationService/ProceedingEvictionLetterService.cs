@@ -34,7 +34,7 @@ namespace Libraries.Service.ApplicationService
             return await _proceedingEvictionLetterRepository.BindRefNoNameList();
         }
 
-        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model)
+        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(int model)
         {
             return await _proceedingEvictionLetterRepository.FetchProceedingConvictionLetterData(model);
         }

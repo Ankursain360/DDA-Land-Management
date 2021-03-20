@@ -2,10 +2,10 @@
 
 });
 
-$('#ProcedingLetter').change(function () {
-    var fileInput = document.getElementById('ProcedingLetter');
+$('#ProcedingLetterDocument').change(function () {
+    var fileInput = document.getElementById('ProcedingLetterDocument');
     var filePath = fileInput.value;
-    const size = (ProcedingLetter.files[0].size);
+    const size = (ProcedingLetterDocument.files[0].size);
     fileValidation(filePath, fileInput, size);
 });
 

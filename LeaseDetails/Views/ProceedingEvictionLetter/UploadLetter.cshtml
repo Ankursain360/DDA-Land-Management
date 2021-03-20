@@ -3,7 +3,7 @@
 
 <div class="pt-3">
 
-    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="UploadLetter" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Upload Letter</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />

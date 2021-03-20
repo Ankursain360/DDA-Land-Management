@@ -142,5 +142,11 @@
     "inputFiles": [
       "wwwroot/js/oldallotmententrycreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/proceedingevictionlettercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/proceedingevictionlettercreate.js"
+    ]
   }
 ]
