@@ -2,10 +2,10 @@
 
 });
 
-$('#EncroachAtrDoc').change(function () {
-    var fileInput = document.getElementById('EncroachAtrDoc');
+$('#ProcedingLetter').change(function () {
+    var fileInput = document.getElementById('ProcedingLetter');
     var filePath = fileInput.value;
-    const size = (EncroachAtrDoc.files[0].size);
+    const size = (ProcedingLetter.files[0].size);
     fileValidation(filePath, fileInput, size);
 });
 

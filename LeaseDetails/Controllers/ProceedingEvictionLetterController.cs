@@ -19,6 +19,7 @@ using LeaseDetails.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using Microsoft.Extensions.Configuration;
 
 namespace LeaseDetails.Controllers
 {
@@ -26,10 +27,14 @@ namespace LeaseDetails.Controllers
     {
 
         private readonly IProceedingEvictionLetterService _proceedingEvictionLetterService;
+        public IConfiguration _configuration;
 
-        public ProceedingEvictionLetterController(IProceedingEvictionLetterService proceedingEvictionLetterService)
+        string ProceedingEvictionLetterPath = "";
+        public ProceedingEvictionLetterController(IProceedingEvictionLetterService proceedingEvictionLetterService,
+            IConfiguration configuration)
         {
             _proceedingEvictionLetterService = proceedingEvictionLetterService;
+            ProceedingEvictionLetterPath = _configuration.GetSection("FilePaths:ProceedingEvictionLetter:ProceedingEvictionLetterPath").Value.ToString();
         }
 
         [AuthorizeContext(ViewAction.Add)]
@@ -86,37 +91,45 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> UploadLetter()
         {
             ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
-            data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
-            ViewBag.VisibleLetter = 0;
             return View(data);
         }
 
-       
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> UploadLetter(int id, Requestforproceeding requestforproceeding)
-        //{
-        //    try
-        //    {
-        //        requestforproceeding.ModifiedBy = SiteContext.UserId;
-        //        var result = await _proceedingEvictionLetterService.UpdateRequestProceedingUpload(id, requestforproceeding);
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-        //            return View("Index");
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(requestforproceeding);
 
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return View(requestforproceeding);
-        //    }
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadLetter(int id, Requestforproceeding requestforproceeding)
+        {
+            try
+            {
+                if(requestforproceeding.ProcedingLetterDocument == null && requestforproceeding.ProcedingLetter == "")
+                {
+                    ViewBag.Message = Alert.Show("Upload Document is Mandatory", "", AlertType.Warning);
+                    return View(requestforproceeding);
+                }
+                FileHelper fileHelper = new FileHelper();
+                requestforproceeding.ProcedingLetter = requestforproceeding.ProcedingLetterDocument != null ?
+                                                                   fileHelper.SaveFile1(ProceedingEvictionLetterPath, requestforproceeding.ProcedingLetterDocument) :
+                                                                   requestforproceeding.ProcedingLetterDocument != null || requestforproceeding.ProcedingLetter != "" ?
+                                                                   requestforproceeding.ProcedingLetter : string.Empty;
+                requestforproceeding.ModifiedBy = SiteContext.UserId;
+                var result = await _proceedingEvictionLetterService.UpdateRequestProceedingUpload(id, requestforproceeding);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(requestforproceeding);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(requestforproceeding);
+            }
+        }
     }
 }

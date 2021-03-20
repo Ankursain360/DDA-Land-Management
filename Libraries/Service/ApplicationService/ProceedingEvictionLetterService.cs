@@ -54,5 +54,16 @@ namespace Libraries.Service.ApplicationService
             _proceedingEvictionLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<bool> UpdateRequestProceedingUpload(int id, Requestforproceeding requestforproceeding)
+        {
+            var result = await _proceedingEvictionLetterRepository.FindBy(a => a.Id == requestforproceeding.Id);
+            Requestforproceeding model = result.FirstOrDefault();
+            model.ProcedingLetter = requestforproceeding.ProcedingLetter;
+            model.IsUpload = 1;
+            model.ModifiedDate = DateTime.Now;
+            _proceedingEvictionLetterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }

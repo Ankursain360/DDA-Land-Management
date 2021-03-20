@@ -15,5 +15,6 @@ namespace Libraries.Service.IApplicationService
         Task<string> GetLetterRefNo(int id);
         Task<bool> UpdateRequestProceeding(ProceedingEvictionLetterSearchDto model, int UserId);
         Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model);
+        Task<bool> UpdateRequestProceedingUpload(int id, Requestforproceeding requestforproceeding);
     }
 }
