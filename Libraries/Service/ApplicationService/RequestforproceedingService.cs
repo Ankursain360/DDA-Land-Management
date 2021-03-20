@@ -26,6 +26,18 @@ namespace Libraries.Service.ApplicationService
             _requestRepository = requestRepository;
         }
 
+        public async Task<List<Allotmententry>> GetAllAllotment()
+        {
+            List<Allotmententry> villageList = await _requestRepository.GetAllAllotment();
+            return villageList;
+        }
+
+        public async Task<List<Honble>> GetAllHonble()
+        {
+            List<Honble> villageList = await _requestRepository.GetAllHonble();
+            return villageList;
+        }
+
         public async Task<List<Requestforproceeding>> GetAllRequestForProceeding()
         {
 
@@ -76,8 +88,19 @@ namespace Libraries.Service.ApplicationService
             return model;
         }
 
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _requestRepository.FindBy(a => a.Id == id);
+            Requestforproceeding model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _requestRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
-
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
+        {
+            return await _requestRepository.GetPagedRequestForProceeding(model);
+        }
 
 
 

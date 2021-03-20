@@ -75,10 +75,20 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.AllotmentId)
                 .HasConstraintName("fkalltmentid");
 
-            builder.HasOne(d => d.HonebleLgOrCommonNavigation)
+            builder.HasOne(d => d.Honble)
                 .WithMany(p => p.Requestforproceeding)
                 .HasForeignKey(d => d.HonebleLgOrCommon)
                 .HasConstraintName("fkhonbleid");
+
+            builder.Property(e => e.ProcedingLetter).HasColumnType("longtext");
+            builder.Property(e => e.IsGenerate).HasColumnType("int(11)");
+
+            builder.Property(e => e.IsUpload).HasColumnType("int(11)");
+            builder.Property(e => e.UserId).HasColumnType("int(11)");
+            builder.HasOne(d => d.User)
+                 .WithMany(p => p.Requestforproceeding)
+                 .HasForeignKey(d => d.UserId)
+                 .HasConstraintName("fkUserId");
 
 
         }

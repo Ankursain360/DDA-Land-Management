@@ -11,16 +11,16 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IRequestforproceedingService : IEntityService<Requestforproceeding>
     {
+        Task<List<Allotmententry>> GetAllAllotment();
+        Task<List<Honble>> GetAllHonble();
 
         Task<bool> Create(Requestforproceeding requestforproceeding);
         Task<bool> Update(int id, Requestforproceeding scheme);
         Task<List<Requestforproceeding>> GetAllRequestForProceeding();
         Task<Requestforproceeding> FetchSingleResult(int id);
-        //Task<List<Requestforproceeding>> GetRequestUsingRepo();
-        //Task<bool> Delete(int id);
-        //Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
-
-        //Task<bool> UpdateBeforeApproval(int id, Requestforproceeding requestforproceeding);
+        Task<List<Requestforproceeding>> GetRequestUsingRepo();
+        Task<bool> Delete(int id);
+        Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
 
 
     }

@@ -41,7 +41,7 @@
 
                             </td>
                             <td align="right">
-                                Dated :  02/7/2015
+                                Dated : @DateTime.Now.ToString("dd-MMM-yyyy")
                             </td>
                     </table>
                 </td>
@@ -60,7 +60,7 @@
                         1. Name of the Society
                     </th>
                     <td width="50%">
-                        @Model.Allotment.Application.Name
+                        @(Model.Allotment == null ?  "" : Model.Allotment.Application == null ? "" : Model.Allotment.Application.Name)
                     </td>
                 </tr>
                 <tr>
@@ -68,7 +68,7 @@
                         2. Use as per allotment letter/Lease Deed:
                     </th>
                     <td>
-                        Primary-cum-Nursery School.
+                        @(Model.Allotment == null ?  "" : Model.Allotment.LeasePurposesType == null ? "" : Model.Allotment.LeasePurposesType.PurposeUse)
 
                     </td>
                 </tr>
@@ -85,7 +85,7 @@
                         4. Date of cancellation of lease Deed/allotment
                     </th>
                     <td>
-                        09.12.05
+                        @(Model.DateOfCancellationofLease == null ? "" : Convert.ToDateTime((Model.DateOfCancellationofLease)).ToString("dd-MMM-yyyy"))
                     </td>
                 </tr>
                 <tr>
@@ -93,7 +93,8 @@
                         5. Whether by Hon'ble LG or Comm.(LD)
                     </th>
                     <td>
-                        Hon'ble the then L.G.
+                        @*@(Model.HonebleLgOrCommon == null ?  "" : Model.HonebleLgOrCommon.HonbleName)*@
+                        @Model.HonebleLgOrCommon
                     </td>
                 </tr>
                 <tr>
@@ -101,7 +102,7 @@
                         6. Proceeding for eviction of Possession Assessment of damage
                     </th>
                     <td>
-                        Possession of land.
+                        @Model.ProceedingEvictionPossession
                     </td>
                 </tr>
                 <tr>
@@ -109,7 +110,7 @@
                         7. Court case if any
                     </th>
                     <td>
-                        No, As per record available Court Register.
+                        @Model.CourtCaseifAny
                     </td>
                 </tr>
             </tbody>
