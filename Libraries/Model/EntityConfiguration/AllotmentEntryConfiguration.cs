@@ -10,100 +10,102 @@ namespace Libraries.Model.EntityConfiguration
 
     public class AllotmententryConfiguration : IEntityTypeConfiguration<Allotmententry>
     {
-        public void Configure(EntityTypeBuilder<Allotmententry> builder)
+        public void Configure(EntityTypeBuilder<Allotmententry> entity)
         {
             {
-                builder.ToTable("allotmententry", "lms");
+                entity.ToTable("allotmententry", "lms");
 
-                builder.HasIndex(e => e.ApplicationId)
+                entity.HasIndex(e => e.ApplicationId)
                     .HasName("fkleaseappid_idx");
 
-                builder.HasIndex(e => e.LeasePurposesTypeId)
+                entity.HasIndex(e => e.LeasePurposesTypeId)
                     .HasName("fkleasepurposesid_idx");
 
-                builder.HasIndex(e => e.LeaseSubPurposeId)
+                entity.HasIndex(e => e.LeaseSubPurposeId)
                     .HasName("fkleasesubpurposeid_idx");
 
-                builder.HasIndex(e => e.LeasesTypeId)
+                entity.HasIndex(e => e.LeasesTypeId)
                     .HasName("fkleasetypessid_idx");
 
-                builder.Property(e => e.Id).HasColumnType("int(11)");
+                entity.Property(e => e.Id).HasColumnType("int(11)");
 
-                builder.Property(e => e.AllotedArea).HasColumnType("decimal(18,3)");
+                entity.Property(e => e.AllotmentDate).HasColumnType("date");
 
-                builder.Property(e => e.AllotmentDate).HasColumnType("date");
+                entity.Property(e => e.AmountLicFee).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.AmountLicFee).HasColumnType("decimal(18,3)");
+                entity.Property(e => e.ApplicationId).HasColumnType("int(11)");
 
-                builder.Property(e => e.ApplicationId).HasColumnType("int(11)");
+                entity.Property(e => e.BuildingArea).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+                entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-                builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                builder.Property(e => e.DocumentCharges).HasColumnType("decimal(18,3)");
+                entity.Property(e => e.DocumentCharges).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.GroundRent).HasColumnType("decimal(18,3)");
+                entity.Property(e => e.GroundRent).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+                entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-                builder.Property(e => e.IsPlayground)
-                    .HasMaxLength(50)
+                entity.Property(e => e.LeasePurposesTypeId).HasColumnType("int(11)");
+
+                entity.Property(e => e.LeaseSubPurposeId).HasColumnType("int(11)");
+
+                entity.Property(e => e.LeasesTypeId).HasColumnType("int(11)");
+
+                entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+                entity.Property(e => e.NoOfYears).HasColumnType("int(11)");
+
+                entity.Property(e => e.OldNewEntry)
+                    .HasMaxLength(45)
                     .IsUnicode(false);
 
-                builder.Property(e => e.LeasePurposesTypeId).HasColumnType("int(11)");
-
-                builder.Property(e => e.LeaseSubPurposeId).HasColumnType("int(11)");
-
-                builder.Property(e => e.LeasesTypeId).HasColumnType("int(11)");
-
-                builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
-
-                builder.Property(e => e.NoOfYears).HasColumnType("int(11)");
-
-                builder.Property(e => e.PhaseNo)
+                entity.Property(e => e.PhaseNo)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                builder.Property(e => e.PlayGroundArea).HasColumnType("decimal(18,3)");
+                entity.Property(e => e.PlayGroundArea).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.PlotNo)
+                entity.Property(e => e.PlotNo)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                builder.Property(e => e.PocketNo)
+                entity.Property(e => e.PocketNo)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                builder.Property(e => e.PremiumAmount).HasColumnType("decimal(18,3)");
+                entity.Property(e => e.PremiumAmount).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.PremiumRate).HasColumnType("decimal(18,3)");
+                entity.Property(e => e.PremiumRate).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.Remarks)
+                entity.Property(e => e.Remarks)
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                builder.Property(e => e.SectorNo)
+                entity.Property(e => e.SectorNo)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                builder.HasOne(d => d.Application)
+                entity.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
+
+                entity.HasOne(d => d.Application)
                     .WithMany(p => p.Allotmententry)
                     .HasForeignKey(d => d.ApplicationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fkleaseappid");
 
-                builder.HasOne(d => d.LeasePurposesType)
+                entity.HasOne(d => d.LeasePurposesType)
                     .WithMany(p => p.Allotmententry)
                     .HasForeignKey(d => d.LeasePurposesTypeId)
                     .HasConstraintName("fkleasepurposesid");
 
-                builder.HasOne(d => d.LeaseSubPurpose)
+                entity.HasOne(d => d.LeaseSubPurpose)
                     .WithMany(p => p.Allotmententry)
                     .HasForeignKey(d => d.LeaseSubPurposeId)
                     .HasConstraintName("fkleasesubpurposeid");
 
-                builder.HasOne(d => d.LeasesType)
+                entity.HasOne(d => d.LeasesType)
                     .WithMany(p => p.Allotmententry)
                     .HasForeignKey(d => d.LeasesTypeId)
                     .HasConstraintName("fkleasetypessid");

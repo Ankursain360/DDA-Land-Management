@@ -17,10 +17,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Leasepurpose>> GetAllLeasepurpose();
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
         Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
-       
+
+        Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
 
 
-       
 
     }
 }

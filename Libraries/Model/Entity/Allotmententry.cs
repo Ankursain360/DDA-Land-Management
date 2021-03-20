@@ -17,14 +17,15 @@ namespace Libraries.Model.Entity
             //Requestforproceeding = new HashSet<Requestforproceeding>();
         }
         public int ApplicationId { get; set; }
-        public decimal AllotedArea { get; set; }
+        public decimal TotalArea { get; set; }
         public DateTime AllotmentDate { get; set; }
         public string PhaseNo { get; set; }
         public string SectorNo { get; set; }
         public string PlotNo { get; set; }
         public string PocketNo { get; set; }
         public decimal PlayGroundArea { get; set; }
-        public string IsPlayground { get; set; }
+        public decimal? BuildingArea { get; set; }
+       
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
 
@@ -37,6 +38,7 @@ namespace Libraries.Model.Entity
         public int? LeasesTypeId { get; set; }
         public int? LeasePurposesTypeId { get; set; }
         public int? LeaseSubPurposeId { get; set; }
+        public string OldNewEntry { get; set; }
         [NotMapped]
         public List<Allotmententry> ApplicationList { get; set; }
         [NotMapped]
@@ -60,7 +62,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public decimal? LandAreaSqMt { get; set; }
 
-
+       
         [NotMapped]
         public DateTime Date { get; set; }
         //[NotMapped]
