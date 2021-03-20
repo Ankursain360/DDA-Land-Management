@@ -92,6 +92,9 @@ namespace LeaseDetails
                 options.SaveTokens = true;
 
             });
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);//You can set Time   
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,6 +113,7 @@ namespace LeaseDetails
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

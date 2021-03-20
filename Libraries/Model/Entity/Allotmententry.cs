@@ -79,5 +79,24 @@ namespace Libraries.Model.Entity
 
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
 
+        //[NotMapped]
+        //public string FullName
+        //{
+        //    get
+        //    {
+        //        return Application.RefNo + " (" + Application.Name + ")";
+        //    }
+        //}
+
+        [NotMapped]
+        public string LRefNo
+        {
+            get
+            {
+                return Application.RefNo ;
+            }
+        }
+
+
     }
 }

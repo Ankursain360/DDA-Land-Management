@@ -59,6 +59,9 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public IFormFile CancellationPhoto { get; set; }
 
+        [NotMapped]
+        public IFormFile ProcedingLetterDocument { get; set; }
+
 
     }
 }

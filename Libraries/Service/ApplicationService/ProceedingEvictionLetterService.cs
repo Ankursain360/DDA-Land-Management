@@ -34,7 +34,7 @@ namespace Libraries.Service.ApplicationService
             return await _proceedingEvictionLetterRepository.BindRefNoNameList();
         }
 
-        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model)
+        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(int model)
         {
             return await _proceedingEvictionLetterRepository.FetchProceedingConvictionLetterData(model);
         }
@@ -51,6 +51,17 @@ namespace Libraries.Service.ApplicationService
             model.LetterReferenceNo = data.LetterReferenceNo;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = UserId;
+            _proceedingEvictionLetterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> UpdateRequestProceedingUpload(int id, Requestforproceeding requestforproceeding)
+        {
+            var result = await _proceedingEvictionLetterRepository.FindBy(a => a.Id == requestforproceeding.Id);
+            Requestforproceeding model = result.FirstOrDefault();
+            model.ProcedingLetter = requestforproceeding.ProcedingLetter;
+            model.IsUpload = 1;
+            model.ModifiedDate = DateTime.Now;
             _proceedingEvictionLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
