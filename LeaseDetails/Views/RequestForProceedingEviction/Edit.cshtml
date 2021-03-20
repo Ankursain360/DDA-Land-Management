@@ -3,7 +3,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Request for procceding" })
 <div class="pt-3">
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Create</h3>
+        <h3 class="mb-3 d-flex">Edit</h3>
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
@@ -104,7 +104,7 @@
 
 
 
-            
+
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-6">
@@ -136,7 +136,7 @@
                 </label>
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="file" asp-for="DemandLetterPhoto"  class="floating-label-field floating-label-field--s3" />
+                    <input type="file" asp-for="DemandLetterPhoto" class="floating-label-field floating-label-field--s3" />
 
 
                     <label class="floating-label">Demand Letter </label>
@@ -150,7 +150,7 @@
                 </label>
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="file" asp-for="NocPhoto"  class="floating-label-field floating-label-field--s3" />
+                    <input type="file" asp-for="NocPhoto" class="floating-label-field floating-label-field--s3" />
 
 
                     <label class="floating-label">NOC</label>
@@ -168,7 +168,7 @@
                 </label>
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="file" asp-for="CancellationPhoto"  class="floating-label-field floating-label-field--s3" />
+                    <input type="file" asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3" />
 
 
                     <label class="floating-label">Cancellation Order </label>
@@ -179,7 +179,7 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Update</button>
                 @Html.ActionLink("Back", "Index", "RequestForProceedingEviction", null, new { @class = "btn btn-theme " })
             </div>
         </div>
@@ -191,5 +191,6 @@
 
 
 </div>
+
 
 
