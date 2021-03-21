@@ -81,8 +81,8 @@ namespace Repository.EntityRepository
                                                .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                        .Include(x => x.Ref.Application)
-                               //        .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
-                               //.Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                       .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                               //.Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Ref.Application.RefNo.Contains(model.AllotmentId))
                                //.Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.RefId== Convert.ToInt32(model.AllotmentId)))
                                 .OrderBy(x => x.Ref.Application.RefNo)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);

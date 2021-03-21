@@ -112,19 +112,12 @@ $(function ClearFields() {
     });
 
 $("#ddlrno").change(function () {
-    debugger
+    
     var kid = $(this).val();
     if (kid) {
 
         GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
-        //HttpGet(`/Possesionplan/BindLeaseApplicationDetails/?appId=${kid}`, 'json', function (response) {
-
-
-        //    $("#LAName").val(response[0].name);
-        //    $("#LAContact").val(response[0].contactNo);
-        //    $("#LaAddress").val(response[0].address);
-        //    $("#txtAllotedArea").val(response[0].areaSqlMt);
-        //});
+        
 
     }
 });
