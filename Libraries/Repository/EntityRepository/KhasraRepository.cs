@@ -189,14 +189,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-
-                    //case ("VILLAGE"):
-                    //    data.Results = data.Results.OrderBy(x => x.Name).ToList();
-                    //    break;
-                    //case ("KHASRA"):
-                    //    data.Results = data.Results.OrderBy(x => x.Name).ToList();
-                    //    break;
-                    case ("VILLAGE"):
+                        case ("VILLAGE"):
                         data = null;
                         data = await _dbContext.Khasra
                                    .Include(x => x.Acquiredlandvillage)

@@ -88,8 +88,7 @@ namespace Libraries.Service.ApplicationService
 
 
             model.AllotmentDate = allotmententry.AllotmentDate;
-            model.AllotedArea = allotmententry.AllotedArea;
-            model.PhaseNo = allotmententry.PhaseNo;
+             model.PhaseNo = allotmententry.PhaseNo;
 
             model.SectorNo = allotmententry.SectorNo;
             model.PlotNo = allotmententry.PlotNo;

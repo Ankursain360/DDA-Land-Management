@@ -13,8 +13,8 @@
 
     }
 });
-$("#AllotmentId").change(function () {
- 
+$("#AllotmentId").Onchange(function () {
+ debugger
     var kid = $(this).val();
     if (kid) {
         HttpGet(`/Possesionplan/BindLeaseApplicationDetails/?appId=${kid}`, 'json', function (response) {

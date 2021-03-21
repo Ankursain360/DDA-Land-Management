@@ -288,6 +288,8 @@ namespace Libraries.Model
         public virtual DbSet<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
         public virtual DbSet<Possesionplan> Possesionplan { get; set; }
         public virtual DbSet<Allotmententry> Allotmententry { get; set; }
+        public virtual DbSet<Leasepaymentdetails> Leasepaymentdetails { get; set; }
+        public virtual DbSet<Leasepaymenttype> Leasepaymenttype { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -524,6 +526,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LeaseApplicationDocumentsConfiguration());
             modelBuilder.ApplyConfiguration(new PossesionplanConfiguration());
             modelBuilder.ApplyConfiguration(new AllotmententryConfiguration());
+            modelBuilder.ApplyConfiguration(new LeasepaymenttypeConfiguration());
+            modelBuilder.ApplyConfiguration(new LeasepaymentdetailsConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -188,7 +188,11 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGE"):
-                        data.Results = data.Results.OrderBy(x => x.Village.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Nazul
+                .Include(x => x.Village)
+                           .Where(x => (x.VillageId == (nazulVillageReportSearchDto.villageId == 0 ? x.VillageId : nazulVillageReportSearchDto.villageId))
+                && (x.IsActive == 1)).OrderBy(x => x.Village.Name).GetPaged(nazulVillageReportSearchDto.PageNumber, nazulVillageReportSearchDto.PageSize);
                         break;
 
                    
@@ -201,7 +205,13 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Village.Name).ToList();
+
+                        data = null;
+                        data = await _dbContext.Nazul
+                .Include(x => x.Village)
+                           .Where(x => (x.VillageId == (nazulVillageReportSearchDto.villageId == 0 ? x.VillageId : nazulVillageReportSearchDto.villageId))
+                && (x.IsActive == 1)).OrderByDescending(x => x.Village.Name)
+                            .GetPaged(nazulVillageReportSearchDto.PageNumber, nazulVillageReportSearchDto.PageSize);
                         break;
 
 

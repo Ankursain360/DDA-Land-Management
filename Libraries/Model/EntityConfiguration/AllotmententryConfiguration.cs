@@ -20,8 +20,7 @@ namespace Libraries.Model.EntityConfiguration
 
                 builder.Property(e => e.Id).HasColumnType("int(11)");
 
-                builder.Property(e => e.AllotedArea).HasColumnType("decimal(18,3)");
-
+               
                 builder.Property(e => e.AllotmentDate).HasColumnType("date");
 
                 builder.Property(e => e.ApplicationId).HasColumnType("int(11)");
