@@ -21,6 +21,10 @@ namespace Libraries.Model.Entity
        
         [Required(ErrorMessage = "Allotment Date is mandatory ")]
         public DateTime AllotmentDate { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        [Required(ErrorMessage = "AllotedArea is mandatory")]
+        public decimal AllotedArea { get; set; }
         public string PhaseNo { get; set; }
         public string SectorNo { get; set; }
         public string PlotNo { get; set; }
