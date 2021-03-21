@@ -17,6 +17,7 @@ namespace Libraries.Model.Entity
             Allotmententry = new HashSet<Allotmententry>();
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
         }
+        [Required(ErrorMessage = "This field is Mandatory")]
         public string RefNo { get; set; }
 
         [Required(ErrorMessage = "Name is Mandatory")]
@@ -107,7 +108,53 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile ApprovalDocument { get; set; }
-        
 
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        // Old Allotment entryfeilds
+
+
+        [NotMapped]
+        public decimal AllotedArea { get; set; }
+       
+        [NotMapped]
+        [Required(ErrorMessage = "Allotment Date is Mandatory")]
+        public DateTime AllotmentDate { get; set; }
+        [NotMapped]
+        public DateTime? PossessionTakenDate { get; set; }
+        [NotMapped]
+        public string IsPlayground { get; set; }
+
+        [NotMapped]
+        public decimal PlayGroundArea { get; set; }
+        [NotMapped]
+        public decimal? PremiumAmount { get; set; }
+        [NotMapped]
+        public decimal? AmountLicFee { get; set; }
+        [NotMapped]
+        public int? NoOfYears { get; set; }
+        [NotMapped]
+        public decimal? GroundRent { get; set; }
+
+        [NotMapped]
+        public int PropertyTypeId { get; set; }
+        [NotMapped]
+        public List<PropertyType> PropertyTypeList { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Lease Type is Mandatory")]
+        public int LeaseTypeId { get; set; }
+        [NotMapped]
+        public List<Leasetype> LeaseTypeList { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Lease Purpose is Mandatory")]
+        public int PurposeId { get; set; }
+        [NotMapped]
+        public List<Leasepurpose> LeasePurposeList { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Lease SubPurpose is Mandatory")]
+        public int SubPurposeId { get; set; }
+        [NotMapped]
+        public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
     }
 }

@@ -9,11 +9,6 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface ILeaseApplicationFormRepository : IGenericRepository<Leaseapplication>
     {
-
-        //Task<bool> Any(int id, string name, int ServiceTypeId);
-        //Task<List<Servicetype>> GetServiceTypeList();
-        //Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
-        //Task<Documentchecklist> FetchSingleResult(int id);
         Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
         Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments);
         Task<Leaseapplication> FetchLeaseApplicationDetails(int id);

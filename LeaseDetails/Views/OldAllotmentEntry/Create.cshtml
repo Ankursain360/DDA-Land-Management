@@ -1,0 +1,205 @@
+﻿@model Libraries.Model.Entity.Leaseapplication
+@await Component.InvokeAsync("PageHeader", new { pageName = "Old Allotment Entry" })
+
+<div class="pt-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="my-3 d-flex sub-heading">Allottee Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="RefNo"
+                           class="floating-label-field floating-label-field--s3 " />
+                    <span asp-validation-for="RefNo" class="text-danger"></span>
+                    <label class="floating-label">File No.   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="Name"
+                           class="floating-label-field floating-label-field--s3 " />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label class="floating-label">Allottee  Name  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="Address"
+                           class="floating-label-field floating-label-field--s3 " />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <label class="floating-label">Allottee Address  </label>
+                </div>
+            </div>
+        </div>
+        <h3 class="my-3 d-flex sub-heading">Area Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="LeaseTypeId" asp-items="@(new SelectList(Model.LeaseTypeList, "Id","Type"))">
+                        <option disabled="disabled" selected value="">Select</option>
+
+                    </select>
+                    <span asp-validation-for="LeaseTypeId" class="text-danger"></span>
+                    <label class="floating-label">Lease Type </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="Address"
+                           class="floating-label-field floating-label-field--s3 " />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <label class="floating-label">Plot No. </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3" id="area">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="AllotedArea"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                    <label class="floating-label"> Building Area   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="AllotedArea"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                    <label class="floating-label"> Open Area/Playfield Area   </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="AllotedArea"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                    <label class="floating-label"> Total Area   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="date" asp-for="AllotmentDate"
+                           class="floating-label-field floating-label-field--s3 " value="" />
+                    <span asp-validation-for="AllotmentDate" class="text-danger"></span>
+                    <label class="floating-label">Allotment Date       </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="PurposeId" asp-items="@(new SelectList(Model.LeasePurposeList, "Id","PurposeUse"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
+                        <option disabled="disabled" selected value="">Select</option>
+
+                    </select>
+                    <span asp-validation-for="PurposeId" class="text-danger"></span>
+                    <label class="floating-label">Lease Purpose / Use </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="SubPurposeId" asp-items="@(new SelectList(Model.LeaseSubPurposeList, "Id","SubPurposeUse"))">
+                        <option disabled="disabled" selected value="">Select</option>
+
+                    </select>
+                    <span asp-validation-for="SubPurposeId" class="text-danger"></span>
+                    <label class="floating-label">Sub Purpose / Use </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+           
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" asp-for="Rate"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="Rate" class="text-danger msg"></span>
+                        <label class="floating-label"> Premium Rate </label>
+                    </div>
+                </div>
+           
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="date" asp-for="PossessionTakenDate"
+                           class="floating-label-field floating-label-field--s3 " value="" />
+                    <span asp-validation-for="PossessionTakenDate" class="text-danger"></span>
+                    <label class="floating-label">Possession Date  </label>
+                </div>
+            </div>
+        </div>
+       
+
+        <h3 class="my-3 d-flex sub-heading">Calculation Details</h3>
+
+        <div class="row mt-md-3" id="amount">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="PremiumAmount"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="PremiumAmount" class="text-danger msg"></span>
+                    <label class="floating-label"> Premium Amount </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="GroundRent"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="GroundRent" class="text-danger"></span>
+                    <label class="floating-label">Ground Rent  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3" id="fee">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="AmountLicFee"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="AmountLicFee" class="text-danger msg"></span>
+                    <label class="floating-label"> License Fee </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" asp-for="NoOfYears" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers " />
+                    <span asp-validation-for="NoOfYears" class="text-danger msg"></span>
+                    <label class="floating-label"> Lease Years  </label>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "Premiumrate", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/oldallotmententrycreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/oldallotmententrycreate.min.js" asp-append-version="true"></script>
+</environment>

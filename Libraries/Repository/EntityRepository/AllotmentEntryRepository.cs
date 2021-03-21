@@ -33,21 +33,37 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        //public async Task<List<Khasra>> BindKhasra(int? villageId)
-        //{
-        //    List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
-        //    return khasraList;
-        //}
+        public async Task<List<Leasetype>> GetAllLeasetype()
+        {
+            List<Leasetype> leaseTypeList = await _dbContext.Leasetype.Where(x => x.IsActive == 1).ToListAsync();
+            return leaseTypeList;
+        }
 
-
-
+        
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
+        {
+            List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
+            return leasePurposeList;
+        }
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId)
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.PurposeUseId == purposeId && x.IsActive == 1).ToListAsync();
+            return leaseSubPurposeList;
+        }
 
 
         public async Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId)
         {
             return await _dbContext.Leaseapplication.Where(x => x.Id == applicationId).SingleOrDefaultAsync();
         }
-
+        public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
+        {
+            var result = await _dbContext.Allotmententry.Where(x => x.Id == LeasesTypeId).SingleOrDefaultAsync();
+            var masterPremiumAmount = await _dbContext.Premiumrate.Where(x => x.FromDate <= result.AllotmentDate && x.ToDate >= result.AllotmentDate).FirstOrDefaultAsync();
+            result.PremiumRate = masterPremiumAmount.PremiumRate;
+            result.TotalPremiumAmount = Convert.ToDecimal(0.00024711) * masterPremiumAmount.PremiumRate * result.TotalArea;
+            return result;
+        }
 
 
 

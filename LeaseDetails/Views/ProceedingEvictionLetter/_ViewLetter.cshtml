@@ -1,0 +1,162 @@
+﻿@*@model Libraries.Model.Entity.Requestforproceeding*@
+@model Dto.Master.ProceedingEvictionLetterViewLetterDataDto
+
+<link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/select2/select2.js" defer></script>
+<style>
+    /*table,
+    tbody,
+    td {
+        width: 40%;
+    }
+
+    table,
+    tbody,
+    th {
+        width: 50%;
+    }*/
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-top: 0px none;
+        border-bottom: 0px none;
+    }
+</style>
+<div class="pt-3">
+    <div id="LetterData" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+
+        <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+            <tr>
+                <td align="center">
+                    <h4><b><u> DELHI DEVLOPMENT AUTHORITY</u></b></h4> <br />
+                    <h4><b><u> INSTITUTIONAL LAND BRANCH</u></b></h4> <br />
+                </td>
+            </tr>
+
+            <tr>
+
+                <td style="border:none; border-top: none;">
+                    <table style="border:none; border-top: none; width:100%">
+                        <tr>
+
+                            <td align="left">
+                                @Model.LetterReferenceNo
+
+                            </td>
+                            <td align="right">
+                                Dated : @DateTime.Now.ToString("dd-MMM-yyyy")
+                            </td>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Sub: Request for starting proceeding for eviction under Public Premises (Eviction of unauthorized and occupied) Act, 1971 to the Court of Estate Officer, TYA, DDA New Delhi.</b>
+                </td>
+
+            </tr>
+        </table>
+        <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+            <tbody class="tbody">
+                <tr>
+                    <th width="50%">
+                        1. Name of the Society
+                    </th>
+                    <td width="50%">
+                        @Model.SocityName
+                       @* @(Model.Allotment == null ?  "" : Model.Allotment.Application == null ? "" : Model.Allotment.Application.Name)*@
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        2. Use as per allotment letter/Lease Deed:
+                    </th>
+                    <td>
+                        @Model.PurposeUse
+                       @* @(Model.Allotment == null ?  "" : Model.Allotment.LeasePurposesType == null ? "" : Model.Allotment.LeasePurposesType.PurposeUse)*@
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        3. Ground of violation
+                    </th>
+                    <td>
+                        @Model.GroundOfViolations
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        4. Date of cancellation of lease Deed/allotment
+                    </th>
+                    <td>
+                        @Model.DateOfCancellationofLease
+                       @* @(Model.DateOfCancellationofLease == null ? "" : Convert.ToDateTime((Model.DateOfCancellationofLease)).ToString("dd-MMM-yyyy"))*@
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        5. Whether by Hon'ble LG or Comm.(LD)
+                    </th>
+                    <td>
+                        @Model.HonbleName
+                      @*  @(Model.Honble == null ?  "" : Model.Honble.HonbleName)*@
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        6. Proceeding for eviction of Possession Assessment of damage
+                    </th>
+                    <td>
+                        @Model.ProceedingEvictionPossession
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        7. Court case if any
+                    </th>
+                    <td>
+                        @Model.CourtCaseifAny
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+            <tbody class="tbody">
+                <tr>
+                    <td>
+                        It is requested that proceeding of eviction against the Gyan Mandir Education Society may be taken under P.P. Act. The relevant photocopies of the documents are enclosed (Demand letter, NOC and cancellation order).
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right">
+                        Dy. Director (LM)DDA
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+
+                        <p style="color:black">
+                            @Model.RoleName /        @Model.ZoneName
+                            Dy. Director (LM)/West Zone
+                            <br />Subhash Nagar Mor
+                            <br />   DDA Office Complex
+                            <br />Delhi
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/select2/select2.js" defer></script>
+<environment include="Development">
+    <script src="~/js/site.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+

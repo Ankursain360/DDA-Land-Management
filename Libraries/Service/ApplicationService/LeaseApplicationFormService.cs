@@ -28,24 +28,6 @@ namespace Libraries.Service.ApplicationService
             _leaseApplicationRepository = leaseApplicationRepository;
             _mapper = mapper;
         }
-        //public async Task<Leaseapplication> FetchSingleResult(int id)
-        //{
-        //    return await _leaseApplicationRepository.FetchSingleResult(id);
-        //}
-        //public async Task<bool> Update(int id, Leaseapplication leaseapplication)
-        //{
-        //    var result = await _leaseApplicationRepository.FindBy(a => a.Id == id);
-        //    Leaseapplication model = result.FirstOrDefault();
-        //    model.ServiceTypeId = leaseapplication.ServiceTypeId;
-        //    model.Name = leaseapplication.Name;
-        //    model.Description = leaseapplication.Description;
-        //    model.IsMandatory = leaseapplication.IsMandatory;
-        //    model.IsActive = leaseapplication.IsActive;
-        //    model.ModifiedDate = DateTime.Now;
-        //    _leaseApplicationRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
-
         public async Task<bool> Create(Leaseapplication leaseapplication)
         {
             leaseapplication.CreatedDate = DateTime.Now;
@@ -57,32 +39,6 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leaseApplicationRepository.FetchLeaseApplicationDetails(id);
         }
-
-
-        //public async Task<bool> CheckUniqueName(int id, string Name, int ServiceTypeId)
-        //{
-        //    bool result = await _leaseApplicationRepository.Any(id, Name, ServiceTypeId);
-        //    return result;
-        //}
-
-        //public async Task<bool> Delete(int id)
-        //{
-        //    var form = await _leaseApplicationRepository.FindBy(a => a.Id == id);
-        //    Leaseapplication model = form.FirstOrDefault();
-        //    model.IsActive = 0;
-        //    _leaseApplicationRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
-        //public async Task<List<Servicetype>> GetServiceTypeList()
-        //{
-        //    return await _leaseApplicationRepository.GetServiceTypeList();
-        //}
-
-        //public async Task<PagedResult<Leaseapplication>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model)
-        //{
-        //    return await _leaseApplicationRepository.GetPagedDocumentChecklistData(model);
-        //}
-
         public async Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid)
         {
             return await _leaseApplicationRepository.GetDocumentChecklistDetails(servicetypeid);

@@ -24,11 +24,15 @@ namespace Libraries.Repository.EntityRepository
             List<Allotmententry> list = await _dbContext.Allotmententry.Include(x => x.Application).ToListAsync();
             return list;
         }
-       
+
 
         public async Task<Allotmententry> FetchSingleAppAreaDetails(int? ApplicationId)
         {
-            return await _dbContext.Allotmententry.Where(x => x.ApplicationId == ApplicationId).SingleOrDefaultAsync();
+            var result = await _dbContext.Allotmententry.Where(x => x.Id == ApplicationId).SingleOrDefaultAsync();
+            var masterPremiumAmount = await _dbContext.Premiumrate.Where(x => x.FromDate <= result.AllotmentDate && x.ToDate >= result.AllotmentDate).FirstOrDefaultAsync();
+            result.PremiumRate = masterPremiumAmount.PremiumRate;
+            //result.TotalPremiumAmount = Convert.ToDecimal(0.00024711)*masterPremiumAmount.PremiumRate * result.AllotedArea ?? 0;
+            return result;
         }
     }
 }

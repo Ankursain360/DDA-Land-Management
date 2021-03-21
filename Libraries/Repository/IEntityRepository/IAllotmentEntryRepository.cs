@@ -13,12 +13,14 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Allotmententry>> GetAllAllotmententry();
 
         Task<List<Leaseapplication>> GetAllLeaseapplication();
-        //Task<List<Khasra>> BindKhasra(int? villageId);
+        Task<List<Leasetype>> GetAllLeasetype();
+        Task<List<Leasepurpose>> GetAllLeasepurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
         Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
-       
+
+        Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
 
 
-       
 
     }
 }

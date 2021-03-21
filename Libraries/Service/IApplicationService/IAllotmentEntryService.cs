@@ -15,10 +15,13 @@ namespace Libraries.Service.IApplicationService
 
 
         Task<List<Leaseapplication>> GetAllLeaseapplication();
-        //Task<List<Khasra>> BindKhasra(int? villageId);
-        Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
-        //Task<List<Undersection17>> GetAllUndersection17List();
+        Task<List<Leasetype>> GetAllLeasetype();
+        Task<List<Leasepurpose>> GetAllLeasepurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
 
+        Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
+        Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
+       
         Task<List<Allotmententry>> GetAllotmententryUsingRepo();
         Task<List<Allotmententry>> GetAllAllotmententry();
 
@@ -29,7 +32,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Allotmententry>> GetPagedAllotmententry(AllotmentEntrySearchDto model);
 
 
-        //Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model);
+        
 
 
     }

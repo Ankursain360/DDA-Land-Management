@@ -44,21 +44,6 @@ namespace LeaseDetails.Controllers
             _workflowtemplateService = workflowtemplateService;
             _hostingEnvironment = hostingEnvironment;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public async Task<PartialViewResult> List([FromBody] DocumentChecklistSearchDto model)
-        //{
-        //    var result = await _leaseApplicationFormService.GetPagedDocumentChecklistData(model);
-        //    return PartialView("_List", result);
-        //}
-        //async Task BindDropDown(Documentchecklist documentchecklist)
-        //{
-        //    documentchecklist.ServiceTypeList = await _leaseApplicationFormService.GetServiceTypeList();
-        //}
 
         [AllowAnonymous]
         public async Task<IActionResult> Create()
