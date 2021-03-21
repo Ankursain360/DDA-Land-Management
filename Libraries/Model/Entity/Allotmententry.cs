@@ -15,6 +15,7 @@ namespace Libraries.Model.Entity
         {
             Possesionplan = new HashSet<Possesionplan>();
             Requestforproceeding = new HashSet<Requestforproceeding>();
+            Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
         }
         public int ApplicationId { get; set; }
         public decimal TotalArea { get; set; }
@@ -78,15 +79,16 @@ namespace Libraries.Model.Entity
     
 
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
+        public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
 
-        //[NotMapped]
-        //public string FullName
-        //{
-        //    get
-        //    {
-        //        return Application.RefNo + " (" + Application.Name + ")";
-        //    }
-        //}
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return Application.RefNo + " (" + Application.Name + ")";
+            }
+        }
 
         [NotMapped]
         public string LRefNo
