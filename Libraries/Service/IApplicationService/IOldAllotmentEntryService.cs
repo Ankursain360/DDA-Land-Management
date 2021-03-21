@@ -17,5 +17,16 @@ namespace Libraries.Service.IApplicationService
         Task<List<PropertyType>> GetAllPropertyType();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
+        //********* save in table  Allotmententry  **********
+
+
+        Task<int> SaveAllotmentDetails(Allotmententry entry);
+        Task<List<Allotmententry>> GetAllAllotmententry(int id);
+        Task<bool> DeleteEntry(int Id);
+
+        //********* save in table  possesionplan  **********
+        Task<bool> SavepossessionDetails(Possesionplan entry);
+        //Task<List<Possesionplan>> GetAllPossesionplan(int id);
+        //Task<bool> DeletePlan(int Id);
     }
 }

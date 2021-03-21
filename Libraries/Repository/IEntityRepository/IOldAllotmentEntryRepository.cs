@@ -14,11 +14,17 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Leasetype>> GetAllLeaseType();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
-       
-        //********* rpt ! Owner Details **********
 
-        //Task<bool> SaveOwner(Jaraiowner Jaraiowner);
-        //Task<List<Jaraiowner>> GetAllOwner(int id);
-        //Task<bool> DeleteOwner(int Id);
+        //********* save in table  Allotmententry  **********
+
+       
+        Task<int> SaveAllotmentDetails(Allotmententry entry);
+        Task<List<Allotmententry>> GetAllAllotmententry(int id);
+        Task<bool> DeleteEntry(int Id);
+
+        //********* save in table  possesionplan  **********
+        Task<bool> SavepossessionDetails(Possesionplan entry);
+        //Task<List<Possesionplan>> GetAllPossesionplan(int id);
+        //Task<bool> DeletePlan(int Id);
     }
 }

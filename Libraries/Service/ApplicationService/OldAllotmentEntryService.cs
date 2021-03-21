@@ -56,5 +56,48 @@ namespace Libraries.Service.ApplicationService
             _oldAllotmentEntryRepository.Add(lease);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        //********* save in table  Allotmententry  **********
+
+
+        public async Task<int> SaveAllotmentDetails(Allotmententry entry)
+        {
+            entry.CreatedBy = entry.CreatedBy;
+            entry.CreatedDate = DateTime.Now;
+            entry.IsActive = 1;
+            //return await _oldAllotmentEntryRepository.SaveAllotmentDetails(entry);
+             var result= await _oldAllotmentEntryRepository.SaveAllotmentDetails(entry);
+            var id = entry.Id;
+            return id;
+        }
+        public async Task<List<Allotmententry>> GetAllAllotmententry(int id)
+        {
+            return await _oldAllotmentEntryRepository.GetAllAllotmententry(id);
+        }
+        public async Task<bool> DeleteEntry(int Id)
+        {
+            return await _oldAllotmentEntryRepository.DeleteEntry(Id);
+        }
+
+        //********* save in table  possesionplan  **********
+        public async Task<bool> SavepossessionDetails(Possesionplan entry)
+        {
+            entry.CreatedBy = entry.CreatedBy;
+            entry.CreatedDate = DateTime.Now;
+            entry.IsActive = 1;
+            return await _oldAllotmentEntryRepository.SavepossessionDetails(entry);
+
+        }
+        //public async Task<List<Possesionplan>> GetAllPossesionplan(int id)
+        //{
+        //return await _oldAllotmentEntryRepository.GetAllPossesionplan(id);
+        //}
+        //public async Task<bool> DeletePlan(int Id)
+        //{
+        // return await _jaraidetailRepository.DeletePlan(Id);
+        //}
+
+
+
+        
     }
 }

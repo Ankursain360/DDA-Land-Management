@@ -41,28 +41,45 @@ namespace Libraries.Repository.EntityRepository
             List<Leasesubpurpose> list = await _dbContext.Leasesubpurpose.Where(x => x.PurposeUseId == purposeId && x.IsActive == 1).ToListAsync();
             return list;
         }
+
+        //********* save in table  Allotmententry  **********
+
+
+        public async Task<int> SaveAllotmentDetails(Allotmententry entry)
+        {
+            _dbContext.Allotmententry.Add(entry);
+            var Result = await _dbContext.SaveChangesAsync();
+            //return Result > 0 ? true : false;
+            return Result;
+        }
+        public async Task<List<Allotmententry>> GetAllAllotmententry(int id)
+        {
+            return await _dbContext.Allotmententry.Where(x => x.ApplicationId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> DeleteEntry(int Id)
+        {
+            _dbContext.Remove(_dbContext.Allotmententry.Where(x => x.ApplicationId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        //********* save in table  possesionplan  **********
+        public async Task<bool> SavepossessionDetails(Possesionplan entry)
+        {
+            _dbContext.Possesionplan.Add(entry);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        //public async Task<List<Possesionplan>> GetAllPossesionplan(int id)
+        //{
+        //    return await _dbContext.Possesionplan.Where(x => x.AllotmentId == id && x.IsActive == 1).ToListAsync();
+        //}
+        //public async Task<bool> DeletePlan(int Id)
+        //{
+
+        //}
+
        
-
-
-        //********* rpt ! Owner Details **********
-
-        //public async Task<bool> SaveOwner(Jaraiowner Jaraiowner)
-        //{
-        //    _dbContext.Jaraiowner.Add(Jaraiowner);
-        //    var Result = await _dbContext.SaveChangesAsync();
-        //    return Result > 0 ? true : false;
-        //}
-        //public async Task<List<Jaraiowner>> GetAllOwner(int id)
-        //{
-        //    return await _dbContext.Jaraiowner.Where(x => x.JaraiDetailId == id && x.IsActive == 1).ToListAsync();
-        //}
-
-        //public async Task<bool> DeleteOwner(int Id)
-        //{
-        //    _dbContext.RemoveRange(_dbContext.Jaraiowner.Where(x => x.JaraiDetailId == Id));
-        //    var Result = await _dbContext.SaveChangesAsync();
-        //    return Result > 0 ? true : false;
-        //}
 
     }
 }
