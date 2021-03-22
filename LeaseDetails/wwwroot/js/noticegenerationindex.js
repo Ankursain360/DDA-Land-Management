@@ -34,7 +34,7 @@ $("#btnReset").click(function () {
 
 function GetDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    HttpPost(`/LeaseHearingDetails/List`, 'html', param, function (response) {
+    HttpPost(`/NoticeGeneration/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });

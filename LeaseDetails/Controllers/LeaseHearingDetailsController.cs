@@ -44,7 +44,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-     //   [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -60,10 +60,8 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
-            var Data = await _leaseApplicationFormApprovalService.FetchSingleResult(id);
-            var dropdownValue = await GetApprovalStatusDropdownList();
-            List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
-            Data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
+            Requestforproceeding Data = await _leaseHearingDetailsService.FetchRequestforproceedingData(id);
+            Data.ApprovalStatusList = await _leaseHearingDetailsService.BindDropdownApprovalStatus();
             if (Data == null)
             {
                 return NotFound();

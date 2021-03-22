@@ -12,5 +12,7 @@ namespace Libraries.Service.IApplicationService
     public interface ILeaseHearingDetailsService : IEntityService<Requestforproceeding>
     {
         Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model, int userId);
+        Task<Requestforproceeding> FetchRequestforproceedingData(int id);
+        Task<List<Approvalstatus>> BindDropdownApprovalStatus();
     }
 }
