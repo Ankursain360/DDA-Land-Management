@@ -110,6 +110,7 @@ namespace LeaseDetails.Controllers
 
 
                     undersection4plot.CreatedBy = SiteContext.UserId;
+                    //undersection4plot.PendingAt = 0;
                     var result = await _undersection4PlotService.Create(undersection4plot);
 
                     if (result == true)
@@ -123,12 +124,12 @@ namespace LeaseDetails.Controllers
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(undersection4plot);
                     }
-                }
-                else
-                {
-                    return View(undersection4plot);
-                }
             }
+                else
+            {
+                return View(undersection4plot);
+            }
+        }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
@@ -226,25 +227,6 @@ namespace LeaseDetails.Controllers
                 return View(undersection4plot);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

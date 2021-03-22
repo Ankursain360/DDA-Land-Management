@@ -41,9 +41,15 @@
                 <div class="floating-label-wrap">
 
 
-                    <select class="floating-label-field floating-label-field--s3"
-                           asp-for="AllotmentId" asp-items="@(new SelectList(Model.AllotmententryList, "Id","LRefNo"))">
+                    <select class="floating-label-field floating-label-field--s3" onchange="get_socity()"
+                            asp-for="AllotmentId"
+                          
+                            >
                         <option selected disabled="disabled" value="">---Select---</option>
+                        @foreach (var item in Model.AllotmententryList)
+                        {
+                            <option value="@item.Id" data-id=" @item.SocietyName"> @item.LRefNo </option>
+                        }
                     </select>
                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label class="floating-label">File No</label>
@@ -68,7 +74,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input disabled type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
+                    <input disabled type="text" id="Society_name" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
 
                     <span class="text-danger"></span>
                     <label class="floating-label">Name Of the Society </label>
@@ -126,11 +132,11 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
-                            asp-for="Honble" asp-items="@(new SelectList(Model.HonbleList, "Id","HonbleName"))">
+                            asp-for="HonebleLgOrCommon" asp-items="@(new SelectList(Model.HonbleList, "Id","HonbleName"))">
                         <option selected disabled="disabled" value="">---Select---</option>
                     </select>
-                    <span asp-validation-for="Honble" class="text-danger"></span>
-                    <label asp-for="Honble" class="floating-label">Honble</label>
+                    <span asp-validation-for="HonebleLgOrCommon" class="text-danger"></span>
+                    <label asp-for="HonebleLgOrCommon" class="floating-label">Honble</label>
                 </div>
             </div>
 
@@ -234,3 +240,10 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+<script>
+    function get_socity() {
+        var sname = $("#AllotmentId").find(':selected').attr('data-id');
+        $("#Society_name").val(sname);
+    }
+    </script>

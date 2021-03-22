@@ -55,6 +55,7 @@ namespace Libraries.Service.ApplicationService
         {
 
             requestforproceeding.CreatedBy = 1;
+           requestforproceeding.PendingAt = 0;
             requestforproceeding.CreatedDate = DateTime.Now;
             _requestRepository.Add(requestforproceeding);
             return await _unitOfWork.CommitAsync() > 0;
