@@ -1,0 +1,147 @@
+﻿@*@model Libraries.Model.Entity.Premiumrate*@
+@await Component.InvokeAsync("PageHeader", new { pageName = "Judgement Details" })
+
+<div class="pt-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="accordion mb-4" id="accordionExample">
+            <div class="card">
+                <div class="card-header p-0" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-block btn-link collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Request of Eviction Proceeding<i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+
+                        collapseOne
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header p-0" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn-link btn btn-block collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Notice Details<i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        collapseTwo
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header p-0" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn-link btn btn-block collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Notice Display <i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        collapseThree
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header p-0" id="headingFour">
+                    <h2 class="mb-0">
+                        <button class="btn-link btn btn-block collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Evidance Document Upload <i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        collapseFour
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header p-0" id="headingFive">
+                    <h2 class="mb-0">
+                        <button class="btn-link btn btn-block collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Hearing Details<i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="table-section bg-white border shadow rounded">
+                            <div class="table-responsive ">
+                                <table class="table table-sm table-bordered mb-0 table-striped">
+                                    <thead class="text-nowrap">
+
+                                        <tr>
+                                            <th>Hearing Venue</th>
+                                            <th>Hearing Date</th>
+                                            <th>Hearing Time</th>
+                                            <th>Handed Over By</th>
+                                            <th>Attendee</th>
+                                            <th>Hearing  Remarks</th>
+                                            <th>Document</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="my-3 d-flex sub-heading pt-4">Judgement Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option disabled="disabled" selected value="">Select</option>
+                        <option >A</option>
+                        <option >B</option>
+                    </select>
+                    @*<span asp-validation-for="LeasesTypeId" class="text-danger"></span>*@
+                    <label class="floating-label">Forward To</label>
+                </div>
+            </div>
+           
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "Judgement", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/premiumrate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/premiumrate.min.js" asp-append-version="true"></script>
+</environment>

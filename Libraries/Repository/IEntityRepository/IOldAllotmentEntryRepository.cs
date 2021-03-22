@@ -13,11 +13,21 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<PropertyType>> GetAllPropertyType();
         Task<List<Leasetype>> GetAllLeaseType();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
-        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int? purposeId);
+        Task<PagedResult<Allotmententry>> GetPagedOldEntry(OLdAllotmentSearchDto model);
+        Task<bool> Update(int id, Allotmententry entry);
+        Task<bool> UpdateLease(int id, Allotmententry entry);
+       
+        Task<Allotmententry> FetchSingleResult(int id);
+        Task<Leaseapplication> FetchSingleLeaseResult(int id);
+      
+        Task<Possesionplan> FetchSinglePossessionResult(int id);
+        Task<bool> UpdatePossession(int id, Allotmententry entry);
+
 
         //********* save in table  Allotmententry  **********
 
-       
+
         Task<int> SaveAllotmentDetails(Allotmententry entry);
         Task<List<Allotmententry>> GetAllAllotmententry(int id);
         Task<bool> DeleteEntry(int Id);

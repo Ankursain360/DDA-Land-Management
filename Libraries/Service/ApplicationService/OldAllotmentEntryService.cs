@@ -44,10 +44,10 @@ namespace Libraries.Service.ApplicationService
             return list;
         }
 
-        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId)
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int? purposeId)
         {
-            List<Leasesubpurpose> zoneList = await _oldAllotmentEntryRepository.GetAllLeaseSubpurpose(purposeId);
-            return zoneList;
+            List<Leasesubpurpose> List = await _oldAllotmentEntryRepository.GetAllLeaseSubpurpose(purposeId);
+            return List;
         }
        
         public async Task<bool> Create(Leaseapplication lease)
@@ -56,10 +56,44 @@ namespace Libraries.Service.ApplicationService
             _oldAllotmentEntryRepository.Add(lease);
             return await _unitOfWork.CommitAsync() > 0;
         }
-        //********* save in table  Allotmententry  **********
+        public async Task<bool> Update(int id, Allotmententry entry)
+        {
+
+            return await _oldAllotmentEntryRepository.Update(id, entry);
+
+        }
+        public async Task<bool> UpdateLease(int id, Allotmententry entry)
+        {
+            return await _oldAllotmentEntryRepository.UpdateLease(id, entry);
+
+        }
+        public async Task<Allotmententry> FetchSingleResult(int id)
+        {
+            Allotmententry model = await _oldAllotmentEntryRepository.FetchSingleResult(id);
+            return model;
+        }
+        public async Task<Leaseapplication> FetchSingleLeaseResult(int id)
+        {
+            return await _oldAllotmentEntryRepository.FetchSingleLeaseResult(id);
+        }
+
+        public async Task<Possesionplan> FetchSinglePossessionResult(int id)
+        {
+            return await _oldAllotmentEntryRepository.FetchSinglePossessionResult(id);
+        }
+        public async Task<bool> UpdatePossession(int id, Allotmententry entry)
+        {
+            return await _oldAllotmentEntryRepository.UpdatePossession(id, entry);
+        }
+        public async Task<PagedResult<Allotmententry>> GetPagedOldEntry(OLdAllotmentSearchDto model)
+        {
+            return await _oldAllotmentEntryRepository.GetPagedOldEntry(model);
+        }
+
+            //********* save in table  Allotmententry  **********
 
 
-        public async Task<int> SaveAllotmentDetails(Allotmententry entry)
+            public async Task<int> SaveAllotmentDetails(Allotmententry entry)
         {
             entry.CreatedBy = entry.CreatedBy;
             entry.CreatedDate = DateTime.Now;

@@ -16,7 +16,18 @@ namespace Libraries.Service.IApplicationService
         Task<List<Leasetype>> GetAllLeaseType();
         Task<List<PropertyType>> GetAllPropertyType();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
-        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int? purposeId);
+        Task<PagedResult<Allotmententry>> GetPagedOldEntry(OLdAllotmentSearchDto model);
+
+        Task<bool> Update(int id, Allotmententry entry);
+        Task<bool> UpdateLease(int id, Allotmententry entry);
+        Task<Allotmententry> FetchSingleResult(int id);
+        Task<Leaseapplication> FetchSingleLeaseResult(int id);
+
+        Task<Possesionplan> FetchSinglePossessionResult(int id);
+        Task<bool> UpdatePossession(int id, Allotmententry entry);
+
+
         //********* save in table  Allotmententry  **********
 
 
