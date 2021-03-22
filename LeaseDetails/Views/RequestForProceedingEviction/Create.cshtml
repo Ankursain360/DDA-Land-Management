@@ -13,7 +13,7 @@
                             asp-for="UserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))">
                         <option selected disabled="disabled" value="">---Select---</option>
                     </select>
-
+                    <span asp-validation-for="UserId" class="text-danger"></span>
                     <label class="floating-label">UserName</label>
                 </div>
             </div>
@@ -42,10 +42,10 @@
 
 
                     <select class="floating-label-field floating-label-field--s3"
-                            asp-for="AllotmentId" asp-items="@(new SelectList(Model.AllotmententryList, "Id","LRefNo"))">
+                           asp-for="AllotmentId" asp-items="@(new SelectList(Model.AllotmententryList, "Id","LRefNo"))">
                         <option selected disabled="disabled" value="">---Select---</option>
                     </select>
-
+                    <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label class="floating-label">File No</label>
                 </div>
             </div>
@@ -56,7 +56,7 @@
 
                     <input asp-for="LetterReferenceNo" placeholder="Address" type="text"
                            class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="LetterReferenceNo" class="text-danger"></span>
                     <label class="floating-label">Letter Reference No</label>
                 </div>
             </div>
@@ -100,7 +100,7 @@
 
                     <input placeholder="Contact No" asp-for="GroundOfViolations" type="text"
                            class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="GroundOfViolations" class="text-danger"></span>
                     <label class="floating-label">Ground of violations  </label>
                 </div>
             </div>
@@ -116,7 +116,7 @@
 
                     <input placeholder="Contact No" asp-for="DateOfCancellationofLease" type="date" value=""
                            class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="DateOfCancellationofLease" class="text-danger"></span>
                     <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
                 </div>
             </div>
@@ -144,7 +144,7 @@
 
                     <input asp-for="ProceedingEvictionPossession" placeholder="Address" type="text"
                            class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="ProceedingEvictionPossession" class="text-danger"></span>
                     <label class="floating-label">Proceeding for eviction of possession Assessment of damage</label>
                 </div>
             </div>
@@ -153,7 +153,7 @@
 
                     <input asp-for="CourtCaseifAny" type="text"
                            class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="CourtCaseifAny" class="text-danger"></span>
                     <label class="floating-label">Court case if any   </label>
                 </div>
             </div>
@@ -233,3 +233,4 @@
 </div>
 
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

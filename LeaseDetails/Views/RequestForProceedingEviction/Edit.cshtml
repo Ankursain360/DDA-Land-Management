@@ -134,31 +134,59 @@
                 <label class="err" style="color:red;">
                     Only Upload 10 Mb File
                 </label>
+
                 <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DemandLetter" />
 
-                    <input type="file" asp-for="DemandLetterPhoto" class="floating-label-field floating-label-field--s3" />
+                    @{ if (Model.DemandLetter != null)
+                        {
 
 
-                    <label class="floating-label">Demand Letter </label>
+                            <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="DemandLetterPhoto" />
+                            <label for="field-1" class="floating-label">Demand Letter </label>
+                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                   "> (View Existing Photo )</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="DemandLetterPhoto" class="floating-label-field floating-label-field--s3">
+
+                            <label for="field-1" class="floating-label">Demand Letter</label> } }
 
                 </div>
+
+
+
+
+
             </div>
+
 
             <div class="col-md-6">
                 <label class="err" style="color:red;">
                     Only Upload 10 Mb File
                 </label>
                 <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="Noc" />
 
-                    <input type="file" asp-for="NocPhoto" class="floating-label-field floating-label-field--s3" />
+                    @{ if (Model.Noc != null)
+                        {
 
 
-                    <label class="floating-label">NOC</label>
+                            <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="NocPhoto" />
+                            <label for="field-1" class="floating-label">NOC </label>
+                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                   "> (View Existing Photo )</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="NocPhoto" class="floating-label-field floating-label-field--s3">
+
+                            <label for="field-1" class="floating-label">Demand Letter</label> } }
 
                 </div>
             </div>
         </div>
-
 
         <div class="row mt-md-3">
 
@@ -167,11 +195,22 @@
                     Only Upload 10 Mb File
                 </label>
                 <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="CancellationOrder" />
 
-                    <input type="file" asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3" />
+                    @{ if (Model.CancellationOrder != null)
+                        {
 
 
-                    <label class="floating-label">Cancellation Order </label>
+                            <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="CancellationPhoto" />
+                            <label for="field-1" class="floating-label">NOC </label>
+                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                   "> (View Existing Photo )</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3">
+
+                            <label for="field-1" class="floating-label">Cancellation Photo</label> } }
 
                 </div>
             </div>
