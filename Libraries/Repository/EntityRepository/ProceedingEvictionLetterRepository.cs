@@ -23,6 +23,23 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<ProceedingEvictionLetterViewLetterDataDto> BindProceedingConvictionLetterData(int id)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("ProceedingLetterGenerate")
+                                            .WithSqlParams(("P_Id", id))
+                                            .ExecuteStoredProcedureAsync<ProceedingEvictionLetterViewLetterDataDto>();
+
+                return (ProceedingEvictionLetterViewLetterDataDto)data.FirstOrDefault();
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<List<RefNoNameDto>> BindRefNoNameList()
         {
             try
@@ -40,12 +57,12 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model)
+        public async Task<Requestforproceeding> FetchProceedingConvictionLetterData(int id)
         {
             return await _dbContext.Requestforproceeding
                                     .Include(x => x.Allotment)
                                     .Include(x => x.Allotment.Application)
-                                    .Where(x => x.Id == model.RefNoNameId)
+                                    .Where(x => x.Id == id)
                                     .FirstOrDefaultAsync();
         }
 

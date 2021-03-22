@@ -14,6 +14,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<RefNoNameDto>> BindRefNoNameList();
         Task<string> GetLetterRefNo(int id);
         Task<bool> UpdateRequestProceeding(ProceedingEvictionLetterSearchDto model, int UserId);
-        Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model);
+        Task<Requestforproceeding> FetchProceedingConvictionLetterData(int id);
+        Task<bool> UpdateRequestProceedingUpload(int id, Requestforproceeding requestforproceeding);
+        Task<bool> UpdateRequestProceedingIsSend(int id, int UserId);
+        Task<ProceedingEvictionLetterViewLetterDataDto> BindProceedingConvictionLetterData(int refNoNameId);
     }
 }

@@ -12,6 +12,19 @@
 
     }
 });
+$(document).ready(function () {
+    debugger
+    var kid = $("#ApplicationId").val();
+    if (kid) {
+        HttpGet(`/AllotmentEntry/GetCalculationList/?LeasesTypeId=${kid}`, 'json', function (response) {
+            debugger;
+            $("#PremiumRate").val(response.premiumRate);
+           
+            $("#DocumentCharges").val(response.documentCharges);
+        });
+
+    }
+});
 $("#ApplicationId").change(function () {
     var kid = $(this).val();
     if (kid) {
@@ -25,6 +38,12 @@ $("#ApplicationId").change(function () {
 
     }
 });
+$("input[name='Playground']").click(function () {
+    var selected = $("input[type='radio'][name='Playground']:checked");
+    $("#IsPlayground").val(selected.val());
+
+});
+
 $('#ddlJudgement').change(function () {
     var value = $('#ddlJudgement option:selected').val();
     if (value == 0) {
@@ -39,7 +58,7 @@ $('#ddlJudgement').change(function () {
 });
 function onChange(id) {
 
-    HttpGet(`/AllotmentEntry/GetAllLeaseSubpurpose/?PurposeId=${id}`, 'json', function (response) {
+    HttpGet(`/AllotmentEntry/GetAllLeaseSubpurpose/?purposeUseId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].subPurposeUse + '</option>';

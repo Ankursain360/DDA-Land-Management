@@ -1,0 +1,22 @@
+﻿@model Dto.Master.ProceedingEvictionLetterCreateProfileDto
+@await Component.InvokeAsync("PageHeader", new { pageName = "Proceeding Eviction Letter" })
+
+<div class="pt-3">
+
+    <input type="hidden" asp-for="RefNoNameId" />
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 " id="VisibleLetter" style="display:none;">
+        <input type="submit" value="Print" class="btn btn-theme" id="btnPrint" style="display:none;" />
+        @Html.ActionLink("Back", "Index", "RequestForProceedingEviction", null, new { @class = "btn btn-theme " })
+        <div id="LetterDataView">
+        </div>
+    </div>
+</div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/proceedingevictionlettercreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/proceedingevictionlettercreate.min.js" asp-append-version="true"></script>
+</environment>

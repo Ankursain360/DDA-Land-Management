@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-   
+    GetDetails();
 });
 
 
@@ -40,16 +40,18 @@ function GetDetails() {
         if (response != null) {
             $("#btnPrint").show();
             $("#VisibleLetter").show();
-            $("#btnGenerate").hide();
-            $("#LetterReferenceNo").attr("readonly", "readonly");
+            //$("#btnGenerate").hide();
+            //$("#LetterReferenceNo").attr("readonly", "readonly");
         }
     });
 }
 
 function GetSearchParam() {
     var model = {
+        //LetterReferenceNo: $("#LetterReferenceNo").val(),
+        //RefNoNameId: parseInt($("#RefNoNameId option:selected").val())
         LetterReferenceNo: $("#LetterReferenceNo").val(),
-        RefNoNameId: parseInt($("#RefNoNameId option:selected").val())
+        RefNoNameId: parseInt($("#RefNoNameId").val())
     }
     return model;
 }

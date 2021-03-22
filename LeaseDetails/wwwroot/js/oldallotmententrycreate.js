@@ -1,36 +1,53 @@
 ﻿
-// CODE FOR click event OF RADIO BUTTON
-$(function () {
-    $("input[name='Playground']").click(function () {
-        if ($("#rdbYes").is(":checked")) {
-            $("#play").show();
-        } else {
-            $("#play").hide();
-        }
-    });
-});
+//// CODE FOR click event OF RADIO BUTTON
+//$(function () {
+//    $("input[name='Playground']").click(function () {
+//        if ($("#rdbYes").is(":checked")) {
+//            $("#play").show();
+//            $("#fee").show();
+//        } else {
+//            $("#play").hide();
+//            $("#fee").hide();
+//        }
+//    });
+//});
 
 
- //CODE FOR SAVING VALUE OF RADIO BUTTON
+// //CODE FOR SAVING VALUE OF RADIO BUTTON
 
-$("input[name='Playground']").click(function () {
-    var selected = $("input[type='radio'][name='Playground']:checked");
-    $("#IsPlayground").val(selected.val());
+//$("input[name='Playground']").click(function () {
+//    var selected = $("input[type='radio'][name='Playground']:checked");
+//    $("#IsPlayground").val(selected.val());
 
-});
+//});
 
 
 $('#LeaseTypeId').change(function () {
     var value = $('#LeaseTypeId option:selected').val();
     
-    if (value == 2) {
-        $('#temp').hide();
-        $('#amount').hide();  
-
+    if (value == 3) {
+        $('#area').show();
+       
     }
     else {
-        $('#temp').show();
-        $('#amount').show();  
+        $('#area').hide();   
+    }
+    if (value == 1) {
+        $('#amount').show();
+    }
+    else {
+        $('#amount').hide();
+    }
+    if (value == 2) {
+        $('#fee').show();
+    }
+    else {
+        $('#fee').hide();
+    }
+     if (value == 3) {
+       
+        $('#amount').show();
+        $('#fee').show();
     }
 });
 

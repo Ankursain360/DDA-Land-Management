@@ -7,10 +7,12 @@
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
+    <Content Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +27,7 @@
     <None Include="Views\LeaseApplicationForm\Print.cshtml" />
     <None Include="Views\LeaseApplicationForm\_List.cshtml" />
     <None Include="wwwroot\js\leaseapplicationformcreate.min.js" />
+    <None Include="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>

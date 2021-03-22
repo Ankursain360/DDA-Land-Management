@@ -64,25 +64,16 @@ namespace Libraries.Service.ApplicationService
             List<Leasetype> leaseTypeList = await _allotmentEntryRepository.GetAllLeasetype();
             return leaseTypeList;
         }
-        //public async Task<List<Leasepurpose>> GetAllLeasepurpose()
-        //{
-        //    List<Leasepurpose> leasePurposeList = await _allotmentEntryRepository.GetAllLeasepurpose();
-        //    return leasePurposeList;
-        //}
-        //public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
-        //{
-        //    List<Leasesubpurpose> leaseSubPurposeList = await _allotmentEntryRepository.GetAllLeasesubpurpose();
-        //    return leaseSubPurposeList;
-        //}
+        
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
             List<Leasepurpose> leasePurposeList = await _allotmentEntryRepository.GetAllLeasepurpose();
             return leasePurposeList;
         }
 
-        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId)
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId)
         {
-            List<Leasesubpurpose> leaseSubPurposeList = await _allotmentEntryRepository.GetAllLeaseSubpurpose(purposeId);
+            List<Leasesubpurpose> leaseSubPurposeList = await _allotmentEntryRepository.GetAllLeaseSubpurpose(purposeUseId);
             return leaseSubPurposeList;
         }
 
@@ -109,14 +100,15 @@ namespace Libraries.Service.ApplicationService
 
 
             model.AllotmentDate = allotmententry.AllotmentDate;
-            model.AllotedArea = allotmententry.AllotedArea;
+            model.TotalArea = allotmententry.TotalArea;
             model.PhaseNo = allotmententry.PhaseNo;
 
             model.SectorNo = allotmententry.SectorNo;
             model.PlotNo = allotmententry.PlotNo;
             model.PocketNo = allotmententry.PocketNo;
-            //model.BuildingArea = allotmententry.BuildingArea;
-
+            model.NoOfYears = allotmententry.NoOfYears;
+            model.AmountLicFee = allotmententry.AmountLicFee;
+            model.BuildingArea = allotmententry.BuildingArea;
 
             model.IsActive = allotmententry.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -140,7 +132,10 @@ namespace Libraries.Service.ApplicationService
             return await _allotmentEntryRepository.FetchSingleLeaseapplicationResult(applicationId);
         }
 
-        
+        public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
+        {
+            return await _allotmentEntryRepository.FetchSingleCalculationDetails(LeasesTypeId);
+        }
     }
 }
 

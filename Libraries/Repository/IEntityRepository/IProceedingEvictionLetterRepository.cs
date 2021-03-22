@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<RefNoNameDto>> BindRefNoNameList();
         Task<string> GetLetterRefNo(int id);
-        Task<Requestforproceeding> FetchProceedingConvictionLetterData(ProceedingEvictionLetterSearchDto model);
+        Task<Requestforproceeding> FetchProceedingConvictionLetterData(int id);
+        Task<ProceedingEvictionLetterViewLetterDataDto> BindProceedingConvictionLetterData(int id);
     }
 }

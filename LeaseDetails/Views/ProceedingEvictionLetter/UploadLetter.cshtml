@@ -1,27 +1,44 @@
 ﻿@model Libraries.Model.Entity.Requestforproceeding
-@await Component.InvokeAsync("PageHeader", new { pageName = "Document Checklist" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Upload Proceeding Eviction Letter" })
 
 <div class="pt-3">
 
-    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="UploadLetter" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Upload Letter</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="checkIsSend" value="0" />
 
-        <div class="row">            
+        <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Noc" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
-                    <span asp-validation-for="Noc" class="text-danger"></span>
-                    <label class="floating-label">Upload Document</label>
+                    <input type="hidden" asp-for="ProcedingLetter" />
+                    @{
+                        if (Model.ProcedingLetter != null)
+                        {
+                            <a class="badge badge-primary px-2" asp-action="ViewProceedingLetter" asp-route-id="@Model.Id" target="_blank"> (View Letter)</a>
+                            <input asp-for="ProcedingLetterDocument" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                            <span asp-validation-for="ProcedingLetterDocument" class="text-danger"></span>
+                        }
+                        else
+                        {
+                            <input asp-for="ProcedingLetterDocument" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                            <span asp-validation-for="ProcedingLetterDocument" class="text-danger"></span>
+                            <label class="floating-label">Upload Document</label>
+                        }
+                    }
                 </div>
             </div>
         </div>
 
-     
+
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Upload </button>
+                @if (Model.ProcedingLetter != null)
+                {
+                <button class="btn btn-theme " type="submit" onclick="return checkSend();">Send for State Officer </button>
+                }
                 @Html.ActionLink("Back", "Index", "RequestForProceedingEviction", null, new { @class = "btn btn-theme " })
 
             </div>

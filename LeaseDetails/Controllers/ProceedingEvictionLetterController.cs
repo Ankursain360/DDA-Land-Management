@@ -19,6 +19,7 @@ using LeaseDetails.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using Microsoft.Extensions.Configuration;
 
 namespace LeaseDetails.Controllers
 {
@@ -26,44 +27,156 @@ namespace LeaseDetails.Controllers
     {
 
         private readonly IProceedingEvictionLetterService _proceedingEvictionLetterService;
+        public IConfiguration _configuration;
 
-        public ProceedingEvictionLetterController(IProceedingEvictionLetterService proceedingEvictionLetterService)
+        string ProceedingEvictionLetterPath = "";
+        public ProceedingEvictionLetterController(IProceedingEvictionLetterService proceedingEvictionLetterService,
+            IConfiguration configuration)
         {
             _proceedingEvictionLetterService = proceedingEvictionLetterService;
+            _configuration = configuration;
+            ProceedingEvictionLetterPath = _configuration.GetSection("FilePaths:ProceedingEvictionLetter:ProceedingEvictionLetterPath").Value.ToString();
         }
 
+        //[AuthorizeContext(ViewAction.Add)]
+        //public async Task<IActionResult> Create()
+        //{
+        //    ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
+        //    data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
+        //    ViewBag.VisibleLetter = 0;
+        //    return View(data);
+        //}
+
+        //[HttpPost]
+        //public async Task<PartialViewResult> ViewLetter([FromBody] ProceedingEvictionLetterSearchDto model)
+        //{
+        //    var result = false;
+        //    if(model !=  null)
+        //    {
+        //        var IsUpdate = await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(model.RefNoNameId));
+        //        if (IsUpdate == null)
+        //        {
+        //            result = await _proceedingEvictionLetterService.UpdateRequestProceeding(model, SiteContext.UserId);
+        //        }
+        //        else
+        //        {
+        //            if (model.RefNoNameId != 0 && model.LetterReferenceNo != null)
+        //            {
+        //                result = true;
+        //            }
+        //        }
+        //    }
+
+        //    if(result)
+        //    {
+        //        var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(model);
+        //        ViewBag.VisibleLetter = 1;
+        //        return PartialView("_ViewLetter", data);
+        //    }
+        //    else
+        //    {
+        //        Requestforproceeding data = new Requestforproceeding();
+        //        ViewBag.Message = Alert.Show("No data Found", "", AlertType.Info);
+        //        return PartialView("_ViewLetter", data);
+        //    }
+        //}
+
+        //[HttpGet]
+        //public async Task<JsonResult> GetLetterRefNo(int? Id)
+        //{
+        //    Id = Id ?? 0;
+        //    return Json(await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(Id)));
+        //}
+
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> UploadLetter(int id)
         {
-            ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
-            data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
-            ViewBag.VisibleLetter = 0;
+            Requestforproceeding data = new Requestforproceeding();
+            data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(id);
+            data.Id = id;
             return View(data);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadLetter(int id, Requestforproceeding requestforproceeding)
+        {
+            try
+            {
+                if(requestforproceeding.checkIsSend != 1)
+                {
+                    if (requestforproceeding.ProcedingLetterDocument == null && requestforproceeding.ProcedingLetter == null)
+                    {
+                        ViewBag.Message = Alert.Show("Upload Document is Mandatory", "", AlertType.Warning);
+                        return View(requestforproceeding);
+                    }
+                    FileHelper fileHelper = new FileHelper();
+                    requestforproceeding.ProcedingLetter = requestforproceeding.ProcedingLetterDocument != null ?
+                                                                       fileHelper.SaveFile1(ProceedingEvictionLetterPath, requestforproceeding.ProcedingLetterDocument) :
+                                                                       requestforproceeding.ProcedingLetterDocument != null || requestforproceeding.ProcedingLetter != "" ?
+                                                                       requestforproceeding.ProcedingLetter : string.Empty;
+                    requestforproceeding.ModifiedBy = SiteContext.UserId;
+                    var result = await _proceedingEvictionLetterService.UpdateRequestProceedingUpload(id, requestforproceeding);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show("Proceeding Document Uploaded Sucessfully", "", AlertType.Success);
+                        TempData["Message"] = Alert.Show("Proceeding Document Uploaded Sucessfully", "", AlertType.Success);
+                        return RedirectToAction("Index", "RequestForProceedingEviction");
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(requestforproceeding);
+
+                    }
+
+                }
+                else
+                {
+                    var result = await _proceedingEvictionLetterService.UpdateRequestProceedingIsSend(id, SiteContext.UserId);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show("Letter Send", "", AlertType.Success);
+                        TempData["Message"] = Alert.Show("Letter Send", "", AlertType.Success);
+                        return RedirectToAction("Index", "RequestForProceedingEviction");
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(requestforproceeding);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(requestforproceeding);
+            }
+        }
+
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> GenerateLetter(int id)
+        {
+            ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
+            data.RefNoNameId = id;
+            ViewBag.VisibleLetter = 0;
+            return View(data);
+
+        }
         [HttpPost]
         public async Task<PartialViewResult> ViewLetter([FromBody] ProceedingEvictionLetterSearchDto model)
         {
             var result = false;
-            if(model !=  null)
+            if (model != null)
             {
-                var IsUpdate = await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(model.RefNoNameId));
-                if (IsUpdate == null)
-                {
-                    result = await _proceedingEvictionLetterService.UpdateRequestProceeding(model, SiteContext.UserId);
-                }
-                else
-                {
-                    if (model.RefNoNameId != 0 && model.LetterReferenceNo != null)
-                    {
-                        result = true;
-                    }
-                }
+                result = await _proceedingEvictionLetterService.UpdateRequestProceeding(model, SiteContext.UserId);
             }
-
-            if(result)
+            if (result)
             {
-                var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(model);
+                ProceedingEvictionLetterViewLetterDataDto data = new ProceedingEvictionLetterViewLetterDataDto();
+                data = await _proceedingEvictionLetterService.BindProceedingConvictionLetterData(model.RefNoNameId);
                 ViewBag.VisibleLetter = 1;
                 return PartialView("_ViewLetter", data);
             }
@@ -75,48 +188,14 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetLetterRefNo(int? Id)
+
+        public async Task<IActionResult> ViewProceedingLetter(int Id)
         {
-            Id = Id ?? 0;
-            return Json(await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(Id)));
+            FileHelper file = new FileHelper();
+            Requestforproceeding Data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(Id);
+            string filename = ProceedingEvictionLetterPath + Data.ProcedingLetter;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
-
-        [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> UploadLetter()
-        {
-            ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
-            data.RefNoNameList = await _proceedingEvictionLetterService.BindRefNoNameList();
-            ViewBag.VisibleLetter = 0;
-            return View(data);
-        }
-
-       
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> UploadLetter(int id, Requestforproceeding requestforproceeding)
-        //{
-        //    try
-        //    {
-        //        requestforproceeding.ModifiedBy = SiteContext.UserId;
-        //        var result = await _proceedingEvictionLetterService.UpdateRequestProceedingUpload(id, requestforproceeding);
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-        //            return View("Index");
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(requestforproceeding);
-
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return View(requestforproceeding);
-        //    }
-        //}
     }
 }

@@ -39,16 +39,7 @@ namespace Libraries.Repository.EntityRepository
             return leaseTypeList;
         }
 
-        //public async Task<List<Leasepurpose>> GetAllLeasepurpose()
-        //{
-        //    List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
-        //    return leasePurposeList;
-        //}
-        //public async Task<List<Leasesubpurpose>> GetAllLeasesubpurpose()
-        //{
-        //    List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.IsActive == 1).ToListAsync();
-        //    return leaseSubPurposeList;
-        //}
+        
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
             List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
@@ -65,7 +56,14 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Leaseapplication.Where(x => x.Id == applicationId).SingleOrDefaultAsync();
         }
-
+        public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
+        {
+            var result = await _dbContext.Allotmententry.Where(x => x.Id == LeasesTypeId).SingleOrDefaultAsync();
+            var masterPremiumAmount = await _dbContext.Premiumrate.Where(x => x.FromDate <= result.AllotmentDate && x.ToDate >= result.AllotmentDate).FirstOrDefaultAsync();
+            result.PremiumRate = masterPremiumAmount.PremiumRate;
+            result.TotalPremiumAmount = Convert.ToDecimal(0.00024711) * masterPremiumAmount.PremiumRate * result.TotalArea;
+            return result;
+        }
 
 
 

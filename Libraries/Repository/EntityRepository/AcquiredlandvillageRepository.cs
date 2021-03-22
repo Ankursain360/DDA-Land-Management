@@ -208,14 +208,9 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model)
         {
             var data = await _dbContext.Acquiredlandvillage
-
-
-                  .Where(x => (x.IsActive == 1)
+                           .Where(x => (x.IsActive == 1)
                                    && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
-
-
-
-                                   .OrderByDescending(x => x.Id)
+                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -225,17 +220,34 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGE"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                          .OrderBy(x => x.Name)
+                          .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
 
                     case ("CONSOLIDATION"):
-                        data.Results = data.Results.OrderBy(x => x.YearofConsolidation).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderBy(x => x.YearofConsolidation)
+                                  .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
                     case ("SHEET"):
-                        data.Results = data.Results.OrderBy(x => x.TotalNoOfSheet).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderBy(x => x.TotalNoOfSheet)
+                                  .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
                     case ("ACQUIRED"):
-                        data.Results = data.Results.OrderBy(x => x.Acquired).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderBy(x => x.Acquired)
+                                  .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
 
                 }
@@ -246,17 +258,29 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderByDescending(x => x.Name).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
 
                     case ("CONSOLIDATION"):
-                        data.Results = data.Results.OrderByDescending(x => x.YearofConsolidation).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderByDescending(x => x.YearofConsolidation).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
                     case ("SHEET"):
-                        data.Results = data.Results.OrderByDescending(x => x.TotalNoOfSheet).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderByDescending(x => x.TotalNoOfSheet).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
                     case ("ACQUIRED"):
-                        data.Results = data.Results.OrderByDescending(x => x.Acquired).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                          .Where(x => (x.IsActive == 1)
+                                  && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderByDescending(x => x.Acquired).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -290,7 +314,12 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGE"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                                     .Where(x => (x.IsActive == 1)
+                   && (x.Acquired == "yes")
+                                    && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                     .OrderBy(x => x.Name).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -300,7 +329,12 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Acquiredlandvillage
+                                     .Where(x => (x.IsActive == 1)
+                   && (x.Acquired == "yes")
+                                    && (x.Id == (model.Name == 0 ? x.Id : model.Name))).OrderByDescending(x => x.Name)
+                                     .OrderByDescending(x => x.Name).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
                         break;
 
                 }

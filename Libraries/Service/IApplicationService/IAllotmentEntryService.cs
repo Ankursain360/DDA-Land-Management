@@ -17,11 +17,11 @@ namespace Libraries.Service.IApplicationService
         Task<List<Leaseapplication>> GetAllLeaseapplication();
         Task<List<Leasetype>> GetAllLeasetype();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
-        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
 
         Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
-        //Task<List<Undersection17>> GetAllUndersection17List();
-
+        Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
+       
         Task<List<Allotmententry>> GetAllotmententryUsingRepo();
         Task<List<Allotmententry>> GetAllAllotmententry();
 
