@@ -55,8 +55,9 @@ namespace LeaseDetails.Controllers
             undersection4plot.IsActive = 1;
             undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
             undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-          
-        
+            undersection4plot.UserNameList = await _undersection4PlotService.BindUsernameNameList();
+
+
 
             return View(undersection4plot);
         }
@@ -68,8 +69,8 @@ namespace LeaseDetails.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Requestforproceeding undersection4plot)
         {
-          
-           
+
+
 
 
             //DemandletterFilePath = _configuration.GetSection("FilePaths:Demandletter:DemandletterFilePath").Value.ToString();
@@ -79,6 +80,7 @@ namespace LeaseDetails.Controllers
             try
             {
                 undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
+                undersection4plot.UserNameList = await _undersection4PlotService.BindUsernameNameList();
 
                 undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
 

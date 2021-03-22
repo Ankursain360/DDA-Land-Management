@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
-
+using Dto.Master;
 using Repository.Common;
 
 
@@ -150,7 +150,22 @@ namespace Libraries.Repository.EntityRepository
 
 
 
+        public async Task<List<UserBindDropdownDto>> BindUsernameNameList()
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("BindUserZoneDropDown")
+                                            .WithOutParams()
+                                            .ExecuteStoredProcedureAsync<UserBindDropdownDto>();
 
+                return (List<UserBindDropdownDto>)data;
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
 
 

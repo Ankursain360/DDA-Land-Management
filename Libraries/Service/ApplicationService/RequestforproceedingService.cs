@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -24,6 +25,11 @@ namespace Libraries.Service.ApplicationService
         {
             _unitOfWork = unitOfWork;
             _requestRepository = requestRepository;
+        }
+
+        public async Task<List<UserBindDropdownDto>> BindUsernameNameList()
+        {
+            return await _requestRepository.BindUsernameNameList();
         }
 
         public async Task<List<Allotmententry>> GetAllAllotment()

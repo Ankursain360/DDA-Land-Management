@@ -6,6 +6,7 @@ using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 
 using Microsoft.AspNetCore.Http;
+using Dto.Master;
 
 
 namespace Libraries.Model.Entity
@@ -58,6 +59,9 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile CancellationPhoto { get; set; }
+
+        [NotMapped]
+        public List<UserBindDropdownDto> UserNameList { get; set; }
 
 
     }
