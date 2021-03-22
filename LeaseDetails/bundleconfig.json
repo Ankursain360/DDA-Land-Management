@@ -160,5 +160,11 @@
     "inputFiles": [
       "wwwroot/js/leasehearingdetailscreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticegenerationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticegenerationindex.js"
+    ]
   }
 ]
