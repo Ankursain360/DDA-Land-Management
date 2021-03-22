@@ -44,7 +44,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-     //   [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -57,7 +57,7 @@ namespace LeaseDetails.Controllers
             return PartialView("_List", result);
         }
 
-      //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             Requestforproceeding Data = await _leaseHearingDetailsService.FetchRequestforproceedingData(id);
@@ -79,7 +79,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
 
-      //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Leaseapplication leaseapplication)
         {
             var result = false;
