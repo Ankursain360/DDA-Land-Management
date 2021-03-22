@@ -60,6 +60,9 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<UserBindDropdownDto> UserNameList { get; set; }
 
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
 
     }
 }

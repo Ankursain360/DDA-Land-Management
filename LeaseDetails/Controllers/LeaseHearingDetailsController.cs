@@ -57,13 +57,11 @@ namespace LeaseDetails.Controllers
             return PartialView("_List", result);
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+      //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
-            var Data = await _leaseApplicationFormApprovalService.FetchSingleResult(id);
-            var dropdownValue = await GetApprovalStatusDropdownList();
-            List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
-            Data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
+            Requestforproceeding Data = await _leaseHearingDetailsService.FetchRequestforproceedingData(id);
+            Data.ApprovalStatusList = await _leaseHearingDetailsService.BindDropdownApprovalStatus();
             if (Data == null)
             {
                 return NotFound();
@@ -81,7 +79,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
 
-        [AuthorizeContext(ViewAction.Add)]
+      //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Leaseapplication leaseapplication)
         {
             var result = false;

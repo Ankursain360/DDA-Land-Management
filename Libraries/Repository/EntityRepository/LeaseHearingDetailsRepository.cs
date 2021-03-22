@@ -23,6 +23,24 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<List<Approvalstatus>> BindDropdownApprovalStatus()
+        {
+            var badCodes = new[] { 1, 2 };
+            List<Approvalstatus> ApprovalstatusList = await _dbContext.Approvalstatus
+                                                                        .Where(x => x.IsActive == 1 && badCodes.Contains(x.Id))
+                                                                        .ToListAsync();
+            return ApprovalstatusList;
+        }
+
+        public async Task<Requestforproceeding> FetchRequestforproceedingData(int id)
+        {
+            return await _dbContext.Requestforproceeding
+                                        .Include(x => x.Allotment)
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => x.IsActive == 1 && x.Id == id)
+                                        .FirstOrDefaultAsync();
+        }
+
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model, int userId)
         {
             var data = await _dbContext.Requestforproceeding
@@ -31,7 +49,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.IsActive == 1
                                         && (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
-                                        && ( x.PendingAt == userId)
+                                        && (x.PendingAt == userId)
                                         )
                                         .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;

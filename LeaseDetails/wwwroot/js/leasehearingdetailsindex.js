@@ -27,8 +27,8 @@ $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
-    $('#ServiceTypeId').val('0').trigger('change');
-    $('#txtName').val('');
+    $('#txtRefNo').val('');
+    $('#txtSocietyName').val('');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 

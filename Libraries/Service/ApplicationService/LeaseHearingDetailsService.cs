@@ -29,6 +29,16 @@ namespace Libraries.Service.ApplicationService
             _mapper = mapper;
         }
 
+        public async Task<List<Approvalstatus>> BindDropdownApprovalStatus()
+        {
+            return await _leaseHearingDetailsRepository.BindDropdownApprovalStatus();
+        }
+
+        public async Task<Requestforproceeding> FetchRequestforproceedingData(int id)
+        {
+            return await _leaseHearingDetailsRepository.FetchRequestforproceedingData(id);
+        }
+
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model, int userId)
         {
             return await _leaseHearingDetailsRepository.GetPagedRequestLetterDetails(model, userId);
