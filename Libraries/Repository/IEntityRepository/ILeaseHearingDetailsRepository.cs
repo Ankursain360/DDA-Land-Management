@@ -10,5 +10,6 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface ILeaseHearingDetailsRepository : IGenericRepository<Requestforproceeding>
     {
+        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model, int userId);
     }
 }

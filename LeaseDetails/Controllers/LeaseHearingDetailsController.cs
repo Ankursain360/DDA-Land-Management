@@ -26,11 +26,13 @@ namespace LeaseDetails.Controllers
         private readonly IApprovalProccessService _approvalproccessService;
         string LeaseFilePath = "";
         string ApprovalDocumentPath = "";
-        public LeaseHearingDetailsController(ILeaseApplicationFormApprovalService leaseApplicationFormApprovalService,
+        public LeaseHearingDetailsController(ILeaseHearingDetailsService leaseHearingDetailsService, 
+            ILeaseApplicationFormApprovalService leaseApplicationFormApprovalService,
             ILeaseApplicationFormService leaseApplicationFormService,
             IConfiguration configuration,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService)
         {
+            _leaseHearingDetailsService = leaseHearingDetailsService;
             _leaseApplicationFormApprovalService = leaseApplicationFormApprovalService;
             _leaseApplicationFormService = leaseApplicationFormService;
             _configuration = configuration;
@@ -42,18 +44,17 @@ namespace LeaseDetails.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
+     //   [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] LeaseApplicationFormApprovalSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] LeaseHearingDetailsSearchDto model)
         {
-            var result = await _leaseApplicationFormApprovalService.GetPagedLeaseApplicationFormDetails(model, SiteContext.UserId);
-            ViewBag.IsApproved = model.StatusId;
-            return PartialView("_ListLeaseApplicationFormApproval", result);
+            var result = await _leaseHearingDetailsService.GetPagedRequestLetterDetails(model, SiteContext.UserId);
+            return PartialView("_List", result);
         }
 
         [AuthorizeContext(ViewAction.Add)]

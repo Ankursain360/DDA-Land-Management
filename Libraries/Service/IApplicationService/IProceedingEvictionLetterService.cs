@@ -16,7 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdateRequestProceeding(ProceedingEvictionLetterSearchDto model, int UserId);
         Task<Requestforproceeding> FetchProceedingConvictionLetterData(int id);
         Task<bool> UpdateRequestProceedingUpload(int id, Requestforproceeding requestforproceeding);
-        Task<bool> UpdateRequestProceedingIsSend(int id, int UserId);
+        Task<bool> UpdateRequestProceedingIsSend(Requestforproceeding data, int userId);
         Task<ProceedingEvictionLetterViewLetterDataDto> BindProceedingConvictionLetterData(int refNoNameId);
     }
 }

@@ -24,20 +24,13 @@ namespace Libraries.Model.Entity
         public string DemandLetter { get; set; }
         public string Noc { get; set; }
         public string CancellationOrder { get; set; }
-
-
         public byte? IsActive { get; set; }
-
-
-
         public int? UserId { get; set; }
         public string ProcedingLetter { get; set; }
         public int? IsGenerate { get; set; }
-        public int? IsUpload { get; set; }
+        public int? IsUpload { get; set; }        
         public int? IsSend { get; set; }
-
-
-
+        public int? PendingAt { get; set; }
 
         public Allotmententry Allotment { get; set; }
 

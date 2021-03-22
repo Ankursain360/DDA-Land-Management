@@ -29,6 +29,9 @@ namespace Libraries.Service.ApplicationService
             _mapper = mapper;
         }
 
-       
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model, int userId)
+        {
+            return await _leaseHearingDetailsRepository.GetPagedRequestLetterDetails(model, userId);
+        }
     }
 }
