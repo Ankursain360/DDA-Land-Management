@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
-
+using Dto.Master;
 using Microsoft.AspNetCore.Http;
 
 
@@ -63,6 +63,9 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public int checkIsSend { get; set; }
+
+        [NotMapped]
+        public List<UserBindDropdownDto> UserNameList { get; set; }
 
 
     }
