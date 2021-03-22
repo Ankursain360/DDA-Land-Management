@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -14,5 +15,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Honble>> GetAllHonble();
         Task<List<Requestforproceeding>> GetAllRequestForProceeding();
         Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
+        Task<List<UserBindDropdownDto>> BindUsernameNameList();
     }
 }

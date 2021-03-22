@@ -16,9 +16,13 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-            <td>@item.AllotmentId</td>
-            <td>@item.LetterReferenceNo</td>
-            <td>@item.Subject</td>
+            <td>
+                @(item.Allotment.Application.RefNo==null? " ":item.Allotment.Application.RefNo)
+                        @*@(item.VillageName == null? "-":item.VillageName)*@
+
+                    </td>
+            <td>@(item.LetterReferenceNo==null? "":item.LetterReferenceNo)</td>
+            <td>@(item.Subject==null? "":item.Subject)</td>
 
             <td>
                 @if (item.IsActive == 1)

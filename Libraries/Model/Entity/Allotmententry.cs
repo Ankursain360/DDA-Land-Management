@@ -99,6 +99,16 @@ namespace Libraries.Model.Entity
             }
         }
 
+        [NotMapped]
+        public string SocietyName
+        {
+            get
+            {
+                return Application.Name;
+            }
+        }
+
+
 
     }
 }
