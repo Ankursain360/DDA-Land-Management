@@ -70,6 +70,15 @@ namespace Libraries.Model.Entity
         public List<UserBindDropdownDto> UserNameList { get; set; }
 
         [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
 
 
