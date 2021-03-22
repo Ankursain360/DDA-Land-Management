@@ -148,5 +148,11 @@
     "inputFiles": [
       "wwwroot/js/proceedingevictionlettercreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leasehearingdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/leasehearingdetailsindex.js"
+    ]
   }
 ]
