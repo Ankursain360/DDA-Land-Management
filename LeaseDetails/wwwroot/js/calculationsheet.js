@@ -16,13 +16,13 @@
 //    }
 //});
 
-function GetReport(pageNumber, pageSize, sortOrder) {
-    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    HttpPost(`/ReportofLandTransferDepartmentWise/List`, 'html', param, function (response) {
-        $('#LoadReportView').html("");
-        $('#LoadReportView').html(response);
-    });
-}
+//function GetReport(pageNumber, pageSize, sortOrder) {
+//    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
+//    HttpPost(`/ReportofLandTransferDepartmentWise/List`, 'html', param, function (response) {
+//        $('#LoadReportView').html("");
+//        $('#LoadReportView').html(response);
+//    });
+//}
 
 $("#ApplicationId").change(function () {
     var id = $(this).val();
