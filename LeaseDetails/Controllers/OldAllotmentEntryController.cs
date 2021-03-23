@@ -125,18 +125,34 @@ namespace LeaseDetails.Controllers
                 PurposeId = PurposeId ?? 0;
                 return Json(await _oldAllotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(PurposeId)));
             }
+        public async Task<IActionResult> View(int id)
+        {
 
+            var Data = await _oldAllotmentEntryService.FetchSingleResult(id);
+            var Data2 = await _oldAllotmentEntryService.FetchSingleLeaseResult(Data.ApplicationId);
+            /// var Data3 = await _oldAllotmentEntryService.FetchSinglePossessionResult(Data.Id);
+            Data.LeaseTypeList = await _oldAllotmentEntryService.GetAllLeaseType();
+            Data.LeasePurposeList = await _oldAllotmentEntryService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _oldAllotmentEntryService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
+            Data.Application = Data2;
+            //  Data.PossessionTakenDate = Data3.PossessionTakenDate;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
         public async Task<IActionResult> Edit(int id)
         {
            
             var Data = await _oldAllotmentEntryService.FetchSingleResult(id);
             var Data2 = await _oldAllotmentEntryService.FetchSingleLeaseResult(Data.ApplicationId);
-            var Data3 = await _oldAllotmentEntryService.FetchSinglePossessionResult(Data.Id);
+           /// var Data3 = await _oldAllotmentEntryService.FetchSinglePossessionResult(Data.Id);
             Data.LeaseTypeList = await _oldAllotmentEntryService.GetAllLeaseType();
             Data.LeasePurposeList = await _oldAllotmentEntryService.GetAllLeasepurpose();
             Data.LeaseSubPurposeList = await _oldAllotmentEntryService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             Data.Application = Data2;
-            Data.PossessionTakenDate = Data3.PossessionTakenDate;
+          //  Data.PossessionTakenDate = Data3.PossessionTakenDate;
             if (Data == null)
             {
                 return NotFound();
@@ -169,6 +185,23 @@ namespace LeaseDetails.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(entry);
 
+            }
+        }
+
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _oldAllotmentEntryService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                //var result1 = await _premiumrateService.GetAllPremiumrate();
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+               // var result1 = await _premiumrateService.GetAllPremiumrate();
+                return View("Index");
             }
         }
     } 

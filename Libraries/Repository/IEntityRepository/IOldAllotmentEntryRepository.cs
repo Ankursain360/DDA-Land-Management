@@ -23,7 +23,7 @@ namespace Libraries.Repository.IEntityRepository
       
         Task<Possesionplan> FetchSinglePossessionResult(int id);
         Task<bool> UpdatePossession(int id, Allotmententry entry);
-
+        Task<bool> Delete(int id);// to delete record in alotment entry table
 
         //********* save in table  Allotmententry  **********
 

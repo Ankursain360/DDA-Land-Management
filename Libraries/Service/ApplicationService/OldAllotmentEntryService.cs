@@ -131,7 +131,9 @@ namespace Libraries.Service.ApplicationService
         //}
 
 
-
-        
+        public async Task<bool> Delete(int id) //delete record in allotment entry table
+        {
+            return await _oldAllotmentEntryRepository.Delete(id);
+        }
     }
 }

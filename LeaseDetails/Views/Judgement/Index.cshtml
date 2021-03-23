@@ -4,17 +4,17 @@
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
-        @*<div class="row">
+        <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtProperty" class="floating-label-field floating-label-field--s3" placeholder="Property Type" />
-                    <label for="txtProperty" class="floating-label">Property Type</label>
+                    <label for="txtProperty" class="floating-label">Reference Number</label>
                 </div>
             </div>
-            <div class="col-md-3">
+            @*<div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
-                    <label for="txtFromDate" class="floating-label">From Date</label>
+                    <label for="txtFromDate" class="floating-label">File No</label>
                 </div>
             </div>
             <div class="col-md-3">
@@ -22,9 +22,9 @@
                     <input type="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
                     <label for="txtToDate" class="floating-label">To Date</label>
                 </div>
-            </div>
+            </div>*@
 
-        </div>*@
+        </div>
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
                 <div class="row">
@@ -45,11 +45,10 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Type">Property Type </option>
-                        <option value="Rate">Premium Rate </option>
-                        <option value="From">From Date </option>
-                        <option value="To">To Date </option>
-                        <option value="Status">Status</option>
+                        <option value="Type">Reference Number </option>
+                        
+                        <option value="To">File No </option>
+                       
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
@@ -80,21 +79,30 @@
                     <thead class="text-nowrap">
                         <tr>
 
-                            <th> Property Type </th>
-                            <th> Premium Rate</th>
-                            <th> From Date</th>
-                            <th> To Date</th>
+                            <th>File No.</th>
+                            <th>Letter Reference No.</th>
+                            <th>Subject</th>
                             <th> Status</th>
-                            <th>Operations</th>
+                            <th>Operation</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>F-1201</td>
+                            <td>1123</td>
+                            <td>Request</td>
+
+                            <td>Active</td>
+                            <td>
+                                <a asp-action="Create" title="View" class="view">  Add Details </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>F-1201</td>
+                            <td>1123</td>
+                            <td>Request</td>
+
+                            <td>Active</td>
                             <td>
                                 <a asp-action="Create" title="View" class="view">  Add Details </a>
                             </td>
@@ -103,7 +111,7 @@
 
                 </table>
 
-               
+               <br />
             </div>
         </div>
 
@@ -112,10 +120,10 @@
 
 </div>
 
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/premiumrateindex.js"></script>
 </environment>
 <environment exclude="Development">
     <script src="~/js/premiumrateindex.min.js" asp-append-version="true"></script>
-</environment>
+</environment>*@
