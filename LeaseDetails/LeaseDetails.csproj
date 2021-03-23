@@ -8,6 +8,7 @@
     <Content Remove="bundleconfig.json" />
     <Content Remove="Views\LeaseHearingDetails\Create.cshtml" />
     <Content Remove="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
+    <Content Remove="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
     <Content Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
     <Content Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
@@ -30,6 +31,7 @@
     <None Include="Views\LeaseApplicationForm\_List.cshtml" />
     <None Include="Views\LeaseHearingDetails\Create.cshtml" />
     <None Include="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
+    <None Include="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
     <None Include="wwwroot\js\leaseapplicationformcreate.min.js" />
     <None Include="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>

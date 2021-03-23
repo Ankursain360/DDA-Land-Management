@@ -1,9 +1,16 @@
 ﻿$(document).ready(function () {
 
+    var id = 4;//parseInt($('#Id').val());
+    GetOtherDetails(id);
     GetDetails();
 });
 
-
+function GetOtherDetails(id) {
+    HttpGet(`/NoticeGeneration/RequestForProceedingEvictionView/?Id=${id}`, 'html', function (response) {
+        $('#RequestForProceedingEvictionDiv').html("");
+        $('#RequestForProceedingEvictionDiv').html(response);
+    });
+};
 function GetLetterRefNo(id) {
     HttpGet(`/ProceedingEvictionLetter/GetLetterRefNo/?Id=${id}`, 'json', function (response) {
 
