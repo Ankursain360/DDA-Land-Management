@@ -4,27 +4,20 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-  //  GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
-   // ClearFields();
+      GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    // ClearFields();
 });
 
 $("#btnSearch").click(function () {
     GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
-    
+
 });
 
 $("#btnReset").click(function () {
-    debugger
-    $('#txtSNumber').val('');
-    $('#txtSMode').val('');
-    $('#txtSDate').val('');
-   
-    $('#ddlrno').trigger('change');
-    
-    //var test = $("#ddlrno").children("option:selected").val()
-    //if (test) {
-        GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
-    //}
+
+    $('#txtNotificationN').val('');
+
+    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -48,12 +41,12 @@ $('#ddlSort').change(function () {
 });
 function GetPremiumrate(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-   // HttpPost(`/LeasePaymentDetails/List`, 'html', param, function (response) {
+    
     HttpPost(`/Test/List`, 'html', param, function (response) {
-       
+
         $('#divPossessionDetail').html("");
         $('#divPossessionDetail').html(response);
-        
+
     });
 }
 
@@ -61,9 +54,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
 
         AllotmentId: $("#ddlrno").children("option:selected").val(),
-        Mode: $('#txtSMode').val(),
-        PaymentDate: $('#txtSDate').val(),
-        Number: $('#txtSNumber').val(),
+
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -88,7 +79,7 @@ $(function () {
         if ($("#A").is(":checked")) {
             $('#PaymentMode').val('Challan');
         }
-        
+
 
         else {
             $('#PaymentMode').val('Epayment');
@@ -111,23 +102,22 @@ $(function ClearFields() {
         $('#ddlrno').val('');
         $('#ddlpt').val('');
     } else { }
-    if (document.getElementById('hid2').value == "1")
-        {
+    if (document.getElementById('hid2').value == "1") {
         $('#txtamount').val('');
         $('#txtchallan').val('');
         $('#txtpdate').val('');
         $('#ddlrno').val('');
         $('#ddlpt').val('');
     }
-    });
+});
 
 $("#ddlrno").change(function () {
-    debugger
+
     var kid = $(this).val();
     if (kid) {
 
         GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
-        
+
 
     }
 });

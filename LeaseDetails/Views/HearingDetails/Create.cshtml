@@ -1,0 +1,174 @@
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Hearing Details" })
+
+
+
+
+<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <h3 class="mb-3 d-flex">Hearing Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+    <div class="table-section bg-white border shadow rounded pb-3">
+        <div class="table-responsive px-2" id="divHistoryDetails">
+            <a data-toggle="collapse" href="#collapseHistoryApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval">
+                <h3 class="my-3 d-flex sub-heading">Evidance Upload Document Details</h3>
+            </a>
+            <div class="collapse" id="collapseHistoryApprroval">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        <tr>
+
+                            <th>Document Details</th>
+
+                            <th>View/Download</th>
+                        </tr>
+                    </thead>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="table-section bg-white border shadow rounded pb-3">
+        <div class="table-responsive px-2" id="divHistoryDetails">
+            <a data-toggle="collapse" href="#collapseHistoryApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval">
+                <h3 class="my-3 d-flex sub-heading">Hearing History Details</h3>
+            </a>
+            <div class="collapse" id="collapseHistoryApprroval">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        <tr>
+
+                            <th>Hearing Venue</th>
+                            <th>Hearing Date</th>
+                            <th>Hearing Time</th>
+                            <th>Hearing Remarks</th>
+                             <th>Operations</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>High Court, Delhi</td>
+                            <td>01-Apr -2021</td>
+                            <td>04:30 Pm</td>
+                            <td>This is dummy data only.</td>
+                            
+                            <td>
+                                <div class="action-btns">
+                                    <a class="edit" asp-action="Create"><i class="ri-edit-line"></i> </a>
+                                   @*<a class="edit"><i>Generate Notice</i></a>*@
+                                   
+                                </div>
+                            </td>
+
+                        </tr>
+
+                         </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <h3 class="my-3 d-flex sub-heading">Hearing Details Add</h3>
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Venue" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Venue  </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Date" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Date</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-md-3">
+        <div class="col-md-6">
+
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Time" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Time </label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Documents" type="file" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Documents (if any)</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-md-3">
+        <div class="col-md-12">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <textarea class="floating-label-field floating-label-field--s3" placeholder="Hearing Remarks">
+                </textarea>
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Remarks </label>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-md-3">
+        <div class=" col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span class="text-danger"></span>
+                <label class="floating-label">Status </label>
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="row pt-3">
+            <div class="col-md-12">
+
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <input type="submit" value="Submit" class="btn btn-theme " />
+                        <input type="submit" value="Generate Notice" class="btn btn-theme " />
+                        @Html.ActionLink("Back", "Index", "Hearing Details", null, new { @class = "btn btn-theme " })
+                    </div>
+                </div>
+            </div>
+        </div>
+</form>
+
+@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+
+    <script src="~/js/requestapprovalprocesschange.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/requestapprovalprocesschange.min.js" asp-append-version="true"></script>
+</environment>*@
