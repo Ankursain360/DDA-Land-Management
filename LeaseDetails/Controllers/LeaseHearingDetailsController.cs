@@ -24,13 +24,16 @@ namespace LeaseDetails.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IRequestforproceedingService _undersection4PlotService;
+
         string LeaseFilePath = "";
         string ApprovalDocumentPath = "";
-        public LeaseHearingDetailsController(ILeaseHearingDetailsService leaseHearingDetailsService, 
+        public LeaseHearingDetailsController(ILeaseHearingDetailsService leaseHearingDetailsService,
             ILeaseApplicationFormApprovalService leaseApplicationFormApprovalService,
             ILeaseApplicationFormService leaseApplicationFormService,
             IConfiguration configuration,
-            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService)
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
+            IRequestforproceedingService undersection4PlotService)
         {
             _leaseHearingDetailsService = leaseHearingDetailsService;
             _leaseApplicationFormApprovalService = leaseApplicationFormApprovalService;
@@ -38,6 +41,7 @@ namespace LeaseDetails.Controllers
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
             _workflowtemplateService = workflowtemplateService;
+            _undersection4PlotService = undersection4PlotService;
             LeaseFilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
 
@@ -162,22 +166,63 @@ namespace LeaseDetails.Controllers
 
 
         #region LeaseApplicationForm Details
-        public async Task<PartialViewResult> LeaseApplicationFormView(int id)
+        public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
         {
-            var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
-            Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
-            return PartialView("_LeaseApplicationFormView", Data);
-        }
+            var Data = await _undersection4PlotService.FetchSingleResult(id);
+            Data.HonbleList = await _undersection4PlotService.GetAllHonble();
+            Data.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
+            Data.UserNameList = await _undersection4PlotService.BindUsernameNameList();
 
-        public async Task<IActionResult> ViewDocumentLeaseApplicationForm(int Id)
+            return PartialView("_RequestForProceedingEvictionView", Data);
+        }
+        public async Task<FileResult> ViewLetter(int Id)
         {
             FileHelper file = new FileHelper();
-            Leaseapplicationdocuments Data = await _leaseApplicationFormService.FetchLeaseApplicationDocumentDetails(Id);
-            string filename = LeaseFilePath + Data.DocumentFileName;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
-            return File(FileBytes, file.GetContentType(filename));
-            //string filename = Data.DocumentFileName;
-            //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            var Data = await _undersection4PlotService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = Data.DemandLetter;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+
+
+        public async Task<FileResult> ViewLetter1(int Id)
+        {
+            try
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.Noc;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+            catch (Exception ex)
+            {
+
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.Noc;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+        }
+        public async Task<FileResult> ViewLetter2(int Id)
+        {
+            try
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.CancellationOrder;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+            catch (Exception ex)
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.CancellationOrder;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
         }
         #endregion
 

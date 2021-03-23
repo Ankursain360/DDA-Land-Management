@@ -55,24 +55,24 @@ namespace LeaseDetails.Controllers
         }
 
 
-        //[AuthorizeContext(ViewAction.Add)]
-        //public async Task<IActionResult> Create(int id)
-        //{
-        //    var demolitionpoliceData = await _demolitionPoliceAssistenceLetterService.FetchSingleResultButOnAneexureId(id);
-        //    if (demolitionpoliceData == null)
-        //    {
-        //        Demolitionpoliceassistenceletter Data = new Demolitionpoliceassistenceletter();
-        //        Data.FixingDemolitionId = id;
-        //        ViewBag.PrimaryId = 0;
-        //        return View(Data);
-        //    }
-        //    else
-        //    {
-        //        demolitionpoliceData.FixingDemolitionId = id;
-        //        ViewBag.PrimaryId = demolitionpoliceData.Id;
-        //        return View(demolitionpoliceData);
-        //    }
-        //}
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id)
+        {
+            Requestforproceeding result = await _leaseHearingDetailsService.FetchRequestforproceedingData(id);
+            //if (result == null)
+            //{
+            //    Requestforproceeding Data = new Requestforproceeding();
+            //    Data.FixingDemolitionId = id;
+            //    ViewBag.PrimaryId = 0;
+            //    return View(Data);
+            //}
+            //else
+            //{
+            //    result.FixingDemolitionId = id;
+            //    ViewBag.PrimaryId = result.Id;
+                return View(result);
+           // }
+        }
 
         //[HttpPost]
         //[AuthorizeContext(ViewAction.Add)]
@@ -162,6 +162,30 @@ namespace LeaseDetails.Controllers
         //        return View(demolitionpoliceassistenceletter);
         //    }
         //}
+
+        [HttpPost]
+        public async Task<PartialViewResult> ViewNotice([FromBody] ProceedingEvictionLetterSearchDto model)
+        {
+            //var result = false;
+            //if (model != null)
+            //{
+            //    result = await _proceedingEvictionLetterService.UpdateRequestProceeding(model, SiteContext.UserId);
+            //}
+            //if (result)
+            //{
+            //    ProceedingEvictionLetterViewLetterDataDto data = new ProceedingEvictionLetterViewLetterDataDto();
+            //    data = await _proceedingEvictionLetterService.BindProceedingConvictionLetterData(model.RefNoNameId);
+            //    ViewBag.VisibleLetter = 1;
+            //    return PartialView("_ViewNotice", data);
+            //}
+            //else
+            //{
+            //    Requestforproceeding data = new Requestforproceeding();
+            //    ViewBag.Message = Alert.Show("No data Found", "", AlertType.Info);
+            //    return PartialView("_ViewNotice", data);
+            //}
+            return PartialView("_ViewNotice");
+        }
 
         //[AuthorizeContext(ViewAction.Edit)]
         //public async Task<IActionResult> Edit(int id)

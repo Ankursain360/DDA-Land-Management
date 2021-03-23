@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
-    //var id = parseInt($('#Id').val());
-    //GetOtherDetails(id);
+    var id = parseInt($('#Id').val());
+    GetOtherDetails(id);
     //GetHistoryDetails(id);
 
     //HttpGet(`/LeaseApplicationFormApproval/GetApprovalDropdownList`, 'html', function (response) {
@@ -15,14 +15,14 @@
 });
 
 function GetOtherDetails(id) {
-    HttpGet(`/LeaseApplicationFormApproval/LeaseApplicationFormView/?Id=${id}`, 'html', function (response) {
-        $('#LeaseApplicationFormDetailsDiv').html("");
-        $('#LeaseApplicationFormDetailsDiv').html(response);
+    HttpGet(`/LeaseHearingDetails/RequestForProceedingEvictionView/?Id=${id}`, 'html', function (response) {
+        $('#RequestForProceedingEvictionDiv').html("");
+        $('#RequestForProceedingEvictionDiv').html(response);
     });
 };
 
 function GetHistoryDetails(id) {
-    HttpGet(`/LeaseApplicationFormApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
+    HttpGet(`/LeaseHearingDetails/HistoryDetails/?Id=${id}`, 'html', function (response) {
         $('#divHistoryDetails').html("");
         $('#divHistoryDetails').html(response);
     });
