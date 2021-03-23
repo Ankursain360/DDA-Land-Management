@@ -27,6 +27,7 @@ namespace Libraries.Service.IApplicationService
         Task<Possesionplan> FetchSinglePossessionResult(int id);
         Task<bool> UpdatePossession(int id, Allotmententry entry);
 
+         Task<bool> Delete(int id); //delete record in allotment entry table
 
         //********* save in table  Allotmententry  **********
 
