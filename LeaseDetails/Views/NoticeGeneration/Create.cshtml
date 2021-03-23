@@ -13,6 +13,27 @@
     <div id="RequestForProceedingEvictionDiv">
 
     </div>
+    <br />
+    <div class="row mt-md-3">
+        <input type="hidden" id="GenerateUpload" value="0" id="GenerateUpload" />
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Generate" value="0" checked>
+                <label class="form-check-label" for="radio">
+                    Generate
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Upload" value="1">
+                <label class="form-check-label" for="radio">
+                    Upload
+                </label>
+            </div>
+        </div>
+
+    </div>
     <div id="divGenerate">
         <div class="row mt-md-3">
             <div class="col-md-3">
@@ -40,7 +61,39 @@
             </div>
         </div>
     </div>
+    <div id="divUpload" style="display:none;">
+        <div class="row pt-3">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    @*@{
+                        @if (Model.FilePath != null)
+                        {
+                            <input placeholder="Photo" id="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                        else
+                        {*@
+                            <input placeholder="Photo" id="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <label class="floating-label">Upload Document</label>
+                        @*}
+                    }*@
 
+                    <span id="Document" class="text-danger" style="display:none;" id="MessageFileUpload">File Upload is Mandatory</span>
+
+
+                </div>
+            </div>
+            @*@{
+                @if (Model.FilePath != null)
+                {
+                    <div class="col-md-3 mt-2">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            @Html.ActionLink(" (View Uploaded Document)", "ViewLetter", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
+                        </div>
+                    </div>
+                }
+            }*@
+        </div>
+    </div>
     <div class="row pt-3">
         <div class="col-md-12">
             <input type="submit" value="Generate" class="btn btn-theme " id="btnGenerate" />
