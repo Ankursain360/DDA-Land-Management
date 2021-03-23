@@ -255,7 +255,15 @@ namespace Libraries.Repository.EntityRepository
 
         //}
 
-       
-
+        // to delete record in alotment entry table
+        public async Task<bool> Delete(int id)
+        {
+            
+            Allotmententry model = await FetchSingleResult(id);
+            model.IsActive = 0;
+            _dbContext.Allotmententry.Update(model);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+           
     }
 }

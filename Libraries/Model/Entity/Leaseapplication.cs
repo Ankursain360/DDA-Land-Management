@@ -157,5 +157,7 @@ namespace Libraries.Model.Entity
         public int SubPurposeId { get; set; }
         [NotMapped]
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
+        [NotMapped]
+        public List<Leaseapplication> RefNoList { get; set; }
     }
 }

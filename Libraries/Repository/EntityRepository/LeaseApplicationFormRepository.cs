@@ -65,6 +65,12 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Leaseapplicationdocuments.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
+        public async Task<List<Leaseapplication>> GetRefNoListforAllotmentLetter()
+        {
+            return await _dbContext.Leaseapplication
+                .Where(x=> x.IsActive == 1)
+                .OrderByDescending(x => x.RefNo).ToListAsync();
+        }
     }
 
 

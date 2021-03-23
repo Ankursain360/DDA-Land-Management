@@ -1,0 +1,407 @@
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Hearing Details" })
+
+
+
+
+<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <h3 class="mb-3 d-flex">Hearing Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <a data-toggle="collapse" href="#collapseHistoryEviction" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryEviction">
+        <h3 class="my-3 d-flex sub-heading">Request of Eviction Proceeding </h3>
+    </a>
+
+    <div class="collapse" id="collapseHistoryEviction">
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" style="width:560px" disabled>
+                        <option>--Select-- </option>
+                        <option>Vedang</option>
+                        <option>DD</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">UserName </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <select class="floating-label-field floating-label-field--s3" style="width:560px" disabled>
+                        <option>--Select-- </option>
+                        <option>F-001</option>
+                        <option>B-002</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">File No </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Address" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Name Of the Society    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Use as per allotment letter/Lease Deed</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea typeof="" disabled placeholder="Required Area"
+                              type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Subject   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Alloted Area" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" disabled />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Ground of violations  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input placeholder="Play Ground Area" type="date"
+                           class="floating-label-field floating-label-field--s3 numbers" disabled />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
+                </div>
+
+            </div>
+
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" style="width:560px" disabled>
+                        <option>--Select-- </option>
+                        <option>LG</option>
+                        <option>B-002</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Honble </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Phase No" type="text"
+                           class="floating-label-field floating-label-field--s3" disabled />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Proceeding for eviction of possession Assessment of damage</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Sector No" type="text"
+                           class="floating-label-field floating-label-field--s3" disabled />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Court case if any  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" class="floating-label-field floating-label-field--s3" disabled />
+
+
+                    <label class="floating-label">Demand Letter </label>
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" class="floating-label-field floating-label-field--s3" disabled />
+
+
+                    <label class="floating-label">NOC</label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="file" class="floating-label-field floating-label-field--s3" disabled />
+
+
+                    <label class="floating-label">Cancellation Order </label>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+    <a data-toggle="collapse" href="#collapseHistoryApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval">
+        <h3 class="my-3 d-flex sub-heading">Notice Details </h3>
+    </a>
+    <div class="collapse" id="collapseHistoryApprroval">
+
+        <div id="divGenerate">
+            <div class="row mt-md-3">
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="Date" class="floating-label-field floating-label-field--s3" disabled />
+                        <span class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>
+                        <label class="floating-label">Meeting Date</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="time" class="floating-label-field floating-label-field--s3" disabled />
+                        <span class="text-danger" style="display:none;" id="MessageTime">Meeting Time is Mandatory</span>
+                        <label class="floating-label">Meeting Time</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-12">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea type="text" class="floating-label-field floating-label-field--s3" disabled></textarea>
+                        <span class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>
+                        <label class="floating-label">Meeting Place</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <a data-toggle="collapse" href="#collapseHistoryApprroval1" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval1">
+        <h3 class="my-3 d-flex sub-heading">Notice Display</h3>
+    </a>
+
+    <div class="collapse" id="collapseHistoryApprroval1">
+
+
+        <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+        <script src="~/lib/bootstrap/select2/select2.js" defer></script>
+
+
+
+        <style>
+          
+            .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+                border-top: 0px none;
+                border-bottom: 0px none;
+            }
+        </style>
+
+        <a class="btn btn-theme" target="_blank" asp-action="ViewLetter">View Letter</a>
+
+       
+
+
+    </div>
+
+            <a data-toggle="collapse" href="#collapseHistoryApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval">
+                <h3 class="my-3 d-flex sub-heading">Evidance Upload Document Details</h3>
+            </a>
+            <div class="collapse" id="collapseHistoryApprroval">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        <tr>
+
+                            <th>Document Details</th>
+
+                            <th>View/Download</th>
+                        </tr>
+                    </thead>
+
+                </table>
+
+            </div>
+
+       
+    
+            <a data-toggle="collapse" href="#collapseHistoryApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval">
+                <h3 class="my-3 d-flex sub-heading">Hearing History Details</h3>
+            </a>
+            <div class="collapse" id="collapseHistoryApprroval">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        <tr>
+
+                            <th>Hearing Venue</th>
+                            <th>Hearing Date</th>
+                            <th>Hearing Time</th>
+                            <th>Hearing Remarks</th>
+                            <th>Operations</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>High Court, Delhi</td>
+                            <td>01-Apr -2021</td>
+                            <td>04:30 Pm</td>
+                            <td>This is dummy data only.</td>
+
+                            <td>
+                                <div class="action-btns">
+                                    <a class="edit" asp-action="Create"><i class="ri-edit-line"></i> </a>
+                                    @*<a class="edit"><i>Generate Notice</i></a>*@
+
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+      
+
+
+    <h3 class="my-3 d-flex sub-heading">Hearing Details Add</h3>
+
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Venue" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Venue  </label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Date" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Date</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-md-3">
+        <div class="col-md-6">
+
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Time" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Time </label>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Documents" type="file" />
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Documents (if any)</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-md-3">
+        <div class="col-md-12">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <textarea class="floating-label-field floating-label-field--s3" placeholder="Hearing Remarks">
+                </textarea>
+                <span class="text-danger"></span>
+                <label class="floating-label">Hearing Remarks </label>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-md-3">
+        <div class=" col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span class="text-danger"></span>
+                <label class="floating-label">Status </label>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <input type="submit" value="Submit" class="btn btn-theme " />
+                    <input type="submit" value="Generate Notice" class="btn btn-theme " />
+                    @Html.ActionLink("Back", "Index", "Hearing Details", null, new { @class = "btn btn-theme " })
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+
+    <script src="~/js/requestapprovalprocesschange.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/requestapprovalprocesschange.min.js" asp-append-version="true"></script>
+</environment>*@

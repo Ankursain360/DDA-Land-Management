@@ -43,7 +43,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
+       // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();

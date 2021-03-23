@@ -84,7 +84,7 @@
                                             <th>Hearing Venue</th>
                                             <th>Hearing Date</th>
                                             <th>Hearing Time</th>
-                                            <th>Handed Over By</th>
+                                           
                                             <th>Attendee</th>
                                             <th>Hearing  Remarks</th>
                                             <th>Document</th>
@@ -93,7 +93,6 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -118,14 +117,22 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3">
                         <option disabled="disabled" selected value="">Select</option>
-                        <option >A</option>
-                        <option >B</option>
+                        <option>A</option>
+                        <option>B</option>
                     </select>
                     @*<span asp-validation-for="LeasesTypeId" class="text-danger"></span>*@
                     <label class="floating-label">Forward To</label>
                 </div>
             </div>
-           
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file"  class="floating-label-field floating-label-field--s3" placeholder="Name">
+                    @*<span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>*@
+                    <label for="field-1" class="floating-label"> Upload copy of the document selected </label>
+
+                </div>
+            </div>
+
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">

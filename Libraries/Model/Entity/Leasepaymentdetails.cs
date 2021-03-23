@@ -9,12 +9,17 @@ namespace Libraries.Model.Entity
 {
    public class Leasepaymentdetails : AuditableEntity<int>
     {
-        //  [Required(ErrorMessage = " Refernce number is mandatory")]
+        [Required(ErrorMessage = " Refernce number is mandatory")]
         public int? RefId { get; set; }
+        [Required(ErrorMessage = "Payment Type is mandatory")]
         public int? PaymentTypeId { get; set; }
+
         public string PaymentMode { get; set; }
+        [Required(ErrorMessage = "Payment Date is mandatory")]
         public DateTime? PaymentDate { get; set; }
+        [Required(ErrorMessage = "Challan/UTR number is mandatory")]
         public string ChallanUtrnumber { get; set; }
+        [Required(ErrorMessage = "Payment Amount is mandatory")]
         public decimal? PaymentAmount { get; set; }
         public byte? IsActive { get; set; }
         

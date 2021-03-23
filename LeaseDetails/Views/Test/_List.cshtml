@@ -1,0 +1,41 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Leasepaymentdetails>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+
+    <thead class="text-nowrap">
+        <tr>
+
+            <th>Reference Number</th>
+            <th>Payment Type</th>
+            <th>Payment Mode</th>
+            <th>Payment Date</th>
+            <th>Challan /UTR Number</th>
+            <th>Amount</th>
+            <th>Operation</th>
+
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        @foreach (var item in Model.Results)
+        {
+        <tr>
+
+            <td>@item.Ref.Application.RefNo</td>
+            <td>@item.PaymentType.Name</td>
+            <td>@item.PaymentMode</td>
+            <td>@(Convert.ToDateTime(item.PaymentDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.ChallanUtrnumber</td>
+            <td>@item.PaymentAmount</td>
+            <td>
+                <div class="action-btns">
+
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                </div>
+            </td>
+
+        </tr>
+        }
+
+    </tbody>
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
