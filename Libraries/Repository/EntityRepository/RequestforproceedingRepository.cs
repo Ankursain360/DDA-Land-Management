@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
-
+using Dto.Master;
 using Repository.Common;
 
 
@@ -47,8 +47,10 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
         {
-            var data = await _dbContext.Requestforproceeding.Include(x => x.Allotment)
+            var data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
+
                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                ).
@@ -64,20 +66,37 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("UNDERSECTION4NO"):
+                    case ("LETTERREFNO"):
                         data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment)
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
                   .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                       && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                  )
                                 .OrderBy(s => s.LetterReferenceNo)
                                 .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
-                    case ("VILLAGE"):
+
+
+                    case ("ALLOTMENTNO"):
                         data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment)
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
+                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
+                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+
+                 )
+                                .OrderBy(s => s.Allotment.Application.RefNo)
+                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("SUBJECT"):
+                        data = null;
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                    )
@@ -89,8 +108,9 @@ namespace Libraries.Repository.EntityRepository
 
                     case ("STATUS"):
                         data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment)
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                )
@@ -104,20 +124,37 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("UNDERSECTION4NO"):
+                    case ("LETTERREFNO"):
                         data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment)
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
                   .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                       && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                  )
                                 .OrderByDescending(s => s.LetterReferenceNo)
                                 .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
-                    case ("VILLAGE"):
+
+
+                    case ("ALLOTMENTNO"):
                         data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment)
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
+                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
+                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+
+                 )
+                                .OrderByDescending(s => s.Allotment.Application.RefNo)
+                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("SUBJECT"):
+                        data = null;
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                    )
@@ -127,8 +164,9 @@ namespace Libraries.Repository.EntityRepository
 
                     case ("STATUS"):
                         data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment)
+                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                )
@@ -150,7 +188,22 @@ namespace Libraries.Repository.EntityRepository
 
 
 
+        public async Task<List<UserBindDropdownDto>> BindUsernameNameList()
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("BindUserZoneDropDown")
+                                            .WithOutParams()
+                                            .ExecuteStoredProcedureAsync<UserBindDropdownDto>();
 
+                return (List<UserBindDropdownDto>)data;
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
 
 

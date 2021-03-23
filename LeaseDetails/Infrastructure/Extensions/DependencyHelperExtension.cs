@@ -47,6 +47,8 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IOldAllotmentEntryRepository, OldAllotmentEntryRepository>();
             services.AddScoped<IRequestforproceedingRepository, RequestforproceedingRepository>();
             services.AddScoped<ILeasepaymentdetailsRepository, LeasepaymentdetailsRepository>();
+            services.AddScoped<ILeaseHearingDetailsRepository, LeaseHearingDetailsRepository>();
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -76,6 +78,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IOldAllotmentEntryService, OldAllotmentEntryService>();
             services.AddScoped<IRequestforproceedingService, RequestforproceedingService>();
             services.AddScoped<ILeasepaymentdetailsService, LeasepaymentdetailsService>();
+            services.AddScoped<ILeaseHearingDetailsService, LeaseHearingDetailsService>();
 
         }
     }

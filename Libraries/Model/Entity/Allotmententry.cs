@@ -52,8 +52,7 @@ namespace Libraries.Model.Entity
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
         [NotMapped]
         public int PurposeId { get; set; }
-
-
+       
         [NotMapped]
         public string Name { get; set; }
         [NotMapped]
@@ -62,8 +61,9 @@ namespace Libraries.Model.Entity
         public string ContactNo { get; set; }
         [NotMapped]
         public decimal? LandAreaSqMt { get; set; }
+        [NotMapped]
+        public DateTime? PossessionTakenDate { get; set; }
 
-       
         [NotMapped]
         public DateTime Date { get; set; }
         //[NotMapped]
@@ -95,9 +95,19 @@ namespace Libraries.Model.Entity
         {
             get
             {
-                return Application.RefNo ;
+                return Application.RefNo;
             }
         }
+
+        [NotMapped]
+        public string SocietyName
+        {
+            get
+            {
+                return Application.Name;
+            }
+        }
+
 
 
     }

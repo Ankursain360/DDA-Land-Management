@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Dto.Master;
 using Libraries.Repository.Common;
 
 namespace Libraries.Service.IApplicationService
@@ -21,7 +22,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Requestforproceeding>> GetRequestUsingRepo();
         Task<bool> Delete(int id);
         Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
-
+        Task<List<UserBindDropdownDto>> BindUsernameNameList();
 
     }
 }

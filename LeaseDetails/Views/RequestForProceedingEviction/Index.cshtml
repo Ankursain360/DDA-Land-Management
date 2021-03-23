@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-md-3 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <input type="text" id="txtReferenceNo" class="floating-label-field floating-label-field--s3" placeholder="Name" />
                     <label for="txtName" class="floating-label"> Reference Number</label>
                 </div>
             </div>
@@ -23,8 +23,8 @@
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtCode" class="floating-label-field floating-label-field--s3" placeholder="Code" />
-                    <label for="txtCode" class="floating-label">Area/Locality</label>
+                    <input type="text" id="txtSubject" class="floating-label-field floating-label-field--s3" placeholder="Code" />
+                    <label for="txtCode" class="floating-label">Subject</label>
                 </div>
             </div>
         </div>
@@ -49,10 +49,11 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Name">Proposal Name</option>
+                        <option value="LETTERREFNO">Letter Ref No</option>
+                        <option value="ALLOTMENTNO">Allotment No</option>
 
                         <option value="FileNo">File No</option>
-                        <option value="Code">Area Locality</option>
+                        <option value="SUBJECT">Subject</option>
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>

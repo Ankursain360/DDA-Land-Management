@@ -61,11 +61,12 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> UpdateRequestProceedingIsSend(int id, int UserId)
+        public async Task<bool> UpdateRequestProceedingIsSend(Requestforproceeding data, int UserId)
         {
-            var result = await _proceedingEvictionLetterRepository.FindBy(a => a.Id == id);
+            var result = await _proceedingEvictionLetterRepository.FindBy(a => a.Id == data.Id);
             Requestforproceeding model = result.FirstOrDefault();
             model.IsSend = 1;
+            model.PendingAt = data.UserId;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = UserId;
             _proceedingEvictionLetterRepository.Edit(model);
