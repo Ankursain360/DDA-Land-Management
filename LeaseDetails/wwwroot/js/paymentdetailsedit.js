@@ -42,7 +42,7 @@ $('#ddlSort').change(function () {
 function GetPremiumrate(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     
-    HttpPost(`/Test/List`, 'html', param, function (response) {
+    HttpPost(`/LeasePaymentDetails/List`, 'html', param, function (response) {
 
         $('#divPossessionDetail').html("");
         $('#divPossessionDetail').html(response);

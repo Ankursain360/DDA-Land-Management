@@ -168,9 +168,15 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/requestforproceedingindex.min.js",
+    "outputFileName": "wwwroot/js/paymentdetailscreate.min.js",
     "inputFiles": [
-      "wwwroot/js/requestforproceedingindex.js"
+      "wwwroot/js/paymentdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentdetailsedit.js"
     ]
   }
 ]
