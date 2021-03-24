@@ -3,9 +3,9 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Reference No.</th>
-            <th>Letter Reference No.</th>           
-            <th>Subject</th>
+            <th>Allottee No</th>
+            <th>Allottee Date</th>           
+            <th>Letter Reference No</th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -18,11 +18,13 @@
         <tr>
             <td>
                 @(item.Allotment.Application.RefNo==null? " ":item.Allotment.Application.RefNo)
-                        @*@(item.VillageName == null? "-":item.VillageName)*@
+                @*@(item.VillageName == null? "-":item.VillageName)*@
 
-                    </td>
+            </td>
+            <td>@(Convert.ToDateTime(item.DateOfCancellationofLease).ToString("dd-MMM-yyyy"))</td>
+          
             <td>@(item.LetterReferenceNo==null? "":item.LetterReferenceNo)</td>
-            <td>@(item.Subject==null? "":item.Subject)</td>
+           
 
             <td>
                 @if (item.IsActive == 1)

@@ -18,7 +18,7 @@
                         <option selected disabled="disabled" value="">---Select---</option>
                         @foreach (var item in Model.AllotmententryList)
                         {
-                            <option value="@item.Id" data-id=" @item.SocietyName"> @item.LRefNo </option>
+                            <option value="@item.Id" data-id="@item.SocietyName,@item.PurposeName" > @item.LRefNo </option>
                         }
                     </select>
                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
@@ -53,7 +53,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input disabled placeholder="Contact No" type="text"
+                    <input disabled placeholder="Contact No" id="Purpose_name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span class="text-danger"></span>
                     <label class="floating-label">Use as per allotment letter/Lease Deed  </label>
@@ -106,7 +106,7 @@
                         <option selected disabled="disabled" value="">---Select---</option>
                     </select>
                     <span asp-validation-for="HonebleLgOrCommon" class="text-danger"></span>
-                    <label asp-for="HonebleLgOrCommon" class="floating-label">Honble</label>
+                    <label asp-for="HonebleLgOrCommon" class="floating-label">Whether by Hon'ble LG or Comm.(LD) </label>
                 </div>
             </div>
 
@@ -228,7 +228,12 @@
 
 <script>
     function get_socity() {
-        var sname = $("#AllotmentId").find(':selected').attr('data-id');
-        $("#Society_name").val(sname);
+
+       var sname = $("#AllotmentId").find(':selected').attr('data-id');
+      
+        var res = sname.split(",");
+       // alert(res[0]);
+        $("#Society_name").val(res[0]);
+        $("#Purpose_name").val(res[1]);
     }
     </script>

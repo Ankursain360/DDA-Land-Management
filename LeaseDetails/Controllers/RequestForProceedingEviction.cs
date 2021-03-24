@@ -159,21 +159,18 @@ namespace LeaseDetails.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Requestforproceeding undersection4plot)
         {
+            undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
+            undersection4plot.UserNameList = await _undersection4PlotService.BindUsernameNameList();
+
+            undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
 
             DemandletterFilePath = _configuration.GetSection("FilePaths:Demandletter:DemandletterFilePath").Value.ToString();
             NOCFilePath = _configuration.GetSection("FilePaths:NOC:NOCFilePath").Value.ToString();
             CancellationOrderFilePath = _configuration.GetSection("FilePaths:CancellationOrder:CancellationOrderFilePath").Value.ToString();
 
-  
-            if (ModelState.IsValid)
-            {
 
-                undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-                undersection4plot.UserNameList = await _undersection4PlotService.BindUsernameNameList();
-
-                undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
-
-
+            //if (ModelState.IsValid)
+            //{
 
                 FileHelper fileHelper = new FileHelper();
                 if (undersection4plot.DemandLetterPhoto != null)
@@ -191,11 +188,6 @@ namespace LeaseDetails.Controllers
                 {
                     undersection4plot.CancellationOrder = fileHelper.SaveFile(CancellationOrderFilePath, undersection4plot.CancellationPhoto);
                 }
-
-
-
-
-
 
 
 
@@ -221,12 +213,12 @@ namespace LeaseDetails.Controllers
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(undersection4plot);
                 }
-            }
-            else
-            {
+        //}
+        //    else
+        //    {
                 return View(undersection4plot);
-            }
-        }
+  //  }
+}
 
 
 
