@@ -28,13 +28,28 @@ $("#ApplicationId").change(function () {
     var id = $(this).val();
 
     if (id) {
+      
         HttpGet(`/CalculationSheet/Receipt/?ApplicationId=${id}`, 'html', function (response) {
 
-           
+            
             $('#View').html("");
             $('#View').html(response);
 
         });
 
     }
+});
+
+
+
+
+$(function () {
+    $("#btnPrint").click(function () {
+        $('.jhide').hide();
+      
+        window.print();
+       
+        $('.jhide').show();
+       
+    });
 });
