@@ -6,456 +6,226 @@
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <div class="accordion mb-4" id="accordionExample">
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
-                <div class="card-header p-0" id="headingOne">
-                    <h2 class="mb-0">
-                        <button class="btn btn-block btn-link collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            View Request of Eviction Proceeding Details<i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
-                        </button>
-                    </h2>
-                </div>
-
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-
-                        <div class="pt-3">
-
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap">
-                                        <select class="floating-label-field floating-label-field--s3" style="width:100%;">
-                                            <option disabled="disabled" selected value="">Select</option>
-                                            
-                                        </select>
-                                        @*<span asp-validation-for="LeasesTypeId" class="text-danger"></span>*@
-                                    <label class="floating-label">File No </label>
-                                    </div>
-                                
-                                </div>
-
-
-                                <div class=" col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                        <input placeholder="Address" type="text"
-                                               class="floating-label-field floating-label-field--s3" disabled />
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Letter Reference No</label>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap">
-                                        <input disabled type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
-
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Name Of the Society </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                        <input disabled placeholder="Contact No" type="text"
-                                               class="floating-label-field floating-label-field--s3" />
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Use as per allotment letter/Lease Deed  </label>
-                                    </div>
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto">View Request Proceeding For Eviction Details </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">
+                    <div id="allDetails">
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3">
+                                        @*asp-for="AllotmentId" asp-items="@(new SelectList(Model.AllotmententryList, "Id","LRefNo"))" disabled>*@
+                                        <option selected disabled="disabled" value="">---Select---</option>
+                                    </select>
+                                    <label class="floating-label">File No</label>
                                 </div>
                             </div>
-
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap">
-                                        <textarea type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" disabled></textarea>
-
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Subject </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                        <input placeholder="Contact No" type="text"
-                                               class="floating-label-field floating-label-field--s3" disabled />
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Ground of violations  </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                        <input placeholder="Contact No" type="date" value=""
-                                               class="floating-label-field floating-label-field--s3" disabled />
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap">
-                                        <select class="floating-label-field floating-label-field--s3">
-                                            <option selected disabled="disabled" value="">---Select---</option>
-                                        </select>
-                                        @*<span asp-validation-for="HonebleLgOrCommon" class="text-danger"></span>*@
-                                        <label class="floating-label">Honble</label>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                            <div class="row mt-md-3">
-                                <div class=" col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                        <input placeholder="Address" type="text"
-                                               class="floating-label-field floating-label-field--s3" disabled />
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Proceeding for eviction of possession Assessment of damage</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                        <input type="text"
-                                               class="floating-label-field floating-label-field--s3" disabled />
-                                        <span class="text-danger"></span>
-                                        <label class="floating-label">Court case if any   </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-md-3">
-
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input type="hidden" />
-
-                                        <a class="badge badge-primary px-2" href="#" target="_blank"> View Demand Letter</a>
-                                    </div>
-
-
-                                </div>
-
-
-                                <div class="col-md-6">
-                                    <a class="badge badge-primary px-2" href="#" target="_blank"> View NOC Document</a>
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="row mt-md-3">
-
-                                <div class="col-md-6">
-                                    <a class="badge badge-primary px-2" href="#" target="_blank"> View Cancellation Order Document</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-
-
-
-
-
-            </div>
-       
-
-                      
-                  
-          
-            <div class="card">
-                <div class="card-header p-0" id="headingTwo">
-                    <h2 class="mb-0">
-                        <button class="btn-link btn btn-block collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                           View Notice Generations Details<i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        <div id="divGenerate">
-                            <div class="row mt-md-3">
-                                <div class="col-md-3">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input disabled type="Date" class="floating-label-field floating-label-field--s3" />
-                                        <span class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>
-                                        <label class="floating-label">Meeting Date</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input disabled type="time" class="floating-label-field floating-label-field--s3" />
-                                        <span class="text-danger" style="display:none;" id="MessageTime">Meeting Time is Mandatory</span>
-                                        <label class="floating-label">Meeting Time</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-md-3">
-                                <div class="col-md-12">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <textarea disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                                        <span class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>
-                                        <label class="floating-label">Meeting Place</label>
-                                    </div>
+                            <div class=" col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input @*asp-for="LetterReferenceNo"*@ placeholder="Address" type="text"
+                                           class="floating-label-field floating-label-field--s3" disabled />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Letter Reference No</label>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
-                    <script src="~/lib/bootstrap/select2/select2.js" defer></script>
-                    <style>
-                        /*table,
-                            tbody,
-                            td {
-                                width: 40%;
-                            }
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <input disabled type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Name Of the Society </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            table,
-                            tbody,
-                            th {
-                                width: 50%;
-                            }*/
-                        .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-                            border-top: 0px none;
-                            border-bottom: 0px none;
-                        }
-                    </style>
-                    <div class="pt-3">
-                        <div id="LetterData" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
-
-                            <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
-                                <tr>
-                                    <td align="center">
-                                        <h4><b> COURT OF ESTATE OFFICER,</b></h4> <br />
-                                        <h4><b> SOUTH EAST ZONE, LAND MANAGEMENT WING,</b></h4> <br />
-                                        <h4><b> DELHI DEVELOPMENT AUTHORITY,</b></h4> <br />
-                                        <h4><b> C-1/7, GROUND FLOOR. VIKAS SADAN, </b></h4> <br />
-                                        <h4><b> INA, NEW DELHI-110023</b></h4> <br />
-                                        <br />
-                                        <h6><b> *****</b></h6> <br />
-
-                                    </td>
-                                </tr>
-
-                                <tr>
-
-                                    <td style="border:none; border-top: none;">
-                                        <table style="border:none; border-top: none; width:100%">
-                                            <tr>
-
-                                                <td align="left">
-                                                    No. EV/LM/SEZ/051(5)/K-1/31, CR Park/1997/DDA
-
-                                                </td>
-                                                <td align="right">
-                                                    Dated : @DateTime.Now.ToString("dd-MMM-yyyy")
-                                                </td>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="left">
-                                        <b> Smt.Rama Malick, </b> <br />
-                                        <b> W/o Sh. Ashok Sethi, </b> <br />
-                                        <b> R/o E-158, Masjid Moth,  </b><br />
-                                        <b> Greater Kailash-II, New Delhi </b> <br />
-                                        <br />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <b>
-                                            Sub: Notice under sub-section (1) and clause (b) (ii) of sub-
-                                            section (2)of section 4 of the Public Premises Eviction of
-                                            Unauthorized Occupants) Act 1971.
-                                        </b>
-                                    </td>
-
-                                </tr>
-                            </table>
-                            <br />
-
-                            <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
-                                <tbody class="tbody">
-                                    <tr>
-                                        <td>
-                                            Whereas I, the Undersigned, am of the firm opinion, on the grounds specified below, that you are in
-                                            unauthorized occupation of the Public Premises mentioned in the Schedule below and that you should be
-                                            evicted from the said premises.
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>
-                                            Whereas you have been found in occupation of public premises mention in the schedule below.  The lease has
-                                            been determined by the Competent Authority due to the violation of the lease terms and conditions.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Now, therefore, in pursuance of sub-section(1) of section 4 of the Act, I hereby call upon you to show
-                                            cause on or before the <b>25th Day of September, 2018</b> why such an order of eviction should not be made.
-
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            And in pursuance of clause (b) (ii) of sub-section (2) of section 4 of the  Act I also call upon to appear
-                                            before me in person or through a duly authorized representative capable to answer all material questions
-                                            connected with the matter along with the evidence which you intend to produce in support of the cause shown,
-                                            on <b>
-                                                25th Day of September, 2018 at 3:30 PM
-                                            </b> for personal hearing.  In case, you fail to appear on the said
-                                            date and time, the case will be decided ex parte.
-
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left">
-
-                                            <p style="color:black">
-                                                <b>Ground Floor, </b> <br />
-                                                <b>Plot no. K-1/31,</b><br />
-                                                <b>Chitranjan Park, </b> <br />
-                                                <b>New Delhi. </b> <br />
-                                                <b>Date:       September, 2018 </b> <br />
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right">
-
-                                            <b>
-                                                (Signature and seal
-                                                of the Estate Officer)
-                                            </b>
-                                            <br />
-
-
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                    <input disabled placeholder="Contact No" type="text"
+                                           class="floating-label-field floating-label-field--s3" />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Use as per allotment letter/Lease Deed  </label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
-                    <script src="~/lib/bootstrap/select2/select2.js" defer></script>
-                    <environment include="Development">
-                        <script src="~/js/site.js"></script>
-                    </environment>
-                    <environment exclude="Development">
-                        <script src="~/js/site.min.js" asp-append-version="true"></script>
-                    </environment>
-                    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <textarea type="text" @*asp-for="Subject"*@ class="floating-label-field floating-label-field--s3 " placeholder="Remarks" disabled></textarea>
 
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Subject </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input placeholder="Contact No" @*asp-for="GroundOfViolations"*@ type="text"
+                                           class="floating-label-field floating-label-field--s3" disabled />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Ground of violations  </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input placeholder="Contact No" @*asp-for="DateOfCancellationofLease"*@ type="date" value=""
+                                           class="floating-label-field floating-label-field--s3" disabled />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3"
+                                            @*asp-for="HonebleLgOrCommon" asp-items="@(new SelectList(Model.HonbleList, "Id","HonbleName"))"*@>
+                                        <option selected disabled="disabled" value="">---Select---</option>
+                                    </select>
+                                    @*<span asp-validation-for="HonebleLgOrCommon" class="text-danger"></span>*@
+                                    <label @*asp-for="HonebleLgOrCommon"*@ class="floating-label">Honble</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class=" col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header p-0" id="headingThree">
-                    <h2 class="mb-0">
-                        <button class="btn-link btn btn-block collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          View Allottee Evidance Document Details <i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                    <div class="card-body">
+                                    <input @*asp-for="ProceedingEvictionPossession"*@ placeholder="Address" type="text"
+                                           class="floating-label-field floating-label-field--s3" disabled />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Proceeding for eviction of possession Assessment of damage</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
 
+                                    <input @*asp-for="CourtCaseifAny"*@ type="text"
+                                           class="floating-label-field floating-label-field--s3" disabled />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Court case if any   </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <label style="color:#2196F3;font-size:.7rem;">
+                                        Demand Letter
+                                    </label>
+                                    <input type="hidden" @*asp-for="DemandLetter"*@ />
 
-                        <div class="table-section bg-white border shadow rounded">
-                            <div class="table-responsive ">
-                                <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                                    <thead class="text-nowrap">
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Document Name</th>
-                                            <th>Document Upload</th>
+                                    @*@{ if (Model.DemandLetter != null)
+                                    {
+                                        <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="DemandLetterPhoto" disabled />
+                                        <label for="field-1" class="floating-label">Demand Letter </label>
+                                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
+                                    }
+                                    else
+                                    {*@
+                                    <label class="badge badge-primary px-2">No File</label>
+                                    <input type="file" @*asp-for="DemandLetterPhoto"*@ disabled class="floating-label-field floating-label-field--s3">
 
-                                           
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbl_posts_body">
-                                    </tbody>
-                                    <tbody class="tbody" id="add">
-                                        <tr id="">
-                                            <td><span class="sn">1</span></td>
-                                            <td>
-                                                <input disabled type="text"
-                                                       placeholder="Document Name" />
-                                            </td>
-                                            <td>
-                                                <a class="badge badge-primary px-2" href="#" target="_blank"> View Document</a>
-                                               
-                                            </td>
+                                    @*}
+                                    }*@
+                                </div>
+                            </div>
 
-                                           
-                                        </tr>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <label style="color:#2196F3;font-size:.7rem;">
+                                        NOC
+                                    </label>
+                                    <input type="hidden" @*asp-for="Noc"*@ />
+                                    @*@{ if (Model.Noc != null)
+                                    {
+                                        <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="NocPhoto" disabled />
+                                        <label for="field-1" class="floating-label">NOC </label>
+                                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
+                                    }
+                                    else
+                                    {*@
+                                    <label class="badge badge-primary px-2">No File</label>
+                                    <input type="file" @*asp-for="NocPhoto"*@ class="floating-label-field floating-label-field--s3" disabled>
 
-                                    </tbody>
-                                </table>
+                                    @*}
+                                    }*@
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <label style="color:#2196F3;font-size:.7rem;">
+                                        Cancellation Order
+                                    </label>
+                                    <input type="hidden" @*asp-for="CancellationOrder"*@ />
+
+                                    @*@{ if (Model.CancellationOrder != null)
+                                    {
+                                        <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="CancellationPhoto" disabled />
+                                        <label for="field-1" class="floating-label">NOC </label>
+                                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
+                                    }
+                                    else
+                                    {*@
+                                    <label class="badge badge-primary px-2">No File</label>
+                                    <input type="file" @*asp-for="CancellationPhoto"*@ class="floating-label-field floating-label-field--s3" disabled>
+
+                                    @*}
+                                    }*@
+
+                                </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
             </div>
+        </div>
+
+
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
-                <div class="card-header p-0" id="headingFour">
-                    <h2 class="mb-0">
-                        <button class="btn-link btn btn-block collapsed d-flex sub-heading px-3 py-2 border-0 align-items-center" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            View Hearing Details  <i class="ri-arrow-drop-down-line ml-auto" style="font-size: 1.2rem;font-weight: 100;"></i>
-                        </button>
-                    </h2>
-                </div>
-                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                    <div class="card-body">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval1" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto"> View Notice Generations Details </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval1">
+                    <div id="divGenerate">
+
+
                         <div class="table-section bg-white border shadow rounded">
                             <div class="table-responsive ">
                                 <table class="table table-sm table-bordered mb-0 table-striped">
                                     <thead class="text-nowrap">
 
                                         <tr>
-                                            <th>Hearing Venue</th>
-                                            <th>Hearing Date</th>
-                                            <th>Hearing Time</th>
+                                            <th>Meeting Date</th>
+                                            <th>Meeting Time</th>
+                                            <th>Meeting Place</th>
 
-                                            <th>Attendee</th>
-                                            <th>Hearing  Remarks</th>
-                                            <th>Document</th>
+                                            <th>Operations</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td> High Court</td>
+
                                             <td> 23-mar-2021</td>
                                             <td>10:00 AM</td>
-                                            <td>All</td>
-                                            <td>dummy data  </td>
-                                            <td>No Document available</td>
+                                            <td>New Delhi</td>
+
+                                            <td>
+                                                <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter"> View File </a>
+                                            </td>
 
                                         </tr>
 
@@ -463,11 +233,114 @@
                                 </table>
                             </div>
                         </div>
+
+
+
                     </div>
+                    <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+                    <script src="~/lib/bootstrap/select2/select2.js" defer></script>
+
                 </div>
             </div>
-           
         </div>
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
+            <div class="card">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval2" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto">View Allottee Evidance Document Details  </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval2">
+
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Document Details</th>
+                                        <th>Document</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        <td> Test DD Name</td>
+                                        <td>Doc Name </td>
+
+
+
+                                        <td>
+                                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter"> View File </a>
+                                        </td>
+
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
+            <div class="card">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval3" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto">View Hearing Details </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval3">
+
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+
+                                    <tr>
+                                        <th>Hearing Venue</th>
+                                        <th>Hearing Date</th>
+                                        <th>Hearing Time</th>
+
+                                        <th>Attendee</th>
+                                        <th>Hearing  Remarks</th>
+                                        <th>Document</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> High Court</td>
+                                        <td> 23-mar-2021</td>
+                                        <td>10:00 AM</td>
+                                        <td>All</td>
+                                        <td>dummy data  </td>
+                                        <td>
+                                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter"> View File </a>
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        
 
         <h3 class="my-3 d-flex sub-heading pt-4">Judgement Details</h3>
         <div class="row mt-md-3">
@@ -475,8 +348,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3">
                         <option disabled="disabled" selected value="">Select</option>
-                        <option>A</option>
-                        <option>B</option>
+                       
                     </select>
                     @*<span asp-validation-for="LeasesTypeId" class="text-danger"></span>*@
                     <label class="floating-label">Forward To</label>
@@ -484,7 +356,7 @@
             </div>
             <div class=" col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="file"  class="floating-label-field floating-label-field--s3" placeholder="Name">
+                    <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
                     @*<span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>*@
                     <label for="field-1" class="floating-label"> Upload copy of the document selected </label>
 

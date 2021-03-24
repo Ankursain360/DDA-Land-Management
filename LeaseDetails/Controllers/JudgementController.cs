@@ -16,5 +16,9 @@ namespace LeaseDetails.Controllers
         {
             return View();
         }
+        public IActionResult ViewLetter()
+        {
+            return View();
+        }
     }
 }

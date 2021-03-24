@@ -39,7 +39,7 @@ namespace Libraries.Repository.EntityRepository
             //List<Allotmententry> villageList = await _dbContext.Allotmententry.Include(x=>x.Application).Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1)).ToListAsync();
             //return villageList;
 
-            List<Allotmententry> villageList = await _dbContext.Allotmententry.Include(x => x.Application).Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1)).ToListAsync();
+            List<Allotmententry> villageList = await _dbContext.Allotmententry.Include(x => x.Application).Include(x => x.LeasePurposesType).Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1 && x.LeasePurposesTypeId==x.LeasePurposesType.Id)).ToListAsync();
             return villageList;
         }
 

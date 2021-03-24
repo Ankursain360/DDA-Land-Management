@@ -67,8 +67,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public DateTime Date { get; set; }
        
-        [NotMapped]
-        public decimal TotalPremiumAmount { get; set; }
+        //[NotMapped]
+        //public decimal TotalPremiumAmount { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
 
@@ -107,7 +107,14 @@ namespace Libraries.Model.Entity
             }
         }
 
-
+        [NotMapped]
+        public string PurposeNamefor
+        {
+            get
+            {
+                return LeasePurposesType.PurposeUse;
+            }
+        }
 
     }
 }
