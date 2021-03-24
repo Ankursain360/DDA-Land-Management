@@ -297,6 +297,7 @@ namespace Libraries.Model
         public virtual DbSet<Honble> Honble { get; set; }
         public virtual DbSet<Leasepaymentdetails> Leasepaymentdetails { get; set; }
         public virtual DbSet<Leasepaymenttype> Leasepaymenttype { get; set; }
+        public virtual DbSet<Judgement> Judgement { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -537,7 +538,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new HonbleConfiguration());
             modelBuilder.ApplyConfiguration(new LeasepaymenttypeConfiguration());
             modelBuilder.ApplyConfiguration(new LeasepaymentdetailsConfiguration());
-
+            modelBuilder.ApplyConfiguration(new JudgementConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
