@@ -55,6 +55,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _proceedingEvictionLetterRepository.FindBy(a => a.Id == data.RefNoNameId);
             Requestforproceeding model = result.FirstOrDefault();
             model.IsGenerate = 1;
+            model.Status = 1;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = UserId;
             _proceedingEvictionLetterRepository.Edit(model);
@@ -66,6 +67,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _proceedingEvictionLetterRepository.FindBy(a => a.Id == data.Id);
             Requestforproceeding model = result.FirstOrDefault();
             model.IsSend = 1;
+            model.Status = 3;
             model.PendingAt = data.UserId;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = UserId;
@@ -79,6 +81,7 @@ namespace Libraries.Service.ApplicationService
             Requestforproceeding model = result.FirstOrDefault();
             model.ProcedingLetter = requestforproceeding.ProcedingLetter;
             model.IsUpload = 1;
+            model.Status = 2;
             model.ModifiedDate = DateTime.Now;
             _proceedingEvictionLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
