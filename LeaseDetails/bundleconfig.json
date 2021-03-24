@@ -178,5 +178,23 @@
     "inputFiles": [
       "wwwroot/js/paymentdetailsedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticegenerationcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticegenerationcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingevictionuploadletter.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingevictionuploadletter.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingindex.js"
+    ]
   }
 ]

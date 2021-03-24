@@ -125,7 +125,10 @@ namespace LeaseDetails.Controllers
                     {
                         ViewBag.Message = Alert.Show("Proceeding Document Uploaded Sucessfully", "", AlertType.Success);
                         TempData["Message"] = Alert.Show("Proceeding Document Uploaded Sucessfully", "", AlertType.Success);
-                        return RedirectToAction("Index", "RequestForProceedingEviction");
+                        var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(id);
+                        data.Id = id;
+                        //return RedirectToAction("Index", "RequestForProceedingEviction");
+                        return View(data);
                     }
                     else
                     {
@@ -159,7 +162,10 @@ namespace LeaseDetails.Controllers
                     {
                         ViewBag.Message = Alert.Show("Letter Send to Official", "", AlertType.Success);
                         TempData["Message"] = Alert.Show("Letter Send to Officia", "", AlertType.Success);
-                        return RedirectToAction("Index", "RequestForProceedingEviction");
+                        var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(id);
+                        data.Id = id;
+                        //return RedirectToAction("Index", "RequestForProceedingEviction");
+                        return View(data);
                     }
                     else
                     {

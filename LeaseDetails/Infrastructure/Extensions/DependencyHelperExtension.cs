@@ -48,6 +48,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IRequestforproceedingRepository, RequestforproceedingRepository>();
             services.AddScoped<ILeasepaymentdetailsRepository, LeasepaymentdetailsRepository>();
             services.AddScoped<ILeaseHearingDetailsRepository, LeaseHearingDetailsRepository>();
+            services.AddScoped<INoticeGenerationRepository, NoticeGenerationRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -79,6 +80,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IRequestforproceedingService, RequestforproceedingService>();
             services.AddScoped<ILeasepaymentdetailsService, LeasepaymentdetailsService>();
             services.AddScoped<ILeaseHearingDetailsService, LeaseHearingDetailsService>();
+            services.AddScoped<INoticeGenerationService, NoticeGenerationService>();
 
         }
     }
