@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\LeasePaymentDetails\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
@@ -50,6 +51,21 @@
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\LeasePaymentDetails\Create.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\LeasePaymentDetails\_List.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\LeasePaymentDetails\Edit.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@
             <th>Payment Date</th>
             <th>Challan /UTR Number</th>
             <th>Amount</th>
-            <th>Operations</th>
+            <th>Operation</th>
 
         </tr>
     </thead>
@@ -21,19 +21,15 @@
         <tr>
 
             <td>@item.Ref.Application.RefNo</td>
-            @*<td>@item.RefId</td>*@
-
-
             <td>@item.PaymentType.Name</td>
             <td>@item.PaymentMode</td>
-            @*<td>@item.PaymentDate</td>*@
             <td>@(Convert.ToDateTime(item.PaymentDate).ToString("dd-MMM-yyyy"))</td>
             <td>@item.ChallanUtrnumber</td>
             <td>@item.PaymentAmount</td>
             <td>
                 <div class="action-btns">
 
-                    <a asp-action="create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
                 </div>
             </td>
 

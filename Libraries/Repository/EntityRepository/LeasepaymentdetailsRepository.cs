@@ -85,10 +85,10 @@ namespace Repository.EntityRepository
                                        .Include(x => x.Ref.Application)
                                        .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
                                        && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
-                                      // && (x.PaymentDate == (model.PaymentDate)))
-                                       //&& x.PaymentMode.Contains(string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains (model.Mode)))
-                                       //&& (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       //&& (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate==Convert.ToDateTime(model.PaymentDate))))
+                                                              // && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
+                                                              //&& x.PaymentMode.Contains(string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains (model.Mode)))
+                                                              //&& (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
+                                                              //&& (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate==Convert.ToDateTime(model.PaymentDate))))
                                                               .OrderBy(x => x.Ref.Application.RefNo)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
                         break;
@@ -100,9 +100,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref.Application)
                                  // .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
                                  .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number))
+                                    //  && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))
+                                    )
                                     .OrderBy(x => x.PaymentType.Name)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -113,11 +113,10 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                                        .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
-                                    //  .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number))
+                                      // && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))
+                                      )
                                     .OrderBy(x => x.PaymentMode)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -128,12 +127,10 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                               //  .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                               .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
-                                    .OrderBy(x => x.ChallanUtrnumber)
+                                        .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                      //  && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))).OrderBy(x => x.ChallanUtrnumber)
+                                      .OrderByDescending(x => x.ChallanUtrnumber)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
                         break;
@@ -143,11 +140,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                              //   .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
                               .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number))
+                                       && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
                                  .OrderBy(x => x.PaymentAmount)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -158,18 +153,16 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                                //  .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                               .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                     //  && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
                                     .OrderBy(x => x.PaymentDate)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
                         break;
                 }
             }
-            else if (SortOrder == 2 && model.AllotmentId != null)
+            else if (SortOrder == 2 && model.AllotmentId != "0")
             {
                 switch (model.SortBy.ToUpper())
                 {
@@ -179,12 +172,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                          .Include(x => x.Ref.Application)
                                          .Include(x => x.PaymentType)
-
-                              // .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                              .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+.Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                     //  && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
                                 .OrderByDescending(x => x.Ref.Application.RefNo)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
                         break;
@@ -194,11 +184,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                                //  .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                               .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                  //     && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
                                     .OrderByDescending(x => x.PaymentType.Name)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -209,11 +197,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                               //  .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                               .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                       .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                    //   && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
                                     .OrderByDescending(x => x.PaymentMode)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -224,11 +210,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                           //        .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
                            .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                     //  && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
                                     .OrderByDescending(x => x.ChallanUtrnumber)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -239,11 +223,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                               //   .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                               .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                              .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                   //    && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
                                     .OrderByDescending(x => x.PaymentAmount)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -254,11 +236,9 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Ref)
                                         .Include(x => x.PaymentType)
                                         .Include(x => x.Ref.Application)
-                                 // .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                 .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
-                                       && (string.IsNullOrEmpty(model.Mode) || (x.PaymentMode.Contains(model.Mode)))
-                                       && (string.IsNullOrEmpty(model.Number) || (x.ChallanUtrnumber.Contains(model.Number)))
-                                       && (string.IsNullOrEmpty(model.PaymentDate) || (x.PaymentDate == Convert.ToDateTime(model.PaymentDate))))
+                                .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || (x.Ref.Id == Convert.ToInt32(model.AllotmentId)))
+                                       && (x.PaymentMode.Contains(model.Mode)) && (x.ChallanUtrnumber.Contains(model.Number)))
+                                    //   && (x.PaymentDate == Convert.ToDateTime(model.PaymentDate)))
                                     .OrderByDescending(x => x.PaymentDate)
                                 .GetPaged<Leasepaymentdetails>(model.PageNumber, model.PageSize);
 
