@@ -12,6 +12,10 @@ namespace Libraries.Model.Entity
 {
    public class Requestforproceeding : AuditableEntity<int>
     {
+        public Requestforproceeding()
+        {
+            Leasenoticegeneration = new HashSet<Leasenoticegeneration>();
+        }
         [Required(ErrorMessage = "FIle No is mandatory ")]
         public int? AllotmentId { get; set; }
         [Required(ErrorMessage = "Letter Reference No is mandatory ")]
@@ -40,6 +44,7 @@ namespace Libraries.Model.Entity
         public int? IsUpload { get; set; }        
         public int? IsSend { get; set; }
         public int? PendingAt { get; set; }
+        public int? Status { get; set; }
 
         public Allotmententry Allotment { get; set; }
 
@@ -80,6 +85,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
+        public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
 
 
     }

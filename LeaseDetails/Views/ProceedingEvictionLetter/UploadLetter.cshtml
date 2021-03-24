@@ -12,6 +12,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
+                    <label style="color:#2196F3;font-size:.7rem;">
+                        Upload Document
+                    </label>
                     <input type="hidden" asp-for="ProcedingLetter" />
                     @{
                         if (Model.ProcedingLetter != null)
@@ -19,13 +22,12 @@
                             <a class="badge badge-primary px-2" asp-action="ViewProceedingLetter" asp-route-id="@Model.Id" target="_blank"> (View Letter)</a>
                             <input asp-for="ProcedingLetterDocument" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
                             <span asp-validation-for="ProcedingLetterDocument" class="text-danger"></span>
-                            <label class="floating-label">Upload Document</label>
+                            @*<label class="floating-label">Upload Document</label>*@
                         }
                         else
                         {
                             <input asp-for="ProcedingLetterDocument" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
                             <span asp-validation-for="ProcedingLetterDocument" class="text-danger"></span>
-                            <label class="floating-label">Upload Document</label>
                         }
                     }
                 </div>

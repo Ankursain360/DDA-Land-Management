@@ -90,6 +90,16 @@ namespace Libraries.Model.Entity
         }
 
         [NotMapped]
+        public string PurposeName
+        {
+            get
+            {
+                return LeasePurposesType.PurposeUse ;
+            }
+        }
+
+
+        [NotMapped]
         public string LRefNo
         {
             get
@@ -107,14 +117,7 @@ namespace Libraries.Model.Entity
             }
         }
 
-        [NotMapped]
-        public string PurposeNamefor
-        {
-            get
-            {
-                return LeasePurposesType.PurposeUse;
-            }
-        }
+        
 
     }
 }

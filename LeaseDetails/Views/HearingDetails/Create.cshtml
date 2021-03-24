@@ -149,19 +149,22 @@
                         <div class="col-md-6">
 
                             <div class="floating-label-wrap mb-3 mb-md-0">
+                                <label style="color:#2196F3;font-size:.7rem;">
+                                    Demand Letter
+                                </label>
                                 <input type="hidden" />
 
                                 @*@{ if (Model.DemandLetter != null)
-                                                         {
+                             {
 
 
-                                                             <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3"  disabled />
-                                                             <label for="field-1" class="floating-label">Demand Letter </label>
-                                                             <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
-                                    "> (View File )</a>
-                                                         }
-                                                         else
-                                                         {*@
+                                 <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3"  disabled />
+                                 <label for="field-1" class="floating-label">Demand Letter </label>
+                                 <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+        "> (View File )</a>
+                             }
+                             else
+                             {*@
                                 <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" disabled class="floating-label-field floating-label-field--s3">
 
@@ -176,11 +179,13 @@
                         <div class="col-md-6">
 
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
+                                <label style="color:#2196F3;font-size:.7rem;">
+                                    NOC
+                                </label>
                                 @*<input type="file" class="floating-label-field floating-label-field--s3" />
 
 
-                                    <label class="floating-label">NOC</label>*@
+        <label class="floating-label">NOC</label>*@
                                 <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" disabled class="floating-label-field floating-label-field--s3">
 
@@ -194,6 +199,9 @@
                         <div class="col-md-6">
 
                             <div class="floating-label-wrap mb-3 mb-md-0">
+                                <label style="color:#2196F3;font-size:.7rem;">
+                                    Cancellation Order
+                                </label>
 
                                 <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" disabled class="floating-label-field floating-label-field--s3">
