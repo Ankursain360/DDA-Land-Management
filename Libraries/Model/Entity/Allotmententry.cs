@@ -107,7 +107,14 @@ namespace Libraries.Model.Entity
             }
         }
 
-
+        [NotMapped]
+        public string PurposeNamefor
+        {
+            get
+            {
+                return LeasePurposesType.PurposeUse;
+            }
+        }
 
     }
 }
