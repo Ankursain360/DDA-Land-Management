@@ -110,7 +110,7 @@ namespace LeaseDetails.Controllers
 
 
                     undersection4plot.CreatedBy = SiteContext.UserId;
-                    //undersection4plot.PendingAt = 0;
+              
                     var result = await _undersection4PlotService.Create(undersection4plot);
 
                     if (result == true)
