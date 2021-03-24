@@ -4,37 +4,7 @@
 <div class="pt-3">
     <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Create</h3>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-
-
-                    <select class="floating-label-field floating-label-field--s3"
-                            asp-for="UserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))">
-                        <option selected disabled="disabled" value="">---Select---</option>
-                    </select>
-                    <span asp-validation-for="UserId" class="text-danger"></span>
-                    <label class="floating-label">UserName</label>
-                </div>
-            </div>
-
-
-            @*<div class=" col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="LetterReferenceNo" placeholder="Address" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
-                    <label class="floating-label">Letter Reference No</label>
-                </div>
-            </div>*@
-
-        </div>
-
-
-
-
-
+      
 
         <div class="row mt-md-3">
             <div class="col-md-6">
@@ -221,6 +191,21 @@
 
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="UserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))">
+                        <option selected disabled="disabled" value="">---Select---</option>
+                    </select>
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                    <label class="floating-label">UserName</label>
+                </div>
+            </div>
+
+
         </div>
 
         <div class="row mt-md-3">

@@ -166,5 +166,11 @@
     "inputFiles": [
       "wwwroot/js/noticegenerationindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingindex.js"
+    ]
   }
 ]
