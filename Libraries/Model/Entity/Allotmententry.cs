@@ -66,8 +66,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public DateTime Date { get; set; }
-        //[NotMapped]
-        //public decimal PremiumRate { get; set; }
+       
         [NotMapped]
         public decimal TotalPremiumAmount { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }

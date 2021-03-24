@@ -3,10 +3,8 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-
-            @*<th> File No </th>
-            <th> Allottee  Name</th>
-            <th> Allottee  Address</th>*@
+            <th>File No</th>
+           <th>Applicant Name</th>
             <th> Lease Type</th>
             <th> Total Area</th>
             <th>Allotment Date</th>
@@ -18,14 +16,14 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            @*<td> @(item.Application == null?"": item.Application.Name)</td>
-            <td></td>
-            <td></td>*@
+            <td> @(item.Application == null?"": item.Application.RefNo)</td>
+            <td> @(item.Application == null?"": item.Application.Name)</td>
+           
             <td> @(item.LeasesType == null?"": item.LeasesType.Type)</td>
             <td>@item.TotalArea</td>
 
             <td>  @(Convert.ToDateTime(item.AllotmentDate).ToString("dd-MMM-yyyy"))</td>
-           
+
             <td>
                 @if (item.IsActive == 1)
                 {

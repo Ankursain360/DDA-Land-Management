@@ -1,9 +1,53 @@
 ﻿$(document).ready(function () {
 
+    var id = 4;//parseInt($('#Id').val());
+    GetOtherDetails(id);
     GetDetails();
+
+    var value = $("#GenerateUpload").val();
+    if (value == 0) {
+        $("#divGenerate").show();
+        $("#divUpload").hide();
+        $("#btnGenerate").val("Generate");
+    }
+    else {
+        $("#divGenerate").hide();
+        $("#divUpload").show();
+        $("#btnGenerate").val("Upload");
+
+    }
 });
+$("input[name='radioStatus']").click(function () {
+    var selected = $("input[type='radio'][name='radioStatus']:checked");
+    $("#GenerateUpload").val(selected.val());
+    if (selected.val() == 0) {
+        $("#divGenerate").show();
+        $("#divUpload").hide();
+        $("#btnGenerate").val("Generate");
+    }
+    else {
+        $("#divGenerate").hide();
+        $("#divUpload").show();
+        $("#btnGenerate").val("Upload");
 
+    }
+    //if ($("#Generate").is(":checked")) {
+    //    $("#divGenerate").show();
+    //    $("#divUpload").hide();
 
+    //}
+    //else if ($("#Upload").is(":checked")) {
+    //    $("#divGenerate").hide();
+    //    $("#divUpload").show();
+    //}
+
+});
+function GetOtherDetails(id) {
+    HttpGet(`/NoticeGeneration/RequestForProceedingEvictionView/?Id=${id}`, 'html', function (response) {
+        $('#RequestForProceedingEvictionDiv').html("");
+        $('#RequestForProceedingEvictionDiv').html(response);
+    });
+};
 function GetLetterRefNo(id) {
     HttpGet(`/ProceedingEvictionLetter/GetLetterRefNo/?Id=${id}`, 'json', function (response) {
 

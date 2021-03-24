@@ -149,6 +149,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                                .Include(x => x.LeasesType)
+                                               .Include(x => x.Application)
                                                 .Where(x => (x.OldNewEntry == "Old") &&
                                                 (string.IsNullOrEmpty(model.name) || x.LeasesType.Type.Contains(model.name)))
                                                 .OrderBy(x => x.LeasesType.Type)
@@ -158,6 +159,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                                .Include(x => x.LeasesType)
+                                               .Include(x => x.Application)
                                                 .Where(x => (x.OldNewEntry == "Old") &&
                                                 (string.IsNullOrEmpty(model.name) || x.LeasesType.Type.Contains(model.name)))
                                                 .OrderBy(x => x.AllotmentDate)
@@ -168,6 +170,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                                .Include(x => x.LeasesType)
+                                               .Include(x => x.Application)
                                                 .Where(x => (x.OldNewEntry == "Old") &&
                                                 (string.IsNullOrEmpty(model.name) || x.LeasesType.Type.Contains(model.name)))
                                                 .OrderByDescending(x => x.IsActive)
@@ -187,6 +190,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                                .Include(x => x.LeasesType)
+                                               .Include(x => x.Application)
                                                 .Where(x => (x.OldNewEntry == "Old") &&
                                                 (string.IsNullOrEmpty(model.name) || x.LeasesType.Type.Contains(model.name)))
                                                 .OrderByDescending(x => x.LeasesType.Type)
@@ -196,6 +200,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                                .Include(x => x.LeasesType)
+                                               .Include(x => x.Application)
                                                 .Where(x => (x.OldNewEntry == "Old") &&
                                                 (string.IsNullOrEmpty(model.name) || x.LeasesType.Type.Contains(model.name)))
                                                 .OrderByDescending(x => x.AllotmentDate)
@@ -206,6 +211,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                                .Include(x => x.LeasesType)
+                                               .Include(x => x.Application)
                                                 .Where(x => (x.OldNewEntry == "Old") &&
                                                 (string.IsNullOrEmpty(model.name) || x.LeasesType.Type.Contains(model.name)))
                                                 .OrderBy(x => x.IsActive)

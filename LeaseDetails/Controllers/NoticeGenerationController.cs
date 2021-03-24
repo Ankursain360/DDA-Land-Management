@@ -27,17 +27,19 @@ namespace LeaseDetails.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IRequestforproceedingService _undersection4PlotService;
 
         string targetPathDocument = "";
         public NoticeGenerationController(ILeaseHearingDetailsService leaseHearingDetailsService,
             IConfiguration configuration, 
-            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService
-            )
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
+            IRequestforproceedingService undersection4PlotService)
         {
             _leaseHearingDetailsService = leaseHearingDetailsService;
             _configuration = configuration;
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
+            _undersection4PlotService = undersection4PlotService;
         }
 
 
@@ -291,7 +293,66 @@ namespace LeaseDetails.Controllers
         //    byte[] FileBytes = System.IO.File.ReadAllBytes(path);
         //    return File(FileBytes, file.GetContentType(path));
         //}
+        #region RequestForProceedingEviction Details
+        public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
+        {
+            var Data = await _undersection4PlotService.FetchSingleResult(id);
+            Data.HonbleList = await _undersection4PlotService.GetAllHonble();
+            Data.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
+            Data.UserNameList = await _undersection4PlotService.BindUsernameNameList();
 
+            return PartialView("_RequestForProceedingEvictionView", Data);
+        }
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _undersection4PlotService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = Data.DemandLetter;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+
+
+        public async Task<FileResult> ViewLetter1(int Id)
+        {
+            try
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.Noc;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+            catch (Exception ex)
+            {
+
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.Noc;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+        }
+        public async Task<FileResult> ViewLetter2(int Id)
+        {
+            try
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.CancellationOrder;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+            catch (Exception ex)
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.CancellationOrder;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+        }
+        #endregion
     }
 }
 

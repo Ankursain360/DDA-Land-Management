@@ -133,10 +133,6 @@
             <div class="row mt-md-3">
 
                 <div class="col-md-6">
-                    <label class="err" style="color:red;">
-                        Only Upload 10 Mb File
-                    </label>
-
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="hidden" asp-for="DemandLetter" />
 
@@ -151,9 +147,10 @@
                             }
                             else
                             {
+                    <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" asp-for="DemandLetterPhoto" disabled class="floating-label-field floating-label-field--s3">
 
-                                <label for="field-1" class="floating-label">Demand Letter</label> } }
+                               } }
 
                     </div>
 
@@ -165,9 +162,6 @@
 
 
                 <div class="col-md-6">
-                    <label class="err" style="color:red;">
-                        Only Upload 10 Mb File
-                    </label>
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="hidden" asp-for="Noc" />
 
@@ -182,9 +176,10 @@
                             }
                             else
                             {
+                                <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" asp-for="NocPhoto" class="floating-label-field floating-label-field--s3" disabled>
 
-                                <label for="field-1" class="floating-label">Demand Letter</label> } }
+                               } }
 
                     </div>
                 </div>
@@ -193,9 +188,6 @@
             <div class="row mt-md-3">
 
                 <div class="col-md-6">
-                    <label class="err" style="color:red;">
-                        Only Upload 10 Mb File
-                    </label>
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="hidden" asp-for="CancellationOrder" />
 
@@ -210,9 +202,10 @@
                             }
                             else
                             {
+                                <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3" disabled>
 
-                                <label for="field-1" class="floating-label">Cancellation Photo</label> } }
+                              } }
 
                     </div>
                 </div>
