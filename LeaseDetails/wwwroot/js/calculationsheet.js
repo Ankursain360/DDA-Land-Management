@@ -43,13 +43,41 @@ $("#ApplicationId").change(function () {
 
 
 
+//$(function () {
+//    $("#btnPrint").click(function () {
+//        $('.jhide').hide();
+      
+//        window.print();
+       
+//        $('.jhide').show();
+       
+//    });
+//});
+
+
+
 $(function () {
     $("#btnPrint").click(function () {
         $('.jhide').hide();
-      
-        window.print();
-       
+        nWin($("#View").html(), $("#pagename").html());
         $('.jhide').show();
-       
     });
 });
+function nWin(context, title) {
+    var printWindow = window.open('', '');
+    var doc = printWindow.document;
+    var printContents = document.getElementById("View").innerHTML;
+    doc.write(document.getElementById("View").innerHTML);
+    //doc.write(printContents);
+    doc.close();
+    function show() {
+        if (doc.readyState === "complete") {
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        } else {
+            setTimeout(show, 100);
+        }
+    };
+    show();
+};

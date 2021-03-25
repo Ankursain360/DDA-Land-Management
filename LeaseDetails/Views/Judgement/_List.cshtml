@@ -1,0 +1,52 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Requestforproceeding>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+            <th>Reference No.</th>
+            <th>Society Name </th>
+            <th>Allotment Date</th>
+            <th>Area</th>
+            <th> Status</th>
+           
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+        <tr>
+            <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.RefNo)</td>
+            <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.Name)</td>
+            <td>@(item.Allotment == null ? "" : (Convert.ToDateTime(item.Allotment.AllotmentDate)).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.GroundOfViolations</td>
+            <td>
+                @if (item.IsActive == 1)
+                {
+                    <span class="badge badge-primary px-2 py-1">Active</span> }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
+            </td>
+           
+            <td>
+                <a asp-action="Create" title="View" class="view">  Add Details </a>
+
+            </td>
+
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
