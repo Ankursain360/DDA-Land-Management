@@ -68,11 +68,19 @@ $("#AllotmentDate").change(function () {
     var pid = parseInt($('#LeasePurposesTypeId option:selected').val());
     var adate = $("#AllotmentDate").val();
     if (kid) {
-        
+
         HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-      
+
             debugger;
             $("#PremiumRate").val(response.premiumRate);
+
+        });
+    }
+    if (kid) {
+        HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+
+            debugger;
+            $("#GroundRate").val(response.GroundRate);
 
         });
     }

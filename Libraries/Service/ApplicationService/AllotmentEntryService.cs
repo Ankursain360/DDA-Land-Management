@@ -101,6 +101,7 @@ namespace Libraries.Service.ApplicationService
             model.PremiumAmount = allotmententry.PremiumAmount;
             model.PremiumRate = allotmententry.PremiumRate;
             model.DocumentCharge = allotmententry.DocumentCharge;
+            model.GroundRate = allotmententry.GroundRate;
             model.AllotmentDate = allotmententry.AllotmentDate;
             model.TotalArea = allotmententry.TotalArea;
             model.PhaseNo = allotmententry.PhaseNo;
@@ -146,33 +147,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _allotmentEntryRepository.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
         }
-        //public async Task<List<Premiumrate>> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
-        //{
-        //    var result = await _allotmentEntryRepository.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
-        //    return result;
-        //}
-        //public async Task<List<Premiumrate>> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
-        //{
-        //    return await _allotmentEntryRepository.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
-        //}
-        //public async Task<List<Allotmententry>> FetchSinglerateResult(int leasePurposeId, int leaseSubPurposeId, string allotmentDate)
-        //{
-
-        //    var result = await _allotmentEntryRepository.FindBy(a => a.LeasePurposesTypeId == leasePurposeId && a.LeaseSubPurposeId == leaseSubPurposeId );
-
-        //    return result;
-
-
-        //}
-        //public async Task<List<Premiumrate>> FetchSinglerateResultPremiumRate(string allotmentDate)
-        //{
-
-        //    var result = await _allotmentEntryRepository.FindBy(a => a.Fr == leasePurposeId && a.LeaseSubPurposeId == leaseSubPurposeId);
-
-        //    return result;
-
-
-        //}
+        public async Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
+        {
+            return await _allotmentEntryRepository.FetchSinglegroundrentResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
+        }
     }
 }
 

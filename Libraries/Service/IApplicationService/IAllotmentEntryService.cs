@@ -23,7 +23,7 @@ namespace Libraries.Service.IApplicationService
         //Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
         Task<Documentcharges> FetchSingledocumentResult(int? leasesTypeId);
         Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
-        //Task<List<Premiumrate>> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
+        Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
         Task<List<Allotmententry>> GetAllotmententryUsingRepo();
         Task<List<Allotmententry>> GetAllAllotmententry();
 

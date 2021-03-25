@@ -22,6 +22,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Documentcharges> FetchSingledocumentResult(int? leasesTypeId);
 
         Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
+        Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
 
 
 

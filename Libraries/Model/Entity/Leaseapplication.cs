@@ -136,7 +136,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public int? NoOfYears { get; set; }
         [NotMapped]
-        public decimal? GroundRent { get; set; }
+        public decimal? GroundRate { get; set; }
 
         [NotMapped]
         public int PropertyTypeId { get; set; }

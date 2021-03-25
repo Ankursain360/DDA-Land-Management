@@ -43,7 +43,7 @@ namespace Libraries.Model.EntityConfiguration
 
                 builder.Property(e => e.DocumentCharges).HasColumnType("decimal(18,3)");
 
-                builder.Property(e => e.GroundRent).HasColumnType("decimal(18,3)");
+                builder.Property(e => e.GroundRate).HasColumnType("decimal(18,3)");
 
                 builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
