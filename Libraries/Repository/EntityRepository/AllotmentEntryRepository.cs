@@ -24,7 +24,7 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        
+
 
         public async Task<List<Leaseapplication>> GetAllLeaseapplication()
         {
@@ -39,7 +39,7 @@ namespace Libraries.Repository.EntityRepository
             return leaseTypeList;
         }
 
-        
+
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
             List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
@@ -56,6 +56,16 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Leaseapplication.Where(x => x.Id == applicationId).SingleOrDefaultAsync();
         }
+
+        //public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
+        //{
+        //    var result = await _dbContext.Allotmententry.Where(x => x.Id == LeasesTypeId).FirstOrDefaultAsync();
+        //    var masterPremiumAmount = await _dbContext.Premiumrate.Where(x => x.FromDate <= result.AllotmentDate && x.ToDate >= result.AllotmentDate).FirstOrDefaultAsync();
+        //    result.PremiumRate = masterPremiumAmount.PremiumRate;
+        //    result.PremiumAmount = Convert.ToDecimal(0.00024711) * masterPremiumAmount.PremiumRate * result.TotalArea;
+        //    return result;
+        //}
+
         public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
         {
             var result = await _dbContext.Allotmententry.Where(x => x.Id == LeasesTypeId).SingleOrDefaultAsync();
@@ -184,10 +194,25 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+        public async Task<Documentcharges> FetchSingledocumentResult(int? leasesTypeId)
+        {
+            return await _dbContext.Documentcharges.Where(x => x.Id == leasesTypeId).SingleOrDefaultAsync();
+        }
 
-
-
-
+        public async Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
+        {
+            //var data =  await _dbContext.Premiumrate.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (x.FromDate >= Convert.ToDateTime(allotmentDate) && x.ToDate <= Convert.ToDateTime(allotmentDate))).SingleOrDefaultAsync();
+            var data = await _dbContext.Premiumrate.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (Convert.ToDateTime(allotmentDate) >= x.FromDate && Convert.ToDateTime(allotmentDate) <= x.ToDate)).SingleOrDefaultAsync();
+            return data;
+        }
+        public async Task<Groundrent> FetchSinglegroundrentResult(int? leaseSubPurposeId)
+        {
+            return await _dbContext.Groundrent.Where(x => x.Id == leaseSubPurposeId).SingleOrDefaultAsync();
+        }
+        public async Task<Licencefees> FetchSinglefeeResult(int? leaseSubPurposeId)
+        {
+            return await _dbContext.Licencefees.Where(x => x.Id == leaseSubPurposeId).SingleOrDefaultAsync();
+        }
 
 
     }
