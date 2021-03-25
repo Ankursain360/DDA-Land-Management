@@ -55,6 +55,7 @@ namespace Libraries.Service.ApplicationService
         {
 
             requestforproceeding.CreatedBy = 1;
+           requestforproceeding.PendingAt = 0;
             requestforproceeding.CreatedDate = DateTime.Now;
             _requestRepository.Add(requestforproceeding);
             return await _unitOfWork.CommitAsync() > 0;
@@ -74,6 +75,10 @@ namespace Libraries.Service.ApplicationService
             model.Subject = scheme.Subject;
             model.GroundOfViolations = scheme.GroundOfViolations;
             model.DateOfCancellationofLease = scheme.DateOfCancellationofLease;
+            model.DemandLetter = scheme.DemandLetter;
+            model.Noc = scheme.Noc;
+            model.CancellationOrder = scheme.CancellationOrder;
+            model.UserId = scheme.UserId;
 
             model.HonebleLgOrCommon = scheme.HonebleLgOrCommon;
             model.ProceedingEvictionPossession = scheme.ProceedingEvictionPossession;

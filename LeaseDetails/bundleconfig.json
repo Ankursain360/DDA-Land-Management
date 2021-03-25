@@ -148,5 +148,53 @@
     "inputFiles": [
       "wwwroot/js/proceedingevictionlettercreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leasehearingdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/leasehearingdetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leasehearingdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/leasehearingdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticegenerationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticegenerationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentdetailsedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticegenerationcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticegenerationcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingevictionuploadletter.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingevictionuploadletter.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingindex.js"
+    ]
   }
 ]

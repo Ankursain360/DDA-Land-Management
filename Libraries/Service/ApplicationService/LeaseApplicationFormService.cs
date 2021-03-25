@@ -75,5 +75,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leaseApplicationRepository.FetchLeaseApplicationDocumentDetails(id);
         }
+        public async Task<List<Leaseapplication>> GetRefNoListforAllotmentLetter()
+        {
+            return await _leaseApplicationRepository.GetRefNoListforAllotmentLetter();
+        }
     }
 }

@@ -28,13 +28,15 @@ namespace LeaseDetails.Controllers
 
         private readonly IProceedingEvictionLetterService _proceedingEvictionLetterService;
         public IConfiguration _configuration;
+        private readonly IApprovalProccessService _approvalproccessService;
 
         string ProceedingEvictionLetterPath = "";
         public ProceedingEvictionLetterController(IProceedingEvictionLetterService proceedingEvictionLetterService,
-            IConfiguration configuration)
+            IConfiguration configuration, IApprovalProccessService approvalproccessService)
         {
             _proceedingEvictionLetterService = proceedingEvictionLetterService;
             _configuration = configuration;
+            _approvalproccessService = approvalproccessService;
             ProceedingEvictionLetterPath = _configuration.GetSection("FilePaths:ProceedingEvictionLetter:ProceedingEvictionLetterPath").Value.ToString();
         }
 
@@ -104,7 +106,8 @@ namespace LeaseDetails.Controllers
         {
             try
             {
-                if(requestforproceeding.checkIsSend != 1)
+                var result = false;
+                if (requestforproceeding.checkIsSend != 1)
                 {
                     if (requestforproceeding.ProcedingLetterDocument == null && requestforproceeding.ProcedingLetter == null)
                     {
@@ -117,12 +120,15 @@ namespace LeaseDetails.Controllers
                                                                        requestforproceeding.ProcedingLetterDocument != null || requestforproceeding.ProcedingLetter != "" ?
                                                                        requestforproceeding.ProcedingLetter : string.Empty;
                     requestforproceeding.ModifiedBy = SiteContext.UserId;
-                    var result = await _proceedingEvictionLetterService.UpdateRequestProceedingUpload(id, requestforproceeding);
+                    result = await _proceedingEvictionLetterService.UpdateRequestProceedingUpload(id, requestforproceeding);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show("Proceeding Document Uploaded Sucessfully", "", AlertType.Success);
                         TempData["Message"] = Alert.Show("Proceeding Document Uploaded Sucessfully", "", AlertType.Success);
-                        return RedirectToAction("Index", "RequestForProceedingEviction");
+                        var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(id);
+                        data.Id = id;
+                        //return RedirectToAction("Index", "RequestForProceedingEviction");
+                        return View(data);
                     }
                     else
                     {
@@ -134,12 +140,32 @@ namespace LeaseDetails.Controllers
                 }
                 else
                 {
-                    var result = await _proceedingEvictionLetterService.UpdateRequestProceedingIsSend(id, SiteContext.UserId);
+                    #region Approval Proccess At 1st level start Added by Renu 22 March 2021
+                    Requestforproceeding Data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(id);
+                    result = await _proceedingEvictionLetterService.UpdateRequestProceedingIsSend(Data, SiteContext.UserId);//Update Table details 
+                    if (result)
+                    {
+                        Approvalproccess approvalproccess = new Approvalproccess();
+                        approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                        approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseHearingDetails").Value);
+                        approvalproccess.ServiceId = id;
+                        approvalproccess.SendFrom = SiteContext.UserId;
+                        approvalproccess.SendTo = Data.UserId;
+                        approvalproccess.PendingStatus = 0;  
+                        approvalproccess.Status = 1;  
+                        approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                        result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                    }
+
+                    #endregion
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show("Letter Send", "", AlertType.Success);
-                        TempData["Message"] = Alert.Show("Letter Send", "", AlertType.Success);
-                        return RedirectToAction("Index", "RequestForProceedingEviction");
+                        ViewBag.Message = Alert.Show("Letter Send to Official", "", AlertType.Success);
+                        TempData["Message"] = Alert.Show("Letter Send to Officia", "", AlertType.Success);
+                        var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(id);
+                        data.Id = id;
+                        //return RedirectToAction("Index", "RequestForProceedingEviction");
+                        return View(data);
                     }
                     else
                     {

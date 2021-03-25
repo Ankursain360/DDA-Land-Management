@@ -1,0 +1,151 @@
+﻿@model Libraries.Model.Entity.Leasepaymentdetails
+@await Component.InvokeAsync("PageHeader", new { pageName = "Payment Details" })
+
+
+<div class="pt-3">
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Edit Details </h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" id="hid" />
+
+        <input type="hidden" value=@ViewBag.pass id="hid2" />
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="RefId" asp-items="@(new SelectList(Model.AllotmententryList,"Id", "FullName"))" id="ddlrno">
+                        
+
+
+                        <option disabled="disabled" selected value="">Select</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="RefId"></span>
+                    <label class="floating-label">Refernce Number(Allotee Name) </label>
+                </div>
+            </div>
+
+        </div>
+        <div id="Divclsification">
+            <h3 class="my-3 d-flex sub-heading"> Payment Details </h3>
+            <div class="table-section bg-white border shadow rounded">
+                <div class="short-section d-md-flex align-items-center">
+                    <div class="p-3 d-flex align-items-end mr-auto">
+                        <div class="floating-label-wrap">
+                            <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+
+                                <option value="AllotmentNumber">Refernce Number</option>
+
+                                <option value="Type">Payment Type</option>
+                                <option value="Mode">Payment Mode</option>
+                                <option value="Date">Payment Date</option>
+                                <option value="Number">Challan / UTR Number</option>
+                                <option value="Amount">Payment Amount</option>
+
+                            </select>
+                            <label for="field-1" class="floating-label">Sort by</label>
+                        </div>
+                        <div class="short-btn d-flex align-items-center">
+                            <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                            <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive px-2" id="divPossessionDetail">
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <input type="hidden" id="StatusOfLand" value="Challan" />
+                <span class="text-danger"></span>
+            </div>
+        </div>
+        <div id="Divclsification">
+            <h3 class="my-3 d-flex sub-heading"> Payment Mode </h3>
+            <div class="form-row">
+                <input type="hidden" asp-for="PaymentMode" id="PaymentMode" />
+                <span asp-validation-for="PaymentMode" class="text-danger"></span>
+                <div class="form-group col-md-4">
+                    <label class="radio-inline  ">
+                        <input type="radio" class="floating-label-field  " placeholder="Name" name="grpPaymentMode" value="Challan" id="A" asp-for="PaymentMode" checked>Challan
+                    </label>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="radio-inline  ">
+                        <input type="radio" class="floating-label-field " placeholder="Name" name="grpPaymentMode" value="Epayment" asp-for="PaymentMode" id="V">E-Payments
+                    </label>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="PaymentTypeId" asp-items="@(new SelectList(Model.PaymenttypeList,"Id", "Name"))" id="ddlpt">
+                            <option disabled="disabled" selected value="">Select</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="PaymentTypeId"></span>
+                        <label class="floating-label" asp-for="PaymentTypeId">Payment Type </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" type="date"
+                               class="floating-label-field floating-label-field--s3 " asp-for="PaymentDate" id="txtpdate" />
+                        <span class="text-danger" asp-validation-for="PaymentDate"></span>
+                        <label class="floating-label">Payment Date    </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" asp-for="ChallanUtrnumber" id="txtchallan" />
+                    <span class="text-danger msg" asp-validation-for="ChallanUtrnumber"></span>
+                    <label class="floating-label">  Challan/UTR  Number   </label>
+                </div>
+               
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" asp-for="PaymentAmount" id="txtamount" limit="10" />
+                    <span class="text-danger msg" asp-validation-for="PaymentAmount"></span>
+                    <label class="floating-label"> Payment Amount   </label>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row mt-md-3">
+
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit" id="btnSubmit" name="btnsubmit">Update</button>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/paymentdetailsedit.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/paymentdetailsedit.min.js" asp-append-version="true"></script>
+</environment>
+

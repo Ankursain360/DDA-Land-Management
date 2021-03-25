@@ -1,0 +1,50 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Allotmententry>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+            <th>File No</th>
+           <th>Applicant Name</th>
+            <th> Lease Type</th>
+            <th> Total Area</th>
+            <th>Allotment Date</th>
+            <th>Status</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Results)
+        {
+        <tr>
+            <td> @(item.Application == null?"": item.Application.RefNo)</td>
+            <td> @(item.Application == null?"": item.Application.Name)</td>
+           
+            <td> @(item.LeasesType == null?"": item.LeasesType.Type)</td>
+            <td>@item.TotalArea</td>
+
+            <td>  @(Convert.ToDateTime(item.AllotmentDate).ToString("dd-MMM-yyyy"))</td>
+
+            <td>
+                @if (item.IsActive == 1)
+                {
+                    <span class="badge badge-primary px-2 py-1">Active</span> }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
+            </td>
+            <td>
+                <div class="action-btns">
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                    <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are you sure, you want to delete this record?')"><i class="ri-delete-bin-5-fill"></i></a>
+                </div>
+
+            </td>
+
+        </tr>
+}
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

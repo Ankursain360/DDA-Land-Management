@@ -113,18 +113,19 @@ namespace Libraries.Model.Entity
         public List<Approvalstatus> ApprovalStatusList { get; set; }
 
         // Old Allotment entryfeilds
-
-
+       
         [NotMapped]
-        public decimal AllotedArea { get; set; }
+        public decimal TotalArea { get; set; }
        
         [NotMapped]
         [Required(ErrorMessage = "Allotment Date is Mandatory")]
         public DateTime AllotmentDate { get; set; }
         [NotMapped]
+        public string PlotNo { get; set; }
+        [NotMapped]
         public DateTime? PossessionTakenDate { get; set; }
         [NotMapped]
-        public string IsPlayground { get; set; }
+        public decimal? BuildingArea { get; set; }
 
         [NotMapped]
         public decimal PlayGroundArea { get; set; }
@@ -148,7 +149,7 @@ namespace Libraries.Model.Entity
         public List<Leasetype> LeaseTypeList { get; set; }
         [NotMapped]
         [Required(ErrorMessage = "Lease Purpose is Mandatory")]
-        public int PurposeId { get; set; }
+        public int? PurposeId { get; set; }
         [NotMapped]
         public List<Leasepurpose> LeasePurposeList { get; set; }
         [NotMapped]
@@ -156,5 +157,7 @@ namespace Libraries.Model.Entity
         public int SubPurposeId { get; set; }
         [NotMapped]
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
+        [NotMapped]
+        public List<Leaseapplication> RefNoList { get; set; }
     }
 }

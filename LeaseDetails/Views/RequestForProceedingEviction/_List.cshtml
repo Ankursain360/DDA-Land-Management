@@ -4,9 +4,11 @@
     <thead class="text-nowrap">
         <tr>
             <th>Reference No.</th>
-            <th>Letter Reference No.</th>           
-            <th>Subject</th>
+            <th>Society Name </th>
+            <th>Allotment Date</th>
+            <th>Area</th>
             <th> Status</th>
+            <th> Letter Status</th>
             <th>Operations</th>
         </tr>
     </thead>
@@ -16,10 +18,10 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-            <td>@item.AllotmentId</td>
-            <td>@item.LetterReferenceNo</td>
-            <td>@item.Subject</td>
-
+            <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.RefNo)</td>
+            <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.Name)</td>
+            <td>@(item.Allotment == null ? "" : (Convert.ToDateTime(item.Allotment.AllotmentDate)).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.GroundOfViolations</td>
             <td>
                 @if (item.IsActive == 1)
                 {
@@ -27,6 +29,21 @@
                 else
                 {
                     <span class="badge badge-danger px-2 py-1">Inactive</span>}
+            </td>
+            <td>
+                @if (item.Status == 1)
+                {
+                    <span class="badge badge-secondary px-2 py-1">Generated</span>}
+                else if (item.Status == 2)
+                {
+                    <span class="badge badge-primary px-2 py-1">Uploaded</span>}
+                else if (item.Status == 3)
+                {
+                    <span class="badge badge-success px-2 py-1">Send</span>}
+                else
+                {
+                    <span class="badge badge-warning px-2 py-1">Not Generated</span>
+                }
             </td>
             <td>
                 <div class="action-btns">

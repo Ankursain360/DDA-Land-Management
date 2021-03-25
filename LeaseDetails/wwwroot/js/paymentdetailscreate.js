@@ -4,7 +4,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+  //  GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
    // ClearFields();
 });
 
@@ -14,10 +14,17 @@ $("#btnSearch").click(function () {
 });
 
 $("#btnReset").click(function () {
-
-    $('#txtNotificationN').val('');
-
-    GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    debugger
+    $('#txtSNumber').val('');
+    $('#txtSMode').val('');
+    $('#txtSDate').val('');
+   
+    $('#ddlrno').trigger('change');
+    
+    //var test = $("#ddlrno").children("option:selected").val()
+    //if (test) {
+        GetPremiumrate(currentPageNumber, currentPageSize, sortOrder);
+    //}
 });
 
 
@@ -41,6 +48,7 @@ $('#ddlSort').change(function () {
 });
 function GetPremiumrate(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
+   // HttpPost(`/LeasePaymentDetails/List`, 'html', param, function (response) {
     HttpPost(`/LeasePaymentDetails/List`, 'html', param, function (response) {
        
         $('#divPossessionDetail').html("");
@@ -53,7 +61,9 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
 
         AllotmentId: $("#ddlrno").children("option:selected").val(),
-
+        Mode: $('#txtSMode').val(),
+        PaymentDate: $('#txtSDate').val(),
+        Number: $('#txtSNumber').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -112,7 +122,7 @@ $(function ClearFields() {
     });
 
 $("#ddlrno").change(function () {
-    
+    debugger
     var kid = $(this).val();
     if (kid) {
 

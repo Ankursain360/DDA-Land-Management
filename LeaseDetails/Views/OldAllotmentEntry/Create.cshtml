@@ -49,9 +49,9 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Name" asp-for="Address"
+                    <input placeholder="Name" asp-for="PlotNo"
                            class="floating-label-field floating-label-field--s3 " />
-                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <span asp-validation-for="PlotNo" class="text-danger"></span>
                     <label class="floating-label">Plot No. </label>
                 </div>
             </div>
@@ -59,17 +59,17 @@
         <div class="row mt-md-3" id="area">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Name" asp-for="AllotedArea"
+                    <input placeholder="Name" asp-for="BuildingArea"
                            class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                    <span asp-validation-for="BuildingArea" class="text-danger"></span>
                     <label class="floating-label"> Building Area   </label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Name" asp-for="AllotedArea"
+                    <input placeholder="Name" asp-for="PlayGroundArea"
                            class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                    <span asp-validation-for="PlayGroundArea" class="text-danger"></span>
                     <label class="floating-label"> Open Area/Playfield Area   </label>
                 </div>
             </div>
@@ -78,9 +78,9 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Name" asp-for="AllotedArea"
+                    <input placeholder="Name" asp-for="TotalArea"
                            class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="AllotedArea" class="text-danger"></span>
+                    <span asp-validation-for="TotalArea" class="text-danger"></span>
                     <label class="floating-label"> Total Area   </label>
                 </div>
             </div>
@@ -188,7 +188,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Create</button>
-                @Html.ActionLink("Back", "Index", "Premiumrate", null, new { @class = "btn btn-theme " })
+                @Html.ActionLink("Back", "Index", "OldAllotmentEntry", null, new { @class = "btn btn-theme " })
             </div>
         </div>
     </form>

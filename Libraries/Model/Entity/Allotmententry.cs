@@ -52,8 +52,7 @@ namespace Libraries.Model.Entity
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
         [NotMapped]
         public int PurposeId { get; set; }
-
-
+       
         [NotMapped]
         public string Name { get; set; }
         [NotMapped]
@@ -63,14 +62,13 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public decimal? LandAreaSqMt { get; set; }
         [NotMapped]
-        public decimal DocumentCharge { get; set; }
+        public DateTime? PossessionTakenDate { get; set; }
 
         [NotMapped]
         public DateTime Date { get; set; }
+       
         //[NotMapped]
-        //public decimal PremiumRate { get; set; }
-        [NotMapped]
-        public decimal TotalPremiumAmount { get; set; }
+        //public decimal TotalPremiumAmount { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
 
@@ -82,24 +80,44 @@ namespace Libraries.Model.Entity
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
         public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
 
-        //[NotMapped]
-        //public string FullName
-        //{
-        //    get
-        //    {
-        //        return Application.RefNo + " (" + Application.Name + ")";
-        //    }
-        //}
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return Application.RefNo + " (" + Application.Name + ")";
+            }
+        }
 
-        //[NotMapped]
-        //public string LRefNo
-        //{
-        //    get
-        //    {
-        //        return Application.RefNo ;
-        //    }
-        //}
+        [NotMapped]
+        public string PurposeName
+        {
+            get
+            {
+                return LeasePurposesType.PurposeUse ;
+            }
+        }
 
+
+        [NotMapped]
+        public string LRefNo
+        {
+            get
+            {
+                return Application.RefNo;
+            }
+        }
+
+        [NotMapped]
+        public string SocietyName
+        {
+            get
+            {
+                return Application.Name;
+            }
+        }
+
+        
 
     }
 }

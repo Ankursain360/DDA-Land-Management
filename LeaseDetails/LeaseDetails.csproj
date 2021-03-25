@@ -2,16 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>acd73896-8476-4e05-bbd0-fdf61e2eb855</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
+    <Content Remove="Views\LeaseHearingDetails\Create.cshtml" />
+    <Content Remove="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
+    <Content Remove="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
     <Content Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
+    <Content Remove="wwwroot\js\noticegenerationcreate.min.js" />
     <Content Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\LeasePaymentDetails\Edit.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\noticegenerationcreate.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
 
@@ -26,7 +33,11 @@
     <None Include="Views\LeaseApplicationForm\Index.cshtml" />
     <None Include="Views\LeaseApplicationForm\Print.cshtml" />
     <None Include="Views\LeaseApplicationForm\_List.cshtml" />
+    <None Include="Views\LeaseHearingDetails\Create.cshtml" />
+    <None Include="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
+    <None Include="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
     <None Include="wwwroot\js\leaseapplicationformcreate.min.js" />
+    <None Include="wwwroot\js\noticegenerationcreate.min.js" />
     <None Include="wwwroot\js\proceedingevictionlettercreate.min.js" />
   </ItemGroup>
 
@@ -44,6 +55,21 @@
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\LeasePaymentDetails\Create.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\LeasePaymentDetails\_List.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\LeasePaymentDetails\Edit.cshtml" />
   </ItemGroup>
 
 </Project>
