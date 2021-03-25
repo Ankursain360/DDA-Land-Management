@@ -14,8 +14,67 @@
 
     </div>
     <div class="table-section bg-white border shadow rounded pb-3">
+        <h3 class="my-3 d-flex sub-heading">Notice Generation History Details</h3>
         <div class="table-responsive px-2" id="divHistoryDetails">
+            <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
+                        <th>Meeting Date</th>
+                        <th>Meeting Time</th>
+                        <th>Meeting Place</th>
+                        <th>Attachment</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.LeaseNoticeGenerationList.Count() > 0)
+                    {
+                        @foreach (var item in Model.LeaseNoticeGenerationList)
+                        {
+                            <tr>
 
+                                <td>
+                                    @(item.MeetingDate != null ? Convert.ToDateTime(item.MeetingDate).ToString("dd-MMM-yyyy") : "")
+                                </td>
+                                <td>
+                                    @item.MeetingTime
+                                </td>
+                                <td>
+                                    @item.MeetingPlace
+                                </td>
+                                <td>
+                                    @if (item.NoticeFileName != null)
+                                    {
+                                        <a class="badge badge-primary px-2" asp-action="ViewNotice" asp-route-id="@item.Id" target="_blank"> (View)</a>
+                                    }
+                                    else
+                                    {
+                                        <a>No Document</a>
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.NoticeFileName == null || item.MeetingDate == null)
+                                    {
+                                        <div class="action-btns">
+                                            <a onclick="GetNoticeEditDetails(@item.Id);" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <a>No Action</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="14" style="text-align:center"> No Record Available! </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
     <br />
@@ -60,7 +119,7 @@
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea asp-for="MeetingPlace" type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                    <span asp-validation-for="MeetingPlace" class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>
+                    <span asp-validation-for="MeetingPlace" class="text-danger" style="display:none;" id="MessagePlace">Meeting Place is Mandatory</span>
                     <label class="floating-label">Meeting Place</label>
                 </div>
             </div>
@@ -87,31 +146,167 @@
 
                 </div>
             </div>
-            @{
+            @*@{
                 @if (Model.NoticeFileName != null)
-                {
+                {*@
                     <div class="col-md-3 mt-2">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            @Html.ActionLink(" (View Uploaded Document)", "ViewLetter", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
+                            <a id="viewId" asp-action="ViewNotice" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                          @*  @Html.ActionLink(" (View Uploaded Document)", "ViewNotice", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })*@
                         </div>
                     </div>
-                }
-            }
+                @*}
+            }*@
         </div>
     </div>
     <div class="row pt-3">
         <div class="col-md-12">
-            <input type="submit" value="Generate" class="btn btn-theme " id="btnGenerate" />
+            <input type="submit" value="Generate" class="btn btn-theme " id="btnGenerate" onclick="return check();" />
             @Html.ActionLink("Back", "Index", "NoticeGeneration", null, new { @class = "btn btn-theme " })
+            <a asp-action="Create" asp-route-id="@Model.RequestProceedingId" class="btn btn-theme">Clear</a>
         </div>
     </div>
 
 </form>
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 " id="VisibleLetter" style="display:none;">
-    <input type="submit" value="Print" class="btn btn-theme" id="btnPrint" style="display:none;" />
-    <div id="LetterDataView">
-    </div>
-</div>
+@{
+    @if (ViewBag.IsVisible == true)
+    {
+        <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 " id="VisibleLetter" >
+            <input type="submit" value="Print" class="btn btn-theme" id="btnPrint"  />
+            <div id="LetterDataView">
+                <style>
+                    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+                        border-top: 0px none;
+                        border-bottom: 0px none;
+                    }
+                </style>
+                <div class="pt-3">
+                    <div id="LetterData" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+
+                        <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+                            <tr>
+                                <td align="center">
+                                    <h5><b> COURT OF ESTATE OFFICER,</b></h5> <br />
+                                    <h5><b> SOUTH EAST ZONE, LAND MANAGEMENT WING,</b></h5> <br />
+                                    <h5><b> DELHI DEVELOPMENT AUTHORITY,</b></h5> <br />
+                                    <h5><b> C-1/7, GROUND FLOOR. VIKAS SADAN, </b></h5> <br />
+                                    <h5><b> INA, NEW DELHI-110023</b></h5> <br />
+                                    <br />
+                                    <h6><b> *****</b></h6> <br />
+
+                                </td>
+                            </tr>
+
+                            <tr>
+
+                                <td style="border:none; border-top: none;">
+                                    <table style="border:none; border-top: none; width:100%">
+                                        <tr>
+
+                                            <td align="left">
+                                                Letter No. : @(Model.RequestProceeding == null ?  "" : Model.RequestProceeding.LetterReferenceNo == null ? "" : Model.RequestProceeding.LetterReferenceNo)
+
+                                            </td>
+                                            <td align="right">
+                                                Dated : @DateTime.Now.ToString("dd-MMM-yyyy")
+                                            </td>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                    <b> Smt.Rama Malick, </b> <br />
+                                    <b> W/o Sh. Ashok Sethi, </b> <br />
+                                    <b> R/o E-158, Masjid Moth,  </b><br />
+                                    <b> Greater Kailash-II, New Delhi </b> <br />
+                                    <br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>
+                                        Sub: Notice under sub-section (1) and clause (b) (ii) of sub-
+                                        section (2)of section 4 of the Public Premises Eviction of
+                                        Unauthorized Occupants) Act 1971.
+                                    </b>
+                                </td>
+
+                            </tr>
+                        </table>
+                        <br />
+
+                        <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+                            <tbody class="tbody">
+                                <tr>
+                                    <td>
+                                        Whereas I, the Undersigned, am of the firm opinion, on the grounds specified below, that you are in
+                                        unauthorized occupation of the Public Premises mentioned in the Schedule below and that you should be
+                                        evicted from the said premises.
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        Whereas you have been found in occupation of public premises mention in the schedule below.  The lease has
+                                        been determined by the Competent Authority due to the violation of the lease terms and conditions.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Now, therefore, in pursuance of sub-section(1) of section 4 of the Act, I hereby call upon you to show
+                                        cause on or before the <b>@(Model.MeetingDate != null ? Convert.ToDateTime(Model.MeetingDate).ToString("dd-MMM-yyyy") : "")</b> why such an order of eviction should not be made.
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        And in pursuance of clause (b) (ii) of sub-section (2) of section 4 of the  Act I also call upon to appear
+                                        before me in person or through a duly authorized representative capable to answer all material questions
+                                        connected with the matter along with the evidence which you intend to produce in support of the cause shown,
+                                        on <b>
+                                            @(Model.MeetingDate != null ? Convert.ToDateTime(Model.MeetingDate).ToString("dd-MMM-yyyy") : "") at @(Model.MeetingTime == null ? "" : Model.MeetingTime)
+                                        </b> for personal hearing.  In case, you fail to appear on the said
+                                        date and time, the case will be decided ex parte.
+
+
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="left">
+
+                                        <p style="color:black">
+                                            @(Model.MeetingPlace == null ? "" : Model.MeetingPlace)
+                                            @*<b>Ground Floor, </b> <br />
+                                    <b>Plot no. K-1/31,</b><br />
+                                    <b>Chitranjan Park, </b> <br />
+                                    <b>New Delhi. </b> <br />
+                                    <b>Date:       September, 2018 </b> <br />*@
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right">
+
+                                        <b>
+                                            (Signature and seal
+                                            of the Estate Officer)
+                                        </b>
+                                        <br />
+
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

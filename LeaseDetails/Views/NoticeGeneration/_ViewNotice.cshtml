@@ -1,5 +1,4 @@
-﻿@*@model Libraries.Model.Entity.Requestforproceeding*@
-@model Dto.Master.ProceedingEvictionLetterViewLetterDataDto
+﻿@model Libraries.Model.Entity.Leasenoticegeneration
 
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>
@@ -33,7 +32,7 @@
                         <tr>
 
                             <td align="left">
-                                No. EV/LM/SEZ/051(5)/K-1/31, CR Park/1997/DDA
+                                Letter No. : @(Model.RequestProceeding == null ?  "" : Model.RequestProceeding.LetterReferenceNo == null ? "" : Model.RequestProceeding.LetterReferenceNo)
 
                             </td>
                             <td align="right">
@@ -44,10 +43,10 @@
             </tr>
             <tr>
                 <td align="left">
-                   <b> Smt.Rama Malick, </b> <br />
-                   <b> W/o Sh. Ashok Sethi, </b> <br />
+                    <b> Smt.Rama Malick, </b> <br />
+                    <b> W/o Sh. Ashok Sethi, </b> <br />
                     <b> R/o E-158, Masjid Moth,  </b><br />
-                  <b> Greater Kailash-II, New Delhi </b> <br />
+                    <b> Greater Kailash-II, New Delhi </b> <br />
                     <br />
                 </td>
             </tr>
@@ -68,58 +67,60 @@
             <tbody class="tbody">
                 <tr>
                     <td>
-                        Whereas I, the Undersigned, am of the firm opinion, on the grounds specified below, that you are in 
-                        unauthorized occupation of the Public Premises mentioned in the Schedule below and that you should be 
+                        Whereas I, the Undersigned, am of the firm opinion, on the grounds specified below, that you are in
+                        unauthorized occupation of the Public Premises mentioned in the Schedule below and that you should be
                         evicted from the said premises.
                     </td>
                 </tr>
 
                 <tr>
                     <td>
-                        Whereas you have been found in occupation of public premises mention in the schedule below.  The lease has 
+                        Whereas you have been found in occupation of public premises mention in the schedule below.  The lease has
                         been determined by the Competent Authority due to the violation of the lease terms and conditions.
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        Now, therefore, in pursuance of sub-section(1) of section 4 of the Act, I hereby call upon you to show 
-                        cause on or before the <b>25th Day of September, 2018</b> why such an order of eviction should not be made.
+                        Now, therefore, in pursuance of sub-section(1) of section 4 of the Act, I hereby call upon you to show
+                        cause on or before the <b>@(Model.MeetingDate != null ? Convert.ToDateTime(Model.MeetingDate).ToString("dd-MMM-yyyy") : "")</b> why such an order of eviction should not be made.
 
 
-</td>
+                    </td>
                 </tr>
                 <tr>
                     <td>
-                        And in pursuance of clause (b) (ii) of sub-section (2) of section 4 of the  Act I also call upon to appear 
-                        before me in person or through a duly authorized representative capable to answer all material questions 
+                        And in pursuance of clause (b) (ii) of sub-section (2) of section 4 of the  Act I also call upon to appear
+                        before me in person or through a duly authorized representative capable to answer all material questions
                         connected with the matter along with the evidence which you intend to produce in support of the cause shown,
                         on <b>
-    25th Day of September, 2018 at 3:30 PM</b> for personal hearing.  In case, you fail to appear on the said
-    date and time, the case will be decided ex parte.
+    @(Model.MeetingDate != null ? Convert.ToDateTime(Model.MeetingDate).ToString("dd-MMM-yyyy") : "") at @(Model.MeetingTime != null ? "" : Model.MeetingTime)
+</b> for personal hearing.  In case, you fail to appear on the said
+                        date and time, the case will be decided ex parte.
 
 
-</td>
+                    </td>
                 </tr>
 
                 <tr>
                     <td align="left">
 
                         <p style="color:black">
-                            <b>Ground Floor, </b> <br />
-                           <b>Plot no. K-1/31,</b><br />
-                           <b>Chitranjan Park, </b> <br />
-                           <b>New Delhi. </b> <br />
-                            <b>Date:       September, 2018 </b> <br />
+                            @(Model.MeetingPlace != null ? "" : Model.MeetingPlace)
+                            @*<b>Ground Floor, </b> <br />
+        <b>Plot no. K-1/31,</b><br />
+        <b>Chitranjan Park, </b> <br />
+        <b>New Delhi. </b> <br />
+        <b>Date:       September, 2018 </b> <br />*@
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">
-                        
-                            <b>
-                                (Signature and seal
-                                of the Estate Officer)
-                            </b>
+
+                        <b>
+                            (Signature and seal
+                            of the Estate Officer)
+                        </b>
                         <br />
 
 
