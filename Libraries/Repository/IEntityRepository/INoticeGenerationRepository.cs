@@ -10,7 +10,8 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface INoticeGenerationRepository : IGenericRepository<Leasenoticegeneration>
     {
-
-
+        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
+        Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id);
+        Task<List<Leasenoticegeneration>> GetNoticeHistoryDetails(int id);
     }
 }

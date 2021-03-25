@@ -1,7 +1,8 @@
 ﻿$(document).ready(function () {
 
-    var id = 4;//parseInt($('#Id').val());
+    var id = parseInt($('#Id').val());
     GetOtherDetails(id);
+    GetHistoryDetails(id);
     GetDetails();
 
     var value = $("#GenerateUpload").val();
@@ -30,24 +31,23 @@ $("input[name='radioStatus']").click(function () {
         $("#divUpload").show();
         $("#btnGenerate").val("Upload");
 
-    }
-    //if ($("#Generate").is(":checked")) {
-    //    $("#divGenerate").show();
-    //    $("#divUpload").hide();
-
-    //}
-    //else if ($("#Upload").is(":checked")) {
-    //    $("#divGenerate").hide();
-    //    $("#divUpload").show();
-    //}
-
+    }   
 });
+
+function GetHistoryDetails(id) {
+    HttpGet(`/NoticeGeneration/NoticeHistoryDetails/?Id=${id}`, 'html', function (response) {
+        $('#divHistoryDetails').html("");
+        $('#divHistoryDetails').html(response);
+    });
+};
+
 function GetOtherDetails(id) {
     HttpGet(`/NoticeGeneration/RequestForProceedingEvictionView/?Id=${id}`, 'html', function (response) {
         $('#RequestForProceedingEvictionDiv').html("");
         $('#RequestForProceedingEvictionDiv').html(response);
     });
 };
+
 function GetLetterRefNo(id) {
     HttpGet(`/ProceedingEvictionLetter/GetLetterRefNo/?Id=${id}`, 'json', function (response) {
 

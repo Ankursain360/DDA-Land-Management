@@ -26,6 +26,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.MeetingDate).HasColumnType("date");
 
+            builder.Property(e => e.MeetingTime)
+               .HasMaxLength(20)
+               .IsUnicode(false);
+
             builder.Property(e => e.MeetingPlace).HasColumnType("longtext");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
