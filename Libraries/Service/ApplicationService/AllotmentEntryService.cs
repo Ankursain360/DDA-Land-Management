@@ -98,7 +98,10 @@ namespace Libraries.Service.ApplicationService
             model.LandAreaSqMt = allotmententry.LandAreaSqMt;
 
 
-
+            model.PremiumAmount = allotmententry.PremiumAmount;
+            model.PremiumRate = allotmententry.PremiumRate;
+            model.DocumentCharge = allotmententry.DocumentCharge;
+            model.GroundRate = allotmententry.GroundRate;
             model.AllotmentDate = allotmententry.AllotmentDate;
             model.TotalArea = allotmententry.TotalArea;
             model.PhaseNo = allotmententry.PhaseNo;
@@ -132,9 +135,21 @@ namespace Libraries.Service.ApplicationService
             return await _allotmentEntryRepository.FetchSingleLeaseapplicationResult(applicationId);
         }
 
-        public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
+        //public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
+        //{
+        //    return await _allotmentEntryRepository.FetchSingleCalculationDetails(LeasesTypeId);
+        //}
+        public async Task<Documentcharges> FetchSingledocumentResult(int? leasesTypeId)
         {
-            return await _allotmentEntryRepository.FetchSingleCalculationDetails(LeasesTypeId);
+            return await _allotmentEntryRepository.FetchSingledocumentResult(leasesTypeId);
+        }
+        public async Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
+        {
+            return await _allotmentEntryRepository.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
+        }
+        public async Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
+        {
+            return await _allotmentEntryRepository.FetchSinglegroundrentResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
         }
     }
 }

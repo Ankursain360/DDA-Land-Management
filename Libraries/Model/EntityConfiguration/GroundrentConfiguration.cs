@@ -13,8 +13,11 @@ namespace Model.EntityConfiguration
         {
             builder.ToTable("groundrent", "lms");
 
-            builder.HasIndex(e => e.PropertyTypeId)
-                .HasName("fkpropertytype_idx");
+            builder.HasIndex(e => e.LeasePurposesTypeId)
+                .HasName("fkleasepurposegroundrateid_idx");
+
+            builder.HasIndex(e => e.LeaseSubPurposeId)
+                .HasName("fkleasesubpurposegroundrateid_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -24,23 +27,29 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.FromDate).HasColumnType("date");
 
-            builder.Property(e => e.GroundRate)
-                .HasColumnName("GroundRate")
-                .HasColumnType("decimal(18,3)");
+            builder.Property(e => e.GroundRate).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+            builder.Property(e => e.LeasePurposesTypeId).HasColumnType("int(11)");
 
-            builder.Property(e => e.PropertyTypeId).HasColumnType("int(11)");
+            builder.Property(e => e.LeaseSubPurposeId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.ToDate).HasColumnType("date");
 
-            builder.HasOne(d => d.PropertyType)
-                .WithMany(p => p.Groundrate)
-                .HasForeignKey(d => d.PropertyTypeId)
+            builder.HasOne(d => d.LeasePurposesType)
+                .WithMany(p => p.Groundrent)
+                .HasForeignKey(d => d.LeasePurposesTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_propertytype");
+                .HasConstraintName("fkleasepurposegroundrateid");
+
+            builder.HasOne(d => d.LeaseSubPurpose)
+                .WithMany(p => p.Groundrent)
+                .HasForeignKey(d => d.LeaseSubPurposeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkleasesubpurposegroundrateid");
         }
         }
     }

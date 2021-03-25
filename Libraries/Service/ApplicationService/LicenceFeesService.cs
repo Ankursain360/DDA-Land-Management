@@ -30,10 +30,16 @@ namespace Libraries.Service.ApplicationService
             return await _licenceFeesRepository.GetAllLicencefees();
         }
 
-        public async Task<List<PropertyType>> GetAllPropertyType()
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
-            List<PropertyType> list = await _licenceFeesRepository.GetAllPropertyType();
-            return list;
+            List<Leasepurpose> leasePurposeList = await _licenceFeesRepository.GetAllLeasepurpose();
+            return leasePurposeList;
+        }
+
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId)
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _licenceFeesRepository.GetAllLeaseSubpurpose(purposeUseId);
+            return leaseSubPurposeList;
         }
 
         public async Task<Licencefees> FetchSingleResult(int id)
@@ -47,7 +53,8 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _licenceFeesRepository.FindBy(a => a.Id == id);
             Licencefees model = result.FirstOrDefault();
-            model.PropertyTypeId = licencefees.PropertyTypeId;
+            model.LeasePurposesTypeId = licencefees.LeasePurposesTypeId;
+            model.LeaseSubPurposeId = licencefees.LeaseSubPurposeId;
             model.LicenceFees = licencefees.LicenceFees;
             model.FromDate = licencefees.FromDate;
             model.ToDate = licencefees.ToDate;

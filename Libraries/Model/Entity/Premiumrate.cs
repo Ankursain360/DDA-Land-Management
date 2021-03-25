@@ -9,7 +9,8 @@ namespace Libraries.Model.Entity
     public  class Premiumrate : AuditableEntity<int>
     {
         [Required(ErrorMessage = " Property Type is mandatory", AllowEmptyStrings = false)]
-        public int PropertyTypeId { get; set; }
+        public int LeasePurposesTypeId { get; set; }
+        public int LeaseSubPurposeId { get; set; }
 
         [Required(ErrorMessage = " Premium Rate is mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
@@ -22,9 +23,13 @@ namespace Libraries.Model.Entity
         public DateTime ToDate { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
-
         [NotMapped]
-        public List<PropertyType> PropertyTypeList { get; set; }
-        public PropertyType PropertyType { get; set; }
+        public List<Leasepurpose> LeasePurposeList { get; set; }
+        [NotMapped]
+        public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
+        [NotMapped]
+        public DateTime AllotmentDate { get; set; }
+        public Leasepurpose LeasePurposesType { get; set; }
+        public Leasesubpurpose LeaseSubPurpose { get; set; }
     }
 }

@@ -54,7 +54,7 @@ namespace Libraries.Repository.EntityRepository
             model.LeaseSubPurposeId = entry.LeaseSubPurposeId;
             model.PremiumRate = entry.PremiumRate;
             model.PremiumAmount = entry.PremiumAmount;
-            model.GroundRent = entry.GroundRent;
+            model.GroundRate = entry.GroundRate;
             model.AmountLicFee = entry.AmountLicFee;
             model.NoOfYears = entry.NoOfYears;
             

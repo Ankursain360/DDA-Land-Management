@@ -60,14 +60,44 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input asp-for="TotalArea" placeholder="Alloted Area" type="text"
-                           class="floating-label-field floating-label-field--s3 numbers" />
+                           class="floating-label-field floating-label-field--s3 numbers" id="parea" />
                     <span asp-validation-for="TotalArea" class="text-danger"></span>
                     <label class="floating-label">AllotedArea </label>
                 </div>
             </div>
         </div>
-       
+        <h3 class="my-3 d-flex sub-heading">Area Details</h3>
         <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="LeasesTypeId" asp-items="@(new SelectList(Model.LeaseTypeList, "Id","Type"))" id="ddlLeaseType">
+                        <option disabled="disabled" selected value="">Select</option>
+
+                    </select>
+                    <span asp-validation-for="LeasesTypeId" class="text-danger"></span>
+                    <label class="floating-label">Lease Type </label>
+                </div>
+            </div></div>
+            <div class="row mt-md-3" id="area">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" asp-for="BuildingArea"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="BuildingArea" class="text-danger"></span>
+                        <label class="floating-label"> Building Area   </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" asp-for="PlayGroundArea"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="PlayGroundArea" class="text-danger"></span>
+                        <label class="floating-label"> Open Area/Playfield Area   </label>
+                    </div>
+                </div>
+            </div>
+            @*<div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select id="ddlJudgement" class="floating-label-field floating-label-field--s3"
@@ -111,36 +141,36 @@
                         <label class="floating-label">Document Charges </label>
                     </div>
 
-                </div>
-                <div class="row mt-md-3" id="temp">
-                    @*<div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <label>Playfield Included</label>
-                            </div>
-                            <div class="col-md-4">
-                                <input type="hidden" asp-for="IsPlayground" value="Yes" />
+                </div>*@
+            <!--<div class="row mt-md-3" id="temp">-->
+            @*<div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Playfield Included</label>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="hidden" asp-for="IsPlayground" value="Yes" />
 
-                                <div class="form-check theme">
-                                    <input asp-for="IsPlayground" class="form-check-input" type="radio" name="Playground" id="rdbYes" checked value="Yes">
-                                    <label class="form-check-label" for="radio">
-                                        Yes
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check theme">
-                                    <input asp-for="IsPlayground" class="form-check-input" type="radio" name="Playground" id="rdbNo" value="No">
-                                    <label class="form-check-label" for="radio">
-                                        No
-                                    </label>
-                                </div>
-
-                            </div>
+                        <div class="form-check theme">
+                            <input asp-for="IsPlayground" class="form-check-input" type="radio" name="Playground" id="rdbYes" checked value="Yes">
+                            <label class="form-check-label" for="radio">
+                                Yes
+                            </label>
                         </div>
-                    </div>*@
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check theme">
+                            <input asp-for="IsPlayground" class="form-check-input" type="radio" name="Playground" id="rdbNo" value="No">
+                            <label class="form-check-label" for="radio">
+                                No
+                            </label>
+                        </div>
 
-                    <div id="play" class="col-md-6">
+                    </div>
+                </div>
+            </div>*@
+
+            <!--<div id="play" class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input placeholder="Name" asp-for="PlayGroundArea"
                                    class="floating-label-field floating-label-field--s3 " />
@@ -150,8 +180,8 @@
                     </div>
 
                 </div>
-            </div>
-            <div id="DivJudgement2" class="row mt-md-3">
+        </div>-->
+            @*<div id="DivJudgement2" class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -175,7 +205,7 @@
 
                 </div>
 
-            </div>
+            </div>*@
 
             <div class="row mt-md-3">
                 <div class="col-md-4">
@@ -215,6 +245,62 @@
 
                 </div>
 
+            </div>
+            <h3 class="my-3 d-flex sub-heading">Calculation Details</h3>
+
+            <div class="row mt-md-3" id="amount">
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" asp-for="PremiumAmount"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="PremiumAmount" class="text-danger msg"></span>
+                        <label class="floating-label"> Premium Amount </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" asp-for="GroundRate"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="GroundRate" class="text-danger"></span>
+                        <label class="floating-label">Ground Rent  </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input value="" placeholder="Name" asp-for="DocumentCharge"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="DocumentCharge" class="text-danger"></span>
+                        <label class="floating-label">Document Charge  </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name"  asp-for="PremiumRate" 
+                               class="floating-label-field floating-label-field--s3 numbers"/>
+                        <span asp-validation-for="PremiumRate" class="text-danger"></span>
+                        <label class="floating-label">Premium Rate   </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-md-3" id="fee">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" asp-for="AmountLicFee"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="AmountLicFee" class="text-danger msg"></span>
+                        <label class="floating-label"> License Fee </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Name" asp-for="NoOfYears" type="text"
+                               class="floating-label-field floating-label-field--s3 numbers " />
+                        <span asp-validation-for="NoOfYears" class="text-danger msg"></span>
+                        <label class="floating-label"> Lease Years  </label>
+                    </div>
+                </div>
             </div>
             <div class="row mt-md-3">
                 <div class="col-md-6">
@@ -282,7 +368,7 @@
                     @Html.ActionLink("Back", "Index", "AllotmentEntry", null, new { @class = "btn btn-theme " })
                 </div>
             </div>
-</form>
+    </form>
 </div>
 
 

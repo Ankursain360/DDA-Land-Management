@@ -26,7 +26,7 @@ namespace Libraries.Model.Entity
         public string PocketNo { get; set; }
         public decimal PlayGroundArea { get; set; }
         public decimal? BuildingArea { get; set; }
-       
+
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
 
@@ -34,7 +34,7 @@ namespace Libraries.Model.Entity
         public decimal? PremiumAmount { get; set; }
         public decimal? AmountLicFee { get; set; }
         public int? NoOfYears { get; set; }
-        public decimal? GroundRent { get; set; }
+        public decimal? GroundRate { get; set; }
         public decimal? DocumentCharges { get; set; }
         public int? LeasesTypeId { get; set; }
         public int? LeasePurposesTypeId { get; set; }
@@ -52,7 +52,7 @@ namespace Libraries.Model.Entity
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
         [NotMapped]
         public int PurposeId { get; set; }
-       
+
         [NotMapped]
         public string Name { get; set; }
         [NotMapped]
@@ -62,11 +62,14 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public decimal? LandAreaSqMt { get; set; }
         [NotMapped]
+
+        public decimal DocumentCharge { get; set; }
+        [NotMapped]
         public DateTime? PossessionTakenDate { get; set; }
 
         [NotMapped]
         public DateTime Date { get; set; }
-       
+
         //[NotMapped]
         //public decimal TotalPremiumAmount { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
@@ -75,19 +78,30 @@ namespace Libraries.Model.Entity
         public Leasepurpose LeasePurposesType { get; set; }
         public Leasesubpurpose LeaseSubPurpose { get; set; }
         public Leasetype LeasesType { get; set; }
-    
+
 
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
         public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
 
-        [NotMapped]
-        public string FullName
-        {
-            get
-            {
-                return Application.RefNo + " (" + Application.Name + ")";
-            }
-        }
+
+        //[NotMapped]
+        //public string FullName
+        //{
+        //    get
+        //    {
+        //        return Application.RefNo + " (" + Application.Name + ")";
+        //    }
+        //}
+
+
+        //[NotMapped]
+        //public string LRefNo
+        //{
+        //    get
+        //    {
+        //        return Application.RefNo ;
+        //    }
+        //}
 
         [NotMapped]
         public string PurposeName
@@ -117,7 +131,7 @@ namespace Libraries.Model.Entity
             }
         }
 
-        
+
 
     }
 }
