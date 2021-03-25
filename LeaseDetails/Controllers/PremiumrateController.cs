@@ -44,7 +44,9 @@ namespace LeaseDetails.Controllers
         {
             Premiumrate rate = new Premiumrate();
             rate.IsActive = 1;
-            rate.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+          
+            rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
+            rate.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(rate.LeasePurposesTypeId);
             return View(rate);
         }
 
@@ -54,7 +56,8 @@ namespace LeaseDetails.Controllers
       //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Premiumrate rate)
         {
-            rate.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+            rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
+            rate.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(rate.LeasePurposesTypeId);
             try
             {
 
@@ -93,7 +96,9 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _premiumrateService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+            //Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+            Data.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -106,7 +111,8 @@ namespace LeaseDetails.Controllers
       //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Premiumrate rate)
         {
-            rate.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+            rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
+            rate.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(rate.LeasePurposesTypeId);
             if (ModelState.IsValid)
             {
                 try
@@ -160,7 +166,9 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _premiumrateService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+            //Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
+            Data.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -176,6 +184,12 @@ namespace LeaseDetails.Controllers
             string sFileName = @"Premiumrate.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAllLeaseSubpurpose(int? purposeUseId)
+        {
+            purposeUseId = purposeUseId ?? 0;
+            return Json(await _premiumrateService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
     }
 }

@@ -18,7 +18,11 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
         Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
 
-        Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
+        //Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
+        Task<Documentcharges> FetchSingledocumentResult(int? leasesTypeId);
+
+        Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
+
 
 
 

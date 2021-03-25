@@ -15,8 +15,11 @@ namespace Libraries.Model.EntityConfiguration
         {
             entity.ToTable("licencefees", "lms");
 
-            entity.HasIndex(e => e.PropertyTypeId)
-                .HasName("fklicencefee_idx");
+            entity.HasIndex(e => e.LeasePurposesTypeId)
+                .HasName("fkleasepurposefeesid_idx");
+
+            entity.HasIndex(e => e.LeaseSubPurposeId)
+                .HasName("fkleasesubpurposefeesid_idx");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -27,25 +30,32 @@ namespace Libraries.Model.EntityConfiguration
             entity.Property(e => e.FromDate).HasColumnType("date");
 
             entity.Property(e => e.IsActive)
-                        .HasColumnType("tinyint(4)")
-                        .HasDefaultValueSql("1");
+                .HasColumnType("tinyint(4)")
+                .HasDefaultValueSql("1");
+
+            entity.Property(e => e.LeasePurposesTypeId).HasColumnType("int(11)");
+
+            entity.Property(e => e.LeaseSubPurposeId).HasColumnType("int(11)");
 
             entity.Property(e => e.LicenceFees)
-                        .HasColumnName("LicenceFees")
-                        .HasColumnType("decimal(18,3)");
+                .HasColumnName("LicenceFees")
+                .HasColumnType("decimal(18,3)");
 
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            entity.Property(e => e.PropertyTypeId).HasColumnType("int(11)");
-
             entity.Property(e => e.ToDate).HasColumnType("date");
 
-            entity.HasOne(d => d.PropertyType)
-                        .WithMany(p => p.Licencefees)
-                        .HasForeignKey(d => d.PropertyTypeId)
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fklicencefee");
+            entity.HasOne(d => d.LeasePurposesType)
+                .WithMany(p => p.Licencefees)
+                .HasForeignKey(d => d.LeasePurposesTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkleasepurposefeesid_idx");
 
+            entity.HasOne(d => d.LeaseSubPurpose)
+                .WithMany(p => p.Licencefees)
+                .HasForeignKey(d => d.LeaseSubPurposeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkleasesubpurposefeesid_idx");
         }
     }
 }

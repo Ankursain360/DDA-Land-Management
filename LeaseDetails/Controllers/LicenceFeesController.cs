@@ -55,7 +55,8 @@ namespace LeaseDetails.Controllers
         {
             Licencefees licencefees = new Licencefees();
             licencefees.IsActive = 1;
-            licencefees.PropertyTypeList = await _licenceFeesService.GetAllPropertyType();
+            licencefees.LeasePurposeList = await _licenceFeesService.GetAllLeasepurpose();
+            licencefees.LeaseSubPurposeList = await _licenceFeesService.GetAllLeaseSubpurpose(licencefees.LeasePurposesTypeId);
             return View(licencefees);
         }
 
@@ -65,7 +66,8 @@ namespace LeaseDetails.Controllers
         //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Licencefees licfees)
         {
-            licfees.PropertyTypeList = await _licenceFeesService.GetAllPropertyType();
+            licfees.LeasePurposeList = await _licenceFeesService.GetAllLeasepurpose();
+            licfees.LeaseSubPurposeList = await _licenceFeesService.GetAllLeaseSubpurpose(licfees.LeasePurposesTypeId);
             try
             {
 
@@ -104,7 +106,8 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _licenceFeesService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _licenceFeesService.GetAllPropertyType();
+            Data.LeasePurposeList = await _licenceFeesService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _licenceFeesService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -117,7 +120,8 @@ namespace LeaseDetails.Controllers
         //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Licencefees licfees)
         {
-            licfees.PropertyTypeList = await _licenceFeesService.GetAllPropertyType();
+            licfees.LeasePurposeList = await _licenceFeesService.GetAllLeasepurpose();
+            licfees.LeaseSubPurposeList = await _licenceFeesService.GetAllLeaseSubpurpose(licfees.LeasePurposesTypeId);
             if (ModelState.IsValid)
             {
                 try
@@ -170,7 +174,8 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _licenceFeesService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _licenceFeesService.GetAllPropertyType();
+            Data.LeasePurposeList = await _licenceFeesService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _licenceFeesService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -186,6 +191,12 @@ namespace LeaseDetails.Controllers
             string sFileName = @"Premiumrate.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAllLeaseSubpurpose(int? purposeUseId)
+        {
+            purposeUseId = purposeUseId ?? 0;
+            return Json(await _licenceFeesService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
     }
 }

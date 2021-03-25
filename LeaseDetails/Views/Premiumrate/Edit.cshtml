@@ -9,14 +9,54 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
-                            asp-for="PropertyTypeId" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LeasePurposesTypeId" asp-items="@(new SelectList(Model.LeasePurposeList, "Id","PurposeUse"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
                         <option disabled="disabled" selected value="">Select</option>
+
+
+
                     </select>
-                    <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
-                    <label asp-for="PropertyTypeId" class="floating-label">Property Type </label>
+                    <span asp-validation-for="LeasePurposesTypeId" class="text-danger"></span>
+                    <label class="floating-label">Purpose </label>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LeaseSubPurposeId" asp-items="@(new SelectList(Model.LeaseSubPurposeList, "Id","SubPurposeUse"))">
+                        <option value="">--Select-- </option>
+                    </select>
+
+
+
+
+                    <span asp-validation-for="LeaseSubPurposeId" class="text-danger"></span>
+                    <label class="floating-label">SubPurpose </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="FromDate" placeholder="Name" type="date" id="txtFromDate"
+                           class="floating-label-field floating-label-field--s3 " />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                    <label class="floating-label">From Date    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="ToDate" placeholder="Name" type="date" id="txtToDate"
+                           class="floating-label-field floating-label-field--s3 " onblur="checkTextField(this);" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                    <p id="error" style="color:red;"></p>
+                    <label class="floating-label">  To Date   </label>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="PremiumRate" placeholder="Name" type="text"
@@ -25,26 +65,6 @@
                     <label class="floating-label">Premium Rate   </label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FromDate" placeholder="Name" type="date"
-                           class="floating-label-field floating-label-field--s3 " />
-                    <span asp-validation-for="FromDate" class="text-danger"></span>
-                    <label class="floating-label">From Date    </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="ToDate" placeholder="Name" type="date"
-                           class="floating-label-field floating-label-field--s3 " />
-                    <span asp-validation-for="ToDate" class="text-danger"></span>
-                    <label class="floating-label">  To Date   </label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">

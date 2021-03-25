@@ -42,7 +42,9 @@ namespace LeaseDetails.Controllers
             Groundrent groundrent = new Groundrent();
             groundrent.IsActive = 1;
             groundrent.CreatedBy = SiteContext.UserId;
-            groundrent.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+            //groundrent.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+            groundrent.LeasePurposeList = await _groundRentService.GetAllLeasepurpose();
+            groundrent.LeaseSubPurposeList = await _groundRentService.GetAllLeaseSubpurpose(groundrent.LeasePurposesTypeId);
             return View(groundrent);
             
         }
@@ -53,7 +55,8 @@ namespace LeaseDetails.Controllers
         {
             try
             {
-                groundrent.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+                groundrent.LeasePurposeList = await _groundRentService.GetAllLeasepurpose();
+                groundrent.LeaseSubPurposeList = await _groundRentService.GetAllLeaseSubpurpose(groundrent.LeasePurposesTypeId);
                 if (ModelState.IsValid)
                 {
                     var result = await _groundRentService.Create(groundrent);
@@ -101,7 +104,9 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _groundRentService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+            //Data.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+            Data.LeasePurposeList = await _groundRentService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _groundRentService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
 
             if (Data == null)
             {
@@ -178,7 +183,8 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _groundRentService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
+            Data.LeasePurposeList = await _groundRentService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _groundRentService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
 
             if (Data == null)
             {
@@ -199,7 +205,12 @@ namespace LeaseDetails.Controllers
         }
 
 
-
+        [HttpGet]
+        public async Task<JsonResult> GetAllLeaseSubpurpose(int? purposeUseId)
+        {
+            purposeUseId = purposeUseId ?? 0;
+            return Json(await _groundRentService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
+        }
 
 
     }

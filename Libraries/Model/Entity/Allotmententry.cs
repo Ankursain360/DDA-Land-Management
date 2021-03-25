@@ -62,8 +62,9 @@ namespace Libraries.Model.Entity
         public string ContactNo { get; set; }
         [NotMapped]
         public decimal? LandAreaSqMt { get; set; }
+        [NotMapped]
+        public decimal DocumentCharge { get; set; }
 
-       
         [NotMapped]
         public DateTime Date { get; set; }
         //[NotMapped]
@@ -81,23 +82,23 @@ namespace Libraries.Model.Entity
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
         public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
 
-        [NotMapped]
-        public string FullName
-        {
-            get
-            {
-                return Application.RefNo + " (" + Application.Name + ")";
-            }
-        }
+        //[NotMapped]
+        //public string FullName
+        //{
+        //    get
+        //    {
+        //        return Application.RefNo + " (" + Application.Name + ")";
+        //    }
+        //}
 
-        [NotMapped]
-        public string LRefNo
-        {
-            get
-            {
-                return Application.RefNo ;
-            }
-        }
+        //[NotMapped]
+        //public string LRefNo
+        //{
+        //    get
+        //    {
+        //        return Application.RefNo ;
+        //    }
+        //}
 
 
     }
