@@ -543,6 +543,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new JudgementConfiguration());
             modelBuilder.ApplyConfiguration(new LeaseNoticeGenerationConfiguration());
             modelBuilder.ApplyConfiguration(new AllotteeEvidenceUploadConfiguration());
+            modelBuilder.ApplyConfiguration(new LeasepurposeConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
