@@ -213,13 +213,13 @@ namespace LeaseDetails.Controllers
 
         //    return Json(await _allotmentEntryService.FetchSingleCalculationDetails(Convert.ToInt32(LeasesTypeId)));
         //}
-        [HttpGet]
-        public async Task<JsonResult> GetDocumentList(int? leasesTypeId)
-        {
-            leasesTypeId = leasesTypeId ?? 0;
+        //[HttpGet]
+        //public async Task<JsonResult> GetDocumentList(int? leasesTypeId)
+        //{
+        //    leasesTypeId = leasesTypeId ?? 0;
 
-            return Json(await _allotmentEntryService.FetchSingledocumentResult(Convert.ToInt32(leasesTypeId)));
-        }
+        //    return Json(await _allotmentEntryService.FetchSingledocumentResult(Convert.ToInt32(leasesTypeId)));
+        //}
 
         [HttpGet]
         public async Task<JsonResult> GetRateList(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
@@ -260,5 +260,17 @@ namespace LeaseDetails.Controllers
             //return Json(Data.PremiumRate);
            
                 }
+        public async Task<JsonResult> GetDocumentList(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
+        {
+            leasePurposeId = leasePurposeId ?? 0;
+            leaseSubPurposeId = leaseSubPurposeId ?? 0;
+
+
+            return Json(await _allotmentEntryService.FetchSingledocumentResult(leasePurposeId, leaseSubPurposeId, allotmentDate));
+            //var Data = await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
+
+            //return Json(Data.PremiumRate);
+
+        }
     }
 }

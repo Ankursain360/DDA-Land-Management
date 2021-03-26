@@ -194,9 +194,10 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<Documentcharges> FetchSingledocumentResult(int? leasesTypeId)
+        public async Task<Documentcharges> FetchSingledocumentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
         {
-            return await _dbContext.Documentcharges.Where(x => x.Id == leasesTypeId).SingleOrDefaultAsync();
+            var data = await _dbContext.Documentcharges.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (Convert.ToDateTime(allotmentDate) >= x.FromDate && Convert.ToDateTime(allotmentDate) <= x.ToDate)).SingleOrDefaultAsync();
+            return data;
         }
 
         public async Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
