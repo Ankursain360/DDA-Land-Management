@@ -33,6 +33,7 @@ namespace Libraries.Model.Entity
         public decimal? PremiumRate { get; set; }
         public decimal? PremiumAmount { get; set; }
         public decimal? AmountLicFee { get; set; }
+        public decimal? TotalAmount { get; set; }
         public decimal? LicenceFees { get; set; }
         public decimal? AmountGroundRate { get; set; }
         public int? NoOfYears { get; set; }

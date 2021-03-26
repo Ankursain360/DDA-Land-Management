@@ -16,22 +16,22 @@ $(document).ready(function () {
     }
 });
 $("#ddlLeaseType").change(function () {
-   
+
     var abc = $("#ddlLeaseType").children("option:selected").val();
     //var abc = $("#LeasesTypeId").val();
     if (abc) {
         HttpGet(`/AllotmentEntry/GetDocumentList/?leasesTypeId=${abc}`, 'json', function (response) {
-            
+
             $("#DocumentCharge").val(response.documentCharge);
         });
         //HttpGet(`/AllotmentEntry/GetCalculationList/?LeasesTypeId=${abc}`, 'json', function (response) {
         //    debugger;
         //    $("#PremiumRate").val(response.premiumRate);
 
-           
+
         //});
         //HttpGet(`/AllotmentEntry/GetRateList/?LeasesTypeId=${abc}`, 'json', function (response) {
-            
+
         //    $("#textprate").val(response.premiumRate);
 
 
@@ -44,10 +44,10 @@ $("#ApplicationId").change(function () {
     var kid = $(this).val();
     if (kid) {
         HttpGet(`/AllotmentEntry/GetAreaList/?applicationid=${kid}`, 'json', function (response) {
-            
+
             $("#Name").val(response.name);
             $("#Address").val(response.address);
-            $("#ContactNo").val(response.contactNo); 
+            $("#ContactNo").val(response.contactNo);
             $("#LandAreaSqMt").val(response.landAreaSqMt);
         });
 
@@ -55,7 +55,7 @@ $("#ApplicationId").change(function () {
 });
 
 $("#AllotmentDate").change(function () {
-    
+
     var kid = parseInt($('#LeaseSubPurposeId option:selected').val());
     var pid = parseInt($('#LeasePurposesTypeId option:selected').val());
     var adate = $("#AllotmentDate").val();
@@ -72,10 +72,10 @@ $("#AllotmentDate").change(function () {
             $("#PremiumAmount").val(pamount);
 
         });
-    
-   
+
+
         HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-           
+
             debugger;
             $("#GroundRate").val(response.groundRate);
             var grate = $("#GroundRate").val(response.groundRate);
@@ -90,9 +90,16 @@ $("#AllotmentDate").change(function () {
             $("#LicenceFees").val(response.licenceFees);
 
         });
+        HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+
+            debugger;
+            $("#DocumentCharge").val(response.documentCharge);
+
+
+        });
     }
 });
-   
+
 
 $('#LeasesTypeId').change(function () {
     var value = $('#LeasesTypeId option:selected').val();
@@ -136,13 +143,13 @@ function onChange(id) {
 };
 //function checkTextField(field) {
 //    debugger;
-    
+
 //    var area = $('#parea').val();
 //    var prate = $('#textprate').val();
 //    var xyz = area * prate;
 //    $("#PremiumAmount").val(xyz);
 //    //var grent = xyz * (2.5 / 100);
 //    //$("#GroundRent").val(grent);
-   
+
 
 //}
