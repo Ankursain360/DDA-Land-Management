@@ -14,6 +14,7 @@ namespace Libraries.Model.Entity
     {
         public Requestforproceeding()
         {
+            Judgement = new HashSet<Judgement>();
             Leasenoticegeneration = new HashSet<Leasenoticegeneration>();
         }
         [Required(ErrorMessage = "FIle No is mandatory ")]
@@ -86,7 +87,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
         public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
-
+        public ICollection<Judgement> Judgement { get; set; }
 
     }
 }
