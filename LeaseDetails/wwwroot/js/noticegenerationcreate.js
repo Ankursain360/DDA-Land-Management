@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
 
-    var id = parseInt($('#Id').val());
+    var id = parseInt($('#RequestProceedingId').val());
     GetOtherDetails(id);
-    GetHistoryDetails(id);
-    GetDetails();
+    //  GetHistoryDetails(id);
+    //  GetDetails();
 
     var value = $("#GenerateUpload").val();
     if (value == 0) {
@@ -31,15 +31,15 @@ $("input[name='radioStatus']").click(function () {
         $("#divUpload").show();
         $("#btnGenerate").val("Upload");
 
-    }   
+    }
 });
 
-function GetHistoryDetails(id) {
-    HttpGet(`/NoticeGeneration/NoticeHistoryDetails/?Id=${id}`, 'html', function (response) {
-        $('#divHistoryDetails').html("");
-        $('#divHistoryDetails').html(response);
-    });
-};
+//function GetHistoryDetails(id) {
+//    HttpGet(`/NoticeGeneration/NoticeHistoryDetails/?Id=${id}`, 'html', function (response) {
+//        $('#divHistoryDetails').html("");
+//        $('#divHistoryDetails').html(response);
+//    });
+//};
 
 function GetOtherDetails(id) {
     HttpGet(`/NoticeGeneration/RequestForProceedingEvictionView/?Id=${id}`, 'html', function (response) {
@@ -67,14 +67,14 @@ function GetLetterRefNo(id) {
     });
 };
 
-$("#btnGenerate").click(function () {
-    if ($("#LetterReferenceNo").val() != "") {
-        GetDetails();
-    }
-    else {
-        WarningMessage('Please Fill Letter Reference No.');
-    }
-});
+//$("#btnGenerate").click(function () {
+//    if ($("#LetterReferenceNo").val() != "") {
+//        GetDetails();
+//    }
+//    else {
+//        WarningMessage('Please Fill Letter Reference No.');
+//    }
+//});
 
 function GetDetails() {
     var param = GetSearchParam();
@@ -121,3 +121,86 @@ function nWin(context, title) {
     };
     show();
 };
+
+
+function GetNoticeEditDetails(id) {
+    HttpGet(`/NoticeGeneration/GetNoticeGenerationDetails/?Id=${id}`, 'json', function (response) {
+
+        if (response != null) {
+            $('#Id').val(response.id);
+            $('#RequestProceedingId').val(response.requestProceedingId);
+            if (response.meetingDate != null)
+                $('#MeetingDate').val(response.meetingDate.split('T')[0]);
+            $('#MeetingTime').val(response.meetingTime);
+            $('#MeetingPlace').val(response.meetingPlace);
+            $('#NoticeFileName').val(response.noticeFileName);
+            if (response.noticeFileName != null) {
+                $('#viewId').show();
+            }
+            else {
+                $('#viewId').hide();
+            }
+        }
+    });
+}
+
+function check() {
+    var checkresult = false;
+    var selected = $("input[type='radio'][name='radioStatus']:checked");
+    $("#GenerateUpload").val(selected.val());
+    if (selected.val() == 0) {
+        var Date_val = $('#MeetingDate').val();
+        if (Date_val == "") {
+            checkresult = false;
+            $("#MessageDate").show();
+        } else {
+            checkresult = true;
+            $("#MessageDate").hide();
+        }
+
+        var Time_val = $('#MeetingTime').val();
+        if (Time_val == "") {
+            checkresult = false;
+            $("#MessageTime").show();
+        } else {
+            checkresult = true;
+            $("#MessageTime").hide();
+        }
+
+        var Place_val = $('#MeetingPlace').val();
+        if (Place_val == "") {
+            checkresult = false;
+            $("#MeetingPlace").show();
+        } else {
+            checkresult = true;
+            $("#MeetingPlace").hide();
+        }
+
+        if (Date_val == "" || Time_val == "" || Place_val == "") {
+            checkresult = false;
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    else {
+        var fileInput = document.getElementById('Document');
+        var filePath = fileInput.value;
+        if (filePath == "") {
+            checkresult = false;
+            $("#MessageFileUpload").show();
+        } else {
+            checkresult = true;
+        }
+
+        if (filePath == "") {
+            checkresult = false;
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+}

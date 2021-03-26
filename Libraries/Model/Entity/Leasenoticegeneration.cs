@@ -26,5 +26,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public int GenerateUpload { get; set; }
+
+        [NotMapped]
+        public List<Leasenoticegeneration> LeaseNoticeGenerationList { get; set; }
     }
 }
