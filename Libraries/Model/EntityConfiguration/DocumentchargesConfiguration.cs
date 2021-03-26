@@ -13,8 +13,11 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("documentcharges", "lms");
 
-            builder.HasIndex(e => e.PropertyTypeId)
-                .HasName("fkdocumentproperty_idx");
+            builder.HasIndex(e => e.LeasePurposesTypeId)
+                .HasName("fkpurposedocid_idx");
+
+            builder.HasIndex(e => e.LeaseSubPurposeId)
+                .HasName("fkleasesubdocid_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -30,17 +33,25 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnType("tinyint(4)")
                 .HasDefaultValueSql("1");
 
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+            builder.Property(e => e.LeasePurposesTypeId).HasColumnType("int(11)");
 
-            builder.Property(e => e.PropertyTypeId).HasColumnType("int(11)");
+            builder.Property(e => e.LeaseSubPurposeId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.ToDate).HasColumnType("date");
 
-            builder.HasOne(d => d.PropertyType)
+            builder.HasOne(d => d.LeasePurposesType)
                 .WithMany(p => p.Documentcharges)
-                .HasForeignKey(d => d.PropertyTypeId)
+                .HasForeignKey(d => d.LeasePurposesTypeId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fkdocumentproperty");
+                .HasConstraintName("fkpurposedocid_idx");
+
+            builder.HasOne(d => d.LeaseSubPurpose)
+                .WithMany(p => p.Documentcharges)
+                .HasForeignKey(d => d.LeaseSubPurposeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkleasesubdocid_idx");
 
 
 

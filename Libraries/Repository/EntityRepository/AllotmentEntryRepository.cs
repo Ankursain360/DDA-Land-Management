@@ -210,9 +210,10 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Groundrent.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (Convert.ToDateTime(allotmentDate) >= x.FromDate && Convert.ToDateTime(allotmentDate) <= x.ToDate)).SingleOrDefaultAsync();
             return data;
         }
-        public async Task<Licencefees> FetchSinglefeeResult(int? leaseSubPurposeId)
+        public async Task<Licencefees> FetchSinglefeeResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
         {
-            return await _dbContext.Licencefees.Where(x => x.Id == leaseSubPurposeId).SingleOrDefaultAsync();
+            var data = await _dbContext.Licencefees.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (Convert.ToDateTime(allotmentDate) >= x.FromDate && Convert.ToDateTime(allotmentDate) <= x.ToDate)).SingleOrDefaultAsync();
+            return data;
         }
 
 

@@ -245,7 +245,20 @@ namespace LeaseDetails.Controllers
             //var Data = await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
 
             //return Json(Data.PremiumRate);
+            
 
         }
+        public async Task<JsonResult> GetFeeList(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
+        {
+            leasePurposeId = leasePurposeId ?? 0;
+            leaseSubPurposeId = leaseSubPurposeId ?? 0;
+
+
+            return Json(await _allotmentEntryService.FetchSinglefeeResult(leasePurposeId, leaseSubPurposeId, allotmentDate));
+            //var Data = await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
+
+            //return Json(Data.PremiumRate);
+           
+                }
     }
 }

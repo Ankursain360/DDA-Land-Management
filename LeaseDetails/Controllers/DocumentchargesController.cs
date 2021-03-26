@@ -46,7 +46,9 @@ namespace LeaseDetails.Controllers
         {
             Documentcharges charge = new Documentcharges();
             charge.IsActive = 1;
-            charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            charge.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            charge.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(charge.LeasePurposesTypeId);
             return View(charge);
         }
 
@@ -56,7 +58,9 @@ namespace LeaseDetails.Controllers
         //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Documentcharges charge)
         {
-            charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            charge.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            charge.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(charge.LeasePurposesTypeId);
             try
             {
 
@@ -95,7 +99,9 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _documentchargesService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            //Data.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            Data.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -108,7 +114,9 @@ namespace LeaseDetails.Controllers
         //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Documentcharges charge)
         {
-            charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            charge.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            charge.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(charge.LeasePurposesTypeId);
             if (ModelState.IsValid)
             {
                 try
@@ -162,7 +170,9 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _documentchargesService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            //Data.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            Data.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -178,6 +188,12 @@ namespace LeaseDetails.Controllers
             string sFileName = @"Documentcharges.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetAllLeaseSubpurpose(int? purposeUseId)
+        {
+            purposeUseId = purposeUseId ?? 0;
+            return Json(await _documentchargesService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
     }
 }

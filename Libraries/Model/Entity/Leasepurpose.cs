@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
             Groundrent = new HashSet<Groundrent>();
             Licencefees = new HashSet<Licencefees>();
             Premiumrate = new HashSet<Premiumrate>();
+            Documentcharges = new HashSet<Documentcharges>();
         }
         public string PurposeUse { get; set; }
         public byte? IsActive { get; set; }
@@ -28,5 +29,6 @@ namespace Libraries.Model.Entity
         public ICollection<Premiumrate> Premiumrate { get; set; }
         public ICollection<Groundrent> Groundrent { get; set; }
         public ICollection<Licencefees> Licencefees { get; set; }
+        public ICollection<Documentcharges> Documentcharges { get; set; }
     }
 }

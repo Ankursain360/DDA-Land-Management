@@ -15,7 +15,9 @@ namespace Libraries.Service.IApplicationService
     public interface IDocumentchargesServices : IEntityService<Documentcharges>
     {
         Task<List<Documentcharges>> GetAllDocumentcharges();
-        Task<List<PropertyType>> GetAllPropertyType();
+        //Task<List<PropertyType>> GetAllPropertyType();
+        Task<List<Leasepurpose>> GetAllLeasepurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
         Task<bool> Update(int id, Documentcharges charge);
         Task<bool> Create(Documentcharges charge);
         Task<Documentcharges> FetchSingleResult(int id);
