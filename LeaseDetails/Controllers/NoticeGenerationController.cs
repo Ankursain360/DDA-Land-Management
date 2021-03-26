@@ -147,13 +147,15 @@ namespace LeaseDetails.Controllers
                         ViewBag.IsVisible = true;
                         ViewBag.DataLetter = Body;
                         ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
-                        return View(emptyData);
+                        ViewBag.PrimaryId = 0;
+                        return View("Create",emptyData);
                     }
                     else
                     {
                         ViewBag.IsVisible = false;
                         ViewBag.Message = Alert.Show("File Uploaded Successfully", "", AlertType.Success);
-                        return View(emptyData);
+                        ViewBag.PrimaryId = 0;
+                        return View("Create", emptyData);
                     }
                 }
                 else

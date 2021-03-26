@@ -17,6 +17,12 @@
         $("#btnGenerate").val("Upload");
 
     }
+
+    if (parseInt($('#Id').val()) == 0) {
+        $("#MeetingDate").val("");
+        $("#MeetingTime").val("");
+        $("#MeetingPlace").val("");
+    }
 });
 $("input[name='radioStatus']").click(function () {
     var selected = $("input[type='radio'][name='radioStatus']:checked");
