@@ -29,9 +29,16 @@ namespace Libraries.Service.ApplicationService
         {
             return await _groundRentRepository.GetAllGroundRent();
         }
-        public async Task<List<PropertyType>> GetAllPropertyTypeList()
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
-            return await _groundRentRepository.GetAllPropertyTypeList();
+            List<Leasepurpose> leasePurposeList = await _groundRentRepository.GetAllLeasepurpose();
+            return leasePurposeList;
+        }
+
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId)
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _groundRentRepository.GetAllLeaseSubpurpose(purposeUseId);
+            return leaseSubPurposeList;
         }
 
 
@@ -46,7 +53,8 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _groundRentRepository.FindBy(a => a.Id == id);
             Groundrent model = result.FirstOrDefault();
-            model.PropertyTypeId = rent.PropertyTypeId;
+            model.LeasePurposesTypeId = rent.LeasePurposesTypeId;
+            model.LeaseSubPurposeId = rent.LeaseSubPurposeId;
             model.GroundRate = rent.GroundRate;
             model.FromDate = rent.FromDate;
             model.ToDate = rent.ToDate;

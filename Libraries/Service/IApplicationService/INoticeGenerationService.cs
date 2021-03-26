@@ -11,6 +11,10 @@ namespace Libraries.Service.IApplicationService
 {
     public interface INoticeGenerationService : IEntityService<Leasenoticegeneration>
     {
-       
+        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
+        Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id);
+        Task<List<Leasenoticegeneration>> GetNoticeHistoryDetails(int id);
+        Task<bool> Create(Leasenoticegeneration leasenoticegeneration);
+        Task<bool> Update(int id, Leasenoticegeneration leasenoticegeneration);
     }
 }

@@ -14,7 +14,8 @@ namespace Libraries.Service.IApplicationService
     public interface ILicenceFeesService : IEntityService<Licencefees>
     {
         Task<List<Licencefees>> GetAllLicencefees();
-        Task<List<PropertyType>> GetAllPropertyType();
+        Task<List<Leasepurpose>> GetAllLeasepurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
         Task<bool> Update(int id, Licencefees licencefees);
         Task<bool> Create(Licencefees licencefees);
         Task<Licencefees> FetchSingleResult(int id);

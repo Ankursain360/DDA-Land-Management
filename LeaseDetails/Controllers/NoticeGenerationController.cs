@@ -23,27 +23,34 @@ namespace LeaseDetails.Controllers
 {
     public class NoticeGenerationController : BaseController
     {
-        public readonly ILeaseHearingDetailsService _leaseHearingDetailsService;      
+        public readonly INoticeGenerationService _noticeGenerationService;
+        public readonly ILeaseHearingDetailsService _leaseHearingDetailsService;
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IRequestforproceedingService _undersection4PlotService;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        string targetPathDocument = "";
-        public NoticeGenerationController(ILeaseHearingDetailsService leaseHearingDetailsService,
-            IConfiguration configuration, 
+        string targetPathNotice = "";
+        public NoticeGenerationController(INoticeGenerationService noticeGenerationService,
+            ILeaseHearingDetailsService leaseHearingDetailsService,
+            IConfiguration configuration,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
-            IRequestforproceedingService undersection4PlotService)
+            IRequestforproceedingService undersection4PlotService,
+            IHostingEnvironment en)
         {
+            _noticeGenerationService = noticeGenerationService;
             _leaseHearingDetailsService = leaseHearingDetailsService;
             _configuration = configuration;
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
             _undersection4PlotService = undersection4PlotService;
+            _hostingEnvironment = en;
+            targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
         }
 
 
-       // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -52,7 +59,7 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LeaseHearingDetailsSearchDto model)
         {
-            var result = await _leaseHearingDetailsService.GetPagedRequestLetterDetails(model, SiteContext.UserId);
+            var result = await _noticeGenerationService.GetPagedRequestLetterDetails(model);
             return PartialView("_List", result);
         }
 
@@ -60,110 +67,136 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
-            Requestforproceeding result = await _leaseHearingDetailsService.FetchRequestforproceedingData(id);
-            //if (result == null)
+            //if (id == 0)
             //{
-            //    Requestforproceeding Data = new Requestforproceeding();
-            //    Data.FixingDemolitionId = id;
-            //    ViewBag.PrimaryId = 0;
-            //    return View(Data);
+            Leasenoticegeneration Data = new Leasenoticegeneration();
+            Data.LeaseNoticeGenerationList = await _noticeGenerationService.GetNoticeHistoryDetails(id);
+            Data.RequestProceedingId = id;
+            ViewBag.PrimaryId = 0;
+            return View(Data);
             //}
             //else
             //{
-            //    result.FixingDemolitionId = id;
+            //    Leasenoticegeneration result = await _noticeGenerationService.FetchNoticeGenerationDetails(id);
+            //    result.RequestProceedingId = id;
             //    ViewBag.PrimaryId = result.Id;
-                return View(result);
-           // }
+            //    return View(result);
+            //}
         }
 
-        //[HttpPost]
-        //[AuthorizeContext(ViewAction.Add)]
-        //public async Task<IActionResult> Create(Demolitionpoliceassistenceletter demolitionpoliceassistenceletter)
-        //{
-        //    var result = false;
-        //    ViewBag.PrimaryId = demolitionpoliceassistenceletter.Id;
-        //    targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (demolitionpoliceassistenceletter.GenerateUpload == 0)
-        //        {
-        //            if (demolitionpoliceassistenceletter.MeetingDate == null || demolitionpoliceassistenceletter.MeetingTime == null)
-        //            {
-        //                ViewBag.Message = Alert.Show("Meeting Date and Time is Mandatory", "", AlertType.Warning);
-        //                return View(demolitionpoliceassistenceletter);
-        //            }
-        //        }
-        //        else if (demolitionpoliceassistenceletter.GenerateUpload == 1)
-        //        {
-        //            if (demolitionpoliceassistenceletter.Document == null)
-        //            {
-        //                ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
-        //                return View(demolitionpoliceassistenceletter);
-        //            }
-        //        }
-        //        string LetterFileName = "";
-        //        string LetterfilePath = "";
-        //        if (demolitionpoliceassistenceletter.Document != null)
-        //        {
-        //            if (!Directory.Exists(targetPathDocument))
-        //            {
-        //                DirectoryInfo di = Directory.CreateDirectory(targetPathDocument);// Try to create the directory.
-        //            }
-        //            LetterFileName = Guid.NewGuid().ToString() + "_" + demolitionpoliceassistenceletter.Document.FileName;
-        //            LetterfilePath = Path.Combine(targetPathDocument, LetterFileName);
-        //            using (var stream = new FileStream(LetterfilePath, FileMode.Create))
-        //            {
-        //                demolitionpoliceassistenceletter.Document.CopyTo(stream);
-        //            }
-        //            demolitionpoliceassistenceletter.FilePath = LetterfilePath;
-        //        }
+        [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id, Leasenoticegeneration leasenoticegeneration)
+        {
+            var result = false;
+            ViewBag.PrimaryId = leasenoticegeneration.Id;
+            if (ModelState.IsValid)
+            {
+                leasenoticegeneration.LeaseNoticeGenerationList = await _noticeGenerationService.GetNoticeHistoryDetails(leasenoticegeneration.RequestProceedingId);
+                if (leasenoticegeneration.GenerateUpload == 0)
+                {
+                    if (leasenoticegeneration.MeetingDate == null || leasenoticegeneration.MeetingTime == null || leasenoticegeneration.MeetingPlace == null)
+                    {
+                        ViewBag.Message = Alert.Show("Meeting Date , Time and Place is Mandatory", "", AlertType.Warning);
+                        return View(leasenoticegeneration);
+                    }
+                }
+                else if (leasenoticegeneration.GenerateUpload == 1)
+                {
+                    if (leasenoticegeneration.Document == null)
+                    {
+                        ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
+                        return View(leasenoticegeneration);
+                    }
+                }
+                FileHelper fileHelper = new FileHelper();
+                if (leasenoticegeneration.Document != null)
+                {
+                    leasenoticegeneration.NoticeFileName = leasenoticegeneration.Document != null ?
+                                                                      fileHelper.SaveFile1(targetPathNotice, leasenoticegeneration.Document) :
+                                                                      leasenoticegeneration.Document != null || leasenoticegeneration.NoticeFileName != "" ?
+                                                                      leasenoticegeneration.NoticeFileName : string.Empty;
+                }
 
 
-        //        var demolitionpoliceData = await _demolitionPoliceAssistenceLetterService.FetchSingleResultButOnAneexureId(demolitionpoliceassistenceletter.FixingDemolitionId);
-        //        if (demolitionpoliceData == null)
-        //        {
-        //            demolitionpoliceassistenceletter.CreatedBy = SiteContext.UserId;
-        //            result = await _demolitionPoliceAssistenceLetterService.Create(demolitionpoliceassistenceletter);
-        //        }
-        //        else
-        //        {
-        //            demolitionpoliceassistenceletter.ModifiedBy = SiteContext.UserId;
-        //            result = await _demolitionPoliceAssistenceLetterService.Update(demolitionpoliceData.Id, demolitionpoliceassistenceletter);
-        //        }
+                // var demolitionpoliceData = await _noticeGenerationService.FetchSingleResultButOnAneexureId(leasenoticegeneration.FixingDemolitionId);
+                if (id == 0)
+                {
+                    var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
+                    leasenoticegeneration.NoticeReferenceNo = leasenoticegeneration.RequestProceedingId + finalString;
+                    leasenoticegeneration.CreatedBy = SiteContext.UserId;
+                    result = await _noticeGenerationService.Create(leasenoticegeneration);
+                }
+                else
+                {
+                    leasenoticegeneration.ModifiedBy = SiteContext.UserId;
+                    result = await _noticeGenerationService.Update(id, leasenoticegeneration);
+                }
 
 
-        //        if (result)
-        //        {
-        //            var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResultButOnAneexureId(demolitionpoliceassistenceletter.FixingDemolitionId);
-        //            demolitionpoliceassistenceletter.FilePath = Data.FilePath;
-        //            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
-        //            var Body = PopulateBody(Data, path);
-        //            if (demolitionpoliceassistenceletter.GenerateUpload == 0)
-        //            {
-        //                ViewBag.IsVisible = true;
-        //                ViewBag.DataLetter = Body;
-        //                ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
-        //            }
-        //            else
-        //            {
-        //                ViewBag.IsVisible = false;
-        //                ViewBag.Message = Alert.Show("File Uploaded Successfully", "", AlertType.Success);
-        //            }
-        //            return View(demolitionpoliceassistenceletter);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Success);
-        //            return View("Index");
-        //        }
+                if (result)
+                {
+                    var Data = await _noticeGenerationService.FetchNoticeGenerationDetails(leasenoticegeneration.Id);
+                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "NoticeDetails.html");
+                    var Body = PopulateBody(Data, path);
+                    Leasenoticegeneration emptyData = new Leasenoticegeneration();
+                    emptyData.LeaseNoticeGenerationList = await _noticeGenerationService.GetNoticeHistoryDetails(leasenoticegeneration.RequestProceedingId);
+                    emptyData.RequestProceedingId = leasenoticegeneration.RequestProceedingId;
+                    if (leasenoticegeneration.GenerateUpload == 0)
+                    {
+                        ViewBag.IsVisible = true;
+                        ViewBag.DataLetter = Body;
+                        ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
+                        ViewBag.PrimaryId = 0;
+                        return View("Create",emptyData);
+                    }
+                    else
+                    {
+                        ViewBag.IsVisible = false;
+                        ViewBag.Message = Alert.Show("File Uploaded Successfully", "", AlertType.Success);
+                        ViewBag.PrimaryId = 0;
+                        return View("Create", emptyData);
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Success);
+                    return View("Index");
+                }
 
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return View(demolitionpoliceassistenceletter);
-        //    }
-        //}
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(leasenoticegeneration);
+            }
+        }
+        private string PopulateBody(Leasenoticegeneration leasenoticegeneration, string Path)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(Path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{LetterReferenceNo}", (leasenoticegeneration.NoticeReferenceNo == null ? "" : leasenoticegeneration.NoticeReferenceNo));
+            body = body.Replace("{TodayDatetime}", Convert.ToDateTime((DateTime.Now)).ToString("dd-MMM-yyyy"));
+            body = body.Replace("{SocietyName}", (leasenoticegeneration.RequestProceeding == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Name == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Name));
+            body = body.Replace("{Address}", (leasenoticegeneration.RequestProceeding == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Address == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Address));
+            body = body.Replace("{MeetingDate}", (leasenoticegeneration.MeetingDate == null ? "" : Convert.ToDateTime((leasenoticegeneration.MeetingDate)).ToString("dd-MMM-yyyy")));
+            body = body.Replace("{MeetingTime}", (leasenoticegeneration.MeetingTime == null ? "" : leasenoticegeneration.MeetingTime));
+            body = body.Replace("{MeetingPlace}", (leasenoticegeneration.MeetingPlace == null ? "" : leasenoticegeneration.MeetingPlace));
+
+
+            return body;
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> ViewNotice([FromBody] ProceedingEvictionLetterSearchDto model)
@@ -189,110 +222,6 @@ namespace LeaseDetails.Controllers
             return PartialView("_ViewNotice");
         }
 
-        //[AuthorizeContext(ViewAction.Edit)]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(id);
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
-
-
-        //[HttpPost]
-        //[AuthorizeContext(ViewAction.Edit)]
-        //public async Task<IActionResult> Edit(int id, Demolitionpoliceassistenceletter demolitionpoliceassistenceletter)
-        //{
-        //    targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        if (demolitionpoliceassistenceletter.GenerateUpload == 0)
-        //        {
-        //            if (demolitionpoliceassistenceletter.MeetingDate == null || demolitionpoliceassistenceletter.MeetingTime == null)
-        //            {
-        //                ViewBag.Message = Alert.Show("Meeting Date and Time is Mandatory", "", AlertType.Warning);
-        //                return View(demolitionpoliceassistenceletter);
-        //            }
-        //        }
-        //        else if (demolitionpoliceassistenceletter.GenerateUpload == 1)
-        //        {
-        //            if (demolitionpoliceassistenceletter.Document == null)
-        //            {
-        //                ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
-        //                return View(demolitionpoliceassistenceletter);
-        //            }
-        //        }
-        //        string LetterFileName = "";
-        //        string LetterfilePath = "";
-        //        if (demolitionpoliceassistenceletter.Document != null)
-        //        {
-        //            if (!Directory.Exists(targetPathDocument))
-        //            {
-        //                DirectoryInfo di = Directory.CreateDirectory(targetPathDocument);// Try to create the directory.
-        //            }
-        //            LetterFileName = Guid.NewGuid().ToString() + "_" + demolitionpoliceassistenceletter.Document.FileName;
-        //            LetterfilePath = Path.Combine(targetPathDocument, LetterFileName);
-        //            using (var stream = new FileStream(LetterfilePath, FileMode.Create))
-        //            {
-        //                demolitionpoliceassistenceletter.Document.CopyTo(stream);
-        //            }
-        //            demolitionpoliceassistenceletter.FilePath = LetterfilePath;
-        //        }
-
-        //        demolitionpoliceassistenceletter.ModifiedBy = SiteContext.UserId;
-        //        var result = await _demolitionPoliceAssistenceLetterService.Update(id, demolitionpoliceassistenceletter);
-
-        //        if (result)
-        //        {
-        //            var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(id);
-        //            demolitionpoliceassistenceletter.FilePath = Data.FilePath;
-        //            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
-        //            var Body = PopulateBody(Data, path);
-        //            ViewBag.IsVisible = true;
-        //            ViewBag.DataLetter = Body;
-        //            ViewBag.Message = Alert.Show("Generate Successfully", "", AlertType.Success);
-        //            return View(demolitionpoliceassistenceletter);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Success);
-        //            return View("Index");
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return View(demolitionpoliceassistenceletter);
-        //    }
-
-        //}
-        //private string PopulateBody(Demolitionpoliceassistenceletter demolitionpoliceassistenceletter, string Path)
-        //{
-        //    string body = string.Empty;
-        //    using (StreamReader reader = new StreamReader(Path))
-        //    {
-        //        body = reader.ReadToEnd();
-        //    }
-        //    body = body.Replace("{MeetingDate}", Convert.ToDateTime((demolitionpoliceassistenceletter.MeetingDate)).ToString("dd-MMM-yyyy"));
-        //    body = body.Replace("{KhasraNo}", demolitionpoliceassistenceletter.FixingDemolition.Encroachment.KhasraNo);
-        //    body = body.Replace("{Locality}", demolitionpoliceassistenceletter.FixingDemolition.Encroachment.Locality.Name);
-        //    body = body.Replace("{MeetingTime}", demolitionpoliceassistenceletter.MeetingTime);
-
-        //    return body;
-        //}
-
-        //public async Task<FileResult> ViewLetter(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(Id);
-        //    string path = Data.FilePath;
-        //    byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-        //    return File(FileBytes, file.GetContentType(path));
-        //}
         #region RequestForProceedingEviction Details
         public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
         {
@@ -353,6 +282,29 @@ namespace LeaseDetails.Controllers
             }
         }
         #endregion
+
+        #region History Details Only For Notice Generation
+        public async Task<PartialViewResult> NoticeHistoryDetails(int id)
+        {
+            var Data = await _noticeGenerationService.GetNoticeHistoryDetails(id);
+            return PartialView("_ListNoticeGenertion", Data);
+        }
+        #endregion
+
+        public async Task<JsonResult> GetNoticeGenerationDetails(int id)
+        {
+            var data = await _noticeGenerationService.FetchNoticeGenerationDetails(id);
+            return Json(data);
+        }
+
+        public async Task<FileResult> ViewNotice(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _noticeGenerationService.FetchNoticeGenerationDetails(Id);
+            string path = targetPathNotice + Data.NoticeFileName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
     }
 }
 

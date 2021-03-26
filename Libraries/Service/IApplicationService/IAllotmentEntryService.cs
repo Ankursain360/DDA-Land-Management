@@ -20,8 +20,11 @@ namespace Libraries.Service.IApplicationService
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
 
         Task<Leaseapplication> FetchSingleLeaseapplicationResult(int? applicationId);
-        Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
-       
+        //Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId);
+        Task<Documentcharges> FetchSingledocumentResult(int? leasesTypeId);
+        Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
+        Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
+        Task<Licencefees> FetchSinglefeeResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
         Task<List<Allotmententry>> GetAllotmententryUsingRepo();
         Task<List<Allotmententry>> GetAllAllotmententry();
 

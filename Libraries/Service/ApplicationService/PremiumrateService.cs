@@ -30,10 +30,21 @@ namespace Libraries.Service.ApplicationService
             return await _premiumrateRepository.GetAllPremiumrate();
         }
 
-        public async Task<List<PropertyType>> GetAllPropertyType()
+        //public async Task<List<PropertyType>> GetAllPropertyType()
+        //{
+        //    List<PropertyType> list = await _premiumrateRepository.GetAllPropertyType();
+        //    return list;
+        //}
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
-            List<PropertyType> list = await _premiumrateRepository.GetAllPropertyType();
-            return list;
+            List<Leasepurpose> leasePurposeList = await _premiumrateRepository.GetAllLeasepurpose();
+            return leasePurposeList;
+        }
+
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId)
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _premiumrateRepository.GetAllLeaseSubpurpose(purposeUseId);
+            return leaseSubPurposeList;
         }
 
         public async Task<Premiumrate> FetchSingleResult(int id)
@@ -47,7 +58,9 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _premiumrateRepository.FindBy(a => a.Id == id);
             Premiumrate model = result.FirstOrDefault();
-            model.PropertyTypeId = rate.PropertyTypeId;
+            model.LeasePurposesTypeId = rate.LeasePurposesTypeId;
+
+            model.LeaseSubPurposeId = rate.LeaseSubPurposeId;
             model.PremiumRate = rate.PremiumRate;
             model.FromDate = rate.FromDate;
             model.ToDate = rate.ToDate;
@@ -83,6 +96,6 @@ namespace Libraries.Service.ApplicationService
             return await _premiumrateRepository.GetPagedPremiumrate(model);
         }
 
-
+       
     }
 }

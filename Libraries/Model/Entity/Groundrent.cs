@@ -9,7 +9,8 @@ namespace Libraries.Model.Entity
     public class Groundrent : AuditableEntity<int>
     {
         [Required(ErrorMessage = " Property Type is mandatory", AllowEmptyStrings = false)]
-        public int PropertyTypeId { get; set; }
+        public int LeasePurposesTypeId { get; set; }
+        public int LeaseSubPurposeId { get; set; }
         [Required(ErrorMessage = " Ground Rate is mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Premium Rate; Max 18 digits")]
@@ -21,11 +22,14 @@ namespace Libraries.Model.Entity
         public DateTime ToDate { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
-       
 
-        public PropertyType PropertyType { get; set; }
+
         [NotMapped]
-        public List<PropertyType> PropertyTypeList { get; set; }
+        public List<Leasepurpose> LeasePurposeList { get; set; }
+        [NotMapped]
+        public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
+        public Leasepurpose LeasePurposesType { get; set; }
+        public Leasesubpurpose LeaseSubPurpose { get; set; }
     }
 }
 

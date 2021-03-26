@@ -14,6 +14,8 @@ using AutoMapper;
 namespace Libraries.Service.ApplicationService
 {
 
+
+
     public class OldAllotmentEntryService : EntityService<Leaseapplication>, IOldAllotmentEntryService
     {
         private readonly IUnitOfWork _unitOfWork;
