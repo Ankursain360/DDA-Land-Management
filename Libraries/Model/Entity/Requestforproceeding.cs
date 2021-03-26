@@ -14,6 +14,7 @@ namespace Libraries.Model.Entity
     {
         public Requestforproceeding()
         {
+            Allotteeevidenceupload = new HashSet<Allotteeevidenceupload>();
             Leasenoticegeneration = new HashSet<Leasenoticegeneration>();
         }
         [Required(ErrorMessage = "FIle No is mandatory ")]
@@ -85,6 +86,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
+        public ICollection<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
         public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
 
 
