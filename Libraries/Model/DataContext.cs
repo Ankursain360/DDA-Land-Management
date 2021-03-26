@@ -541,6 +541,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LeasepaymentdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new JudgementConfiguration());
             modelBuilder.ApplyConfiguration(new LeaseNoticeGenerationConfiguration());
+            modelBuilder.ApplyConfiguration(new LeasepurposeConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
 
       
         public string PurposeUse { get; set; }
+
         public byte? IsActive { get; set; }
         
 
