@@ -30,12 +30,22 @@ namespace Libraries.Service.ApplicationService
             return await _documentchargesRepository.GetAllDocumentcharges();
         }
 
-        public async Task<List<PropertyType>> GetAllPropertyType()
+        //public async Task<List<PropertyType>> GetAllPropertyType()
+        //{
+        //    List<PropertyType> list = await _documentchargesRepository.GetAllPropertyType();
+        //    return list;
+        //}
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
-            List<PropertyType> list = await _documentchargesRepository.GetAllPropertyType();
-            return list;
+            List<Leasepurpose> leasePurposeList = await _documentchargesRepository.GetAllLeasepurpose();
+            return leasePurposeList;
         }
 
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId)
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _documentchargesRepository.GetAllLeaseSubpurpose(purposeUseId);
+            return leaseSubPurposeList;
+        }
         public async Task<Documentcharges> FetchSingleResult(int id)
         {
             var result = await _documentchargesRepository.FindBy(a => a.Id == id);
@@ -47,7 +57,8 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _documentchargesRepository.FindBy(a => a.Id == id);
             Documentcharges model = result.FirstOrDefault();
-            model.PropertyTypeId = charge.PropertyTypeId;
+            model.LeasePurposesTypeId = charge.LeasePurposesTypeId;
+            model.LeaseSubPurposeId = charge.LeaseSubPurposeId;
             model.DocumentCharge = charge.DocumentCharge;
             model.FromDate = charge.FromDate;
             model.ToDate = charge.ToDate;

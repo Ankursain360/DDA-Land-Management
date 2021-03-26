@@ -110,6 +110,7 @@ namespace Libraries.Service.ApplicationService
             model.PlotNo = allotmententry.PlotNo;
             model.PocketNo = allotmententry.PocketNo;
             model.NoOfYears = allotmententry.NoOfYears;
+            model.LicenceFees = allotmententry.LicenceFees;
             model.AmountLicFee = allotmententry.AmountLicFee;
             model.BuildingArea = allotmententry.BuildingArea;
 
@@ -150,6 +151,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
         {
             return await _allotmentEntryRepository.FetchSinglegroundrentResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
+        }
+        public async Task<Licencefees> FetchSinglefeeResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
+        {
+            return await _allotmentEntryRepository.FetchSinglefeeResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
         }
     }
 }

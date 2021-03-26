@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     //debugger
     var kid = $("#ApplicationId").val();
     if (kid) {
@@ -51,17 +53,7 @@ $("#ApplicationId").change(function () {
 
     }
 });
-//$("#LeaseSubPurposeId").change(function () {
-//    var kid = $(this).val();
-//    if (kid) {
-//        HttpGet(`/AllotmentEntry/GetRateList/?LeaseSubPurposeId=${kid}`, 'json', function (response) {
 
-//            $("#PremiumRate").val(response.premiumRate);
-          
-//        });
-
-//    }
-//});
 $("#AllotmentDate").change(function () {
     
     var kid = parseInt($('#LeaseSubPurposeId option:selected').val());
@@ -73,14 +65,29 @@ $("#AllotmentDate").change(function () {
 
             debugger;
             $("#PremiumRate").val(response.premiumRate);
+            var prate = $("#PremiumRate").val(response.premiumRate);
+            var grate = $("#GroundRate").val(response.groundRate);
+            var area = $('#parea').val();
+            var pamount = area * (response.premiumRate);
+            $("#PremiumAmount").val(pamount);
 
         });
-    }
-    if (kid) {
+    
+   
         HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+           
+            debugger;
+            $("#GroundRate").val(response.groundRate);
+            var grate = $("#GroundRate").val(response.groundRate);
+            var ppamount = $('#PremiumAmount').val();
+            var gamount = ppamount * (response.groundRate);
+            $("#AmountGroundRate").val(gamount);
+
+        });
+        HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
             debugger;
-            $("#GroundRate").val(response.GroundRate);
+            $("#LicenceFees").val(response.licenceFees);
 
         });
     }
@@ -128,14 +135,14 @@ function onChange(id) {
     });
 };
 //function checkTextField(field) {
-     
+//    debugger;
     
 //    var area = $('#parea').val();
 //    var prate = $('#textprate').val();
 //    var xyz = area * prate;
 //    $("#PremiumAmount").val(xyz);
-//    var grent = xyz * (2.5 / 100);
-//    $("#GroundRent").val(grent);
+//    //var grent = xyz * (2.5 / 100);
+//    //$("#GroundRent").val(grent);
    
 
 //}

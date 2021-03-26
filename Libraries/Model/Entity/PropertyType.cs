@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
             Interest = new HashSet<Interest>();
             Rate = new HashSet<Rate>();
             //Premiumrate = new HashSet<Premiumrate>();
-            Documentcharges = new HashSet<Documentcharges>();
+            //Documentcharges = new HashSet<Documentcharges>();
             Damagecalculation = new HashSet<Damagecalculation>();
             //Groundrate = new HashSet<Groundrent>();
             Intersetrate = new HashSet<Interestrate>();
@@ -29,7 +29,7 @@ namespace Libraries.Model.Entity
         //public ICollection<Premiumrate> Premiumrate { get; set; }
         //public ICollection<Groundrent> Groundrate { get; set; }
         public ICollection<Interestrate> Intersetrate { get; set; }
-        public ICollection<Documentcharges> Documentcharges { get; set; }
-        //public ICollection<Licencefees> Licencefees { get; set; }
+        //public ICollection<Documentcharges> Documentcharges { get; set; }
+        ////public ICollection<Licencefees> Licencefees { get; set; }
     }
 }
