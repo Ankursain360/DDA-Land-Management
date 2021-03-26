@@ -28,7 +28,7 @@ namespace LeaseDetails.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
-        private readonly IRequestforproceedingService _undersection4PlotService;
+        private readonly IRequestforproceedingService _requestforproceedingService;
         private readonly IHostingEnvironment _hostingEnvironment;
 
         string targetPathNotice = "";
@@ -36,7 +36,7 @@ namespace LeaseDetails.Controllers
             ILeaseHearingDetailsService leaseHearingDetailsService,
             IConfiguration configuration,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
-            IRequestforproceedingService undersection4PlotService,
+            IRequestforproceedingService requestforproceedingService,
             IHostingEnvironment en)
         {
             _noticeGenerationService = noticeGenerationService;
@@ -44,7 +44,7 @@ namespace LeaseDetails.Controllers
             _configuration = configuration;
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
-            _undersection4PlotService = undersection4PlotService;
+            _requestforproceedingService = requestforproceedingService;
             _hostingEnvironment = en;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
         }
@@ -225,17 +225,17 @@ namespace LeaseDetails.Controllers
         #region RequestForProceedingEviction Details
         public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
         {
-            var Data = await _undersection4PlotService.FetchSingleResult(id);
-            Data.HonbleList = await _undersection4PlotService.GetAllHonble();
-            Data.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-            Data.UserNameList = await _undersection4PlotService.BindUsernameNameList();
+            var Data = await _requestforproceedingService.FetchSingleResult(id);
+            Data.HonbleList = await _requestforproceedingService.GetAllHonble();
+            Data.AllotmententryList = await _requestforproceedingService.GetAllAllotment();
+            Data.UserNameList = await _requestforproceedingService.BindUsernameNameList();
 
             return PartialView("_RequestForProceedingEvictionView", Data);
         }
         public async Task<FileResult> ViewLetter(int Id)
         {
             FileHelper file = new FileHelper();
-            var Data = await _undersection4PlotService.FetchSingleResult(Id);
+            var Data = await _requestforproceedingService.FetchSingleResult(Id);
             string targetPhotoPathLayout = Data.DemandLetter;
             byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
@@ -247,7 +247,7 @@ namespace LeaseDetails.Controllers
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                var Data = await _requestforproceedingService.FetchSingleResult(Id);
                 string targetPhotoPathLayout = Data.Noc;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
@@ -256,7 +256,7 @@ namespace LeaseDetails.Controllers
             {
 
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                var Data = await _requestforproceedingService.FetchSingleResult(Id);
                 string targetPhotoPathLayout = Data.Noc;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
@@ -267,7 +267,7 @@ namespace LeaseDetails.Controllers
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                var Data = await _requestforproceedingService.FetchSingleResult(Id);
                 string targetPhotoPathLayout = Data.CancellationOrder;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
@@ -275,7 +275,7 @@ namespace LeaseDetails.Controllers
             catch (Exception ex)
             {
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
+                var Data = await _requestforproceedingService.FetchSingleResult(Id);
                 string targetPhotoPathLayout = Data.CancellationOrder;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
