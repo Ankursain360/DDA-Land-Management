@@ -29,13 +29,15 @@ namespace LeaseDetails.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IRequestforproceedingService _undersection4PlotService;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         string targetPathNotice = "";
         public NoticeGenerationController(INoticeGenerationService noticeGenerationService,
             ILeaseHearingDetailsService leaseHearingDetailsService,
             IConfiguration configuration,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
-            IRequestforproceedingService undersection4PlotService)
+            IRequestforproceedingService undersection4PlotService,
+            IHostingEnvironment en)
         {
             _noticeGenerationService = noticeGenerationService;
             _leaseHearingDetailsService = leaseHearingDetailsService;
@@ -43,6 +45,7 @@ namespace LeaseDetails.Controllers
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
             _undersection4PlotService = undersection4PlotService;
+            _hostingEnvironment = en;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
         }
 
@@ -119,6 +122,8 @@ namespace LeaseDetails.Controllers
                 // var demolitionpoliceData = await _noticeGenerationService.FetchSingleResultButOnAneexureId(leasenoticegeneration.FixingDemolitionId);
                 if (id == 0)
                 {
+                    var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
+                    leasenoticegeneration.NoticeReferenceNo = leasenoticegeneration.RequestProceedingId + finalString;
                     leasenoticegeneration.CreatedBy = SiteContext.UserId;
                     result = await _noticeGenerationService.Create(leasenoticegeneration);
                 }
@@ -132,21 +137,23 @@ namespace LeaseDetails.Controllers
                 if (result)
                 {
                     var Data = await _noticeGenerationService.FetchNoticeGenerationDetails(leasenoticegeneration.Id);
-                    Data.LeaseNoticeGenerationList = await _noticeGenerationService.GetNoticeHistoryDetails(leasenoticegeneration.RequestProceedingId);
-                    //leasenoticegeneration.FilePath = Data.FilePath;
-                    //string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
-                    //var Body = PopulateBody(Data, path);
+                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "NoticeDetails.html");
+                    var Body = PopulateBody(Data, path);
+                    Leasenoticegeneration emptyData = new Leasenoticegeneration();
+                    emptyData.LeaseNoticeGenerationList = await _noticeGenerationService.GetNoticeHistoryDetails(leasenoticegeneration.RequestProceedingId);
+                    emptyData.RequestProceedingId = leasenoticegeneration.RequestProceedingId;
                     if (leasenoticegeneration.GenerateUpload == 0)
                     {
                         ViewBag.IsVisible = true;
+                        ViewBag.DataLetter = Body;
                         ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
-                        return View(Data);
+                        return View(emptyData);
                     }
                     else
                     {
                         ViewBag.IsVisible = false;
                         ViewBag.Message = Alert.Show("File Uploaded Successfully", "", AlertType.Success);
-                        return View(Data);
+                        return View(emptyData);
                     }
                 }
                 else
@@ -162,11 +169,33 @@ namespace LeaseDetails.Controllers
                 return View(leasenoticegeneration);
             }
         }
-
-        public PartialViewResult LoadNotice()
+        private string PopulateBody(Leasenoticegeneration leasenoticegeneration, string Path)
         {
-            return PartialView("_ViewNotice");
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(Path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{LetterReferenceNo}", (leasenoticegeneration.NoticeReferenceNo == null ? "" : leasenoticegeneration.NoticeReferenceNo));
+            body = body.Replace("{TodayDatetime}", Convert.ToDateTime((DateTime.Now)).ToString("dd-MMM-yyyy"));
+            body = body.Replace("{SocietyName}", (leasenoticegeneration.RequestProceeding == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Name == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Name));
+            body = body.Replace("{Address}", (leasenoticegeneration.RequestProceeding == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Address == null ? "" :
+                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Address));
+            body = body.Replace("{MeetingDate}", (leasenoticegeneration.MeetingDate == null ? "" : Convert.ToDateTime((leasenoticegeneration.MeetingDate)).ToString("dd-MMM-yyyy")));
+            body = body.Replace("{MeetingTime}", (leasenoticegeneration.MeetingTime == null ? "" : leasenoticegeneration.MeetingTime));
+            body = body.Replace("{MeetingPlace}", (leasenoticegeneration.MeetingPlace == null ? "" : leasenoticegeneration.MeetingPlace));
+
+
+            return body;
         }
+
         [HttpPost]
         public async Task<PartialViewResult> ViewNotice([FromBody] ProceedingEvictionLetterSearchDto model)
         {

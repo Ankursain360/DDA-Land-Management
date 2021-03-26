@@ -27,6 +27,8 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Leasenoticegeneration
                                     .Include(x => x.RequestProceeding)
+                                    //.Include(x => x.RequestProceeding.Allotment)
+                                    //.Include(x => x.RequestProceeding.Allotment.Application)
                                     .Where(x => x.Id == id)
                                     .FirstOrDefaultAsync();
         }

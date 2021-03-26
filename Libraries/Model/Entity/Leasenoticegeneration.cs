@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
     public class Leasenoticegeneration : AuditableEntity<int>
     {
         public int RequestProceedingId { get; set; }
+        public string NoticeReferenceNo { get; set; }
         public DateTime? MeetingDate { get; set; }
         public string MeetingTime { get; set; }
         public string MeetingPlace { get; set; }

@@ -135,7 +135,8 @@ function GetNoticeEditDetails(id) {
             $('#MeetingPlace').val(response.meetingPlace);
             $('#NoticeFileName').val(response.noticeFileName);
             if (response.noticeFileName != null) {
-                $('#viewId').show();
+                $("#viewId").attr('href', '/NoticeGeneration/ViewNotice/' + response.id)
+                $("#viewId").show();
             }
             else {
                 $('#viewId').hide();
