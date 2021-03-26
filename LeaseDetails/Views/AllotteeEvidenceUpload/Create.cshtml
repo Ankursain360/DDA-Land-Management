@@ -1,0 +1,163 @@
+﻿@model Libraries.Model.Entity.Allotteeevidenceupload
+@await Component.InvokeAsync("PageHeader", new { pageName = "Evidance Submitted by Allottee" })
+
+<div class="pt-3">
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="RequestProceedingId" />
+        <input type="hidden" asp-for="Id" value="@ViewBag.PrimaryId" />
+
+        <h3 class="mb-3 d-flex">Details</h3>
+
+        <div id="RequestForProceedingEvictionDiv">
+
+        </div>
+
+        <div id="NoticeGenerationDiv">
+
+        </div>
+
+        <div class="table-section bg-white border shadow rounded pb-3">
+            <h3 class="my-3 d-flex sub-heading">Allottee Evidence Upload History Details</h3>
+            <div class="table-responsive px-2" id="divHistoryDetails">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        <tr>
+                            <th>Document Name</th>
+                            <th>Attachment</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.AllotteeEvidenceUploadList.Count() > 0)
+                        {
+                            @foreach (var item in Model.AllotteeEvidenceUploadList)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @(item.DocumentName != null ? item.DocumentName : "")
+                                    </td>
+                                    <td>
+                                        @if (item.DocumentPatth != null)
+                                        {
+                                            <a class="badge badge-primary px-2" asp-action="ViewAllotteeEvidenceDoc" asp-route-id="@item.Id" target="_blank"> (View)</a>
+                                        }
+                                        else
+                                        {
+                                            <a>No Document</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="action-btns">
+                                            <a onclick="GetAllotteeEvidenceEditDetails(@item.Id);" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <th colspan="14" style="text-align:center"> No Record Available! </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div id="DivCreateEdit">
+            <div class="row mt-md-3">
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="DocumentName" type="text" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="DocumentName" class="text-danger" style="display:none;" id="DocumentName">Document Name is Mandatory</span>
+                        <label class="floating-label">Document Name</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="hidden" asp-for="DocumentPatth" />
+
+                        @{
+                            @if (Model.DocumentPatth != null)
+                            {
+                                <input id="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf"/>
+                                <label class="floating-label">Document Upload</label>
+                            }
+                            else
+                            {
+                                <input  asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                                <label class="floating-label">Document Upload</label>
+                            }
+                        }
+
+                        <span asp-validation-for="Document" class="text-danger" style="display:none;" id="MessageFileUpload">Document Upload is Mandatory</span>
+
+
+                    </div>
+                </div>
+                <div class="col-md-3 mt-2">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <a id="viewId" asp-action="ViewNotice" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div id="DivFamilyDetails">
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive ">
+                    <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Document Name</th>
+                                <th>Document Upload</th>
+
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                        </tbody>
+                        <tbody class="tbody" id="add">
+                            <tr id="">
+                                <td><span class="sn">1</span></td>
+                                <td>
+                                    <input type="text"
+                                           class="floating-label-field floating-label-field--s3" />
+                                </td>
+                                <td>
+                                    <input type="file" class="floating-label-field floating-label-field--s3" />
+                                </td>
+
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;">+</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>*@
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <input type="submit" value="Submit" class="btn btn-theme " id="btnGenerate" onclick="return check();" />
+                @Html.ActionLink("Back", "Index", "AllotteeEvidence", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/allotteeevidenceindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/allotteeevidenceindex.min.js" asp-append-version="true"></script>
+</environment>

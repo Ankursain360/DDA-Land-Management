@@ -34,15 +34,15 @@ namespace Libraries.Service.ApplicationService
         //    return await _noticeGenerationRepository.FetchNoticeGenerationDetails(id);
         //}
 
-        //public async Task<List<Leasenoticegeneration>> GetNoticeHistoryDetails(int id)
-        //{
-        //    return await _noticeGenerationRepository.GetNoticeHistoryDetails(id);
-        //}
+        public async Task<List<Allotteeevidenceupload>> GetAllotteeEvidenceHistoryDetails(int id)
+        {
+            return await _allotteeEvidenceUploadRepository.GetAllotteeEvidenceHistoryDetails(id);
+        }
 
-        //public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model)
-        //{
-        //    return await _noticeGenerationRepository.GetPagedRequestLetterDetails(model);
-        //}
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(AllotteeEvidenceSearchDto model)
+        {
+            return await _allotteeEvidenceUploadRepository.GetPagedRequestLetterDetails(model);
+        }
 
         //public async Task<bool> Update(int id, Leasenoticegeneration leasenoticegeneration)
         //{
