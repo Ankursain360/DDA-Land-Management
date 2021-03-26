@@ -17,6 +17,12 @@
         $("#btnGenerate").val("Upload");
 
     }
+
+    if (parseInt($('#Id').val()) == 0) {
+        $("#MeetingDate").val("");
+        $("#MeetingTime").val("");
+        $("#MeetingPlace").val("");
+    }
 });
 $("input[name='radioStatus']").click(function () {
     var selected = $("input[type='radio'][name='radioStatus']:checked");
@@ -135,7 +141,8 @@ function GetNoticeEditDetails(id) {
             $('#MeetingPlace').val(response.meetingPlace);
             $('#NoticeFileName').val(response.noticeFileName);
             if (response.noticeFileName != null) {
-                $('#viewId').show();
+                $("#viewId").attr('href', '/NoticeGeneration/ViewNotice/' + response.id)
+                $("#viewId").show();
             }
             else {
                 $('#viewId').hide();

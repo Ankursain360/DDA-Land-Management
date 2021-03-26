@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
             Documentcharges = new HashSet<Documentcharges>();
         }
         public string PurposeUse { get; set; }
+
         public byte? IsActive { get; set; }
         public ICollection<Allotmententry> Allotmententry { get; set; }
         public ICollection<Leasesubpurpose> Leasesubpurpose { get; set; }

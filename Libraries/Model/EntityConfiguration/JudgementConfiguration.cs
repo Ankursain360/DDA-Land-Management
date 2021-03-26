@@ -17,11 +17,20 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.ToTable("judgement", "lms");
 
+            builder.HasIndex(e => e.RequestForProceedingId)
+                .HasName("fkreqProceedingId_idx");
+
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.Property(e => e.DocumentPath).HasColumnType("longtext");
+            builder.Property(e => e.FilePath).HasColumnType("longtext");
 
             builder.Property(e => e.IsActive).HasDefaultValueSql("1");
+
+            builder.HasOne(d => d.RequestForProceeding)
+                .WithMany(p => p.Judgement)
+                .HasForeignKey(d => d.RequestForProceedingId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkreqProceedingId");
         }
     }
 }

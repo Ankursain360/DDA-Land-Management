@@ -93,7 +93,7 @@
                         before me in person or through a duly authorized representative capable to answer all material questions
                         connected with the matter along with the evidence which you intend to produce in support of the cause shown,
                         on <b>
-    @(Model.MeetingDate != null ? Convert.ToDateTime(Model.MeetingDate).ToString("dd-MMM-yyyy") : "") at @(Model.MeetingTime != null ? "" : Model.MeetingTime)
+    @(Model.MeetingDate != null ? Convert.ToDateTime(Model.MeetingDate).ToString("dd-MMM-yyyy") : "") at @(Model.MeetingTime == null ? "" : Model.MeetingTime)
 </b> for personal hearing.  In case, you fail to appear on the said
                         date and time, the case will be decided ex parte.
 

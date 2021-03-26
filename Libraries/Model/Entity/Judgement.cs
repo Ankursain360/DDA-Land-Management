@@ -1,19 +1,26 @@
 ﻿
+using Dto.Master;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
     public partial class Judgement : AuditableEntity<int>
     {
-
-      
-        public int? RequestforProceedingId { get; set; }
-        public int? ForwardTo { get; set; }
-        public string DocumentPath { get; set; }
+       
+        public int RequestForProceedingId { get; set; }
+        public int? ForwardToUserId { get; set; }
+        public string FilePath { get; set; }
         public byte? IsActive { get; set; }
-      
+        [NotMapped]
+        public IFormFile File { get; set; }
+
+        public Requestforproceeding RequestForProceeding { get; set; }
+        [NotMapped]
+        public List<UserBindDropdownDto> UserNameList { get; set; }
     }
 }
 
