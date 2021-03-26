@@ -4,8 +4,9 @@
     <thead class="text-nowrap">
         <tr>
 
-            <th> Property Type </th>
-            <th> Document Charges </th>
+            <th>Lease Purpose </th>
+            <th>Lease SubPurpose </th>
+            <th>Document Charges </th>
             <th> From Date</th>
             <th> To Date</th>
             <th> Status</th>
@@ -16,7 +17,9 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td> @(item.PropertyType == null?"": item.PropertyType.Name)</td>
+            @*<td> @(item.PropertyType == null?"": item.PropertyType.Name)</td>*@
+            <td>@item.LeasePurposesType.PurposeUse</td>
+            <td>@item.LeaseSubPurpose.SubPurposeUse</td>
 
             <td>@item.DocumentCharge</td>
 

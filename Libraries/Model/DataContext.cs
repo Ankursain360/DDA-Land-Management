@@ -299,6 +299,7 @@ namespace Libraries.Model
         public virtual DbSet<Leasepaymenttype> Leasepaymenttype { get; set; }
         public virtual DbSet<Judgement> Judgement { get; set; }
         public virtual DbSet<Leasenoticegeneration> Leasenoticegeneration { get; set; }
+        public virtual DbSet<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -541,6 +542,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LeasepaymentdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new JudgementConfiguration());
             modelBuilder.ApplyConfiguration(new LeaseNoticeGenerationConfiguration());
+            modelBuilder.ApplyConfiguration(new AllotteeEvidenceUploadConfiguration());
+            modelBuilder.ApplyConfiguration(new LeasepurposeConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

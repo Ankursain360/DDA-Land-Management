@@ -32,6 +32,7 @@ namespace Libraries.Model.EntityConfiguration
                 builder.Property(e => e.AllotmentDate).HasColumnType("date");
 
                 builder.Property(e => e.AmountLicFee).HasColumnType("decimal(18,3)");
+                builder.Property(e => e.LicenceFees).HasColumnType("decimal(18,3)");
 
                 builder.Property(e => e.ApplicationId).HasColumnType("int(11)");
 
@@ -44,6 +45,7 @@ namespace Libraries.Model.EntityConfiguration
                 builder.Property(e => e.DocumentCharges).HasColumnType("decimal(18,3)");
 
                 builder.Property(e => e.GroundRate).HasColumnType("decimal(18,3)");
+                builder.Property(e => e.AmountGroundRate).HasColumnType("decimal(18,3)");
 
                 builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 

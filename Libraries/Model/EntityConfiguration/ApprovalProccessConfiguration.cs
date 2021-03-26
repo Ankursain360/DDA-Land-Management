@@ -7,11 +7,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-
-
     public class ApprovalProccessConfiguration : IEntityTypeConfiguration<Approvalproccess>
     {
-
         public void Configure(EntityTypeBuilder<Approvalproccess> builder)
         {
             builder.ToTable("approvalproccess", "lms");
