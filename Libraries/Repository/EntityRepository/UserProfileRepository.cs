@@ -364,5 +364,13 @@ namespace Repository.EntityRepository
             List<Zone> zoneList = await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
             return zoneList;
         }
+
+        public async Task<Allotmententry> GetAllotteeDetails(int userId)
+        {
+            return await _dbContext.Allotmententry
+                                    .Include(x => x.Application)
+                                    .Where(x => x.Application.UserId == userId)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

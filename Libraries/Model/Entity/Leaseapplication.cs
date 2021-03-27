@@ -69,6 +69,7 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
+        public int? UserId { get; set; }
         public ICollection<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
         public ICollection<Allotmententry> Allotmententry { get; set; }
         //****** Document repeator *****
