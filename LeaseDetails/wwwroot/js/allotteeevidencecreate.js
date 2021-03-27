@@ -1,74 +1,28 @@
 ﻿$(document).ready(function () {
 
     var id = parseInt($('#RequestProceedingId').val());
-    GetOtherDetails(id);
-    //  GetHistoryDetails(id);
-    //  GetDetails();
+    GetAllotteeEvidenceOtherDetails(id);
+    GetNoticeGenerationDetails(id);
 
-});
-$("input[name='radioStatus']").click(function () {
-    var selected = $("input[type='radio'][name='radioStatus']:checked");
-    $("#GenerateUpload").val(selected.val());
-    if (selected.val() == 0) {
-        $("#divGenerate").show();
-        $("#divUpload").hide();
-        $("#btnGenerate").val("Generate");
-    }
-    else {
-        $("#divGenerate").hide();
-        $("#divUpload").show();
-        $("#btnGenerate").val("Upload");
-
+    if (parseInt($('#Id').val()) == 0) {
+        $("#DocumentName").val("");
+        $("#DocumentPatth").val("");
     }
 });
 
-//function GetHistoryDetails(id) {
-//    HttpGet(`/AllotteeEvidenceUpload/NoticeHistoryDetails/?Id=${id}`, 'html', function (response) {
-//        $('#divHistoryDetails').html("");
-//        $('#divHistoryDetails').html(response);
-//    });
-//};
+function GetNoticeGenerationDetails(id) {
+    HttpGet(`/AllotteeEvidenceUpload/NoticeGenerationDetails/?Id=${id}`, 'html', function (response) {
+        $('#NoticeGenerationDiv').html("");
+        $('#NoticeGenerationDiv').html(response);
+    });
+};
 
-function GetOtherDetails(id) {
+function GetAllotteeEvidenceOtherDetails(id) {
     HttpGet(`/AllotteeEvidenceUpload/RequestForProceedingEvictionView/?Id=${id}`, 'html', function (response) {
         $('#RequestForProceedingEvictionDiv').html("");
         $('#RequestForProceedingEvictionDiv').html(response);
     });
 };
-
-
-//$("#btnGenerate").click(function () {
-//    if ($("#LetterReferenceNo").val() != "") {
-//        GetDetails();
-//    }
-//    else {
-//        WarningMessage('Please Fill Letter Reference No.');
-//    }
-//});
-
-function GetDetails() {
-    var param = GetSearchParam();
-    HttpPost(`/AllotteeEvidenceUpload/ViewNotice`, 'html', param, function (response) {
-        $('#LetterDataView').html("");
-        $('#LetterDataView').html(response);
-        if (response != null) {
-            $("#btnPrint").show();
-            $("#VisibleLetter").show();
-            //$("#btnGenerate").hide();
-            //$("#LetterReferenceNo").attr("readonly", "readonly");
-        }
-    });
-}
-
-function GetSearchParam() {
-    var model = {
-        //LetterReferenceNo: $("#LetterReferenceNo").val(),
-        //RefNoNameId: parseInt($("#RefNoNameId option:selected").val())
-        LetterReferenceNo: "",// $("#LetterReferenceNo").val(),
-        RefNoNameId: 1 //parseInt($("#Id").val())
-    }
-    return model;
-}
 
 $(function () {
     $("#btnPrint").click(function () { nWin($("#LetterDataView").html(), $("#pagename").html()); });
@@ -92,20 +46,16 @@ function nWin(context, title) {
     show();
 };
 
-
 function GetAllotteeEvidenceEditDetails(id) {
     HttpGet(`/AllotteeEvidenceUpload/GetAllotteeEvidenceUploadDetails/?Id=${id}`, 'json', function (response) {
 
         if (response != null) {
             $('#Id').val(response.id);
             $('#RequestProceedingId').val(response.requestProceedingId);
-            if (response.meetingDate != null)
-                $('#MeetingDate').val(response.meetingDate.split('T')[0]);
-            $('#MeetingTime').val(response.meetingTime);
-            $('#MeetingPlace').val(response.meetingPlace);
-            $('#NoticeFileName').val(response.noticeFileName);
-            if (response.noticeFileName != null) {
-                $("#viewId").attr('href', '/AllotteeEvidenceUpload/ViewNotice/' + response.id)
+            $('#DocumentName').val(response.documentName);
+            if (response.documentPatth != null) {
+                $("#DocumentPatth").val(response.documentPatth);
+                $("#viewId").attr('href', '/AllotteeEvidenceUpload/ViewAllotteeEvidenceDoc/' + response.id)
                 $("#viewId").show();
             }
             else {
@@ -117,61 +67,98 @@ function GetAllotteeEvidenceEditDetails(id) {
 
 function check() {
     var checkresult = false;
-    var selected = $("input[type='radio'][name='radioStatus']:checked");
-    $("#GenerateUpload").val(selected.val());
-    if (selected.val() == 0) {
-        var Date_val = $('#MeetingDate').val();
-        if (Date_val == "") {
+    var name_Val = $('#DocumentName').val();
+    if (name_Val == "") {
             checkresult = false;
-            $("#MessageDate").show();
+        $("#MessageDocumentName").show();
         } else {
             checkresult = true;
-            $("#MessageDate").hide();
+        $("#MessageDocumentName").hide();
         }
 
-        var Time_val = $('#MeetingTime').val();
-        if (Time_val == "") {
-            checkresult = false;
-            $("#MessageTime").show();
-        } else {
-            checkresult = true;
-            $("#MessageTime").hide();
-        }
-
-        var Place_val = $('#MeetingPlace').val();
-        if (Place_val == "") {
-            checkresult = false;
-            $("#MeetingPlace").show();
-        } else {
-            checkresult = true;
-            $("#MeetingPlace").hide();
-        }
-
-        if (Date_val == "" || Time_val == "" || Place_val == "") {
-            checkresult = false;
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    else {
-        var fileInput = document.getElementById('Document');
-        var filePath = fileInput.value;
-        if (filePath == "") {
+    var Document_val = $('#DocumentPatth').val();
+    if (Document_val == "") {
             checkresult = false;
             $("#MessageFileUpload").show();
         } else {
             checkresult = true;
+            $("#MessageFileUpload").hide();
         }
-
-        if (filePath == "") {
+    if (name_Val == "" || Document_val == "") {
             checkresult = false;
             return false;
         }
         else {
             return true;
-        }
-
-    }
+        }   
 }
+
+$('#DocumentName').change(function () {
+    var name_Val = $('#DocumentName').val();
+    if (name_Val == "") {
+        checkresult = false;
+        $("#MessageDocumentName").show();
+    } else {
+        checkresult = true;
+        $("#MessageDocumentName").hide();
+    }
+});
+$('#Document').change(function () {
+    var fileInput = document.getElementById('Document');
+    var filePath = fileInput.value;
+    const size = (fileInput.files[0].size);
+    fileValidation(filePath, fileInput, size);
+    if (fileInput.value != "") {
+        $("#DocumentPatth").val("filePath");
+        $("#MessageFileUpload").hide();
+    }
+    else {
+        if (parseInt($('#Id').val()) == 0) {
+            $("#DocumentPatth").val('');
+            $("#MessageFileUpload").show();
+        }
+    }
+});
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}
+
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
+
+$("#collapse").click(function () {
+    $('#collapseRequestProceeding').collapse("toggle").promise().done(function () {
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+
+$("#collapse").click(function () {
+    $("#collapseNoticeGeneration").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+

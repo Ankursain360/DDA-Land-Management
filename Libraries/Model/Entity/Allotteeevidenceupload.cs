@@ -11,7 +11,11 @@ namespace Libraries.Model.Entity
     public class Allotteeevidenceupload : AuditableEntity<int>
     {
         public int RequestProceedingId { get; set; }
+
+        [Required(ErrorMessage = "Document Name is Mandatory Field")]
         public string DocumentName { get; set; }
+
+        [Required(ErrorMessage = "Document Upload is Mandatory Field")]
         public string DocumentPatth { get; set; }
         public byte? IsActive { get; set; }
 

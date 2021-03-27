@@ -72,74 +72,49 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(int id, Leasenoticegeneration leasenoticegeneration)
+        public async Task<IActionResult> Create(int id, Allotteeevidenceupload allotteeevidenceupload)
         {
             var result = false;
-            ViewBag.PrimaryId = leasenoticegeneration.Id;
+            ViewBag.PrimaryId = allotteeevidenceupload.Id;
+            allotteeevidenceupload.AllotteeEvidenceUploadList = await _allotteeEvidenceUploadService.GetAllotteeEvidenceHistoryDetails(allotteeevidenceupload.RequestProceedingId);
+
             if (ModelState.IsValid)
             {
-                leasenoticegeneration.LeaseNoticeGenerationList = await _noticeGenerationService.GetNoticeHistoryDetails(leasenoticegeneration.RequestProceedingId);
-                if (leasenoticegeneration.GenerateUpload == 0)
-                {
-                    if (leasenoticegeneration.MeetingDate == null || leasenoticegeneration.MeetingTime == null || leasenoticegeneration.MeetingPlace == null)
-                    {
-                        ViewBag.Message = Alert.Show("Meeting Date , Time and Place is Mandatory", "", AlertType.Warning);
-                        return View(leasenoticegeneration);
-                    }
-                }
-                else if (leasenoticegeneration.GenerateUpload == 1)
-                {
-                    if (leasenoticegeneration.Document == null)
-                    {
-                        ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
-                        return View(leasenoticegeneration);
-                    }
-                }
                 FileHelper fileHelper = new FileHelper();
-                if (leasenoticegeneration.Document != null)
+                if (allotteeevidenceupload.Document != null)
                 {
-                    leasenoticegeneration.NoticeFileName = leasenoticegeneration.Document != null ?
-                                                                      fileHelper.SaveFile1(targetPathNotice, leasenoticegeneration.Document) :
-                                                                      leasenoticegeneration.Document != null || leasenoticegeneration.NoticeFileName != "" ?
-                                                                      leasenoticegeneration.NoticeFileName : string.Empty;
+                    allotteeevidenceupload.DocumentPatth = allotteeevidenceupload.Document != null ?
+                                                                      fileHelper.SaveFile1(targetPathAllotteeEvidence, allotteeevidenceupload.Document) :
+                                                                      allotteeevidenceupload.Document != null || allotteeevidenceupload.DocumentPatth != "" ?
+                                                                      allotteeevidenceupload.DocumentPatth : string.Empty;
                 }
 
-
-                // var demolitionpoliceData = await _noticeGenerationService.FetchSingleResultButOnAneexureId(leasenoticegeneration.FixingDemolitionId);
                 if (id == 0)
                 {
-                    var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
-                    leasenoticegeneration.NoticeReferenceNo = leasenoticegeneration.RequestProceedingId + finalString;
-                    leasenoticegeneration.CreatedBy = SiteContext.UserId;
-                    result = await _noticeGenerationService.Create(leasenoticegeneration);
+                    allotteeevidenceupload.CreatedBy = SiteContext.UserId;
+                    result = await _allotteeEvidenceUploadService.Create(allotteeevidenceupload);
                 }
                 else
                 {
-                    leasenoticegeneration.ModifiedBy = SiteContext.UserId;
-                    result = await _noticeGenerationService.Update(id, leasenoticegeneration);
+                    allotteeevidenceupload.ModifiedBy = SiteContext.UserId;
+                    result = await _allotteeEvidenceUploadService.Update(id, allotteeevidenceupload);
                 }
 
 
                 if (result)
                 {
-                    var Data = await _noticeGenerationService.FetchNoticeGenerationDetails(leasenoticegeneration.Id);
-                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "NoticeDetails.html");
-                    var Body = PopulateBody(Data, path);
-                    Leasenoticegeneration emptyData = new Leasenoticegeneration();
-                    emptyData.LeaseNoticeGenerationList = await _noticeGenerationService.GetNoticeHistoryDetails(leasenoticegeneration.RequestProceedingId);
-                    emptyData.RequestProceedingId = leasenoticegeneration.RequestProceedingId;
-                    if (leasenoticegeneration.GenerateUpload == 0)
+                    Allotteeevidenceupload emptyData = new Allotteeevidenceupload();
+                    emptyData.AllotteeEvidenceUploadList = await _allotteeEvidenceUploadService.GetAllotteeEvidenceHistoryDetails(allotteeevidenceupload.RequestProceedingId);
+                    emptyData.RequestProceedingId = allotteeevidenceupload.RequestProceedingId;
+                    if (id == 0)
                     {
-                        ViewBag.IsVisible = true;
-                        ViewBag.DataLetter = Body;
-                        ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         ViewBag.PrimaryId = 0;
                         return View("Create", emptyData);
                     }
                     else
                     {
-                        ViewBag.IsVisible = false;
-                        ViewBag.Message = Alert.Show("File Uploaded Successfully", "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         ViewBag.PrimaryId = 0;
                         return View("Create", emptyData);
                     }
@@ -154,34 +129,8 @@ namespace LeaseDetails.Controllers
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(leasenoticegeneration);
+                return View(allotteeevidenceupload);
             }
-        }
-        private string PopulateBody(Leasenoticegeneration leasenoticegeneration, string Path)
-        {
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader(Path))
-            {
-                body = reader.ReadToEnd();
-            }
-            body = body.Replace("{LetterReferenceNo}", (leasenoticegeneration.NoticeReferenceNo == null ? "" : leasenoticegeneration.NoticeReferenceNo));
-            body = body.Replace("{TodayDatetime}", Convert.ToDateTime((DateTime.Now)).ToString("dd-MMM-yyyy"));
-            body = body.Replace("{SocietyName}", (leasenoticegeneration.RequestProceeding == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment.Application == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Name == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Name));
-            body = body.Replace("{Address}", (leasenoticegeneration.RequestProceeding == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment.Application == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Address == null ? "" :
-                                                    leasenoticegeneration.RequestProceeding.Allotment.Application.Address));
-            body = body.Replace("{MeetingDate}", (leasenoticegeneration.MeetingDate == null ? "" : Convert.ToDateTime((leasenoticegeneration.MeetingDate)).ToString("dd-MMM-yyyy")));
-            body = body.Replace("{MeetingTime}", (leasenoticegeneration.MeetingTime == null ? "" : leasenoticegeneration.MeetingTime));
-            body = body.Replace("{MeetingPlace}", (leasenoticegeneration.MeetingPlace == null ? "" : leasenoticegeneration.MeetingPlace));
-
-
-            return body;
         }
 
         #region RequestForProceedingEviction Details
@@ -245,25 +194,33 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
-        #region History Details Only For Notice Generation
-        public async Task<PartialViewResult> NoticeHistoryDetails(int id)
+        #region Details Only For Notice Generation
+        public async Task<PartialViewResult> NoticeGenerationDetails(int id)
         {
             var Data = await _noticeGenerationService.GetNoticeHistoryDetails(id);
             return PartialView("_ListNoticeGenertion", Data);
         }
-        #endregion
-
-        public async Task<JsonResult> GetNoticeGenerationDetails(int id)
-        {
-            var data = await _noticeGenerationService.FetchNoticeGenerationDetails(id);
-            return Json(data);
-        }
-
         public async Task<FileResult> ViewNotice(int Id)
         {
             FileHelper file = new FileHelper();
             var Data = await _noticeGenerationService.FetchNoticeGenerationDetails(Id);
             string path = targetPathNotice + Data.NoticeFileName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        #endregion
+
+        public async Task<JsonResult> GetAllotteeEvidenceUploadDetails(int id)
+        {
+            var data = await _allotteeEvidenceUploadService.FetchAllotteeEvidenceUploadDetails(id);
+            return Json(data);
+        }
+
+        public async Task<FileResult> ViewAllotteeEvidenceDoc(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _allotteeEvidenceUploadService.FetchAllotteeEvidenceUploadDetails(Id);
+            string path = targetPathAllotteeEvidence + Data.DocumentPatth;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }

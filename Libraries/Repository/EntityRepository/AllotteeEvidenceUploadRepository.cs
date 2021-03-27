@@ -23,15 +23,15 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        //public async Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id)
-        //{
-        //    return await _dbContext.Leasenoticegeneration
-        //                            .Include(x => x.RequestProceeding)
-        //                            //   .Include(x => x.RequestProceeding.Allotment)
-        //                            //    .Include(x => x.RequestProceeding.Allotment.Application)
-        //                            .Where(x => x.Id == id)
-        //                            .FirstOrDefaultAsync();
-        //}
+        public async Task<Allotteeevidenceupload> FetchAllotteeEvidenceUploadDetails(int id)
+        {
+            return await _dbContext.Allotteeevidenceupload
+                                    .Include(x => x.RequestProceeding)
+                                    //   .Include(x => x.RequestProceeding.Allotment)
+                                    //    .Include(x => x.RequestProceeding.Allotment.Application)
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
 
         public async Task<List<Allotteeevidenceupload>> GetAllotteeEvidenceHistoryDetails(int id)
         {

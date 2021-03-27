@@ -13,12 +13,12 @@
 
         </div>
 
-        <div id="NoticeGenerationDiv">
+        <div  id="NoticeGenerationDiv">
 
         </div>
 
         <div class="table-section bg-white border shadow rounded pb-3">
-            <h3 class="my-3 d-flex sub-heading">Allottee Evidence Upload History Details</h3>
+            <h3 class="my-3 d-flex sub-heading">Allottee Evidence Upload History</h3>
             <div class="table-responsive px-2" id="divHistoryDetails">
                 <table class="table table-sm table-bordered mb-0 table-striped">
                     <thead class="text-nowrap">
@@ -68,87 +68,51 @@
         </div>
         <br />
         <div id="DivCreateEdit">
+            <h3 class="my-3 d-flex sub-heading">Upload Allottee Evidence</h3>
             <div class="row mt-md-3">
                 <div class="col-md-3">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="DocumentName" type="text" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="DocumentName" class="text-danger" style="display:none;" id="DocumentName">Document Name is Mandatory</span>
+                        <span asp-validation-for="DocumentName" class="text-danger" style="display:none;" id="MessageDocumentName">Document Name is Mandatory</span>
+
+                        @* <span asp-validation-for="DocumentName" class="text-danger"></span>*@
                         <label class="floating-label">Document Name</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="hidden" asp-for="DocumentPatth" />
-
-                        @{
-                            @if (Model.DocumentPatth != null)
-                            {
-                                <input id="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf"/>
-                                <label class="floating-label">Document Upload</label>
-                            }
-                            else
-                            {
-                                <input  asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
-                                <label class="floating-label">Document Upload</label>
-                            }
+                        @*@{
+                    @if (Model.DocumentPatth != null)
+                    {*@
+                        <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                        <label class="floating-label">Document Upload</label>
+                        @*}
+                        else
+                        {
+                            <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                            <label class="floating-label">Document Upload</label>
                         }
+                    }*@
 
-                        <span asp-validation-for="Document" class="text-danger" style="display:none;" id="MessageFileUpload">Document Upload is Mandatory</span>
+                        @*<span asp-validation-for="DocumentPatth" class="text-danger"></span>*@
 
+                        <span asp-validation-for="DocumentPatth" class="text-danger" style="display:none;" id="MessageFileUpload">Document Upload is Mandatory</span>
 
                     </div>
                 </div>
                 <div class="col-md-3 mt-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a id="viewId" asp-action="ViewNotice" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <a id="viewId" asp-action="ViewAllotteeEvidenceDoc" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                     </div>
                 </div>
             </div>
         </div>
-        @*<div id="DivFamilyDetails">
-            <div class="table-section bg-white border shadow rounded">
-                <div class="table-responsive ">
-                    <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
-                            <tr>
-                                <th>Sr.No</th>
-                                <th>Document Name</th>
-                                <th>Document Upload</th>
-
-                                <th>Operation</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl_posts_body">
-                        </tbody>
-                        <tbody class="tbody" id="add">
-                            <tr id="">
-                                <td><span class="sn">1</span></td>
-                                <td>
-                                    <input type="text"
-                                           class="floating-label-field floating-label-field--s3" />
-                                </td>
-                                <td>
-                                    <input type="file" class="floating-label-field floating-label-field--s3" />
-                                </td>
-
-                                <td>
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;">+</a>
-                                    </div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>*@
         <div class="row pt-3">
             <div class="col-md-12">
                 <input type="submit" value="Submit" class="btn btn-theme " id="btnGenerate" onclick="return check();" />
-                @Html.ActionLink("Back", "Index", "AllotteeEvidence", null, new { @class = "btn btn-theme " })
+                @Html.ActionLink("Back", "Index", "AllotteeEvidenceUpload", null, new { @class = "btn btn-theme " })
+                <a asp-action="Create" asp-route-id="@Model.RequestProceedingId" class="btn btn-theme">Clear</a>
             </div>
         </div>
     </form>
@@ -156,8 +120,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/allotteeevidenceindex.js"></script>
+    <script src="~/js/allotteeevidencecreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/allotteeevidenceindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/allotteeevidencecreate.min.js" asp-append-version="true"></script>
 </environment>

@@ -11,7 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IAllotteeEvidenceUploadRepository : IGenericRepository<Allotteeevidenceupload>
     {
         Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(AllotteeEvidenceSearchDto model);
-        //Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id);
         Task<List<Allotteeevidenceupload>> GetAllotteeEvidenceHistoryDetails(int id);
+        Task<Allotteeevidenceupload> FetchAllotteeEvidenceUploadDetails(int id);
     }
 }
