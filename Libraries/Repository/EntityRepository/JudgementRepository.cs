@@ -217,6 +217,24 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => x.Id == id)
                                    .FirstOrDefaultAsync();
         }
+
+        public async Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId)
+        {
+            var data = await _dbContext.Allotteeevidenceupload
+                                                   .Include(x => x.RequestProceeding)
+                                                   .Where(x => x.RequestProceedingId == RequestId)
+                                                   .ToListAsync();
+            return data;
+        }
+        public async Task<Allotteeevidenceupload> FetchSingleEvidence(int? id)
+        {
+            var data = await _dbContext.Allotteeevidenceupload
+                                  .Include(x => x.RequestProceeding)
+                                  .Where(x => x.Id == id)
+                                  .FirstOrDefaultAsync();
+            return data;
+        }
+
         //****  For Judgement page  ********
 
         public async Task<List<Judgement>> GetAllJudgement()

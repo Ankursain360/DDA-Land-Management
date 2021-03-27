@@ -39,15 +39,8 @@ namespace LeaseDetails.Controllers
         }
         public async Task<IActionResult> Create(int id)
         {
-            //Judgement model = new Judgement();
-            //model.UserNameList = await _judgementService.BindUsernameNameList();
-            //model.RequestForProceedingId = id;
-            //return View(model);
-
-
             var Data = await _judgementService.FetchSingleResult(id);
-           
-            //model.RequestForProceedingId = id;
+            
             if (Data == null)
             {
                 Judgement model = new Judgement();
@@ -108,7 +101,7 @@ namespace LeaseDetails.Controllers
                         model.FilePath = fileHelper.SaveFile(Document, model.File);
                     }
                     model.UserNameList = await _judgementService.BindUsernameNameList();
-                   // model.RequestForProceedingId = id;
+                  
                    
                     model.ModifiedBy = SiteContext.UserId;
                     model.IsActive = 1;
@@ -168,6 +161,22 @@ namespace LeaseDetails.Controllers
             FileHelper file = new FileHelper();
             var Data = await _judgementService.FetchSingleNotice(Id);
             string path = targetPathNotice + Data.NoticeFileName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+
+        public async Task<PartialViewResult> AllotteeEvidenceView(int id)
+        {
+            var Data = await _judgementService.FetchAllotteeEvidenceDetails(id);
+
+            return PartialView("_AllotteeEvidence", Data);
+        }
+        public async Task<FileResult> ViewEvidence(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _judgementService.FetchSingleEvidence(Id);
+            string path = targetPathNotice + Data.DocumentPatth;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }

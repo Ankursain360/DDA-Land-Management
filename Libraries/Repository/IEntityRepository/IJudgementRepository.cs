@@ -21,7 +21,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Leasenoticegeneration>> FetchNoticeGenerationDetails(int? RequestId);
         Task<Leasenoticegeneration> FetchSingleNotice(int? id);
 
-
+        Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId); 
+        Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
 
         //****  For Judgement page  ********
 

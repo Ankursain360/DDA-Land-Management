@@ -1,6 +1,5 @@
 ﻿
 
-
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dto.Master;
@@ -19,8 +18,13 @@ namespace Libraries.Service.IApplicationService
         Task<List<Allotmententry>> GetAllAllotment();
         Task<List<Honble>> GetAllHonble();
         Task<Requestforproceeding> FetchSingleReqDetails(int? RequestId);
+
         Task<List<Leasenoticegeneration>> FetchNoticeGenerationDetails(int? RequestId);
         Task<Leasenoticegeneration> FetchSingleNotice(int? id);
+        
+        Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId);
+        Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
+
         Task<bool> Update(int id, Judgement judge);
         Task<bool> Create(Judgement judge);
         Task<Judgement> FetchSingleResult(int id);

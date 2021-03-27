@@ -59,6 +59,17 @@ namespace Libraries.Service.ApplicationService
         {
             return await _judgementRepository.FetchSingleNotice(id);
         }
+
+        public async Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId)
+        {
+            return await _judgementRepository.FetchAllotteeEvidenceDetails(RequestId);
+        }
+
+        public async Task<Allotteeevidenceupload> FetchSingleEvidence(int? id)
+        {
+            return await _judgementRepository.FetchSingleEvidence(id);
+        }
+
         public async Task<bool> Update(int id, Judgement judge)
         {
            
