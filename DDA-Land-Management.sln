@@ -53,7 +53,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaseDetails", "LeaseDetail
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeasePublicInterface", "LeasePublicInterface\LeasePublicInterface.csproj", "{2361201A-2386-43C7-8F9B-6CB720F65EFA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaseAllottee", "LeaseForPublic\LeaseAllottee.csproj", "{27D657D3-EB22-427E-8F92-2085DED838DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaseForPublic", "LeaseForPublic\LeaseForPublic.csproj", "{27D657D3-EB22-427E-8F92-2085DED838DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
