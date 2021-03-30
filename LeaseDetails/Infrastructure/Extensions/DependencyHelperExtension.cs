@@ -56,6 +56,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ILeasepurposeRepository, LeasepurposeRepository>();
 
             services.AddScoped<IApplyForServicesRepository, ApplyForServicesRepository>();
+            services.AddScoped<ILeasesubpurposeRepository, LeasesubpurposeRepository>();
 
 
 
@@ -95,6 +96,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IAllotteeEvidenceUploadService, AllotteeEvidenceUploadService>();
             services.AddScoped<ILeasepurposeService, LeasepurposeService>();
             services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
+            services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
 
 
 
