@@ -12,6 +12,10 @@ namespace Libraries.Model.Entity
 {
     public class Leasenoticegeneration : AuditableEntity<int>
     {
+        public Leasenoticegeneration()
+        {
+            Hearingdetails = new HashSet<Hearingdetails>();
+        }
         public int RequestProceedingId { get; set; }
         public string NoticeReferenceNo { get; set; }
         public DateTime? MeetingDate { get; set; }
@@ -30,5 +34,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Leasenoticegeneration> LeaseNoticeGenerationList { get; set; }
+        
+        public ICollection<Hearingdetails> Hearingdetails { get; set; }
     }
 }

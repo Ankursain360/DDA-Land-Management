@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <input placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3 " value="" />
+                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" />
                     <span class="text-danger"></span>
                     <label class="floating-label">Refernce Number   </label>
                 </div>
@@ -29,7 +29,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input placeholder="Name" type="date"
-                           class="floating-label-field floating-label-field--s3 " value="" />
+                           class="floating-label-field floating-label-field--s3 " id="txtDate" />
                     <span class="text-danger"></span>
                     <label class="floating-label">Date   </label>
                 </div>
@@ -43,7 +43,7 @@
 
                 </div>
                 <button class="btn btn-theme" id="btnReset" type="reset"> Clear </button>
-                <button class="btn btn-theme " type="submit" id="btnGenerate">Generate</button>
+                <button class="btn btn-theme" id="btnGenerate" type="submit">Generate</button>
                 @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
             </div>
 

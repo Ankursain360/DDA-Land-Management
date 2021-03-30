@@ -60,18 +60,18 @@ namespace LeaseDetails.Controllers
             return View(Data);
            // return View();
         }
-        public async Task<IActionResult> Generate(int id)
+        [HttpGet]
+        public async Task<JsonResult> GetGroundRateList(int id, string dn,string rn)
         {
             var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
+            ViewBag.NewDate = dn;
+            ViewBag.NewRefNo = rn;
+          // RedirectToAction("AllotmentLetter", "AllotmentLetter");
+           return Json(await _leaseApplicationFormService.FetchLeaseApplicationDetails(id));
 
-            if (Data == null)
-            {
-                return NotFound();
-            }
-           
-            return PartialView("AllotmentLetter", Data);
+            // return PartialView("AllotmentLetter", Data);
         }
-        public async Task<IActionResult> Create(Leaseapplication leaseapp)
+        public async Task<IActionResult> Create(Leaseapplication leaseapp, string dn, string rn)
         {
             try
             {

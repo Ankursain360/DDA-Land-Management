@@ -15,6 +15,8 @@ namespace Libraries.Model.Entity
         public Requestforproceeding()
         {
             Allotteeevidenceupload = new HashSet<Allotteeevidenceupload>();
+            Evidancedoc = new HashSet<Evidancedoc>();
+            Hearingdetails = new HashSet<Hearingdetails>();
             Leasenoticegeneration = new HashSet<Leasenoticegeneration>();
             Judgement = new HashSet<Judgement>();
         }
@@ -89,7 +91,9 @@ namespace Libraries.Model.Entity
         public List<Approvalstatus> ApprovalStatusList { get; set; }
         public ICollection<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
         public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
-        public ICollection<Judgement> Judgement { get; set; }
 
+        public ICollection<Evidancedoc> Evidancedoc { get; set; }
+        public ICollection<Hearingdetails> Hearingdetails { get; set; }
+        public ICollection<Judgement> Judgement { get; set; }
     }
 }

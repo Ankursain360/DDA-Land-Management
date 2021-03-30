@@ -48,21 +48,35 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
         {
-            var data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
+            var data = await _dbContext.Requestforproceeding
+               // .Include(x => x.Allotment).Include(x => x.Allotment.Application)
+               //   .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+               //     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
+               //     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
-                .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                    && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+               //)
+               //
+               . GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
 
-               ).
-
-
-
-                GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
 
 
 
             int SortOrder = (int)model.SortOrder;
+            //if (SortOrder == 0)
+            //{
+            //     data = await _dbContext.Requestforproceeding
+            //       // .Include(x => x.Allotment).Include(x => x.Allotment.Application)
+            //       //   .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+            //       //     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
+            //       //     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+
+            //       //).
+
+
+
+            //       . GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
+            //}
+
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())

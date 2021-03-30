@@ -213,7 +213,7 @@ namespace Service.ApplicationService
             return result;
         }
 
-        public async  Task<Allotmententry> GetAllotteeDetails(int userId)
+        public async  Task<Possesionplan> GetAllotteeDetails(int userId)
         {
             return await _userProfileRepository.GetAllotteeDetails(userId);
         }
