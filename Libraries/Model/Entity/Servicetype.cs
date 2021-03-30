@@ -15,8 +15,11 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Name is mandatory ")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Status is mandatory ")]
+
+        public string Url { get; set; }
+        public int? Timeline { get; set; }
         public byte IsActive { get; set; }
 
-        public ICollection<Documentchecklist> Documentchecklist { get; set; }
+         public ICollection<Documentchecklist> Documentchecklist { get; set; }
     }
 }

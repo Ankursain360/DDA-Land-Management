@@ -45,8 +45,8 @@ namespace Libraries.Service.ApplicationService
             var result = await _serviceTypeRepository.FindBy(a => a.Id == id);
             Servicetype model = result.FirstOrDefault();
             model.Name = servicetype.Name;
-           
-
+            model.Url = servicetype.Url;
+            model.Timeline = servicetype.Timeline;
             model.ModifiedDate = DateTime.Now;
             model.IsActive = servicetype.IsActive;
             model.ModifiedBy = 1;
