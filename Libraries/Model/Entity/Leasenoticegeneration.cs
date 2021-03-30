@@ -12,6 +12,10 @@ namespace Libraries.Model.Entity
 {
     public class Leasenoticegeneration : AuditableEntity<int>
     {
+        public Leasenoticegeneration()
+        {
+            Hearingdetails = new HashSet<Hearingdetails>();
+        }
         public int RequestProceedingId { get; set; }
         public DateTime? MeetingDate { get; set; }
         public TimeSpan? MeetingTime { get; set; }
@@ -20,5 +24,7 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
 
         public Requestforproceeding RequestProceeding { get; set; }
+        
+        public ICollection<Hearingdetails> Hearingdetails { get; set; }
     }
 }

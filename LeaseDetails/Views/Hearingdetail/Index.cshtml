@@ -64,7 +64,7 @@
 
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                
+
                 <a href="#" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
@@ -119,9 +119,9 @@
                         </td>
                         <td>
                             <div class="action-btns">
-                                
+
                                 <a class="edit" asp-action="Create"><i class="ri-edit-line"></i> </a>
-                                
+
                             </div>
                         </td>
 
@@ -135,7 +135,9 @@
 
 
 
-
+            <div class="table-responsive px-2">
+                <div id="divScheme"></div>
+            </div>
 
 
 
@@ -145,3 +147,10 @@
     </div>
 
 </div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/hearingdetailsindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/hearingdetailsindex.min.js" asp-append-version="true"></script>
+</environment>
