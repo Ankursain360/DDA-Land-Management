@@ -31,7 +31,7 @@ namespace LeaseDetails.Controllers
     {
         private readonly ILeaseApplicationFormService _leaseApplicationFormService;
         public IConfiguration _configuration;
-
+        private readonly ICalculationSheetService _calculationSheetService;
         public AllotmentLetterController(ILeaseApplicationFormService leaseApplicationFormService, IConfiguration configuration)
         {
             _leaseApplicationFormService = leaseApplicationFormService;
@@ -51,6 +51,9 @@ namespace LeaseDetails.Controllers
         }
         public async Task<IActionResult> View(int id)
         {
+            Leaseapplication entry = new Leaseapplication();
+
+            entry.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetter();
             var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
 
             if (Data == null)

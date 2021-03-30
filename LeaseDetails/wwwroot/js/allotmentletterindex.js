@@ -59,13 +59,10 @@ $("#txtDate").change(function () {
     var vid = 3;
     var daten = document.getElementById("txtDate").value;
     var refn = document.getElementById("txtRefernceNumber").value;
-   
+    sessionStorage.NewDate = daten;
+    sessionStorage.RefN = refn;
 
-        // HttpPost(`/AllotmentLetter/Generate`, 'html', param, function (response) {
-    HttpGet("/AllotmentLetter/GetGroundRateList?id = " + vid + " &dn = " + daten + " &rn=" + refn, 'json', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
-    });
+
 });
 function onPaging(pageNo) {
     GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
