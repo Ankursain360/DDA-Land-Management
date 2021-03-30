@@ -52,6 +52,8 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IJudgementRepository, JudgementRepository>();
             services.AddScoped<IAllotteeEvidenceUploadRepository, AllotteeEvidenceUploadRepository>();
             services.AddScoped<ILeasepurposeRepository, LeasepurposeRepository>();
+            services.AddScoped<ILeasesubpurposeRepository, LeasesubpurposeRepository>();
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -86,6 +88,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IJudgementService, JudgementService>();
             services.AddScoped<IAllotteeEvidenceUploadService, AllotteeEvidenceUploadService>();
             services.AddScoped<ILeasepurposeService, LeasepurposeService>();
+            services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
 
         }
     }
