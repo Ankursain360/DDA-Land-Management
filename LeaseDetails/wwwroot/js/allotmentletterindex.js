@@ -50,12 +50,19 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: pageSize,
         pageNumber: pageNumber
     }
-    debugger
+   
     return model;
 }
-$("#btnGenerate").click(function () {
+$("#txtDate").change(function () {
     debugger
-    HttpPost(`/AllotmentLetter/Generate`, 'html', param, function (response) {
+   // HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+    var vid = 3;
+    var daten = document.getElementById("txtDate").value;
+    var refn = document.getElementById("txtRefernceNumber").value;
+   
+
+        // HttpPost(`/AllotmentLetter/Generate`, 'html', param, function (response) {
+    HttpGet("/AllotmentLetter/GetGroundRateList?id = " + vid + " &dn = " + daten + " &rn=" + refn, 'json', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
