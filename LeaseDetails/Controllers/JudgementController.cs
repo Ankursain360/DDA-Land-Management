@@ -180,5 +180,13 @@ namespace LeaseDetails.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+        public async Task<PartialViewResult> HearingDetailsView(int id)
+        {
+            var Data = await _judgementService.FetchHearingDetails(id);
+
+            return PartialView("_HearingDetails", Data);
+        }
+        
     }
 }
