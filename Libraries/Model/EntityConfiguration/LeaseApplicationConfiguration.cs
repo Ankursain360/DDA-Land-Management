@@ -91,6 +91,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.PendingAt).HasColumnType("int(11)");
 
+            builder.Property(e => e.UserId).HasColumnType("int(11)");
+
             builder.Property(e => e.ProposedDescription).HasColumnType("longtext");
 
             builder.Property(e => e.Purpose).HasColumnType("longtext");

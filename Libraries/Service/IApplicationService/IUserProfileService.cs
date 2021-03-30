@@ -21,6 +21,7 @@ namespace Service.IApplicationService
         Task<List<RoleDto>> GetActiveRole();
         Task<bool> CreateUser(AddUserDto userDto);
         Task<bool> UpdateUser(EditUserDto userDto);
+        Task<Possesionplan> GetAllotteeDetails(int userId);
         Task<bool> ValidateUniqueRoleName(int id, string name);
         Task<bool> ValidateUniqueUserName(int id, string UserName);
         Task<bool> UpdateUserPersonalDetails(UserPersonalInfoDto model);

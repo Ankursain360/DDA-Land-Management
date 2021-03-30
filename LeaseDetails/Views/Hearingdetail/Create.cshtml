@@ -1,4 +1,4 @@
-﻿
+﻿@model Libraries.Model.Entity.Hearingdetails
 @await Component.InvokeAsync("PageHeader", new { pageName = "Hearing Details" })
 
 
@@ -6,6 +6,7 @@
 
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex">Hearing Details</h3>
+    <input type="hidden" asp-for="Id" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="permission mt-2 accordion list-unstyled m-0 ">
         <div class="card">
@@ -46,7 +47,7 @@
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
                                 <input placeholder="Address" type="text"
-                                       class="floating-label-field floating-label-field--s3" disabled />
+                                       class="floating-label-field floating-label-field--s3"  disabled />
                                 @*<span asp-validation-for="LetterReferenceNo" class="text-danger"></span>*@
                                 <label class="floating-label">Letter Reference No</label>
                             </div>
@@ -155,16 +156,16 @@
                                 <input type="hidden" />
 
                                 @*@{ if (Model.DemandLetter != null)
-                             {
+                                                         {
 
 
-                                 <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3"  disabled />
-                                 <label for="field-1" class="floating-label">Demand Letter </label>
-                                 <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
-        "> (View File )</a>
-                             }
-                             else
-                             {*@
+                                                             <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3"  disabled />
+                                                             <label for="field-1" class="floating-label">Demand Letter </label>
+                                                             <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                                    "> (View File )</a>
+                                                         }
+                                                         else
+                                                         {*@
                                 <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" disabled class="floating-label-field floating-label-field--s3">
 
@@ -185,7 +186,7 @@
                                 @*<input type="file" class="floating-label-field floating-label-field--s3" />
 
 
-        <label class="floating-label">NOC</label>*@
+                                    <label class="floating-label">NOC</label>*@
                                 <label class="badge badge-primary px-2">No File</label>
                                 <input type="file" disabled class="floating-label-field floating-label-field--s3">
 
@@ -320,11 +321,11 @@
                                         <td>Doc Name </td>
 
 
-                                       
+
                                         <td>
                                             <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter"> View File </a>
                                         </td>
-                                        
+
 
                                     </tr>
 
@@ -350,7 +351,11 @@
                 <i class="arrow ri-arrow-drop-down-line slow"></i>
             </a>
             <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval4">
-
+                <div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive px-2">
+                        <div id="divAcquiredLandVillage"></div>
+                    </div>
+                </div>
                 <div class="table-section bg-white border shadow rounded">
                     <div class="table-responsive ">
                         <table class="table table-sm table-bordered mb-0 table-striped">
@@ -375,8 +380,8 @@
                                     <td>Attandee Details</td>
                                     <td>This is dummy data only.</td>
                                     <td>
-    <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter"> View File </a>
-</td>
+                                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter"> View File </a>
+                                    </td>
 
                                     <td>
                                         <div class="action-btns">
@@ -402,10 +407,12 @@
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>
-   
+
     <h3 class="my-3 d-flex sub-heading">Add New Hearing Details </h3>
 
 
@@ -417,7 +424,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Date" />
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Date"  type="date" />
                 <span class="text-danger"></span>
                 <label class="floating-label">Hearing Date</label>
             </div>
@@ -425,7 +432,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Venue" />
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Venue"  type="time" />
                 <span class="text-danger"></span>
                 <label class="floating-label">Hearing Time  </label>
             </div>
@@ -437,7 +444,7 @@
 
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Time" />
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Time"  type="text" />
                 <span class="text-danger"></span>
                 <label class="floating-label">Hearing Venue </label>
             </div>
@@ -499,10 +506,17 @@
                 <div class="col-md-12">
                     <input type="submit" value="Submit" class="btn btn-theme " />
 
-                    @Html.ActionLink("Back", "Index", "Hearing Details", null, new { @class = "btn btn-theme " })
+                    @Html.ActionLink("Back", "Index", "Hearing detail", null, new { @class = "btn btn-theme " })
                 </div>
             </div>
         </div>
     </div>
 </form>
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/hearingdetailsindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/hearingdetailsindex.min.js" asp-append-version="true"></script>
+</environment>

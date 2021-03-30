@@ -49,10 +49,15 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ILeasepaymentdetailsRepository, LeasepaymentdetailsRepository>();
             services.AddScoped<ILeaseHearingDetailsRepository, LeaseHearingDetailsRepository>();
             services.AddScoped<INoticeGenerationRepository, NoticeGenerationRepository>();
+            services.AddScoped<IHearingdetailsRepository, HearingdetailsRepository>();
+
             services.AddScoped<IJudgementRepository, JudgementRepository>();
             services.AddScoped<IAllotteeEvidenceUploadRepository, AllotteeEvidenceUploadRepository>();
             services.AddScoped<ILeasepurposeRepository, LeasepurposeRepository>();
-            services.AddScoped<ILeasesubpurposeRepository, LeasesubpurposeRepository>();
+
+            services.AddScoped<IApplyForServicesRepository, ApplyForServicesRepository>();
+
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -85,10 +90,14 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ILeasepaymentdetailsService, LeasepaymentdetailsService>();
             services.AddScoped<ILeaseHearingDetailsService, LeaseHearingDetailsService>();
             services.AddScoped<INoticeGenerationService, NoticeGenerationService>();
+
             services.AddScoped<IJudgementService, JudgementService>();
             services.AddScoped<IAllotteeEvidenceUploadService, AllotteeEvidenceUploadService>();
             services.AddScoped<ILeasepurposeService, LeasepurposeService>();
-            services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
+            services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
+
+
+
 
         }
     }

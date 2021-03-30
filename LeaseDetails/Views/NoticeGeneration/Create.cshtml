@@ -132,11 +132,11 @@
                     @{
                         @if (Model.NoticeFileName != null)
                         {
-                            <input placeholder="Photo" id="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input  asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
                         }
                         else
                         {
-                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
                             <label class="floating-label">Upload Document</label>
                         }
                     }

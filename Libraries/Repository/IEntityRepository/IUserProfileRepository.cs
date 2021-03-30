@@ -18,5 +18,6 @@ namespace Repository.IEntityRepository
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<bool> ValidateUniqueRoleName(int id, string name);
         Task<bool> ValidateUniqueUserName(int id, string userName);
+        Task<Possesionplan> GetAllotteeDetails(int userId);
     }
 }

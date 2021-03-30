@@ -364,5 +364,15 @@ namespace Repository.EntityRepository
             List<Zone> zoneList = await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
             return zoneList;
         }
+
+        public async Task<Possesionplan> GetAllotteeDetails(int userId)
+        {
+            return await _dbContext.Possesionplan
+                                    .Include(x => x.Allotment)
+                                    .Include(x => x.Allotment.Application)
+                                    .Include( x => x.Allotment.LeasePurposesType)
+                                    .Where(x => x.Allotment.Application.UserId == userId)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

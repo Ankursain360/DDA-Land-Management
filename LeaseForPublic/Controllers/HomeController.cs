@@ -22,8 +22,9 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Index()
         {
-            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
-            return View(user);
+            //UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            var Data = await _userProfileService.GetAllotteeDetails(_siteContext.UserId);
+            return View(Data);
         }
 
         public IActionResult Privacy()

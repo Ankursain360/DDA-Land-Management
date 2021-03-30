@@ -10,8 +10,8 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IAllotteeEvidenceUploadRepository : IGenericRepository<Allotteeevidenceupload>
     {
-        //Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
-        //Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id);
-        //Task<List<Leasenoticegeneration>> GetNoticeHistoryDetails(int id);
+        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(AllotteeEvidenceSearchDto model);
+        Task<List<Allotteeevidenceupload>> GetAllotteeEvidenceHistoryDetails(int id);
+        Task<Allotteeevidenceupload> FetchAllotteeEvidenceUploadDetails(int id);
     }
 }
