@@ -1,0 +1,40 @@
+﻿@*@model Dto.Master.UserProfileDto*@
+@model Libraries.Model.Entity.Allotmententry
+
+<h1 class="border-bottom">Welcome to DDA Land Information Management Application</h1>
+<div class="profile-box bg-white rounded border p-3 my-4 shadow d-md-flex align-items-center py-lg-4 px-xl-5">
+    <figure class="mx-auto my-0">
+        <img class="d-block rounded-circle mx-auto shadow-sm" src="~/images/noimage.jpg" alt="">
+    </figure>
+    <div class="text-center detail py-3 text-md-left px-md-4 mx-lg-auto px-xl-5 ml-xl-0">
+        <h2 class="mb-2">@(Model.Application == null ? "" : Model.Application.RefNo)</h2>
+        @*<p class="text-muted mb-2 mb-md-1">Last Login : <strong>22 Oct 2020 02:33 PM</strong></p>
+        <p class="text-muted">Full time designer <strong>(DDA)</strong></p>*@
+    </div>
+    <div class="py-3 pl-md-4 mx-lg-auto pr-xl-5 ml-xl-0 pl-xl-2">
+        <table class="table table-borderless table-sm m-0">
+            <tbody>
+                <tr>
+                    <th scope="row">Registration No.</th>
+                    <td>@(Model.Application == null ? "" : Model.Application.RegistrationNo)</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Contact No.</th>
+                    <td colspan="2">@(Model.Application == null ? "" : Model.Application.ContactNo)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email-Id</th>
+                    <td>@(Model.Application == null ? "" : Model.Application.EmailId)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lease Purpose</th>
+                    <td>@(Model.LeasePurposesType == null ? "" : Model.LeasePurposesType.PurposeUse)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<figure class="m-0 mb-md-n3">
+    <img class="img-fluid d-block mx-auto" src="~/images/brand.png" alt="dda">
+</figure>

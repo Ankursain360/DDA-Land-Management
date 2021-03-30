@@ -1,24 +1,184 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using LeaseDetails.Filters;
+using Utility.Helper;
+using System.Threading.Tasks;
+using Dto.Search;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace LeaseDetails.Controllers
 {
-    public class JudgementController : Controller
+    public class JudgementController : BaseController
     {
+        private readonly IJudgementService _judgementService;
+        public IConfiguration _configuration;
+        string targetPathNotice = "";
+        public JudgementController(IJudgementService judgementService, IConfiguration configuration)
+        {
+            _judgementService = judgementService;
+            _configuration = configuration;
+            targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
+
+        }
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Create()
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
         {
-            return View();
+            var result = await _judgementService.GetPagedRequestForProceeding(model);
+
+            return PartialView("_List", result);
+        }
+        public async Task<IActionResult> Create(int id)
+        {
+            var Data = await _judgementService.FetchSingleResult(id);
+            
+            if (Data == null)
+            {
+                Judgement model = new Judgement();
+                model.UserNameList = await _judgementService.BindUsernameNameList();
+                model.RequestForProceedingId = id;
+                return View(model);
+            }
+            else 
+            { 
+                Data.UserNameList = await _judgementService.BindUsernameNameList();
+                return View(Data);
+            }
+           
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id,Judgement model)
+        {
+            string Document = _configuration.GetSection("FilePaths:Judgement:Doc").Value.ToString();
+            FileHelper fileHelper = new FileHelper();
+
+
+            if (ModelState.IsValid)
+                {
+                var Data = await _judgementService.FetchSingleResult(id);
+                if (Data == null)
+                {
+                    if (model.File != null)
+                    {
+                        model.FilePath = fileHelper.SaveFile(Document, model.File);
+                    }
+                    model.UserNameList = await _judgementService.BindUsernameNameList();
+                    model.RequestForProceedingId = id;
+                    model.Id = 0;
+                    model.CreatedBy = SiteContext.UserId;
+                    model.IsActive = 1;
+                    var result = await _judgementService.Create(model);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+
+                        return View(model);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(model);
+
+                    }
+                }
+                else 
+                {
+                    if (model.File != null)
+                    {
+                        model.FilePath = fileHelper.SaveFile(Document, model.File);
+                    }
+                    model.UserNameList = await _judgementService.BindUsernameNameList();
+                  
+                   
+                    model.ModifiedBy = SiteContext.UserId;
+                    model.IsActive = 1;
+                    var result = await _judgementService.Update(id, model);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return View(model);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(model);
+
+                    }
+                }
+                    
+                }
+                else
+                {
+                    return View(model);
+                }
+           
         }
         public IActionResult ViewLetter()
         {
             return View();
+        }
+        public async Task<IActionResult> DownloadJudgementFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Judgement Data = await _judgementService.FetchSingleResult(Id);
+            string filename = Data.FilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
+        {
+            var Data = await _judgementService.FetchSingleReqDetails(id);
+            Data.HonbleList = await _judgementService.GetAllHonble();
+            Data.AllotmententryList = await _judgementService.GetAllAllotment();
+            Data.UserNameList = await _judgementService.BindUsernameNameList();
+
+            return PartialView("_RequestForProceedingEvictionView", Data);
+        }
+
+        
+
+        public async Task<PartialViewResult> NoticeGenerationView(int id)
+        {
+            var Data = await _judgementService.FetchNoticeGenerationDetails(id);
+           
+            return PartialView("_ListNoticeGenertion", Data);
+        }
+
+        public async Task<FileResult> ViewNotice(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _judgementService.FetchSingleNotice(Id);
+            string path = targetPathNotice + Data.NoticeFileName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+
+        public async Task<PartialViewResult> AllotteeEvidenceView(int id)
+        {
+            var Data = await _judgementService.FetchAllotteeEvidenceDetails(id);
+
+            return PartialView("_AllotteeEvidence", Data);
+        }
+        public async Task<FileResult> ViewEvidence(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _judgementService.FetchSingleEvidence(Id);
+            string path = targetPathNotice + Data.DocumentPatth;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
         }
     }
 }

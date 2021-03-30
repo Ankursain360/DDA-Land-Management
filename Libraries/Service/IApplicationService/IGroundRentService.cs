@@ -13,12 +13,13 @@ namespace Libraries.Service.IApplicationService
     public interface IGroundRentService : IEntityService<Groundrent>
     {
         Task<List<Groundrent>> GetAllGroundRent();
-        Task<List<PropertyType>> GetAllPropertyTypeList();
+        //Task<List<PropertyType>> GetAllPropertyTypeList();
         Task<bool> Update(int id, Groundrent rent);
         Task<bool> Create(Groundrent rate);
         Task<Groundrent> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Groundrent>> GetPagedGroundRent(GroundrentSearchDto model);
-
+        Task<List<Leasepurpose>> GetAllLeasepurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
     }
 }

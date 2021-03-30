@@ -11,6 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Groundrent>> GetAllGroundRent();
         Task<PagedResult<Groundrent>> GetPagedGroundRent(GroundrentSearchDto model);
-        Task<List<PropertyType>> GetAllPropertyTypeList();
+        Task<List<Leasepurpose>> GetAllLeasepurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
     }
 }

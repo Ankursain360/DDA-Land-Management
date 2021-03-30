@@ -12,7 +12,8 @@ namespace Libraries.Repository.IEntityRepository
     public interface ILicenceFeesRepository : IGenericRepository<Licencefees>
     {
         Task<List<Licencefees>> GetAllLicencefees();
-        Task<List<PropertyType>> GetAllPropertyType();
+        Task<List<Leasepurpose>> GetAllLeasepurpose();
+        Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
         Task<PagedResult<Licencefees>> GetPagedLicencefees(LicencefeesSearchDto model);
     }
 }

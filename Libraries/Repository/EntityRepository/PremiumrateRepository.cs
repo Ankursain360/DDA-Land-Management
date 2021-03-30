@@ -21,8 +21,11 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Premiumrate>> GetPagedPremiumrate(PremiumrateSearchDto model)
         {
-            var data = await _dbContext.Premiumrate.Include(x => x.PropertyType)
-                  .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name))&&
+            var data = await _dbContext.Premiumrate.Include(x => x.LeasePurposesType)
+                       .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
                   x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
                                     && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                             .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
@@ -35,50 +38,65 @@ namespace Libraries.Repository.EntityRepository
                     case ("TYPE"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name))&&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
-                                               .OrderBy(x => x.PropertyType.Name)
+                                               .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderBy(x => x.LeasePurposesType.PurposeUse)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("RATE"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                             .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                              .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                 .OrderBy(x => x.PremiumRate)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("FROM"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                              .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderBy(x => x.FromDate)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("TO"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                              .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                 .OrderBy(x => x.ToDate)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderByDescending(x => x.IsActive)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
@@ -93,50 +111,65 @@ namespace Libraries.Repository.EntityRepository
                     case ("TYPE"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
-                                               .OrderByDescending(x => x.PropertyType.Name)
+                                               .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                               .OrderByDescending(x => x.LeasePurposesType.PurposeUse)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("RATE"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                              .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderByDescending(x => x.PremiumRate)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("FROM"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                              .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                 .OrderByDescending(x => x.FromDate)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("TO"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                              .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderByDescending(x => x.ToDate)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Premiumrate
-                                               .Include(x => x.PropertyType)
-                                               .Where(x => (string.IsNullOrEmpty(model.name) || x.PropertyType.Name.Contains(model.name)) &&
-                                                 x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
-                                                 && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
+                                              .Include(x => x.LeasePurposesType)
+                            .Include(x => x.LeaseSubPurpose)
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderBy(x => x.IsActive)
                                                .GetPaged<Premiumrate>(model.PageNumber, model.PageSize);
                         break;
@@ -146,15 +179,26 @@ namespace Libraries.Repository.EntityRepository
            
         }
 
-        public async Task<List<PropertyType>> GetAllPropertyType()
+        //public async Task<List<PropertyType>> GetAllPropertyType()
+        //{
+        //    List<PropertyType> list = await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();
+        //    return list;
+        //}
+        public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
-            List<PropertyType> list = await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();
-            return list;
+            List<Leasepurpose> leasePurposeList = await _dbContext.Leasepurpose.Where(x => x.IsActive == 1).ToListAsync();
+            return leasePurposeList;
         }
+        public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId)
+        {
+            List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.PurposeUseId == purposeId && x.IsActive == 1).ToListAsync();
+            return leaseSubPurposeList;
+        }
+
 
         public async Task<List<Premiumrate>> GetAllPremiumrate()
         {
-            return await _dbContext.Premiumrate.Include(x => x.PropertyType).Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Premiumrate.Include(x => x.LeasePurposesType).Include(x => x.LeaseSubPurpose).Where(x => x.IsActive == 1).ToListAsync();
         }
 
 

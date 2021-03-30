@@ -11,6 +11,6 @@ namespace Dto.Search
         public string FromDate { get; set; }
         public string ToDate { get; set; }
 
-
+        public string sub { get; set; }
     }
 }

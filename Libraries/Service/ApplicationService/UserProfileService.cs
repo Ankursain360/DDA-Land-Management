@@ -212,5 +212,10 @@ namespace Service.ApplicationService
             var result = _mapper.Map<List<ZoneDto>>(zones);
             return result;
         }
+
+        public async  Task<Allotmententry> GetAllotteeDetails(int userId)
+        {
+            return await _userProfileRepository.GetAllotteeDetails(userId);
+        }
     }
 }

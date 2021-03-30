@@ -77,7 +77,7 @@ namespace LeaseDetails.Controllers
                     entry.PlayGroundArea = lease.PlayGroundArea;
                     entry.PremiumRate = lease.Rate;
                     entry.PremiumAmount = lease.PremiumAmount;
-                    entry.GroundRent = lease.GroundRent;
+                    entry.GroundRate = lease.GroundRate;
                     entry.AmountLicFee = lease.AmountLicFee;
                     entry.NoOfYears = lease.NoOfYears;
                     entry.LeasesTypeId = lease.LeaseTypeId;
