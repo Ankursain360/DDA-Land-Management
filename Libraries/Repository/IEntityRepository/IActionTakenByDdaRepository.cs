@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IJudgementRepository : IGenericRepository<Judgement>
+    public interface IActionTakenByDdaRepository : IGenericRepository<Actiontakenbydda>
     {
         public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
 
@@ -21,15 +21,14 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Leasenoticegeneration>> FetchNoticeGenerationDetails(int? RequestId);
         Task<Leasenoticegeneration> FetchSingleNotice(int? id);
 
-        Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId); 
+        Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId);
         Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
         Task<List<Hearingdetails>> FetchHearingDetails(int? RequestId);
 
-        //****  For Judgement page  ********
+        //****  For action taken by dda page  ********
 
-        Task<List<Judgement>> GetAllJudgement();
-       
-        Task<Judgement> FetchSingleResult(int id);
-        Task<List<Judgementstatus>> GetJudgementStatusList();
+        Task<List<Actiontakenbydda>> GetAllActiontakenbydda();
+
+        Task<Actiontakenbydda> FetchSingleResult(int id);
     }
 }

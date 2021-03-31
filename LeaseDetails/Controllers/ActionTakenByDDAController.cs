@@ -14,14 +14,14 @@ using System.IO;
 
 namespace LeaseDetails.Controllers
 {
-    public class JudgementController : BaseController
+    public class ActionTakenByDDAController : BaseController
     {
-        private readonly IJudgementService _judgementService;
+        private readonly IActiontakenbyddaService _actiontakenbyddaService;
         public IConfiguration _configuration;
         string targetPathNotice = "";
-        public JudgementController(IJudgementService judgementService, IConfiguration configuration)
+        public ActionTakenByDDAController(IActiontakenbyddaService actiontakenbyddaService, IConfiguration configuration)
         {
-            _judgementService = judgementService;
+            _actiontakenbyddaService = actiontakenbyddaService;
             _configuration = configuration;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
 
@@ -33,56 +33,53 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
         {
-            var result = await _judgementService.GetPagedRequestForProceeding(model);
+            var result = await _actiontakenbyddaService.GetPagedRequestForProceeding(model);
 
             return PartialView("_List", result);
         }
         public async Task<IActionResult> Create(int id)
         {
-            var Data = await _judgementService.FetchSingleResult(id);
-            
+            var Data = await _actiontakenbyddaService.FetchSingleResult(id);
+
             if (Data == null)
             {
-                Judgement model = new Judgement();
-                model.UserNameList = await _judgementService.BindUsernameNameList();
-                model.JudgementStatusList = await _judgementService.GetJudgementStatusList();
+                Actiontakenbydda model = new Actiontakenbydda();
+                model.UserNameList = await _actiontakenbyddaService.BindUsernameNameList();
                 model.RequestForProceedingId = id;
                 return View(model);
             }
-            else 
-            { 
-                Data.UserNameList = await _judgementService.BindUsernameNameList();
-                Data.JudgementStatusList = await _judgementService.GetJudgementStatusList();
+            else
+            {
+                Data.UserNameList = await _actiontakenbyddaService.BindUsernameNameList();
                 return View(Data);
             }
-           
+
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         //[AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(int id,Judgement model)
+        public async Task<IActionResult> Create(int id, Actiontakenbydda model)
         {
-            string Document = _configuration.GetSection("FilePaths:Judgement:Doc").Value.ToString();
+            string Documentt = _configuration.GetSection("FilePaths:ActionTakenByDDA:Doc").Value.ToString();
             FileHelper fileHelper = new FileHelper();
 
 
             if (ModelState.IsValid)
-                {
-                var Data = await _judgementService.FetchSingleResult(id);
+            {
+                var Data = await _actiontakenbyddaService.FetchSingleResult(id);
                 if (Data == null)
                 {
                     if (model.File != null)
                     {
-                        model.FilePath = fileHelper.SaveFile(Document, model.File);
+                        model.Document = fileHelper.SaveFile(Documentt, model.File);
                     }
-                    model.UserNameList = await _judgementService.BindUsernameNameList();
-                    model.JudgementStatusList = await _judgementService.GetJudgementStatusList();
+                    model.UserNameList = await _actiontakenbyddaService.BindUsernameNameList();
                     model.RequestForProceedingId = id;
                     model.Id = 0;
                     model.CreatedBy = SiteContext.UserId;
                     model.IsActive = 1;
-                    var result = await _judgementService.Create(model);
+                    var result = await _actiontakenbyddaService.Create(model);
 
                     if (result == true)
                     {
@@ -97,18 +94,18 @@ namespace LeaseDetails.Controllers
 
                     }
                 }
-                else 
+                else
                 {
                     if (model.File != null)
                     {
-                        model.FilePath = fileHelper.SaveFile(Document, model.File);
+                        model.Document = fileHelper.SaveFile(Documentt, model.File);
                     }
-                    model.UserNameList = await _judgementService.BindUsernameNameList();
-                    model.JudgementStatusList = await _judgementService.GetJudgementStatusList();
+                    model.UserNameList = await _actiontakenbyddaService.BindUsernameNameList();
+
 
                     model.ModifiedBy = SiteContext.UserId;
                     model.IsActive = 1;
-                    var result = await _judgementService.Update(id, model);
+                    var result = await _actiontakenbyddaService.Update(id, model);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
@@ -121,48 +118,48 @@ namespace LeaseDetails.Controllers
 
                     }
                 }
-                    
-                }
-                else
-                {
-                    return View(model);
-                }
-           
+
+            }
+            else
+            {
+                return View(model);
+            }
+
         }
-        public IActionResult ViewLetter()
-        {
-            return View();
-        }
+        //public IActionResult ViewLetter()
+        //{
+        //    return View();
+        //}
         public async Task<IActionResult> DownloadJudgementFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Judgement Data = await _judgementService.FetchSingleResult(Id);
-            string filename = Data.FilePath;
+            Actiontakenbydda Data = await _actiontakenbyddaService.FetchSingleResult(Id);
+            string filename = Data.Document;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
         {
-            var Data = await _judgementService.FetchSingleReqDetails(id);
-            Data.HonbleList = await _judgementService.GetAllHonble();
-            Data.AllotmententryList = await _judgementService.GetAllAllotment();
-            Data.UserNameList = await _judgementService.BindUsernameNameList();
+            var Data = await _actiontakenbyddaService.FetchSingleReqDetails(id);
+            Data.HonbleList = await _actiontakenbyddaService.GetAllHonble();
+            Data.AllotmententryList = await _actiontakenbyddaService.GetAllAllotment();
+            Data.UserNameList = await _actiontakenbyddaService.BindUsernameNameList();
 
             return PartialView("_RequestForProceedingEvictionView", Data);
         }
 
-        
+
 
         public async Task<PartialViewResult> NoticeGenerationView(int id)
         {
-            var Data = await _judgementService.FetchNoticeGenerationDetails(id);
-           
+            var Data = await _actiontakenbyddaService.FetchNoticeGenerationDetails(id);
+
             return PartialView("_ListNoticeGenertion", Data);
         }
 
         public async Task<FileResult> ViewNotice(int Id)
         {
             FileHelper file = new FileHelper();
-            var Data = await _judgementService.FetchSingleNotice(Id);
+            var Data = await _actiontakenbyddaService.FetchSingleNotice(Id);
             string path = targetPathNotice + Data.NoticeFileName;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -171,14 +168,14 @@ namespace LeaseDetails.Controllers
 
         public async Task<PartialViewResult> AllotteeEvidenceView(int id)
         {
-            var Data = await _judgementService.FetchAllotteeEvidenceDetails(id);
+            var Data = await _actiontakenbyddaService.FetchAllotteeEvidenceDetails(id);
 
             return PartialView("_AllotteeEvidence", Data);
         }
         public async Task<FileResult> ViewEvidence(int Id)
         {
             FileHelper file = new FileHelper();
-            var Data = await _judgementService.FetchSingleEvidence(Id);
+            var Data = await _actiontakenbyddaService.FetchSingleEvidence(Id);
             string path = targetPathNotice + Data.DocumentPatth;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -186,10 +183,10 @@ namespace LeaseDetails.Controllers
 
         public async Task<PartialViewResult> HearingDetailsView(int id)
         {
-            var Data = await _judgementService.FetchHearingDetails(id);
+            var Data = await _actiontakenbyddaService.FetchHearingDetails(id);
 
             return PartialView("_HearingDetails", Data);
         }
-        
+
     }
 }

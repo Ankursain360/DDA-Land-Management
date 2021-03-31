@@ -10,7 +10,7 @@ using Libraries.Service.Common;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface IJudgementService
+    public interface IActiontakenbyddaService
     {
 
         public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
@@ -21,14 +21,14 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Leasenoticegeneration>> FetchNoticeGenerationDetails(int? RequestId);
         Task<Leasenoticegeneration> FetchSingleNotice(int? id);
-        
+
         Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId);
         Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
         Task<List<Hearingdetails>> FetchHearingDetails(int? RequestId);
-        Task<bool> Update(int id, Judgement judge);
-        Task<bool> Create(Judgement judge);
-        Task<Judgement> FetchSingleResult(int id);
+        Task<bool> Update(int id, Actiontakenbydda actionbydda);
+        Task<bool> Create(Actiontakenbydda actionbydda);
+        Task<Actiontakenbydda> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-        Task<List<Judgementstatus>> GetJudgementStatusList();
     }
 }
+

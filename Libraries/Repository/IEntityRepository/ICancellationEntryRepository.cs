@@ -9,12 +9,13 @@ using Dto.Master;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface ICancellationEntryRepository : IGenericRepository<Requestforproceeding>
+    public interface ICancellationEntryRepository : IGenericRepository<Cancellationentry>
     {
         Task<List<Allotmententry>> GetAllAllotment();
         Task<List<Honble>> GetAllHonble();
-        Task<List<Requestforproceeding>> GetAllRequestForProceeding();
-        Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
+        Task<List<Cancellationentry>> GetAllRequestForProceeding();
+        Task<PagedResult<Cancellationentry>> GetPagedCancellationEntry(CancellationEntrySearchDto model);
         Task<List<UserBindDropdownDto>> BindUsernameNameList();
+        Task<Allotmententry> FetchAllottmentDetails(int allottmentId);
     }
 }

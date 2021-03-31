@@ -4,20 +4,21 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    debugger;
+    GetAction(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetAction(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
 
-    $('#txtReferenceNo').val('');
-   
+    $('#txtName').val('');
+    $('#txtCode').val('');
+    $('#txtFileNo').val('')
 
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetAction(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -25,7 +26,7 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetAction(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -33,14 +34,14 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetAction(currentPageNumber, currentPageSize, sortOrder);
 });
 $('#ddlSort').change(function () {
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetAction(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetJudgement(pageNumber, pageSize, order) {
+function GetAction(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Judgement/List`, 'html', param, function (response) {
+    HttpPost(`/ActionTakenByDDA/List`, 'html', param, function (response) {
         $('#divJudgementTable').html("");
         $('#divJudgementTable').html(response);
     });
@@ -48,8 +49,9 @@ function GetJudgement(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        letterReferenceNo: $('#txtReferenceNo').val(),
-       
+        letterReferenceNo: $('#txtFileNo').val(),
+        AllotmentNo: $('#txtReferenceNo').val(),
+        subject: $('#txtSubject').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -61,11 +63,11 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 function onPaging(pageNo) {
-    GetJudgement(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetAction(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetJudgement(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetAction(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

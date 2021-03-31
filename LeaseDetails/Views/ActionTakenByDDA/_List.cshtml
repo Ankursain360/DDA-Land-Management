@@ -9,7 +9,7 @@
                     <th>Area</th>
                     <th> Status</th>
 
-                    <th>Operation</th>
+                    <th>Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,5 +52,5 @@
 
         </table>
     </div>
-    </div>
+    
     @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

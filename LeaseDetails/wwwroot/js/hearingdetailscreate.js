@@ -9,37 +9,44 @@ $(document).ready(function () {
     GetDetails(id);
     GetNoticeDetails(id);
     GetEvidenceDetails(id);
-    
+    DateCheck();
 });
 function GetDetailsHearingDetails(pageNumber, pageSize, sortOrder) {
 
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/HearingDetails/ListHearingDetails`, 'html', param, function (response) {
+        debugger
         $('#divTable').html("");
         $('#divTable').html(response);
     });
 }
-
-$("#txtAttendee").click(function () {
+$("#btnGenerate").click(function () {
     debugger
-  
+    var daten = document.getElementById("txtHearingDate").value;
+    var refn = document.getElementById("txtHearingTime").value;
+    sessionStorage.NewDate = daten;
+    sessionStorage.RefN = refn;
+    window.location.href = '/HearingDetails/ViewLetter/';
+
+});
+
+function DateCheck() {
+    debugger;
+
     var daten = document.getElementById("txtHearingDate").value;
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
 
-   var todayN = yyyy + '-' + mm + '-' + dd;
-    if (daten <= todayN) {
+    var todayN = yyyy + '-' + mm + '-' + dd;
+    if (daten > todayN) {
 
-        document.getElementById("txtAttendee").readOnly = true;
-        document.getElementById("txtRemark").readOnly = true;
-        document.getElementById("file").readOnly = true;
-
+        document.getElementById("txtAttendee").hidden = true;
+        document.getElementById("txtRemark").hidden = true;
+        document.getElementById("file").hidden = true;
     }
-
-
-});
+};
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         AllotmentId: 0,
