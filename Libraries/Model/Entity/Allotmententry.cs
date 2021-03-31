@@ -9,14 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace Libraries.Model.Entity
 {
     public class Allotmententry : AuditableEntity<int>
-
     {
         public Allotmententry()
         {
+            Cancellationentry = new HashSet<Cancellationentry>();
             Leasedeed = new HashSet<Leasedeed>();
             Possesionplan = new HashSet<Possesionplan>();
             Requestforproceeding = new HashSet<Requestforproceeding>();
             Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
+            Mortgage = new HashSet<Mortgage>();
         }
         public int ApplicationId { get; set; }
         public decimal TotalArea { get; set; }
@@ -76,6 +77,7 @@ namespace Libraries.Model.Entity
 
         //[NotMapped]
         //public decimal TotalPremiumAmount { get; set; }
+        public ICollection<Cancellationentry> Cancellationentry { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }
 
@@ -88,6 +90,7 @@ namespace Libraries.Model.Entity
         public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
 
         public ICollection<Leasedeed> Leasedeed { get; set; }
+        public ICollection<Mortgage> Mortgage { get; set; }
         //[NotMapped]
         //public string FullName
         //{

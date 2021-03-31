@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Leasepurpose>
-@await Component.InvokeAsync("PageHeader", new { pageName = "purpose" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Purpose" })
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
@@ -7,7 +7,7 @@
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtPurposeUse" class="floating-label-field floating-label-field--s3" placeholder="PurposeUse" />
-                    <label for="txtPurposeUse" class="floating-label"> PurposeUse</label>
+                    <label for="txtPurposeUse" class="floating-label"> Purpose Use</label>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
 
 
-                        <option value="PurposeUse">purposeUse</option>
+                        <option value="PurposeUse">Purpose Use</option>
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>

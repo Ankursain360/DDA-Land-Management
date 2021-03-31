@@ -39,7 +39,7 @@
                     <span class="badge badge-primary px-2 py-1">Uploaded</span>}
                 else if (item.Status == 3)
                 {
-                    <span class="badge badge-success px-2 py-1">Send</span>}
+                    <span class="badge badge-success px-2 py-1">Sent</span>}
                 else
                 {
                     <span class="badge badge-warning px-2 py-1">Not Generated</span>
@@ -63,7 +63,7 @@
                     }
                     @if (item.IsUpload == 1)
                     {
-                        <a asp-action="ViewProceedingLetter" asp-controller="ProceedingEvictionLetter" asp-route-id="@item.Id" title="Upload" target="_blank"><i class="ri-file-download-line"></i> </a>
+                        <a asp-action="ViewProceedingLetter" asp-controller="ProceedingEvictionLetter" asp-route-id="@item.Id" title="Download" target="_blank"><i class="ri-file-download-line"></i> </a>
                     }
                 </div>
 
