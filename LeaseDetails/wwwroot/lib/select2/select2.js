@@ -1679,7 +1679,6 @@
 
                     this.$selection.on('mousedown', '.select2-selection__clear',
                         function (evt) {
-                            debugger;
                             self._handleClear(evt);
                         });
 

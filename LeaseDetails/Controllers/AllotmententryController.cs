@@ -12,16 +12,25 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using Utility.Helper;
+using Dto.Master;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+
 namespace LeaseDetails.Controllers
 {
     public class AllotmentEntryController : BaseController
     {
+        static string result = string.Empty;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public Microsoft.Extensions.Configuration.IConfiguration _configuration;
         private readonly IAllotmentEntryService _allotmentEntryService;
+        private readonly ILeaseApplicationFormService _leaseApplicationFormService;
 
-
-        public AllotmentEntryController(IAllotmentEntryService allotmentEntryService)
+        public AllotmentEntryController(IAllotmentEntryService allotmentEntryService, IHostingEnvironment hostingEnvironment)
         {
             _allotmentEntryService = allotmentEntryService;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public async Task<IActionResult> Index()
@@ -66,17 +75,69 @@ namespace LeaseDetails.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    //var result = await _allotmentEntryService.Create(allotmententry);
+
+                    //if (result == true)
+                    //{
+                    //    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    //    var list = await _allotmentEntryService.GetAllAllotmententry();
+                    //    return View("Index", list);
+                    //}app
                     var result = await _allotmentEntryService.Create(allotmententry);
 
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _allotmentEntryService.GetAllAllotmententry();
-                        return View("Index", list);
+                        //var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(Convert.ToInt32(id));
+                        var Data = await _allotmentEntryService.FetchLeaseApplicationmailDetails(allotmententry.ApplicationId);
+
+                        if (Data != null && Data.EmailId != null)
+                        {
+                            #region Mail Generate
+                            //At successfull completion send mail and sms
+                            Uri uri = new Uri("http://localhost:1018/AllotmentEntry");
+                            string Action = "Dear " + allotmententry.Name + ",  click  below link :-  " + uri;
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "AllotmentEntryMailDetails.html");
+
+                            #region Mail Generation Added By Renu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            LeaseRefBodyDto bodyDTO = new LeaseRefBodyDto();
+                            bodyDTO.displayName = Data.Name;
+                            bodyDTO.RefNo = Data.RefNo;
+                            bodyDTO.link = Action;
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.PopulateBodyLeaseRefernceNo(bodyDTO);
+                            #endregion
+
+                            string strMailSubject = "User Reference No. Details ";
+                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, Data.EmailId, strMailCC, strMailBCC, strAttachPath);
+                            #endregion
+                        
+                            if (sendMailResult)
+                            {
+                                ViewBag.Message = Alert.Show("Dear User,<br/>" + Data.Name + "  Your password is send to Registered email and Mobile No", "", AlertType.Success);
+                            }
+                            else
+                            {
+                                ViewBag.Message = Alert.Show("Dear User,<br/>" + Data.Name + "  Successfully allotment is done but Enable to send Reference No. on your mail or sms due to network issue", "", AlertType.Info);
+
+                            }
+
+                            #endregion
+                            return View(allotmententry);
+                        }
+
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(allotmententry);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(allotmententry);
                     }
                 }
@@ -84,6 +145,8 @@ namespace LeaseDetails.Controllers
                 {
                     return View(allotmententry);
                 }
+
+               
             }
             catch (Exception ex)
             {

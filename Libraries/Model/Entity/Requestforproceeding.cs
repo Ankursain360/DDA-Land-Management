@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Libraries.Model.Entity
 {
-   public class Requestforproceeding : AuditableEntity<int>
+    public class Requestforproceeding : AuditableEntity<int>
     {
         public Requestforproceeding()
         {
@@ -46,7 +46,7 @@ namespace Libraries.Model.Entity
         public int? UserId { get; set; }
         public string ProcedingLetter { get; set; }
         public int? IsGenerate { get; set; }
-        public int? IsUpload { get; set; }        
+        public int? IsUpload { get; set; }
         public int? IsSend { get; set; }
         public int? PendingAt { get; set; }
         public int? Status { get; set; }
@@ -94,8 +94,12 @@ namespace Libraries.Model.Entity
         public ICollection<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
         public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
 
+
+        public ICollection<Judgement> Judgement { get; set; }
         public ICollection<Evidancedoc> Evidancedoc { get; set; }
         public ICollection<Hearingdetails> Hearingdetails { get; set; }
-        public ICollection<Judgement> Judgement { get; set; }
+
+
+        
     }
 }

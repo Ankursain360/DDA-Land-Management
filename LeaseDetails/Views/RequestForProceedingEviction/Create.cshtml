@@ -16,10 +16,10 @@
                           
                             >
                         <option selected disabled="disabled" value="">---Select---</option>
-                        @foreach (var item in Model.AllotmententryList)
+                        @*@foreach (var item in Model.AllotmententryList)
                         {
                             <option value="@item.Id" data-id="@item.SocietyName,@item.PurposeName" > @item.LRefNo </option>
-                        }
+                        }*@
                     </select>
                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label class="floating-label">File No</label>

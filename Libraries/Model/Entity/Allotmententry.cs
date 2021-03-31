@@ -110,33 +110,33 @@ namespace Libraries.Model.Entity
         //    }
         //}
 
-        [NotMapped]
-        public string PurposeName
-        {
-            get
-            {
-                return LeasePurposesType.PurposeUse ;
-            }
-        }
+        //[NotMapped]
+        //public string PurposeName
+        //{
+        //    get
+        //    {
+        //        return LeasePurposesType.PurposeUse ;
+        //    }
+        //}
 
 
-        [NotMapped]
-        public string LRefNo
-        {
-            get
-            {
-                return Application.RefNo;
-            }
-        }
+        //[NotMapped]
+        //public string LRefNo
+        //{
+        //    get
+        //    {
+        //        return Application.RefNo;
+        //    }
+        //}
 
-        [NotMapped]
-        public string SocietyName
-        {
-            get
-            {
-                return Application.Name;
-            }
-        }
+        //[NotMapped]
+        //public string SocietyName
+        //{
+        //    get
+        //    {
+        //        return Application.Name;
+        //    }
+        //}
 
 
 
