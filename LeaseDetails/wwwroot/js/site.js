@@ -221,6 +221,7 @@ function HttpGet(url, dataType, callback) {
 	$.ajax({
 		cache: false,
 		type: 'GET',
+		async: false,
 		contentType: "application/json; charset=utf-8",
 		dataType: dataType,
 		url: url
@@ -238,6 +239,7 @@ function HttpPost(url, dataType, payload, callback) {
 	$.ajax({
 		cache: false,
 		type: 'POST',
+		async: false,
 		data: JSON.stringify(payload),
 		contentType: "application/json; charset=utf-8",
 		dataType: dataType,
