@@ -31,7 +31,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Allotment.Application)
                                         .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                         && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                        && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                        && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)
+                                        && x.IsSend == 1)
 
                                         ).GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
 
@@ -49,7 +50,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Allotment.Application)
                                         .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                         && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                        && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)) )
+                                        && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                        && x.IsSend == 1)
                                          .OrderBy(s => s.LetterReferenceNo)
                                         .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
@@ -62,7 +64,8 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                          && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)))
+                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                         && x.IsSend == 1)
                                         .OrderBy(s => s.Allotment.Application.RefNo)
                                         .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
@@ -75,7 +78,8 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                          && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)))
+                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                         && x.IsSend == 1)
                                         .OrderBy(s => s.Subject)
                                          .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
 
@@ -89,7 +93,8 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                          && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)))
+                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                         && x.IsSend == 1)
                                         .OrderByDescending(s => s.IsActive)
                                          .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
@@ -107,7 +112,8 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                          && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)))
+                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                         && x.IsSend == 1)
                                          .OrderByDescending(s => s.LetterReferenceNo)
                                          .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
@@ -120,7 +126,8 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                          && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)))
+                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                         && x.IsSend == 1)
                                          .OrderByDescending(s => s.Allotment.Application.RefNo)
                                          .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
@@ -133,7 +140,8 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                          && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)))
+                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                         && x.IsSend == 1)
                                          .OrderByDescending(s => s.Subject)
                                         .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
@@ -145,7 +153,8 @@ namespace Libraries.Repository.EntityRepository
                                          .Include(x => x.Allotment.Application)
                                          .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                          && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject)))
+                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                         && x.IsSend == 1)
                                         .OrderBy(s => s.IsActive)
                                       .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
@@ -258,8 +267,14 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Judgement
                                     .Include(x => x.RequestForProceeding)
+                                    .Include(x => x.JudgementStatus)
                                     .Where(x => x.RequestForProceedingId == id)
                                     .FirstOrDefaultAsync();
+        }
+        public async Task<List<Judgementstatus>> GetJudgementStatusList()
+        {
+            List<Judgementstatus> List = await _dbContext.Judgementstatus.Where(x => x.IsActive == 1).ToListAsync();
+            return List;
         }
     }
 }

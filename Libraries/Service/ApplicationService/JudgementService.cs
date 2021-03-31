@@ -107,5 +107,11 @@ namespace Libraries.Service.ApplicationService
             _judgementRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<Judgementstatus>> GetJudgementStatusList()
+        {
+            List<Judgementstatus> List = await _judgementRepository.GetJudgementStatusList();
+            return List;
+        }
     }
 }

@@ -25,6 +25,8 @@ namespace Libraries.Model.Entity
         public Requestforproceeding RequestForProceeding { get; set; }
         [NotMapped]
         public List<UserBindDropdownDto> UserNameList { get; set; }
+        [NotMapped]
+        public List<Judgementstatus> JudgementStatusList { get; set; }
     }
 }
 
