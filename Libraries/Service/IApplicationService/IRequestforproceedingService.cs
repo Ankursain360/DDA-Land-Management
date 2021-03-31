@@ -23,6 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
         Task<List<UserBindDropdownDto>> BindUsernameNameList();
-
+        Task<List<Cancellationentry>> GetCancellationListData();
+        Task<Cancellationentry> FetchCancellationDetailsDetails(int CancellationId);
     }
 }

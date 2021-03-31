@@ -16,5 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Requestforproceeding>> GetAllRequestForProceeding();
         Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
         Task<List<UserBindDropdownDto>> BindUsernameNameList();
+        Task<List<Cancellationentry>> GetCancellationListData();
+        Task<Cancellationentry> FetchCancellationDetailsDetails(int cancellationId);
     }
 }

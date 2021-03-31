@@ -310,5 +310,29 @@
     "inputFiles": [
       "wwwroot/js/cancellationentryindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/hearingdetailsletter.min.js",
+    "inputFiles": [
+      "wwwroot/js/hearingdetailsletter.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/requestforproceedingview.min.js",
+    "inputFiles": [
+      "wwwroot/js/requestforproceedingview.js"
+    ]
   }
 ]

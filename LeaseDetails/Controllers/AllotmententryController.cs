@@ -71,7 +71,8 @@ namespace LeaseDetails.Controllers
                 allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
                 allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
                 allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
-                allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(allotmententry.PurposeId);
+                //allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(allotmententry.PurposeId);
+                allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(allotmententry.LeasePurposesTypeId));
 
                 if (ModelState.IsValid)
                 {
@@ -166,7 +167,7 @@ namespace LeaseDetails.Controllers
             Data.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
             Data.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
             Data.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
-            Data.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Data.PurposeId);
+            Data.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(Data.LeasePurposesTypeId));
 
             if (Data == null)
             {
@@ -183,7 +184,7 @@ namespace LeaseDetails.Controllers
             allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
             allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
             allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
-            allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(allotmententry.PurposeId);
+            allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(allotmententry.LeasePurposesTypeId));
             if (ModelState.IsValid)
             {
                 try
@@ -239,9 +240,12 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _allotmentEntryService.FetchSingleResult(id);
-
-
             Data.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
+            Data.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
+            Data.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(Data.LeasePurposesTypeId));
+
+            
 
             if (Data == null)
             {

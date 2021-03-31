@@ -2,45 +2,37 @@
 
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
-           aria-controls="collapseApprroval">
+        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseRequestProceeding" role="button" aria-expanded="true"
+           aria-controls="collapseRequestProceeding">
             <i class="ri-arrow-right-s-fill"></i>
             <span class="text ml-1 mr-auto">View Request Proceeding For Eviction Details </span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval">
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseRequestProceeding">
             <div id="allDetails">
                 <div class="row mt-md-3">
                     <div class="col-md-6">
-                        @*<div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3"
-                                    asp-for="AllotmentId" asp-items="@(new SelectList(Model.AllotmententryList, "Id","LRefNo"))" disabled>
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.CancellationList, "Id","Allotment.Application.RefNo"))" onchange="return GetRelativeData(this.options[this.selectedIndex].value);"
+                                    asp-for="CancellationId">
                                 <option selected disabled="disabled" value="">---Select---</option>
                             </select>
+                            <span asp-validation-for="CancellationId" class="text-danger"></span>
                             <label class="floating-label">File No</label>
-                        </div>*@
-                    </div>
-                    <div class=" col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input  asp-for="LetterReferenceNo" placeholder="Address" type="text"
-                                   class="floating-label-field floating-label-field--s3" disabled />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Letter Reference No</label>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            <input disabled type="text" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
+                            <input disabled type="text" id="Society_name" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
                             <span class="text-danger"></span>
                             <label class="floating-label">Name Of the Society </label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input disabled placeholder="Contact No" type="text"
+                            <input disabled placeholder="Contact No" id="Purpose_name" type="text"
                                    class="floating-label-field floating-label-field--s3" />
                             <span class="text-danger"></span>
                             <label class="floating-label">Use as per allotment letter/Lease Deed  </label>
@@ -68,7 +60,7 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input placeholder="Contact No" asp-for="DateOfCancellationofLease" type="date" 
+                            <input placeholder="Contact No" asp-for="DateOfCancellationofLease" type="date"
                                    class="floating-label-field floating-label-field--s3" disabled />
                             <span class="text-danger"></span>
                             <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
@@ -105,84 +97,67 @@
                         </div>
                     </div>
                 </div>
+             
                 <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <label style="color:#2196F3;font-size:.7rem;">
-                                Demand Letter
-                            </label>
-                            <input type="hidden" asp-for="DemandLetter" />
+            <div class="col-md-6">
+                <label style="color:#2196F3;font-size:.7rem;">
+                    Demand Letter <span style="color:red"> (Only Upload 10 Mb File)</span>
+                </label>
+                <input type="hidden" asp-for="DemandLetter" />
+                <label class="badge badge-primary px-2" id="NoFileDemandLetterId">No File</label>
+                <a id="viewDemandLetterId" asp-action="ViewLetter" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
 
-                            @{ if (Model.DemandLetter != null)
-                                {
-                                    <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="DemandLetterPhoto" disabled />
-                                    <label for="field-1" class="floating-label">Demand Letter </label>
-                                    <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
-                                }
-                                else
-                                {
-                                    <label class="badge badge-primary px-2">No File</label>
-                                    <input type="file" asp-for="DemandLetterPhoto" disabled class="floating-label-field floating-label-field--s3">
+            </div>
+            <div class="col-md-6">
+                <label style="color:#2196F3;font-size:.7rem;">
+                    NOC <span style="color:red"> (Only Upload 10 Mb File)</span>
+                </label>
+                <input type="hidden" asp-for="Noc" />
+                <label class="badge badge-primary px-2" id="NoFileNOCId">No File</label>
 
-                                }
-                            }
-                        </div>
-                    </div>
+            </div>
+        </div>
 
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <label style="color:#2196F3;font-size:.7rem;">
-                                NOC
-                            </label>
-                            <input type="hidden" asp-for="Noc" />
-                            @{ if (Model.Noc != null)
-                                {
-                                    <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="NocPhoto" disabled />
-                                    <label for="field-1" class="floating-label">NOC </label>
-                                    <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
-                                }
-                                else
-                                {
-                                    <label class="badge badge-primary px-2">No File</label>
-                                    <input type="file" asp-for="NocPhoto" class="floating-label-field floating-label-field--s3" disabled>
 
-                                }
-                            }
-                        </div>
-                    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <label style="color:#2196F3;font-size:.7rem;">
+                    Cancellation Order <span style="color:red"> (Only Upload 10 Mb File)</span>
+                </label>
+                <input type="hidden" asp-for="CancellationOrder" value="" />
+                <label class="badge badge-primary px-2" id="NoFileCancelOrderId">No File</label>
+                <a id="viewCancelOrderId" asp-action="ViewLetter2" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
                 </div>
 
+            </div>
+        </div>
+
                 <div class="row mt-md-3">
-                    <div class="col-md-6">
+                    <div class=" col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <label style="color:#2196F3;font-size:.7rem;">
-                                Cancellation Order
-                            </label>
-                            <input type="hidden" asp-for="CancellationOrder" />
-
-                            @{ if (Model.CancellationOrder != null)
-                                {
-                                    <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="CancellationPhoto" disabled />
-                                    <label for="field-1" class="floating-label">NOC </label>
-                                    <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
-                                }
-                                else
-                                {
-                                    <label class="badge badge-primary px-2">No File</label>
-                                    <input type="file" asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3" disabled>
-
-                                }
-                            }
-
+                            <input asp-for="LetterReferenceNo" placeholder="Address" type="text" disabled
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span asp-validation-for="LetterReferenceNo" class="text-danger"></span>
+                            <label class="floating-label">Letter Reference No</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" style="width:100%;" 
-                                    @*asp-for="UserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))"*@>
+                            <select class="floating-label-field floating-label-field--s3" disabled
+                                    asp-for="UserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))">
                                 <option selected disabled="disabled" value="">---Select---</option>
                             </select>
-                            @*<span asp-validation-for="UserId" class="text-danger"></span>*@
+                            <span asp-validation-for="UserId" class="text-danger"></span>
                             <label class="floating-label">UserName</label>
                         </div>
                     </div>
@@ -193,3 +168,9 @@
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/requestforproceedingedit.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/requestforproceedingedit.min.js" asp-append-version="true"></script> 
+</environment>

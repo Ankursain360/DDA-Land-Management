@@ -21,7 +21,10 @@ namespace Libraries.Model.Entity
             Leasenoticegeneration = new HashSet<Leasenoticegeneration>();
             Judgement = new HashSet<Judgement>();
         }
+
+
         [Required(ErrorMessage = "FIle No is mandatory ")]
+        public int? CancellationId { get; set; }
         public int? AllotmentId { get; set; }
         [Required(ErrorMessage = "Letter Reference No is mandatory ")]
         public string LetterReferenceNo { get; set; }
@@ -52,6 +55,7 @@ namespace Libraries.Model.Entity
         public int? Status { get; set; }
 
         public Allotmententry Allotment { get; set; }
+        public Cancellationentry Cancellation { get; set; }
 
         public Honble Honble { get; set; }
         public ApplicationUser User { get; set; }
@@ -99,7 +103,9 @@ namespace Libraries.Model.Entity
         public ICollection<Evidancedoc> Evidancedoc { get; set; }
         public ICollection<Hearingdetails> Hearingdetails { get; set; }
 
+        [NotMapped]
+        public List<Cancellationentry> CancellationList { get; set; }
 
-        
+
     }
 }

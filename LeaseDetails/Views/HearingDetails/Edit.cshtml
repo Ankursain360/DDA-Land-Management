@@ -169,7 +169,7 @@
             <div class="row pt-3">
                 <div class="col-md-12">
                     <input type="submit" value="Update" class="btn btn-theme " />
-                    <input value="Generate Letter" class="btn btn-theme" id="btnGenerate"/>
+                    <input value="Generate Letter" asp-action="View" class="btn btn-theme" type="submit"  id="btnGenerate"/>
 
                     @Html.ActionLink("Back", "Index", "HearingDetails", null, new { @class = "btn btn-theme " })
                 </div>

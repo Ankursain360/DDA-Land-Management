@@ -84,8 +84,8 @@ namespace LeaseDetails.Controllers
                 //{
                 hearingdetails.CreatedBy = SiteContext.UserId;
                     hearingdetails.ReqProcId = 18;
-                    hearingdetails.NoticeGenId = 3;
-                    hearingdetails.EvidanceDocId = 1;
+                   // hearingdetails.NoticeGenId = 3;
+                   // hearingdetails.EvidanceDocId = 1;
                     hearingdetails.Remark = " ";
                     hearingdetails.IsActive = 1;
                     hearingdetails.CreatedBy = 1;
@@ -241,8 +241,8 @@ namespace LeaseDetails.Controllers
                 try
                 {
                     rate.ReqProcId = 18;
-                    rate.NoticeGenId = 3;
-                    rate.EvidanceDocId = 1;
+                  //  rate.NoticeGenId = 3;
+                  //  rate.EvidanceDocId = 1;
                     rate.ModifiedBy = SiteContext.UserId;
                     var result = await _hearingdetailsService.Update(id, rate);
                     if (result == true)
