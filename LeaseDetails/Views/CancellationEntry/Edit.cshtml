@@ -11,10 +11,6 @@
                     <select class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.AllotmententryList, "Id","Application.RefNo"))" onchange="return GetOtherData(this.options[this.selectedIndex].value);"
                             asp-for="AllotmentId">
                         <option selected disabled="disabled" value="">---Select---</option>
-                        @*@foreach (var item in Model.AllotmententryList)
-            {
-                <option value="@item.Id" data-id="@item.SocietyName,@item.PurposeName"> @item.LRefNo </option>
-            }*@
                     </select>
                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label class="floating-label">File No</label>
