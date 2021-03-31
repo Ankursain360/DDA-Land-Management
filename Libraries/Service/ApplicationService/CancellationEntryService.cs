@@ -15,105 +15,101 @@ using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class CancellationEntryService : EntityService<Requestforproceeding>, ICancellationEntryService
+    public class CancellationEntryService : EntityService<Cancellationentry>, ICancellationEntryService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRequestforproceedingRepository _requestRepository;
+        private readonly ICancellationEntryRepository _cancellationEntryRepository;
 
-        public CancellationEntryService(IUnitOfWork unitOfWork, IRequestforproceedingRepository requestRepository)
-     : base(unitOfWork, requestRepository)
+        public CancellationEntryService(IUnitOfWork unitOfWork, ICancellationEntryRepository cancellationEntryRepository)
+     : base(unitOfWork, cancellationEntryRepository)
         {
             _unitOfWork = unitOfWork;
-            _requestRepository = requestRepository;
+            _cancellationEntryRepository = cancellationEntryRepository;
         }
 
         public async Task<List<UserBindDropdownDto>> BindUsernameNameList()
         {
-            return await _requestRepository.BindUsernameNameList();
+            return await _cancellationEntryRepository.BindUsernameNameList();
         }
 
         public async Task<List<Allotmententry>> GetAllAllotment()
         {
-            List<Allotmententry> villageList = await _requestRepository.GetAllAllotment();
+            List<Allotmententry> villageList = await _cancellationEntryRepository.GetAllAllotment();
             return villageList;
         }
 
         public async Task<List<Honble>> GetAllHonble()
         {
-            List<Honble> villageList = await _requestRepository.GetAllHonble();
+            List<Honble> villageList = await _cancellationEntryRepository.GetAllHonble();
             return villageList;
         }
 
-        public async Task<List<Requestforproceeding>> GetAllRequestForProceeding()
+        public async Task<List<Cancellationentry>> GetAllRequestForProceeding()
         {
 
-            return await _requestRepository.GetAllRequestForProceeding();
+            return await _cancellationEntryRepository.GetAllRequestForProceeding();
         }
 
 
-        public async Task<bool> Create(Requestforproceeding requestforproceeding)
+        public async Task<bool> Create(Cancellationentry cancellationentry)
         {
 
-            requestforproceeding.CreatedBy = 1;
-            requestforproceeding.PendingAt = 0;
-            requestforproceeding.CreatedDate = DateTime.Now;
-            _requestRepository.Add(requestforproceeding);
+            cancellationentry.CreatedBy = 1;
+            cancellationentry.CreatedDate = DateTime.Now;
+            _cancellationEntryRepository.Add(cancellationentry);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<Requestforproceeding>> GetRequestUsingRepo()
+        public async Task<List<Cancellationentry>> GetRequestUsingRepo()
         {
-            return await _requestRepository.GetAllRequestForProceeding();
+            return await _cancellationEntryRepository.GetAllRequestForProceeding();
         }
 
-        public async Task<bool> Update(int id, Requestforproceeding scheme)
+        public async Task<bool> Update(int id, Cancellationentry cancellationentry)
         {
-            var result = await _requestRepository.FindBy(a => a.Id == id);
-            Requestforproceeding model = result.FirstOrDefault();
-            model.AllotmentId = scheme.AllotmentId;
-            model.LetterReferenceNo = scheme.LetterReferenceNo;
-            model.Subject = scheme.Subject;
-            model.GroundOfViolations = scheme.GroundOfViolations;
-            model.DateOfCancellationofLease = scheme.DateOfCancellationofLease;
-            model.DemandLetter = scheme.DemandLetter;
-            model.Noc = scheme.Noc;
-            model.CancellationOrder = scheme.CancellationOrder;
-            model.UserId = scheme.UserId;
-
-            model.HonebleLgOrCommon = scheme.HonebleLgOrCommon;
-            model.ProceedingEvictionPossession = scheme.ProceedingEvictionPossession;
-            model.CourtCaseifAny = scheme.CourtCaseifAny;
-            //  model.Remarks = scheme.Remarks;
-
-            model.IsActive = scheme.IsActive;
+            var result = await _cancellationEntryRepository.FindBy(a => a.Id == id);
+            Cancellationentry model = result.FirstOrDefault();
+            model.AllotmentId = cancellationentry.AllotmentId;
+            model.Subject = cancellationentry.Subject;
+            model.GroundOfViolations = cancellationentry.GroundOfViolations;
+            model.DateOfCancellationofLease = cancellationentry.DateOfCancellationofLease;
+            model.DemandLetter = cancellationentry.DemandLetter;
+            model.Noc = cancellationentry.Noc;
+            model.CancellationOrder = cancellationentry.CancellationOrder;
+            model.HonebleLgOrCommon = cancellationentry.HonebleLgOrCommon;
+            model.ProceedingEvictionPossession = cancellationentry.ProceedingEvictionPossession;
+            model.CourtCaseifAny = cancellationentry.CourtCaseifAny;
+            model.IsActive = cancellationentry.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
-            _requestRepository.Edit(model);
+            _cancellationEntryRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<Requestforproceeding> FetchSingleResult(int id)
+        public async Task<Cancellationentry> FetchSingleResult(int id)
         {
-            var result = await _requestRepository.FindBy(a => a.Id == id);
-            Requestforproceeding model = result.FirstOrDefault();
+            var result = await _cancellationEntryRepository.FindBy(a => a.Id == id);
+            Cancellationentry model = result.FirstOrDefault();
             return model;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var form = await _requestRepository.FindBy(a => a.Id == id);
-            Requestforproceeding model = form.FirstOrDefault();
+            var form = await _cancellationEntryRepository.FindBy(a => a.Id == id);
+            Cancellationentry model = form.FirstOrDefault();
             model.IsActive = 0;
-            _requestRepository.Edit(model);
+            _cancellationEntryRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
+        public async Task<PagedResult<Cancellationentry>> GetPagedCancellationEntry(CancellationEntrySearchDto model)
         {
-            return await _requestRepository.GetPagedRequestForProceeding(model);
+            return await _cancellationEntryRepository.GetPagedCancellationEntry(model);
         }
 
-
-
+        public async Task<Allotmententry> FetchAllottmentDetails(int allottmentId)
+        {
+            return await _cancellationEntryRepository.FetchAllottmentDetails(allottmentId);
+        }
     }
 }
