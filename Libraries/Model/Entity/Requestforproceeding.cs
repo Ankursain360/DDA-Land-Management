@@ -16,7 +16,6 @@ namespace Libraries.Model.Entity
         {
             Actiontakenbydda = new HashSet<Actiontakenbydda>();
             Allotteeevidenceupload = new HashSet<Allotteeevidenceupload>();
-            Evidancedoc = new HashSet<Evidancedoc>();
             Hearingdetails = new HashSet<Hearingdetails>();
             Leasenoticegeneration = new HashSet<Leasenoticegeneration>();
             Judgement = new HashSet<Judgement>();
@@ -100,7 +99,7 @@ namespace Libraries.Model.Entity
 
 
         public ICollection<Judgement> Judgement { get; set; }
-        public ICollection<Evidancedoc> Evidancedoc { get; set; }
+       
         public ICollection<Hearingdetails> Hearingdetails { get; set; }
 
         [NotMapped]

@@ -3,7 +3,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    debugger
+   
     var id = parseInt($('#RequestForProceedingId').val());
     GetDetailsHearingDetails();
     GetDetails(id);
@@ -15,7 +15,7 @@ function GetDetailsHearingDetails(pageNumber, pageSize, sortOrder) {
 
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/HearingDetails/ListHearingDetails`, 'html', param, function (response) {
-        debugger
+        
         $('#divTable').html("");
         $('#divTable').html(response);
     });
@@ -31,7 +31,7 @@ function GetDetailsHearingDetails(pageNumber, pageSize, sortOrder) {
 //});
 
 function DateCheck() {
-    debugger;
+   
 
     var daten = document.getElementById("txtHearingDate").value;
     var today = new Date();

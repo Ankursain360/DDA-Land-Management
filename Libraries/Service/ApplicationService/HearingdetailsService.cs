@@ -35,7 +35,10 @@ namespace Libraries.Service.ApplicationService
             _hearingdetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
+        public string GetDownload(int id)
+        {
+            return _hearingdetailsRepository.GetDownload(id);
+        }
         public async Task<Hearingdetails> FetchSingleResult(int id)
         {
             var result = await _hearingdetailsRepository.FindBy(a => a.Id == id);
@@ -60,6 +63,7 @@ namespace Libraries.Service.ApplicationService
             model.HearingVenue = hearingdetails.HearingVenue;
 
             model.Remark = hearingdetails.Remark;
+            model.DocumentPatth = hearingdetails.DocumentPatth;
 
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = model.ModifiedBy;
@@ -104,12 +108,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _hearingdetailsRepository.GetHphotofiledetails(hid);
         }
-        public async Task<bool> DeleteHphotofiledetails(int Id)
-        {
-            return await _hearingdetailsRepository.DeleteHphotofiledetails(Id);
-        }
+        //public async Task<bool> DeleteHphotofiledetails(int Id)
+        //{
+        //    return await _hearingdetailsRepository.DeleteHphotofiledetails(Id);
+        //}
 
-        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(HearingdetailsSeachDto model)
         {
             return await _hearingdetailsRepository.GetPagedRequestForProceeding(model);
         }
@@ -127,6 +131,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<Requestforproceeding> FetchSingleReqDetails(int? RequestId)
         {
             return await _hearingdetailsRepository.FetchSingleReqDetails(RequestId);
+        }
+        public async Task<Hearingdetails> FetchSingleHearingdetailswithReqProc(int? RequestId)
+        {
+            return await _hearingdetailsRepository.FetchSingleHearingdetailswithReqProc(RequestId);
         }
         public async Task<List<Leasenoticegeneration>> FetchNoticeGenerationDetails(int? RequestId)
         {
@@ -148,7 +156,9 @@ namespace Libraries.Service.ApplicationService
             return await _hearingdetailsRepository.FetchSingleEvidence(id);
         }
 
-
-
+        //public Task<bool> DeleteHphotofiledetails(int Id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -1,12 +1,12 @@
 ﻿@model Libraries.Model.Entity.Hearingdetails
-@await Component.InvokeAsync("PageHeader", new { pageName = "Hearing Details Letter" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Hearing Notice Details " })
 
 
 <div class="pt-3">
 
     <form asp-action="View" method="post" disabled="disbled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">View Letter</h3>
-
+        <h3 class="mb-3 d-flex">View Hearing Notice</h3>
+        <input type="hidden" asp-for="Id" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div id="LetterData" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
 
@@ -31,21 +31,25 @@
                             <tr>
 
                                 <td align="left">
-                                    No. EV/LM/SEZ/051(5)/K-1/31, CR Park/1997/DDA
+                                    No. -  @(Model.ReqProc == null ?  "" : Model.ReqProc.LetterReferenceNo == null ? "" : Model.ReqProc.LetterReferenceNo)
 
                                 </td>
                                 <td align="right">
-                                    Dated : <label class="floating-label" asp-for="HearingDate"> </label>
+                                    Dated : @DateTime.Now.ToString("dd-MMM-yyyy")
                                 </td>
                         </table>
                     </td>
                 </tr>
                 <tr>
                     <td align="left">
-                        <b> Smt.Rama Malick, </b> <br />
-                        <b> S/o Sh. G.D. Verma, </b> <br />
-                        <b> R/o E-905, Ground Floor,</b><br />
-                        <b>Chitranjan Park, New Delhi 110019 </b> <br />
+                        <b>To,</b>
+                        <b>
+                            @(Model.ReqProc == null ?  "" : Model.ReqProc.Allotment.Name == null ? "" : Model.ReqProc.Allotment.Name)
+                        </b> <br />
+                        <b>
+                            @(Model.ReqProc == null ?  "" : Model.ReqProc.Allotment.Address == null ? "" : Model.ReqProc.Allotment.Address)
+                        </b> <br />
+
                         <br />
                     </td>
                 </tr>
@@ -68,7 +72,7 @@
                         <td>
                             In connection with the notice under Section 4(1) of the Public Premises (Eviction of Unauthorised Occupants) Act, 1971
                             you are hereby directed that you may produce evidence in support of your objections to the notice and appear before the
-                            court of undersigned on  <label class="floating-label" asp-for="HearingDate"> </label> at  <label class="floating-label" asp-for="HearingTime"> </label>.
+                            court of undersigned on  @(Convert.ToDateTime(Model.HearingDate).ToString("dd-MMM-yyyy")) at  @Model.HearingTime.
                         </td>
                     </tr>
 
@@ -101,6 +105,7 @@
             <div class="col-md-12">
 
                 @Html.ActionLink("Back", "Index", "HearingDetails", null, new { @class = "btn btn-theme " })
+                <input type="submit" value="Print" class="btn btn-theme" id="btnPrint" />
             </div>
         </div>
 

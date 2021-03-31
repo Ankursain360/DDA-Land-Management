@@ -49,9 +49,8 @@ function GetDetails(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        letterReferenceNo: $('#txtFileNo').val(),
-        AllotmentNo: $('#txtReferenceNo').val(),
-        subject: $('#txtSubject').val(),
+        refno: ($('#txtRefNo').val()),
+        name: ($('#txtSocietyName').val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

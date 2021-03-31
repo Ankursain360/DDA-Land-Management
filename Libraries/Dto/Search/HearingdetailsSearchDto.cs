@@ -1,10 +1,14 @@
 ﻿using Dto.Common;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Dto.Search
 {
     public class HearingdetailsSeachDto : BaseSearchDto
     {
-        public string AllotmentId { get; set; }
+        public string refno { get; set; }
+        public string name { get; set; }
     }
 }
 

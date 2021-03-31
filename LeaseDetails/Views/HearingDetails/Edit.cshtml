@@ -138,7 +138,8 @@
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Documents" type="file" id="file" />
+                <input type="hidden" asp-for="DocumentPatth" />
+                <input class="floating-label-field floating-label-field--s3" asp-for="Photo" placeholder="Hearing Documents" type="file" id="file" />
                 <span class="text-danger"></span>
                 <label class="floating-label">Hearing Documents (if any)</label>
             </div>
@@ -169,7 +170,7 @@
             <div class="row pt-3">
                 <div class="col-md-12">
                     <input type="submit" value="Update" class="btn btn-theme " />
-                    <input value="Generate Letter" asp-action="View" class="btn btn-theme" type="submit"  id="btnGenerate"/>
+                    <input value="Generate Notice" asp-action="View" class="btn btn-theme" type="submit"  id="btnGenerate"  asp-route-id="@Model.Id"/>
 
                     @Html.ActionLink("Back", "Index", "HearingDetails", null, new { @class = "btn btn-theme " })
                 </div>

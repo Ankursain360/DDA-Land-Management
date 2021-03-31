@@ -10,6 +10,8 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IHearingdetailsService : IEntityService<Hearingdetails>
     {
+        
+        string GetDownload(int id);
         Task<bool> Delete(int id);
         Task<Hearingdetails> FetchSingleResult(int id);
         Task<bool> Update(int id, Hearingdetails hearingdetails);
@@ -19,9 +21,10 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Hearingdetails>> GetPagedHearingDetails(HearingdetailsSeachDto model);
         Task<bool> SaveHearingphotofiledetails(Hearingdetailsphotofiledetails hearingdetailsphotofiledetails);
         Task<Hearingdetailsphotofiledetails> GetHphotofiledetails(int hid);
-        Task<bool> DeleteHphotofiledetails(int Id);
+        Task<Hearingdetails> FetchSingleHearingdetailswithReqProc(int? RequestId);
+      //  Task<bool> DeleteHphotofiledetails(int Id);
         Task<Requestforproceeding> FetchSingleResultReq(int id);
-        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
+       Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(HearingdetailsSeachDto model);
 
         Task<List<Allotmententry>> GetAllAllotment();
         Task<List<Honble>> GetAllHonble();

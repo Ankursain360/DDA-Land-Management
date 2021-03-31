@@ -8,14 +8,15 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IHearingdetailsRepository : IGenericRepository<Hearingdetails>
     {
-        Task<bool> DeleteHphotofiledetails(int Id);
+        string GetDownload(int id);
+       // Task<bool> DeleteHphotofiledetails(int Id);
         Task<Hearingdetailsphotofiledetails> GetHphotofiledetails(int hid);
         Task<bool> SaveHearingphotofiledetails(Hearingdetailsphotofiledetails hearingdetailsphotofiledetails);
         Task<List<Requestforproceeding>> GetAllRequestforproceeding();
         Task<List<Leasenoticegeneration>> GetAllLeasenoticegeneration(int? AppId);
         Task<PagedResult<Hearingdetails>> GetPagedHearingDetails(HearingdetailsSeachDto model);
-        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
-
+        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(HearingdetailsSeachDto model);
+        Task<Hearingdetails> FetchSingleHearingdetailswithReqProc(int? RequestId);
         Task<List<Allotmententry>> GetAllAllotment();
         Task<List<Honble>> GetAllHonble();
 

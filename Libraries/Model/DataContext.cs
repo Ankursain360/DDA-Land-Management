@@ -299,7 +299,7 @@ namespace Libraries.Model
         public virtual DbSet<Leasepaymenttype> Leasepaymenttype { get; set; }
         public virtual DbSet<Judgement> Judgement { get; set; }
         public virtual DbSet<Leasenoticegeneration> Leasenoticegeneration { get; set; }
-        public virtual DbSet<Evidancedoc> Evidancedoc { get; set; }
+       
         public virtual DbSet<Hearingdetails> Hearingdetails { get; set; }
         public virtual DbSet<Hearingdetailsphotofiledetails> Hearingdetailsphotofiledetails { get; set; }
         public virtual DbSet<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }

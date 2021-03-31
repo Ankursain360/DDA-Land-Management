@@ -41,7 +41,7 @@ namespace LeaseDetails.Controllers
         {
             return View();
         }
-        public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] HearingdetailsSeachDto model)
         {
             var result = await _hearingdetailsService.GetPagedRequestForProceeding(model);
 

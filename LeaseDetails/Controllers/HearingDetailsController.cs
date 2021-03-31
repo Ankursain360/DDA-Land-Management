@@ -17,6 +17,8 @@ using LeaseDetails.Filters;
 using Core.Enum;
 using System.Data;
 using System;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace LeaseDetails.Controllers
 {
@@ -70,7 +72,7 @@ namespace LeaseDetails.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] HearingdetailsSeachDto model)
         {
             var result = await _hearingdetailsService.GetPagedRequestForProceeding(model);
 
@@ -172,25 +174,7 @@ namespace LeaseDetails.Controllers
         {
             return View();
         }
-        //public async Task<IActionResult> DownloadJudgementFile(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    Hearingdetailsphotofiledetails Data = await _hearingdetailsService..FetchSingleResult(Id);
-        //   // string filename = Data.FilePath;
-        //  //  return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
-        //}
-        //public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
-        //{
-        //    var Data = await _hearingdetailsService.FetchSingleReqDetails(id);
-        //    Data.HonbleList = await _hearingdetailsService.GetAllHonble();
-        //    Data.AllotmententryList = await _hearingdetailsService.GetAllAllotment();
-
-
-        //    return PartialView("_RequestForProceedingEvictionView", Data);
-        //}
-
-
-
+        
         public async Task<PartialViewResult> NoticeGenerationView(int id)
         {
             var Data = await _hearingdetailsService.FetchNoticeGenerationDetails(id);
@@ -234,7 +218,7 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _hearingdetailsService.FetchSingleResult(id);
-
+            ViewBag.ExistDocFile = Data.DocumentPatth;
             if (Data == null)
             {
                 return NotFound();
@@ -248,6 +232,7 @@ namespace LeaseDetails.Controllers
         //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Hearingdetails rate)
         {
+            ViewBag.ExistDocFile = rate.DocumentPatth;
 
             if (ModelState.IsValid)
             {
@@ -288,9 +273,44 @@ namespace LeaseDetails.Controllers
             }
             return View(rate);
         }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".txt", "text/plain"},
+                {".pdf", "application/pdf"},
+                {".doc", "application/vnd.ms-word"},
+                {".docx", "application/vnd.ms-word"},
+                {".xls", "application/vnd.ms-excel"},
+                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"},
+                {".csv", "text/csv"}
+            };
+        }
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+
+        public async Task<IActionResult> Download(int Id)
+        {
+            string filename = _hearingdetailsService.GetDownload(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _hearingdetailsService.FetchSingleResult(id);
+            var Data = await _hearingdetailsService.FetchSingleHearingdetailswithReqProc(id);
            
             if (Data == null)
             {
@@ -303,7 +323,7 @@ namespace LeaseDetails.Controllers
         {
             FileHelper file = new FileHelper();
             var Data = await _hearingdetailsService.FetchSingleResult(Id);
-            string path = targetPathHearingDetails + Data.DocumentPatth;
+            string path = targetPathHearingDetails +"//"+ Data.DocumentPatth;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }

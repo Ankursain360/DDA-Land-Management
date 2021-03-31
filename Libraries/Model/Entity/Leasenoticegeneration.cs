@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
     {
         public Leasenoticegeneration()
         {
-            Hearingdetails = new HashSet<Hearingdetails>();
+      //      Hearingdetails = new HashSet<Hearingdetails>();
         }
         public int RequestProceedingId { get; set; }
         public string NoticeReferenceNo { get; set; }
@@ -35,6 +35,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Leasenoticegeneration> LeaseNoticeGenerationList { get; set; }
         
-        public ICollection<Hearingdetails> Hearingdetails { get; set; }
+       // public ICollection<Hearingdetails> Hearingdetails { get; set; }
     }
 }
