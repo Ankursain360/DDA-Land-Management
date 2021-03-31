@@ -18,8 +18,11 @@ namespace Libraries.Model.Entity
         public string CurrentStatus { get; set; }
         public string Document { get; set; }
         public byte? IsActive { get; set; }
-       
 
+        [NotMapped]
+        public IFormFile File { get; set; }
         public Requestforproceeding RequestForProceeding { get; set; }
+        [NotMapped]
+        public List<UserBindDropdownDto> UserNameList { get; set; }
     }
 }
