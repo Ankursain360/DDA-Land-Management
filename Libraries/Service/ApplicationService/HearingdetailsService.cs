@@ -109,6 +109,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _hearingdetailsRepository.DeleteHphotofiledetails(Id);
         }
-        
+
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model)
+        {
+            return await _hearingdetailsRepository.GetPagedRequestLetterDetails(model);
+        }
     }
     }

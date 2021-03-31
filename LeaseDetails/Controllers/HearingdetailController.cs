@@ -35,50 +35,63 @@ namespace LeaseDetails.Controllers
             _hearingdetailsService = hearingdetailsService;
             _requestforproceedingService = requestforproceedingService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-
             return View();
         }
-        [HttpPost]
-        public async Task<PartialViewResult> ListReq([FromBody] RequestForProceedingSearchDto model)
-        {
-            var result = await _requestforproceedingService.GetPagedRequestForProceeding(model);
-
-            return PartialView("_ListReq", result);
-        }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] HearingdetailsSeachDto model)
+        public async Task<PartialViewResult> List([FromBody] LeaseHearingDetailsSearchDto model)
         {
-
-            var result = await _hearingdetailsService.GetPagedHearingDetails(model);
+            var result = await _hearingdetailsService.GetPagedRequestLetterDetails(model);
             return PartialView("_List", result);
         }
+        //public IActionResult Index()
+        //{
 
-       //   [AuthorizeContext(ViewAction.Add)]
+        //    return View();
+        //}
+        //[HttpPost]
+        //public async Task<PartialViewResult> ListReq([FromBody] RequestForProceedingSearchDto model)
+        //{
+        //    var result = await _requestforproceedingService.GetPagedRequestForProceeding(model);
+
+        //    return PartialView("_ListReq", result);
+        //}
+
+        //[HttpPost]
+        //public async Task<PartialViewResult> List([FromBody] HearingdetailsSeachDto model)
+        //{
+
+        //    var result = await _hearingdetailsService.GetPagedHearingDetails(model);
+        //    return PartialView("_List", result);
+        //}
+
+        //   [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
-            if (id == 0)
-            {
+            //if (id == 0)
+            //{
                 Hearingdetails groundrent = new Hearingdetails();
                 groundrent.IsActive = 1;
                 groundrent.CreatedBy = SiteContext.UserId;
                 // groundrent.PropertyTypeList = await _groundRentService.GetAllPropertyTypeList();
                 return View(groundrent);
 
-            }
-            else
-            { var Data = await _hearingdetailsService.FetchSingleResultReq(id);
+            //}
+            //else
+            //{ var Data = await _hearingdetailsService.FetchSingleResultReq(id);
 
-                if (Data == null)
-                {
-                    return NotFound();
+            //    if (Data == null)
+            //    {
+            //        return NotFound();
                     
-                }
-                return View(Data);
+            //    }
+            //    return View(Data);
 
-            }
+            //}
 
             
 

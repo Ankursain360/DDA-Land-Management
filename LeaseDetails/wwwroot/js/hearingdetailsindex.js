@@ -1,77 +1,140 @@
-﻿var currentPageNumber = 1;
-var currentPageSize = 5;
-var sortOrder = 0;//default Ascending 
+﻿//var currentPageNumber = 1;
+//var currentPageSize = 5;
+//var sortOrder = 0;//default Ascending 
 
+
+//$(document).ready(function () {
+//    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+//});
+
+//$("#btnSearch").click(function () {
+
+//    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+//});
+
+
+//$("#btnReset").click(function () {
+//    $('#txtName').val('');
+//    $('#txtCode').val('');
+//    $('#txtFileNo').val('')
+//    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+//});
+
+//$("#btnAscending").click(function () {
+//    $("#btnDescending").removeClass("active");
+//    $("#btnAscending").addClass("active");
+//    sortOrder = 1;//for Ascending
+//    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+//});
+
+
+//$("#btnDescending").click(function () {
+//    $("#btnAscending").removeClass("active");
+//    $("#btnDescending").addClass("active");
+//    sortOrder = 2;//for Descending
+//    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+//});
+
+//function GetDivision(pageNumber, pageSize, order) {
+
+//    var param = GetSearchParam(pageNumber, pageSize, order);
+//    HttpPost(`/Hearingdetail/ListReq`, 'html', param, function (response) {
+//        console.log(response);
+
+//        $('#divScheme').html("");
+//        $('#divScheme').html(response);
+//    });
+
+
+//}
+
+//function GetSearchParam(pageNumber, pageSize, sortOrder) {
+
+//    var model = {
+//        letterReferenceNo: $('#txtFileNo').val(),
+//        AllotmentNo: $('#txtReferenceNo').val(),
+//        subject: $('#txtSubject').val(),
+//        sortBy: $("#ddlSort").children("option:selected").val(),
+//        sortOrder: parseInt(sortOrder),
+//        pageSize: parseInt(pageSize),
+//        pageNumber: parseInt(pageNumber)
+//    }
+//    console.log(model);
+//    return model;
+//}
+
+
+//function onPaging(pageNo) {
+//    GetDivision(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+//    currentPageNumber = pageNo;
+//}
+
+//function onChangePageSize(pageSize) {
+//    GetDivision(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+//    currentPageSize = pageSize;
+//}
+
+var currentPageNumber = 1;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
-});
-
-
-$("#btnReset").click(function () {
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtFileNo').val('')
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
-
 
 $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+$("#btnReset").click(function () {
+    $('#txtRefNo').val('');
+    $('#txtSocietyName').val('');
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDivision(pageNumber, pageSize, order) {
-
-    var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Hearingdetail/ListReq`, 'html', param, function (response) {
-        console.log(response);
-
-        $('#divScheme').html("");
-        $('#divScheme').html(response);
+function GetDetails(pageNumber, pageSize, sortOrder) {
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
+    HttpPost(`/Hearingdetail/List`, 'html', param, function (response) {
+        $('#divTable').html("");
+        $('#divTable').html(response);
     });
-
-
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-
     var model = {
-        letterReferenceNo: $('#txtFileNo').val(),
-        AllotmentNo: $('#txtReferenceNo').val(),
-        subject: $('#txtSubject').val(),
+        refno: ($('#txtRefNo').val()),
+        name: ($('#txtSocietyName').val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber)
+        pageSize: pageSize,
+        pageNumber: pageNumber
     }
-    console.log(model);
     return model;
 }
 
-
 function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
-
 
