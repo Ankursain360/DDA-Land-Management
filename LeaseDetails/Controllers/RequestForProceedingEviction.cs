@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -12,8 +11,6 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-
-
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Microsoft.AspNetCore.Http;
@@ -25,125 +22,111 @@ namespace LeaseDetails.Controllers
 {
     public class RequestForProceedingEviction : BaseController
     {
-        private readonly IRequestforproceedingService _undersection4PlotService;
+        private readonly IRequestforproceedingService _requestforproceedingService;
+        private readonly ICancellationEntryService _cancellationEntryService;
         public IConfiguration _configuration;
-        string DemandletterFilePath = string.Empty;
-        string NOCFilePath = string.Empty;
-        string CancellationOrderFilePath = string.Empty;
 
-        public RequestForProceedingEviction(IRequestforproceedingService undersection4PlotService, IConfiguration configuration)
+        string targetPathDemandLetter = "";
+        string targetPathNOC = "";
+        string targetPathCanellationOrder = "";
+        public RequestForProceedingEviction(IRequestforproceedingService requestforproceedingService,
+            ICancellationEntryService cancellationEntryService, 
+            IConfiguration configuration)
         {
             _configuration = configuration;
-            _undersection4PlotService = undersection4PlotService;
+            _cancellationEntryService = cancellationEntryService;
+            _requestforproceedingService = requestforproceedingService;
+            targetPathDemandLetter = _configuration.GetSection("FilePaths:CancellationEntry:DemandletterFilePath").Value.ToString();
+            targetPathNOC = _configuration.GetSection("FilePaths:CancellationEntry:NOCFilePath").Value.ToString();
+            targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
         }
         public async Task<IActionResult> Index()
         {
             var Msg = TempData.Peek("Message");
             if (Msg != null)
                 ViewBag.Message = Msg;
-            var list = await _undersection4PlotService.GetAllRequestForProceeding();
+            var list = await _requestforproceedingService.GetAllRequestForProceeding();
             return View(list);
         }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
         {
-            var result = await _undersection4PlotService.GetPagedRequestForProceeding(model);
+            var result = await _requestforproceedingService.GetPagedRequestForProceeding(model);
 
             return PartialView("_List", result);
         }
 
         public async Task<IActionResult> Create()
         {
-            Requestforproceeding undersection4plot = new Requestforproceeding();
-            undersection4plot.IsActive = 1;
-            undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
-            undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-            undersection4plot.UserNameList = await _undersection4PlotService.BindUsernameNameList();
-
-
-
-            return View(undersection4plot);
+            Requestforproceeding requestforproceeding = new Requestforproceeding();
+            requestforproceeding.IsActive = 1;
+            requestforproceeding.HonbleList = await _requestforproceedingService.GetAllHonble();
+            requestforproceeding.CancellationList = await _requestforproceedingService.GetCancellationListData();
+            requestforproceeding.UserNameList = await _requestforproceedingService.BindUsernameNameList();
+            return View(requestforproceeding);
         }
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Requestforproceeding undersection4plot)
+        public async Task<IActionResult> Create(Requestforproceeding requestforproceeding)
         {
-
-
-
-
-            DemandletterFilePath = _configuration.GetSection("FilePaths:Demandletter:DemandletterFilePath").Value.ToString();
-            NOCFilePath = _configuration.GetSection("FilePaths:NOC:NOCFilePath").Value.ToString();
-            CancellationOrderFilePath = _configuration.GetSection("FilePaths:CancellationOrder:CancellationOrderFilePath").Value.ToString();
-
             try
             {
-                undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-                undersection4plot.UserNameList = await _undersection4PlotService.BindUsernameNameList();
-
-                undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
+                requestforproceeding.CancellationList = await _requestforproceedingService.GetCancellationListData();
+                requestforproceeding.UserNameList = await _requestforproceedingService.BindUsernameNameList();
+                requestforproceeding.HonbleList = await _requestforproceedingService.GetAllHonble();
 
                 if (ModelState.IsValid)
                 {
                     FileHelper fileHelper = new FileHelper();
-                    if (undersection4plot.DemandLetterPhoto != null)
+                    if (requestforproceeding.DemandLetterPhoto != null)
                     {
-                        undersection4plot.DemandLetter = fileHelper.SaveFile(DemandletterFilePath, undersection4plot.DemandLetterPhoto);
+                        requestforproceeding.DemandLetter = fileHelper.SaveFile1(targetPathDemandLetter, requestforproceeding.DemandLetterPhoto);
                     }
-
-
-                    if (undersection4plot.NocPhoto != null)
+                    if (requestforproceeding.NocPhoto != null)
                     {
-                        undersection4plot.Noc = fileHelper.SaveFile(NOCFilePath, undersection4plot.NocPhoto);
+                        requestforproceeding.Noc = fileHelper.SaveFile1(targetPathNOC, requestforproceeding.NocPhoto);
                     }
-
-                    if (undersection4plot.CancellationPhoto != null)
+                    if (requestforproceeding.CancellationPhoto != null)
                     {
-                        undersection4plot.CancellationOrder = fileHelper.SaveFile(CancellationOrderFilePath, undersection4plot.CancellationPhoto);
+                        requestforproceeding.CancellationOrder = fileHelper.SaveFile1(targetPathCanellationOrder, requestforproceeding.CancellationPhoto);
                     }
+                    requestforproceeding.CreatedBy = SiteContext.UserId;
 
-
-
-                    undersection4plot.CreatedBy = SiteContext.UserId;
-              
-                    var result = await _undersection4PlotService.Create(undersection4plot);
+                    var result = await _requestforproceedingService.Create(requestforproceeding);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4PlotService.GetAllRequestForProceeding();
+                        var list = await _requestforproceedingService.GetAllRequestForProceeding();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4plot);
+                        return View(requestforproceeding);
                     }
-            }
+                }
                 else
-            {
-                return View(undersection4plot);
+                {
+                    return View(requestforproceeding);
+                }
             }
-        }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(undersection4plot);
+                return View(requestforproceeding);
             }
         }
 
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _undersection4PlotService.FetchSingleResult(id);
-            Data.HonbleList = await _undersection4PlotService.GetAllHonble();
-            Data.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-            Data.UserNameList = await _undersection4PlotService.BindUsernameNameList();
+            var Data = await _requestforproceedingService.FetchSingleResult(id);
+            Data.HonbleList = await _requestforproceedingService.GetAllHonble();
+            Data.CancellationList = await _requestforproceedingService.GetCancellationListData();
+            Data.UserNameList = await _requestforproceedingService.BindUsernameNameList();
 
 
             if (Data == null)
@@ -157,78 +140,62 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Requestforproceeding undersection4plot)
+        public async Task<IActionResult> Edit(int id, Requestforproceeding requestforproceeding)
         {
-            undersection4plot.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-            undersection4plot.UserNameList = await _undersection4PlotService.BindUsernameNameList();
+            requestforproceeding.CancellationList = await _requestforproceedingService.GetCancellationListData();
+            requestforproceeding.UserNameList = await _requestforproceedingService.BindUsernameNameList();
+            requestforproceeding.HonbleList = await _requestforproceedingService.GetAllHonble();
 
-            undersection4plot.HonbleList = await _undersection4PlotService.GetAllHonble();
+            FileHelper fileHelper = new FileHelper();
+            if (requestforproceeding.DemandLetterPhoto != null)
+            {
+                requestforproceeding.DemandLetter = fileHelper.SaveFile1(targetPathDemandLetter, requestforproceeding.DemandLetterPhoto);
+            }
+            if (requestforproceeding.NocPhoto != null)
+            {
+                requestforproceeding.Noc = fileHelper.SaveFile1(targetPathNOC, requestforproceeding.NocPhoto);
+            }
+            if (requestforproceeding.CancellationPhoto != null)
+            {
+                requestforproceeding.CancellationOrder = fileHelper.SaveFile1(targetPathCanellationOrder, requestforproceeding.CancellationPhoto);
+            }
 
-            DemandletterFilePath = _configuration.GetSection("FilePaths:Demandletter:DemandletterFilePath").Value.ToString();
-            NOCFilePath = _configuration.GetSection("FilePaths:NOC:NOCFilePath").Value.ToString();
-            CancellationOrderFilePath = _configuration.GetSection("FilePaths:CancellationOrder:CancellationOrderFilePath").Value.ToString();
-
-
-            //if (ModelState.IsValid)
-            //{
-
-                FileHelper fileHelper = new FileHelper();
-                if (undersection4plot.DemandLetterPhoto != null)
+            try
+            {
+                var result = await _requestforproceedingService.Update(id, requestforproceeding);
+                if (result == true)
                 {
-                    undersection4plot.DemandLetter = fileHelper.SaveFile(DemandletterFilePath, undersection4plot.DemandLetterPhoto);
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    var list = await _requestforproceedingService.GetAllRequestForProceeding();
+                    return View("Index", list);
                 }
-
-
-                if (undersection4plot.NocPhoto != null)
-                {
-                    undersection4plot.Noc = fileHelper.SaveFile(NOCFilePath, undersection4plot.NocPhoto);
-                }
-
-                if (undersection4plot.CancellationPhoto != null)
-                {
-                    undersection4plot.CancellationOrder = fileHelper.SaveFile(CancellationOrderFilePath, undersection4plot.CancellationPhoto);
-                }
-
-
-
-                try
-                {
-                   
-
-                    var result = await _undersection4PlotService.Update(id, undersection4plot);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4PlotService.GetAllRequestForProceeding();
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4plot);
-                    }
-                }
-                catch (Exception ex)
+                else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(undersection4plot);
+                    return View(requestforproceeding);
                 }
-        //}
-        //    else
-        //    {
-                return View(undersection4plot);
-  //  }
-}
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(requestforproceeding);
+            }
+            //}
+            //    else
+            //    {
+            return View(requestforproceeding);
+            //  }
+        }
 
 
 
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _undersection4PlotService.FetchSingleResult(id);
-            Data.HonbleList = await _undersection4PlotService.GetAllHonble();
-            Data.AllotmententryList = await _undersection4PlotService.GetAllAllotment();
-            Data.UserNameList = await _undersection4PlotService.BindUsernameNameList();
+            var Data = await _requestforproceedingService.FetchSingleResult(id);
+            Data.HonbleList = await _requestforproceedingService.GetAllHonble();
+            Data.CancellationList = await _requestforproceedingService.GetCancellationListData();
+            Data.UserNameList = await _requestforproceedingService.BindUsernameNameList();
 
 
             if (Data == null)
@@ -244,7 +211,7 @@ namespace LeaseDetails.Controllers
             try
             {
 
-                var result = await _undersection4PlotService.Delete(id);
+                var result = await _requestforproceedingService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -258,7 +225,7 @@ namespace LeaseDetails.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _undersection4PlotService.GetAllRequestForProceeding();
+            var list = await _requestforproceedingService.GetAllRequestForProceeding();
             return View("Index", list);
         }
 
@@ -267,8 +234,8 @@ namespace LeaseDetails.Controllers
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.DemandLetter;
+                var Data = await _cancellationEntryService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = targetPathDemandLetter + Data.DemandLetter;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
@@ -276,22 +243,21 @@ namespace LeaseDetails.Controllers
             {
 
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.DemandLetter;
+                var Data = await _cancellationEntryService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = targetPathDemandLetter + Data.DemandLetter;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
 
             }
         }
-
 
         public async Task<FileResult> ViewLetter1(int Id)
         {
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.Noc;
+                var Data = await _cancellationEntryService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = targetPathNOC + Data.Noc;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
@@ -299,22 +265,20 @@ namespace LeaseDetails.Controllers
             {
 
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.Noc;
+                var Data = await _cancellationEntryService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = targetPathNOC + Data.Noc;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
 
             }
         }
-
-
         public async Task<FileResult> ViewLetter2(int Id)
         {
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.CancellationOrder;
+                var Data = await _cancellationEntryService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = targetPathCanellationOrder + Data.CancellationOrder;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
@@ -322,14 +286,20 @@ namespace LeaseDetails.Controllers
             {
 
                 FileHelper file = new FileHelper();
-                var Data = await _undersection4PlotService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.CancellationOrder;
+                var Data = await _cancellationEntryService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = targetPathCanellationOrder + Data.CancellationOrder;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
 
             }
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetRelativeData(int? CancellationId)
+        {
+            CancellationId = CancellationId ?? 0;
+            return Json(await _requestforproceedingService.FetchCancellationDetailsDetails(Convert.ToInt32(CancellationId)));
+        }
 
 
 

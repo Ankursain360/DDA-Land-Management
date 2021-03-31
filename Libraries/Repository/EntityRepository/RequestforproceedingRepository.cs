@@ -220,9 +220,22 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-
-
-
-
+        public async Task<List<Cancellationentry>> GetCancellationListData()
+        {
+            return await _dbContext.Cancellationentry
+                                    .Include(x => x.Allotment)
+                                    .Include(x => x.Allotment.Application)
+                                    .Where(x => x.IsActive == 1)
+                                    .ToListAsync();
+        }
+        public async Task<Cancellationentry> FetchCancellationDetailsDetails(int CancellationId)
+        {
+            return await _dbContext.Cancellationentry
+                                    .Include(x => x.Allotment)
+                                    .Include(x => x.Allotment.Application)
+                                    .Include(x => x.Allotment.LeasePurposesType)
+                                    .Where(x => x.Id == CancellationId)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

@@ -9,7 +9,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LeasePurposesTypeId" asp-items="@(new SelectList(Model.LeasePurposeList, "Id","PurposeUse"))"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="LeasePurposesTypeId" asp-items="@(new SelectList(Model.LeasePurposeList, "Id","PurposeUse"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
                         <option disabled="disabled" selected value="">Select</option>
 
@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LeaseSubPurposeId" asp-items="@(new SelectList(Model.LeaseSubPurposeList, "Id","SubPurposeUse"))">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="LeaseSubPurposeId" asp-items="@(new SelectList(Model.LeaseSubPurposeList, "Id","SubPurposeUse"))">
                         <option value="">--Select-- </option>
                     </select>
 
@@ -41,7 +41,7 @@
                     <input disabled asp-for="DocumentCharge" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="DocumentCharge" class="text-danger"></span>
-                    <label class="floating-label">Premium Rate   </label>
+                    <label class="floating-label">Document Charge   </label>
                 </div>
             </div>
         </div>

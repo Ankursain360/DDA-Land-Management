@@ -113,7 +113,13 @@ namespace Libraries.Service.ApplicationService
             return await _requestRepository.GetPagedRequestForProceeding(model);
         }
 
-
-
+        public async Task<List<Cancellationentry>> GetCancellationListData()
+        {
+            return await _requestRepository.GetCancellationListData();
+        }
+        public async Task<Cancellationentry> FetchCancellationDetailsDetails(int CancellationId)
+        {
+            return await _requestRepository.FetchCancellationDetailsDetails(CancellationId);
+        }
     }
 }

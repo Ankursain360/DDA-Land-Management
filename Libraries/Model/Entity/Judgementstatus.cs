@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Libraries.Model.Entity
 {
@@ -15,8 +16,10 @@ namespace Libraries.Model.Entity
             Judgement = new HashSet<Judgement>();
         }
 
-       
+        [Required(ErrorMessage = "Status is mandatory")]
         public string Status { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
        
 

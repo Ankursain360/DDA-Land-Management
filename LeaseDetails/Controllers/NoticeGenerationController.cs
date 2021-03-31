@@ -29,15 +29,20 @@ namespace LeaseDetails.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IRequestforproceedingService _requestforproceedingService;
+        private readonly ICancellationEntryService _cancellationEntryService;
         private readonly IHostingEnvironment _hostingEnvironment;
 
         string targetPathNotice = "";
+        string targetPathDemandLetter = "";
+        string targetPathNOC = "";
+        string targetPathCanellationOrder = "";
         public NoticeGenerationController(INoticeGenerationService noticeGenerationService,
             ILeaseHearingDetailsService leaseHearingDetailsService,
             IConfiguration configuration,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IRequestforproceedingService requestforproceedingService,
-            IHostingEnvironment en)
+            IHostingEnvironment en,
+            ICancellationEntryService cancellationEntryService )
         {
             _noticeGenerationService = noticeGenerationService;
             _leaseHearingDetailsService = leaseHearingDetailsService;
@@ -46,7 +51,11 @@ namespace LeaseDetails.Controllers
             _approvalproccessService = approvalproccessService;
             _requestforproceedingService = requestforproceedingService;
             _hostingEnvironment = en;
+            _cancellationEntryService = cancellationEntryService;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
+            targetPathDemandLetter = _configuration.GetSection("FilePaths:CancellationEntry:DemandletterFilePath").Value.ToString();
+            targetPathNOC = _configuration.GetSection("FilePaths:CancellationEntry:NOCFilePath").Value.ToString();
+            targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
         }
 
 
@@ -148,7 +157,7 @@ namespace LeaseDetails.Controllers
                         ViewBag.DataLetter = Body;
                         ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
                         ViewBag.PrimaryId = 0;
-                        return View("Create",emptyData);
+                        return View("Create", emptyData);
                     }
                     else
                     {
@@ -227,7 +236,7 @@ namespace LeaseDetails.Controllers
         {
             var Data = await _requestforproceedingService.FetchSingleResult(id);
             Data.HonbleList = await _requestforproceedingService.GetAllHonble();
-            Data.AllotmententryList = await _requestforproceedingService.GetAllAllotment();
+            Data.CancellationList = await _requestforproceedingService.GetCancellationListData();
             Data.UserNameList = await _requestforproceedingService.BindUsernameNameList();
 
             return PartialView("_RequestForProceedingEvictionView", Data);
@@ -235,8 +244,8 @@ namespace LeaseDetails.Controllers
         public async Task<FileResult> ViewLetter(int Id)
         {
             FileHelper file = new FileHelper();
-            var Data = await _requestforproceedingService.FetchSingleResult(Id);
-            string targetPhotoPathLayout = Data.DemandLetter;
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathDemandLetter + Data.DemandLetter;
             byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
         }
@@ -244,42 +253,19 @@ namespace LeaseDetails.Controllers
 
         public async Task<FileResult> ViewLetter1(int Id)
         {
-            try
-            {
-                FileHelper file = new FileHelper();
-                var Data = await _requestforproceedingService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.Noc;
-                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
-            }
-            catch (Exception ex)
-            {
-
-                FileHelper file = new FileHelper();
-                var Data = await _requestforproceedingService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.Noc;
-                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
-            }
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathNOC + Data.Noc;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
         }
         public async Task<FileResult> ViewLetter2(int Id)
         {
-            try
-            {
-                FileHelper file = new FileHelper();
-                var Data = await _requestforproceedingService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.CancellationOrder;
-                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
-            }
-            catch (Exception ex)
-            {
-                FileHelper file = new FileHelper();
-                var Data = await _requestforproceedingService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.CancellationOrder;
-                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
-            }
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathCanellationOrder + Data.CancellationOrder;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
         }
         #endregion
 
