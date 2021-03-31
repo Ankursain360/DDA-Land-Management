@@ -21,5 +21,6 @@ namespace Libraries.Service.IApplicationService
         Task<Hearingdetailsphotofiledetails> GetHphotofiledetails(int hid);
         Task<bool> DeleteHphotofiledetails(int Id);
         Task<Requestforproceeding> FetchSingleResultReq(int id);
+        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
     }
 }
