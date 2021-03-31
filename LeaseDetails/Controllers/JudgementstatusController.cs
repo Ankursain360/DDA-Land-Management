@@ -28,6 +28,7 @@ namespace LeaseDetails.Controllers
             var list = _JudgementstatusService.GetAllJudgementstatus();
             return View();
         }
+
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] JudgementstatusSearchDto model)
         {
