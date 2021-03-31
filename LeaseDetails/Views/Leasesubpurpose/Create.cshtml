@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Leasesubpurpose
-@await Component.InvokeAsync("PageHeader", new { pageName = "Subpurpose" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Sub Purpose" })
 
 <div class="pt-3">
 
@@ -15,7 +15,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="PurposeUseId" class="text-danger"></span>
-                    <label asp-for="PurposeUseId" class="floating-label">PurposeUse </label>
+                    <label asp-for="PurposeUseId" class="floating-label">Purpose Use </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -23,7 +23,7 @@
                     <input asp-for="SubPurposeUse" type="text"
                            class="floating-label-field floating-label-field--s3" limit="500" />
                     <span asp-validation-for="SubPurposeUse" class="text-danger"></span>
-                    <label class="floating-label">SubPurposeUse </label>
+                    <label class="floating-label">Sub Purpose Use </label>
                 </div>
             </div>
         </div>
