@@ -11,6 +11,10 @@ namespace Libraries.Model.Entity
 {
     public class Cancellationentry : AuditableEntity<int>
     {
+        public Cancellationentry()
+        {
+            Requestforproceeding = new HashSet<Requestforproceeding>();
+        }
 
         [Required(ErrorMessage = "File No is mandatory ")]
         public int? AllotmentId { get; set; }
@@ -51,5 +55,6 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile CancellationPhoto { get; set; }
+        public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
     }
 }
