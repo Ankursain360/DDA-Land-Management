@@ -25,6 +25,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId);
         Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
         Task<List<Hearingdetails>> FetchHearingDetails(int? RequestId);
+        Task<Actiontakenbydda> FetchActionTakenByDDADetails(int? RequestId);
         Task<bool> Update(int id, Judgement judge);
         Task<bool> Create(Judgement judge);
         Task<Judgement> FetchSingleResult(int id);

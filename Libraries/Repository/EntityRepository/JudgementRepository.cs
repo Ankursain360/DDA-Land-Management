@@ -236,7 +236,17 @@ namespace Libraries.Repository.EntityRepository
                                        .ToListAsync();
             return data;
         }
+        public async Task <Actiontakenbydda> FetchActionTakenByDDADetails(int? RequestId)
+        {
+            var data = await _dbContext.Actiontakenbydda
+                                       .Include(x => x.RequestForProceeding)
+                                       .Where(x => x.RequestForProceedingId == RequestId)
+                                       .FirstOrDefaultAsync();
+            return data;
+        }
+       
         
+
         //****  For Judgement page  ********
 
         public async Task<List<Judgement>> GetAllJudgement()

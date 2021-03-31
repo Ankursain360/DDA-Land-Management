@@ -74,6 +74,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _judgementRepository.FetchHearingDetails(RequestId);
         }
+
+        public async Task <Actiontakenbydda> FetchActionTakenByDDADetails(int? RequestId)
+        {
+            return await _judgementRepository.FetchActionTakenByDDADetails(RequestId);
+        }
+
+
+
         public async Task<bool> Update(int id, Judgement judge)
         {
            

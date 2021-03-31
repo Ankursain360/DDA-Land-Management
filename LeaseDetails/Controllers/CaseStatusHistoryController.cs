@@ -36,10 +36,7 @@ namespace LeaseDetails.Controllers
 
             if (Data == null)
             {
-                //Judgement model = new Judgement();
-                //model.UserNameList = await _judgementService.BindUsernameNameList();
-                //model.JudgementStatusList = await _judgementService.GetJudgementStatusList();
-                //model.RequestForProceedingId = id;
+                
                 return View();
             }
             else
@@ -56,6 +53,14 @@ namespace LeaseDetails.Controllers
             var result = await _judgementService.GetPagedRequestForProceeding(model);
 
             return PartialView("_List", result);
+        }
+
+        public async Task<IActionResult> DownloadJudgementFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Judgement Data = await _judgementService.FetchSingleResult(Id);
+            string filename = Data.FilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
         {
@@ -106,6 +111,19 @@ namespace LeaseDetails.Controllers
             var Data = await _judgementService.FetchHearingDetails(id);
 
             return PartialView("_HearingDetails", Data);
+        }
+        public async Task<PartialViewResult> ActionTakenByDDAView(int id)
+        {
+            var Data = await _judgementService.FetchActionTakenByDDADetails(id);
+
+            return PartialView("_ActiontakenbyDDA", Data);
+        }
+        public async Task<IActionResult> DownloadActionFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Actiontakenbydda Data = await _judgementService.FetchActionTakenByDDADetails(Id);
+            string filename = Data.Document;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
     }
 }
