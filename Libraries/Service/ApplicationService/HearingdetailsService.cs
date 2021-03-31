@@ -54,12 +54,11 @@ namespace Libraries.Service.ApplicationService
             Hearingdetails model = result.FirstOrDefault();
 
             model.Attendee = hearingdetails.Attendee;
-            model.NoticeGenId = hearingdetails.NoticeGenId;
-            model.EvidanceDocId = hearingdetails.EvidanceDocId;
+            
             model.HearingDate = hearingdetails.HearingDate;
             model.HearingTime = hearingdetails.HearingTime;
             model.HearingVenue = hearingdetails.HearingVenue;
-            model.ReqProcId = hearingdetails.ReqProcId;
+            
             model.Remark = hearingdetails.Remark;
             
             model.ModifiedDate = DateTime.Now;
@@ -109,6 +108,47 @@ namespace Libraries.Service.ApplicationService
         {
             return await _hearingdetailsRepository.DeleteHphotofiledetails(Id);
         }
-        
+
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
+        {
+            return await _hearingdetailsRepository.GetPagedRequestForProceeding(model);
+        }
+        public async Task<List<Allotmententry>> GetAllAllotment()
+        {
+            List<Allotmententry> List = await _hearingdetailsRepository.GetAllAllotment();
+            return List;
+        }
+
+        public async Task<List<Honble>> GetAllHonble()
+        {
+            List<Honble> List = await _hearingdetailsRepository.GetAllHonble();
+            return List;
+        }
+        public async Task<Requestforproceeding> FetchSingleReqDetails(int? RequestId)
+        {
+            return await _hearingdetailsRepository.FetchSingleReqDetails(RequestId);
+        }
+        public async Task<List<Leasenoticegeneration>> FetchNoticeGenerationDetails(int? RequestId)
+        {
+            return await _hearingdetailsRepository.FetchNoticeGenerationDetails(RequestId);
+        }
+
+        public async Task<Leasenoticegeneration> FetchSingleNotice(int? id)
+        {
+            return await _hearingdetailsRepository.FetchSingleNotice(id);
+        }
+
+        public async Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId)
+        {
+            return await _hearingdetailsRepository.FetchAllotteeEvidenceDetails(RequestId);
+        }
+
+        public async Task<Allotteeevidenceupload> FetchSingleEvidence(int? id)
+        {
+            return await _hearingdetailsRepository.FetchSingleEvidence(id);
+        }
+
+
+
     }
-    }
+}

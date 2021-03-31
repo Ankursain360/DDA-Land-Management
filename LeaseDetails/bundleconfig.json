@@ -196,5 +196,11 @@
     "inputFiles": [
       "wwwroot/js/requestforproceedingindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/hearingdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/hearingdetailsindex.js"
+    ]
   }
 ]

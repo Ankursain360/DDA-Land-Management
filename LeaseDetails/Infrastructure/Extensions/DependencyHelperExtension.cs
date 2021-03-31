@@ -95,6 +95,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IAllotteeEvidenceUploadService, AllotteeEvidenceUploadService>();
             services.AddScoped<ILeasepurposeService, LeasepurposeService>();
             services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
+            services.AddScoped<IHearingdetailsService, HearingdetailsService>();
 
 
 

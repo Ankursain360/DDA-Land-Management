@@ -1,30 +1,31 @@
-﻿var currentPageNumber = 1;
+﻿
+var currentPageNumber = 1;
 var currentPageSize = 5;
-var sortOrder = 0;//default Ascending 
-
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
-
 $("#btnReset").click(function () {
+
     $('#txtName').val('');
     $('#txtCode').val('');
     $('#txtFileNo').val('')
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -32,24 +33,20 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
-
-function GetDivision(pageNumber, pageSize, order) {
-
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Hearingdetail/ListReq`, 'html', param, function (response) {
-        console.log(response);
-
-        $('#divScheme').html("");
-        $('#divScheme').html(response);
+    HttpPost(`/HearingDetails/List`, 'html', param, function (response) {
+        $('#divJudgementTable').html("");
+        $('#divJudgementTable').html(response);
     });
-
-
-}
+}2
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-
     var model = {
         letterReferenceNo: $('#txtFileNo').val(),
         AllotmentNo: $('#txtReferenceNo').val(),
@@ -58,20 +55,18 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
+
+
     }
-    console.log(model);
     return model;
 }
 
-
 function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
-
-
