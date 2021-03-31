@@ -57,6 +57,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ILeasesubpurposeRepository, LeasesubpurposeRepository>();
             services.AddScoped<ICancellationEntryRepository, CancellationEntryRepository>();
             services.AddScoped<ILeasedeedRepository, LeasedeedRepository>();
+            services.AddScoped<IActionTakenByDdaRepository, ActionTakenByDdaRepository>();
 
 
 
@@ -99,6 +100,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ICancellationEntryService, CancellationEntryService>();
             services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
             services.AddScoped<ILeasedeedService, LeasedeedService>();
+            services.AddScoped<IActiontakenbyddaService, ActiontakenbyddaService>();
 
 
 

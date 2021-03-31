@@ -1,6 +1,6 @@
 ﻿
 @model IEnumerable<Libraries.Model.Entity.Requestforproceeding>
-@await Component.InvokeAsync("PageHeader", new { pageName = "Decision Taken By DDA" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Case Status History" })
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
@@ -11,7 +11,7 @@
                     <label for="txtName" class="floating-label"> Reference Number</label>
                 </div>
             </div>
-           
+
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
@@ -34,7 +34,7 @@
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
                         <option value="LETTERREFNO">Letter Ref No</option>
-                        
+
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
@@ -62,8 +62,8 @@
             <div id="divJudgementTable">
 
 
-              
-               
+
+
             </div>
         </div>
 
@@ -73,9 +73,9 @@
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/judgementindex.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/judgementindex.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/casestatushistoryindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/casestatushistoryindex.min.js" asp-append-version="true"></script>
+</environment>

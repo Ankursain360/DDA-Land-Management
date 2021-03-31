@@ -80,6 +80,8 @@ namespace Libraries.Service.ApplicationService
             Judgement model = await _judgementRepository.FetchSingleResult(id);
             model.ForwardToUserId = judge.ForwardToUserId;
             model.FilePath = judge.FilePath;
+            model.JudgementStatusId = judge.JudgementStatusId;
+            model.Remarks = judge.Remarks;
             model.IsActive = 1;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = judge.ModifiedBy;

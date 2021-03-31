@@ -4,7 +4,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    
+
     GetJudgement(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -15,7 +15,7 @@ $("#btnSearch").click(function () {
 $("#btnReset").click(function () {
 
     $('#txtReferenceNo').val('');
-   
+
 
     GetJudgement(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -40,7 +40,7 @@ $('#ddlSort').change(function () {
 });
 function GetJudgement(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Judgement/List`, 'html', param, function (response) {
+    HttpPost(`/CaseStatusHistory/List`, 'html', param, function (response) {
         $('#divJudgementTable').html("");
         $('#divJudgementTable').html(response);
     });
@@ -49,7 +49,7 @@ function GetJudgement(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         letterReferenceNo: $('#txtReferenceNo').val(),
-       
+
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
