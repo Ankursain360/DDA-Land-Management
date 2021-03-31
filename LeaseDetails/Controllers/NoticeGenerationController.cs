@@ -51,7 +51,7 @@ namespace LeaseDetails.Controllers
             _approvalproccessService = approvalproccessService;
             _requestforproceedingService = requestforproceedingService;
             _hostingEnvironment = en;
-            _requestforproceedingService = requestforproceedingService;
+            _cancellationEntryService = cancellationEntryService;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
             targetPathDemandLetter = _configuration.GetSection("FilePaths:CancellationEntry:DemandletterFilePath").Value.ToString();
             targetPathNOC = _configuration.GetSection("FilePaths:CancellationEntry:NOCFilePath").Value.ToString();
