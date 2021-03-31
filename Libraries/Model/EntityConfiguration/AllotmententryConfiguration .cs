@@ -43,7 +43,7 @@ namespace Libraries.Model.EntityConfiguration
 
                 builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                builder.Property(e => e.DocumentCharges).HasColumnType("decimal(18,3)");
+                builder.Property(e => e.DocumentCharge).HasColumnType("decimal(18,3)");
 
                 builder.Property(e => e.GroundRate).HasColumnType("decimal(18,3)");
                 builder.Property(e => e.AmountGroundRate).HasColumnType("decimal(18,3)");

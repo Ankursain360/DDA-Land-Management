@@ -40,7 +40,7 @@ namespace Libraries.Model.Entity
         public decimal? AmountGroundRate { get; set; }
         public int? NoOfYears { get; set; }
         public decimal? GroundRate { get; set; }
-        public decimal? DocumentCharges { get; set; }
+        public decimal? DocumentCharge { get; set; }
         public int? LeasesTypeId { get; set; }
         public int? LeasePurposesTypeId { get; set; }
         public int? LeaseSubPurposeId { get; set; }
@@ -66,9 +66,9 @@ namespace Libraries.Model.Entity
         public string ContactNo { get; set; }
         [NotMapped]
         public decimal? LandAreaSqMt { get; set; }
-        [NotMapped]
+        //[NotMapped]
 
-        public decimal DocumentCharge { get; set; }
+        //public decimal DocumentCharge { get; set; }
         [NotMapped]
         public DateTime? PossessionTakenDate { get; set; }
 
