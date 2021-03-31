@@ -143,6 +143,7 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Allotmententry
                                     .Include(x => x.Application)
+                                    .Include(x => x.LeasePurposesType)
                                     .Where(x => x.Id == allottmentId)
                                     .FirstOrDefaultAsync();
         }

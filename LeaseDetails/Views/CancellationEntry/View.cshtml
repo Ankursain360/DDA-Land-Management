@@ -9,14 +9,9 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-
-                    <select class="floating-label-field floating-label-field--s3" onchange="get_socity()"
-                            asp-for="AllotmentId" disabled>
+                    <select class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.AllotmententryList, "Id","Application.RefNo"))" onchange="return GetOtherData(this.options[this.selectedIndex].value);"
+                            asp-for="AllotmentId">
                         <option selected disabled="disabled" value="">---Select---</option>
-                        @*@foreach (var item in Model.AllotmententryList)
-                        {
-                            <option value="@item.Id" data-id="@item.SocietyName,@item.PurposeName"> @item.LRefNo </option>
-                        }*@
                     </select>
                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label class="floating-label">File No</label>
@@ -168,7 +163,7 @@
 
                             <input disabled type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="NocPhoto" />
                             <label for="field-1" class="floating-label">NOC </label>
-                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter1" asp-route-id="@Model.Id
                    "> (View Existing Photo )</a>
                         }
                         else
@@ -196,7 +191,7 @@
 
                             <input disabled type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="CancellationPhoto" />
                             <label for="field-1" class="floating-label">NOC </label>
-                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter2" asp-route-id="@Model.Id
                    "> (View Existing Photo )</a>
                         }
                         else
