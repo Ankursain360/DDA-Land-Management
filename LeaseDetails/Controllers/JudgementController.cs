@@ -45,12 +45,14 @@ namespace LeaseDetails.Controllers
             {
                 Judgement model = new Judgement();
                 model.UserNameList = await _judgementService.BindUsernameNameList();
+                model.JudgementStatusList = await _judgementService.GetJudgementStatusList();
                 model.RequestForProceedingId = id;
                 return View(model);
             }
             else 
             { 
                 Data.UserNameList = await _judgementService.BindUsernameNameList();
+                Data.JudgementStatusList = await _judgementService.GetJudgementStatusList();
                 return View(Data);
             }
            
@@ -75,6 +77,7 @@ namespace LeaseDetails.Controllers
                         model.FilePath = fileHelper.SaveFile(Document, model.File);
                     }
                     model.UserNameList = await _judgementService.BindUsernameNameList();
+                    model.JudgementStatusList = await _judgementService.GetJudgementStatusList();
                     model.RequestForProceedingId = id;
                     model.Id = 0;
                     model.CreatedBy = SiteContext.UserId;
@@ -101,8 +104,8 @@ namespace LeaseDetails.Controllers
                         model.FilePath = fileHelper.SaveFile(Document, model.File);
                     }
                     model.UserNameList = await _judgementService.BindUsernameNameList();
-                  
-                   
+                    model.JudgementStatusList = await _judgementService.GetJudgementStatusList();
+
                     model.ModifiedBy = SiteContext.UserId;
                     model.IsActive = 1;
                     var result = await _judgementService.Update(id, model);

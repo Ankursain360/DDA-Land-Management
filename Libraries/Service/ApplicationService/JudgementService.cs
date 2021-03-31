@@ -80,6 +80,8 @@ namespace Libraries.Service.ApplicationService
             Judgement model = await _judgementRepository.FetchSingleResult(id);
             model.ForwardToUserId = judge.ForwardToUserId;
             model.FilePath = judge.FilePath;
+            model.JudgementStatusId = judge.JudgementStatusId;
+            model.Remarks = judge.Remarks;
             model.IsActive = 1;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = judge.ModifiedBy;
@@ -106,6 +108,12 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = 0;
             _judgementRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<List<Judgementstatus>> GetJudgementStatusList()
+        {
+            List<Judgementstatus> List = await _judgementRepository.GetJudgementStatusList();
+            return List;
         }
     }
 }

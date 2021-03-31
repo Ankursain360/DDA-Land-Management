@@ -10,19 +10,19 @@ using Libraries.Repository.Common;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface ICancellationEntryService : IEntityService<Requestforproceeding>
+    public interface ICancellationEntryService : IEntityService<Cancellationentry>
     {
         Task<List<Allotmententry>> GetAllAllotment();
         Task<List<Honble>> GetAllHonble();
 
-        Task<bool> Create(Requestforproceeding requestforproceeding);
-        Task<bool> Update(int id, Requestforproceeding scheme);
-        Task<List<Requestforproceeding>> GetAllRequestForProceeding();
-        Task<Requestforproceeding> FetchSingleResult(int id);
-        Task<List<Requestforproceeding>> GetRequestUsingRepo();
+        Task<bool> Create(Cancellationentry cancellationentry);
+        Task<bool> Update(int id, Cancellationentry scheme);
+        Task<List<Cancellationentry>> GetAllRequestForProceeding();
+        Task<Cancellationentry> FetchSingleResult(int id);
+        Task<List<Cancellationentry>> GetRequestUsingRepo();
         Task<bool> Delete(int id);
-        Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
+        Task<PagedResult<Cancellationentry>> GetPagedCancellationEntry(CancellationEntrySearchDto model);
         Task<List<UserBindDropdownDto>> BindUsernameNameList();
-
+        Task<Allotmententry> FetchAllottmentDetails(int v);
     }
 }

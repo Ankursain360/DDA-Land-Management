@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Judgement
-@await Component.InvokeAsync("PageHeader", new { pageName = "Judgement Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Decision Taken By DDA" })
 
 <div class="pt-3">
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
@@ -19,7 +19,7 @@
         <div id="RequestForProceedingEvictionDiv">
 
         </div>
-        
+
         <div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval1" role="button" aria-expanded="true"
@@ -71,7 +71,7 @@
                     <div id="HearingDetailsDiv">
 
                     </div>
-                    
+
 
                 </div>
             </div>
@@ -114,6 +114,27 @@
 
             </div>
 
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="JudgementStatusId" asp-items="@(new SelectList(Model.JudgementStatusList, "Id","Status"))">
+                        <option disabled="disabled" selected value="">Select</option>
+
+                    </select>
+                    <span asp-validation-for="JudgementStatusId" class="text-danger"></span>
+                    <label class="floating-label">Judgement Status</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label"> Remarks </label>
+                </div>
+            </div>
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">

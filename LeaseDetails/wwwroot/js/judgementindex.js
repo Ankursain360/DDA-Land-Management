@@ -4,7 +4,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    debugger;
+    
     GetJudgement(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -14,9 +14,8 @@ $("#btnSearch").click(function () {
 
 $("#btnReset").click(function () {
 
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtFileNo').val('')
+    $('#txtReferenceNo').val('');
+   
 
     GetJudgement(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -49,9 +48,8 @@ function GetJudgement(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        letterReferenceNo: $('#txtFileNo').val(),
-        AllotmentNo: $('#txtReferenceNo').val(),
-        subject: $('#txtSubject').val(),
+        letterReferenceNo: $('#txtReferenceNo').val(),
+       
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
