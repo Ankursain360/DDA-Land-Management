@@ -109,7 +109,9 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose()
         {
-            return await _dbContext.Leasesubpurpose.Include(x => x.LeasePurposesType).Where(x => x.IsActive == 1).ToListAsync();
+
+            List<Leasesubpurpose> leaseSubPurposeList = await _dbContext.Leasesubpurpose.Where(x => x.IsActive == 1).ToListAsync();
+            return leaseSubPurposeList;
         }
 
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
