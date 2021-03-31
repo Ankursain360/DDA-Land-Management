@@ -29,5 +29,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Judgement judge);
         Task<Judgement> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<List<Judgementstatus>> GetJudgementStatusList();
     }
 }

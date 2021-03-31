@@ -17,6 +17,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.ToTable("judgement", "lms");
 
+            builder.HasIndex(e => e.JudgementStatusId)
+                .HasName("fkjudgementstatus_idx");
+
             builder.HasIndex(e => e.RequestForProceedingId)
                 .HasName("fkreqProceedingId_idx");
 
@@ -25,6 +28,15 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.FilePath).HasColumnType("longtext");
 
             builder.Property(e => e.IsActive).HasDefaultValueSql("1");
+
+            builder.Property(e => e.Remarks)
+                .HasMaxLength(2000)
+                .IsUnicode(false);
+
+            builder.HasOne(d => d.JudgementStatus)
+                .WithMany(p => p.Judgement)
+                .HasForeignKey(d => d.JudgementStatusId)
+                .HasConstraintName("fkjudgementstatus");
 
             builder.HasOne(d => d.RequestForProceeding)
                 .WithMany(p => p.Judgement)

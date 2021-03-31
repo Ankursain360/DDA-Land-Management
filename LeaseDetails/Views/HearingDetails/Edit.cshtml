@@ -10,7 +10,7 @@
   
 
     <input type="hidden" asp-for="ReqProcId" id="RequestForProceedingId" />
-    <
+    
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div id="RequestForProceedingEvictionDiv">
 
@@ -96,7 +96,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Venue" asp-for="HearingTime" type="time" />
+                <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Venue" asp-for="HearingTime" type="time" id="txtHearingTime" />
                 <span class="text-danger"></span>
                 <label class="floating-label">Hearing Time  </label>
             </div>
@@ -143,17 +143,18 @@
                 <label class="floating-label">Hearing Documents (if any)</label>
             </div>
         </div>
-    </div>
-    <div class=" col-md-6">
-        <div class="floating-label-wrap">
-            <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-                <option value="1">Active</option>
-                <option value="0">Inactive</option>
-            </select>
-            <span class="text-danger"></span>
-            <label class="floating-label">Status </label>
+        <div class=" col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span class="text-danger"></span>
+                <label class="floating-label">Status </label>
+            </div>
         </div>
     </div>
+    
 
 
 
@@ -168,6 +169,7 @@
             <div class="row pt-3">
                 <div class="col-md-12">
                     <input type="submit" value="Update" class="btn btn-theme " />
+                    <input value="Generate Letter" class="btn btn-theme" id="btnGenerate"/>
 
                     @Html.ActionLink("Back", "Index", "HearingDetails", null, new { @class = "btn btn-theme " })
                 </div>

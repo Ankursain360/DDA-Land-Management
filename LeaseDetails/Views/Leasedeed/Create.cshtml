@@ -1,0 +1,80 @@
+﻿@model Libraries.Model.Entity.Leasedeed
+@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Deed" })
+<link href="~/css/PrintLabel.css" rel="stylesheet" />
+
+<div class="pt-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="AllotmentId" asp-items="@(new SelectList(Model.ApplicationList, "Id","Application.RefNo"))">
+                        <option disabled="disabled" selected value="">Select</option>
+                    </select>
+                    <span asp-validation-for="AllotmentId" class="text-danger"></span>
+                    <label asp-for="AllotmentId" class="floating-label">Application Reference No  </label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="pt-4" id="View">
+
+        </div>
+
+        <h3 class="my-3 d-flex sub-heading pt-4">Lease Deed</h3>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="LeaseDeedDate" placeholder="Name" type="date"
+                           class="floating-label-field floating-label-field--s3 " value="" />
+                    <span asp-validation-for="LeaseDeedDate" class="text-danger"></span>
+                    <label class="floating-label">Lease deed date   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                    <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                    <label for="field-1" class="floating-label"> Document </label>
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label"> Remarks </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "Leasedeed", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/leasedeed.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/leasedeed.min.js" asp-append-version="true"></script>
+</environment>

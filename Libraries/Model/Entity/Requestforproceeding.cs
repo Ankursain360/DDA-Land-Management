@@ -10,10 +10,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Libraries.Model.Entity
 {
-   public class Requestforproceeding : AuditableEntity<int>
+    public class Requestforproceeding : AuditableEntity<int>
     {
         public Requestforproceeding()
         {
+            Actiontakenbydda = new HashSet<Actiontakenbydda>();
             Allotteeevidenceupload = new HashSet<Allotteeevidenceupload>();
             Evidancedoc = new HashSet<Evidancedoc>();
             Hearingdetails = new HashSet<Hearingdetails>();
@@ -45,7 +46,7 @@ namespace Libraries.Model.Entity
         public int? UserId { get; set; }
         public string ProcedingLetter { get; set; }
         public int? IsGenerate { get; set; }
-        public int? IsUpload { get; set; }        
+        public int? IsUpload { get; set; }
         public int? IsSend { get; set; }
         public int? PendingAt { get; set; }
         public int? Status { get; set; }
@@ -89,11 +90,16 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
+        public ICollection<Actiontakenbydda> Actiontakenbydda { get; set; }
         public ICollection<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
         public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
 
+
+        public ICollection<Judgement> Judgement { get; set; }
         public ICollection<Evidancedoc> Evidancedoc { get; set; }
         public ICollection<Hearingdetails> Hearingdetails { get; set; }
-        public ICollection<Judgement> Judgement { get; set; }
+
+
+        
     }
 }

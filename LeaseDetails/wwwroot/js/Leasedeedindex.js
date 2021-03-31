@@ -4,21 +4,18 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetLeasedeed(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetLeasedeed(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
 
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtFileNo').val('')
+    $('#txtApplication').val('');
 
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetLeasedeed(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -26,7 +23,7 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetLeasedeed(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -34,40 +31,38 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetLeasedeed(currentPageNumber, currentPageSize, sortOrder);
 });
 $('#ddlSort').change(function () {
-    GetJudgement(currentPageNumber, currentPageSize, sortOrder);
+    GetLeasedeed(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetJudgement(pageNumber, pageSize, order) {
+function GetLeasedeed(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Judgement/List`, 'html', param, function (response) {
-        $('#divJudgementTable').html("");
-        $('#divJudgementTable').html(response);
+    HttpPost(`/Leasedeed/List`, 'html', param, function (response) {
+        $('#divLeasedeedTable').html("");
+        $('#divLeasedeedTable').html(response);
     });
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        letterReferenceNo: $('#txtFileNo').val(),
-        AllotmentNo: $('#txtReferenceNo').val(),
-        subject: $('#txtSubject').val(),
+
+        name: $('#txtApplication').val(),
+       
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
-
-
     }
     return model;
 }
 
 function onPaging(pageNo) {
-    GetJudgement(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetLeasedeed(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetJudgement(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetLeasedeed(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

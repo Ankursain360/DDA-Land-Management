@@ -45,13 +45,13 @@ namespace LeaseDetails.Controllers
             if (Data == null)
             {
                 Hearingdetails model = new Hearingdetails();
-               
+
                 model.ReqProcId = id;
                 return View(model);
             }
             else
             {
-                
+
                 return View(Data);
             }
 
@@ -62,69 +62,69 @@ namespace LeaseDetails.Controllers
         //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Hearingdetails model)
         {
-           // string Document = _configuration.GetSection("FilePaths:Judgement:Doc").Value.ToString();
+            // string Document = _configuration.GetSection("FilePaths:Judgement:Doc").Value.ToString();
             FileHelper fileHelper = new FileHelper();
 
 
             //if (ModelState.IsValid)
             //{
-                var Data = await _hearingdetailsService.FetchSingleResult(id);
-                if (Data == null)
+            var Data = await _hearingdetailsService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                //if (model.File != null)
+                //{
+                //    model.FilePath = fileHelper.SaveFile(Document, model.File);
+                //}
+
+
+                model.ReqProcId = id;
+                model.NoticeGenId = 3;
+                model.EvidanceDocId = 1;
+                model.Remark = "";
+                model.Id = 0;
+                model.CreatedBy = SiteContext.UserId;
+                model.IsActive = 1;
+                var result = await _hearingdetailsService.Create(model);
+
+                if (result == true)
                 {
-                    //if (model.File != null)
-                    //{
-                    //    model.FilePath = fileHelper.SaveFile(Document, model.File);
-                    //}
-                   
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
 
-                    model.ReqProcId = id;
-                    model.NoticeGenId = 3;
-                    model.EvidanceDocId = 1;
-                    model.Remark = "";
-                    model.Id = 0;
-                    model.CreatedBy = SiteContext.UserId;
-                    model.IsActive = 1;
-                    var result = await _hearingdetailsService.Create(model);
-
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-
-                    return RedirectToAction("Index", "Hearingdetail");
-                }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(model);
-
-                    }
+                    return RedirectToAction("Index", "HearingDetails");
                 }
                 else
                 {
-                    //if (model.File != null)
-                    //{
-                    //    model.FilePath = fileHelper.SaveFile(Document, model.File);
-                    //}
-                   
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(model);
 
-
-                    model.ModifiedBy = SiteContext.UserId;
-                    model.IsActive = 1;
-                    var result = await _hearingdetailsService.Update(id, model);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View(model);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(model);
-
-                    }
                 }
+            }
+            else
+            {
+                //if (model.File != null)
+                //{
+                //    model.FilePath = fileHelper.SaveFile(Document, model.File);
+                //}
 
-           // }
+
+
+                model.ModifiedBy = SiteContext.UserId;
+                model.IsActive = 1;
+                var result = await _hearingdetailsService.Update(id, model);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    return View(model);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(model);
+
+                }
+            }
+
+            // }
             //else
             //{
             //    return View(model);
@@ -147,7 +147,7 @@ namespace LeaseDetails.Controllers
             var Data = await _hearingdetailsService.FetchSingleReqDetails(id);
             Data.HonbleList = await _hearingdetailsService.GetAllHonble();
             Data.AllotmententryList = await _hearingdetailsService.GetAllAllotment();
-           
+
 
             return PartialView("_RequestForProceedingEvictionView", Data);
         }
@@ -197,12 +197,12 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _hearingdetailsService.FetchSingleResult(id);
-           
+
             if (Data == null)
             {
                 return NotFound();
             }
-           
+
             return View(Data);
         }
 
@@ -216,14 +216,16 @@ namespace LeaseDetails.Controllers
             {
                 try
                 {
-                  
+
                     rate.ModifiedBy = SiteContext.UserId;
                     var result = await _hearingdetailsService.Update(id, rate);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                      return RedirectToAction("Index", "HearingDetails");
+                        //var list = await _hearingdetailsService.GetAllInterestrate();
+                        //return View("Index", list);
+                        return RedirectToAction("Index", "HearingDetails");
                     }
                     else
                     {
