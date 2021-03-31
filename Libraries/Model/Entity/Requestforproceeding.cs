@@ -14,6 +14,7 @@ namespace Libraries.Model.Entity
     {
         public Requestforproceeding()
         {
+            Actiontakenbydda = new HashSet<Actiontakenbydda>();
             Allotteeevidenceupload = new HashSet<Allotteeevidenceupload>();
             Evidancedoc = new HashSet<Evidancedoc>();
             Hearingdetails = new HashSet<Hearingdetails>();
@@ -89,6 +90,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
+        public ICollection<Actiontakenbydda> Actiontakenbydda { get; set; }
         public ICollection<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
         public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
 
