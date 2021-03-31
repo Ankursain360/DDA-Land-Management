@@ -2,15 +2,20 @@
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using LeaseDetails.Filters;
-using Utility.Helper;
-using System.Threading.Tasks;
-using Dto.Search;
 using Microsoft.Extensions.Configuration;
+using Dto.Search;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
+using Microsoft.AspNetCore.Hosting;
+using LeaseDetails.Filters;
+using Core.Enum;
+using System.Data;
 using System;
 
 namespace LeaseDetails.Controllers
@@ -21,12 +26,43 @@ namespace LeaseDetails.Controllers
         public IConfiguration _configuration;
         string targetPathNotice = "";
         string targetPathHearingDetails = "";
-        public HearingDetailsController(IHearingdetailsService hearingdetailsService, IConfiguration configuration)
+
+        public readonly INoticeGenerationService _noticeGenerationService;
+        public readonly ILeaseHearingDetailsService _leaseHearingDetailsService;
+       
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IRequestforproceedingService _requestforproceedingService;
+        private readonly ICancellationEntryService _cancellationEntryService;
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        
+        string targetPathDemandLetter = "";
+        string targetPathNOC = "";
+        string targetPathCanellationOrder = "";
+        public HearingDetailsController(IHearingdetailsService hearingdetailsService, IConfiguration configuration, INoticeGenerationService noticeGenerationService,
+            ILeaseHearingDetailsService leaseHearingDetailsService,
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
+            IRequestforproceedingService requestforproceedingService,
+            IHostingEnvironment en,
+            ICancellationEntryService cancellationEntryService)
         {
             _hearingdetailsService = hearingdetailsService;
             _configuration = configuration;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
             targetPathHearingDetails = _configuration.GetSection("FilePaths:HearingDetails:HearingDetailsPath").Value.ToString();
+            _noticeGenerationService = noticeGenerationService;
+            _leaseHearingDetailsService = leaseHearingDetailsService;
+           
+            _workflowtemplateService = workflowtemplateService;
+            _approvalproccessService = approvalproccessService;
+            _requestforproceedingService = requestforproceedingService;
+            _hostingEnvironment = en;
+            _cancellationEntryService = cancellationEntryService;
+           
+            targetPathDemandLetter = _configuration.GetSection("FilePaths:CancellationEntry:DemandletterFilePath").Value.ToString();
+            targetPathNOC = _configuration.GetSection("FilePaths:CancellationEntry:NOCFilePath").Value.ToString();
+            targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
 
         }
         public IActionResult Index()
@@ -143,15 +179,15 @@ namespace LeaseDetails.Controllers
         //   // string filename = Data.FilePath;
         //  //  return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         //}
-        public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
-        {
-            var Data = await _hearingdetailsService.FetchSingleReqDetails(id);
-            Data.HonbleList = await _hearingdetailsService.GetAllHonble();
-            Data.AllotmententryList = await _hearingdetailsService.GetAllAllotment();
+        //public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
+        //{
+        //    var Data = await _hearingdetailsService.FetchSingleReqDetails(id);
+        //    Data.HonbleList = await _hearingdetailsService.GetAllHonble();
+        //    Data.AllotmententryList = await _hearingdetailsService.GetAllAllotment();
 
 
-            return PartialView("_RequestForProceedingEvictionView", Data);
-        }
+        //    return PartialView("_RequestForProceedingEvictionView", Data);
+        //}
 
 
 
@@ -271,6 +307,42 @@ namespace LeaseDetails.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+        #region RequestForProceedingEviction Details
+        public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
+        {
+            var Data = await _requestforproceedingService.FetchSingleResult(id);
+            Data.HonbleList = await _requestforproceedingService.GetAllHonble();
+            Data.CancellationList = await _requestforproceedingService.GetCancellationListData();
+            Data.UserNameList = await _requestforproceedingService.BindUsernameNameList();
 
+            return PartialView("_RequestForProceedingEvictionView", Data);
+        }
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathDemandLetter + Data.DemandLetter;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+
+
+        public async Task<FileResult> ViewLetter1(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathNOC + Data.Noc;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+        public async Task<FileResult> ViewLetter2(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathCanellationOrder + Data.CancellationOrder;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+        #endregion
     }
 }
