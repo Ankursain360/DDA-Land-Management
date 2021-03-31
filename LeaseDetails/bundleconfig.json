@@ -196,5 +196,41 @@
     "inputFiles": [
       "wwwroot/js/requestforproceedingindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/judgementcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/judgementcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/judgementindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/judgementindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/applyforserviceindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/applyforserviceindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/oldallotmententryedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/oldallotmententryedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/oldallotmententryindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/oldallotmententryindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/servicetypeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/servicetypeindex.js"
+    ]
   }
 ]
