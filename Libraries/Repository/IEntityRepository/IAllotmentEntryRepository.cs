@@ -24,7 +24,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
         Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
         Task<Licencefees> FetchSinglefeeResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
-
+        Task<Leaseapplication> FetchLeaseApplicationmailDetails(int id);
 
 
 
