@@ -24,6 +24,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId); 
         Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
         Task<List<Hearingdetails>> FetchHearingDetails(int? RequestId);
+        Task<Actiontakenbydda> FetchActionTakenByDDADetails(int? RequestId);
 
         //****  For Judgement page  ********
 

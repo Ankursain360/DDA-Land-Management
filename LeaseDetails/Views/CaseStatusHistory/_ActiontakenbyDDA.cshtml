@@ -1,0 +1,136 @@
+﻿@model Libraries.Model.Entity.Actiontakenbydda
+@*@await Component.InvokeAsync("PageHeader", new { pageName = "Action Taken By DDA Details" })*@
+
+
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+
+      
+        
+          
+      
+
+        <input type="hidden" asp-for="RequestForProceedingId" />
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+       
+
+
+       
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            HandedOver/TakenOver By DDA:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="hidden" value="Yes" asp-for="HandedTakenByDda" />
+
+                        <div class="form-check theme">
+                            <input disabled class="form-check-input" type="radio" name="villageradio" id="rYes" value="Yes" checked="checked">
+                            <label class="form-check-label" for="radio">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input disabled class="form-check-input" type="radio" name="villageradio" id="rNo" value="No">
+                            <label class="form-check-label" for="radio">
+                                No
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <span asp-validation-for="HandedTakenByDda" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled  asp-for="HandedTakenByDdadate" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="HandedTakenByDdadate" class="text-danger"></span>
+                    <label class="floating-label">HandedOver/TakenOver By DDA Date </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Plot Restored:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="hidden" value="Yes" asp-for="PlotRestored" />
+
+                        <div class="form-check theme">
+                            <input disabled class="form-check-input" type="radio" name="plotradio" id="rYes" value="Yes" checked="checked">
+                            <label class="form-check-label" for="radio">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input disabled class="form-check-input" type="radio" name="plotradio" id="rNo" value="No">
+                            <label class="form-check-label" for="radio">
+                                No
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <span asp-validation-for="PlotRestored" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea disabled asp-for="CurrentStatus" type="text" placeholder="Current Status" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+                    <label class="floating-label">Current Status<span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    @{ if (Model.Document != null)
+                        {
+                            <a class="badge badge-primary px-2" asp-action="DownloadActionFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
+                            <input disabled type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                        }
+                        else
+                        {
+                            <input disabled type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                            <label for="field-1" class="floating-label"> Upload copy of the document selected </label> } }
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+      
+    </form>
+
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/actiontakenbydda.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/actiontakenbydda.js" asp-append-version="true"></script>
+</environment>

@@ -6,6 +6,7 @@ $(document).ready(function () {
     GetNoticeDetails(id);
     GetEvidenceDetails(id);
     GetHearingDetails(id);
+    GetActiontakenbyDDADetails(id);
 });
 
 
@@ -38,5 +39,14 @@ function GetHearingDetails(id) {
     HttpGet(`/CaseStatusHistory/HearingDetailsView/?id=${id}`, 'html', function (response) {
         $('#HearingDetailsDiv').html("");
         $('#HearingDetailsDiv').html(response);
+    });
+};
+
+
+
+function GetActiontakenbyDDADetails(id) {
+    HttpGet(`/CaseStatusHistory/ActionTakenByDDAView/?id=${id}`, 'html', function (response) {
+        $('#ActionDetailsDiv').html("");
+        $('#ActionDetailsDiv').html(response);
     });
 };

@@ -1,17 +1,17 @@
 ﻿@model Libraries.Model.Entity.Requestforproceeding
 
-<div class="permission mt-2 accordion list-unstyled m-0 ">
+@*<div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
-           aria-controls="collapseApprroval">
+        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseRequestProceeding" role="button" aria-expanded="true"
+           aria-controls="collapseRequestProceeding">
             <i class="ri-arrow-right-s-fill"></i>
             <span class="text ml-1 mr-auto">View Request Proceeding For Eviction Details </span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
-        </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval">
+        </a>*@
+        @*<div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseRequestProceeding">*@
             <div id="allDetails">
                 <div class="row mt-md-3">
-                    @*<div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="floating-label-wrap">
                             <select class="floating-label-field floating-label-field--s3"
                                     asp-for="AllotmentId" asp-items="@(new SelectList(Model.AllotmententryList, "Id","LRefNo"))" disabled>
@@ -19,10 +19,10 @@
                             </select>
                             <label class="floating-label">File No</label>
                         </div>
-                    </div>*@
+                    </div>
                     <div class=" col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input  asp-for="LetterReferenceNo" placeholder="Address" type="text"
+                            <input asp-for="LetterReferenceNo" placeholder="Address" type="text"
                                    class="floating-label-field floating-label-field--s3" disabled />
                             <span class="text-danger"></span>
                             <label class="floating-label">Letter Reference No</label>
@@ -68,7 +68,7 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input placeholder="Contact No" asp-for="DateOfCancellationofLease" type="date" 
+                            <input placeholder="Contact No" asp-for="DateOfCancellationofLease" type="date" value=""
                                    class="floating-label-field floating-label-field--s3" disabled />
                             <span class="text-danger"></span>
                             <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
@@ -178,8 +178,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" style="width:100%;" 
-                                    @*asp-for="UserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))"*@>
+                            <select class="floating-label-field floating-label-field--s3" style="width:100%;">
                                 <option selected disabled="disabled" value="">---Select---</option>
                             </select>
                             @*<span asp-validation-for="UserId" class="text-danger"></span>*@
@@ -189,7 +188,7 @@
                 </div>
 
             </div>
-        </div>
+        @*</div>
     </div>
-</div>
+</div>*@
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
