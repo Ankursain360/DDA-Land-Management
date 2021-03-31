@@ -66,10 +66,27 @@ $("#AllotmentDate").change(function () {
             debugger;
             $("#PremiumRate").val(response.premiumRate);
             var prate = $("#PremiumRate").val(response.premiumRate);
-            var grate = $("#GroundRate").val(response.groundRate);
+            //var grate = $("#GroundRate").val(response.groundRate);
             var area = $('#parea').val();
-            var pamount = area * (response.premiumRate);
+            var pamount = area * (response.premiumRate)*4047;
             $("#PremiumAmount").val(pamount);
+
+            //addition
+            debugger;
+            var pa = $("#PremiumAmount").val();
+            $("#PremiumAmount").val(pa);
+            var ga = $("#AmountGroundRate").val();
+            $("#AmountGroundRate").val(ga);
+            var dc = $("#DocumentCharge").val();
+            $("#DocumentCharge").val(dc);
+            debugger;
+            var al = $("#AmountLicFee").val();
+            $("#AmountLicFee").val(al);
+            //var li = $("#AmountLicFee").val();
+            //$("#AmountLicFee").val(li);
+            var totalamount = parseInt(pa) + parseInt(ga) + parseInt(al) + parseInt(dc);
+            
+            $("#TotalAmount").val(parseInt(totalamount));
 
         });
 
@@ -83,13 +100,21 @@ $("#AllotmentDate").change(function () {
             var gamount = ppamount * (response.groundRate);
             $("#AmountGroundRate").val(gamount);
 
+          
         });
         HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
             debugger;
             $("#LicenceFees").val(response.licenceFees);
+            
+            var licfee = $("#LicenceFees").val(response.licenceFees);
+           
+            var years = $('#nyears').val();
+            var lamount = years * (response.licenceFees);
+            $("#AmountLicFee").val(lamount);
 
         });
+        
         HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
             debugger;
@@ -99,17 +124,56 @@ $("#AllotmentDate").change(function () {
         });
     }
 });
+function onChange(id) {
 
+    HttpGet(`/AllotmentEntry/GetAllLeaseSubpurpose/?purposeUseId=${id}`, 'json', function (response) {
+        var html = '<option value="">Select</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].subPurposeUse + '</option>';
+        }
 
-$('#LeasesTypeId').change(function () {
-    var value = $('#LeasesTypeId option:selected').val();
+        $("#LeaseSubPurposeId").select2('val', '')
+        $("#LeaseSubPurposeId").html(html);
+    });
+};
+
+//$('#LeasesTypeId').change(function () {
+//    var value = $('#LeasesTypeId option:selected').val();
+
+//    if (value == 3) {
+//        $('#area').show();
+
+//    }
+//    else {
+//        $('#area').hide();
+//    }
+//    if (value == 1) {
+//        $('#amount').show();
+//    }
+//    else {
+//        $('#amount').hide();
+//    }
+//    if (value == 2) {
+//        $('#fee').show();
+//    }
+//    else {
+//        $('#fee').hide();
+//    }
+//    if (value == 3) {
+
+//        $('#amount').show();
+//        $('#fee').show();
+//    }
+//});
+$('#ddlJudgement').change(function () {
+    var value = $('#ddlJudgement option:selected').val();
 
     if (value == 3) {
-        $('#area').show();
+        $('#aarea').show();
 
     }
     else {
-        $('#area').hide();
+        $('#aarea').hide();
     }
     if (value == 1) {
         $('#amount').show();
@@ -127,29 +191,7 @@ $('#LeasesTypeId').change(function () {
 
         $('#amount').show();
         $('#fee').show();
+        //$('#aarea').show();
     }
+
 });
-function onChange(id) {
-
-    HttpGet(`/AllotmentEntry/GetAllLeaseSubpurpose/?purposeUseId=${id}`, 'json', function (response) {
-        var html = '<option value="">Select</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].subPurposeUse + '</option>';
-        }
-
-        $("#LeaseSubPurposeId").select2('val', '')
-        $("#LeaseSubPurposeId").html(html);
-    });
-};
-//function checkTextField(field) {
-//    debugger;
-
-//    var area = $('#parea').val();
-//    var prate = $('#textprate').val();
-//    var xyz = area * prate;
-//    $("#PremiumAmount").val(xyz);
-//    //var grent = xyz * (2.5 / 100);
-//    //$("#GroundRent").val(grent);
-
-
-//}

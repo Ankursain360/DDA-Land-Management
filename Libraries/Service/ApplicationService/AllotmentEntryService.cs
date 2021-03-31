@@ -14,6 +14,7 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAllotmentEntryRepository _allotmentEntryRepository;
+        //private readonly UserManager<ApplicationUser> _userManager;
         public AllotmentEntryService(IUnitOfWork unitOfWork, IAllotmentEntryRepository allotmentEntryRepository)
       : base(unitOfWork, allotmentEntryRepository)
         {
@@ -102,6 +103,10 @@ namespace Libraries.Service.ApplicationService
             model.PremiumRate = allotmententry.PremiumRate;
             model.DocumentCharge = allotmententry.DocumentCharge;
             model.GroundRate = allotmententry.GroundRate;
+            model.NoOfYears = allotmententry.NoOfYears;
+            model.LicenceFees = allotmententry.LicenceFees;
+            model.AmountLicFee = allotmententry.AmountLicFee;
+            model.AmountGroundRate = allotmententry.AmountGroundRate; 
             model.AllotmentDate = allotmententry.AllotmentDate;
             model.TotalArea = allotmententry.TotalArea;
             model.PhaseNo = allotmententry.PhaseNo;
@@ -109,9 +114,7 @@ namespace Libraries.Service.ApplicationService
             model.SectorNo = allotmententry.SectorNo;
             model.PlotNo = allotmententry.PlotNo;
             model.PocketNo = allotmententry.PocketNo;
-            model.NoOfYears = allotmententry.NoOfYears;
-            model.LicenceFees = allotmententry.LicenceFees;
-            model.AmountLicFee = allotmententry.AmountLicFee;
+           
             model.BuildingArea = allotmententry.BuildingArea;
 
             model.IsActive = allotmententry.IsActive;
@@ -156,6 +159,34 @@ namespace Libraries.Service.ApplicationService
         {
             return await _allotmentEntryRepository.FetchSinglefeeResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
         }
+        public async Task<Leaseapplication> FetchLeaseApplicationmailDetails(int id)
+        {
+            return await _allotmentEntryRepository.FetchLeaseApplicationmailDetails(id);
+        }
+        //public async Task<string> CreateUser(Damagepayeeregister model)
+        //{
+        //    ApplicationUser user = new ApplicationUser()
+        //    {
+        //        Name = model.payeeName[0],
+        //        UserName = model.payeeName[0],
+        //        Email = model.EmailId[0],
+        //        PhoneNumber = model.MobileNo[0],
+        //        PasswordSetDate = DateTime.Now.AddDays(30),
+        //        CreatedBy = 1,
+        //        CreatedDate = DateTime.Now,
+        //        IsDefaultPassword = 1
+        //    };
+        //    string password = "Pass123$";
+
+        //    var userSavedResult = await _userManager.CreateAsync(user, password);
+        //    //  var userSavedResult = await _userManager.CreateAsync(user, userDto.Password);
+        //    if (userSavedResult.Succeeded)
+        //    {
+        //        return password;
+        //    }
+        //    return "False";
+
+        //}
     }
 }
 

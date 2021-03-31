@@ -57,14 +57,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Leaseapplication.Where(x => x.Id == applicationId).SingleOrDefaultAsync();
         }
 
-        //public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
-        //{
-        //    var result = await _dbContext.Allotmententry.Where(x => x.Id == LeasesTypeId).FirstOrDefaultAsync();
-        //    var masterPremiumAmount = await _dbContext.Premiumrate.Where(x => x.FromDate <= result.AllotmentDate && x.ToDate >= result.AllotmentDate).FirstOrDefaultAsync();
-        //    result.PremiumRate = masterPremiumAmount.PremiumRate;
-        //    result.PremiumAmount = Convert.ToDecimal(0.00024711) * masterPremiumAmount.PremiumRate * result.TotalArea;
-        //    return result;
-        //}
+        public async Task<Leaseapplication> FetchLeaseApplicationmailDetails(int id)
+        {
+            return await _dbContext.Leaseapplication.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
 
         public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
         {

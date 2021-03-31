@@ -27,7 +27,7 @@
             </td>
             <td>
                 <div class="action-btns">
-                   <a href=@item.Url target="_blank"class="btn btn-theme" style="width:auto;min-width:80px;"><b>Apply</b></a>
+                   <a href=@(item.Url == ""? "/Home/Index": item.Url) target="_blank"class="btn btn-theme" style="width:auto;min-width:80px;"><b>Apply</b></a>
                 </div>
 
             </td>

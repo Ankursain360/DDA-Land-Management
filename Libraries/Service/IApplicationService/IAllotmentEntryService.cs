@@ -34,8 +34,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Allotmententry>> GetPagedAllotmententry(AllotmentEntrySearchDto model);
 
+        Task<Leaseapplication> FetchLeaseApplicationmailDetails(int id);
 
-        
 
 
     }

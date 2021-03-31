@@ -306,6 +306,10 @@ namespace Libraries.Model
         public virtual DbSet<Leasedeed> Leasedeed { get; set; }
         public virtual DbSet<Allotteeservicesdocument> Allotteeservicesdocument { get; set; }
         public virtual DbSet<Mortgage> Mortgage { get; set; }
+        public virtual DbSet<Cancellationentry> Cancellationentry { get; set; }
+        public virtual DbSet<Judgementstatus> Judgementstatus { get; set; }
+
+        public virtual DbSet<Actiontakenbydda> Actiontakenbydda { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -551,6 +555,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LeasedeedConfiguration());
             modelBuilder.ApplyConfiguration(new MortgageConfiguration());
             modelBuilder.ApplyConfiguration(new AllotteeServicesDocumentConfiguration());
+            modelBuilder.ApplyConfiguration(new CancellationEntryConfiguration());
+            modelBuilder.ApplyConfiguration(new JudgementstatusConfiguration());
+            modelBuilder.ApplyConfiguration(new ActiontakenbyddaConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
