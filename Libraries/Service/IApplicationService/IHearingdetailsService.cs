@@ -32,6 +32,5 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId);
         Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
-        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
     }
 }

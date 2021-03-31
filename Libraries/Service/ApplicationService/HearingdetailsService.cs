@@ -20,7 +20,7 @@ namespace Libraries.Service.ApplicationService
         private readonly IHearingdetailsRepository _hearingdetailsRepository;
         private readonly IRequestforproceedingRepository _requestforproceedingRepository;
         private readonly IMapper _mapper;
-        public HearingdetailsService(IUnitOfWork unitOfWork, IHearingdetailsRepository hearingdetailsRepository,IRequestforproceedingRepository requestforproceedingRepository, IMapper mapper) : base(unitOfWork, hearingdetailsRepository)
+        public HearingdetailsService(IUnitOfWork unitOfWork, IHearingdetailsRepository hearingdetailsRepository, IRequestforproceedingRepository requestforproceedingRepository, IMapper mapper) : base(unitOfWork, hearingdetailsRepository)
         {
             _unitOfWork = unitOfWork;
             _hearingdetailsRepository = hearingdetailsRepository;
@@ -54,13 +54,13 @@ namespace Libraries.Service.ApplicationService
             Hearingdetails model = result.FirstOrDefault();
 
             model.Attendee = hearingdetails.Attendee;
-            
+
             model.HearingDate = hearingdetails.HearingDate;
             model.HearingTime = hearingdetails.HearingTime;
             model.HearingVenue = hearingdetails.HearingVenue;
-            
+
             model.Remark = hearingdetails.Remark;
-            
+
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = model.ModifiedBy;
             _hearingdetailsRepository.Edit(model);
@@ -70,7 +70,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Hearingdetails hearingdetails)
         {
-            
+
             hearingdetails.CreatedDate = DateTime.Now;
 
             hearingdetails.IsActive = 1;
@@ -150,10 +150,5 @@ namespace Libraries.Service.ApplicationService
 
 
 
-
-        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model)
-        {
-            return await _hearingdetailsRepository.GetPagedRequestLetterDetails(model);
-        }
     }
 }

@@ -41,36 +41,14 @@ namespace LeaseDetails.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] LeaseHearingDetailsSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
         {
-            var result = await _hearingdetailsService.GetPagedRequestLetterDetails(model);
+            var result = await _hearingdetailsService.GetPagedRequestForProceeding(model);
+
             return PartialView("_List", result);
         }
-        //public IActionResult Index()
-        //{
 
-        //    return View();
-        //}
-        //[HttpPost]
-        //public async Task<PartialViewResult> ListReq([FromBody] RequestForProceedingSearchDto model)
-        //{
-        //    var result = await _requestforproceedingService.GetPagedRequestForProceeding(model);
-
-        //    return PartialView("_ListReq", result);
-        //}
-
-        //[HttpPost]
-        //public async Task<PartialViewResult> List([FromBody] HearingdetailsSeachDto model)
-        //{
-
-        //    var result = await _hearingdetailsService.GetPagedHearingDetails(model);
-        //    return PartialView("_List", result);
-        //}
-
-        //   [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(int id)
+                public async Task<IActionResult> Create(int id)
         {
             //if (id == 0)
             //{

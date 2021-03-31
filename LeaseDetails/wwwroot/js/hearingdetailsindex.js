@@ -35,6 +35,7 @@ $("#btnDescending").click(function () {
     sortOrder = 2;//for Descending
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
 $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
