@@ -36,7 +36,7 @@
             </div>
 
         </div>
-        <div class="row mt-md-3">
+        @*<div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="LicenceFees" placeholder="Name" type="text"
@@ -45,17 +45,10 @@
                     <label class="floating-label">Licences Fees   </label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="LicenceFees" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="LicenceFees" class="text-danger"></span>
-                    <label class="floating-label">Licence Fees   </label>
-                </div>
-            </div>
-        </div>
+        </div>*@
+        @*<div class="row mt-md-3">
+            
+        </div>*@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -75,6 +68,14 @@
             </div>
         </div>
         <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="LicenceFees" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="LicenceFees" class="text-danger"></span>
+                    <label class="floating-label">Licence Fees   </label>
+                </div>
+            </div>
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">

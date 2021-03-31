@@ -1,0 +1,214 @@
+﻿@model Libraries.Model.Entity.Actiontakenbydda
+@await Component.InvokeAsync("PageHeader", new { pageName = "Action Taken By DDA Details" })
+
+<div class="pt-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+
+        @if (Model.Id == 0)
+        {
+            <h3 class="mb-3 d-flex">Add Details</h3>
+        }
+        else
+        {
+            <h3 class="mb-3 d-flex">Edit Details</h3>
+        }
+
+        <input type="hidden" asp-for="RequestForProceedingId" />
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div id="RequestForProceedingEvictionDiv">
+
+        </div>
+
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
+            <div class="card">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval1" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto"> View Notice Generations Details </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval1">
+                    <div id="NoticeGenerationDiv">
+
+                    </div>
+                    <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+                    <script src="~/lib/bootstrap/select2/select2.js" defer></script>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
+            <div class="card">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval2" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto">View Allottee Evidance Document Details  </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval2">
+
+                    <div id="AllotteeEvidenceDiv">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
+            <div class="card">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval3" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto">View Hearing Details </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval3">
+                    <div id="HearingDetailsDiv">
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <h3 class="my-3 d-flex sub-heading pt-4">Action Taken By DDA Details</h3>
+        <div class="row mt-md-3">
+           
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            HandedOver/TakenOver By DDA:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="hidden" value="Yes" asp-for="HandedTakenByDda" />
+
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" name="villageradio" id="rYes" value="Yes" checked="checked">
+                            <label class="form-check-label" for="radio">
+                               Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" name="villageradio" id="rNo" value="No">
+                            <label class="form-check-label" for="radio">
+                                No
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <span asp-validation-for="HandedTakenByDda" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input value="" asp-for="HandedTakenByDdadate" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="HandedTakenByDdadate" class="text-danger"></span>
+                    <label class="floating-label">HandedOver/TakenOver By DDA Date </label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Plot Restored:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="hidden" value="Yes" asp-for="PlotRestored" />
+
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" name="plotradio" id="rYes" value="Yes" checked="checked">
+                            <label class="form-check-label" for="radio">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" name="plotradio" id="rNo" value="No">
+                            <label class="form-check-label" for="radio">
+                                No
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <span asp-validation-for="PlotRestored" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="CurrentStatus" type="text" placeholder="Current Status" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="CurrentStatus" class="text-danger"></span>
+                    <label class="floating-label">Current Status<span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    @{ if (Model.Document != null)
+                        {
+                            <a class="badge badge-primary px-2" asp-action="DownloadJudgementFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
+                            <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                            <label for="field-1" class="floating-label"> Upload copy of the document selected </label> } }
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                @if (Model.Id == 0)
+                {
+                    <button class="btn btn-theme " type="submit">Create</button>
+                }
+                else
+                {
+                    <button class="btn btn-theme " type="submit">Update</button>
+                }
+
+                @Html.ActionLink("Back", "Index", "ActionTakenByDDA", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/actiontakenbydda.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/actiontakenbydda.js" asp-append-version="true"></script>
+</environment>
