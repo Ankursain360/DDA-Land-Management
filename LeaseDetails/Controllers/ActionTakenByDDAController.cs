@@ -17,13 +17,24 @@ namespace LeaseDetails.Controllers
     public class ActionTakenByDDAController : BaseController
     {
         private readonly IActiontakenbyddaService _actiontakenbyddaService;
+        private readonly IRequestforproceedingService _requestforproceedingService;
+        private readonly ICancellationEntryService _cancellationEntryService;
         public IConfiguration _configuration;
         string targetPathNotice = "";
-        public ActionTakenByDDAController(IActiontakenbyddaService actiontakenbyddaService, IConfiguration configuration)
+       
+        string targetPathDemandLetter = "";
+        string targetPathNOC = "";
+        string targetPathCanellationOrder = "";
+        public ActionTakenByDDAController(IActiontakenbyddaService actiontakenbyddaService, IConfiguration configuration, IRequestforproceedingService requestforproceedingService, ICancellationEntryService cancellationEntryService)
         {
+            _requestforproceedingService = requestforproceedingService;
             _actiontakenbyddaService = actiontakenbyddaService;
             _configuration = configuration;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
+           
+            targetPathDemandLetter = _configuration.GetSection("FilePaths:CancellationEntry:DemandletterFilePath").Value.ToString();
+            targetPathNOC = _configuration.GetSection("FilePaths:CancellationEntry:NOCFilePath").Value.ToString();
+            targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
 
         }
         public IActionResult Index()
@@ -137,15 +148,15 @@ namespace LeaseDetails.Controllers
             string filename = Data.Document;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
-        public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
-        {
-            var Data = await _actiontakenbyddaService.FetchSingleReqDetails(id);
-            Data.HonbleList = await _actiontakenbyddaService.GetAllHonble();
-            Data.AllotmententryList = await _actiontakenbyddaService.GetAllAllotment();
-            Data.UserNameList = await _actiontakenbyddaService.BindUsernameNameList();
+        //public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
+        //{
+        //    var Data = await _actiontakenbyddaService.FetchSingleReqDetails(id);
+        //    Data.HonbleList = await _actiontakenbyddaService.GetAllHonble();
+        //    Data.AllotmententryList = await _actiontakenbyddaService.GetAllAllotment();
+        //    Data.UserNameList = await _actiontakenbyddaService.BindUsernameNameList();
 
-            return PartialView("_RequestForProceedingEvictionView", Data);
-        }
+        //    return PartialView("_RequestForProceedingEvictionView", Data);
+        //}
 
 
 
@@ -155,7 +166,43 @@ namespace LeaseDetails.Controllers
 
             return PartialView("_ListNoticeGenertion", Data);
         }
+        #region RequestForProceedingEviction Details
+        public async Task<PartialViewResult> RequestForProceedingEvictionView(int id)
+        {
+            var Data = await _requestforproceedingService.FetchSingleResult(id);
+            Data.HonbleList = await _requestforproceedingService.GetAllHonble();
+            Data.CancellationList = await _requestforproceedingService.GetCancellationListData();
+            Data.UserNameList = await _requestforproceedingService.BindUsernameNameList();
 
+            return PartialView("_RequestForProceedingEvictionView", Data);
+        }
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathDemandLetter + Data.DemandLetter;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+
+
+        public async Task<FileResult> ViewLetter1(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathNOC + Data.Noc;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+        public async Task<FileResult> ViewLetter2(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _cancellationEntryService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = targetPathCanellationOrder + Data.CancellationOrder;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+        #endregion
         public async Task<FileResult> ViewNotice(int Id)
         {
             FileHelper file = new FileHelper();

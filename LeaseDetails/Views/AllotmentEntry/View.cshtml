@@ -69,17 +69,7 @@
         </div>
         <h3 class="my-3 d-flex sub-heading">Lease Details</h3>
         <div class="row mt-md-3">
-            @*<div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
-                            asp-for="LeasesTypeId" asp-items="@(new SelectList(Model.LeaseTypeList, "Id","Type"))">
-                        <option disabled="disabled" selected value="">Select</option>
-
-                    </select>
-                    <span asp-validation-for="LeasesTypeId" class="text-danger"></span>
-                    <label class="floating-label">Lease Type </label>
-                </div>
-            </div>*@
+           
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" id="ddlJudgement" asp-for="LeasesTypeId">
@@ -177,7 +167,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input value="" asp-for="AllotmentDate" placeholder="Allotment Date" type="date"
+                    <input  asp-for="AllotmentDate" placeholder="Allotment Date" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="AllotmentDate" class="text-danger"></span>
                     <label class="floating-label">Allotment Date </label>
@@ -257,7 +247,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input value="" placeholder="Name" asp-for="DocumentCharge"
+                    <input  placeholder="Name" asp-for="DocumentCharge"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="DocumentCharge" class="text-danger"></span>
                     <label class="floating-label">Document Charge  </label>
