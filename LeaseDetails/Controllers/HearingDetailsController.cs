@@ -20,11 +20,13 @@ namespace LeaseDetails.Controllers
         private readonly IHearingdetailsService _hearingdetailsService;
         public IConfiguration _configuration;
         string targetPathNotice = "";
+        string targetPathHearingDetails = "";
         public HearingDetailsController(IHearingdetailsService hearingdetailsService, IConfiguration configuration)
         {
             _hearingdetailsService = hearingdetailsService;
             _configuration = configuration;
             targetPathNotice = _configuration.GetSection("FilePaths:NoticeGeneration:NoticeGenerationPath").Value.ToString();
+            targetPathHearingDetails = _configuration.GetSection("FilePaths:HearingDetails:HearingDetailsPath").Value.ToString();
 
         }
         public IActionResult Index()
@@ -78,8 +80,7 @@ namespace LeaseDetails.Controllers
 
 
                 model.ReqProcId = id;
-                model.NoticeGenId = 3;
-                model.EvidanceDocId = 1;
+               
                 model.Remark = "";
                 model.Id = 0;
                 model.CreatedBy = SiteContext.UserId;
@@ -214,6 +215,14 @@ namespace LeaseDetails.Controllers
 
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                if (rate.Photo != null)
+                {
+                    rate.DocumentPatth = rate.Photo != null ?
+                                                                      fileHelper.SaveFile1(targetPathHearingDetails, rate.Photo) :
+                                                                      rate.Photo != null || rate.DocumentPatth != "" ?
+                                                                      rate.DocumentPatth : string.Empty;
+                }
                 try
                 {
 
@@ -243,5 +252,25 @@ namespace LeaseDetails.Controllers
             }
             return View(rate);
         }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _hearingdetailsService.FetchSingleResult(id);
+           
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+           // return PartialView("ViewLetter");
+        }
+        public async Task<FileResult> ViewHearingDetailsDoc(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _hearingdetailsService.FetchSingleResult(Id);
+            string path = targetPathHearingDetails + Data.DocumentPatth;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
     }
 }

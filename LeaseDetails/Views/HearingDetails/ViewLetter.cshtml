@@ -1,4 +1,5 @@
-﻿
+﻿@model Libraries.Model.Entity.Groundrent
+@await Component.InvokeAsync("PageHeader", new { pageName = "Ground Rent" })
 
 <div class="row pt-3">
     <div class="col-md-12">
@@ -35,7 +36,10 @@
 
                             </td>
                             <td align="right">
-                                Dated :<input id="txttodayDate"/>
+                                Dated :<label  id="lbltodayDate" name="lbltodayDate"></label>
+                                           
+                                           
+                                <input id="txttodayDate"                             /> 
                             </td>
                     </table>
                 </td>

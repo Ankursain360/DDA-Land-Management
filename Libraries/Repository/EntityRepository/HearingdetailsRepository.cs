@@ -29,6 +29,7 @@ namespace Repository.EntityRepository
                                         .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
                                         && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                                         && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
+                                        && x.IsSend == 1
 
                                         ).GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
 

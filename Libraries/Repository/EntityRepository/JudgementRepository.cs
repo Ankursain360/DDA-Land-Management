@@ -230,8 +230,8 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Hearingdetails
                                        .Include(x => x.ReqProc) 
-                                       .Include(x => x.NoticeGen)
-                                       .Include(x => x.EvidanceDoc)
+                                      // .Include(x => x.NoticeGen)
+                                      // .Include(x => x.EvidanceDoc)
                                        .Where(x => x.ReqProcId == RequestId)
                                        .ToListAsync();
             return data;

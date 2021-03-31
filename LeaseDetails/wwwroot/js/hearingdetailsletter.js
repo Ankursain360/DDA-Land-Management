@@ -6,6 +6,11 @@
 
     var todayN = yyyy + '-' + mm + '-' + dd;
     $("#txttodayDate").val(todayN);
+    $("#lbltodayDate").val(todayN);
+    var lblName = document.getElementById("lbltodayDate");
+
+    //Copy the TextBox value to Label.
+    lblName.innerHTML = todayN;
     var HearingDate = sessionStorage.getItem("NewDate");
     var HearingTime = sessionStorage.getItem("RefN");
 
