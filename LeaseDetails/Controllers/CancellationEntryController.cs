@@ -274,7 +274,12 @@ namespace LeaseDetails.Controllers
 
             }
         }
-
+        [HttpGet]
+        public async Task<JsonResult> GetOtherData(int? AllottmentId)
+        {
+            AllottmentId = AllottmentId ?? 0;
+            return Json(await _cancellationEntryService.FetchAllottmentDetails(Convert.ToInt32(AllottmentId)));
+        }
 
     }
 }

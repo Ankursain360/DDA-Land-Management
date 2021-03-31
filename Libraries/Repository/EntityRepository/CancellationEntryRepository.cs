@@ -37,7 +37,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Allotmententry>> GetAllAllotment()
         {
             List<Allotmententry> villageList = await _dbContext.Allotmententry.Include(x => x.Application).
-                Include(x => x.LeasePurposesType).Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1 && x.LeasePurposesTypeId == x.LeasePurposesType.Id)).ToListAsync();
+                                                                                Include(x => x.LeasePurposesType)
+                                                                                .Where(x => (x.ApplicationId == x.Application.Id 
+                                                                                && x.IsActive == 1 
+                                                                                && x.LeasePurposesTypeId == x.LeasePurposesType.Id))
+                                                                                .ToListAsync();
             return villageList;
         }
 
@@ -135,5 +139,12 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<Allotmententry> FetchAllottmentDetails(int allottmentId)
+        {
+            return await _dbContext.Allotmententry
+                                    .Include(x => x.Application)
+                                    .Where(x => x.Id == allottmentId)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

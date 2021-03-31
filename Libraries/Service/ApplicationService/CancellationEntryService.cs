@@ -107,7 +107,9 @@ namespace Libraries.Service.ApplicationService
             return await _cancellationEntryRepository.GetPagedCancellationEntry(model);
         }
 
-
-
+        public async Task<Allotmententry> FetchAllottmentDetails(int allottmentId)
+        {
+            return await _cancellationEntryRepository.FetchAllottmentDetails(allottmentId);
+        }
     }
 }
