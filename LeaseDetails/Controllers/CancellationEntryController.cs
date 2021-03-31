@@ -93,6 +93,7 @@ namespace LeaseDetails.Controllers
                     }
                     cancellationentry.CreatedBy = SiteContext.UserId;
 
+                    cancellationentry.CreatedBy = SiteContext.UserId;
                     var result = await _cancellationEntryService.Create(cancellationentry);
                     if (result == true)
                     {
@@ -153,6 +154,7 @@ namespace LeaseDetails.Controllers
             }
             try
             {
+                cancellationentry.ModifiedBy = SiteContext.UserId;
                 var result = await _cancellationEntryService.Update(id, cancellationentry);
                 if (result == true)
                 {

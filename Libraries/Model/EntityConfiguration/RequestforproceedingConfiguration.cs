@@ -18,12 +18,19 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.AllotmentId)
                 .HasName("fkalltmentid_idx");
 
+            builder.HasIndex(e => e.CancellationId)
+                .HasName("fk_CancellationId_idx");
+
+
             builder.HasIndex(e => e.HonebleLgOrCommon)
                 .HasName("fkhonbleid_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AllotmentId).HasColumnType("int(11)");
+
+            builder.Property(e => e.CancellationId).HasColumnType("int(11)");
+
 
             builder.Property(e => e.CancellationOrder)
                 .HasMaxLength(2000)
@@ -74,6 +81,12 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Requestforproceeding)
                 .HasForeignKey(d => d.AllotmentId)
                 .HasConstraintName("fkalltmentid");
+
+            builder.HasOne(d => d.Cancellation)
+                .WithMany(p => p.Requestforproceeding)
+                .HasForeignKey(d => d.CancellationId)
+                .HasConstraintName("fk_CancellationId");
+
 
             builder.HasOne(d => d.Honble)
                 .WithMany(p => p.Requestforproceeding)
