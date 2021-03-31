@@ -27,7 +27,7 @@ $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
-    $('#PurposeUseId').val('0').trigger('change');
+    $('#PurposeUseId').val('').trigger('change');
     $('#txtSubPurposeUse').val('');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
