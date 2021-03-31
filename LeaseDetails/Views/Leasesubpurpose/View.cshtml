@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Leasesubpurpose
-@await Component.InvokeAsync("PageHeader", new { pageName = "Subpurpose" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Sub Purpose" })
 
 <div class="pt-3">
 
@@ -11,19 +11,19 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="PurposeUseId" asp-items="@(new SelectList(Model.LeasePurposeUseList, "Id","SubPurposeUse"))">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="PurposeUseId" asp-items="@(new SelectList(Model.LeasePurposeUseList, "Id","PurposeUse"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="PurposeUseId" class="text-danger"></span>
-                    <label asp-for="PurposeUseId" class="floating-label">PurposeUse </label>
+                    <label asp-for="PurposeUseId" class="floating-label">Purpose Use </label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="SubPurposeUse" type="text" disabled
+                    <input asp-for="SubPurposeUse" type="text" disabled  
                            class="floating-label-field floating-label-field--s3" limit="500" />
                     <span asp-validation-for="SubPurposeUse" class="text-danger"></span>
-                    <label class="floating-label">SubPurposeUse </label>
+                    <label class="floating-label">Sub Purpose Use </label>
                 </div>
             </div>
         </div>
