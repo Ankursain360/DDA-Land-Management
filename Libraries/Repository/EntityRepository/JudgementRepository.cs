@@ -235,6 +235,17 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<List<Hearingdetails>> FetchHearingDetails(int? RequestId)
+        {
+            var data = await _dbContext.Hearingdetails
+                                       .Include(x => x.ReqProc) 
+                                       .Include(x => x.NoticeGen)
+                                       .Include(x => x.EvidanceDoc)
+                                       .Where(x => x.ReqProcId == RequestId)
+                                       .ToListAsync();
+            return data;
+        }
+        
         //****  For Judgement page  ********
 
         public async Task<List<Judgement>> GetAllJudgement()

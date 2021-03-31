@@ -365,11 +365,13 @@ namespace Repository.EntityRepository
             return zoneList;
         }
 
-        public async Task<Allotmententry> GetAllotteeDetails(int userId)
+        public async Task<Possesionplan> GetAllotteeDetails(int userId)
         {
-            return await _dbContext.Allotmententry
-                                    .Include(x => x.Application)
-                                    .Where(x => x.Application.UserId == userId)
+            return await _dbContext.Possesionplan
+                                    .Include(x => x.Allotment)
+                                    .Include(x => x.Allotment.Application)
+                                    .Include( x => x.Allotment.LeasePurposesType)
+                                    .Where(x => x.Allotment.Application.UserId == userId)
                                     .FirstOrDefaultAsync();
         }
     }

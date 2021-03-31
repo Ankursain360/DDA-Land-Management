@@ -43,6 +43,7 @@ namespace LeaseDetails.Controllers
         }
 
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Leasepurpose Leasepurpose)

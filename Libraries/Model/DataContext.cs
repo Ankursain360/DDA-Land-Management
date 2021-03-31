@@ -303,6 +303,10 @@ namespace Libraries.Model
         public virtual DbSet<Hearingdetails> Hearingdetails { get; set; }
         public virtual DbSet<Hearingdetailsphotofiledetails> Hearingdetailsphotofiledetails { get; set; }
         public virtual DbSet<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
+        public virtual DbSet<Leasedeed> Leasedeed { get; set; }
+        public virtual DbSet<Allotteeservicesdocument> Allotteeservicesdocument { get; set; }
+        public virtual DbSet<Mortgage> Mortgage { get; set; }
+        public virtual DbSet<Cancellationentry> Cancellationentry { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -545,6 +549,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LeasepaymentdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new JudgementConfiguration());
             modelBuilder.ApplyConfiguration(new LeaseNoticeGenerationConfiguration());
+            modelBuilder.ApplyConfiguration(new LeasedeedConfiguration());
+            modelBuilder.ApplyConfiguration(new MortgageConfiguration());
+            modelBuilder.ApplyConfiguration(new AllotteeServicesDocumentConfiguration());
+            modelBuilder.ApplyConfiguration(new CancellationEntryConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

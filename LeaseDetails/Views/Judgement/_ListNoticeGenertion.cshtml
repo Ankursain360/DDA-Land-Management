@@ -1,60 +1,54 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Leasenoticegeneration>
-    <div class="table-section bg-white border shadow rounded ">
-        <div class="table-responsive">
-            <table class="table table-sm table-bordered mb-0 table-striped">
-                <thead class="text-nowrap">
-                    <tr>
-                        <th>Meeting Date</th>
-                        <th>Meeting Time</th>
-                        <th>Meeting Place</th>
-                        <th>Attachment</th>
+<div class="table-section bg-white border shadow rounded ">
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered mb-0 table-striped">
+            <thead class="text-nowrap">
+                <tr>
+                    <th>Meeting Date</th>
+                    <th>Meeting Time</th>
+                    <th>Meeting Place</th>
+                    <th>Attachment</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null && Model.Count() > 0)
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-
-                                <td>
-                                    @(item.MeetingDate != null ? Convert.ToDateTime(item.MeetingDate).ToString("dd-MMM-yyyy") : "")
-                                </td>
-                                <td>
-                                    @item.MeetingTime
-                                </td>
-                                <td>
-                                    @item.MeetingPlace
-                                </td>
-                                <td>
-                                    @if (item.NoticeFileName != null)
-                                    {
-                                        <a class="badge badge-primary px-2" asp-action="ViewNotice" asp-route-id="@item.Id" target="_blank"> (View)</a>
-                                    }
-                                    else
-                                    {
-                                        <a>No Document</a>
-                                    }
-                                </td>
-
-                            </tr>
-                        }
-                    }
-                    else
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
                     {
                         <tr>
-                            <th colspan="14" style="text-align:center"> No Record Available! </th>
+
+                            <td>
+                                @(item.MeetingDate != null ? Convert.ToDateTime(item.MeetingDate).ToString("dd-MMM-yyyy") : "")
+                            </td>
+                            <td>
+                                @item.MeetingTime
+                            </td>
+                            <td>
+                                @item.MeetingPlace
+                            </td>
+                            <td>
+                                @if (item.NoticeFileName != null)
+                                {
+                                    <a class="badge badge-primary px-2" asp-action="ViewNotice" asp-route-id="@item.Id" target="_blank"> (View)</a>
+                                }
+                                else
+                                {
+                                    <a>No Document</a>
+                                }
+                            </td>
+
                         </tr>
                     }
-                </tbody>
-            </table>
-        </div>
+                }
+                else
+                {
+                    <tr>
+                        <th colspan="14" style="text-align:center"> No Record Available! </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
-    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/noticegenerationlistpartial.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/noticegenerationlistpartial.min.js" asp-append-version="true"></script>
-    </environment>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

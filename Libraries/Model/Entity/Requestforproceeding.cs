@@ -92,9 +92,8 @@ namespace Libraries.Model.Entity
         public ICollection<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
         public ICollection<Leasenoticegeneration> Leasenoticegeneration { get; set; }
 
-        public ICollection<Judgement> Judgement { get; set; }
         public ICollection<Evidancedoc> Evidancedoc { get; set; }
         public ICollection<Hearingdetails> Hearingdetails { get; set; }
-       
+        public ICollection<Judgement> Judgement { get; set; }
     }
 }

@@ -1,0 +1,46 @@
+﻿@model Libraries.Model.Entity.Allotmententry
+
+
+    <form  method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+      
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <h3 class="my-3 d-flex sub-heading ">Application Details  </h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Application.Name" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Application.Name" class="text-danger"></span>
+                    <label class="floating-label"> Name    </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="Application.Address" placeholder="Address" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Application.Address" class="text-danger"></span>
+                    <label class="floating-label">Address    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+          
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Application.ContactNo" placeholder="Contact No" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Application.ContactNo" class="text-danger"></span>
+                    <label class="floating-label">Contact No    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

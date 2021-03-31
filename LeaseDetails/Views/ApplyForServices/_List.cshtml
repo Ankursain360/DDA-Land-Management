@@ -1,16 +1,11 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Hearingdetails>
-
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Servicetype>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
 
-            <th>Hearing Date </th>
-            <th>Hearing Time</th>
-            <th>Hearing Venue</th>
-            <th>Attendee</th>
-            <th>Hearing Remarks</th>
-           
+            <th>Name </th>
+            <th>Timeline </th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -19,18 +14,9 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            @*<td> @(item.Allotment.LRefNo == null?"": item.Allotment.Name)</td>*@
-            <td>  @item.HearingDate</td>
 
-            <td>@item.HearingTime</td>
-            <td>@item.HearingVenue</td>
-            <td>@item.Attendee</td>
-            <td>@item.Remark</td>
-
-
-
-            @* <td>  @(Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy"))</td>*@
-
+            <td>@item.Name</td>
+            <td>@(item.Timeline == null? 0: item.Timeline)</td>
             <td>
                 @if (item.IsActive == 1)
                 {
@@ -41,13 +27,13 @@
             </td>
             <td>
                 <div class="action-btns">
-                   <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
-                     </div>
+                   <a href=@(item.Url == ""? "/Home/Index": item.Url) target="_blank"class="btn btn-theme" style="width:auto;min-width:80px;"><b>Apply</b></a>
+                </div>
 
             </td>
 
         </tr>
-        }
+}
     </tbody>
 
 </table>
