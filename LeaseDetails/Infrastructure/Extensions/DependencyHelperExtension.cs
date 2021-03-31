@@ -56,6 +56,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ILeasepurposeRepository, LeasepurposeRepository>();
 
             services.AddScoped<IApplyForServicesRepository, ApplyForServicesRepository>();
+            services.AddScoped<ILeasesubpurposeRepository, LeasesubpurposeRepository>();
 
 
 

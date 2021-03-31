@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         public Documentchecklist()
         {
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
+            Allotteeservicesdocument = new HashSet<Allotteeservicesdocument>();
         }
         [Required(ErrorMessage = "Service Type is Mandatory")]
         public int ServiceTypeId { get; set; }
@@ -29,6 +30,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Servicetype> ServiceTypeList { get; set; }
+        public ICollection<Allotteeservicesdocument> Allotteeservicesdocument { get; set; }
         public ICollection<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
     }
 }

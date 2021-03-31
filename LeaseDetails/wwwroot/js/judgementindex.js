@@ -4,6 +4,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
+    debugger;
     GetJudgement(currentPageNumber, currentPageSize, sortOrder);
 });
 

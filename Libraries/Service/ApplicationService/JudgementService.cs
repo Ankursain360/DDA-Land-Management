@@ -28,7 +28,8 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
         {
-            return await _judgementRepository.GetPagedRequestForProceeding(model);
+            var data =  await _judgementRepository.GetPagedRequestForProceeding(model);
+            return data;
         }
         public async Task<List<UserBindDropdownDto>> BindUsernameNameList()
         {
@@ -69,7 +70,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _judgementRepository.FetchSingleEvidence(id);
         }
-
+        public async Task<List<Hearingdetails>> FetchHearingDetails(int? RequestId)
+        {
+            return await _judgementRepository.FetchHearingDetails(RequestId);
+        }
         public async Task<bool> Update(int id, Judgement judge)
         {
            

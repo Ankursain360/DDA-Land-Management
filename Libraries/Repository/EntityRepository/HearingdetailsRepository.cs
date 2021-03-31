@@ -310,6 +310,59 @@ namespace Repository.EntityRepository
             return data;
         }
 
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model)
+        {
+            var data = await _dbContext.Requestforproceeding
+                                       .Include(x => x.Allotment)
+                                       .Include(x => x.Allotment.Application)
+                                       .Where(x => x.IsActive == 1
+                                       && (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                       && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                       && x.IsSend == 1
+                                       )
+                                       .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                data = null;
+                data = await _dbContext.Requestforproceeding
+                                        .Include(x => x.Allotment)
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => x.IsActive == 1
+                                        && (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                        && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                        && x.IsSend == 1
+                                        )
+                                       .OrderBy(s =>
+                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
+                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)
+                                       : (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo))
+                                       )
+                                        .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
+
+
+            }
+            else if (SortOrder == 2)
+            {
+                data = null;
+                data = await _dbContext.Requestforproceeding
+                                        .Include(x => x.Allotment)
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => x.IsActive == 1
+                                        && (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                        && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                        && x.IsSend == 1
+                                        )
+                                       .OrderByDescending(s =>
+                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
+                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)
+                                       : (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo))
+                                       )
+                                        .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
+            }
+            return data;
+        }
+    }
         public async Task<List<Honble>> GetAllHonble()
         {
             List<Honble> List = await _dbContext.Honble.Where(x => x.IsActive == 1).ToListAsync();

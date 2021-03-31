@@ -198,6 +198,90 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/js/allotmententrycreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotmententrycreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/allotmententryindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotmententryindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/allotmentlettercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotmentlettercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/allotmentletterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotmentletterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/applyforserviceindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/applyforserviceindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/hearingdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/hearingdetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/judgementcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/judgementcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/judgementindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/judgementindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leasepurposeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/leasepurposeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leasesubpurposeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/leasesubpurposeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/licencefeescreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/licencefeescreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/oldallotmententryedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/oldallotmententryedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/oldallotmententryindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/oldallotmententryindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/servicetypeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/servicetypeindex.js"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/js/hearingdetailsindex.min.js",
     "inputFiles": [
       "wwwroot/js/hearingdetailsindex.js"

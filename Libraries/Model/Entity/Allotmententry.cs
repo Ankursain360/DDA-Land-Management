@@ -13,9 +13,11 @@ namespace Libraries.Model.Entity
     {
         public Allotmententry()
         {
+            Leasedeed = new HashSet<Leasedeed>();
             Possesionplan = new HashSet<Possesionplan>();
             Requestforproceeding = new HashSet<Requestforproceeding>();
             Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
+            Mortgage = new HashSet<Mortgage>();
         }
         public int ApplicationId { get; set; }
         public decimal TotalArea { get; set; }
@@ -86,7 +88,8 @@ namespace Libraries.Model.Entity
         public ICollection<Requestforproceeding> Requestforproceeding { get; set; }
         public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
 
-
+        public ICollection<Leasedeed> Leasedeed { get; set; }
+        public ICollection<Mortgage> Mortgage { get; set; }
         //[NotMapped]
         //public string FullName
         //{

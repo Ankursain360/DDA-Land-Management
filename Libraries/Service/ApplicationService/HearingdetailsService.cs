@@ -150,5 +150,10 @@ namespace Libraries.Service.ApplicationService
 
 
 
+
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model)
+        {
+            return await _hearingdetailsRepository.GetPagedRequestLetterDetails(model);
+        }
     }
 }

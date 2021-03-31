@@ -14,6 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Requestforproceeding>> GetAllRequestforproceeding();
         Task<List<Leasenoticegeneration>> GetAllLeasenoticegeneration(int? AppId);
         Task<PagedResult<Hearingdetails>> GetPagedHearingDetails(HearingdetailsSeachDto model);
+        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
         public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
 
         Task<List<Allotmententry>> GetAllAllotment();
