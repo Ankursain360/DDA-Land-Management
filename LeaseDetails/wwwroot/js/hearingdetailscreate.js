@@ -20,15 +20,15 @@ function GetDetailsHearingDetails(pageNumber, pageSize, sortOrder) {
         $('#divTable').html(response);
     });
 }
-$("#btnGenerate").click(function () {
-    debugger
-    var daten = document.getElementById("txtHearingDate").value;
-    var refn = document.getElementById("txtHearingTime").value;
-    sessionStorage.NewDate = daten;
-    sessionStorage.RefN = refn;
-    window.location.href = '/HearingDetails/ViewLetter/';
+//$("#btnGenerate").click(function () {
+//    debugger
+//    var daten = document.getElementById("txtHearingDate").value;
+//    var refn = document.getElementById("txtHearingTime").value;
+//    sessionStorage.NewDate = daten;
+//    sessionStorage.RefN = refn;
+//   // window.location.href = '/HearingDetails/ViewLetter/';
 
-});
+//});
 
 function DateCheck() {
     debugger;

@@ -1,0 +1,117 @@
+﻿@model Libraries.Model.Entity.Hearingdetails
+@await Component.InvokeAsync("PageHeader", new { pageName = "Hearing Details Letter" })
+
+
+<div class="pt-3">
+
+    <form asp-action="View" method="post" disabled="disbled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Letter</h3>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div id="LetterData" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+
+            <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+                <tr>
+                    <td align="center">
+                        <h4><b> COURT OF ESTATE OFFICER,</b></h4> <br />
+                        <h4><b> SOUTH EAST ZONE, LAND MANAGEMENT WING,</b></h4> <br />
+                        <h4><b> DELHI DEVELOPMENT AUTHORITY,</b></h4> <br />
+                        <h4><b> C-1/7, GROUND FLOOR. VIKAS SADAN, </b></h4> <br />
+                        <h4><b> INA, NEW DELHI-110023</b></h4> <br />
+                        <br />
+                        <h6><b> *****</b></h6> <br />
+
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td style="border:none; border-top: none;">
+                        <table style="border:none; border-top: none; width:100%">
+                            <tr>
+
+                                <td align="left">
+                                    No. EV/LM/SEZ/051(5)/K-1/31, CR Park/1997/DDA
+
+                                </td>
+                                <td align="right">
+                                    Dated : <label class="floating-label" asp-for="HearingDate"> </label>
+                                </td>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left">
+                        <b> Smt.Rama Malick, </b> <br />
+                        <b> S/o Sh. G.D. Verma, </b> <br />
+                        <b> R/o E-905, Ground Floor,</b><br />
+                        <b>Chitranjan Park, New Delhi 110019 </b> <br />
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>
+                            Sub: Proceedings Under section (1)and clause (b)
+                            (ii) of sub section (2) of section 4 of the Public Premises (Eviction of Unauthorized Occupants) Act 1971.
+                            in respect of premises on Ground Floor, Plot No. K-1/31, situated in Chitranjan Park, Delhi.
+                        </b>
+                    </td>
+
+                </tr>
+            </table>
+            <br />
+
+            <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+                <tbody class="tbody">
+                    <tr>
+                        <td>
+                            In connection with the notice under Section 4(1) of the Public Premises (Eviction of Unauthorised Occupants) Act, 1971
+                            you are hereby directed that you may produce evidence in support of your objections to the notice and appear before the
+                            court of undersigned on  <label class="floating-label" asp-for="HearingDate"> </label> at  <label class="floating-label" asp-for="HearingTime"> </label>.
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            If you fail to appear on the said date, ex-parte proceedings will be initiated against you.
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td align="right">
+
+                            <b>
+                                (Signature and seal
+                                of the Estate Officer)
+                            </b><br />
+                            <b>SOUTH EAST ZONE, DDA	</b>
+                            <br />
+
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+
+                @Html.ActionLink("Back", "Index", "HearingDetails", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+<environment include="Development">
+    <script src="~/js/hearingdetailsletter.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/hearingdetailsletter.min.js" asp-append-version="true"></script>
+</environment>
