@@ -280,5 +280,17 @@
     "inputFiles": [
       "wwwroot/js/servicetypeindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/hearingdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/hearingdetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/hearingdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/hearingdetailscreate.js"
+    ]
   }
 ]

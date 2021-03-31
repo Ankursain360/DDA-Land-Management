@@ -21,6 +21,16 @@ namespace Libraries.Service.IApplicationService
         Task<Hearingdetailsphotofiledetails> GetHphotofiledetails(int hid);
         Task<bool> DeleteHphotofiledetails(int Id);
         Task<Requestforproceeding> FetchSingleResultReq(int id);
-        Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
+        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
+
+        Task<List<Allotmententry>> GetAllAllotment();
+        Task<List<Honble>> GetAllHonble();
+
+        Task<Requestforproceeding> FetchSingleReqDetails(int? RequestId);
+        Task<List<Leasenoticegeneration>> FetchNoticeGenerationDetails(int? RequestId);
+        Task<Leasenoticegeneration> FetchSingleNotice(int? id);
+
+        Task<List<Allotteeevidenceupload>> FetchAllotteeEvidenceDetails(int? RequestId);
+        Task<Allotteeevidenceupload> FetchSingleEvidence(int? id);
     }
 }
