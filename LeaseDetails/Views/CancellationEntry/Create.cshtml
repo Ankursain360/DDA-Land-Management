@@ -1,0 +1,157 @@
+﻿@model Libraries.Model.Entity.Cancellationentry
+@await Component.InvokeAsync("PageHeader", new { pageName = "Cancellation Entry" })
+<div class="pt-3">
+    <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Create Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" onchange="get_socity()"
+                            asp-for="AllotmentId">
+                        <option selected disabled="disabled" value="">---Select---</option>
+                        @foreach (var item in Model.AllotmententryList)
+                        {
+                            <option value="@item.Id" data-id="@item.SocietyName,@item.PurposeName"> @item.LRefNo </option>
+                        }
+                    </select>
+                    <span asp-validation-for="AllotmentId" class="text-danger"></span>
+                    <label class="floating-label">File No</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input disabled type="text" id="Society_name" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Name Of the Society </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled placeholder="Contact No" id="Purpose_name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Use as per allotment letter/Lease Deed  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <textarea type="text" asp-for="Subject" class="floating-label-field floating-label-field--s3 " placeholder="Remarks"></textarea>
+
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Cancellation Subject </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Contact No" asp-for="GroundOfViolations" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="GroundOfViolations" class="text-danger"></span>
+                    <label class="floating-label">Ground of violations  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Contact No" asp-for="DateOfCancellationofLease" type="date" value=""
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="DateOfCancellationofLease" class="text-danger"></span>
+                    <label class="floating-label">Date of cancellation of lease Deed/Allotment </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="HonebleLgOrCommon" asp-items="@(new SelectList(Model.HonbleList, "Id","HonbleName"))">
+                        <option selected disabled="disabled" value="">---Select---</option>
+                    </select>
+                    <span asp-validation-for="HonebleLgOrCommon" class="text-danger"></span>
+                    <label asp-for="HonebleLgOrCommon" class="floating-label">Whether by Hon'ble LG or Comm.(LD) </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="ProceedingEvictionPossession" placeholder="Address" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="ProceedingEvictionPossession" class="text-danger"></span>
+                    <label class="floating-label">Proceeding for eviction of possession Assessment of damage</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="CourtCaseifAny" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="CourtCaseifAny" class="text-danger"></span>
+                    <label class="floating-label">Court case if any   </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="DemandLetterPhoto" class="floating-label-field floating-label-field--s3"  accept="application/pdf" />
+                    <label class="floating-label">Demand Letter </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="NocPhoto" class="floating-label-field floating-label-field--s3"  accept="application/pdf" />
+                    <label class="floating-label">NOC</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <label class="err" style="color:red;">
+                    Only Upload 10 Mb File
+                </label>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                    <label class="floating-label">Cancellation Order </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "CancellationEntry", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/cancellationentrycreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/cancellationentrycreate.min.js" asp-append-version="true"></script>
+</environment>

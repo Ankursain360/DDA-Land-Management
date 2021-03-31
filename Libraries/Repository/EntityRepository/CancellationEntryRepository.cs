@@ -16,16 +16,16 @@ using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class CancellationEntryRepository : GenericRepository<Requestforproceeding>, ICancellationEntryRepository
+    public class CancellationEntryRepository : GenericRepository<Cancellationentry>, ICancellationEntryRepository
     {
         public CancellationEntryRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
 
-        public async Task<List<Requestforproceeding>> GetAllRequestForProceeding()
+        public async Task<List<Cancellationentry>> GetAllRequestForProceeding()
         {
-            return await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Honble).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Cancellationentry.Include(x => x.Allotment).Include(x => x.HonebleLgOrCommonNavigation).OrderByDescending(x => x.Id).ToListAsync();
         }
 
         public async Task<List<Honble>> GetAllHonble()
@@ -36,9 +36,6 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Allotmententry>> GetAllAllotment()
         {
-            //List<Allotmententry> villageList = await _dbContext.Allotmententry.Include(x=>x.Application).Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1)).ToListAsync();
-            //return villageList;
-
             List<Allotmententry> villageList = await _dbContext.Allotmententry.Include(x => x.Application).
                 Include(x => x.LeasePurposesType).Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1 && x.LeasePurposesTypeId == x.LeasePurposesType.Id)).ToListAsync();
             return villageList;
@@ -46,163 +43,81 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
+        public async Task<PagedResult<Cancellationentry>> GetPagedCancellationEntry(CancellationEntrySearchDto model)
         {
-            var data = await _dbContext.Requestforproceeding
-               // .Include(x => x.Allotment).Include(x => x.Allotment.Application)
-               //   .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-               //     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-               //     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-               //)
-               //
-               .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-
-
-
-
+            var data = await _dbContext.Cancellationentry
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x =>  (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                        )
+                                         .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
-            //if (SortOrder == 0)
-            //{
-            //     data = await _dbContext.Requestforproceeding
-            //       // .Include(x => x.Allotment).Include(x => x.Allotment.Application)
-            //       //   .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-            //       //     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-            //       //     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-            //       //).
-
-
-
-            //       . GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-            //}
-
             if (SortOrder == 1)
             {
-                switch (model.SortBy.ToUpper())
+                data = null;
+                if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    case ("LETTERREFNO"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-                 )
-                                .OrderBy(s => s.LetterReferenceNo)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-                        break;
-
-
-                    case ("ALLOTMENTNO"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-                 )
-                                .OrderBy(s => s.Allotment.Application.RefNo)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-                        break;
-
-
-                    case ("SUBJECT"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-                   )
-                                    .OrderBy(s => s.Subject)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-
-                        break;
-
-
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-               )
-                           .OrderByDescending(s => s.IsActive)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-                        break;
-
+                    data = await _dbContext.Cancellationentry
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                        )
+                                        .OrderByDescending(s => s.IsActive)                                        
+                                         .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
                 }
+                else
+                {
+                    data = null;
+                    data = await _dbContext.Cancellationentry
+                                        .Include(x => x.Allotment)
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                        )
+                                       .OrderBy(s =>
+                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
+                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)
+                                       : (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo))
+                                       )
+                                        .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
+                }
+
             }
             else if (SortOrder == 2)
             {
-                switch (model.SortBy.ToUpper())
+                if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    case ("LETTERREFNO"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-                 )
-                                .OrderByDescending(s => s.LetterReferenceNo)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-                        break;
-
-
-                    case ("ALLOTMENTNO"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-                 )
-                                .OrderByDescending(s => s.Allotment.Application.RefNo)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-                        break;
-
-
-                    case ("SUBJECT"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-                   )
-                                    .OrderByDescending(s => s.Subject)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-                        break;
-
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
-                    && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
-                     && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
-
-               )
-                           .OrderBy(s => s.IsActive)
-                                .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
-                        break;
-
+                    data = await _dbContext.Cancellationentry
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                        )
+                                        .OrderBy(s => s.IsActive)
+                                         .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
                 }
+                else
+                {
+                    data = null;
+                    data = await _dbContext.Cancellationentry
+                                        .Include(x => x.Allotment)
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
+                                        )
+                                       .OrderByDescending(s =>
+                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
+                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)
+                                       : (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo))
+                                       )
+                                        .GetPaged<Cancellationentry>(model.PageNumber, model.PageSize);
+                }
+
             }
-
-
             return data;
-
-
         }
-
-
-
-
-
-
         public async Task<List<UserBindDropdownDto>> BindUsernameNameList()
         {
             try
@@ -219,10 +134,6 @@ namespace Libraries.Repository.EntityRepository
                 return null;
             }
         }
-
-
-
-
 
     }
 }
