@@ -4,50 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>acd73896-8476-4e05-bbd0-fdf61e2eb855</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="bundleconfig.json" />
-    <Content Remove="Views\CaseStatusHistory\_RequestForProceedingEvictionView.cshtml" />
-    <Content Remove="Views\Judgement\_RequestForProceedingEvictionView.cshtml" />
-    <Content Remove="Views\LeaseHearingDetails\Create.cshtml" />
-    <Content Remove="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
-    <Content Remove="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
-    <Content Remove="wwwroot\js\actiontakenbydda.min.js" />
-    <Content Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
-    <Content Remove="wwwroot\js\noticegenerationcreate.min.js" />
-    <Content Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\LeasePaymentDetails\Edit.cshtml" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\actiontakenbydda.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\noticegenerationcreate.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bundleconfig.json" />
-    <None Include="Views\CaseStatusHistory\_RequestForProceedingEvictionView.cshtml" />
-    <None Include="Views\Judgement\_RequestForProceedingEvictionView.cshtml" />
-    <None Include="Views\LeaseApplicationFormApproval\Create.cshtml" />
-    <None Include="Views\LeaseApplicationFormApproval\Index.cshtml" />
-    <None Include="Views\LeaseApplicationFormApproval\_HistoryDetails.cshtml" />
-    <None Include="Views\LeaseApplicationFormApproval\_LeaseApplicationFormView.cshtml" />
-    <None Include="Views\LeaseApplicationFormApproval\_ListLeaseApplicationFormApproval.cshtml" />
-    <None Include="Views\LeaseApplicationForm\Create.cshtml" />
-    <None Include="Views\LeaseApplicationForm\Index.cshtml" />
-    <None Include="Views\LeaseApplicationForm\Print.cshtml" />
-    <None Include="Views\LeaseApplicationForm\_List.cshtml" />
-    <None Include="Views\LeaseHearingDetails\Create.cshtml" />
-    <None Include="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
-    <None Include="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
-    <None Include="wwwroot\js\actiontakenbydda.min.js" />
-    <None Include="wwwroot\js\leaseapplicationformcreate.min.js" />
-    <None Include="wwwroot\js\noticegenerationcreate.min.js" />
-    <None Include="wwwroot\js\proceedingevictionlettercreate.min.js" />
-  </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
@@ -65,37 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\CancellationEntry\Index.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\HearingDetails\Edit.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\HearingDetails\_ListNoticeGenertion.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\HearingDetails\_RequestForProceedingEvictionView.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\LeasePaymentDetails\Create.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="Views\LeasePaymentDetails\_List.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\js\requestforproceedingedit - Copy.min.js">
-      <DependentUpon>requestforproceedingedit.min.js</DependentUpon>
-    </Content>
+    <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\LeasePaymentDetails\Edit.cshtml" />
-  </ItemGroup>
-
 </Project>
