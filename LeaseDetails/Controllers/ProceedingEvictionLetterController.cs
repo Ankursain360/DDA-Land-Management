@@ -160,8 +160,8 @@ namespace LeaseDetails.Controllers
                     #endregion
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show("Letter Send to Official", "", AlertType.Success);
-                        TempData["Message"] = Alert.Show("Letter Send to Officia", "", AlertType.Success);
+                        ViewBag.Message = Alert.Show("Letter Sent to Official", "", AlertType.Success);
+                        TempData["Message"] = Alert.Show("Letter Sent to Official", "", AlertType.Success);
                         var data = await _proceedingEvictionLetterService.FetchProceedingConvictionLetterData(id);
                         data.Id = id;
                         //return RedirectToAction("Index", "RequestForProceedingEviction");
