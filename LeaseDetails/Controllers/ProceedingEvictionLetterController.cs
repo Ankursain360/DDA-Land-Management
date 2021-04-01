@@ -90,7 +90,7 @@ namespace LeaseDetails.Controllers
         //    return Json(await _proceedingEvictionLetterService.GetLetterRefNo(Convert.ToInt32(Id)));
         //}
 
-        [AuthorizeContext(ViewAction.Add)]
+       // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> UploadLetter(int id)
         {
             Requestforproceeding data = new Requestforproceeding();
@@ -182,7 +182,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+      //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> GenerateLetter(int id)
         {
             ProceedingEvictionLetterCreateProfileDto data = new ProceedingEvictionLetterCreateProfileDto();
