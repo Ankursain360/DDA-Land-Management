@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/js/mortgagecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/mortgagecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/mortgageindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/mortgageindex.js"
+    ]
+  }
+]
