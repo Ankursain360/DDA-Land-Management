@@ -238,7 +238,10 @@ namespace Repository.EntityRepository
             return await _dbContext.Hearingdetails
                                      .Include(x => x.ReqProc)
                                      .Include(x => x.ReqProc.Allotment)
-                                      .Where(x => (x.Id == RequestId) && (x.ReqProc.Id==x.ReqProcId))
+                                     .Include(x => x.ReqProc.Allotment.Application)
+                                      .Where(x => (x.Id == RequestId) && (x.ReqProc.Id==x.ReqProcId) && (x.ReqProc.Allotment.Id==x.ReqProc.AllotmentId)
+                                      
+                                                                                                     )
                                      .OrderByDescending(s => s.Id)
                                      .FirstOrDefaultAsync();
         }
