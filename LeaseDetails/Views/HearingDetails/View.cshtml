@@ -31,7 +31,7 @@
                             <tr>
 
                                 <td align="left">
-                                    No. -  @(Model.ReqProc == null ?  "" : Model.ReqProc.LetterReferenceNo == null ? "" : Model.ReqProc.LetterReferenceNo)
+                                    No. -  @(Model.ReqProc.Allotment.Application == null ?  "" : Model.ReqProc.Allotment.Application == null ? "" : Model.ReqProc.Allotment.Application.RefNo)
 
                                 </td>
                                 <td align="right">
@@ -42,12 +42,12 @@
                 </tr>
                 <tr>
                     <td align="left">
-                        <b>To,</b>
+                        <b>To,</b><br/>
                         <b>
-                            @(Model.ReqProc == null ?  "" : Model.ReqProc.Allotment.Name == null ? "" : Model.ReqProc.Allotment.Name)
+                            @(Model.ReqProc.Allotment.Application == null ?  "" : Model.ReqProc.Allotment.Application.Name == null ? "" : Model.ReqProc.Allotment.Application.Name)
                         </b> <br />
                         <b>
-                            @(Model.ReqProc == null ?  "" : Model.ReqProc.Allotment.Address == null ? "" : Model.ReqProc.Allotment.Address)
+                            @(Model.ReqProc.Allotment.Application == null ?  "" : Model.ReqProc.Allotment.Application.Address == null ? "" : Model.ReqProc.Allotment.Application.Address)
                         </b> <br />
 
                         <br />

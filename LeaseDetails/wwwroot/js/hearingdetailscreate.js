@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 5;
+var currentPageSize = 100;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
@@ -52,7 +52,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         AllotmentId: 0,
         sortBy: 1,
         sortOrder: 1,
-        pageSize: 5,
+        pageSize: 100,
         pageNumber: 1
     }
     return model;
