@@ -9,7 +9,7 @@ function GetRelativeData(id) {
         if (response != null) {
             $("#AllotmentId").val(response.allotmentId);
             $("#CancellationId").val(response.id);
-            $("#Society_name").val(response.allotment.application.refNo);
+            $("#Society_name").val(response.allotment.application.name);
             $("#Purpose_name").val(response.allotment.leasePurposesType.purposeUse);
             $("#Subject").val(response.subject);
             $("#GroundOfViolations").val(response.groundOfViolations);
