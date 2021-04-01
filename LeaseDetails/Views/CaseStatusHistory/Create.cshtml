@@ -11,9 +11,9 @@
         <input type="hidden" asp-for="RequestForProceedingId" />
         <input type="hidden" asp-for="Id" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-       
+        <div id="pagepdf">
 
-        @*<div class="permission mt-2 accordion list-unstyled m-0 ">
+            @*<div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval1" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
@@ -33,7 +33,7 @@
         </div>*@
 
 
-        @*<div class="permission mt-2 accordion list-unstyled m-0 ">
+            @*<div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval2" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
@@ -52,7 +52,7 @@
         </div>*@
 
 
-        @*<div class="permission mt-2 accordion list-unstyled m-0 ">
+            @*<div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval3" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
@@ -69,7 +69,7 @@
         </div>*@
 
 
-        @*<div class="permission mt-2 accordion list-unstyled m-0 ">
+            @*<div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval4" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
@@ -87,7 +87,7 @@
 
 
 
-        @*<div class="permission mt-2 accordion list-unstyled m-0 ">
+            @*<div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval5" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
@@ -104,125 +104,127 @@
         </div>*@
 
 
-        <div class="permission mt-2">
-            <h3 class=" accordion list-unstyled m-0">View Request Proceeding For Eviction Details </h3>
-
-            
-                <div  class="pt-4" id="RequestForProceedingEvictionDiv">
-
-                </div>
-           
-        </div>
-
-        <div class="permission mt-2">
-            <h3 class=" accordion list-unstyled m-0">View Notice Generations Details </h3>
-
-            <div class="pt-4" id="NoticeGenerationDiv">
-
-            </div>
-        </div>
-
-        <br />
+            <div class="permission mt-2">
+                <h3 class=" accordion list-unstyled m-0">View Request Proceeding For Eviction Details </h3>
 
 
-        <div class="permission mt-2">
-            <h3 class=" accordion list-unstyled m-0">View Allottee Evidance Document Details </h3>
-
-            <div class="pt-4" id="AllotteeEvidenceDiv">
-
-            </div>
-        </div>
-
-
-
-
-
-        <div class="permission mt-2">
-            <h3 class=" accordion list-unstyled m-0">View Hearing Details</h3>
-
-            <div class="pt-4" id="HearingDetailsDiv">
-
-            </div>
-        </div>
-
-
-
-
-        <div class="permission mt-2">
-            <h3 class=" accordion list-unstyled m-0">Judgement Details</h3>
-
-            <div class="pt-4" id="judgement">
-
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" style="width:100%;"
-                                    asp-for="ForwardToUserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))">
-                                <option disabled="disabled" selected value="">Select</option>
-
-                            </select>
-                            <span asp-validation-for="ForwardToUserId" class="text-danger"></span>
-                            <label class="floating-label">Forward To</label>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            @{ if (Model.FilePath != null)
-                                {
-                                    <a class="badge badge-primary px-2" asp-action="DownloadJudgementFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
-                                    <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                                    <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
-                                }
-                                else
-                                {
-                                    <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                                    <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
-                                    <label for="field-1" class="floating-label"> Upload copy of the document selected </label> } }
-
-
-                        </div>
-
-
-                    </div>
+                <div class="pt-4" id="RequestForProceedingEvictionDiv">
 
                 </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" style="width:100%;"
-                                    asp-for="JudgementStatusId" asp-items="@(new SelectList(Model.JudgementStatusList, "Id","Status"))">
-                                <option disabled="disabled" selected value="">Select</option>
 
-                            </select>
-                            <span asp-validation-for="JudgementStatusId" class="text-danger"></span>
-                            <label class="floating-label">Judgement Status</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+            </div>
 
-                            <span asp-validation-for="Remarks" class="text-danger"></span>
-                            <label class="floating-label"> Remarks </label>
-                        </div>
-                    </div>
+            <div class="permission mt-2">
+                <h3 class=" accordion list-unstyled m-0">View Notice Generations Details </h3>
+
+                <div class="pt-4" id="NoticeGenerationDiv">
+
                 </div>
+            </div>
+
+            <br />
+
+
+            <div class="permission mt-2">
+                <h3 class=" accordion list-unstyled m-0">View Allottee Evidance Document Details </h3>
+
+                <div class="pt-4" id="AllotteeEvidenceDiv">
+
+                </div>
+            </div>
 
 
 
+
+
+            <div class="permission mt-2">
+                <h3 class=" accordion list-unstyled m-0">View Hearing Details</h3>
+
+                <div class="pt-4" id="HearingDetailsDiv">
+
+                </div>
+            </div>
+
+
+
+
+            <div class="permission mt-2">
+                <h3 class=" accordion list-unstyled m-0">Decision Taken By DDA</h3>
+
+                <div class="pt-4" id="judgement">
+
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" style="width:100%;"
+                                        asp-for="ForwardToUserId" asp-items="@(new SelectList(Model.UserNameList, "Id","Name"))">
+                                    <option disabled="disabled" selected value="">Select</option>
+
+                                </select>
+                                <span asp-validation-for="ForwardToUserId" class="text-danger"></span>
+                                <label class="floating-label">Forward To</label>
+                            </div>
+                        </div>
+                        <div class=" col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                @{ if (Model.FilePath != null)
+                                    {
+                                        <a class="badge badge-primary px-2" asp-action="DownloadJudgementFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
+                                        <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                        <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                        <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                                        <label for="field-1" class="floating-label"> Upload copy of the document selected </label> } }
+
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" style="width:100%;"
+                                        asp-for="JudgementStatusId" asp-items="@(new SelectList(Model.JudgementStatusList, "Id","Status"))">
+                                    <option disabled="disabled" selected value="">Select</option>
+
+                                </select>
+                                <span asp-validation-for="JudgementStatusId" class="text-danger"></span>
+                                <label class="floating-label">Judgement Status</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <textarea asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+
+                                <span asp-validation-for="Remarks" class="text-danger"></span>
+                                <label class="floating-label"> Remarks </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="permission mt-2">
+                <h3 class=" accordion list-unstyled m-0">View Action Taken By DDA Details</h3>
+
+                <div class="pt-4" id="ActionDetailsDiv">
+
+                </div>
             </div>
         </div>
-        <div class="permission mt-2">
-            <h3 class=" accordion list-unstyled m-0">View Action Taken By DDA Details</h3>
-
-            <div class="pt-4" id="ActionDetailsDiv">
-
-            </div>
-        </div>
-
         <div class="row mt-md-3">
             <div class=" col-md-12">
+                <a class="btn btn-info" href="javascript:getPDF();">Print</a>
+                @*<button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>*@
                 @Html.ActionLink("Back", "Index", "CaseStatusHistory", null, new { @class = "btn btn-theme " })
             </div>
         </div>

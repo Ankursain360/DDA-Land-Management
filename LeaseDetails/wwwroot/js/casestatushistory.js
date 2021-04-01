@@ -50,3 +50,13 @@ function GetActiontakenbyDDADetails(id) {
         $('#ActionDetailsDiv').html(response);
     });
 };
+
+
+
+$(function () {
+    $("#btnPrint").click(function () {
+        $('.jhide').hide();
+        window.print();
+        $('.jhide').show();
+    });
+});
