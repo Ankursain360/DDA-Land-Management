@@ -326,36 +326,3 @@ eval(
 
 
 
-//<script type="text/javascript">
-	function getPDF() {
-        var html_width = $("#pagepdf").width();
-        var html_height = $("#pagepdf").height();
-        var top_left_margin = 10;
-        var pdf_width = html_width + (top_left_margin * 2);
-        var pdf_height = (html_height * 1.6) + (top_left_margin * 2.1);
-        var canvas_image_width = html_width;
-        var canvas_image_height = html_height;
-
-        var totalpdfpages = Math.ceil(html_height / pdf_height) - 1;
-
-
-        html2canvas($("#pagepdf")[0], {allowtaint: true, height: pdf_height, y: 0 }).then(function (canvas) {
-		canvas.getContext('2d');
-
-            console.log(canvas.height + "  " + canvas.width);
-
-
-            var imgdata = canvas.toDataURL("image/jpeg", 1.0, {y: 0, height: pdf_height, width: pdf_width });
-            var pdf = new jspdf('p', 'pt', [pdf_height - pdf_height / 2.5, pdf_width]);
-            // pdf.addimage(imgdata, 'jpg', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-            pdf.addImage(imgdata, 'jpg', top_left_margin, 0, canvas_image_width - (canvas_image_width / 8), canvas_image_height * 1.4);
-
-            for (var i = 1; i <= totalpdfpages; i++) {
-		pdf.addpage(pdf_width, pdf_height);
-                pdf.addimage(imgdata, 'jpg', top_left_margin, (pdf_height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
-            }
-
-            pdf.save("html-document.pdf");
-        });
-    };
-//</script>
