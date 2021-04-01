@@ -59,7 +59,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ILeasedeedRepository, LeasedeedRepository>();
             services.AddScoped<IActionTakenByDdaRepository, ActionTakenByDdaRepository>();
             services.AddScoped<IJudgementstatusRepository, JudgementstatusRepository>();
-
+            services.AddScoped<IHonbleRepository, HonbleRepository>();
 
 
             /* Application Services */
@@ -103,6 +103,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<ILeasedeedService, LeasedeedService>();
             services.AddScoped<IActiontakenbyddaService, ActiontakenbyddaService>();
             services.AddScoped<IJudgementstatusService, JudgementstatusService>();
+            services.AddScoped<IHonbleService, HonbleService>();
 
 
 
