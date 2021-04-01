@@ -334,5 +334,23 @@
     "inputFiles": [
       "wwwroot/js/requestforproceedingview.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/actiontakenbydda.min.js",
+    "inputFiles": [
+      "wwwroot/js/actiontakenbydda.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/actiontakenbyddaindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/actiontakenbyddaindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/judgementstatusindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/judgementstatusindex.js"
+    ]
   }
 ]

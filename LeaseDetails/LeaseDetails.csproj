@@ -12,6 +12,7 @@
     <Content Remove="Views\LeaseHearingDetails\Create.cshtml" />
     <Content Remove="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
     <Content Remove="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
+    <Content Remove="wwwroot\js\actiontakenbydda.min.js" />
     <Content Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
     <Content Remove="wwwroot\js\noticegenerationcreate.min.js" />
     <Content Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
@@ -19,6 +20,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\LeasePaymentDetails\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\actiontakenbydda.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\leaseapplicationformcreate.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\noticegenerationcreate.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\proceedingevictionlettercreate.min.js" />
@@ -40,6 +42,7 @@
     <None Include="Views\LeaseHearingDetails\Create.cshtml" />
     <None Include="Views\LeaseHearingDetails\_RequestForProceedingEvictionView.cshtml" />
     <None Include="Views\NoticeGeneration\_RequestForProceedingEvictionView.cshtml" />
+    <None Include="wwwroot\js\actiontakenbydda.min.js" />
     <None Include="wwwroot\js\leaseapplicationformcreate.min.js" />
     <None Include="wwwroot\js\noticegenerationcreate.min.js" />
     <None Include="wwwroot\js\proceedingevictionlettercreate.min.js" />
