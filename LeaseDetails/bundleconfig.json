@@ -352,5 +352,29 @@
     "inputFiles": [
       "wwwroot/js/judgementstatusindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/casestatushistory.min.js",
+    "inputFiles": [
+      "wwwroot/js/casestatushistory.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/casestatushistoryindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/casestatushistoryindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leasedeed.min.js",
+    "inputFiles": [
+      "wwwroot/js/leasedeed.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Leasedeedindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/Leasedeedindex.js"
+    ]
   }
 ]
