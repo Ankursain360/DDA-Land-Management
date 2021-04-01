@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LeaseDetails.Controllers
 {
-    public class DemandController : Controller
+    public class DemandLetterController : Controller
     {
         public IActionResult Index()
         {

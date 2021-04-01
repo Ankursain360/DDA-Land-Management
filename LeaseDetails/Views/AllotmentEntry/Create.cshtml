@@ -68,17 +68,7 @@
         </div>
         <h3 class="my-3 d-flex sub-heading">Lease Details</h3>
         <div class="row mt-md-3">
-            @*<div class="col-md-6">
-            <div class="floating-label-wrap">
-                <select class="floating-label-field floating-label-field--s3"
-                        asp-for="LeasesTypeId" asp-items="@(new SelectList(Model.LeaseTypeList, "Id","Type"))">
-                    <option disabled="disabled" selected value="">Select</option>
-
-                </select>
-                <span asp-validation-for="LeasesTypeId" class="text-danger"></span>
-                <label class="floating-label">Lease Type </label>
-            </div>
-        </div>*@
+           
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" id="ddlJudgement" asp-for="LeasesTypeId">
@@ -97,7 +87,7 @@
                     <input placeholder="Name" asp-for="BuildingArea"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="BuildingArea" class="text-danger"></span>
-                    <label class="floating-label"> Building Area   </label>
+                    <label class="floating-label"> Building Area(in sq mt)   </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -105,7 +95,7 @@
                     <input placeholder="Name" asp-for="PlayGroundArea"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="PlayGroundArea" class="text-danger"></span>
-                    <label class="floating-label"> Open Area/Playfield Area   </label>
+                    <label class="floating-label"> Open Area/Playfield Area(in sq mt)   </label>
                 </div>
             </div>
         </div>
