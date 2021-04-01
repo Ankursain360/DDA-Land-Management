@@ -48,8 +48,10 @@ function DateCheck() {
     }
 };
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
+    var id = parseInt($('#RequestForProceedingId').val());
     var model = {
-        AllotmentId: 0,
+        refno: id,
+        name: "test",
         sortBy: 1,
         sortOrder: 1,
         pageSize: 100,

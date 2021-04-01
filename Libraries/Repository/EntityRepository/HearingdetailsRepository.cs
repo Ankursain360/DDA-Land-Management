@@ -321,6 +321,7 @@ namespace Repository.EntityRepository
                                           .Include(x => x.ReqProc)
                                           //.Include(x=>x.NoticeGen)
                                           //.Include(x => x.EvidanceDoc)
+                                          .Where(x=>x.ReqProcId==Convert.ToInt32(model.refno))
                                           .OrderByDescending(x => x.Id)
                           .GetPaged<Hearingdetails>(model.PageNumber, model.PageSize);
            
