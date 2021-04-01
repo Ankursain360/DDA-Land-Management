@@ -114,7 +114,8 @@ namespace LeaseDetails.Controllers
                             {
                                 DocumentChecklistId = leaseapplication.DocumentChecklistId.Count <= i ? 0 : leaseapplication.DocumentChecklistId[i],
                                 LeaseApplicationId = leaseapplication.Id,
-                                DocumentFileName = filename
+                                DocumentFileName = filename,
+                                CreatedBy = SiteContext.UserId
 
                             });
                         }

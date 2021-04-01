@@ -4,6 +4,7 @@ using Libraries.Model.Common;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
@@ -14,6 +15,7 @@ namespace Libraries.Model.Entity
         public int RequestForProceedingId { get; set; }
         public int? ForwardToUserId { get; set; }
         public string FilePath { get; set; }
+        [Required(ErrorMessage = "This field is Mandatory")]
         public int? JudgementStatusId { get; set; }
         public string Remarks { get; set; }
 
