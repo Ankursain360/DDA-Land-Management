@@ -27,7 +27,7 @@ namespace LeaseForPublic.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
 
-        string targetPathMortgageDocuments = "";
+        string targetPathExtensionDocuments = "";
         public ExtensionServiceController(IExtensionService extensionService,
             IConfiguration configuration, IWorkflowTemplateService workflowtemplateService,
             IApprovalProccessService approvalproccessService)
@@ -36,7 +36,7 @@ namespace LeaseForPublic.Controllers
             _extensionService = extensionService;
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
-            targetPathMortgageDocuments = _configuration.GetSection("FilePaths:Mortgage:MortgageFilePath").Value.ToString();
+            targetPathExtensionDocuments = _configuration.GetSection("FilePaths:Extension:ExtensionFilePath").Value.ToString();
 
         }
 
@@ -55,48 +55,46 @@ namespace LeaseForPublic.Controllers
         //   [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Mortgage mortgage = new Mortgage();
-            mortgage.IsActive = 1;
-            mortgage.Documentchecklist = await _extensionService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
-            return View(mortgage);
+            Extension extension = new Extension();
+            extension.IsActive = 1;
+            extension.Documentchecklist = await _extensionService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
+            return View(extension);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Extension mortgage)
+        public async Task<IActionResult> Create(Extension extension)
         {
             try
             {
-                mortgage.ServiceTypeId = 2;
-                mortgage.Documentchecklist = await _extensionService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdMortgage").Value));
-               
+                extension.ServiceTypeId = 5;
+                extension.Documentchecklist = await _extensionService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
+
                 if (ModelState.IsValid)
                 {
                     FileHelper fileHelper = new FileHelper();
-                    mortgage.CreatedBy = 1;
-                    mortgage.ApprovedStatus = 0;
-                    mortgage.PendingAt = "1";
-                    mortgage.IsActive = 1;
-                    mortgage.Id = 0;
-                    var result = await _extensionService.Create(mortgage);
+                    extension.CreatedBy = SiteContext.UserId;
+                    extension.IsActive = 1;
+                    extension.Id = 0;
+                    var result = await _extensionService.Create(extension);
 
                     if (result)
                     {
                         List<Allotteeservicesdocument> allotteeservicesdocuments = new List<Allotteeservicesdocument>();
-                        for (int i = 0; i < mortgage.DocumentChecklistId.Count; i++)
+                        for (int i = 0; i < extension.DocumentChecklistId.Count; i++)
                         {
                             string filename = null;
-                            if (mortgage.FileUploaded != null && mortgage.FileUploaded.Count > 0)
-                                filename = mortgage.FileUploaded != null ?
-                                                                   mortgage.FileUploaded.Count <= i ? string.Empty :
-                                                                   fileHelper.SaveFile1(targetPathMortgageDocuments, mortgage.FileUploaded[i]) :
-                                                                   mortgage.FileUploaded[i] != null || mortgage.FileUploadedPath[i] != "" ?
-                                                                   mortgage.FileUploadedPath[i] : string.Empty;
+                            if (extension.FileUploaded != null && extension.FileUploaded.Count > 0)
+                                filename = extension.FileUploaded != null ?
+                                                                   extension.FileUploaded.Count <= i ? string.Empty :
+                                                                   fileHelper.SaveFile1(targetPathExtensionDocuments, extension.FileUploaded[i]) :
+                                                                   extension.FileUploaded[i] != null || extension.FileUploadedPath[i] != "" ?
+                                                                   extension.FileUploadedPath[i] : string.Empty;
                             allotteeservicesdocuments.Add(new Allotteeservicesdocument
                             {
-                                DocumentChecklistId = mortgage.DocumentChecklistId.Count <= i ? 0 : mortgage.DocumentChecklistId[i],
-                                ServiceId = mortgage.Id,
-                                ServiceTypeId = mortgage.ServiceTypeId,
+                                DocumentChecklistId = extension.DocumentChecklistId.Count <= i ? 0 : extension.DocumentChecklistId[i],
+                                ServiceId = extension.Id,
+                                ServiceTypeId = extension.ServiceTypeId,
                                 DocumentFileName = filename,
                                 CreatedBy = SiteContext.UserId
 
@@ -108,34 +106,34 @@ namespace LeaseForPublic.Controllers
                     }
                     if (result == true)
                     {
-                        //#region Approval Proccess At 1st level start Added by Renu 16 March 2021
-                        //var DataFlow = await dataAsync();
-                        //for (int i = 0; i < DataFlow.Count; i++)
-                        //{
-                        //    if (!DataFlow[i].parameterSkip)
-                        //    {
-                        //        mortgage.ApprovedStatus = 0;
-                        //        mortgage.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                        //        result = await _leaseApplicationFormService.UpdateBeforeApproval(mortgage.Id, mortgage);  //Update Table details 
-                        //        if (result)
-                        //        {
-                        //            Approvalproccess approvalproccess = new Approvalproccess();
-                        //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                        //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value);
-                        //            approvalproccess.ServiceId = mortgage.Id;
-                        //            approvalproccess.SendFrom = SiteContext.UserId;
-                        //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                        //            approvalproccess.PendingStatus = 1;   //1
-                        //            approvalproccess.Status = null;   //1
-                        //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                        //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                        //        }
+                        #region Approval Proccess At 1st level start Added by Renu 16 March 2021
+                        var DataFlow = await dataAsync();
+                        for (int i = 0; i < DataFlow.Count; i++)
+                        {
+                            if (!DataFlow[i].parameterSkip)
+                            {
+                                extension.ApprovedStatus = 0;
+                                extension.PendingAt = (DataFlow[i].parameterName);
+                                result = await _extensionService.UpdateBeforeApproval(extension.Id, extension);  //Update Table details 
+                                if (result)
+                                {
+                                    Approvalproccess approvalproccess = new Approvalproccess();
+                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdExtensionService").Value);
+                                    approvalproccess.ServiceId = extension.Id;
+                                    approvalproccess.SendFrom = SiteContext.UserId;
+                                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = null;   //1
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                }
 
-                        //        break;
-                        //    }
-                        //}
+                                break;
+                            }
+                        }
 
-                        //#endregion 
+                        #endregion 
 
                         ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         return View("Index");
@@ -143,184 +141,176 @@ namespace LeaseForPublic.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(mortgage);
+                        return View(extension);
 
                     }
                 }
                 else
                 {
-                    return View(mortgage);
+                    return View(extension);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(mortgage);
+                return View(extension);
             }
         }
 
-        //[AuthorizeContext(ViewAction.Edit)]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var Data = await _extensionService.FetchSingleResult(id);
-        //    Data.HonbleList = await _extensionService.GetAllHonble();
-        //    Data.AllotmententryList = await _extensionService.GetAllAllotment();
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
+        // [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _extensionService.FetchSingleResult(id);
+            Data.IsActive = 1;
+            Data.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, Cancellationentry cancellationentry)
-        //{
-        //    cancellationentry.AllotmententryList = await _extensionService.GetAllAllotment();
-        //    cancellationentry.HonbleList = await _extensionService.GetAllHonble();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
 
-        //    FileHelper fileHelper = new FileHelper();
-        //    if (cancellationentry.DemandLetterPhoto != null)
-        //    {
-        //        cancellationentry.DemandLetter = fileHelper.SaveFile1(targetPathDemandLetter, cancellationentry.DemandLetterPhoto);
-        //    }
-        //    if (cancellationentry.NocPhoto != null)
-        //    {
-        //        cancellationentry.Noc = fileHelper.SaveFile1(targetPathNOC, cancellationentry.NocPhoto);
-        //    }
-        //    if (cancellationentry.CancellationPhoto != null)
-        //    {
-        //        cancellationentry.CancellationOrder = fileHelper.SaveFile1(targetPathCanellationOrder, cancellationentry.CancellationPhoto);
-        //    }
-        //    try
-        //    {
-        //        cancellationentry.ModifiedBy = SiteContext.UserId;
-        //        var result = await _extensionService.Update(id, cancellationentry);
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-        //            var list = await _extensionService.GetAllRequestForProceeding();
-        //            return View("Index", list);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(cancellationentry);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return View(cancellationentry);
-        //    }
-        //    return View(cancellationentry);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Extension extension)
+        {
+            try
+            {
+                extension.ServiceTypeId = 5;
+                extension.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
 
-        //[AuthorizeContext(ViewAction.View)]
-        //public async Task<IActionResult> View(int id)
-        //{
-        //    var Data = await _extensionService.FetchSingleResult(id);
-        //    Data.HonbleList = await _extensionService.GetAllHonble();
-        //    Data.AllotmententryList = await _extensionService.GetAllAllotment();
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
+                if (ModelState.IsValid)
+                {
+                    FileHelper fileHelper = new FileHelper();
+                    extension.ModifiedBy = SiteContext.UserId;
+                    extension.IsActive = 1;
+                    var result = await _extensionService.Update(id, extension);
 
-        //[AuthorizeContext(ViewAction.Delete)]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        var result = await _extensionService.Delete(id);
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //    }
-        //    var list = await _extensionService.GetAllRequestForProceeding();
-        //    return View("Index", list);
-        //}
+                    if (result)
+                    {
+                        List<Allotteeservicesdocument> allotteeservicesdocuments = new List<Allotteeservicesdocument>();
+                        for (int i = 0; i < extension.DocumentChecklistId.Count; i++)
+                        {
+                            string filename = null;
+                            if (extension.FileUploaded != null && extension.FileUploaded.Count > 0)
+                                filename = extension.FileUploaded != null ?
+                                                                   extension.FileUploaded.Count <= i ? string.Empty :
+                                                                   fileHelper.SaveFile1(targetPathExtensionDocuments, extension.FileUploaded[i]) :
+                                                                   extension.FileUploaded[i] != null || extension.FileUploadedPath[i] != "" ?
+                                                                   extension.FileUploadedPath[i] : string.Empty;
+                            else
+                                filename = extension.DocumentName[i];
+                            allotteeservicesdocuments.Add(new Allotteeservicesdocument
+                            {
+                                DocumentChecklistId = extension.DocumentChecklistId.Count <= i ? 0 : extension.DocumentChecklistId[i],
+                                ServiceId = extension.Id,
+                                ServiceTypeId = extension.ServiceTypeId,
+                                DocumentFileName = filename,
+                                CreatedBy = SiteContext.UserId,
+                                Id = extension.AllotteeDocumentId[i]
 
-        //public async Task<FileResult> ViewLetter(int Id)
-        //{
-        //    try
-        //    {
-        //        FileHelper file = new FileHelper();
-        //        var Data = await _extensionService.FetchSingleResult(Id);
-        //        string targetPhotoPathLayout = targetPathDemandLetter + Data.DemandLetter;
-        //        byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-        //        return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
-        //    }
-        //    catch (Exception ex)
-        //    {
+                            });
+                        }
+                        foreach (var item in allotteeservicesdocuments)
+                        {
+                            if (item.Id != 0)
+                                result = await _extensionService.UpdateAllotteeServiceDocuments(item.Id, item);
+                            else
+                                result = await _extensionService.SaveAllotteeServiceDocumentsSingle( item);
 
-        //        FileHelper file = new FileHelper();
-        //        var Data = await _extensionService.FetchSingleResult(Id);
-        //        string targetPhotoPathLayout = targetPathDemandLetter + Data.DemandLetter;
-        //        byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-        //        return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+                        }
+                    }
+                    if (result == true)
+                    {
 
-        //    }
-        //}
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return View("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(extension);
 
-        //public async Task<FileResult> ViewLetter1(int Id)
-        //{
-        //    try
-        //    {
-        //        FileHelper file = new FileHelper();
-        //        var Data = await _extensionService.FetchSingleResult(Id);
-        //        string targetPhotoPathLayout = targetPathNOC + Data.Noc;
-        //        byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-        //        return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
-        //    }
-        //    catch (Exception ex)
-        //    {
+                    }
+                }
+                else
+                {
+                    return View(extension);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(extension);
+            }
+        }
 
-        //        FileHelper file = new FileHelper();
-        //        var Data = await _extensionService.FetchSingleResult(Id);
-        //        string targetPhotoPathLayout = targetPathNOC + Data.Noc;
-        //        byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-        //        return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+     //   [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _extensionService.FetchSingleResult(id);
+            Data.IsActive = 1;
+            Data.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
 
-        //    }
-        //}
-        //public async Task<FileResult> ViewLetter2(int Id)
-        //{
-        //    try
-        //    {
-        //        FileHelper file = new FileHelper();
-        //        var Data = await _extensionService.FetchSingleResult(Id);
-        //        string targetPhotoPathLayout = targetPathCanellationOrder + Data.CancellationOrder;
-        //        byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-        //        return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
-        //    }
-        //    catch (Exception ex)
-        //    {
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
 
-        //        FileHelper file = new FileHelper();
-        //        var Data = await _extensionService.FetchSingleResult(Id);
-        //        string targetPhotoPathLayout = targetPathCanellationOrder + Data.CancellationOrder;
-        //        byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-        //        return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+       // [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var result = await _extensionService.Delete(id, SiteContext.UserId);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            return View("Index");
+        }
 
-        //    }
-        //}
+        public async Task<FileResult> ViewExtensionDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _extensionService.FetchSingleResultDocument(Id);
+            string targetPhotoPathLayout = targetPathExtensionDocuments + Data.DocumentFileName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+
         [HttpGet]
         public async Task<JsonResult> GetOtherData()
         {
             return Json(await _extensionService.GetAllotteeDetails(SiteContext.UserId));
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetTimeLineExtensionFees()
+        {
+            return Json(await _extensionService.GetTimeLineExtensionFees());
+        }
+
+        #region Fetch workflow data for approval prrocess Added by Renu 16 March 2021
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdExtensionService").Value));
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+        #endregion
     }
 }

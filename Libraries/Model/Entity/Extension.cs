@@ -14,8 +14,14 @@ namespace Libraries.Model.Entity
         public int AllotmentId { get; set; }
         public int ServiceTypeId { get; set; }
         public int LeaseApplicationId { get; set; }
+
+        [Required(ErrorMessage = "Extension Period is Mandatory")]
         public int ExtensionPeriod { get; set; }
+
+        [Required(ErrorMessage = "Extension Fees is Mandatory")]
         public decimal? ExtentionFees { get; set; }
+
+        [Required(ErrorMessage = "Total Amount is Mandatory")]
         public decimal? TotalAmount { get; set; }
         public int? UserId { get; set; }
         public byte? IsActive { get; set; }
@@ -35,6 +41,15 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<int> DocumentChecklistId { get; set; }
+
+        [NotMapped]
+        public List<Allotteeservicesdocument> AllotteeservicesdocumentList { get; set; }
+
+        [NotMapped]
+        public List<int> AllotteeDocumentId { get; set; }
+
+        [NotMapped]
+        public List<string> DocumentName { get; set; }
 
         [NotMapped]
         public List<int> ServiceId { get; set; }

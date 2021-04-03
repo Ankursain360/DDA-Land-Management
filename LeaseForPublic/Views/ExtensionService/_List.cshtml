@@ -5,7 +5,8 @@
         <tr>
             <th>Reference No.</th>
             <th>Society Name </th>
-            <th>Mortgage Date</th>
+            <th>Extension Period</th>
+            <th>Total Amount</th>
             <th>Area(sq. mt.)</th>
             <th>Status</th>
             <th>Approval Status</th>
@@ -20,7 +21,8 @@
         <tr>
             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.RefNo)</td>
             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.Name)</td>
-           @* <td>@(item.MortgageDate == null ? "" : (Convert.ToDateTime(item.MortgageDate)).ToString("dd-MMM-yyyy"))</td>fN*@
+            <td>@(item.ExtensionPeriod == 0 ? "" : item.ExtensionPeriod.ToString())</td>
+            <td>@(item.TotalAmount == 0 ? "" : item.TotalAmount.ToString())</td>
             <td>@(item.Allotment == null ? "" : item.Allotment.TotalArea.ToString())</td>
             <td>
                 @if (item.IsActive == 1)

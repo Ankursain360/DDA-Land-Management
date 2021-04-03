@@ -91,7 +91,7 @@ namespace LeaseDetails.Controllers
                 if (ModelState.IsValid)
                 {
                     FileHelper fileHelper = new FileHelper();
-                    leaseapplication.CreatedBy = 1;
+                    leaseapplication.CreatedBy = SiteContext.UserId;
                     leaseapplication.ApprovedStatus = 0;
                     leaseapplication.PendingAt = 1;
                     leaseapplication.IsActive = 1;
@@ -272,7 +272,7 @@ namespace LeaseDetails.Controllers
         #region Fetch workflow data for approval prrocess Added by Renu 16 March 2021
         private async Task<List<TemplateStructure>> dataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;

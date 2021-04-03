@@ -1,14 +1,14 @@
-﻿@model Libraries.Model.Entity.Mortgage
-@await Component.InvokeAsync("PageHeader", new { pageName = "Extension" })
+﻿@model Libraries.Model.Entity.Extension
+@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Extension" })
 @{int rowNo = 0; }
 
 <div class="pt-3">
     <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details</h3>
-        <input type="hidden" asp-for="AllottmentId" />
+        <input type="hidden" asp-for="AllotmentId" />
         <input type="hidden" asp-for="LeaseApplicationId" />
 
-        <h3 class="my-3 d-flex sub-heading">Allottee History Details</h3>
+        <h3 class="my-3 d-flex sub-heading">Allottee Details</h3>
         <div id="AllotteeHistoryDiv">
             <div class="row mt-md-3">
                 <div class="col-md-6">
@@ -84,24 +84,29 @@
                 </div>
             </div>
         </div>
-        <h3 class="my-3 d-flex sub-heading">Mortage Details</h3>
+        <h3 class="my-3 d-flex sub-heading">Extension Details</h3>
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Contact No" asp-for="MortgageDate" type="date" value=""
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="MortgageDate" class="text-danger"></span>
-                    <label class="floating-label">Mortgage Date</label>
+                    <input asp-for="ExtensionPeriod" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers TotalCalculation" />
+                    <span asp-validation-for="ExtensionPeriod" class="text-danger"></span>
+                    <label class="floating-label">Extension Period (in months)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input readonly asp-for="ExtentionFees" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="ExtentionFees" class="text-danger"></span>
+                    <label class="floating-label">Extension Fees(per months in Rs.)</label>
                 </div>
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class=" col-md-12">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Remarks" placeholder="Address" type="text" limit="4000"
-                              class="floating-label-field floating-label-field--s3"></textarea>
-                    <span asp-validation-for="Remarks" class="text-danger"></span>
-                    <label class="floating-label">Remarks</label>
+                    <input readonly asp-for="TotalAmount" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                    <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                    <label class="floating-label">Total Amount(Rs.)</label>
                 </div>
             </div>
         </div>
@@ -167,7 +172,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Create</button>
-                @Html.ActionLink("Back", "Index", "Mortgage", null, new { @class = "btn btn-theme " })
+                @Html.ActionLink("Back", "Index", "ExtensionService", null, new { @class = "btn btn-theme " })
             </div>
         </div>
     </form>

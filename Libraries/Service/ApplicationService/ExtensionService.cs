@@ -56,5 +56,76 @@ namespace Libraries.Service.ApplicationService
         {
             return await _extensionRepository.GetAllotteeDetails(userId);
         }
+
+        public async Task<Timeextension> GetTimeLineExtensionFees()
+        {
+            return await _extensionRepository.GetTimeLineExtensionFees();
+        }
+
+        public async Task<Extension> FetchSingleResult(int id)
+        {
+            return await _extensionRepository.FetchSingleResult(id);
+        }
+
+        public async Task<Allotteeservicesdocument> FetchSingleResultDocument(int id)
+        {
+            return await _extensionRepository.FetchSingleResultDocument(id);
+        }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Extension extension)
+        {
+            var result = await _extensionRepository.FindBy(a => a.Id == id);
+            Extension model = result.FirstOrDefault();
+            model.ApprovedStatus = extension.ApprovedStatus;
+            model.PendingAt = extension.PendingAt;
+            _extensionRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> Update(int id, Extension extension)
+        {
+            var result = await _extensionRepository.FindBy(a => a.Id == id);
+            Extension model = result.FirstOrDefault();
+            model.AllotmentId = extension.AllotmentId;
+            model.ServiceTypeId = extension.ServiceTypeId;
+            model.LeaseApplicationId = extension.LeaseApplicationId;
+            model.ExtensionPeriod = extension.ExtensionPeriod;
+            model.ExtentionFees = extension.ExtentionFees;
+            model.TotalAmount = extension.TotalAmount;
+            model.UserId = extension.UserId;
+            model.IsActive = extension.IsActive;
+            model.ApprovedStatus = extension.ApprovedStatus;
+            model.PendingAt = extension.PendingAt;
+            model.ModifiedBy = extension.ModifiedBy;
+            model.ModifiedDate = DateTime.Now;
+            _extensionRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> Delete(int id, int userId)
+        {
+            var result = await _extensionRepository.FindBy(a => a.Id == id);
+            Extension model = result.FirstOrDefault();
+            model.IsActive = 0;
+            model.ModifiedBy = userId;
+            model.ModifiedDate = DateTime.Now;
+            _extensionRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id)
+        {
+            return await _extensionRepository.AlloteeDocumentListDetails(id);
+        }
+
+        public async Task<bool> UpdateAllotteeServiceDocuments(int id, Allotteeservicesdocument allotteeservicesdocuments)
+        {
+            return await _extensionRepository.UpdateAllotteeServiceDocuments( id, allotteeservicesdocuments);
+        }
+
+        public async Task<bool> SaveAllotteeServiceDocumentsSingle(Allotteeservicesdocument item)
+        {
+            return await _extensionRepository.SaveAllotteeServiceDocumentsSingle(item);
+        }
     }
 }

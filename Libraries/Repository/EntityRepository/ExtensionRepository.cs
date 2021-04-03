@@ -23,6 +23,30 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id)
+        {
+            return await _dbContext.Allotteeservicesdocument
+                                       .Include(x => x.DocumentChecklist)
+                                       .Where(x => x.ServiceId == id)
+                                       .ToListAsync();
+        }
+
+        public async Task<Extension> FetchSingleResult(int id)
+        {
+            return await _dbContext.Extension
+                                     .Include(x => x.Allotment)
+                                     .Include(x => x.Allotment.Application)
+                                     .Where(x => x.Id == id)
+                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<Allotteeservicesdocument> FetchSingleResultDocument(int id)
+        {
+            return await _dbContext.Allotteeservicesdocument
+                                     .Where(x => x.Id == id)
+                                     .FirstOrDefaultAsync();
+        }
+
         public async Task<Possesionplan> GetAllotteeDetails(int userId)
         {
             return await _dbContext.Possesionplan
@@ -118,9 +142,38 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<Timeextension> GetTimeLineExtensionFees()
+        {
+            return await _dbContext.Timeextension
+                                    .Where(x => x.FromDate <= DateTime.Now && x.ToDate >= DateTime.Now)
+                                    .FirstOrDefaultAsync();
+        }
+
         public async Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments)
         {
             await _dbContext.Allotteeservicesdocument.AddRangeAsync(allotteeservicesdocuments);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> SaveAllotteeServiceDocumentsSingle(Allotteeservicesdocument item)
+        {
+            _dbContext.Allotteeservicesdocument.Add(item);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> UpdateAllotteeServiceDocuments(int id, Allotteeservicesdocument allotteeservicesdocuments)
+        {
+            foreach (var some in _dbContext.Allotteeservicesdocument.Where(x => x.Id == id).ToList())
+            {
+                some.ServiceId = allotteeservicesdocuments.ServiceId;
+                some.ServiceTypeId = allotteeservicesdocuments.ServiceTypeId;
+                some.DocumentChecklistId = allotteeservicesdocuments.DocumentChecklistId;
+                some.DocumentFileName = allotteeservicesdocuments.DocumentFileName;
+                some.ModifiedBy = allotteeservicesdocuments.CreatedBy;
+                some.ModifiedDate = DateTime.Now;
+            }
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }

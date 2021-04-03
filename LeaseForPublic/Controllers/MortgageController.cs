@@ -91,7 +91,7 @@ namespace LeaseForPublic.Controllers
                 if (ModelState.IsValid)
                 {
                     FileHelper fileHelper = new FileHelper();
-                    mortgage.CreatedBy = 1;
+                    mortgage.CreatedBy = SiteContext.UserId;
                     mortgage.ApprovedStatus = 0;
                     mortgage.PendingAt = "1";
                     mortgage.IsActive = 1;

@@ -14,5 +14,11 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
         Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments);
         Task<Possesionplan> GetAllotteeDetails(int userId);
+        Task<Timeextension> GetTimeLineExtensionFees();
+        Task<Extension> FetchSingleResult(int id);
+        Task<Allotteeservicesdocument> FetchSingleResultDocument(int id);
+        Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id);
+        Task<bool> UpdateAllotteeServiceDocuments(int id, Allotteeservicesdocument allotteeservicesdocuments);
+        Task<bool> SaveAllotteeServiceDocumentsSingle(Allotteeservicesdocument item);
     }
 }

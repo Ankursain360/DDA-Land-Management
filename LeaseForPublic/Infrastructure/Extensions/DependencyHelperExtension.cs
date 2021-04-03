@@ -55,7 +55,6 @@ namespace LeaseForPublic.Infrastructure.Extensions
 
 
             /* Application Services */
-            services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
