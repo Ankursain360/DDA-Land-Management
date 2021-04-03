@@ -4,17 +4,20 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetHonble(currentPageNumber, currentPageSize, sortOrder);
+    GetTimeextension(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetHonble(currentPageNumber, currentPageSize, sortOrder);
+    GetTimeextension(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
 
-    $('#txthonble').val('');
-    GetHonble(currentPageNumber, currentPageSize, sortOrder);
+   
+    $('#txtFromDate').val('');
+    $('#txtToDate').val('');
+
+    GetTimeextension(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -22,7 +25,7 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetHonble(currentPageNumber, currentPageSize, sortOrder);
+    GetTimeextension(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -30,24 +33,25 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetHonble(currentPageNumber, currentPageSize, sortOrder);
+    GetTimeextension(currentPageNumber, currentPageSize, sortOrder);
 });
 $('#ddlSort').change(function () {
-    GetHonble(currentPageNumber, currentPageSize, sortOrder);
+    GetTimeextension(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetHonble(pageNumber, pageSize, order) {
+function GetTimeextension(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Honble/List`, 'html', param, function (response) {
-        $('#divHonbleTable').html("");
-        $('#divHonbleTable').html(response);
+    HttpPost(`/Timeextension/List`, 'html', param, function (response) {
+        $('#divTimeextensionTable').html("");
+        $('#divTimeextensionTable').html(response);
     });
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
 
-        honblename: $('#txthonble').val(),
-
+       
+        FromDate: ($("#txtFromDate").val()),
+        ToDate: ($("#txtToDate").val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -57,11 +61,11 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 function onPaging(pageNo) {
-    GetHonble(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetTimeextension(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetHonble(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetTimeextension(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

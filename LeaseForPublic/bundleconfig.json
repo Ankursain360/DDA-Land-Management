@@ -10,5 +10,17 @@
     "inputFiles": [
       "wwwroot/js/mortgageindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/extensionservicecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/extensionservicecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/extensionserviceindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/extensionserviceindex.js"
+    ]
   }
 ]

@@ -1,16 +1,23 @@
-﻿@model Libraries.Model.Entity.Honble
-@await Component.InvokeAsync("PageHeader", new { pageName = "Honble" })
+﻿
+@model IEnumerable<Libraries.Model.Entity.Timeextension>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Time Extension" })
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
+           
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txthonble" class="floating-label-field floating-label-field--s3" placeholder="Honble" />
-                    <label for="txthonble" class="floating-label">Honble</label>
+                    <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
+                    <label for="txtFromDate" class="floating-label">From Date</label>
                 </div>
             </div>
-
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
+                    <label for="txtToDate" class="floating-label">To Date</label>
+                </div>
+            </div>
 
         </div>
         <div class="row mt-md-3">
@@ -33,7 +40,10 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Honble">Honble </option>
+                       
+                        <option value="Fee">Extension Fees</option>
+                        <option value="From">From Date </option>
+                        <option value="To">To Date </option>
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
@@ -46,11 +56,11 @@
 
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/Honble/create" class="d-flex align-items-center btn btn-primary mr-2">
+                <a href="/Timeextension/create" class="d-flex align-items-center btn btn-primary mr-2">
                     <i class="ri-add-fill mr-2 mr-lg-1"></i>
                     <small>Add More</small>
                 </a>
-                <a href="/Honble/Download" class="d-flex align-items-center btn btn-success">
+                <a href="/Timeextension/Download" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
                 </a>
@@ -58,7 +68,7 @@
         </div>
 
         <div class="table-responsive px-2">
-            <div id="divHonbleTable"></div>
+            <div id="divTimeextensionTable"></div>
         </div>
 
 
@@ -68,8 +78,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/honbleindex.js"></script>
+    <script src="~/js/timeextensionindex.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/honbleindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/timeextensionindex.min.js" asp-append-version="true"></script>
 </environment>
