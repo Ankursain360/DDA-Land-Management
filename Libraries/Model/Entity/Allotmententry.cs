@@ -138,7 +138,9 @@ namespace Libraries.Model.Entity
         //    }
         //}
 
+        //[NotMapped]
 
+        //public List<string> RefNo { get; set; }
 
     }
 }
