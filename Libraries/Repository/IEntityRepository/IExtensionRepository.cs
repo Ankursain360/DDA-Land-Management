@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IExtensionRepository : IGenericRepository<Mortgage>
+    public interface IExtensionRepository : IGenericRepository<Extension>
     {
-        Task<PagedResult<Mortgage>> GetPagedMortgageDetails(MortgageSearchDto model);
+        Task<PagedResult<Extension>> GetPagedExtensionServiceDetails(ExtensionServiceSearchDto model);
         Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
         Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments);
         Task<Possesionplan> GetAllotteeDetails(int userId);

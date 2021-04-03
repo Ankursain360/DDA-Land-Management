@@ -15,7 +15,7 @@ using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class ExtensionRepository : GenericRepository<Mortgage>, IExtensionRepository
+    public class ExtensionRepository : GenericRepository<Extension>, IExtensionRepository
     {
 
         public ExtensionRepository(DataContext dbContext) : base(dbContext)
@@ -42,45 +42,45 @@ namespace Libraries.Repository.EntityRepository
                                         .ToListAsync();
         }
 
-        public async Task<PagedResult<Mortgage>> GetPagedMortgageDetails(MortgageSearchDto model)
+        public async Task<PagedResult<Extension>> GetPagedExtensionServiceDetails(ExtensionServiceSearchDto model)
         {
-            var data = await _dbContext.Mortgage
-                                         .Include(x => x.Allottment)
-                                         .Include(x => x.Allottment.Application)
-                                         .Where(x => (x.Allottment.Application.RefNo != null ? x.Allottment.Application.RefNo.Contains(model.refno == "" ? x.Allottment.Application.RefNo : model.refno) : true)
-                                         && (x.Allottment.Application.Name != null ? x.Allottment.Application.Name.Contains(model.name == "" ? x.Allottment.Application.Name : model.name) : true)
+            var data = await _dbContext.Extension
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
                                         )
-                                         .GetPaged<Mortgage>(model.PageNumber, model.PageSize);
+                                         .GetPaged<Extension>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 data = null;
                 if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    data = await _dbContext.Mortgage
-                                         .Include(x => x.Allottment)
-                                         .Include(x => x.Allottment.Application)
-                                         .Where(x => (x.Allottment.Application.RefNo != null ? x.Allottment.Application.RefNo.Contains(model.refno == "" ? x.Allottment.Application.RefNo : model.refno) : true)
-                                         && (x.Allottment.Application.Name != null ? x.Allottment.Application.Name.Contains(model.name == "" ? x.Allottment.Application.Name : model.name) : true)
+                    data = await _dbContext.Extension
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
                                         )
                                         .OrderByDescending(s => s.IsActive)
-                                         .GetPaged<Mortgage>(model.PageNumber, model.PageSize);
+                                         .GetPaged<Extension>(model.PageNumber, model.PageSize);
                 }
                 else
                 {
                     data = null;
-                    data = await _dbContext.Mortgage
-                                         .Include(x => x.Allottment)
-                                         .Include(x => x.Allottment.Application)
-                                         .Where(x => (x.Allottment.Application.RefNo != null ? x.Allottment.Application.RefNo.Contains(model.refno == "" ? x.Allottment.Application.RefNo : model.refno) : true)
-                                         && (x.Allottment.Application.Name != null ? x.Allottment.Application.Name.Contains(model.name == "" ? x.Allottment.Application.Name : model.name) : true)
+                    data = await _dbContext.Extension
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
                                         )
                                        .OrderBy(s =>
-                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allottment == null ? null : s.Allottment.Application == null ? null : s.Allottment.Application.RefNo)
-                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allottment == null ? null : s.Allottment.Application == null ? null : s.Allottment.Application.Name)
-                                       : (s.Allottment == null ? null : s.Allottment.Application == null ? null : s.Allottment.Application.RefNo))
+                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
+                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)
+                                       : (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo))
                                        )
-                                        .GetPaged<Mortgage>(model.PageNumber, model.PageSize);
+                                        .GetPaged<Extension>(model.PageNumber, model.PageSize);
                 }
 
             }
@@ -88,30 +88,30 @@ namespace Libraries.Repository.EntityRepository
             {
                 if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    data = await _dbContext.Mortgage
-                                         .Include(x => x.Allottment)
-                                         .Include(x => x.Allottment.Application)
-                                         .Where(x => (x.Allottment.Application.RefNo != null ? x.Allottment.Application.RefNo.Contains(model.refno == "" ? x.Allottment.Application.RefNo : model.refno) : true)
-                                         && (x.Allottment.Application.Name != null ? x.Allottment.Application.Name.Contains(model.name == "" ? x.Allottment.Application.Name : model.name) : true)
+                    data = await _dbContext.Extension
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
                                         )
                                         .OrderBy(s => s.IsActive)
-                                         .GetPaged<Mortgage>(model.PageNumber, model.PageSize);
+                                         .GetPaged<Extension>(model.PageNumber, model.PageSize);
                 }
                 else
                 {
                     data = null;
-                    data = await _dbContext.Mortgage
-                                         .Include(x => x.Allottment)
-                                         .Include(x => x.Allottment.Application)
-                                         .Where(x => (x.Allottment.Application.RefNo != null ? x.Allottment.Application.RefNo.Contains(model.refno == "" ? x.Allottment.Application.RefNo : model.refno) : true)
-                                         && (x.Allottment.Application.Name != null ? x.Allottment.Application.Name.Contains(model.name == "" ? x.Allottment.Application.Name : model.name) : true)
+                    data = await _dbContext.Extension
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => (x.Allotment.Application.RefNo != null ? x.Allotment.Application.RefNo.Contains(model.refno == "" ? x.Allotment.Application.RefNo : model.refno) : true)
+                                         && (x.Allotment.Application.Name != null ? x.Allotment.Application.Name.Contains(model.name == "" ? x.Allotment.Application.Name : model.name) : true)
                                         )
                                        .OrderByDescending(s =>
-                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allottment == null ? null : s.Allottment.Application == null ? null : s.Allottment.Application.RefNo)
-                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allottment == null ? null : s.Allottment.Application == null ? null : s.Allottment.Application.Name)
-                                       : (s.Allottment == null ? null : s.Allottment.Application == null ? null : s.Allottment.Application.RefNo))
+                                       (model.SortBy.ToUpper() == "REFNO" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo)
+                                       : model.SortBy.ToUpper() == "SOCIETYNAME" ? (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.Name)
+                                       : (s.Allotment == null ? null : s.Allotment.Application == null ? null : s.Allotment.Application.RefNo))
                                        )
-                                        .GetPaged<Mortgage>(model.PageNumber, model.PageSize);
+                                        .GetPaged<Extension>(model.PageNumber, model.PageSize);
                 }
 
             }

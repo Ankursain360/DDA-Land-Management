@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
-    public class Extensionservice : AuditableEntity<int>
+    public class Extension : AuditableEntity<int>
     {
         public int AllotmentId { get; set; }
         public int ServiceTypeId { get; set; }

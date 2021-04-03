@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class ExtensionServiceConfiguration : IEntityTypeConfiguration<Extensionservice>
+    public class ExtensionConfiguration : IEntityTypeConfiguration<Extension>
     {
-        public void Configure(EntityTypeBuilder<Extensionservice> builder)
+        public void Configure(EntityTypeBuilder<Extension> builder)
         {
             builder.ToTable("extensionservice", "lms");
 

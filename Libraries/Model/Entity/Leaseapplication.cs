@@ -17,7 +17,7 @@ namespace Libraries.Model.Entity
             Allotmententry = new HashSet<Allotmententry>();
             Leaseapplicationdocuments = new HashSet<Leaseapplicationdocuments>();
             Mortgage = new HashSet<Mortgage>();
-            Extensionservice = new HashSet<Extensionservice>();
+            Extensionservice = new HashSet<Extension>();
         }
         [Required(ErrorMessage = "This field is Mandatory")]
         public string RefNo { get; set; }
@@ -163,6 +163,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Leaseapplication> RefNoList { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
-        public ICollection<Extensionservice> Extensionservice { get; set; }
+        public ICollection<Extension> Extensionservice { get; set; }
     }
 }
