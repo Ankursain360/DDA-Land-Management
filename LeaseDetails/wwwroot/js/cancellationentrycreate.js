@@ -16,7 +16,7 @@ function GetOtherData(id) {
     debugger;
     HttpGet(`/CancellationEntry/GetOtherData/?AllottmentId=${id}`, 'json', function (response) {
         if (response != null) {
-            $("#Society_name").val(response.application.refNo);
+            $("#Society_name").val(response.application.name);
             $("#Purpose_name").val(response.leasePurposesType.purposeUse); 
         }
     });

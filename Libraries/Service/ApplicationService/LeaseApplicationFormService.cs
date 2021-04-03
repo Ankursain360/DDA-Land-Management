@@ -51,7 +51,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> SaveLeaseApplicationDocuments(List<Leaseapplicationdocuments> leaseapplicationdocuments)
         {
-            leaseapplicationdocuments.ForEach(x => x.CreatedBy = 1);
             leaseapplicationdocuments.ForEach(x => x.CreatedDate = DateTime.Now);
             return await _leaseApplicationRepository.SaveLeaseApplicationDocuments(leaseapplicationdocuments);
         }

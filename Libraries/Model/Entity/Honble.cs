@@ -14,8 +14,10 @@ namespace Libraries.Model.Entity
             Cancellationentry = new HashSet<Cancellationentry>();
             Requestforproceeding = new HashSet<Requestforproceeding>();
         }
-
+        [Required(ErrorMessage = "HonbleName is mandatory")]
         public string HonbleName { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public ICollection<Cancellationentry> Cancellationentry { get; set; }
 

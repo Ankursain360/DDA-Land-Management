@@ -11,5 +11,10 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IMortgageService : IEntityService<Mortgage>
     {
+        Task<PagedResult<Mortgage>> GetPagedMortgageDetails(MortgageSearchDto model);
+        Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
+        Task<bool> Create(Mortgage mortgage);
+        Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments);
+        Task<Possesionplan> GetAllotteeDetails(int userId);
     }
 }
