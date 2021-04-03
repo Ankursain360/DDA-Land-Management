@@ -51,7 +51,7 @@ namespace LeaseDetails.Controllers
         {
             Allotmententry allotmententry = new Allotmententry();
             allotmententry.IsActive = 1;
-
+           
 
 
             allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
@@ -68,6 +68,7 @@ namespace LeaseDetails.Controllers
         {
             try
             {
+                
                 //Allotmententry allotmententry = new Allotmententry();
                 allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
                 allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();

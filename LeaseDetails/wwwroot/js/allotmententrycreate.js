@@ -1,6 +1,7 @@
 ﻿
 
 $(document).ready(function () {
+
     //debugger
     var kid = $("#ApplicationId").val();
     if (kid) {
@@ -194,4 +195,25 @@ $('#ddlJudgement').change(function () {
         //$('#aarea').show();
     }
 
+});
+
+
+
+$(function () {
+    
+    $('#AllotmentDate').on('change', function () {
+
+        var GivenDate = $("#AllotmentDate").val();
+        var CurrentDate = new Date();
+        GivenDate = new Date(GivenDate);
+
+        if (GivenDate > CurrentDate) {
+            $('#AllotmentDate').val(' ');
+           $('.msg').empty().html('Date Must not be Greater Than Current Date ');
+        } else {
+            $('#AllotmentDate').val('#AllotmentDate'.val());
+        }
+
+
+    });
 });
