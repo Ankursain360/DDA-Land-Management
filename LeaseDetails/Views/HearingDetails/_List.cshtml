@@ -6,7 +6,7 @@
                     <th>Reference No.</th>
                     <th>Society Name </th>
                     <th>Allotment Date</th>
-                    <th>Area</th>
+                    <th>Area(sq. mt.)</th>
                     <th> Status</th>
 
                     <th>Operation</th>
@@ -21,7 +21,7 @@
                             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.RefNo)</td>
                             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.Name)</td>
                             <td>@(item.Allotment == null ? "" : (Convert.ToDateTime(item.Allotment.AllotmentDate)).ToString("dd-MMM-yyyy"))</td>
-                            <td>@item.GroundOfViolations</td>
+                            <td>@(item.Allotment == null ? "" : item.Allotment.TotalArea.ToString())</td>
                             <td>
                                 @if (item.IsActive == 1)
                                 {

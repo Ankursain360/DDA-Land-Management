@@ -26,7 +26,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.AllottmentId).HasColumnType("int(11)");
 
-            builder.Property(e => e.ApprovalStatus).HasColumnType("int(11)");
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 

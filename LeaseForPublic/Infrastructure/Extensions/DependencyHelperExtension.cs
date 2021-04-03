@@ -51,7 +51,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<INoticeGenerationRepository, NoticeGenerationRepository>();
             services.AddScoped<IJudgementRepository, JudgementRepository>();
             services.AddScoped<IMortgageRepository, MortgageRepository>();
-
+            services.AddScoped<IApplyForServicesRepository, ApplyForServicesRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -85,6 +85,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<INoticeGenerationService, NoticeGenerationService>();
             services.AddScoped<IJudgementService, JudgementService>();
             services.AddScoped<IMortgageService, MortgageService>();
+            services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
         }
     }
 }

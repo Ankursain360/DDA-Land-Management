@@ -17,6 +17,7 @@ using Dto.Master;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
+
 namespace LeaseDetails.Controllers
 {
     public class AllotmentEntryController : BaseController
@@ -76,78 +77,91 @@ namespace LeaseDetails.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    //var result = await _allotmentEntryService.Create(allotmententry);
 
-                    //if (result == true)
-                    //{
-                    //    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    //    var list = await _allotmentEntryService.GetAllAllotmententry();
-                    //    return View("Index", list);
-                    //}app
                     var result = await _allotmentEntryService.Create(allotmententry);
 
                     if (result == true)
                     {
-                        //var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(Convert.ToInt32(id));
-                        var Data = await _allotmentEntryService.FetchLeaseApplicationmailDetails(allotmententry.ApplicationId);
-
-                        if (Data != null && Data.EmailId != null)
+                        Random r = new Random();
+                        int num = r.Next();
+                        //******* creating  user ******
+                        var username = "LD" + num;
+                        var resultpassword = await _allotmentEntryService.CreateUser(allotmententry, username);
+                        if (!resultpassword.Equals("False"))
                         {
-                            #region Mail Generate
                             //At successfull completion send mail and sms
-                            Uri uri = new Uri("http://localhost:1018/AllotmentEntry");
-                            string Action = "Dear " + allotmententry.Name + ",  click  below link :-  " + uri;
-                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "AllotmentEntryMailDetails.html");
+                            //string DisplayName = allotmententry.Application.RefNo;
+                            //string EmailID = damagepayeeregister.EmailId[0].ToString();
+                            //string Id = allotmententry.Id.ToString().Unidecode();
+                            string LoginName = allotmententry.Application.RefNo;
+                            //string ContactNo = damagepayeeregister.MobileNo[0].ToString();
+                            string Password = resultpassword;
+                            var Data = await _allotmentEntryService.FetchLeaseApplicationmailDetails(allotmententry.ApplicationId);
 
-                            #region Mail Generation Added By Renu
-
-                            MailSMSHelper mailG = new MailSMSHelper();
-
-                            #region HTML Body Generation
-                            LeaseRefBodyDto bodyDTO = new LeaseRefBodyDto();
-                            bodyDTO.displayName = Data.Name;
-                            bodyDTO.RefNo = Data.RefNo;
-                            bodyDTO.link = Action;
-                            bodyDTO.path = path;
-                            string strBodyMsg = mailG.PopulateBodyLeaseRefernceNo(bodyDTO);
-                            #endregion
-
-                            string strMailSubject = "User Reference No. Details ";
-                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                            var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, Data.EmailId, strMailCC, strMailBCC, strAttachPath);
-                            #endregion
-                        
-                            if (sendMailResult)
+                            if (Data != null && Data.EmailId != null)
                             {
-                                ViewBag.Message = Alert.Show("Dear User,<br/>" + Data.Name + "  Your password is send to Registered email and Mobile No", "", AlertType.Success);
+                                #region Mail Generate
+                                //At successfull completion send mail and sms
+                                Uri uri = new Uri("http://localhost:1018/AllotmentEntry");
+                                string Action = "Dear " + allotmententry.Name + ",  click  below link :-  " + uri;
+                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "AllotmentEntryMailDetails.html");
+
+                                #region Mail Generation Added By Renu
+
+                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                #region HTML Body Generation
+                                LeaseRefBodyDto bodyDTO = new LeaseRefBodyDto();
+                                bodyDTO.displayName = Data.Name;
+                                bodyDTO.RefNo = Data.RefNo;
+                                bodyDTO.link = Action;
+                                bodyDTO.path = path;
+                                string strBodyMsg = mailG.PopulateBodyLeaseRefernceNo(bodyDTO);
+                                #endregion
+
+                                string strMailSubject = "User Reference No. Details ";
+                                string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                                var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, Data.EmailId, strMailCC, strMailBCC, strAttachPath);
+                                #endregion
+
+                                if (sendMailResult)
+                                {
+                                    ViewBag.Message = Alert.Show("Dear User,<br/>" + Data.Name + "  Your password is send to Registered email and Mobile No", "", AlertType.Success);
+                                }
+                                else
+                                {
+                                    ViewBag.Message = Alert.Show("Dear User,<br/>" + Data.Name + "  Successfully allotment is done but Enable to send Reference No. on your mail or sms due to network issue", "", AlertType.Info);
+
+                                }
+
+                                #endregion
+                                return View(allotmententry);
+
                             }
+
                             else
                             {
-                                ViewBag.Message = Alert.Show("Dear User,<br/>" + Data.Name + "  Successfully allotment is done but Enable to send Reference No. on your mail or sms due to network issue", "", AlertType.Info);
-
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(allotmententry);
                             }
-
-                            #endregion
-                            return View(allotmententry);
                         }
-
                         else
                         {
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                             return View(allotmententry);
                         }
+
                     }
                     else
                     {
                         return View(allotmententry);
                     }
+
+
                 }
                 else
                 {
                     return View(allotmententry);
                 }
-
-               
             }
             catch (Exception ex)
             {

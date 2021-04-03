@@ -36,7 +36,8 @@ namespace Libraries.Service.IApplicationService
 
         Task<Leaseapplication> FetchLeaseApplicationmailDetails(int id);
 
-
+        // *************** to create user ************************
+        Task<string> CreateUser(Allotmententry model,  string username);
 
     }
 }

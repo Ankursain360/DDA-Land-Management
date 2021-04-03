@@ -121,10 +121,14 @@ namespace LeaseDetails.Controllers
             {
                 if (deed.File != null)
                 {
-                    deed.DocumentPath = fileHelper.SaveFile(Document, deed.File);
+                    deed.DocumentPath = deed.File != null ? fileHelper.SaveFile1(Document, deed.File) :
+                        deed.File != null || deed.DocumentPath != "" ? deed.DocumentPath : string.Empty;
+                    //deed.DocumentPath = fileHelper.SaveFile(Document, deed.File);
                 }
-                    
-                    deed.ModifiedBy = SiteContext.UserId;
+
+
+               
+                deed.ModifiedBy = SiteContext.UserId;
                     var result = await _leasedeedService.Update(id, deed);
                     if (result == true)
                     {
