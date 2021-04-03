@@ -8,18 +8,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Dto.Search;
+using Microsoft.AspNetCore.Identity;
 namespace Libraries.Service.ApplicationService
 {
     public class AllotmentEntryService : EntityService<Allotmententry>, IAllotmentEntryService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAllotmentEntryRepository _allotmentEntryRepository;
-        //private readonly UserManager<ApplicationUser> _userManager;
-        public AllotmentEntryService(IUnitOfWork unitOfWork, IAllotmentEntryRepository allotmentEntryRepository)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public AllotmentEntryService(IUnitOfWork unitOfWork, IAllotmentEntryRepository allotmentEntryRepository, UserManager<ApplicationUser> userManager)
       : base(unitOfWork, allotmentEntryRepository)
         {
             _unitOfWork = unitOfWork;
             _allotmentEntryRepository = allotmentEntryRepository;
+            _userManager = userManager;
         }
 
 
@@ -139,10 +141,7 @@ namespace Libraries.Service.ApplicationService
             return await _allotmentEntryRepository.FetchSingleLeaseapplicationResult(applicationId);
         }
 
-        //public async Task<Allotmententry> FetchSingleCalculationDetails(int? LeasesTypeId)
-        //{
-        //    return await _allotmentEntryRepository.FetchSingleCalculationDetails(LeasesTypeId);
-        //}
+       
         public async Task<Documentcharges> FetchSingledocumentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
         {
             return await _allotmentEntryRepository.FetchSingledocumentResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
@@ -163,30 +162,33 @@ namespace Libraries.Service.ApplicationService
         {
             return await _allotmentEntryRepository.FetchLeaseApplicationmailDetails(id);
         }
-        //public async Task<string> CreateUser(Damagepayeeregister model)
-        //{
-        //    ApplicationUser user = new ApplicationUser()
-        //    {
-        //        Name = model.payeeName[0],
-        //        UserName = model.payeeName[0],
-        //        Email = model.EmailId[0],
-        //        PhoneNumber = model.MobileNo[0],
-        //        PasswordSetDate = DateTime.Now.AddDays(30),
-        //        CreatedBy = 1,
-        //        CreatedDate = DateTime.Now,
-        //        IsDefaultPassword = 1
-        //    };
-        //    string password = "Pass123$";
 
-        //    var userSavedResult = await _userManager.CreateAsync(user, password);
-        //    //  var userSavedResult = await _userManager.CreateAsync(user, userDto.Password);
-        //    if (userSavedResult.Succeeded)
-        //    {
-        //        return password;
-        //    }
-        //    return "False";
+        // ************* to create user **************
 
-        //}
+        public async Task<string> CreateUser(Allotmententry model, string username)
+        {
+            ApplicationUser user = new ApplicationUser()
+            {
+                UserName = username,
+                Email ="email",
+                Name = username,
+                PasswordSetDate = DateTime.Now.AddDays(30),
+                CreatedBy = 1,
+                CreatedDate = DateTime.Now,
+                IsDefaultPassword = 1
+            };
+            string password = "Pass123$";
+           
+
+            var userSavedResult = await _userManager.CreateAsync(user, password);
+            //  var userSavedResult = await _userManager.CreateAsync(user, userDto.Password);
+            if (userSavedResult.Succeeded)
+            {
+                return password;
+            }
+            return "False";
+
+        }
     }
 }
 
