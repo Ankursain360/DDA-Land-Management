@@ -13,7 +13,7 @@ $("#btnSearch").click(function () {
 
 $("#btnReset").click(function () {
 
-    $('#txtHonble').val('');
+    $('#txthonble').val('');
     GetHonble(currentPageNumber, currentPageSize, sortOrder);
 });
 
