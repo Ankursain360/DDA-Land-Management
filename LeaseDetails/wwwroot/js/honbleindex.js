@@ -46,7 +46,7 @@ function GetHonble(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
 
-        honblename: $('#txtHonble').val(),
+        honblename: $('#txthonble').val(),
 
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
