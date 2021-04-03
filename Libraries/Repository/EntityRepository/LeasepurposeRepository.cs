@@ -31,7 +31,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("PURPOSEUSE"):
+                    case ("PURPOSE"):
                         data = null;
                         data = await _dbContext.Leasepurpose
                             .Where(x => (string.IsNullOrEmpty(model.purposeUse) || x.PurposeUse.Contains(model.purposeUse)))
@@ -54,7 +54,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("PURPOSEUSE"):
+                    case ("PURPOSE"):
                         data = null;
                         data = await _dbContext.Leasepurpose
                             .Where(x => (string.IsNullOrEmpty(model.purposeUse) || x.PurposeUse.Contains(model.purposeUse)))
