@@ -308,6 +308,8 @@ namespace Libraries.Model
         public virtual DbSet<Mortgage> Mortgage { get; set; }
         public virtual DbSet<Cancellationentry> Cancellationentry { get; set; }
         public virtual DbSet<Judgementstatus> Judgementstatus { get; set; }
+        public virtual DbSet<Timeextension> Timeextension { get; set; }
+
 
         public virtual DbSet<Actiontakenbydda> Actiontakenbydda { get; set; }
         public virtual DbSet<Extension> Extension { get; set; }
@@ -560,6 +562,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new JudgementstatusConfiguration());
             modelBuilder.ApplyConfiguration(new ActiontakenbyddaConfiguration());
             modelBuilder.ApplyConfiguration(new ExtensionConfiguration());
+            modelBuilder.ApplyConfiguration(new TimeextensionConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }
