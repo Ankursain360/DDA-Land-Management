@@ -1,8 +1,13 @@
 ﻿$(document).ready(function () {
-   var LetterDate = sessionStorage.getItem("NewDate");
+  // var LetterDate = sessionStorage.getItem("NewDate");
    var RefNumber = sessionStorage.getItem("RefN");
   
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
 
+    var LetterDate = dd + '-' + mm + '-' + yyyy;
     $("#txtNewDate").val(LetterDate);
     $("#txtRefN").val(RefNumber);
     $("#txtRe").val(RefNumber);
@@ -16,8 +21,9 @@
 $(function () {
     $("#btnPrint").click(function () {
         $('.jhide').hide();
-        nWin($("#View").html(), $("#pagename").html());
-        $('.jhide').show();
+        print.window();
+     //   nWin($("#View").html(), $("#pagename").html());
+    //    $('.jhide').show();
     });
 });
 function nWin(context, title) {

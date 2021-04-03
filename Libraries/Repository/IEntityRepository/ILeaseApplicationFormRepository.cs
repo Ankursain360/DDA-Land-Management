@@ -15,6 +15,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Leaseapplicationdocuments>> LeaseApplicationDocumentDetails(int id);
         Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model);
         Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id);
-        Task<List<Leaseapplication>> GetRefNoListforAllotmentLetter();
+        Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
+        Task<Allotmententry> FetchLeaseApplicationDetailsforAllotmentLetter(int id);
     }
 }

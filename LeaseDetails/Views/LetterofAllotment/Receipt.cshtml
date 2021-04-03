@@ -1,0 +1,282 @@
+﻿@model Libraries.Model.Entity.Allotmententry
+    <link href="~/css/PrintLabel.css" rel="stylesheet" />
+    <div class="content contentstyle py-4" id="DivDemandReport">
+        <div class="panel panel-default" style="border-color:black;">
+            <div class="pt-3">
+
+                <div id="LetterData" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+                    <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+                        <tr>
+                            <td align="center">
+
+                                <h5> <b> DELHI DEVELOPMENT AUTHORITY</b></h5> <br />
+                                <h5><b> INSTITUTIONAL LAND BRANCH</b></h5><br />
+                                <h5> <b></b> Room No.216, A-Block, 2" Floor, Vikas Sudan, INA New Delhi<b></h5><br />
+
+                                <br />
+                                <h6><b> *****</b></h6> <br />
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                <table style="border:none; border-top: none; width:100%">
+                                    <tr>
+
+                                        <td align="left">
+                                            Letter No. :<b>  <input type="text" id="txtRefN" /></b>
+                                        </td>
+                                        <td align="right">
+                                            Dated :  <b> <input type="text" id="txtNewDate" /></b>
+                                        </td>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left">
+                                <b>  The Deputy Director,</b><br />
+                                <b>   Dte. of Education,</b><br />
+                                <b>Land & Estate Branch. GNCTD, Lucknow Road,</b><br />
+                                <b> Delhi-110054</b><br />
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <b>
+                                    Subject:- Allotment of land measuring <b> @Model.TotalArea </b> Sqm. to Dte. of Education (Land & Estate Branch), GNCTD for construction of <b> @Model.Application.Name,@(Model.Application.Address)</b> .
+                                </b>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="color:black">
+                                Sir,
+
+
+                            </p>
+                            <p style="margin-left:50px; color:black">
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <br />
+
+
+                    <table class="table" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+                        <tbody class="tbody">
+                            <tr>
+                                <td>
+                                    With reference to letter No.<b> @Model.Application.RefNo </b>I dated<b> @Model.Application.RefNoOfAllotmentLetterDate</b> on the subject noted above. I am directed to
+                                    inform you that under the provision of DDA (Disposal of Developed Nazul land) Rules. 1981. it is proposed to allot a plot
+                                    of land measuring <b>@Model.TotalArea</b> Sqm.<b> @if (Model.LeasePurposesTypeId == 1)
+{<span>(on perpetual lease hold basis)</span>}
+else
+{ <span>(on temp lease hold basis)</span>} </b>for the purpose of <b>@Model.Application.Name,@Model.Application.Address</b> as per enclosed Lay Out Plan
+                                    on the usual tenets and conditions as given in the approved format of perpetual lease deed and the following conditions: -<br />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    1. That the allottee Dte. of Education (Land & Estate Branch), GNCTD will be required	to
+                                    pay provisional premium of land measuring <b>@Model.TotalArea </b> Sqm.  Re. <b>
+    @if (Model.PremiumRate == null)
+    {<span>0.00</span>}
+    else
+    {<span>@Model.PremiumRate</span>}
+</b>/- per acre (Aggregate of the provisional
+                                    land final premium). The revision of rates of land is under consideration of the Central Govt. The allottee
+                                    shall have to pay balance premium for the land as per rates determined by the Central Government under Rule-5
+                                    of DDA (Disposal of Developed Nazul land) Rules 1981, and within the time demanded by DDA. The rates of land.
+                                    determined. by Central Government, shall be binding upon the allottee and shall not be called in question by it in any proceeding.
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    i.The allottee shall give an undertaking to the effect that it will pay the balance premium of land
+
+                                    as and when demanded by DDA on the basis of the rates determined by Central Govt.<br />
+                                    ii.The area of the land/ plot is also subject to variation in size, as per requirement of layout plan and actual demarcation of the plot at site etc.
+                                    <br /> iii.The allotted land shall be used for the purpose of Govt. Sr. Sec. School and no other purpose whatsoever.
+                                    <br /> iv.The building plans should be got approved from the Lessor/DDA/Local body, before getting the same sanctioned for the construction on allotted land and construction as per sanctioned plan shall be completed thereon within a period of 2 years from the date of taking over physical possession of the plot allotted.
+                                    <br /> v.The allottee shall not sell, transfer, assign or otherwise pan with possession of the whole or any
+
+                                    pan of the said and or any building thereon except with the previous consent in writing of the Lessor which he shall be entitled to refuse in his absolute discretion.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    a.PROVIDED that , in the event of the consent being , cii
+                                    • the Lessor may impose such conditions as he thinks fit and the LESSOR shall be cut 111,
+                                    1 to claim and recover the whole or a portion (as the Lessor may in his absolute discretion determine)
+                                    of the un-earned in	in the value (i.e. the difference between the premium paid and market value ) of the
+                                    said land at the time of sale, transfer assignment. or parting with the possession and the decision of Lessor
+                                    in the respect of the market value shall he final & binding.
+                                    <br /> b.Notwithstanding anything contained in sub-clause
+                                    <br />(a) above. the lessee may with the previous consent in writing of the Lt. Governor of Delhi (hem in after called The L.G.) mortgage or charge, the said land to such person as may be approved by the Lt. Govemor in his absolute discretion.
+                                    <br /> vi.The lease decd shall be executed and got registered by the allottee at its own cost as and
+
+                                    when called upon to do so. by the Lessor (PRESIDENT OF INDIA)/DDA.
+                                    <br /> vii.The trees if any standing on the plot in question shall remain as DDA property and shall not
+
+                                    be removed or disposed of without the prior approval of the Lessor in writing. If the trees required to be removed off, then the permission for caning of trees may be obtained from Forest Department/Horticulture Department. The tree will be verified by Horticulture Department. DDA.
+                                    <br /> viii.That all other conditions, as contained in the perpetual lease deed to be executed in this
+
+                                    behalf and any other terms/condition imposed from time to time by the Central Government/Lt. Govemor shall be binding upon the allottee. The form of Lease Deed can be purchased from the office of DDA.
+                                    <br />ix.If the allottee violates any terms and conditions as mentioned above and in the perpetual
+
+                                    lease-deed, the allotment shall be cancelled and possession of the land/plot with superstructure standing thereon if any, will be taken over by the Lessor (PRESIDENT OF INDIA)/DDA, without any compensation to the allottee.
+                                    <br /> x.If the allotment is cancelled for breaches of any terms/ conditions of the allotment, the possession of the plot/land with building, if any will be handed over to DDA by the allottee on the date and time given in the cancellation notice.
+                                    <br /> 2.That it is the „hole responsibility of the allottee to keep proper watch and ward of the land and
+
+                                    property against any encroachment.
+                                    <br /> 3.The offer of allotment of land herein made is on "AS IS WHERE IS BASIS". The
+                                    allottee is advised to got himself acquainted with the conditions herein mentioned	and
+                                    also the site conditions before acceptance of the offer of allotment. It may be	noted that the
+                                    DDA shall not entertain any claim/exemption from the payment of	ground rent, License
+                                    Fee, composition fee etc. once the offer of allotment is accepted and possession is taken over
+                                    <br />  4.The allottee shall abide by all the terms and conditions given in the allotment	letter/lease
+
+                                    deed and other conditions as may be imposed by the Competent Authority from time to time
+                                    <br />5.The allottee shall pay the cost of fencing/Boundary wall if any, as and when	demanded by
+
+                                    DDA.
+                                    <br /> 6.No property development permitted on the allotted land.
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+
+                                    <p style="color:black">
+                                        The payment and the acceptance letter with the required undertaking must be sent within 60 days from the date of issue of Demand-Cum-Allotment letter. failing which interest at the rate of 14% shall be chargeable for the delay period upto 180 days of issue of this letter. On completion of 180 days from the date of issue, the allotment shall be automatically cancelled. If the allottee has made partial payment, after 180 days of issue of this letter the allottee shall have to m-apply for allotment.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    If the above terms and conditions are acceptable to you, the acceptance there of with	an
+                                    undertaking may be sent to the undersigned along with the demand draft for Rs. 46/- (Rupees Forty Six Only) including documentation charges Rs.
+                                    <b>
+                                        @*@if(Model.PremiumRate == null) { Model.PremiumRate=0; }*@
+                                        @if (Model.DocumentCharge == null)
+                                        {<span>0.00</span> }
+                                        else
+                                        {<span>@Model.DocumentCharge</span>}
+                                    </b>
+                                    /- in favour of DDA within 60 days from the date of issue of demand-cum-allotment letter. The said amount can also be deposited in the bank counter situated in I.N.A. office complex and a copy of the challan may also be submitted to this office.
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+
+
+                                    <b>Details of Demand</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    1.	Premium of land measuring
+                                    • 	Re.<b>	 @if (Model.PremiumAmount == null)
+                                    {<span>0.00</span>} else {<span>@Model.PremiumAmount</span> } </b>  ,<b>@Model.TotalArea</b> Sqm. at  Re. <b>
+    @if (Model.PremiumRate == null)
+    {<span>0.00</span>}
+    else
+    {<span>@Model.PremiumRate</span>}
+</b>/- per acre
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    2.	Documentation Charge
+
+                                    •	Rs.	<b> @if (Model.DocumentCharge == null)
+                                    {<span>0.00</span>} </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Total		Rs.	<b>
+    @if (Model.TotalAmount == null)
+    {<span>0.00</span>}
+    else
+    {<span>@Model.TotalAmount</span>}
+</b>
+
+
+                                    (Sada Shiv)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                    Encl: As stated	Dy. Director (IL)/DDA
+                                    ID V
+                                    <br />1. Commissioner (Pig.) DDA. Vikas Minar, New Delhi-I 10002
+                                    <br />2.Commissioner (LM), DDA, Vikas Sadan, New Delhi-I 10023
+                                    <br /> 3.Chief Engineer (Rohini), DDA, Madhuban Chowk, Delhi-1 10085
+                                    <br />  4.Dy. Director (Survey) LD, DDA, Vikas Sadan, New Delhi-I 10023
+                                    <br />   5.Dy. CAO	DDA, Vikas Sadan, New Delhi-110023
+
+                                    <br /><br />Dy. Director (11)/DDA
+
+
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    And whereas in exercise of the powers conferred on me by SubSection (2A) of Section 7
+                                    of the Public Premises (Eviction of Unauthorized Occupants)Act 1971, I consider that arrears of
+                                    damages in respect of the said premises is due and payable by you to the Delhi Development
+                                    Authority.
+
+
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="padding:20px;text-align:center">
+
+                    <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
+                   
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/allotmentlettercreate.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/allotmentlettercreate.min.js" asp-append-version="true"></script>
+    </environment>

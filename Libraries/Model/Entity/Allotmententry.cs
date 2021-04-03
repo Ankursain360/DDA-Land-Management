@@ -93,14 +93,14 @@ namespace Libraries.Model.Entity
         public ICollection<Leasedeed> Leasedeed { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
         public ICollection<Extensionservice> Extensionservice { get; set; }
-        //[NotMapped]
-        //public string FullName
-        //{
-        //    get
-        //    {
-        //        return Application.RefNo + " (" + Application.Name + ")";
-        //    }
-        //}
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return Application.RefNo + " (" + Application.Name + ")";
+            }
+        }
 
 
         //[NotMapped]

@@ -39,6 +39,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leaseApplicationRepository.FetchLeaseApplicationDetails(id);
         }
+        public async Task<Allotmententry> FetchLeaseApplicationDetailsforAllotmentLetter(int id)
+        {
+            return await _leaseApplicationRepository.FetchLeaseApplicationDetailsforAllotmentLetter(id);
+        }
         public async Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid)
         {
             return await _leaseApplicationRepository.GetDocumentChecklistDetails(servicetypeid);
@@ -74,7 +78,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leaseApplicationRepository.FetchLeaseApplicationDocumentDetails(id);
         }
-        public async Task<List<Leaseapplication>> GetRefNoListforAllotmentLetter()
+        public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetter()
         {
             return await _leaseApplicationRepository.GetRefNoListforAllotmentLetter();
         }
