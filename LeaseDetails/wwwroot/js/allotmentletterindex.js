@@ -53,15 +53,17 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
    
     return model;
 }
-$("#txtDate").change(function () {
+$("#btnGenerate").click(function () {
     debugger
-   // HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-    var vid = 3;
+   
+    var allotid = $("#ddlRefNo").children("option:selected").val();
     var daten = document.getElementById("txtDate").value;
     var refn = document.getElementById("txtRefernceNumber").value;
     sessionStorage.NewDate = daten;
     sessionStorage.RefN = refn;
-
+    sessionStorage.Vid = allotid;
+    window.location.href = '/AllotLetter/View/';
+    
 
 });
 function onPaging(pageNo) {

@@ -27,7 +27,7 @@ namespace Libraries.Repository.EntityRepository
 
             if (model.SortBy == null)
             {
-                model.SortBy = "Type";
+                model.SortBy = "Honble";
             }
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -35,7 +35,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("HonbleName"):
+                    case ("HONBLE"):
                         data = null;
                         data = await _dbContext.Honble
                                                    .Where(x => (string.IsNullOrEmpty(model.honblename) || x.HonbleName.Contains(model.honblename)))
@@ -57,7 +57,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("Honble"):
+                    case ("HONBLE"):
                         data = null;
                         data = await _dbContext.Honble
                                                    .Where(x => (string.IsNullOrEmpty(model.honblename) || x.HonbleName.Contains(model.honblename)))

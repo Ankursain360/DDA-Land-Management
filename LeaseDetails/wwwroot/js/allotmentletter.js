@@ -1,17 +1,31 @@
-﻿$(document).ready(function () {
-   var LetterDate = sessionStorage.getItem("NewDate");
-   var RefNumber = sessionStorage.getItem("RefN");
-  
+﻿
 
-    $("#txtNewDate").val(LetterDate);
-    $("#txtRefN").val(RefNumber);
-    $("#txtRe").val(RefNumber);
+
+$("#btnGenerate").click(function () {
+  //  var id = $(this).val();
+    var id = $("#ddlRefNo").children("option:selected").val();
+    var allotid = id;
+    var daten = document.getElementById("txtDate").value;
+    var refn = document.getElementById("txtRefernceNumber").value;
+    sessionStorage.NewDate = daten;
+    sessionStorage.RefN = refn;
+    sessionStorage.Vid = allotid;
+    if (id) {
+
+        HttpGet(`/LetterofAllotment/Receipt/?ApplicationId=${id}`, 'html', function (response) {
+
+
+            $('#View').html("");
+            $('#View').html(response);
+
+        });
+
+    }
 });
-//$(function () {
-//    $("#btnPrint").click(function () {
-//        window.print();
-//    });
-//});
+
+
+
+
 
 $(function () {
     $("#btnPrint").click(function () {

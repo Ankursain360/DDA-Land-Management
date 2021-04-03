@@ -310,7 +310,7 @@ namespace Libraries.Model
         public virtual DbSet<Judgementstatus> Judgementstatus { get; set; }
 
         public virtual DbSet<Actiontakenbydda> Actiontakenbydda { get; set; }
-        public virtual DbSet<Timeextension> Timeextension { get; set; }
+        public virtual DbSet<Extension> Extension { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -559,7 +559,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new CancellationEntryConfiguration());
             modelBuilder.ApplyConfiguration(new JudgementstatusConfiguration());
             modelBuilder.ApplyConfiguration(new ActiontakenbyddaConfiguration());
-            modelBuilder.ApplyConfiguration(new TimeextensionConfiguration());
+            modelBuilder.ApplyConfiguration(new ExtensionConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

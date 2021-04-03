@@ -18,6 +18,7 @@ namespace Libraries.Model.Entity
             Requestforproceeding = new HashSet<Requestforproceeding>();
             Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
             Mortgage = new HashSet<Mortgage>();
+            Extensionservice = new HashSet<Extension>();
         }
         public int ApplicationId { get; set; }
         public decimal TotalArea { get; set; }
@@ -91,6 +92,7 @@ namespace Libraries.Model.Entity
 
         public ICollection<Leasedeed> Leasedeed { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
+        public ICollection<Extension> Extensionservice { get; set; }
         //[NotMapped]
         //public string FullName
         //{
@@ -138,7 +140,9 @@ namespace Libraries.Model.Entity
         //    }
         //}
 
+        //[NotMapped]
 
+        //public List<string> RefNo { get; set; }
 
     }
 }

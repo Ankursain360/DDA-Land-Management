@@ -19,7 +19,6 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISiteContext, SiteContext>();
             /* Respository */
-            services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
@@ -52,6 +51,9 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IJudgementRepository, JudgementRepository>();
             services.AddScoped<IMortgageRepository, MortgageRepository>();
             services.AddScoped<IApplyForServicesRepository, ApplyForServicesRepository>();
+            services.AddScoped<IExtensionRepository, ExtensionRepository>();
+
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -86,6 +88,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IJudgementService, JudgementService>();
             services.AddScoped<IMortgageService, MortgageService>();
             services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
+            services.AddScoped<IExtensionService, ExtensionService>();
         }
     }
 }

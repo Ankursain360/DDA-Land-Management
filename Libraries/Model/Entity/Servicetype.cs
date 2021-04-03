@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
             Allotteeservicesdocument = new HashSet<Allotteeservicesdocument>();
             Documentchecklist = new HashSet<Documentchecklist>();
             Mortgage = new HashSet<Mortgage>();
+            Extensionservice = new HashSet<Extension>();
         }
         [Required(ErrorMessage = "Name is mandatory ")]
         public string Name { get; set; }
@@ -25,5 +26,6 @@ namespace Libraries.Model.Entity
         public ICollection<Allotteeservicesdocument> Allotteeservicesdocument { get; set; }
         public ICollection<Documentchecklist> Documentchecklist { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
+        public ICollection<Extension> Extensionservice { get; set; }
     }
 }
