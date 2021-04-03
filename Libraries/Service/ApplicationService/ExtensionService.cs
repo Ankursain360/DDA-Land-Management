@@ -14,47 +14,47 @@ using AutoMapper;
 namespace Libraries.Service.ApplicationService
 {
 
-    public class ExtensionService : EntityService<Mortgage>, IExtensionService
+    public class ExtensionService : EntityService<Extension>, IExtensionService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMortgageRepository _mortgageRepository;
+        private readonly IExtensionRepository _extensionRepository;
         private readonly IMapper _mapper;
         public ExtensionService(IUnitOfWork unitOfWork,
-            IMortgageRepository mortgageRepository,
+            IExtensionRepository extensionRepository,
             IMapper mapper)
-        : base(unitOfWork, mortgageRepository)
+        : base(unitOfWork, extensionRepository)
         {
             _unitOfWork = unitOfWork;
-            _mortgageRepository = mortgageRepository;
+            _extensionRepository = extensionRepository;
             _mapper = mapper;
         }
 
         public async Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid)
         {
-            return await _mortgageRepository.GetDocumentChecklistDetails(servicetypeid);
+            return await _extensionRepository.GetDocumentChecklistDetails(servicetypeid);
         }
 
-        public async Task<PagedResult<Mortgage>> GetPagedMortgageDetails(MortgageSearchDto model)
+        public async Task<PagedResult<Extension>> GetPagedExtensionServiceDetails(ExtensionServiceSearchDto model)
         {
-            return await _mortgageRepository.GetPagedMortgageDetails(model);
+            return await _extensionRepository.GetPagedExtensionServiceDetails(model);
         }
 
         public async Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments)
         {
             allotteeservicesdocuments.ForEach(x => x.CreatedDate = DateTime.Now);
-            return await _mortgageRepository.SaveAllotteeServiceDocuments(allotteeservicesdocuments);
+            return await _extensionRepository.SaveAllotteeServiceDocuments(allotteeservicesdocuments);
         }
 
-        public async Task<bool> Create(Mortgage mortgage)
+        public async Task<bool> Create(Extension extensionservice)
         {
-            mortgage.CreatedDate = DateTime.Now;
-            _mortgageRepository.Add(mortgage);
+            extensionservice.CreatedDate = DateTime.Now;
+            _extensionRepository.Add(extensionservice);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public async Task<Possesionplan> GetAllotteeDetails(int userId)
         {
-            return await _mortgageRepository.GetAllotteeDetails(userId);
+            return await _extensionRepository.GetAllotteeDetails(userId);
         }
     }
 }

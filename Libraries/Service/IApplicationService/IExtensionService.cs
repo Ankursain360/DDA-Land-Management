@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface IExtensionService : IEntityService<Mortgage>
+    public interface IExtensionService : IEntityService<Extension>
     {
-        Task<PagedResult<Mortgage>> GetPagedMortgageDetails(MortgageSearchDto model);
+        Task<PagedResult<Extension>> GetPagedExtensionServiceDetails(ExtensionServiceSearchDto model);
         Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid);
-        Task<bool> Create(Mortgage mortgage);
+        Task<bool> Create(Extension extensionservice);
         Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments);
         Task<Possesionplan> GetAllotteeDetails(int userId);
     }
