@@ -2,18 +2,19 @@
 
 
 $("#btnGenerate").click(function () {
+
   //  var id = $(this).val();
     var id = $("#ddlRefNo").children("option:selected").val();
     var allotid = id;
-    var daten = document.getElementById("txtDate").value;
+   // var daten = document.getElementById("txtDate").value;
     var refn = document.getElementById("txtRefernceNumber").value;
-    sessionStorage.NewDate = daten;
+   // sessionStorage.NewDate = daten;
     sessionStorage.RefN = refn;
     sessionStorage.Vid = allotid;
     if (id) {
 
         HttpGet(`/LetterofAllotment/Receipt/?ApplicationId=${id}`, 'html', function (response) {
-
+            debugger
 
             $('#View').html("");
             $('#View').html(response);

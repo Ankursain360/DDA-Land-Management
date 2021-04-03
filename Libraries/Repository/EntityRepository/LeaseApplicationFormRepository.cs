@@ -29,7 +29,14 @@ namespace Libraries.Repository.EntityRepository
                                         .FirstOrDefaultAsync();
             return data;
         }
-
+        public async Task<Allotmententry> FetchLeaseApplicationDetailsforAllotmentLetter(int id)
+        {
+            var data = await _dbContext.Allotmententry
+                                         .Include(x => x.Application)
+                                        .Where(x => x.Id == id)
+                                        .FirstOrDefaultAsync();
+            return data;
+        }
         public async Task<List<Documentchecklist>> GetDocumentChecklistDetails(int servicetypeid)
         {
             return await _dbContext.Documentchecklist
@@ -65,12 +72,22 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Leaseapplicationdocuments.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
-        public async Task<List<Leaseapplication>> GetRefNoListforAllotmentLetter()
+        //public async Task<List<Leaseapplication>> GetRefNoListforAllotmentLetter()
+        //{
+        //    return await _dbContext.Leaseapplication
+        //        .Include(x=>x.Allotmententry)
+        //        .Where(x=> (x.IsActive == 1) )
+        //        .OrderByDescending(x => x.RefNo).ToListAsync();
+        //}
+
+        public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetter()
         {
-            return await _dbContext.Leaseapplication
-                .Where(x=> x.IsActive == 1)
-                .OrderByDescending(x => x.RefNo).ToListAsync();
+            return await _dbContext.Allotmententry
+                        .Include(x=>x.Application)
+                       .Where(x => (x.IsActive == 1) )
+                .OrderByDescending(x => x.Application.RefNo).ToListAsync();
         }
+
     }
 
 

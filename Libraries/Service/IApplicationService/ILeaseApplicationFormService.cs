@@ -19,6 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model);
         Task<bool> UpdateBeforeApproval(int id, Leaseapplication leaseapplication);
         Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id);
-        Task<List<Leaseapplication>> GetRefNoListforAllotmentLetter();
+        Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
+        Task<Allotmententry> FetchLeaseApplicationDetailsforAllotmentLetter(int id);
     }
 }

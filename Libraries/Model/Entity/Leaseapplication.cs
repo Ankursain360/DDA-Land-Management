@@ -161,7 +161,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
         [NotMapped]
-        public List<Leaseapplication> RefNoList { get; set; }
+        public List<Allotmententry> RefNoList { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
         public ICollection<Extension> Extensionservice { get; set; }
     }

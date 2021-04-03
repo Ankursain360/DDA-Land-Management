@@ -84,7 +84,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case (" FEE"):
+                    case ("FEE"):
                         data = null;
                         data = await _dbContext.Timeextension
                                                .Where(x => x.FromDate == (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
