@@ -55,7 +55,9 @@ namespace LeaseDetails.Controllers
             {
 
                 if (ModelState.IsValid)
+
                 {
+                    Leasepaymenttype.CreatedBy = SiteContext.UserId;
                     var result = await _LeasePaymentTypeService.Create(Leasepaymenttype);
 
                     if (result == true)
