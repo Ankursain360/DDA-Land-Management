@@ -25,7 +25,7 @@ namespace LeaseDetails.Controllers
         // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-            var list = _LeasePaymentTypeService.GetAllLeasepaymenttype();
+           // var list = _LeasePaymentTypeService.GetAllLeasepaymenttype();
             return View();
         }
         [HttpPost]
@@ -63,9 +63,7 @@ namespace LeaseDetails.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //var list = await _PropertyTypeService.GetAllPropertyType();
-                        //return View("Index", list);
-                        return RedirectToAction("Index", "Leasepaymenttype");
+                        return View("Index");
                     }
                     else
                     {
@@ -130,8 +128,8 @@ namespace LeaseDetails.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         //var list = await _PropertyTypeService.GetAllPropertyType();
-                        //return View("Index", list);
-                        return RedirectToAction("Index", "Leasepaymenttype");
+                        return View("Index");
+                        //return RedirectToAction("Index", "Leasepaymenttype");
                     }
                     else
                     {
@@ -174,8 +172,8 @@ namespace LeaseDetails.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             //var list = await _PropertyTypeService.GetAllPropertyType();
-            //return View("Index", list);
-            return RedirectToAction("Index", "Leasepaymenttype");
+            return View("Index");
+            //return RedirectToAction("Index", "Leasepaymenttype");
         }
 
 
