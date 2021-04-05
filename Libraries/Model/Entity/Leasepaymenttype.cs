@@ -14,8 +14,10 @@ namespace Libraries.Model.Entity
             Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
         }
 
-       
+        [Required(ErrorMessage = "Lease Payment Type  is mandatory")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         
 
