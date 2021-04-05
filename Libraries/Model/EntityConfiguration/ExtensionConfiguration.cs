@@ -46,6 +46,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Remarks).HasColumnType("longtext");
+
             builder.Property(e => e.ServiceTypeId).HasColumnType("int(11)");
 
             builder.Property(e => e.TotalAmount).HasColumnType("decimal(18,3)");

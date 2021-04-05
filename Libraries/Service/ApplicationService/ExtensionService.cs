@@ -92,6 +92,7 @@ namespace Libraries.Service.ApplicationService
             model.ExtensionPeriod = extension.ExtensionPeriod;
             model.ExtentionFees = extension.ExtentionFees;
             model.TotalAmount = extension.TotalAmount;
+            model.Remarks = extension.Remarks;
             model.UserId = extension.UserId;
             model.IsActive = extension.IsActive;
             model.ApprovedStatus = extension.ApprovedStatus;
