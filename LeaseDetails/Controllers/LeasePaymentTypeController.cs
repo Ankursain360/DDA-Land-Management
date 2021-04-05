@@ -15,24 +15,23 @@ using Utility.Helper;
 
 namespace LeaseDetails.Controllers
 {
-    public class JudgementstatusController : BaseController
+    public class LeasePaymentTypeController : BaseController
     {
-        private readonly IJudgementstatusService _JudgementstatusService;
-        public JudgementstatusController(IJudgementstatusService JudgementstatusService)
+        private readonly ILeasePaymentTypeService _LeasePaymentTypeService;
+        public LeasePaymentTypeController(ILeasePaymentTypeService LeasePaymentTypeService)
         {
-            _JudgementstatusService = JudgementstatusService;
+            _LeasePaymentTypeService = LeasePaymentTypeService;
         }
         // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-            var list = _JudgementstatusService.GetAllJudgementstatus();
+           // var list = _LeasePaymentTypeService.GetAllLeasepaymenttype();
             return View();
         }
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] JudgementstatusSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] LeasePaymentTypeSearchDto model)
         {
-            var result = await _JudgementstatusService.GetPagedJudgementstatus(model);
+            var result = await _LeasePaymentTypeService.GetPagedLeasepaymenttype(model);
             return PartialView("_List", result);
         }
 
@@ -40,47 +39,47 @@ namespace LeaseDetails.Controllers
         //   [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Judgementstatus Judgementstatus = new Judgementstatus();
-            Judgementstatus.IsActive = 1;
-            Judgementstatus.CreatedBy = SiteContext.UserId;
+            Leasepaymenttype Leasepaymenttype = new Leasepaymenttype();
+            Leasepaymenttype.IsActive = 1;
+            Leasepaymenttype.CreatedBy = SiteContext.UserId;
 
-            return View(Judgementstatus);
+            return View(Leasepaymenttype);
 
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         // [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Judgementstatus Judgementstatus)
+        public async Task<IActionResult> Create(Leasepaymenttype Leasepaymenttype)
         {
             try
             {
 
                 if (ModelState.IsValid)
+
                 {
-                    var result = await _JudgementstatusService.Create(Judgementstatus);
+                    Leasepaymenttype.CreatedBy = SiteContext.UserId;
+                    var result = await _LeasePaymentTypeService.Create(Leasepaymenttype);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //var list = await _PropertyTypeService.GetAllPropertyType();
                         return View("Index");
-                        //return RedirectToAction("Index", "Judgementstatus");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(Judgementstatus);
+                        return View(Leasepaymenttype);
                     }
                 }
                 else
                 {
-                    return View(Judgementstatus);
+                    return View(Leasepaymenttype);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(Judgementstatus);
+                return View(Leasepaymenttype);
             }
         }
         //[AcceptVerbs("Get", "Post")]
@@ -101,10 +100,10 @@ namespace LeaseDetails.Controllers
         //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            Judgementstatus Judgementstatus = new Judgementstatus();
+            Leasepaymenttype Leasepaymenttype = new Leasepaymenttype();
 
 
-            var Data = await _JudgementstatusService.FetchSingleResult(id);
+            var Data = await _LeasePaymentTypeService.FetchSingleResult(id);
 
 
             if (Data == null)
@@ -116,37 +115,37 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         // [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Judgementstatus Judgementstatus)
+        public async Task<IActionResult> Edit(int id, Leasepaymenttype Leasepaymenttype)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    Judgementstatus.ModifiedBy = SiteContext.UserId;
+                    Leasepaymenttype.ModifiedBy = SiteContext.UserId;
 
-                    var result = await _JudgementstatusService.Update(id, Judgementstatus);
+                    var result = await _LeasePaymentTypeService.Update(id, Leasepaymenttype);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         //var list = await _PropertyTypeService.GetAllPropertyType();
                         return View("Index");
-                       // return RedirectToAction("Index", "Judgementstatus");
+                        //return RedirectToAction("Index", "Leasepaymenttype");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(Judgementstatus);
+                        return View(Leasepaymenttype);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(Judgementstatus);
+                    return View(Leasepaymenttype);
                 }
             }
             else
             {
-                return View(Judgementstatus);
+                return View(Leasepaymenttype);
             }
         }
 
@@ -158,7 +157,7 @@ namespace LeaseDetails.Controllers
             try
             {
 
-                var result = await _JudgementstatusService.Delete(id);
+                var result = await _LeasePaymentTypeService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -174,7 +173,7 @@ namespace LeaseDetails.Controllers
             }
             //var list = await _PropertyTypeService.GetAllPropertyType();
             return View("Index");
-            //return RedirectToAction("Index", "Judgementstatus");
+            //return RedirectToAction("Index", "Leasepaymenttype");
         }
 
 
@@ -182,7 +181,7 @@ namespace LeaseDetails.Controllers
         // [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _JudgementstatusService.FetchSingleResult(id);
+            var Data = await _LeasePaymentTypeService.FetchSingleResult(id);
 
 
             if (Data == null)
@@ -196,9 +195,9 @@ namespace LeaseDetails.Controllers
 
         public async Task<IActionResult> Download()
         {
-            List<Judgementstatus> result = await _JudgementstatusService.GetAll();
+            List<Leasepaymenttype> result = await _LeasePaymentTypeService.GetAll();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Judgementstatus.xlsx";
+            string sFileName = @"Leasepaymenttype.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }

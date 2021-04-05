@@ -22,8 +22,10 @@ namespace Libraries.Model.Entity
             Premiumrate = new HashSet<Premiumrate>();
             Documentcharges = new HashSet<Documentcharges>();
         }
+        [Required(ErrorMessage = "Purposeuse  is mandatory")]
         public string PurposeUse { get; set; }
 
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public ICollection<Allotmententry> Allotmententry { get; set; }
         public ICollection<Leasesubpurpose> Leasesubpurpose { get; set; }
