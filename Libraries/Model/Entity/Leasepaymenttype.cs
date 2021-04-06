@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         public Leasepaymenttype()
         {
             Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
+            Payment = new HashSet<Payment>();
         }
 
         [Required(ErrorMessage = "Lease Payment Type  is mandatory")]
@@ -22,5 +23,6 @@ namespace Libraries.Model.Entity
         
 
         public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
+        public ICollection<Payment> Payment { get; set; }
     }
 }
