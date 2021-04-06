@@ -161,6 +161,9 @@ namespace LeaseForPublic.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _extensionService.FetchSingleResult(id);
+            var Msg = TempData["Message"] as string;
+            if (Msg != null)
+                ViewBag.Message = Msg;
             Data.IsActive = 1;
             Data.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
 
@@ -179,60 +182,90 @@ namespace LeaseForPublic.Controllers
             {
                 extension.ServiceTypeId = 5;
                 extension.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
-
+                var result = false;
                 if (ModelState.IsValid)
                 {
                     FileHelper fileHelper = new FileHelper();
-                    extension.ModifiedBy = SiteContext.UserId;
-                    extension.IsActive = 1;
-                    var result = await _extensionService.Update(id, extension);
-
-                    if (result)
+                    if (extension.EditPosition == "NotComplete")
                     {
-                        List<Allotteeservicesdocument> allotteeservicesdocuments = new List<Allotteeservicesdocument>();
-                        for (int i = 0; i < extension.DocumentChecklistId.Count; i++)
-                        {
-                            string filename = null;
-                            if (extension.FileUploaded != null && extension.FileUploaded.Count > 0)
-                                filename = extension.FileUploaded != null ?
-                                                                   extension.FileUploaded.Count <= i ? string.Empty :
-                                                                   fileHelper.SaveFile1(targetPathExtensionDocuments, extension.FileUploaded[i]) :
-                                                                   extension.FileUploaded[i] != null || extension.FileUploadedPath[i] != "" ?
-                                                                   extension.FileUploadedPath[i] : string.Empty;
-                            else
-                                filename = extension.DocumentName[i];
-                            allotteeservicesdocuments.Add(new Allotteeservicesdocument
-                            {
-                                DocumentChecklistId = extension.DocumentChecklistId.Count <= i ? 0 : extension.DocumentChecklistId[i],
-                                ServiceId = extension.Id,
-                                ServiceTypeId = extension.ServiceTypeId,
-                                DocumentFileName = filename,
-                                CreatedBy = SiteContext.UserId,
-                                Id = extension.AllotteeDocumentId[i]
+                        var Data = await _extensionService.FetchSingleResultDocument(extension.EditDocumentId);
+                        Allotteeservicesdocument allotteeservicesdocuments = new Allotteeservicesdocument();
+                        string filename = null;
+                        filename = extension.EditFileUploaded != null ?
+                                    fileHelper.SaveFile1(targetPathExtensionDocuments, extension.EditFileUploaded) :
+                                    extension.EditDocumentFileName;
+                        allotteeservicesdocuments.DocumentChecklistId = Data.DocumentChecklistId;
+                        allotteeservicesdocuments.ServiceId = extension.Id;
+                        allotteeservicesdocuments.ServiceTypeId = Data.ServiceTypeId;
+                        allotteeservicesdocuments.DocumentFileName = filename;
+                        allotteeservicesdocuments.CreatedBy = SiteContext.UserId;
+                        result = await _extensionService.UpdateAllotteeServiceDocuments(extension.EditDocumentId, allotteeservicesdocuments);
 
-                            });
-                        }
-                        foreach (var item in allotteeservicesdocuments)
-                        {
-                            if (item.Id != 0)
-                                result = await _extensionService.UpdateAllotteeServiceDocuments(item.Id, item);
-                            else
-                                result = await _extensionService.SaveAllotteeServiceDocumentsSingle( item);
 
-                        }
-                    }
-                    if (result == true)
-                    {
 
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View("Index");
+                        if (result)
+                            ViewBag.Message = Alert.Show("Document Updated Successfully", "", AlertType.Success);
+                        else
+                            ViewBag.Message = Alert.Show("Enable to update Document, please try again", "", AlertType.Warning);
+
+                        // return RedirectToAction("Edit", id);
+                        //ViewBag.Message = Alert.Show("Document Updated Successfully", "", AlertType.Success);
+                        return View(extension);
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(extension);
+                        extension.ModifiedBy = SiteContext.UserId;
+                        extension.IsActive = 1;
+                        result = await _extensionService.Update(id, extension);
 
+                        if (result)
+                        {
+                            List<Allotteeservicesdocument> allotteeservicesdocuments = new List<Allotteeservicesdocument>();
+                            for (int i = 0; i < extension.DocumentChecklistId.Count; i++)
+                            {
+                                string filename = null;
+                                if (extension.FileUploaded != null && extension.FileUploaded.Count > 0)
+                                    filename = extension.FileUploaded != null ?
+                                                                       extension.FileUploaded.Count <= i ? string.Empty :
+                                                                       fileHelper.SaveFile1(targetPathExtensionDocuments, extension.FileUploaded[i]) :
+                                                                       extension.FileUploaded[i] != null || extension.FileUploadedPath[i] != "" ?
+                                                                       extension.FileUploadedPath[i] : string.Empty;
+                                else
+                                    filename = extension.DocumentName[i];
+                                allotteeservicesdocuments.Add(new Allotteeservicesdocument
+                                {
+                                    DocumentChecklistId = extension.DocumentChecklistId.Count <= i ? 0 : extension.DocumentChecklistId[i],
+                                    ServiceId = extension.Id,
+                                    ServiceTypeId = extension.ServiceTypeId,
+                                    DocumentFileName = filename,
+                                    CreatedBy = SiteContext.UserId,
+                                    Id = extension.AllotteeDocumentId[i]
+
+                                });
+                            }
+                            foreach (var item in allotteeservicesdocuments)
+                            {
+                                if (item.Id != 0)
+                                    result = await _extensionService.UpdateAllotteeServiceDocuments(item.Id, item);
+                                else
+                                    result = await _extensionService.SaveAllotteeServiceDocumentsSingle(item);
+
+                            }
+                        }
+                        if (result == true)
+                        {
+
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            return View("Index");
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(extension);
+
+                        }
                     }
+
                 }
                 else
                 {
@@ -246,7 +279,7 @@ namespace LeaseForPublic.Controllers
             }
         }
 
-     //   [AuthorizeContext(ViewAction.View)]
+        //   [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _extensionService.FetchSingleResult(id);
@@ -260,7 +293,7 @@ namespace LeaseForPublic.Controllers
             return View(Data);
         }
 
-       // [AuthorizeContext(ViewAction.Delete)]
+        // [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -289,6 +322,12 @@ namespace LeaseForPublic.Controllers
             string targetPhotoPathLayout = targetPathExtensionDocuments + Data.DocumentFileName;
             byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> EditDocument(int DocumentId)
+        {
+            return Json(await _extensionService.FetchSingleResultDocument(DocumentId));
         }
 
         [HttpGet]

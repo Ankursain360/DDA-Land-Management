@@ -378,9 +378,27 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/DemandletterReport.min.js",
+    "outputFileName": "wwwroot/js/honbleindex.min.js",
     "inputFiles": [
-      "wwwroot/js/DemandletterReport.js"
+      "wwwroot/js/honbleindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leasepaymenttypeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/leasepaymenttypeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/timeextension.min.js",
+    "inputFiles": [
+      "wwwroot/js/timeextension.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/timeextensionindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/timeextensionindex.js"
     ]
   }
 ]

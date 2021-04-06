@@ -52,6 +52,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IMortgageRepository, MortgageRepository>();
             services.AddScoped<IApplyForServicesRepository, ApplyForServicesRepository>();
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
 
 
             /* Application Services */
@@ -88,6 +89,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IMortgageService, MortgageService>();
             services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
             services.AddScoped<IExtensionService, ExtensionService>();
+            services.AddScoped<IPaymentService, PaymentService>();
         }
     }
 }
