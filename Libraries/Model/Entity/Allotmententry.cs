@@ -19,6 +19,7 @@ namespace Libraries.Model.Entity
             Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
             Mortgage = new HashSet<Mortgage>();
             Extensionservice = new HashSet<Extension>();
+            Payment = new HashSet<Payment>();
         }
       
         public int ApplicationId { get; set; }
@@ -99,10 +100,11 @@ namespace Libraries.Model.Entity
         public ICollection<Leasedeed> Leasedeed { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
         public ICollection<Extension> Extensionservice { get; set; }
+        public ICollection<Payment> Payment { get; set; }
 
-        
 
-       
+
+
         //[NotMapped]
         //public string FullName
         //{
