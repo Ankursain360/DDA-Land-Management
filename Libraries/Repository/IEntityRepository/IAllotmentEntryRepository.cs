@@ -26,7 +26,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Licencefees> FetchSinglefeeResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate);
         Task<Leaseapplication> FetchLeaseApplicationmailDetails(int id);
 
-
+        Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model);
 
     }
 }

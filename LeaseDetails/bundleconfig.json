@@ -376,5 +376,11 @@
     "inputFiles": [
       "wwwroot/js/Leasedeedindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemandletterReport.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemandletterReport.js"
+    ]
   }
 ]

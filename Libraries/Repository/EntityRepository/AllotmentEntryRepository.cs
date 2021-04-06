@@ -214,5 +214,35 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+
+        public async Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("Get_Demand_Details")
+                                            .WithSqlParams(("AllotmentId", model.applicationid), ("DemandDate", model.demanddate))
+
+
+
+                                            .ExecuteStoredProcedureAsync<DemandletterdatalistDto>();
+
+                return (List<DemandletterdatalistDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+
+
+
+
     }
 }

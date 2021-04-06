@@ -189,6 +189,16 @@ namespace Libraries.Service.ApplicationService
             return "False";
 
         }
+
+
+
+        public async Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model)
+        {
+            return await _allotmentEntryRepository.Getdemandletteralldata(model);
+        }
+
+
+
     }
 }
 
