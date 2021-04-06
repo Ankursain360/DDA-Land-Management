@@ -69,12 +69,14 @@ function EditDocument(id) {
             $("#EditPosition").val("NotComplete");
             $("#EditDocumentId").val(response.id);
             $("#EditDocumentFileName").val(response.documentFileName);
+            $("#DOcName").html(response.documentChecklist.name);
             $("#DocumentEdit").show();
         }
         else {
             $("#EditPosition").val("Complete");
             $("#EditDocumentId").val("0");
             $("#EditDocumentFileName").val("");
+            $("#DOcName").html("Document Upload");
             $("#DocumentEdit").hide();
         }
     });
@@ -86,5 +88,6 @@ function Close() {
     $("#EditPosition").val("Complete");
     $("#EditDocumentId").val("0");
     $("#EditDocumentFileName").val("");
+    $("#DOcName").html("Document Upload");
     $("#DocumentEdit").hide();
 }

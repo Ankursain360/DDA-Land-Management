@@ -1,7 +1,33 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model IEnumerable<Libraries.Model.Entity.Payment>
+@await Component.InvokeAsync("PageHeader", new { pageName = "For Payment" })
 
-<h2>Index</h2>
+
+
+<div class="table-section bg-white border shadow rounded">
+
+
+    <h3 class="my-3 d-flex sub-heading">Allottee Details</h3>
+    <div id="divAlloteeDetails">
+
+    </div>
+    <br />
+    <h3 class="my-3 d-flex sub-heading">Premium Details</h3>
+    <div class="table-responsive px-2" id="divTable">
+
+    </div>
+    <br />
+    <h3 class="my-3 d-flex sub-heading">Ground Rent Details</h3>
+    <div class="table-responsive px-2" id="divGroundRentTable">
+
+    </div>
+
+
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/paymentindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/paymentindex.min.js" asp-append-version="true"></script>
+</environment>
 

@@ -3,10 +3,11 @@
 @{int rowNo = 0; }
 
 <div class="pt-3">
-    <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+    <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
         <input type="hidden" asp-for="AllotmentId" />
         <input type="hidden" asp-for="LeaseApplicationId" />
+        <input type="hidden" asp-for="Id" />
 
         <h3 class="my-3 d-flex sub-heading">Allottee Details</h3>
         <div id="AllotteeHistoryDiv">
@@ -70,7 +71,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input disabled type="text" id="AllottedArea" class="floating-label-field floating-label-field--s3 " />
                         <span class="text-danger"></span>
-                        <label class="floating-label">Total Area(sq. mt.)</label>
+                        <label class="floating-label">Total Area</label>
                     </div>
                 </div>
             </div>
@@ -79,7 +80,7 @@
                     <div class="floating-label-wrap">
                         <input disabled type="text" id="PossessionArea" class="floating-label-field floating-label-field--s3 " />
                         <span class="text-danger"></span>
-                        <label class="floating-label">Possession Area(sq. mt.)</label>
+                        <label class="floating-label">Possession Area</label>
                     </div>
                 </div>
             </div>
@@ -88,14 +89,14 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="ExtensionPeriod" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers TotalCalculation" />
+                    <input asp-for="ExtensionPeriod" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers TotalCalculation" />
                     <span asp-validation-for="ExtensionPeriod" class="text-danger"></span>
                     <label class="floating-label">Extension Period (in months)</label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input readonly asp-for="ExtentionFees" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                    <input readonly asp-for="ExtentionFees" type="text" disabled class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="ExtentionFees" class="text-danger"></span>
                     <label class="floating-label">Extension Fees(per months in Rs.)</label>
                 </div>
@@ -104,7 +105,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input readonly asp-for="TotalAmount" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                    <input readonly asp-for="TotalAmount" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="TotalAmount" class="text-danger"></span>
                     <label class="floating-label">Total Amount(Rs.)</label>
                 </div>
@@ -114,7 +115,8 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Remarks" placeholder="Address" type="text" limit="4000" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea asp-for="Remarks" placeholder="Address" type="text" limit="4000"  disabled
+                              class="floating-label-field floating-label-field--s3"></textarea>
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label class="floating-label">Remarks</label>
                 </div>
@@ -134,23 +136,22 @@
                             </tr>
                         </thead>
                         <tbody class="tbody">
-                            @foreach (var item in Model.Documentchecklist)
+                            @foreach (var item in Model.AllotteeservicesdocumentList)
                             {
                                 <tr>
                                     <td>
-                                        @item.Name
+                                        @item.DocumentChecklist.Name
                                     </td>
-                                    @if (@item.IsMandatory == 1)
+                                    @if (@item.DocumentFileName != "" && @item.DocumentFileName != null)
                                     {
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="FileUploaded" type="file" id="@(rowNo += 1)" required class="floating-label-field floating-label-field--s3 " accept="application/pdf" onchange="onDocumentChange(this);" />
-                                                <span class="d-block text-danger field-validation-valid"></span>
-                                                <div class="invalid-feedback">Please select File</div>
-
-                                                <input type="hidden" asp-for="IsMandatory" value="@(item.IsMandatory)" />
-                                                <input type="hidden" asp-for="DocumentChecklistId" value="@(item.Id)" />
+                                                <a class="badge badge-primary px-2" asp-action="ViewExtensionDocument" asp-route-id="@item.Id" target="_blank">(View File)</a>
+                                                <input type="hidden" asp-for="IsMandatory" value="@(item.DocumentChecklist.IsMandatory)" />
+                                                <input type="hidden" asp-for="DocumentChecklistId" value="@(item.DocumentChecklist.Id)" />
                                                 <input type="hidden" asp-for="ServiceId" value="@(item.ServiceTypeId)" />
+                                                <input type="hidden" asp-for="AllotteeDocumentId" value="@(item.Id)" />
+                                                <input type="hidden" asp-for="DocumentName" value="@(item.DocumentFileName)" />
                                             </div>
                                         </td>
                                     }
@@ -158,18 +159,18 @@
                                     {
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="FileUploaded" type="file" class="form-control floating-label-field floating-label-field--s3 " accept="application/pdf" onchange="onDocumentChange(this);" />
-                                                <span class="d-block text-danger field-validation-valid"></span>
-
-                                                <input type="hidden" asp-for="IsMandatory" value="@(item.IsMandatory)" />
-                                                <input type="hidden" asp-for="DocumentChecklistId" value="@(item.Id)" />
+                                                <label class="badge badge-primary px-2">No Document</label>
+                                                <input type="hidden" asp-for="IsMandatory" value="@(item.DocumentChecklist.IsMandatory)" />
+                                                <input type="hidden" asp-for="DocumentChecklistId" value="@(item.DocumentChecklist.Id)" />
                                                 <input type="hidden" asp-for="ServiceId" value="@(item.ServiceTypeId)" />
+                                                <input type="hidden" asp-for="AllotteeDocumentId" value="@(item.Id)" />
+                                                <input type="hidden" asp-for="DocumentName" value="@(item.DocumentFileName)" />
                                             </div>
                                         </td>
                                     }
 
                                     <td>
-                                        @(item.IsMandatory == 1 ? "Yes" : "No")
+                                        @(item.DocumentChecklist.IsMandatory == 1 ? "Yes" : "No")
                                     </td>
                                 </tr>
                             }
@@ -177,13 +178,10 @@
                     </table>
                 </div>
             </div>
-
-            
         </div>
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
                 @Html.ActionLink("Back", "Index", "ExtensionService", null, new { @class = "btn btn-theme " })
             </div>
         </div>
