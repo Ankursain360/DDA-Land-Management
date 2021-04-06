@@ -78,7 +78,7 @@ namespace LeaseDetails.Controllers
 
                 if (ModelState.IsValid)
                 {
-
+                    allotmententry.CreatedBy = SiteContext.UserId;
                     var result = await _allotmentEntryService.Create(allotmententry);
 
                     if (result == true)
@@ -195,7 +195,7 @@ namespace LeaseDetails.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Allotmententry allotmententry)
         {
-
+            allotmententry.ModifiedBy = SiteContext.UserId;
             allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
             allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
             allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
@@ -288,20 +288,7 @@ namespace LeaseDetails.Controllers
             purposeUseId = purposeUseId ?? 0;
             return Json(await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
-        //[HttpGet]
-        //public async Task<JsonResult> GetCalculationList(int? LeasesTypeId)
-        //{
-        //    LeasesTypeId = LeasesTypeId ?? 0;
-
-        //    return Json(await _allotmentEntryService.FetchSingleCalculationDetails(Convert.ToInt32(LeasesTypeId)));
-        //}
-        //[HttpGet]
-        //public async Task<JsonResult> GetDocumentList(int? leasesTypeId)
-        //{
-        //    leasesTypeId = leasesTypeId ?? 0;
-
-        //    return Json(await _allotmentEntryService.FetchSingledocumentResult(Convert.ToInt32(leasesTypeId)));
-        //}
+      
 
         [HttpGet]
         public async Task<JsonResult> GetRateList(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
@@ -311,9 +298,7 @@ namespace LeaseDetails.Controllers
 
 
             return Json(await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate));
-            //var Data = await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
-
-            //return Json(Data.PremiumRate);
+           
 
         }
         [HttpGet]
@@ -324,9 +309,7 @@ namespace LeaseDetails.Controllers
 
 
             return Json(await _allotmentEntryService.FetchSinglegroundrentResult(leasePurposeId, leaseSubPurposeId, allotmentDate));
-            //var Data = await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
-
-            //return Json(Data.PremiumRate);
+           
             
 
         }
@@ -337,9 +320,7 @@ namespace LeaseDetails.Controllers
 
 
             return Json(await _allotmentEntryService.FetchSinglefeeResult(leasePurposeId, leaseSubPurposeId, allotmentDate));
-            //var Data = await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
-
-            //return Json(Data.PremiumRate);
+           
            
                 }
         public async Task<JsonResult> GetDocumentList(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
@@ -349,9 +330,7 @@ namespace LeaseDetails.Controllers
 
 
             return Json(await _allotmentEntryService.FetchSingledocumentResult(leasePurposeId, leaseSubPurposeId, allotmentDate));
-            //var Data = await _allotmentEntryService.FetchSinglerateResult(leasePurposeId, leaseSubPurposeId, allotmentDate);
-
-            //return Json(Data.PremiumRate);
+           
 
         }
     }

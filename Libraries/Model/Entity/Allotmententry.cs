@@ -20,8 +20,11 @@ namespace Libraries.Model.Entity
             Mortgage = new HashSet<Mortgage>();
             Extensionservice = new HashSet<Extension>();
         }
+      
         public int ApplicationId { get; set; }
+        [Required(ErrorMessage = "This field is Mandatory")]
         public decimal TotalArea { get; set; }
+        [Required(ErrorMessage = "This field is Mandatory")]
         public DateTime AllotmentDate { get; set; }
         public string PhaseNo { get; set; }
         public string SectorNo { get; set; }
@@ -42,8 +45,11 @@ namespace Libraries.Model.Entity
         public int? NoOfYears { get; set; }
         public decimal? GroundRate { get; set; }
         public decimal? DocumentCharge { get; set; }
+        [Required(ErrorMessage = "This field is Mandatory")]
         public int? LeasesTypeId { get; set; }
+        [Required(ErrorMessage = "This field is Mandatory")]
         public int? LeasePurposesTypeId { get; set; }
+        [Required(ErrorMessage = "This field is Mandatory")]
         public int? LeaseSubPurposeId { get; set; }
         public string OldNewEntry { get; set; }
         [NotMapped]
