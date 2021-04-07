@@ -75,17 +75,11 @@ namespace Libraries.Model.Entity
         public string ContactNo { get; set; }
         [NotMapped]
         public decimal? LandAreaSqMt { get; set; }
-        //[NotMapped]
-
-        //public decimal DocumentCharge { get; set; }
         [NotMapped]
         public DateTime? PossessionTakenDate { get; set; }
 
         [NotMapped]
         public DateTime Date { get; set; }
-
-        //[NotMapped]
-        //public decimal TotalPremiumAmount { get; set; }
         public ICollection<Cancellationentry> Cancellationentry { get; set; }
         public ICollection<Possesionplan> Possesionplan { get; set; }
         public Leaseapplication Application { get; set; }

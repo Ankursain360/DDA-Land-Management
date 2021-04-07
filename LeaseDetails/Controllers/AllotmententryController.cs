@@ -36,8 +36,7 @@ namespace LeaseDetails.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _allotmentEntryService.GetAllAllotmententry();
-            return View(list);
+            return View();
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AllotmentEntrySearchDto model)
@@ -83,6 +82,13 @@ namespace LeaseDetails.Controllers
 
                     if (result == true)
                     {
+                        #region Insert Row related to premium , Ground Rent in Payment Table Added By Renu 07 April 2021
+
+                        //result = await _allotmentEntryService.CreatePaymentPremiumDr(allotmententry);
+
+                        #endregion
+
+
                         Random r = new Random();
                         int num = r.Next();
                         //******* creating  user ******
