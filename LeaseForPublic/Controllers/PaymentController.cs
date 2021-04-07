@@ -42,7 +42,11 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View();
+            Payment data = new Payment();
+            var result = await _paymentService.GetAllotteeDetails(SiteContext.UserId);
+            ViewBag.PaymentTypeId = result.Allotment.LeasesTypeId;
+            ViewBag.AllotmentId = result.AllotmentId;
+            return View(data);
         }
 
         //[HttpPost]
@@ -59,17 +63,17 @@ namespace LeaseForPublic.Controllers
         public async Task<PartialViewResult> ListGroundRent(int AllotmentId)
         {
             var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentGroundRentId").Value),SiteContext.UserId);
-            return PartialView("_ListGroundRent", result);
+            return PartialView("_List", result);
         }
         public async Task<PartialViewResult> ListDocumentCharge(int AllotmentId)
         {
             var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value),SiteContext.UserId);
-            return PartialView("_List", result);
+            return PartialView("_ListDocumentCharge", result);
         }
         public async Task<PartialViewResult> ListLicenceFees(int AllotmentId)
         {
             var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentLicenseFeesId").Value),SiteContext.UserId);
-            return PartialView("_ListGroundRent", result);
+            return PartialView("_List", result);
         }
         public async Task<PartialViewResult> AlloteeDetails()
         {

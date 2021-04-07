@@ -1,12 +1,12 @@
 ﻿$(document).ready(function () {
-    GetOtherData();
+    //GetOtherData();
     GetAlloteeDetails();
     var leasetypeid = parseInt($("#LeaseTypeId").val());
     var allotmentid = parseInt($("#AllotmentId").val());
     if (leasetypeid == 1) {
         GetPremiumDetails(allotmentid);
-        GetGroundRentDetails();
-        GetDocumentChargeDetails();
+        GetGroundRentDetails(allotmentid);
+        GetDocumentChargeDetails(allotmentid);
 
         $("#premiumDiv").show();
         $("#groundRentDiv").show();
@@ -14,8 +14,8 @@
         $("#licenceFeesDiv").hide();
     }
     else if (leasetypeid == 1) {
-        GetDocumentChargeDetails();
-        GetLicenceFeesDetails();
+        GetDocumentChargeDetails(allotmentid);
+        GetLicenceFeesDetails(allotmentid);
 
         $("#premiumDiv").hide();
         $("#groundRentDiv").hide();
@@ -24,9 +24,9 @@
     }
     else if (leasetypeid == 3) {
         GetPremiumDetails(allotmentid);
-        GetGroundRentDetails();
-        GetDocumentChargeDetails();
-        GetLicenceFeesDetails();
+        GetGroundRentDetails(allotmentid);
+        GetDocumentChargeDetails(allotmentid);
+        GetLicenceFeesDetails(allotmentid);
 
         $("#premiumDiv").show();
         $("#groundRentDiv").show();
@@ -58,7 +58,7 @@ function GetPremiumDetails(allotmentid) {
     });
 }
 
-function GetGroundRentDetails() {
+function GetGroundRentDetails(allotmentid) {
     HttpGet(`/Payment/ListGroundRent?AllotmentId=${allotmentid}`, 'html', function (response) {
         $('#divGroundRentTable').html("");
         $('#divGroundRentTable').html(response);
@@ -71,7 +71,7 @@ function GetDocumentChargeDetails(allotmentid) {
     });
 }
 
-function GetLicenceFeesDetails() {
+function GetLicenceFeesDetails(allotmentid) {
     HttpGet(`/Payment/ListLicenceFees?AllotmentId=${allotmentid}`, 'html', function (response) {
         $('#divLicenceFeesTable').html("");
         $('#divLicenceFeesTable').html(response);

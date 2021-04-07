@@ -1,12 +1,12 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Payment>
+﻿@model Libraries.Model.Entity.Payment
 @await Component.InvokeAsync("PageHeader", new { pageName = "For Payment" })
 
 
 
 <div class="table-section bg-white border shadow rounded">
 
-    <input type="hidden" id="LeaseTypeId" />
-    <input type="hidden" id="AllotmentId" />
+    <input type="hidden" id="LeaseTypeId" value="@ViewBag.PaymentTypeId"/>
+    <input type="hidden" id="AllotmentId" value="@ViewBag.AllotmentId"/>
     <h3 class="my-3 d-flex sub-heading">Allottee Details</h3>
 
     @*Allottee Details Added*@
