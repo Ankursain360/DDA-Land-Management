@@ -51,7 +51,7 @@ namespace Libraries.Service.ApplicationService
             model.InterestRate = rate.InterestRate;
             model.FromDate = rate.FromDate;
             model.ToDate = rate.ToDate;
-
+            model.LateinterestRate = rate.LateinterestRate;
             model.IsActive = rate.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = rate.ModifiedBy;
