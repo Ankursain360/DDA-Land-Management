@@ -3,8 +3,7 @@ $("#btnGenerate").click(function () {
     //var id = $("#ApplicationId").val();
  
     
-    var id = $("#ddlRefNo").children("option:selected").val();
-  
+    var id = $("#ddlRefNo").children("option:selected").val(); 
    
     
    

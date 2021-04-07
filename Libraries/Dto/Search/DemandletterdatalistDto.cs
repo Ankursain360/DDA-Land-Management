@@ -3,13 +3,10 @@ using System;
 
 namespace Dto.Search
 {
-  public  class DemandletterdatalistDto : AuditableDto<int>
+  public  class DemandletterdatalistDto
     {
 
-        //public float @InterestRate { get; set; }
-        //public float @InterestRate { get; set; }
-     
-     //  public DateTime demanddate { get; set; }
+       
         public decimal TotalArea { get; set; }
         public decimal TotalAmount { get; set; }
         public decimal GroundRate { get; set; }
@@ -17,10 +14,7 @@ namespace Dto.Search
         public string RefNo { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-      //  public float int_rate { get; set; }
-
-      
-
+   
 
     }
 }
