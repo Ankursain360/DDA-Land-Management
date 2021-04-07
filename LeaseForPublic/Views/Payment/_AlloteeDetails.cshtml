@@ -38,6 +38,10 @@
                     <th scope="row">Possession Area(sq. mt.)</th>
                     <td>@(Model.PossessionArea == 0 ? "" : Model.PossessionArea.ToString())</td>
                 </tr>
+                <tr>
+                    <th scope="row">Lease Type</th>
+                    <td>@(Model.Allotment == null ? "" : Model.Allotment.LeasesType == null ? "" : Model.Allotment.LeasesType.Type)</td>
+                </tr>
             </tbody>
         </table>
     </div>
