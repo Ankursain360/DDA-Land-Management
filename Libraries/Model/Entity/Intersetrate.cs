@@ -26,5 +26,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<PropertyType> PropertyTypeList { get; set; }
         public PropertyType PropertyType { get; set; }
+        [Required(ErrorMessage = "Late Interest Rate is mandatory")]
+        public decimal LateinterestRate { get; set; }
     }
 }

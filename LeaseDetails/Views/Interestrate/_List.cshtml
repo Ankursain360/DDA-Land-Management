@@ -8,6 +8,7 @@
             <th> Interest Rate</th>
             <th> From Date</th>
             <th> To Date</th>
+            <th> Late Interest Rate</th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -22,6 +23,7 @@
 
             <td>  @(Convert.ToDateTime(item.FromDate).ToString("dd-MMM-yyyy"))</td>
             <td>  @(Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.LateinterestRate</td>
 
             <td>
                 @if (item.IsActive == 1)

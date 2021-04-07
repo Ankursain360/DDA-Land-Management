@@ -44,7 +44,21 @@
                 </div>
             </div>
         </div>
+
+
+
+
         <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="LateinterestRate" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3 numbers" value="" />
+                    <span asp-validation-for="LateinterestRate" class="text-danger"></span>
+                    <label class="floating-label">LateInterest Rate   </label>
+                </div>
+            </div>
+
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">

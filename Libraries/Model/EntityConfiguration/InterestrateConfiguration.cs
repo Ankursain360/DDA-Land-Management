@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+
+
 using System.Text;
 
 
@@ -36,6 +36,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.PropertyTypeId).HasColumnType("int(11)");
 
             builder.Property(e => e.ToDate).HasColumnType("date");
+            builder.Property(e => e.LateinterestRate).HasColumnType("decimal(18,3)");
 
             builder.HasOne(d => d.PropertyType)
                         .WithMany(p => p.Intersetrate)
