@@ -12,11 +12,23 @@
     $("#txtRefN").val(RefNumber);
     $("#txtRe").val(RefNumber);
 });
-//$(function () {
-//    $("#btnPrint").click(function () {
-//        window.print();
-//    });
-//});
+$("#btnSave").click(function () {
+    var id = $("#ddlRefNo").children("option:selected").val();
+    var allotid = id;
+    var refn = document.getElementById("txtRefernceNumber").value;
+    sessionStorage.RefN = refn;
+    sessionStorage.Vid = allotid;
+    if (id) {
+
+        HttpGet(`/LetterofAllotment/Save/?ApplicationId=${id}`, 'html', function (response) {
+            debugger
+            $('#View').html("");
+            $('#View').html(response);
+
+        });
+
+    }
+});
 
 $(function () {
     $("#btnPrint").click(function () {
