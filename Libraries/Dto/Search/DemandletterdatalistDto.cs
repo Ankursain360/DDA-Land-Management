@@ -11,6 +11,8 @@ namespace Dto.Search
         public decimal TotalAmount { get; set; }
         public decimal GroundRate { get; set; }
         public decimal LicenceFees { get; set; }
+        public decimal Interestrate { get; set; }
+        public decimal LateInterestrate { get; set; }
         public string RefNo { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
