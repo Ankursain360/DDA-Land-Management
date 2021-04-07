@@ -38,10 +38,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _paymentRepository.GetGroundRentDrDetails(userId);
         }
-
-        public async Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int userId)
+        public async Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int AllotmentId, int LeasePaymentTypeId, int userId)
         {
-            return await _paymentRepository.GetPremiumDrDetails(userId);
+            return await _paymentRepository.GetPremiumDrDetails( AllotmentId,  LeasePaymentTypeId,  userId);
         }
     }
 }

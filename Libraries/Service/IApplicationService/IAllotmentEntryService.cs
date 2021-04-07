@@ -38,8 +38,10 @@ namespace Libraries.Service.IApplicationService
 
         // *************** to create user ************************
         Task<string> CreateUser(Allotmententry model,  string username);
-        //Task<bool> CreatePaymentPremiumDr(Allotmententry allotmententry);
+        Task<bool> CreatePaymentPremiumDr(Allotmententry allotmententry,int LeasePaymentTypeId, int userId);
         Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model);
-
+        Task<bool> CreatePaymentGroundRentDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId);
+        Task<bool> CreatePaymentDocumentChargesDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId);
+        Task<bool> CreatePaymentLicenceFeesDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId);
     }
 }

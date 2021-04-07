@@ -51,14 +51,24 @@ namespace LeaseForPublic.Controllers
         //    var result = await _paymentService.GetPremiumDrDetails(model);
         //    return PartialView("_List", result);
         //}
-        public async Task<PartialViewResult> List()
+        public async Task<PartialViewResult> List(int AllotmentId)
         {
-            var result = await _paymentService.GetPremiumDrDetails(SiteContext.UserId);
+            var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentPremiumId").Value), SiteContext.UserId);
             return PartialView("_List", result);
         }
-        public async Task<PartialViewResult> ListGroundRent()
+        public async Task<PartialViewResult> ListGroundRent(int AllotmentId)
         {
-            var result = await _paymentService.GetGroundRentDrDetails(SiteContext.UserId);
+            var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentGroundRentId").Value),SiteContext.UserId);
+            return PartialView("_ListGroundRent", result);
+        }
+        public async Task<PartialViewResult> ListDocumentCharge(int AllotmentId)
+        {
+            var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value),SiteContext.UserId);
+            return PartialView("_List", result);
+        }
+        public async Task<PartialViewResult> ListLicenceFees(int AllotmentId)
+        {
+            var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentLicenseFeesId").Value),SiteContext.UserId);
             return PartialView("_ListGroundRent", result);
         }
         public async Task<PartialViewResult> AlloteeDetails()
@@ -66,7 +76,7 @@ namespace LeaseForPublic.Controllers
             var result = await _paymentService.GetAllotteeDetails(SiteContext.UserId);
             return PartialView("_AlloteeDetails", result);
         }
-        
+
 
         //   [AuthorizeContext(ViewAction.Add)]
         //public async Task<IActionResult> Create()
@@ -346,11 +356,11 @@ namespace LeaseForPublic.Controllers
         //    return Json(await _extensionService.FetchSingleResultDocument(DocumentId));
         //}
 
-        //[HttpGet]
-        //public async Task<JsonResult> GetOtherData()
-        //{
-        //    return Json(await _extensionService.GetAllotteeDetails(SiteContext.UserId));
-        //}
+        [HttpGet]
+        public async Task<JsonResult> GetOtherData()
+        {
+            return Json(await _paymentService.GetAllotteeDetails(SiteContext.UserId));
+        }
 
         //[HttpGet]
         //public async Task<JsonResult> GetTimeLineExtensionFees()

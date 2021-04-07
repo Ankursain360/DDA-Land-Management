@@ -238,11 +238,11 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-
-
-
-
-
-
+        public async Task<bool> CreatePaymentPremiumDr(Payment model)
+        {
+            _dbContext.Payment.Add(model);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 }
