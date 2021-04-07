@@ -12,13 +12,17 @@ namespace Libraries.Model.Entity
         public Leasepaymenttype()
         {
             Leasepaymentdetails = new HashSet<Leasepaymentdetails>();
+            Payment = new HashSet<Payment>();
         }
 
-       
+        [Required(ErrorMessage = "Lease Payment Type  is mandatory")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         
 
         public ICollection<Leasepaymentdetails> Leasepaymentdetails { get; set; }
+        public ICollection<Payment> Payment { get; set; }
     }
 }

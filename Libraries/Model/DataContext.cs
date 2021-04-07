@@ -314,6 +314,7 @@ namespace Libraries.Model
         public virtual DbSet<Actiontakenbydda> Actiontakenbydda { get; set; }
         public virtual DbSet<Extension> Extension { get; set; }
         public virtual DbSet<Allotmentletter> Allotmentletter{ get; set; }
+        public virtual DbSet<Payment> Payment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -565,6 +566,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ExtensionConfiguration());
             modelBuilder.ApplyConfiguration(new TimeextensionConfiguration());
             modelBuilder.ApplyConfiguration(new AllotmentletterConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

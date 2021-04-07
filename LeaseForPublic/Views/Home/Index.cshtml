@@ -38,11 +38,11 @@
                     <td>@(Model.Allotment == null ? "" : Model.Allotment.LeasePurposesType == null ? "" : Model.Allotment.LeasePurposesType.PurposeUse)</td>
                 </tr>
                 <tr>
-                    <th scope="row">Allotted Area</th>
+                    <th scope="row">Allotted Area(sq. mt.)</th>
                     <td>@(Model.AllotedArea == null ? "" : Model.AllotedArea.ToString())</td>
                 </tr>
                 <tr>
-                    <th scope="row">Possession Area</th>
+                    <th scope="row">Possession Area(sq. mt.)</th>
                     <td>@(Model.PossessionArea == 0 ? "" : Model.PossessionArea.ToString())</td>
                 </tr>
             </tbody>

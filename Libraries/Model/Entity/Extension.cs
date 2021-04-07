@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Total Amount is Mandatory")]
         public decimal? TotalAmount { get; set; }
+        public string Remarks { get; set; }
         public int? UserId { get; set; }
         public byte? IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
@@ -70,6 +71,18 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public string EditPosition { get; set; }
+
+        [NotMapped]
+        public int EditDocumentId { get; set; }
+
+        [NotMapped]
+        public IFormFile EditFileUploaded { get; set; }
+
+        [NotMapped]
+        public string EditDocumentFileName { get; set; }
 
     }
 }

@@ -22,5 +22,11 @@
     "inputFiles": [
       "wwwroot/js/extensionserviceindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentindex.js"
+    ]
   }
 ]

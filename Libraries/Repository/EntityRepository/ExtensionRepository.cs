@@ -28,6 +28,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Allotteeservicesdocument
                                        .Include(x => x.DocumentChecklist)
                                        .Where(x => x.ServiceId == id)
+                                       .OrderByDescending(x => x.DocumentChecklist.IsMandatory)
                                        .ToListAsync();
         }
 
@@ -43,6 +44,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Allotteeservicesdocument> FetchSingleResultDocument(int id)
         {
             return await _dbContext.Allotteeservicesdocument
+                                     .Include(x => x.DocumentChecklist)
                                      .Where(x => x.Id == id)
                                      .FirstOrDefaultAsync();
         }

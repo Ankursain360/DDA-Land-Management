@@ -94,34 +94,41 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _allotmentEntryRepository.FindBy(a => a.Id == id);
             Allotmententry model = result.FirstOrDefault();
+
             model.ApplicationId = allotmententry.ApplicationId;
+          
             model.Name = allotmententry.Name;
             model.Address = allotmententry.Address;
             model.ContactNo = allotmententry.ContactNo;
             model.LandAreaSqMt = allotmententry.LandAreaSqMt;
 
+            model.TotalArea = allotmententry.TotalArea;
+            model.LeasesTypeId = allotmententry.LeasesTypeId;
+            model.BuildingArea = allotmententry.BuildingArea;
+            model.PlayGroundArea = allotmententry.PlayGroundArea;
+            model.PhaseNo = allotmententry.PhaseNo;
+            model.SectorNo = allotmententry.SectorNo;
+            model.PocketNo = allotmententry.PocketNo;
+            model.PlotNo = allotmententry.PlotNo;
 
-            model.PremiumAmount = allotmententry.PremiumAmount;
+            model.LeasePurposesTypeId = allotmententry.LeasePurposesTypeId;
+            model.LeaseSubPurposeId = allotmententry.LeaseSubPurposeId;
+            model.AllotmentDate = allotmententry.AllotmentDate;
             model.PremiumRate = allotmententry.PremiumRate;
-            model.DocumentCharge = allotmententry.DocumentCharge;
+            model.PremiumAmount = allotmententry.PremiumAmount;
             model.GroundRate = allotmententry.GroundRate;
+            model.AmountGroundRate = allotmententry.AmountGroundRate;
             model.NoOfYears = allotmententry.NoOfYears;
             model.LicenceFees = allotmententry.LicenceFees;
             model.AmountLicFee = allotmententry.AmountLicFee;
-            model.AmountGroundRate = allotmententry.AmountGroundRate; 
-            model.AllotmentDate = allotmententry.AllotmentDate;
-            model.TotalArea = allotmententry.TotalArea;
-            model.PhaseNo = allotmententry.PhaseNo;
-
-            model.SectorNo = allotmententry.SectorNo;
-            model.PlotNo = allotmententry.PlotNo;
-            model.PocketNo = allotmententry.PocketNo;
-           
-            model.BuildingArea = allotmententry.BuildingArea;
-
+            model.DocumentCharge = allotmententry.DocumentCharge;
+            model.TotalAmount = allotmententry.TotalAmount;
+            model.Remarks = allotmententry.Remarks;
             model.IsActive = allotmententry.IsActive;
+
+
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = allotmententry.ModifiedBy;
             _allotmentEntryRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
@@ -189,6 +196,16 @@ namespace Libraries.Service.ApplicationService
             return "False";
 
         }
+
+
+
+        public async Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model)
+        {
+            return await _allotmentEntryRepository.Getdemandletteralldata(model);
+        }
+
+
+
     }
 }
 

@@ -1,0 +1,47 @@
+﻿@model Libraries.Model.Entity.Possesionplan
+
+<div class="profile-box bg-white rounded border p-3 my-4 shadow d-md-flex align-items-center py-lg-4 px-xl-5">
+    <div class="text-center detail py-3 text-md-left px-md-4 mx-lg-auto px-xl-5 ml-xl-0">
+        <h2 class="mb-2">
+            @(Model.Allotment == null ? "" : Model.Allotment.Application == null ? "" : Model.Allotment.Application.RefNo)
+        </h2>
+    </div>
+    <div class="py-3 pl-md-4 mx-lg-auto pr-xl-5 ml-xl-0 pl-xl-2">
+        <table class="table table-borderless table-sm m-0">
+            <tbody>
+                <tr>
+                    <th scope="row">Registration No.</th>
+                    <td>@(Model.Allotment == null ? "" : Model.Allotment.Application == null ? "" : Model.Allotment.Application.RegistrationNo)</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Contact No.</th>
+                    <td colspan="2">@(Model.Allotment == null ? "" : Model.Allotment.Application == null ? "" : Model.Allotment.Application.ContactNo)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email-Id</th>
+                    <td>@(Model.Allotment == null ? "" : Model.Allotment.Application == null ? "" : Model.Allotment.Application.EmailId)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Allottment Date</th>
+                    <td>@(Model.Allotment == null ? "" : Model.Allotment.AllotmentDate == null ? "" : (Convert.ToDateTime(Model.Allotment.AllotmentDate)).ToString("dd-MMM-yyyy"))</td>
+                </tr>
+                <tr>
+                    <th scope="row">Lease Purpose</th>
+                    <td>@(Model.Allotment == null ? "" : Model.Allotment.LeasePurposesType == null ? "" : Model.Allotment.LeasePurposesType.PurposeUse)</td>
+                </tr>
+                <tr>
+                    <th scope="row">Allotted Area(sq. mt.)</th>
+                    <td>@(Model.AllotedArea == null ? "" : Model.AllotedArea.ToString())</td>
+                </tr>
+                <tr>
+                    <th scope="row">Possession Area(sq. mt.)</th>
+                    <td>@(Model.PossessionArea == 0 ? "" : Model.PossessionArea.ToString())</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+

@@ -70,7 +70,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input disabled type="text" id="AllottedArea" class="floating-label-field floating-label-field--s3 " />
                         <span class="text-danger"></span>
-                        <label class="floating-label">Allotted Area</label>
+                        <label class="floating-label">Total Area(sq. mt.)</label>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                     <div class="floating-label-wrap">
                         <input disabled type="text" id="PossessionArea" class="floating-label-field floating-label-field--s3 " />
                         <span class="text-danger"></span>
-                        <label class="floating-label">Possession Area</label>
+                        <label class="floating-label">Possession Area(sq. mt.)</label>
                     </div>
                 </div>
             </div>
@@ -107,6 +107,16 @@
                     <input readonly asp-for="TotalAmount" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="TotalAmount" class="text-danger"></span>
                     <label class="floating-label">Total Amount(Rs.)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remarks" placeholder="Address" type="text" limit="4000" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label">Remarks</label>
                 </div>
             </div>
         </div>
@@ -167,6 +177,8 @@
                     </table>
                 </div>
             </div>
+
+            
         </div>
 
         <div class="row mt-md-3">
