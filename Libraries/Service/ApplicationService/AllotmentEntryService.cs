@@ -204,7 +204,10 @@ namespace Libraries.Service.ApplicationService
             return await _allotmentEntryRepository.Getdemandletteralldata(model);
         }
 
-
+        //public async Task<bool> CreatePaymentPremiumDr(Allotmententry allotmententry)
+        //{
+        //    return await _allotmentEntryRepository.CreatePaymentPremiumDr(allotmententry);
+        //}
 
     }
 }
