@@ -62,6 +62,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IHonbleRepository, HonbleRepository>();
             services.AddScoped<ITimeextensionRepository, TimeextensionRepository>();
             services.AddScoped<ILeasePaymentTypeRepository, LeasePaymentTypeRepository>();
+            services.AddScoped<IAllotmentLetterRepository, AllotmentLetterRepository>();
 
 
 
@@ -110,6 +111,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IHonbleService, HonbleService>();
             services.AddScoped<ITimeextensionService, TimeextensionService>();
             services.AddScoped<ILeasePaymentTypeService,LeasePaymentTypeService>();
+            services.AddScoped<IAllotmentLetterService,AllotmentLetterService>();
 
         }
     }

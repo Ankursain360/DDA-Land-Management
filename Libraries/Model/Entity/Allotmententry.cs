@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
     {
         public Allotmententry()
         {
+            Allotmentletter = new HashSet<Allotmentletter>();
             Cancellationentry = new HashSet<Cancellationentry>();
             Leasedeed = new HashSet<Leasedeed>();
             Possesionplan = new HashSet<Possesionplan>();
@@ -93,10 +94,10 @@ namespace Libraries.Model.Entity
         public ICollection<Leasedeed> Leasedeed { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
         public ICollection<Extension> Extensionservice { get; set; }
+        public ICollection<Allotmentletter> Allotmentletter { get; set; }
 
-        
 
-       
+
         //[NotMapped]
         //public string FullName
         //{

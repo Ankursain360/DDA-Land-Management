@@ -313,6 +313,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Actiontakenbydda> Actiontakenbydda { get; set; }
         public virtual DbSet<Extension> Extension { get; set; }
+        public virtual DbSet<Allotmentletter> Allotmentletter{ get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -563,6 +564,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ActiontakenbyddaConfiguration());
             modelBuilder.ApplyConfiguration(new ExtensionConfiguration());
             modelBuilder.ApplyConfiguration(new TimeextensionConfiguration());
+            modelBuilder.ApplyConfiguration(new AllotmentletterConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
