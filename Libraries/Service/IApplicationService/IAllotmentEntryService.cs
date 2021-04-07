@@ -38,6 +38,7 @@ namespace Libraries.Service.IApplicationService
 
         // *************** to create user ************************
         Task<string> CreateUser(Allotmententry model,  string username);
+        //Task<bool> CreatePaymentPremiumDr(Allotmententry allotmententry);
         Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model);
 
     }
