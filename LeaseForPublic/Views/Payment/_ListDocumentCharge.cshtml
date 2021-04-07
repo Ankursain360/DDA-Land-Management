@@ -7,9 +7,6 @@
             <th>Payment Type </th>
             <th>Due Date</th>
             <th>Due Amount</th>
-            <th>Interest on Due Amount</th>
-            <th>Late Interest</th>
-            <th>Total Due Amount</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -28,12 +25,6 @@
                     </td>
                     <td>
                         @item.Amount
-                    </td>
-                    <td>
-                    </td>
-                    <td>
-                    </td>
-                    <td>
                     </td>
                     <td>
                         <button class="btn btn-theme " type="button" onclick="EditDocument(@(item.Id));" style="font-size:.8rem;">Pay Now</button>

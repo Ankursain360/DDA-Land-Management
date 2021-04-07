@@ -11,7 +11,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IPaymentService : IEntityService<Payment>
     {
-        Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int userId);
+        Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int AllotmentId, int LeasePaymentTypeId, int userId);
         Task<List<PaymentPremiumListDataDto>> GetGroundRentDrDetails(int userId);
         Task<Possesionplan> GetAllotteeDetails(int userId);
     }

@@ -28,6 +28,7 @@ function GetOtherData() {
             $("#LeaseDate").val(response.allotment.allotmentDate.split('T')[0]);
             $("#AllottedArea").val(response.allotment.totalArea);
             $("#PossessionArea").val(response.allotment.PossessionArea);
+            $("#LeaseType").val(response.allotment.leasesType.type);
         }
     });
 };

@@ -45,28 +45,7 @@ namespace LeaseDetails.Controllers
 
 
 
-        //public async Task<IActionResult> Create()
-        //{
-        //    Allotmententry entry = new Allotmententry();
-
-        //    entry.ApplicationList = await _DemandletterService.GetAllApplications();
-        //    return View(entry);
-        //}
-
-
-        //public async Task<IActionResult> Receipt(int? ApplicationId)
-        //{
-        //    Allotmententry entry = await _DemandletterService.FetchSingleAppAreaDetails(ApplicationId ?? 0);
-        //  //  entry.Date = DateTime.Now;
-        //    return PartialView("_List", entry);
-        //}
-
-        //public async Task<IActionResult> List(int? ApplicationId)
-        //{
-        //    var Data = await _demandletterService.FetchLeaseApplicationDetailsforAllotmentLetter(ApplicationId ?? 0);
-        //    return PartialView("_List", Data);
-        //}
-
+      
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemandletterDateSearchDto report)
         {

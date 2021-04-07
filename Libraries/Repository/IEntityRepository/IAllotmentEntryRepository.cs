@@ -27,6 +27,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Leaseapplication> FetchLeaseApplicationmailDetails(int id);
 
         Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model);
-
+        Task<bool> CreatePaymentPremiumDr(Payment model);
     }
 }
