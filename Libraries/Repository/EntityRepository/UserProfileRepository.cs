@@ -371,6 +371,7 @@ namespace Repository.EntityRepository
                                     .Include(x => x.Allotment)
                                     .Include(x => x.Allotment.Application)
                                     .Include( x => x.Allotment.LeasePurposesType)
+                                    .Include(x => x.Allotment.LeasesType)
                                     .Where(x => x.Allotment.Application.UserId == userId)
                                     .FirstOrDefaultAsync();
         }

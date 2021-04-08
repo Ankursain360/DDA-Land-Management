@@ -16,7 +16,7 @@ using Utility.Helper;
 using Dto.Master;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.Extensions.Configuration;
 
 namespace LeaseDetails.Controllers
 {
@@ -24,20 +24,21 @@ namespace LeaseDetails.Controllers
     {
         static string result = string.Empty;
         private readonly IHostingEnvironment _hostingEnvironment;
-        public Microsoft.Extensions.Configuration.IConfiguration _configuration;
+        public IConfiguration _configuration;
         private readonly IAllotmentEntryService _allotmentEntryService;
         private readonly ILeaseApplicationFormService _leaseApplicationFormService;
 
-        public AllotmentEntryController(IAllotmentEntryService allotmentEntryService, IHostingEnvironment hostingEnvironment)
+        public AllotmentEntryController(IAllotmentEntryService allotmentEntryService, IHostingEnvironment hostingEnvironment,
+            IConfiguration configuration)
         {
             _allotmentEntryService = allotmentEntryService;
             _hostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
-            var list = await _allotmentEntryService.GetAllAllotmententry();
-            return View(list);
+            return View();
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AllotmentEntrySearchDto model)
@@ -83,6 +84,28 @@ namespace LeaseDetails.Controllers
 
                     if (result == true)
                     {
+                        #region Insert Row related to premium , Ground Rent in Payment Table Added By Renu 07 April 2021
+                        if (allotmententry.LeasesTypeId == 1 )
+                        {
+                            result = await _allotmentEntryService.CreatePaymentPremiumDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentPremiumId").Value), SiteContext.UserId);
+                            result = await _allotmentEntryService.CreatePaymentGroundRentDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentGroundRentId").Value), SiteContext.UserId);
+                            result = await _allotmentEntryService.CreatePaymentDocumentChargesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value), SiteContext.UserId);
+                        }
+                        else if (allotmententry.LeasesTypeId == 2)
+                        {
+                            result = await _allotmentEntryService.CreatePaymentDocumentChargesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value), SiteContext.UserId);
+                            result = await _allotmentEntryService.CreatePaymentLicenceFeesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentLicenseFeesId").Value), SiteContext.UserId);
+                        }
+                        else if (allotmententry.LeasesTypeId == 3)
+                        {
+                            result = await _allotmentEntryService.CreatePaymentPremiumDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentPremiumId").Value), SiteContext.UserId);
+                            result = await _allotmentEntryService.CreatePaymentGroundRentDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentGroundRentId").Value), SiteContext.UserId);
+                            result = await _allotmentEntryService.CreatePaymentDocumentChargesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value), SiteContext.UserId);
+                            result = await _allotmentEntryService.CreatePaymentLicenceFeesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentLicenseFeesId").Value), SiteContext.UserId);
+                        }
+                        #endregion
+
+
                         Random r = new Random();
                         int num = r.Next();
                         //******* creating  user ******
@@ -206,7 +229,7 @@ namespace LeaseDetails.Controllers
                 {
                     var result = await _allotmentEntryService.Update(id, allotmententry);
                     if (result == true)
-                    {
+                    {                        
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _allotmentEntryService.GetAllAllotmententry();
                         return View("Index", list);

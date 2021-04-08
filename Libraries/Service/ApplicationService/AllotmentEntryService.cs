@@ -204,8 +204,65 @@ namespace Libraries.Service.ApplicationService
             return await _allotmentEntryRepository.Getdemandletteralldata(model);
         }
 
+        public async Task<bool> CreatePaymentPremiumDr(Allotmententry allotmententry,int LeasePaymentTypeId, int userId)
+        {
+            Payment model = new Payment();
+            model.AllotmentId = allotmententry.Id;
+            model.LeasePaymentTypeId = LeasePaymentTypeId;
+            model.FromDate = DateTime.Now;
+            model.ToDate = DateTime.Now.AddMonths(2);
+            model.TransactionType = "Dr";
+            model.Amount = (decimal)allotmententry.PremiumAmount;
+            model.IsActive = 1;
+            model.CreatedBy = userId;
+            model.CreatedDate = DateTime.Now;
+            return await _allotmentEntryRepository.CreatePaymentPremiumDr(model);
+        }
 
+        public async Task<bool> CreatePaymentGroundRentDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId)
+        {
+            Payment model = new Payment();
+            model.AllotmentId = allotmententry.Id;
+            model.LeasePaymentTypeId = LeasePaymentTypeId;
+            model.FromDate = DateTime.Now;
+            model.ToDate = DateTime.Now.AddMonths(2);
+            model.TransactionType = "Dr";
+            model.Amount = (decimal)allotmententry.AmountGroundRate;
+            model.IsActive = 1;
+            model.CreatedBy = userId;
+            model.CreatedDate = DateTime.Now;
+            return await _allotmentEntryRepository.CreatePaymentPremiumDr(model);
+        }
 
+        public async Task<bool> CreatePaymentDocumentChargesDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId)
+        {
+            Payment model = new Payment();
+            model.AllotmentId = allotmententry.Id;
+            model.LeasePaymentTypeId = LeasePaymentTypeId;
+            model.FromDate = DateTime.Now;
+            model.ToDate = DateTime.Now.AddMonths(2);
+            model.TransactionType = "Dr";
+            model.Amount = (decimal)allotmententry.DocumentCharge;
+            model.IsActive = 1;
+            model.CreatedBy = userId;
+            model.CreatedDate = DateTime.Now;
+            return await _allotmentEntryRepository.CreatePaymentPremiumDr(model);
+        }
+
+        public async Task<bool> CreatePaymentLicenceFeesDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId)
+        {
+            Payment model = new Payment();
+            model.AllotmentId = allotmententry.Id;
+            model.LeasePaymentTypeId = LeasePaymentTypeId;
+            model.FromDate = DateTime.Now;
+            model.ToDate = DateTime.Now.AddMonths(2);
+            model.TransactionType = "Dr";
+            model.Amount = (decimal)allotmententry.LicenceFees;
+            model.IsActive = 1;
+            model.CreatedBy = userId;
+            model.CreatedDate = DateTime.Now;
+            return await _allotmentEntryRepository.CreatePaymentPremiumDr(model);
+        }
     }
 }
 

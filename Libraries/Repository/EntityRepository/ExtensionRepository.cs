@@ -23,13 +23,13 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id)
+        public async Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id, int servicetypeid)
         {
             return await _dbContext.Allotteeservicesdocument
-                                       .Include(x => x.DocumentChecklist)
-                                       .Where(x => x.ServiceId == id)
-                                       .OrderByDescending(x => x.DocumentChecklist.IsMandatory)
-                                       .ToListAsync();
+                                     .Include(x => x.DocumentChecklist)
+                                     .Where(x => x.ServiceId == id && x.ServiceTypeId == servicetypeid)
+                                     .OrderByDescending(x => x.DocumentChecklist.IsMandatory)
+                                     .ToListAsync();
         }
 
         public async Task<Extension> FetchSingleResult(int id)
@@ -55,6 +55,7 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Allotment)
                                     .Include(x => x.Allotment.Application)
                                     .Include(x => x.Allotment.LeasePurposesType)
+                                    .Include(x => x.Allotment.LeasesType)
                                     .Where(x => x.Allotment.Application.UserId == userId)
                                     .FirstOrDefaultAsync();
         }
@@ -149,6 +150,13 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Timeextension
                                     .Where(x => x.FromDate <= DateTime.Now && x.ToDate >= DateTime.Now)
                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<Extension> IsNeedAddMore()
+        {
+            return await _dbContext.Extension
+                                     .OrderByDescending(x => x.Id)
+                                     .FirstOrDefaultAsync();
         }
 
         public async Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments)

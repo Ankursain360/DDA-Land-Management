@@ -29,6 +29,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Allotment)
                                    .Include(x => x.Allotment.Application)
                                    .Include(x => x.Allotment.LeasePurposesType)
+                                    .Include(x => x.Allotment.LeasesType)
                                    .Where(x => x.Allotment.Application.UserId == userId)
                                    .FirstOrDefaultAsync();
         }
@@ -49,12 +50,12 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-        public async Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int userId)
+        public async Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int AllotmentId, int LeasePaymentTypeId, int userId)
         {
             try
             {
                 var data = await _dbContext.LoadStoredProcedure("PaymentPremiumIndexListBind")
-                                            .WithSqlParams(("P_UserId", userId))
+                                            .WithSqlParams(("P_AllotmentId", AllotmentId), ("P_LeasePaymentTypeId", LeasePaymentTypeId), ("P_UserId", userId))
                                             .ExecuteStoredProcedureAsync<PaymentPremiumListDataDto>();
 
                 return (List<PaymentPremiumListDataDto>)data;

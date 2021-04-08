@@ -2,6 +2,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Lease Extension" })
 
 <div class="pt-3">
+    <input type="hidden" id="IsNeedAddMore" value="@ViewBag.IsNeedAddMore" />
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
