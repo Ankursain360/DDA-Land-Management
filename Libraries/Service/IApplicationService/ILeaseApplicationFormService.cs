@@ -20,6 +20,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdateBeforeApproval(int id, Leaseapplication leaseapplication);
         Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id);
         Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
-        Task<Allotmententry> FetchLeaseApplicationDetailsforAllotmentLetter(int id);
+        Task<Allotmentletter> FetchLeaseApplicationDetailsforAllotmentLetter(int id);
     }
 }

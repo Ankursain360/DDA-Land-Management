@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -23,5 +24,7 @@ namespace Libraries.Model.Entity
          public Allotmententry Allotment { get; set; }
         [NotMapped]
         public List<Allotmententry> RefNoList { get; set; }
+        [NotMapped]
+        public IFormFile DocFile { get; set; }
     }
 }

@@ -49,7 +49,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: pageSize,
         pageNumber: pageNumber
     }
-    debugger
+   
     return model;
 }
 $("#btnGenerate").click(function () {

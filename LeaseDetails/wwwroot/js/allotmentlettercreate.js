@@ -1,42 +1,43 @@
-﻿$(document).ready(function () {
-  // var LetterDate = sessionStorage.getItem("NewDate");
-   var RefNumber = sessionStorage.getItem("RefN");
+﻿////$(document).ready(function () {
+////  // var LetterDate = sessionStorage.getItem("NewDate");
+////   var RefNumber = sessionStorage.getItem("RefN");
   
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0');
-    var yyyy = today.getFullYear();
+////    var today = new Date();
+////    var dd = String(today.getDate()).padStart(2, '0');
+////    var mm = String(today.getMonth() + 1).padStart(2, '0');
+////    var yyyy = today.getFullYear();
 
-    var LetterDate = dd + '-' + mm + '-' + yyyy;
-    $("#txtNewDate").val(LetterDate);
-    $("#txtRefN").val(RefNumber);
-    $("#txtRe").val(RefNumber);
-});
-$("#btnSave").click(function () {
-    var id = $("#ddlRefNo").children("option:selected").val();
-    var allotid = id;
-    var refn = document.getElementById("txtRefernceNumber").value;
-    sessionStorage.RefN = refn;
-    sessionStorage.Vid = allotid;
-    if (id) {
+////    var LetterDate = dd + '-' + mm + '-' + yyyy;
+////    $("#txtNewDate").val(LetterDate);
+////    $("#txtRefN").val(RefNumber);
+////    $("#txtRe").val(RefNumber);
+////});
+//$("#btnSave").click(function () {
+//    var id = $("#ddlRefNo").children("option:selected").val();
+//    var allotid = id;
+//    var refn = document.getElementById("txtRefernceNumber").value;
+//    sessionStorage.RefN = refn;
+//    sessionStorage.Vid = allotid;
+//    if (id) {
 
-        HttpGet(`/LetterofAllotment/Save/?ApplicationId=${id}`, 'html', function (response) {
-            debugger
-            $('#View').html("");
-            $('#View').html(response);
-
-        });
-
-    }
-});
+//        HttpGet(`/LetterofAllotment/Save/?ApplicationId=${id}`, 'html', function (response) {
+//            debugger
+//            $('#View').html("");
+//            $('#View').html(response);
+            
+//        });
+//        $('.jhide').hide();
+//        nWin($("#View").html(), $("#pagename").html());
+//        $('.jhide').show();
+//    }
+//});
 
 $(function () {
     $("#btnPrint").click(function () {
         $('.jhide').hide();
-        print.window();
-     //   nWin($("#View").html(), $("#pagename").html());
-    //    $('.jhide').show();
-    });
+        nWin($("#View").html(), $("#pagename").html());
+        $('.jhide').show();
+      });
 });
 function nWin(context, title) {
     var printWindow = window.open('', '');
