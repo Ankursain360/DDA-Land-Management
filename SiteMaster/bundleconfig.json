@@ -352,5 +352,17 @@
     "inputFiles": [
       "wwwroot/js/approvalprocesscreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/logindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/logindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/schemefileloadingindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/schemefileloadingindex.js"
+    ]
   }
 ]

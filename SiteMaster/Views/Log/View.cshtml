@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Log
-@await Component.InvokeAsync("PageHeader", new { pageName = "Audit Trill" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Audit Trail" })
 
 <div class="pt-3">
     <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -87,7 +87,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         <textarea disabled asp-for="Exception" placeholder="Name" type="text"
-                                  style="height:300px;width:1130px" class="floating-label-field floating-label-field--s3"></textarea>
+                                  style="height:300px;" class="floating-label-field floating-label-field--s3"></textarea>
                         <span asp-validation-for="Exception" class="text-danger"></span>
                         <label class="floating-label">Exception   </label>
                     </div>
