@@ -11,7 +11,7 @@
 
                                 <h5> <b> DELHI DEVELOPMENT AUTHORITY</b></h5> <br />
                                 <h5><b> INSTITUTIONAL LAND BRANCH</b></h5><br />
-                                <h5> <b></b> Room No.216, A-Block, 2" Floor, Vikas Sudan, INA New Delhi<b></h5><br />
+                                <h5> <b> Room No.216, A-Block, 2" Floor, Vikas Sudan, INA New Delhi</b></h5><br />
 
                                 <br />
                                 <h6><b> *****</b></h6> <br />
@@ -27,7 +27,7 @@
                                             Letter No. :<b> @Model.ReferenceNumber    </b>
                                         </td>
                                         <td align="right">
-                                            Dated :  <b> @(Convert.ToDateTime(Model.CreatedDate).ToString("dd-MMM-yyyy"))</b>
+                                            Dated :  <b>@(Convert.ToDateTime(Model.CreatedDate).ToString("dd-MMM-yyyy"))</b>
                                         </td>
                                 </table>
                             </td>
@@ -260,9 +260,13 @@ else
                 </div>
 
                 <div style="padding:20px;text-align:center">
+                    <br /><br />
+                    <br /><br />
+                    <button onclick="window.print()">Print this letter</button>
+                    @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
 
-                    <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
-                   
+
+
 
                 </div>
 
@@ -275,8 +279,8 @@ else
 
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
-        <script src="~/js/allotmentletter.js"></script>
+        <script src="~/js/allotmentlettercreate.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/allotmentletter.min.js" asp-append-version="true"></script>
+        <script src="~/js/allotmentlettercreate.min.js" asp-append-version="true"></script>
     </environment>

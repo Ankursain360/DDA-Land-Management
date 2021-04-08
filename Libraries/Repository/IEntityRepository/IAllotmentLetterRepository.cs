@@ -13,7 +13,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
         Task<PagedResult<Allotmentletter>> GetPagedAllotmentLetter(AllotmentLetterSeearchDto model);
         Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id);
+        Task<Allotmentletter> FetchAllotmentLetterDetails(int id);
         string GetDownload(int id);
+
 
      }
 }

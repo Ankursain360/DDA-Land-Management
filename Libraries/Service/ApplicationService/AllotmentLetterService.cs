@@ -28,6 +28,9 @@ namespace Libraries.Service.ApplicationService
         public async Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id)
         {
             return await _allotmentLetterRepository.FetchSingleAllotmentLetterDetails(id);
+        }public async Task<Allotmentletter> FetchAllotmentLetterDetails(int id)
+        {
+            return await _allotmentLetterRepository.FetchAllotmentLetterDetails(id);
         }
         public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetter()
         {

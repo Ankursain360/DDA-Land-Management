@@ -47,7 +47,7 @@
                 @item.Status
             </td>
             <td>
-                <button class="btn btn-theme " type="button" onclick="EditDocument(@(item.Id));" style="font-size:.8rem;">View</button>
+                <a asp-action="PayNowCreate" asp-route-id="@item.Id" title="Pay Now" class="btn btn-theme " style="font-size:.8rem;">View</a>
             </td>
         </tr>
             }

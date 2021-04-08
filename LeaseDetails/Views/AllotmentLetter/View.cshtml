@@ -1,64 +1,64 @@
-﻿@model Libraries.Model.Entity.Leaseapplication 
+﻿@model Libraries.Model.Entity.Allotmentletter
 @await Component.InvokeAsync("PageHeader", new { pageName = "Allotment Letter" })
 
 <div class="pt-3">
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Add Details</h3>
-        <input type="hidden" asp-for="Id" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
         <div class="row mt-md-3">
-            <!--<div class="col-md-6">
-        <div class="floating-label-wrap">-->
-            @*<select class="floating-label-field floating-label-field--s3"
-                asp-for="RefNo" asp-items="@(new SelectList(Model.RefNoList, "Id","RefNo"))">
-            <option disabled="disabled" selected value="">Select</option>
-        </select>*@
-            <!--<span class="text-danger"></span>
-            <label class="floating-label">Application Number</label>
-        </div>
-    </div>-->
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select asp-for="AllotmentId" class="floating-label-field floating-label-field--s3" id="ddlRefNo">
+                        <option value="">--Select--</option>
+                        @foreach (var item in Model.RefNoList)
+                        {
+                            <option value="@item.Id"> @item.Application.RefNo ( @item.Application.Name )</option>
+                        }
+                    </select>
+                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
+                    <label asp-for="AllotmentId" class="floating-label">Application Reference No  </label>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <input placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" required />
+                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" required asp-for="ReferenceNumber" />
                     <span class="text-danger"></span>
-                    <label class="floating-label">Refernce Number   </label>
+                    <label class="floating-label">Refernce / Allotment Number   </label>
                 </div>
             </div>
+
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Name" type="date"
-                           class="floating-label-field floating-label-field--s3 " id="txtDate" required/>
-                    <span class="text-danger"></span>
-                    <label class="floating-label">Date   </label>
-                </div>
+                <input type="hidden" asp-for="FilePath" />
+                <input class="floating-label-field floating-label-field--s3" asp-for="DocFile" placeholder="AllotmentLetter Upload" type="file" id="file" />
+
+                <
+                <span class="text-danger" asp-validation-for="FilePath"></span>
+                <label class="floating-label">Upload Allotment Letter  </label>
+
             </div>
         </div>
         <div class="row mt-md-3">
-            
-        </div>
-
-        <div class="row mt-md-3">
-
             <div class=" col-md-12">
-                <div class="col-6 col-md-5 col-xl-6">
 
-                </div>
-                <button class="btn btn-theme" id="btnReset" type="reset"> Clear </button>
-                <button class="btn btn-theme" id="btnGenerate" type="submit">Generate</button>
-                @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
+                
+
             </div>
-
         </div>
+       
+
     </form>
 </div>
 
 
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/allotmentletterindex.js"></script>
+    <script src="~/js/allotmentletter.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/allotmentletterindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/allotmentletter.min.js" asp-append-version="true"></script>
 </environment>

@@ -1,100 +1,246 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Libraries.Model.Entity;
+﻿using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using LeaseDetails.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Configuration;
 using Dto.Search;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
+using Microsoft.AspNetCore.Hosting;
 using LeaseDetails.Filters;
 using Core.Enum;
-using Utility.Helper;
-using Microsoft.Extensions.Configuration;
-using Dto.Master;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
+using System.Data;
+using System;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+
 
 namespace LeaseDetails.Controllers
 {
-    
-
     public class AllotmentLetterController : BaseController
     {
+
         private readonly ILeaseApplicationFormService _leaseApplicationFormService;
+        private readonly IAllotmentLetterService _allotmentLetterService;
         public IConfiguration _configuration;
-        private readonly ICalculationSheetService _calculationSheetService;
-        public AllotmentLetterController(ILeaseApplicationFormService leaseApplicationFormService, IConfiguration configuration)
-        {
-            _leaseApplicationFormService = leaseApplicationFormService;
-            _configuration = configuration;
-           
-        }
-        public async Task<IActionResult> Index()
+        string targetPathAllotmentLetter = "";
+        public IActionResult Index()
         {
             return View();
         }
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] DocumentChecklistSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] AllotmentLetterSeearchDto model)
         {
-            var result = await _leaseApplicationFormService.GetPagedAllotmentLetter(model);
+            var result = await _allotmentLetterService.GetPagedAllotmentLetter(model);
             return PartialView("_List", result);
         }
-        public async Task<IActionResult> View(int id)
+
+        public AllotmentLetterController(ILeaseApplicationFormService leaseApplicationFormService, IAllotmentLetterService allotmentLetterService, IConfiguration configuration)
         {
-            Leaseapplication entry = new Leaseapplication();
+            _leaseApplicationFormService = leaseApplicationFormService;
+            _allotmentLetterService = allotmentLetterService;
+            _configuration = configuration;
+            targetPathAllotmentLetter = _configuration.GetSection("FilePaths:Allotmentletter:AllotmentletterFilePath").Value.ToString();
+        }
 
-            entry.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetter();
-            var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
+        public async Task<IActionResult> Create()
+        {
+            Allotmentletter allotmentletter = new Allotmentletter();
+            allotmentletter.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetter();
+            return View(allotmentletter);
+        }
 
+        public async Task<IActionResult> Receipt(int? ApplicationId)
+        {
+            // var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetailsforAllotmentLetter(ApplicationId ?? 0);
+            var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(ApplicationId??0);
+            return PartialView("Receipt", Data);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id, Allotmentletter model)
+        {
+
+            // Allotmentletter model= new Allotmentletter();
+            model.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetter();
+
+            if (ModelState.IsValid)
+            {
+                model.CreatedBy = SiteContext.UserId;
+                model.IsActive = 1;
+                DateTime theDate = DateTime.Now;
+                model.DemandPeriodStart = theDate;
+                DateTime yearInTheFuture = theDate.AddYears(1);
+                model.DemandPeriodEnd = yearInTheFuture;
+                var result = await _allotmentLetterService.Create(model);
+
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                   
+
+                }
+            }
+
+
+            //  return View(model);
+            var Data = await _allotmentLetterService.FetchAllotmentLetterDetails(model.AllotmentId);
+            return PartialView("Receipt", Data);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(id);
+            Data.RefNoList = await _allotmentLetterService.GetRefNoListforAllotmentLetter();
+            ViewBag.ExistDocFile = Data.FilePath;
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
-           // return View();
         }
-        [HttpGet]
-        public async Task<JsonResult> GetGroundRateList(int id, string dn,string rn)
+        [HttpPost]
+        //  [ValidateAntiForgeryToken]
+        //  [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, Allotmentletter allotmentletter)
         {
-            var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(id);
-            ViewBag.NewDate = dn;
-            ViewBag.NewRefNo = rn;
-          // RedirectToAction("AllotmentLetter", "AllotmentLetter");
-           return Json(await _leaseApplicationFormService.FetchLeaseApplicationDetails(id));
+            allotmentletter.RefNoList = await _allotmentLetterService.GetRefNoListforAllotmentLetter();
 
-            // return PartialView("AllotmentLetter", Data);
-        }
-        public async Task<IActionResult> Create(Leaseapplication leaseapp, string dn, string rn)
-        {
-            try
+            if (ModelState.IsValid)
             {
-             
-                var Data = await _leaseApplicationFormService.FetchLeaseApplicationDetails(leaseapp.Id);
-
-                if (Data == null)
+                FileHelper fileHelper = new FileHelper();
+                if (allotmentletter.DocFile != null)
                 {
-                    return NotFound();
+                    allotmentletter.FilePath = allotmentletter.DocFile != null ?
+                                                                      fileHelper.SaveFile1(targetPathAllotmentLetter, allotmentletter.DocFile) :
+                                                                      allotmentletter.DocFile != null || allotmentletter.FilePath != "" ?
+                                                                      allotmentletter.FilePath : string.Empty;
                 }
-                return View("Create", Data);
+                try
+                {
 
+                    allotmentletter.ModifiedBy = SiteContext.UserId;
+                    var result = await _allotmentLetterService.Update(id, allotmentletter);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return RedirectToAction("Index", "AllotmentLetter");
+                        //var list = await _possesionplanService.GetAllPossesionplan();
+                        //return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(allotmentletter);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(allotmentletter);
+
+                }
             }
-            catch (Exception ex)
+            return View(allotmentletter);
+        }
+        public async Task<IActionResult> UploadAllotmentLetter(int id, Allotmentletter allotmentletter)
+        {
+            ViewBag.ExistDocFile = allotmentletter.FilePath;
+
+            var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(id);
+
+
+            if (ModelState.IsValid)
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(leaseapp);
+                FileHelper fileHelper = new FileHelper();
+                if (allotmentletter.DocFile != null)
+                {
+                    allotmentletter.FilePath = allotmentletter.DocFile != null ?
+                                                                      fileHelper.SaveFile1(targetPathAllotmentLetter, allotmentletter.DocFile) :
+                                                                      allotmentletter.DocFile != null || allotmentletter.FilePath != "" ?
+                                                                      allotmentletter.FilePath : string.Empty;
+                }
+                try
+                {
+                    allotmentletter.ModifiedBy = SiteContext.UserId;
+
+                    var result = await _allotmentLetterService.Update(id, allotmentletter);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(allotmentletter);
+
+                }
             }
+
+            return RedirectToAction("Create", "AllotmentLetter");
+
         }
 
-       
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+
+        public async Task<IActionResult> Download(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(Id);
+            string path = targetPathAllotmentLetter + "//" + Data.FilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+            //string filename = _allotmentLetterService.GetDownload(Id);
+            //var memory = new MemoryStream();
+            //using (var stream = new FileStream(filename, FileMode.Open))
+            //{
+            //    await stream.CopyToAsync(memory);
+            //}
+            //memory.Position = 0;
+            //return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<FileResult> ViewAllotmentLetterDoc(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(Id);
+            string path = targetPathAllotmentLetter + "//" + Data.FilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".txt", "text/plain"},
+                {".pdf", "application/pdf"},
+                {".doc", "application/vnd.ms-word"},
+                {".docx", "application/vnd.ms-word"},
+                {".xls", "application/vnd.ms-excel"},
+                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"},
+                {".csv", "text/csv"}
+            };
+        }
     }
 }
