@@ -1,16 +1,16 @@
-﻿@model IEnumerable<Dto.Search.PaymentPremiumListDataDto>
+﻿@model IEnumerable<Dto.Search.ViewPaymentHistoryListDataDto>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
 
-            <th>Payment Type </th>
-            <th>Due Date</th>
-            <th>Due Amount</th>
-            <th>Interest on Due Amount</th>
-            <th>Late Interest</th>
-            <th>Total Due Amount</th>
-            <th>Action</th>
+            <th>Transaction Type </th>
+            <th>Payment Mode</th>
+            <th>Transaction No</th>
+            <th>Transaction Date</th>
+            <th>Total Payable Amount</th>
+            <th>Status</th>
+            <th>Payment Acknowledgement Reciept</th>
         </tr>
     </thead>
     <tbody>
@@ -24,19 +24,22 @@
                         @item.LeasePaymentType
                     </td>
                     <td>
-                        @(item.ToDate!= null ? Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy") : "Not Available")
+                        @item.PaymentMode
                     </td>
                     <td>
-                        @item.Amount
+                        @item.TransactionNo
                     </td>
                     <td>
+                        @(item.TransactionDate != null ? Convert.ToDateTime(item.TransactionDate).ToString("dd-MMM-yyyy") : "Not Available")
                     </td>
                     <td>
+                        @item.TotalPayableAmount
                     </td>
                     <td>
+                        @item.Status
                     </td>
                     <td>
-                        <a asp-action="PayNowCreate" asp-route-id="@item.Id" title="Pay Now" class="btn btn-theme " style="font-size:.8rem;">Pay Now</a>
+                        <a asp-action="PayNowCreate" asp-route-id="@item.Id" title="Pay Now" class="btn btn-theme " style="font-size:.8rem;">View</a>
                     </td>
                 </tr>
             }

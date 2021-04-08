@@ -25,6 +25,7 @@ namespace Libraries.Model.Entity
         public decimal? InterestRate { get; set; }
         public int? NoOfDays { get; set; }
         public string Utrno { get; set; }
+        public string PaymentStatus { get; set; }
         public string Description { get; set; }
         public int? UserId { get; set; }
         public byte? IsActive { get; set; }
@@ -32,5 +33,28 @@ namespace Libraries.Model.Entity
         public Allotmententry Allotment { get; set; }
         public Leasepaymenttype LeasePaymentType { get; set; }
 
+        [NotMapped]
+        public string BillNo { get; set; }
+
+        [NotMapped]
+        public decimal InterestAmount { get; set; }
+
+        [NotMapped]
+        public decimal CGSTAmount { get; set; }
+
+        [NotMapped]
+        public decimal SGSTAmount { get; set; }
+
+        [NotMapped]
+        public decimal TotalAmount { get; set; }
+
+        [NotMapped]
+        public string EmailId { get; set; }
+
+        [NotMapped]
+        public string MobileNo { get; set; }
+
+        [NotMapped]
+        public string PaymentTypeName { get; set; }
     }
 }
