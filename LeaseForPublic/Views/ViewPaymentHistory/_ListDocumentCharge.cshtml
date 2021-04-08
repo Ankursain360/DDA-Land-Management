@@ -1,15 +1,16 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Payment>
+﻿@model IEnumerable<Dto.Search.ViewPaymentHistoryListDataDto>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
 
-            <th>Payment Type </th>
+            <th>Transaction Type </th>
+            <th>Payment Mode</th>
             <th>Transaction No</th>
-            <th>From Date</th>
-            <th>To Date</th>
-            <th>Transaction Type</th>
-            <th>Amount</th>
+            <th>Transaction Date</th>
+            <th>Total Payable Amount</th>
+            <th>Status</th>
+            <th>Payment Acknowledgement Reciept</th>
         </tr>
     </thead>
     <tbody>
@@ -20,22 +21,25 @@
                 <tr>
 
                     <td>
-                        @(item.LeasePaymentType == null ? "" : item.LeasePaymentType.Name)
+                        @item.LeasePaymentType
                     </td>
                     <td>
-                        @item.PaymentTransactionNo
+                        @item.PaymentMode
                     </td>
                     <td>
-                        @(item.FromDate!= null ? Convert.ToDateTime(item.FromDate).ToString("dd-MMM-yyyy") : "Not Available")
+                        @item.TransactionNo
                     </td>
                     <td>
-                        @(item.ToDate!= null ? Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy") : "Not Available")
+                        @(item.TransactionDate != null ? Convert.ToDateTime(item.TransactionDate).ToString("dd-MMM-yyyy") : "Not Available")
                     </td>
                     <td>
-                        @(item.TransactionType == "Dr" ? "Debit" : "Credit")
+                        @item.TotalPayableAmount
                     </td>
                     <td>
-                        @item.Amount
+                        @item.Status
+                    </td>
+                    <td>
+                        <a asp-action="PayNowCreate" asp-route-id="@item.Id" title="Pay Now" class="btn btn-theme " style="font-size:.8rem;">View</a>
                     </td>
                 </tr>
             }

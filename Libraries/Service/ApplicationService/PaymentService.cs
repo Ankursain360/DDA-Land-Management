@@ -29,6 +29,11 @@ namespace Libraries.Service.ApplicationService
             _mapper = mapper;
         }
 
+        public async Task<Payment> FetchResultPayment(int id)
+        {
+            return await _paymentRepository.FetchResultPayment(id);
+        }
+
         public async Task<List<ViewPaymentHistoryListDataDto>> GetAlloteeLeasePaymentDetails(int allotmentId, int leasePaymentTyeId)
         {
             return await _paymentRepository.GetAlloteeLeasePaymentDetails(allotmentId, leasePaymentTyeId);

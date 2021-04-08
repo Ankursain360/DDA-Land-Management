@@ -16,5 +16,6 @@ namespace Libraries.Service.IApplicationService
         Task<Possesionplan> GetAllotteeDetails(int userId);
         Task<List<Leasepaymenttype>> LeasePaymentTypeListBind(int allotmentId);
         Task<List<ViewPaymentHistoryListDataDto>> GetAlloteeLeasePaymentDetails(int allotmentId, int leasePaymentTyeId);
+        Task<Payment> FetchResultPayment(int id);
     }
 }

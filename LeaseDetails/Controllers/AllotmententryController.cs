@@ -229,27 +229,7 @@ namespace LeaseDetails.Controllers
                 {
                     var result = await _allotmentEntryService.Update(id, allotmententry);
                     if (result == true)
-                    {
-                        #region Insert Row related to premium , Ground Rent in Payment Table Added By Renu 07 April 2021
-                        if (allotmententry.LeasesTypeId == 1)
-                        {
-                            result = await _allotmentEntryService.CreatePaymentPremiumDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentPremiumId").Value), SiteContext.UserId);
-                            result = await _allotmentEntryService.CreatePaymentGroundRentDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentGroundRentId").Value), SiteContext.UserId);
-                            result = await _allotmentEntryService.CreatePaymentDocumentChargesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value), SiteContext.UserId);
-                        }
-                        else if (allotmententry.LeasesTypeId == 2)
-                        {
-                            result = await _allotmentEntryService.CreatePaymentDocumentChargesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value), SiteContext.UserId);
-                            result = await _allotmentEntryService.CreatePaymentLicenceFeesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentLicenseFeesId").Value), SiteContext.UserId);
-                        }
-                        else if (allotmententry.LeasesTypeId == 3)
-                        {
-                            result = await _allotmentEntryService.CreatePaymentPremiumDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentPremiumId").Value), SiteContext.UserId);
-                            result = await _allotmentEntryService.CreatePaymentGroundRentDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentGroundRentId").Value), SiteContext.UserId);
-                            result = await _allotmentEntryService.CreatePaymentDocumentChargesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentDocumentChargesId").Value), SiteContext.UserId);
-                            result = await _allotmentEntryService.CreatePaymentLicenceFeesDr(allotmententry, Convert.ToInt32(_configuration.GetSection("LeasePaymentLicenseFeesId").Value), SiteContext.UserId);
-                        }
-                        #endregion
+                    {                      
 
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _allotmentEntryService.GetAllAllotmententry();

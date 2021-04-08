@@ -23,6 +23,13 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<Payment> FetchResultPayment(int id)
+        {
+            return await _dbContext.Payment
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
+
         public async Task<List<ViewPaymentHistoryListDataDto>> GetAlloteeLeasePaymentDetails(int allotmentId, int leasePaymentTyeId)
         {
             try
