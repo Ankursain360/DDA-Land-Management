@@ -25,6 +25,7 @@ namespace Libraries.Model.Entity
         public decimal? InterestRate { get; set; }
         public int? NoOfDays { get; set; }
         public string Utrno { get; set; }
+        public string PaymentStatus { get; set; }
         public string Description { get; set; }
         public int? UserId { get; set; }
         public byte? IsActive { get; set; }

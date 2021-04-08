@@ -23,6 +23,23 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<List<ViewPaymentHistoryListDataDto>> GetAlloteeLeasePaymentDetails(int allotmentId, int leasePaymentTyeId)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("PaymentHistoryListViewBind")
+                                            .WithSqlParams(("P_AllotmentId", allotmentId), ("P_LeasePaymentTypeId", leasePaymentTyeId))
+                                            .ExecuteStoredProcedureAsync<ViewPaymentHistoryListDataDto>();
+
+                return (List<ViewPaymentHistoryListDataDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
         public async Task<Possesionplan> GetAllotteeDetails(int userId)
         {
             return await _dbContext.Possesionplan
@@ -64,6 +81,18 @@ namespace Libraries.Repository.EntityRepository
             {
                 throw;
             }
+        }
+
+        public async Task<List<Leasepaymenttype>> LeasePaymentTypeListBind(int allotmentId)
+        {
+            var InId = (from x in _dbContext.Payment
+                                  where x.IsActive == 1 && x.AllotmentId == allotmentId
+                                  select x.LeasePaymentTypeId).ToArray();
+
+            return await _dbContext.Leasepaymenttype
+                                    .Where(x => x.IsActive == 1
+                                    && (InId).Contains(x.Id))
+                                    .ToListAsync();
         }
     }
 }
