@@ -14,7 +14,9 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Create(Allotmentletter allotmentletter);
         Task<PagedResult<Allotmentletter>> GetPagedAllotmentLetter(AllotmentLetterSeearchDto model);
-
+        Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id);
         Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
+        Task<bool> Update(int id, Allotmentletter allotmentletter);
+        string GetDownload(int id);
     }
 }

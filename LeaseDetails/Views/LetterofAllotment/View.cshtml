@@ -2,7 +2,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Allotment Letter" })
 
 <div class="pt-3">
-    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3"  enctype="multipart/form-data">
+    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -17,8 +17,7 @@
                             <option value="@item.Id"> @item.Application.RefNo ( @item.Application.Name )</option>
                         }
                     </select>
-                  
-                    <span asp-validation-for="AllotmentId" class="text-danger"></span>
+                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label asp-for="AllotmentId" class="floating-label">Application Reference No  </label>
                 </div>
             </div>
@@ -42,18 +41,15 @@
                 <label class="floating-label">Upload Allotment Letter  </label>
 
             </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+
+                
+
             </div>
-            <div class="row mt-md-3">
-                <div class=" col-md-12">
-
-                    <button class="btn btn-theme " id="btnGenerate" type="submit">Update </button>
-                    <button class="btn btn-theme " id="btnGenerate" action="UploadAllotmentLetter">Upload </button>
-                    <button class="btn btn-theme " id="btnReset">Reset</button>
-
-                </div>
-            </div>
-            <div id="View"> </div>
-
+        </div>
+       
 
     </form>
 </div>

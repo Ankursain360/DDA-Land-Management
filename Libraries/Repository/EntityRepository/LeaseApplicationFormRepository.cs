@@ -29,11 +29,13 @@ namespace Libraries.Repository.EntityRepository
                                         .FirstOrDefaultAsync();
             return data;
         }
-        public async Task<Allotmententry> FetchLeaseApplicationDetailsforAllotmentLetter(int id)
+        public async Task<Allotmentletter> FetchLeaseApplicationDetailsforAllotmentLetter(int id)
         {
-            var data = await _dbContext.Allotmententry
-                                         .Include(x => x.Application)
-                                        .Where(x => x.Id == id)
+            var data = await _dbContext.Allotmentletter
+                                         .Include(x => x.Allotment)
+                                         .Include(x => x.Allotment.Application)
+                                         .Where(x => x.Allotment.Id == id && x.Allotment.Application.Id==x.Allotment.ApplicationId)
+                                         .OrderByDescending(x => x.Id)
                                         .FirstOrDefaultAsync();
             return data;
         }

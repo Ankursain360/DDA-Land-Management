@@ -21,6 +21,14 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public string GetDownload(int id)
+        {
+            var File = (from f in _dbContext.Allotmentletter
+                        where f.Id == id
+                        select f.FilePath).First();
+
+            return File;
+        }
         public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetter()
         {
             return await _dbContext.Allotmententry
@@ -138,7 +146,15 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-       
+        public async Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id)
+        {
+            var data = await _dbContext.Allotmentletter
+                                        .Include(x => x.Allotment)
+                                        .Where(x => x.Id == id)// && x.AllotmentId==x.Allotment.Id)
+                                        .FirstOrDefaultAsync();
+            return data;
+        }
+
     }
 
 

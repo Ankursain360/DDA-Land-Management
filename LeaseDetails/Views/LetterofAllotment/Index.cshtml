@@ -11,10 +11,10 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtGenerateDate" class="floating-label-field floating-label-field--s3" />
+                @*<div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" id="txtGenerateDate" class="floating-label-field floating-label-field--s3"  />
                     <label for="txtName" class="floating-label">Letter Generate Date </label> 
-                </div>
+                </div>*@
             </div>
 
         </div>
@@ -50,9 +50,14 @@
                     <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
-
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                     <a href="/Zone/download" class="d-flex align-items-center btn btn-success">
+                <a href="/LetterofAllotment/create" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Generate Letter</small>
+                </a>
+            </div>
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/Zone/download" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
                 </a>
