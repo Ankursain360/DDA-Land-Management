@@ -23,7 +23,7 @@ $("#btnGenerate").click(function () {
 
 
             applicationid: id,
-            demanddate: LetterDate
+          //  demanddate: LetterDate
           
 
         }

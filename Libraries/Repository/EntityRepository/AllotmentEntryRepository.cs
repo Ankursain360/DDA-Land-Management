@@ -223,7 +223,10 @@ namespace Libraries.Repository.EntityRepository
 
 
                 var data = await _dbContext.LoadStoredProcedure("Get_Demand_Details")
-                                            .WithSqlParams(("AllotmentId", model.applicationid), ("DemandDate", model.demanddate))
+                                            .WithSqlParams(("AllotmentId", model.applicationid)
+                                            //,
+                                            //("DemandDate", model.demanddate)
+                                            )
 
 
 
