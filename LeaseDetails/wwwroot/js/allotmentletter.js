@@ -1,30 +1,29 @@
 ﻿
 
+=(function () {
+//    var id = $("#ddlRefNo").children("option:selected").val();
+//    var allotid = id;
+//    var refn = document.getElementById("txtRefernceNumber").value;
+//    sessionStorage.RefN = refn;
+//    sessionStorage.Vid = allotid;
+//    //if (id) {
+//    //    HttpGet(`/LetterofAllotment/Receipt/?ApplicationId=${id}`, 'html', function (response) {
+//    //        debugger
+//    //        $('#View').htsml("");
+//    //        $('#View').html(response);
 
-$("#btnGenerate").click(function () {
-    var id = $("#ddlRefNo").children("option:selected").val();
-    var allotid = id;
-    var refn = document.getElementById("txtRefernceNumber").value;
-    sessionStorage.RefN = refn;
-    sessionStorage.Vid = allotid;
-    if (id) {
-        HttpGet(`/LetterofAllotment/Receipt/?ApplicationId=${id}`, 'html', function (response) {
-            debugger
-            $('#View').html("");
-            $('#View').html(response);
+//    //    });
+       
 
-        });
-        //HttpGet(`/LetterofAllotment/Receipt/?ApplicationId=${id}`, 'html', function (response) {
-        //    debugger
-        //     $('#View').html("");
-        //    $('#View').html(response);
+//    }
+//);
 
-        //});
-
-    }
+$("#btnReset").click(function () {
+    $('#txtRefernceNumber').val('');
+  //  document.getElementById("ddlRefNo").selectedIndex = "";
+    document.getElementById("AllotmentId").selectedIndex = "";
+    location.reload();
 });
-
-
 
 
 

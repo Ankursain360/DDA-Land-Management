@@ -1,17 +1,17 @@
-﻿////$(document).ready(function () {
-////  // var LetterDate = sessionStorage.getItem("NewDate");
-////   var RefNumber = sessionStorage.getItem("RefN");
+﻿$(document).ready(function () {
+  // var LetterDate = sessionStorage.getItem("NewDate");
+   var RefNumber = sessionStorage.getItem("RefN");
   
-////    var today = new Date();
-////    var dd = String(today.getDate()).padStart(2, '0');
-////    var mm = String(today.getMonth() + 1).padStart(2, '0');
-////    var yyyy = today.getFullYear();
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
 
-////    var LetterDate = dd + '-' + mm + '-' + yyyy;
-////    $("#txtNewDate").val(LetterDate);
-////    $("#txtRefN").val(RefNumber);
-////    $("#txtRe").val(RefNumber);
-////});
+    var LetterDate = dd + '-' + mm + '-' + yyyy;
+    $("#txtNewDate").val(LetterDate);
+    $("#txtRefN").val(RefNumber);
+    $("#txtRe").val(RefNumber);
+});
 //$("#btnSave").click(function () {
 //    var id = $("#ddlRefNo").children("option:selected").val();
 //    var allotid = id;
@@ -34,6 +34,7 @@
 
 $(function () {
     $("#btnPrint").click(function () {
+        debugger
         $('.jhide').hide();
         nWin($("#View").html(), $("#pagename").html());
         $('.jhide').show();
