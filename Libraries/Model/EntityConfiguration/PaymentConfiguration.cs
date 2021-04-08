@@ -53,6 +53,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
+            builder.Property(e => e.PaymentStatus)
+               .HasMaxLength(200)
+               .IsUnicode(false);
+
             builder.Property(e => e.RecieptNo)
                 .HasMaxLength(45)
                 .IsUnicode(false);

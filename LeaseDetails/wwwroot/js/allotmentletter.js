@@ -8,13 +8,18 @@ $("#btnGenerate").click(function () {
     sessionStorage.RefN = refn;
     sessionStorage.Vid = allotid;
     if (id) {
-
         HttpGet(`/LetterofAllotment/Receipt/?ApplicationId=${id}`, 'html', function (response) {
             debugger
-             $('#View').html("");
+            $('#View').html("");
             $('#View').html(response);
 
         });
+        //HttpGet(`/LetterofAllotment/Receipt/?ApplicationId=${id}`, 'html', function (response) {
+        //    debugger
+        //     $('#View').html("");
+        //    $('#View').html(response);
+
+        //});
 
     }
 });

@@ -13,5 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Possesionplan> GetAllotteeDetails(int userId);
         Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int AllotmentId, int LeasePaymentTypeId, int userId);
         Task<List<PaymentPremiumListDataDto>> GetGroundRentDrDetails(int userId);
+        Task<List<Leasepaymenttype>> LeasePaymentTypeListBind(int allotmentId);
+        Task<List<ViewPaymentHistoryListDataDto>> GetAlloteeLeasePaymentDetails(int allotmentId, int leasePaymentTyeId);
     }
 }

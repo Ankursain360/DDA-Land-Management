@@ -39,7 +39,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leaseApplicationRepository.FetchLeaseApplicationDetails(id);
         }
-        public async Task<Allotmententry> FetchLeaseApplicationDetailsforAllotmentLetter(int id)
+        public async Task<Allotmentletter> FetchLeaseApplicationDetailsforAllotmentLetter(int id)
         {
             return await _leaseApplicationRepository.FetchLeaseApplicationDetailsforAllotmentLetter(id);
         }

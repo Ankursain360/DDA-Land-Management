@@ -22,8 +22,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdateBeforeApproval(int id, Extension extension);
         Task<bool> Update(int id, Extension extension);
         Task<bool> Delete(int id, int userId);
-        Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id);
+        Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id, int servicetypeid);
         Task<bool> UpdateAllotteeServiceDocuments(int id, Allotteeservicesdocument allotteeservicesdocuments);
         Task<bool> SaveAllotteeServiceDocumentsSingle(Allotteeservicesdocument item);
+        Task<Extension> IsNeedAddMore();
     }
 }

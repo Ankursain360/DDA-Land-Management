@@ -114,9 +114,9 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id)
+        public async Task<List<Allotteeservicesdocument>> AlloteeDocumentListDetails(int id, int servicetypeid)
         {
-            return await _extensionRepository.AlloteeDocumentListDetails(id);
+            return await _extensionRepository.AlloteeDocumentListDetails(id, servicetypeid);
         }
 
         public async Task<bool> UpdateAllotteeServiceDocuments(int id, Allotteeservicesdocument allotteeservicesdocuments)
@@ -128,5 +128,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _extensionRepository.SaveAllotteeServiceDocumentsSingle(item);
         }
+
+        public async Task<Extension> IsNeedAddMore()
+        {
+            return await _extensionRepository.IsNeedAddMore();
+        }
+
     }
 }

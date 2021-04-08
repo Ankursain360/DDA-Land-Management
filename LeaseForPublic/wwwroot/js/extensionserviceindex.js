@@ -4,6 +4,11 @@ var sortOrder = 1;//default Ascending
 
 
 $(document).ready(function () {
+    if (parseInt($("#IsNeedAddMore").val()) == 1)
+        $("#divAddMore").show();
+    else
+        $("#divAddMore").hide();
+
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 

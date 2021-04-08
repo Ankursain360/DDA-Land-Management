@@ -42,6 +42,12 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var data = await _extensionService.IsNeedAddMore();
+            if (data == null || data.ApprovedStatus == 1)
+                ViewBag.IsNeedAddMore = 1;
+            else
+                ViewBag.IsNeedAddMore = 0;
+
             return View();
         }
 
@@ -165,7 +171,7 @@ namespace LeaseForPublic.Controllers
             if (Msg != null)
                 ViewBag.Message = Msg;
             Data.IsActive = 1;
-            Data.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
+            Data.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id, Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
 
             if (Data == null)
             {
@@ -181,7 +187,7 @@ namespace LeaseForPublic.Controllers
             try
             {
                 extension.ServiceTypeId = 5;
-                extension.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
+                extension.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id, Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
                 var result = false;
                 if (ModelState.IsValid)
                 {
@@ -284,7 +290,7 @@ namespace LeaseForPublic.Controllers
         {
             var Data = await _extensionService.FetchSingleResult(id);
             Data.IsActive = 1;
-            Data.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id);
+            Data.AllotteeservicesdocumentList = await _extensionService.AlloteeDocumentListDetails(id, Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
 
             if (Data == null)
             {

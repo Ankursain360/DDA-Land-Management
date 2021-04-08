@@ -29,6 +29,11 @@ namespace Libraries.Service.ApplicationService
             _mapper = mapper;
         }
 
+        public async Task<List<ViewPaymentHistoryListDataDto>> GetAlloteeLeasePaymentDetails(int allotmentId, int leasePaymentTyeId)
+        {
+            return await _paymentRepository.GetAlloteeLeasePaymentDetails(allotmentId, leasePaymentTyeId);
+        }
+
         public async Task<Possesionplan> GetAllotteeDetails(int userId)
         {
             return await _paymentRepository.GetAllotteeDetails( userId);
@@ -41,6 +46,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<PaymentPremiumListDataDto>> GetPremiumDrDetails(int AllotmentId, int LeasePaymentTypeId, int userId)
         {
             return await _paymentRepository.GetPremiumDrDetails( AllotmentId,  LeasePaymentTypeId,  userId);
+        }
+
+        public async Task<List<Leasepaymenttype>> LeasePaymentTypeListBind(int allotmentId)
+        {
+            return await _paymentRepository.LeasePaymentTypeListBind(allotmentId);
         }
     }
 }
