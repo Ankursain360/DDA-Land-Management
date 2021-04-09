@@ -12,31 +12,33 @@
     $("#txtRefN").val(RefNumber);
     $("#txtRe").val(RefNumber);
 });
-$("#btnSave").click(function () {
-    var id = $("#ddlRefNo").children("option:selected").val();
-    var allotid = id;
-    var refn = document.getElementById("txtRefernceNumber").value;
-    sessionStorage.RefN = refn;
-    sessionStorage.Vid = allotid;
-    if (id) {
+//$("#btnSave").click(function () {
+//    var id = $("#ddlRefNo").children("option:selected").val();
+//    var allotid = id;
+//    var refn = document.getElementById("txtRefernceNumber").value;
+//    sessionStorage.RefN = refn;
+//    sessionStorage.Vid = allotid;
+//    if (id) {
 
-        HttpGet(`/LetterofAllotment/Save/?ApplicationId=${id}`, 'html', function (response) {
-            debugger
-            $('#View').html("");
-            $('#View').html(response);
-
-        });
-
-    }
-});
+//        HttpGet(`/LetterofAllotment/Save/?ApplicationId=${id}`, 'html', function (response) {
+//            debugger
+//            $('#View').html("");
+//            $('#View').html(response);
+            
+//        });
+//        $('.jhide').hide();
+//        nWin($("#View").html(), $("#pagename").html());
+//        $('.jhide').show();
+//    }
+//});
 
 $(function () {
     $("#btnPrint").click(function () {
+        debugger
         $('.jhide').hide();
-        print.window();
-     //   nWin($("#View").html(), $("#pagename").html());
-    //    $('.jhide').show();
-    });
+        nWin($("#View").html(), $("#pagename").html());
+        $('.jhide').show();
+      });
 });
 function nWin(context, title) {
     var printWindow = window.open('', '');

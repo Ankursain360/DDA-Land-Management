@@ -34,7 +34,7 @@ $("#btnReset").click(function () {
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    HttpPost(`/LetterofAllotment/List`, 'html', param, function (response) {
+    HttpPost(`/AllotmentLetter/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
@@ -49,7 +49,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: pageSize,
         pageNumber: pageNumber
     }
-    debugger
+   
     return model;
 }
 $("#btnGenerate").click(function () {

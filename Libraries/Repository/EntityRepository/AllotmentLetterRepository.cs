@@ -21,6 +21,14 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public string GetDownload(int id)
+        {
+            var File = (from f in _dbContext.Allotmentletter
+                        where f.Id == id
+                        select f.FilePath).First();
+
+            return File;
+        }
         public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetter()
         {
             return await _dbContext.Allotmententry
@@ -58,8 +66,8 @@ namespace Libraries.Repository.EntityRepository
                             .Include(s => s.Allotment)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
-                             && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
-                            .OrderBy(x => x.DemandDate)
+                            // && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
+                           ) .OrderBy(x => x.DemandDate)
                             .GetPaged<Allotmentletter>(model.PageNumber, model.PageSize);
                         break;
                     case ("UPLOAD"):
@@ -68,8 +76,8 @@ namespace Libraries.Repository.EntityRepository
                             .Include(s => s.Allotment)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
-                             && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
-                            .OrderBy(x => x.FilePath != "")
+                          ) //)  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
+                            .OrderBy(x => x.FilePath == null)
                             .GetPaged<Allotmentletter>(model.PageNumber, model.PageSize);
                         break;
                     case ("GENERATE"):
@@ -78,8 +86,8 @@ namespace Libraries.Repository.EntityRepository
                             .Include(s => s.Allotment)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
-                             && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
-                            .OrderBy(x => x.FilePath == "")
+                           )//  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
+                            .OrderBy(x => x.FilePath != null)
                             .GetPaged<Allotmentletter>(model.PageNumber, model.PageSize);
                         break;
 
@@ -96,8 +104,8 @@ namespace Libraries.Repository.EntityRepository
                             .Include(s => s.Allotment)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
-                             && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
-                            .OrderByDescending(x => x.Allotment.Application.RefNo)
+                           //  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
+                            ).OrderByDescending(x => x.Allotment.Application.RefNo)
                             .GetPaged<Allotmentletter>(model.PageNumber, model.PageSize);
                         break;
 
@@ -108,7 +116,7 @@ namespace Libraries.Repository.EntityRepository
                             .Include(s => s.Allotment)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
-                             && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
+                            )// && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
                             .OrderByDescending(x => x.DemandDate)
                             .GetPaged<Allotmentletter>(model.PageNumber, model.PageSize);
                         break;
@@ -118,8 +126,8 @@ namespace Libraries.Repository.EntityRepository
                             .Include(s => s.Allotment)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
-                             && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
-                            .OrderByDescending(x => x.FilePath != "")
+                           )//  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
+                            .OrderByDescending(x => x.FilePath == null)
                             .GetPaged<Allotmentletter>(model.PageNumber, model.PageSize);
                         break;
                     case ("GENERATE"):
@@ -128,8 +136,8 @@ namespace Libraries.Repository.EntityRepository
                             .Include(s => s.Allotment)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
-                             && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
-                            .OrderByDescending(x => x.FilePath == "")
+                           )//  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
+                            .OrderByDescending(x => x.FilePath !=null)
                             .GetPaged<Allotmentletter>(model.PageNumber, model.PageSize);
                         break;
 
@@ -138,7 +146,22 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-       
+        public async Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id)
+        {
+            var data = await _dbContext.Allotmentletter
+                                        .Include(x => x.Allotment)
+                                        .Where(x => x.Id == id)// && x.AllotmentId==x.Allotment.Id)
+                                        .FirstOrDefaultAsync();
+            return data;
+        }
+        public async Task<Allotmentletter> FetchAllotmentLetterDetails(int id)
+        {
+            var data = await _dbContext.Allotmentletter
+                                        .Include(x => x.Allotment)
+                                        .Where(x => x.AllotmentId == id)// && x.AllotmentId==x.Allotment.Id)
+                                        .FirstOrDefaultAsync();
+            return data;
+        }
     }
 
 

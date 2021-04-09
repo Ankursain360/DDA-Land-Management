@@ -2,8 +2,8 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Allotment Letter" })
 
 <div class="pt-3">
-    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+        <h3 class="mb-3 d-flex">Edit Details / Upload Letter</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
 
@@ -15,12 +15,9 @@
                         @foreach (var item in Model.RefNoList)
                         {
                             <option value="@item.Id"> @item.Application.RefNo ( @item.Application.Name )</option>
-}
+                        }
                     </select>
-                    @*<select class="floating-label-field floating-label-field--s3"
-                                asp-for="RefNo" asp-items="@(new SelectList(Model.RefNoList, "Id","Application.RefNo"))" id="ddlRefNo">
-                            <option disabled="disabled" selected value="">Select</option>
-                        </select>*@
+
                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label asp-for="AllotmentId" class="floating-label">Application Reference No  </label>
                 </div>
@@ -28,21 +25,33 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <input placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" required asp-for="ReferenceNumber"  />
-                    <span class="text-danger"></span>
+                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" required asp-for="ReferenceNumber" />
+                    <span asp-validation-for="ReferenceNumber" class="text-danger"></span>
                     <label class="floating-label">Refernce / Allotment Number   </label>
                 </div>
             </div>
 
         </div>
-
         <div class="row mt-md-3">
-            <div class=" col-md-12">
+            <div class="col-md-6">
+                <input type="hidden" asp-for="FilePath" />
+                <input class="floating-label-field floating-label-field--s3" asp-for="DocFile" placeholder="AllotmentLetter Upload" type="file" id="file" />
 
-                <button class="btn btn-theme " id="btnGenerate" type="submit">Update </button>
-                <button class="btn btn-theme " id="btnGenerate" action="Upload">Upload </button>
-                <button class="btn btn-theme " id="btnReset">Reset</button>
 
+                <span class="text-danger" asp-validation-for="FilePath"></span>
+                <label class="floating-label">Upload Allotment Letter  </label>
+
+            </div>
+        </div>
+       
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                     
+                        <button class="btn btn-theme " id="btnGenerate" type="submit">Update </button>
+                        <button class="btn btn-theme " id="btnGenerate" action="UploadAllotmentLetter">Upload </button>
+                    
+                </div>
             </div>
         </div>
         <div id="View"> </div>

@@ -25,6 +25,13 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _allotmentLetterRepository = allotmentLetterRepository;
         }
+        public async Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id)
+        {
+            return await _allotmentLetterRepository.FetchSingleAllotmentLetterDetails(id);
+        }public async Task<Allotmentletter> FetchAllotmentLetterDetails(int id)
+        {
+            return await _allotmentLetterRepository.FetchAllotmentLetterDetails(id);
+        }
         public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetter()
         {
             return await _allotmentLetterRepository.GetRefNoListforAllotmentLetter();
@@ -39,6 +46,23 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<Allotmentletter>> GetPagedAllotmentLetter(AllotmentLetterSeearchDto model)
         {
             return await _allotmentLetterRepository.GetPagedAllotmentLetter(model);
+        }
+        public async Task<bool> Update(int id, Allotmentletter allotmentletter)
+        {
+            var result = await _allotmentLetterRepository.FindBy(a => a.Id == id);
+            Allotmentletter model = result.FirstOrDefault();
+            model.FilePath = allotmentletter.FilePath;
+            model.AllotmentId = allotmentletter.AllotmentId;
+            model.ReferenceNumber = allotmentletter.ReferenceNumber;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = allotmentletter.ModifiedBy;
+            _allotmentLetterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+
+        }
+        public string GetDownload(int id)
+        {
+            return _allotmentLetterRepository.GetDownload(id);
         }
     }
 }

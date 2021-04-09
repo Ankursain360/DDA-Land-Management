@@ -28,5 +28,17 @@
     "inputFiles": [
       "wwwroot/js/paymentindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/applyforserviceindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/applyforserviceindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/viewpaymenthistoryindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/viewpaymenthistoryindex.js"
+    ]
   }
 ]

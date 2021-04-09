@@ -48,13 +48,6 @@ namespace LeaseForPublic.Controllers
             ViewBag.AllotmentId = result.AllotmentId;
             return View(data);
         }
-
-        //[HttpPost]
-        //public async Task<PartialViewResult> List([FromBody] ExtensionServiceSearchDto model)
-        //{
-        //    var result = await _paymentService.GetPremiumDrDetails(model);
-        //    return PartialView("_List", result);
-        //}
         public async Task<PartialViewResult> List(int AllotmentId)
         {
             var result = await _paymentService.GetPremiumDrDetails(AllotmentId, Convert.ToInt32(_configuration.GetSection("LeasePaymentPremiumId").Value), SiteContext.UserId);
@@ -81,15 +74,25 @@ namespace LeaseForPublic.Controllers
             return PartialView("_AlloteeDetails", result);
         }
 
-
-        //   [AuthorizeContext(ViewAction.Add)]
-        //public async Task<IActionResult> Create()
-        //{
-        //    Extension extension = new Extension();
-        //    extension.IsActive = 1;
-        //    extension.Documentchecklist = await _extensionService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
-        //    return View(extension);
-        //}
+        public async Task<IActionResult> PayNowCreate(int id)
+        {
+            Payment payment = await _paymentService.FetchResultPayment(id);
+            Random r = new Random();
+            int num = r.Next();
+            var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
+           
+            var result = await _paymentService.GetPremiumDrDetails(payment.AllotmentId, payment.LeasePaymentTypeId, SiteContext.UserId);
+            var data = result.FirstOrDefault();
+            payment.Amount = data.Amount;
+            payment.InterestAmount = 0;
+            payment.CGSTAmount = 0;
+            payment.SGSTAmount = 0;
+            payment.TotalAmount = data.Amount;
+            payment.PaymentTypeName = data.LeasePaymentType;
+            payment.PaymentTransactionNo = num + finalString;
+            payment.BillNo = num.ToString();
+            return View(payment);
+        }
 
         //[HttpPost]
         //[ValidateAntiForgeryToken]

@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Allotmententry
+﻿@model Libraries.Model.Entity.Allotmentletter
     <link href="~/css/PrintLabel.css" rel="stylesheet" />
     <div class="content contentstyle py-4" id="DivDemandReport">
         <div class="panel panel-default" style="border-color:black;">
@@ -11,7 +11,7 @@
 
                                 <h5> <b> DELHI DEVELOPMENT AUTHORITY</b></h5> <br />
                                 <h5><b> INSTITUTIONAL LAND BRANCH</b></h5><br />
-                                <h5> <b></b> Room No.216, A-Block, 2" Floor, Vikas Sudan, INA New Delhi<b></h5><br />
+                                <h5> <b> Room No.216, A-Block, 2" Floor, Vikas Sudan, INA New Delhi</b></h5><br />
 
                                 <br />
                                 <h6><b> *****</b></h6> <br />
@@ -24,10 +24,10 @@
                                     <tr>
 
                                         <td align="left">
-                                            Letter No. :<b>  <input type="text" id="txtRefN" /></b>
+                                            Letter No. :<b> @Model.ReferenceNumber    </b>
                                         </td>
                                         <td align="right">
-                                            Dated :  <b> <input type="text" id="txtNewDate" /></b>
+                                            Dated :  <b>@(Convert.ToDateTime(Model.CreatedDate).ToString("dd-MMM-yyyy"))</b>
                                         </td>
                                 </table>
                             </td>
@@ -44,7 +44,7 @@
                         <tr>
                             <td align="center">
                                 <b>
-                                    Subject:- Allotment of land measuring <b> @Model.TotalArea </b> Sqm. to Dte. of Education (Land & Estate Branch), GNCTD for construction of <b> @Model.Application.Name,@(Model.Application.Address)</b> .
+                                    Subject:- Allotment of land measuring <b> @Model.Allotment.TotalArea </b> Sqm. to Dte. of Education (Land & Estate Branch), GNCTD for construction of <b> @Model.Allotment.Application.Name,@(Model.Allotment.Application.Address)</b> .
                                 </b>
                             </td>
 
@@ -73,12 +73,12 @@
                         <tbody class="tbody">
                             <tr>
                                 <td>
-                                    With reference to letter No.<b> @Model.Application.RefNo </b>I dated<b> @Model.Application.RefNoOfAllotmentLetterDate</b> on the subject noted above. I am directed to
+                                    With reference to letter No.<b> @Model.Allotment.Application.RefNo </b>I dated<b> @Model.Allotment.Application.RefNoOfAllotmentLetterDate</b> on the subject noted above. I am directed to
                                     inform you that under the provision of DDA (Disposal of Developed Nazul land) Rules. 1981. it is proposed to allot a plot
-                                    of land measuring <b>@Model.TotalArea</b> Sqm.<b> @if (Model.LeasePurposesTypeId == 1)
+                                    of land measuring <b>@Model.Allotment.TotalArea</b> Sqm.<b> @if (Model.Allotment.LeasePurposesTypeId == 1)
 {<span>(on perpetual lease hold basis)</span>}
 else
-{ <span>(on temp lease hold basis)</span>} </b>for the purpose of <b>@Model.Application.Name,@Model.Application.Address</b> as per enclosed Lay Out Plan
+{ <span>(on temp lease hold basis)</span>} </b>for the purpose of <b>@Model.Allotment.Application.Name,@Model.Allotment.Application.Address</b> as per enclosed Lay Out Plan
                                     on the usual tenets and conditions as given in the approved format of perpetual lease deed and the following conditions: -<br />
                                 </td>
                             </tr>
@@ -86,11 +86,11 @@ else
                             <tr>
                                 <td>
                                     1. That the allottee Dte. of Education (Land & Estate Branch), GNCTD will be required	to
-                                    pay provisional premium of land measuring <b>@Model.TotalArea </b> Sqm.  Re. <b>
-    @if (Model.PremiumRate == null)
+                                    pay provisional premium of land measuring <b>@Model.Allotment.TotalArea </b> Sqm.  Re. <b>
+    @if (Model.Allotment.PremiumRate == null)
     {<span>0.00</span>}
     else
-    {<span>@Model.PremiumRate</span>}
+    {<span>@Model.Allotment.PremiumRate</span>}
 </b>/- per acre (Aggregate of the provisional
                                     land final premium). The revision of rates of land is under consideration of the Central Govt. The allottee
                                     shall have to pay balance premium for the land as per rates determined by the Central Government under Rule-5
@@ -170,10 +170,10 @@ else
                                     undertaking may be sent to the undersigned along with the demand draft for Rs. 46/- (Rupees Forty Six Only) including documentation charges Rs.
                                     <b>
                                         @*@if(Model.PremiumRate == null) { Model.PremiumRate=0; }*@
-                                        @if (Model.DocumentCharge == null)
+                                        @if (Model.Allotment.DocumentCharge == null)
                                         {<span>0.00</span> }
                                         else
-                                        {<span>@Model.DocumentCharge</span>}
+                                        {<span>@Model.Allotment.DocumentCharge</span>}
                                     </b>
                                     /- in favour of DDA within 60 days from the date of issue of demand-cum-allotment letter. The said amount can also be deposited in the bank counter situated in I.N.A. office complex and a copy of the challan may also be submitted to this office.
                                 </td>
@@ -189,12 +189,12 @@ else
                             <tr>
                                 <td>
                                     1.	Premium of land measuring
-                                    • 	Re.<b>	 @if (Model.PremiumAmount == null)
-                                    {<span>0.00</span>} else {<span>@Model.PremiumAmount</span> } </b>  ,<b>@Model.TotalArea</b> Sqm. at  Re. <b>
-    @if (Model.PremiumRate == null)
+                                    • 	Re.<b>	 @if (Model.Allotment.PremiumAmount == null)
+                                    {<span>0.00</span>} else {<span>@Model.Allotment.PremiumAmount</span> } </b>  ,<b>@Model.Allotment.TotalArea</b> Sqm. at  Re. <b>
+    @if (Model.Allotment.PremiumRate == null)
     {<span>0.00</span>}
     else
-    {<span>@Model.PremiumRate</span>}
+    {<span>@Model.Allotment.PremiumRate</span>}
 </b>/- per acre
                                 </td>
                             </tr>
@@ -203,17 +203,17 @@ else
                                 <td>
                                     2.	Documentation Charge
 
-                                    •	Rs.	<b> @if (Model.DocumentCharge == null)
+                                    •	Rs.	<b> @if (Model.Allotment.DocumentCharge == null)
                                     {<span>0.00</span>} </b>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     Total		Rs.	<b>
-    @if (Model.TotalAmount == null)
+    @if (Model.Allotment.TotalAmount == null)
     {<span>0.00</span>}
     else
-    {<span>@Model.TotalAmount</span>}
+    {<span>@Model.Allotment.TotalAmount</span>}
 </b>
 
 
@@ -260,10 +260,13 @@ else
                 </div>
 
                 <div style="padding:20px;text-align:center">
+                    <br /><br />
+                    <br /><br />
+                    <button onclick="window.print()">Print this letter</button>
+                    @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
 
-                    <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
-                    <button class="btn btn-success jhide" type="submit" id="btnSave">Save</button>
-                   
+
+
 
                 </div>
 

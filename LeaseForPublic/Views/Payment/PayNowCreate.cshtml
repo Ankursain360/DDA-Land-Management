@@ -1,0 +1,121 @@
+﻿@model Libraries.Model.Entity.Payment
+@await Component.InvokeAsync("PageHeader", new { pageName = "Pay Details" })
+@{int rowNo = 0; }
+
+<div class="pt-3">
+    <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <input type="hidden" asp-for="AllotmentId" />
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="LeasePaymentTypeId" />
+
+        <h3 class="my-3 d-flex sub-heading">Pay Details</h3>
+        <div id="PayDetailsDiv" align="center">
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="BillNo" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Bill No.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="PaymentTransactionNo" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Transaction No.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="Amount" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Due Amount</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="InterestAmount" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Interest Amount</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="CGSTAmount" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">CGST Amount(9%)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="SGSTAmount" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">SGST Amount(9%)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="TotalAmount" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Total Amount</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3" align="center">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input readonly type="text" asp-for="PaymentTypeName" class="floating-label-field floating-label-field--s3 " />
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Payment Description</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="my-3 d-flex sub-heading">Communication Details</h3>
+        <div class="row mt-md-3" align="center">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input  type="text" asp-for="EmailId" class="floating-label-field floating-label-field--s3 " />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Email Id<span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3" align="center">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input  type="text" asp-for="MobileNo" class="floating-label-field floating-label-field--s3 " />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Mobile No.<span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <button class="btn btn-theme " type="submit">Proceed</button>
+                @Html.ActionLink("Cancel", "Index", "Payment", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/paymentpaynowcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/paymentpaynowcreate.min.js" asp-append-version="true"></script>
+</environment>

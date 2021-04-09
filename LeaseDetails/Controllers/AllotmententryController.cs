@@ -229,7 +229,8 @@ namespace LeaseDetails.Controllers
                 {
                     var result = await _allotmentEntryService.Update(id, allotmententry);
                     if (result == true)
-                    {                        
+                    {                      
+
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _allotmentEntryService.GetAllAllotmententry();
                         return View("Index", list);

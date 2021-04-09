@@ -27,8 +27,7 @@
                         @item.Amount
                     </td>
                     <td>
-                        <button class="btn btn-theme " type="button" onclick="EditDocument(@(item.Id));" style="font-size:.8rem;">Pay Now</button>
-                        @*<button class="btn btn-theme " type="button" onclick="EditDocument(@(item.Id));" style="font-size:.8rem;">View History</button>*@
+                        <a asp-action="PayNowCreate" asp-route-id="@item.Id" title="Pay Now" class="btn btn-theme " style="font-size:.8rem;">Pay Now</a>
                     </td>
                 </tr>
             }
