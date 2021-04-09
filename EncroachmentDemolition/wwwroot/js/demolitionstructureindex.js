@@ -42,7 +42,7 @@ function GetDemolition(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
 
     HttpPost(`/Demolitionstructuredetails/List`, 'html', param, function (response) {
-        
+
         $('#divDemolitionTable').html("");
         $('#divDemolitionTable').html(response);
     });

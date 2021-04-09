@@ -16,10 +16,7 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        //public async Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model)
-        //{
-        //    return await _dbContext.Module.GetPaged<Module>(model.PageNumber, model.PageSize);
-        //}
+       
 
         public async Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model)
         {

@@ -7,11 +7,14 @@ $(document).ready(function () {
 });
 function GetModule(pageNumber, pageSize,order) {
     var param = GetSearchParam(pageNumber, pageSize,order);
-    HttpPost(`/module/List`, 'html', param, function (response) {
+    HttpPost(`/Module/List`, 'html', param, function (response) {
         $('#divModuleTable').html("");
         $('#divModuleTable').html(response);
     });
 }
+$('#ddlSort').change(function () {
+    GetModule(currentPageNumber, currentPageSize, sortOrder);
+});
 
 $("#btnReset").click(function () {
     $('#txtName').val('');

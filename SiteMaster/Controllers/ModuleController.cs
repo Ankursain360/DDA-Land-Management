@@ -26,11 +26,9 @@ namespace SiteMaster.Controllers
             _moduleService = moduleService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _moduleService.GetAllModule();
-            return View(result);
-
+            return View();
         }
 
         [HttpPost]

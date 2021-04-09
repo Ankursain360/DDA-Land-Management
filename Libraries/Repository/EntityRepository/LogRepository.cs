@@ -31,10 +31,9 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Log>> GetPagedLog(LogSearchDto model)
         {
             var data = await _dbContext.Log
-                 .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
-                 && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger))
-                  )
-                .GetPaged<Log>(model.PageNumber, model.PageSize);
+                                       .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
+                                         && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger)))
+                                         .GetPaged<Log>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -43,21 +42,19 @@ namespace Libraries.Repository.EntityRepository
                     case ("APPLICATION"):
                         data = null;
                         data = await _dbContext.Log
-                            .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
-                  && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger))
-                   )
-                           .OrderBy(s => s.Application)
-                           .GetPaged<Log>(model.PageNumber, model.PageSize);
+                                                .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
+                                                 && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger)))
+                                                .OrderBy(s => s.Application)
+                                                .GetPaged<Log>(model.PageNumber, model.PageSize);
 
                         break;
                     case ("LOGGER"):
                         data = null;
                         data = await _dbContext.Log
-                            .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
-                  && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger))
-                   )
-                           .OrderBy(s => s.Logger)
-                           .GetPaged<Log>(model.PageNumber, model.PageSize);
+                                                .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
+                                                && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger)))
+                                                .OrderBy(s => s.Logger)
+                                                .GetPaged<Log>(model.PageNumber, model.PageSize);
                         break;
                    
                 }
@@ -69,21 +66,19 @@ namespace Libraries.Repository.EntityRepository
                     case ("APPLICATION"):
                         data = null;
                         data = await _dbContext.Log
-                            .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
-                  && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger))
-                   )
-                           .OrderByDescending(s => s.Application)
-                           .GetPaged<Log>(model.PageNumber, model.PageSize);
+                                               .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
+                                                && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger)))
+                                               .OrderByDescending(s => s.Application)
+                                               .GetPaged<Log>(model.PageNumber, model.PageSize);
 
                         break;
                     case ("LOGGER"):
                         data = null;
                         data = await _dbContext.Log
-                            .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
-                  && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger))
-                   )
-                           .OrderByDescending(s => s.Logger)
-                           .GetPaged<Log>(model.PageNumber, model.PageSize);
+                                               .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.Contains(model.application))
+                                               && (string.IsNullOrEmpty(model.logger) || x.Logger.Contains(model.logger)))
+                                              .OrderByDescending(s => s.Logger)
+                                              .GetPaged<Log>(model.PageNumber, model.PageSize);
                         break;
 
                 }

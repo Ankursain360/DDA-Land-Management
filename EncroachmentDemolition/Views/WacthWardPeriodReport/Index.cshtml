@@ -18,18 +18,21 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                   
+        <tr>
 
-                    <td>@item.Date</td>
-                    <td>@item.Locality.Name</td>
+            <td>@(item.Date == null ? "" : Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
 
-                    <td>@item.Landmark</td>
-                    <td>@item.StatusOnGround</td>
-                    <td>@item.Remarks</td>
+            @*<td>@item.Date</td>*@
+            <td>@(item.Locality == null ? "" : item.Locality.Name == null ? "" : item.Locality.Name)</td>
 
-                   
-                </tr>
+            @*<td>@item.Locality.Name</td>*@
+
+            <td>@item.Landmark</td>
+            <td>@item.StatusOnGround</td>
+            <td>@item.Remarks</td>
+
+
+        </tr>
             }
         }
         else

@@ -4,11 +4,11 @@ var sortOrder = 1;//default Ascending
 
 
 $(document).ready(function () {
-    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+    GetLog(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
-function GetAcquiredLandVillage(pageNumber, pageSize, order) {
+function GetLog(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Log/List`, 'html', param, function (response) {
         $('#divAcquiredLandVillage').html("");
@@ -20,7 +20,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         application: $('#txtName').val(),
        
-        logger: $('#txtDistrict').val(),
+        logger: $('#txtLogger').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -30,16 +30,16 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 $("#btnSearch").click(function () {
-    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+    GetLog(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
 
     $('#txtName').val('');
    
-        $('#txtDistrict').val(''),
+    $('#txtLogger').val('');
 
-        GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+     GetLog(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -47,7 +47,7 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+    GetLog(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -55,18 +55,19 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+    GetLog(currentPageNumber, currentPageSize, sortOrder);
 });
+
 $('#ddlSort').change(function () {
-    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+    GetLog(currentPageNumber, currentPageSize, sortOrder);
 });
 
 function onPaging(pageNo) {
-    GetAcquiredLandVillage(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetLog(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetAcquiredLandVillage(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetLog(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
 
 }
