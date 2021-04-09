@@ -72,7 +72,7 @@ namespace LeaseDetails.Controllers
 
             return resultList;
         }
-
+        [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Extension extension)
         {
@@ -96,7 +96,7 @@ namespace LeaseDetails.Controllers
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
                             approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowProcessIdExtensionService").Value);
                             approvalproccess.ServiceId = extension.Id;
                             approvalproccess.SendFrom = SiteContext.UserId;
                             approvalproccess.PendingStatus = 1;
@@ -152,7 +152,7 @@ namespace LeaseDetails.Controllers
         #region Fetch workflow data for approval prrocess Added by Renu 16 march 2021
         private async Task<List<TemplateStructure>> DataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value));
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowProcessIdExtensionService").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
@@ -193,6 +193,35 @@ namespace LeaseDetails.Controllers
             }
             return (List<string>)dropdown;
         }
+
+        #region History Details Only For Approval Page
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowProcessIdExtensionService").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
+        }
+        #endregion
+
+        #region Extension Details
+        public async Task<PartialViewResult> ExtensionView(int id)
+        {
+            var Data = await _extensionService.FetchSingleResult(id);
+          //  Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
+            return PartialView("_LeaseApplicationFormView", Data);
+        }
+
+        //public async Task<IActionResult> ViewDocumentLeaseApplicationForm(int Id)
+        //{
+        //    FileHelper file = new FileHelper();
+        //    Leaseapplicationdocuments Data = await _leaseApplicationFormService.FetchLeaseApplicationDocumentDetails(Id);
+        //    string filename = LeaseFilePath + Data.DocumentFileName;
+        //    byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+        //    return File(FileBytes, file.GetContentType(filename));
+        //    //string filename = Data.DocumentFileName;
+        //    //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        //}
+        #endregion
         public async Task<IActionResult> ViewDocumentApprovalProccess(int Id)
         {
             FileHelper file = new FileHelper();
