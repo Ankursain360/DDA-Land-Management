@@ -1,5 +1,5 @@
 ﻿function onChange(id) {
-    debugger;
+
     HttpGet(`/Division/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {

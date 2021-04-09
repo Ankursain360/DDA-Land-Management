@@ -14,7 +14,7 @@
                     <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
                             asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option selected="selected" disabled="disabled" value="">Select </option>
+                        <option selected="selected" disabled="disabled">Select </option>
                     </select>
                     <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     <label asp-for="DepartmentId" class="floating-label">Department </label>
@@ -22,9 +22,9 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
 
-                        <option selected="selected" disabled="disabled" value="">Select </option>
+                        <option selected="selected" disabled="disabled">Select </option>
                     </select>
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
@@ -37,7 +37,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId">
 
-                        <option selected="selected" disabled="disabled" value="">Select </option>
+                        <option selected="selected" disabled="disabled">Select </option>
                     </select>
                     <span asp-validation-for="DivisionId" class="text-danger"></span>
                     <label asp-for="DivisionId" class="floating-label">Division </label>

@@ -7,7 +7,8 @@ $(document).ready(function () {
 });
 
 function GetVillage(pageNumber, pageSize, order) {
-    var param = GetSearchParam(pageNumber, pageSize,order);
+    var param = GetSearchParam(pageNumber, pageSize, order);
+  //  alert(JSON.stringify(param));
     HttpPost(`/village/List`, 'html', param, function (response) {
         $('#divVillageTable').html("");
         $('#divVillageTable').html(response);
@@ -58,11 +59,11 @@ $("#btnReset").click(function () {
 
 
 function onPaging(pageNo) {
-    GetVillage(parseInt(pageNo), parseInt(currentPageSize));
+    GetVillage(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetVillage(parseInt(currentPageNumber), parseInt(pageSize));
+    GetVillage(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }
