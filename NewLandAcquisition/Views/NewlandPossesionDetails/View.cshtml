@@ -195,58 +195,58 @@
                 </div>
 
             </div>
-
-            <div class="form-group col-md-6">
-                <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.us17List, "Id","Number"))" disabled>
-                    <option value="">Select</option>
-                </select>
-                <span asp-validation-for="Us17id" class="text-danger"></span>
-                <label asp-for="Us17id" class="floating-label">Under section 17 </label>
-            </div>
-
-
-
-        </div>
-
-       <div class="form-row">
-
-
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks" disabled></textarea>
-                    <label class="floating-label">Remarks</label>
-                </div>
-            </div>
-
-
-
-
-            <div class=" col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+            <div class="row mt-md-3">
+                <div class="form-group col-md-6">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.us17List, "Id","Number"))" disabled>
+                        <option value="">Select</option>
                     </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <span asp-validation-for="Us17id" class="text-danger"></span>
+                    <label asp-for="Us17id" class="floating-label">Under section 17 </label>
+                </div>
+            </div>
+
+
+            </div>
+
+            <div class="form-row">
+
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks" disabled></textarea>
+                        <label class="floating-label">Remarks</label>
+                    </div>
+                </div>
+
+
+
+
+                <div class=" col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <label asp-for="IsActive" class="floating-label">Status </label>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row mt-md-3">
+                <div class=" col-md-12">
+
+                    @Html.ActionLink("Back", "Index", "NewlandPossesionDetails", null, new { @class = "btn btn-theme " })
                 </div>
             </div>
 
 
 
-        </div>
-
-        <div class="row mt-md-3">
-            <div class=" col-md-12">
-
-                @Html.ActionLink("Back", "Index", "NewlandPossesionDetails", null, new { @class = "btn btn-theme " })
-            </div>
-        </div>
-
-
-
-    </form>
+</form>
 </div>
 
 

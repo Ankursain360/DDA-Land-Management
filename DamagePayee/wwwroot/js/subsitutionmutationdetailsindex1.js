@@ -1,38 +1,73 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
+
 
 $(document).ready(function () {
-    var StatusId = 0;
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetWatchandward(pageNumber, pageSize, StatusId) {
-    var param = GetSearchParam(pageNumber, pageSize, StatusId);
+
+function GetAcquiredLandVillage(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/SubstitutionMutationDetails/List`, 'html', param, function (response) {
         $('#divMutationTable').html("");
         $('#divMutationTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize, StatusId) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "test",
-        StatusId: StatusId,
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        
+        locality: $('#txtLocality').val(),
+        district: $('#txtDistrict').val(),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
+$("#btnSearch").click(function () {
+    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnReset").click(function () {
+
+    
+    $('#txtLocality').val(''),
+        $('#txtDistrict').val(''),
+
+    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+});
+$('#ddlSort').change(function () {
+    GetAcquiredLandVillage(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetWatchandward(pageNo, currentPageSize);
+    GetAcquiredLandVillage(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetWatchandward(currentPageNumber, pageSize);
+    GetAcquiredLandVillage(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
 

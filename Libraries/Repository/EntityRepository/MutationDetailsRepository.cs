@@ -24,15 +24,7 @@ namespace Libraries.Repository.EntityRepository
             throw new NotImplementedException();
         }
               
-        //public async Task AddMutationDetails(Mutationdetailstemp mutationdetailstemp)
-        //{
-        //    Mutationdetailstemp obj = new Mutationdetailstemp();
-        //    obj.CreatedBy = 1;
-        //    obj.CreatedDate = DateTime.Now;
-        //    await  _dbContext.Mutationdetailstemp.AddAsync(obj);
-        //  await  _dbContext.SaveChangesAsync(); 
-            
-        //}
+        
         public async Task<List<Mutationdetails>> GetAllMutationDetails()
         {
             var data = await _dbContext.Mutationdetails
@@ -55,54 +47,7 @@ namespace Libraries.Repository.EntityRepository
             return districtList;
         }
 
-        //public async Task<Mutationdetails> GetPhotoPropFile(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-        //public async Task<Mutationdetails> SaveMutationAtsFilePath(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-        //public async Task<Mutationdetails> SaveMutationGPAFilePath(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-        //public async Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-        //public async Task<Mutationdetails> SaveMutationSignSPCFilePath(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-        //public async Task<Mutationdetails> SaveMutationAddressProofFilePath(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-        //public async Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-        //public async Task<Mutationdetails> SaveMutationIndemnityFilePath(int id)
-        //{
-        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
-
-        //}
-
-        //public async Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage)
-        //{
-        //    _dbContext.Mutationolddamageassesse.Add(oldDamage);
-        //    var Result = await _dbContext.SaveChangesAsync();
-        //    return Result > 0 ? true : false;
-        //}
-
+        
         public async Task<List<Damagepayeeregister>> FetchSingleResult(int id)
         {
             var data = await _dbContext.Damagepayeeregister
@@ -127,15 +72,131 @@ namespace Libraries.Repository.EntityRepository
                                     .FirstOrDefaultAsync();
         }
 
+        //public async Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model)
+        //{
+        //    return await _dbContext.Damagepayeeregister
+        //                           .Include(x => x.Locality)
+        //                           .Include(x => x.District)
+        //                           .Where(x => x.IsActive == 1  && x.ApprovedStatus == 1
+        //                           //&& (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+        //                           )
+        //                           .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+        //}
         public async Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model)
         {
-            return await _dbContext.Damagepayeeregister
+            var data = await _dbContext.Damagepayeeregister
                                    .Include(x => x.Locality)
                                    .Include(x => x.District)
-                                   .Where(x => x.IsActive == 1  && x.ApprovedStatus == 1
-                                   //&& (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-                                   )
+
+                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                   
+                                    && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+
+
                                    .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                   
+                   
+
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                    .Include(x => x.Locality)
+                                   .Include(x => x.District)
+
+                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+
+                                    && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+                                   .OrderBy(a => a.Locality.Name)
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("DISTRICT"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.District)
+
+                                 .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+
+                                    && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+                                   .OrderBy(a => a.District.Name)
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.District)
+
+                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+
+                                    && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+                                   .OrderByDescending(a => a.IsActive)
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+               
+
+
+                    switch (model.SortBy.ToUpper())
+                {
+
+                    
+
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                    .Include(x => x.Locality)
+                                   .Include(x => x.District)
+
+                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+
+                                    && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+                                   .OrderByDescending(a => a.Locality.Name)
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("DISTRICT"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.District)
+
+                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+
+                                    && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+                                   .OrderByDescending(a => a.District.Name)
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.District)
+
+                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+
+                                    && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+                                   .OrderBy(a => a.IsActive)
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
         }
         public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
         {

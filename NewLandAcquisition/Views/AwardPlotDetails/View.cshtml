@@ -29,15 +29,16 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <label class="control-label lb-sm" asp-for="KhasraId">Khasra No</label>
-                    <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.NewlandKhasraList, "Id","Name"))" disabled>
-                        <option disabled="disabled">Select</option>
+                    <select disabled class="floating-label-field floating-label-field--s3"
+                            asp-for="KhasraId" asp-items="@(new SelectList(Model.NewlandKhasraList, "Id","Name"))">
+
+                        <option value="">---Select---</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
-
+                    <label asp-for="KhasraId" class="floating-label">Khasra No </label>
                 </div>
             </div>
 

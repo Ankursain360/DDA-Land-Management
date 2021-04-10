@@ -85,9 +85,9 @@ function Ascending() {
         alert('Please select SortBy Value');
     }
 };
-$('#ddlSort').change(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
-});
+//$('#ddlSort').change(function () {
+//    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+//});
 function GetDetailsOrderby(pageNumber, pageSize, order) {
     var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
     HttpPost(`/ImpositionOfCharges/GetDetails`, 'html', param, function (response) {
