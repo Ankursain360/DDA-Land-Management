@@ -1,25 +1,56 @@
-﻿var currentPageNumber = 1;
-var currentPageSize = 10;
-var sortby = 1;//default Ascending 
+﻿
+
+
+var currentPageNumber = 1;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    var StatusId = 0;
-    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetEncroachmentRegisteration(pageNumber, pageSize, StatusId, order) {
-    var param = GetSearchParam(pageNumber, pageSize, StatusId, order);
+$("#btnSearch").click(function () {
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnReset").click(function () {
+
+   
+
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+});
+$('#ddlSort').change(function () {
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+});
+function GetEncroachmentRegisteration(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/EncroachmentRegister/List`, 'html', param, function (response) {
         $('#divEncroachmentRegisterationTable').html("");
         $('#divEncroachmentRegisterationTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize, StatusId, sortOrder) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
+
         name: "test",
-       
-        StatusId: parseInt(StatusId),
+
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -28,81 +59,12 @@ function GetSearchParam(pageNumber, pageSize, StatusId, sortOrder) {
     return model;
 }
 
-
-$("#btnAscending").click(function () {
-    $("#btnDescending").removeClass("active");
-    $("#btnAscending").addClass("active");
-    sortby = 1;//for Ascending
-   if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
-
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
-    }
-
-});
-
-
-$("#btnDescending").click(function () {
-    $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
-    sortby = 2;//for Descending
-    if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
-
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
-    }
-});
-
-
-
 function onPaging(pageNo) {
-    if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-        GetEncroachmentRegisteration(parseInt(pageNo), parseInt(currentPageSize), StatusId, sortby);
-        currentPageNumber = pageNo;
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-        GetEncroachmentRegisteration(parseInt(pageNo), parseInt(currentPageSize), StatusId, sortby);
-        currentPageNumber = pageNo;
-    }
-
+    GetEncroachmentRegisteration(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-   
-    if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-        GetEncroachmentRegisteration(parseInt(currentPageNumber), parseInt(pageSize), StatusId, sortby);
-        currentPageSize = pageSize;
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-        GetEncroachmentRegisteration(parseInt(currentPageNumber), parseInt(pageSize), StatusId, sortby);
-        currentPageSize = pageSize;
-    }
+    GetEncroachmentRegisteration(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    currentPageSize = pageSize;
 }
-
-
-
-
-$("input[name='radioStatus']").click(function () {
-    if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
-
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
-    }
-
-});

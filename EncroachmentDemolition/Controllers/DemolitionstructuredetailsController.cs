@@ -37,7 +37,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> List([FromBody] DemolitionstructuredetailsDto model)
         {
            
-            var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetailsList(model);
+            var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetails(model);
             return PartialView("_List", result);
         }
 

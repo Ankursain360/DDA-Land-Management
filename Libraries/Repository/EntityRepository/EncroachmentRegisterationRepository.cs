@@ -128,38 +128,70 @@ namespace Libraries.Repository.EntityRepository
                 .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1 
                  && !(InInspectionId).Contains(x.Id))
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
-            //return await _dbContext.EncroachmentRegisteration
-            //                        .Include(x=> x.WatchWard)
-            //                        .Include(x => x.Locality)
-            //                        .Where(x =>  x.WatchWard.ApprovedStatus == 1 || x.IsActive == 1 )
-            //                        .GetPaged(model.PageNumber, model.PageSize);
-            //return await _dbContext.EncroachmentRegisteration
-            //                        .Include(x => x.Locality)
-            //                        .Where(x => x.IsActive == 1)
-            //                        .GetPaged(model.PageNumber, model.PageSize);
-
-            //}
-            //catch(Exception ex)
-            //{
-            //    throw;
-            //}
+           
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
-
                     case ("DATE"):
-                        data.Results = data.Results.OrderBy(x => x.Date).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                               .Include(x => x.PrimaryListNoNavigation)
+                                               .Include(x => x.PrimaryListNoNavigation.Locality)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Khasra)
+                                               .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                                && !(InInspectionId).Contains(x.Id))
+                                               .OrderBy(x => x.Date)
+                                               .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                      
+
+
                         break;
+
+
+                   
                     case ("LOCALITY"):
-                        data.Results = data.Results.OrderBy(x => x.PrimaryListNoNavigation.Locality.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                              .Include(x => x.PrimaryListNoNavigation)
+                                              .Include(x => x.PrimaryListNoNavigation.Locality)
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                               && !(InInspectionId).Contains(x.Id))
+                                              .OrderBy(x => x.PrimaryListNoNavigation.Locality.Name)
+                                              .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+                      
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderBy(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                              .Include(x => x.PrimaryListNoNavigation)
+                                              .Include(x => x.PrimaryListNoNavigation.Locality)
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                               && !(InInspectionId).Contains(x.Id))
+                                              .OrderBy(x => x.PrimaryListNoNavigation.KhasraNo)
+                                              .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+                       
                         break;
                     case ("PRIMARYLISTNO"):
-                        data.Results = data.Results.OrderBy(x => x.PrimaryListNo).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                              .Include(x => x.PrimaryListNoNavigation)
+                                              .Include(x => x.PrimaryListNoNavigation.Locality)
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                               && !(InInspectionId).Contains(x.Id))
+                                              .OrderBy(x => x.PrimaryListNo)
+                                              .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                       
                         break;
                 }
             }
@@ -169,16 +201,60 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("DATE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Date).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                              .Include(x => x.PrimaryListNoNavigation)
+                                              .Include(x => x.PrimaryListNoNavigation.Locality)
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                               && !(InInspectionId).Contains(x.Id))
+                                              .OrderByDescending(x => x.Date)
+                                              .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+                      
                         break;
                     case ("LOCALITY"):
-                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.Locality.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                              .Include(x => x.PrimaryListNoNavigation)
+                                              .Include(x => x.PrimaryListNoNavigation.Locality)
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                               && !(InInspectionId).Contains(x.Id))
+                                              .OrderByDescending(x => x.PrimaryListNoNavigation.Locality.Name)
+                                              .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+
+                     
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                              .Include(x => x.PrimaryListNoNavigation)
+                                              .Include(x => x.PrimaryListNoNavigation.Locality)
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                               && !(InInspectionId).Contains(x.Id))
+                                              .OrderByDescending(x => x.PrimaryListNoNavigation.KhasraNo)
+                                              .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+                       
                         break;
                     case ("PRIMARYLISTNO"):
-                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNo).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                              .Include(x => x.PrimaryListNoNavigation)
+                                              .Include(x => x.PrimaryListNoNavigation.Locality)
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1
+                                               && !(InInspectionId).Contains(x.Id))
+                                              .OrderByDescending(x => x.PrimaryListNo)
+                                              .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                        
                         break;
 
                 }
@@ -282,30 +358,19 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto dto)//added by Nikita
         {
-            //var data = await _dbContext.EncroachmentRegisteration
-            //    .Include(x => x.Locality)
-            //    .Include(x => x.Department)
-            //    .Include(x => x.Zone)
-            //    .Include(x => x.Division)
-            //    .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
-            //    && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
-            //    && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-            //    && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
-            //    && x.EncrochmentDate >= fromdate && x.EncrochmentDate <= todate
-            //    && (x.IsActive == 1))
-            //    .OrderByDescending(x => x.Id).ToListAsync();
-            //return data;
+           
             var data = await _dbContext.EncroachmentRegisteration
-                .Include(x => x.Locality)
-                .Include(x => x.Department)
-                .Include(x => x.Zone)
-                .Include(x => x.Division)
-                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
-                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
-                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
-                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
-                  && x.EncrochmentDate >= dto.fromDate
-               && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1)).OrderByDescending(x => x.Id).GetPaged(dto.PageNumber, dto.PageSize);
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.Department)
+                                       .Include(x => x.Zone)
+                                       .Include(x => x.Division)
+                                       .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                        && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                         && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                         && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                         && x.EncrochmentDate >= dto.fromDate
+                                         && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                        .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
 
             int SortOrder = (int)dto.SortOrder;
             if (SortOrder == 1)
@@ -313,22 +378,118 @@ namespace Libraries.Repository.EntityRepository
                 switch (dto.SortBy.ToUpper())
                 {
                     case ("DEPARTMENT"):
-                        data.Results = data.Results.OrderBy(x => x.Department.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Department)
+                                                .Include(x => x.Zone)
+                                                .Include(x => x.Division)
+                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                 && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                 && x.EncrochmentDate >= dto.fromDate
+                                                 && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                                .OrderBy(x => x.Department.Name)
+                                                 .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+                                               
+
+                      
                         break;
                     case ("ZONE"):
-                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderBy(x => x.Zone.Name)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+                      
                         break;
                     case ("DIVISION"):
-                        data.Results = data.Results.OrderBy(x => x.Division.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderBy(x => x.Division.Name)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+                        
                         break;
                     case ("LOCALITY"):
-                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderBy(x => x.Locality.Name)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+                       
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderBy(x => x.KhasraNo).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderBy(x => x.KhasraNo)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+                        
                         break;
                     case ("DATE"):
-                        data.Results = data.Results.OrderBy(x => x.EncrochmentDate).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderBy(x => x.EncrochmentDate)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+                       
                         break;
 
                 }
@@ -337,23 +498,120 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (dto.SortBy.ToUpper())
                 {
+                    
                     case ("DEPARTMENT"):
-                        data.Results = data.Results.OrderByDescending(x => x.Department.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Department)
+                                                .Include(x => x.Zone)
+                                                .Include(x => x.Division)
+                                                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                 && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                 && x.EncrochmentDate >= dto.fromDate
+                                                 && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                                .OrderByDescending(x => x.Department.Name)
+                                                 .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+
                         break;
                     case ("ZONE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderByDescending(x => x.Zone.Name)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+
                         break;
                     case ("DIVISION"):
-                        data.Results = data.Results.OrderByDescending(x => x.Division.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderByDescending(x => x.Division.Name)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+
                         break;
                     case ("LOCALITY"):
-                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderByDescending(x => x.Locality.Name)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+
                         break;
                     case ("KHASRANO"):
-                        data.Results = data.Results.OrderByDescending(x => x.KhasraNo).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderByDescending(x => x.KhasraNo)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+
                         break;
                     case ("DATE"):
-                        data.Results = data.Results.OrderByDescending(x => x.EncrochmentDate).ToList();
+                        data = null;
+                        data = await _dbContext.EncroachmentRegisteration
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                                               && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                                               && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                                                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                                                && x.EncrochmentDate >= dto.fromDate
+                                                && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1))
+                                               .OrderByDescending(x => x.EncrochmentDate)
+                                                .GetPaged<EncroachmentRegisteration>(dto.PageNumber, dto.PageSize);
+
+
+
                         break;
 
                 }

@@ -316,5 +316,11 @@
     "inputFiles": [
       "wwwroot/js/onlinecomplaintcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitionstructureindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitionstructureindex.js"
+    ]
   }
 ]

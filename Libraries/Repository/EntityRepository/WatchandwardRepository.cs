@@ -194,12 +194,12 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
         {
             var data = await _dbContext.Watchandward
-                .Include(x => x.Locality)
-
-                .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
-               && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
-               && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
-                .OrderByDescending(x => x.Id).GetPaged(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+                                        .Include(x => x.Locality)
+                                        .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                         && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                         && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                                         .GetPaged<Watchandward>(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+                                        
 
             int SortOrder = (int)watchAndWardPeriodReportSearchDto.SortOrder;
             if (SortOrder == 1)
@@ -208,14 +208,43 @@ namespace Libraries.Repository.EntityRepository
                 {
                     
                     case ("LOCALITY"):
-                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                        .Include(x => x.Locality)
+                                        .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                         && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                         && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                                        .OrderBy(x => x.Locality.Name)
+                                         .GetPaged<Watchandward>(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+
+                        
                         break;
                     
                     case ("DATE"):
-                        data.Results = data.Results.OrderBy(x => x.Date).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                        .Include(x => x.Locality)
+                                        .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                         && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                         && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                                        .OrderBy(x => x.Date)
+                                         .GetPaged<Watchandward>(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+
+
+                     
                         break;
                     case ("LANDMARK"):
-                        data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                        .Include(x => x.Locality)
+                                        .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                         && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                         && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                                        .OrderBy(x => x.Landmark)
+                                         .GetPaged<Watchandward>(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+
+
+                       
                         break;
 
                 }
@@ -225,15 +254,45 @@ namespace Libraries.Repository.EntityRepository
                 switch (watchAndWardPeriodReportSearchDto.SortBy.ToUpper())
                 {
                    
-                    case ("LOCALITY"):
-                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
-                        break;
                    
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                        .Include(x => x.Locality)
+                                        .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                         && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                         && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                                        .OrderByDescending(x => x.Locality.Name)
+                                         .GetPaged<Watchandward>(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+
+
+                        break;
+
                     case ("DATE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Date).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                        .Include(x => x.Locality)
+                                        .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                         && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                         && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                                        .OrderByDescending(x => x.Date)
+                                         .GetPaged<Watchandward>(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+
+
+
                         break;
                     case ("LANDMARK"):
-                        data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                        .Include(x => x.Locality)
+                                        .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+                                         && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+                                         && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                                        .OrderByDescending(x => x.Landmark)
+                                         .GetPaged<Watchandward>(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+
+
+
                         break;
 
                 }

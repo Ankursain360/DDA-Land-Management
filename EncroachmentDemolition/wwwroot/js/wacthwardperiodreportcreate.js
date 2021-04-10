@@ -3,20 +3,16 @@ var currentPageSize = 10;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
-        debugger;
+       
         var result = ValidateForm();
         var localityid = $('#LocalityId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
-        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
-        if (result) {
+          if (result) {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
-        //}
-        //else {
-        //    alert('Please Fill All Fields');
-        //}
+      
     });
 
     $(".linkdisabled").click(function () {
@@ -26,7 +22,7 @@ $(document).ready(function () {
 
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    debugger
+    
     HttpPost(`/WacthWardPeriodReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
@@ -34,7 +30,7 @@ function GetDetails(pageNumber, pageSize, order) {
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+   
     var localityid = $('#LocalityId option:selected').val();
     var FromDate = $('#txtFromDate').val();
     var ToDate = $('#txtToDate').val();
@@ -75,6 +71,9 @@ $("#btnReset").click(function () {
 
 });
 
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
 function onPaging(pageNo) {
     GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
