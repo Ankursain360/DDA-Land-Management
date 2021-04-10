@@ -37,7 +37,7 @@ var Polys = [];
 var VILLAGEID_UNIVERSAL = [];
 var RECTWITHKHASRANO_LAYER = [];
 var WELL_LAYER = [];
-
+var alljsondata = [];
 $(document).ready(function () {
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
         var html = '';
@@ -198,9 +198,11 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
 function showvillagelayers(villageid) {
 
     HttpGet("/GIS/GetGisDataLayersDetails?VillageId=" + parseInt(villageid), 'json', function (response) {
-
-        localStorage.setItem('alldata', JSON.stringify(response)); //data added to local storage
-
+        //sessionStorage.clear();
+       // localStorage.setItem('alldata', JSON.stringify(response)); //data added to local storage
+       // sessionStorage.setItem('alldata', JSON.stringify(response)); //data added to session storage
+        alljsondata = [];
+        alljsondata = JSON.stringify(response);
         var Abadi = response.filter((x) => x.gisLayerId === 1);    //abadi
         if (Abadi.length > 0 && Abadi[0].checkedStatus == 1)
             showDisBoundariesAbadi(Abadi);
@@ -769,7 +771,8 @@ $(function () {
 
 $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functionality added by renu */
     e.preventDefault();
-    var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
+   // var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
+    var data = alljsondata;  //get data from local storage
     $(this).closest('table').find('td input[type="checkbox"]').prop('checked', $(this).prop('checked'));
     if (this.checked) {
         $('#chkAllImpInfra').attr("checked", "checked");
@@ -1152,7 +1155,8 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
     debugger;
     e.preventDefault();
     var id = $(this).attr("id");
-    var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
+    //var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
+    var data = JSON.parse(alljsondata);
     if ($(this).is(":checked")) {
 
         var Abadi = data.filter((x) => x.gisLayerId === 1);    //abadi

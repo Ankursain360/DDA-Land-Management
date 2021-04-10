@@ -20,8 +20,8 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);    // To Delete Data  added by renu
 
-        Task<bool> CheckUniqueName(int id, string zone);// To check Unique Value  for zone
-        Task<bool> CheckUniqueCode(int id, string code);// To check Unique Value  for zone
+        Task<bool> CheckUniqueName(int id,int departmentId, string zone);// To check Unique Value  for zone
+        Task<bool> CheckUniqueCode(int id, int departmentId, string code);// To check Unique Value  for zone
         Task<List<Department>> GetDropDownList();
         Task<List<Zone>> GetAllDetails();
         Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model);

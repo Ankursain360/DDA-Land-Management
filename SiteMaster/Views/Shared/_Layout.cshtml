@@ -22,7 +22,7 @@
 </head>
 <body class="bg-gray">
     @*<div style="display:none;">*@
-        <div class="body-loading loader-active" style="display:none"></div>
+    <div class="body-loading loader-active" style="display:none"></div>
     @*</div>*@
     <div class="top-header">
         <header>
@@ -40,39 +40,39 @@
                         </a>
                     </div>
                     @*<div class="dropdown noti text-white my-2  mr-3 order-md-3">
-                        <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
-                            <i class="ri-notification-2-line"></i>
-                            <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
-                            <ul class="list-unstyled m-0 p-0">
-                                <li class="px-3">
-                                    <a href="#" class="d-flex align-items-center py-2 border-bottom">
-                                        <div class="noti-time text-center pr-2">
-                                            <i class="ri-discuss-line"></i>
-                                            <small class="d-block w-100">12:00</small>
-                                        </div>
-                                        <p class="m-0 text-truncate text-left">
-                                            Some notification message new message
-                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="px-3">
-                                    <a href="#" class="d-flex align-items-center py-2 border-bottom read">
-                                        <div class="noti-time text-center pr-2">
-                                            <i class="ri-discuss-line"></i>
-                                            <small class="d-block w-100">2 Days</small>
-                                        </div>
-                                        <p class="m-0 text-truncate text-left">
-                                            Some notification message new message
-                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>*@
+                            <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
+                                <i class="ri-notification-2-line"></i>
+                                <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
+                                <ul class="list-unstyled m-0 p-0">
+                                    <li class="px-3">
+                                        <a href="#" class="d-flex align-items-center py-2 border-bottom">
+                                            <div class="noti-time text-center pr-2">
+                                                <i class="ri-discuss-line"></i>
+                                                <small class="d-block w-100">12:00</small>
+                                            </div>
+                                            <p class="m-0 text-truncate text-left">
+                                                Some notification message new message
+                                                <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                            </p>
+                                        </a>
+                                    </li>
+                                    <li class="px-3">
+                                        <a href="#" class="d-flex align-items-center py-2 border-bottom read">
+                                            <div class="noti-time text-center pr-2">
+                                                <i class="ri-discuss-line"></i>
+                                                <small class="d-block w-100">2 Days</small>
+                                            </div>
+                                            <p class="m-0 text-truncate text-left">
+                                                Some notification message new message
+                                                <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>*@
                     @await Component.InvokeAsync("SignInProfile")
                 </div>
             </div>
@@ -83,7 +83,7 @@
             @await Component.InvokeAsync("SideNav")
         </ul>
     </aside>
-   
+
     <partial name="_CookieConsentPartial" />
     <section id="rightSection" class="slow bg-gray">
         <div class="container-fluid">
@@ -109,7 +109,15 @@
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script src="~/lib/toaster/toastr.min.js"></script>
+    <script>
+        $(window).on('load', function () {
+            $(".body-loading").css("display", "none");
+        });
+        $(window).on('beforeunload', function () {
+            $(".body-loading").css("display", "block");
+        });
 
+    </script>
     <environment include="Development">
         <script src="~/js/site.js"></script>
     </environment>

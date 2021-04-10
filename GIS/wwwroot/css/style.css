@@ -61,6 +61,60 @@ a.no-dec {
 }
 
 
+.body-loading {
+    position: fixed;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .9);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: none;
+}
+
+    .body-loading.loader-active {
+        display: block;
+    }
+
+
+    .body-loading::after {
+        content: "";
+        position: fixed;
+        width: 48px;
+        height: 48px;
+        border: 8px solid #fff;
+        border-left-color: transparent;
+        border-radius: 50%;
+        top: calc(50% + 18px);
+        left: calc(50% - 24px);
+        animation: rotation 1.2s linear infinite;
+    }
+
+
+    .body-loading::before {
+        content: 'Loading...';
+        position: fixed;
+        top: calc(50% - 18px);
+        text-align: center;
+        width: 100%;
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(359deg)
+    }
+}
 
 /*map css*/
 /*

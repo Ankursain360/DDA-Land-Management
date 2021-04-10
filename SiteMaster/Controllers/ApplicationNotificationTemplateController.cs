@@ -1,34 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
-
+using System.Collections.Generic;
 namespace SiteMaster.Controllers
 {
-    public class ZoneController : BaseController
+    public class ApplicationNotificationTemplateController : BaseController
     {
+        private readonly IApplicationNotificationTemplateService _applicationNotificationService;
 
-        private readonly IZoneService _zoneService;
-
-        public ZoneController(IZoneService zoneService)
+        public ApplicationNotificationTemplateController(IApplicationNotificationTemplateService applicationNotificationService)
         {
-            _zoneService = zoneService;
+            _applicationNotificationService = applicationNotificationService;
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -37,67 +29,64 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] ZoneSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] ApplicationNotificationTemplateSearchDto model)
         {
-            var result = await _zoneService.GetPagedZone(model);
+            var result = await _applicationNotificationService.GetPagedTemplate(model);
             return PartialView("_List", result);
         }
-        async Task BindDropDown(Zone zone)
-        {
-            zone.DepartmentList = await _zoneService.GetDropDownList();
-        }
+
 
 
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            Zone zone = new Zone();
-            zone.IsActive = 1;
-            await BindDropDown(zone);
-            return View(zone);
+            return View();
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Zone zone)
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(ApplicationNotificationTemplate templates)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    await BindDropDown(zone);
-                    var result = await _zoneService.Create(zone);
+                    templates.CreatedDate = DateTime.Now;
+                    templates.CreatedBy = SiteContext.UserId;
+                    var result = await _applicationNotificationService.Create(templates);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var result1 = await _zoneService.GetAllDetails();
-                        return View("Index", result1);
+
+                        var list = await _applicationNotificationService.GetAllTemplate();
+                        return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(zone);
+                        return View(templates);
 
                     }
                 }
                 else
                 {
-                    return View(zone);
+                    return View(templates);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(zone);
+                return View(templates);
             }
         }
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _zoneService.FetchSingleResult(id);
-            await BindDropDown(Data);
+            var Data = await _applicationNotificationService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -106,106 +95,109 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Edit)]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Zone zone)
+        [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, ApplicationNotificationTemplate updatetemplate)
         {
-            await BindDropDown(zone);
             if (ModelState.IsValid)
             {
                 try
                 {
-
-                    var result = await _zoneService.Update(id, zone);
+                    updatetemplate.ModifiedBy = SiteContext.UserId;
+                    updatetemplate.ModifiedDate = DateTime.Now;
+                    var result = await _applicationNotificationService.Update(id, updatetemplate);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _zoneService.GetAllDetails();
+                        var result1 = await _applicationNotificationService.GetAllTemplate();
                         return View("Index", result1);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(zone);
+                        return View(updatetemplate);
 
                     }
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(zone);
+
                 }
             }
-            return View(zone);
+            return View(updatetemplate);
         }
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, int DepartmentId, string Name)
+        public async Task<IActionResult> Exist(int Id, string Name)
         {
-            var result = await _zoneService.CheckUniqueName(Id, DepartmentId, Name);
+            var result = await _applicationNotificationService.CheckUniqueName(Id, Name);
             if (result == false)
             {
                 return Json(true);
             }
             else
             {
-                return Json($"Zone Name : {Name} already exist in this department.");
-            }
-        }
-
-        [AcceptVerbs("Get", "Post")]
-        [AllowAnonymous]
-        public async Task<IActionResult> IsCodeExist(int Id, int DepartmentId, string Code)
-        {
-            var result = await _zoneService.CheckUniqueCode(Id, DepartmentId, Code);
-            if (result == false)
-            {
-                return Json(true);
-            }
-            else
-            {
-                return Json($"Zone Code: {Code} already exist");
+                return Json($"Template Name : {Name} already exist");
             }
         }
 
 
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            var result = await _zoneService.Delete(id);
+
+            var result = await _applicationNotificationService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _applicationNotificationService.GetAllTemplate();
+                return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _applicationNotificationService.GetAllTemplate();
+                return View("Index", result1);
             }
-            return RedirectToAction("Index", "Zone");
+        }
+
+        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        {
+
+            var result = await _applicationNotificationService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _applicationNotificationService.GetAllTemplate();
+                return View("Index", result1);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _applicationNotificationService.GetAllTemplate();
+                return View("Index", result1);
+            }
 
         }
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _zoneService.FetchSingleResult(id);
-            await BindDropDown(Data);
+            var Data = await _applicationNotificationService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
-
-
         public async Task<IActionResult> Download()
         {
-            List<Zone> result = await _zoneService.GetAll();
+            List<ApplicationNotificationTemplate> result = await _applicationNotificationService.GetAllTemplate();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Zone.xlsx";
+            string sFileName = @"Notificationtemplate.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
-
-
     }
 }

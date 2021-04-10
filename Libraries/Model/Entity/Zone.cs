@@ -32,12 +32,12 @@ namespace Libraries.Model.Entity
         public int DepartmentId { get; set; }
 
         [Required(ErrorMessage = "Zone Name is mandatory")]
-        [Remote(action: "Exist", controller: "Zone", AdditionalFields = "Id")]
+        [Remote(action: "Exist", controller: "Zone", AdditionalFields = "Id,DepartmentId")]
         [StringLength(100)]
         public string Name { get; set; }
 
         [Required(ErrorMessage = " Zone Code is mandatory")]
-        [Remote(action: "IsCodeExist", controller: "Zone", AdditionalFields = "Id")]
+        [Remote(action: "IsCodeExist", controller: "Zone", AdditionalFields = "Id,DepartmentId")]
         [StringLength(100)]
         public string Code { get; set; }
         public byte IsActive { get; set; }

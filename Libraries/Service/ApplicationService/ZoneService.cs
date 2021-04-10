@@ -75,14 +75,14 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<bool> CheckUniqueName(int id, string zone)
+        public async Task<bool> CheckUniqueName(int id, int DepartmentId, string zone)
         {
-            bool result = await _zoneRepository.Any(id, zone);
+            bool result = await _zoneRepository.Any(id, DepartmentId, zone);
             return result;
         }
-        public async Task<bool> CheckUniqueCode(int id, string code)
+        public async Task<bool> CheckUniqueCode(int id, int DepartmentId, string code)
         {
-            bool result = await _zoneRepository.anyCode(id, code);
+            bool result = await _zoneRepository.anyCode(id, DepartmentId, code);
             return result;
         }
 
