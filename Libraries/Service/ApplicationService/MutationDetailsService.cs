@@ -111,48 +111,7 @@ namespace Libraries.Service.ApplicationService
             throw new NotImplementedException();
         }
 
-        //public async Task<Mutationdetails> GetPhotoPropFile(int id)
-        //{
-        //    return await _mutationDetailsRepository.GetPhotoPropFile(id);
-
-        //}
-
-        //public async Task<Mutationdetails> SaveMutationAtsFilePath(int id)
-        //{
-        //    return await _mutationDetailsRepository.SaveMutationAtsFilePath(id);
-        //}
-        //public async Task<Mutationdetails> SaveMutationGPAFilePath(int id)
-        //{
-        //    return await _mutationDetailsRepository.SaveMutationGPAFilePath(id);
-        //}
-        //public async Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id)
-        //{
-        //    return await _mutationDetailsRepository.SaveMutationMoneyReceiptFilePath(id);
-        //}
-        //public async Task<Mutationdetails> SaveMutationSignSPCFilePath(int id)
-        //{
-        //    return await _mutationDetailsRepository.SaveMutationSignSPCFilePath(id);
-        //}
-        //public async Task<Mutationdetails> SaveMutationAddressProofFilePath(int id)
-        //{
-        //    return await _mutationDetailsRepository.SaveMutationAddressProofFilePath(id);
-        //}
-        //public async Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id)
-        //{
-        //    return await _mutationDetailsRepository.SaveMutationAffitDevitFilePath(id);
-        //}
-        //public async Task<Mutationdetails> SaveMutationIndemnityFilePath(int id)
-        //{
-        //    return await _mutationDetailsRepository.SaveMutationIndemnityFilePath(id);
-        //}
-
-        //public async Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage)
-        //{
-        //    oldDamage.CreatedBy = 1;
-        //    oldDamage.CreatedDate = DateTime.Now;
-        //    oldDamage.IsActive = 1;
-        //    return await _mutationDetailsRepository.SaveMutationOldDamage(oldDamage);
-        //}
+        
         public async Task<Damagepayeeregister> FetchDamageResult(int Id)
         {
             return await _mutationDetailsRepository.FetchDamageResult(Id);
@@ -162,7 +121,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _mutationDetailsRepository.GetPagedSubsitutionMutationDetails(model);
         }
-
+        
         public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
         {
             return await _mutationDetailsRepository.GetPersonalInfo(id);
