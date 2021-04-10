@@ -136,7 +136,7 @@ namespace Libraries.Model
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
 
 
-
+        public virtual DbSet<ApplicationNotificationTemplate> ApplicationNotificationTemplate { get; set; }
 
 
 
@@ -299,7 +299,7 @@ namespace Libraries.Model
         public virtual DbSet<Leasepaymenttype> Leasepaymenttype { get; set; }
         public virtual DbSet<Judgement> Judgement { get; set; }
         public virtual DbSet<Leasenoticegeneration> Leasenoticegeneration { get; set; }
-       
+
         public virtual DbSet<Hearingdetails> Hearingdetails { get; set; }
         public virtual DbSet<Hearingdetailsphotofiledetails> Hearingdetailsphotofiledetails { get; set; }
         public virtual DbSet<Allotteeevidenceupload> Allotteeevidenceupload { get; set; }
@@ -313,7 +313,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Actiontakenbydda> Actiontakenbydda { get; set; }
         public virtual DbSet<Extension> Extension { get; set; }
-        public virtual DbSet<Allotmentletter> Allotmentletter{ get; set; }
+        public virtual DbSet<Allotmentletter> Allotmentletter { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -366,7 +366,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new SaknilesseeConfiguration());
             modelBuilder.ApplyConfiguration(new SakniownerConfiguration());
             modelBuilder.ApplyConfiguration(new SaknitenantConfiguration());
-
+            modelBuilder.ApplyConfiguration(new ApplicationNotificationTemplateConfiguration());
             modelBuilder.ApplyConfiguration(new JaraidetailsConfiguration());
             modelBuilder.ApplyConfiguration(new JaraiownerConfiguration());
             modelBuilder.ApplyConfiguration(new EncrocherPeopleConfiguration());

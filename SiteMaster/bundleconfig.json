@@ -364,5 +364,11 @@
     "inputFiles": [
       "wwwroot/js/schemefileloadingindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/applicationnotificationtemplateindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/applicationnotificationtemplateindex.js"
+    ]
   }
 ]

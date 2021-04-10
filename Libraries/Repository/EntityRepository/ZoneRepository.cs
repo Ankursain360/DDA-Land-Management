@@ -26,14 +26,14 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Zone.Include(s => s.Department).Where(s => s.IsActive == 1).OrderBy( s => s.Id).ToListAsync();
             return data;
         }
-        public async Task<bool> Any(int id, string name)
+        public async Task<bool> Any(int id,int DepartmentId, string name)
         {
-            return await _dbContext.Zone.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            return await _dbContext.Zone.AnyAsync(t => t.Id != id && t.DepartmentId == DepartmentId && t.Name.ToLower() == name.ToLower());
         }
 
-        public async Task<bool> anyCode(int id, string code)
+        public async Task<bool> anyCode(int id,int DepartmentId, string code)
         {
-            return await _dbContext.Zone.AnyAsync(t => t.Id != id && t.Code.ToLower() == code.ToLower());
+            return await _dbContext.Zone.AnyAsync(t => t.Id != id && t.DepartmentId == DepartmentId && t.Code.ToLower() == code.ToLower());
         }
 
         public async Task<List<Department>> GetDepartmentList()

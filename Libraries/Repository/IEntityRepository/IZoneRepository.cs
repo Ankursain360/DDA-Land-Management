@@ -10,8 +10,8 @@ namespace Libraries.Repository.IEntityRepository
     public interface IZoneRepository : IGenericRepository<Zone>
     {
         
-        Task<bool> Any(int id, string name);
-        Task<bool> anyCode(int id, string name);
+        Task<bool> Any(int id,int DepartmentId, string name);
+        Task<bool> anyCode(int id, int DepartmentId, string name);
         Task<List<Department>> GetDepartmentList();
         Task<List<Zone>> GetAllDetails();
         Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model);
