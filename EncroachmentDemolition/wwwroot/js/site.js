@@ -42,6 +42,13 @@ $(document).ready(function () {
     //    ValidateForm();
     //});
 });
+
+$(window).on('load', function () {
+    $(".body-loading").css("display", "none");
+});
+$(window).on('beforeunload', function () {
+    $(".body-loading").css("display", "block");
+});
 function ValidateForm() {
     var isFormValid = true;
     //debugger;
@@ -202,6 +209,7 @@ function HttpGet(url, dataType, callback) {
     $.ajax({
         cache: false,
         type: 'GET',
+        async: true,
         contentType: "application/json; charset=utf-8",
         dataType: dataType,
         url: url
@@ -219,7 +227,7 @@ function HttpPost(url, dataType, payload, callback) {
     $.ajax({
         cache: false,
         type: 'POST',
-        async: false,
+        async: true,
         data: JSON.stringify(payload),
         contentType: "application/json; charset=utf-8",
         dataType: dataType,
@@ -238,6 +246,7 @@ function HttpPut(url, dataType, payload, callback) {
     $.ajax({
         cache: false,
         type: 'PUT',
+        async: true,
         data: JSON.stringify(payload),
         contentType: "application/json; charset=utf-8",
         dataType: dataType,
@@ -255,6 +264,7 @@ function HttpDelete(url, dataType, callback) {
     DisplayLoader(true);
     $.ajax({
         cache: false,
+        async: true,
         type: 'DELETE',
         contentType: "application/json; charset=utf-8",
         dataType: dataType,
