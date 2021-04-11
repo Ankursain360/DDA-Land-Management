@@ -16,7 +16,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ChecklistDescription)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");

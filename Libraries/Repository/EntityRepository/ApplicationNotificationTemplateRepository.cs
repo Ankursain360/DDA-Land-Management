@@ -17,7 +17,7 @@ namespace Libraries.Repository.EntityRepository
         }
 
         public async Task<PagedResult<ApplicationNotificationTemplate>> GetPagedTemplate(ApplicationNotificationTemplateSearchDto model)
-        {           
+        {
             var data = await _dbContext.ApplicationNotificationTemplate
                              .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name)))
                              .GetPaged<ApplicationNotificationTemplate>(model.PageNumber, model.PageSize);
@@ -26,24 +26,44 @@ namespace Libraries.Repository.EntityRepository
             if (SortOrder == 1)
             {
                 data = null;
-                data = await _dbContext.ApplicationNotificationTemplate
+                if (model.SortBy.ToUpper() == "ISACTIVE")
+                {
+                    data = await _dbContext.ApplicationNotificationTemplate
+                              .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name)))
+                                        .OrderByDescending(s => s.IsActive)
+                                        .GetPaged<ApplicationNotificationTemplate>(model.PageNumber, model.PageSize);
+                }
+                else
+                {
+                    data = await _dbContext.ApplicationNotificationTemplate
                               .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name)))
                                        .OrderBy(s =>
                                        (model.SortBy.ToUpper() == "NAME" ? s.Name : s.Name)
                                        )
                                         .GetPaged<ApplicationNotificationTemplate>(model.PageNumber, model.PageSize);
+                }
 
 
             }
             else if (SortOrder == 2)
             {
                 data = null;
-                data = await _dbContext.ApplicationNotificationTemplate
+                if (model.SortBy.ToUpper() == "ISACTIVE")
+                {
+                    data = await _dbContext.ApplicationNotificationTemplate
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name)))
+                                       .OrderBy(s => s.IsActive)
+                                       .GetPaged<ApplicationNotificationTemplate>(model.PageNumber, model.PageSize);
+                }
+                else
+                {
+                    data = await _dbContext.ApplicationNotificationTemplate
                              .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name)))
                                       .OrderByDescending(s =>
                                       (model.SortBy.ToUpper() == "NAME" ? s.Name : s.Name)
                                       )
                                        .GetPaged<ApplicationNotificationTemplate>(model.PageNumber, model.PageSize);
+                }
             }
             return data;
         }
