@@ -56,6 +56,17 @@ namespace Libraries.Repository.EntityRepository
                            .OrderBy(s => s.Module.Name)
                            .GetPaged<Menu>(model.PageNumber, model.PageSize);
                         break;
+                    case ("SORTBY"):
+                        data = null;
+                        data = await _dbContext.Menu
+                            .Include(x => x.Module)
+                            .Include(x => x.ParentMenu)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.parentname) || x.ParentMenu.Name.Contains(model.parentname))
+                            && (string.IsNullOrEmpty(model.modulename) || x.Module.Name.Contains(model.modulename)))
+                           .OrderBy(s => s.SortBy)
+                           .GetPaged<Menu>(model.PageNumber, model.PageSize);
+                        break;
                     case ("PARENTNAME"):
                         data = null;
                         data = await _dbContext.Menu
@@ -104,6 +115,17 @@ namespace Libraries.Repository.EntityRepository
                             && (string.IsNullOrEmpty(model.parentname) || x.ParentMenu.Name.Contains(model.parentname))
                             && (string.IsNullOrEmpty(model.modulename) || x.Module.Name.Contains(model.modulename)))
                            .OrderByDescending(s => s.Module.Name)
+                           .GetPaged<Menu>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("SORTBY"):
+                        data = null;
+                        data = await _dbContext.Menu
+                            .Include(x => x.Module)
+                            .Include(x => x.ParentMenu)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.parentname) || x.ParentMenu.Name.Contains(model.parentname))
+                            && (string.IsNullOrEmpty(model.modulename) || x.Module.Name.Contains(model.modulename)))
+                           .OrderByDescending(s => s.SortBy)
                            .GetPaged<Menu>(model.PageNumber, model.PageSize);
                         break;
                     case ("PARENTNAME"):
