@@ -101,7 +101,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
-                                .OrderBy(x => x.IsActive==1)
+                                .OrderByDescending(x => x.IsActive)
                                 .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
                         break;
                 }
@@ -148,7 +148,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.AwardMaster.AwardNumber.Contains(model.name))
-                                .OrderByDescending(x => x.IsActive == 1)
+                                .OrderBy(x => x.IsActive)
                                 .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
                         break;
                 }

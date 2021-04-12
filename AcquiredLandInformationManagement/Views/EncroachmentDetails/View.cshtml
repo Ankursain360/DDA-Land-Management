@@ -7,12 +7,13 @@
 
     <form asp-action="View" method="post" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <input type="hidden" asp-for="Id" />
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <h3 class="mb-3 d-flex">View Details</h3>
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
+                        <option disabled="disabled" selected="selected" value="">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label class="floating-label" asp-for="VillageId">Village Name</label>
@@ -22,8 +23,8 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <option disabled="disabled" selected="selected" value="">Select</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label class="floating-label" asp-for="KhasraId">Khasra Name</label>
@@ -34,20 +35,22 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                   
-                    <input asp-for="LandUse" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="LandUse">
+                        <option value="Yes"> Yes</option>
+                        <option value="No"> No</option>
+                    </select>
                     <span asp-validation-for="LandUse" class="text-danger"></span>
-                    <label class="floating-label" asp-for="LandUse">LandUse</label>
+                    <label class="floating-label" asp-for="LandUse">Land Use</label>
 
                 </div>
             </div>
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="DateofDetection" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name">
+                    <input disabled asp-for="DateofDetection" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name">
 
                     <span asp-validation-for="DateofDetection" class="text-danger"></span>
-                    <label asp-for="DateofDetection" class="floating-label">DateofDetection </label>
+                    <label asp-for="DateofDetection" class="floating-label">Date Of Detection </label>
                 </div>
 
 
@@ -55,27 +58,34 @@
         </div>
         <div class="row mt-md-3">
             <div class="col-md-6">
-              
-                <div class="floating-label-wrap">
-                    <input asp-for="Bigha" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
+                    <input disabled asp-for="Bigha" placeholder="Name" type="text"
+                           value="" class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="Bigha" class="text-danger"></span>
-                    <label asp-for="Bigha" class="floating-label">Bigha </label>
-
+                    <label class="floating-label">Bigha    </label>
                 </div>
-                <div class="floating-label-wrap">
-                    <input asp-for="Biswa" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
+
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input disabled asp-for="Biswa" placeholder="Name" type="text"
+                           value="" class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="Biswa" class="text-danger"></span>
-                    <label asp-for="Biswa" class="floating-label">Biswa </label>
-
+                    <label class="floating-label">Biswa  </label>
                 </div>
             </div>
+
+
+        </div>
+        <div class="row mt-md-3">
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="NatureofencroachmentId" asp-items="@(new SelectList(Model.NencroachmentList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="NatureofencroachmentId" asp-items="@(new SelectList(Model.NencroachmentList, "Id","Name"))">
+                        <option disabled="disabled" value="" selected="selected">Select</option>
                     </select>
                     <span asp-validation-for="NatureofencroachmentId" class="text-danger"></span>
                     <label asp-for="NatureofencroachmentId" class="floating-label">Nature Of Encroachment </label>
@@ -83,31 +93,22 @@
                 </div>
 
             </div>
-
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="FileNo" type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input disabled asp-for="FileNo" type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label asp-for="FileNo" class="floating-label">Reference No / FileNo </label>
 
                 </div>
             </div>
-            <div class=" col-md-6">
 
-                <div class="floating-label-wrap">
-                  
-                </div>
-
-            </div>
 
         </div>
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="ActionDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input disabled asp-for="ActionDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
                     <span asp-validation-for="ActionDate" class="text-danger"></span>
                     <label asp-for="ActionDate" class="floating-label">ActionDate </label>
@@ -118,8 +119,8 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ReasonsId" asp-items="@(new SelectList(Model.NencroachmentList, "Id","Name"))">
-                        <option disabled="disabled">Select</option>
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="ReasonsId" asp-items="@(new SelectList(Model.NencroachmentList, "Id","Name"))">
+                        <option disabled="disabled" value="" selected="selected">Select</option>
                     </select>
                     <span asp-validation-for="ReasonsId" class="text-danger"></span>
                     <label asp-for="ReasonsId" class="floating-label">Reason </label>
@@ -129,6 +130,7 @@
             </div>
 
         </div>
+
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <input type="hidden" asp-for="DamageArea" id="DamageArea" value="Yes" />
@@ -148,13 +150,7 @@
                     </div>
 
                 </div>
-                <div class=" col-md-6">
-
-                    <div class="floating-label-wrap">
-
-                    </div>
-
-                </div>
+            
 
             </div>
         </div>
@@ -168,7 +164,7 @@
                             <th>Sr.No</th>
                             <th> Name</th>
                             <th>Address</th>
-                                   </tr>
+                        </tr>
                     </thead>
                     <tbody id="tbl_posts_body">
                     </tbody>
@@ -185,7 +181,7 @@
                             </td>
 
 
-                              </tr>
+                        </tr>
 
                     </tbody>
                 </table>
@@ -203,7 +199,7 @@
                             <th>Amount</th>
                             <th>Cheque Number</th>
                             <th>Cheque Date</th>
-                                                      
+
                         </tr>
                     </thead>
                     <tbody id="tbl_posts1_body">
@@ -226,7 +222,7 @@
 
                             </td>
 
-                           
+
                         </tr>
                     </tbody>
                 </table>
@@ -234,9 +230,15 @@
 
 
         </div>
-        <div class="row mt-md-3">
-            <label class="control-label lb-sm">Remarks</label>
-            <textarea type="text" asp-for="ActionRemarks" class="form-control" style=" background-color: #dddddd;"></textarea>
+        <div class="row mt-md-4">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="ActionRemarks" type="text" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="ActionRemarks" class="text-danger"></span>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+
 
         </div>
         <div class="row pt-3">
