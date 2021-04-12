@@ -205,7 +205,7 @@ $("#btnReset").click(function () {
     $('#LocalityId').val('0').trigger('change');
     $('#InventoriedInId').val('0').trigger('change')
     $('#ClassificationOfLandId').val('0').trigger('change');
-    $('#PlannedUnplannedLand').val('Planned Land').trigger('change');
+    $('#PlannedUnplannedLand').val("Planned Land").trigger('change');
     $('#Colony').val('');
     $('#Sector').val('');
     $('#Block').val('');
@@ -214,5 +214,6 @@ $("#btnReset").click(function () {
     $('#MainLandUseId').val('0').trigger('change');
     $('#LitigationStatus').val('0').trigger('change');
     $('#Encroached').val('0').trigger('change');
+    debugger;
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
