@@ -29,7 +29,7 @@ function setRouteParameter() {
 
 function GetReqIdHistory(id) {
     HttpGet(`/RequestApprovalProcess/RequestIdHistory/?Id=${id}`, 'json', function (data) {
-        debugger
+      
         try {
             if ((data[0].id) != 0) {
                 var x = data[0].id;
