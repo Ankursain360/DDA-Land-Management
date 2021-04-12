@@ -21,10 +21,10 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _booktransferlandService = booktransferlandService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _booktransferlandService.GetAllBooktransferland();
-            return View(result);
+           
+            return View();
         }
 
         [HttpPost]

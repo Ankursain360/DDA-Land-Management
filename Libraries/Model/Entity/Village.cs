@@ -53,6 +53,10 @@ namespace Libraries.Model.Entity
         public decimal? TotalArea { get; set; }
         public string Polygon { get; set; }
         public byte IsActive { get; set; }
+        [Required(ErrorMessage = " Department is mandatory")]
+        public int? DepartmentId { get; set; }
+        [Required(ErrorMessage = "Division is mandatory")]
+        public int? DivisionId { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
@@ -60,12 +64,14 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Division> DivisionList { get; set; }
-        [Required(ErrorMessage = "Division is mandatory")]
-        [NotMapped]
-        public int DivisionId { get; set; }
-        [Required(ErrorMessage = " Department is mandatory")]
-        [NotMapped]
-        public int DepartmentId { get; set; }
+        //[Required(ErrorMessage = "Division is mandatory")]
+        //[NotMapped]
+        //public int DivisionId { get; set; }
+        //[Required(ErrorMessage = " Department is mandatory")]
+        //[NotMapped]
+        //public int DepartmentId { get; set; }
+        public Department Department { get; set; }
+        public Division Division { get; set; }
         public virtual Zone Zone { get; set; }
         //public virtual ICollection<Nazul> Nazul { get; set; }
         public ICollection<Plot> Plot { get; set; }

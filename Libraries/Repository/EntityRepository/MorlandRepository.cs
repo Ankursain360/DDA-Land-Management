@@ -97,7 +97,7 @@ namespace Libraries.Repository.EntityRepository
                                .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
-                                .OrderBy(x => x.IsActive==1)
+                                .OrderByDescending(x => x.IsActive==1)
                                 .GetPaged<Morland>(model.PageNumber, model.PageSize);
                         break;
                 }
@@ -148,7 +148,7 @@ namespace Libraries.Repository.EntityRepository
                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
-                                .OrderByDescending(x => x.IsActive == 1)
+                                .OrderBy(x => x.IsActive == 1)
                                 .GetPaged<Morland>(model.PageNumber, model.PageSize);
                         break;
                 }
