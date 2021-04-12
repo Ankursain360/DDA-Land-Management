@@ -23,7 +23,7 @@ function FillKhasraAtEdit() {
 
 
     HttpGet(`/Newlandannexure1/GetDetailsKhasra/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
+   
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #KhasraNo").val(data[i].khasraNo);
             $("#tbl_posts #add #Bigha").val(data[i].bigha);
@@ -60,7 +60,7 @@ function FillKhasraAtEdit() {
 }
 
 $(document).delegate('a.add-record', 'click', function (e) {
-    debugger
+   
 
     if ($("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != ''
         && $("#tbl_posts #add #OwnershipStatus").children("option:selected").val() != undefined
@@ -89,7 +89,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();
-        debugger
+       
 
         $("#tbl_posts #add .floating-label-field").val('');
     }
