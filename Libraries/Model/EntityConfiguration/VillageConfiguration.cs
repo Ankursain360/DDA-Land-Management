@@ -11,6 +11,12 @@ namespace Libraries.Model.EntityConfiguration
         {
             entity.ToTable("village", "lms");
 
+            entity.HasIndex(e => e.DepartmentId)
+               .HasName("fkdepId_idx");
+
+            entity.HasIndex(e => e.DivisionId)
+                .HasName("fkdivId_idx");
+
             entity.HasIndex(e => e.ZoneId)
                 .HasName("ZoneId_idx");
 
@@ -46,6 +52,18 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.ZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("ZoneId");
+
+            entity.HasOne(d => d.Department)
+               .WithMany(p => p.Village)
+               .HasForeignKey(d => d.DepartmentId)
+               .HasConstraintName("fkdepId");
+
+            entity.HasOne(d => d.Division)
+                .WithMany(p => p.Village)
+                .HasForeignKey(d => d.DivisionId)
+                .HasConstraintName("fkdivId");
+
+
         }
     }
 }

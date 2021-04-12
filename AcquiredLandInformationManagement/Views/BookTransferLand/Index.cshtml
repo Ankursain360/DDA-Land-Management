@@ -5,7 +5,7 @@
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
-            <div class="col-md-3    ">
+            <div class="col-md-3 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Action" />
                     <label class="floating-label">Part</label>
@@ -36,10 +36,10 @@
         <div class="p-3 d-flex align-items-end mr-auto">
             <div class="floating-label-wrap">
                 <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                    <option value="NOTIFICATIONNO">Notification No</option>
-                    <option value="NotificationDate">Notification Date</option>
-                    <option value="POSESSIONDATE">Date of Possesion</option>
-                    <option value="PART">Part</option>
+                    <option value="No">Notification No</option>
+                    <option value="Date">Notification Date</option>
+                    <option value="Posession">Date of Possesion</option>
+                    <option value="Part">Part</option>
 
                     <option value="Status">Status</option>
                 </select>
@@ -62,16 +62,13 @@
             </a>
         </div>
     </div>
-    <div id="divBooktransferlandTable" class="table-responsive px-2" ></div>
-</div>
-
-<div class="container-fluid">
-    <div class="card  table-card table-responsive">
-        <div id="divBooktransferlandTable"></div>
-
+    <div class="table-responsive px-2" id="divBooktransferlandTable">
 
     </div>
+
+  
 </div>
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

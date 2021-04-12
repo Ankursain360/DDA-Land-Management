@@ -22,72 +22,84 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model)
         {
             var data = await _dbContext.Booktransferland
-                 .Include(x => x.Locality)
-                
-                .Include(x => x.Khasra)
-                .Include(x => x.LandNotification)
-                             .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.Khasra)
+                                       .Include(x => x.LandNotification)
+                                       .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NOTIFICATIONNO"):
+                    
+                    case ("NO"):
                         data = null;
                         data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderBy(s => s.LandNotification.Name)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Khasra)
+                                                .Include(x => x.LandNotification)
+                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                                .OrderBy(x => x.LandNotification.Name)
+                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("DATE"):
+                        data = null;
+                        data = await _dbContext.Booktransferland
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Khasra)
+                                               .Include(x => x.LandNotification)
+                                               .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                               .OrderBy(x => x.NotificationDate)
+                                               .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+
+
+                        break;
+                    case ("POSESSION"):
+                        data = null;
+                        data = await _dbContext.Booktransferland
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Khasra)
+                                                .Include(x => x.LandNotification)
+                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                                .OrderBy(s => s.DateofPossession)
+                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+
+
 
                         break;
                     case ("PART"):
                         data = null;
                         data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderBy(s => s.Part)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Khasra)
+                                                .Include(x => x.LandNotification)
+                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                                .OrderBy(s => s.Part)
+                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+                       
 
                         break;
-                    case ("NOTIFICATIONDATE"):
-                        data = null;
-                        data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderBy(s => s.NotificationDate)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
-
-                        break;
-                    case ("POSESSIONDATE"):
-                        data = null;
-                        data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderBy(s => s.DateofPossession)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
-
-                        break;
+                   
+                    
                     
 
                        
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderByDescending(s => s.IsActive == 0)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Include(x => x.LandNotification)
+                                              .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                              .OrderByDescending(s => s.IsActive)
+                                              .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+
+                    
 
                         break;
 
@@ -97,62 +109,77 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NOTIFICATIONNO"):
+                    case ("NO"):
                         data = null;
                         data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderByDescending(s => s.LandNotification.Name)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Khasra)
+                                                .Include(x => x.LandNotification)
+                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                                .OrderByDescending(s => s.LandNotification.Name)
+                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("DATE"):
+                        data = null;
+                        data = await _dbContext.Booktransferland
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Khasra)
+                                               .Include(x => x.LandNotification)
+                                               .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                               .OrderByDescending(s => s.NotificationDate)
+                                               .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+
+
+                        break;
+                    case ("POSESSION"):
+                        data = null;
+                        data = await _dbContext.Booktransferland
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Khasra)
+                                                .Include(x => x.LandNotification)
+                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                                .OrderByDescending(s => s.DateofPossession)
+                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+
+
 
                         break;
                     case ("PART"):
                         data = null;
                         data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderByDescending(s => s.Part)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.Khasra)
+                                                .Include(x => x.LandNotification)
+                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                                .OrderByDescending(s => s.Part)
+                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+
 
                         break;
-                    case ("NOTIFICATIONDATE"):
-                        data = null;
-                        data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderByDescending(s => s.NotificationDate)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                    
+                    
 
-                        break;
-                    case ("POSESSIONDATE"):
-                        data = null;
-                        data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderByDescending(s => s.DateofPossession)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
 
-                        break;
-                   
+
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Booktransferland
-                                   .Include(x => x.Locality)
-                                   .Include(x => x.Khasra)
-                        .Include(x => x.LandNotification)
-                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                            .OrderBy(s => s.IsActive == 0)
-                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+                                              .Include(x => x.Locality)
+                                              .Include(x => x.Khasra)
+                                              .Include(x => x.LandNotification)
+                                              .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                                              .OrderBy(s => s.IsActive)
+                                              .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+
+
 
                         break;
+
                 }
             }
             return data;

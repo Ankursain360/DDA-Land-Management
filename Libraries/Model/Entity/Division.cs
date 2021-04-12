@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
             PropertyregistrationTakenOverDivision = new HashSet<Propertyregistration>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             Planning = new HashSet<Planning>();
+            Village = new HashSet<Village>();
         }
 
         [Required(ErrorMessage = "Division name is mandatory")]
@@ -56,5 +57,6 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> PropertyregistrationTakenOverDivision { get; set; }
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
         public virtual ICollection<Planning> Planning { get; internal set; }
+        public ICollection<Village> Village { get; set; }
     }
 }

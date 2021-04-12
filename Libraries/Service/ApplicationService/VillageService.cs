@@ -44,7 +44,10 @@ namespace Libraries.Service.ApplicationService
             var result = await _villageRepository.FindBy(a => a.Id == id);
             Village model = result.FirstOrDefault();
             model.Name = village.Name;
+            model.DepartmentId = village.DepartmentId;
             model.ZoneId = village.ZoneId;
+            model.DivisionId = village.DivisionId;
+           
             model.IsActive = village.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

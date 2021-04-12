@@ -49,6 +49,9 @@ namespace SiteMaster.Controllers
             Village village = new Village();
             village.IsActive = 1;
             village.DepartmentList = await _villageService.GetAllDepartment();
+           
+            village.ZoneList = await _villageService.GetAllZone(Convert.ToInt32(village.DepartmentId));
+            village.DivisionList = await _villageService.GetAllDivisionList(Convert.ToInt32(village.ZoneId));
             return View(village);
         }
         [HttpPost]
@@ -56,6 +59,11 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Village village)
         {
+            village.DepartmentList = await _villageService.GetAllDepartment();
+
+            village.ZoneList = await _villageService.GetAllZone(Convert.ToInt32(village.DepartmentId));
+            village.DivisionList = await _villageService.GetAllDivisionList(Convert.ToInt32(village.ZoneId));
+
             try
             {
                 village.DepartmentList = await _villageService.GetAllDepartment();
@@ -106,6 +114,8 @@ namespace SiteMaster.Controllers
         {
             var Data = await _villageService.FetchSingleResult(id);
             Data.DepartmentList = await _villageService.GetAllDepartment();
+            Data.ZoneList = await _villageService.GetAllZone(Convert.ToInt32(Data.DepartmentId));
+            Data.DivisionList = await _villageService.GetAllDivisionList(Convert.ToInt32(Data.ZoneId));
             if (Data == null)
             {
                 return NotFound();
@@ -117,6 +127,10 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Village village)
         {
+            village.DepartmentList = await _villageService.GetAllDepartment();
+            village.ZoneList = await _villageService.GetAllZone(Convert.ToInt32(village.DepartmentId));
+            village.DivisionList = await _villageService.GetAllDivisionList(Convert.ToInt32(village.ZoneId));
+
             if (ModelState.IsValid)
             {
                 try
@@ -178,7 +192,10 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _villageService.FetchSingleResult(id);
+          
             Data.DepartmentList = await _villageService.GetAllDepartment();
+            Data.ZoneList = await _villageService.GetAllZone(Convert.ToInt32(Data.DepartmentId));
+            Data.DivisionList = await _villageService.GetAllDivisionList(Convert.ToInt32(Data.ZoneId));
             if (Data == null)
             {
                 return NotFound();

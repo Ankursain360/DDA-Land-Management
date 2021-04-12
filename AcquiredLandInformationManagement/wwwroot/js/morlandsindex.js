@@ -67,7 +67,9 @@ function onChangePageSize(pageSize) {
     currentPageSize = pageSize;
 }
 
-
+$('#ddlSort').change(function () {
+    GetMorLands(currentPageNumber, currentPageSize, sortOrder);
+});
 //function GetMorLands(pageNumber, pageSize) {
 //    var param = GetSearchParam(pageNumber, pageSize);
 //    HttpPost(`/morLands/List`, 'html', param, function (response) {
