@@ -43,6 +43,10 @@ $("#btnDescending").click(function () {
     GetMenu(currentPageNumber, currentPageSize, sortOrder);
 });
 
+$('#ddlSort').change(function () {
+    GetMenu(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnSearch").click(function () {
     GetMenu(currentPageNumber, currentPageSize, sortOrder);
 });

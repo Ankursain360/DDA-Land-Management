@@ -22,7 +22,9 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model)
         {
             var data = await _dbContext.Village
-                            .Include(x=>x.Zone)
+                             .Include(x=>x.Zone)
+                             .Include(x => x.Department)
+                             .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .GetPaged<Village>(model.PageNumber, model.PageSize);
@@ -37,6 +39,8 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Village
                             .Include(x => x.Zone)
+                             .Include(x => x.Department)
+                             .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .OrderBy(x => x.Name)
@@ -46,6 +50,8 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Village
                             .Include(x => x.Zone)
+                             .Include(x => x.Department)
+                             .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .OrderBy(x => x.Zone.Name)
@@ -56,6 +62,8 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Village
                             .Include(x => x.Zone)
+                             .Include(x => x.Department)
+                             .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .OrderByDescending(x => x.IsActive)
@@ -72,6 +80,8 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Village
                             .Include(x => x.Zone)
+                             .Include(x => x.Department)
+                             .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .OrderByDescending(x => x.Name)
@@ -81,6 +91,8 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Village
                             .Include(x => x.Zone)
+                             .Include(x => x.Department)
+                             .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .OrderByDescending(x => x.Zone.Name)
@@ -91,6 +103,8 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Village
                             .Include(x => x.Zone)
+                             .Include(x => x.Department)
+                             .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .OrderBy(x => x.IsActive)

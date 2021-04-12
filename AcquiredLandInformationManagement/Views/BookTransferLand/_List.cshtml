@@ -21,20 +21,12 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-                      <td>@item.LandNotification.Name</td>
+            <td>@item.LandNotification.Name</td>
 
-           
+            <td>@(item.NotificationDate == null ? "" : (Convert.ToDateTime(item.NotificationDate)).ToString("dd-MMM-yyyy"))</td>
 
-            <td>
-                @if (item.NotificationDate == null)
-                {
-                    <span class="badge">No Data</span>
-                }
-                else
-                {
-                    @(Convert.ToDateTime(item.NotificationDate).ToString("dd-MMM-yyyy"))
-                }
-            </td>
+
+
             <td>@item.Part</td>
 
 
@@ -42,17 +34,9 @@
 
             <td>@item.StatusOfLand</td>
 
-            
-            <td>
-                @if (item.DateofPossession == null)
-                {
-                    <span class="badge badge-primary px-2 py-1">No Record Available</span>
-                }
-                else
-                {
-                    @(Convert.ToDateTime(item.DateofPossession).ToString("dd-MMM-yyyy"))
-                }
-            </td>
+            <td>@(item.DateofPossession == null ? "" : (Convert.ToDateTime(item.DateofPossession)).ToString("dd-MMM-yyyy"))</td>
+
+           
             <td>@item.Remarks</td>
 
             <td>
@@ -71,7 +55,7 @@
                     <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
                     <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are you sure, you want to delete this record?')"><i class="ri-delete-bin-5-fill"></i></a>
 
-                       </div>
+                </div>
             </td>
 
         </tr>
