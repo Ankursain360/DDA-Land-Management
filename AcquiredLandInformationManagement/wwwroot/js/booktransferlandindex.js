@@ -8,8 +8,10 @@ $(document).ready(function () {
 
 
 function GetBooktransferland(pageNumber, pageSize, order) {
+   
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/bookTransferLand/List`, 'html', param, function (response) {
+       // alert(response);
         $('#divBooktransferlandTable').html("");
         $('#divBooktransferlandTable').html(response);
     });
@@ -59,6 +61,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
 
 function onPaging(pageNo) {
+  
     GetBooktransferland(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
@@ -67,3 +70,5 @@ function onChangePageSize(pageSize) {
     GetBooktransferland(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
+
+

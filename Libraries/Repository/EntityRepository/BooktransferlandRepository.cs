@@ -25,6 +25,7 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.Locality)
                                        .Include(x => x.Khasra)
                                        .Include(x => x.LandNotification)
+                                         .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -182,8 +183,14 @@ namespace Libraries.Repository.EntityRepository
 
                 }
             }
+          
+            
+            
             return data;
         }
+     
+        
+        
         public async Task<List<Booktransferland>> GetBooktransferland()
         {
             return await _dbContext.Booktransferland.ToListAsync();
