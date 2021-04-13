@@ -18,6 +18,18 @@ function GetLandTransfer(pageNumber, pageSize, sortOrder) {
 $("#btnGenerate").click(function () {
     GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
 });
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+$("#btnReset").click(function () {
+    $('#Propertyregistration_DepartmentId').val('0').trigger('change');
+    $('#Propertyregistration_ZoneId').val('0').trigger('change');
+    $('#Propertyregistration_DivisionId').val('0').trigger('change');
+    $('#Propertyregistration_InventoriedInId').val('0').trigger('change')
+    $('#Propertyregistration_ClassificationOfLandId ').val('0').trigger('change');
+    $('#Propertyregistration_PlannedUnplannedLand').val('0').trigger('change');
+    GetLandTransfer(currentPageNumber, currentPageSize, sortOrder);
+});
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");

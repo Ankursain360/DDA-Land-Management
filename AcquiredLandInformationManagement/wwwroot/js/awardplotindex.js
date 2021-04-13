@@ -55,6 +55,9 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     return model;
 }
 
+$('#ddlSort').change(function () {
+    GetAward(currentPageNumber, currentPageSize, sortby);
+});
 function onPaging(pageNo) {
     GetAward(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;

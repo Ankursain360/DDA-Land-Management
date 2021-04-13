@@ -99,12 +99,12 @@
                 <div class="p-3 d-flex align-items-end mr-auto">
                     <div class="floating-label-wrap">
                         <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                            <option selected="selected" value="inventoriedin">Inventoried In</option>
-                            <option value="plannedunplanned">Planned/Unplanned Land</option>
-                            <option value="classification">Classification of Land</option>
-                            <option value="department">Department</option>
-                            <option value="zone">Zone</option>
-                            <option value="division">Division</option>
+                            <option selected="selected" value="INVENTORIEDIN">Inventoried In</option>
+                            <option value="PLANNEDUNPLANNED">Planned/Unplanned Land</option>
+                            <option value="CLASSIFICATION">Classification of Land</option>
+                            <option value="DEPARTMENT">Department</option>
+                            <option value="ZONE">Zone</option>
+                            <option value="DIVISION">Division</option>
                         </select>
                         <label for="field-1" class="floating-label">Sort by</label>
                     </div>
@@ -128,7 +128,7 @@
 </div>
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
-        <script src="~/js/LandTransferindex.js"></script>
+        <script src="~/js/LandTransferIndex.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="~/js/LandTransferIndex.min.js" asp-append-version="true"></script>
