@@ -22,6 +22,7 @@ namespace NewLandAcquisition.Controllers
         {
             _newlandawardmasterdetailService = newlandawardmasterdetailsService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -29,7 +30,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
+        
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] NewlandawardmasterSearchDto model)
         {
