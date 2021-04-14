@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Enum;
 using Dto.Search;
+using LeaseDetails.Filters;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,7 @@ namespace LeaseDetails.Controllers
             _oldAllotmentEntryService = oldAllotmentEntryService;
 
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -31,6 +34,7 @@ namespace LeaseDetails.Controllers
             var result = await _oldAllotmentEntryService.GetPagedOldEntry(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Leaseapplication lease = new Leaseapplication();
@@ -43,6 +47,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Leaseapplication lease)
         {
            // lease.PropertyTypeList = await _oldAllotmentEntryService.GetAllPropertyType();
@@ -125,6 +130,7 @@ namespace LeaseDetails.Controllers
                 PurposeId = PurposeId ?? 0;
                 return Json(await _oldAllotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(PurposeId)));
             }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
 
@@ -142,6 +148,7 @@ namespace LeaseDetails.Controllers
             }
             return View(Data);
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
            
@@ -160,6 +167,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Allotmententry entry)
         {
            
@@ -187,7 +195,7 @@ namespace LeaseDetails.Controllers
 
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _oldAllotmentEntryService.Delete(id);

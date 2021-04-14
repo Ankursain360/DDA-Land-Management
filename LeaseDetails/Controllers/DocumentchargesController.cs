@@ -27,7 +27,7 @@ namespace LeaseDetails.Controllers
         {
             _documentchargesService = documentchargesService;
         }
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -41,7 +41,7 @@ namespace LeaseDetails.Controllers
             var result = await _documentchargesService.GetPagedDocumentcharges(model);
             return PartialView("_List", result);
         }
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Documentcharges charge = new Documentcharges();
@@ -55,7 +55,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Add)]
+          [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Documentcharges charge)
         {
             //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
@@ -95,7 +95,7 @@ namespace LeaseDetails.Controllers
                 return View(charge);
             }
         }
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _documentchargesService.FetchSingleResult(id);
@@ -110,8 +110,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Documentcharges charge)
         {
             //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
@@ -148,7 +148,7 @@ namespace LeaseDetails.Controllers
             return View(charge);
         }
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _documentchargesService.Delete(id);
@@ -166,7 +166,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _documentchargesService.FetchSingleResult(id);
@@ -180,7 +180,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-        //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Documentcharges> result = await _documentchargesService.GetAllDocumentcharges();

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -21,19 +23,20 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _sakanidetailService = sakanidetailService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public  IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
+
         public async Task<PartialViewResult> List([FromBody] SakaniDetailsSearchDto model)
         {
             var result = await _sakanidetailService.GetPagedSaknidetail(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Saknidetails sakni = new Saknidetails();
@@ -46,6 +49,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Saknidetails sakni)
         {
 
@@ -249,6 +253,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 x.Address
             }));
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _sakanidetailService.FetchSingleResult(id);
@@ -265,6 +270,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Saknidetails sakni)
         {
 
@@ -441,7 +447,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(sakni);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
            
@@ -458,7 +464,7 @@ namespace AcquiredLandInformationManagement.Controllers
                var list = await _sakanidetailService.GetAllSaknidetail();
                return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _sakanidetailService.FetchSingleResult(id);

@@ -22,7 +22,7 @@ namespace LeaseDetails.Controllers
         {
             _LeasePaymentTypeService = LeasePaymentTypeService;
         }
-        // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
            // var list = _LeasePaymentTypeService.GetAllLeasepaymenttype();
@@ -36,7 +36,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Leasepaymenttype Leasepaymenttype = new Leasepaymenttype();
@@ -48,7 +48,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Leasepaymenttype Leasepaymenttype)
         {
             try
@@ -82,22 +82,9 @@ namespace LeaseDetails.Controllers
                 return View(Leasepaymenttype);
             }
         }
-        //[AcceptVerbs("Get", "Post")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Exist(int Id, string Name)
-        //{
-        //    var result = await _PropertyTypeService.CheckUniqueName(Id, Name);
-        //    if (result == false)
-        //    {
-        //        return Json(true);
-        //    }
-        //    else
-        //    {
-        //        return Json($"Village: {Name} already exist");
-        //    }
-        //}
 
-        //  [AuthorizeContext(ViewAction.Edit)]
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             Leasepaymenttype Leasepaymenttype = new Leasepaymenttype();
@@ -114,7 +101,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Leasepaymenttype Leasepaymenttype)
         {
             if (ModelState.IsValid)
@@ -151,7 +138,7 @@ namespace LeaseDetails.Controllers
 
 
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
@@ -192,7 +179,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Leasepaymenttype> result = await _LeasePaymentTypeService.GetAll();

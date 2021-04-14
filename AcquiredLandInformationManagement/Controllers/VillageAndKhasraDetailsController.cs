@@ -12,6 +12,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -26,7 +28,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Possessiondetails undersection4plot = new Possessiondetails();

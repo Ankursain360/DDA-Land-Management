@@ -41,7 +41,7 @@ namespace LeaseDetails.Controllers
             targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
         }
 
-      //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var Msg = TempData.Peek("Message");
@@ -58,7 +58,7 @@ namespace LeaseDetails.Controllers
             return PartialView("_List", result);
         }
 
-     //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Cancellationentry cancellationentry = new Cancellationentry();
@@ -134,6 +134,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Cancellationentry cancellationentry)
         {
             cancellationentry.AllotmententryList = await _cancellationEntryService.GetAllAllotment();

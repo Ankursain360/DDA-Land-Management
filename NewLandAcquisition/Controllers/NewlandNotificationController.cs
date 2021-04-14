@@ -30,6 +30,7 @@ namespace NewLandAcquisition.Controllers
             _newlandnotificationService = newlandnotificationService;
             _configuration = configuration;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -41,6 +42,7 @@ namespace NewLandAcquisition.Controllers
 
             return PartialView("_List", result);
         }
+         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandnotification newlandnotification = new Newlandnotification();
@@ -49,8 +51,8 @@ namespace NewLandAcquisition.Controllers
         }
 
         [HttpPost]
-       // [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Add)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandnotification newlandnotification)
         {
             try

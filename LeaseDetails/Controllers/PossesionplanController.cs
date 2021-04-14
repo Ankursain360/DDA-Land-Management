@@ -32,7 +32,7 @@ namespace LeaseDetails.Controllers
             _configuration = configuration;
             _possesionplanService = possesionplanService;
         }
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -58,7 +58,7 @@ namespace LeaseDetails.Controllers
             var result = await _possesionplanService.GetPagedPossesionPlan(model);
             return PartialView("_List", result);
         }
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Possesionplan rate = new Possesionplan();
@@ -72,7 +72,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Possesionplan rate)
         {
             rate.AllotmententryList = await _possesionplanService.GetAllAllotmententry();
@@ -118,7 +118,7 @@ namespace LeaseDetails.Controllers
                 return View(rate);
             }
         }
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _possesionplanService.FetchSingleResult(id);
@@ -133,8 +133,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Possesionplan rate, IFormFile AssignSIfile)
         {
             rate.AllotmententryList = await _possesionplanService.GetAllAllotmententry();
@@ -195,7 +195,7 @@ namespace LeaseDetails.Controllers
             return View(rate);
         }
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _possesionplanService.Delete(id);
@@ -214,7 +214,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _possesionplanService.FetchSingleResult(id);
@@ -227,7 +227,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-        //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadExcel()
         {
             List<Possesionplan> result = await _possesionplanService.GetAllPossesionplan();

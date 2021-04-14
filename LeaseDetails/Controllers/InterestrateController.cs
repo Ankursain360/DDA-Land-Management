@@ -25,7 +25,7 @@ namespace LeaseDetails.Controllers
         {
             _InterestrateService = InterestrateService;
         }
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -39,7 +39,7 @@ namespace LeaseDetails.Controllers
             var result = await _InterestrateService.GetPagedInterestrate(model);
             return PartialView("_List", result);
         }
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Interestrate rate = new Interestrate();
@@ -51,7 +51,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Interestrate rate)
         {
             rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
@@ -89,7 +89,7 @@ namespace LeaseDetails.Controllers
                 return View(rate);
             }
         }
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _InterestrateService.FetchSingleResult(id);
@@ -102,8 +102,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Interestrate rate)
         {
             rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
@@ -138,7 +138,7 @@ namespace LeaseDetails.Controllers
             return View(rate);
         }
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _InterestrateService.Delete(id);
@@ -168,7 +168,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-        //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Interestrate> result = await _InterestrateService.GetAllInterestrate();

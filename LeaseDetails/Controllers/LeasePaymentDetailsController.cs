@@ -34,7 +34,7 @@ namespace LeaseDetails.Controllers
             _configuration = configuration;
             _LeasepaymentdetailsService = LeasepaymentdetailsService;
         }
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -54,7 +54,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
 
@@ -72,7 +72,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Leasepaymentdetails rate)
         {
             rate.AllotmententryList = await _LeasepaymentdetailsService.GetAllAllotmententry();
@@ -142,7 +142,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Leasepaymentdetails leasepaymentdetails)
         {
             if (ModelState.IsValid)

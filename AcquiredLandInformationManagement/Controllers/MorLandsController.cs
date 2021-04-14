@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -23,7 +25,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _morlandService = morlandService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             
@@ -49,7 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return Json($"Location/Village Name : {Name} already exist");
             }
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
 
         {
@@ -64,6 +66,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Morland morland)
         {
             try
@@ -102,7 +105,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _morlandService.FetchSingleResult(id);
@@ -119,6 +122,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Morland morland)
         {
             if (ModelState.IsValid)
@@ -149,7 +153,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(morland);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -172,7 +176,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _morlandService.GetAllMorland();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _morlandService.FetchSingleResult(id);

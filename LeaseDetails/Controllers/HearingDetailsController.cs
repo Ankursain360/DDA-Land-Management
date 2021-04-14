@@ -67,6 +67,7 @@ namespace LeaseDetails.Controllers
             targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
 
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -78,6 +79,7 @@ namespace LeaseDetails.Controllers
 
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _hearingdetailsService.FetchSingleResult(id);
@@ -99,7 +101,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Hearingdetails model)
         {
             // string Document = _configuration.GetSection("FilePaths:Judgement:Doc").Value.ToString();
@@ -215,6 +217,7 @@ namespace LeaseDetails.Controllers
             var result = await _hearingdetailsService.GetPagedHearingDetails(model);
             return PartialView("_ListHearingDetails", result);
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _hearingdetailsService.FetchSingleResult(id);
@@ -228,8 +231,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Hearingdetails rate)
         {
             ViewBag.ExistDocFile = rate.DocumentPatth;
@@ -296,7 +299,7 @@ namespace LeaseDetails.Controllers
             var ext = Path.GetExtension(path).ToLowerInvariant();
             return types[ext];
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download(int Id)
         {
             string filename = _hearingdetailsService.GetDownload(Id);
@@ -308,6 +311,7 @@ namespace LeaseDetails.Controllers
             memory.Position = 0;
             return File(memory, GetContentType(filename), Path.GetFileName(filename));
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _hearingdetailsService.FetchSingleHearingdetailswithReqProc(id);

@@ -28,7 +28,7 @@ namespace NewLandAcquisition.Controllers
             _configuration = configuration;
         }
 
-       // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             
@@ -37,7 +37,7 @@ namespace NewLandAcquisition.Controllers
             return View(model);
         }
         [HttpPost]
-       // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id,Newlandannexure2 newlandannexure2)
         {
             try
@@ -97,6 +97,7 @@ namespace NewLandAcquisition.Controllers
                 return RedirectToAction("Index", "RequestApprovalProcess");
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -179,6 +180,7 @@ namespace NewLandAcquisition.Controllers
             memory.Position = 0;
             return File(memory, GetContentType(filename), Path.GetFileName(filename));
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newlandannexure2Service.FetchSingleResultAnnx2(id);
@@ -193,7 +195,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
         [HttpPost]
-        //    [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandannexure2 newlandannexure2)
         {
             

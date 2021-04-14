@@ -12,6 +12,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
+
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class PaymentdetailController : Controller
@@ -23,7 +26,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _paymentdetailService = paymentdetailService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _paymentdetailService.GetAllPaymentdetail();
@@ -35,7 +38,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _paymentdetailService.GetPagedPaymentdetail(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -44,6 +47,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Paymentdetail paymentdetail)
         {
             try
@@ -80,7 +84,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _paymentdetailService.FetchSingleResult(id);
@@ -94,6 +98,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Paymentdetail paymentdetail)
         {
             if (ModelState.IsValid)
@@ -124,7 +129,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(paymentdetail);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -147,7 +152,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _paymentdetailService.GetAllPaymentdetail();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _paymentdetailService.FetchSingleResult(id);
