@@ -26,6 +26,7 @@ namespace LeaseDetails.Controllers
         private readonly IApprovalProccessService _approvalproccessService;
         string LeaseFilePath = "";
         string ApprovalDocumentPath = "";
+        string targetPathExtensionDocuments = "";
         public ExtensionApprovalController(IExtensionApprovalService extensionApprovalService,
         IExtensionService extensionService,
            IConfiguration configuration,
@@ -38,6 +39,8 @@ namespace LeaseDetails.Controllers
             _workflowtemplateService = workflowtemplateService;
             LeaseFilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
+            targetPathExtensionDocuments = _configuration.GetSection("FilePaths:Extension:ExtensionFilePath").Value.ToString();
+
 
         }
         public IActionResult Index()
@@ -58,6 +61,9 @@ namespace LeaseDetails.Controllers
             var dropdownValue = await GetApprovalStatusDropdownList();
             List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
             Data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
+            //Data.AllotteeservicesdocumentList = await _extensionService
+            //    .AlloteeDocumentListDetails(id, Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
+
             if (Data == null)
             {
                 return NotFound();
@@ -73,7 +79,7 @@ namespace LeaseDetails.Controllers
             return resultList;
         }
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+       // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Extension extension)
         {
             var result = false;
@@ -187,7 +193,7 @@ namespace LeaseDetails.Controllers
                 {
                     dropdown = (List<string>)DataFlow[i].parameterAction;
                     return (dropdown);
-                    break;
+                  //  break;
                 }
 
             }
@@ -207,8 +213,11 @@ namespace LeaseDetails.Controllers
         public async Task<PartialViewResult> ExtensionView(int id)
         {
             var Data = await _extensionService.FetchSingleResult(id);
-          //  Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
-            return PartialView("_LeaseApplicationFormView", Data);
+            //  Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
+            Data.AllotteeservicesdocumentList = await _extensionService
+                  .AlloteeDocumentListDetails(id, Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
+
+            return PartialView("_ExtensionView", Data);
         }
 
         //public async Task<IActionResult> ViewDocumentLeaseApplicationForm(int Id)
@@ -233,5 +242,14 @@ namespace LeaseDetails.Controllers
             //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         #endregion
+
+        public async Task<FileResult> ViewExtensionDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _extensionService.FetchSingleResultDocument(Id);
+            string targetPhotoPathLayout = targetPathExtensionDocuments + Data.DocumentFileName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+        }
     }
 }
