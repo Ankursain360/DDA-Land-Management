@@ -26,7 +26,7 @@ namespace LeaseDetails.Controllers
         {
             _timeextensionService = timeextensionService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
            
@@ -41,7 +41,7 @@ namespace LeaseDetails.Controllers
             var result = await _timeextensionService.GetPagedTimeextension(model);
             return PartialView("_List", result);
         }
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public  IActionResult Create()
         {
             
@@ -51,7 +51,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Timeextension time)
         {
           
@@ -89,7 +89,7 @@ namespace LeaseDetails.Controllers
                 return View(time);
             }
         }
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _timeextensionService.FetchSingleResult(id);
@@ -102,8 +102,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Timeextension time)
         {
             
@@ -138,7 +138,7 @@ namespace LeaseDetails.Controllers
             return View(time);
         }
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _timeextensionService.Delete(id);
@@ -167,7 +167,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-        //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Timeextension> result = await _timeextensionService.GetAllTimeextension();

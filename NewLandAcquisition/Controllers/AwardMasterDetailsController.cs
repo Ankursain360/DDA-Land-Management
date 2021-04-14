@@ -22,6 +22,7 @@ namespace NewLandAcquisition.Controllers
         {
             _newlandawardmasterdetailService = newlandawardmasterdetailsService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -29,7 +30,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        //   [AuthorizeContext(ViewAction.View)]
+        
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] NewlandawardmasterSearchDto model)
         {
@@ -37,7 +38,7 @@ namespace NewLandAcquisition.Controllers
             return PartialView("_List", result);
         }
 
-        // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandawardmasterdetail model = new Newlandawardmasterdetail();
@@ -50,7 +51,7 @@ namespace NewLandAcquisition.Controllers
             return View(model);
         }
         [HttpPost]
-        //    [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandawardmasterdetail awardmasterdetail)
         {
             try
@@ -87,7 +88,7 @@ namespace NewLandAcquisition.Controllers
                 return View(awardmasterdetail);
             }
         }
-        //   [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newlandawardmasterdetailService.FetchSingleResult(id);
@@ -103,7 +104,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
 
-        //   [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newlandawardmasterdetailService.FetchSingleResult(id);
@@ -119,7 +120,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
         [HttpPost]
-        //    [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandawardmasterdetail newlandawardmasterdetail)
         {
             newlandawardmasterdetail.NewlandvillageList = await _newlandawardmasterdetailService.Getvillage();
@@ -147,7 +148,7 @@ namespace NewLandAcquisition.Controllers
                 return View(newlandawardmasterdetail);
             }
         }
-        //    [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality 
         {
             var result = await _newlandawardmasterdetailService.Delete(id);
@@ -193,7 +194,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        //    [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Newlandawardmasterdetail> result = await _newlandawardmasterdetailService.GetAll();

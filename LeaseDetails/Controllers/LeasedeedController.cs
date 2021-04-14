@@ -52,6 +52,7 @@ namespace LeaseDetails.Controllers
             var result = await _leasedeedService.GetPagedLeasedeed(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Leasedeed deed = new Leasedeed();
@@ -62,7 +63,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Leasedeed deed)
         {
             deed.ApplicationList = await _leasedeedService.GetAllApplications();
@@ -110,8 +111,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Leasedeed deed)
         {
             deed.ApplicationList = await _leasedeedService.GetAllApplications();
@@ -149,7 +150,7 @@ namespace LeaseDetails.Controllers
             return View(deed);
         }
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _leasedeedService.Delete(id);
@@ -167,7 +168,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _leasedeedService.FetchSingleResult(id);
@@ -179,7 +180,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-        //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Leasedeed> result = await _leasedeedService.GetAllLeasedeed();

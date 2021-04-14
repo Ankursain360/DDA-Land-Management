@@ -25,7 +25,7 @@ namespace NewLandAcquisition.Controllers
             {
             _newLandProposalPlotDetailsService = newLandProposalPlotDetailsService;
             }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
             {
                 return View();
@@ -37,7 +37,7 @@ namespace NewLandAcquisition.Controllers
             var result = await _newLandProposalPlotDetailsService.GetPagedProposalplotdetails(model);
             return PartialView("_List", result);
         }
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandacquistionproposalplotdetails newlandacquistionproposalplotdetails = new Newlandacquistionproposalplotdetails();
@@ -52,7 +52,7 @@ namespace NewLandAcquisition.Controllers
 
 
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandacquistionproposalplotdetails newlandacquistionproposalplotdetails)
         {
             try
@@ -92,7 +92,7 @@ namespace NewLandAcquisition.Controllers
                 return View(newlandacquistionproposalplotdetails);
             }
         }
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -113,7 +113,7 @@ namespace NewLandAcquisition.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandacquistionproposalplotdetails newlandacquistionproposalplotdetails)
         {
 
@@ -150,7 +150,7 @@ namespace NewLandAcquisition.Controllers
 
 
 
-        //[AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == 0)
@@ -183,7 +183,7 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
-       //[AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Newlandacquistionproposalplotdetails> result = await _newLandProposalPlotDetailsService.GetAllProposalplotdetails();

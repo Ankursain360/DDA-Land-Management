@@ -24,7 +24,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Newlandvillage model = new Newlandvillage();

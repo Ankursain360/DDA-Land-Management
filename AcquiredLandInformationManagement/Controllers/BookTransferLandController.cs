@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -21,6 +23,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _booktransferlandService = booktransferlandService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
            
@@ -33,7 +36,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _booktransferlandService.GetPagedBooktransferland(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Booktransferland booktransferland = new Booktransferland();
@@ -56,7 +59,7 @@ namespace AcquiredLandInformationManagement.Controllers
        
 
         [HttpPost]
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Booktransferland booktransferland)
         {
             try
@@ -94,6 +97,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(booktransferland);
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -112,7 +116,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpPost]
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Booktransferland booktransferland)
         {
             booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
@@ -146,7 +150,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -169,7 +173,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _booktransferlandService.GetAllBooktransferland();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _booktransferlandService.FetchSingleResult(id);

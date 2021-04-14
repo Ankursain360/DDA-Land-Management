@@ -10,9 +10,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-
-
-
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -26,7 +25,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _disposallandtypeService = disposallandtypeService;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
 
@@ -34,6 +33,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpPost]
+
         public async Task<PartialViewResult> List([FromBody] DisposalLandTypeSearchDto model)
         {
             var result = await _disposallandtypeService.GetPagedDisposalLandType(model);
@@ -43,7 +43,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -51,7 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [HttpPost]
-        
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Disposallandtype disposallandtype)
         {
             try
@@ -86,7 +86,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(disposallandtype);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _disposallandtypeService.FetchSingleResult(id);
@@ -98,7 +98,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpPost]
-        
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Disposallandtype disposallandtype)
         {
             if (ModelState.IsValid)
@@ -144,7 +144,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
             if (id == 0)
@@ -162,7 +162,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return View("Index", result);
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _disposallandtypeService.FetchSingleResult(id);

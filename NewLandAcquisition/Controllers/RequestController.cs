@@ -42,7 +42,7 @@ namespace NewLandAcquisition.Controllers
             _approvalproccessService = approvalproccessService;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -58,7 +58,7 @@ namespace NewLandAcquisition.Controllers
             return PartialView("_List", result);
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Request request = new Request();
@@ -68,7 +68,8 @@ namespace NewLandAcquisition.Controllers
 
 
         [HttpPost]
-        // [ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Request request)
         {
             try
@@ -152,7 +153,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _requestService.FetchSingleResult(id);
@@ -166,6 +167,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Request scheme)
         {
            
@@ -207,7 +209,7 @@ namespace NewLandAcquisition.Controllers
                 return View(scheme);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -230,7 +232,7 @@ namespace NewLandAcquisition.Controllers
             var list = await _requestService.GetAllRequest();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _requestService.FetchSingleResult(id);

@@ -12,6 +12,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
+
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class Undersection17plotdetailController : Controller
@@ -23,7 +26,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _undersection17plotdetailService = undersection17plotdetailService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _undersection17plotdetailService.GetAllUndersection17plotdetail();
@@ -35,7 +38,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _undersection17plotdetailService.GetPagedUndersection17plotdetail(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
 
         {
@@ -52,6 +55,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Undersection17plotdetail undersection17Plotdetail)
         {
             try
@@ -90,7 +94,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -108,6 +112,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Undersection17plotdetail undersection17plotdetail)
         {
             undersection17plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
@@ -141,7 +146,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(undersection17plotdetail);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -164,7 +169,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _undersection17plotdetailService.GetAllUndersection17plotdetail();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _undersection17plotdetailService.FetchSingleResult(id);

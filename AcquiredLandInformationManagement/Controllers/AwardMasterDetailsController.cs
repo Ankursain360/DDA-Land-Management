@@ -22,6 +22,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _awardmasterdetailsService = awardmasterdetailsService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -35,7 +36,8 @@ namespace AcquiredLandInformationManagement.Controllers
             return PartialView("_List", result);
         }
 
-       // [AuthorizeContext(ViewAction.Add)]
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Awardmasterdetail model = new Awardmasterdetail();
@@ -48,7 +50,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(model);
         }
         [HttpPost]
-        //    [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Awardmasterdetail awardmasterdetail)
         {
             try
@@ -85,8 +87,8 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(awardmasterdetail);
             }
         }
-         //   [AuthorizeContext(ViewAction.Edit)]
-            public async Task<IActionResult> Edit(int id)
+        [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id)
             {
                 var Data = await _awardmasterdetailsService.FetchSingleResult(id);
                  Data.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
@@ -101,8 +103,8 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(Data);
             }
 
-         //   [AuthorizeContext(ViewAction.View)]
-            public async Task<IActionResult> View(int id)
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
             {
             var Data = await _awardmasterdetailsService.FetchSingleResult(id);
             Data.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
@@ -117,7 +119,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(Data);
             }
         [HttpPost]
-    //    [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Awardmasterdetail awardmasterdetail)
         {
             awardmasterdetail.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
@@ -145,7 +147,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(awardmasterdetail);
             }
         }
-    //    [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality 
         {
             var result = await _awardmasterdetailsService.Delete(id);
@@ -190,8 +192,8 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
-       
-    //    [AuthorizeContext(ViewAction.Download)]
+
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Awardmasterdetail> result = await _awardmasterdetailsService.GetAll();

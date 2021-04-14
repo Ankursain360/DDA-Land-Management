@@ -23,7 +23,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _awardplotDetailService = awardplotDetailService;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -37,7 +37,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Awardplotdetails awardplotdetails = new Awardplotdetails();
@@ -51,6 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Awardplotdetails awardplotdetails)
         {
             try
@@ -88,7 +89,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _awardplotDetailService.FetchSingleResult(id);
@@ -108,6 +109,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Awardplotdetails awardplotdetails)
         {
 
@@ -144,7 +146,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(awardplotdetails);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -167,7 +169,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _awardplotDetailService.GetAwardplotdetails();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _awardplotDetailService.FetchSingleResult(id);

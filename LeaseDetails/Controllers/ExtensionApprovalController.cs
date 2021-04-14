@@ -43,6 +43,7 @@ namespace LeaseDetails.Controllers
 
 
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -54,7 +55,7 @@ namespace LeaseDetails.Controllers
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_ListExtensionApproval", result);
         }
-      
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _extensionApprovalService.FetchSingleResult(id);

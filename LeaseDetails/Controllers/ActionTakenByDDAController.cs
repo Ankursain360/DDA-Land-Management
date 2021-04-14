@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Core.Enum;
 
 namespace LeaseDetails.Controllers
 {
@@ -37,6 +38,7 @@ namespace LeaseDetails.Controllers
             targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
 
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -48,6 +50,7 @@ namespace LeaseDetails.Controllers
 
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _actiontakenbyddaService.FetchSingleResult(id);
@@ -69,7 +72,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Actiontakenbydda model)
         {
             string Documentt = _configuration.GetSection("FilePaths:ActionTakenByDDA:Doc").Value.ToString();

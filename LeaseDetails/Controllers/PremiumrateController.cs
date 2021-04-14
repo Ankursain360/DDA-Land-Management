@@ -25,7 +25,7 @@ namespace LeaseDetails.Controllers
         {
             _premiumrateService = premiumrateService;
         }
-      //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -39,7 +39,7 @@ namespace LeaseDetails.Controllers
             var result = await _premiumrateService.GetPagedPremiumrate(model);
             return PartialView("_List", result);
         }
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Premiumrate rate = new Premiumrate();
@@ -53,7 +53,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-      //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Premiumrate rate)
         {
             rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
@@ -92,7 +92,7 @@ namespace LeaseDetails.Controllers
                 return View(rate);
             }
         }
-       // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _premiumrateService.FetchSingleResult(id);
@@ -107,8 +107,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-      //  [ValidateAntiForgeryToken]
-      //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Premiumrate rate)
         {
             rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
@@ -143,8 +143,8 @@ namespace LeaseDetails.Controllers
             }
             return View(rate);
         }
-       
-      //  [AuthorizeContext(ViewAction.Delete)]
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _premiumrateService.Delete(id);
@@ -162,7 +162,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-      //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _premiumrateService.FetchSingleResult(id);
@@ -176,7 +176,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-      //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Premiumrate> result = await _premiumrateService.GetAllPremiumrate();

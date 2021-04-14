@@ -25,7 +25,7 @@ namespace NewLandAcquisition.Controllers
             _newlandvillageService = newlandvillageService;
         }
 
-        
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -41,7 +41,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandvillage newlandvillage = new Newlandvillage();
@@ -55,7 +55,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandvillage newlandvillage)
         {
             try
@@ -95,7 +95,7 @@ namespace NewLandAcquisition.Controllers
 
 
 
-      //  [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newlandvillageService.FetchSingleResult(id);
@@ -111,7 +111,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-      //  [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandvillage newlandvillage)
         {
 
@@ -150,7 +150,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-     //   [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -175,7 +175,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newlandvillageService.FetchSingleResult(id);

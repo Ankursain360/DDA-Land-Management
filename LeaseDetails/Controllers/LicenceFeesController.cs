@@ -36,7 +36,7 @@ namespace LeaseDetails.Controllers
         {
             _licenceFeesService = licenceFeesService;
         }
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -50,7 +50,7 @@ namespace LeaseDetails.Controllers
             var result = await _licenceFeesService.GetPagedLicencefees(model);
             return PartialView("_List", result);
         }
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Licencefees licencefees = new Licencefees();
@@ -63,7 +63,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Licencefees licfees)
         {
             licfees.LeasePurposeList = await _licenceFeesService.GetAllLeasepurpose();
@@ -102,7 +102,7 @@ namespace LeaseDetails.Controllers
                 return View(licfees);
             }
         }
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _licenceFeesService.FetchSingleResult(id);
@@ -116,8 +116,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Licencefees licfees)
         {
             licfees.LeasePurposeList = await _licenceFeesService.GetAllLeasepurpose();
@@ -152,7 +152,7 @@ namespace LeaseDetails.Controllers
             return View(licfees);
         }
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _licenceFeesService.Delete(id);
@@ -170,7 +170,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _licenceFeesService.FetchSingleResult(id);
@@ -183,12 +183,12 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-        //  [AuthorizeContext(ViewAction.Download)]
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Licencefees> result = await _licenceFeesService.GetAllLicencefees();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Premiumrate.xlsx";
+            string sFileName = @"LicenceFees.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }

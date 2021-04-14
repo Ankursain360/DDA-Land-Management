@@ -25,7 +25,7 @@ namespace LeaseDetails.Controllers
         {
             _calculationSheetService = calculationSheetService;
         }
-     
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Allotmententry entry = new Allotmententry();

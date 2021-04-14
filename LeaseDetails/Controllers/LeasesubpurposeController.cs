@@ -25,7 +25,7 @@ namespace LeaseDetails.Controllers
         {
             _LeasesubpurposeService = LeasesubpurposeService;
         }
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -39,7 +39,7 @@ namespace LeaseDetails.Controllers
             var result = await _LeasesubpurposeService.GetPagedLeasesubpurpose(model);
             return PartialView("_List", result);
         }
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Leasesubpurpose Leasesubpurpose = new Leasesubpurpose();
@@ -53,7 +53,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Leasesubpurpose Leasesubpurpose)
         {
             Leasesubpurpose.LeasePurposeUseList = await _LeasesubpurposeService.GetAllLeasepurpose();
@@ -92,7 +92,7 @@ namespace LeaseDetails.Controllers
                 return View(Leasesubpurpose);
             }
         }
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _LeasesubpurposeService.FetchSingleResult(id);
@@ -107,8 +107,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Leasesubpurpose Leasesubpurpose)
         {
             Leasesubpurpose.LeasePurposeUseList = await _LeasesubpurposeService.GetAllLeasepurpose();
@@ -144,7 +144,7 @@ namespace LeaseDetails.Controllers
             return View(Leasesubpurpose);
         }
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _LeasesubpurposeService.Delete(id);
@@ -162,7 +162,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _LeasesubpurposeService.FetchSingleResult(id);

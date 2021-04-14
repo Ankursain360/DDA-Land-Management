@@ -11,6 +11,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using Core.Enum;
+using LeaseDetails.Filters;
+
 namespace LeaseDetails.Controllers
 {
     public class LeasepurposeController : Controller
@@ -22,7 +25,7 @@ namespace LeaseDetails.Controllers
         {
             _LeasepurposeService = LeasepurposeService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _LeasepurposeService.GetLeasepurposes();
@@ -36,7 +39,7 @@ namespace LeaseDetails.Controllers
             var result = await _LeasepurposeService.GetpagedLeasepurpose(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Leasepurpose Leasepurpose)
         {
             try
@@ -82,7 +86,7 @@ namespace LeaseDetails.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _LeasepurposeService.FetchSingleResult(id);
@@ -96,6 +100,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Leasepurpose Leasepurpose)
         {
             if (ModelState.IsValid)
@@ -126,7 +131,7 @@ namespace LeaseDetails.Controllers
                 return View(Leasepurpose);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -149,7 +154,7 @@ namespace LeaseDetails.Controllers
             var list = await _LeasepurposeService.GetLeasepurposes();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _LeasepurposeService.FetchSingleResult(id);

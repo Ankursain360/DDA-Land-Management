@@ -46,6 +46,7 @@ namespace LeaseDetails.Controllers
         }
 
         [AllowAnonymous]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             var Msg = TempData["Message"] as string;
@@ -59,6 +60,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Leaseapplication leaseapplication)
         {
             try

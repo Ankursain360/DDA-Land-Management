@@ -75,6 +75,7 @@ namespace LeaseDetails.Controllers
 
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Hearingdetails hearingdetails)
         {
             try
@@ -219,6 +220,7 @@ namespace LeaseDetails.Controllers
                 return null;
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _hearingdetailsService.FetchSingleResult(id);
@@ -231,8 +233,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Hearingdetails rate)
         {
            

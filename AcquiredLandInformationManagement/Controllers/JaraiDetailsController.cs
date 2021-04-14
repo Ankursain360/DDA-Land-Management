@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -21,7 +23,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _jaraidetailService = jaraidetailService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -33,7 +35,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return PartialView("_List", result);
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Jaraidetails jarai = new Jaraidetails();
@@ -45,6 +47,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Jaraidetails jarai)
         {
 
@@ -215,6 +218,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 x.Address
             }));
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _jaraidetailService.FetchSingleResult(id);
@@ -234,6 +238,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Jaraidetails jarai)
         {
             if (ModelState.IsValid)
@@ -368,7 +373,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(jarai);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
           
@@ -385,7 +390,7 @@ namespace AcquiredLandInformationManagement.Controllers
                var list = await _jaraidetailService.GetAllJaraidetail();
                return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _jaraidetailService.FetchSingleResult(id);

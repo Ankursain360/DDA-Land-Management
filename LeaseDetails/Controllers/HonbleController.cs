@@ -22,7 +22,7 @@ namespace LeaseDetails.Controllers
         {
             _HonbleService = HonbleService;
         }
-        // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             var list = _HonbleService.GetAllHonble();
@@ -36,7 +36,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Honble Honble = new Honble();
@@ -48,7 +48,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Honble Honble)
         {
             try
@@ -114,7 +114,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Honble Honble)
         {
             if (ModelState.IsValid)
@@ -151,7 +151,7 @@ namespace LeaseDetails.Controllers
 
 
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
@@ -178,7 +178,7 @@ namespace LeaseDetails.Controllers
 
 
 
-        // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _HonbleService.FetchSingleResult(id);

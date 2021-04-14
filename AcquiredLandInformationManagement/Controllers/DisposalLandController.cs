@@ -24,6 +24,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _disposallandService = disposallandService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             
@@ -35,6 +36,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _disposallandService.GetPagedDisposalLand(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Disposalland disposalland = new Disposalland();
@@ -48,6 +50,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Disposalland disposalland)
         {
             try
@@ -85,6 +88,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(disposalland);
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -103,7 +107,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpPost]
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Disposalland disposalland)
         {
             disposalland.UtilizationtypeList = await _disposallandService.GetAllUtilizationtype();
@@ -135,7 +139,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(disposalland);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == 0)
@@ -152,7 +156,7 @@ namespace AcquiredLandInformationManagement.Controllers
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View("Index", result);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _disposallandService.FetchSingleResult(id);

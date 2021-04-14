@@ -12,6 +12,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
+
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class UnderSection17DetailsController : Controller
@@ -23,7 +26,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
           _undersection17Service = undersection17Service;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _undersection17Service.GetAllUndersection17();
@@ -35,7 +38,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _undersection17Service.GetPagedUndersection17(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
 
         {
@@ -50,6 +53,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Undersection17 undersection17)
         {
             try
@@ -88,7 +92,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _undersection17Service.FetchSingleResult(id);
@@ -105,6 +109,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Undersection17 undersection17)
         {
             undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
@@ -136,7 +141,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(undersection17);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -159,7 +164,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _undersection17Service.GetAllUndersection17();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _undersection17Service.FetchSingleResult(id);

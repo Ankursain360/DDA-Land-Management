@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Core.Enum;
 
 namespace LeaseDetails.Controllers
 {
@@ -41,6 +42,7 @@ namespace LeaseDetails.Controllers
             targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
 
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();

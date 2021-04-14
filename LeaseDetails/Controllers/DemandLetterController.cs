@@ -28,7 +28,7 @@ namespace LeaseDetails.Controllers
             _demandlettersService = demandlettersService;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
