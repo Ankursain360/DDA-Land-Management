@@ -30,7 +30,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Newlandkhasra model = new Newlandkhasra();

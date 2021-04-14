@@ -12,6 +12,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using NewLandAcquisition.Filters;
+using Core.Enum;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -24,7 +26,7 @@ namespace NewLandAcquisition.Controllers
         {
             _khasraService = khasraService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _khasraService.GetAllKhasra();
@@ -36,8 +38,8 @@ namespace NewLandAcquisition.Controllers
             var result = await _khasraService.GetPagedKhasra(model);
             return PartialView("_List", result);
         }
-
-    public async Task<IActionResult> Create()
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
         {
             Newlandkhasra khasra = new Newlandkhasra();
             khasra.IsActive = 1;
@@ -50,6 +52,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandkhasra khasra)
         {
             try
@@ -88,7 +91,7 @@ namespace NewLandAcquisition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _khasraService.FetchSingleResult(id);
@@ -105,6 +108,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandkhasra khasra)
 
         {
@@ -138,7 +142,7 @@ namespace NewLandAcquisition.Controllers
                 return View(khasra);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -161,7 +165,7 @@ namespace NewLandAcquisition.Controllers
             var list = await _khasraService.GetAllKhasra();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _khasraService.FetchSingleResult(id);

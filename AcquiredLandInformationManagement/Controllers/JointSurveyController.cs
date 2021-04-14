@@ -11,6 +11,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -22,7 +24,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _jointsurveyService = jointsurveyService;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
 
 
@@ -38,7 +40,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
 
@@ -54,6 +56,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Jointsurvey jointsurvey)
         {
             try
@@ -90,7 +93,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             Jointsurvey jointsurvey = new Jointsurvey();
@@ -108,6 +111,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Jointsurvey jointsurvey)
         {
             try
@@ -147,7 +151,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
             var result = await _jointsurveyService.Delete(id);
@@ -166,7 +170,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
 

@@ -17,6 +17,8 @@ using Dto.Master;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using LeaseDetails.Filters;
+using Core.Enum;
 
 namespace LeaseDetails.Controllers
 {
@@ -35,7 +37,7 @@ namespace LeaseDetails.Controllers
             _hostingEnvironment = hostingEnvironment;
             _configuration = configuration;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             return View();
@@ -46,7 +48,7 @@ namespace LeaseDetails.Controllers
             var result = await _allotmentEntryService.GetPagedAllotmententry(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
 
         {
@@ -65,6 +67,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Allotmententry allotmententry)
         {
             try
@@ -196,7 +199,7 @@ namespace LeaseDetails.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _allotmentEntryService.FetchSingleResult(id);
@@ -216,6 +219,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Allotmententry allotmententry)
         {
             allotmententry.ModifiedBy = SiteContext.UserId;
@@ -252,7 +256,7 @@ namespace LeaseDetails.Controllers
                 return View(allotmententry);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -275,7 +279,7 @@ namespace LeaseDetails.Controllers
             var list = await _allotmentEntryService.GetAllAllotmententry();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _allotmentEntryService.FetchSingleResult(id);

@@ -13,6 +13,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
+using NewLandAcquisition.Filters;
+using Core.Enum;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -25,7 +27,7 @@ namespace NewLandAcquisition.Controllers
             _newLandJointSurveyService = newLandJointSurveyService;
             _configuration = configuration;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -37,7 +39,7 @@ namespace NewLandAcquisition.Controllers
             var result = await _newLandJointSurveyService.GetPagedNewLandJointSurvey(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandjointsurvey newlandjointsurvey = new Newlandjointsurvey();
@@ -51,6 +53,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandjointsurvey newlandjointsurvey)
         {
             newlandjointsurvey.ZoneList = await _newLandJointSurveyService.GetAllZone();
@@ -170,6 +173,7 @@ namespace NewLandAcquisition.Controllers
                 
             }));
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newLandJointSurveyService.FetchSingleResult(id);
@@ -187,6 +191,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandjointsurvey newlandjointsurvey)
         {
             newlandjointsurvey.ZoneList = await _newLandJointSurveyService.GetAllZone();
@@ -315,7 +320,7 @@ namespace NewLandAcquisition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
 
@@ -332,7 +337,7 @@ namespace NewLandAcquisition.Controllers
             var list = await _newLandJointSurveyService.GetAllNewLandJointSurvey();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newLandJointSurveyService.FetchSingleResult(id);

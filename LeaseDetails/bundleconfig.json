@@ -400,5 +400,11 @@
     "inputFiles": [
       "wwwroot/js/timeextensionindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/extensionapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/extensionapprovalcreate.js"
+    ]
   }
 ]

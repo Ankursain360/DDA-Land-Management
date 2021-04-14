@@ -12,6 +12,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using LeaseDetails.Filters;
+using Core.Enum;
+
 namespace LeaseDetails.Controllers
 {
     public class ServiceTypeController : BaseController
@@ -23,7 +26,7 @@ namespace LeaseDetails.Controllers
         {
             _serviceTypeService = serviceTypeService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _serviceTypeService.GetAllServicetype();
@@ -35,7 +38,7 @@ namespace LeaseDetails.Controllers
             var result = await _serviceTypeService.GetPagedServicetype(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -44,6 +47,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Servicetype servicetype)
         {
             try
@@ -80,7 +84,7 @@ namespace LeaseDetails.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _serviceTypeService.FetchSingleResult(id);
@@ -94,6 +98,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Servicetype servicetype)
         {
             if (ModelState.IsValid)
@@ -124,7 +129,7 @@ namespace LeaseDetails.Controllers
                 return View(servicetype);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -147,7 +152,7 @@ namespace LeaseDetails.Controllers
             var list = await _serviceTypeService.GetAllServicetype();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _serviceTypeService.FetchSingleResult(id);

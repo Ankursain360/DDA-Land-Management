@@ -30,6 +30,8 @@ namespace LeaseDetails.Controllers
         private readonly IAllotmentLetterService _allotmentLetterService;
         public IConfiguration _configuration;
         string targetPathAllotmentLetter = "";
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -48,7 +50,7 @@ namespace LeaseDetails.Controllers
             _configuration = configuration;
             targetPathAllotmentLetter = _configuration.GetSection("FilePaths:Allotmentletter:AllotmentletterFilePath").Value.ToString();
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Allotmentletter allotmentletter = new Allotmentletter();
@@ -64,7 +66,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Allotmentletter model)
         {
 
@@ -94,7 +96,7 @@ namespace LeaseDetails.Controllers
             var Data = await _allotmentLetterService.FetchAllotmentLetterDetails(model.AllotmentId);
             return PartialView("Receipt", Data);
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(id);
@@ -107,8 +109,8 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
         [HttpPost]
-        //  [ValidateAntiForgeryToken]
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Allotmentletter allotmentletter)
         {
             allotmentletter.RefNoList = await _allotmentLetterService.GetRefNoListforAllotmentLetter();

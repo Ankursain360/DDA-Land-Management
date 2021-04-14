@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -26,6 +28,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _nazulService = nazulService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var result = await _nazulService.GetAllNazul();
@@ -37,7 +40,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _nazulService.GetPagedNazul(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Nazul nazul = new Nazul();
@@ -50,6 +53,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Nazul nazul)
         {
             try
@@ -85,7 +89,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(nazul);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _nazulService.FetchSingleResult(id);
@@ -99,6 +103,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Nazul nazul)
         {
             nazul.VillageList = await _nazulService.GetAllVillageList();
@@ -127,7 +132,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(nazul);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  
         {
 
@@ -146,7 +151,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _nazulService.FetchSingleResult(id);

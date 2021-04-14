@@ -12,6 +12,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
+
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class KhasraMasterController : Controller
@@ -23,7 +26,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _khasraService = khasraService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _khasraService.GetAllKhasra();
@@ -35,8 +38,8 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _khasraService.GetPagedKhasra(model);
             return PartialView("_List", result);
         }
-
-    public async Task<IActionResult> Create()
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
         
         {
             Khasra khasra = new Khasra();
@@ -50,6 +53,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Khasra khasra)
         {
             try
@@ -88,7 +92,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _khasraService.FetchSingleResult(id);
@@ -105,6 +109,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Khasra khasra)
 
         {
@@ -138,7 +143,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(khasra);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -161,7 +166,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _khasraService.GetAllKhasra();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _khasraService.FetchSingleResult(id);

@@ -37,6 +37,9 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Extension
                                      .Include(x => x.Allotment)
                                      .Include(x => x.Allotment.Application)
+                                     .Include(x => x.Allotment.LeasePurposesType)
+                                     .Include(x => x.Allotment.LeasesType)
+                                     .Include(x => x.LeaseApplication)
                                      .Where(x => x.Id == id)
                                      .FirstOrDefaultAsync();
         }

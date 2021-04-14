@@ -22,7 +22,7 @@ namespace LeaseDetails.Controllers
         {
             _JudgementstatusService = JudgementstatusService;
         }
-        // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             var list = _JudgementstatusService.GetAllJudgementstatus();
@@ -37,7 +37,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Judgementstatus Judgementstatus = new Judgementstatus();
@@ -49,7 +49,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Judgementstatus Judgementstatus)
         {
             try
@@ -83,22 +83,8 @@ namespace LeaseDetails.Controllers
                 return View(Judgementstatus);
             }
         }
-        //[AcceptVerbs("Get", "Post")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Exist(int Id, string Name)
-        //{
-        //    var result = await _PropertyTypeService.CheckUniqueName(Id, Name);
-        //    if (result == false)
-        //    {
-        //        return Json(true);
-        //    }
-        //    else
-        //    {
-        //        return Json($"Village: {Name} already exist");
-        //    }
-        //}
 
-        //  [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             Judgementstatus Judgementstatus = new Judgementstatus();
@@ -115,7 +101,7 @@ namespace LeaseDetails.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Judgementstatus Judgementstatus)
         {
             if (ModelState.IsValid)
@@ -152,7 +138,7 @@ namespace LeaseDetails.Controllers
 
 
 
-        //  [AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             try
@@ -179,7 +165,7 @@ namespace LeaseDetails.Controllers
 
 
 
-        // [AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _JudgementstatusService.FetchSingleResult(id);
@@ -193,7 +179,7 @@ namespace LeaseDetails.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Judgementstatus> result = await _JudgementstatusService.GetAll();

@@ -12,6 +12,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -24,7 +26,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _schemeService = schemeService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
 
@@ -38,7 +40,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Scheme scheme = new Scheme();
@@ -49,6 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Scheme scheme)
         {
             try
@@ -85,7 +88,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _schemeService.FetchSingleResult(id);
@@ -99,6 +102,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Scheme scheme)
         {
             if (ModelState.IsValid)
@@ -130,7 +134,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -153,7 +157,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _schemeService.GetAllScheme();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _schemeService.FetchSingleResult(id);

@@ -29,7 +29,7 @@ namespace NewLandAcquisition.Controllers
             {
             _newlandProposaldetailsService = newlandProposaldetailsService;
             }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public  IActionResult Index()
             {
                
@@ -54,7 +54,7 @@ namespace NewLandAcquisition.Controllers
 
 
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandacquistionproposaldetails newlandacquistionproposaldetails)
         {
             try
@@ -90,7 +90,7 @@ namespace NewLandAcquisition.Controllers
                 return View(newlandacquistionproposaldetails);
             }
         }
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -105,7 +105,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandacquistionproposaldetails newlandacquistionproposaldetails)
         {
             newlandacquistionproposaldetails.SchemeList = await _newlandProposaldetailsService.GetAllScheme();
@@ -151,7 +151,7 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
-        //[AuthorizeContext(ViewAction.Delete)]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  
         {
             if (id == 0)

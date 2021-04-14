@@ -12,6 +12,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using NewLandAcquisition.Filters;
+using Core.Enum;
+
 namespace NewLandAcquisition.Controllers
 {
     public class NewLandEnhanceCompensationController : BaseController
@@ -23,7 +26,7 @@ namespace NewLandAcquisition.Controllers
         {
             _newLandEnhanceCompensationService = newLandEnhanceCompensationService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _newLandEnhanceCompensationService.GetAllNewlandenhancecompensation();
@@ -35,7 +38,7 @@ namespace NewLandAcquisition.Controllers
             var result = await _newLandEnhanceCompensationService.GetPagedNewlandenhancecompensation(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
 
         {
@@ -52,6 +55,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandenhancecompensation newlandenhancecompensation)
         {
             try
@@ -91,7 +95,7 @@ namespace NewLandAcquisition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _newLandEnhanceCompensationService.FetchSingleResult(id);
@@ -107,6 +111,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandenhancecompensation newlandenhancecompensation)
         {
 
@@ -140,7 +145,7 @@ namespace NewLandAcquisition.Controllers
                 return View(newlandenhancecompensation);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -163,7 +168,7 @@ namespace NewLandAcquisition.Controllers
             var list = await _newLandEnhanceCompensationService.GetAllNewlandenhancecompensation();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _newLandEnhanceCompensationService.FetchSingleResult(id);

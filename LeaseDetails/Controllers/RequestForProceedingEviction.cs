@@ -40,6 +40,7 @@ namespace LeaseDetails.Controllers
             targetPathNOC = _configuration.GetSection("FilePaths:CancellationEntry:NOCFilePath").Value.ToString();
             targetPathCanellationOrder = _configuration.GetSection("FilePaths:CancellationEntry:CancellationOrderFilePath").Value.ToString();
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var Msg = TempData.Peek("Message");
@@ -56,7 +57,7 @@ namespace LeaseDetails.Controllers
 
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Requestforproceeding requestforproceeding = new Requestforproceeding();
@@ -69,6 +70,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Requestforproceeding requestforproceeding)
         {
             try
@@ -120,7 +122,7 @@ namespace LeaseDetails.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _requestforproceedingService.FetchSingleResult(id);
@@ -140,6 +142,7 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Requestforproceeding requestforproceeding)
         {
             requestforproceeding.CancellationList = await _requestforproceedingService.GetCancellationListData();
@@ -189,7 +192,7 @@ namespace LeaseDetails.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _requestforproceedingService.FetchSingleResult(id);
@@ -205,7 +208,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try

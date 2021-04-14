@@ -12,6 +12,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -23,7 +25,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _Possessiondetailservice = possessiondetailsService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -41,7 +43,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Possessiondetails undersection4plot = new Possessiondetails();
@@ -55,6 +57,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Possessiondetails undersection4plot)
         {
             try
@@ -93,7 +96,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _Possessiondetailservice.FetchSingleResult(id);
@@ -113,6 +116,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Possessiondetails undersection4plot)
         {
 
@@ -147,7 +151,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(undersection4plot);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -170,7 +174,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _Possessiondetailservice.GetAllPossessiondetails();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _Possessiondetailservice.FetchSingleResult(id);

@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -23,7 +25,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _appealdetailService = appealdetailService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var list = await _appealdetailService.GetAllAppealdetail();
@@ -35,7 +37,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _appealdetailService.GetPagedAppealdetail(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -44,6 +46,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Appealdetail appealdetail)
         {
             try
@@ -80,7 +83,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _appealdetailService.FetchSingleResult(id);
@@ -94,6 +97,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Appealdetail appealdetail)
         {
             if (ModelState.IsValid)
@@ -124,7 +128,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(appealdetail);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -147,7 +151,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _appealdetailService.GetAllAppealdetail();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _appealdetailService.FetchSingleResult(id);

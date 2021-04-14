@@ -12,7 +12,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-
+using NewLandAcquisition.Filters;
+using Core.Enum;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -26,6 +27,7 @@ namespace NewLandAcquisition.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -39,7 +41,7 @@ namespace NewLandAcquisition.Controllers
 
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             Newlandscheme scheme = new Newlandscheme();
@@ -50,6 +52,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandscheme scheme)
         {
             try
@@ -83,7 +86,7 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _schemeService.FetchSingleResult(id);
@@ -97,6 +100,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandscheme scheme)
         {
             if (ModelState.IsValid)
@@ -128,7 +132,7 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -151,7 +155,7 @@ namespace NewLandAcquisition.Controllers
             var list = await _schemeService.GetAllScheme();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _schemeService.FetchSingleResult(id);

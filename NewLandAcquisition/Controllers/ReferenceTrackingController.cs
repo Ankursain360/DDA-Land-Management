@@ -24,7 +24,7 @@ namespace NewLandAcquisition.Controllers
             _requestService = requestService;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             Request request = new Request();

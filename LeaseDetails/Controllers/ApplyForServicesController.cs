@@ -25,6 +25,7 @@ namespace LeaseDetails.Controllers
         {
             _applyForServicesService = applyForServicesService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
