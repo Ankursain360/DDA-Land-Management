@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Dto.Search.PayemntDescriptionListDto>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+
+
+          
+            <th>Year </th>
+            <th>Period covered by demanmd</th>
+            <th>Due Date of payment</th>
+            <th>Bill/Letter No & Date</th>
+            <th>Transaction Type</th>
+            <th>Amount</th>
+            <th>Lease Payment Type</th>
+            <th>Receipt No</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count() > 0)
+        {
+
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            @*<td>@item.LeasePurposesType.PurposeUse</td>*@
+            <td>@(Convert.ToDateTime(item.PYear).ToString("yyyy"))</td>
+
+
+
+            <td>  @(Convert.ToDateTime(item.FromDate).ToString("dd-MMM-yyyy")) &nbsp;-&nbsp; @(Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy"))</td>
+            <td>   @(Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy"))</td>
+            <td></td>
+        
+            @if (item.TransactionType == "Dr")
+            {
+                <td>Debit</td>
+            }
+            else if(item.TransactionType == "Cr"){
+            
+            <td>Credit</td>
+            }
+          
+            <td>@item.Amount</td>
+            <td>@item.Name</td>
+            <td>@item.RecieptNo</td>
+
+
+        </tr>
+            }}
+
+
+        else
+        {
+            <tr>
+                <th colspan="13" style="text-align:center"> Data Not Available </th>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

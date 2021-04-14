@@ -247,5 +247,55 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+
+
+
+
+     
+
+
+
+
+        public async Task<List<PayemntDescriptionListDto>> GetPagedPaymentReport(PaymentdetailssearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("Paymentdescriptiondetails")
+                                            .WithSqlParams(("P_allotmentId", model.allotmentid)
+                                            //,
+                                            //("DemandDate", model.demanddate)
+                                            )
+
+
+
+                                            .ExecuteStoredProcedureAsync<PayemntDescriptionListDto>();
+
+                return (List<PayemntDescriptionListDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

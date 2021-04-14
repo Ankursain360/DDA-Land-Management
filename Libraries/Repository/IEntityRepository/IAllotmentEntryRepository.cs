@@ -28,5 +28,6 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<DemandletterdatalistDto>> Getdemandletteralldata(DemandletterDateSearchDto model);
         Task<bool> CreatePaymentPremiumDr(Payment model);
+        Task<List<PayemntDescriptionListDto>> GetPagedPaymentReport(PaymentdetailssearchDto model);
     }
 }

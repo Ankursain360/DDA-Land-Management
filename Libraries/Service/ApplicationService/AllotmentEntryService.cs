@@ -263,6 +263,15 @@ namespace Libraries.Service.ApplicationService
             model.CreatedDate = DateTime.Now;
             return await _allotmentEntryRepository.CreatePaymentPremiumDr(model);
         }
+
+
+        public async Task<List<PayemntDescriptionListDto>> GetPagedPaymentReport(PaymentdetailssearchDto model)
+        {
+            return await _allotmentEntryRepository.GetPagedPaymentReport(model);
+
+        }
+
+
     }
 }
 
