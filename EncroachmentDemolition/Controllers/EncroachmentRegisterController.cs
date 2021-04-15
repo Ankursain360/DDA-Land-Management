@@ -86,7 +86,7 @@ namespace EncroachmentDemolition.Controllers
             string FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
             if (ModelState.IsValid)
             {
-                encroachmentRegisterations.WatchWardId = null;
+                encroachmentRegisterations.WatchWardId = encroachmentRegisterations.WatchWardId == 0 ? null : encroachmentRegisterations.WatchWardId;
                 var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
                 if (result)
                 {
@@ -96,12 +96,14 @@ namespace EncroachmentDemolition.Controllers
                         encroachmentRegisterations.Type != null && 
                         encroachmentRegisterations.DateOfEncroachment != null && 
                         encroachmentRegisterations.CountOfStructure != null && 
-                        encroachmentRegisterations.ReferenceNoOnLocation != null && 
+                        encroachmentRegisterations.ReferenceNoOnLocation != null &&
+                        encroachmentRegisterations.ConstructionStatus != null &&
                         encroachmentRegisterations.NameOfStructure.Count > 0 &&
                         encroachmentRegisterations.AreaApprox.Count > 0 &&
                         encroachmentRegisterations.Type.Count > 0 && 
                         encroachmentRegisterations.DateOfEncroachment.Count > 0 &&
                         encroachmentRegisterations.CountOfStructure.Count > 0 &&
+                        encroachmentRegisterations.ConstructionStatus.Count > 0 &&
                         encroachmentRegisterations.ReferenceNoOnLocation.Count > 0)
                     {
                         List<DetailsOfEncroachment> detailsOfEncroachment = new List<DetailsOfEncroachment>();
@@ -109,14 +111,14 @@ namespace EncroachmentDemolition.Controllers
                         {
                             detailsOfEncroachment.Add(new DetailsOfEncroachment
                             {
-                                Area = encroachmentRegisterations.AreaApprox[i],
-                                CountOfStructure = encroachmentRegisterations.CountOfStructure[i],
-                                DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment[i],
-                                ReligiousStructure = encroachmentRegisterations.ReligiousStructure[i],
-                                ConstructionStatus = encroachmentRegisterations.ConstructionStatus[i],
-                                NameOfStructure = encroachmentRegisterations.NameOfStructure[i],
-                                ReferenceNoOnLocation = encroachmentRegisterations.ReferenceNoOnLocation[i],
-                                Type = encroachmentRegisterations.Type[i],
+                                Area = encroachmentRegisterations.AreaApprox.Count <= i ? 0 : encroachmentRegisterations.AreaApprox[i],
+                                CountOfStructure = encroachmentRegisterations.CountOfStructure.Count <= i ? 0 : encroachmentRegisterations.CountOfStructure[i],
+                                DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment.Count <= i ? 0 : encroachmentRegisterations.DateOfEncroachment[i],
+                                ReligiousStructure = encroachmentRegisterations.ReligiousStructure.Count <= i ? "" : encroachmentRegisterations.ReligiousStructure[i],
+                                ConstructionStatus = encroachmentRegisterations.ConstructionStatus.Count <= i ? "" : encroachmentRegisterations.ConstructionStatus[i],
+                                NameOfStructure = encroachmentRegisterations.NameOfStructure.Count <= i ? "" : encroachmentRegisterations.NameOfStructure[i],
+                                ReferenceNoOnLocation = encroachmentRegisterations.ReferenceNoOnLocation.Count <= i ? "" : encroachmentRegisterations.ReferenceNoOnLocation[i],
+                                Type = encroachmentRegisterations.Type.Count <= i ? "" : encroachmentRegisterations.Type[i],
                                 EncroachmentRegisterationId = encroachmentRegisterations.Id
                             });
                         }
