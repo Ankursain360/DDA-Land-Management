@@ -191,6 +191,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
+        public async Task<Newlandkhasra> FetchSingleKhasra1Result(int? khasraId)
+        {
+            return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
 
     }
 }

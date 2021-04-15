@@ -173,5 +173,12 @@ namespace NewLandAcquisition.Controllers
 
             return Json(await _newlandus4plotService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
+      
+        public async Task<JsonResult> GetKhasra1AreaList(int? khasraid)
+        {
+            khasraid = khasraid ?? 0;
+
+            return Json(await _newlandus4plotService.FetchSingleKhasra1Result(Convert.ToInt32(khasraid)));
+        }
     }
 }

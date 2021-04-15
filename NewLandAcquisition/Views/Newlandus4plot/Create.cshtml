@@ -12,7 +12,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","Name"))">
-                        <option selected disabled="disabled"value="">Select</option>
+                        <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="NotificationId" class="text-danger"></span>
                     <label asp-for="NotificationId" class="floating-label">Notification No</label>
@@ -54,39 +54,70 @@
             </div>
         </div>
 
+        <h3 class="my-3 d-flex sub-heading pt-4"> Actual Area </h3>
+        <div class="row mt-md-3">
+
+
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input readonly asp-for="ABigha" placeholder="Notification"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="ABigha" class="text-danger"></span>
+                    <label class="floating-label">Bigha    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div  class="floating-label-wrap mb-3 mb-md-0">
+                    <input readonly asp-for="ABiswa" placeholder="Name"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="ABiswa" class="text-danger"></span>
+                    <label class="floating-label">Biswa </label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div  class="floating-label-wrap mb-3 mb-md-0">
+                    <input readonly asp-for="ABiswanshi" placeholder="NoOfKhatauni"
+                           class="floating-label-field floating-label-field--s3 numbers" />
+                    <span asp-validation-for="ABiswanshi" class="text-danger"></span>
+                    <label class="floating-label">Biswanshi </label>
+                </div>
+            </div>
+
+
+        </div>
         <h3 class="my-3 d-flex sub-heading pt-4">Area </h3>
         <div class="row mt-md-3">
 
 
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Bigha" placeholder="Notification"
+                    <input  asp-for="Bigha" placeholder="Notification"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="Bigha" class="text-danger"></span>
                     <label class="floating-label">Bigha    </label>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Biswa" placeholder="Name" 
+                <div  class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Biswa" placeholder="Name"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="Biswa" class="text-danger"></span>
                     <label class="floating-label">Biswa </label>
                 </div>
             </div>
-       
+
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Biswanshi" placeholder="NoOfKhatauni" 
+                    <input asp-for="Biswanshi" placeholder="NoOfKhatauni"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="Biswanshi" class="text-danger"></span>
                     <label class="floating-label">Biswanshi </label>
                 </div>
             </div>
-      
-        
-        </div>
 
+
+        </div>
 
         <div class="row mt-md-3">
             <div class="col-md-12">
@@ -100,7 +131,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit" >Create</button>
+                <button class="btn btn-theme " type="submit">Create</button>
                 @Html.ActionLink("Back", "Index", "Newlandus4plot", null, new { @class = "btn btn-theme " })
 
             </div>

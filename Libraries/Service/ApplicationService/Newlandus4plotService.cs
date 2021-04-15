@@ -30,6 +30,9 @@ namespace Libraries.Service.ApplicationService
             model.NotificationId = us4.NotificationId;
             model.VillageId = us4.VillageId;
             model.KhasraId = us4.KhasraId;
+            model.ABigha = us4.ABigha;
+            model.ABiswa = us4.ABiswa;
+            model.ABiswanshi = us4.ABiswanshi;
             model.Bigha = us4.Bigha;
             model.Biswa = us4.Biswa;
             model.Biswanshi = us4.Biswanshi;
@@ -87,6 +90,10 @@ namespace Libraries.Service.ApplicationService
             return khasraList;
         }
         public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _newlandus4plotRepository.FetchSingleKhasraResult(khasraId);
+        }
+        public async Task<Newlandkhasra> FetchSingleKhasra1Result(int? khasraId)
         {
             return await _newlandus4plotRepository.FetchSingleKhasraResult(khasraId);
         }
