@@ -92,8 +92,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
     if ($("#tbl_posts #add #ConstructionStatus").children("option:selected").val() != '' && $("#tbl_posts #add #ConstructionStatus").children("option:selected").val() != undefined && $("#tbl_posts #add #NameOfStructure").val() != '' && $("#tbl_posts #add #AreaApprox").val() != '' && $("#tbl_posts #add #Type").val() != ''
         && $("#tbl_posts #add #DateOfEncroachment").val() != '' && $("#tbl_posts #add #ReligiousStructure").val() != '' && $("#tbl_posts #add #ReferenceNoOnLocation").val() != '' && $("#tbl_posts #add #CountOfStructure").val() != ''
     ) {
-        var ConstructionStatus// = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
-        var ReligiousStructure //= $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();
+        var ConstructionStatus = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
+        var ReligiousStructure = $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -113,6 +113,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         debugger
         /*$("#tbl_posts #add .form-control").val('');*/ 
         $("#tbl_posts #add .floating-label-field").val('');
+        $("#tbl_posts #add #ConstructionStatus").val("").trigger('change');
+        $("#tbl_posts #add #ReligiousStructure").val("").trigger('change');
     }
     else {
         alert('Please fill record before add new record ');
