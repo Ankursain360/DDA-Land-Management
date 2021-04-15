@@ -23,36 +23,51 @@ namespace Libraries.Model.Entity
         }
         public int? WatchWardId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Department is Mandatory Field", AllowEmptyStrings = false)]
         public int DepartmentId { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Zone is Mandatory Field", AllowEmptyStrings = false)]
         public int ZoneId { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Division is Mandatory Field", AllowEmptyStrings = false)]
         public int DivisionId { get; set; }
-        [Required] 
+       
+        [Required(ErrorMessage = "Locality is Mandatory Field", AllowEmptyStrings = false)]
         public int LocalityId { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Encroachment Date is Mandatory Field")]
         public DateTime EncrochmentDate { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Khasra No is Mandatory Field")]
         public string KhasraNo { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Area is Mandatory Field")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal Area { get; set; }
 
         public string EncroacherName { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Status of Land is Mandatory Field")]
         public string StatusOfLand { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Possession is Mandatory Field")]
         public string IsPossession { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Possession Type is Mandatory Field")]
         public string PossessionType { get; set; }
         public int? OtherDepartment { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Police Station is Mandatory Field")]
         public string PoliceStation { get; set; }
-        [Required] 
+
+        [Required(ErrorMessage = "Security Guard on Duty is Mandatory Field")]
         public string SecurityGuardOnDuty { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Remarks is Mandatory Field")]
         public string Remarks { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Location Address with Landmark is Mandatory Field")]
         public string LocationAddressWithLandMark { get; set; }
         public byte IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
@@ -85,29 +100,22 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }
         [NotMapped]
-        //[Required]
         public List<string> NameOfStructure { get; set; }
         [NotMapped]
-        //[Required]
         public List<string> ConstructionStatus { get; set; }
         [NotMapped]
-        //[Required]
         public List<decimal> AreaApprox { get; set; }
         [NotMapped]
-        //[Required]
         public List<string> Type { get; set; }
         [NotMapped]
-        //[Required]
         public List<int> DateOfEncroachment { get; set; }
 
         [NotMapped]
         public List<string> ReligiousStructure { get; set; }
 
         [NotMapped]
-        //[Required]
         public List<decimal> CountOfStructure { get; set; }
         [NotMapped]
-        //[Required]
         public List<string> ReferenceNoOnLocation { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
 
