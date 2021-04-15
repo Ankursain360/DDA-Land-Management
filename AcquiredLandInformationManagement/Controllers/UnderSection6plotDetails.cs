@@ -12,7 +12,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-
+using Core.Enum;
+using AcquiredLandInformationManagement.Filters;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -26,7 +27,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -44,7 +45,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Undersection6plot undersection4plot = new Undersection6plot();
@@ -58,6 +59,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Undersection6plot undersection4plot)
         {
             try
@@ -96,7 +98,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _undersection6plotservice.FetchSingleResult(id);
@@ -116,6 +118,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Undersection6plot undersection4plot)
         {
 
@@ -152,7 +155,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(undersection4plot);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -175,7 +178,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _undersection6plotservice.GetAllUndersection6Plot();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _undersection6plotservice.FetchSingleResult(id);

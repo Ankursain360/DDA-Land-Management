@@ -28,7 +28,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return View();
         }
-        //   [AuthorizeContext(ViewAction.View)]
+        
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AwardMasterDetailsSearchDto model)
         {

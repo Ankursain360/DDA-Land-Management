@@ -25,7 +25,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _enhancecompensationService = enhancecompensationService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             return View();

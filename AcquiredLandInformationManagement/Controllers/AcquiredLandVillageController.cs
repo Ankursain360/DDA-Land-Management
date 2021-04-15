@@ -193,7 +193,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Acquiredlandvillage> result = await _acquiredlandvillageService.GetAcquiredlandvillage();
