@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Demolitionpoliceassistenceletter
-@await Component.InvokeAsync("PageHeader", new { pageName = "Police Assistence letter" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Police Assistance letter" })
 <br />
 <br />
 
@@ -7,7 +7,7 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="FixingDemolitionId" />
     <input type="hidden" asp-for="Id" value="@ViewBag.PrimaryId" />
-    <h3 class="mb-3 d-flex">Police Assistence letter By</h3>
+    <h3 class="mb-3 d-flex">Police Assistance letter By</h3>
 
     <div class="row mt-md-3">
         <input type="hidden" asp-for="GenerateUpload" value="0" id="GenerateUpload" />

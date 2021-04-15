@@ -14,6 +14,10 @@ $("#KhasraId").change(function () {
     var kid = $(this).val();
     if (kid) {
         HttpGet(`/UnderSection22PlotDetails/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+            $("#Bigha1").val(response.bigha);
+            $("#Biswa1").val(response.biswa);
+            $("#Biswanshi1").val(response.biswanshi);
+
 
             $("#Bigha").val(response.bigha);
             $("#Biswa").val(response.biswa);

@@ -10,7 +10,7 @@
 
 <div class="pt-3">
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-      
+
         <h3 class="mb-3 d-flex">Add Details</h3>
 
 
@@ -51,6 +51,54 @@
             </div>
 
         </div>
+
+
+        <div class="pt-3">
+            <h3 class="mb-3 d-flex">Actual Area</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                    <input value="" type="text" id="Bigha1" class="floating-label-field floating-label-field--s3 numbers" placeholder="Bigha" readonly />
+
+                    <label class="floating-label">Bigha</label>
+
+                </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                    <input value="" type="text" id="Biswa1" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswa" readonly />
+
+                    <label class="floating-label">Biswa</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                    <input value="" type="text" id="Biswanshi1" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswanshi" readonly />
+
+                    <label class="floating-label">Biswanshi</label>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
         <div id="Divclsification">
 
             <h2 class="my-3 sub-heading">Area</h2>
@@ -110,7 +158,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <input type="submit" value="Create" class="btn btn-theme " />
-              
+
                 @Html.ActionLink("Back", "Index", "Undersection17plotdetail", null, new { @class = "btn btn-theme " })
             </div>
         </div>
