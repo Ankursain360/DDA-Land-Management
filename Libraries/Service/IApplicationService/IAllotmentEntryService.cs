@@ -43,5 +43,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CreatePaymentGroundRentDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId);
         Task<bool> CreatePaymentDocumentChargesDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId);
         Task<bool> CreatePaymentLicenceFeesDr(Allotmententry allotmententry, int LeasePaymentTypeId, int userId);
+        Task<List<PayemntDescriptionListDto>> GetPagedPaymentReport(PaymentdetailssearchDto model);
+
     }
 }
