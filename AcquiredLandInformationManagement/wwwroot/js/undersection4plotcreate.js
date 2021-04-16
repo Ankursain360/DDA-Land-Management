@@ -1,4 +1,46 @@
-﻿function onChange(id) {
+﻿$(document).ready(function () {
+    var id = $("#UnderSection4Id").val();
+    $("#VillageId").val('');
+    $("#KhasraId").val('');
+    if (id) {
+
+        HttpGet(`/UnderSection4PlotForm/Notification4View/?NotificationId=${id}`, 'html', function (response) {
+
+
+            $('#divnotification4Table').html("");
+            $('#divnotification4Table').html(response);
+
+        });
+
+    }
+});
+
+$("#UnderSection4Id").change(function () {
+
+    var id = $(this).val();
+  
+   
+    if (id) {
+
+        HttpGet(`/UnderSection4PlotForm/Notification4View/?NotificationId=${id}`, 'html', function (response) {
+
+
+            $('#divnotification4Table').html("");
+            $('#divnotification4Table').html(response);
+
+        });
+
+    }
+});
+
+
+
+
+
+
+
+
+function onChange(id) {
 
     HttpGet(`/UnderSection4PlotForm/GetKhasraList/?villageId=${id}`, 'json', function (response) {
         var html = '<option value=""> select</option>';

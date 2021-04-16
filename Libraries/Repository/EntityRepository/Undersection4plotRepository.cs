@@ -205,7 +205,17 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-
+        public async Task<List<Undersection4plot>> GetAllNotificationList(int? NotificationId)
+        {
+            var data = await _dbContext.Undersection4plot
+                                        .Include(x => x.Village)
+                                         .Include(x => x.UnderSection4)
+                                              .Include(x => x.Khasra)
+                                        .Where(x => x.UnderSection4Id ==NotificationId)
+                                         .OrderByDescending(x => x.Id)
+                                        .ToListAsync();
+            return data;
+        }
 
     }
 }
