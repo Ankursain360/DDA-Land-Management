@@ -1,4 +1,33 @@
-﻿function onChange(id) {
+﻿//notification dta
+//debugger;
+//$(document).ready(function () {
+//    GetNotificationDetails();
+
+//});
+//debugger;
+//function GetNotificationDetails() {
+//    HttpGet(`/Newlandus4plot/NotificationView`, 'html', function (response) {
+//        $('#divnotificationTable').html("");
+//        $('#divnotificationTable').html(response);
+//    });
+//};
+$("#NotificationId").change(function () {
+    var id = $(this).val();
+    debugger;
+    if (id) {
+
+        HttpGet(`/Newlandus4plot/NotificationView/?NotificationId=${id}`, 'html', function (response) {
+
+
+            $('#divnotificationTable').html("");
+            $('#divnotificationTable').html(response);
+
+        });
+
+    }
+});
+
+function onChange(id) {
 
     HttpGet(`/Newlandus4plot/GetKhasraList/?villageId=${id}`, 'json', function (response) {
         var html = '<option value=""> --Select--</option>';
@@ -32,3 +61,7 @@ $("#KhasraId").change(function () {
 
     }
 });
+
+
+
+

@@ -17,6 +17,7 @@ namespace Libraries.Repository.IEntityRepository
             Task<List<Newlandvillage>> GetAllVillage();
             Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
             Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
-        Task<Newlandkhasra> FetchSingleKhasra1Result(int? khasraId); 
+        Task<Newlandkhasra> FetchSingleKhasra1Result(int? khasraId);
+        Task<List<Newlandus4plot>> GetAllFetchNotificationDetails(int? NotificationId);
     }
 }

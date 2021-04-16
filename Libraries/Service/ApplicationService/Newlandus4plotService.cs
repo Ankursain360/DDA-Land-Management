@@ -96,7 +96,13 @@ namespace Libraries.Service.ApplicationService
         public async Task<Newlandkhasra> FetchSingleKhasra1Result(int? khasraId)
         {
             return await _newlandus4plotRepository.FetchSingleKhasraResult(khasraId);
+
         }
+        public async Task<List<Newlandus4plot>> GetAllFetchNotificationDetails(int? NotificationId)
+        {
+            return await _newlandus4plotRepository.GetAllFetchNotificationDetails(NotificationId);
+        }
+
 
     }
 }
