@@ -24,7 +24,8 @@ namespace Libraries.Service.IApplicationService
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model);
         Task<List<Unotification4detailsListDto>> GetPagednotification4detailsList(Unotification4detailsSearchDto model);
-        Task<List<Undersection4plot>> GetAllNotificationList(int? NotificationId);
+        //Task<List<Undersection4plot>> GetAllNotificationList(int? NotificationId);
+        Task<PagedResult<Undersection4plot>> GetAllNotificationList(NotificationList4SearchDto model);
 
     }
 }

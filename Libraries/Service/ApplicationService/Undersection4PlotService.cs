@@ -127,9 +127,9 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<List<Undersection4plot>> GetAllNotificationList(int? NotificationId)
+        public async Task<PagedResult<Undersection4plot>> GetAllNotificationList(NotificationList4SearchDto model)
         {
-            return await _undersection4plotRepository.GetAllNotificationList(NotificationId);
+            return await _undersection4plotRepository.GetAllNotificationList(model);
         }
 
 

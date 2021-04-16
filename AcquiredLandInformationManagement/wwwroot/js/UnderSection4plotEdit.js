@@ -4,8 +4,8 @@ var currentPageSize = 5;
 
 $(document).ready(function () {
     var id = $("#UnderSection4Id").val();
-    $("#VillageId").val('');
-    $("#KhasraId").val('');
+    //$("#VillageId").val('');
+    //$("#KhasraId").val('');
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -27,11 +27,11 @@ $(document).ready(function () {
 function GetDivision(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/UnderSection4PlotForm/Notification4View/`, 'html', param, function (response) {
-            $('#divnotification4Table').html("");
-            $('#divnotification4Table').html(response);
+        $('#divnotification4Table').html("");
+        $('#divnotification4Table').html(response);
 
-        });
-    }
+    });
+}
 
 function GetSearchParam(pageNumber, pageSize) {
 
@@ -40,7 +40,7 @@ function GetSearchParam(pageNumber, pageSize) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
-   
+
     return model;
 }
 
@@ -52,7 +52,7 @@ function GetSearchParam(pageNumber, pageSize) {
 $("#UnderSection4Id").change(function () {
 
     var id = $(this).val();
-  
+
     var model = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -84,7 +84,7 @@ function onChange(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
 
-       // $("#KhasraId").select2('val', '')
+        // $("#KhasraId").select2('val', '')
         $("#KhasraId").html(html);
     });
 };
@@ -100,7 +100,7 @@ $("#KhasraId").change(function () {
             $("#Bigha").val(response.bigha);
             $("#Biswa").val(response.biswa);
             $("#Biswanshi").val(response.biswanshi);
-           // alert(JSON.stringify(response));
+            // alert(JSON.stringify(response));
         });
 
     }
@@ -114,7 +114,7 @@ $("#Bigha").keyup(function () {
         $(this).val('');
         return false;
     }
-   
+
 });
 $("#Biswa").keyup(function () {
     var Biswa_value = $(this).val();

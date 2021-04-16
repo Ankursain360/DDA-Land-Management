@@ -215,12 +215,17 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-        public async Task<PartialViewResult> Notification4View(int? NotificationId)
+        public async Task<PartialViewResult> Notification4View([FromBody] NotificationList4SearchDto model)
         {
-            var Data = await _undersection4PlotService.GetAllNotificationList(NotificationId);
+            var Data = await _undersection4PlotService.GetAllNotificationList(model);
 
             return PartialView("_ListNotification", Data);
         }
+
+
+
+    
+
 
 
 
