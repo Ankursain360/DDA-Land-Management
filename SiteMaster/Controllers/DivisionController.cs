@@ -16,8 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
-
-
+using Dto.Master;
 using Utility.Helper;
 
 
@@ -215,18 +214,32 @@ namespace SiteMaster.Controllers
             return Json(await _divisionService.GetAllZone(Convert.ToInt32(DepartmentId)));
         }
 
-
-
-
-        public async Task<IActionResult> Download()
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> DivisionList()
         {
-            List<Division> result = await _divisionService.GetAllDivision();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Division.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _divisionService.GetAllDivision();
+            List<DivisionListDto> data = new List<DivisionListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DivisionListDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name,
+                        Zone = result[i].Zone==null ?"" : result[i].Zone.Name,                      
+                        DivisionCode = result[i].Code,
+                        DivisionName= result[i].Name,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
+      
 
 
     }

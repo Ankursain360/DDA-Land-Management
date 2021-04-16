@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Enum;
-using Dto.Search;
-using Libraries.Model.Entity;
-using Libraries.Service.ApplicationService;
-using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Dto.Search;
 using SiteMaster.Filters;
+using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -200,14 +204,30 @@ namespace SiteMaster.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> MenuList()
         {
-            List<Menu> result = await _menuService.GetAllMenu();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Menu.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _menuService.GetAllMenu();
+            List<MenuListDto> data = new List<MenuListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new MenuListDto()
+                    {
+                        Id = result[i].Id,
+                        ModuleName = result[i].ModuleId==null ?"": result[i].Module.Name,
+                        MenuName = result[i].Name,
+                        SortBy = result[i].SortBy.ToString(),
+                        ParentMenu = result[i].ParentMenuId == null ? "" : result[i].ParentMenu.Name,                     
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+        
 
     }
 }

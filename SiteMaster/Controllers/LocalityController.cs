@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
-
+using Dto.Master;
 namespace SiteMaster.Controllers
 {
     public class LocalityController : BaseController
@@ -22,6 +22,7 @@ namespace SiteMaster.Controllers
         {
             _localityService = localityService;
         }
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
@@ -79,6 +80,8 @@ namespace SiteMaster.Controllers
                 return View(locality);
             }
         }
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
@@ -192,13 +195,31 @@ namespace SiteMaster.Controllers
             return Json(await _localityService.GetAllDivisionList(Convert.ToInt32(ZoneId)));
         }
 
+
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> LocalityList()
         {
-            List<Locality> result = await _localityService.GetAllLocality();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Locality.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _localityService.GetAllLocality();
+            List<LocalityListDto> data = new List<LocalityListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LocalityListDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name,
+                        Division =  result[i].Division == null ? "" : result[i].Division.Name,
+                        LocalityVillageCode = result[i].LocalityCode,
+                        LocalityVillageName = result[i].Name,
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);       
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
     }

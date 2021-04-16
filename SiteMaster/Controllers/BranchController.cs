@@ -18,7 +18,7 @@ using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
-
+using Dto.Master;
 namespace SiteMaster.Controllers
 {
     public class BranchController : BaseController
@@ -195,13 +195,33 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-        public async Task<IActionResult> Download()
-        {
-            List<Branch> result = await _branchService.GetAllDetails();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Branch.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+
+
+       // [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> BranchList()
+        {
+            var result = await _branchService.GetAllDetails();
+            List<BranchListDto> data = new List<BranchListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new BranchListDto()
+                    {
+                        Id = result[i].Id,
+                        BranchCode= result[i].Code,
+                        BranchName = result[i].Name,
+                        Department=result[i].Department==null ? "" :result[i].Department.Name,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+
+      
     }
 }

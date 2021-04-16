@@ -1,19 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
-using System.Data;
-using Newtonsoft.Json;
 using Utility.Helper;
-using System.Collections.Generic;
-
+using Dto.Master;
 namespace SiteMaster.Controllers
 {
     public class DistrictController : BaseController
@@ -188,5 +196,35 @@ namespace SiteMaster.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
+        
+        [AuthorizeContext(ViewAction.Download)]        
+        public async Task<IActionResult> DownloadIndex()
+        {
+            var result = await  _districtService.GetAllDistrict();
+            List<DistrictListDTO> data = new List<DistrictListDTO>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DistrictListDTO()
+                    {
+                        Id = result[i].Id,
+                        Code = result[i].Code,
+                        Name=result[i].Name,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);         
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
+
+
+
+
     }
 }
