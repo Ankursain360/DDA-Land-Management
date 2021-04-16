@@ -201,7 +201,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Village)
                                          .Include(x => x.Notification)
                                               .Include(x => x.Khasra)
-                                        .Where(x => x.Id == NotificationId)
+                                        .Where(x => x.NotificationId == NotificationId)
                                         .ToListAsync();
             return data;
         }

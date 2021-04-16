@@ -62,6 +62,36 @@ $("#KhasraId").change(function () {
     }
 });
 
+$("#Bigha").keyup(function () {
+    var Bigha_value = $(this).val();
+    var Bigha1_value = $("#ABigha").val();
+    if (Bigha_value > Bigha1_value) {
+        alert("Enter the correct value");
+        $(this).val('');
+        return false;
+    }
 
+});
+$("#Biswa").keyup(function () {
+    var Biswa_value = $(this).val();
+    var Biswa1_value = $("#ABiswa").val();
+    if (Biswa_value > Biswa1_value) {
+        alert("Enter the correct value");
+        $(this).val('');
+        return false;
+    }
+
+});
+
+$("#Biswanshi").keyup(function () {
+    var Biswanshi_value = $(this).val();
+    var Biswanshi1_value = $("#ABiswanshi").val();
+    if (Biswanshi_value > Biswanshi1_value) {
+        alert("Area is should not be greater than actual area");
+        $(this).val('');
+        return false;
+    }
+
+});
 
 
