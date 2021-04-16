@@ -191,6 +191,16 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
-
+        public async Task<List<Newlandus6plot>> GetAllFetchNotification6Details(int? NotificationId)
+        {
+            var data = await _dbContext.Newlandus6plot
+                                        .Include(x => x.Village)
+                                         .Include(x => x.Notification)
+                                              .Include(x => x.Khasra)
+                                        .Where(x => x.NotificationId == NotificationId)
+                                        .OrderByDescending(x => x.Id)
+                                        .ToListAsync();
+            return data;
+        }
     }
 }
