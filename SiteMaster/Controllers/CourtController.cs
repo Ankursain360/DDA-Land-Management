@@ -1,15 +1,23 @@
-﻿using Core.Enum;
-using Dto.Search;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Mvc;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
 using SiteMaster.Filters;
-using System;
-using System.Threading.Tasks;
-
+using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 namespace SiteMaster.Controllers
 {
     public class CourtController : BaseController
@@ -165,5 +173,33 @@ namespace SiteMaster.Controllers
             var list = await _courtService.GetAllCourt();
             return View("Index", list);
         }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> CourtList()
+        {
+            var result = await _courtService.GetAllCourt();
+            List<CourtListDto> data = new List<CourtListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new CourtListDto()
+                    {
+                        Id = result[i].Id,                        
+                        CourtName = result[i].Name,
+                        CourtAddress = result[i].Address,
+                        PhoneNo = result[i].PhoneNo,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
     }
 }
