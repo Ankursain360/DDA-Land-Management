@@ -27,7 +27,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _schemeService = schemeService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             return View();

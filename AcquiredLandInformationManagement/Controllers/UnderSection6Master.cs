@@ -12,8 +12,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-
-
+using Core.Enum;
+using AcquiredLandInformationManagement.Filters;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -26,7 +26,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _undersection4service = undersection4service;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
 
@@ -41,7 +41,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Undersection6 undersection4 = new Undersection6();
@@ -54,6 +54,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Undersection6 undersection6)
         {
             try
@@ -88,7 +89,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _undersection4service.FetchSingleResult(id);
@@ -105,6 +106,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Undersection6 undersection6)
         {
             undersection6.NotificationList = await _undersection4service.GetAllundersection4();
@@ -139,7 +141,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -163,7 +165,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return View("Index", list);
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _undersection4service.FetchSingleResult(id);

@@ -26,7 +26,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _enchroachmentService = enchroachmentService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
 
             return View();

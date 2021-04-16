@@ -33,6 +33,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _undersection22plotdetailsService.GetPagedUndersection22plotdetails(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Undersection22plotdetails model = new Undersection22plotdetails();
@@ -152,6 +153,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             if (id == 0)

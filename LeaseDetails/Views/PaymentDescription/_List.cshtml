@@ -34,15 +34,9 @@
             <td>   @(Convert.ToDateTime(item.ToDate).ToString("dd-MMM-yyyy"))</td>
             <td></td>
         
-            @if (item.TransactionType == "Dr")
-            {
-                <td>Debit</td>
-            }
-            else if(item.TransactionType == "Cr"){
-            
-            <td>Credit</td>
-            }
+         
           
+            <td>@item.TransactionType</td>
             <td>@item.Amount</td>
             <td>@item.Name</td>
             <td>@item.RecieptNo</td>
