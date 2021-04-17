@@ -466,5 +466,11 @@
     "inputFiles": [
       "wwwroot/js/morlandcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UnderSection4plotEdit.min.js",
+    "inputFiles": [
+      "wwwroot/js/UnderSection4plotEdit.js"
+    ]
   }
 ]

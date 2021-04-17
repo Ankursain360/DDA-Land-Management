@@ -8,6 +8,7 @@
             <th>Notification No.</th>
             <th>Village Name</th>
             <th>Khasra No</th>
+            <th>Actual Area(Bigha-Biswa-Biswanshi)</th>
             <th>Area(Bigha-Biswa-Biswanshi)</th>
             <th>Status</th>
             <th>Operation</th>
@@ -22,6 +23,15 @@
             <td>@item.Undersection6.Number</td>
             <td>@item.Village.Name</td>
             <td>@item.Khasra.Name</td>
+
+            <td>
+                @item.Khasra.Bigha
+                -
+                @item.Khasra.Biswa-
+                @item.Khasra.Biswanshi
+            </td>
+
+
             <td>
                 @item.Bigha
                 -

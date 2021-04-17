@@ -77,7 +77,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _undersection6plotservice.GetAllUndersection6Plot();
-                        return View("Index", list);
+                        return View("Create", undersection4plot);
                     }
                     else
                     {
@@ -212,6 +212,12 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        public async Task<PartialViewResult> Notification6View([FromBody] NotificationList6SearchDto model)
+        {
+            var Data = await _undersection6plotservice.GetAllNotificationList(model);
+
+            return PartialView("_ListNotification", Data);
+        }
 
 
 

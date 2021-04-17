@@ -131,6 +131,9 @@ namespace Libraries.Service.ApplicationService
             return await _undersection6plotRepository.GetPagednotification6detailsList(model);
         }
 
-
+        public async Task<PagedResult<Undersection6plot>> GetAllNotificationList(NotificationList6SearchDto model)
+        {
+            return await _undersection6plotRepository.GetAllNotificationList(model);
+        }
     }
 }
