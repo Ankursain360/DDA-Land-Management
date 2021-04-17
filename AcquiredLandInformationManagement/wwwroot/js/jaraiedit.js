@@ -35,7 +35,7 @@ function FillOwnerAtEdit() {
 
   
     HttpGet(`/JaraiDetails/GetDetailsOwner/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
+        
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #OwnerName").val(data[i].ownerName);
             $("#tbl_posts #add #FatherName").val(data[i].fatherName);

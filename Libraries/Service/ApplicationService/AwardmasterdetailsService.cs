@@ -50,9 +50,9 @@ namespace Libraries.Service.ApplicationService
           
             model.Compensation = awardmasterdetail.Compensation;
             model.VillageId = awardmasterdetail.VillageId;
-            model.Us6id = awardmasterdetail.Us6id;
-            model.Us4id = awardmasterdetail.Us4id;
-            model.Us17id = awardmasterdetail.Us17id;
+            model.US6Id = awardmasterdetail.US6Id;
+            model.US4Id = awardmasterdetail.US4Id;
+            model.US17Id = awardmasterdetail.US17Id;
             model.Type = awardmasterdetail.Type;
             model.Remarks = awardmasterdetail.Remarks;
             model.Rate4 = awardmasterdetail.Rate4;
@@ -69,7 +69,7 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public new async Task<bool> Create(Awardmasterdetail awardmasterdetail)
+        public  async Task<bool> Create(Awardmasterdetail awardmasterdetail)
         {
 
             awardmasterdetail.CreatedBy = 1;

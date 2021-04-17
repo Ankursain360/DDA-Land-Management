@@ -16,7 +16,7 @@ $("input[name='grpPayableApealable']").click(function () {
     $("#PayableAppealable").val(selected.val());
 });
 function GetKhasraList(id) {
-    debugger;
+  
     HttpGet(`/DemandListDetails/GetKhasraList/?Id=${id}`, 'json', function (response) {
         $("#KhasraNoId").val('').trigger('change');
         var html = '<option value="">---Select---</option>';

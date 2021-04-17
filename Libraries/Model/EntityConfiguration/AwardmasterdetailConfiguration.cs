@@ -20,13 +20,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("Id_UNIQUE")
                 .IsUnique();
 
-            builder.HasIndex(e => e.Us6id)
+            builder.HasIndex(e => e.US6Id)
                 .HasName("US6Id_idx");
 
-            builder.HasIndex(e => e.Us4id)
+            builder.HasIndex(e => e.US4Id)
                 .HasName("US4Id_idx");
 
-            builder.HasIndex(e => e.Us17id)
+            builder.HasIndex(e => e.US17Id)
                .HasName("US17Id_idx");
 
             builder.HasIndex(e => e.Compensation)
@@ -86,15 +86,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Us17id)
+            builder.Property(e => e.US17Id)
                 .HasColumnName("US17Id")
                 .HasColumnType("int(11)");
 
-            builder.Property(e => e.Us4id)
+            builder.Property(e => e.US4Id)
                 .HasColumnName("US4Id")
                 .HasColumnType("int(11)");
 
-            builder.Property(e => e.Us6id)
+            builder.Property(e => e.US6Id)
                 .HasColumnName("US6Id")
                 .HasColumnType("int(11)");
 
@@ -107,17 +107,17 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.HasOne(d => d.Us6)
                 .WithMany(p => p.Awardmasterdetail)
-                .HasForeignKey(d => d.Us6id)
+                .HasForeignKey(d => d.US6Id)
                 .HasConstraintName("fk_US6Id");
 
             builder.HasOne(d => d.Us4)
                 .WithMany(p => p.Awardmasterdetail)
-                .HasForeignKey(d => d.Us4id)
+                .HasForeignKey(d => d.US4Id)
                 .HasConstraintName("fk_US4Id");
 
             builder.HasOne(d => d.Us17)
                 .WithMany(p => p.Awardmasterdetail)
-                .HasForeignKey(d => d.Us17id)
+                .HasForeignKey(d => d.US17Id)
                 .HasConstraintName("fk_US17Id");
 
             builder.HasOne(d => d.Acquiredlandvillage)

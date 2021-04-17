@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
 
         public string Rate1 { get; set; }
         public string Rate2 { get; set; }
+        [Required(ErrorMessage = "Rate is mandatory")]
         public string Rate3 { get; set; }
         public string Rate4 { get; set; }
         public string Type { get; set; }
@@ -30,20 +31,23 @@ namespace Libraries.Model.Entity
         public string Nature { get; set; }
         [Required(ErrorMessage = "Purpose is mandatory")]
         public string Purpose { get; set; }
-        public int Us4id { get; set; }
-        public int Us6id { get; set; }
-        public int Us17id { get; set; }
+        [Required(ErrorMessage = "Undersection 4 is mandatory")]
+        public int US4Id { get; set; }
+        [Required(ErrorMessage = "Undersection 6 is mandatory")]
+        public int US6Id { get; set; }
+        [Required(ErrorMessage = "Undersection 17  is mandatory")]
+        public int US17Id { get; set; }
         public string Remarks { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
       
         
         public Proposaldetails Proposal { get; set; }
-        [Required(ErrorMessage = "Undersection 17  is mandatory")]
+       
         public Undersection17 Us17 { get; set; }
-        [Required(ErrorMessage = "Undersection 4 is mandatory")]
+       
         public Undersection4 Us4 { get; set; }
-        [Required(ErrorMessage = "Undersection 6 is mandatory")]
+       
         public Undersection6 Us6 { get; set; }
         public Acquiredlandvillage Acquiredlandvillage { get; set; }
         public ICollection<Awardplotdetails> Awardplotdetails { get; set; }
