@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
-
 using Utility.Helper;
 using Notification;
 using Notification.Constants;
@@ -17,6 +16,14 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using EncroachmentDemolition.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class WatchWardController : BaseController
@@ -500,5 +507,36 @@ namespace EncroachmentDemolition.Controllers
             return ObjList;
         }
         #endregion
+
+
+
+
+
+        public async Task<IActionResult> WatchWardList()
+        {
+            var result = await _watchandwardService.GetAllWatchandward();
+            List<WatchWardListDto> data = new List<WatchWardListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new WatchWardListDto()
+                    {
+                        Id = result[i].Id,  
+                        Date=result[i].Date.ToString()==null ? "": result[i].Date.ToString(),
+                        
+                        Loaclity = result[i].PrimaryListNoNavigation == null ? "" : result[i].PrimaryListNoNavigation.Locality == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name.ToString(),
+                        PrimaryListNo = result[i].PrimaryListNo.ToString(),
+                        StatusOnGround= result[i].StatusOnGround.ToString(),
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
     }
 }
