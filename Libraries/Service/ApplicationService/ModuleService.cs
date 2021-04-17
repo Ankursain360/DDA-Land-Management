@@ -94,5 +94,10 @@ namespace Libraries.Service.ApplicationService
         {
             return _moduleRepository.GetModuleByGuid(guid);
         }
+
+        public async Task<List<Menuactionrolemap>> ModuleFromMenuRoleActionMap(int roleId)
+        {
+            return await _moduleRepository.ModuleFromMenuRoleActionMap(roleId);
+        }
     }
 }

@@ -139,5 +139,14 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Module.FirstOrDefaultAsync(x => x.Guid == guid && x.IsActive == 1);
         }
+
+        public async Task<List<Menuactionrolemap>> ModuleFromMenuRoleActionMap(int roleId)
+        {
+            var Data = await _dbContext.Menuactionrolemap
+                                       .Include(x => x.Module)
+                                       .OrderBy(x => x.ModuleId)
+                                       .Where(x => x.RoleId == roleId).ToListAsync();
+            return (Data.GroupBy(x => x.ModuleId).SelectMany(g => g.OrderBy(d => d.ModuleId).Take(1)).ToList());
+        }
     }
 }

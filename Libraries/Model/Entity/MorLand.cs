@@ -32,6 +32,7 @@ namespace Libraries.Model.Entity
         public string Developed { get; set; }
         public string LandType { get; set; }
         public string Remarks { get; set; }
+        [Required(ErrorMessage = " Serial Number is mandatory")]
         public string SerialNumber { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }

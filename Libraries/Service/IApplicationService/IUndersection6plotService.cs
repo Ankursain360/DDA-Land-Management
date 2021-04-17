@@ -25,7 +25,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Undersection6plot>> GetPagedNoUndersection6plot(NotificationUndersection6plotDto model);
         Task<List<Unotification6detailsListDto>> GetPagednotification6detailsList(Unotification6detailsSearchDto model);
 
-
+        Task<PagedResult<Undersection6plot>> GetAllNotificationList(NotificationList6SearchDto model);
 
     }
 }

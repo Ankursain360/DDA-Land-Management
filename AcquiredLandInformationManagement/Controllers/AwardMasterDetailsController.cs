@@ -49,44 +49,8 @@ namespace AcquiredLandInformationManagement.Controllers
             model.purposalList = await _awardmasterdetailsService.GetPurposal();
             return View(model);
         }
-        [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Awardmasterdetail awardmasterdetail)
-        {
-            try
-            {
-                awardmasterdetail.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
-                awardmasterdetail.purposalList = await _awardmasterdetailsService.GetPurposal();
-                awardmasterdetail.section6List = await _awardmasterdetailsService.Getundersection6();
-                awardmasterdetail.section4List = await _awardmasterdetailsService.Getundersection4();
-                awardmasterdetail.section17List = await _awardmasterdetailsService.Getundersection17();
-                if (ModelState.IsValid)
-                {
-                    var result = await _awardmasterdetailsService.Create(awardmasterdetail);
-
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _awardmasterdetailsService.Getawardmasterdetails();
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(awardmasterdetail);
-                    }
-                }
-                else
-                {
-                    return View(awardmasterdetail);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(awardmasterdetail);
-            }
-        }
+      
+      
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
             {
@@ -202,7 +166,48 @@ namespace AcquiredLandInformationManagement.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
+        [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(Awardmasterdetail Award)
+        {
+            try
+            {
+                Award.AcquiredlandvillageList = await _awardmasterdetailsService.Getvillage();
+                Award.purposalList = await _awardmasterdetailsService.GetPurposal();
+                Award.section6List = await _awardmasterdetailsService.Getundersection6();
+                Award.section4List = await _awardmasterdetailsService.Getundersection4();
+                Award.section17List = await _awardmasterdetailsService.Getundersection17();
 
+                if (ModelState.IsValid)
+                {
+                   
 
+                    var result = await _awardmasterdetailsService.Create(Award);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+
+                        var list = await _awardmasterdetailsService.Getawardmasterdetails();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(Award);
+
+                    }
+                }
+                else
+                {
+                    return View(Award);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(Award);
+            }
+        }
     }
 }
