@@ -195,7 +195,17 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-
+        public async Task<PagedResult<Undersection6plot>> GetAllNotificationList(NotificationList6SearchDto model)
+        {
+            var data = await _dbContext.Undersection6plot
+                                        .Include(x => x.Village)
+                                         .Include(x => x.Undersection6)
+                                              .Include(x => x.Khasra)
+                                        .Where(x => x.UnderSection6Id == model.NotificationId)
+                                        .OrderByDescending(x => x.Id)
+                                         .GetPaged<Undersection6plot>(model.PageNumber, model.PageSize);
+            return data;
+        }
 
 
     }

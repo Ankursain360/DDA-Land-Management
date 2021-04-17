@@ -14,7 +14,7 @@
         <h3 class="mb-3 d-flex">Add Details</h3>
 
         <div class="row">
-            <div class=" col-md-12">
+            <div class=" col-md-6">
                 <div class="floating-label-wrap">
 
                     <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection6Id" asp-items="@(new SelectList(Model.NotificationList, "Id","Number"))">
@@ -98,7 +98,7 @@
 
 
         <div class="pt-3">
-            <h3 class="mb-3 d-flex">Area</h3>
+            <h3 class="mb-3 d-flex">Used Area</h3>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -170,6 +170,20 @@
 
     </form>
 </div>
+
+
+<div class="table-section bg-white border shadow rounded">
+
+
+    <div class="table-responsive px-2">
+        <div id="divnotification6Table"></div>
+    </div>
+
+
+</div>
+
+
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 

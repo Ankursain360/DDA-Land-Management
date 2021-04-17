@@ -15,7 +15,7 @@ using Notification.OptionEnums;
 using Utility.Helper;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
-
+using Dto.Master;
 namespace EncroachmentDemolition.Controllers
 {
     public class EncroachmentRegisterController : BaseController
@@ -457,5 +457,30 @@ namespace EncroachmentDemolition.Controllers
             return ObjList;
         }
         #endregion
+
+
+        public async Task<IActionResult> EncroachmentRegisterList()
+        {
+            var result = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
+            List<EncroachmentRegisterListDto> data = new List<EncroachmentRegisterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new EncroachmentRegisterListDto()
+                    {
+                        Id = result[i].Id,
+                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),                       
+                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.ToString(),   
+                        PrimaryListNo=result[i].StatusOfLand,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
     }
 }
