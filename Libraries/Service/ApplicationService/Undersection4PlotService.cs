@@ -125,5 +125,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _undersection4plotRepository.GetPagednotification4detailsList(model);
         }
+
+
+        public async Task<PagedResult<Undersection4plot>> GetAllNotificationList(NotificationList4SearchDto model)
+        {
+            return await _undersection4plotRepository.GetAllNotificationList(model);
+        }
+
+
+
     }
 }

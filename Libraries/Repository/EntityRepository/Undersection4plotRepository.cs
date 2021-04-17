@@ -205,7 +205,17 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-
+        public async Task<PagedResult<Undersection4plot>> GetAllNotificationList(NotificationList4SearchDto model)
+        {
+            var data = await _dbContext.Undersection4plot
+                                        .Include(x => x.Village)
+                                         .Include(x => x.UnderSection4)
+                                              .Include(x => x.Khasra)
+                                        .Where(x => x.UnderSection4Id == model.NotificationId)
+                                        .OrderByDescending(x => x.Id)
+                                         .GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+            return data;
+        }
 
     }
 }

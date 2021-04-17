@@ -1,14 +1,17 @@
-﻿@*@model IEnumerable<Libraries.Model.Entity.Newlandus4plot>*@
-@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Newlandus4plot>
+﻿@*@model IEnumerable<Libraries.Model.Entity.Undersection4plot>*@
+
+@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Undersection4plot>
 <div class="table-section bg-white border shadow rounded ">
     <div class="table-responsive">
         <table class="table table-sm table-bordered mb-0 table-striped">
             <thead class="text-nowrap">
                 <tr>
-
+                    <th>Notification No</th>
                     <th>Village Name</th>
                     <th>Khasra No.</th>
-                    <th>Bigha-Biswa-Biswanshi</th>
+                    <th>Actual Area(Bigha-Biswa-Biswanshi)</th>
+                    <th>Used Area(Bigha-Biswa-Biswanshi)</th>
+
 
                 </tr>
             </thead>
@@ -19,14 +22,22 @@
                     {
                         <tr>
 
+                            <td>@(item.UnderSection4.Number==null?"": item.UnderSection4.Number)</td>
                             <td>@(item.Village==null?"": item.Village.Name)</td>
                             <td>@(item.Khasra == null?"": item.Khasra.Name)</td>
+                            <td>
+                                @item.Khasra.Bigha
+                                -
+                                @item.Khasra.Biswa-
+                                @item.Khasra.Biswanshi
+                            </td>
                             <td>
                                 @item.Bigha
                                 -
                                 @item.Biswa-
                                 @item.Biswanshi
                             </td>
+
 
                         </tr>
                     }

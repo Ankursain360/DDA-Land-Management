@@ -32,6 +32,13 @@ namespace NewLandAcquisition.Controllers
         {
             var result = await _newlandus6plotService.GetPagedUS6Plot(model);
             return PartialView("_List", result);
+
+        }
+        public async Task<PartialViewResult> NotificationView(int? NotificationId)
+        {
+            var Data = await _newlandus6plotService.GetAllFetchNotification6Details(NotificationId);
+
+            return PartialView("_ListNotification", Data);
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()

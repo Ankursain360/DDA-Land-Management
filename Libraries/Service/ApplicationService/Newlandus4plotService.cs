@@ -98,11 +98,14 @@ namespace Libraries.Service.ApplicationService
             return await _newlandus4plotRepository.FetchSingleKhasraResult(khasraId);
 
         }
-        public async Task<List<Newlandus4plot>> GetAllFetchNotificationDetails(int? NotificationId)
+        //public async Task<PagedResult<Newlandus4plot>> GetAllFetchNotificationDetails(NewLandNotification4ListSearchDto model)
+        //{
+        //    return await _newlandus4plotRepository.GetAllFetchNotificationDetails(model);
+        //}
+        public async Task<PagedResult<Newlandus4plot>> GetAllFetchNotificationDetails(NewLandNotification4ListSearchDto model)
         {
-            return await _newlandus4plotRepository.GetAllFetchNotificationDetails(NotificationId);
+            return await _newlandus4plotRepository.GetAllFetchNotificationDetails(model);
         }
-
 
     }
 }
