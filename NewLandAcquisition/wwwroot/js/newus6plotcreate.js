@@ -1,4 +1,35 @@
-﻿function onChange(id) {
+﻿$(document).ready(function () {
+    var id = $("#NotificationId").val();
+    $("#VillageId").val('');
+    $("#KhasraId").val('');
+    if (id) {
+
+        HttpGet(`/Newlandus6plot/NotificationView/?NotificationId=${id}`, 'html', function (response) {
+
+
+            $('#divnotification6Table').html("");
+            $('#divnotification6Table').html(response);
+
+        });
+
+    }
+});
+$("#NotificationId").change(function () {
+    var id = $(this).val();
+    debugger;
+    if (id) {
+
+        HttpGet(`/Newlandus4plot/NotificationView/?NotificationId=${id}`, 'html', function (response) {
+
+
+            $('#divnotificationTable').html("");
+            $('#divnotificationTable').html(response);
+
+        });
+
+    }
+});
+function onChange(id) {
 
     HttpGet(`/Newlandus6plot/GetKhasraList/?villageId=${id}`, 'json', function (response) {
         var html = '<option value=""> --Select--</option>';
@@ -16,6 +47,9 @@ $("#KhasraId").change(function () {
     if (kid) {
         HttpGet(`/Newlandus6plot/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
 
+            $("#ABigha").val(response.bigha);
+            $("#ABiswa").val(response.biswa);
+            $("#ABiswanshi").val(response.biswanshi);
             $("#Bigha").val(response.bigha);
             $("#Biswa").val(response.biswa);
             $("#Biswanshi").val(response.biswanshi);

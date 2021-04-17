@@ -22,6 +22,7 @@ namespace Libraries.Service.IApplicationService
              Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
              Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
         Task<Newlandkhasra> FetchSingleKhasra1Result(int? khasraId);
-        Task<List<Newlandus4plot>> GetAllFetchNotificationDetails(int? NotificationId);
+        //Task<PagedResult<Newlandus4plot>> GetAllFetchNotificationDetails(NewLandNotification4ListSearchDto model);
+        Task<PagedResult<Newlandus4plot>> GetAllFetchNotificationDetails(NewLandNotification4ListSearchDto model);
     }
 }

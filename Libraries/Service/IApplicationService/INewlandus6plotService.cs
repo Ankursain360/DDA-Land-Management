@@ -21,5 +21,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Newlandvillage>> GetAllVillage();
         Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
         Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
+        Task<List<Newlandus6plot>> GetAllFetchNotification6Details(int? NotificationId);
     }
 }

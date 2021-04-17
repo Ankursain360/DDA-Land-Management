@@ -195,14 +195,26 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
-        public async Task<List<Newlandus4plot>> GetAllFetchNotificationDetails(int? NotificationId)
+        //public async Task<PagedResult<Newlandus4plot>> GetAllFetchNotificationDetails(NewLandNotification4ListSearchDto model)
+        //{
+        //    var data = await _dbContext.Newlandus4plot
+        //                                .Include(x => x.Village)
+        //                                 .Include(x => x.Notification)
+        //                                      .Include(x => x.Khasra)
+        //                                .Where(x => x.NotificationId ==model.NotificationId)
+        //                                .OrderByDescending(x => x.Id)
+        //                                .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
+        //    return data;
+        //}
+        public async Task<PagedResult<Newlandus4plot>> GetAllFetchNotificationDetails(NewLandNotification4ListSearchDto model)
         {
             var data = await _dbContext.Newlandus4plot
                                         .Include(x => x.Village)
                                          .Include(x => x.Notification)
                                               .Include(x => x.Khasra)
-                                        .Where(x => x.NotificationId == NotificationId)
-                                        .ToListAsync();
+                                        .Where(x => x.NotificationId == model.NotificationId)
+                                        .OrderByDescending(x => x.Id)
+                                         .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
             return data;
         }
 
