@@ -69,7 +69,7 @@ namespace NewLandAcquisition.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _newlandus4plotService.GetAllUS4Plot();
-                        return View("Index", list);
+                        return View("Create", us4plot);
                     }
                     else
                     {

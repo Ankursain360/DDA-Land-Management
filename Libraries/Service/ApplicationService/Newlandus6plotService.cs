@@ -90,9 +90,13 @@ namespace Libraries.Service.ApplicationService
         {
             return await _newlandus6plotRepository.FetchSingleKhasraResult(khasraId);
         }
-        public async Task<List<Newlandus6plot>> GetAllFetchNotification6Details(int? NotificationId)
+        //public async Task<List<Newlandus6plot>> GetAllFetchNotification6Details(int? NotificationId)
+        //{
+        //    return await _newlandus6plotRepository.GetAllFetchNotification6Details(NotificationId);
+        //}
+        public async Task<PagedResult<Newlandus6plot>> GetAllFetchNotificationDetails(NewLandNotification6ListSearchDto model)
         {
-            return await _newlandus6plotRepository.GetAllFetchNotification6Details(NotificationId);
+            return await _newlandus6plotRepository.GetAllFetchNotificationDetails(model);
         }
 
     }

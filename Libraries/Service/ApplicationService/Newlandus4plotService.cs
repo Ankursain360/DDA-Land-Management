@@ -36,6 +36,9 @@ namespace Libraries.Service.ApplicationService
             model.Bigha = us4.Bigha;
             model.Biswa = us4.Biswa;
             model.Biswanshi = us4.Biswanshi;
+            model.ABigha = us4.ABigha;
+            model.ABiswa = us4.ABiswa;
+            model.ABiswanshi = us4.ABiswanshi;
             model.Remarks = us4.Remarks;
             model.IsActive = us4.IsActive;
             model.ModifiedDate = DateTime.Now;

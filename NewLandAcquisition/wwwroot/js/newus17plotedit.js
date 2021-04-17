@@ -1,11 +1,13 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
 
-debugger;
+
 $(document).ready(function () {
+    //
     var id = $("#NotificationId").val();
-    $("#VillageId").val('');
-    $("#KhasraId").val('');
+
+    //$("#VillageId").val('');
+    //$("#KhasraId").val('');
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -13,7 +15,7 @@ $(document).ready(function () {
     }
 
     if (id) {
-        debugger;
+
         HttpPost(`/Newlandus17plot/NotificationView/`, 'html', param, function (response) {
 
 
@@ -23,6 +25,23 @@ $(document).ready(function () {
         });
 
     }
+
+    //
+    var kid = $("#KhasraId").val();
+
+    if (kid) {
+        HttpGet(`/Newlandus17plot/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
+
+            $("#ABigha").val(response.bigha);
+            $("#ABiswa").val(response.biswa);
+            $("#ABiswanshi").val(response.biswanshi);
+
+
+            // alert(JSON.stringify(response));
+        });
+
+    }
+
 });
 function GetDivision(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
@@ -90,7 +109,6 @@ function onChange(id) {
 };
 $("#KhasraId").change(function () {
     var kid = $(this).val();
-    debugger;
     if (kid) {
         HttpGet(`/Newlandus17plot/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
 
@@ -150,5 +168,3 @@ function onChangePageSize(pageSize) {
     GetDivision(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }
-
-
