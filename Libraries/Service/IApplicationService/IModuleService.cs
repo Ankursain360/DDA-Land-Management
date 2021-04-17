@@ -19,5 +19,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model);
         Task<List<Module>> GetActiveModule();
         Task<Module> GetModuleByGuid(string guid);
+        Task<List<Menuactionrolemap>> ModuleFromMenuRoleActionMap(int roleId);
     }
 }

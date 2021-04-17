@@ -33,12 +33,26 @@ namespace LandingPage.Controllers
 
         public async Task<IActionResult> Index()
         {
-           
-            var list = await _moduleService.GetAllModule();
-           return View(list);
-           
+            //  var list = await _moduleService.GetAllModule();
+            var result = await _moduleService.ModuleFromMenuRoleActionMap(SiteContext.RoleId ?? 0);
+            List<RoleWiseModuleMappingDto> data = new List<RoleWiseModuleMappingDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new RoleWiseModuleMappingDto()
+                    {
+                        Id = result[i].ModuleId ?? 0,
+                        Url = result[i].Module == null ? "" : result[i].Module.Url,
+                        Target = result[i].Module == null ? "" : result[i].Module.Target,
+                        Icon = result[i].Module == null ? "" : result[i].Module.Icon,
+                        Name = result[i].Module == null ? "" : result[i].Module.Name,
+                        Description = result[i].Module == null ? "" : result[i].Module.Description
+                    });
+                }
+            }
+            return View(data);           
         }
-
 
         public IActionResult Privacy()
         {
