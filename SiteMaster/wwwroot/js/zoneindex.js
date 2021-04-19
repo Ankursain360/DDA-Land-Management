@@ -27,7 +27,8 @@ $("#btnDescending").click(function () {
 
 $("#btnReset").click(function () {
     $('#txtName').val('');
-    $('#txtCode').val('')
+    $('#txtCode').val('');
+    $('#txtDep').val('')
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -44,6 +45,7 @@ function GetDetails(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: $('#txtName').val(),
+        department: $('#txtDep').val(),
         code: $('#txtCode').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
@@ -53,7 +55,9 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     return model;
 }
 
-
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
 
 function onPaging(pageNo) {
     GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);

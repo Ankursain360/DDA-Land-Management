@@ -19,7 +19,8 @@ function GetLog(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         application: $('#txtName').val(),
-       
+        traceId: $('#txtTrace').val(),
+        date: $('#txtDate').val(),
         logger: $('#txtLogger').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
@@ -36,6 +37,8 @@ $("#btnSearch").click(function () {
 $("#btnReset").click(function () {
 
     $('#txtName').val('');
+    $('#txtTrace').val('');
+    $('#txtDate').val('');
    
     $('#txtLogger').val('');
 
@@ -62,6 +65,8 @@ $('#ddlSort').change(function () {
     GetLog(currentPageNumber, currentPageSize, sortOrder);
 });
 
+
+
 function onPaging(pageNo) {
     GetLog(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
@@ -69,5 +74,6 @@ function onPaging(pageNo) {
 
 function onChangePageSize(pageSize) {
     GetLog(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
-
+    currentPageSize = pageSize;
 }
+

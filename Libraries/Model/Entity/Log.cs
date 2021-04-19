@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
        
         public string TraceId { get; set; }
         public string Application { get; set; }
-        public DateTime? Logged { get; set; }
+        public DateTime Logged { get; set; }
         public string Level { get; set; }
         public string Message { get; set; }
         public string Logger { get; set; }
