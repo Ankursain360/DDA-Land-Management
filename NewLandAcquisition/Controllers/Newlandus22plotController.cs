@@ -34,6 +34,13 @@ namespace NewLandAcquisition.Controllers
             var result = await _newlandus22plotService.GetPagedUS22Plot(model);
             return PartialView("_List", result);
         }
+        public async Task<PartialViewResult> NotificationView([FromBody] NewLandNotification22ListSearchDto model)
+        {
+            var Data = await _newlandus22plotService.GetAllFetchNotificationDetails(model);
+
+            return PartialView("_ListNotification", Data);
+        }
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
@@ -68,7 +75,7 @@ namespace NewLandAcquisition.Controllers
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     var list = await _newlandus22plotService.GetAllUS22Plot();
-                    return View("Index", list);
+                    return View("Create", us22plot);
                 }
                 else
                 {

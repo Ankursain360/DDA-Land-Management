@@ -253,6 +253,16 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
-
+        public async Task<PagedResult<Newlandus22plot>> GetAllFetchNotificationDetails(NewLandNotification22ListSearchDto model)
+        {
+            var data = await _dbContext.Newlandus22plot
+                                        .Include(x => x.Village)
+                                         .Include(x => x.Notification)
+                                              .Include(x => x.Khasra)
+                                        .Where(x => x.NotificationId == model.NotificationId)
+                                        .OrderByDescending(x => x.Id)
+                                         .GetPaged<Newlandus22plot>(model.PageNumber, model.PageSize);
+            return data;
+        }
     }
 }

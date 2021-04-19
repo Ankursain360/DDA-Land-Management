@@ -122,6 +122,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _newlandus22plotRepository.FetchSingleKhasraResult(khasraId);
         }
+        public async Task<PagedResult<Newlandus22plot>> GetAllFetchNotificationDetails(NewLandNotification22ListSearchDto model)
+        {
+            return await _newlandus22plotRepository.GetAllFetchNotificationDetails(model);
+        }
 
     }
 }
