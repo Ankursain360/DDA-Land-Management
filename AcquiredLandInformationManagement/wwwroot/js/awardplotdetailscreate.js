@@ -1,4 +1,140 @@
-﻿function onChange(id) {
+﻿
+
+var currentPageNumber = 1;
+var currentPageSize = 5;
+
+
+$(document).ready(function () {
+    var id = $("#AwardMasterId").val();
+    $("#VillageId").val('');
+    $("#KhasraId").val('');
+    var param = {
+        AwardId: id,
+        pageSize: parseInt(currentPageSize),
+        pageNumber: parseInt(currentPageNumber)
+    }
+
+    if (id) {
+
+        HttpPost(`/AwardPlotDetails/AwardView/`, 'html', param, function (response) {
+
+            $('#divAwardTable').html("");
+            $('#divAwardTable').html(response);
+
+        });
+
+    }
+});
+
+function GetAward(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+
+    HttpPost(`/AwardPlotDetails/AwardView/`, 'html', param, function (response) {
+        $('#divAwardTable').html("");
+        $('#divAwardTable').html(response);
+
+    });
+}
+
+function GetSearchParam(pageNumber, pageSize) {
+
+    var model = {
+        AwardId: $('#AwardMasterId').val(),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
+    }
+
+    return model;
+}
+
+
+
+function onPaging(pageNo) {
+    GetAward(parseInt(pageNo), parseInt(currentPageSize));
+    currentPageNumber = pageNo;
+}
+
+function onChangePageSize(pageSize) {
+    GetAward(parseInt(currentPageNumber), parseInt(pageSize));
+    currentPageSize = pageSize;
+}
+
+
+
+$("#AwardMasterId").change(function () {
+
+    var id = $(this).val();
+
+    var model = {
+        AwardId: id,
+        pageSize: parseInt(currentPageSize),
+        pageNumber: parseInt(currentPageNumber)
+    }
+    //alert(JSON.stringify(model));
+    if (id) {
+       
+            HttpPost(`/AwardPlotDetails/AwardView/`, 'html', model, function (response) {
+                $('#divAwardTable').html("");
+                $('#divAwardTable').html(response);
+        });
+
+    }
+});
+
+
+$("#KhasraId").change(function () {
+    var kid = $(this).val();
+    if (kid) {
+        HttpGet(`/AwardPlotDetails/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+
+            $("#Bigha1").val(response.bigha);
+            $("#Biswa1").val(response.biswa);
+            $("#Biswanshi1").val(response.biswanshi);
+
+            $("#Bigha").val(response.bigha);
+            $("#Biswa").val(response.biswa);
+            $("#Biswanshi").val(response.biswanshi);
+            // alert(JSON.stringify(response));
+        });
+
+    }
+});
+
+$("#Bigha").keyup(function () {
+    var Bigha_value = $(this).val();
+    var Bigha1_value = $("#Bigha1").val();
+    if (Bigha_value > Bigha1_value) {
+        alert("Enter the correct value");
+        $(this).val('');
+        return false;
+    }
+
+});
+$("#Biswa").keyup(function () {
+    var Biswa_value = $(this).val();
+    var Biswa1_value = $("#Biswa1").val();
+    if (Biswa_value > Biswa1_value) {
+        alert("Enter the correct value");
+        $(this).val('');
+        return false;
+    }
+
+});
+
+$("#Biswanshi").keyup(function () {
+    var Biswanshi_value = $(this).val();
+    var Biswanshi1_value = $("#Biswanshi1").val();
+    if (Biswanshi_value > Biswanshi1_value) {
+        alert("Area is not greater than actual area");
+        $(this).val('');
+        return false;
+    }
+
+});
+
+
+
+function onChange(id) {
     debugger
     HttpGet(`/AwardPlotDetails/GetKhasraList/?VillageId=${id}`, 'json', function (response) {
         var html = '';

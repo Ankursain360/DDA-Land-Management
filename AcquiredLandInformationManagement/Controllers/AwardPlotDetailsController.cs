@@ -68,7 +68,8 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _awardplotDetailService.GetAwardplotdetails();
-                        return View("Index", list);
+                        return View("Create", awardplotdetails);
+                       
                     }
                     else
                     {
@@ -127,7 +128,8 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _awardplotDetailService.GetAwardplotdetails();
-                        return View("Index", list);
+                       // return View("Index", list);
+                        return View("Edit", awardplotdetails);
                     }
                     else
                     {
@@ -202,7 +204,14 @@ namespace AcquiredLandInformationManagement.Controllers
             return Json(await _awardplotDetailService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
+       
 
+        public async Task<PartialViewResult> AwardView([FromBody] AwardViewSearchDto model)
+        {
+            var Data = await _awardplotDetailService.GetAllAwardViewList(model);
+
+            return PartialView("_ListAward", Data);
+        }
 
 
 

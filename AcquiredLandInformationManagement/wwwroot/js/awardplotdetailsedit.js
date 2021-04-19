@@ -1,34 +1,31 @@
-﻿var currentPageNumber = 1;
+﻿
+
+var currentPageNumber = 1;
 var currentPageSize = 5;
 
 
 $(document).ready(function () {
-    //
-    var id = $("#UnderSection4Id").val();
-   
+    var id = $("#AwardMasterId").val();
     //$("#VillageId").val('');
     //$("#KhasraId").val('');
     var param = {
-        NotificationId: id,
+        AwardId: id,
         pageSize: parseInt(currentPageSize),
         pageNumber: parseInt(currentPageNumber)
     }
 
     if (id) {
 
-        HttpPost(`/UnderSection4PlotForm/Notification4View/`, 'html', param, function (response) {
+        HttpPost(`/AwardPlotDetails/AwardView/`, 'html', param, function (response) {
 
-
-            $('#divnotification4Table').html("");
-            $('#divnotification4Table').html(response);
+            $('#divAwardTable').html("");
+            $('#divAwardTable').html(response);
 
         });
 
     }
-
-    //
     var kid = $("#KhasraId").val();
-  
+
     if (kid) {
         HttpGet(`/UnderSection4PlotForm/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
 
@@ -36,19 +33,19 @@ $(document).ready(function () {
             $("#Biswa1").val(response.biswa);
             $("#Biswanshi1").val(response.biswanshi);
 
-          
+
             // alert(JSON.stringify(response));
         });
 
     }
-
 });
 
-function GetDivision(pageNumber, pageSize) {
+function GetAward(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/UnderSection4PlotForm/Notification4View/`, 'html', param, function (response) {
-        $('#divnotification4Table').html("");
-        $('#divnotification4Table').html(response);
+
+    HttpPost(`/AwardPlotDetails/AwardView/`, 'html', param, function (response) {
+        $('#divAwardTable').html("");
+        $('#divAwardTable').html(response);
 
     });
 }
@@ -56,7 +53,7 @@ function GetDivision(pageNumber, pageSize) {
 function GetSearchParam(pageNumber, pageSize) {
 
     var model = {
-        NotificationId: $('#UnderSection4Id').val(),
+        AwardId: $('#AwardMasterId').val(),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
@@ -66,52 +63,43 @@ function GetSearchParam(pageNumber, pageSize) {
 
 
 
+function onPaging(pageNo) {
+    GetAward(parseInt(pageNo), parseInt(currentPageSize));
+    currentPageNumber = pageNo;
+}
+
+function onChangePageSize(pageSize) {
+    GetAward(parseInt(currentPageNumber), parseInt(pageSize));
+    currentPageSize = pageSize;
+}
 
 
 
-$("#UnderSection4Id").change(function () {
+$("#AwardMasterId").change(function () {
 
     var id = $(this).val();
 
     var model = {
-        NotificationId: id,
+        AwardId: id,
         pageSize: parseInt(currentPageSize),
         pageNumber: parseInt(currentPageNumber)
     }
     //alert(JSON.stringify(model));
     if (id) {
-        HttpPost(`/UnderSection4PlotForm/Notification4View/`, 'html', model, function (response) {
-            $('#divnotification4Table').html("");
-            $('#divnotification4Table').html(response);
 
+        HttpPost(`/AwardPlotDetails/AwardView/`, 'html', model, function (response) {
+            $('#divAwardTable').html("");
+            $('#divAwardTable').html(response);
         });
 
     }
 });
 
 
-
-
-
-
-
-
-function onChange(id) {
-
-    HttpGet(`/UnderSection4PlotForm/GetKhasraList/?villageId=${id}`, 'json', function (response) {
-        var html = '<option value=""> select</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }
-
-        // $("#KhasraId").select2('val', '')
-        $("#KhasraId").html(html);
-    });
-};
 $("#KhasraId").change(function () {
     var kid = $(this).val();
     if (kid) {
-        HttpGet(`/UnderSection4PlotForm/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+        HttpGet(`/AwardPlotDetails/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
 
             $("#Bigha1").val(response.bigha);
             $("#Biswa1").val(response.biswa);
@@ -160,12 +148,15 @@ $("#Biswanshi").keyup(function () {
 
 
 
-function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize));
-    currentPageNumber = pageNo;
-}
+function onChange(id) {
+    debugger
+    HttpGet(`/AwardPlotDetails/GetKhasraList/?VillageId=${id}`, 'json', function (response) {
+        var html = '';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
 
-function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize));
-    currentPageSize = pageSize;
-}
+        $("#KhasraId").select2('val', '')
+        $("#KhasraId").html(html);
+    });
+};
