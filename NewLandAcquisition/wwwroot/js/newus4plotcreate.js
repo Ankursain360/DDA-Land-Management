@@ -108,10 +108,11 @@ $("#KhasraId").change(function () {
 });
 
 $("#Bigha").keyup(function () {
+  
     var Bigha_value = $(this).val();
     var Bigha1_value = $("#ABigha").val();
-    if (Bigha_value > Bigha1_value) {
-        alert("Enter the correct value");
+    if (parseFloat(Bigha_value) > parseFloat(Bigha1_value)) {
+        alert("Used Area is not greater than Actual Area");
         $(this).val('');
         return false;
     }
@@ -120,8 +121,8 @@ $("#Bigha").keyup(function () {
 $("#Biswa").keyup(function () {
     var Biswa_value = $(this).val();
     var Biswa1_value = $("#ABiswa").val();
-    if (Biswa_value > Biswa1_value) {
-        alert("Enter the correct value");
+    if (parseFloat(Biswa_value ) > parseFloat(Biswa1_value)) {
+        alert("Used Area is not greater than Actual Area");
         $(this).val('');
         return false;
     }
@@ -129,10 +130,11 @@ $("#Biswa").keyup(function () {
 });
 
 $("#Biswanshi").keyup(function () {
+    
     var Biswanshi_value = $(this).val();
-    var Biswanshi1_value = $("#ABiswanshi").val();
-    if (Biswanshi_value > Biswanshi1_value) {
-        alert("Area is not greater than actual area");
+    var Biswanshi1_value =$("#ABiswanshi").val();
+    if (parseFloat(Biswanshi_value) > (Biswanshi1_value)) {
+        alert("Used Area is not greater than Actual Area");
         $(this).val('');
         return false;
     }
