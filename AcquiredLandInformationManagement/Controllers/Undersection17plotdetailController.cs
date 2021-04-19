@@ -73,7 +73,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _undersection17plotdetailService.GetAllUndersection17plotdetail();
-                        return View("Index", list);
+                        return View("Create", undersection17Plotdetail);
                     }
                     else
                     {
@@ -204,6 +204,11 @@ namespace AcquiredLandInformationManagement.Controllers
             return Json(await _undersection17plotdetailService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
+        public async Task<PartialViewResult> Notification4View([FromBody] NotificationList17SearchDto model)
+        {
+            var Data = await _undersection17plotdetailService.GetAllNotificationList(model);
 
+            return PartialView("_ListNotification", Data);
+        }
     }
 }

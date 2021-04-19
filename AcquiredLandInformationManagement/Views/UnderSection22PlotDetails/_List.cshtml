@@ -7,7 +7,8 @@
                 <th>Notification U/S 22  </th>
                 <th>Village Name </th>
                 <th>Khasra No.</th>
-                <th>Area(Bigha-Biswa-Biswanshi)</th>
+                <th>Actual Area(Bigha-Biswa-Biswanshi)</th>
+                <th>Used Area(Bigha-Biswa-Biswanshi)</th>
                 <th>Notification U/S-4</th>
                 <th>Notification U/S-6</th>
                 <th>Notification U/S-17</th>
@@ -25,6 +26,12 @@
                 <td> @(item.UnderSection22 == null?"": item.UnderSection22.NotificationNo)</td>
                 <td> @(item.Acquiredlandvillage == null?"": item.Acquiredlandvillage.Name)</td>
                 <td> @(item.Khasra == null?"": item.Khasra.Name)</td>
+                <td>
+                    @item.Khasra.Bigha
+                    -
+                    @item.Khasra.Biswa-
+                    @item.Khasra.Biswanshi
+                </td>
                 <td>
                     @item.Bigha
                     -

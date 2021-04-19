@@ -29,6 +29,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);
         Task<List<Unotification22detailsListDto>> GetPagednotification22detailsList(Unotification22detailsSearchDto model);
+        Task<PagedResult<Undersection22plotdetails>> GetAllNotificationList(NotificationList22SearchDto model);
 
     }
 }

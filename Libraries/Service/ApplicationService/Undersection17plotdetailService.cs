@@ -120,7 +120,13 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model)
         {
             return await _undersection17plotdetailRepository.GetPagednotification17detailsList(model);
+
         }
+        public async Task<PagedResult<Undersection17plotdetail>> GetAllNotificationList(NotificationList17SearchDto model)
+        {
+            return await _undersection17plotdetailRepository.GetAllNotificationList(model);
+        }
+
     }
 }
 

@@ -231,7 +231,17 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-
+        public async Task<PagedResult<Undersection17plotdetail>> GetAllNotificationList(NotificationList17SearchDto model)
+        {
+            var data = await _dbContext.Undersection17plotdetail
+                                        .Include(x => x.Acquiredlandvillage)
+                                         .Include(x => x.UnderSection17)
+                                              .Include(x => x.Khasra)
+                                        .Where(x => x.UnderSection17Id == model.NotificationId)
+                                        .OrderByDescending(x => x.Id)
+                                         .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+            return data;
+        }
 
 
     }

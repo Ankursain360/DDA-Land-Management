@@ -30,6 +30,7 @@ namespace Libraries.Service.IApplicationService
 
        
         Task<List<Unotification17detailsListDto>> GetPagednotification17detailsList(Unotification17detailsSearchDto model);
+        Task<PagedResult<Undersection17plotdetail>> GetAllNotificationList(NotificationList17SearchDto model);
 
 
     }

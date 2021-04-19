@@ -1,0 +1,56 @@
+﻿@*@model IEnumerable<Libraries.Model.Entity.Undersection4plot>*@
+
+@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Undersection17plotdetail>
+<div class="table-section bg-white border shadow rounded ">
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered mb-0 table-striped">
+            <thead class="text-nowrap">
+                <tr>
+                    <th>Notification No</th>
+                    <th>Village Name</th>
+                    <th>Khasra No.</th>
+                    <th>Actual Area(Bigha-Biswa-Biswanshi)</th>
+                    <th>Used Area(Bigha-Biswa-Biswanshi)</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Results.Count() > 0)
+                {
+                    @foreach (var item in Model.Results)
+                    {
+                        <tr>
+
+                            <td>@(item.UnderSection17.Number==null?"": item.UnderSection17.Number)</td>
+                            <td>@(item.Acquiredlandvillage==null?"": item.Acquiredlandvillage.Name)</td>
+                            <td>@(item.Khasra == null?"": item.Khasra.Name)</td>
+                            <td>
+                                @item.Khasra.Bigha
+                                -
+                                @item.Khasra.Biswa-
+                                @item.Khasra.Biswanshi
+                            </td>
+                            <td>
+                                @item.Bigha
+                                -
+                                @item.Biswa-
+                                @item.Biswanshi
+                            </td>
+
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <th colspan="14" style="text-align:center"> No Record Available! </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+    </div>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

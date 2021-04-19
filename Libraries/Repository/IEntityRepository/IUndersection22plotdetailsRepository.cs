@@ -20,5 +20,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Undersection22plotdetails>> GetPagedUndersection22plotdetails(Undersection22plotdetailsSearchDto model);
         Task<List<Unotification22detailsListDto>> GetPagednotification22detailsList(Unotification22detailsSearchDto model);
+        Task<PagedResult<Undersection22plotdetails>> GetAllNotificationList(NotificationList22SearchDto model);
     }
 }

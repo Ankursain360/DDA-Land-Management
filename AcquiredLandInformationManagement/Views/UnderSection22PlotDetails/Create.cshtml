@@ -44,6 +44,7 @@
                 </div>
             </div>
         </div>
+      
         <div class="pt-3">
             <h3 class="mb-3 d-flex">Actual Area</h3>
         </div>
@@ -82,37 +83,39 @@
         </div>
 
 
+        <div class="pt-3">
+            <h3 class="mb-3 d-flex">Used Area</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
 
 
+                    <input value="" type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3 numbers" placeholder="Bigha" />
+                    <span asp-validation-for="Bigha" class="text-danger"></span>
+                    <label class="floating-label">Bigha</label>
 
-
-        <div id="Divclsification">
-            <h3 class="my-3 d-flex sub-heading"> Area </h3>
-            <div class="row mt-md-3">
-                <div class="col-md-2">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Bigha" placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3  numbers" />
-                        <span asp-validation-for="Bigha" class="text-danger"></span>
-                        <label class="floating-label">Bigha    </label>
-                    </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswa" placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3  numbers" />
-                        <span asp-validation-for="Biswa" class="text-danger"></span>
-                        <label class="floating-label">Biswa  </label>
-                    </div>
+            </div>
+
+            <div class="form-group col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                    <input value="" type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswa" />
+                    <span asp-validation-for="Biswa" class="text-danger"></span>
+                    <label class="floating-label">Biswa</label>
                 </div>
-                <div class="col-md-2">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswanshi" placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3  numbers" />
-                        <span asp-validation-for="Biswanshi" class="text-danger"></span>
-                        <label class="floating-label">Biswanshi </label>
-                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                    <input value="" type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswanshi" />
+                    <span asp-validation-for="Biswanshi" class="text-danger"></span>
+                    <label class="floating-label">Biswanshi</label>
                 </div>
             </div>
         </div>
@@ -182,7 +185,15 @@
 
 </div>
 
+<div class="table-section bg-white border shadow rounded">
 
+
+    <div class="table-responsive px-2">
+        <div id="divnotification22Table"></div>
+    </div>
+
+
+</div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

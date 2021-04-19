@@ -117,6 +117,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _undersection22plotdetailsRepository.GetPagednotification22detailsList(model);
         }
-
+        public async Task<PagedResult<Undersection22plotdetails>> GetAllNotificationList(NotificationList22SearchDto model)
+        {
+            return await _undersection22plotdetailsRepository.GetAllNotificationList(model);
+        }
     }
 }
