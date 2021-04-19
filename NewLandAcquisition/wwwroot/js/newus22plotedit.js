@@ -1,12 +1,13 @@
-﻿
-var currentPageNumber = 1;
+﻿var currentPageNumber = 1;
 var currentPageSize = 5;
 
-debugger;
+
 $(document).ready(function () {
+    //
     var id = $("#NotificationId").val();
-    $("#VillageId").val('');
-    $("#KhasraId").val('');
+
+    //$("#VillageId").val('');
+    //$("#KhasraId").val('');
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -14,7 +15,7 @@ $(document).ready(function () {
     }
 
     if (id) {
-        debugger;
+
         HttpPost(`/Newlandus22plot/NotificationView/`, 'html', param, function (response) {
 
 
@@ -24,6 +25,23 @@ $(document).ready(function () {
         });
 
     }
+
+    //
+    var kid = $("#KhasraId").val();
+
+    if (kid) {
+        HttpGet(`/Newlandus22plot/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
+
+            $("#ABigha").val(response.bigha);
+            $("#ABiswa").val(response.biswa);
+            $("#ABiswanshi").val(response.biswanshi);
+
+
+            // alert(JSON.stringify(response));
+        });
+
+    }
+
 });
 function GetDivision(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
@@ -68,7 +86,7 @@ $("#NotificationId").change(function () {
         });
 
     }
-        HttpGet(`/Newlandus22plot/GetAllUS4Plot/?notificationId=${id}`, 'json', function (response) {
+    HttpGet(`/Newlandus22plot/GetAllUS4Plot/?notificationId=${id}`, 'json', function (response) {
         var html = '<option></option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option  value=' + response[i].id + '>' + response[i].notification.name + '</option>';
@@ -95,7 +113,7 @@ $("#NotificationId").change(function () {
         $("#Us17Id").select2('val', '')
         $("#Us17Id").html(html);
     });
-//};
+    //};
 
 });
 
@@ -105,10 +123,9 @@ $("#NotificationId").change(function () {
 
 
 
-
 function onChange(id) {
 
-    HttpGet(`/Newlandus4plot/GetKhasraList/?villageId=${id}`, 'json', function (response) {
+    HttpGet(`/Newlandus17plot/GetKhasraList/?villageId=${id}`, 'json', function (response) {
         var html = '<option value=""> select</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
@@ -120,9 +137,8 @@ function onChange(id) {
 };
 $("#KhasraId").change(function () {
     var kid = $(this).val();
-    debugger;
     if (kid) {
-        HttpGet(`/Newlandus4plot/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
+        HttpGet(`/Newlandus17plot/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
 
             $("#ABigha").val(response.bigha);
             $("#ABiswa").val(response.biswa);
@@ -141,7 +157,7 @@ $("#Bigha").keyup(function () {
     var Bigha_value = $(this).val();
     var Bigha1_value = $("#ABigha").val();
     if (parseFloat(Bigha_value) > (Bigha1_value)) {
-        alert("Enter the correct value");
+        alert("Area is not greater than actual area");
         $(this).val('');
         return false;
     }
@@ -151,7 +167,7 @@ $("#Biswa").keyup(function () {
     var Biswa_value = $(this).val();
     var Biswa1_value = $("#ABiswa").val();
     if (parseFloat(Biswa_value) > (Biswa1_value)) {
-        alert("Enter the correct value");
+        alert("Area is not greater than actual area");
         $(this).val('');
         return false;
     }
@@ -180,5 +196,3 @@ function onChangePageSize(pageSize) {
     GetDivision(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }
-
-

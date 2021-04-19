@@ -43,16 +43,7 @@
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
                 </div>
             </div>
-            <div class=" col-md-6">
-                <div class="floating-label-wrap">
-                    <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label class="floating-label">Status </label>
-                </div>
-            </div>
+            
         </div>
 
         <div class="pt-3">
@@ -133,12 +124,22 @@
 
 
         <div class="row mt-md-3">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea disabled asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
 
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label class="floating-label">Remarks  </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label class="floating-label">Status </label>
                 </div>
             </div>
         </div>
@@ -175,8 +176,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/newus17plotcreate.js"></script>
+    <script src="~/js/newus17plotedit.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/newus17plotcreate.min.js" asp-append-version="true"></script>
+    <script src="~/js/newus17plotedit.min.js" asp-append-version="true"></script>
 </environment>
