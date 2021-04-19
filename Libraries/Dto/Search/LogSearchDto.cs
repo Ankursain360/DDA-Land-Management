@@ -9,6 +9,8 @@ namespace Dto.Search
     {
         public string application { get; set; }
         public string logger { get; set; }
-        
+       // public string date { get; set; }
+        public DateTime? date { get; set; }
+        public string traceId { get; set; }
     }
 }
