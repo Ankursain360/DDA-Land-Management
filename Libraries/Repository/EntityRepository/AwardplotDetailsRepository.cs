@@ -223,5 +223,17 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
 
+
+        public async Task<PagedResult<Awardplotdetails>> GetAllAwardViewList(AwardViewSearchDto model)
+        {
+            var data = await _dbContext.Awardplotdetails
+                                        .Include(x => x.Village)
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.AwardMasterId == model.AwardId)
+                                        .OrderByDescending(x => x.Id)
+                                        .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+            return data;
+        }
     }
 }

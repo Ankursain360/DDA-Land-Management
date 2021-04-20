@@ -43,6 +43,7 @@ $(document).ready(function () {
     }
 
 });
+
 function GetDivision(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/UnderSection4PlotForm/Notification4View/`, 'html', param, function (response) {

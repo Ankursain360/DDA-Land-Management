@@ -25,5 +25,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Awardplotdetails>> GetPagedAwardReport(AwardReportSearchDto model);
 
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
+        Task<PagedResult<Awardplotdetails>> GetAllAwardViewList(AwardViewSearchDto model);
     }
 }

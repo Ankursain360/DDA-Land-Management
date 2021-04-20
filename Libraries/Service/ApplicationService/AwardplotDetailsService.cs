@@ -126,7 +126,11 @@ namespace Libraries.Service.ApplicationService
             return await _awardplotDetailsRepository.FetchSingleKhasraResult(khasraId);
         }
 
-
+       
+        public async Task<PagedResult<Awardplotdetails>> GetAllAwardViewList(AwardViewSearchDto model)
+        {
+            return await _awardplotDetailsRepository.GetAllAwardViewList(model);
+        }
     }
 }
 

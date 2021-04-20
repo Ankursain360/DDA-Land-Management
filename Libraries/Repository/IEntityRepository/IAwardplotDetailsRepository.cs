@@ -19,5 +19,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model);
         Task<List<AwardReportDtoProfile>> BindAwardNoDateList();
         Task<PagedResult<Awardplotdetails>> GetPagedAwardReport(AwardReportSearchDto model);
+        Task<PagedResult<Awardplotdetails>> GetAllAwardViewList(AwardViewSearchDto model);
     }
 }
