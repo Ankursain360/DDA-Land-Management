@@ -114,7 +114,10 @@ namespace Libraries.Service.ApplicationService
             return await _newlandawardplotdetailsRepository.GetPagedAwardplotdetails(model);
         }
 
-       
+        public async Task<PagedResult<Newlandawardplotdetails>> GetAllFetchNotificationDetails(NewLandAwardPlotDetailsListSearchDto model)
+        {
+            return await _newlandawardplotdetailsRepository.GetAllFetchNotificationDetails(model);
+        }
     }
 }
 

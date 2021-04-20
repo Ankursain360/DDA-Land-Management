@@ -24,5 +24,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Newlandawardplotdetails>> GetPagedAwardplotdetails(NewlandawardplotdetailsSearchDto model);
 
         Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);
+        Task<PagedResult<Newlandawardplotdetails>> GetAllFetchNotificationDetails(NewLandAwardPlotDetailsListSearchDto model);
     }
 }

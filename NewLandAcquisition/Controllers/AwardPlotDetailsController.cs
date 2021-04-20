@@ -39,6 +39,12 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return PartialView("_List", result);
         }
+        public async Task<PartialViewResult> NotificationView([FromBody] NewLandAwardPlotDetailsListSearchDto model)
+        {
+            var Data = await _awardplotDetailService.GetAllFetchNotificationDetails(model);
+
+            return PartialView("_ListNotification", Data);
+        }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {

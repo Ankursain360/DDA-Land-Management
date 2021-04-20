@@ -171,7 +171,17 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
 
-
+        public async Task<PagedResult<Newlandawardplotdetails>> GetAllFetchNotificationDetails(NewLandAwardPlotDetailsListSearchDto model)
+        {
+            var data = await _dbContext.Newlandawardplotdetails
+                                        .Include(x => x.NewlandVillage)
+                                         .Include(x => x.NewlandAwardMaster)
+                                              .Include(x => x.NewlandKhasra)
+                                        .Where(x => x.AwardMasterId == model.AwardMasterId)
+                                        .OrderByDescending(x => x.Id)
+                                         .GetPaged<Newlandawardplotdetails>(model.PageNumber, model.PageSize);
+            return data;
+        }
 
 
     }
