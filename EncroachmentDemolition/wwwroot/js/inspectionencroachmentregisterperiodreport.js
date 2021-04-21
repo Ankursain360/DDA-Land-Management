@@ -11,9 +11,18 @@ $(document).ready(function () {
         var localityid = $('#LocalityId option:selected').val();
         var FromDate = $('#txtFromDate').val();
         var ToDate = $('#txtToDate').val();
-        if (result) {
+        if (FromDate == '' || ToDate == '') {
+            alert("Please Select From Date and To Date");
+            $('#txtFromDate').val('');
+            $('#txtToDate').val('');
+            $('#LoadReportView').html("");
+            return false;
+        }
+
+        else {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
+        
     });
     $(".linkdisabled").click(function () {
         return false;
@@ -78,7 +87,7 @@ $("#btnReset").click(function () {
     $('#LocalityId').val('0').trigger('change');
     $('#txtFromDate').val('');
     $('#txtToDate').val('');
-
+    $('#LoadReportView').html("");
 
     //GetDetails(currentPageNumber, currentPageSize, sortby);
 

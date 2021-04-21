@@ -12,7 +12,7 @@
 
             <th>Date Of approval of demolition</th>
 
-            <th>Operation</th>
+            <th>Operations</th>
         </tr>
     </thead>
     <tbody>
@@ -35,9 +35,16 @@
                     <td>@(item.DateOfApprovalDemolition == null ? "" : Convert.ToDateTime(item.DateOfApprovalDemolition).ToString("dd-MMM-yyyy"))</td>
 
                     <td>
-                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill" aria-hidden="true"></i> </a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> &nbsp; | &nbsp;  <i class="ri-edit-line" aria-hidden="true"></i> </a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="ri-delete-bin-5-fill" aria-hidden="true"></i></a>
+                        <div class="action-btns">
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>
+                        </div>
+
+                        @*<a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill" aria-hidden="true"></i> </a>
+        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> &nbsp; | &nbsp;  <i class="ri-edit-line" aria-hidden="true"></i> </a>
+        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="ri-delete-bin-5-fill" aria-hidden="true"></i></a>
+                        *@
                     </td>
                 </tr>
             }

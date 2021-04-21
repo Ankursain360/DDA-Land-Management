@@ -502,6 +502,7 @@ figcaption h6 {
     width: 100%;
     top: 58px;
     overflow: auto;
+    z-index: 99;
 }
 
 

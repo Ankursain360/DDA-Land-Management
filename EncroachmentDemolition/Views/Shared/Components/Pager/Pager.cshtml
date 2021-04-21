@@ -5,7 +5,7 @@
        
         <div class="floating-label-wrap mx-md-3">
             @{
-                int[] arrPageSize = { 10, 50, 100, 200 };
+                int[] arrPageSize = { 5, 50, 100, 200 };
             }
             <select class="floating-label-field floating-label-field--s3" id="ddlPageSize" onchange="onChangePageSize(this.value)">
                 @foreach (var item in arrPageSize)

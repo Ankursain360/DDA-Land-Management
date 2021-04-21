@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 
 $(document).ready(function () {
@@ -19,7 +19,7 @@ $(document).ready(function () {
 });
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    debugger
+    
     HttpPost(`/DemolitionReport2/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
@@ -27,7 +27,7 @@ function GetDetails(pageNumber, pageSize, order) {
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+    
     var departmentid = $('#DepartmentId option:selected').val();
     var zoneid = $('#ZoneId option:selected').val();
     var divisionid = $('#DivisionId option:selected').val();

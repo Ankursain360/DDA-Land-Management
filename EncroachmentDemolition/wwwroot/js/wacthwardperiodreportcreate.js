@@ -1,15 +1,23 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
-       
+
         var result = ValidateForm();
         var localityid = $('#LocalityId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
-
-          if (result) {
+        if (fromDate == '' || toDate == '') {
+            alert("Please Select From Date and To Date");
+            $('#txtFromDate').val('');
+            $('#txtToDate').val('');
+            $('#LoadReportView').html("");
+            return false;
+        } 
+    
+        else
+        {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
       
@@ -19,6 +27,18 @@ $(document).ready(function () {
         return false;
     });
 });
+function ValidateForm() {
+    var fromDate = $('#txtFromDate').val();
+    var toDate = $('#txtToDate').val();
+    if (fromDate == null || toDate == null)
+    {
+        alert("Please Select FromDate and ToDate");
+        $('#txtFromDate').val('');
+        $('#txtToDate').val('');
+        return false;
+    }
+
+}
 
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
@@ -66,7 +86,7 @@ $("#btnReset").click(function () {
     $('#LocalityId').val('0').trigger('change');
     $('#txtFromDate').val('');
     $('#txtToDate').val('');
-
+    $('#LoadReportView').html("");
     //GetDetails(currentPageNumber, currentPageSize, sortby);
 
 });
