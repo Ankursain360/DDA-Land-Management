@@ -270,6 +270,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Gislayer> Gislayer { get; set; }
         public virtual DbSet<Gisdata> Gisdata { get; set; }
+        public virtual DbSet<Newlandnotificationdetails> Newlandnotificationdetails { get; set; }
 
         public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
         public virtual DbSet<Courtcasesmapping> Courtcasesmapping { get; set; }
@@ -536,7 +537,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisDataConfiguartion());
             modelBuilder.ApplyConfiguration(new GisLayerConfiguration());
             modelBuilder.ApplyConfiguration(new Newlandannexure2Configuration());
-
+            modelBuilder.ApplyConfiguration(new NewlandnotificationdetailsConfiguration());
 
 
             // Lease Details module

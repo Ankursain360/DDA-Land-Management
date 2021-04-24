@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         public NewlandNotificationtype()
         {
             Newlandnotification = new HashSet<Newlandnotification>();
+            Newlandnotificationdetails = new HashSet<Newlandnotificationdetails>();
         }
         public string NotificationType { get; set; }
 
@@ -19,5 +20,6 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
 
         public ICollection<Newlandnotification> Newlandnotification { get; set; }
+        public ICollection<Newlandnotificationdetails> Newlandnotificationdetails { get; set; }
     }
-    }
+}
