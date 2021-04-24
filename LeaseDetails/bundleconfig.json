@@ -406,5 +406,11 @@
     "inputFiles": [
       "wwwroot/js/extensionapprovalcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemandLetterCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemandLetterCreate.js"
+    ]
   }
 ]

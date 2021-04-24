@@ -29,7 +29,7 @@ $("#btnGenerate").click(function () {
         }
         HttpPost(`/DemandLetter/List`, 'html', param, function (response) {
 
-            alert(response);
+          
            $('#Vieww').html("");
             $('#Vieww').html(response);
          
