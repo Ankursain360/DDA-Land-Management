@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using NewLandAcquisition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -165,6 +167,33 @@ namespace NewLandAcquisition.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+
+
+        public async Task<IActionResult> NewLandSchemeList()
+        {
+            var result = await _schemeService.GetAllScheme();
+            List<NewLandSchemeListDto> data = new List<NewLandSchemeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandSchemeListDto()
+                    {
+                        Id = result[i].Id,  
+                        SchemeCode=result[i].Code,
+                        SchemeName=result[i].Name,
+                        SchemeDate=result[i].SchemeDate.ToString(),
+                        SchemeFileNo=result[i].FileNo,
+                        Description=result[i].Description,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

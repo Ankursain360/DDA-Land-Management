@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using NewLandAcquisition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -165,6 +167,8 @@ namespace NewLandAcquisition.Controllers
             var list = await _khasraService.GetAllKhasra();
             return View("Index", list);
         }
+
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
@@ -181,8 +185,32 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
 
+        public async Task<IActionResult> NewLandKhasraList()
+        {
+            var result = await _khasraService.GetAllKhasra();
+            List<NewLandKhasraListDto> data = new List<NewLandKhasraListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandKhasraListDto()
+                    {
+                   
+                        Id = result[i].Id,
+                        Village =result[i].Newlandvillage==null ?"" :result[i].Newlandvillage.Name,                     
+                        RectNo= result[i].RectNo,
+                        LandCategory = result[i].LandCategory == null ? "" : result[i].LandCategory.Name,
+                        KhasraNo = result[i].Name,                      
+                        Area= result[i].Bigha.ToString() +'-'+ result[i].Biswa.ToString()+'-' + result[i].Biswanshi.ToString(),
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
-
+        
     }
 }

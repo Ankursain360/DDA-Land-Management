@@ -55,7 +55,6 @@ namespace NewLandAcquisition.Controllers
         }
 
         [HttpPost]
-
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandus22plot us22plot)
         {

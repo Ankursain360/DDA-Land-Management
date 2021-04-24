@@ -470,7 +470,7 @@ namespace EncroachmentDemolition.Controllers
                     data.Add(new EncroachmentRegisterListDto()
                     {
                         Id = result[i].Id,
-                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),                       
+                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),
                         KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.ToString(),   
                         PrimaryListNo=result[i].StatusOfLand,
                         IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
