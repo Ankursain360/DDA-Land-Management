@@ -9,8 +9,8 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IProccessWorkflowRepository : IGenericRepository<Processworkflow>
     {
-        int GetPreviousApprovalId(int proccessid, int serviceid);
-        Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id);
+        int GetPreviousApprovalId(string proccessguid, int serviceid);
+        Task<List<Approvalproccess>> GetHistoryDetails(string proccessguid, int id);
         int FetchCountResultForProccessWorkflow(int workflowTemplateId);
     }
 }

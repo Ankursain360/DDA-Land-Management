@@ -16,10 +16,8 @@ namespace Libraries.Model.Entity
         }
         [Required (ErrorMessage ="Please fill date")]
         public DateTime? Date { get; set; }
-        //[Required(ErrorMessage = "Please select locality")]
         public int? LocalityId { get; set; }
 
-        //[Required(ErrorMessage = "Please select khasra")]
         public int? KhasraId { get; set; }
 
         [Required(ErrorMessage = "Please select Primary List No.")]
@@ -28,7 +26,6 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Please fill Landmark")]
         public string Landmark { get; set; }
 
-        //[Required(ErrorMessage = "Please select")]
         public int Encroachment { get; set; }
 
         [Required(ErrorMessage = "Status On Ground is required")]
@@ -37,12 +34,12 @@ namespace Libraries.Model.Entity
         public string PhotoPath { get; set; }
         public string ReportFiletPath { get; set; }
 
-        //[Required(ErrorMessage = "Remarks feild is required")]
         public string Remarks { get; set; }
-        //[Required(ErrorMessage = "Please select  status")]
         public byte? IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
-        public int? PendingAt { get; set; }
+        public string PendingAt { get; set; }
+        public int? ApprovalZoneId { get; set; }
+
 
         [NotMapped]
         public List<Propertyregistration> PrimaryListNoList { get; set; }
@@ -94,6 +91,7 @@ namespace Libraries.Model.Entity
         public string ApprovalRemarks { get; set; }
 
         public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
 
     }
 }

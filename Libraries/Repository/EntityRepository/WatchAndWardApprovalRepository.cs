@@ -18,14 +18,6 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        //public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
-        //{
-        //    return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
-        //        .Include(x => x.Village)
-        //        .Include(x => x.Khasra)
-        //        .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
-        //}
-
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId)
         {
 
@@ -34,9 +26,6 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.PrimaryListNoNavigation.Locality)
                                     .Include(x => x.Locality)
                                     .Include(x => x.Khasra)
-                                    .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                    && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-                                    )
                                     .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -86,12 +75,6 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Watchandward.ToListAsync();
         }
-        //public async Task<List<Watchandward>> GetAllWatchandward()
-        //{
-        //    return await _dbContext.Watchandward.Include(x => x.Village)
-        //        .Include(x => x.Khasra)
-        //        .ToListAsync();
-        //}
         public async Task<List<Watchandward>> GetAllWatchandward()
         {
             return await _dbContext.Watchandward.Include(x => x.Locality)

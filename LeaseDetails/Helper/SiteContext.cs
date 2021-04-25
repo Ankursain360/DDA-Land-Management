@@ -62,5 +62,16 @@ namespace LeaseDetails.Helper
             }
             set => throw new NotImplementedException();
         }
+
+        public int? ZoneId
+        {
+            get
+            {
+                string userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(a => a.Type == "sub").Value;
+                var user = _userProfileService.GetUserById(Convert.ToInt32(userId)).GetAwaiter().GetResult();
+                return user.ZoneId;
+            }
+            set => throw new NotImplementedException();
+        }
     }
 }

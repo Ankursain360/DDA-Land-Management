@@ -103,9 +103,9 @@ namespace LeaseDetails.Controllers
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
                             approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowProcessIdExtensionService").Value);
+                            approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProcessIdExtensionService").Value);
                             approvalproccess.ServiceId = extension.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.SendFrom = SiteContext.UserId.ToString();
                             approvalproccess.PendingStatus = 1;
                             approvalproccess.Remarks = extension.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(extension.ApprovalStatus);
@@ -115,7 +115,7 @@ namespace LeaseDetails.Controllers
                                 approvalproccess.SendTo = null;
                             else
                             {
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                approvalproccess.SendTo = Convert.ToString(DataFlow[i + 1].parameterName);
                             }
                             result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
@@ -204,7 +204,7 @@ namespace LeaseDetails.Controllers
         #region History Details Only For Approval Page
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowProcessIdExtensionService").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowProcessIdExtensionService").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }

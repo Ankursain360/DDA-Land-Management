@@ -79,55 +79,55 @@ namespace EncroachmentDemolition.Controllers
         {
             var result = false;
            
-            #region Approval Proccess At Further level start Added by Renu 9 Dec 2020
-            var DataFlow = await DataAsync();
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (!DataFlow[i].parameterSkip)
-                {
-                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                    {
-                        result = true;
-                        if (result)
-                        {
-                            Approvalproccess approvalproccess = new Approvalproccess();
-                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value);
-                            approvalproccess.ServiceId = fixingdemolition.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
-                            approvalproccess.PendingStatus = 1;
-                            approvalproccess.Remarks = fixingdemolition.ApprovalRemarks; ///May be comment
-                            approvalproccess.Status = Convert.ToInt32(fixingdemolition.ApprovalStatus);
-                            if (i == DataFlow.Count - 1)
-                                approvalproccess.SendTo = null;
-                            else
-                            {
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                            }
-                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+            //#region Approval Proccess At Further level start Added by Renu 9 Dec 2020
+            //var DataFlow = await DataAsync();
+            //for (int i = 0; i < DataFlow.Count; i++)
+            //{
+            //    if (!DataFlow[i].parameterSkip)
+            //    {
+            //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+            //        {
+            //            result = true;
+            //            if (result)
+            //            {
+            //                Approvalproccess approvalproccess = new Approvalproccess();
+            //                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+            //                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value);
+            //                approvalproccess.ServiceId = fixingdemolition.Id;
+            //                approvalproccess.SendFrom = SiteContext.UserId;
+            //                approvalproccess.PendingStatus = 1;
+            //                approvalproccess.Remarks = fixingdemolition.ApprovalRemarks; ///May be comment
+            //                approvalproccess.Status = Convert.ToInt32(fixingdemolition.ApprovalStatus);
+            //                if (i == DataFlow.Count - 1)
+            //                    approvalproccess.SendTo = null;
+            //                else
+            //                {
+            //                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                }
+            //                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
-                            if (result)
-                            {
-                                if (i == DataFlow.Count - 1)
-                                {
-                                    fixingdemolition.ApprovedStatus = 1;
-                                    fixingdemolition.PendingAt = 0;
-                                }
-                                else
-                                {
-                                    fixingdemolition.ApprovedStatus = 0;
-                                    fixingdemolition.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                                }
-                                result = await _annexureAService.UpdateBeforeApproval(id, fixingdemolition);
-                            }
-                        }
-                        break;
-                    }
+            //                if (result)
+            //                {
+            //                    if (i == DataFlow.Count - 1)
+            //                    {
+            //                        fixingdemolition.ApprovedStatus = 1;
+            //                        fixingdemolition.PendingAt = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        fixingdemolition.ApprovedStatus = 0;
+            //                        fixingdemolition.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                    }
+            //                    result = await _annexureAService.UpdateBeforeApproval(id, fixingdemolition);
+            //                }
+            //            }
+            //            break;
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
-            #endregion
+            //#endregion
 
             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
             return View("Index");
@@ -136,7 +136,7 @@ namespace EncroachmentDemolition.Controllers
         #region History Details Only For Approval Page
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessIdRequestDemolition").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }

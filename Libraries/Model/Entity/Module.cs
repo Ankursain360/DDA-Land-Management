@@ -12,9 +12,9 @@ namespace Libraries.Model.Entity
     {
         public Module()
         {
-
             Menu = new HashSet<Menu>();
             Menuactionrolemap = new HashSet<Menuactionrolemap>();
+            WorkflowTemplate = new HashSet<WorkflowTemplate>();
         }
 
         [Required(ErrorMessage = " Module name is mandatory")]

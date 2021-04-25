@@ -147,12 +147,12 @@ namespace LeaseDetails.Controllers
                     {
                         Approvalproccess approvalproccess = new Approvalproccess();
                         approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                        approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseHearingDetails").Value);
+                        approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessIdLeaseHearingDetails").Value);
                         approvalproccess.ServiceId = id;
-                        approvalproccess.SendFrom = SiteContext.UserId;
-                        approvalproccess.SendTo = Data.UserId;
-                        approvalproccess.PendingStatus = 0;  
-                        approvalproccess.Status = 1;  
+                        approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                        approvalproccess.SendTo = Data.UserId.ToString();
+                        approvalproccess.PendingStatus = 0;
+                        approvalproccess.Status = 1;
                         approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                         result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
                     }

@@ -19,33 +19,31 @@
 
 
 <div class="pt-3">
-  
-    <div  class="d-block rounded border p-3 bg-white search-filer shadow mb-3" id="myForm"  method="post" asp-action="Create">
-        <h3 class="mb-3 d-flex">Add Details</h3>
-      
-        <div asp-validation-summary="ModelOnly" class="text-danger lb-sm"></div>
 
+    <div id="frmTemplate" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" method="post" asp-action="Create">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger lb-sm"></div>
+        <input type="hidden" id="RevertCode" value="@ViewBag.RevertCodeValue" />
+        <input type="hidden" id="ApprovedCode" value="@ViewBag.ApprovedCodeValue" />
+        <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
         <div class="row">
             <div class="col-md-4">
-                <br />
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3 " asp-for="ModuleId"
                             asp-items="@(new SelectList(Model.ModuleList, "Id","Name"))">
-
-                        <option selected="selected" disabled="disabled" value="">Select </option>
+                        <option selected="selected" disabled="disabled" value="0">Select </option>
                     </select>
-                   <span asp-validation-for="ModuleId" class="text-danger" style="display:none;" id="ModuleIdMessage"></span>
-
+                    <span asp-validation-for="ModuleId" class="text-danger" style="display:none;" id="ModuleIdMessage">Module Name Is Mandatory</span>
                     <label asp-for="ModuleId" class="floating-label">Module </label>
                 </div>
 
-                 </div>
+            </div>
             <div class="col-md-4">
-                <br />
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Name" placeholder="Name" type="text"
+                    <input asp-for="Name" type="text" maxlength="4000"
                            class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="Name" class="text-danger" style="display:none;" id="NameMessage"></span>
+                    <span asp-validation-for="Name" class="text-danger" style="display:none;" id="NameMessage">Process Name Is Mandatory</span>
 
                     <label asp-for="Name" class="floating-label">Proccess Name  </label>
                 </div>
@@ -53,41 +51,63 @@
 
             </div>
             <div class="col-md-4">
-                <br />
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Description" placeholder="Proccess Description" type="text"
-                           class="floating-label-field floating-label-field--s3 " />
-                   <span asp-validation-for="Description" class="text-danger" style="display:none;" id="DescriptionMessage"></span>
+                    <textarea asp-for="Description" type="text" maxlength="4000"
+                              class="floating-label-field floating-label-field--s3 "></textarea>
+                    <span asp-validation-for="Description" class="text-danger" style="display:none;" id="DescriptionMessage">Proccess Description Is Mandatory</span>
 
                     <label asp-for="Description" class="floating-label">Proccess Description  </label>
                 </div>
             </div>
         </div>
-       
+
         <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Slatime" type="text" value="" maxlength="3"
+                           class="floating-label-field floating-label-field--s3 onlynumbers" />
+                    <span asp-validation-for="Slatime" class="text-danger" style="display:none;" id="SlatimeMessage">SLA Time Is Mandatory</span>
+                    <label asp-for="Slatime" class="floating-label">SLA Time(in days)  </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="EffectiveDate" type="date" value=""
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="EffectiveDate" class="text-danger" style="display:none;" id="EffectiveDateMessage">Effective Date  Is Mandatory</span>
+                    <label asp-for="EffectiveDate" class="floating-label">Effective Date  </label>
+                </div>
+            </div>
             <div class="col-md-3">
                 <label class="control-label lb-sm">IsActive</label>
                 <input type="checkbox" asp-for="IsActiveData" checked />
             </div>
-            <div class=" col-md-3">
-                <a class="btn btn-theme add-record " style="color:white;"   data-added="0">  Add Level</a>
-               
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-10"></div>
+            <div class=" col-md-2">
+                <a class="btn btn-theme add-record " style="color:white;" data-added="0">  Add Level</a>
             </div>
         </div>
         <br />
         <div id="LoadReportView">
 
         </div>
-
         <div class="row mt-md-3">
-            <div class="col-md-12" >
-                <button class="btn btn-theme "id="btnCreate" type="submit">Create</button>
-              
+            <div class=" col-md-10"></div>
+            <div class=" col-md-2">
+                <a class="btn btn-theme add-record " style="color:white;" data-added="0">  Add Level</a>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <button class="btn btn-theme " id="btnCreate" type="submit">Create</button>
+
                 @Html.ActionLink("Back", "Index", "WorkFlowTemplate", null, new { @class = "btn btn-theme" })
             </div>
         </div>
 
-        </div>
+    </div>
 
 </div>
 
@@ -98,4 +118,10 @@
 </environment>
 <environment exclude="Development">
     <script src="~/js/workflowcreate.min.js" asp-append-version="true"></script>
+</environment>
+<environment include="Development">
+    <script src="~/js/common.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/common.min.js" asp-append-version="true"></script>
 </environment>

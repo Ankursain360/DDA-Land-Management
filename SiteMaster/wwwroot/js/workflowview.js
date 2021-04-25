@@ -7,7 +7,7 @@
 function GetTaskDetails() {
 
     var id = $('#Id').val();
-    HttpGet(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
+    HttpGetAsync(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
         debugger;
         response = JSON.parse(response);
         console.log(response);
@@ -15,7 +15,7 @@ function GetTaskDetails() {
 
         for (var i = 0; i < response.length; i++) {
             var param = GetSearchParam();
-            HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
+            HttpPostAsync(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
                 $('#LoadReportView').append(response);
             });
         }
@@ -27,6 +27,14 @@ function GetTaskDetails() {
 
 function FillLevels(response) {
     var count = response.length;
+    var k = 0;
+    $(".ParameterConditionalListClass").each(function () {
+        $(this).removeAttr("name");
+        $(this).attr("name", "ParameterConditionalList[" + k + "]");
+        $(this).attr("readonly", "readonly");
+        k = k + 1;
+    });
+
 
     var i = 0;
     $(".ParameterNameListClass").each(function () {
@@ -111,33 +119,15 @@ function FillLevels(response) {
             $("input[name='ParameterSkipList[" + j + "]']").val("false");
         }
 
+        $("Select[name='ParameterConditionalList[" + j + "]']").val(response[j].parameterConditional);
         $("Select[name='ParameterValueList[" + j + "]']").val(response[j].parameterValue);
         $("Select[name='ParameterValueList[" + j + "]']").trigger('change');
         $("Select[name='ParameterNameList[" + j + "]']").val(response[j].parameterName);
         $("input[name='ParameterLevelList[" + j + "]']").val(response[j].parameterLevel);
+        $("input[name='ParameterOrderList[" + j + "]']").val(response[j].parameterOrder);
         $("Select[name='ParameterActionList[" + j + "]']").val(response[j].parameterAction);
 
-
     }
-
-}
-$('#ddlOperationType').change(function () {
-    BindDropdown();
-});
-
-
-function BindDropdown() {
-    var value = $('#ddlOperationType option:selected').val();
-    HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
-        var html = '<option value="0">---Select---</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }
-        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-            $(".ParameterNameListClass").html(html);
-        }
-
-    });
 }
 
 function GetLevelDetails() {
@@ -148,8 +138,15 @@ function GetLevelDetails() {
     ) {
 
         var param = GetSearchParam();
-        HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
+        HttpPostAsync(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
             $('#LoadReportView').append(response);
+
+            var k = 0;
+            $(".ParameterConditionalListClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterConditionalList[" + k + "]");
+                k = k + 1;
+            });
 
             var i = 0;
             $(".ParameterNameListClass").each(function () {
@@ -167,6 +164,14 @@ function GetLevelDetails() {
                 i = i + 1;
             });
 
+
+            var i = 0;
+            $(".nameClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterLabelNameList[" + i + "]");
+                i = i + 1;
+            });
+
             var i = 0;
             $(".ParameterLevelListClass").each(function () {
                 $(this).removeAttr("name");
@@ -175,6 +180,16 @@ function GetLevelDetails() {
                 $(this).removeAttr("disabled", "disabled");
                 $(this).attr("disabled", "disabled");
                 i = i + 1;
+            });
+
+            var t = 0;
+            $(".ParameterOrderListClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterOrderList[" + t + "]");
+                $(this).val(t + 1);
+                $(this).removeAttr("disabled", "disabled");
+                $(this).attr("disabled", "disabled");
+                t = t + 1;
             });
 
             var i = 0;
@@ -216,6 +231,7 @@ function GetLevelDetails() {
     else {
         alert('Please fill record before add new record ');
     }
+    $("input[type='hidden'][name='ParameterSkipList[0]']").remove();
 
 }
 
@@ -245,7 +261,13 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         // jQuery("#recordDiv" + id).remove();
         //  $('#recordDiv' + id).empty();
 
-        debugger;
+
+        var k = 0;
+        $(".ParameterConditionalListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterConditionalList[" + k + "]");
+            k = k + 1;
+        });
         var i = 0;
         $(".ParameterNameListClass").each(function () {
             $(this).removeAttr("name");
@@ -258,6 +280,13 @@ $(document).delegate('a.delete-record', 'click', function (e) {
             $(this).attr("name", "ParameterValueList[" + i + "]");
             $(this).removeAttr("onchange");
             $(this).attr("onchange", "callTypeDropdown(" + i + ")");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".nameClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterLabelNameList[" + i + "]");
             i = i + 1;
         });
 
@@ -310,216 +339,44 @@ $(document).delegate('a.delete-record', 'click', function (e) {
     }
 });
 
-$(function () {
-    $("#btnCreate").click(function () {
-        debugger;
-        var checkresult = false;
-        var dropdown_val = $('#ModuleId option:selected').val();
-        if (parseInt(dropdown_val) < 1) {
-            checkresult = false;
-            $("#ModuleIdMessage").show();
-        } else {
-            checkresult = true;
-        }
-
-        var Name_val = $('#Name').val();
-        if (Name_val == "") {
-            checkresult = false;
-            $("#NameMessage").show();
-        } else {
-            checkresult = true;
-        }
-
-        var Description_val = $('#Description').val();
-        if (Description_val == "") {
-            checkresult = false;
-            $("#DescriptionMessage").show();
-        } else {
-            checkresult = true;
-        }
-
-        if (parseInt(dropdown_val) < 1 || Name_val == "" || Description_val == "") {
-            checkresult = false;
-        }
-
-
-        if (checkresult) {
-            var param = GetListData();
-            HttpPost(`/WorkFlowTemplate/Edit`, 'json', param, function (response) {
-                window.location.href = '/WorkFlowTemplate/Index';
-            });
-        }
-    });
-});
-
-function GetListData() {
-    var id = $('#Id').val();
-    var moduleId = $('#ModuleId option:selected').val();
-    var name = $('#Name').val();
-    var description = $('#Description').val();
-    var usertype = $('#ddlOperationType option:selected').val();
-    var isActive;
-    if ($("#IsActiveData").is(":checked")) {
-        isActive = 1;
-    }
-    else {
-        isActive = 0;
-    }
-    var workflow = [];
-    var model = {};
-    var data = {};
-    debugger;
-    var count = $('.myWebsiteTable').find('table').length;
-    for (var i = 0; i < count; i++) {
-        var parameterName = $("select[name='ParameterNameList[" + i + "]']").val();
-        var parameterValue = $("select[name='ParameterValueList[" + i + "]']").val();
-        var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
-        var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
-        var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
-
-        if ($("input[name='ParameterSkipList[" + i + "]']").is(":checked")) {
-            parameterSkip = true;
-        }
-        else {
-            parameterSkip = false;
-        }
-        if ((parameterName == "0")) {
-        }
-        else {
-            model = {
-                parameterName: parameterName,
-                parameterValue: parameterValue,
-                parameterLevel: parameterLevel,
-                parameterSkip: (parameterSkip),
-                parameterAction: parameterAction
-            }
-            workflow.push(model);
-        }
-
-    };
-    console.log(workflow);
-    if ($.isEmptyObject(workflow)) {
-
-    }
-    else {
-        data = {
-            Id: parseInt(id),
-            moduleId: parseInt(moduleId),
-            name: name,
-            description: description,
-            usertype: usertype,
-            isActive: isActive,
-            template: JSON.stringify(workflow)
-        }
-    }
-    console.log(data);
-    return data;
-}
-
-
-
-$('#myForm').validate({
-    rules: {
-        ModuleId: {
-            required: true
-        },
-        Name: {
-            required: true
-        },
-        Description: {
-            required: true
-        }
-    },
-
-    messages: {
-        ModuleId: {
-            required: ModuleIdMessage //this is a function that returns custom messages
-        },
-        Name: {
-            required: NameMessage //this is a function that returns custom messages
-        },
-        Description: {
-            required: DescriptionMessage //this is a function that returns custom messages
-        }
-    },
-    highlight: function (element) {
-        $(element).closest('.form-group').addClass('has-error');
-    },
-    unhighlight: function (element) {
-        $(element).closest('.form-group').removeClass('has-error');
-    },
-    errorElement: 'span',
-    errorClass: 'help-block',
-    errorPlacement: function (error, element) {
-        if (element.parent('.input-group').length) {
-            error.insertAfter(element.parent());
-        } else {
-            error.insertAfter(element);
-        }
-    },
-    submitHandler: function (form) {
-        debugger;
-        var param = GetListData();
-        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
-            window.location.href = '/WorkFlowTemplate/Index';
-        });
-        return true;
-    }
-});
-
-//For Drop down
-function ModuleIdMessage() {
-    debugger;
-    var dropdown_val = $('#ModuleId option:selected').val();
-    if (dropdown_val < 1) {
-        return "Module is Mandatory";
-    } else {
-        return false;
-    }
-}
-
-//For Textbox
-function NameMessage() {
-    debugger;
-    var dropdown_val = $('#Name').val();
-    if (dropdown_val == "") {
-        return "Process Name is Mandatory";
-    } else {
-        return "";
-    }
-}
-
-function DescriptionMessage() {
-    var dropdown_val = $('#Description').val();
-    if (dropdown_val == "") {
-        return "Proccess Description is Mandatory";
-    } else {
-        return "";
-    }
-}
-
 function callTypeDropdown(element) {
     debugger;
     var name = element;
-    console.log(name);
     var fragment_arr = name;
-    console.log(fragment_arr)
     var value = $("select[name='ParameterValueList[" + name + "]']").val();
-    console.log(value);
 
-    HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
+    HttpGetAsync(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
         debugger;
-        var html = '<option value="0">---Select---</option>';
-        for (var i = 0; i < response.length; i++) {
-            if (value == "Role") {
-                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-            }
-            else {
-                html = html + '<option value=' + response[i].user.id + '>' + response[i].user.name + '</option>';
-            }
+        var html = "";
+        if (value == "Role") {
+            html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
         }
+        for (var i = 0; i < response.length; i++) {
+            //if (value == "Role") {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+            //}
+            //else {
+            //    html = html + '<option value=' + response[i].user.id + '>' + response[i].user.name + '</option>';
+            //}
+        }
+
         $("select[name='ParameterNameList[" + fragment_arr + "]']").val(null).trigger('change');
+        if (value == "Role") {
+            $("select[name='ParameterNameList[" + fragment_arr + "]']").removeAttr("multiple", "multiple");
+        }
+        else {
+            $("select[name='ParameterNameList[" + fragment_arr + "]']").attr("multiple", "");
+        }
         $("select[name='ParameterNameList[" + fragment_arr + "]']").html(html);
         $("label[name='ParameterLabelNameList[" + fragment_arr + "]']").html(value + ' Name');
+
+        $("select[name='ParameterNameList[" + fragment_arr + "]']").select2({
+        });
+    });
+    // callSelect2();
+}
+
+function callSelect2() {
+    $("select").select2({
     });
 }

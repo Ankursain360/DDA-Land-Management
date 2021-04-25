@@ -21,5 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<Leaseapplicationdocuments> FetchLeaseApplicationDocumentDetails(int id);
         Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
         Task<Allotmentletter> FetchLeaseApplicationDetailsforAllotmentLetter(int id);
+        Task<bool> RollBackEntry(int id);
+        Task<bool> RollBackEntryDocument(int id);
     }
 }

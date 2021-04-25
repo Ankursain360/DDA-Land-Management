@@ -412,5 +412,11 @@
     "inputFiles": [
       "wwwroot/js/DemandLetterCreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/leaseapplicationformapprovalview.min.js",
+    "inputFiles": [
+      "wwwroot/js/leaseapplicationformapprovalview.js"
+    ]
   }
 ]

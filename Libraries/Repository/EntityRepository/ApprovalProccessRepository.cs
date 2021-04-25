@@ -20,30 +20,36 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
+        public async Task<List<ApprovalHistoryListDataDto>> GetHistoryDetails(string proccessguid, int id)
         {
-            var result = await _dbContext.Approvalproccess
-                                    //  .Include(x => x.SendFrom as user1)
-                                    .Where(x => x.ProccessID == proccessid && x.ServiceId == id)
-                                    .ToListAsync();
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("ApprovalHistoryDetails")
+                                            .WithSqlParams(("P_ProccessGuid", proccessguid), ("P_ServiceId", id)
+                                            )
+                                            .ExecuteStoredProcedureAsync<ApprovalHistoryListDataDto>();
 
-            return result;
-
+                return (List<ApprovalHistoryListDataDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
-        public int GetPreviousApprovalId(int proccessid, int serviceid)
+        public int GetPreviousApprovalId(string proccessguid, int serviceid)
         {
-            var File = (from f in _dbContext.Approvalproccess
-                        where f.ProccessID == proccessid && f.ServiceId == serviceid
-                        orderby f.Id descending
-                        select f.Id).First();
+            var Id = (from f in _dbContext.Approvalproccess
+                      where f.ProcessGuid == proccessguid && f.ServiceId == serviceid
+                      orderby f.Id descending
+                      select f.Id).First();
 
-            return File;
+            return Id;
         }
-        public int CheckIsApprovalStart(int proccessid, int serviceid)
+        public int CheckIsApprovalStart(string proccessguid, int serviceid)
         {
             var File = (from f in _dbContext.Approvalproccess
-                        where f.ProccessID == proccessid && f.ServiceId == serviceid
+                        where f.ProcessGuid == proccessguid && f.ServiceId == serviceid
                         orderby f.Id descending
                         select f.Id).Count();
 
@@ -62,6 +68,28 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Approvalstatus
                                      .Where(x => x.IsActive == 1 && actions.Contains(x.Id))
                                      .ToListAsync();
+        }
+
+        public async Task<Approvalstatus> FetchSingleApprovalStatus(int id)
+        {
+            return await _dbContext.Approvalstatus
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<Approvalstatus> GetStatusIdFromStatusCode(int statuscode)
+        {
+            return await _dbContext.Approvalstatus
+                                   .Where(x => x.StatusCode == statuscode)
+                                   .FirstOrDefaultAsync();
+        }
+
+        public async Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid)
+        {
+            return await _dbContext.Approvalproccess
+                                     .Where(x => x.ProcessGuid == processguid && x.ServiceId == serviceid)
+                                     .OrderBy(x => x.Id)
+                                     .FirstOrDefaultAsync();
         }
     }
 }

@@ -217,5 +217,45 @@ namespace Service.ApplicationService
         {
             return await _userProfileRepository.GetAllotteeDetails(userId);
         }
+
+        public async Task<List<UserProfileDto>> GetUserOnRoleBasis(int roleId)
+        {
+            var user = await _userProfileRepository.GetUserOnRoleBasis(roleId);
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            return result;
+        }
+
+        public async Task<List<UserProfileDto>> GetUserSkippingItsOwn(int roleId, int userid)
+        {
+            var user = await _userProfileRepository.GetUserSkippingItsOwn(roleId, userid);
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            return result;
+        }
+
+        public async Task<List<UserWithRoleDto>> GetUserWithRole()
+        {
+            return await _userProfileRepository.GetUserWithRole();
+        }
+
+        public async Task<List<UserProfileDto>> GetUserOnRoleZoneBasis(int roleId, int zoneId)
+        {
+            var user = await _userProfileRepository.GetUserOnRoleZoneBasis(roleId, zoneId);
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            return result;
+        }
+
+        public async Task<UserProfileDto> GetUserByIdZone(int userid, int zoneId)
+        {
+            var user = await _userProfileRepository.GetUserByIdZone(userid, zoneId);
+            var result = _mapper.Map<UserProfileDto>(user);
+            return result;
+        }
+
+        public async Task<List<UserProfileDto>> UserListSkippingmultiusers(int[] nums)
+        {
+            var user = await _userProfileRepository.UserListSkippingmultiusers(nums);
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            return result;
+        }
     }
 }

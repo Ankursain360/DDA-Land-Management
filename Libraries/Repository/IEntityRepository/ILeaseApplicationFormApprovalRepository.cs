@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dto.Search;
 using Libraries.Model.Entity;
@@ -9,7 +10,8 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface ILeaseApplicationFormApprovalRepository : IGenericRepository<Leaseapplication>
     {
-        Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId);
+        Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id);
         Task<Leaseapplication> FetchSingleResult(int id);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

@@ -22,82 +22,73 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<WorkflowTemplate>> GetPagedWorkflowTemplate(WorkflowTemplateSearchDto model)
         {
-           
+
             var data = await _dbContext.WorkflowTemplate
-                            .Include(x => x.Module)
-                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.module) || x.Module.Name.Contains(model.module)))
-                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
+                                            .Include(x => x.Module)
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                             && (string.IsNullOrEmpty(model.version) || x.Version.Contains(model.version))
+                                             && x.ModuleId == (model.moduleid == 0 ? x.ModuleId : model.moduleid)
+                                             )
+                                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
-                switch (model.SortBy.ToUpper())
+                data = null;
+                if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.WorkflowTemplate
-                            .Include(x => x.Module)
-                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.module) || x.Module.Name.Contains(model.module)))
-                            .OrderBy(s => s.Name)
-                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("MODULE"):
-                        data = null;
-                        data = await _dbContext.WorkflowTemplate
-                            .Include(x => x.Module)
-                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.module) || x.Module.Name.Contains(model.module)))
-                            .OrderBy(s => s.Module.Name)
-                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.WorkflowTemplate
-                            .Include(x => x.Module)
-                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.module) || x.Module.Name.Contains(model.module)))
-                            .OrderByDescending(s => s.IsActive)
-                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
-                        break;
-
-
+                    data = await _dbContext.WorkflowTemplate
+                                            .Include(x => x.Module)
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                             && (string.IsNullOrEmpty(model.version) || x.Version.Contains(model.version))
+                                             && x.ModuleId == (model.moduleid == 0 ? x.ModuleId : model.moduleid)
+                                             )
+                                            .OrderByDescending(s => s.IsActive)
+                                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
                 }
-
+                else
+                {
+                    data = await _dbContext.WorkflowTemplate
+                                            .Include(x => x.Module)
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                             && (string.IsNullOrEmpty(model.version) || x.Version.Contains(model.version))
+                                             && x.ModuleId == (model.moduleid == 0 ? x.ModuleId : model.moduleid)
+                                             )
+                                            .OrderBy(s =>
+                                            (model.SortBy.ToUpper() == "NAME" ? s.Name
+                                            : model.SortBy.ToUpper() == "MODULE" ? s.Module.Name
+                                            : s.Module.Name)
+                                            )
+                                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
+                }
             }
             else if (SortOrder == 2)
             {
-                switch (model.SortBy.ToUpper())
+                data = null;
+                if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.WorkflowTemplate
-                            .Include(x => x.Module)
-                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.module) || x.Module.Name.Contains(model.module)))
-                            .OrderByDescending(s => s.Name)
-                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("MODULE"):
-                        data = null;
-                        data = await _dbContext.WorkflowTemplate
-                            .Include(x => x.Module)
-                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.module) || x.Module.Name.Contains(model.module)))
-                            .OrderByDescending(s => s.Module.Name)
-                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.WorkflowTemplate
-                            .Include(x => x.Module)
-                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.module) || x.Module.Name.Contains(model.module)))
-                            .OrderBy(s => s.IsActive)
-                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
-                        break;
-
-
+                    data = await _dbContext.WorkflowTemplate
+                                            .Include(x => x.Module)
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                             && (string.IsNullOrEmpty(model.version) || x.Version.Contains(model.version))
+                                             && x.ModuleId == (model.moduleid == 0 ? x.ModuleId : model.moduleid)
+                                             )
+                                            .OrderBy(s => s.IsActive)
+                                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
+                }
+                else
+                {
+                    data = await _dbContext.WorkflowTemplate
+                                            .Include(x => x.Module)
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                             && (string.IsNullOrEmpty(model.version) || x.Version.Contains(model.version))
+                                             && x.ModuleId == (model.moduleid == 0 ? x.ModuleId : model.moduleid)
+                                             )
+                                            .OrderByDescending(s =>
+                                            (model.SortBy.ToUpper() == "NAME" ? s.Name
+                                            : model.SortBy.ToUpper() == "MODULE" ? s.Module.Name
+                                            : s.Module.Name)
+                                            )
+                                            .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
                 }
             }
             return data;
@@ -114,16 +105,32 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
         }
 
-        //public async Task<List<Role>> GetRolelist()
-        //{
-        //    var result = await _dbContext.Role.Where(x => x.IsActive == 1).ToListAsync();
-        //    return result;
-        //}
+        public async Task<List<Approvalstatus>> GetApprovalStatusListData()
+        {
+            return await _dbContext.Approvalstatus
+                                    .Where(x => x.IsActive == 1)
+                                    .ToListAsync();
+        }
 
-        //public async Task<List<User>> GetUserlist()
-        //{
-        //    var result = await _dbContext.User.Where(x => x.IsActive == 1).ToListAsync();
-        //    return result;
-        //}
+        public int ProcessGuidBasisCount(string processGuid)
+        {
+            var count = (from f in _dbContext.WorkflowTemplate
+                         where f.ProcessGuid == processGuid
+                         orderby f.Id descending
+                         select f.Id).Count();
+
+            return count;
+        }
+
+        public async Task<WorkflowTemplate> FetchSingleResultOnProcessGuid(string processguid)
+        {
+            return await _dbContext.WorkflowTemplate
+                                    .Where(x => x.ProcessGuid == processguid && x.EffectiveDate <= DateTime.Now
+                                    && x.IsActive == 1
+                                    )
+                                    .OrderByDescending(x => x.Id)
+                                    .Take(1)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

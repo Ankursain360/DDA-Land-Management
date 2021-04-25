@@ -23,28 +23,27 @@ namespace Libraries.Repository.EntityRepository
         public int FetchCountResultForProccessWorkflow(int workflowTemplateId)
         {
             var count = (from f in _dbContext.Processworkflow
-                        where f.WorkflowTemplateId == workflowTemplateId 
-                        orderby f.Id 
-                        select f.Id).Count();
+                         where f.WorkflowTemplateId == workflowTemplateId
+                         orderby f.Id
+                         select f.Id).Count();
 
             return count;
         }
 
-        public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
+        public async Task<List<Approvalproccess>> GetHistoryDetails(string proccessguid, int id)
         {
             var result = await _dbContext.Approvalproccess
-                                    // .Include(x => x.SendFromUser)
-                                    .Where(x => x.ProccessID == proccessid && x.ServiceId == id)
+                                    .Where(x => x.ProcessGuid == proccessguid && x.ServiceId == id)
                                     .ToListAsync();
 
             return result;
 
         }
 
-        public int GetPreviousApprovalId(int proccessid, int serviceid)
+        public int GetPreviousApprovalId(string proccessguid, int serviceid)
         {
             var File = (from f in _dbContext.Approvalproccess
-                        where f.ProccessID == proccessid && f.ServiceId == serviceid
+                        where f.ProcessGuid == proccessguid && f.ServiceId == serviceid
                         orderby f.Id descending
                         select f.Id).First();
 

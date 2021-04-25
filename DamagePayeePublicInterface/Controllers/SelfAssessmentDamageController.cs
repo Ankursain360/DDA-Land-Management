@@ -235,38 +235,38 @@ namespace DamagePayeePublicInterface.Controllers
                         }
                         if (result)
                         {
-                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
+                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart((_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
                             if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
                             {
-                                #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
-                                var DataFlow = await dataAsync();
-                                for (int i = 0; i < DataFlow.Count; i++)
-                                {
-                                    if (!DataFlow[i].parameterSkip)
-                                    {
-                                        damagepayeeregistertemp.ApprovedStatus = 0;
-                                        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                                        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
-                                        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
-                                        if (result)
-                                        {
-                                            Approvalproccess approvalproccess = new Approvalproccess();
-                                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
-                                            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
-                                            approvalproccess.SendFrom = SiteContext.UserId;
-                                            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                            approvalproccess.PendingStatus = 1;   //1
-                                            approvalproccess.Status = null;   //1
-                                            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                        }
+                                //#region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                                //var DataFlow = await dataAsync();
+                                //for (int i = 0; i < DataFlow.Count; i++)
+                                //{
+                                //    if (!DataFlow[i].parameterSkip)
+                                //    {
+                                //        damagepayeeregistertemp.ApprovedStatus = 0;
+                                //        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                //        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
+                                //        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
+                                //        if (result)
+                                //        {
+                                //            Approvalproccess approvalproccess = new Approvalproccess();
+                                //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                                //            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
+                                //            approvalproccess.SendFrom = SiteContext.UserId;
+                                //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                //            approvalproccess.PendingStatus = 1;   //1
+                                //            approvalproccess.Status = null;   //1
+                                //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                //        }
 
-                                        break;
-                                    }
-                                }
+                                //        break;
+                                //    }
+                                //}
 
-                                #endregion
+                                //#endregion
                             }
 
                         }
@@ -417,38 +417,38 @@ namespace DamagePayeePublicInterface.Controllers
                         }
                         if (result)
                         {
-                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
+                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart((_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
                             if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
                             {
-                                #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
-                                var DataFlow = await dataAsync();
-                                for (int i = 0; i < DataFlow.Count; i++)
-                                {
-                                    if (!DataFlow[i].parameterSkip)
-                                    {
-                                        damagepayeeregistertemp.ApprovedStatus = 0;
-                                        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                                        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
-                                        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
-                                        if (result)
-                                        {
-                                            Approvalproccess approvalproccess = new Approvalproccess();
-                                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
-                                            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
-                                            approvalproccess.SendFrom = SiteContext.UserId;
-                                            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                            approvalproccess.PendingStatus = 1;   //1
-                                            approvalproccess.Status = null;   //1
-                                            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                        }
+                                //#region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                                //var DataFlow = await dataAsync();
+                                //for (int i = 0; i < DataFlow.Count; i++)
+                                //{
+                                //    if (!DataFlow[i].parameterSkip)
+                                //    {
+                                //        damagepayeeregistertemp.ApprovedStatus = 0;
+                                //        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                //        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
+                                //        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
+                                //        if (result)
+                                //        {
+                                //            Approvalproccess approvalproccess = new Approvalproccess();
+                                //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                                //            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
+                                //            approvalproccess.SendFrom = SiteContext.UserId;
+                                //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                //            approvalproccess.PendingStatus = 1;   //1
+                                //            approvalproccess.Status = null;   //1
+                                //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                //        }
 
-                                        break;
-                                    }
-                                }
+                                //        break;
+                                //    }
+                                //}
 
-                                #endregion
+                                //#endregion
                             }
 
                         }

@@ -19,7 +19,7 @@
 
 
 <div class="pt-3">
-   
+
     <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3" id="myForm" method="post" disabled="disabled">
         <h3 class="mb-3 d-flex">View Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -30,7 +30,7 @@
 
                 <br />
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3 " asp-for="ModuleId"
+                    <select class="floating-label-field floating-label-field--s3 " asp-for="ModuleId" disabled
                             asp-items="@(new SelectList(Model.ModuleList, "Id","Name"))">
 
                         <option selected="selected" disabled="disabled" value="">Select </option>
@@ -39,11 +39,11 @@
                     <label asp-for="ModuleId" class="floating-label">Module </label>
                 </div>
 
-               </div>
+            </div>
             <div class=" col-md-4">
                 <br />
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Name" placeholder="Name" type="text"
+                    <input disabled asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label asp-for="Name" class="floating-label">Proccess Name  </label>
@@ -52,8 +52,8 @@
             <div class=" col-md-4">
                 <br />
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Description" placeholder="Proccess Description" type="text"
-                           class="floating-label-field floating-label-field--s3 " />
+                    <textarea disabled asp-for="Description" placeholder="Proccess Description" type="text"
+                              class="floating-label-field floating-label-field--s3 "></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                     <label asp-for="Description" class="floating-label">Proccess Description  </label>
                 </div>
@@ -61,15 +61,35 @@
 
         </div>
         <br />
-        <div class="row">
-            <div class="form-group col-md-3">
-                <label class="control-label lb-sm">IsActive</label>
-                <input type="checkbox" disabled asp-for="IsActiveData" checked />
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="Slatime" type="text"
+                           class="floating-label-field floating-label-field--s3 onlynumbers" />
+                    <span asp-validation-for="Slatime" class="text-danger" style="display:none;" id="SlatimeMessage">SLA Time Is Mandatory</span>
+                    <label asp-for="Slatime" class="floating-label">SLA Time(in days)   </label>
+                </div>
             </div>
-            <div class="form-group col-md-3">
-               
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled asp-for="EffectiveDate" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="EffectiveDate" class="text-danger" style="display:none;" id="EffectiveDateMessage">Effective Date  Is Mandatory</span>
+                    <label asp-for="EffectiveDate" class="floating-label">Effective Date  </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Version" type="text" class="floating-label-field floating-label-field--s3" disabled />
+                    <label asp-for="Version" class="floating-label">Version </label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label class="control-label lb-sm">IsActive</label>
+                <input type="checkbox" asp-for="IsActiveData" checked disabled />
             </div>
         </div>
+
         <div id="LoadReportView">
 
         </div>

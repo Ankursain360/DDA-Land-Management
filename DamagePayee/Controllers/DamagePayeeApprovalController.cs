@@ -152,7 +152,7 @@ namespace DamagePayee.Controllers
         }
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _proccessWorkflowService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), id);
+            var Data = await _proccessWorkflowService.GetHistoryDetails((_configuration.GetSection("workflowPreccessIdDamagePayee").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
@@ -388,56 +388,56 @@ namespace DamagePayee.Controllers
             else
                 ViewBag.RebateValue = Math.Round((value.RebatePercentage), 2);
 
-            #region Approval Proccess At Further level start Added by Renu 23 jan 2021
-            var DataFlow = await DataAsync();
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (!DataFlow[i].parameterSkip)
-                {
-                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                    {
-                        result = true;  ///May be comment
-                        if (result)
-                        {
-                            Approvalproccess approvalproccess = new Approvalproccess();
-                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
-                            approvalproccess.ServiceId = damagepayeeregister.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
-                            approvalproccess.PendingStatus = 1;
-                            approvalproccess.Remarks = damagepayeeregister.ApprovalRemarks; ///May be comment
-                            approvalproccess.Status = Convert.ToInt32(damagepayeeregister.ApprovalStatus);
-                            if (i == DataFlow.Count - 1)
-                                approvalproccess.SendTo = null;
-                            else
-                            {
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                            }
-                            // if (i != DataFlow.Count - 1)  ///May be Uncomment
-                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+            //#region Approval Proccess At Further level start Added by Renu 23 jan 2021
+            //var DataFlow = await DataAsync();
+            //for (int i = 0; i < DataFlow.Count; i++)
+            //{
+            //    if (!DataFlow[i].parameterSkip)
+            //    {
+            //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+            //        {
+            //            result = true;  ///May be comment
+            //            if (result)
+            //            {
+            //                Approvalproccess approvalproccess = new Approvalproccess();
+            //                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+            //                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+            //                approvalproccess.ServiceId = damagepayeeregister.Id;
+            //                approvalproccess.SendFrom = SiteContext.UserId;
+            //                approvalproccess.PendingStatus = 1;
+            //                approvalproccess.Remarks = damagepayeeregister.ApprovalRemarks; ///May be comment
+            //                approvalproccess.Status = Convert.ToInt32(damagepayeeregister.ApprovalStatus);
+            //                if (i == DataFlow.Count - 1)
+            //                    approvalproccess.SendTo = null;
+            //                else
+            //                {
+            //                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                }
+            //                // if (i != DataFlow.Count - 1)  ///May be Uncomment
+            //                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
-                            if (result)
-                            {
-                                if (i == DataFlow.Count - 1)
-                                {
-                                    damagepayeeregister.ApprovedStatus = 1;
-                                    damagepayeeregister.PendingAt = 0;
-                                }
-                                else
-                                {
-                                    damagepayeeregister.ApprovedStatus = 0;
-                                    damagepayeeregister.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                                }
-                                result = await _damagepayeeregisterService.UpdateBeforeApproval(id, damagepayeeregister);
-                            }
-                        }
-                        break;
-                    }
+            //                if (result)
+            //                {
+            //                    if (i == DataFlow.Count - 1)
+            //                    {
+            //                        damagepayeeregister.ApprovedStatus = 1;
+            //                        damagepayeeregister.PendingAt = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        damagepayeeregister.ApprovedStatus = 0;
+            //                        damagepayeeregister.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                    }
+            //                    result = await _damagepayeeregisterService.UpdateBeforeApproval(id, damagepayeeregister);
+            //                }
+            //            }
+            //            break;
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
-            #endregion
+            //#endregion
             var Msgddl = damagepayeeregister.ApprovalStatus;
             if (Msgddl == "3")
             {

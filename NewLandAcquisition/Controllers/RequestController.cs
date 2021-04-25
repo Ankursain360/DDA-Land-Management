@@ -106,10 +106,10 @@ namespace NewLandAcquisition.Controllers
 
                                 Approvalproccess approvalproccess = new Approvalproccess();
                                 approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowRequestId").Value);
+                           //     approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowRequestId").Value);
                                 approvalproccess.ServiceId = request.Id;
-                                 approvalproccess.SendFrom = SiteContext.UserId;
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                           //      approvalproccess.SendFrom = SiteContext.UserId;
+                            //    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
                                 approvalproccess.PendingStatus = 1;   //1
                                 approvalproccess.Status = null;   //1
                                 approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment

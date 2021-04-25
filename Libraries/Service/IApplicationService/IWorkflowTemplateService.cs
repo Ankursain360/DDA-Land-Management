@@ -24,7 +24,8 @@ namespace Libraries.Service.IApplicationService
 
         Task<PagedResult<WorkflowTemplate>> GetPagedWorkflowTemplate(WorkflowTemplateSearchDto model);
         Task<List<Module>> GetAllModuleList();
-        //Task<List<User>> GetUserlist();
-        //Task<List<Role>> GetRolelist();
+        Task<List<Approvalstatus>> GetApprovalStatusListData();
+        int ProcessGuidBasisCount(string ProcessGuid);
+        Task<WorkflowTemplate> FetchSingleResultOnProcessGuid(string processguid);
     }
 }
