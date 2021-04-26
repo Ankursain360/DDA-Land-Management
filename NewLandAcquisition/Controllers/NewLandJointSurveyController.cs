@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using NewLandAcquisition.Filters;
 using Core.Enum;
+using Dto.Master;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -375,5 +376,34 @@ namespace NewLandAcquisition.Controllers
 
             return Json(await _newLandJointSurveyService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
+
+
+        public async Task<IActionResult> NewLandJointSurveyList()
+        {
+            var result = await _newLandJointSurveyService.GetAllNewLandJointSurvey();
+            List<NewlandJoinSurveyListDto> data = new List<NewlandJoinSurveyListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewlandJoinSurveyListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageName=result[i].Village==null ?"" : result[i].Village.Name.ToString(),
+                        KhasraName = result[i].Khasra == null ? "" : result[i].Khasra.Name.ToString(),
+                        Address=result[i].Address,
+                        Area = result[i].Bigha.ToString() + '-' + result[i].Biswa.ToString() + '-' + result[i].Biswanshi.ToString(),
+                        jointSurveyDate=result[i].JointSurveyDate.ToString(),
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
     }
 }
