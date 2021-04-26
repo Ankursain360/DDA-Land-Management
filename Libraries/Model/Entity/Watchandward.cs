@@ -14,6 +14,8 @@ namespace Libraries.Model.Entity
             Watchandwardreportfiledetails = new HashSet<Watchandwardreportfiledetails>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
         }
+        public string RefNo { get; set; }
+
         [Required (ErrorMessage ="Please fill date")]
         public DateTime? Date { get; set; }
         public int? LocalityId { get; set; }
@@ -84,12 +86,29 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string Pocket { get; set; }
 
+        #region Approval Related Fields
         [NotMapped]
         public string ApprovalStatus { get; set; }
 
         [NotMapped]
+        public int ApprovalStatusCode { get; set; }
+
+        [NotMapped]
         public string ApprovalRemarks { get; set; }
 
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
+
+        #endregion
         public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
         public Approvalstatus ApprovedStatusNavigation { get; set; }
 

@@ -2,7 +2,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-           
+
             <th>Date</th>
             <th>Locality(Village)</th>
             <th>Khasra No.</th>
@@ -18,24 +18,26 @@
             @foreach (var item in Model.Results)
             {
                 <tr>
-                    
+
                     <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
                     <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
                     <td>@item.PrimaryListNoNavigation.KhasraNo</td>
                     <td>@item.PrimaryListNo</td>
                     <td>@item.StatusOnGround</td>
-                    <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+                    <td>
+                        @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+                    </td>
                     @if (ViewBag.IsApproved == 0)
                     {
                         <td>
-
                             <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-
                         </td>
                     }
                     else
                     {
-                        <td>No Action</td>
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-line"></i> </a>
+                        </td>
                     }
                 </tr>
             }

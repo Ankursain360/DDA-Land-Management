@@ -27,37 +27,38 @@
                         {
                             @foreach (var item in Model)
                             {
-                                <tr>
+                        <tr>
 
-                                    <td>
-                                        @item.SendFrom
-                                    </td>
-                                    <td>
-                                        @item.SendTo
-                                    </td>
-                                    <td>
-                                        @(item.SubmitDate != null ? Convert.ToDateTime(item.SubmitDate).ToString("dd-MMM-yyyy h:mm tt") : "Not Available")
-                                    </td>
-                                    <td>
-                                        @item.ActionTakenDate @* @(item.ActionTakenDate != null ? Convert.ToDateTime(item.ActionTakenDate).ToString("dd-MMM-yyyy h:mm tt") : "Not Available")*@
-                                    </td>
-                                    <td>
-                                        @if (item.DocumentName != "")
-                                        {
-                                            <a class="badge badge-primary px-2" asp-action="ViewDocumentApprovalProccess" asp-route-id="@item.Id" target="_blank"> (View)</a>
-                                        }
-                                        else
-                                        {
-                                            <a>No Document</a>
-                                        }
-                                    </td>
-                                    <td>
-                                        @(item.SentStatusName == null ? "" : item.SentStatusName)
-                                    </td>
-                                    <td>
-                                        @item.Remarks
-                                    </td>
-                                </tr>
+                            <td>
+                                @item.SendFrom
+                            </td>
+                            <td>
+                                @item.SendTo
+                            </td>
+                            <td>
+                                @*@(item.SubmitDate != null ? Convert.ToDateTime(item.SubmitDate).ToString("dd-MMM-yyyy h:mm tt") : "Not Available")*@
+                                @item.SubmitDate
+                            </td>
+                            <td>
+                                @item.ActionTakenDate @* @(item.ActionTakenDate != null ? Convert.ToDateTime(item.ActionTakenDate).ToString("dd-MMM-yyyy h:mm tt") : "Not Available")*@
+                            </td>
+                            <td>
+                                @if (item.DocumentName != "")
+                                {
+                                    <a class="badge badge-primary px-2" asp-action="ViewDocumentApprovalProccess" asp-route-id="@item.Id" target="_blank"> (View)</a>
+                                }
+                                else
+                                {
+                                    <a>No Document</a>
+                                }
+                            </td>
+                            <td>
+                                @(item.SentStatusName == null ? "" : item.SentStatusName)
+                            </td>
+                            <td>
+                                @item.Remarks
+                            </td>
+                        </tr>
                             }
                         }
                         else

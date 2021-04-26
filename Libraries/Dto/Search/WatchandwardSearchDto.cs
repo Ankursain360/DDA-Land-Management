@@ -8,10 +8,9 @@ namespace Dto.Search
 
     public class WatchandwardSearchDto : BaseSearchDto
     {
-        public string name { get; set; }
-        public int localityId { get; set; }
-        public DateTime fromDate { get; set; }
-        public DateTime toDate { get; set; }
+        public string date { get; set; }
         public string locality { get; set; }
+        public string khasrano { get; set; }
+        public string primarylistno { get; set; }
     }
 }

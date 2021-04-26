@@ -15,10 +15,16 @@ function GetWatchandward(pageNumber, pageSize, order) {
     });
 }
 
+$('#ddlSort').change(function () {
+    GetWatchandward(currentPageNumber, currentPageSize, sortby);
+});
+
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "WATCHWARD",
+        date: $('#txtDate').val(),
         locality: $('#txtLocality').val(),
+        khasrano: $('#txtKhasrano').val(),
+        primarylistno: $('#txtPrimarylistno').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -50,6 +56,9 @@ $("#btnSearch").click(function () {
 
 $("#btnReset").click(function () {
     $('#txtLocality').val('');
+    $('#txtDate').val('');
+    $('#txtKhasrano').val('');
+    $('#txtPrimarylistno').val('');
     GetWatchandward(currentPageNumber, currentPageSize, sortby);
 
 });

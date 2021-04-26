@@ -213,7 +213,7 @@ namespace Service.ApplicationService
             return result;
         }
 
-        public async  Task<Possesionplan> GetAllotteeDetails(int userId)
+        public async Task<Possesionplan> GetAllotteeDetails(int userId)
         {
             return await _userProfileRepository.GetAllotteeDetails(userId);
         }
@@ -247,8 +247,11 @@ namespace Service.ApplicationService
         public async Task<UserProfileDto> GetUserByIdZone(int userid, int zoneId)
         {
             var user = await _userProfileRepository.GetUserByIdZone(userid, zoneId);
-            var result = _mapper.Map<UserProfileDto>(user);
-            return result;
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            if (result.Count == 0)
+                return null;
+            else
+                return result[0];
         }
 
         public async Task<List<UserProfileDto>> UserListSkippingmultiusers(int[] nums)

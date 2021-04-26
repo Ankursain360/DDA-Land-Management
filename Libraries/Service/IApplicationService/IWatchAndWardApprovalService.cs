@@ -15,10 +15,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Khasra>> GetAllKhasra();
         Task<List<Village>> GetAllVillage();
         Task<List<Locality>> GetAllLocality();
-        Task<bool> Update(int id, Watchandward watchandward);
-        Task<bool> Create(Watchandward watchandward);
         Task<Watchandward> FetchSingleResult(int id);
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId);
-        
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

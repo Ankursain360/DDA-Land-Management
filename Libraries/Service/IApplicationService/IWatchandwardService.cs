@@ -47,5 +47,8 @@ namespace Libraries.Service.IApplicationService
         Task<Propertyregistration> FetchSingleResultOnPrimaryList(int v);
 
         Task<bool> UpdateBeforeApproval(int id, Watchandward watchandward);
+        Task<bool> RollBackEntryPhoto(int id);
+        Task<bool> RollBackEntryReport(int id);
+        Task<bool> RollBackEntry(int id);
     }
 }

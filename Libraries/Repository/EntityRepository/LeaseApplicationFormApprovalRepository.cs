@@ -28,8 +28,7 @@ namespace Libraries.Repository.EntityRepository
                                     .Where(x => x.Id == id)
                                     .FirstOrDefaultAsync();
         }
-
-        // public async Task<Tuple<int,int,IEnumerable<Leaseapplication>>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id)
+                
         public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id)
         {
             var AllDataList = await _dbContext.Leaseapplication.ToListAsync();
@@ -47,9 +46,7 @@ namespace Libraries.Repository.EntityRepository
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         )
                                         .GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
-
-            //    var data1 = data.Results.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));//.GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
-
+                        
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -87,7 +84,6 @@ namespace Libraries.Repository.EntityRepository
                                        .GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
             }
 
-            //  var xyz = new Tuple<int, int, IEnumerable<Leaseapplication>>(data.CurrentPage, data.PazeSize,data1);
             return data;
         }
 

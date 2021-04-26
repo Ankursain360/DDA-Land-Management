@@ -10,7 +10,7 @@ namespace Dto.Search
         public int ServiceId { get; set; }
         public string SendFrom { get; set; }
         public string SendTo { get; set; }
-        public DateTime SubmitDate { get; set; }
+        public string SubmitDate { get; set; }
         public string ActionTakenDate { get; set; }
         public string DocumentName { get; set; }
         public string SentStatusName { get; set; }

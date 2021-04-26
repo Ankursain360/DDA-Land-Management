@@ -71,6 +71,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
+            builder.Property(e => e.RefNo)
+                .HasMaxLength(45)
+                .IsUnicode(false);
+
             builder.Property(e => e.PrimaryListNo).HasColumnType("int(11)");
 
             builder.Property(e => e.ReportFiletPath)

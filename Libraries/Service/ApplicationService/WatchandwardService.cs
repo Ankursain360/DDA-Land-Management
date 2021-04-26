@@ -185,6 +185,22 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<bool> RollBackEntryPhoto(int id)
+        {
+            return await _watchandwardRepository.RollBackEntryPhoto(id);
+        }
 
+        public async Task<bool> RollBackEntryReport(int id)
+        {
+            return await _watchandwardRepository.RollBackEntryReport(id);
+        }
+
+        public async Task<bool> RollBackEntry(int id)
+        {
+            var result = await _watchandwardRepository.FindBy(a => a.Id == id);
+            Watchandward model = result.FirstOrDefault();
+            _watchandwardRepository.Delete(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }

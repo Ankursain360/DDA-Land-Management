@@ -16,5 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId);
+        Task<Watchandward> FetchSingleResult(int id);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

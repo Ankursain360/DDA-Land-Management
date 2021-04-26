@@ -100,7 +100,7 @@
                         <br />
                         foreach (var item in Model.Watchandwardphotofiledetails)
                         {
-                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id"> (View Photo @(Photo += 1 ))</a>
+                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id" target="_blank"> (View Photo @(Photo += 1 ))</a>
 
                             if (item.LattLongUrl != null)
                             {

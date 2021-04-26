@@ -103,6 +103,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Leaseapplicationdocuments> Leasedocuments { get; set; }
 
+        #region Approval Related Fields
         [NotMapped]
         public string ApprovalStatus { get; set; }
 
@@ -124,6 +125,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public int ApprovalRoleId { get; set; }
 
+        #endregion
 
         // Old Allotment entryfeilds
 

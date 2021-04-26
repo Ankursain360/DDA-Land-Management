@@ -132,5 +132,17 @@ namespace Libraries.Repository.EntityRepository
                                     .Take(1)
                                     .FirstOrDefaultAsync();
         }
+
+        public async Task<WorkflowTemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version)
+        {
+            return await _dbContext.WorkflowTemplate
+                                   .Where(x => x.ProcessGuid == processguid 
+                                   && x.Version == version
+                                   && x.IsActive == 1
+                                   )
+                                   .OrderByDescending(x => x.Id)
+                                   .Take(1)
+                                   .FirstOrDefaultAsync();
+        }
     }
 }

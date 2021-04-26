@@ -94,32 +94,41 @@ namespace LeaseDetails.Controllers
                 FileHelper fileHelper = new FileHelper();
                 var Msgddl = leaseapplication.ApprovalStatus;
                 #region Approval Proccess At Further level start Added by Renu 16 march 2021
-                var DataFlow = await DataAsync();
                 var FirstApprovalProcessData = await _approvalproccessService.FirstApprovalProcessData((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), leaseapplication.Id);
                 var ApprovalProccessBackId = _approvalproccessService.GetPreviousApprovalId((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), leaseapplication.Id);
                 var ApprovalProcessBackData = await _approvalproccessService.FetchApprovalProcessDocumentDetails(ApprovalProccessBackId);
                 var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
 
+                var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
+
                 Approvalproccess approvalproccess = new Approvalproccess();
 
                 /*Check if zonewise then aprovee user must have zoneid*/
-                for (int i = 0; i < DataFlow.Count; i++)
+                if (leaseapplication.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert) || leaseapplication.ApprovalStatusCode == ((int)ApprovalActionStatus.Forward))
                 {
-                    if (!DataFlow[i].parameterSkip)
+                    if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
                     {
-                        if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
+                        for (int i = 0; i < DataFlow.Count; i++)
                         {
-                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                            if (!DataFlow[i].parameterSkip)
                             {
-                                if (SiteContext.ZoneId == null)
+                                if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
                                 {
-                                    ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
-                                    return View(leaseapplication);
-                                }
+                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                    {
+                                        if (SiteContext.ZoneId == null)
+                                        {
+                                            ViewBag.Items = await _userProfileService.GetRole();
+                                            await BindApprovalStatusDropdown(leaseapplication);
+                                            ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
+                                            return View(leaseapplication);
+                                        }
 
-                                leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                                        leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                                    }
+                                    break;
+                                }
                             }
-                            break;
                         }
                     }
                 }
@@ -129,7 +138,7 @@ namespace LeaseDetails.Controllers
                     result = false;
                     ViewBag.Items = await _userProfileService.GetRole();
                     await BindApprovalStatusDropdown(leaseapplication);
-                    ViewBag.Message = Alert.Show("Application cannot be Reverted at FirstLevel", "", AlertType.Warning);
+                    ViewBag.Message = Alert.Show("Application cannot be Reverted at First Level", "", AlertType.Warning);
                     return View(leaseapplication);
                 }
                 else
@@ -217,7 +226,7 @@ namespace LeaseDetails.Controllers
 
                                                             StringBuilder multouserszonewise = new StringBuilder();
                                                             int colrevert = 0;
-                                                            if (UserListRoleBasis != null)
+                                                            if (UserListRoleBasis != null && UserListRoleBasis.Count > 0)
                                                             {
                                                                 for (int h = 0; h < UserListRoleBasis.Count; h++)
                                                                 {
@@ -228,7 +237,13 @@ namespace LeaseDetails.Controllers
                                                                 }
                                                                 approvalproccess.SendTo = multouserszonewise.ToString();
                                                             }
-
+                                                            else
+                                                            {
+                                                                ViewBag.Items = await _userProfileService.GetRole();
+                                                                await BindApprovalStatusDropdown(leaseapplication);
+                                                                ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
+                                                                return View(leaseapplication);
+                                                            }
                                                         }
                                                     }
                                                     else
@@ -246,11 +261,25 @@ namespace LeaseDetails.Controllers
                                                                     if (colrevert > 0)
                                                                         multouserszonewise.Append(",");
                                                                     var UserProfile = await _userProfileService.GetUserByIdZone(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
-                                                                    multouserszonewise.Append(UserProfile.UserId);
+                                                                    if (UserProfile != null)
+                                                                        multouserszonewise.Append(UserProfile.UserId);
                                                                     colrevert++;
                                                                 }
                                                                 approvalproccess.SendTo = multouserszonewise.ToString();
                                                             }
+                                                        }
+                                                        if (approvalproccess.SendTo != "")
+                                                        {
+                                                            int[] nums = Array.ConvertAll(approvalproccess.SendTo.Split(','), int.Parse);
+                                                            var data = await _userProfileService.UserListSkippingmultiusers(nums);
+                                                            return Json(data);
+                                                        }
+                                                        else
+                                                        {
+                                                            ViewBag.Items = await _userProfileService.GetRole();
+                                                            await BindApprovalStatusDropdown(leaseapplication);
+                                                            ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
+                                                            return View(leaseapplication);
                                                         }
                                                     }
 
@@ -476,18 +505,18 @@ namespace LeaseDetails.Controllers
 
 
         #region Fetch workflow data for approval prrocess Added by Renu 16 march 2021
-        private async Task<List<TemplateStructure>> DataAsync()
+        private async Task<List<TemplateStructure>> DataAsync(string version)
         {
-            var Data = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value));
+            var Data = await _workflowtemplateService.FetchSingleResultOnProcessGuidWithVersion((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), version);
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status but not in use now after new approval changes
         {
-            var DataFlow = await DataAsync();
+            var DataFlow = await DataAsync("242");
 
             for (int i = 0; i < DataFlow.Count; i++)
             {
@@ -533,11 +562,12 @@ namespace LeaseDetails.Controllers
         }
         public async Task<List<string>> GetApprovalStatusDropdownList(int serviceid)  //Bind Dropdown of Approval Status
         {
-            var DataFlow = await DataAsync();
             List<string> dropdown = null;
             var ApprovalProccessBackId = _approvalproccessService.GetPreviousApprovalId((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), serviceid);
             var ApprovalProcessBackData = await _approvalproccessService.FetchApprovalProcessDocumentDetails(ApprovalProccessBackId);
             var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
+
+            var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
 
             if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
             {
@@ -572,6 +602,7 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
+        #region Approval Related changes Added By Renu 26 April  2021
         [HttpPost]
         public async Task<IActionResult> Back()
         {
@@ -598,11 +629,13 @@ namespace LeaseDetails.Controllers
         public async Task<JsonResult> GetForwardedUserList(string value)
         {
             int serviceid = Convert.ToInt32(value);
-            var DataFlow = await DataAsync();
             List<string> dropdown = null;
             var ApprovalProccessBackId = _approvalproccessService.GetPreviousApprovalId((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), serviceid);
             var ApprovalProcessBackData = await _approvalproccessService.FetchApprovalProcessDocumentDetails(ApprovalProccessBackId);
             var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
+
+            var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
+
             List<string> JsonMsg = new List<string>();
             if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
             {
@@ -636,7 +669,16 @@ namespace LeaseDetails.Controllers
                                             else
                                                 UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[d].parameterName[b]));
 
-                                            return Json(UserListRoleBasis);
+                                            if (UserListRoleBasis.Count == 0)
+                                            {
+                                                JsonMsg.Add("false");
+                                                JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
+                                                return Json(JsonMsg);
+                                            }
+                                            else
+                                            {
+                                                return Json(UserListRoleBasis);
+                                            }
 
                                         }
                                     }
@@ -655,16 +697,26 @@ namespace LeaseDetails.Controllers
                                                     if (col > 0)
                                                         multouserszonewise.Append(",");
                                                     var UserProfile = await _userProfileService.GetUserByIdZone(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
-                                                    multouserszonewise.Append(UserProfile.UserId);
+                                                    if (UserProfile != null)
+                                                        multouserszonewise.Append(UserProfile.UserId);
                                                     col++;
                                                 }
                                                 SendTo = multouserszonewise.ToString();
                                             }
                                         }
 
-                                        int[] nums = Array.ConvertAll(SendTo.Split(','), int.Parse);
-                                        var data = await _userProfileService.UserListSkippingmultiusers(nums);
-                                        return Json(data);
+                                        if (SendTo != "")
+                                        {
+                                            int[] nums = Array.ConvertAll(SendTo.Split(','), int.Parse);
+                                            var data = await _userProfileService.UserListSkippingmultiusers(nums);
+                                            return Json(data);
+                                        }
+                                        else
+                                        {
+                                            JsonMsg.Add("false");
+                                            JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
+                                            return Json(JsonMsg);
+                                        }
                                     }
 
                                     break;
@@ -695,5 +747,6 @@ namespace LeaseDetails.Controllers
             }
             return View(Data);
         }
+        #endregion
     }
 }

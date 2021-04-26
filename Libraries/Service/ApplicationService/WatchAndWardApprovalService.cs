@@ -26,9 +26,8 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<Watchandward> FetchSingleResult(int id)
         {
-            var result = await _watchAndWardApprovalRepository.FindBy(a => a.Id == id);
-            Watchandward model = result.FirstOrDefault();
-            return model;
+            var result = await _watchAndWardApprovalRepository.FetchSingleResult(id);
+            return result;
         }
 
         public async Task<List<Khasra>> GetAllKhasra()
@@ -54,15 +53,9 @@ namespace Libraries.Service.ApplicationService
             return await _watchAndWardApprovalRepository.GetPagedWatchandward(model,  userId);
         }
 
-        public Task<bool> Update(int id, Watchandward watchandward)
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
         {
-            throw new NotImplementedException();
+            return await _watchAndWardApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
         }
-
-        public Task<bool> Create(Watchandward watchandward)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

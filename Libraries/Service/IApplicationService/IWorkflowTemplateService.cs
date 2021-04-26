@@ -27,5 +27,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Approvalstatus>> GetApprovalStatusListData();
         int ProcessGuidBasisCount(string ProcessGuid);
         Task<WorkflowTemplate> FetchSingleResultOnProcessGuid(string processguid);
+        Task<WorkflowTemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version);
     }
 }

@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Approvalstatus>> GetApprovalStatusListData();
         int ProcessGuidBasisCount(string processGuid);
         Task<WorkflowTemplate> FetchSingleResultOnProcessGuid(string processguid);
+        Task<WorkflowTemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version);
     }
 }
