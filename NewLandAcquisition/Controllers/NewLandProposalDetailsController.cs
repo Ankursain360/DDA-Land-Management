@@ -13,12 +13,11 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
-
 using System.Data;
 using Newtonsoft.Json;
+using Dto.Master;
 
 namespace NewLandAcquisition.Controllers
-
 {
     
         public class NewLandProposalDetailsController : BaseController
@@ -189,5 +188,32 @@ namespace NewLandAcquisition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
+
+        public async Task<IActionResult> NewLandProposalList()
+        {
+            var result = await _newlandProposaldetailsService.GetAllProposaldetails();
+            List<NewLandProposalListDto> data = new List<NewLandProposalListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandProposalListDto()
+                    {
+                        Id = result[i].Id,
+                        SchemeName = result[i].Scheme == null ? "" : result[i].Scheme.Name.ToString(),
+                        ProposalName = result[i].Name,
+                        RequiredAgency = result[i].RequiredAgency,
+                        ProposalNo = result[i].ProposalFileNo,
+                        ProposalDate = result[i].ProposalDate.ToString(),
+                        Area = result[i].Bigha.ToString()+'-'+result[i].Biswa.ToString() + '-'+ result[i].Biswanshi.ToString(),
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
     }
 }

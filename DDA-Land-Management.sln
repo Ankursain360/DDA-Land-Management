@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeasePublicInterface", "Lea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaseForPublic", "LeaseForPublic\LeaseForPublic.csproj", "{27D657D3-EB22-427E-8F92-2085DED838DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacant.Land.Api", "Vacant.Land.Api\Vacant.Land.Api.csproj", "{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -351,6 +353,18 @@ Global
 		{27D657D3-EB22-427E-8F92-2085DED838DE}.Release|x64.Build.0 = Release|Any CPU
 		{27D657D3-EB22-427E-8F92-2085DED838DE}.Release|x86.ActiveCfg = Release|Any CPU
 		{27D657D3-EB22-427E-8F92-2085DED838DE}.Release|x86.Build.0 = Release|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Debug|x64.Build.0 = Debug|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Debug|x86.Build.0 = Debug|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Release|x64.ActiveCfg = Release|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Release|x64.Build.0 = Release|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Release|x86.ActiveCfg = Release|Any CPU
+		{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
