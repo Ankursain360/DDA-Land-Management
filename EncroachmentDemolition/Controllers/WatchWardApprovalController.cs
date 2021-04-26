@@ -78,56 +78,56 @@ namespace EncroachmentDemolition.Controllers
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
-            #region Approval Proccess At Further level start Added by Renu 27 Nov 2020
-            var DataFlow = await DataAsync();
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (!DataFlow[i].parameterSkip)
-                {
-                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                    {
-                        result = true;  ///May be comment
-                        if (result)
-                        {
-                            Approvalproccess approvalproccess = new Approvalproccess();
-                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
-                            approvalproccess.ServiceId = watchandward.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
-                            approvalproccess.PendingStatus = 1;
-                            approvalproccess.Remarks = watchandward.ApprovalRemarks; ///May be comment
-                            approvalproccess.Status = Convert.ToInt32(watchandward.ApprovalStatus);
-                            if (i == DataFlow.Count - 1)
-                                approvalproccess.SendTo = null;
-                            else
-                            {
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                            }
-                            // if (i != DataFlow.Count - 1)  ///May be Uncomment
-                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+            //#region Approval Proccess At Further level start Added by Renu 27 Nov 2020
+            //var DataFlow = await DataAsync();
+            //for (int i = 0; i < DataFlow.Count; i++)
+            //{
+            //    if (!DataFlow[i].parameterSkip)
+            //    {
+            //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+            //        {
+            //            result = true;  ///May be comment
+            //            if (result)
+            //            {
+            //                Approvalproccess approvalproccess = new Approvalproccess();
+            //                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+            //                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+            //                approvalproccess.ServiceId = watchandward.Id;
+            //                approvalproccess.SendFrom = SiteContext.UserId;
+            //                approvalproccess.PendingStatus = 1;
+            //                approvalproccess.Remarks = watchandward.ApprovalRemarks; ///May be comment
+            //                approvalproccess.Status = Convert.ToInt32(watchandward.ApprovalStatus);
+            //                if (i == DataFlow.Count - 1)
+            //                    approvalproccess.SendTo = null;
+            //                else
+            //                {
+            //                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                }
+            //                // if (i != DataFlow.Count - 1)  ///May be Uncomment
+            //                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
-                            if (result)
-                            {
-                                if (i == DataFlow.Count - 1)
-                                {
-                                    watchandward.ApprovedStatus = 1;
-                                    watchandward.PendingAt = 0;
-                                }
-                                else
-                                {
-                                    watchandward.ApprovedStatus = 0;
-                                    watchandward.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                                }
-                                result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
-                            }
-                        }
-                        break;
-                    }
+            //                if (result)
+            //                {
+            //                    if (i == DataFlow.Count - 1)
+            //                    {
+            //                        watchandward.ApprovedStatus = 1;
+            //                        watchandward.PendingAt = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        watchandward.ApprovedStatus = 0;
+            //                        watchandward.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                    }
+            //                    result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
+            //                }
+            //            }
+            //            break;
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
-            #endregion
+            //#endregion
 
             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
             return View("Index");
@@ -135,7 +135,7 @@ namespace EncroachmentDemolition.Controllers
 
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessId").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }

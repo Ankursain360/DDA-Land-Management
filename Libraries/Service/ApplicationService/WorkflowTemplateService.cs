@@ -49,18 +49,17 @@ namespace Libraries.Service.ApplicationService
             model.Name = workflowtemplate.Name;
             model.Description = workflowtemplate.Description;
             model.ModuleId = workflowtemplate.ModuleId;
+            model.Slatime = workflowtemplate.Slatime;
+            model.EffectiveDate = workflowtemplate.EffectiveDate;
             model.Template = workflowtemplate.Template;
             model.ModifiedDate = DateTime.Now;
             model.IsActive = workflowtemplate.IsActive;
-            model.ModifiedBy = 1;
             _workflowtemplateRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public async Task<bool> Create(WorkflowTemplate workflowtemplate)
         {
-
-            workflowtemplate.CreatedBy = 1;
             workflowtemplate.CreatedDate = DateTime.Now;
             _workflowtemplateRepository.Add(workflowtemplate);
             return await _unitOfWork.CommitAsync() > 0;
@@ -70,7 +69,6 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> CheckUniqueName(int id, string workflowtemplate)
         {
             bool result = await _workflowtemplateRepository.Any(id, workflowtemplate);
-            //  var result1 = _dbContext.WorkflowTemplate.Any(t => t.Id != id && t.Name == workflowtemplate.Name);
             return result;
         }
 
@@ -87,14 +85,20 @@ namespace Libraries.Service.ApplicationService
         {
             return await _workflowtemplateRepository.GetAllModuleList();
         }
-        //public async Task<List<User>> GetUserlist()
-        //{
-        //    return await _workflowtemplateRepository.GetUserlist();
-        //}
 
-        //public async Task<List<Role>> GetRolelist()
-        //{
-        //    return await _workflowtemplateRepository.GetRolelist();
-        //}
+        public async Task<List<Approvalstatus>> GetApprovalStatusListData()
+        {
+            return await _workflowtemplateRepository.GetApprovalStatusListData();
+        }
+
+        public int ProcessGuidBasisCount(string ProcessGuid)
+        {
+            return _workflowtemplateRepository.ProcessGuidBasisCount(ProcessGuid);
+        }
+
+        public async Task<WorkflowTemplate> FetchSingleResultOnProcessGuid(string processguid)
+        {
+            return await _workflowtemplateRepository.FetchSingleResultOnProcessGuid(processguid);
+        }
     }
 }

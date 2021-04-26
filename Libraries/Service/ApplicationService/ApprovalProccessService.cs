@@ -45,41 +45,61 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public int GetPreviousApprovalId(int proccessid, int serviceid)
+        public int GetPreviousApprovalId(string proccessguid, int serviceid)
         {
-            return _approvalproccessRepository.GetPreviousApprovalId(proccessid, serviceid);
+            return _approvalproccessRepository.GetPreviousApprovalId(proccessguid, serviceid);
         }
 
         public async Task<bool> UpdatePreviousApprovalProccess(int previousApprovalId, Approvalproccess approvalproccess, int userId)
         {
             var result = await _approvalproccessRepository.FindBy(a => a.Id == previousApprovalId);
             Approvalproccess model = result.FirstOrDefault();
-            model.Remarks = approvalproccess.Remarks;
             model.PendingStatus = approvalproccess.PendingStatus;
-            model.Status = approvalproccess.Status;
             model.ModifiedBy = userId;
             model.ModifiedDate = DateTime.Now;
             _approvalproccessRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
+        public async Task<List<ApprovalHistoryListDataDto>> GetHistoryDetails(string proccessguid, int id)
         {
-            return await _approvalproccessRepository.GetHistoryDetails(proccessid,  id);
+            return await _approvalproccessRepository.GetHistoryDetails(proccessguid, id);
         }
-        public int CheckIsApprovalStart(int proccessid, int serviceid)
+        public int CheckIsApprovalStart(string proccessguid, int serviceid)
         {
-            return _approvalproccessRepository.CheckIsApprovalStart(proccessid, serviceid);
+            return _approvalproccessRepository.CheckIsApprovalStart(proccessguid, serviceid);
         }
 
         public async Task<Approvalproccess> FetchApprovalProcessDocumentDetails(int id)
         {
-            return await _approvalproccessRepository.FetchApprovalProcessDocumentDetails( id);
+            return await _approvalproccessRepository.FetchApprovalProcessDocumentDetails(id);
         }
 
         public async Task<List<Approvalstatus>> BindDropdownApprovalStatus(int[] actions)
         {
             return await _approvalproccessRepository.BindDropdownApprovalStatus(actions);
+        }
+
+        public async Task<Approvalstatus> FetchSingleApprovalStatus(int id)
+        {
+            return await _approvalproccessRepository.FetchSingleApprovalStatus(id);
+        }
+
+        public async Task<Approvalstatus> GetStatusIdFromStatusCode(int statuscode)
+        {
+            return await _approvalproccessRepository.GetStatusIdFromStatusCode(statuscode);
+        }
+
+        public async Task<bool> RollBackEntry(string processguid, int serviceid)
+        {
+            var result = await _approvalproccessRepository.FindBy(a => a.ProcessGuid == processguid && a.ServiceId == serviceid);
+            Approvalproccess model = result.FirstOrDefault();
+            _approvalproccessRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        public async Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid)
+        {
+            return await _approvalproccessRepository.FirstApprovalProcessData(processguid, serviceid);
         }
     }
 }

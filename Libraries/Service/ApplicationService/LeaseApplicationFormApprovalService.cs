@@ -34,9 +34,15 @@ namespace Libraries.Service.ApplicationService
             return await _leaseApplicationApprovalRepository.FetchSingleResult(id);
         }
 
-        public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id)
         {
-            return await _leaseApplicationApprovalRepository.GetPagedLeaseApplicationFormDetails( model,  userId);
+            var data = await _leaseApplicationApprovalRepository.GetPagedLeaseApplicationFormDetails(model, userId, id);
+            return data;
+        }
+
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _leaseApplicationApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
         }
     }
 }

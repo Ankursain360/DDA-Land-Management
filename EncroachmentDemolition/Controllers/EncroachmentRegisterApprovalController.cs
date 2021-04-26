@@ -77,56 +77,56 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
             encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
             var Msgddl = encroachmentRegisterations.ApprovalStatus;
-            #region Approval Proccess At Further level start Added by Renu 4 Dec 2020
-            var DataFlow = await DataAsync();
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (!DataFlow[i].parameterSkip)
-                {
-                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                    {
-                        result = true;
-                        if (result)
-                        {
-                            Approvalproccess approvalproccess = new Approvalproccess();
-                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
-                            approvalproccess.ServiceId = encroachmentRegisterations.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
-                            approvalproccess.PendingStatus = 1;
-                            approvalproccess.Remarks = encroachmentRegisterations.ApprovalRemarks; ///May be comment
-                            approvalproccess.Status = Convert.ToInt32(encroachmentRegisterations.ApprovalStatus);
+            //#region Approval Proccess At Further level start Added by Renu 4 Dec 2020
+            //var DataFlow = await DataAsync();
+            //for (int i = 0; i < DataFlow.Count; i++)
+            //{
+            //    if (!DataFlow[i].parameterSkip)
+            //    {
+            //        if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+            //        {
+            //            result = true;
+            //            if (result)
+            //            {
+            //                Approvalproccess approvalproccess = new Approvalproccess();
+            //                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+            //                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+            //                approvalproccess.ServiceId = encroachmentRegisterations.Id;
+            //                approvalproccess.SendFrom = SiteContext.UserId;
+            //                approvalproccess.PendingStatus = 1;
+            //                approvalproccess.Remarks = encroachmentRegisterations.ApprovalRemarks; ///May be comment
+            //                approvalproccess.Status = Convert.ToInt32(encroachmentRegisterations.ApprovalStatus);
 
-                            if (i == DataFlow.Count - 1)
-                                approvalproccess.SendTo = null;
-                            else
-                            {
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                            }
-                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+            //                if (i == DataFlow.Count - 1)
+            //                    approvalproccess.SendTo = null;
+            //                else
+            //                {
+            //                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                }
+            //                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
-                            if (result)
-                            {
-                                if (i == DataFlow.Count - 1)
-                                {
-                                    encroachmentRegisterations.ApprovedStatus = 1;
-                                    encroachmentRegisterations.PendingAt = 0;
-                                }
-                                else
-                                {
-                                    encroachmentRegisterations.ApprovedStatus = 0;
-                                    encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
-                                }
-                                result = await _encroachmentRegisterationService.UpdateBeforeApproval(id, encroachmentRegisterations);
-                            }
-                        }
-                        break;
-                    }
+            //                if (result)
+            //                {
+            //                    if (i == DataFlow.Count - 1)
+            //                    {
+            //                        encroachmentRegisterations.ApprovedStatus = 1;
+            //                        encroachmentRegisterations.PendingAt = 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        encroachmentRegisterations.ApprovedStatus = 0;
+            //                        encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+            //                    }
+            //                    result = await _encroachmentRegisterationService.UpdateBeforeApproval(id, encroachmentRegisterations);
+            //                }
+            //            }
+            //            break;
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
-            #endregion
+            //#endregion
            
             
              if(Msgddl=="3")
@@ -144,7 +144,7 @@ namespace EncroachmentDemolition.Controllers
         #region History Details Only For Approval Page
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessId").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }

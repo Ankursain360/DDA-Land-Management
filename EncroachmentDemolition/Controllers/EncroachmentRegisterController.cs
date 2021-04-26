@@ -180,34 +180,34 @@ namespace EncroachmentDemolition.Controllers
                     }
                     if (result)
                     {
-                        #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
-                        var DataFlow = await dataAsync();
-                        for (int i = 0; i < DataFlow.Count; i++)
-                        {
-                            if (!DataFlow[i].parameterSkip)
-                            {
-                                encroachmentRegisterations.ApprovedStatus = 0;
-                                encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                                result = await _encroachmentRegisterationService.UpdateBeforeApproval(encroachmentRegisterations.Id, encroachmentRegisterations);  //Update Table details 
-                                if (result)
-                                {
-                                    Approvalproccess approvalproccess = new Approvalproccess();
-                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdInspection").Value);
-                                    approvalproccess.ServiceId = encroachmentRegisterations.Id;
-                                    approvalproccess.SendFrom = SiteContext.UserId;
-                                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                    approvalproccess.PendingStatus = 1;   //1
-                                    approvalproccess.Status = null;   //1
-                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                }
+                        //#region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                        //var DataFlow = await dataAsync();
+                        //for (int i = 0; i < DataFlow.Count; i++)
+                        //{
+                        //    if (!DataFlow[i].parameterSkip)
+                        //    {
+                        //        encroachmentRegisterations.ApprovedStatus = 0;
+                        //        encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                        //        result = await _encroachmentRegisterationService.UpdateBeforeApproval(encroachmentRegisterations.Id, encroachmentRegisterations);  //Update Table details 
+                        //        if (result)
+                        //        {
+                        //            Approvalproccess approvalproccess = new Approvalproccess();
+                        //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                        //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdInspection").Value);
+                        //            approvalproccess.ServiceId = encroachmentRegisterations.Id;
+                        //            approvalproccess.SendFrom = SiteContext.UserId;
+                        //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                        //            approvalproccess.PendingStatus = 1;   //1
+                        //            approvalproccess.Status = null;   //1
+                        //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                        //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                        //        }
 
-                                break;
-                            }
-                        }
+                        //        break;
+                        //    }
+                        //}
 
-                        #endregion 
+                        //#endregion 
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
                         return View("Index", result1);
@@ -470,7 +470,7 @@ namespace EncroachmentDemolition.Controllers
                     data.Add(new EncroachmentRegisterListDto()
                     {
                         Id = result[i].Id,
-                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),                       
+                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),
                         KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.ToString(),   
                         PrimaryListNo=result[i].StatusOfLand,
                         IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",

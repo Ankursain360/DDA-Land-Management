@@ -11,6 +11,7 @@ using SiteMaster.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
+using System;
 
 namespace SiteMaster.Controllers
 {
@@ -28,14 +29,16 @@ namespace SiteMaster.Controllers
         }
 
         [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var message = TempData["Msg"] as string;
-            if(message != null)
+            if (message != null)
             {
                 ViewBag.Message = message;
             }
-            return View();
+            WorkflowTemplate model = new WorkflowTemplate();
+            await BindDropDown(model);
+            return View(model);
         }
 
         [HttpPost]
@@ -50,12 +53,21 @@ namespace SiteMaster.Controllers
         }
 
 
-
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             WorkflowTemplate model = new WorkflowTemplate();
             await BindDropDown(model);
+            var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
+            for (int i = 0; i < StatusList.Count; i++)
+            {
+                if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
+                    ViewBag.RevertCodeValue = StatusList[i].Id;
+                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
+                    ViewBag.ApprovedCodeValue = StatusList[i].Id;
+                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
+                    ViewBag.ForwardCodeValue = StatusList[i].Id;
+            }
             return View(model);
         }
 
@@ -63,54 +75,77 @@ namespace SiteMaster.Controllers
         public async Task<PartialViewResult> GetDetails([FromBody] WorkflowLevelDto WorkflowLevelDto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
-           
-            ViewBag.Items = await _userProfileService.GetRole();
-           
-
+            //ViewBag.Items = await _userProfileService.GetRole();
+            ViewBag.Items = await _userProfileService.GetUserWithRole();
+            ViewBag.ApprovalStatus = await _workflowtemplateService.GetApprovalStatusListData();
             return PartialView("_Levels", model);
         }
 
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
-
         public async Task<IActionResult> Create([FromBody] WorkflowTemplateCreateDto workflowtemplatecreatedto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
+            List<string> JsonMsg = new List<string>();
+            if (workflowtemplatecreatedto == null)
+            {
+                JsonMsg.Add("false");
+                JsonMsg.Add("Please Enter Correct data");
+                return Json(JsonMsg);
+            }
             model.ModuleList = await _workflowtemplateService.GetAllModuleList();
             model.Name = workflowtemplatecreatedto.name;
             model.Description = workflowtemplatecreatedto.description;
             model.ModuleId = workflowtemplatecreatedto.moduleId;
-            model.UserType = workflowtemplatecreatedto.usertype;
+            model.Slatime = workflowtemplatecreatedto.slatime;
+            model.EffectiveDate = Convert.ToDateTime(workflowtemplatecreatedto.effectivedate);
             model.IsActive = workflowtemplatecreatedto.isActive;
             model.Template = workflowtemplatecreatedto.template;
+            model.ProcessGuid = Guid.NewGuid().ToString();
+            var ProcessGuidBasisCount = _workflowtemplateService.ProcessGuidBasisCount(model.Name);
+            Random r = new Random();
+            int num = r.Next();
+            model.Version = "V1(" + num + ")";
 
             if (ModelState.IsValid)
             {
                 if (model.Template != null)
                 {
+                    model.CreatedBy = SiteContext.UserId;
                     var result = await _workflowtemplateService.Create(model);
 
                     if (result == true)
                     {
-                        TempData["Msg"] = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return Json(Url.Action("Index", "WorkFlowTemplate"));
+                        //TempData["Msg"] = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        //return Json(Url.Action("Index", "WorkFlowTemplate"));
+                        JsonMsg.Add("/WorkFlowTemplate/Index");
+                        JsonMsg.Add("Record added successfully.");
+                        return Json(JsonMsg);
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return Json(Url.Action("Create", "WorkFlowTemplate"));
-
+                        //ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        //return Json(Url.Action("Create", "WorkFlowTemplate"));
+                        JsonMsg.Add("false");
+                        JsonMsg.Add("Unable to process the request.");
+                        return Json(JsonMsg);
                     }
                 }
                 else
                 {
-                    return Json(Url.Action("Create", "WorkFlowTemplate"));
+                    //return Json(Url.Action("Create", "WorkFlowTemplate"));
+                    JsonMsg.Add("false");
+                    JsonMsg.Add("Unable to process the request.");
+                    return Json(JsonMsg);
                 }
 
             }
             else
             {
-                return Json(Url.Action("Create", "WorkFlowTemplate"));
+                //return Json(Url.Action("Create", "WorkFlowTemplate"));
+                JsonMsg.Add("false");
+                JsonMsg.Add("Unable to process the request.");
+                return Json(JsonMsg);
             }
         }
         [AuthorizeContext(ViewAction.Edit)]
@@ -122,6 +157,18 @@ namespace SiteMaster.Controllers
                 Data.IsActiveData = true;
             else
                 Data.IsActiveData = false;
+
+            var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
+            for (int i = 0; i < StatusList.Count; i++)
+            {
+                if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
+                    ViewBag.RevertCodeValue = StatusList[i].Id;
+                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
+                    ViewBag.ApprovedCodeValue = StatusList[i].Id;
+                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
+                    ViewBag.ForwardCodeValue = StatusList[i].Id;
+            }
+
             if (Data == null)
             {
                 return NotFound();
@@ -142,24 +189,46 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit([FromBody] WorkflowTemplateCreateDto workflowtemplatecreatedto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
+            List<string> JsonMsg = new List<string>();
+            if (workflowtemplatecreatedto == null)
+            {
+                JsonMsg.Add("false");
+                JsonMsg.Add("Please Enter Correct data");
+                return Json(JsonMsg);
+            }
             model.ModuleList = await _workflowtemplateService.GetAllModuleList();
             model.Name = workflowtemplatecreatedto.name;
             model.Description = workflowtemplatecreatedto.description;
             model.ModuleId = workflowtemplatecreatedto.moduleId;
+            model.Slatime = workflowtemplatecreatedto.slatime;
+            model.EffectiveDate = Convert.ToDateTime(workflowtemplatecreatedto.effectivedate);
             model.IsActive = workflowtemplatecreatedto.isActive;
             model.Template = workflowtemplatecreatedto.template;
             int id = workflowtemplatecreatedto.Id;
 
-            var result = await _workflowtemplateService.Update(id, model);
+            var Data = await _workflowtemplateService.FetchSingleResult(id);
+            model.ProcessGuid = Data.ProcessGuid;
+
+            var ProcessGuidBasisCount = _workflowtemplateService.ProcessGuidBasisCount(Data.ProcessGuid);
+            Random r = new Random();
+            int num = r.Next();
+            model.Version = "V" + (ProcessGuidBasisCount + 1) + "(" + num + ")";
+
+            model.CreatedBy = SiteContext.UserId;
+            //var result = await _workflowtemplateService.Update(id, model);
+            var result = await _workflowtemplateService.Create(model);
             if (result == true)
             {
-                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                return Json(Url.Action("Index", "WorkFlowTemplate"));
+                JsonMsg.Add("/WorkFlowTemplate/Index");
+                JsonMsg.Add("New Version Created Sucessfully");
+                // return Json(Url.Action("Index", "WorkFlowTemplate"));
+                return Json(JsonMsg);
             }
             else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(model);
+                JsonMsg.Add("false");
+                JsonMsg.Add("Unable to process the request.");
+                return Json(JsonMsg);
 
             }
         }
@@ -190,6 +259,18 @@ namespace SiteMaster.Controllers
                 Data.IsActiveData = true;
             else
                 Data.IsActiveData = false;
+
+            var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
+            for (int i = 0; i < StatusList.Count; i++)
+            {
+                if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
+                    ViewBag.RevertCodeValue = StatusList[i].Id;
+                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
+                    ViewBag.ApprovedCodeValue = StatusList[i].Id;
+                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
+                    ViewBag.ForwardCodeValue = StatusList[i].Id;
+            }
+
             if (Data == null)
             {
                 return NotFound();
@@ -206,8 +287,7 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                var data = await _userProfileService.GetUser();
-
+                var data = await _userProfileService.GetUserWithRole();
                 return Json(data);
             }
         }

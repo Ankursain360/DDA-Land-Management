@@ -3,7 +3,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-   
+
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -11,9 +11,14 @@ $("#btnSearch").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+
 $("#btnReset").click(function () {
+    $('#ddlModuleId').val(0).trigger('change');
     $('#txtName').val('');
-    $('#txtModule').val('');
+    $('#txtVersion').val('');
 
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -33,9 +38,9 @@ $("#btnDescending").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDetails(pageNumber, pageSize,order) {
+function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-   
+
     HttpPost(`/WorkFlowTemplate/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
@@ -45,10 +50,11 @@ function GetDetails(pageNumber, pageSize,order) {
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-   
+
     var model = {
         name: $('#txtName').val(),
-        module: $('#txtModule').val(),
+        version: $('#txtVersion').val(),
+        moduleid: parseInt($('#ddlModuleId option:selected').val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

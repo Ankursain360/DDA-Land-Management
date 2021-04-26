@@ -29,22 +29,37 @@ namespace Libraries.Repository.EntityRepository
                                     .FirstOrDefaultAsync();
         }
 
-        public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId)
+        // public async Task<Tuple<int,int,IEnumerable<Leaseapplication>>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id)
+        public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id)
         {
+            var AllDataList = await _dbContext.Leaseapplication.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Leaseapplication myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+
             var data = await _dbContext.Leaseapplication
+                                        .Include(x => x.ApprovedStatusNavigation)
                                         .Include(x => x.Leaseapplicationdocuments)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                        && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                        .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         )
                                         .GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
+
+            //    var data1 = data.Results.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));//.GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
+
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 data = null;
                 data = await _dbContext.Leaseapplication
+                                        .Include(x => x.ApprovedStatusNavigation)
                                         .Include(x => x.Leaseapplicationdocuments)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                        && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                         .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         )
                                        .OrderBy(s =>
                                        (model.SortBy.ToUpper() == "REFNO" ? s.RefNo
@@ -58,9 +73,11 @@ namespace Libraries.Repository.EntityRepository
             {
                 data = null;
                 data = await _dbContext.Leaseapplication
+                                        .Include(x => x.ApprovedStatusNavigation)
                                         .Include(x => x.Leaseapplicationdocuments)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                        && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                         .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         )
                                        .OrderByDescending(s =>
                                        (model.SortBy.ToUpper() == "REFNO" ? s.RefNo
@@ -69,7 +86,25 @@ namespace Libraries.Repository.EntityRepository
                                        )
                                        .GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
             }
+
+            //  var xyz = new Tuple<int, int, IEnumerable<Leaseapplication>>(data.CurrentPage, data.PazeSize,data1);
             return data;
+        }
+
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            var result = false;
+            var AllDataList = await _dbContext.Leaseapplication
+                                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                                .ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString())).ToList();
+
+            if (UserWiseDataList.Count == 0)
+                result = false;
+            else
+                result = true;
+
+            return result;
         }
     }
 

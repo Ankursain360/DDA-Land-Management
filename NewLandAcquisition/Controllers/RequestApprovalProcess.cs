@@ -86,9 +86,9 @@ namespace NewLandAcquisition.Controllers
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
                             approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowRequestId").Value);
+                        //    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowRequestId").Value);
                             approvalproccess.ServiceId = request.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
+                       //     approvalproccess.SendFrom = SiteContext.UserId;
                             approvalproccess.PendingStatus = 1;
                             approvalproccess.Remarks = request.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(request.ApprovalStatus);
@@ -96,7 +96,7 @@ namespace NewLandAcquisition.Controllers
                                 approvalproccess.SendTo = null;
                             else
                             {
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                         //       approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
                             }
                             // if (i != DataFlow.Count - 1)  ///May be Uncomment
                             result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
@@ -281,7 +281,7 @@ namespace NewLandAcquisition.Controllers
 
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowRequestId").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowRequestId").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }

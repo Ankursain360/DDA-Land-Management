@@ -13,9 +13,9 @@ namespace Libraries.Service.IApplicationService
 
         //Task<bool> Update(int id, Approvalproccess approvalproccess, int userId); // To Upadte Particular data added by renu
         Task<bool> Create(Processworkflow proccess); // To Create Particular data added by renu
-        int GetPreviousApprovalId(int proccessid, int serviceid);
+        int GetPreviousApprovalId(string proccessguid, int serviceid);
         //Task<bool> UpdatePreviousApprovalProccess(int previousApprovalId, Approvalproccess approvalproccess, int userId);
-        Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id);
+        Task<List<Approvalproccess>> GetHistoryDetails(string proccessguid, int id);
         int FetchCountResultForProccessWorkflow(int workflowTemplateId);
     }
 }

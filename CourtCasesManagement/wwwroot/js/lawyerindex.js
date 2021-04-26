@@ -19,7 +19,7 @@ function GetSearchParam(pageNumber, pageSize) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
-    debugger
+ 
     return model;
 }
 

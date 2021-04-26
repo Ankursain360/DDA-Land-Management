@@ -24,18 +24,6 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _proccessWorkflowRepository = proccessWorkflowRepository;
         }
-
-
-        //public async Task<bool> Update(int id, Approvalproccess approvalproccess, int userId)
-        //{
-        //    var result = await _proccessWorkflowRepository.FindBy(a => a.Id == id);
-        //    Approvalproccess model = result.FirstOrDefault();
-        //    model.ModifiedBy = userId;
-        //    model.ModifiedDate = DateTime.Now;
-        //    _proccessWorkflowRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
-
         public async Task<bool> Create(Processworkflow proccess)
         {
             proccess.CreatedDate = DateTime.Now;
@@ -43,27 +31,13 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public int GetPreviousApprovalId(int proccessid, int serviceid)
+        public int GetPreviousApprovalId(string proccessguid, int serviceid)
         {
-            return _proccessWorkflowRepository.GetPreviousApprovalId(proccessid, serviceid);
+            return _proccessWorkflowRepository.GetPreviousApprovalId(proccessguid, serviceid);
         }
-
-        //public async Task<bool> UpdatePreviousApprovalProccess(int previousApprovalId, Processworkflow processworkflow, int userId)
-        //{
-        //    var result = await _proccessWorkflowRepository.FindBy(a => a.Id == previousApprovalId);
-        //    Approvalproccess model = result.FirstOrDefault();
-        //    model.Remarks = approvalproccess.Remarks;
-        //    model.PendingStatus = approvalproccess.PendingStatus;
-        //    model.Status = approvalproccess.Status;
-        //    model.ModifiedBy = userId;
-        //    model.ModifiedDate = DateTime.Now;
-        //    _proccessWorkflowRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
-
-        public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
+        public async Task<List<Approvalproccess>> GetHistoryDetails(string proccessguid, int id)
         {
-            return await _proccessWorkflowRepository.GetHistoryDetails(proccessid, id);
+            return await _proccessWorkflowRepository.GetHistoryDetails(proccessguid, id);
         }
 
         public int FetchCountResultForProccessWorkflow(int workflowTemplateId)

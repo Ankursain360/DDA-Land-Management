@@ -170,20 +170,7 @@ namespace Libraries.Repository.EntityRepository
             List<Newlandacquistionproposaldetails> proposaldetailsList = await _dbContext.Newlandacquistionproposaldetails.ToListAsync();
             return proposaldetailsList;
         }
-        //public async Task<List<Newlandvillage>> GetAllVillageList()
-        //{
-        //    List<Newlandvillage> villageList = await _dbContext.Newlandvillage.ToListAsync();
-        //    return villageList;
-        //}
-        //public async Task<List<Newlandkhasra>> GetAllKhasraList(int? villageId)
-        //{
-        //    List<Newlandkhasra> khasraList = await _dbContext.Newlandkhasra.ToListAsync();
-        //    return khasraList;
-        //}
-        //public async Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId)
-        //{
-        //    return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
-        //}
+       
 
         public async Task<List<Newlandvillage>> GetAllVillage()
         {

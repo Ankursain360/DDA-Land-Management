@@ -19,7 +19,6 @@ namespace Libraries.Model.Entity
             Mortgage = new HashSet<Mortgage>();
             Extensionservice = new HashSet<Extension>();
         }
-        [Required(ErrorMessage = "This field is Mandatory")]
         public string RefNo { get; set; }
 
         [Required(ErrorMessage = "Name is Mandatory")]
@@ -69,8 +68,9 @@ namespace Libraries.Model.Entity
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid; Max 18 digits")]
         public decimal? Rate { get; set; }
         public byte IsActive { get; set; }
+        public int? ApprovalZoneId { get; set; }
         public int? ApprovedStatus { get; set; }
-        public int? PendingAt { get; set; }
+        public string PendingAt { get; set; }
         public int? UserId { get; set; }
         public ICollection<Leaseapplicationdocuments> Leaseapplicationdocuments { get; set; }
         public ICollection<Allotmententry> Allotmententry { get; set; }
@@ -107,6 +107,9 @@ namespace Libraries.Model.Entity
         public string ApprovalStatus { get; set; }
 
         [NotMapped]
+        public int ApprovalStatusCode { get; set; }
+
+        [NotMapped]
         public string ApprovalRemarks { get; set; }
 
         [NotMapped]
@@ -115,11 +118,18 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
 
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
+
+
         // Old Allotment entryfeilds
-       
+
         [NotMapped]
         public decimal TotalArea { get; set; }
-       
+
         [NotMapped]
         [Required(ErrorMessage = "Allotment Date is Mandatory")]
         public DateTime AllotmentDate { get; set; }
@@ -146,17 +156,14 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<PropertyType> PropertyTypeList { get; set; }
         [NotMapped]
-        [Required(ErrorMessage = "Lease Type is Mandatory")]
         public int LeaseTypeId { get; set; }
         [NotMapped]
         public List<Leasetype> LeaseTypeList { get; set; }
         [NotMapped]
-        [Required(ErrorMessage = "Lease Purpose is Mandatory")]
         public int? PurposeId { get; set; }
         [NotMapped]
         public List<Leasepurpose> LeasePurposeList { get; set; }
         [NotMapped]
-        [Required(ErrorMessage = "Lease SubPurpose is Mandatory")]
         public int SubPurposeId { get; set; }
         [NotMapped]
         public List<Leasesubpurpose> LeaseSubPurposeList { get; set; }
@@ -164,5 +171,7 @@ namespace Libraries.Model.Entity
         public List<Allotmententry> RefNoList { get; set; }
         public ICollection<Mortgage> Mortgage { get; set; }
         public ICollection<Extension> Extensionservice { get; set; }
+
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
     }
 }

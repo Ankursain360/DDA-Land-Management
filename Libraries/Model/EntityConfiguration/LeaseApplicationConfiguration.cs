@@ -13,9 +13,14 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("leaseapplication", "lms");
 
+            builder.HasIndex(e => e.ApprovedStatus)
+                .HasName("fk_ApprovedStatusLeaseApplication_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Address).HasColumnType("longtext");
+
+            builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
 
             builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
@@ -89,7 +94,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.NotarizedUndertakingDescription).HasColumnType("longtext");
 
-            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
+            builder.Property(e => e.PendingAt)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.UserId).HasColumnType("int(11)");
 
@@ -115,6 +122,11 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.SponsorshipDescription).HasColumnType("longtext");
+
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                .WithMany(p => p.Leaseapplication)
+                .HasForeignKey(d => d.ApprovedStatus)
+                .HasConstraintName("fk_ApprovedStatusLeaseApplication");
         }
     }
 }

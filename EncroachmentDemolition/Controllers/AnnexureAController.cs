@@ -143,34 +143,34 @@ namespace EncroachmentDemolition.Controllers
            
             if (result)
             {
-                #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
-                var DataFlow = await dataAsync();
-                for (int i = 0; i < DataFlow.Count; i++)
-                {
-                    if (!DataFlow[i].parameterSkip)
-                    {
-                        fixingdemolition.ApprovedStatus = 0;
-                        fixingdemolition.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                        result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
-                        if (result)
-                        {
-                            Approvalproccess approvalproccess = new Approvalproccess();
-                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value);
-                            approvalproccess.ServiceId = fixingdemolition.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
-                            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                            approvalproccess.PendingStatus = 1;   //1
-                            approvalproccess.Status = null;   //1
-                            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                        }
+                //#region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                //var DataFlow = await dataAsync();
+                //for (int i = 0; i < DataFlow.Count; i++)
+                //{
+                //    if (!DataFlow[i].parameterSkip)
+                //    {
+                //        fixingdemolition.ApprovedStatus = 0;
+                //        fixingdemolition.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                //        result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
+                //        if (result)
+                //        {
+                //            Approvalproccess approvalproccess = new Approvalproccess();
+                //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value);
+                //            approvalproccess.ServiceId = fixingdemolition.Id;
+                //            approvalproccess.SendFrom = SiteContext.UserId;
+                //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                //            approvalproccess.PendingStatus = 1;   //1
+                //            approvalproccess.Status = null;   //1
+                //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                //        }
 
-                        break;
-                    }
-                }
+                //        break;
+                //    }
+                //}
 
-                #endregion
+                //#endregion
 
                 ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                 return View("Index");

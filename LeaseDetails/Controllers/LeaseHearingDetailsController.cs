@@ -103,9 +103,9 @@ namespace LeaseDetails.Controllers
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
                             approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value);
+                            approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value);
                             approvalproccess.ServiceId = leaseapplication.Id;
-                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.SendFrom = SiteContext.UserId.ToString();
                             approvalproccess.PendingStatus = 1;
                             approvalproccess.Remarks = leaseapplication.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(leaseapplication.ApprovalStatus);
@@ -115,7 +115,7 @@ namespace LeaseDetails.Controllers
                                 approvalproccess.SendTo = null;
                             else
                             {
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                approvalproccess.SendTo = Convert.ToString(DataFlow[i + 1].parameterName);
                             }
                             result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
@@ -124,12 +124,12 @@ namespace LeaseDetails.Controllers
                                 if (i == DataFlow.Count - 1)
                                 {
                                     leaseapplication.ApprovedStatus = 1;
-                                    leaseapplication.PendingAt = 0;
+                                    leaseapplication.PendingAt = "0";
                                 }
                                 else
                                 {
                                     leaseapplication.ApprovedStatus = 0;
-                                    leaseapplication.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                    leaseapplication.PendingAt = Convert.ToString(DataFlow[i + 1].parameterName);
                                 }
                                 result = await _leaseApplicationFormService.UpdateBeforeApproval(leaseapplication.Id, leaseapplication);  //Update Table details 
                             }
@@ -158,7 +158,7 @@ namespace LeaseDetails.Controllers
         #region History Details Only For Approval Page
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessIdLeaseApplicationForm").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }

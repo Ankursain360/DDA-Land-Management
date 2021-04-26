@@ -34,7 +34,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Allotmentletter
                                          .Include(x => x.Allotment)
                                          .Include(x => x.Allotment.Application)
-                                         .Where(x => x.Allotment.Id == id && x.Allotment.Application.Id==x.Allotment.ApplicationId)
+                                         .Where(x => x.Allotment.Id == id && x.Allotment.Application.Id == x.Allotment.ApplicationId)
                                          .OrderByDescending(x => x.Id)
                                         .FirstOrDefaultAsync();
             return data;
@@ -65,7 +65,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Leaseapplication>> GetPagedAllotmentLetter(DocumentChecklistSearchDto model)
         {
             var data = await _dbContext.Leaseapplication
-                                                  .Where(x => x.IsActive==1)
+                                                  .Where(x => x.IsActive == 1)
                                         .GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
             return data;
         }
@@ -85,11 +85,17 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetter()
         {
             return await _dbContext.Allotmententry
-                        .Include(x=>x.Application)
-                       .Where(x => (x.IsActive == 1) )
+                        .Include(x => x.Application)
+                       .Where(x => (x.IsActive == 1))
                 .OrderByDescending(x => x.Application.RefNo).ToListAsync();
         }
 
+        public async Task<bool> RollBackEntryDocument(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Leaseapplicationdocuments.Where(x => x.LeaseApplicationId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 
 

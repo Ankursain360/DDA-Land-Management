@@ -7,13 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
- public  class ApprovalstatusConfiguration : IEntityTypeConfiguration<Approvalstatus>
+    public class ApprovalstatusConfiguration : IEntityTypeConfiguration<Approvalstatus>
     {
         public void Configure(EntityTypeBuilder<Approvalstatus> builder)
         {
             builder.ToTable("approvalstatus", "lms");
-
-            builder.Property(e => e.IsActive).HasColumnType("int(11)");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -21,15 +19,24 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+            builder.Property(e => e.IsActive).HasColumnType("int(11)");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
-            
+
             builder.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            builder.Property(e => e.SentStatusName)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            builder.Property(e => e.StatusCode).HasColumnType("int(11)");
         }
 
-        
+
     }
-    
+
 }

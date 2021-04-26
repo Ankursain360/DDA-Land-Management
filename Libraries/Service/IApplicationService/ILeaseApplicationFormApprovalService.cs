@@ -11,7 +11,8 @@ namespace Libraries.Service.IApplicationService
 {
     public interface ILeaseApplicationFormApprovalService : IEntityService<Leaseapplication>
     {
-        Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId);
+        Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id);
         Task<Leaseapplication> FetchSingleResult(int id);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

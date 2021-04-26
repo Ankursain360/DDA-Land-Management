@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
             Newlandus17plot = new HashSet<Newlandus17plot>();
             Newlandus6plot = new HashSet<Newlandus6plot>();
             Newlandus22plot = new HashSet<Newlandus22plot>();
+           
         }
 
         [Required(ErrorMessage = " Notification is mandatory")]
@@ -38,6 +39,7 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandus17plot> Newlandus17plot { get; set; }
         public ICollection<Newlandus6plot> Newlandus6plot { get; set; }
         public ICollection<Newlandus22plot> Newlandus22plot { get; set; }
+        
     }
 }
 

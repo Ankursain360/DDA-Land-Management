@@ -19,12 +19,23 @@ namespace Libraries.Model.Entity
         public string Description { get; set; }
         [Required(ErrorMessage = " Module is mandatory")]
         public int ModuleId { get; set; }
-        public string UserType { get; set; }
+        public string Version { get; set; }
+
+        [Required(ErrorMessage = "SLA Time is mandatory")]
+        public int Slatime { get; set; }
+
+
+        [Required(ErrorMessage = "Effective Date is mandatory")]
+        public DateTime EffectiveDate { get; set; }
         public string Template { get; set; }
         public byte IsActive { get; set; }
+        public string ProcessGuid { get; set; }
 
         [NotMapped]
         public List<Module> ModuleList { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
 
         [NotMapped]
         public List<int?> WorkflowIdList { get; set; }
@@ -33,10 +44,15 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<string> ParameterLabelNameList { get; set; }
+
+        [NotMapped]
+        public List<string> ParameterConditionalList { get; set; }
         [NotMapped]
         public List<string> ParameterValueList { get; set; }
         [NotMapped]
         public List<string> ParameterLevelList { get; set; }
+        [NotMapped]
+        public List<string> ParameterOrderList { get; set; }
         [NotMapped]
         public List<string> ParameterSkipList { get; set; }
 

@@ -1,9 +1,11 @@
-﻿using Dto.Search;
+﻿using Dto.Master;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
+using Repository.Common;
 using Repository.IEntityRepository;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +32,7 @@ namespace Repository.EntityRepository
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
                                         && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1 )
+                                        && (a.IsActive == 1)
                                         )
                                     .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
 
@@ -126,7 +128,7 @@ namespace Repository.EntityRepository
                                    .OrderBy(x => x.User.Email)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
-                   
+
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Userprofile
@@ -257,16 +259,16 @@ namespace Repository.EntityRepository
                         break;
                 }
             }
-            
+
             return data;
         }
 
         public async Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model)
         {
             var data = await _dbContext.Roles
-                           .Where(x =>string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                           .Where(x => string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
                            .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
-           
+
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -309,10 +311,6 @@ namespace Repository.EntityRepository
                 }
             }
             return data;
-
-            //var result = await _dbContext.Roles.
-            //                GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
-            //return result;
         }
 
         public async Task<List<Userprofile>> GetUser()
@@ -370,10 +368,79 @@ namespace Repository.EntityRepository
             return await _dbContext.Possesionplan
                                     .Include(x => x.Allotment)
                                     .Include(x => x.Allotment.Application)
-                                    .Include( x => x.Allotment.LeasePurposesType)
+                                    .Include(x => x.Allotment.LeasePurposesType)
                                     .Include(x => x.Allotment.LeasesType)
                                     .Where(x => x.Allotment.Application.UserId == userId)
                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Userprofile>> GetUserOnRoleBasis(int roleId)
+        {
+            return await _dbContext.Userprofile
+                                   .Include(a => a.User)
+                                   .Include(a => a.Role)
+                                   .Include(a => a.Department)
+                                   .Include(a => a.Zone)
+                                   .Include(a => a.District)
+                                   .Where(a => a.IsActive == 1 && a.RoleId == roleId)
+                                   .ToListAsync();
+        }
+
+        public async Task<List<Userprofile>> GetUserSkippingItsOwn(int roleId, int userid)
+        {
+            return await _dbContext.Userprofile
+                                   .Include(a => a.User)
+                                   .Include(a => a.Role)
+                                   .Include(a => a.Department)
+                                   .Include(a => a.Zone)
+                                   .Include(a => a.District)
+                                   .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.User.Id != userid)
+                                   .ToListAsync();
+        }
+
+        public async Task<List<UserWithRoleDto>> GetUserWithRole()
+        {
+            var data = await _dbContext.LoadStoredProcedure("UserWithRoleDropdownBind")
+                                        .WithOutParams()
+                                        .ExecuteStoredProcedureAsync<UserWithRoleDto>();
+
+            return (List<UserWithRoleDto>)data;
+        }
+
+        public async Task<List<Userprofile>> GetUserOnRoleZoneBasis(int roleId, int zoneId)
+        {
+            return await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Zone)
+                                  .Include(a => a.District)
+                                  .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.ZoneId == zoneId)
+                                  .ToListAsync();
+        }
+
+        public async Task<List<Userprofile>> GetUserByIdZone(int userid, int zoneId)
+        {
+            return await _dbContext.Userprofile
+                                .Include(a => a.User)
+                                .Include(a => a.Role)
+                                .Include(a => a.Department)
+                                .Include(a => a.Zone)
+                                .Include(a => a.District)
+                                .Where(a => a.IsActive == 1 && a.UserId == userid && a.ZoneId == zoneId)
+                                .ToListAsync();
+        }
+
+        public async Task<List<Userprofile>> UserListSkippingmultiusers(int[] nums)
+        {
+            return await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Zone)
+                                  .Include(a => a.District)
+                                  .Where(a => a.IsActive == 1 && nums.Contains(a.UserId))
+                                  .ToListAsync();
         }
     }
 }

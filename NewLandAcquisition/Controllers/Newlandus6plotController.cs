@@ -17,29 +17,41 @@ namespace NewLandAcquisition.Controllers
 {
     public class Newlandus6plotController : BaseController
     {
+
         private readonly INewlandus6plotService _newlandus6plotService;
         public Newlandus6plotController(INewlandus6plotService newlandus6plotService)
         {
             _newlandus6plotService = newlandus6plotService;
         }
+
+
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
+
+
+
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] Newlandus6plotSearchDto model)
         {
             var result = await _newlandus6plotService.GetPagedUS6Plot(model);
             return PartialView("_List", result);
-
         }
+
+
         public async Task<PartialViewResult> NotificationView([FromBody] NewLandNotification6ListSearchDto model)
         {
             var Data = await _newlandus6plotService.GetAllFetchNotificationDetails(model);
 
             return PartialView("_ListNotification", Data);
         }
+
+
+
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
@@ -47,7 +59,6 @@ namespace NewLandAcquisition.Controllers
             us4plot.NotificationList = await _newlandus6plotService.GetAllNotification();
             us4plot.VillageList = await _newlandus6plotService.GetAllVillage();
             us4plot.KhasraList = await _newlandus6plotService.GetAllKhasra(us4plot.VillageId);
-
             return View(us4plot);
         }
 
@@ -81,9 +92,9 @@ namespace NewLandAcquisition.Controllers
             else
             {
                 return View(us6plot);
-            }
-
+            }        
         }
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {

@@ -13,7 +13,7 @@ using System.Data;
 using Newtonsoft.Json;
 using Utility.Helper;
 using System.Collections.Generic;
-
+using Dto.Master;
 namespace NewLandAcquisition.Controllers
 {
     public class VillageController : BaseController
@@ -25,7 +25,7 @@ namespace NewLandAcquisition.Controllers
             _newlandvillageService = newlandvillageService;
         }
 
-        [AuthorizeContext(ViewAction.View)]
+      
         public IActionResult Index()
         {
 
@@ -190,13 +190,34 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
 
-        public async Task<IActionResult> Download()
-        {
-            List<Newlandvillage> result = await _newlandvillageService.GetNewlandvillage();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"village.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+
+        
+
+        public async Task<IActionResult> NewLandVillageList()
+        {
+            var result = await _newlandvillageService.GetNewlandvillage();
+            List<NewLandVillageListDto> data = new List<NewLandVillageListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandVillageListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageName=result[i].Name,
+                        DistrictName = result[i].District == null ? "" : result[i].District.Name.ToString(),
+                        TehsilName = result[i].Tehsil == null ? "" : result[i].Tehsil.Name.ToString(),
+                        ZoneName = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),                      
+                        Acquired=result[i].Acquired,
+                        VillageType=result[i].VillageType,                        
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
     }

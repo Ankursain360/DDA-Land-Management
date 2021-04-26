@@ -126,6 +126,27 @@ namespace Utility.Helper
 
             return body;
         }
+
+
+        public string PopulateBodyApprovalMailDetails(ApprovalMailBodyDto element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{ApplicationName}", element.ApplicationName);
+            body = body.Replace("{AppRefNo}", element.AppRefNo);
+            body = body.Replace("{SubmitDate}", element.SubmitDate);
+            body = body.Replace("{SenderName}", element.SenderName);
+            body = body.Replace("{Remarks}", element.Remarks);
+            body = body.Replace("{Status}", element.Status);
+            body = body.Replace("{Link}", element.Link);
+
+
+            return body;
+        }
+
         #endregion
 
         #region SMS
