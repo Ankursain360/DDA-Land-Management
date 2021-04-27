@@ -6,8 +6,7 @@ $(document).ready(function () {
     //
     var id = $("#UnderSection22Id").val();
 
-    //$("#VillageId").val('');
-    //$("#KhasraId").val('');
+    
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -37,7 +36,7 @@ $(document).ready(function () {
             $("#Biswanshi1").val(response.biswanshi);
 
 
-            // alert(JSON.stringify(response));
+           
         });
 
     }
@@ -77,7 +76,7 @@ $("#UnderSection22Id").change(function () {
         pageSize: parseInt(currentPageSize),
         pageNumber: parseInt(currentPageNumber)
     }
-    //alert(JSON.stringify(model));
+    
     if (id) {
         HttpPost(`/UnderSection22PlotDetails/Notification4View/`, 'html', model, function (response) {
             $('#divnotification22Table').html("");
@@ -103,7 +102,7 @@ function onChange(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
 
-        // $("#KhasraId").select2('val', '')
+        $("#KhasraId").select2('val', '')
         $("#KhasraId").html(html);
     });
 };
@@ -119,7 +118,7 @@ $("#KhasraId").change(function () {
             $("#Bigha").val(response.bigha);
             $("#Biswa").val(response.biswa);
             $("#Biswanshi").val(response.biswanshi);
-            // alert(JSON.stringify(response));
+            
         });
 
     }

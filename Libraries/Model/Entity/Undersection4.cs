@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
     {
         public Undersection4()
         {
-            Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
+            
             Undersection4plot = new HashSet<Undersection4plot>();
             Undersection6 = new HashSet<Undersection6>();
             Awardmasterdetail = new HashSet<Awardmasterdetail>();
@@ -37,7 +37,7 @@ namespace Libraries.Model.Entity
         public List<Proposaldetails> ProposalList { get; set; }
      
         public Proposaldetails Proposal { get; set; }
-        public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+       
         public ICollection<Undersection4plot> Undersection4plot { get; set; }
         public ICollection<Undersection6> Undersection6 { get; set; }
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }

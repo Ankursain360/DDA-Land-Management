@@ -23,9 +23,6 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Undersection22plotdetails>> GetAllUS22PlotDetails()
         {
             return await _dbContext.Undersection22plotdetails
-                                   .Include(x => x.UnderSection4)
-                                   .Include(x => x.UnderSection6)
-                                   .Include(x => x.UnderSection17)
                                    .Include(x => x.UnderSection22)
                                    .Include(x => x.Khasra)
                                    .Include(x => x.Acquiredlandvillage)
@@ -72,9 +69,6 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Undersection22plotdetails
                               .Include(x => x.UnderSection22)
-                              .Include(x => x.UnderSection4)
-                              .Include(x => x.UnderSection6)
-                              .Include(x => x.UnderSection17)
                               .Include(x => x.Acquiredlandvillage)
                               .Include(x => x.Khasra)
                              .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
@@ -92,10 +86,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                      .Include(x => x.UnderSection22)
-                                     .Include(x => x.UnderSection4)
-                                     .Include(x => x.UnderSection6)
-                                     .Include(x => x.UnderSection17)
-                                     .Include(x => x.Acquiredlandvillage)
+                                      .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
                                       && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
@@ -109,9 +100,6 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                       .Include(x => x.UnderSection22)
-                                      .Include(x => x.UnderSection4)
-                                      .Include(x => x.UnderSection6)
-                                      .Include(x => x.UnderSection17)
                                       .Include(x => x.Acquiredlandvillage)
                                       .Include(x => x.Khasra)
                                       .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
@@ -125,10 +113,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                       .Include(x => x.UnderSection22)
-                                      .Include(x => x.UnderSection4)
-                                      .Include(x => x.UnderSection6)
-                                      .Include(x => x.UnderSection17)
-                                      .Include(x => x.Acquiredlandvillage)
+                                       .Include(x => x.Acquiredlandvillage)
                                       .Include(x => x.Khasra)
                                       .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
                                       && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
@@ -143,9 +128,6 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                       .Include(x => x.UnderSection22)
-                                      .Include(x => x.UnderSection4)
-                                      .Include(x => x.UnderSection6)
-                                      .Include(x => x.UnderSection17)
                                       .Include(x => x.Acquiredlandvillage)
                                       .Include(x => x.Khasra)
                                       .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
@@ -166,9 +148,6 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                      .Include(x => x.UnderSection22)
-                                     .Include(x => x.UnderSection4)
-                                     .Include(x => x.UnderSection6)
-                                     .Include(x => x.UnderSection17)
                                      .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
@@ -183,9 +162,6 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                       .Include(x => x.UnderSection22)
-                                      .Include(x => x.UnderSection4)
-                                      .Include(x => x.UnderSection6)
-                                      .Include(x => x.UnderSection17)
                                       .Include(x => x.Acquiredlandvillage)
                                       .Include(x => x.Khasra)
                                       .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
@@ -199,9 +175,6 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                       .Include(x => x.UnderSection22)
-                                      .Include(x => x.UnderSection4)
-                                      .Include(x => x.UnderSection6)
-                                      .Include(x => x.UnderSection17)
                                       .Include(x => x.Acquiredlandvillage)
                                       .Include(x => x.Khasra)
                                       .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
@@ -217,10 +190,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Undersection22plotdetails
                                       .Include(x => x.UnderSection22)
-                                      .Include(x => x.UnderSection4)
-                                      .Include(x => x.UnderSection6)
-                                      .Include(x => x.UnderSection17)
-                                      .Include(x => x.Acquiredlandvillage)
+                                       .Include(x => x.Acquiredlandvillage)
                                       .Include(x => x.Khasra)
                                       .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
                                       && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))

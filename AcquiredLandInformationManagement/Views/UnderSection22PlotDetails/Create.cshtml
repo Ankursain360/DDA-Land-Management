@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-      
+
         <div class="pt-3">
             <h3 class="mb-3 d-flex">Actual Area</h3>
         </div>
@@ -119,39 +119,7 @@
                 </div>
             </div>
         </div>
-        <h3 class="my-3 d-flex sub-heading"> Notifications </h3>
-        <div class="row mt-md-3">
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection4Id"
-                            asp-items="@(new SelectList(Model.Undersection4List,"Id","Number"))">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                    </select>
-                    <span asp-validation-for="UnderSection4Id" class="text-danger"></span>
-                    <label asp-for="UnderSection4Id" class="floating-label">Notification No(U/S-4) </label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection6Id"
-                            asp-items="@(new SelectList(Model.Undersection6List,"Id","Number"))">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                    </select>
-                    <span asp-validation-for="UnderSection6Id" class="text-danger"></span>
-                    <label asp-for="UnderSection6Id" class="floating-label">Notification No(U/S-6) </label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection17Id"
-                            asp-items="@(new SelectList(Model.Undersection17List,"Id","Number"))">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                    </select>
-                    <span asp-validation-for="UnderSection17Id" class="text-danger"></span>
-                    <label asp-for="UnderSection17Id" class="floating-label">Notification No(U/S-17) </label>
-                </div>
-            </div>
-        </div>
+       
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -185,16 +153,15 @@
 
 </div>
 
+
+
 <div class="table-section bg-white border shadow rounded">
-
-
-    <div class="table-responsive px-2">
+    <div class="table-responsive ">
         <div id="divnotification22Table"></div>
     </div>
 
 
 </div>
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/us22plotcreate.js"></script>

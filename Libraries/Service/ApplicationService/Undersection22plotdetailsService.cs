@@ -88,9 +88,7 @@ namespace Libraries.Service.ApplicationService
             Undersection22plotdetails model = result.FirstOrDefault();
 
             model.UnderSection22Id = us22plot.UnderSection22Id;
-            model.UnderSection4Id = us22plot.UnderSection4Id;
-            model.UnderSection6Id = us22plot.UnderSection6Id;
-            model.UnderSection17Id = us22plot.UnderSection17Id;
+           
             model.AcquiredlandvillageId = us22plot.AcquiredlandvillageId;
             model.KhasraId = us22plot.KhasraId;
             model.Bigha = us22plot.Bigha;
