@@ -25,7 +25,7 @@ namespace SiteMaster.Controllers
         {
             _newlandnotificationdetailsService = newlandnotificationdetailsService;
         }
-      //  [AuthorizeContext(ViewAction.View)]
+        //  [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -39,8 +39,8 @@ namespace SiteMaster.Controllers
             var result = await _newlandnotificationdetailsService.GetPagedNotifications(model);
             return PartialView("_List", result);
         }
-       // [AuthorizeContext(ViewAction.Add)]
-       
+        // [AuthorizeContext(ViewAction.Add)]
+
         public async Task<IActionResult> Create()
         {
             Newlandnotificationdetails notification = new Newlandnotificationdetails();
@@ -53,19 +53,120 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Add)]
+        // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Newlandnotificationdetails notification)
         {
-            try
+
+
+            if (ModelState.IsValid)
             {
+                notification.NotificationTypeList = await _newlandnotificationdetailsService.GetAllNotificationType();
+                notification.VillageList = await _newlandnotificationdetailsService.GetAllVillage();
+                notification.KhasraList = await _newlandnotificationdetailsService.GetAllKhasra(notification.VillageId);
+                notification.CreatedBy = SiteContext.UserId;
 
-                if (ModelState.IsValid)
+               
+                if (notification.NotificationTypeId == 2)
                 {
-                    notification.NotificationTypeList = await _newlandnotificationdetailsService.GetAllNotificationType();
-                    notification.VillageList = await _newlandnotificationdetailsService.GetAllVillage();
-                    notification.KhasraList = await _newlandnotificationdetailsService.GetAllKhasra(notification.VillageId);
-                    notification.CreatedBy = SiteContext.UserId;
+                   
+                    var data1 = await _newlandnotificationdetailsService.FetchconditionResult(1,
+                                        notification.NotificationNo, notification.VillageId, notification.KhasraId);
 
+                    if (data1 == null)
+                    {
+
+                        ViewBag.Message = Alert.Show("First Please Fill Notification for Under section 4");
+                        return View(notification);
+                    }
+
+                    else
+                    {
+
+                        var result = await _newlandnotificationdetailsService.Create(notification);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+
+                            var list = await _newlandnotificationdetailsService.GetAllNotifications();
+                            return View("Create", notification);
+
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(notification);
+
+                        }
+                    }
+                }
+                else if (notification.NotificationTypeId == 3)
+                {
+                   
+                    var data1 = await _newlandnotificationdetailsService.FetchconditionResult(2,
+                                                            notification.NotificationNo, notification.VillageId, notification.KhasraId);
+
+                    if (data1 == null)
+                    {
+                        ViewBag.Message = Alert.Show(" Please Fill Notification for Under section 6");
+                        return View(notification);
+                    }
+                    else
+                    {
+
+                        var result = await _newlandnotificationdetailsService.Create(notification);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+
+                            var list = await _newlandnotificationdetailsService.GetAllNotifications();
+                            return View("Create", notification);
+
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(notification);
+
+                        }
+                    }
+                }
+                else if (notification.NotificationTypeId == 4)
+                {
+                   
+
+                    var data1 = await _newlandnotificationdetailsService.FetchconditionResult(3,
+                                                            notification.NotificationNo, notification.VillageId, notification.KhasraId);
+
+                    if (data1 == null)
+                    {
+                        ViewBag.Message = Alert.Show(" Please Fill Notification for Under section 17");
+                        return View(notification);
+                    }
+                    else
+                    {
+
+                        var result = await _newlandnotificationdetailsService.Create(notification);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+
+                            var list = await _newlandnotificationdetailsService.GetAllNotifications();
+                            return View("Create", notification);
+
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(notification);
+
+                        }
+                    }
+                }
+                else
+                {
                     var result = await _newlandnotificationdetailsService.Create(notification);
 
                     if (result == true)
@@ -73,7 +174,8 @@ namespace SiteMaster.Controllers
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
 
                         var list = await _newlandnotificationdetailsService.GetAllNotifications();
-                        return View("Index", list);
+                        return View("Create", notification);
+
                     }
                     else
                     {
@@ -82,16 +184,14 @@ namespace SiteMaster.Controllers
 
                     }
                 }
-                else
-                {
-                    return View(notification);
-                }
-            }
-            catch (Exception ex)
+
+            
+            } 
+            else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(notification);
+                 return View(notification);
             }
+           
         }
        // [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
@@ -127,7 +227,8 @@ namespace SiteMaster.Controllers
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
                         var list = await _newlandnotificationdetailsService.GetAllNotifications();
-                        return View("Index", list);
+                        //return View("Index", list);
+                        return View("Create", notification);
                     }
                     else
                     {
@@ -203,6 +304,14 @@ namespace SiteMaster.Controllers
 
             return Json(await _newlandnotificationdetailsService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
+
+        public async Task<PartialViewResult> NotificationsView([FromBody] NotificationsViewSearchDto model)
+        {
+            var Data = await _newlandnotificationdetailsService.GetAllNotificationsViewList(model);
+
+            return PartialView("_ListNotification", Data);
+        }
+
     }
 }
 

@@ -104,5 +104,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _newlandnotificationdetailsRepository.FetchSingleKhasraResult(khasraId);
         }
+        public async Task<PagedResult<Newlandnotificationdetails>> GetAllNotificationsViewList(NotificationsViewSearchDto model)
+        {
+            return await _newlandnotificationdetailsRepository.GetAllNotificationsViewList(model);
+        }
+        public async Task<Newlandnotificationdetails> FetchconditionResult(int? TypeId, string NotifNo, int? vilage, int? khasra)
+        {
+            return await _newlandnotificationdetailsRepository.FetchconditionResult(TypeId, NotifNo, vilage, khasra);
+        }
+
     }
 }

@@ -1,74 +1,98 @@
-﻿var currentPageNumber = 1;
+﻿
+
+var currentPageNumber = 1;
 var currentPageSize = 5;
 
 
-//$(document).ready(function () {
-//    var id = $("#NotificationId").val();
-//    $("#VillageId").val('');
-//    $("#KhasraId").val('');
-//    var param = {
-//        NotificationId: id,
-//        pageSize: parseInt(currentPageSize),
-//        pageNumber: parseInt(currentPageNumber)
-//    }
+$(document).ready(function () {
+    var id = $("#NotificationTypeId").val();
+    
+    var param = {
+        TypeId: id,
+        pageSize: parseInt(currentPageSize),
+        pageNumber: parseInt(currentPageNumber)
+    }
 
-//    if (id) {
-//        debugger;
-//        HttpPost(`/Newlandus4plot/NotificationView/`, 'html', param, function (response) {
+    if (id) {
 
+        HttpPost(`/Newlandnotificationdetails/NotificationsView/`, 'html', param, function (response) {
 
-//            $('#divnotificationTable').html("");
-//            $('#divnotificationTable').html(response);
+            $('#divNotificationsTable').html("");
+            $('#divNotificationsTable').html(response);
 
-//        });
+        });
 
-//    }
-//});
-//function GetDivision(pageNumber, pageSize) {
-//    var param = GetSearchParam(pageNumber, pageSize);
-//    HttpPost(`/Newlandus4plot/NotificationView/`, 'html', param, function (response) {
-//        $('#divnotificationTable').html("");
-//        $('#divnotificationTable').html(response);
+    }
+    var kid = $("#KhasraId").val();
 
-//    });
-//}
+    if (kid) {
+        HttpGet(`/Newlandnotificationdetails/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
 
-//function GetSearchParam(pageNumber, pageSize) {
-
-//    var model = {
-//        NotificationId: $('#NotificationId').val(),
-//        pageSize: parseInt(pageSize),
-//        pageNumber: parseInt(pageNumber)
-//    }
-
-//    return model;
-//}
+            $("#Bigha1").val(response.bigha);
+            $("#Biswa1").val(response.biswa);
+            $("#Biswanshi1").val(response.biswanshi);
 
 
 
+        });
+
+    }
+});
+
+function GetNotifications(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+
+    HttpPost(`/Newlandnotificationdetails/NotificationsView/`, 'html', param, function (response) {
+        $('#divNotificationsTable').html("");
+        $('#divNotificationsTable').html(response);
+
+    });
+}
+
+function GetSearchParam(pageNumber, pageSize) {
+
+    var model = {
+        TypeId: $('#NotificationTypeId').val(),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
+    }
+
+    return model;
+}
 
 
 
-//$("#NotificationId").change(function () {
+function onPaging(pageNo) {
+    GetNotifications(parseInt(pageNo), parseInt(currentPageSize));
+    currentPageNumber = pageNo;
+}
 
-//    var id = $(this).val();
+function onChangePageSize(pageSize) {
+    GetNotifications(parseInt(currentPageNumber), parseInt(pageSize));
+    currentPageSize = pageSize;
+}
 
-//    var model = {
-//        NotificationId: id,
-//        pageSize: parseInt(currentPageSize),
-//        pageNumber: parseInt(currentPageNumber)
-//    }
-//    //alert(JSON.stringify(model));
-//    if (id) {
-//        HttpPost(`/Newlandus4plot/NotificationView/`, 'html', model, function (response) {
-//            $('#divnotificationTable').html("");
-//            $('#divnotificationTable').html(response);
 
-//        });
+$("#NotificationTypeId").change(function () {
 
-//    }
-//});
+    var id = $(this).val();
 
+    var model = {
+        TypeId: id,
+        pageSize: parseInt(currentPageSize),
+        pageNumber: parseInt(currentPageNumber)
+    }
+    
+    if (id) {
+
+        HttpPost(`/Newlandnotificationdetails/NotificationsView/`, 'html', model, function (response) {
+            $('#divNotificationsTable').html("");
+            $('#divNotificationsTable').html(response);
+
+        });
+
+    }
+});
 
 
 
@@ -91,7 +115,7 @@ function onChange(id) {
 
 $("#KhasraId").change(function () {
     var kid = $(this).val();
-    debugger;
+    
     if (kid) {
         HttpGet(`/Newlandnotificationdetails/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
 
@@ -146,14 +170,14 @@ $("#Biswanshi").keyup(function () {
 });
 
 
-function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize));
-    currentPageNumber = pageNo;
-}
+//function onPaging(pageNo) {
+//    GetDivision(parseInt(pageNo), parseInt(currentPageSize));
+//    currentPageNumber = pageNo;
+//}
 
-function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize));
-    currentPageSize = pageSize;
-}
+//function onChangePageSize(pageSize) {
+//    GetDivision(parseInt(currentPageNumber), parseInt(pageSize));
+//    currentPageSize = pageSize;
+//}
 
 

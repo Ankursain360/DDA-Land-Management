@@ -20,7 +20,7 @@
                     <label asp-for="NotificationTypeId" class="floating-label">Notification No</label>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NotificationNo" placeholder="Notification"
                            type="text" class="floating-label-field floating-label-field--s3 " />
@@ -70,14 +70,14 @@
             <div class="form-group col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input  type="text" id="Biswa1" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswa" readonly />
+                    <input type="text" id="Biswa1" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswa" readonly />
 
                     <label class="floating-label">Biswa</label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input  type="text" id="Biswanshi1" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswanshi" readonly />
+                    <input type="text" id="Biswanshi1" class="floating-label-field floating-label-field--s3 numbers" placeholder="Biswanshi" readonly />
 
                     <label class="floating-label">Biswanshi</label>
                 </div>
@@ -150,24 +150,14 @@
 
 </div>
 
-@*<div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end mr-auto">
+
+<div class="table-section bg-white border shadow rounded">
+    <div class="table-responsive ">
+        <div id="divNotificationsTable"></div>
+    </div>
 
 
-            </div>
-
-
-
-        </div>
-
-        <div class="table-responsive px-2">
-            <div id="divnotificationTable"></div>
-        </div>
-
-
-    </div>*@
-
+</div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
