@@ -30,6 +30,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Watchandward
                                         .Include(x => x.PrimaryListNoNavigation)
                                         .Include(x => x.PrimaryListNoNavigation.Locality)
+                                        .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
                                             && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                             && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")

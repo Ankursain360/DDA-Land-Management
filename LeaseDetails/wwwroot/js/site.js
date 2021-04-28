@@ -4,6 +4,7 @@
 // Write your JavaScript code.
 var AllRules = '';
 $(document).ready(function () {
+	
 	$('#mobileMenu').on('click', function () {
 		$('#leftMenu').toggleClass('small');
 		$('#mobileMenu').toggleClass('open');

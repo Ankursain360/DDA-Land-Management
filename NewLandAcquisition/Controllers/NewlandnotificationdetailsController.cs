@@ -312,6 +312,7 @@ namespace NewLandAcquisition.Controllers
             return PartialView("_ListNotification", Data);
         }
 
+
     }
 }
 

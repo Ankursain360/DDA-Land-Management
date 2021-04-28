@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
 using NewLandAcquisition.Controllers;
-
+using Dto.Master;
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class AwardPlotDetailsController : BaseController
@@ -187,12 +187,6 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-
-
-
-
-
-
         [HttpGet]
         public async Task<JsonResult> GetKhasraList(int? villageId)
         {
@@ -209,6 +203,27 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        public async Task<IActionResult> AwardPlotDetailsList()
+        {
+            var result = await _awardplotDetailService.GetAwardplotdetails();
+            List<NewLandAwardPlotDetailsListDto> data = new List<NewLandAwardPlotDetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandAwardPlotDetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        AwardNo = result[i].NewlandAwardMaster==null? "" :result[i].NewlandAwardMaster.AwardNumber,
+                        VillageName = result[i].NewlandVillage == null ? "" : result[i].NewlandVillage.Name.ToString(),
+                        KhasraNo = result[i].NewlandKhasra == null ? "" : result[i].NewlandKhasra.Name.ToString(),
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
     }
 }
