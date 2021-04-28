@@ -104,7 +104,7 @@ function GetUserList(id) {
     HttpGet(`/WatchWardApproval/GetUserList/?value=${id}`, 'json', function (response) {
         var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
         for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].user.id + '>' + response[i].user.name + '</option>';
+            html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
         }
         $("#ApprovalUserId").val(null).trigger('change');
         $("#ApprovalUserId").html(html);
@@ -121,7 +121,7 @@ function GetForwardedUserList() {
             else {
                 var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
                 for (var i = 0; i < response.length; i++) {
-                    html = html + '<option value=' + response[i].user.id + '>' + response[i].user.name + '</option>';
+                    html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
                 }
                 $("#ApprovalUserId").val(null).trigger('change');
                 $("#ApprovalUserId").html(html);

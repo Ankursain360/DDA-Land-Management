@@ -386,9 +386,11 @@ namespace Repository.EntityRepository
                                    .ToListAsync();
         }
 
-        public async Task<List<Userprofile>> GetUserSkippingItsOwn(int roleId, int userid)
+        public async Task<List<UserProfileInfoDetailsDto>> GetUserSkippingItsOwnConcatedName(int roleId, int userid)
         {
-            return await _dbContext.Userprofile
+            List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
                                    .Include(a => a.User)
                                    .Include(a => a.Role)
                                    .Include(a => a.Department)
@@ -396,6 +398,26 @@ namespace Repository.EntityRepository
                                    .Include(a => a.District)
                                    .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.User.Id != userid)
                                    .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {                    
+                    listData.Add(new UserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        ZoneId = Data[i].ZoneId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Zone == null ? "NA" : Data[i].Zone.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
         }
 
         public async Task<List<UserWithRoleDto>> GetUserWithRole()
@@ -441,6 +463,142 @@ namespace Repository.EntityRepository
                                   .Include(a => a.District)
                                   .Where(a => a.IsActive == 1 && nums.Contains(a.UserId))
                                   .ToListAsync();
+        }
+
+        public async Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleZoneBasisConcatedName(int roleId, int zoneId)
+        {
+            List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Zone)
+                                  .Include(a => a.District)
+                                  .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.ZoneId == zoneId)
+                                  .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new UserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        ZoneId = Data[i].ZoneId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name, Data[i].Role == null ? "NA" : Data[i].Role.Name, Data[i].Zone == null ? "NA" : Data[i].Zone.Name)
+                    });
+                }
+            }
+
+            return listData;
+        }
+
+        public async Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId)
+        {
+            List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                   .Include(a => a.User)
+                                   .Include(a => a.Role)
+                                   .Include(a => a.Department)
+                                   .Include(a => a.Zone)
+                                   .Include(a => a.District)
+                                   .Where(a => a.IsActive == 1 && a.RoleId == roleId)
+                                   .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new UserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        ZoneId = Data[i].ZoneId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Zone == null ? "NA" : Data[i].Zone.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
+        }
+
+        public async Task<List<UserProfileInfoDetailsDto>> GetUserByIdZoneConcatedName(int userid, int zoneId)
+        {
+            List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                .Include(a => a.User)
+                                .Include(a => a.Role)
+                                .Include(a => a.Department)
+                                .Include(a => a.Zone)
+                                .Include(a => a.District)
+                                .Where(a => a.IsActive == 1 && a.UserId == userid && a.ZoneId == zoneId)
+                                .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new UserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        ZoneId = Data[i].ZoneId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name, Data[i].Role == null ? "NA" : Data[i].Role.Name, Data[i].Zone == null ? "NA" : Data[i].Zone.Name)
+                    });
+                }
+            }
+
+            return listData;
+        }
+
+        public async Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums)
+        {
+            List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Zone)
+                                  .Include(a => a.District)
+                                  .Where(a => a.IsActive == 1 && nums.Contains(a.UserId))
+                                  .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new UserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        ZoneId = Data[i].ZoneId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Zone == null ? "NA" : Data[i].Zone.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
         }
     }
 }

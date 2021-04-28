@@ -91,5 +91,16 @@ namespace Libraries.Repository.EntityRepository
                                      .OrderBy(x => x.Id)
                                      .FirstOrDefaultAsync();
         }
+
+        public async Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level)
+        {
+            return await _dbContext.Approvalproccess
+                                     .Where(x => x.ProcessGuid == processguid && x.ServiceId == serviceid
+                                     && x.Level == level
+                                     )
+                                     .OrderBy(x => x.Id)
+                                     .Take(1)
+                                     .FirstOrDefaultAsync();
+        }
     }
 }

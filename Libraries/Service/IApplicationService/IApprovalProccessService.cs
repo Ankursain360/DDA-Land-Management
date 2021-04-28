@@ -23,5 +23,6 @@ namespace Libraries.Service.IApplicationService
         Task<Approvalstatus> GetStatusIdFromStatusCode(int statuscode);
         Task<bool> RollBackEntry(string processguid, int serviceid);
         Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid);
+        Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level);
     }
 }

@@ -225,11 +225,10 @@ namespace Service.ApplicationService
             return result;
         }
 
-        public async Task<List<UserProfileDto>> GetUserSkippingItsOwn(int roleId, int userid)
+        public async Task<List<UserProfileInfoDetailsDto>> GetUserSkippingItsOwnConcatedName(int roleId, int userid)
         {
-            var user = await _userProfileRepository.GetUserSkippingItsOwn(roleId, userid);
-            var result = _mapper.Map<List<UserProfileDto>>(user);
-            return result;
+            var user = await _userProfileRepository.GetUserSkippingItsOwnConcatedName(roleId, userid);
+            return user;
         }
 
         public async Task<List<UserWithRoleDto>> GetUserWithRole()
@@ -259,6 +258,30 @@ namespace Service.ApplicationService
             var user = await _userProfileRepository.UserListSkippingmultiusers(nums);
             var result = _mapper.Map<List<UserProfileDto>>(user);
             return result;
+        }
+
+        public async Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleZoneBasisConcatedName(int roleId, int zoneId)
+        {
+            return await _userProfileRepository.GetUserOnRoleZoneBasisConcatedName(roleId , zoneId);
+        }
+
+        public async Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId)
+        {
+            return await _userProfileRepository.GetUserOnRoleBasisConcatedName(roleId);
+        }
+
+        public async Task<UserProfileInfoDetailsDto> GetUserByIdZoneConcatedName(int userid, int zoneId)
+        {
+            var user = await _userProfileRepository.GetUserByIdZoneConcatedName(userid, zoneId);
+            if (user.Count == 0)
+                return null;
+            else
+                return user[0];
+        }
+
+        public async Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums)
+        {
+            return await _userProfileRepository.UserListSkippingmultiusersConcatedName(nums);
         }
     }
 }

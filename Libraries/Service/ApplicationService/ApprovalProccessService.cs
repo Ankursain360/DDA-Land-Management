@@ -101,5 +101,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _approvalproccessRepository.FirstApprovalProcessData(processguid, serviceid);
         }
+
+        public async Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level)
+        {
+            return await _approvalproccessRepository.CheckLastUserForRevert( processguid,  serviceid,  level);
+        }
     }
 }

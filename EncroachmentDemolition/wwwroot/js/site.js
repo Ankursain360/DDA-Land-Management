@@ -3,14 +3,14 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-
+   
     $('#mobileMenu').on('click', function () {
         $('#leftMenu').toggleClass('small');
         $('#mobileMenu').toggleClass('open');
         $('#rightSection').toggleClass('menu-close');
         $('footer').toggleClass('menu-close');
     });
-    
+
     $("select[class!='form-control destroy']").select2({
         placeholder: "--Select--",
         allowClear: true

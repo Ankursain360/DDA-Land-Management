@@ -30,10 +30,14 @@ namespace Service.IApplicationService
         Task<bool> DeleteUser(int id);
         Task<List<ZoneDto>> GetAllZone(int departmentId);
         Task<List<UserProfileDto>> GetUserOnRoleBasis(int roleId);
-        Task<List<UserProfileDto>> GetUserSkippingItsOwn(int roleId, int userid);
+        Task<List<UserProfileInfoDetailsDto>> GetUserSkippingItsOwnConcatedName(int roleId, int userid);
         Task<List<UserWithRoleDto>> GetUserWithRole();
         Task<List<UserProfileDto>> GetUserOnRoleZoneBasis(int roleId, int zoneId);
         Task<UserProfileDto> GetUserByIdZone(int userid, int zoneId);
         Task<List<UserProfileDto>> UserListSkippingmultiusers(int[] nums);
+        Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleZoneBasisConcatedName(int roleId, int zoneId);
+        Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId);
+        Task<UserProfileInfoDetailsDto> GetUserByIdZoneConcatedName(int userid, int zoneId);
+        Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums);
     }
 }

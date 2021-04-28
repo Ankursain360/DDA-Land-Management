@@ -21,10 +21,14 @@ namespace Repository.IEntityRepository
         Task<bool> ValidateUniqueUserName(int id, string userName);
         Task<Possesionplan> GetAllotteeDetails(int userId);
         Task<List<Userprofile>> GetUserOnRoleBasis(int roleId);
-        Task<List<Userprofile>> GetUserSkippingItsOwn(int roleId, int userid);
+        Task<List<UserProfileInfoDetailsDto>> GetUserSkippingItsOwnConcatedName(int roleId, int userid);
         Task<List<UserWithRoleDto>> GetUserWithRole();
         Task<List<Userprofile>> GetUserOnRoleZoneBasis(int roleId, int zoneId);
         Task<List<Userprofile>> GetUserByIdZone(int userid, int zoneId);
         Task<List<Userprofile>> UserListSkippingmultiusers(int[] nums);
+        Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleZoneBasisConcatedName(int roleId, int zoneId);
+        Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId);
+        Task<List<UserProfileInfoDetailsDto>> GetUserByIdZoneConcatedName(int userid, int zoneId);
+        Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums);
     }
 }
