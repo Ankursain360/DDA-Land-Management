@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -156,12 +157,28 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+       
+
+        public async Task<IActionResult> Undersection22List()
         {
-            List<Undersection22> result = await _undersection22Service.GetAllUndersection22();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Undersection22.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _undersection22Service.GetAllUndersection22();
+            List<Undersection22ListDto> data = new List<Undersection22ListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new Undersection22ListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].NotificationNo,
+                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
     }

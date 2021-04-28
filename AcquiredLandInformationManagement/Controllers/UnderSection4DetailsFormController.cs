@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -175,7 +177,33 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
 
+
+        public async Task<IActionResult> UnderSection4List()
+        {
+            var result = await _undersection4service.GetAllUndersection4();
+            List<UnderSection4ListDto> data = new List<UnderSection4ListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new UnderSection4ListDto()
+                    {
+                        Id = result[i].Id,
+                        ProposalName = result[i].Proposal == null ? "" : result[i].Proposal.Name,
+                        NotificationNo = result[i].Number,
+                        NotificationDate = Convert.ToDateTime(result[i].Ndate).ToString("dd-MMM-yyyy"),
+                        Type = result[i].TypeDetails,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
 
     }

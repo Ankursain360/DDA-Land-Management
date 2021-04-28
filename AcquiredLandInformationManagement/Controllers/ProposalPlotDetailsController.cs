@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -180,20 +181,43 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
-       [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
-        {
-            List<Proposalplotdetails> result = await _proposalplotdetailsService.GetAllProposalplotdetails();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Proposalplotdetails.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
-
-        }
+      
         [HttpGet]
         public async Task<JsonResult> GetKhasraList(int? villageId)
         {
             villageId = villageId ?? 0;
             return Json(await _proposalplotdetailsService.GetAllKhasra(Convert.ToInt32(villageId)));
         }
+        [AuthorizeContext(ViewAction.Download)]
+       
+
+        public async Task<IActionResult> ProposalplotdetailsList()
+        {
+            var result = await _proposalplotdetailsService.GetAllProposalplotdetails();
+            List<ProposalplotdetailsListDto> data = new List<ProposalplotdetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ProposalplotdetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        ProposalName = result[i].Proposaldetails == null ? "" : result[i].Proposaldetails.Name,
+                        VillageName = result[i].Acquiredlandvillage == null ? "" : result[i].Acquiredlandvillage.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+
+                        Area = result[i].Bigha.ToString()
+                                  + '-' + result[i].Biswa.ToString()
+                                  + '-' + result[i].Biswanshi.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
     }
 }

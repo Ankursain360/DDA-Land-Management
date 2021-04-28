@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -183,7 +185,35 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> KhasraMasterList()
+        {
+            var result = await _khasraService.GetAllKhasra();
+            List<KhasraMasterListDto> data = new List<KhasraMasterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new KhasraMasterListDto()
+                    {
+                        Id = result[i].Id,
+                        Village = result[i].Acquiredlandvillage == null ? "" : result[i].Acquiredlandvillage.Name,
+                        RectNo = result[i].RectNo,
+                        LandCategory = result[i].LandCategory == null ? "" : result[i].LandCategory.Name,
+                        KhasraNo = result[i].Name,
+                        Area = result[i].Bigha.ToString()
+                                  + '-' + result[i].Biswa.ToString()
+                                  + '-' + result[i].Biswanshi.ToString(),
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
     }
 }

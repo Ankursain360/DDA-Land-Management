@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -177,12 +178,32 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> ProposalDetailsList()
         {
-            List<Proposaldetails> result = await _proposaldetailsService.GetAllProposaldetails();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Proposaldetails.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _proposaldetailsService.GetAllProposaldetails();
+            List<ProposalDetailsListDto> data = new List<ProposalDetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ProposalDetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        SchemeName = result[i].Scheme == null ? "" : result[i].Scheme.Name,
+                        ProposalName = result[i].Name,
+                        RequiredAgency = result[i].RequiredAgency,
+                        ProposalNoFileNo = result[i].ProposalFileNo,
+                        ProposalDate = Convert.ToDateTime(result[i].ProposalDate).ToString("dd-MMM-yyyy"),
+                        Area = result[i].Bigha.ToString()
+                                  + '-' + result[i].Biswa.ToString()
+                                  + '-' + result[i].Biswanshi.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
     }

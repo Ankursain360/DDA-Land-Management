@@ -26,7 +26,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.UnderSection22)
                                    .Include(x => x.Khasra)
                                    .Include(x => x.Acquiredlandvillage)
-                                   .Where(x => x.IsActive == 1).ToListAsync();
+                                   .ToListAsync();
         }
         public async Task<List<Acquiredlandvillage>> GetAllAcquiredlandvillage()
         {

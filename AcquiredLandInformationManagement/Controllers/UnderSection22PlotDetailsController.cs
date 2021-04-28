@@ -11,6 +11,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using Utility.Helper;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -181,6 +183,33 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return PartialView("_ListNotification", Data);
         }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Undersection22plotList()
+        {
+            var result = await _undersection22plotdetailsService.GetAllUS22PlotDetails();
+            List<Undersection22plotListDto> data = new List<Undersection22plotListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new Undersection22plotListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationUS22 = result[i].UnderSection22 == null ? "" : result[i].UnderSection22.NotificationNo,
+                        VillageName = result[i].Acquiredlandvillage == null ? "" : result[i].Acquiredlandvillage.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                       
+                        Area = result[i].Bigha.ToString()
+                                  + '-' + result[i].Biswa.ToString()
+                                  + '-' + result[i].Biswanshi.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }
