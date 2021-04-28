@@ -20,6 +20,7 @@ using Core.Enum;
 using Utility.Helper;
 
 using Dto.Common;
+using Dto.Master;
 
 
 
@@ -276,7 +277,30 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
+        public async Task<IActionResult> RequestList()
+        {
+            var result = await _requestService.GetAllRequest();
+            List<RequestListDto> data = new List<RequestListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new RequestListDto()
+                    {
+                        Id = result[i].Id,
+                        ProposalName = result[i].PproposalName,
+                        Fileno = result[i].PfileNo ,
+                        RequiringBody = result[i].RequiringBody,
+                        Area = result[i].AreaLocality,
 
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
     }
 }

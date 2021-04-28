@@ -13,6 +13,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using NewLandAcquisition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -167,6 +169,38 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
+
+
+        public async Task<IActionResult> NewlandAppealdetailList()
+        {
+            var result = await _NewlandAppealdetailService.GetNewlandappealdetails();
+            List<NewLandAppealDetailListDto> data = new List<NewLandAppealDetailListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandAppealDetailListDto()
+                    {
+                        Id = result[i].Id,
+                         DemandListNo= result[i].DemandListNo,
+                         EnmSno= result[i].EnmSno,
+                        Appealno = result[i].AppealNo,
+                        AppealByDepartment = result[i].AppealByDept,
+                        DateOfApproval = result[i].DateOfAppeal.ToString(),
+                        PanelLawyer = result[i].PanelLawer,
+                     
+
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
 
 
 

@@ -51,7 +51,7 @@ function GetDetails(pageNumber, pageSize, order) {
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+   
     var name = $('#Name option:selected').val();
 
     var model = {
