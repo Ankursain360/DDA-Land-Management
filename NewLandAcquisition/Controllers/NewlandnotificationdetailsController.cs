@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using SiteMaster.Filters;
+using NewLandAcquisition.Filters;
 using Utility.Helper;
 
-namespace SiteMaster.Controllers
+namespace NewLandAcquisition.Controllers
 {
     public class NewlandnotificationdetailsController : BaseController
     {
