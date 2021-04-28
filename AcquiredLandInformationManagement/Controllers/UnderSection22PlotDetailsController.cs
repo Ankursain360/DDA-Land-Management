@@ -39,9 +39,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Undersection22plotdetails model = new Undersection22plotdetails();
             
             model.Undersection22List = await _undersection22plotdetailsService.GetAllUndersection22();
-            model.Undersection4List = await _undersection22plotdetailsService.GetAllUndersection4();
-            model.Undersection6List = await _undersection22plotdetailsService.GetAllUndersection6();
-            model.Undersection17List = await _undersection22plotdetailsService.GetAllUndersection17();
+           
             model.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             model.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(model.AcquiredlandvillageId);
            
@@ -54,9 +52,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
            
             us22plot.Undersection22List = await _undersection22plotdetailsService.GetAllUndersection22();
-            us22plot.Undersection4List = await _undersection22plotdetailsService.GetAllUndersection4();
-            us22plot.Undersection6List = await _undersection22plotdetailsService.GetAllUndersection6();
-            us22plot.Undersection17List = await _undersection22plotdetailsService.GetAllUndersection17();
+            
             us22plot.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             us22plot.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(us22plot.AcquiredlandvillageId);
             us22plot.IsActive = 1;
@@ -89,9 +85,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             var Data = await _undersection22plotdetailsService.FetchSingleResult(id);
             Data.Undersection22List = await _undersection22plotdetailsService.GetAllUndersection22();
-            Data.Undersection4List = await _undersection22plotdetailsService.GetAllUndersection4();
-            Data.Undersection6List = await _undersection22plotdetailsService.GetAllUndersection6();
-            Data.Undersection17List = await _undersection22plotdetailsService.GetAllUndersection17();
+           
             Data.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             Data.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(Data.AcquiredlandvillageId);
 
@@ -109,9 +103,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
 
             us22plot.Undersection22List = await _undersection22plotdetailsService.GetAllUndersection22();
-            us22plot.Undersection4List = await _undersection22plotdetailsService.GetAllUndersection4();
-            us22plot.Undersection6List = await _undersection22plotdetailsService.GetAllUndersection6();
-            us22plot.Undersection17List = await _undersection22plotdetailsService.GetAllUndersection17();
+            
             us22plot.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             us22plot.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(us22plot.AcquiredlandvillageId);
 
@@ -123,7 +115,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _undersection22plotdetailsService.GetAllUS22PlotDetails();
-                        return View("Index", list);
+                        return View("Edit", us22plot);
                     }
                     else
                     {
@@ -140,9 +132,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _undersection22plotdetailsService.FetchSingleResult(id);
             Data.Undersection22List = await _undersection22plotdetailsService.GetAllUndersection22();
-            Data.Undersection4List = await _undersection22plotdetailsService.GetAllUndersection4();
-            Data.Undersection6List = await _undersection22plotdetailsService.GetAllUndersection6();
-            Data.Undersection17List = await _undersection22plotdetailsService.GetAllUndersection17();
+           
             Data.AcquiredlandvillageList = await _undersection22plotdetailsService.GetAllAcquiredlandvillage();
             Data.KhasraList = await _undersection22plotdetailsService.GetAllKhasra(Data.AcquiredlandvillageId);
 

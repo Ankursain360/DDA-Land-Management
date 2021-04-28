@@ -280,5 +280,23 @@
     "inputFiles": [
       "wwwroot/js/newlandawardplotdetailsedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Newlandnotificationdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/Newlandnotificationdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Newlandnotificationdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/Newlandnotificationdetailsedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandnotificationdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandnotificationdetailsindex.js"
+    ]
   }
 ]

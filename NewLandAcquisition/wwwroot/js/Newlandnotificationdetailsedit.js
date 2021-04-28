@@ -5,95 +5,99 @@ var currentPageSize = 5;
 
 
 $(document).ready(function () {
-    //var id = $("#AwardMasterId").val();
-    ////$("#VillageId").val('');
-    ////$("#KhasraId").val('');
-    //var param = {
-    //    AwardId: id,
-    //    pageSize: parseInt(currentPageSize),
-    //    pageNumber: parseInt(currentPageNumber)
-    //}
+    var id = $("#NotificationTypeId").val();
+   
+    var param = {
+        TypeId: id,
+        pageSize: parseInt(currentPageSize),
+        pageNumber: parseInt(currentPageNumber)
+    }
 
-//    if (id) {
+    if (id) {
 
-//        HttpPost(`/AwardPlotDetails/AwardView/`, 'html', param, function (response) {
+        HttpPost(`/Newlandnotificationdetails/NotificationsView/`, 'html', param, function (response) {
 
-//            $('#divAwardTable').html("");
-//            $('#divAwardTable').html(response);
+            $('#divNotificationsTable').html("");
+            $('#divNotificationsTable').html(response);
 
-//        });
+        });
 
-//    }
+    }
     var kid = $("#KhasraId").val();
 
     if (kid) {
         HttpGet(`/Newlandnotificationdetails/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
-            
+
             $("#Bigha1").val(response.bigha);
             $("#Biswa1").val(response.biswa);
             $("#Biswanshi1").val(response.biswanshi);
 
 
-           
+
         });
 
     }
 });
 
-//function GetAward(pageNumber, pageSize) {
-//    var param = GetSearchParam(pageNumber, pageSize);
+function GetNotifications(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
 
-//    HttpPost(`/AwardPlotDetails/AwardView/`, 'html', param, function (response) {
-//        $('#divAwardTable').html("");
-//        $('#divAwardTable').html(response);
+    HttpPost(`/Newlandnotificationdetails/NotificationsView/`, 'html', param, function (response) {
+        $('#divNotificationsTable').html("");
+        $('#divNotificationsTable').html(response);
 
-//    });
-//}
+    });
+}
 
-//function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam(pageNumber, pageSize) {
 
-//    var model = {
-//        AwardId: $('#AwardMasterId').val(),
-//        pageSize: parseInt(pageSize),
-//        pageNumber: parseInt(pageNumber)
-//    }
+    var model = {
+        TypeId: $('#NotificationTypeId').val(),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
+    }
 
-//    return model;
-//}
-
-
-
-//function onPaging(pageNo) {
-//    GetAward(parseInt(pageNo), parseInt(currentPageSize));
-//    currentPageNumber = pageNo;
-//}
-
-//function onChangePageSize(pageSize) {
-//    GetAward(parseInt(currentPageNumber), parseInt(pageSize));
-//    currentPageSize = pageSize;
-//}
+    return model;
+}
 
 
 
-//$("#AwardMasterId").change(function () {
+function onPaging(pageNo) {
+    GetNotifications(parseInt(pageNo), parseInt(currentPageSize));
+    currentPageNumber = pageNo;
+}
 
-//    var id = $(this).val();
+function onChangePageSize(pageSize) {
+    GetNotifications(parseInt(currentPageNumber), parseInt(pageSize));
+    currentPageSize = pageSize;
+}
 
-//    var model = {
-//        AwardId: id,
-//        pageSize: parseInt(currentPageSize),
-//        pageNumber: parseInt(currentPageNumber)
-//    }
-//    //alert(JSON.stringify(model));
-//    if (id) {
 
-//        HttpPost(`/AwardPlotDetails/AwardView/`, 'html', model, function (response) {
-//            $('#divAwardTable').html("");
-//            $('#divAwardTable').html(response);
-//        });
+$("#NotificationTypeId").change(function () {
 
-//    }
-//});
+    var id = $(this).val();
+
+    var model = {
+        TypeId: id,
+        pageSize: parseInt(currentPageSize),
+        pageNumber: parseInt(currentPageNumber)
+    }
+
+    if (id) {
+
+        HttpPost(`/Newlandnotificationdetails/NotificationsView/`, 'html', model, function (response) {
+            $('#divNotificationsTable').html("");
+            $('#divNotificationsTable').html(response);
+
+        });
+
+    }
+});
+
+
+
+
+
 
 
 $("#KhasraId").change(function () {

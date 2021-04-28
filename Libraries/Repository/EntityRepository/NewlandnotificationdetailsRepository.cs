@@ -232,7 +232,27 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Newlandkhasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
-
-
+       
+        public async Task<PagedResult<Newlandnotificationdetails>> GetAllNotificationsViewList(NotificationsViewSearchDto model)
+        {
+            var data = await _dbContext.Newlandnotificationdetails
+                                        .Include(x => x.NotificationType)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.NotificationTypeId == model.TypeId)
+                                        .OrderByDescending(x => x.Id)
+                                        .GetPaged<Newlandnotificationdetails>(model.PageNumber, model.PageSize);
+            return data;
+        }
+        public async Task<Newlandnotificationdetails> FetchconditionResult(int? TypeId, string NotifNo, int? vilage, int? khasra)
+        {
+            var data = await _dbContext.Newlandnotificationdetails
+                                       .Where(x => x.NotificationTypeId == TypeId
+                                       && x.NotificationNo == NotifNo
+                                       && x.VillageId == vilage
+                                       && x.KhasraId == khasra)
+                                       .FirstOrDefaultAsync();
+            return data;
+        }
     }
 }

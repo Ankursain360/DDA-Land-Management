@@ -25,7 +25,9 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Newlandnotificationdetails>> GetAllNotifications();
         Task<PagedResult<Newlandnotificationdetails>> GetPagedNotifications(NewlandnotificationdetailsSearchDto model);
+        Task<PagedResult<Newlandnotificationdetails>> GetAllNotificationsViewList(NotificationsViewSearchDto model);
 
-
+        Task<Newlandnotificationdetails> FetchconditionResult(int? TypeId,string NotifNo,int? vilage,int? khasra);
+        
     }
 }

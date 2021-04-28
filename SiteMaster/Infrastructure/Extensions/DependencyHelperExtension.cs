@@ -53,8 +53,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<IApprovalCompleteRepository, ApprovalCompleteRepository>();
             services.AddScoped<IApplicationNotificationTemplateRepository, ApplicationNotificationTemplateRepository>();
-            services.AddScoped<INewlandnotificationdetailsRepository, NewlandnotificationdetailsRepository>();
-
+            
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -90,7 +89,6 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<IApprovalCompleteService, ApprovalCompleteService>();
             services.AddScoped<IApplicationNotificationTemplateService, ApplicationNotificationTemplateService>();
-            services.AddScoped<INewlandnotificationdetailsService, NewlandnotificationdetailsService>();
-        }
+             }
     }
 }

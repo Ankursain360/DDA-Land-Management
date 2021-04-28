@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
+using Dto.Master;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -194,16 +195,31 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+     
+
+        public async Task<IActionResult> AwardMasterDetailsList()
         {
-            List<Newlandawardmasterdetail> result = await _newlandawardmasterdetailService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"AwardMaster.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _newlandawardmasterdetailService.Getawardmasterdetails();
+            List<NewLandAwardMasterDetailsListDto> data = new List<NewLandAwardMasterDetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandAwardMasterDetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        AwardNo=result[i].AwardNumber,
+                        VillageName= result[i].Newlandvillage == null ? "" : result[i].Newlandvillage.Name.ToString(),
+                        AwardDate =result[i].AwardDate.ToString(),
+                        ProposalName= result[i].Proposal == null ? "" : result[i].Proposal.Name.ToString(),
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-
 
     }
 }
