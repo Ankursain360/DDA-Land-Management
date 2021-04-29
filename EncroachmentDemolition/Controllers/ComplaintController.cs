@@ -105,7 +105,7 @@ namespace EncroachmentDemolition.Controllers
                         if (!DataFlow[i].parameterSkip)
                         {
                             onlinecomplaint.ApprovedStatus = 0;
-                            onlinecomplaint.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                         //   onlinecomplaint.PendingAt = (DataFlow[i].parameterName);
                             result = await _onlinecomplaintService.UpdateBeforeApproval(onlinecomplaint.Id, onlinecomplaint);  //Update Table details 
                             if (result)
                             {

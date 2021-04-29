@@ -13,11 +13,18 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("fixingdemolition", "lms");
 
+            builder.HasIndex(e => e.ApprovedStatus)
+                .HasName("fk_ApprovedStatusFixingDemolition_idx");
+
 
             builder.HasIndex(e => e.EncroachmentId)
                 .HasName("fk1EncroachmentId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -29,13 +36,21 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
-
             builder.Property(e => e.DemolitionUniqueId)
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
+
+            builder.Property(e => e.PendingAt)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                .WithMany(p => p.Fixingdemolition)
+                .HasForeignKey(d => d.ApprovedStatus)
+                .HasConstraintName("fk_ApprovedStatusFixingDemolition");
+
 
             builder.HasOne(d => d.Encroachment)
                 .WithMany(p => p.Fixingdemolition)

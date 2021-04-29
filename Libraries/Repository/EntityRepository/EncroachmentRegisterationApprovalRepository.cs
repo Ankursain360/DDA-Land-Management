@@ -24,7 +24,8 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.EncroachmentRegisteration
                                     .Include(x => x.Locality)
                                     .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId 
-                                    && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0))
+                                   // && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                   )
                                     .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;

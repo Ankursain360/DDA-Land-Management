@@ -14,6 +14,9 @@ namespace Libraries.Model.EntityConfiguration
         {
                 builder.ToTable("encroachmentregisteration");
 
+            builder.HasIndex(e => e.ApprovedStatus)
+                .HasName("fk_ApprovedStatusEncroachmentregistration_idx");
+
             builder.HasIndex(e => e.DepartmentId)
                 .HasName("EncroachmentDeptId_idx");
 
@@ -33,6 +36,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("EncroachmentZonetId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
 
@@ -60,6 +67,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.OtherDepartment).HasColumnType("int(11)");
+
+            builder.Property(e => e.PendingAt)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.PoliceStation)
                 .HasMaxLength(100)
@@ -94,11 +105,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
-
-            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
-
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                .WithMany(p => p.EncroachmentRegisteration)
+                .HasForeignKey(d => d.ApprovedStatus)
+                .HasConstraintName("fk_ApprovedStatusEncroachmentregistration");
+
 
             builder.HasOne(d => d.Department)
                 .WithMany(p => p.EncroachmentregisterationDepartment)

@@ -23,7 +23,10 @@ namespace Libraries.Model.Entity
         public int EncroachmentId { get; set; }
         public byte IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
-        public int? PendingAt { get; set; }
+        public string PendingAt { get; set; }
+        public int? ApprovalZoneId { get; set; }
+
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
 
         [NotMapped]
         public List<Demolitionchecklist> Demolitionchecklist { get; set; }
@@ -62,12 +65,28 @@ namespace Libraries.Model.Entity
         public ICollection<Fixingchecklist> Fixingchecklist { get; set; }
         public ICollection<Fixingprogram> Fixingprogram { get; set; }
         public ICollection<Fixingdocument> Fixingdocument { get; set; }
+        public ICollection<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
 
         [NotMapped]
         public string ApprovalStatus { get; set; }
 
         [NotMapped]
+        public int ApprovalStatusCode { get; set; }
+
+        [NotMapped]
         public string ApprovalRemarks { get; set; }
-        public ICollection<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
+
     }
 }

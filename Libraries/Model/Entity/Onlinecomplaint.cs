@@ -42,7 +42,8 @@ namespace Libraries.Model.Entity
         public string Email { get; set; }
         public string ReferenceNo { get; set; }
         public int? ApprovedStatus { get; set; }
-        public int? PendingAt { get; set; }
+        public string PendingAt { get; set; }
+        public int? ApprovalZoneId { get; set; }
 
         public string Remarks { get; set; }
 
@@ -61,11 +62,28 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Photograph Is Mandatory ")]
         [DataType(DataType.Upload)]
         public IFormFile Photo { get; set; }
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public int ApprovalStatusCode { get; set; }
 
         [NotMapped]
         public string ApprovalRemarks { get; set; }
+
         [NotMapped]
-        public string ApprovalStatus { get; set; }
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
+
 
 
     }
