@@ -1,11 +1,12 @@
-﻿
-
-
-var currentPageNumber = 1;
+﻿var currentPageNumber = 1;
 var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$('#ddlSort').change(function () {
     GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -48,9 +49,10 @@ function GetEncroachmentRegisteration(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-
-        name: "test",
-
+        date: $('#txtDate').val(),
+        locality: $('#txtLocality').val(),
+        khasrano: $('#txtKhasrano').val(),
+        primarylistno: $('#txtPrimarylistno').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -68,3 +70,18 @@ function onChangePageSize(pageSize) {
     GetEncroachmentRegisteration(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
+
+$("#btnSearch").click(function () {
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnReset").click(function () {
+    $('#txtLocality').val('');
+    $('#txtDate').val('');
+    $('#txtKhasrano').val('');
+    $('#txtPrimarylistno').val('');
+    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, sortOrder);
+
+});
+
+

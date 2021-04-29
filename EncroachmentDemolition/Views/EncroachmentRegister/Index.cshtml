@@ -1,37 +1,83 @@
 ﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Inspection/Encroachment Register" })
 <br />
 <br />
-<div class="table-section bg-white border shadow rounded">
-    <div class="short-section d-md-flex align-items-center">
-        <div class="p-3 d-flex align-items-end mr-auto">
-            <div class="floating-label-wrap">
-                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                    <option value="Date">Date</option>
-                    <option value="Locality">Locality</option>
-                    <option value="KhasraNo">Khasra No</option>
-                    <option value="PrimaryListNo">Primary List No.</option>
-                </select>
-                <label for="field-1" class="floating-label">Sort by</label>
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" id="txtDate" class="floating-label-field floating-label-field--s3" />
+                    <label for="txtDate" class="floating-label">Date</label>
+                </div>
             </div>
-            <div class="short-btn d-flex align-items-center">
-                <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
-                <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtLocality" class="floating-label-field floating-label-field--s3" />
+                    <label for="txtLocality" class="floating-label">Locality Name</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtKhasrano" class="floating-label-field floating-label-field--s3" />
+                    <label for="txtKhasrano" class="floating-label">Khasra No.</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtPrimarylistno" class="floating-label-field floating-label-field--s3" />
+                    <label for="txtPrimarylistno" class="floating-label">Primary List No.</label>
+                </div>
             </div>
         </div>
-
-        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-            <a href="/EncroachmentRegister/create" class="d-flex align-items-center btn btn-primary mr-2">
-                <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                <small>Add More</small>
-            </a>
-            <a href="/EncroachmentRegister/EncroachmentRegisterList" class="d-flex align-items-center btn btn-success">
-                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                <small>Download</small>
-            </a>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" id="btnSearch" type="submit">Search</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="table-responsive px-2" id="divEncroachmentRegisterationTable">
 
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="Date">Date</option>
+                        <option value="Locality">Locality</option>
+                        <option value="KhasraNo">Khasra No</option>
+                        <option value="PrimaryListNo">Primary List No.</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/EncroachmentRegister/create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="/EncroachmentRegister/EncroachmentRegisterList" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive px-2" id="divEncroachmentRegisterationTable">
+
+        </div>
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

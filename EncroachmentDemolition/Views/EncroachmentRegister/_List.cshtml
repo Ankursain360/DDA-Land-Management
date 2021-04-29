@@ -28,7 +28,7 @@
                     <td> @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
                     <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
                     <td>@item.PrimaryListNoNavigation.KhasraNo</td>
-                    <td>@item.PrimaryListNo</td>
+                    <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
                     <td>@item.StatusOnGround</td>
                    
                     <td style="min-width:120px;">
