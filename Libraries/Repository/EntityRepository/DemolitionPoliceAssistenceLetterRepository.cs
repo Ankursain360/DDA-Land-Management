@@ -51,7 +51,7 @@ namespace Repository.EntityRepository
                 var data= await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                        && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                      //  && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                        // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)
                                         )
                                         .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
@@ -104,7 +104,7 @@ namespace Repository.EntityRepository
                 return await _dbContext.Fixingdemolition
                                        .Include(x => x.Encroachment).Include(x => x.Encroachment.Locality)
                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                       && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                      // && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                        && !(InDemolitionPoliceAssistenceTable).Contains(x.Id))
                                        .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
             }

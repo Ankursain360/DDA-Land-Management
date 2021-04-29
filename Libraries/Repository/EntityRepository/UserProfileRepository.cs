@@ -491,7 +491,7 @@ namespace Repository.EntityRepository
                         UserName = Data[i].User == null ? "" : Data[i].User.Name,
                         RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
                         ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
-                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name, Data[i].Role == null ? "NA" : Data[i].Role.Name, Data[i].Zone == null ? "NA" : Data[i].Zone.Name)
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Zone == null ? "NA" : Data[i].Zone.Name.ToUpper())
                     });
                 }
             }
@@ -559,7 +559,7 @@ namespace Repository.EntityRepository
                         UserName = Data[i].User == null ? "" : Data[i].User.Name,
                         RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
                         ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
-                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name, Data[i].Role == null ? "NA" : Data[i].Role.Name, Data[i].Zone == null ? "NA" : Data[i].Zone.Name)
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Zone == null ? "NA" : Data[i].Zone.Name.ToUpper())
                     });
                 }
             }

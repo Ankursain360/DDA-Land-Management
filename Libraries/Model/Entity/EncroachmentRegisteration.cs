@@ -71,7 +71,8 @@ namespace Libraries.Model.Entity
         public string LocationAddressWithLandMark { get; set; }
         public byte IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
-        public int? PendingAt { get; set; }
+        public string PendingAt { get; set; }
+        public int? ApprovalZoneId { get; set; }
         public virtual Department Department { get; set; }
         public virtual Department OtherDepartmentNavigation { get; set; }
         public virtual Division Division { get; set; }
@@ -118,14 +119,33 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<string> ReferenceNoOnLocation { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
+      
+        [NotMapped]
+        public DateTime? Date { get; set; }
+
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
 
         [NotMapped]
         public string ApprovalStatus { get; set; }
 
         [NotMapped]
-        public string ApprovalRemarks { get; set; }
+        public int ApprovalStatusCode { get; set; }
+
         [NotMapped]
-        public DateTime? Date { get; set; }
-       
+        public string ApprovalRemarks { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
+
+
     }
 }

@@ -11,7 +11,10 @@ namespace Libraries.Model.Entity
         public Approvalstatus()
         {
             Approvalproccess = new HashSet<Approvalproccess>();
+            EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
+            Fixingdemolition = new HashSet<Fixingdemolition>();
             Leaseapplication = new HashSet<Leaseapplication>();
+            Onlinecomplaint = new HashSet<Onlinecomplaint>();
             Watchandward = new HashSet<Watchandward>();
         }
 
@@ -22,8 +25,12 @@ namespace Libraries.Model.Entity
         public string SentStatusName { get; set; }
         public int IsActive { get; set; }
 
+
         public ICollection<Approvalproccess> Approvalproccess { get; set; }
+        public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
         public ICollection<Leaseapplication> Leaseapplication { get; set; }
+        public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
     }
 }

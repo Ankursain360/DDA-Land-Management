@@ -39,7 +39,9 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Onlinecomplaint.
                 Include(x => x.Location).Include(x => x.ComplaintType).
-               Where(x=>x.IsActive==1 && x.ApprovedStatus==model.StatusId && (model.StatusId==0 ? x.PendingAt== userId : x.PendingAt == 0))
+               Where(x=>x.IsActive==1 && x.ApprovedStatus==model.StatusId  
+               //(model.StatusId==0 ? x.PendingAt== userId : x.PendingAt == 0)
+               )
                 .OrderByDescending(x => x.Id).GetPaged<Onlinecomplaint>(model.PageNumber, model.PageSize);
 
 

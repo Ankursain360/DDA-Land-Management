@@ -11,6 +11,10 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Onlinecomplaint> builder)
         {
             builder.ToTable("onlinecomplaint", "lms");
+
+            builder.HasIndex(e => e.ApprovedStatus)
+                .HasName("fk_ApprovedStatusFixingDemolition_idx");
+
             builder.HasIndex(e => e.ComplaintTypeId)
                       .HasName("Name_idx");
 
@@ -18,6 +22,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("LocationId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
             builder.Property(e => e.AddressOfComplaint)
                 .HasMaxLength(500)
@@ -55,6 +63,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(400)
                 .IsUnicode(false);
 
+            builder.Property(e => e.PendingAt)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
             builder.Property(e => e.PhotoPath)
                 .HasMaxLength(200)
                 .IsUnicode(false);
@@ -68,6 +80,10 @@ namespace Libraries.Model.EntityConfiguration
                .HasMaxLength(200)
                .IsUnicode(false);
 
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                .WithMany(p => p.Onlinecomplaint)
+                .HasForeignKey(d => d.ApprovedStatus)
+                .HasConstraintName("fk_ApprovedStatusOnlineComplaint");
 
             builder.HasOne(d => d.ComplaintType)
                 .WithMany(p => p.Onlinecomplaint)
@@ -78,9 +94,6 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Onlinecomplaint)
                 .HasForeignKey(d => d.LocationId)
                 .HasConstraintName("LocationId");
-
-            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
-            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
 
         }
         }

@@ -118,12 +118,12 @@ namespace EncroachmentDemolition.Controllers
                                 if (i == DataFlow.Count - 1)
                                 {
                                     onlinecomplaint.ApprovedStatus = 1;
-                                    onlinecomplaint.PendingAt = 0;
+                                    onlinecomplaint.PendingAt = "0";
                                 }
                                 else
                                 {
                                     onlinecomplaint.ApprovedStatus = 0;
-                                    onlinecomplaint.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                    onlinecomplaint.PendingAt = (DataFlow[i + 1].parameterName).ToString();
                                 }
                                 result = await _onlinecomplaintService.UpdateBeforeApproval(id, onlinecomplaint);
                             }
