@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<EncroachmentRegisteration> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    //To Delete Data added by Praveen
         Task<List<Locality>> GetAllLocalityList(int divisionId);
-        Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
+        Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Khasra>> GetAllKhasraList(int localityId);
@@ -39,6 +39,10 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto inspectionEncroachmentregistrationSearchDto);
         Task<bool> UpdateBeforeApproval(int id, EncroachmentRegisteration encroachmentRegisterations);
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model);
-
+        Task<bool> RollBackEntry(int id);
+        Task<bool> RollBackEntryEncroachmentLocationMapFileDetails(int id);
+        Task<bool> RollBackEntryEncroachmentFirFileDetails(int id);
+        Task<bool> RollBackEntryEncroachmentPhotoFileDetails(int id);
+        Task<bool> RollBackEntryDetailsofEncroachmentRepeater(int id);
     }
 }

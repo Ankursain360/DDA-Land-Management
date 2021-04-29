@@ -64,9 +64,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllZone(departmentId);
         }
-        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
+        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved)
         {
-            return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model);
+            return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model, approved);
         }
         public async Task<bool> Update(int id, EncroachmentRegisteration encroachmentRegisteration)
         {
@@ -199,5 +199,32 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationRepository.GetPagedDemolitionReport(model);  //demolition report ---ishu
         }
 
+        public async Task<bool> RollBackEntry(int id)
+        {
+            var result = await _encroachmentRegisterationRepository.FindBy(a => a.Id == id);
+            EncroachmentRegisteration model = result.FirstOrDefault();
+            _encroachmentRegisterationRepository.Delete(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> RollBackEntryEncroachmentLocationMapFileDetails(int id)
+        {
+            return await _encroachmentRegisterationRepository.RollBackEntryEncroachmentLocationMapFileDetails(id);
+        }
+
+        public async Task<bool> RollBackEntryEncroachmentFirFileDetails(int id)
+        {
+            return await _encroachmentRegisterationRepository.RollBackEntryEncroachmentFirFileDetails(id);
+        }
+
+        public async Task<bool> RollBackEntryEncroachmentPhotoFileDetails(int id)
+        {
+            return await _encroachmentRegisterationRepository.RollBackEntryEncroachmentPhotoFileDetails(id);
+        }
+
+        public async Task<bool> RollBackEntryDetailsofEncroachmentRepeater(int id)
+        {
+            return await _encroachmentRegisterationRepository.RollBackEntryDetailsofEncroachmentRepeater(id);
+        }
     }
 }

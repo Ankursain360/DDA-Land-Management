@@ -21,6 +21,8 @@ namespace Libraries.Model.Entity
             EncroachmentLocationMapFileDetails = new HashSet<EncroachmentLocationMapFileDetails>();
             EncroachmentPhotoFileDetails = new HashSet<EncroachmentPhotoFileDetails>();
         }
+        public string RefNo { get; set; }
+
         public int? WatchWardId { get; set; }
 
         [Required(ErrorMessage = "Department is Mandatory Field", AllowEmptyStrings = false)]

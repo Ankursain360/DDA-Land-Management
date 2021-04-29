@@ -29,7 +29,7 @@ namespace Libraries.Repository.EntityRepository
                                     .FirstOrDefaultAsync();
         }
                 
-        public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId, int id)
+        public async Task<PagedResult<Leaseapplication>> GetPagedLeaseApplicationFormDetails(LeaseApplicationFormApprovalSearchDto model, int userId)
         {
             var AllDataList = await _dbContext.Leaseapplication.ToListAsync();
             var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));

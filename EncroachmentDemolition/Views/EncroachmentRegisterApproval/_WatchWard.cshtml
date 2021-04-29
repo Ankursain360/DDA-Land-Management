@@ -2,167 +2,168 @@
 @{int Photo = 0;}
 @{int ReportFile = 0;}
 
-<style>
+<div class="permission mt-2 accordion list-unstyled m-0 ">
+    <div class="card">
+        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseWatchWardApprroval" role="button" aria-expanded="true"
+           aria-controls="collapseWatchWardApprroval">
+            <i class="ri-arrow-right-s-fill"></i>
+            <span class="text ml-1 mr-auto">View Watch & Ward Details</span>
+            <i class="arrow ri-arrow-drop-down-line slow"></i>
+        </a>
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseWatchWardApprroval">
 
-    [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
-        display: none;
-    }
-</style>
+            <div id="allDetails">
 
-<div enctype="multipart/form-data" disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <a data-toggle="collapse" href="#collapseWatchWardApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseWatchWardApprroval">
-        <h3 class="my-3 d-flex sub-heading">View Watch & Ward Details</h3>
-    </a>
-    <div class="collapse" id="collapseWatchWardApprroval">
-        @if (Model != null)
-        {
-            <div id="divShowData">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="Date" type="date" id="txtDate" disabled class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="Date" class="text-danger"></span>
-                            <label class="floating-label">Date</label>
-                        </div>
-                    </div>
-                </div>
-                <div id="DivPrimaryList">
-                    <h2 class="my-3 sub-heading">Primary List No. and other details</h2>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="PrimaryListNo" asp-items="@(new SelectList(Model.PrimaryListNoList, "Id","PrimaryListNo"))" onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
-                                    <option value="">--Select--</option>
-                                </select>
-                                <label asp-validation-for="PrimaryListNo" class="error"></label>
-                                <label class="floating-label">Primary List No.</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="InventoryOtherDiv">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="Landmark" type="text" disabled class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="Landmark" class="text-danger"></span>
-                            <label class="floating-label">Land Mark</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
+
+                @if (Model != null)
+                {
+                    <div id="divShowData">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="1" checked>
-                                    <label for="Encroachment" class="form-check-label">Yes </label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="0">
-                                    <label for="Encroachment" class="form-check-label">No </label>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="Date" type="date" id="txtDate" disabled class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="Date" class="text-danger"></span>
+                                    <label class="floating-label">Date</label>
                                 </div>
                             </div>
                         </div>
-                        <span asp-validation-for="Encroachment" class="text-danger"></span>
-                      
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div class="col-md-12">
-                        <textarea asp-for="StatusOnGround" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                        <span asp-validation-for="StatusOnGround" class="text-danger"></span>
-                        <label class="floating-label">Status on Ground</label>
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            @{
-                                if (Model.Watchandwardphotofiledetails != null && Model.Watchandwardphotofiledetails.Count > 0)
-                                {
-                                    <br />
-                                    foreach (var item in Model.Watchandwardphotofiledetails)
-                                    {
-                                        <a asp-action="ViewDocument" asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
+                        <div id="DivPrimaryList">
+                            <h2 class="my-3 sub-heading">Primary List No. and other details</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="floating-label-wrap">
+                                        <select class="floating-label-field floating-label-field--s3" disabled asp-for="PrimaryListNo" asp-items="@(new SelectList(Model.PrimaryListNoList, "Id","PrimaryListNo"))" onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
+                                            <option value="">--Select--</option>
+                                        </select>
+                                        <label asp-validation-for="PrimaryListNo" class="error"></label>
+                                        <label class="floating-label">Primary List No.</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="InventoryOtherDiv">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="Landmark" type="text" disabled class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="Landmark" class="text-danger"></span>
+                                    <label class="floating-label">Land Mark</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check theme">
+                                            <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="1" checked>
+                                            <label for="Encroachment" class="form-check-label">Yes </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check theme">
+                                            <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="0">
+                                            <label for="Encroachment" class="form-check-label">No </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Encroachment" class="text-danger"></span>
 
-                                        if (item.LattLongUrl != null)
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-md-12">
+                                <textarea asp-for="StatusOnGround" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                                <span asp-validation-for="StatusOnGround" class="text-danger"></span>
+                                <label class="floating-label">Status on Ground</label>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    @{
+                                        if (Model.Watchandwardphotofiledetails != null && Model.Watchandwardphotofiledetails.Count > 0)
                                         {
-                                            <a target="_blank" href="@item.LattLongUrl">View Location on Map</a>
+                                            <br />
+                                            foreach (var item in Model.Watchandwardphotofiledetails)
+                                            {
+                                                <a asp-action="ViewDocument" asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
+
+                                                if (item.LattLongUrl != null)
+                                                {
+                                                    <a target="_blank" href="@item.LattLongUrl">View Location on Map</a>
+                                                }
+                                                <br />
+                                            }
+                                            <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="image/png, image/jpeg, image/gif" multiple />
+                                            <span asp-validation-for="Photo" class="text-danger"></span>
                                         }
-                                        <br />
+                                        else
+                                        {
+                                            <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                            <span asp-validation-for="Photo" class="text-danger"></span>
+                                            <label class="floating-label">Photo</label>
+                                        }
                                     }
-                                    <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="image/png, image/jpeg, image/gif" multiple />
-                                    <span asp-validation-for="Photo" class="text-danger"></span>
-                                }
-                                else
-                                {
-                                    <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                    <span asp-validation-for="Photo" class="text-danger"></span>
-                                    <label class="floating-label">Photo</label>
-                                }
-                            }
-                        </div>
-                    </div>
-                    <div class="col-md-6" style="display:none;">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="display:none;">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            @{
-                                if (Model.Watchandwardreportfiledetails != null && Model.Watchandwardreportfiledetails.Count > 0)
-                                {
-                                    <br />
-                                    foreach (var item in Model.Watchandwardreportfiledetails)
-                                    {
-                                        <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
-                                        <br />
+                                    @{
+                                        if (Model.Watchandwardreportfiledetails != null && Model.Watchandwardreportfiledetails.Count > 0)
+                                        {
+                                            <br />
+                                            foreach (var item in Model.Watchandwardreportfiledetails)
+                                            {
+                                                <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
+                                                <br />
+                                            }
+                                            <input disabled type="file" class="floating-label-field floating-label-field--s3" asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                            <span asp-validation-for="ReportFile" class="text-danger"></span>
+                                        }
+                                        else
+                                        {
+                                            <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                            <span asp-validation-for="ReportFile" class="text-danger"></span>
+                                            <label class="floating-label">Report</label>
+                                        }
                                     }
-                                    <input disabled type="file" class="floating-label-field floating-label-field--s3" asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                    <span asp-validation-for="ReportFile" class="text-danger"></span>
-                                }
-                                else
-                                {
-                                    <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                    <span asp-validation-for="ReportFile" class="text-danger"></span>
-                                    <label class="floating-label">Report</label>
-                                }
-                            }
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6" style="display:none;">
-                        <div class="floating-label-wrap">
-                            <label class="floating-label">Status</label>
-                            <select disabled asp-for="IsActive" class="form-control dda-dropdown">
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
-                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <div class="row">
+                            <div class="col-md-6" style="display:none;">
+                                <div class="floating-label-wrap">
+                                    <label class="floating-label">Status</label>
+                                    <select disabled asp-for="IsActive" class="form-control dda-dropdown">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12" style="display:none;">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea asp-for="Remarks" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                            <span asp-validation-for="Remarks" class="text-danger"></span>
-                            <label class="floating-label">Remarks</label>
+                        <div class="row">
+                            <div class="col-md-12" style="display:none;">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <textarea asp-for="Remarks" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                                    <label class="floating-label">Remarks</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+
+                else
+                {
+                    <div id="divNoData">
+                        <p>No Data Available</p>
+                    </div>
+                }
             </div>
-        }
-
-        else
-        {
-            <div id="divNoData">
-                <p>No Data Available</p>
-            </div>
-        }
-
+        </div>
     </div>
 </div>
 

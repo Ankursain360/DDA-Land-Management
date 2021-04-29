@@ -107,7 +107,7 @@ namespace LeaseDetails.Controllers
                             {
                                 if (SiteContext.ZoneId == null)
                                 {
-                                    ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
+                                    ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
                                     return View(leaseapplication);
                                 }
 
@@ -206,7 +206,7 @@ namespace LeaseDetails.Controllers
                         #region Approval Proccess At 1st level start Added by Renu 21 April 2021
                         var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value));
                         var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
-                        //var DataFlow = await dataAsync();
+                       
                         for (int i = 0; i < DataFlow.Count; i++)
                         {
                             if (!DataFlow[i].parameterSkip)

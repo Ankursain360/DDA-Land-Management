@@ -112,7 +112,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.EncroachmentPhotoFileDetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
 
-        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
+        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved)
         {
             //try {
 
@@ -125,7 +125,8 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
-                .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1 
+                .Include(x => x.ApprovedStatusNavigation)
+                .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1 
                  && !(InInspectionId).Contains(x.Id))
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
            
@@ -677,6 +678,34 @@ namespace Libraries.Repository.EntityRepository
 
 
 
+        }
+
+        public async Task<bool> RollBackEntryEncroachmentLocationMapFileDetails(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.EncroachmentLocationMapFileDetails.Where(x => x.EncroachmentRegistrationId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> RollBackEntryEncroachmentFirFileDetails(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.EncroachmentFirFileDetails.Where(x => x.EncroachmentRegistrationId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> RollBackEntryEncroachmentPhotoFileDetails(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.EncroachmentPhotoFileDetails.Where(x => x.EncroachmentRegistrationId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> RollBackEntryDetailsofEncroachmentRepeater(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.DetailsOfEncroachment.Where(x => x.EncroachmentRegisterationId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
     }
 }

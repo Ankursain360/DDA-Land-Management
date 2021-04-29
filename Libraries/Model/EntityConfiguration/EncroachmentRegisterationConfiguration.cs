@@ -85,7 +85,11 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(1000)
                 .IsUnicode(false);
-            
+
+            builder.Property(e => e.RefNo)
+                .HasMaxLength(45)
+                .IsUnicode(false);
+
             builder.Property(e => e.LocationAddressWithLandMark)
                 .IsRequired()
                 .HasMaxLength(1000)

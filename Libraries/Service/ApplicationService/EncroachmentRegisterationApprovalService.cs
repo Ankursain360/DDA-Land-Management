@@ -52,16 +52,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationApprovalRepository.GetPagedEncroachmentRegisteration(model, userId);
         }
-
-        public Task<bool> Update(int id, EncroachmentRegisteration watchandward)
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
         {
-            throw new NotImplementedException();
+            return await _encroachmentRegisterationApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
         }
-
-        public Task<bool> Create(EncroachmentRegisteration watchandward)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
