@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Dto.Master;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +14,7 @@ using Notification.OptionEnums;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -224,8 +225,37 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-    
 
+        [AuthorizeContext(ViewAction.Download)]
+
+
+        public async Task<IActionResult> Undersection4plotList()
+        {
+            var result = await _undersection4PlotService.GetAllUndersection4Plot();
+            List<Undersection4plotListDto> data = new List<Undersection4plotListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new Undersection4plotListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].UnderSection4 == null ? "" : result[i].UnderSection4.Number,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+
+                        Area = result[i].Bigha.ToString()
+                                  + '-' + result[i].Biswa.ToString()
+                                  + '-' + result[i].Biswanshi.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
 
 

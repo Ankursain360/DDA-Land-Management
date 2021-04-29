@@ -13,6 +13,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -189,6 +191,34 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Download)]
 
+
+        public async Task<IActionResult> JointSurveyList()
+        {
+            var result = await _jointsurveyService.GetAllJointSurvey();
+            List<JointSurveyListDto> data = new List<JointSurveyListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new JointSurveyListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                        SitePosition = result[i].SitePosition,
+                      
+                        JointSurveyDate = Convert.ToDateTime(result[i].JointSurveyDate).ToString("dd-MMM-yyyy"),
+                     
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

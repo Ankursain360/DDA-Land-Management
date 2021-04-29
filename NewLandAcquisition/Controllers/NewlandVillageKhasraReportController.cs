@@ -11,6 +11,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using NewLandAcquisition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 namespace NewLandAcquisition.Controllers
 {
     public class NewlandVillageKhasraReportController : BaseController
@@ -53,6 +55,36 @@ namespace NewLandAcquisition.Controllers
                 return PartialView();
             }
         }
+
+
+        public async Task<IActionResult> NewLandVillageKhasraReportList()
+        {
+            var result = await _NewlandkhasraService.GetAllKhasra();
+            List<NewLandVillageKhasraReportListDto> data = new List<NewLandVillageKhasraReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandVillageKhasraReportListDto()
+                    {
+                        Id = result[i].Id,
+                        Village = result[i].Newlandvillage==null?"":result[i].Newlandvillage.Name.ToString(),
+                       
+                        KhasraNo = result[i].Name,
+                      
+
+                        RectNo = result[i].RectNo,
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
     }
 }
 

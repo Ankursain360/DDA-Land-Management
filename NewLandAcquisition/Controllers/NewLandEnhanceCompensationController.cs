@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using NewLandAcquisition.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -199,6 +201,37 @@ namespace NewLandAcquisition.Controllers
 
             return Json(await _newLandEnhanceCompensationService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
+
+
+        public async Task<IActionResult> NewLandEnhanceCompensationList()
+        {
+            var result = await _newLandEnhanceCompensationService.GetAllNewlandenhancecompensation();
+            List<NewLandEnhanceCompensationListDto> data = new List<NewLandEnhanceCompensationListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandEnhanceCompensationListDto()
+                    {
+                        Id = result[i].Id,
+                        DemandListNo = result[i].DemandListNo,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name.ToString(),
+                        KhasraName = result[i].Khasra == null ? "" : result[i].Khasra.Name.ToString(),
+                        Area = result[i].Bigha.ToString() + '-' + result[i].Biswa.ToString() + '-' + result[i].Biswanshi.ToString(),
+                        PayableAppealable = result[i].PayableAppealable,
+                        CaseInvolesWhichCourt=result[i].CaseInvolesWhichCourt,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
 
 
     }

@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\newlandawardplotdetailsedit.min.js" />
+    <Content Remove="wwwroot\js\Newlandnotificationdetailscreate.min.js" />
   </ItemGroup>
 
 	<ItemGroup> 
@@ -36,12 +37,14 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\newlandawardplotdetailsedit.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\Newlandnotificationdetailscreate.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\newlandschemeindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\newus6plotcreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\js\newlandawardplotdetailsedit.min.js" />
+    <None Include="wwwroot\js\Newlandnotificationdetailscreate.min.js" />
   </ItemGroup>
 
 </Project>

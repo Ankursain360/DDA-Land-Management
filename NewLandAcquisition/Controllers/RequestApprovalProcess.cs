@@ -18,6 +18,10 @@ using System.Drawing.Imaging;
 using NewLandAcquisition.Filters;
 using Core.Enum;
 
+
+using Dto.Common;
+using Dto.Master;
+
 namespace NewLandAcquisition.Controllers
 {
     public class RequestApprovalProcess : BaseController
@@ -308,6 +312,39 @@ namespace NewLandAcquisition.Controllers
 
             }
         }
+
+
+        public async Task<IActionResult> RequestApprovalProcessList()
+        {
+            var result = await _requestService.GetAllRequest();
+            List<RequestApprovalProcessListDto> data = new List<RequestApprovalProcessListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new RequestApprovalProcessListDto()
+                    {
+                        Id = result[i].Id,
+                        ProposalName = result[i].PproposalName,
+                        Fileno = result[i].PfileNo,
+                        RequiringBody = result[i].RequiringBody,
+                        Area = result[i].AreaLocality,
+
+                        ApprovedStatus = result[i].ApprovedStatus.ToString() == "1" ? "Approved" : "Pending",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+
+
 
     }
 }

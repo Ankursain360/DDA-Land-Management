@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Dto.Master;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +14,7 @@ using Notification.OptionEnums;
 using Dto.Search;
 using Core.Enum;
 using AcquiredLandInformationManagement.Filters;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -218,7 +219,37 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return PartialView("_ListNotification", Data);
         }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Undersection6plotList()
+        {
+            var result = await _undersection6plotservice.GetAllUndersection6Plot();
+            List<Undersection6plotListDto> data = new List<Undersection6plotListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new Undersection6plotListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].Undersection6 == null ? "" : result[i].Undersection6.Number,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                      
 
+                        Area = result[i].Bigha.ToString() 
+                                  + '-' + result[i].Biswa.ToString() 
+                                  + '-' + result[i].Biswanshi.ToString(),
+
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
 
     }

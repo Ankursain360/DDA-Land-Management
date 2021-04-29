@@ -13,6 +13,7 @@ using System.Data;
 using Newtonsoft.Json;
 using Utility.Helper;
 using System.Collections.Generic;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -193,16 +194,35 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
+      
+
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> AcquiredLandVillageList()
         {
-            List<Acquiredlandvillage> result = await _acquiredlandvillageService.GetAcquiredlandvillage();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Acquiredlandvillage.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _acquiredlandvillageService.GetAcquiredlandvillage();
+            List<AcquiredLandVillageListDto> data = new List<AcquiredLandVillageListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new AcquiredLandVillageListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageCode = result[i].Code,
+                        VillageName = result[i].Name,
+                        DistrictName = result[i].District == null ? "" : result[i].District.Name,
+                        TehsilName = result[i].Tehsil == null ? "" : result[i].Tehsil.Name,
+                        ZoneName = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        Acquired = result[i].Acquired == "yes" ? "Yes" : "No",
+                        VillageType = result[i].VillageType,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
-
-
     }
 }
