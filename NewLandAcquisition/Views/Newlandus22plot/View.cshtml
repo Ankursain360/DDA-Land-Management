@@ -90,7 +90,7 @@
 
 
         <div class="pt-3">
-            <h3 class="mb-3 d-flex">Used Area</h3>
+            <h3 class="mb-3 d-flex">Notify Area</h3>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -125,42 +125,7 @@
                 </div>
             </div>
         </div>
-        <h3 class="my-3 d-flex sub-heading pt-4">Notification Taken </h3>
-
-        <div class="row mt-md-3">
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3"
-                            asp-for="Us4Id" asp-items="@(new SelectList(Model.Us4List, "Id","Notification.Name"))">
-                        <option selected disabled="disabled" value="">Select</option>
-                    </select>
-                    <span asp-validation-for="Us4Id" class="text-danger"></span>
-                    <label asp-for="Us4Id" class="floating-label">Notification No 4</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3"
-                            asp-for="Us6Id" asp-items="@(new SelectList(Model.Us6List, "Id","Notification.Name"))">
-                        <option selected disabled="disabled" value="">Select</option>
-                    </select>
-                    <span asp-validation-for="Us6Id" class="text-danger"></span>
-                    <label asp-for="Us6Id" class="floating-label">Notification No 6 </label>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3"
-                            asp-for="Us17Id" asp-items="@(new SelectList(Model.Us17List, "Id","Notification.Name"))">
-                        <option selected disabled="disabled" value="">Select</option>
-                    </select>
-                    <span asp-validation-for="Us17Id" class="text-danger"></span>
-                    <label asp-for="Us17Id" class="floating-label">Notification No 17</label>
-                </div>
-            </div>
-        </div>
-
+     
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">

@@ -1,7 +1,7 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
 
-debugger;
+
 $(document).ready(function () {
     var id = $("#NotificationId").val();
     $("#VillageId").val('');
@@ -90,7 +90,7 @@ function onChange(id) {
 };
 $("#KhasraId").change(function () {
     var kid = $(this).val();
-    debugger;
+   
     if (kid) {
         HttpGet(`/Newlandus6plot/GetKhasraAreaList/?khasraid=${kid}`, 'json', function (response) {
 
