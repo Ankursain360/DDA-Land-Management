@@ -60,14 +60,19 @@ namespace NewLandAcquisition.Controllers
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    data.Add(new NewLandAcquiredVillageReportListDto()
+                    if (result[i].Acquired == "yes")
                     {
+                        data.Add(new NewLandAcquiredVillageReportListDto()
+                    {
+                        
                         Id = result[i].Id,
                         Village = result[i].Name,
                       
                         
                         Acquired = result[i].Acquired,
+                         
                     }); ;
+                    }
                 }
             }
 
