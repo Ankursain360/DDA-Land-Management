@@ -37,4 +37,19 @@
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\AnnexureAApproval\_EncroachmentRegisterView.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\AnnexureAApproval\_WatchWard.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\AnnexureA\_WatchWard.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

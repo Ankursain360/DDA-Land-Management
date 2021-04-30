@@ -4,45 +4,24 @@
 
     <thead class="text-nowrap">
         <tr>
-           
+
             <th>Reference No</th>
             <th>Complaint Name</th>
             <th>Contact No</th>
             <th>Email</th>
-           
-            <th>Approve Status</th>
             <th>Status</th>
+            <th>Approval Status</th>
             <th>Operation</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.Results)
         {
-        <tr>
-            
+        <tr>            
             <td>@item.ReferenceNo</td>
             <td>@item.Name</td>
             <td>@item.Contact</td>
-            <td>@item.Email</td>
-           
-
-            <td>
-                @if (item.ApprovedStatus == 0)
-                {
-                    <span class="badge badge-primary px-2 py-1">Pending</span>
-                }
-                else if (item.ApprovedStatus == 1)
-                {
-                    <span class="badge badge-primary px-2 py-1">Approved</span>
-
-                }
-                else
-                {
-                    <span class="badge badge-primary px-2 py-1">Reject</span>
-                }
-
-            </td>
-
+            <td>@item.Email</td>  
             <td>
                 @if (item.IsActive == 1)
                 {

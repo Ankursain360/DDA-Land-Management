@@ -91,9 +91,9 @@ namespace Libraries.Service.ApplicationService
             return await _annexureARepository.SaveFixingdocument(fixingdocument);
         }
 
-        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model)
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved)
         {
-            return await _annexureARepository.GetPagedDetails(model);
+            return await _annexureARepository.GetPagedDetails(model,approved);
         }
 
         public async Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition)
@@ -115,6 +115,29 @@ namespace Libraries.Service.ApplicationService
         public async Task<Fixingdocument> GetAnnexureAfiledetails(int id)
         {
             return await _annexureARepository.GetAnnexureAfiledetails(id);
+        }
+
+        public async Task<bool> RollBackEntry(int id)
+        {
+            var result = await _annexureARepository.FindBy(a => a.Id == id);
+            Fixingdemolition model = result.FirstOrDefault();
+            _annexureARepository.Delete(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> RollBackEntryFixingdocument(int id)
+        {
+            return await _annexureARepository.RollBackEntryFixingdocument(id);
+        }
+
+        public async Task<bool> RollBackEntryFixingchecklist(int id)
+        {
+            return await _annexureARepository.RollBackEntryFixingchecklist(id);
+        }
+
+        public async Task<bool> RollBackEntryFixingprogram(int id)
+        {
+            return await _annexureARepository.RollBackEntryFixingprogram(id);
         }
     }
 }

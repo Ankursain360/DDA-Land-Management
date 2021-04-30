@@ -2,7 +2,6 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-          
             <th>Date</th>
             <th>Locality(Village)</th>
             <th>Khasra No</th>
@@ -17,19 +16,21 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                  
-                    <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
-                    <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
-                    <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>
-                    <td>@item.PoliceStation</td>
-                    <td>@item.SecurityGuardOnDuty</td>
-                    <td>@item.StatusOfLand</td>
-                    <td>
-                        <a asp-action="Create" asp-route-id="@item.Id" title="Add Status">Request</a>
-                       
-                    </td>
-                </tr>
+        <tr>
+
+            <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
+            <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
+            <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>
+            <td>@item.PoliceStation</td>
+            <td>@item.SecurityGuardOnDuty</td>
+            <td>
+                @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+            </td>
+            <td>
+                <a asp-action="Create" asp-route-id="@item.Id" title="Add Status">Request</a>
+
+            </td>
+        </tr>
             }
         }
         else

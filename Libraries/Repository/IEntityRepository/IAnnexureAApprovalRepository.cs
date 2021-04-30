@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

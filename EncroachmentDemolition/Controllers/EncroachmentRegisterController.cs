@@ -31,8 +31,8 @@ namespace EncroachmentDemolition.Controllers
         private readonly IUserProfileService _userProfileService;
         public EncroachmentRegisterController(IEncroachmentRegisterationService encroachmentRegisterationService,
             IConfiguration configuration, IWatchandwardService watchandwardService,
-            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService
-            , IUserProfileService userProfileService)
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
+            IUserProfileService userProfileService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _configuration = configuration;
@@ -72,9 +72,9 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> WatchWardView(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
-            Data.LocalityList = await _watchandwardService.GetAllLocality();
-            Data.KhasraList = await _watchandwardService.GetAllKhasra();
-            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+            if (Data != null)
+                Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+
 
             return PartialView("_WatchWard", Data);
         }
