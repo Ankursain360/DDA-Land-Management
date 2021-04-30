@@ -18,6 +18,8 @@ namespace Libraries.Model.Entity
             Fixingdocument = new HashSet<Fixingdocument>();
             Demolitionpoliceassistenceletter = new HashSet<Demolitionpoliceassistenceletter>();
         }
+        public string RefNo { get; set; }
+
 
         public string DemolitionUniqueId { get; set; }
         public int EncroachmentId { get; set; }

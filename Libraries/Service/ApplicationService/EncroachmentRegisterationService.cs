@@ -226,5 +226,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.RollBackEntryDetailsofEncroachmentRepeater(id);
         }
+
+        public async Task<Zone> FetchSingleResultOnZoneList(int zoneid)
+        {
+            return await _encroachmentRegisterationRepository.FetchSingleResultOnZoneList(zoneid);
+        }
     }
 }

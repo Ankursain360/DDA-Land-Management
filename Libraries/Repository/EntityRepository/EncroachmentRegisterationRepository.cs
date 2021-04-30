@@ -760,5 +760,10 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        public async Task<Zone> FetchSingleResultOnZoneList(int zoneid)
+        {
+            return await _dbContext.Zone.Where(x => x.Id == zoneid).FirstOrDefaultAsync();
+        }
     }
 }

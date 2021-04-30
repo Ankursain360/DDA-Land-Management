@@ -75,7 +75,7 @@ namespace EncroachmentDemolition.Controllers
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
-           
+
             return PartialView("_WatchWard", Data);
         }
 
@@ -90,9 +90,14 @@ namespace EncroachmentDemolition.Controllers
                 encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
                 encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
                 encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+                encroachmentRegisterations.Zone = await _encroachmentRegisterationService.FetchSingleResultOnZoneList(Convert.ToInt32(encroachmentRegisterations.ZoneId));
                 string PhotoFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:PhotoFilePath").Value.ToString();
                 string LocationMapFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:LocationMapFilePath").Value.ToString();
                 string FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
+                Random r = new Random();
+                int num = r.Next();
+                encroachmentRegisterations.RefNo = DateTime.Now.Year.ToString() + encroachmentRegisterations.Zone.Code + num.ToString();
+
                 if (ModelState.IsValid)
                 {
                     #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021

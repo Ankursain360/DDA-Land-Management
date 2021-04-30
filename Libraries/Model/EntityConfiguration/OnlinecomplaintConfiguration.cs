@@ -80,6 +80,11 @@ namespace Libraries.Model.EntityConfiguration
                .HasMaxLength(200)
                .IsUnicode(false);
 
+            builder.Property(e => e.RefNo)
+                .HasMaxLength(45)
+                .IsUnicode(false);
+
+
             builder.HasOne(d => d.ApprovedStatusNavigation)
                 .WithMany(p => p.Onlinecomplaint)
                 .HasForeignKey(d => d.ApprovedStatus)

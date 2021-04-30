@@ -44,5 +44,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> RollBackEntryEncroachmentFirFileDetails(int id);
         Task<bool> RollBackEntryEncroachmentPhotoFileDetails(int id);
         Task<bool> RollBackEntryDetailsofEncroachmentRepeater(int id);
+        Task<Zone> FetchSingleResultOnZoneList(int v);
     }
 }
