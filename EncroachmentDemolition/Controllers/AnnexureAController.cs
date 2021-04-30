@@ -89,9 +89,10 @@ namespace EncroachmentDemolition.Controllers
         {
             try
             {
+                var encroachment = await _encroachmentRegisterationService.FetchSingleResult(fixingdemolition.EncroachmentId);
                 Random r = new Random();
                 int num = r.Next();
-                fixingdemolition.RefNo = DateTime.Now.Year.ToString() + num.ToString();
+                fixingdemolition.RefNo = DateTime.Now.Year.ToString()+ encroachment.Zone.Code + num.ToString();
                 #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
 
                 Approvalproccess approvalproccess = new Approvalproccess();

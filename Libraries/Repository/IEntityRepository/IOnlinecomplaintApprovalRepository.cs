@@ -16,7 +16,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Location>> GetAllLocation();
         Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintApprovalSearchDto model, int userId);
-
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
 
     }
 }

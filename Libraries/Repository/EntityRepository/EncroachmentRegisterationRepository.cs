@@ -52,6 +52,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<EncroachmentRegisteration> FetchSingleResult(int id)
         {
             return await _dbContext.EncroachmentRegisteration
+                            .Include(x => x.Zone)
                             .Include(x => x.EncroachmentPhotoFileDetails)
                             .Include(x => x.EncroachmentFirFileDetails)
                             .Include(x => x.EncroachmentLocationMapFileDetails)

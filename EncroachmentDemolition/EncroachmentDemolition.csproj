@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\OnlineComplaintApproval\Create.cshtml~RF2044ffbc.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\demolitionreportindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
   </ItemGroup>

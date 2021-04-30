@@ -55,15 +55,8 @@ function GetDetails(pageNumber, pageSize, sortOrder, StatusId) {
         $('#divAnnexureAApprovalTable').html(response);
     });
 }
-function GetSearchParam(pageNumber, pageSize, sortOrder, StatusId) {
-    var sorbyname = $('#Sortbyd').val();
-    var sortdesc = $("#sortdesc").val();
-    if (sorbyname) { } else {
-        sorbyname = 'KHASRANO';
-    }
+function GetSearchParam(pageNumber, pageSize, sortOrder, StatusId) {   
     var model = {
-        colname: sorbyname,
-        orderby: sortdesc,
         name: "test",
         StatusId: parseInt(StatusId),
         sortBy: $("#ddlSort").children("option:selected").val(),

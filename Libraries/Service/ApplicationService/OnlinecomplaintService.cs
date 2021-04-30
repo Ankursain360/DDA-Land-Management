@@ -96,14 +96,9 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Onlinecomplaint onlinecomplaint)
         {
-
             onlinecomplaint.CreatedBy = 1;
             onlinecomplaint.CreatedDate = DateTime.Now;
             onlinecomplaint.IsActive = 1;
-            onlinecomplaint.ApprovedStatus = 0;
-
-
-
             _onlinecomplaintRepository.Add(onlinecomplaint);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -129,18 +124,12 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public async Task<bool> RollBackEntry(int id)
+        {
+            var result = await _onlinecomplaintRepository.FindBy(a => a.Id == id);
+            Onlinecomplaint model = result.FirstOrDefault();
+            _onlinecomplaintRepository.Delete(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }

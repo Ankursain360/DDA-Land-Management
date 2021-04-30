@@ -2,16 +2,15 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-          
+
             <th>Complaint Name</th>
             <th>Contact No</th>
             <th>Email</th>
-            <th>Area/Address</th>
+            @*<th>Area/Address</th>*@
             <th>Complaint Type</th>
             <th>Location</th>
             <th>Reference No</th>
             <th>Status</th>
-          
             <th>Operation</th>
         </tr>
     </thead>
@@ -21,27 +20,28 @@
             @foreach (var item in Model.Results)
             {
                 <tr>
-                  
+
                     <td>@item.Name</td>
                     <td>@item.Contact</td>
                     <td>@item.Email</td>
-                    <td>@item.AddressOfComplaint</td>
+                    @*<td>@item.AddressOfComplaint</td>*@
                     <td>@item.ComplaintType.Name</td>
-
                     <td>@item.Location.Name</td>
                     <td>@item.ReferenceNo</td>
-                    <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+                    <td>
+                        @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+                    </td>
                     @if (ViewBag.IsApproved == 0)
                     {
                         <td>
-
                             <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-
                         </td>
                     }
                     else
                     {
-                        <td>No Action</td>
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-line"></i> </a>
+                        </td>
                     }
                 </tr>
             }
