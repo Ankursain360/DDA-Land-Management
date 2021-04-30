@@ -10,7 +10,7 @@
             <th scope="col" style="min-width: 105px;">Operation</th>
         </tr>
     </thead>
-    <tbody class="tbody">>
+    <tbody class="tbody">
         @if (Model != null && Model.Results.Count() > 0)
         {
             @foreach (var item in Model.Results)
@@ -34,7 +34,7 @@
                                 <tbody>
                                     <tr>
                                         <td>@item.RecordRoomNo</td>
-                                        <td>@item.Almirah.AlmirahNo)</td>
+                                        <td>@item.Almirah.AlmirahNo</td>
                                         <td>@(item.Row.RowNo)</td>
                                         <td>@(item.Column == null ? "" : item.Column.ColumnNo)</td>
                                         <td>@(item.BundleId == null ? "" : item.Bundle.BundleNo)</td>

@@ -38,6 +38,14 @@ namespace Libraries.Repository.EntityRepository
             var fileNoList = await _dbContext.Datastoragedetails.Where(x => x.IsActive == 1).ToListAsync();
             return fileNoList;
         }
+        public async Task<List<Datastoragedetails>> GetIssuereturnfile()
+        {
+            return await _dbContext.Datastoragedetails
+                             .Include(x => x.Almirah)
+                             .Include(x => x.Row)
+                             .Include(x => x.Column)
+                             .Include(x => x.Bundle).ToListAsync();
+        }
         public async Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model)
         {
 

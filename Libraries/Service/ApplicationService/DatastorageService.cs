@@ -241,6 +241,10 @@ namespace Libraries.Service.ApplicationService
             _datastoragedetailRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
+        public async Task<List<Datastoragedetails>> GetDataStorageDetails()
+        {
+            return await _datastoragedetailRepository.GetDataStorageDetails();
+                                  
+        }
     }
 }
