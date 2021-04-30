@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -164,7 +166,35 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
-        
+        [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> NazulList()
+        {
+            var result = await _nazulService.GetAllNazul();
+            List<NazulListDto> data = new List<NazulListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NazulListDto()
+                    {
+                        Id = result[i].Id,
+                        Village = result[i].Village == null ? "" : result[i].Village.Name,
+                        JaraiSakni = result[i].JaraiSakani,
+                        Language = result[i].Language,
+                        DateOfConsolidation = Convert.ToDateTime(result[i].YearOfConsolidation).ToString("dd-MMM-yyyy"),
+                        DateOfJamabandi = Convert.ToDateTime(result[i].YearOfJamabandi).ToString("dd-MMM-yyyy"),
+                        LastMutationNo = result[i].LastMutationNo,
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 
 }

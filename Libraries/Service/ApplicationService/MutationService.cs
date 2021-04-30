@@ -109,5 +109,9 @@ namespace Service.ApplicationService
         {
             return await _mutationRepository.DeleteMutationParticulars(id);
         }
+        public async Task<List<Mutation>> GetAllMutation()
+        {
+            return await _mutationRepository.GetAllMutation();
+        }
     }
 }

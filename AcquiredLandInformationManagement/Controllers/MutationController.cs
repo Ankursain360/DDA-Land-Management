@@ -257,7 +257,34 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return PartialView("_KhasraView", Data);
         }
+        [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> MutationList()
+        {
+            var result = await _mutationService.GetAllMutation();
+            List<MutationListDto> data = new List<MutationListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new MutationListDto()
+                    {
+                        Id = result[i].Id,
+                        Village = result[i].AcquiredVillage == null ? "" : result[i].AcquiredVillage.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                        MutationOwnerLessee = result[i].MutationOwnerLessee,
+                        MutationNo = result[i].MutationNo,
+                        MutationFees = result[i].MutationFees.ToString(),
+                      
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 
 }

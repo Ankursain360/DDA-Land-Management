@@ -184,7 +184,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> DemanddetailsList()
         {
-            var result = await _demandListDetailsService.GetAll();
+            var result = await _demandListDetailsService.GetAllDemandlistdetails();
             List<DemanddetailsListDto> data = new List<DemanddetailsListDto>();
             if (result != null)
             {

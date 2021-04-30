@@ -65,7 +65,13 @@ namespace Libraries.Repository.EntityRepository
             }
             return data;
         }
-
+        public async Task<List<Mutation>> GetAllMutation()
+        {
+            return await _dbContext.Mutation
+                                   .Include(x => x.AcquiredVillage)
+                                   .Include(x => x.Khasra)
+                                   .ToListAsync();
+        }
         public async Task<Mutation> FetchSingleResult(int id)
         {
             return await _dbContext.Mutation

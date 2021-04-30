@@ -21,5 +21,6 @@ namespace Libraries.Service.IApplicationService
         int GetLocalityByName(string name);
         int GetKhasraByName(string name);
         Task<bool> CheckUniqueName(int id, string fileNo);
+        Task<List<Demandlistdetails>> GetAllDemandlistdetails();
     }
 }
