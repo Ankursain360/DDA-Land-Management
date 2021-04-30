@@ -57,8 +57,12 @@ namespace Service.ApplicationService
         {
             return await _issueReturnFileRepository.GetPagedIssueReturnFile(model);
         }
+        public async Task<List<Datastoragedetails>> GetIssuereturnfile()
+        {
+            return await _issueReturnFileRepository.GetIssuereturnfile();
 
-      
+        }
+
         public async Task<bool> UpdateIssueFileStatus(int id)
         {
             var form = await _datastoragedetailRepository.FindBy(a => a.Id == id);

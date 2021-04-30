@@ -60,6 +60,9 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model);
         Task<Datastoragedetails> FetchPrintLabel(int id);
 
-       
+        Task<List<Datastoragedetails>> GetDataStorageDetails();
+
+
+
     }
 }

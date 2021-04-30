@@ -24,6 +24,7 @@ namespace Libraries.Service.IApplicationService
         Task<Issuereturnfile> FetchfiletResult(int id);
         Task<Issuereturnfile> FetchReturnReceiptResult(int id);
         Task<bool> Update(int id, Issuereturnfile issuereturnfile);
+        Task<List<Datastoragedetails>> GetIssuereturnfile();
         Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model);
     }
 }
