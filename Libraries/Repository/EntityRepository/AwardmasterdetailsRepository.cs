@@ -158,7 +158,9 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Awardmasterdetail>> Getawardmasterdetails()
         {
-            return await _dbContext.Awardmasterdetail.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Awardmasterdetail
+                                   .Include(x => x.Acquiredlandvillage)
+                                   .Include(x => x.Proposal).ToListAsync();
           
         }
         public async Task<bool> Any(int id, string AwardNumber)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -166,13 +167,33 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+      
+      
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+
+        public async Task<IActionResult> LdolandList()
         {
-            List<Ldoland> result = await _ldolandService.GetAllLdoland();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Ldoland.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _ldolandService.GetAllLdoland();
+            List<LdolandListDto> data = new List<LdolandListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LdolandListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.Name,
+                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
+                        SerialNo = result[i].SerialNumber == null ? ' ' : result[i].SerialNumber,
+                        PropertySiteNo =result[i].PropertySiteNo,
+                        LocationNameVillage = result[i].Location,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
     }

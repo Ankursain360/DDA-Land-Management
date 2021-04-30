@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -209,7 +211,32 @@ namespace AcquiredLandInformationManagement.Controllers
             return Json(await _Possessiondetailservice.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> PossessiondetailsList()
+        {
+            var result = await _Possessiondetailservice.GetAllPossessiondetails();
+            List<PossessiondetailsListDto> data = new List<PossessiondetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new PossessiondetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                        Date = Convert.ToDateTime(result[i].PossDate).ToString("dd-MMM-yyyy"),
+                        PlotNo = result[i].PlotNo,
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
     }
 }

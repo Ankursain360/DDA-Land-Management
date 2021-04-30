@@ -178,6 +178,37 @@ namespace AcquiredLandInformationManagement.Controllers
             Id = Id ?? 0;
             return Json(await _demandListDetailsService.GetKhasraList(Convert.ToInt32(Id)));
         }
+
+
+        [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> DemanddetailsList()
+        {
+            var result = await _demandListDetailsService.GetAll();
+            List<DemanddetailsListDto> data = new List<DemanddetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemanddetailsListDto()
+                    {
+          
+                        Id = result[i].Id,
+                        DemandListNo = result[i].DemandListNo,
+                        Village = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.Name,
+                        ENMSrNo = result[i].Enmsno.ToString(),
+                        TotalAmount = result[i].TotalAmount.ToString(),
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 
 }

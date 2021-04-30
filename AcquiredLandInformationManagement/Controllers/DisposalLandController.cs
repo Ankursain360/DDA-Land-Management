@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -171,15 +172,34 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+       
+        public async Task<IActionResult> DisposallandList()
         {
-            List<Disposalland> result = await _disposallandService.GetAllDisposalland();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"LandDisposal.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _disposallandService.GetAllDisposalland();
+            List<DisposallandListDto> data = new List<DisposallandListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DisposallandListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                        AreaDisposed = result[i].AreaDisposed,
+                        DateofDisposed = Convert.ToDateTime(result[i].DateOfDisposed).ToString("dd-MMM-yyyy"),
+                        Transferto = result[i].TransferTo,
+                        TransferBy = result[i].TransferBy,
+                        FileNoRefNo = result[i].FileNoRefNo,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
-
         [HttpGet]
         public async Task<JsonResult> GetKhasraList(int? villageId)
         {

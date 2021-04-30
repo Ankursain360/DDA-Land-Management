@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Dto.Master;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -186,6 +187,36 @@ namespace AcquiredLandInformationManagement.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> BooktransferlandList()
+        {
+            var result = await _booktransferlandService.GetAllBooktransferland();
+            List<BooktransferlandListDto> data = new List<BooktransferlandListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new BooktransferlandListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.Name,
+                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
+                        Part = result[i].Part,
+                        Area = result[i].Area.ToString(),
+                        StatusOfLand = result[i].StatusOfLand,
+                        DateofPossession = Convert.ToDateTime(result[i].DateofPossession).ToString("dd-MMM-yyyy"),
+                        Remarks = result[i].Remarks,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
         }
     }
 }
