@@ -243,7 +243,9 @@ namespace AcquiredLandInformationManagement.Controllers
                         NotificationNo = result[i].UnderSection4 == null ? "" : result[i].UnderSection4.Number,
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
-
+                        ActualArea = result[i].Khasra.Bigha
+                                  + '-' + result[i].Khasra.Biswa
+                                  + '-' + result[i].Khasra.Biswanshi,
                         Area = result[i].Bigha.ToString()
                                   + '-' + result[i].Biswa.ToString()
                                   + '-' + result[i].Biswanshi.ToString(),

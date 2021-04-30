@@ -11,7 +11,7 @@ namespace Dto.Master
         public string NotificationUS22 { get; set; }
         public string VillageName { get; set; }
         public string KhasraNo { get; set; }
-        
+        public string ActualArea { get; set; }
         public string Area { get; set; }
         public string Status { get; set; }
     }

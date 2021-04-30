@@ -120,5 +120,9 @@ namespace Service.ApplicationService
         {
             return await _demandListDetailsRepository.GetKhasraList( id);
         }
+        public async Task<List<Demandlistdetails>> GetAllDemandlistdetails()
+        {
+            return await _demandListDetailsRepository.GetAllDemandlistdetails();
+        }
     }
 }

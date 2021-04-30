@@ -206,6 +206,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         Id = result[i].Id,
                         NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.Name,
+                        PropertySiteNo = result[i].PropertySiteNo,
                         LocationNameVillage = result[i].Name,
                         SiteDescription = result[i].SiteDescription,
                         Area = result[i].Area.ToString(),

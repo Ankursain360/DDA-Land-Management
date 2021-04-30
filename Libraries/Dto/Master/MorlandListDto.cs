@@ -7,6 +7,7 @@ namespace Dto.Master
     {  
         public int Id { get; set; }
         public string NotificationNo { get; set; }
+        public string PropertySiteNo { get; set; }
         public string LocationNameVillage { get; set; }
         public string SiteDescription { get; set; }
         public string Area { get; set; }

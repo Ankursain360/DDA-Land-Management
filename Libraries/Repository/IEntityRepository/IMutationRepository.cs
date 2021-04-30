@@ -19,5 +19,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Mutationparticulars>> GetMutationParticulars(int id);
         Task<bool> SaveMutationParticulars(List<Mutationparticulars> mutationparticulars);
         Task<bool> DeleteMutationParticulars(int id);
+        Task<List<Mutation>> GetAllMutation();
     }
 }
