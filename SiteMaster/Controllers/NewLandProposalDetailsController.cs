@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NewLandAcquisition.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
@@ -17,7 +17,7 @@ using System.Data;
 using Newtonsoft.Json;
 using Dto.Master;
 
-namespace NewLandAcquisition.Controllers
+namespace SiteMaster.Controllers
 {
     
         public class NewLandProposalDetailsController : BaseController

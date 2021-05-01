@@ -7,20 +7,20 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using NewLandAcquisition.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using System.Data;
 using Newtonsoft.Json;
 using Utility.Helper;
 using System.Collections.Generic;
 using Dto.Master;
-namespace NewLandAcquisition.Controllers
+namespace SiteMaster.Controllers
 {
-    public class VillageController : BaseController
+    public class NewLandVillageController : BaseController
     {
         private readonly INewlandvillageService _newlandvillageService;
        
-        public VillageController(INewlandvillageService newlandvillageService)
+        public NewLandVillageController(INewlandvillageService newlandvillageService)
         {
             _newlandvillageService = newlandvillageService;
         }
@@ -192,8 +192,8 @@ namespace NewLandAcquisition.Controllers
 
 
 
-        
 
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> NewLandVillageList()
         {
             var result = await _newlandvillageService.GetNewlandvillage();
