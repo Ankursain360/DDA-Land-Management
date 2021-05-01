@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -13,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -411,6 +413,34 @@ namespace AcquiredLandInformationManagement.Controllers
             villageId = villageId ?? 0;
             return Json(await _jaraidetailService.GetAllKhasra(Convert.ToInt32(villageId)));
         }
+         [AuthorizeContext(ViewAction.Download)]
+       
+        public async Task<IActionResult> JaraidetailsList()
+        {
+            var result =  await _jaraidetailService.GetAllJaraidetail();
+            List<JaraidetailsListDto> data = new List<JaraidetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new JaraidetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                        YearOfjamabandi = result[i].YearOfjamabandi,
+                        NoOfKhewat = result[i].NoOfKhewat,
+                        NoOfKhatauni = result[i].NoOfKhatauni,
+                        NaamPatti = result[i].NaamPatti,
+                        
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

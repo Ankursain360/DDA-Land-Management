@@ -27,7 +27,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id);
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
-        Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
+        Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Locality>> GetAllLocalityList();//for demolition report -- ishu
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model);//for demolition report -- ishu
@@ -35,5 +35,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Khasra>> GetAllKhasraList(int localityId);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto inspectionEncroachmentregistrationSearchDto);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);
+        Task<bool> RollBackEntryEncroachmentLocationMapFileDetails(int id);
+        Task<bool> RollBackEntryEncroachmentFirFileDetails(int id);
+        Task<bool> RollBackEntryEncroachmentPhotoFileDetails(int id);
+        Task<bool> RollBackEntryDetailsofEncroachmentRepeater(int id);
+        Task<Zone> FetchSingleResultOnZoneList(int zoneid);
     }
 }

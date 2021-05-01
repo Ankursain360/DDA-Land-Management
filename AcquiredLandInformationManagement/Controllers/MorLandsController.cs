@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -13,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -190,7 +192,35 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> MorlandList()
+        {
+            var result = await _morlandService.GetAllMorland();
+            List<MorlandListDto> data = new List<MorlandListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new MorlandListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.Name,
+                        PropertySiteNo = result[i].PropertySiteNo,
+                        LocationNameVillage = result[i].Name,
+                        SiteDescription = result[i].SiteDescription,
+                        Area = result[i].Area.ToString(),
+                        StatusOfLand = result[i].StatusOfLand,
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
 
     }

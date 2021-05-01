@@ -14,6 +14,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Acquiredlandvillage>> GetVillageList();
         Task<List<Khasra>> GetKhasraList(int id);
         Task<PagedResult<Mutation>> GetPagedDMSFileUploadList(DemandListDetailsSearchDto model);
+        Task<List<Mutation>> GetAllMutation();
         Task<bool> Create(Mutation mutation);
         Task<Mutation> FetchSingleResult(int id);
         Task<bool> Update(int id, Mutation mutation);

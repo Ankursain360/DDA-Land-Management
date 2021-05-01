@@ -107,7 +107,7 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 if (SiteContext.ZoneId == null)
                                 {
-                                    ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
+                                    ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
                                     return View(watchandward);
                                 }
 
@@ -299,6 +299,7 @@ namespace EncroachmentDemolition.Controllers
             }
             catch (Exception ex)
             {
+                #region Roll Back of Transaction Added by Renu 26 April  2021 
                 var deleteResult = false;
                 if (watchandward.Id != 0)
                 {
@@ -309,6 +310,7 @@ namespace EncroachmentDemolition.Controllers
                 }
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(watchandward);
+                #endregion
             }
 
         }

@@ -34,5 +34,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureAApprovalRepository.GetPagedAnnexureA(model, userId);
         }
+
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _annexureAApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
+        }
     }
 }

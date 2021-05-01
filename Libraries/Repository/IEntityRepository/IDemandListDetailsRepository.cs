@@ -18,5 +18,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Demandlistdetails> FetchSingleResult(int id);
         Task<List<Acquiredlandvillage>> GetVillageList();
         Task<List<Khasra>> GetKhasraList(int id);
+        Task<List<Demandlistdetails>> GetAllDemandlistdetails();
     }
 }

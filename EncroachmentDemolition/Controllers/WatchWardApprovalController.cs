@@ -416,15 +416,11 @@ namespace EncroachmentDemolition.Controllers
             }
             else
             {
-                ViewBag.Message = Alert.Show("Application Submited ", "", AlertType.Warning);
-                TempData["Message"] = Alert.Show("Application Submited ", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show("Application Already Submited ", "", AlertType.Warning);
+                TempData["Message"] = Alert.Show("Application Already Submited ", "", AlertType.Warning);
 
                 return RedirectToAction("Index");
             }
-
-
-            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-            return View("Index");
         }
 
 

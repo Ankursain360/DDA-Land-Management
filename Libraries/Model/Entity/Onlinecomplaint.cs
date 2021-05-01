@@ -10,8 +10,6 @@ namespace Libraries.Model.Entity
 {
     public class Onlinecomplaint : AuditableEntity<int>
     {
-
-
         [Required(ErrorMessage = " Complaint Name Is Mandatory")]
         public string Name { get; set; }
        

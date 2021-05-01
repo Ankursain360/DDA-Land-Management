@@ -20,13 +20,21 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId)
         {
+            var AllDataList = await _dbContext.EncroachmentRegisteration.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (EncroachmentRegisteration myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
 
             var data = await _dbContext.EncroachmentRegisteration
-                                    .Include(x => x.Locality)
-                                    .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId 
-                                   // && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-                                   )
-                                    .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.IsActive == 1
+                                            && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                            && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                            )
+                                        .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -43,7 +51,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("KHASRANO"):
                         data.Results = data.Results.OrderBy(x => x.KhasraNo).ToList();
                         break;
-                   
+
                 }
             }
             else if (SortOrder == 2)
@@ -60,7 +68,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("KHASRANO"):
                         data.Results = data.Results.OrderByDescending(x => x.KhasraNo).ToList();
                         break;
-                   
+
 
                 }
             }
@@ -97,6 +105,22 @@ namespace Libraries.Repository.EntityRepository
         {
             List<Locality> localitylist = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return localitylist;
+        }
+
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            var result = false;
+            var AllDataList = await _dbContext.EncroachmentRegisteration
+                                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                                .ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString())).ToList();
+
+            if (UserWiseDataList.Count == 0)
+                result = false;
+            else
+                result = true;
+
+            return result;
         }
 
     }

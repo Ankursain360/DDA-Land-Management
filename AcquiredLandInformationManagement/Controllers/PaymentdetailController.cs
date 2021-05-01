@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -168,7 +170,35 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> PaymentdetailList()
+        {
+            var result = await _paymentdetailService.GetAllPaymentdetail();
+            List<PaymentdetailListDto> data = new List<PaymentdetailListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new PaymentdetailListDto()
+                    {
+                        Id = result[i].Id,
+                        DemandListNo = result[i].DemandListNo,
+                        ENMSNO = result[i].EnmSno,
+                        BankName = result[i].BankName,
+                        VoucherNo = result[i].VoucherNo,
+                        ChequeNo = result[i].ChequeNo,
+                        ChequeDate = Convert.ToDateTime(result[i].ChequeDate).ToString("dd-MMM-yyyy"),
+                        PercentPaid = result[i].PercentPaid.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
     }
 }

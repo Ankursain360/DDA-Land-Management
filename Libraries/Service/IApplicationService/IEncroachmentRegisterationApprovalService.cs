@@ -15,10 +15,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Khasra>> GetAllKhasra();
         Task<List<Village>> GetAllVillage();
         Task<List<Locality>> GetAllLocality();
-        Task<bool> Update(int id, EncroachmentRegisteration watchandward);
-        Task<bool> Create(EncroachmentRegisteration watchandward);
         Task<EncroachmentRegisteration> FetchSingleResult(int id);
         Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId);
-
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

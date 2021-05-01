@@ -14,14 +14,9 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<ComplaintType>> GetAllComplaintType();
 
-       Task<List<Location>> GetAllLocation();
-       Task<Onlinecomplaint> FetchSingleResult(int id);
+        Task<List<Location>> GetAllLocation();
+        Task<Onlinecomplaint> FetchSingleResult(int id);
         Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintApprovalSearchDto model, int userId);
-
-    
-
-
-
-
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

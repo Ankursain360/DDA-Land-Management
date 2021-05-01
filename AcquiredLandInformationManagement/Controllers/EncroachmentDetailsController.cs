@@ -14,6 +14,8 @@ using Dto.Search;
 using AcquiredLandInformationManagement.Helper;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -364,6 +366,32 @@ namespace AcquiredLandInformationManagement.Controllers
                 
             }));
         }
+        [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> EnchroachmentList()
+        {
+            var result =  await _enchroachmentService.GetAllEnchroachment();
+            List<EnchroachmentListDto> data = new List<EnchroachmentListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new EnchroachmentListDto()
+                    {
+                        Id = result[i].Id,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                        LandUse = result[i].LandUse,
+                        ReferenceNo = result[i].FileNo,
+                        ActionTaken = Convert.ToDateTime(result[i].ActionDate).ToString("dd-MMM-yyyy"),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

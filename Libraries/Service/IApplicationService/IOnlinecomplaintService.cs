@@ -26,6 +26,6 @@ namespace Libraries.Service.IApplicationService
 
 
         Task<bool> UpdateBeforeApproval(int id, Onlinecomplaint onlinecomplaint);
-
+        Task<bool> RollBackEntry(int id);
     }
 }

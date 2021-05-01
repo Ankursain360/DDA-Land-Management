@@ -14,6 +14,9 @@ using Notification.OptionEnums;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
 using Dto.Search;
+using Utility.Helper;
+using Dto.Master;
+
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class AppealDetailController : Controller
@@ -166,7 +169,35 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> AppealdetailList()
+        {
+            var result = await _appealdetailService.GetAllAppealdetail();
+            List<AppealdetailListDto> data = new List<AppealdetailListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new AppealdetailListDto()
+                    {
+                        Id = result[i].Id,
+                        DemandListNo = result[i].DemandListNo,
+                        ENMSNO = result[i].EnmSno,
+                        AppealNo = result[i].AppealNo,
+                        AppealByDepartment = result[i].AppealByDept,
+                        DateOfAppeal =  Convert.ToDateTime(result[i].DateOfAppeal).ToString("dd-MMM-yyyy"),
+                        PanelLawyer = result[i].PanelLawer,
+                        
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
 
     }

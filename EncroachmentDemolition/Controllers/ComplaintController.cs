@@ -15,11 +15,10 @@ using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Dto.Common;
 using EncroachmentDemolition.Filters;
-
-
-
 using Core.Enum;
-
+using Service.IApplicationService;
+using Dto.Master;
+using System.Text;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -31,20 +30,18 @@ namespace EncroachmentDemolition.Controllers
         string targetReportfilePathLayout = string.Empty;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IUserProfileService _userProfileService;
 
         public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IApprovalProccessService approvalproccessService,
-            IWorkflowTemplateService workflowtemplateService, IConfiguration configuration)
+            IWorkflowTemplateService workflowtemplateService, IConfiguration configuration,
+            IUserProfileService userProfileService)
         {
             _workflowtemplateService = workflowtemplateService;
             _onlinecomplaintService = onlinecomplaintService;
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
+            _userProfileService = userProfileService;
         }
-
-
-
-
-
         public IActionResult Index()
         {
             return View();
@@ -54,7 +51,6 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> List([FromBody] OnlinecomplaintSearchDto model)
         {
             var result = await _onlinecomplaintService.GetPagedOnlinecomplaint(model);
-
             return PartialView("_List", result);
         }
 
@@ -83,9 +79,86 @@ namespace EncroachmentDemolition.Controllers
                 onlinecomplaint.ReferenceNo = "TRN" + finalString;
                 onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
                 onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
+                onlinecomplaint.IsActive = 1;
 
                 if (ModelState.IsValid)
                 {
+                    #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
+
+                    Approvalproccess approvalproccess = new Approvalproccess();
+                    var DataFlow = await dataAsync();
+                    for (int i = 0; i < DataFlow.Count; i++)
+                    {
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                            {
+                                if (SiteContext.ZoneId == null)
+                                {
+                                    ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
+                                    return View(onlinecomplaint);
+                                }
+
+                                onlinecomplaint.ApprovalZoneId = SiteContext.ZoneId;
+                            }
+                            if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                            {
+                                for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                                {
+                                    List<UserProfileDto> UserListRoleBasis = null;
+                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
+                                    else
+                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
+
+                                    StringBuilder multouserszonewise = new StringBuilder();
+                                    int col = 0;
+                                    if (UserListRoleBasis != null)
+                                    {
+                                        for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                        {
+                                            if (col > 0)
+                                                multouserszonewise.Append(",");
+                                            multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                            col++;
+                                        }
+                                        approvalproccess.SendTo = multouserszonewise.ToString();
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
+                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                {
+                                    StringBuilder multouserszonewise = new StringBuilder();
+                                    int col = 0;
+                                    if (approvalproccess.SendTo != null)
+                                    {
+                                        string[] multiTo = approvalproccess.SendTo.Split(',');
+                                        foreach (string MultiUserId in multiTo)
+                                        {
+                                            var UserProfile = await _userProfileService.GetUserByIdZoneConcatedName(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
+                                            if (UserProfile != null)
+                                            {
+                                                if (col > 0)
+                                                    multouserszonewise.Append(",");
+                                                multouserszonewise.Append(UserProfile.UserId);
+                                            }
+                                            col++;
+                                        }
+                                        approvalproccess.SendTo = multouserszonewise.ToString();
+                                    }
+                                }
+                            }
+
+
+                            break;
+                        }
+                    }
+                    #endregion
+
                     targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
                    
                     FileHelper file = new FileHelper();
@@ -94,38 +167,58 @@ namespace EncroachmentDemolition.Controllers
                         onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
                    
                     }
-
-
                     var result = await _onlinecomplaintService.Create(onlinecomplaint);
-
-
-                    var DataFlow = await dataAsync();
-                    for (int i = 0; i < DataFlow.Count; i++)
+                    if (result)
                     {
-                        if (!DataFlow[i].parameterSkip)
+                        #region Approval Proccess At 1st level start Added by Renu 21 April 2021
+                        var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidOnlineComplaintId").Value));
+                        var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+                        for (int i = 0; i < DataFlow.Count; i++)
                         {
-                            onlinecomplaint.ApprovedStatus = 0;
-                         //   onlinecomplaint.PendingAt = (DataFlow[i].parameterName);
-                            result = await _onlinecomplaintService.UpdateBeforeApproval(onlinecomplaint.Id, onlinecomplaint);  //Update Table details 
-                            if (result)
+                            if (!DataFlow[i].parameterSkip)
                             {
-                                Approvalproccess approvalproccess = new Approvalproccess();
-                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                              //  approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessOnlineComplaintId").Value);
-                                approvalproccess.ServiceId = onlinecomplaint.Id;
-                            //    approvalproccess.SendFrom = SiteContext.UserId;
-                             //   approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                approvalproccess.PendingStatus = 1;   //1
-                                approvalproccess.Status = null;   //1
-                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                onlinecomplaint.ApprovedStatus = ApprovalStatus.Id;
+                                onlinecomplaint.PendingAt = approvalproccess.SendTo;
+                                result = await _onlinecomplaintService.UpdateBeforeApproval(onlinecomplaint.Id, onlinecomplaint);  //Update Table details 
+                                if (result)
+                                {
+                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidOnlineComplaintId").Value);
+                                    approvalproccess.ServiceId = onlinecomplaint.Id;
+                                    approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                    approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                    #region set sendto and sendtoprofileid 
+                                    StringBuilder multouserprofileid = new StringBuilder();
+                                    int col = 0;
+                                    if (approvalproccess.SendTo != null)
+                                    {
+                                        string[] multiTo = approvalproccess.SendTo.Split(',');
+                                        foreach (string MultiUserId in multiTo)
+                                        {
+                                            if (col > 0)
+                                                multouserprofileid.Append(",");
+                                            var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                            multouserprofileid.Append(UserProfile.Id);
+                                            col++;
+                                        }
+                                        approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                    }
+                                    #endregion
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = ApprovalStatus.Id;   //1
+                                    approvalproccess.Level = i + 1;
+                                    approvalproccess.Version = workflowtemplatedata.Version;
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                }
+
+                                break;
                             }
-
-                            break;
                         }
+
+                        #endregion
+
                     }
-
-
                     if (result == true)
                     {
                         string DisplayName = onlinecomplaint.Name.ToString();
@@ -169,8 +262,16 @@ namespace EncroachmentDemolition.Controllers
             }
             catch (Exception ex)
             {
+                #region Roll Back of Transaction Added by Renu 26 April  2021 
+                var deleteResult = false;
+                if (onlinecomplaint.Id != 0)
+                {
+                    deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), onlinecomplaint.Id);                    
+                    deleteResult = await _onlinecomplaintService.RollBackEntry(onlinecomplaint.Id);
+                }
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(onlinecomplaint);
+                #endregion
             }
         }
 
@@ -256,13 +357,15 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
+        #region Fetch workflow data for approval prrocess Added by Renu 30 April 2021
         private async Task<List<TemplateStructure>> dataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(18);
+            var Data = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidOnlineComplaintId").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
         }
+        #endregion
 
     }
 }

@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
+using Dto.Master;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -158,12 +159,30 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+       
+        public async Task<IActionResult> AwardmasterdetailList()
         {
-            List<Awardmasterdetail> result = await _awardmasterdetailsService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"AwardMaster.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result =  await _awardmasterdetailsService.Getawardmasterdetails();
+            List<AwardmasterdetailListDto> data = new List<AwardmasterdetailListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new AwardmasterdetailListDto()
+                    {
+                        Id = result[i].Id,
+                        AwardNumber = result[i].AwardNumber,
+                        Awarddate = Convert.ToDateTime(result[i].AwardDate).ToString("dd-MMM-yyyy"),
+                        VillageName = result[i].Acquiredlandvillage == null ? "" : result[i].Acquiredlandvillage.Name,
+                        ProposalName = result[i].Proposal == null ? "" : result[i].Proposal.Name,
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
         [HttpPost]

@@ -1,135 +1,110 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-   
     var StatusId = 0;
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
 });
 
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+});
 
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
 
-function GetWatchandward(pageNumber, pageSize, StatusId) {
-    var param = GetSearchParam(pageNumber, pageSize, StatusId);
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
+
+$('#ddlSort').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
+
+function GetDetails(pageNumber, pageSize, sortOrder, StatusId) {
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder, StatusId);
     HttpPost(`/OnlineComplaintApproval/List`, 'html', param, function (response) {
-        console.log(response);
         $('#divOnlineComplaintTable').html("");
         $('#divOnlineComplaintTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize, StatusId) {
-
-    var sorbyname = $('#Sortbyd').val();
-    var sortdesc = $("#sortdesc").val();
-    if (sorbyname) { } else {
-        sorbyname = 'Name';
-    }
-
-
+function GetSearchParam(pageNumber, pageSize, sortOrder, StatusId) {
     var model = {
-
-        colname: sorbyname,
-        orderby: sortdesc,
-
-        StatusId: StatusId,
+        name: "test",
+        StatusId: parseInt(StatusId),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
         pageNumber: pageNumber
     }
     return model;
 }
 
-$("#Sortbyd").change(function () {
-
+function onPaging(pageNo) {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-
+        GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder, StatusId);
+        currentPageNumber = pageNo;
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-
+        GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder, StatusId);
+        currentPageNumber = pageNo;
     }
-
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
-
-});
-$("#ascId").click(function () {
-    $("#descId").removeClass("active");
-    $("#ascId").addClass("active");
-    $("#sortdesc").val(2);
-
-    if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-
-    }
-
-
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
-});
-$("#descId").click(function () {
-    $("#ascId").removeClass("active");
-    $("#descId").addClass("active");
-    $("#sortdesc").val(1);
-    if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-
-    }
-
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
-});
-
-
-function onPaging(pageNo) {pageNo
-    
-    pageNo = parseInt(pageNo);
-    if ($("#Pending").is(":checked")) {
-        var StatusId = 0;
-    }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
-    }
-    
-    GetWatchandward(pageNo, currentPageSize, StatusId);
-    currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-
-
+        GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder, StatusId);
+        currentPageSize = pageSize;
     }
     else if ($("#Approved").is(":checked")) {
-
         var StatusId = 1;
-
+        GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder, StatusId);
+        currentPageSize = pageSize;
     }
-   
-    GetWatchandward(currentPageNumber, pageSize, StatusId);
-    currentPageSize = pageSize;
 }
-
 
 $("input[name='radioStatus']").click(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-        currentPageNumber = 1;
-        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
 
     }
     else if ($("#Approved").is(":checked")) {
-        currentPageNumber = 1;
         var StatusId = 1;
-        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
     }
 
 });

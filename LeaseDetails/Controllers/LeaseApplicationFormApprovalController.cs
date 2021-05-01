@@ -62,9 +62,8 @@ namespace LeaseDetails.Controllers
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LeaseApplicationFormApprovalSearchDto model)
-        {
-            var ApprovalStatusApproved = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
-            var result = await _leaseApplicationFormApprovalService.GetPagedLeaseApplicationFormDetails(model, SiteContext.UserId, ApprovalStatusApproved.Id);
+        {            
+            var result = await _leaseApplicationFormApprovalService.GetPagedLeaseApplicationFormDetails(model, SiteContext.UserId);
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_ListLeaseApplicationFormApproval", result);
         }
@@ -476,8 +475,8 @@ namespace LeaseDetails.Controllers
             }
             else
             {
-                ViewBag.Message = Alert.Show("Application Submited ", "", AlertType.Warning);
-                TempData["Message"] = Alert.Show("Application Submited ", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show("Application Already Submited ", "", AlertType.Warning);
+                TempData["Message"] = Alert.Show("Application Already Submited ", "", AlertType.Warning);
 
                 return RedirectToAction("Index");
             }

@@ -28,9 +28,13 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> SaveFixingprogram(Fixingprogram fixingprogram);//save 
         Task<bool> SaveFixingdocument(Fixingdocument fixingdocument);
-        Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model);
+        Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved);
         Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition);
         Task<Fixingdemolition> FetchSingleResult(int id);
         Task<Fixingdocument> GetAnnexureAfiledetails(int id);
+        Task<bool> RollBackEntry(int id);
+        Task<bool> RollBackEntryFixingdocument(int id);
+        Task<bool> RollBackEntryFixingchecklist(int id);
+        Task<bool> RollBackEntryFixingprogram(int id);
     }
 }

@@ -2,7 +2,7 @@
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Authorization;
+using Dto.Master;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
@@ -214,6 +214,30 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> AwardplotdetailsList()
+        {
+            var result =  await _awardplotDetailService.GetAwardplotdetails();
+            List<AwardplotdetailsListtDto> data = new List<AwardplotdetailsListtDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new AwardplotdetailsListtDto()
+                    {
+                        Id = result[i].Id,
+                        AwardNumber = result[i].AwardMaster == null ? "" : result[i].AwardMaster.AwardNumber,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

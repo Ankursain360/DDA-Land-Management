@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using Utility.Helper;
 
 namespace FileDataLoading.Controllers
 {
@@ -53,6 +54,36 @@ namespace FileDataLoading.Controllers
                 return NotFound();
             }
             return PartialView(Data);
+
+        }
+
+        // [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> DisplayLabelList()
+        {
+            var result = await _datastorageService.GetDataStorageDetails();
+            List<DisplayLabelListDto> data = new List<DisplayLabelListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DisplayLabelListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        FileName = result[i].Name,
+                        RecordRoomNo = result[i].RecordRoomNo,
+                        AlNoCompactorNo = result[i].Almirah == null ? "" : result[i].Almirah.AlmirahNo,
+                        RowNo = result[i].Row == null ? "" : result[i].Row.RowNo,
+                        ColNo = result[i].Column == null ? "" : result[i].Column.ColumnNo,
+                        BnNo = result[i].Bundle == null ? "" : result[i].Bundle.BundleNo,
+                        Status = result[i].FileStatus == "Issued" ? "Issued" : "Available",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
 

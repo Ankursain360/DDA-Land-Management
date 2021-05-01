@@ -16,6 +16,11 @@ using Utility.Helper;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
 using System.Data;
+using Service.IApplicationService;
+using Dto.Master;
+using System.Text;
+using System.IO;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class AnnexureAController : BaseController
@@ -26,12 +31,14 @@ namespace EncroachmentDemolition.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         public IConfiguration _configuration;
+        private readonly IUserProfileService _userProfileService;
         string targetPhotoPathLayout = string.Empty;
         string targetReportfilePathLayout = string.Empty;
 
         public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService,
             IAnnexureAService annexureAService, IWatchandwardService watchandwardService, IConfiguration configuration,
-            IWorkflowTemplateService workflowtemplateService, IApprovalProccessService approvalproccessService)
+            IWorkflowTemplateService workflowtemplateService, IApprovalProccessService approvalproccessService,
+            IUserProfileService userProfileService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _annexureAService = annexureAService;
@@ -39,12 +46,13 @@ namespace EncroachmentDemolition.Controllers
             _watchandwardService = watchandwardService;
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
+            _userProfileService = userProfileService;
         }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AnnexureASearchDto model)
         {
-            var result = await _annexureAService.GetPagedDetails(model);
+            var result = await _annexureAService.GetPagedDetails(model, (int)ApprovalActionStatus.Approved);
             return PartialView("_List", result);
         }
 
@@ -79,106 +87,224 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
         {
-            var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
-            fixingdemolition.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
+            try
+            {
+                var encroachment = await _encroachmentRegisterationService.FetchSingleResult(fixingdemolition.EncroachmentId);
+                Random r = new Random();
+                int num = r.Next();
+                fixingdemolition.RefNo = DateTime.Now.Year.ToString()+ encroachment.Zone.Code + num.ToString();
+                #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
 
-            fixingdemolition.Encroachment = Data;
-            fixingdemolition.Id = 0;
-            if (fixingdemolition.EncroachmentId == 0)
-            {
-                return NotFound();
-            }
-            fixingdemolition.EncroachmentId = fixingdemolition.Encroachment.Id;
-            var result = await _annexureAService.Create(fixingdemolition);
-            List<Fixingprogram> fixingprogram = new List<Fixingprogram>();
-            for (int i = 0; i < fixingdemolition.DemolitionProgramId.Count(); i++)
-            {
-                fixingprogram.Add(new Fixingprogram
+                Approvalproccess approvalproccess = new Approvalproccess();
+                var DataFlow = await dataAsync();
+                for (int i = 0; i < DataFlow.Count; i++)
                 {
+                    if (!DataFlow[i].parameterSkip)
+                    {
+                        if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                        {
+                            if (SiteContext.ZoneId == null)
+                            {
+                                ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
+                                return View(fixingdemolition);
+                            }
 
-                    DemolitionProgramId = (int)fixingdemolition.DemolitionProgramId[i],
-                    ItemsDetails = fixingdemolition.ItemsDetails[i],
-                    FixingdemolitionId = fixingdemolition.Id
-                });
-            }
-            foreach (var item in fixingprogram)
-            {
-                result = await _annexureAService.SaveFixingprogram(item);
-            }
-            List<Fixingchecklist> fixingchecklist = new List<Fixingchecklist>();
-            for (int i = 0; i < fixingdemolition.DemolitionChecklistId.Count(); i++)
-            {
-                fixingchecklist.Add(new Fixingchecklist
+                            fixingdemolition.ApprovalZoneId = SiteContext.ZoneId;
+                        }
+                        if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                        {
+                            for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                            {
+                                List<UserProfileDto> UserListRoleBasis = null;
+                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                    UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
+                                else
+                                    UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
+
+                                StringBuilder multouserszonewise = new StringBuilder();
+                                int col = 0;
+                                if (UserListRoleBasis != null)
+                                {
+                                    for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                    {
+                                        if (col > 0)
+                                            multouserszonewise.Append(",");
+                                        multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                        col++;
+                                    }
+                                    approvalproccess.SendTo = multouserszonewise.ToString();
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
+                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                            {
+                                StringBuilder multouserszonewise = new StringBuilder();
+                                int col = 0;
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        var UserProfile = await _userProfileService.GetUserByIdZoneConcatedName(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
+                                        if (UserProfile != null)
+                                        {
+                                            if (col > 0)
+                                                multouserszonewise.Append(",");
+                                            multouserszonewise.Append(UserProfile.UserId);
+                                        }
+                                        col++;
+                                    }
+                                    approvalproccess.SendTo = multouserszonewise.ToString();
+                                }
+                            }
+                        }
+
+
+                        break;
+                    }
+                }
+                #endregion
+                var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
+                fixingdemolition.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
+
+                fixingdemolition.Encroachment = Data;
+                fixingdemolition.Id = 0;
+                if (fixingdemolition.EncroachmentId == 0)
                 {
+                    return NotFound();
+                }
+                fixingdemolition.EncroachmentId = fixingdemolition.Encroachment.Id;
+                var result = await _annexureAService.Create(fixingdemolition);
 
-                    DemolitionChecklistId = (int)fixingdemolition.DemolitionChecklistId[i],
-                    ChecklistDetails = fixingdemolition.ChecklistDetails[i],
-                    FixingdemolitionId = fixingdemolition.Id
-                });
-            }
-            foreach (var item in fixingchecklist)
-            {
-                result = await _annexureAService.Savefixingchecklist(item);
-            }
-            string DocumentFilePath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:DocumentFilePath").Value.ToString();
-            FileHelper fileHelper = new FileHelper();
-           
-            List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
-            for (int i = 0; i < fixingdemolition.DemolitionDocumentId.Count; i++)
-            {
-                string FilePath = null;
-                if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
-                    FilePath = fileHelper.SaveFile(DocumentFilePath, fixingdemolition.DocumentDetails[i]);
-                fixingdocument.Add(new Fixingdocument
+                List<Fixingprogram> fixingprogram = new List<Fixingprogram>();
+                for (int i = 0; i < fixingdemolition.DemolitionProgramId.Count(); i++)
                 {
-                    DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
-                    DocumentDetails = FilePath,
-                    FixingdemolitionId = fixingdemolition.Id
-                });
-            }
-            foreach (var item in fixingdocument)
-            {
-                result = await _annexureAService.SaveFixingdocument(item);
-            }
-           
-            if (result)
-            {
-                //#region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
-                //var DataFlow = await dataAsync();
-                //for (int i = 0; i < DataFlow.Count; i++)
-                //{
-                //    if (!DataFlow[i].parameterSkip)
-                //    {
-                //        fixingdemolition.ApprovedStatus = 0;
-                //        fixingdemolition.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                //        result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
-                //        if (result)
-                //        {
-                //            Approvalproccess approvalproccess = new Approvalproccess();
-                //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value);
-                //            approvalproccess.ServiceId = fixingdemolition.Id;
-                //            approvalproccess.SendFrom = SiteContext.UserId;
-                //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                //            approvalproccess.PendingStatus = 1;   //1
-                //            approvalproccess.Status = null;   //1
-                //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                //        }
+                    fixingprogram.Add(new Fixingprogram
+                    {
 
-                //        break;
-                //    }
-                //}
+                        DemolitionProgramId = (int)fixingdemolition.DemolitionProgramId[i],
+                        ItemsDetails = fixingdemolition.ItemsDetails[i],
+                        FixingdemolitionId = fixingdemolition.Id
+                    });
+                }
+                foreach (var item in fixingprogram)
+                {
+                    result = await _annexureAService.SaveFixingprogram(item);
+                }
+                List<Fixingchecklist> fixingchecklist = new List<Fixingchecklist>();
+                for (int i = 0; i < fixingdemolition.DemolitionChecklistId.Count(); i++)
+                {
+                    fixingchecklist.Add(new Fixingchecklist
+                    {
 
-                //#endregion
+                        DemolitionChecklistId = (int)fixingdemolition.DemolitionChecklistId[i],
+                        ChecklistDetails = fixingdemolition.ChecklistDetails[i],
+                        FixingdemolitionId = fixingdemolition.Id
+                    });
+                }
+                foreach (var item in fixingchecklist)
+                {
+                    result = await _annexureAService.Savefixingchecklist(item);
+                }
+                string DocumentFilePath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:DocumentFilePath").Value.ToString();
+                FileHelper fileHelper = new FileHelper();
 
-                ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
-                return View("Index");
+                List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
+                for (int i = 0; i < fixingdemolition.DemolitionDocumentId.Count; i++)
+                {
+                    string FilePath = null;
+                    if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
+                        FilePath = fileHelper.SaveFile(DocumentFilePath, fixingdemolition.DocumentDetails[i]);
+                    fixingdocument.Add(new Fixingdocument
+                    {
+                        DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
+                        DocumentDetails = FilePath,
+                        FixingdemolitionId = fixingdemolition.Id
+                    });
+                }
+                foreach (var item in fixingdocument)
+                {
+                    result = await _annexureAService.SaveFixingdocument(item);
+                }
+
+                if (result)
+                {
+                    #region Approval Proccess At 1st level start Added by Renu 21 April 2021
+                    var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value));
+                    var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+                    for (int i = 0; i < DataFlow.Count; i++)
+                    {
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            fixingdemolition.ApprovedStatus = ApprovalStatus.Id;
+                            fixingdemolition.PendingAt = approvalproccess.SendTo;
+                            result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
+                            if (result)
+                            {
+                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value);
+                                approvalproccess.ServiceId = fixingdemolition.Id;
+                                approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                #region set sendto and sendtoprofileid 
+                                StringBuilder multouserprofileid = new StringBuilder();
+                                int col = 0;
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multouserprofileid.Append(",");
+                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                        multouserprofileid.Append(UserProfile.Id);
+                                        col++;
+                                    }
+                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                }
+                                #endregion
+                                approvalproccess.PendingStatus = 1;   //1
+                                approvalproccess.Status = ApprovalStatus.Id;   //1
+                                approvalproccess.Level = i + 1;
+                                approvalproccess.Version = workflowtemplatedata.Version;
+                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                            }
+
+                            break;
+                        }
+                    }
+
+                    #endregion
+
+                    ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(fixingdemolition);
+                }
             }
-            else
+            catch (Exception ex)
             {
+                #region Roll Back of Transaction Added by Renu 26 April  2021 
+                var deleteResult = false;
+                if (fixingdemolition.Id != 0)
+                {
+                    deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), fixingdemolition.Id);
+                    deleteResult = await _annexureAService.RollBackEntryFixingprogram(fixingdemolition.Id);
+                    deleteResult = await _annexureAService.RollBackEntryFixingchecklist(fixingdemolition.Id);
+                    deleteResult = await _annexureAService.RollBackEntryFixingdocument(fixingdemolition.Id);
+                    deleteResult = await _annexureAService.RollBackEntry(fixingdemolition.Id);
+                }
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(fixingdemolition);
+                #endregion
             }
         }
 
@@ -209,10 +335,53 @@ namespace EncroachmentDemolition.Controllers
 
         #endregion
 
-        #region Fetch workflow data for approval prrocess Added by Renu 08 Dec 2020
+        #region EncroachmentRegisteration Details
+        public async Task<PartialViewResult> EncroachmentRegisterView(int id)
+        {
+            var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
+            encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
+            encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
+            encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
+            encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
+            encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+
+            return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
+        }
+        public async Task<IActionResult> DownloadPhotoFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            EncroachmentPhotoFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentPhotoFileDetails(Id);
+            string filename = Data.PhotoFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+
+        public async Task<JsonResult> DetailsOfRepeater(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _encroachmentRegisterationService.GetDetailsOfEncroachment(Convert.ToInt32(Id));
+            return Json(data.Select(x => new { x.CountOfStructure, x.DateOfEncroachment, x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus, x.ReligiousStructure }));
+        }
+
+        public async Task<IActionResult> DownloadFirfile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            EncroachmentFirFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentFirFileDetails(Id);
+            string filename = Data.FirFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadLocationMapFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            EncroachmentLocationMapFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentLocationMapFileDetails(Id);
+            string filename = Data.LocationMapFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        #endregion
+
+        #region Fetch workflow data for approval prrocess Added by Renu 30 April 2021
         private async Task<List<TemplateStructure>> dataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;

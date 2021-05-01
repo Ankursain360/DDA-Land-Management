@@ -43,18 +43,14 @@ namespace Libraries.Service.ApplicationService
         {
 
             return await _onlinecomplaintApprovalRepository.GetAllLocation();
-        }
-
-
-      
-
-
+        }  
         public async Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintApprovalSearchDto model, int userId)
         {
             return await _onlinecomplaintApprovalRepository.GetPagedOnlinecomplaint(model, userId);
         }
-
-
-
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _onlinecomplaintApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
+        }
     }
 }

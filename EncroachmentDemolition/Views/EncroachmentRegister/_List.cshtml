@@ -5,14 +5,13 @@
 
     <thead class="text-nowrap">
         <tr>
-           
+
             <th>Date</th>
             <th>Locality(Village)</th>
             <th>Khasra No.</th>
             <th>Primary List No.</th>
             <th>Status on Ground</th>
-
-           
+            <th>Status</th>
             <th>Operations</th>
         </tr>
     </thead>
@@ -23,18 +22,18 @@
 
             {
                 <tr>
-                   
-
                     <td> @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
                     <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
                     <td>@item.PrimaryListNoNavigation.KhasraNo</td>
-                    <td>@item.PrimaryListNo</td>
+                    <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
                     <td>@item.StatusOnGround</td>
-                   
+                    <td>
+                        @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+                    </td>
                     <td style="min-width:120px;">
                         <div class="action-btns">
                             <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                         </div>
+                        </div>
                     </td>
                 </tr>
             }

@@ -95,7 +95,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Datastoragedetails>> GetDataStorageDetails()
         {
-            return await _dbContext.Datastoragedetails.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Datastoragedetails
+                                   .Include(x => x.Almirah)
+                                   .Include(x => x.Row)
+                                   .Include(x => x.Column)
+                                   .Include(x => x.Bundle)
+                                   .ToListAsync();
         }
 
      

@@ -68,22 +68,23 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Fixingdocument.Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1).ToListAsync();
         }
-        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model)
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved)
         {
-            var InInspectionId = (from x in _dbContext.EncroachmentRegisteration
-                                  where x.WatchWard != null && x.IsActive == 1
-                                  select x.WatchWardId).ToArray();
+            var InInspectionId = (from x in _dbContext.Fixingdemolition
+                                  where  x.IsActive == 1
+                                  select x.EncroachmentId).ToArray();
 
             var data = await _dbContext.EncroachmentRegisteration
-               .Include(x => x.Locality)
-                                     .Where(x => x.IsActive == 1 && x.ApprovedStatus == 1
-                                      && !(InInspectionId).Contains(x.Id)
-                                      && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra))
-                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
-                   && (string.IsNullOrEmpty(model.policestation) || x.PoliceStation.Contains(model.policestation))
-
-                                      )
-                                     .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                         .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
+                                          && !(InInspectionId).Contains(x.Id)
+                                          && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra))
+                                            && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                            && (string.IsNullOrEmpty(model.policestation) || x.PoliceStation.Contains(model.policestation)
+                                            )
+                                              )
+                                             .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
 
 
             int SortOrder = (int)model.orderby;
@@ -139,6 +140,27 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Fixingdocument> GetAnnexureAfiledetails(int id)
         {
             return await _dbContext.Fixingdocument.Where(x => x.FixingdemolitionId == id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> RollBackEntryFixingdocument(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Fixingdocument.Where(x => x.FixingdemolitionId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> RollBackEntryFixingchecklist(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Fixingchecklist.Where(x => x.FixingdemolitionId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> RollBackEntryFixingprogram(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Fixingprogram.Where(x => x.FixingdemolitionId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
     }
 }

@@ -40,10 +40,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintSearchDto model)
         {
-            var data = await _dbContext.Onlinecomplaint.Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.contact) || x.Contact.Contains(model.contact))
-                   && (string.IsNullOrEmpty(model.email) || x.Email.Contains(model.email))).
-                Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id).GetPaged<Onlinecomplaint>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Onlinecomplaint
+                                        .Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id)
+                                        .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.contact) || x.Contact.Contains(model.contact))
+                                           && (string.IsNullOrEmpty(model.email) || x.Email.Contains(model.email))
+                                           )
+                                            .GetPaged<Onlinecomplaint>(model.PageNumber, model.PageSize);
 
 
             int SortOrder = (int)model.orderby;

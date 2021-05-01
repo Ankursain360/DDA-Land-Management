@@ -201,7 +201,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.LandNotification)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
-                .Where(x => x.IsActive == 1)
+                
                 .ToListAsync();
 
 

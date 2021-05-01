@@ -12,6 +12,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -172,7 +174,31 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
+        [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> DisposallandtypeList()
+        {
+            var result = await _disposallandtypeService.GetAllDisposallandtype();
+            List<DisposallandtypeListDto> data = new List<DisposallandtypeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DisposallandtypeListDto()
+                    {
+                        Id = result[i].Id,
+                        NewLand = result[i].Name,
+                        Code = result[i].LandCode,
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
     }
 }

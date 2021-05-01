@@ -65,7 +65,13 @@ namespace Libraries.Repository.EntityRepository
             }
             return data;
         }
-
+        public async Task<List<Demandlistdetails>> GetAllDemandlistdetails()
+        {
+            return await _dbContext.Demandlistdetails
+                                   .Include(x => x.Village)
+                                   .Include(x => x.KhasraNo)
+                                   .ToListAsync();
+        }
         public async Task<Demandlistdetails> FetchSingleResult(int id)
         {
             return await _dbContext.Demandlistdetails

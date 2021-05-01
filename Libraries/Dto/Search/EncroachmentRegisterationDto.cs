@@ -7,7 +7,9 @@ namespace Dto.Search
 {
     public class EncroachmentRegisterationDto:BaseSearchDto
     {
-        public string name { get; set; }
-        public int StatusId { get; set; }
+        public string date { get; set; }
+        public string locality { get; set; }
+        public string khasrano { get; set; }
+        public string primarylistno { get; set; }
     }
 }

@@ -1,124 +1,129 @@
 ﻿@model Libraries.Model.Entity.Fixingdemolition
 @{ int recNo = 0;}
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-
-    <form asp-action="Create" enctype="multipart/form-data">
-        <a data-toggle="collapse" href="#collapseAnnexureA" role="button" aria-expanded="false" aria-controls="collapseAnnexureA">
-            <h3 class="my-3 d-flex sub-heading">View Request For Fixing of Demolition Programme Details </h3>
+<div class="permission mt-2 accordion list-unstyled m-0 ">
+    <div class="card">
+        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseAnnexureA" role="button" aria-expanded="false"
+           aria-controls="collapseAnnexureA">
+            <i class="ri-arrow-right-s-fill"></i>
+            <span class="text ml-1 mr-auto">View Request For Fixing of Demolition Programme Details</span>
+            <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="collapse" id="collapseAnnexureA">
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseAnnexureA">
+            <div id="allDetails">
+                <input type="hidden" asp-for="Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input type="hidden" asp-for="Id" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           
-            <h3 class="my-3 d-flex sub-heading">Summary</h3>
-            <div class="table-section bg-white border shadow rounded">
-                <div class="table-responsive ">
-                    <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
-                            <tr>
-                                <th>Sr.No</th>
-                                <th>Items</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Fixingprogram)
-                            {
+                <h3 class="my-3 d-flex sub-heading">Summary</h3>
+                <div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive ">
+                        <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
                                 <tr>
-                                    <td>@(recNo += 1)</td>
-                                    <td>@(item.DemolitionProgram.Items)</td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <textarea type="text" asp-for="@(item.ItemsDetails)" disabled placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
-                                            <input type="hidden" asp-for="DemolitionProgramId" value="@(item.Id)" />
-                                        </div>
-                                    </td>
+                                    <th>Sr.No</th>
+                                    <th>Items</th>
+                                    <th>Details</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Fixingprogram)
+                                {
+                                    <tr>
+                                        <td>@(recNo += 1)</td>
+                                        <td>@(item.DemolitionProgram.Items)</td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <textarea type="text" asp-for="@(item.ItemsDetails)" disabled placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                                                <input type="hidden" asp-for="DemolitionProgramId" value="@(item.Id)" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <h3 class="my-3 d-flex sub-heading">Check List</h3>
+                <div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive ">
+                        <table class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Items</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                @foreach (var item in Model.Fixingchecklist)
+                                {
+                                    <tr>
+                                        <td>@(recNo += 1)</td>
+                                        <td>@(item.DemolitionChecklist.ChecklistDescription)</td>
+                                        <td>
+                                            <div class="floating-label-wrap">
+                                                <select class="floating-label-field floating-label-field--s3" disabled
+                                                        asp-for="@(item.ChecklistDetails)" required style="width:100%;">
+                                                    <option value="Yes">Yes</option>
+                                                    <option value="No">No</option>
+                                                    <option value="Not Required">Not Required</option>
+                                                </select>
+                                                <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <h3 class="my-3 d-flex sub-heading">Encloures</h3>
+                <div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive ">
+                        <table class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Items</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                @foreach (var item in Model.Fixingdocument)
+                                {
+                                    <tr>
+                                        <td>
+                                            @(recNo += 1)
+                                        </td>
+                                        <td>
+                                            @item.DemolitionDocument.DocumentName
+                                        </td>
+                                        @if (@item.DocumentDetails != null)
+                                        {
+                                            <td>
+
+                                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                                    <a class="badge badge-primary px-2" asp-action="ViewDocumentAnnexureA" asp-route-id="@item.FixingdemolitionId" target="_blank"> (View Document)</a>
+
+                                                </div>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>  <a>No Document</a></td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            <h3 class="my-3 d-flex sub-heading">Check List</h3>
-            <div class="table-section bg-white border shadow rounded">
-                <div class="table-responsive ">
-                    <table class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
-                            <tr>
-                                <th>Sr.No</th>
-                                <th>Items</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody">
-                            @foreach (var item in Model.Fixingchecklist)
-                            {
-                                <tr>
-                                    <td>@(recNo += 1)</td>
-                                    <td>@(item.DemolitionChecklist.ChecklistDescription)</td>
-                                    <td>
-                                        <div class="floating-label-wrap">
-                                            <select class="floating-label-field floating-label-field--s3" disabled
-                                                    asp-for="@(item.ChecklistDetails)" required style="width:100%;">
-                                                <option value="Yes">Yes</option>
-                                                <option value="No">No</option>
-                                                <option value="Not Required">Not Required</option>
-                                            </select>
-                                            <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />
-                                        </div>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <h3 class="my-3 d-flex sub-heading">Encloures</h3>
-            <div class="table-section bg-white border shadow rounded">
-                <div class="table-responsive ">
-                    <table class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
-                            <tr>
-                                <th>Sr.No</th>
-                                <th>Items</th>
-                                <th>Details</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody">
-                            @foreach (var item in Model.Fixingdocument)
-                            {
-                                <tr>
-                                    <td>
-                                        @(recNo += 1)
-                                    </td>
-                                    <td>
-                                        @item.DemolitionDocument.DocumentName
-                                    </td>
-                                    @if (@item.DocumentDetails != null)
-                                    {
-                                    <td>
 
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                            <a class="badge badge-primary px-2" asp-action="ViewDocumentAnnexureA" asp-route-id="@item.FixingdemolitionId"> (View Document)</a>
-
-                                        </div>
-                                    </td>
-                                    }
-                                    else
-                                    {
-                                    <td>  <a>No Document</a></td>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
-    </form>
+    </div>
 </div>
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/annexureaview.js"></script>

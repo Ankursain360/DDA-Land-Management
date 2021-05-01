@@ -16,6 +16,8 @@ using Notification.OptionEnums;
 using Utility.Helper;
 using FileDataLoading.Filters;
 using Core.Enum;
+using Dto.Master;
+
 namespace FileDataLoading.Controllers
 {
     public class DataStorageDetailsController : BaseController
@@ -339,6 +341,34 @@ namespace FileDataLoading.Controllers
             var list = await _datastorageService.GetAllDataStorageDetail();
             return View("Index", list);
         }
+       // [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> DatastoragedetailsList()
+        {
+            var result = await _datastorageService.GetDataStorageDetails();
+            List<DatastoragedetailsListDto> data = new List<DatastoragedetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DatastoragedetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        NameSubject = result[i].Name,
+                        RecordRoomNo = result[i].RecordRoomNo,
+                        AlNoCompactorNo = result[i].Almirah == null ? "" : result[i].Almirah.AlmirahNo,
+                        RowNo = result[i].Row == null ? "" : result[i].Row.RowNo,
+                        ColNo = result[i].Column == null ? "" : result[i].Column.ColumnNo,
+                        BnNo = result[i].Bundle == null ? "" : result[i].Bundle.BundleNo,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }
