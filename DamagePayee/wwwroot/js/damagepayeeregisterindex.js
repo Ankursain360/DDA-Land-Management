@@ -1,8 +1,11 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
+    GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
+});
+$("#btnSearch1").click(function () {
     GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -29,10 +32,14 @@ function GetDamagePayeeRegister(pageNumber, pageSize, order) {
         $('#divDamagePayeeRegisterTable').html(response);
     });
 }
-
+$('#ddlSort').change(function () {
+    GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
+});
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "damagepayeeregister",
+        fileno: $('#txtFileNo').val(),
+        locality: parseInt($('#txtLocalityId option:selected').val()),
+        propertyno: $('#txtPropertyNo').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -41,6 +48,12 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     return model;
 }
 
+$("#btnReset").click(function () {
+    $('#txtLocalityId').val('0').trigger('change');
+    $('#txtFileNo').val('');
+    $('#txtPropertyNo').val('');
+    GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
+});
 function onPaging(pageNo) {
     GetDamagePayeeRegister(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;

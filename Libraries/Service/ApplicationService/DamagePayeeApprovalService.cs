@@ -25,14 +25,19 @@ namespace Service.ApplicationService
             _unitOfWork = unitOfWork;
             _damagePayeeApprovalRepository = damagePayeeApprovalRepository;
         }
-
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser)
-        {
-            return await _damagePayeeApprovalRepository.GetPagedDamagePayeeRegisterForApproval(model,  IsUser);
-        }
         public async Task<PagedResult<Damagepayeeregister>> GetPagedDamageForApproval(DamagepayeeRegisterApprovalDto model, int userId)
         {
             return await _damagePayeeApprovalRepository.GetPagedDamageForApproval(model, userId);
+        }
+
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _damagePayeeApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
+        }
+
+        public async Task<Damagepayeeregister> FetchSingleResult(int id)
+        {
+            return await _damagePayeeApprovalRepository.FetchSingleResult(id);
         }
     }
 }

@@ -4,13 +4,7 @@
     GetOtherDetails(id);
     GetHistoryDetails(id);
 
-    HttpGet(`/DamagePayeeApproval/GetApprovalDropdownList`, 'html', function (response) {
-        response = JSON.parse(response);
-        $('#ApprovalStatus option').filter(function () {
-            return $.inArray($(this).val(), response) == -1
-        }).remove();
-        callSelect2();
-    });
+    $("#ApprovalStatus").val('0').trigger('change');
 
 });
 
@@ -54,109 +48,194 @@ $("#collapse").click(function () {
     });
 });
 
-$('#myForm').validate({
-    rules: {
-        ApprovalStatusId: {
-            required: true
-        },
-        ApprovalRemarks: {
-            required: true
-        }
-    },
 
-    messages: {
-        ApprovalStatusId: {
-            required: ApprovalStatusIdMessage //this is a function that returns custom messages
-        },
-        ApprovalRemarks: {
-            required: ApprovalRemarksMessage //this is a function that returns custom messages
-        }
-    },
-    highlight: function (element) {
-        $(element).closest('.form-group').addClass('has-error');
-    },
-    unhighlight: function (element) {
-        $(element).closest('.form-group').removeClass('has-error');
-    },
-    errorElement: 'span',
-    errorClass: 'help-block',
-    errorPlacement: function (error, element) {
-        if (element.parent('.input-group').length) {
-            error.insertAfter(element.parent());
-        } else {
-            error.insertAfter(element);
-        }
-    },
-    submitHandler: function (form) {
-        return true;
-    }
+//function GetListData() {
+    
+//    var status = $('#ApprovalStatus option:selected').val();
+//    var remarks = $('#ApprovalRemarks').val();
+//    var damagepayeeregisterid = $('#Id').val();
+//    var workflow = [];
+//    var model = {};
+//    var data = {};
+//    debugger;
+//    var count = $('.myWebsiteTable').find('table').length;
+//    for (var i = 0; i < count; i++) {
+//        var parameterName = $("select[name='ParameterNameList[" + i + "]']").val();
+//        var parameterValue = $("select[name='ParameterValueList[" + i + "]']").val();
+//        var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
+//        var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
+//        var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
+
+//        if ((parameterName == "0")) {
+
+//        }
+//        else {
+//            model = {
+//                parameterValue: parameterValue,
+//                parameterName: parameterName,
+//                parameterLevel: parameterLevel,
+//                parameterSkip: (parameterSkip),
+//                parameterAction: parameterAction
+//            }
+//            workflow.push(model);
+//        }
+
+//    };
+//    console.log(workflow);
+//    if ($.isEmptyObject(workflow)) {
+
+//    }
+//    else {
+//        data = {
+//            Id: parseInt(id),
+//            moduleId: parseInt(moduleId),
+//            name: name,
+//            description: description,
+//            usertype: usertype,
+//            isActive: isActive,
+//            template: JSON.stringify(workflow)
+//        }
+//    }
+//    console.log(data);
+//    return data;
+//}
+
+
+$('#ApprovalDocument').change(function () {
+    var fileInput = document.getElementById('ApprovalDocument');
+    var filePath = fileInput.value;
+    const size = (ApprovalDocument.files[0].size);
+    fileValidation(filePath, fileInput, size);
 });
 
-function ApprovalRemarksMessage() {
-    var dropdown_val = $('#ApprovalRemarks').val();
-    if (dropdown_val == "") {
-        return "Approval Remarks is Mandatory";
-    } else {
-        return "";
-    }
-};
 
-function ApprovalStatusIdMessage() {
-    var dropdown_val = $('#ApprovalStatus').val();
-    if (dropdown_val == "") {
-        return "Approval Status is Mandatory";
-    } else {
-        return "";
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
     }
-};
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
 
-function GetListData() {
-    
-    var status = $('#ApprovalStatus option:selected').val();
-    var remarks = $('#ApprovalRemarks').val();
-    var damagepayeeregisterid = $('#Id').val();
-    var workflow = [];
-    var model = {};
-    var data = {};
+}
+
+function GetApprvoalStatus(id) {
     debugger;
-    var count = $('.myWebsiteTable').find('table').length;
-    for (var i = 0; i < count; i++) {
-        var parameterName = $("select[name='ParameterNameList[" + i + "]']").val();
-        var parameterValue = $("select[name='ParameterValueList[" + i + "]']").val();
-        var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
-        var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
-        var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
+    HttpGet(`/DamagePayeeApproval/GetApprvoalStatus/?value=${id}`, 'json', function (response) {
+        if (response != null) {
+            $("#ApprovalStatusCode").val(response.statusCode);
+            if (response.statusCode == $("#QueryForwardCode").val()) {
+                $("#RoleListDiv").show();
+                $("#UserListDiv").show();
+            }
+            else if (response.statusCode == $("#ForwardCode").val()) {
+                $("#RoleListDiv").hide();
+                $("#UserListDiv").show();
+                GetForwardedUserList();
+            }
+            else {
+                $("#RoleListDiv").hide();
+                $("#UserListDiv").hide();
+            }
 
-        if ((parameterName == "0")) {
-
+            callSelect2();
         }
         else {
-            model = {
-                parameterValue: parameterValue,
-                parameterName: parameterName,
-                parameterLevel: parameterLevel,
-                parameterSkip: (parameterSkip),
-                parameterAction: parameterAction
+            $("#ApprovalStatusCode").val(0);
+            $("#RoleListDiv").hide();
+            $("#UserListDiv").hide();
+        }
+    });
+};
+
+function GetUserList(id) {
+    debugger;
+    HttpGet(`/DamagePayeeApproval/GetUserList/?value=${id}`, 'json', function (response) {
+        var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
+        }
+        $("#ApprovalUserId").val(null).trigger('change');
+        $("#ApprovalUserId").html(html);
+    });
+};
+
+function GetForwardedUserList() {
+    debugger;
+    HttpGet(`/DamagePayeeApproval/GetForwardedUserList/?value=${parseInt($("#Id").val())}`, 'json', function (response) {
+        if (response != null) {
+            if (response[0] == "false") {
+                WarningMessage(response[1]);
             }
-            workflow.push(model);
+            else {
+                var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
+                for (var i = 0; i < response.length; i++) {
+                    html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
+                }
+                $("#ApprovalUserId").val(null).trigger('change');
+                $("#ApprovalUserId").html(html);
+            }
         }
+    });
+};
 
-    };
-    console.log(workflow);
-    if ($.isEmptyObject(workflow)) {
-
+$("#btnCreate").click(function () {
+    var checkresult = false;
+    var dropdown_ApprovalStatus = $('#ApprovalStatus option:selected').val();
+    if (parseInt(dropdown_ApprovalStatus) < 1) {
+        checkresult = false;
+        $("#ApprovalStatusMessage").show();
+    } else {
+        checkresult = true;
+        $("#ApprovalStatusMessage").hide();
     }
-    else {
-        data = {
-            Id: parseInt(id),
-            moduleId: parseInt(moduleId),
-            name: name,
-            description: description,
-            usertype: usertype,
-            isActive: isActive,
-            template: JSON.stringify(workflow)
+
+    var dropdown_ApprovalRoleId = $('#ApprovalRoleId option:selected').val();
+    if (parseInt(dropdown_ApprovalRoleId) < 1) {
+        checkresult = false;
+        $("#ApprovalRoleIdMessage").show();
+    } else {
+        checkresult = true;
+        $("#ApprovalRoleIdMessage").hide();
+    }
+
+    var dropdown_ApprovalUserId = $('#ApprovalUserId option:selected').val();
+    if (parseInt(dropdown_ApprovalUserId) < 1) {
+        checkresult = false;
+        $("#ApprovalUserIdMessage").show();
+    } else {
+        checkresult = true;
+        $("#ApprovalUserIdMessage").hide();
+    }
+
+    var ApprovalRemarks_val = $('#ApprovalRemarks').val();
+    if (ApprovalRemarks_val == "") {
+        checkresult = false;
+        $("#ApprovalRemarksMessage").show();
+    } else {
+        checkresult = true;
+        $("#ApprovalRemarksMessage").hide();
+    }
+
+    if (parseInt(dropdown_ApprovalStatus) < 1 || ApprovalRemarks_val == "") {
+        checkresult = false;
+    }
+    if ($("#ApprovalStatusCode").val() == $("#QueryForwardCode").val()) {
+        if (parseInt(dropdown_ApprovalRoleId) < 1 || parseInt(dropdown_ApprovalUserId) < 1) {
+            checkresult = false;
         }
     }
-    console.log(data);
-    return data;
-}
+    if ($("#ApprovalStatusCode").val() == $("#ForwardCode").val()) {
+        if (parseInt(dropdown_ApprovalUserId) < 1) {
+            checkresult = false;
+        }
+    }
+
+    return checkresult
+
+});

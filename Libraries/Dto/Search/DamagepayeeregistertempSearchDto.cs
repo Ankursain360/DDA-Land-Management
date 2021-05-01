@@ -8,6 +8,8 @@ namespace Dto.Search
   
      public class DamagepayeeregistertempSearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public string fileno { get; set; }
+        public string propertyno { get; set; }
+        public int locality { get; set; }
     }
 }

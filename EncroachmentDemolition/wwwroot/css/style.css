@@ -1290,6 +1290,7 @@ textarea.floating-label-field--s3 {
 @media(min-width:1200px) {}
 */
 
+/*Start for accordian design added by renu */
 .permission {
     font-size: .8rem;
 }
@@ -1318,3 +1319,5 @@ textarea.floating-label-field--s3 {
             margin-top: 0rem;
             margin-left: -1.1rem;
         }
+
+/*End for accordian design added by renu */

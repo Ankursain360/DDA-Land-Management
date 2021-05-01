@@ -12,7 +12,8 @@ namespace Libraries.Service.IApplicationService
 
     public interface IDamagePayeeApprovalService : IEntityService<Damagepayeeregister>
     {
-        Task<PagedResult<Damagepayeeregister>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser);
         Task<PagedResult<Damagepayeeregister>> GetPagedDamageForApproval(DamagepayeeRegisterApprovalDto model, int userId);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
+        Task<Damagepayeeregister> FetchSingleResult(int id);
     }
 }

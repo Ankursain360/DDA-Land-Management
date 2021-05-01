@@ -22,11 +22,20 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Damagepayeeregister>> GetPagedDamageForApproval(DamagepayeeRegisterApprovalDto model, int userId)
         {
+            var AllDataList = await _dbContext.Damagepayeeregister.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Damagepayeeregister myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+
             var data = await _dbContext.Damagepayeeregister
                                         .Include(x => x.Locality)
                                         .Include(x => x.District)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                        && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         )
                                         .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -36,9 +45,11 @@ namespace Libraries.Repository.EntityRepository
                 data = await _dbContext.Damagepayeeregister
                                 .Include(x => x.Locality)
                                 .Include(x => x.District)
-                                .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-                                )
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        )
                                 .OrderBy(s =>
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo : model.SortBy.ToUpper() == "DISTRICT" ? s.District.Name : model.SortBy.ToUpper() == "LOCALITY" ? s.Locality.Name : s.FileNo)
                                 )
@@ -50,9 +61,11 @@ namespace Libraries.Repository.EntityRepository
                 data = await _dbContext.Damagepayeeregister
                                 .Include(x => x.Locality)
                                 .Include(x => x.District)
-                                .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-                                )
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        )
                                 .OrderByDescending(s =>
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo : model.SortBy.ToUpper() == "DISTRICT" ? (s.District == null ? null : s.District.Name) : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null) : s.FileNo)
                                 )
@@ -61,26 +74,28 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser)
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
         {
-            if (IsUser)
-            {
+            var result = false;
+            var AllDataList = await _dbContext.Damagepayeeregister
+                                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                                .ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString())).ToList();
 
-                return await _dbContext.Damagepayeeregister
-                                        .Include(x => x.Locality)
-                                        .Include(x => x.District)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId)
-                                        .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
-            }
+            if (UserWiseDataList.Count == 0)
+                result = false;
             else
-            {
-                return await _dbContext.Damagepayeeregister
-                                        .Include(x => x.Locality)
-                                        .Include(x => x.District)
-                                        .Where(x => x.IsActive == 1
-                                        && (model.StatusId == 0 ? x.ApprovedStatus == 2 : x.ApprovedStatus == model.StatusId))
-                                        .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
-            }
+                result = true;
+
+            return result;
+        }
+        public async Task<Damagepayeeregister> FetchSingleResult(int id)
+        {
+            return await _dbContext.Damagepayeeregister
+                                .Include(x => x.Locality)
+                                .Include(x => x.District)
+                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                .FirstOrDefaultAsync();
         }
     }
 }

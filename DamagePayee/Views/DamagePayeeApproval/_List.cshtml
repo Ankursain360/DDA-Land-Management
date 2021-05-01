@@ -10,7 +10,7 @@
             <th>District</th>
             <th>Locality</th>
             <th>Submitted On</th>
-            <th>Status</th>
+            <th>Approval Status</th>
             <th>Operations</th>
         </tr>
 
@@ -20,36 +20,29 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@item.FileNo</td>
-                    <td>@item.TypeOfDamageAssessee</td>
-                    <td>@item.PropertyNo</td>
-                    <td>@item.District.Name</td>
-                    <td>@item.Locality.Name</td>
-                    <td> @(Convert.ToDateTime(item.CreatedDate).ToString("dd MMM yyyy"))</td>
-
-                    <td>
-                        @if (item.ApprovedStatus == 0)
-                        {
-                            <span class="badge badge-warning px-2 py-1">Pending</span> }
-                        else
-                        {
-                            <span class="badge badge-success px-2 py-1">Approved</span>
-                        }
-                    </td>
-                    @if (ViewBag.IsApproved == 0)
-                    {
-                        <td>
-
-                            <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-
-                        </td>
-                    }
-                    else
-                    {
-                        <td>No Action</td>
-                    }
-                </tr>
+        <tr>
+            <td>@item.FileNo</td>
+            <td>@item.TypeOfDamageAssessee</td>
+            <td>@item.PropertyNo</td>
+            <td>@item.District.Name</td>
+            <td>@item.Locality.Name</td>
+            <td> @(Convert.ToDateTime(item.CreatedDate).ToString("dd MMM yyyy"))</td>
+            <td>
+                @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+            </td>
+            @if (ViewBag.IsApproved == 0)
+            {
+                <td>
+                    <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-line"></i> </a>
+                </td>
+            }
+        </tr>
             }
         }
         else
