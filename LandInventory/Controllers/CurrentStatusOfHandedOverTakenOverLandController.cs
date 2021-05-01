@@ -14,6 +14,8 @@ using System.IO;
 using System.Threading.Tasks;
 using Utility.Helper;
 
+using Dto.Master;
+
 namespace LandInventory.Controllers
 {
     public class CurrentStatusOfHandedOverTakenOverLandController : BaseController
@@ -199,5 +201,44 @@ namespace LandInventory.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+
+        public async Task<IActionResult> UpdatePlotDetailsList()
+        {
+            var result = await _landTransferService.GetAllLandTransferList();
+            List<UpdatePlotDetailsListDto> data = new List<UpdatePlotDetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new UpdatePlotDetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].PropertyRegistration.Department == null ? " " : result[i].PropertyRegistration.Department.Name,
+                        Zone = result[i].PropertyRegistration.Zone == null ? " " : result[i].PropertyRegistration.Zone.Name,
+                        Division = result[i].PropertyRegistration.Division == null ? " " : result[i].PropertyRegistration.Division.Name,
+                        Village = result[i].PropertyRegistration.Locality == null ? " " : result[i].PropertyRegistration.Locality.Name,
+                      
+                       
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

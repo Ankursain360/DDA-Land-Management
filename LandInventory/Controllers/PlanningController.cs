@@ -12,6 +12,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using Utility.Helper;
+using Dto.Master;
+
+
 namespace LandInventory.Controllers
 {
     public class PlanningController : Controller
@@ -307,5 +311,61 @@ namespace LandInventory.Controllers
             DivisionId = DivisionId ?? 0;
             return Json(await _planningService.GetUnplannedProperties(Convert.ToInt32(DepartmentId), Convert.ToInt32(ZoneId), Convert.ToInt32(DivisionId)));
         }
+
+
+
+        public async Task<IActionResult> UpdatePlanningDetailsList()
+        {
+           
+            string UnplannedProperty_text = string.Empty;
+            string PlannedProperty_text = string.Empty;
+            var result = await _planningService.GetAllPlanninglist();
+            List<UpdatePlanningDetailsListDto> data = new List<UpdatePlanningDetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                   var  pp = result[i].PlanningProperties;
+                    foreach (var d in pp)
+                    {
+                        if (d.PropertyType == 0)
+                        {
+                            UnplannedProperty_text = "#aa";
+                        } 
+                        if (d.PropertyType == 1)
+                        {
+                            UnplannedProperty_text = "#bb";
+                        }
+
+                    }
+                    data.Add(new UpdatePlanningDetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].Department == null ? " " : result[i].Department.Name,
+                        Division = result[i].Division == null ? " " : result[i].Division.Name,
+                        Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
+                        UnplannedProperty = UnplannedProperty_text,
+                        plannedProperty = PlannedProperty_text,
+
+
+
+
+
+
+
+                        //IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+
     }
 }

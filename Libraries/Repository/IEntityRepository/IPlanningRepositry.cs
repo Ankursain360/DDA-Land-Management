@@ -19,5 +19,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> CreateProperties(List<PlanningProperties> planningProperties);
         Task<List<int>> FetchUnplannedProperties(int id);
         Task<List<int>> FetchPlannedProperties(int id);
+        Task<List<Planning>> GetAllPlanninglist();
     }
 }

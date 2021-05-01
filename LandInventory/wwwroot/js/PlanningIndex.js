@@ -31,7 +31,7 @@ $("#btnReset").click(function () {
 function GetLandTransfer(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/Planning/List`, 'html', param, function (response) {
-        debugger;
+       
         $('#divLandTransferTable').html("");
         $('#divLandTransferTable').html(response);
     });
@@ -45,7 +45,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         unplannedname: $('#txtName').val(),
         plannedname: $('#txtUserName').val()
     }
-    debugger
+   
     return model;
 }
 function onPaging(pageNo) {

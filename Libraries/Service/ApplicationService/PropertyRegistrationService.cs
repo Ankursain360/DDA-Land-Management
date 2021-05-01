@@ -68,6 +68,15 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetAllPropertyregistration(UserId);
         }
+        public async Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId)
+        {
+            return await _propertyregistrationRepository.GetAllPropertInventorylist(UserId);
+        }
+
+        public async Task<List<Propertyregistration>> GetUnverifiedList(int UserId)
+        {
+            return await _propertyregistrationRepository.GetUnverifiedList(UserId);
+        }
 
         public async Task<Propertyregistration> FetchSingleResult(int id)
         {
@@ -325,6 +334,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Propertyregistration>> GetKhasraReportList()
         {
             return await _propertyregistrationRepository.GetKhasraReportList();
+        }
+
+        public async Task<List<Propertyregistration>> GetAllDeletedPropertyList()
+        {
+            return await _propertyregistrationRepository.GetAllDeletedPropertyList();
         }
 
         public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId)

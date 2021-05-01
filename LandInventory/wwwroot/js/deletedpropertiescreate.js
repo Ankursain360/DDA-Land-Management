@@ -85,7 +85,7 @@ $('#ddlSort').change(function () {
 
 function GetDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    debugger
+
     HttpPost(`/DeletedProperties/List`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);

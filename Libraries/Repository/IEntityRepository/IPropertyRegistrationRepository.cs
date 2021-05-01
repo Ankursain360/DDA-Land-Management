@@ -16,6 +16,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Landuse>> GetLandUseDropDownList();
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
+        Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
+        Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
+        Task<List<Propertyregistration>> GetAllDeletedPropertyList();
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();

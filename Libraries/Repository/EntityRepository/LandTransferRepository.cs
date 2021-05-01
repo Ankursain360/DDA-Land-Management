@@ -249,7 +249,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Landtransfer>> GetAllLandTransferList()
         {
-            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Landtransfer.Include(x => x.PropertyRegistration)
+                 .Include(x => x.PropertyRegistration.Locality)
+                 .Include(x => x.PropertyRegistration.Department)
+                 .Include(x => x.PropertyRegistration.Zone)
+                 .Include(x => x.PropertyRegistration.Division).Where(x => x.IsActive == 1).ToListAsync();
         }
 
 

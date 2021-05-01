@@ -53,5 +53,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> DisposeDetails(int id, Disposedproperty model);
         Task<bool> InsertInDisposedProperty(int id, Disposedproperty model);
         Task<bool> UpdatePropertyRegistrationForLandTransfer(int id, Propertyregistration propertyregistration);
+        Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
+        Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
+        Task<List<Propertyregistration>> GetAllDeletedPropertyList();
     }
 }

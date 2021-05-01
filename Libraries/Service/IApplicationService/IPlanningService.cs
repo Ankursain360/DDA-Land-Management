@@ -25,5 +25,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> VerifyProperties(int plannigId);
         Task<List<int>> FetchUnplannedProperties(int id);
         Task<List<int>> FetchPlannedProperties(int id);
+        Task<List<Planning>> GetAllPlanninglist();
     }
 }

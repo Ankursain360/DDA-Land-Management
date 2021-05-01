@@ -8,7 +8,7 @@ $(document).ready(function () {
 function GetLandTransfer(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/Planning/VerificationPageList`, 'html', param, function (response) {
-        debugger;
+       
         $('#divLandTransferTable').html("");
         $('#divLandTransferTable').html(response);
     });
@@ -19,7 +19,7 @@ function GetSearchParam(pageNumber, pageSize) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
-    debugger
+ 
     return model;
 }
 function onPaging(pageNo) {

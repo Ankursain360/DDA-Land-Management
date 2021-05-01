@@ -33,6 +33,22 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Division.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId).ToListAsync();
         }
+
+        public async Task<List<Planning>> GetAllPlanninglist()
+        {
+            return await _dbContext.Planning
+                .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1)
+                 .ToListAsync();
+        }
+
+
+
         public async Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto)
         {
             return await _dbContext.Planning

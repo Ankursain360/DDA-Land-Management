@@ -126,5 +126,12 @@ namespace Service.ApplicationService
             _planningRepositry.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+
+        public async Task<List<Planning>> GetAllPlanninglist()
+        {
+            return await _planningRepositry.GetAllPlanninglist();
+        }
+
     }
 }
