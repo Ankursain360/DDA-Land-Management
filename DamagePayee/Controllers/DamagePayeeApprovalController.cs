@@ -392,7 +392,7 @@ namespace DamagePayee.Controllers
                         string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                         #endregion
 
-                        string strMailSubject = "Pending Lease Application Approval Request Details ";
+                        string strMailSubject = "Pending Damage Payee Register Application Approval Request Details ";
                         string strMailCC = "", strMailBCC = "", strAttachPath = "";
                         sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
                         #endregion

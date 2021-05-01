@@ -370,7 +370,7 @@ namespace EncroachmentDemolition.Controllers
 
                         #region HTML Body Generation
                         ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                        bodyDTO.ApplicationName = "Lease Application";
+                        bodyDTO.ApplicationName = "Watch & Ward Application";
                         bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
                         bodyDTO.SenderName = senderUser.User.Name;
                         bodyDTO.Link = link;
@@ -381,7 +381,7 @@ namespace EncroachmentDemolition.Controllers
                         string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                         #endregion
 
-                        string strMailSubject = "Pending Lease Application Approval Request Details ";
+                        string strMailSubject = "Pending Watch & Ward Application Approval Request Details ";
                         string strMailCC = "", strMailBCC = "", strAttachPath = "";
                         sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
                         #endregion
