@@ -63,6 +63,21 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<INewlandProposaldetailsRepository, NewlandProposaldetailsRepository>();
             services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
 
+            // Acquired land  masters
+
+
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+            services.AddScoped<IKhasraRepository, KhasraRepository>();
+            services.AddScoped<ITehsilRepository, TehsilRepository>();//added by anuj 8-feb-21
+            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
+            services.AddScoped<IUndersection4Repository, Undersection4Repository>();
+            services.AddScoped<IUnderSection6Repository, UnderSection6Repository>();
+            services.AddScoped<IUndersection17Repository, Undersection17Repository>();
+            services.AddScoped<IUndersection22Repository, Undersection22Repository>();
+            services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
+
+
+
 
 
             /* Application Services */
@@ -107,6 +122,21 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<INewlandSchemeService, NewlandSchemeService>();
             services.AddScoped<INewlandProposaldetailsService, NewlandProposaldetailsService>();
             services.AddScoped<INewlandawardmasterdetailService, NewlandawardmasterdetailsService>();
+
+
+            // Acquired land  masters
+
+
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
+            services.AddScoped<IKhasraService, KhasraService>();
+            services.AddScoped<ITehsilService, TehsilService>();//added by anuj 8-feb-21
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
+            services.AddScoped<IUndersection4service, Undersection4Service>();
+            services.AddScoped<IUnderSection6Service, UnderSection6Service>();
+            services.AddScoped<IUndersection17Service, Undersection17Service>();
+            services.AddScoped<IUndersection22Service, Undersection22Service>();
+            services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
+
 
         }
     }

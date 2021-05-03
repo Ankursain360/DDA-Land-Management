@@ -12,95 +12,91 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
-using Utility.Helper;
+using SiteMaster.Filters;
 using Dto.Master;
+using Utility.Helper;
 
-namespace AcquiredLandInformationManagement.Controllers
+namespace SiteMaster.Controllers
 {
-    public class UnderSection17DetailsController : Controller
+    public class UnderSection6Master : Controller
     {
-        private readonly IUndersection17Service _undersection17Service;
+        private readonly IUnderSection6Service _undersection4service;
 
-
-        public UnderSection17DetailsController(IUndersection17Service undersection17Service)
+        public UnderSection6Master(IUnderSection6Service undersection4service)
         {
-          _undersection17Service = undersection17Service;
+            _undersection4service = undersection4service;
         }
+
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var list = await _undersection17Service.GetAllUndersection17();
-            return View(list);
+
+            return View();
         }
+
+
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] UnderSection17SearchDto model)
+        public async Task<PartialViewResult> List([FromBody] Undersection6SearchDto model)
         {
-            var result = await _undersection17Service.GetPagedUndersection17(model);
+            var result = await _undersection4service.GetPagedUndersection6details(model);
+
             return PartialView("_List", result);
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
-
         {
-            Undersection17 undersection17 = new Undersection17();
-            undersection17.IsActive = 1;
+            Undersection6 undersection4 = new Undersection6();
+            undersection4.IsActive = 1;
+            undersection4.NotificationList = await _undersection4service.GetAllundersection4();
 
-
-            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
-            return View(undersection17);
+            return View(undersection4);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Undersection17 undersection17)
+        public async Task<IActionResult> Create(Undersection6 undersection6)
         {
             try
             {
-
-
-                undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
+                undersection6.NotificationList = await _undersection4service.GetAllundersection4();
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _undersection17Service.Create(undersection17);
+                    var result = await _undersection4service.Create(undersection6);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection17Service.GetAllUndersection17();
+                        var list = await _undersection4service.GetAllUndersection6();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection17);
+                        return View(undersection6);
                     }
                 }
                 else
                 {
-                    return View(undersection17);
+                    return View(undersection6);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(undersection17);
+                return View(undersection6);
             }
         }
-
-
 
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _undersection17Service.FetchSingleResult(id);
-           
+            var Data = await _undersection4service.FetchSingleResult(id);
 
-            Data.Undersection6List = await _undersection17Service.GetAllUndersection6List();
+            Data.NotificationList = await _undersection4service.GetAllundersection4();
 
             if (Data == null)
             {
@@ -109,47 +105,51 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Undersection17 undersection17)
+        public async Task<IActionResult> Edit(int id, Undersection6 undersection6)
         {
-            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
+            undersection6.NotificationList = await _undersection4service.GetAllundersection4();
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _undersection17Service.Update(id, undersection17);
+                    var result = await _undersection4service.Update(id, undersection6);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection17Service.GetAllUndersection17();
+                        var list = await _undersection4service.GetAllUndersection6();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection17);
+                        return View(undersection6);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(undersection17);
+                    return View(undersection6);
                 }
             }
             else
             {
-                return View(undersection17);
+                return View(undersection6);
             }
         }
+
+
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
 
-                var result = await _undersection17Service.Delete(id);
+                var result = await _undersection4service.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -163,16 +163,15 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _undersection17Service.GetAllUndersection17();
+            var list = await _undersection4service.GetAllUndersection6();
             return View("Index", list);
         }
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _undersection17Service.FetchSingleResult(id);
-
-         
-            Data.Undersection6List = await _undersection17Service.GetAllUndersection6List();
+            var Data = await _undersection4service.FetchSingleResult(id);
+            Data.NotificationList = await _undersection4service.GetAllundersection4();
 
 
             if (Data == null)
@@ -182,23 +181,23 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
-
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Undersection17List()
+
+
+        public async Task<IActionResult> Undersection6List()
         {
-            var result = await _undersection17Service.GetAllUndersection17();
-            List<Undersection17ListDto> data = new List<Undersection17ListDto>();
+            var result = await _undersection4service.GetAllUndersection6();
+            List<Undersection6ListDto> data = new List<Undersection6ListDto>();
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    data.Add(new Undersection17ListDto()
+                    data.Add(new Undersection6ListDto()
                     {
                         Id = result[i].Id,
+                        UnderSection4No = result[i].Undersection4 == null ? "" : result[i].Undersection4.Number,
                         NotificationNo = result[i].Number,
-                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
-                        NotificationUS6 = result[i].UnderSection6 == null ? "" : result[i].UnderSection6.Number,
-                        
+                        NotificationDate = Convert.ToDateTime(result[i].Ndate).ToString("dd-MMM-yyyy"),
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
@@ -209,6 +208,6 @@ namespace AcquiredLandInformationManagement.Controllers
 
         }
 
+
     }
 }
-

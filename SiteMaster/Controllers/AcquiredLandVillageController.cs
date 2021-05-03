@@ -7,7 +7,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using AcquiredLandInformationManagement.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using System.Data;
 using Newtonsoft.Json;
@@ -15,7 +15,7 @@ using Utility.Helper;
 using System.Collections.Generic;
 using Dto.Master;
 
-namespace AcquiredLandInformationManagement.Controllers
+namespace SiteMaster.Controllers
 {
     public class AcquiredLandVillageController : BaseController
     {

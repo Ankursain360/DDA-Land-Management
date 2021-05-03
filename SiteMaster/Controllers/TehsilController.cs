@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AcquiredLandInformationManagement.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using Dto.Master;
 using Dto.Search;
@@ -15,77 +15,84 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
 
-namespace AcquiredLandInformationManagement.Controllers
-{
-    public class UnderSection22DetailsController : BaseController
-    {
-        private readonly IUndersection22Service _undersection22Service;
+namespace SiteMaster.Controllers
 
-        public UnderSection22DetailsController(IUndersection22Service undersection22Service)
+{
+
+    public class TehsilController : BaseController
+    {
+        private readonly ITehsilService _tehsilService;
+
+        public TehsilController(ITehsilService tehsilService)
         {
-            _undersection22Service = undersection22Service;
+            _tehsilService = tehsilService;
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-
+          
             return View();
-
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] Undersection22SearchDto model)
+        public async Task<PartialViewResult> List([FromBody] TehsilSearchDto model)
         {
-            var result = await _undersection22Service.GetPagedUndersection22(model);
+            var result = await _tehsilService.GetPagedTehsil(model);
             return PartialView("_List", result);
         }
+
         [AuthorizeContext(ViewAction.Add)]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            Tehsil tehsil = new Tehsil();
+            tehsil.IsActive = 1;           
+            return View(tehsil);
         }
 
 
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Undersection22 undersection22)
+        public async Task<IActionResult> Create(Tehsil tehsil)
         {
             try
             {
-
+            
                 if (ModelState.IsValid)
                 {
-                    undersection22.CreatedBy = SiteContext.UserId;
-                    var result = await _undersection22Service.Create(undersection22);
+
+
+                    var result = await _tehsilService.Create(tehsil);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection22Service.GetAllUndersection22();
+                        var list = await _tehsilService.GetAllTehsil();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection22);
+                        return View(tehsil);
 
                     }
                 }
                 else
                 {
-                    return View(undersection22);
+                    return View(tehsil);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(undersection22);
+                return View(tehsil);
             }
         }
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _undersection22Service.FetchSingleResult(id);
+
+            var Data = await _tehsilService.FetchSingleResult(id);
+           
             if (Data == null)
             {
                 return NotFound();
@@ -94,26 +101,26 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Undersection22 undersection22)
+        public async Task<IActionResult> Edit(int id, Tehsil tehsil)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
 
-                    undersection22.ModifiedBy = SiteContext.UserId;
-                    var result = await _undersection22Service.Update(id, undersection22);
+                    var result = await _tehsilService.Update(id, tehsil);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection22Service.GetAllUndersection22();
+                        var list = await _tehsilService.GetAllTehsil();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection22);
+                        return View(tehsil);
 
                     }
                 }
@@ -122,10 +129,23 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 }
             }
-            return View(undersection22);
+            return View(tehsil);
         }
 
-       
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            var result = await _tehsilService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Page: {Name} already exist");
+            }
+        }
 
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
@@ -135,20 +155,20 @@ namespace AcquiredLandInformationManagement.Controllers
                 return NotFound();
             }
 
-            var form = await _undersection22Service.Delete(id);
+            var form = await _tehsilService.Delete(id);
             if (form == false)
             {
                 return NotFound();
             }
-            var result = await _undersection22Service.GetAllUndersection22();
+            var result = await _tehsilService.GetAllTehsil();
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View("Index", result);
         }
-
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _undersection22Service.FetchSingleResult(id);
+            var Data = await _tehsilService.FetchSingleResult(id);
+           
             if (Data == null)
             {
                 return NotFound();
@@ -157,21 +177,20 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [AuthorizeContext(ViewAction.Download)]
-       
-
-        public async Task<IActionResult> Undersection22List()
+      
+        public async Task<IActionResult> TehsilList()
         {
-            var result = await _undersection22Service.GetAllUndersection22();
-            List<Undersection22ListDto> data = new List<Undersection22ListDto>();
+            var result = await _tehsilService.GetAllTehsil();
+            List<TehsilListDto> data = new List<TehsilListDto>();
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    data.Add(new Undersection22ListDto()
+                    data.Add(new TehsilListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].NotificationNo,
-                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
+                        TehsilName = result[i].Name,
+                       
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
