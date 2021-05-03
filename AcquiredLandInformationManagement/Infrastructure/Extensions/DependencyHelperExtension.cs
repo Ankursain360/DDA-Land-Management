@@ -24,23 +24,21 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IJointsurveyRepository, JointsurveyRepository>();
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
-            services.AddScoped<IUnderSection6Repository, UnderSection6Repository>();
+          
             services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
 
-            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+           
             services.AddScoped<ISchemeRepository, SchemeRepository>();
 
-            services.AddScoped<IUndersection4Repository, Undersection4Repository>();
-
-            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
+            
+            
             services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
-            services.AddScoped<IKhasraRepository, KhasraRepository>();
+           
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
 
-            services.AddScoped<IUndersection22Repository, Undersection22Repository>();
+           
             services.AddScoped<IAwardplotDetailsRepository, AwardplotDetailsRepository>();
-            services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
-
+           
             services.AddScoped<IDisposallandtypeRepository, DisposallandtypeRepository>();
             services.AddScoped<INazulRepository, NazulRepository>();
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();
@@ -52,7 +50,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IBooktransferlandRepository, BooktransferlandRepository>();
             services.AddScoped<ISakanidetailRepository, SakanidetailRepository>(); //added by Nikita
             services.AddScoped<IJaraidetailRepository, JaraidetailRepository>(); //added by Nikita
-            services.AddScoped<IUndersection17Repository, Undersection17Repository>();
+           
             services.AddScoped<IModuleRepository, ModuleRepository>();
 
             services.AddScoped<IMenuRepository, MenuRepository>();
@@ -60,7 +58,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-            services.AddScoped<ITehsilRepository, TehsilRepository>();//added by anuj 8-feb-21
+           
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
             services.AddScoped<IUndersection17plotdetailRepository, Undersection17plotdetailRepository>();
@@ -79,14 +77,13 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IJointsurveyService, JointsurveyService>();
-            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
+          
             services.AddScoped<ISchemeService, SchemeService>();
-            services.AddScoped<IUndersection4service, Undersection4Service>();
-            services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
+          
             services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
-            services.AddScoped<IKhasraService, KhasraService>();
+          
             services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
-            services.AddScoped<IUndersection22Service, Undersection22Service>();
+           
             services.AddScoped<IAwardplotDetailService, AwardplotDetailsService>();
             services.AddScoped<IDisposallandtypeService, DisposallandtypeService>();
             services.AddScoped<INazulService, NazulService>();
@@ -102,7 +99,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IBooktransferlandService, BooktransferlandService>();
             services.AddScoped<ISakanidetailService, SakanidetailService>(); //added by Nikita
             services.AddScoped<IJaraidetailService, JaraidetailService>();
-            services.AddScoped<IUndersection17Service, Undersection17Service>();
+           
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
@@ -111,7 +108,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<ITehsilService, TehsilService>();//added by anuj 8-feb-21
+          
             services.AddScoped<IDisposallandService, DisposallandService>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
             services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
@@ -120,10 +117,10 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IPaymentdetailService, PaymentdetailService>();
             services.AddScoped<IPossessiondetailsService, PossessiondetailsService>();
           
-            services.AddScoped<IUnderSection6Service, UnderSection6Service>();
+           
             services.AddScoped<IDemandListDetailsService, DemandListDetailsService>();
             services.AddScoped<IMutationService, MutationService>();
-            services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
+           
             services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
             services.AddScoped<INewlandnotificationService, NewlandnotificationService>();
 

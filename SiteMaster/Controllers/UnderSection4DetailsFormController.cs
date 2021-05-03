@@ -12,18 +12,20 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using SiteMaster.Filters;
 using Core.Enum;
-using AcquiredLandInformationManagement.Filters;
-using Dto.Master;
 using Utility.Helper;
+using Dto.Master;
 
-namespace AcquiredLandInformationManagement.Controllers
+namespace SiteMaster.Controllers
 {
-    public class UnderSection6Master : Controller
+    public class UnderSection4DetailsFormController : Controller
     {
-        private readonly IUnderSection6Service _undersection4service;
 
-        public UnderSection6Master(IUnderSection6Service undersection4service)
+        private readonly IUndersection4service _undersection4service;
+
+
+        public UnderSection4DetailsFormController(IUndersection4service undersection4service)
         {
             _undersection4service = undersection4service;
         }
@@ -35,21 +37,22 @@ namespace AcquiredLandInformationManagement.Controllers
             return View();
         }
 
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] Undersection6SearchDto model)
+        public async Task<PartialViewResult> List([FromBody] Undersection4SearchDto model)
         {
-            var result = await _undersection4service.GetPagedUndersection6details(model);
+            var result = await _undersection4service.GetPagedUndersection4details(model);
 
             return PartialView("_List", result);
         }
+
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Undersection6 undersection4 = new Undersection6();
+            Undersection4 undersection4 = new Undersection4();
             undersection4.IsActive = 1;
-            undersection4.NotificationList = await _undersection4service.GetAllundersection4();
-
+            undersection4.ProposalList = await _undersection4service.GetAllProposal();
+           
             return View(undersection4);
         }
 
@@ -57,46 +60,45 @@ namespace AcquiredLandInformationManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Undersection6 undersection6)
+        public async Task<IActionResult> Create(Undersection4 undersection4)
         {
             try
             {
-                undersection6.NotificationList = await _undersection4service.GetAllundersection4();
+                undersection4.ProposalList = await _undersection4service.GetAllProposal();
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _undersection4service.Create(undersection6);
+                    var result = await _undersection4service.Create(undersection4);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4service.GetAllUndersection6();
+                        var list = await _undersection4service.GetAllUndersection4();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection6);
+                        return View(undersection4);
                     }
                 }
                 else
                 {
-                    return View(undersection6);
+                    return View(undersection4);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(undersection6);
+                return View(undersection4);
             }
         }
-
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _undersection4service.FetchSingleResult(id);
-
-            Data.NotificationList = await _undersection4service.GetAllundersection4();
+         
+            Data.ProposalList = await _undersection4service.GetAllProposal();
 
             if (Data == null)
             {
@@ -105,44 +107,39 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Undersection6 undersection6)
+        public async Task<IActionResult> Edit(int id, Undersection4 undersection4)
         {
-            undersection6.NotificationList = await _undersection4service.GetAllundersection4();
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _undersection4service.Update(id, undersection6);
+                    var result = await _undersection4service.Update(id, undersection4);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4service.GetAllUndersection6();
+                        var list = await _undersection4service.GetAllUndersection4();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection6);
+                        return View(undersection4);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(undersection6);
+                    return View(undersection4);
                 }
             }
             else
             {
-                return View(undersection6);
+                return View(undersection4);
             }
         }
-
-
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
@@ -163,16 +160,15 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _undersection4service.GetAllUndersection6();
+            var list = await _undersection4service.GetAllUndersection4();
             return View("Index", list);
         }
-
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _undersection4service.FetchSingleResult(id);
-            Data.NotificationList = await _undersection4service.GetAllundersection4();
-
+            Data.ProposalList = await _undersection4service.GetAllProposal();
+           
 
             if (Data == null)
             {
@@ -184,20 +180,21 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Download)]
 
 
-        public async Task<IActionResult> Undersection6List()
+        public async Task<IActionResult> UnderSection4List()
         {
-            var result = await _undersection4service.GetAllUndersection6();
-            List<Undersection6ListDto> data = new List<Undersection6ListDto>();
+            var result = await _undersection4service.GetAllUndersection4();
+            List<UnderSection4ListDto> data = new List<UnderSection4ListDto>();
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    data.Add(new Undersection6ListDto()
+                    data.Add(new UnderSection4ListDto()
                     {
                         Id = result[i].Id,
-                        UnderSection4No = result[i].Undersection4 == null ? "" : result[i].Undersection4.Number,
+                        ProposalName = result[i].Proposal == null ? "" : result[i].Proposal.Name,
                         NotificationNo = result[i].Number,
                         NotificationDate = Convert.ToDateTime(result[i].Ndate).ToString("dd-MMM-yyyy"),
+                        Type = result[i].TypeDetails,
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }

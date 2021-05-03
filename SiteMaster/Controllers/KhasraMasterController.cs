@@ -12,93 +12,95 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using AcquiredLandInformationManagement.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
-using Utility.Helper;
 using Dto.Master;
+using Utility.Helper;
 
-namespace AcquiredLandInformationManagement.Controllers
+namespace SiteMaster.Controllers
 {
-    public class UnderSection4DetailsFormController : Controller
+    public class KhasraMasterController : Controller
     {
+        private readonly IKhasraService _khasraService;
 
-        private readonly IUndersection4service _undersection4service;
 
-
-        public UnderSection4DetailsFormController(IUndersection4service undersection4service)
+        public KhasraMasterController(IKhasraService khasraService)
         {
-            _undersection4service = undersection4service;
+            _khasraService = khasraService;
         }
-
         [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
-            return View();
+            var list = await _khasraService.GetAllKhasra();
+            return View(list);
         }
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] Undersection4SearchDto model)
+        public async Task<PartialViewResult> List([FromBody] KhasraMasterSearchDto model)
         {
-            var result = await _undersection4service.GetPagedUndersection4details(model);
-
+            var result = await _khasraService.GetPagedKhasra(model);
             return PartialView("_List", result);
         }
-
-
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
+        
         {
-            Undersection4 undersection4 = new Undersection4();
-            undersection4.IsActive = 1;
-            undersection4.ProposalList = await _undersection4service.GetAllProposal();
+            Khasra khasra = new Khasra();
+            khasra.IsActive = 1;
+            khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
            
-            return View(undersection4);
+            khasra.VillageList = await _khasraService.GetAllVillageList();
+            return View(khasra);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Undersection4 undersection4)
+        public async Task<IActionResult> Create(Khasra khasra)
         {
             try
             {
-                undersection4.ProposalList = await _undersection4service.GetAllProposal();
+                khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
+
+                khasra.VillageList = await _khasraService.GetAllVillageList();
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _undersection4service.Create(undersection4);
+                    var result = await _khasraService.Create(khasra);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4service.GetAllUndersection4();
+                        var list = await _khasraService.GetAllKhasra();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4);
+                        return View(khasra);
                     }
                 }
                 else
                 {
-                    return View(undersection4);
+                    return View(khasra);    
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(undersection4);
+                return View(khasra);
             }
         }
+
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _undersection4service.FetchSingleResult(id);
-         
-            Data.ProposalList = await _undersection4service.GetAllProposal();
+            var Data = await _khasraService.FetchSingleResult(id);
+            Data.LandCategoryList = await _khasraService.GetAllLandCategory();
+          
+            Data.VillageList = await _khasraService.GetAllVillageList();
 
             if (Data == null)
             {
@@ -110,34 +112,37 @@ namespace AcquiredLandInformationManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Undersection4 undersection4)
+        public async Task<IActionResult> Edit(int id, Khasra khasra)
+
         {
+            khasra.VillageList = await _khasraService.GetAllVillageList();
+            khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _undersection4service.Update(id, undersection4);
+                    var result = await _khasraService.Update(id, khasra);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4service.GetAllUndersection4();
+                        var list = await _khasraService.GetAllKhasra();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4);
+                        return View(khasra);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(undersection4);
+                    return View(khasra);
                 }
             }
             else
             {
-                return View(undersection4);
+                return View(khasra);
             }
         }
         [AuthorizeContext(ViewAction.Delete)]
@@ -146,7 +151,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
 
-                var result = await _undersection4service.Delete(id);
+                var result = await _khasraService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -160,15 +165,17 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _undersection4service.GetAllUndersection4();
+            var list = await _khasraService.GetAllKhasra();
             return View("Index", list);
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _undersection4service.FetchSingleResult(id);
-            Data.ProposalList = await _undersection4service.GetAllProposal();
+            var Data = await _khasraService.FetchSingleResult(id);
            
+            Data.LandCategoryList = await _khasraService.GetAllLandCategory();
+            Data.VillageList = await _khasraService.GetAllVillageList();
+
 
             if (Data == null)
             {
@@ -177,24 +184,27 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+
         [AuthorizeContext(ViewAction.Download)]
-
-
-        public async Task<IActionResult> UnderSection4List()
+        public async Task<IActionResult> KhasraMasterList()
         {
-            var result = await _undersection4service.GetAllUndersection4();
-            List<UnderSection4ListDto> data = new List<UnderSection4ListDto>();
+            var result = await _khasraService.GetAllKhasra();
+            List<KhasraMasterListDto> data = new List<KhasraMasterListDto>();
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    data.Add(new UnderSection4ListDto()
+                    data.Add(new KhasraMasterListDto()
                     {
                         Id = result[i].Id,
-                        ProposalName = result[i].Proposal == null ? "" : result[i].Proposal.Name,
-                        NotificationNo = result[i].Number,
-                        NotificationDate = Convert.ToDateTime(result[i].Ndate).ToString("dd-MMM-yyyy"),
-                        Type = result[i].TypeDetails,
+                        Village = result[i].Acquiredlandvillage == null ? "" : result[i].Acquiredlandvillage.Name,
+                        RectNo = result[i].RectNo,
+                        LandCategory = result[i].LandCategory == null ? "" : result[i].LandCategory.Name,
+                        KhasraNo = result[i].Name,
+                        Area = result[i].Bigha.ToString()
+                                  + '-' + result[i].Biswa.ToString()
+                                  + '-' + result[i].Biswanshi.ToString(),
+
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
@@ -204,7 +214,6 @@ namespace AcquiredLandInformationManagement.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
-
 
     }
 }
