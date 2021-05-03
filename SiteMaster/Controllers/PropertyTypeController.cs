@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Enum;
-using Dto.Search;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -11,156 +6,171 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using LeaseDetails.Filters;
+using System;
+using System.Threading.Tasks;
+using SiteMaster.Filters;
+using Core.Enum;
+using System.Collections.Generic;
 using Utility.Helper;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
-
-    public class InterestrateController : BaseController
+    public class PropertyTypeController : BaseController
     {
-        private readonly IInterestrateService _InterestrateService;
-
-        public InterestrateController(IInterestrateService InterestrateService)
+        private readonly IPropertyTypeService _PropertyTypeService;
+        public PropertyTypeController(IPropertyTypeService PropertyTypeService)
         {
-            _InterestrateService = InterestrateService;
+            _PropertyTypeService = PropertyTypeService;
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
+            var list = _PropertyTypeService.GetAllPropertyType();
             return View();
         }
-
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] InterestrateSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] PropertyTypeSearchDto model)
         {
-
-            var result = await _InterestrateService.GetPagedInterestrate(model);
+            var result = await _PropertyTypeService.GetPagedPropertyType(model);
             return PartialView("_List", result);
         }
+
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Interestrate rate = new Interestrate();
-            rate.IsActive = 1;
-            rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
-            return View(rate);
+            PropertyType PropertyType = new PropertyType();
+            PropertyType.IsActive = 1;
+            PropertyType.CreatedBy = SiteContext.UserId;
+           
+            return View(PropertyType);
+
         }
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Interestrate rate)
+        public async Task<IActionResult> Create(PropertyType PropertyType)
         {
-            rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
             try
             {
-
+              
                 if (ModelState.IsValid)
                 {
-
-                    rate.CreatedBy = SiteContext.UserId;
-                    var result = await _InterestrateService.Create(rate);
+                    var result = await _PropertyTypeService.Create(PropertyType);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //return View();
-                        var list = await _InterestrateService.GetAllInterestrate();
-                        return View("Index", list);
+                        //var list = await _PropertyTypeService.GetAllPropertyType();
+                        //return View("Index", list);
+                        return RedirectToAction("Index", "PropertyType");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(rate);
-
+                        return View(PropertyType);
                     }
                 }
                 else
                 {
-                    return View(rate);
+                    return View(PropertyType);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(rate);
+                return View(PropertyType);
             }
         }
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _InterestrateService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
+            PropertyType PropertyType = new PropertyType();
+            
+
+            var Data = await _PropertyTypeService.FetchSingleResult(id);
+          
+
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Interestrate rate)
+        public async Task<IActionResult> Edit(int id, PropertyType PropertyType)
         {
-            rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
             if (ModelState.IsValid)
             {
                 try
                 {
-
-                    rate.ModifiedBy = SiteContext.UserId;
-                    var result = await _InterestrateService.Update(id, rate);
+                    PropertyType.ModifiedBy = SiteContext.UserId;
+                    
+                    var result = await _PropertyTypeService.Update(id, PropertyType);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-
-                        var list = await _InterestrateService.GetAllInterestrate();
-                        return View("Index", list);
+                        //var list = await _PropertyTypeService.GetAllPropertyType();
+                        //return View("Index", list);
+                        return RedirectToAction("Index", "PropertyType");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(rate);
-
+                        return View(PropertyType);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(rate);
-
+                    return View(PropertyType);
                 }
             }
-            return View(rate);
+            else
+            {
+                return View(PropertyType);
+            }
         }
+
+
 
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var result = await _InterestrateService.Delete(id);
-            if (result == true)
+            try
             {
-                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _InterestrateService.GetAllInterestrate();
-                return View("Index", result1);
+
+                var result = await _PropertyTypeService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
             }
-            else
+            catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _InterestrateService.GetAllInterestrate();
-                return View("Index", result1);
             }
+            //var list = await _PropertyTypeService.GetAllPropertyType();
+            //return View("Index", list);
+            return RedirectToAction("Index", "PropertyType");
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _InterestrateService.FetchSingleResult(id);
-            Data.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
+            var Data = await _PropertyTypeService.FetchSingleResult(id);
+         
+
             if (Data == null)
             {
                 return NotFound();
@@ -168,14 +178,20 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
+
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
-            List<Interestrate> result = await _InterestrateService.GetAllInterestrate();
+            List<PropertyType> result = await _PropertyTypeService.GetAll();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Interestrate.xlsx";
+            string sFileName = @"PropertyType.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
+
+
+
+
+
     }
 }

@@ -8,12 +8,12 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
-using LeaseDetails.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
     public class GroundRentController : BaseController
     {

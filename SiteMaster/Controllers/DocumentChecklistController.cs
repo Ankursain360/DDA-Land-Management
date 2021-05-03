@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using LeaseDetails.Models;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
-using LeaseDetails.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
     public class DocumentChecklistController : BaseController
     {

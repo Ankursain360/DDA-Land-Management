@@ -12,11 +12,11 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
 using Core.Enum;
-using LeaseDetails.Filters;
+using SiteMaster.Filters;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
-    public class LeasepurposeController : Controller
+    public class LeasepurposeController : BaseController
     {
         private readonly ILeasepurposeService _LeasepurposeService;
 

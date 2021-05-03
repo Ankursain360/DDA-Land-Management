@@ -8,30 +8,31 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
-using LeaseDetails.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
-    public class PropertyTypeController : BaseController
+    public class JudgementstatusController : BaseController
     {
-        private readonly IPropertyTypeService _PropertyTypeService;
-        public PropertyTypeController(IPropertyTypeService PropertyTypeService)
+        private readonly IJudgementstatusService _JudgementstatusService;
+        public JudgementstatusController(IJudgementstatusService JudgementstatusService)
         {
-            _PropertyTypeService = PropertyTypeService;
+            _JudgementstatusService = JudgementstatusService;
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-            var list = _PropertyTypeService.GetAllPropertyType();
+            var list = _JudgementstatusService.GetAllJudgementstatus();
             return View();
         }
+
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] PropertyTypeSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] JudgementstatusSearchDto model)
         {
-            var result = await _PropertyTypeService.GetPagedPropertyType(model);
+            var result = await _JudgementstatusService.GetPagedJudgementstatus(model);
             return PartialView("_List", result);
         }
 
@@ -39,59 +40,58 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            PropertyType PropertyType = new PropertyType();
-            PropertyType.IsActive = 1;
-            PropertyType.CreatedBy = SiteContext.UserId;
-           
-            return View(PropertyType);
+            Judgementstatus Judgementstatus = new Judgementstatus();
+            Judgementstatus.IsActive = 1;
+            Judgementstatus.CreatedBy = SiteContext.UserId;
+
+            return View(Judgementstatus);
 
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(PropertyType PropertyType)
+        public async Task<IActionResult> Create(Judgementstatus Judgementstatus)
         {
             try
             {
-              
+
                 if (ModelState.IsValid)
                 {
-                    var result = await _PropertyTypeService.Create(PropertyType);
+                    var result = await _JudgementstatusService.Create(Judgementstatus);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         //var list = await _PropertyTypeService.GetAllPropertyType();
-                        //return View("Index", list);
-                        return RedirectToAction("Index", "PropertyType");
+                        return View("Index");
+                        //return RedirectToAction("Index", "Judgementstatus");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(PropertyType);
+                        return View(Judgementstatus);
                     }
                 }
                 else
                 {
-                    return View(PropertyType);
+                    return View(Judgementstatus);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(PropertyType);
+                return View(Judgementstatus);
             }
         }
-
 
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            PropertyType PropertyType = new PropertyType();
-            
+            Judgementstatus Judgementstatus = new Judgementstatus();
 
-            var Data = await _PropertyTypeService.FetchSingleResult(id);
-          
+
+            var Data = await _JudgementstatusService.FetchSingleResult(id);
+
 
             if (Data == null)
             {
@@ -102,37 +102,37 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, PropertyType PropertyType)
+        public async Task<IActionResult> Edit(int id, Judgementstatus Judgementstatus)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    PropertyType.ModifiedBy = SiteContext.UserId;
-                    
-                    var result = await _PropertyTypeService.Update(id, PropertyType);
+                    Judgementstatus.ModifiedBy = SiteContext.UserId;
+
+                    var result = await _JudgementstatusService.Update(id, Judgementstatus);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         //var list = await _PropertyTypeService.GetAllPropertyType();
-                        //return View("Index", list);
-                        return RedirectToAction("Index", "PropertyType");
+                        return View("Index");
+                       // return RedirectToAction("Index", "Judgementstatus");
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(PropertyType);
+                        return View(Judgementstatus);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(PropertyType);
+                    return View(Judgementstatus);
                 }
             }
             else
             {
-                return View(PropertyType);
+                return View(Judgementstatus);
             }
         }
 
@@ -144,7 +144,7 @@ namespace LeaseDetails.Controllers
             try
             {
 
-                var result = await _PropertyTypeService.Delete(id);
+                var result = await _JudgementstatusService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -159,8 +159,8 @@ namespace LeaseDetails.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             //var list = await _PropertyTypeService.GetAllPropertyType();
-            //return View("Index", list);
-            return RedirectToAction("Index", "PropertyType");
+            return View("Index");
+            //return RedirectToAction("Index", "Judgementstatus");
         }
 
 
@@ -168,8 +168,8 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _PropertyTypeService.FetchSingleResult(id);
-         
+            var Data = await _JudgementstatusService.FetchSingleResult(id);
+
 
             if (Data == null)
             {
@@ -182,9 +182,9 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
-            List<PropertyType> result = await _PropertyTypeService.GetAll();
+            List<Judgementstatus> result = await _JudgementstatusService.GetAll();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"PropertyType.xlsx";
+            string sFileName = @"Judgementstatus.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }

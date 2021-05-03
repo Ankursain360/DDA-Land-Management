@@ -28,17 +28,13 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
-            services.AddScoped<IPremiumrateRepository, PremiumrateRepository>();
-            services.AddScoped<IDocumentchargesRepository, DocumentchargesRepository>();
-            services.AddScoped<IGroundRentRepository, GroundRentRepository>();
-            services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
-            services.AddScoped<ILicenceFeesRepository, LicenceFeesRepository>();
-            services.AddScoped<IInterestrateRepository, InterestrateRepository>();
-            services.AddScoped<IDocumentCheckListRepository, DocumentCheckListRepository>();
+           
+            
+        
             services.AddScoped<ILeaseApplicationFormRepository, LeaseApplicationFormRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
-            services.AddScoped<IServiceTypeRepository, ServiceTypeRepository>();
+           
             services.AddScoped<ILeaseApplicationFormApprovalRepository, LeaseApplicationFormApprovalRepository>();
             services.AddScoped<IAllotmentEntryRepository, AllotmentEntryRepository>();
             services.AddScoped<ICalculationSheetRepository, CalculationSheetRepository>();
@@ -52,16 +48,16 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IHearingdetailsRepository, HearingdetailsRepository>();
             services.AddScoped<IJudgementRepository, JudgementRepository>();
             services.AddScoped<IAllotteeEvidenceUploadRepository, AllotteeEvidenceUploadRepository>();
-            services.AddScoped<ILeasepurposeRepository, LeasepurposeRepository>();
+            
             services.AddScoped<IApplyForServicesRepository, ApplyForServicesRepository>();
-            services.AddScoped<ILeasesubpurposeRepository, LeasesubpurposeRepository>();
+          
             services.AddScoped<ICancellationEntryRepository, CancellationEntryRepository>();
             services.AddScoped<ILeasedeedRepository, LeasedeedRepository>();
             services.AddScoped<IActionTakenByDdaRepository, ActionTakenByDdaRepository>();
-            services.AddScoped<IJudgementstatusRepository, JudgementstatusRepository>();
-            services.AddScoped<IHonbleRepository, HonbleRepository>();
+           
+            
             services.AddScoped<ITimeextensionRepository, TimeextensionRepository>();
-            services.AddScoped<ILeasePaymentTypeRepository, LeasePaymentTypeRepository>();
+           
             services.AddScoped<IAllotmentLetterRepository, AllotmentLetterRepository>();
             services.AddScoped<IExtensionApprovalRepository, ExtensionApprovalRepository>();
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
@@ -78,17 +74,15 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<IPremiumrateService, PremiumrateService>();
-            services.AddScoped<IDocumentchargesServices, DocumentchargesServices>();
-            services.AddScoped<IGroundRentService, GroundRentService>();
-            services.AddScoped<IPropertyTypeService, PropertyTypeService>();
-            services.AddScoped<ILicenceFeesService, LicenceFeesService>();
-            services.AddScoped<IInterestrateService, InterestrateService>();
-            services.AddScoped<IDocumentCheckListService, DocumentCheckListService>();
+           
+           
+            
+           
+            
             services.AddScoped<ILeaseApplicationFormService, LeaseApplicationFormService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
-            services.AddScoped<IServiceTypeService, ServiceTypeService>();
+            
             services.AddScoped<ILeaseApplicationFormApprovalService, LeaseApplicationFormApprovalService>();
             services.AddScoped<IAllotmentEntryService, AllotmentEntryService>();
             services.AddScoped<ICalculationSheetService, CalculationSheetService>();
@@ -101,17 +95,17 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<INoticeGenerationService, NoticeGenerationService>();
             services.AddScoped<IJudgementService, JudgementService>();
             services.AddScoped<IAllotteeEvidenceUploadService, AllotteeEvidenceUploadService>();
-            services.AddScoped<ILeasepurposeService, LeasepurposeService>();
+           
             services.AddScoped<IApplyForServicesService, ApplyForServicesService>();
             services.AddScoped<IHearingdetailsService, HearingdetailsService>();
             services.AddScoped<ICancellationEntryService, CancellationEntryService>();
-            services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
+            
             services.AddScoped<ILeasedeedService, LeasedeedService>();
             services.AddScoped<IActiontakenbyddaService, ActiontakenbyddaService>();
-            services.AddScoped<IJudgementstatusService, JudgementstatusService>();
-            services.AddScoped<IHonbleService, HonbleService>();
+            
+           
             services.AddScoped<ITimeextensionService, TimeextensionService>();
-            services.AddScoped<ILeasePaymentTypeService,LeasePaymentTypeService>();
+           
             services.AddScoped<IAllotmentLetterService,AllotmentLetterService>();
             services.AddScoped<IExtensionApprovalService, ExtensionApprovalService>();
             services.AddScoped<IExtensionService, ExtensionService>();

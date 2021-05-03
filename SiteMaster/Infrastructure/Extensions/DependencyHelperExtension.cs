@@ -19,7 +19,7 @@ namespace SiteMaster.Infrastructure.Extensions
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ISiteContext, SiteContext>();
-            /* Respository */
+            /********** Respository ***********/
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IDesignationRepository, DesignationRepository>();
             services.AddScoped<IZoneRepository, ZoneRepository>();
@@ -76,11 +76,27 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUndersection22Repository, Undersection22Repository>();
             services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
 
+            //Lease masters 
+
+
+            services.AddScoped<IPropertyTypeRepository, PropertyTypeRepository>();
+            services.AddScoped<IGroundRentRepository, GroundRentRepository>();
+            services.AddScoped<IPremiumrateRepository, PremiumrateRepository>();
+            services.AddScoped<IDocumentchargesRepository, DocumentchargesRepository>();
+            services.AddScoped<ILicenceFeesRepository, LicenceFeesRepository>();
+            services.AddScoped<IInterestrateRepository, InterestrateRepository>();
+            services.AddScoped<IDocumentCheckListRepository, DocumentCheckListRepository>(); services.AddScoped<IServiceTypeRepository, ServiceTypeRepository>();
+            services.AddScoped<ILeasepurposeRepository, LeasepurposeRepository>();
+
+            services.AddScoped<ILeasesubpurposeRepository, LeasesubpurposeRepository>();
+            services.AddScoped<IJudgementstatusRepository, JudgementstatusRepository>();
+            services.AddScoped<IHonbleRepository, HonbleRepository>();
+            services.AddScoped<ILeasePaymentTypeRepository, LeasePaymentTypeRepository>();
 
 
 
 
-            /* Application Services */
+            /************ Application Services ************/
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
             services.AddScoped<IZoneService, ZoneService>();
@@ -137,6 +153,24 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUndersection22Service, Undersection22Service>();
             services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
 
+            // Lease masters
+
+            services.AddScoped<IPropertyTypeService, PropertyTypeService>();
+            services.AddScoped<IGroundRentService, GroundRentService>();
+            services.AddScoped<IPremiumrateService, PremiumrateService>();
+            services.AddScoped<IDocumentchargesServices, DocumentchargesServices>();
+            services.AddScoped<ILicenceFeesService, LicenceFeesService>();
+            services.AddScoped<IInterestrateService, InterestrateService>();
+
+            services.AddScoped<IDocumentCheckListService, DocumentCheckListService>();
+            services.AddScoped<IServiceTypeService, ServiceTypeService>();
+
+            services.AddScoped<ILeasepurposeService, LeasepurposeService>();
+            services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
+            services.AddScoped<IJudgementstatusService, JudgementstatusService>();
+            services.AddScoped<IHonbleService, HonbleService>();
+
+            services.AddScoped<ILeasePaymentTypeService, LeasePaymentTypeService>();
 
         }
     }

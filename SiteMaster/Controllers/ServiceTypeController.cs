@@ -12,10 +12,10 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using LeaseDetails.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
     public class ServiceTypeController : BaseController
     {

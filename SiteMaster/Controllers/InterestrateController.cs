@@ -1,4 +1,9 @@
-﻿using Dto.Search;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Core.Enum;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -6,171 +11,156 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using System;
-using System.Threading.Tasks;
-using LeaseDetails.Filters;
-using Core.Enum;
-using System.Collections.Generic;
+using SiteMaster.Filters;
 using Utility.Helper;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
-    public class JudgementstatusController : BaseController
+
+    public class InterestrateController : BaseController
     {
-        private readonly IJudgementstatusService _JudgementstatusService;
-        public JudgementstatusController(IJudgementstatusService JudgementstatusService)
+        private readonly IInterestrateService _InterestrateService;
+
+        public InterestrateController(IInterestrateService InterestrateService)
         {
-            _JudgementstatusService = JudgementstatusService;
+            _InterestrateService = InterestrateService;
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-            var list = _JudgementstatusService.GetAllJudgementstatus();
             return View();
         }
 
+
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] JudgementstatusSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] InterestrateSearchDto model)
         {
-            var result = await _JudgementstatusService.GetPagedJudgementstatus(model);
+
+            var result = await _InterestrateService.GetPagedInterestrate(model);
             return PartialView("_List", result);
         }
-
-
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Judgementstatus Judgementstatus = new Judgementstatus();
-            Judgementstatus.IsActive = 1;
-            Judgementstatus.CreatedBy = SiteContext.UserId;
-
-            return View(Judgementstatus);
-
+            Interestrate rate = new Interestrate();
+            rate.IsActive = 1;
+            rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
+            return View(rate);
         }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Judgementstatus Judgementstatus)
+        public async Task<IActionResult> Create(Interestrate rate)
         {
+            rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _JudgementstatusService.Create(Judgementstatus);
+
+                    rate.CreatedBy = SiteContext.UserId;
+                    var result = await _InterestrateService.Create(rate);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //var list = await _PropertyTypeService.GetAllPropertyType();
-                        return View("Index");
-                        //return RedirectToAction("Index", "Judgementstatus");
+                        //return View();
+                        var list = await _InterestrateService.GetAllInterestrate();
+                        return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(Judgementstatus);
+                        return View(rate);
+
                     }
                 }
                 else
                 {
-                    return View(Judgementstatus);
+                    return View(rate);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(Judgementstatus);
+                return View(rate);
             }
         }
-
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            Judgementstatus Judgementstatus = new Judgementstatus();
-
-
-            var Data = await _JudgementstatusService.FetchSingleResult(id);
-
-
+            var Data = await _InterestrateService.FetchSingleResult(id);
+            Data.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Judgementstatus Judgementstatus)
+        public async Task<IActionResult> Edit(int id, Interestrate rate)
         {
+            rate.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    Judgementstatus.ModifiedBy = SiteContext.UserId;
 
-                    var result = await _JudgementstatusService.Update(id, Judgementstatus);
+                    rate.ModifiedBy = SiteContext.UserId;
+                    var result = await _InterestrateService.Update(id, rate);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        //var list = await _PropertyTypeService.GetAllPropertyType();
-                        return View("Index");
-                       // return RedirectToAction("Index", "Judgementstatus");
+
+                        var list = await _InterestrateService.GetAllInterestrate();
+                        return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(Judgementstatus);
+                        return View(rate);
+
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(Judgementstatus);
+                    return View(rate);
+
                 }
             }
-            else
-            {
-                return View(Judgementstatus);
-            }
+            return View(rate);
         }
-
-
 
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            var result = await _InterestrateService.Delete(id);
+            if (result == true)
             {
-
-                var result = await _JudgementstatusService.Delete(id);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                }
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _InterestrateService.GetAllInterestrate();
+                return View("Index", result1);
             }
-            catch (Exception ex)
+            else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _InterestrateService.GetAllInterestrate();
+                return View("Index", result1);
             }
-            //var list = await _PropertyTypeService.GetAllPropertyType();
-            return View("Index");
-            //return RedirectToAction("Index", "Judgementstatus");
         }
 
-
-
-        [AuthorizeContext(ViewAction.View)]
+        //  [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _JudgementstatusService.FetchSingleResult(id);
-
-
+            var Data = await _InterestrateService.FetchSingleResult(id);
+            Data.PropertyTypeList = await _InterestrateService.GetAllPropertyType();
             if (Data == null)
             {
                 return NotFound();
@@ -178,20 +168,14 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
-            List<Judgementstatus> result = await _JudgementstatusService.GetAll();
+            List<Interestrate> result = await _InterestrateService.GetAllInterestrate();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Judgementstatus.xlsx";
+            string sFileName = @"Interestrate.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
-
-
-
-
-
     }
 }

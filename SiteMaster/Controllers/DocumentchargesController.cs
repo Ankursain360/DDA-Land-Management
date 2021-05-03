@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,19 +13,19 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using LeaseDetails.Filters;
+using SiteMaster.Filters;
 using Utility.Helper;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
-  
-    public class PremiumrateController : BaseController
-    {
-        private readonly IPremiumrateService _premiumrateService;
 
-        public PremiumrateController(IPremiumrateService premiumrateService)
+    public class DocumentchargesController : BaseController
+    {
+        private readonly IDocumentchargesServices _documentchargesService;
+
+        public DocumentchargesController(IDocumentchargesServices documentchargesService)
         {
-            _premiumrateService = premiumrateService;
+            _documentchargesService = documentchargesService;
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -33,72 +35,73 @@ namespace LeaseDetails.Controllers
 
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] PremiumrateSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] DocumentchargesSearchDto model)
         {
 
-            var result = await _premiumrateService.GetPagedPremiumrate(model);
+            var result = await _documentchargesService.GetPagedDocumentcharges(model);
             return PartialView("_List", result);
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
-            Premiumrate rate = new Premiumrate();
-            rate.IsActive = 1;
-          
-            rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
-            rate.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(rate.LeasePurposesTypeId);
-            return View(rate);
+            Documentcharges charge = new Documentcharges();
+            charge.IsActive = 1;
+            //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            charge.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            charge.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(charge.LeasePurposesTypeId);
+            return View(charge);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Premiumrate rate)
+          [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(Documentcharges charge)
         {
-            rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
-            rate.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(rate.LeasePurposesTypeId);
+            //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            charge.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            charge.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(charge.LeasePurposesTypeId);
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    
-                    rate.CreatedBy = SiteContext.UserId;
-                     var result = await _premiumrateService.Create(rate);
+                   
+                    charge.CreatedBy = SiteContext.UserId;
+                    var result = await _documentchargesService.Create(charge);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         //return View();
-                        var list = await _premiumrateService.GetAllPremiumrate();
+                        var list = await _documentchargesService.GetAllDocumentcharges();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(rate);
+                        return View(charge);
 
                     }
                 }
                 else
                 {
-                    return View(rate);
+                    return View(charge);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(rate);
+                return View(charge);
             }
         }
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _premiumrateService.FetchSingleResult(id);
-            //Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
-            Data.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
-            Data.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
+            var Data = await _documentchargesService.FetchSingleResult(id);
+            //Data.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            Data.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -109,55 +112,56 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Premiumrate rate)
+        public async Task<IActionResult> Edit(int id, Documentcharges charge)
         {
-            rate.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
-            rate.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(rate.LeasePurposesTypeId);
+            //charge.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            charge.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            charge.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(charge.LeasePurposesTypeId);
             if (ModelState.IsValid)
             {
                 try
                 {
-                   
-                    rate.ModifiedBy = SiteContext.UserId;
-                    var result = await _premiumrateService.Update(id, rate);
+
+                    charge.ModifiedBy = SiteContext.UserId;
+                    var result = await _documentchargesService.Update(id, charge);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                        var list = await _premiumrateService.GetAllPremiumrate();
+                        var list = await _documentchargesService.GetAllDocumentcharges();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(rate);
+                        return View(charge);
 
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(rate);
+                    return View(charge);
 
                 }
             }
-            return View(rate);
+            return View(charge);
         }
 
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var result = await _premiumrateService.Delete(id);
+            var result = await _documentchargesService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _premiumrateService.GetAllPremiumrate();
+                var result1 = await _documentchargesService.GetAllDocumentcharges();
                 return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _premiumrateService.GetAllPremiumrate();
+                var result1 = await _documentchargesService.GetAllDocumentcharges();
                 return View("Index", result1);
             }
         }
@@ -165,10 +169,10 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _premiumrateService.FetchSingleResult(id);
-            //Data.PropertyTypeList = await _premiumrateService.GetAllPropertyType();
-            Data.LeasePurposeList = await _premiumrateService.GetAllLeasepurpose();
-            Data.LeaseSubPurposeList = await _premiumrateService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
+            var Data = await _documentchargesService.FetchSingleResult(id);
+            //Data.PropertyTypeList = await _documentchargesService.GetAllPropertyType();
+            Data.LeasePurposeList = await _documentchargesService.GetAllLeasepurpose();
+            Data.LeaseSubPurposeList = await _documentchargesService.GetAllLeaseSubpurpose(Data.LeasePurposesTypeId);
             if (Data == null)
             {
                 return NotFound();
@@ -179,9 +183,9 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
-            List<Premiumrate> result = await _premiumrateService.GetAllPremiumrate();
+            List<Documentcharges> result = await _documentchargesService.GetAllDocumentcharges();
             var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Premiumrate.xlsx";
+            string sFileName = @"Documentcharges.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
@@ -189,7 +193,7 @@ namespace LeaseDetails.Controllers
         public async Task<JsonResult> GetAllLeaseSubpurpose(int? purposeUseId)
         {
             purposeUseId = purposeUseId ?? 0;
-            return Json(await _premiumrateService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
+            return Json(await _documentchargesService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
     }
 }

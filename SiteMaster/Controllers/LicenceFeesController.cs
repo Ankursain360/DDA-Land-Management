@@ -1,14 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-
-//namespace LeaseDetails.Controllers
-//{
-//    public class LicenceFeesController
-//    {
-//    }
-//}
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using LeaseDetails.Filters;
+using SiteMaster.Filters;
 using Utility.Helper;
 
-namespace LeaseDetails.Controllers
+namespace SiteMaster.Controllers
 {
 
     public class LicenceFeesController : BaseController
