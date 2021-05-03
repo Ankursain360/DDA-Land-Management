@@ -9,7 +9,7 @@ $(document).ready(function () {
 function GetLandTransfer(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/LandTransfer/List`, 'html', param, function (response) {
-        debugger;
+     
         $('#divLandTransferTable').html("");
         $('#divLandTransferTable').html(response);
     });
@@ -129,7 +129,7 @@ function GetDivisionList(id) {
     });
 };
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+ 
     var classificationOfLandId = $('#Propertyregistration_ClassificationOfLandId option:selected').val();
     var departmentid = $('#Propertyregistration_DepartmentId option:selected').val();
     var zoneId = $('#Propertyregistration_ZoneId option:selected').val();

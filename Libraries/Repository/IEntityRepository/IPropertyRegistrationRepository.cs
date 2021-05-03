@@ -43,6 +43,10 @@ namespace Libraries.Repository.IEntityRepository
         string GetHandedOverCopyofOrderFile(int id);
         Task<bool> InsertInDisposedProperty(Disposedproperty model);
         Task<List<Propertyregistration>> GetKhasraReportList();
+        Task<List<Propertyregistration>> GetAllRestorePropertyReportList();
+        Task<List<Propertyregistration>> GetAllRestoreLandReportData();
+        Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();
+        Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId);
         Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId);
         Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
     }

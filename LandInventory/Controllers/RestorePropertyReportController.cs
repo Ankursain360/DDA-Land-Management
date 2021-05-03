@@ -11,6 +11,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using LandInventory.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 namespace LandInventory.Controllers
 {
     public class RestorePropertyReportController : Controller
@@ -116,6 +118,43 @@ namespace LandInventory.Controllers
             }
             return View(Data);
         }
+
+
+
+        public async Task<IActionResult> RestorePropertyReportList()
+        {
+            var result = await _propertyregistrationService.GetAllRestorePropertyReportList();
+            List<RestorePropertyReportListDto> data = new List<RestorePropertyReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new RestorePropertyReportListDto()
+                    {
+                        Id = result[i].Id,
+                        InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
+                        PlannedUnplannedLand = result[i].PlannedUnplannedLand,
+
+                        ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
+                        Department = result[i].Department == null ? " " : result[i].Department.Name,
+                        Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
+                        Division = result[i].Division == null ? " " : result[i].Division.Name,
+                        Locality = result[i].LocalityId == null ? " " : result[i].Locality.Name,
+                        KhasraNo = result[i].KhasraNo,
+                        AddressWithLandmark = result[i].Palandmark,
+                        PrimaryListNo = result[i].PrimaryListNo,
+                        AreaInSqm = result[i].TotalArea.ToString(),
+                        RestoreReason = result[i].Restoreproperty == null ? " " : result[i].Restoreproperty.RestoreReason,
+                        RestoreDate = result[i].Restoreproperty == null ? " " : result[i].Restoreproperty.RestoreDate.ToString("dd-MMM-yyyy"),
+
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
 
     }
 }

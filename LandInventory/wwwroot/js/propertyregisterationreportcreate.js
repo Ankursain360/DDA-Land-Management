@@ -140,7 +140,7 @@ $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+ 
     var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
     var departmentid = $('#DepartmentId option:selected').val();
     var zoneId = $('#ZoneId option:selected').val();
