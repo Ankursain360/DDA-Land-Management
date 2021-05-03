@@ -39,9 +39,9 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         [Required]
         public byte IsActive { get; set; }
-
         public int? ApprovedStatus { get; set; }
-        public int? PendingAt { get; set; }
+        public string PendingAt { get; set; }
+        public int? ApprovalZoneId { get; set; }
         public string ReferenceNo { get; set; }
 
         [NotMapped]
@@ -52,12 +52,29 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public string ApprovalRemarks { get; set; }
-        [NotMapped]
         public string ApprovalStatus { get; set; }
 
+        [NotMapped]
+        public int ApprovalStatusCode { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
 
         public ICollection<Newlandannexure1> Newlandannexure1 { get; set; }
+
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
 
     }
 }

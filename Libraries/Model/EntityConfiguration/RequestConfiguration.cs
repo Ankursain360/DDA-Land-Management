@@ -15,12 +15,20 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.ToTable("request", "lms");
 
+            builder.HasIndex(e => e.ApprovedStatus)
+                .HasName("fk_ApprovedStatusRequest_idx");
+
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AreaLocality)
                 .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -34,6 +42,11 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.PendingAt)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
 
             builder.Property(e => e.PfileNo)
                 .IsRequired()
@@ -72,13 +85,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
-            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
-
             builder.Property(e => e.ReferenceNo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-        }
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                .WithMany(p => p.Request)
+                .HasForeignKey(d => d.ApprovedStatus)
+                .HasConstraintName("fk_ApprovedStatusRequest");
+
         }
     }
+}

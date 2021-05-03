@@ -36,13 +36,3 @@ Version.cpp
 *.defaults
 *.pubxml
 /DDA-Land-Management.v11.suo
-/LeaseDetails/Models/Views/CalculationSheet
-/LeaseDetails/Models/Views/Dashboard
-/LeaseDetails/Models/Views/Demand
-/LeaseDetails/Models/Views/Documentcharges
-/LeaseDetails/Models/Views/DocumentChecklist
-/LeaseDetails/Models/Views/GroundRent
-/LeaseDetails/Models/Views/Home
-/LeaseDetails/Models/Views/Interestrate
-/LeaseDetails/Models/Views
-/LeaseForPublic/.config

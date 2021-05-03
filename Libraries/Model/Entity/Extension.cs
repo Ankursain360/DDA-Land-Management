@@ -14,6 +14,7 @@ namespace Libraries.Model.Entity
         public int AllotmentId { get; set; }
         public int ServiceTypeId { get; set; }
         public int LeaseApplicationId { get; set; }
+        public string RefNo { get; set; }
 
         [Required(ErrorMessage = "Extension Period is Mandatory")]
         public int ExtensionPeriod { get; set; }
@@ -28,6 +29,7 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
         public string PendingAt { get; set; }
+        public int? ApprovalZoneId { get; set; }
 
         public Allotmententry Allotment { get; set; }
         public Leaseapplication LeaseApplication { get; set; }
@@ -59,9 +61,11 @@ namespace Libraries.Model.Entity
         public List<IFormFile> FileUploaded { get; set; }
         [NotMapped]
         public List<string> FileUploadedPath { get; set; }
-
         [NotMapped]
         public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public int ApprovalStatusCode { get; set; }
 
         [NotMapped]
         public string ApprovalRemarks { get; set; }
@@ -71,6 +75,12 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
 
         [NotMapped]
         public string EditPosition { get; set; }
@@ -83,6 +93,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string EditDocumentFileName { get; set; }
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
 
     }
 }

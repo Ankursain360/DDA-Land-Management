@@ -418,5 +418,11 @@
     "inputFiles": [
       "wwwroot/js/leaseapplicationformapprovalview.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/extensionapprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/extensionapprovalindex.js"
+    ]
   }
 ]

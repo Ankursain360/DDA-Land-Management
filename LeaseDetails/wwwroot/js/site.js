@@ -68,11 +68,16 @@ $('.numbers').keyup(function () {
 
 //For Loader
 $(window).on('load', function () {
-	$(".body-loading").css("display", "none");
+	//$("#loader-wrapper").css("display", "none");
+	setTimeout(function () {
+		$('#loader-wrapper').remove();
+	}, 3000);
 });
 $(window).on('beforeunload', function () {
-	$(".body-loading").css("display", "block");
+	$("#loader-wrapper").css("display", "block");
 });
+
+
 //
 
 
