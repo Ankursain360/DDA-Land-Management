@@ -56,5 +56,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<Propertyregistration>> GetAllPropertInventorylist(int UserId);
         Task<List<Propertyregistration>> GetUnverifiedList(int UserId);
         Task<List<Propertyregistration>> GetAllDeletedPropertyList();
+        Task<List<Propertyregistration>> GetAllRestoreLandReportData();
+        Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();
+        Task<List<Propertyregistration>> GetAllRestorePropertyReportList();
+        Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId);
     }
 }

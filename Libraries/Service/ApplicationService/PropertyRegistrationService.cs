@@ -341,6 +341,26 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetAllDeletedPropertyList();
         }
 
+        public async Task<List<Propertyregistration>> GetAllRestoreLandReportData()
+        {
+            return await _propertyregistrationRepository.GetAllRestoreLandReportData();
+        }
+        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList()
+        {
+            return await _propertyregistrationRepository.GetAllPropertyRegistrationReportList();
+        }
+
+        public async Task<List<Propertyregistration>> GetAllRestorePropertyReportList()
+        {
+            return await _propertyregistrationRepository.GetAllRestorePropertyReportList();
+        }
+
+        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId)
+        {
+            return await _propertyregistrationRepository.GetAllPropertyRegistrationMORlist( UserId);
+        }
+
+
         public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId)
         {
             return await _propertyregistrationRepository.GetInventoryUnverifiedVerified(model, userId);

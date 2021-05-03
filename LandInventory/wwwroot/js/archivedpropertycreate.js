@@ -39,14 +39,14 @@ $("#btnReset").click(function () {
 });
 function GetDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    debugger
+   
     HttpPost(`/ArchivedProperty/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
 }
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+
     var model = {
         name: "test",
         sortBy: $("#ddlSort").children("option:selected").val(),
@@ -93,7 +93,7 @@ function GetDivisionList(id) {
     });
 };
 function GetLocalityList(id) {
-    debugger;
+  
     HttpGet(`/ArchivedProperty/GetLocalityList/?divisionId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {

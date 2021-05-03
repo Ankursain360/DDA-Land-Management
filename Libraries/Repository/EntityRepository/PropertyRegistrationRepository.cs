@@ -152,6 +152,32 @@ namespace Libraries.Repository.EntityRepository
             return LocalityList;
         }
 
+        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList()
+        {
+            
+
+            return await _dbContext.Propertyregistration.
+                Include(x => x.Locality)
+                                     .Include(x => x.ClassificationOfLand)
+                               .Include(x => x.Department)
+                               .Include(x => x.Zone)
+                               .Include(x => x.Division)
+                               .Include(x => x.Locality)
+                               .Include(x => x.DisposalType)
+                               .Include(x => x.MainLandUse)
+                               .Include(x => x.HandedOverDepartment)
+                               .Include(x => x.HandedOverZone)
+                               .Include(x => x.HandedOverDivision)
+                               .Include(x => x.TakenOverDepartment)
+                               .Include(x => x.TakenOverZone)
+                               .Include(x => x.TakenOverDivision)
+                                        .Where(x => (x.IsDeleted == 1 && x.IsActive==1  && x.IsDisposed != 0 && x.IsValidate==1 )).ToListAsync();
+        }
+
+
+
+
+
 
         public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model)
         {
@@ -511,6 +537,45 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId)
+        {
+            var badCodes = new[] { 3, 5 };
+            var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+            if (UserId == 14 || Iscreated > 0)
+            {
+
+                var data1= await _dbContext.Propertyregistration
+       .Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Division)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Locality)
+                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && badCodes.Contains(x.ClassificationOfLand.Id))
+                 .ToListAsync();
+                  return data1;
+            }
+            else
+            {
+
+                var data1 = await _dbContext.Propertyregistration
+       .Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Division)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Locality)
+                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0)
+                 .ToListAsync();
+                return data1;
+
+            }
+          
+        }
+
+
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int UserId)
         {
             var badCodes = new[] { 3, 5 };
@@ -682,6 +747,22 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
 
+        public async Task<List<Propertyregistration>> GetAllRestoreLandReportData()
+        {
+            var NonDeletedId = (from x in _dbContext.Propertyregistration
+                                where x.IsActive == 1 && x.IsDeleted != 0 || x.IsDisposed != 0
+                                select x.Id).ToArray();
+            return await _dbContext.Propertyregistration.Include(x => x.Locality)
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Zone)
+                                        .Include(x => x.Division)
+                                         .Include(x => x.Deletedproperty)
+                                        .Include(x => x.ClassificationOfLand)
+                                        .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0) && !(NonDeletedId).Contains(x.Id)).ToListAsync();
+        }
+
+
+
         public async Task<PagedResult<Propertyregistration>> GetRestoreLandReportData(PropertyRegisterationSearchDto model)
         {
             var NonDeletedId = (from x in _dbContext.Propertyregistration
@@ -765,6 +846,20 @@ namespace Libraries.Repository.EntityRepository
             }
             return data;
         }
+
+
+        public async Task<List<Propertyregistration>> GetAllRestorePropertyReportList()
+        {
+            return await _dbContext.Propertyregistration.
+                                        Include(x => x.Department)
+                                        .Include(x => x.Zone)
+                                        .Include(x => x.Division)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Restoreproperty)
+                                        .Include(x => x.ClassificationOfLand)
+                                        .Where(x => (x.Restoreproperty.RestoreReason != null)).ToListAsync();
+        }
+
         public async Task<PagedResult<Propertyregistration>> GetRestorePropertyReportData(PropertyRegisterationSearchDto model)
         {
             var data = await _dbContext.Propertyregistration.

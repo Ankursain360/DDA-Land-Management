@@ -42,7 +42,7 @@ $('#ddlSort').change(function () {
 });
 function GetDetails(pageNumber, pageSize,  sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    debugger
+ 
     HttpPost(`/RestorePropertyReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
@@ -50,7 +50,7 @@ function GetDetails(pageNumber, pageSize,  sortOrder) {
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+  
     var model = {
         name: "test",
         sortBy: $("#ddlSort").children("option:selected").val(),
@@ -99,7 +99,7 @@ function GetDivisionList(id) {
 };
 //Bind Locality Dropdown from division
 function GetLocalityList(id) {
-    debugger;
+ 
 
     HttpGet(`/RestorePropertyReport/GetLocalityList/?divisionId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
