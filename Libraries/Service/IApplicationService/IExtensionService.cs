@@ -26,5 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdateAllotteeServiceDocuments(int id, Allotteeservicesdocument allotteeservicesdocuments);
         Task<bool> SaveAllotteeServiceDocumentsSingle(Allotteeservicesdocument item);
         Task<Extension> IsNeedAddMore();
+        Task<bool> RollBackEntry(int id);
+        Task<bool> RollBackEntryDocument(int id, int serviceid);
     }
 }

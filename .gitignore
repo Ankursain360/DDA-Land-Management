@@ -12,7 +12,6 @@ bin
 /*/*/*/bin
 /*/*/*/*.min.css
 /*/*/*/*.config
-/*/*/*/*.min.js
 /packages
 *.vs
 *.vs/config/*.config

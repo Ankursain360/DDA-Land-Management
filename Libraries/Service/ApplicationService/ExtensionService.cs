@@ -134,5 +134,17 @@ namespace Libraries.Service.ApplicationService
             return await _extensionRepository.IsNeedAddMore();
         }
 
+        public async Task<bool> RollBackEntry(int id)
+        {
+            var result = await _extensionRepository.FindBy(a => a.Id == id);
+            Extension model = result.FirstOrDefault();
+            _extensionRepository.Delete(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> RollBackEntryDocument(int id, int serviceid)
+        {
+            return await _extensionRepository.RollBackEntryDocument(id, serviceid);
+        }
     }
 }

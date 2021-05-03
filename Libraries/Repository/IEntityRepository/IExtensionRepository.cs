@@ -21,5 +21,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> UpdateAllotteeServiceDocuments(int id, Allotteeservicesdocument allotteeservicesdocuments);
         Task<bool> SaveAllotteeServiceDocumentsSingle(Allotteeservicesdocument item);
         Task<Extension> IsNeedAddMore();
+        Task<bool> RollBackEntryDocument(int id, int serviceid);
     }
 }

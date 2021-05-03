@@ -1,193 +1,187 @@
 ﻿@model Libraries.Model.Entity.Extension
-@*@await Component.InvokeAsync("PageHeader", new { pageName = "Lease Extension" })*@
-@*@{int rowNo = 0; }*@
+    <div class="permission mt-2 accordion list-unstyled m-0 ">
+        <div class="card">
+            <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
+               aria-controls="collapseApprroval">
+                <i class="ri-arrow-right-s-fill"></i>
+                <span class="text ml-1 mr-auto">View Extension Service Details</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">
+                <div id="allDetails">
+                    <input type="hidden" asp-for="AllotmentId" />
+                    <input type="hidden" asp-for="LeaseApplicationId" />
+                    <h3 class="my-3 d-flex sub-heading">Allottee Details</h3>
+                    <div id="AllotteeHistoryDiv">
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <input disabled type="text" asp-for=" LeaseApplication.RefNo" id="RefNo" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Reference No.</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="text" asp-for="LeaseApplication.RegistrationNo" id="RegisterationNo" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Registeration No.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <input asp-for="LeaseApplication.ContactNo" disabled type="text" id="ContactNo" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Contact No.</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="text" asp-for="LeaseApplication.EmailId" id="EmailId" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Email-Id</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <input disabled type="date" id="AllotmentDate" asp-for=" Allotment.AllotmentDate" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Allotment Date</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="text" id="AllottedArea" asp-for="Allotment.TotalArea" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Total Area(sq. mt.)</label>
+                                </div>
+                            </div>
 
-<div class="pt-3">
-    <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <a data-toggle="collapse" href="#collapseApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseApprroval">
-            <h3 class="my-3 d-flex sub-heading">View Extension Service Details</h3>
-        </a>
-        <input type="hidden" asp-for="AllotmentId" />
-        <input type="hidden" asp-for="LeaseApplicationId" />
-        <div class="collapse" id="collapseApprroval">
-            <h3 class="my-3 d-flex sub-heading">Allottee Details</h3>
-            <div id="AllotteeHistoryDiv">
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <input disabled type="text" asp-for=" LeaseApplication.RefNo" id="RefNo" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Reference No.</label>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <input disabled type="text" id="LeaseType" asp-for="Allotment.LeasesType.Type" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Lease Type</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="text" id="LeasePurpose" asp-for="Allotment.LeasePurposesType.PurposeUse" class="floating-label-field floating-label-field--s3 " />
+                                    <span class="text-danger"></span>
+                                    <label class="floating-label">Lease Purpose</label>
+                                </div>
+                            </div>
+                            @*<div class="col-md-6">
+                                    <div class="floating-label-wrap">
+                                        <input disabled type="text" asp-for="Allotment.Leasedeed" id="LeaseDate" class="floating-label-field floating-label-field--s3 " />
+                                        <span class="text-danger"></span>
+                                        <label class="floating-label">Lease Date</label>
+                                    </div>
+                                </div>*@
+
+                        </div>
+                        <div class="row mt-md-3">
+                            @*<div class="col-md-6">
+                                        <div class="floating-label-wrap">
+                                            <input disabled type="text" id="PossessionArea"  class="floating-label-field floating-label-field--s3 " />
+                                            <span class="text-danger"></span>
+                                            <label class="floating-label">Possession Area(sq. mt.)</label>
+                                        </div>
+                                    </div>
+
+                                </div>*@
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="text" asp-for="LeaseApplication.RegistrationNo" id="RegisterationNo" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Registeration No.</label>
+                    <h3 class="my-3 d-flex sub-heading">Extension Details</h3>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="ExtensionPeriod" type="text" class="floating-label-field floating-label-field--s3 onlynumbers TotalCalculation" />
+                                <span asp-validation-for="ExtensionPeriod" class="text-danger"></span>
+                                <label class="floating-label">Extension Period (in months)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input readonly asp-for="ExtentionFees" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                                <span asp-validation-for="ExtentionFees" class="text-danger"></span>
+                                <label class="floating-label">Extension Fees(per months in Rs.)</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <input asp-for="LeaseApplication.ContactNo" disabled type="text" id="ContactNo" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Contact No.</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="text" asp-for="LeaseApplication.EmailId" id="EmailId" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Email-Id</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <input disabled type="date" id="AllotmentDate" asp-for=" Allotment.AllotmentDate" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Allotment Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="text" id="AllottedArea" asp-for="Allotment.TotalArea" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Total Area(sq. mt.)</label>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input readonly asp-for="TotalAmount" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                                <label class="floating-label">Total Amount(Rs.)</label>
+                            </div>
                         </div>
                     </div>
 
-                </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <input disabled type="text" id="LeaseType" asp-for="Allotment.LeasesType.Type" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Lease Type</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="text" id="LeasePurpose" asp-for="Allotment.LeasePurposesType.PurposeUse" class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Lease Purpose</label>
-                        </div>
-                    </div>
-                    @*<div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <input disabled type="text" asp-for="Allotment.Leasedeed" id="LeaseDate" class="floating-label-field floating-label-field--s3 " />
-                        <span class="text-danger"></span>
-                        <label class="floating-label">Lease Date</label>
-                    </div>
-                </div>*@
-
-                </div>
-                <div class="row mt-md-3">
-                    @*<div class="col-md-6">
-                        <div class="floating-label-wrap">
-                            <input disabled type="text" id="PossessionArea"  class="floating-label-field floating-label-field--s3 " />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Possession Area(sq. mt.)</label>
+                    <div class="row mt-md-3">
+                        <div class=" col-md-12">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <textarea asp-for="Remarks" placeholder="Address" type="text" limit="4000" class="floating-label-field floating-label-field--s3"></textarea>
+                                <span asp-validation-for="Remarks" class="text-danger"></span>
+                                <label class="floating-label">Remarks</label>
+                            </div>
                         </div>
                     </div>
 
-                </div>*@
-                </div>
-            </div>
-            <h3 class="my-3 d-flex sub-heading">Extension Details</h3>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="ExtensionPeriod" type="text" class="floating-label-field floating-label-field--s3 onlynumbers TotalCalculation" />
-                        <span asp-validation-for="ExtensionPeriod" class="text-danger"></span>
-                        <label class="floating-label">Extension Period (in months)</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input readonly asp-for="ExtentionFees" type="text" class="floating-label-field floating-label-field--s3 numbers" />
-                        <span asp-validation-for="ExtentionFees" class="text-danger"></span>
-                        <label class="floating-label">Extension Fees(per months in Rs.)</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input readonly asp-for="TotalAmount" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" />
-                        <span asp-validation-for="TotalAmount" class="text-danger"></span>
-                        <label class="floating-label">Total Amount(Rs.)</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-md-3">
-                <div class=" col-md-12">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Remarks" placeholder="Address" type="text" limit="4000" class="floating-label-field floating-label-field--s3"></textarea>
-                        <span asp-validation-for="Remarks" class="text-danger"></span>
-                        <label class="floating-label">Remarks</label>
-                    </div>
-                </div>
-            </div>
-
-            <div id="DivDocument">
-                <h3 class="my-3 d-flex sub-heading">Document</h3>
-                <div class="table-section bg-white border shadow rounded">
-                    <div class="table-responsive ">
-                        <table class="table table-sm table-bordered mb-0 table-striped">
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>Document Name</th>
-                                    <th>Uploaded Document</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tbody">
-                                @foreach (var item in Model.AllotteeservicesdocumentList)
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.DocumentChecklist.Name
-                                        </td>
-                                        @if (@item.DocumentFileName != "")
+                    <div id="DivDocument">
+                        <h3 class="my-3 d-flex sub-heading">Document</h3>
+                        <div class="table-section bg-white border shadow rounded">
+                            <div class="table-responsive ">
+                                <table class="table table-sm table-bordered mb-0 table-striped">
+                                    <thead class="text-nowrap">
+                                        <tr>
+                                            <th>Document Name</th>
+                                            <th>Uploaded Document</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        @foreach (var item in Model.AllotteeservicesdocumentList)
                                         {
-                                            <td>
-                                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                                    <a class="badge badge-primary px-2" asp-action="ViewExtensionDocument" asp-route-id="@item.Id" target="_blank"> (Enclosed)</a>
-                                                   
-                                                </div>
-                                            </td>
+                                            <tr>
+                                                <td>
+                                                    @item.DocumentChecklist.Name
+                                                </td>
+                                                @if (@item.DocumentFileName != "")
+                                                {
+                                                    <td>
+                                                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                                            <a class="badge badge-primary px-2" asp-action="ViewExtensionDocument" asp-route-id="@item.Id" target="_blank"> (Enclosed)</a>
+
+                                                        </div>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>  <a>N/A</a></td>
+                                                }
+                                            </tr>
                                         }
-                                        else
-                                        {
-                                            <td>  <a>N/A</a></td>
-                                        }
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            @*<div class="row mt-md-3">
-            <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
-                @Html.ActionLink("Back", "Index", "ExtensionService", null, new { @class = "btn btn-theme " })
-            </div>
-        </div>*@
         </div>
-    </form>
-</div>
+    </div>
 
-
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/extensionservicecreate.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/extensionservicecreate.min.js" asp-append-version="true"></script>
-</environment>
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/extensionservicecreate.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/extensionservicecreate.min.js" asp-append-version="true"></script>
+    </environment>

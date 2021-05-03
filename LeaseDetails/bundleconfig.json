@@ -424,5 +424,35 @@
     "inputFiles": [
       "wwwroot/js/extensionapprovalindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/allotmentletter.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotmentletter.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/allotmentletterview.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotmentletterview.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/allotteeevidencecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotteeevidencecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/allotteeevidenceindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/allotteeevidenceindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemandletterReport.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemandletterReport.js"
+    ]
   }
 ]

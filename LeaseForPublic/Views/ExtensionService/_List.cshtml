@@ -33,17 +33,12 @@
                                 <span class="badge badge-danger px-2 py-1">Inactive</span>}
                         </td>*@
                     <td>
-                        @if (item.ApprovedStatus == 1)
-                        {
-                            <span class="badge badge-primary px-2 py-1">Approved</span> }
-                        else
-                        {
-                            <span class="badge badge-danger px-2 py-1">Inproccess</span>}
+                        @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
                     </td>
                     <td>
                         <div class="action-btns">
                             <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-                            @if (item.ApprovedStatus == 1)
+                            @if (item.ApprovedStatus == @ViewBag.ApprovedStatus)
                             {
                                 <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
                             }

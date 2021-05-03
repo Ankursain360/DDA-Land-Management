@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using LeaseForPublic.Filters;
 using Core.Enum;
+using Service.IApplicationService;
+using Dto.Master;
+using System.Text;
 
 namespace LeaseForPublic.Controllers
 {
@@ -26,16 +29,18 @@ namespace LeaseForPublic.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IUserProfileService _userProfileService;
 
         string targetPathExtensionDocuments = "";
         public ExtensionServiceController(IExtensionService extensionService,
             IConfiguration configuration, IWorkflowTemplateService workflowtemplateService,
-            IApprovalProccessService approvalproccessService)
+            IApprovalProccessService approvalproccessService, IUserProfileService userProfileService)
         {
             _configuration = configuration;
             _extensionService = extensionService;
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
+            _userProfileService = userProfileService;
             targetPathExtensionDocuments = _configuration.GetSection("FilePaths:Extension:ExtensionFilePath").Value.ToString();
 
         }
@@ -43,7 +48,8 @@ namespace LeaseForPublic.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _extensionService.IsNeedAddMore();
-            if (data == null || data.ApprovedStatus == 1)
+            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+            if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
                 ViewBag.IsNeedAddMore = 1;
             else
                 ViewBag.IsNeedAddMore = 0;
@@ -55,6 +61,7 @@ namespace LeaseForPublic.Controllers
         public async Task<PartialViewResult> List([FromBody] ExtensionServiceSearchDto model)
         {
             var result = await _extensionService.GetPagedExtensionServiceDetails(model);
+            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
             return PartialView("_List", result);
         }
 
@@ -73,6 +80,7 @@ namespace LeaseForPublic.Controllers
         {
             try
             {
+                extension.IsActive = 1;
                 extension.ServiceTypeId = 5;
                 extension.Documentchecklist = await _extensionService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
 
@@ -82,6 +90,83 @@ namespace LeaseForPublic.Controllers
                     extension.CreatedBy = SiteContext.UserId;
                     extension.IsActive = 1;
                     extension.Id = 0;
+                    Random r = new Random();
+                    int num = r.Next();
+                    extension.RefNo = DateTime.Now.Year.ToString() +  num;
+
+                    #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 03 May 2021
+
+                    Approvalproccess approvalproccess = new Approvalproccess();
+                    var DataFlow = await dataAsync();
+                    for (int i = 0; i < DataFlow.Count; i++)
+                    {
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                            {
+                                if (SiteContext.ZoneId == null)
+                                {
+                                    ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                    return View(extension);
+                                }
+
+                                extension.ApprovalZoneId = SiteContext.ZoneId;
+                            }
+                            if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                            {
+                                for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                                {
+                                    List<UserProfileDto> UserListRoleBasis = null;
+                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
+                                    else
+                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
+
+                                    StringBuilder multouserszonewise = new StringBuilder();
+                                    int col = 0;
+                                    if (UserListRoleBasis != null)
+                                    {
+                                        for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                        {
+                                            if (col > 0)
+                                                multouserszonewise.Append(",");
+                                            multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                            col++;
+                                        }
+                                        approvalproccess.SendTo = multouserszonewise.ToString();
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
+                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                {
+                                    StringBuilder multouserszonewise = new StringBuilder();
+                                    int col = 0;
+                                    if (approvalproccess.SendTo != null)
+                                    {
+                                        string[] multiTo = approvalproccess.SendTo.Split(',');
+                                        foreach (string MultiUserId in multiTo)
+                                        {
+                                            if (col > 0)
+                                                multouserszonewise.Append(",");
+                                            var UserProfile = await _userProfileService.GetUserByIdZone(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
+                                            multouserszonewise.Append(UserProfile.UserId);
+                                            col++;
+                                        }
+                                        approvalproccess.SendTo = multouserszonewise.ToString();
+                                    }
+                                }
+                            }
+
+
+                            break;
+                        }
+                    }
+                    #endregion
+
                     var result = await _extensionService.Create(extension);
 
                     if (result)
@@ -112,37 +197,63 @@ namespace LeaseForPublic.Controllers
                     }
                     if (result == true)
                     {
-                        //#region Approval Proccess At 1st level start Added by Renu 16 March 2021
-                        //var DataFlow = await dataAsync();
-                        //for (int i = 0; i < DataFlow.Count; i++)
-                        //{
-                        //    if (!DataFlow[i].parameterSkip)
-                        //    {
-                        //        extension.ApprovedStatus = 0;
-                        //        extension.PendingAt = (DataFlow[i].parameterName);
-                        //        result = await _extensionService.UpdateBeforeApproval(extension.Id, extension);  //Update Table details 
-                        //        if (result)
-                        //        {
-                        //            Approvalproccess approvalproccess = new Approvalproccess();
-                        //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                        //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdExtensionService").Value);
-                        //            approvalproccess.ServiceId = extension.Id;
-                        //            approvalproccess.SendFrom = SiteContext.UserId;
-                        //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                        //            approvalproccess.PendingStatus = 1;   //1
-                        //            approvalproccess.Status = null;   //1
-                        //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                        //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                        //        }
+                        #region Approval Proccess At 1st level start Added by Renu 03 May 2021
+                        var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProcessGuidExtensionService").Value));
+                        var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
 
-                        //        break;
-                        //    }
-                        //}
+                        for (int i = 0; i < DataFlow.Count; i++)
+                        {
+                            if (!DataFlow[i].parameterSkip)
+                            {
+                                extension.ApprovedStatus = ApprovalStatus.Id;
+                                extension.PendingAt = approvalproccess.SendTo;
+                                result = await _extensionService.UpdateBeforeApproval(extension.Id, extension);  //Update Table details 
+                                if (result)
+                                {
+                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProcessGuidExtensionService").Value);
+                                    approvalproccess.ServiceId = extension.Id;
+                                    approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                    approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                    #region set sendto and sendtoprofileid 
+                                    StringBuilder multouserprofileid = new StringBuilder();
+                                    int col = 0;
+                                    if (approvalproccess.SendTo != null)
+                                    {
+                                        string[] multiTo = approvalproccess.SendTo.Split(',');
+                                        foreach (string MultiUserId in multiTo)
+                                        {
+                                            if (col > 0)
+                                                multouserprofileid.Append(",");
+                                            var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                            multouserprofileid.Append(UserProfile.Id);
+                                            col++;
+                                        }
+                                        approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                    }
+                                    #endregion
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = ApprovalStatus.Id;   //1
+                                    approvalproccess.Level = i + 1;
+                                    approvalproccess.Version = workflowtemplatedata.Version;
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                }
 
-                        //#endregion 
+                                break;
+                            }
+                        }
 
+                        #endregion 
+
+                        var data = await _extensionService.IsNeedAddMore();
+                        ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+                        if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
+                            ViewBag.IsNeedAddMore = 1;
+                        else
+                            ViewBag.IsNeedAddMore = 0;
                         ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
-                        return View("Index");
+                        return View("Index", data);
                     }
                     else
                     {
@@ -158,8 +269,17 @@ namespace LeaseForPublic.Controllers
             }
             catch (Exception ex)
             {
+                #region Roll Back of Transaction Added by Renu 26 April  2021 
+                var deleteResult = false;
+                if (extension.Id != 0)
+                {
+                    deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowProcessGuidExtensionService").Value), extension.Id);
+                    deleteResult = await _extensionService.RollBackEntryDocument(extension.Id, Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
+                    deleteResult = await _extensionService.RollBackEntry(extension.Id);
+                }
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(extension);
+                #endregion
             }
         }
 
@@ -260,9 +380,14 @@ namespace LeaseForPublic.Controllers
                         }
                         if (result == true)
                         {
-
+                            var data = await _extensionService.IsNeedAddMore();
+                            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+                            if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
+                                ViewBag.IsNeedAddMore = 1;
+                            else
+                                ViewBag.IsNeedAddMore = 0;
                             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                            return View("Index");
+                            return View("Index", data);
                         }
                         else
                         {
@@ -318,7 +443,13 @@ namespace LeaseForPublic.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            return View("Index");
+            var data = await _extensionService.IsNeedAddMore();
+            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+            if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
+                ViewBag.IsNeedAddMore = 1;
+            else
+                ViewBag.IsNeedAddMore = 0;
+            return View("Index", data);
         }
 
         public async Task<FileResult> ViewExtensionDocument(int Id)
@@ -348,10 +479,10 @@ namespace LeaseForPublic.Controllers
             return Json(await _extensionService.GetTimeLineExtensionFees());
         }
 
-        #region Fetch workflow data for approval prrocess Added by Renu 16 March 2021
+        #region Fetch workflow data for approval prrocess Added by Renu 3 May 2021
         private async Task<List<TemplateStructure>> dataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdExtensionService").Value));
+            var Data = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProcessGuidExtensionService").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;

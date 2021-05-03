@@ -162,6 +162,13 @@ namespace Libraries.Repository.EntityRepository
                                      .FirstOrDefaultAsync();
         }
 
+        public async Task<bool> RollBackEntryDocument(int id, int servicetypeid)
+        {
+            _dbContext.RemoveRange(_dbContext.Allotteeservicesdocument.Where(x => x.ServiceId == id && x.ServiceTypeId == servicetypeid));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
         public async Task<bool> SaveAllotteeServiceDocuments(List<Allotteeservicesdocument> allotteeservicesdocuments)
         {
             await _dbContext.Allotteeservicesdocument.AddRangeAsync(allotteeservicesdocuments);
