@@ -138,7 +138,7 @@ namespace Libraries.Model
 
         public virtual DbSet<ApplicationNotificationTemplate> ApplicationNotificationTemplate { get; set; }
 
-
+        public virtual DbSet<ModuleCategory> ModuleCategory { get; set; }
 
 
         //**********  Court case management**********
