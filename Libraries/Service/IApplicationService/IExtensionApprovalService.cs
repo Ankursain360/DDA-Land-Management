@@ -15,5 +15,6 @@ namespace Libraries.Service.IApplicationService
     {
         Task<PagedResult<Extension>> GetPagedExtensionDetails(ExtensionApprovalSearchDto model, int userId);
         Task<Extension> FetchSingleResult(int id);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

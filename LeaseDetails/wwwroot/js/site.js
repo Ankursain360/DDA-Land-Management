@@ -74,7 +74,10 @@ $(window).on('load', function () {
 	}, 3000);
 });
 $(window).on('beforeunload', function () {
-	$("#loader-wrapper").css("display", "block");
+	//$("#loader-wrapper").css("display", "block");
+	setTimeout(function () {
+		$('#loader-wrapper').remove();
+	}, 3000);
 });
 
 

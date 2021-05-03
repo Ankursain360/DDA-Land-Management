@@ -40,5 +40,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _extensionApprovalRepository.GetPagedExtensionDetails(model, userId);
         }
+
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _extensionApprovalRepository.IsApplicationPendingAtUserEnd( id,  userId);
+        }
     }
 }

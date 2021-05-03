@@ -48,8 +48,9 @@ namespace LeaseForPublic.Controllers
         public async Task<IActionResult> Index()
         {
             var data = await _extensionService.IsNeedAddMore();
-            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
-            if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
+            var approvalstatusresult = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+            int statusid = approvalstatusresult == null ? 0 : approvalstatusresult.Id;
+            if (data == null || data.ApprovedStatus == statusid)
                 ViewBag.IsNeedAddMore = 1;
             else
                 ViewBag.IsNeedAddMore = 0;
@@ -61,7 +62,8 @@ namespace LeaseForPublic.Controllers
         public async Task<PartialViewResult> List([FromBody] ExtensionServiceSearchDto model)
         {
             var result = await _extensionService.GetPagedExtensionServiceDetails(model);
-            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+            var approvalstatusresult = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+            ViewBag.ApprovedStatus = approvalstatusresult == null ? 0 : approvalstatusresult.Id;
             return PartialView("_List", result);
         }
 
@@ -236,7 +238,7 @@ namespace LeaseForPublic.Controllers
                                     approvalproccess.Status = ApprovalStatus.Id;   //1
                                     approvalproccess.Level = i + 1;
                                     approvalproccess.Version = workflowtemplatedata.Version;
-                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    approvalproccess.Remarks = "Record Added and Sent for Approval";///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
                                 }
 
@@ -247,8 +249,9 @@ namespace LeaseForPublic.Controllers
                         #endregion 
 
                         var data = await _extensionService.IsNeedAddMore();
-                        ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
-                        if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
+                        var approvalstatusresult = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+                        int statusid = approvalstatusresult == null ? 0 : approvalstatusresult.Id;
+                        if (data == null || data.ApprovedStatus == statusid)
                             ViewBag.IsNeedAddMore = 1;
                         else
                             ViewBag.IsNeedAddMore = 0;
@@ -381,8 +384,9 @@ namespace LeaseForPublic.Controllers
                         if (result == true)
                         {
                             var data = await _extensionService.IsNeedAddMore();
-                            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
-                            if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
+                            var approvalstatusresult = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+                            int statusid = approvalstatusresult == null ? 0 : approvalstatusresult.Id;
+                            if (data == null || data.ApprovedStatus == statusid)
                                 ViewBag.IsNeedAddMore = 1;
                             else
                                 ViewBag.IsNeedAddMore = 0;
@@ -444,8 +448,9 @@ namespace LeaseForPublic.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             var data = await _extensionService.IsNeedAddMore();
-            ViewBag.ApprovedStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
-            if (data == null || data.ApprovedStatus == ViewBag.ApprovedStatus)
+            var approvalstatusresult = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Approved);
+            int statusid = approvalstatusresult == null ? 0 : approvalstatusresult.Id;
+            if (data == null || data.ApprovedStatus == statusid)
                 ViewBag.IsNeedAddMore = 1;
             else
                 ViewBag.IsNeedAddMore = 0;

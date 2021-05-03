@@ -33,11 +33,20 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Extension>> GetPagedExtensionDetails(ExtensionApprovalSearchDto model, int userId)
         {
+            var AllDataList = await _dbContext.Extension.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Extension myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+
             var data = await _dbContext.Extension
                                        .Include(x => x.Allotment)
                                        .Include(x => x.Allotment.Application)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                        && (model.StatusId == 0 ? x.PendingAt == Convert.ToString(userId) : x.PendingAt == "0")
+                                       .Include(x => x.ApprovedStatusNavigation)
+                                       .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         )
                                         .GetPaged<Extension>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -48,14 +57,14 @@ namespace Libraries.Repository.EntityRepository
                     case ("REFNO"):
                         data = null;
                         data = await _dbContext.Extension
-                                       .Include(x => x.Allotment)
-                                       .Include(x => x.Allotment.Application)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                        // && (model.StatusId == 0 ? x.ConvertPendingAt == userId : x.PendingAt == 0)
-                                        && (model.StatusId == 0 ? x.PendingAt == Convert.ToString(userId) : x.PendingAt == "0")
-                                       // && (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name))
-                                        )
-                                        .OrderBy(x => x.Allotment.Application.RefNo)
+                                        .Include(x => x.Allotment)
+                                        .Include(x => x.Allotment.Application)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.IsActive == 1
+                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                         )
+                                         .OrderBy(x => x.Allotment.Application.RefNo)
                                         .GetPaged<Extension>(model.PageNumber, model.PageSize);
                         
 
@@ -71,13 +80,13 @@ namespace Libraries.Repository.EntityRepository
                     case ("REFNO"):
                         data = null;
                         data = await _dbContext.Extension
-                                      .Include(x => x.Allotment)
-                                      .Include(x => x.Allotment.Application)
-                                       .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                       // && (model.StatusId == 0 ? x.ConvertPendingAt == userId : x.PendingAt == 0)
-                                       && (model.StatusId == 0 ? x.PendingAt == Convert.ToString(userId) : x.PendingAt == "0")
-                                      // && (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name))
-                                       )
+                                       .Include(x => x.Allotment)
+                                       .Include(x => x.Allotment.Application)
+                                       .Include(x => x.ApprovedStatusNavigation)
+                                       .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        )
                                        .OrderByDescending(x => x.Allotment.Application.RefNo)
                                        .GetPaged<Extension>(model.PageNumber, model.PageSize);
                       
@@ -88,6 +97,22 @@ namespace Libraries.Repository.EntityRepository
             }
             return data;
 
+        }
+
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            var result = false;
+            var AllDataList = await _dbContext.Extension
+                                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                                .ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString())).ToList();
+
+            if (UserWiseDataList.Count == 0)
+                result = false;
+            else
+                result = true;
+
+            return result;
         }
     }
 

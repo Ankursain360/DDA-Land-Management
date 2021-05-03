@@ -215,76 +215,7 @@ namespace LeaseDetails.Controllers
                                             for (int d = i - 1; d >= 0; d--)
                                             {
                                                 if (!DataFlow[d].parameterSkip)
-                                                {
-                                                    //if (DataFlow[d].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
-                                                    //{
-                                                    //    for (int j = 0; j < DataFlow[d].parameterName.Count; j++)
-                                                    //    {
-                                                    //        List<UserProfileDto> UserListRoleBasis = null;
-                                                    //        if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                                    //            UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[d].parameterName[j]), SiteContext.ZoneId ?? 0);
-                                                    //        else
-                                                    //            UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[d].parameterName[j]));
-
-                                                    //        StringBuilder multouserszonewise = new StringBuilder();
-                                                    //        int colrevert = 0;
-                                                    //        if (UserListRoleBasis != null && UserListRoleBasis.Count > 0)
-                                                    //        {
-                                                    //            for (int h = 0; h < UserListRoleBasis.Count; h++)
-                                                    //            {
-                                                    //                if (colrevert > 0)
-                                                    //                    multouserszonewise.Append(",");
-                                                    //                multouserszonewise.Append(UserListRoleBasis[h].UserId);
-                                                    //                colrevert++;
-                                                    //            }
-                                                    //            approvalproccess.SendTo = multouserszonewise.ToString();
-                                                    //        }
-                                                    //        else
-                                                    //        {
-                                                    //            ViewBag.Items = await _userProfileService.GetRole();
-                                                    //            await BindApprovalStatusDropdown(leaseapplication);
-                                                    //            ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
-                                                    //            return View(leaseapplication);
-                                                    //        }
-                                                    //    }
-                                                    //}
-                                                    //else
-                                                    //{
-                                                    //    approvalproccess.SendTo = String.Join(",", (DataFlow[d].parameterName));
-                                                    //    if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                                    //    {
-                                                    //        StringBuilder multouserszonewise = new StringBuilder();
-                                                    //        int colrevert = 0;
-                                                    //        if (approvalproccess.SendTo != null)
-                                                    //        {
-                                                    //            string[] multiTo = approvalproccess.SendTo.Split(',');
-                                                    //            foreach (string MultiUserId in multiTo)
-                                                    //            {
-                                                    //                if (colrevert > 0)
-                                                    //                    multouserszonewise.Append(",");
-                                                    //                var UserProfile = await _userProfileService.GetUserByIdZone(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
-                                                    //                if (UserProfile != null)
-                                                    //                    multouserszonewise.Append(UserProfile.UserId);
-                                                    //                colrevert++;
-                                                    //            }
-                                                    //            approvalproccess.SendTo = multouserszonewise.ToString();
-                                                    //        }
-                                                    //    }
-                                                    //    if (approvalproccess.SendTo != "")
-                                                    //    {
-                                                    //        int[] nums = Array.ConvertAll(approvalproccess.SendTo.Split(','), int.Parse);
-                                                    //        var data = await _userProfileService.UserListSkippingmultiusers(nums);
-                                                    //        return Json(data);
-                                                    //    }
-                                                    //    else
-                                                    //    {
-                                                    //        ViewBag.Items = await _userProfileService.GetRole();
-                                                    //        await BindApprovalStatusDropdown(leaseapplication);
-                                                    //        ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
-                                                    //        return View(leaseapplication);
-                                                    //    }
-                                                    //}
-
+                                                {                                                   
                                                     var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), leaseapplication.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
                                                     approvalproccess.SendTo = CheckLastUserForRevert.SendFrom;
                                                     approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
@@ -403,7 +334,6 @@ namespace LeaseDetails.Controllers
                         #region Mail Generate
                         //At successfull completion send mail and sms
                         Uri uri = new Uri("https://www.managemybusinessess.com/");
-                        //  string Action = "Dear " + leaseapplication.Name + ",  You are succesfully registered with DDA Portal. For verify your email click  below link :-  " + uri;
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                         string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
 
@@ -484,16 +414,7 @@ namespace LeaseDetails.Controllers
 
         }
 
-        #region History Details Only For Approval Page
-        public async Task<PartialViewResult> HistoryDetails(int id)
-        {
-            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), id);
-
-            return PartialView("_HistoryDetails", Data);
-        }
-        #endregion
-
-
+        
         #region LeaseApplicationForm Details
         public async Task<PartialViewResult> LeaseApplicationFormView(int id)
         {
@@ -514,6 +435,14 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
+        #region History Details Only For Approval Page
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
+        }
+        #endregion
 
         #region Fetch workflow data for approval prrocess Added by Renu 16 march 2021
         private async Task<List<TemplateStructure>> DataAsync(string version)
@@ -598,8 +527,6 @@ namespace LeaseDetails.Controllers
                 dropdown = new List<string>();
                 dropdown.Add(ApprovalStatusApproved.Id.ToString());
             }
-            // var approvallevel = _approvalproccessService.CheckIsApprovalStart((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), serviceid);
-
             return (List<string>)dropdown;
         }
 
