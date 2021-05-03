@@ -97,7 +97,7 @@ namespace NewLandAcquisition.Controllers
                         if (!DataFlow[i].parameterSkip)
                         {
                             request.ApprovedStatus = 0;
-                            request.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                        //    request.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
                             result = await _requestService.UpdateBeforeApproval(request.Id, request);  //Update Table details 
 
 

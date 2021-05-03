@@ -12,10 +12,12 @@ namespace Libraries.Model.Entity
         {
             Approvalproccess = new HashSet<Approvalproccess>();
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
+            Extension = new HashSet<Extension>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Fixingdemolition = new HashSet<Fixingdemolition>();
             Leaseapplication = new HashSet<Leaseapplication>();
             Onlinecomplaint = new HashSet<Onlinecomplaint>();
+            Request = new HashSet<Request>();
             Watchandward = new HashSet<Watchandward>();
         }
 
@@ -30,9 +32,11 @@ namespace Libraries.Model.Entity
         public ICollection<Approvalproccess> Approvalproccess { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
         public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public ICollection<Extension> Extension { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
         public ICollection<Leaseapplication> Leaseapplication { get; set; }
         public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
+        public ICollection<Request> Request { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
     }
 }

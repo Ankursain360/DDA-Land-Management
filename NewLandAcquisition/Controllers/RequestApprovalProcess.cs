@@ -110,13 +110,13 @@ namespace NewLandAcquisition.Controllers
                                 if (i == DataFlow.Count - 1)
                                 {
                                     request.ApprovedStatus = 1;
-                                    request.PendingAt = 0;
+                                 //   request.PendingAt = 0;
                                     ViewBag.result = true;
                                 }
                                 else
                                 {
                                     request.ApprovedStatus = 0;
-                                    request.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                    //request.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
                                 }
                                 result = await _requestService.UpdateBeforeApproval(id, request);
                             }

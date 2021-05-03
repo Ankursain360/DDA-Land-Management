@@ -26,7 +26,9 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Request.
              
-               Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0))
+               Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId 
+               //&& (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+               )
                 .GetPaged<Request>(model.PageNumber, model.PageSize);
 
 
