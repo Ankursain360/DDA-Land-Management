@@ -11,6 +11,7 @@ namespace Libraries.Model.Entity
         public Approvalstatus()
         {
             Approvalproccess = new HashSet<Approvalproccess>();
+            Damagepayeeregister = new HashSet<Damagepayeeregister>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Fixingdemolition = new HashSet<Fixingdemolition>();
             Leaseapplication = new HashSet<Leaseapplication>();
@@ -27,6 +28,7 @@ namespace Libraries.Model.Entity
 
 
         public ICollection<Approvalproccess> Approvalproccess { get; set; }
+        public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
         public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
         public ICollection<Leaseapplication> Leaseapplication { get; set; }

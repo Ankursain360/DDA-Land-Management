@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Dto.Search.ApprovalHistoryListDataDto>
+
+<div class="permission mt-2 accordion list-unstyled m-0 ">
+    <div class="card">
+        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseHistoryApprroval" role="button" aria-expanded="true"
+           aria-controls="collapseHistoryApprroval">
+            <i class="ri-arrow-right-s-fill"></i>
+            <span class="text ml-1 mr-auto">Approval History Details</span>
+            <i class="arrow ri-arrow-drop-down-line slow"></i>
+        </a>
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseHistoryApprroval">
+            <div class="table-section bg-white border shadow rounded">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        <tr>
+                            <th>Send From </th>
+                            <th>Send To</th>
+                            <th>Submited on</th>
+                            <th>Action Taken on</th>
+                            <th>Attachment</th>
+                            <th>Status</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @item.SendFrom
+                                    </td>
+                                    <td>
+                                        @item.SendTo
+                                    </td>
+                                    <td>
+                                       @item.SubmitDate
+                                    </td>
+                                    <td>
+                                        @item.ActionTakenDate
+                                    </td>
+                                    <td>
+                                        @if (item.DocumentName != "")
+                                        {
+                                            <a class="badge badge-primary px-2" asp-action="ViewDocumentApprovalProccess" asp-route-id="@item.Id" target="_blank"> (View)</a>
+                                        }
+                                        else
+                                        {
+                                            <a>No Document</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        @(item.SentStatusName == null ? "" : item.SentStatusName)
+                                    </td>
+                                    <td>
+                                        @item.Remarks
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <th colspan="14" style="text-align:center"> No Record Available! </th>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+

@@ -1,43 +1,90 @@
 ﻿@model Libraries.Model.Entity.Damagepayeeregister
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutApproval.cshtml";
 }
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register Approval Process" })
+<div class="row mt-md-3">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h6 class="pull-left" style="color:#007bff;margin-top:5px;">Damage Payee Register Approval Process</h6>
+        </div>
+    </div>
+</div>
 <br />
 <br />
 <form asp-action="Create" id="myForm" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex"> Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="RefNo" />
+    <input type="hidden" id="RevertCode" value="@ViewBag.RevertCodeValue" />
+    <input type="hidden" id="ApprovedCode" value="@ViewBag.ApprovedCodeValue" />
+    <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
+    <input type="hidden" id="QueryForwardCode" value="@ViewBag.QueryForwardCodeValue" />
+    <input type="hidden" asp-for="ApprovalStatusCode" value="0" />
 
     <div id="DamagePayeeRegisterDetailsDiv">
 
     </div>
-    <div class="table-section bg-white border shadow rounded pb-3">
-        <div class="table-responsive px-2" id="divHistoryDetails">
+    <div id="divHistoryDetails">
 
-        </div>
     </div>
     <div class="row pt-4">
         <div class="col-md-6">
             <div class="floating-label-wrap">
-                <select class="floating-label-field floating-label-field--s3" asp-for="ApprovalStatus">
-                    <option value="1">Forward</option>
-                    <option value="2">Revert</option>
-                    <option value="3">Approved</option>
+                <select class="floating-label-field floating-label-field--s3" asp-for="ApprovalStatus" asp-items="@(new SelectList(Model.ApprovalStatusList, "Id","Name"))" onchange="return GetApprvoalStatus(this.options[this.selectedIndex].value);">
+                    <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                 </select>
-                <label asp-validation-for="ApprovalStatus" class="error"></label>
+                <span asp-validation-for="ApprovalStatus" class="text-danger" style="display:none;" id="ApprovalStatusMessage">
+                    Status Is Mandatory
+                </span>
                 <label class="floating-label">Status<span style="color:red">*</span></label>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input asp-for="ApprovalDocument" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                <label class="floating-label">Document</label>
+            </div>
+        </div>
     </div>
+
+    <div id="RoleListDiv" style="display:none;">
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ApprovalRoleId" asp-items="@(new SelectList(ViewBag.Items,"Id","Name"))" onchange="return GetUserList(this.options[this.selectedIndex].value);">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="ApprovalRoleId" class="text-danger" style="display:none;" id="ApprovalRoleIdMessage">
+                        Role Is Mandatory
+                    </span>
+                    <label class="floating-label">Role<span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="UserListDiv" style="display:none;">
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ApprovalUserId">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="ApprovalUserId" class="text-danger" style="display:none;" id="ApprovalUserIdMessage">User Is Mandatory</span>
+                    <label class="floating-label">Users(Username|Role|Zone)<span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row pt-3">
         <div class="col-md-12">
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <textarea asp-for="ApprovalRemarks" type="text" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="ApprovalRemarks" class="text-danger"></span>
+                <span asp-validation-for="ApprovalRemarks" class="text-danger" style="display:none;" id="ApprovalRemarksMessage">Remarks Is Mandatory</span>
                 <label class="floating-label">Remarks<span style="color:red">*</span></label>
             </div>
         </div>
@@ -45,7 +92,7 @@
 
     <div class="row pt-3">
         <div class="col-md-12">
-            <input type="submit" value="Submit" class="btn btn-theme " />
+            <input type="submit" value="Submit" class="btn btn-theme " id="btnCreate" />
             @Html.ActionLink("Back", "Index", "DamagePayeeApproval", null, new { @class = "btn btn-theme " })
         </div>
     </div>

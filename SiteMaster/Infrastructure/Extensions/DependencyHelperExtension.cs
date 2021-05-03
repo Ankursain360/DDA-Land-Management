@@ -53,7 +53,17 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<IApprovalCompleteRepository, ApprovalCompleteRepository>();
             services.AddScoped<IApplicationNotificationTemplateRepository, ApplicationNotificationTemplateRepository>();
-            
+
+
+            // new land acquisition masters
+
+            services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
+            services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
+            services.AddScoped<INewlandSchemeRepository, NewlandSchemeRepository>();
+            services.AddScoped<INewlandProposaldetailsRepository, NewlandProposaldetailsRepository>();
+            services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
+
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -89,6 +99,15 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<IApprovalCompleteService, ApprovalCompleteService>();
             services.AddScoped<IApplicationNotificationTemplateService, ApplicationNotificationTemplateService>();
-             }
+
+            // new land acquisition masters 
+
+            services.AddScoped<INewlandvillageService, NewlandvillageService>();
+            services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
+            services.AddScoped<INewlandSchemeService, NewlandSchemeService>();
+            services.AddScoped<INewlandProposaldetailsService, NewlandProposaldetailsService>();
+            services.AddScoped<INewlandawardmasterdetailService, NewlandawardmasterdetailsService>();
+
+        }
     }
 }

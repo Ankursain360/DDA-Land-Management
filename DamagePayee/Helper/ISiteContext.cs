@@ -8,5 +8,6 @@ namespace DamagePayee.Helper
         int? RoleId { get; set; }
         int? DepartmentId { get; set; }
         int? BranchId { get; set; }
+        int? ZoneId { get; set; }
     }
 }

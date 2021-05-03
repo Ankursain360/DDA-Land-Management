@@ -13,6 +13,9 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("damagepayeeregister", "lms");
 
+            builder.HasIndex(e => e.ApprovedStatus)
+                .HasName("fk_ApprovedStatusDamagepayeeRegister_idx");
+
             builder.HasIndex(e => e.DistrictId)
                 .HasName("Fk_TempDistrict_idx");
 
@@ -27,9 +30,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Achknowledgement).HasColumnType("longtext");
 
-            builder.Property(e => e.ApprovedStatus)
-                .HasColumnType("int(11)")
-                .HasDefaultValueSql("0");
+            builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
             builder.Property(e => e.CalculatorValue).HasColumnType("decimal(18,3)");
 
@@ -108,7 +111,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnName("OTP")
                 .HasColumnType("int(11)");
 
-            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
+            builder.Property(e => e.PendingAt)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.PetitionerRespondent)
                 .HasMaxLength(45)
@@ -131,6 +136,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.PropertyPhotoPath).HasColumnType("longtext");
 
             builder.Property(e => e.Rebate).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.RefNo)
+                .HasMaxLength(45)
+                .IsUnicode(false);
+
 
             builder.Property(e => e.ResidentialSqMt).HasColumnType("decimal(18,3)");
 
@@ -157,6 +167,11 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.UserId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                .WithMany(p => p.Damagepayeeregister)
+                .HasForeignKey(d => d.ApprovedStatus)
+                .HasConstraintName("fk_ApprovedStatusDamagepayeeRegister");
 
             builder.HasOne(d => d.District)
                 .WithMany(p => p.Damagepayeeregister)

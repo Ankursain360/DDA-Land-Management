@@ -69,7 +69,9 @@ namespace LeaseDetails.Controllers
             try
             {
                 var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
-                leaseapplication.RefNo = leaseapplication.RegistrationNo + finalString;
+                Random r = new Random();
+                int num = r.Next();
+                leaseapplication.RefNo = leaseapplication.RegistrationNo + num;
                 string FilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
 
                 leaseapplication.Documentchecklist = await _leaseApplicationFormService.GetDocumentChecklistDetails(Convert.ToInt32(_configuration.GetSection("ServiceTypeIdLeaseAppForm").Value));
@@ -311,6 +313,7 @@ namespace LeaseDetails.Controllers
             }
             catch (Exception ex)
             {
+                #region Roll Back of Transaction Added by Renu 26 April  2021 
                 var deleteResult = false;
                 if (leaseapplication.Id != 0)
                 {
@@ -320,6 +323,7 @@ namespace LeaseDetails.Controllers
                 }
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(leaseapplication);
+                #endregion
             }
         }
         public async Task<JsonResult> GetDocumentChecklistDetails()

@@ -166,5 +166,11 @@
     "inputFiles": [
       "wwwroot/js/CaptchaCreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregisterview.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregisterview.js"
+    ]
   }
 ]

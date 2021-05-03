@@ -16,6 +16,8 @@ namespace Libraries.Model.Entity
             Damagepaymenthistory = new HashSet<Damagepaymenthistory>();
             Mutationdetails = new HashSet<Mutationdetails>();
         }
+        public string RefNo { get; set; }
+
         [Required(ErrorMessage = "File No is mandatory feild")]
         public string FileNo { get; set; }
         public string TypeOfDamageAssessee { get; set; }
@@ -92,7 +94,8 @@ namespace Libraries.Model.Entity
         public string Signature { get; set; }
         public string Achknowledgement { get; set; }
         public int? ApprovedStatus { get; set; }
-        public int? PendingAt { get; set; }
+        public string PendingAt { get; set; }
+        public int? ApprovalZoneId { get; set; }
         public int? UserId { get; set; }
         public byte? IsActive { get; set; }
         public string PropertyPhotoPath { get; set; }
@@ -226,6 +229,23 @@ namespace Libraries.Model.Entity
         public string ApprovalStatus { get; set; }
 
         [NotMapped]
+        public int ApprovalStatusCode { get; set; }
+
+        [NotMapped]
         public string ApprovalRemarks { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
+
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
     }
 }

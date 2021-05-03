@@ -12,12 +12,12 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using NewLandAcquisition.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
 
-namespace NewLandAcquisition.Controllers
+namespace SiteMaster.Controllers
 {
     public class NewlandKhasraController : Controller
     {

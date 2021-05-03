@@ -2,15 +2,15 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Village" })
 
 <div class="pt-3">
-    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">View Details</h3>
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input disabled asp-for="Code" placeholder="Name" type="text"
+                    <input asp-for="Code" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Code" class="text-danger"></span>
                     <label class="floating-label">Village Code    </label>
@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input disabled asp-for="Name" placeholder="Name" type="text"
+                    <input asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Village Name    </label>
@@ -29,7 +29,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3"
+                    <select class="floating-label-field floating-label-field--s3"
                             asp-for="DistrictId" asp-items="@(new SelectList(Model.DistrictList, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3"
+                    <select class="floating-label-field floating-label-field--s3"
                             asp-for="TehsilId" asp-items="@(new SelectList(Model.TehsilList, "Id","Name"))">
 
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
@@ -53,7 +53,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input disabled asp-for="YearofConsolidation" placeholder="Year of Consolidation"
+                    <input asp-for="YearofConsolidation" placeholder="Year of Consolidation"
                            type="text" class="floating-label-field floating-label-field--s3 onlynumbers" limit="4" />
                     <span asp-validation-for="YearofConsolidation" class="text-danger"></span>
                     <label class="floating-label">Year of Consolidation   </label>
@@ -62,7 +62,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input disabled asp-for="TotalNoOfSheet" placeholder="Name" type="text"
+                    <input asp-for="TotalNoOfSheet" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="TotalNoOfSheet" class="text-danger"></span>
                     <label class="floating-label">Total No Of Sheet </label>
@@ -72,7 +72,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3"
+                    <select class="floating-label-field floating-label-field--s3"
                             asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
 
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
@@ -84,7 +84,7 @@
             </div>
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="Acquired">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Acquired">
                         <option value="yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -96,7 +96,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input disabled asp-for="Circle" placeholder="Name" type="text"
+                    <input asp-for="Circle" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Circle" class="text-danger"></span>
                     <label class="floating-label">Circle  </label>
@@ -104,7 +104,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea disabled asp-for="WorkingVillage" placeholder="WorkingVillage" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea asp-for="WorkingVillage" placeholder="WorkingVillage" class="floating-label-field floating-label-field--s3"></textarea>
 
                     <span asp-validation-for="WorkingVillage" class="text-danger"></span>
                     <label class="floating-label">Working Village  </label>
@@ -124,7 +124,7 @@
                         <input type="hidden" asp-for="VillageType" />
 
                         <div class="form-check theme">
-                            <input disabled class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rDead" value="Dead" checked="checked">
+                            <input class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rDead" value="Dead" checked="checked">
                             <label class="form-check-label" for="radio">
                                 Dead Village
                             </label>
@@ -132,7 +132,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-check theme">
-                            <input disabled class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rNazul" value="Nazul">
+                            <input class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rNazul" value="Nazul">
                             <label class="form-check-label" for="radio">
                                 Nazul Village
                             </label>
@@ -140,7 +140,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-check theme">
-                            <input disabled class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rUrban" value="Urban">
+                            <input class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rUrban" value="Urban">
                             <label class="form-check-label" for="radio">
                                 Urban Village
                             </label>
@@ -151,7 +151,7 @@
 
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
@@ -160,9 +160,9 @@
                 </div>
             </div>
         </div>
-
         <div class="row mt-md-3">
             <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Update</button>
                 @Html.ActionLink("Back", "Index", "Village", null, new { @class = "btn btn-theme " })
             </div>
         </div>
@@ -173,3 +173,9 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/newlandvillagecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/newlandvillagecreate.js" asp-append-version="true"></script>
+</environment>

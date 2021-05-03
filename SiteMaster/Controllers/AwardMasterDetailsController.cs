@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using NewLandAcquisition.Filters;
+using SiteMaster.Filters;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
 using Dto.Master;
 
-namespace NewLandAcquisition.Controllers
+namespace SiteMaster.Controllers
 {
     public class AwardMasterDetailsController : BaseController
     {

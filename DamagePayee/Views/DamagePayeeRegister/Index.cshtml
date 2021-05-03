@@ -1,7 +1,50 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Damagepayeeregister>
 @await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register" })
 <div class="pt-3">
-   
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3" />
+                    <label for="txtFileNo" class="floating-label">File No.</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtPropertyNo" class="floating-label-field floating-label-field--s3" />
+                    <label for="txtPropertyNo" class="floating-label">Property No.</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" id="txtLocalityId"
+                                asp-items="@(new SelectList(ViewBag.LocalityList,"Id","Name"))">
+                            <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+
+                        </select>
+                        <label for="txtLocalityId" class="floating-label">Locality</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button id="btnSearch1" class="btn btn-theme btn-block" type="button">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">

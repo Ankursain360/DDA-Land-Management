@@ -29,9 +29,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-            services.AddScoped<INewlandProposaldetailsRepository, NewlandProposaldetailsRepository>();
-            services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
-            services.AddScoped<INewlandSchemeRepository, NewlandSchemeRepository>();
+          
             services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
 
             services.AddScoped<INewLandProposalPlotDetailsRepository, NewLandProposalPlotDetailsRepository>();
@@ -48,8 +46,8 @@ namespace NewLandAcquisition.Infrastructure.Extensions
 
 
             services.AddScoped<INewlandus22plotRepository, Newlandus22plotRepository>();
-            services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
-            services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
+           
+            
             services.AddScoped<InewlandawardplotdetailsRepository, NewlandawardplotdetailsRepository>();
             services.AddScoped<INewlandAppealdetailRepository, NewlandAppealdetailRepository>();
 
@@ -80,17 +78,12 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<INewlandProposaldetailsService, NewlandProposaldetailsService>();
-            services.AddScoped<INewlandvillageService, NewlandvillageService>();
-            services.AddScoped<INewlandSchemeService, NewlandSchemeService>();
-
+           
             services.AddScoped<INewLandProposalPlotDetailsService, NewLandProposalPlotDetailsService>();
             services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
 
             services.AddScoped<INewlandus4plotService, Newlandus4plotService>();
             services.AddScoped<INewLandEnhanceCompensationService, NewLandEnhanceCompensationService>();
-            services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
-            services.AddScoped<INewlandawardmasterdetailService, NewlandawardmasterdetailsService>();
             services.AddScoped<INewlandawardplotdetailsService, NewlandawardplotdetailsService>();
 
 
