@@ -10,6 +10,22 @@ using System;
 using System.Threading.Tasks;
 using DamagePayee.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+
+using Microsoft.Extensions.Configuration;
+
+using System.IO;
+using Unidecode.NET;
+using System.Net;
+using DamagePayee.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Extensions;
+
+using Service.IApplicationService;
+using System.Text;
+using System.Collections.Generic;
+
 namespace DamagePayee.Controllers
 {
     public class NoticeToDamagePayeeController : Controller
@@ -140,6 +156,38 @@ namespace DamagePayee.Controllers
             }
             return View(Data);
         }
+
+
+        public async Task<IActionResult> NoticeToDamagePayeeList()
+        {
+            var result = await _noticeToDamagePayeeService.GetAllNoticetoDamagePayee();
+           List<NoticeToDamagePayeeListDto> data = new List<NoticeToDamagePayeeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NoticeToDamagePayeeListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        Name = result[i].Name,
+                        Address = result[i].Address,
+                        PropertyDetails = result[i].PropertyDetails,
+                        Area = result[i].Area,
+                        InterestPercentage = result[i].InterestPercentage,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                                     }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
+
+
 
 
 

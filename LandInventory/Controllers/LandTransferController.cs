@@ -18,6 +18,8 @@ using Utility.Helper;
 using System.Net;
 using LandInventory.Filters;
 using Core.Enum;
+using Dto.Master;
+
 
 namespace LandInventory.Controllers
 {
@@ -461,5 +463,82 @@ namespace LandInventory.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
+
+
+
+
+        public async Task<IActionResult> HandoverTakeoverList()
+        {
+            var result = await _landTransferService.GetAllHandOverTakeOverList();
+            List<HandoverTakeoverListDto> data = new List<HandoverTakeoverListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new HandoverTakeoverListDto()
+                    {
+                        Id = result[i].Id,
+                        InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
+                        ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
+                        PlannedUnplannedLand = result[i].PlannedUnplannedLand,
+
+
+                        Department = result[i].Department == null ? " " : result[i].Department.Name,
+                        Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
+                        Division = result[i].Division == null ? " " : result[i].Division.Name,
+                        PrimaryListNo = result[i].PrimaryListNo,
+                        AddressWithLandmark = result[i].Palandmark,
+
+
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+        public async Task<IActionResult> UnverifiedTransferRecordsList()
+        {
+            var result = await _landTransferService.GetAllUnverifiedTransferRecordList();
+            List<UnverifiedTransferRecordsListDto> data = new List<UnverifiedTransferRecordsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new UnverifiedTransferRecordsListDto()
+                    {
+                        Id = result[i].Id,
+                        InventoriedIn = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
+                        ClassificationofLand = result[i].ClassificationOfLand == null ? " " : result[i].ClassificationOfLand.Name,
+                        PlannedUnplannedLand = result[i].PlannedUnplannedLand,
+
+
+                        Department = result[i].Department == null ? " " : result[i].Department.Name,
+                        Zone = result[i].Zone == null ? " " : result[i].Zone.Name,
+                        Division = result[i].Division == null ? " " : result[i].Division.Name,
+                        PrimaryListNo = result[i].PrimaryListNo,
+                        AddressWithLandmark = result[i].Palandmark,
+
+
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+
+
+
+
     }
 }

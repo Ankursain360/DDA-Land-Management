@@ -11,6 +11,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using LandInventory.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 namespace LandInventory.Controllers
 {
     public class ReportofLandTransferDivisionLocalityWiseController : BaseController
@@ -74,6 +76,48 @@ namespace LandInventory.Controllers
                 return PartialView("_List", null);
             }
         }
+
+
+
+
+
+        public async Task<IActionResult> HandoverTakeoverReportDepartmentZoneDivisionLocalitywiseList()
+        {
+            var result = await _landtransferService.GetAllLandTransferList();
+            List<HandovertakeoverReportDepartmentZoneDivisionLocalityDto> data = new List<HandovertakeoverReportDepartmentZoneDivisionLocalityDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new HandovertakeoverReportDepartmentZoneDivisionLocalityDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].PropertyRegistration.Department.Name,
+                        Zone = result[i].PropertyRegistration.Zone.Name,
+                        Division = result[i].PropertyRegistration.Division.Name,
+                        //Locality = result[i].PropertyRegistration.Division.Name,
+
+
+                        Locality = result[i].PropertyRegistration.LocalityId == null ? " " : result[i].PropertyRegistration.Locality.Name,
+                        KhasraNo = result[i].PropertyRegistration.KhasraNo == null ? " " : result[i].PropertyRegistration.KhasraNo,
+
+                        HandedOverBy = result[i].HandedOverByNameDesingnation,
+                        HandedOverDate = Convert.ToString(result[i].HandedOverDate),
+                        TakenOverBy = result[i].TakenOverByNameDesingnation,
+                        TakenOverDate = result[i].DateofTakenOver.ToString(),
+                        TransferorderIssueAuthority = result[i].TransferorderIssueAuthority,
+                        Remarks = result[i].Remarks,
+
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
 
     }
 }
