@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using CourtCasesManagement.Filters;
 using Core.Enum;
+using Dto.Master;
 namespace CourtCasesManagement.Controllers
 {
     public class LegalmanagementsystemController : BaseController
@@ -367,6 +368,37 @@ namespace CourtCasesManagement.Controllers
             }
             return RedirectToAction("Index", "Legalmanagementsystem");
         }
-        
+
+
+        public async Task<IActionResult> LegalManagementSystemList()
+        {
+            var result = await _legalmanagementsystemService.GetAllLegalmanagementsystem();
+            List<LegalManagementSystemListDto> data = new List<LegalManagementSystemListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LegalManagementSystemListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        CourtCaseNo = result[i].CourtCaseNo,
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        Village = result[i].Locality == null ? "" : result[i].Locality.Name,
+                        COC = result[i].IsActive.ToString() == "1" ? "Yes" : "No",
+                        Jugement= result[i].IsActive.ToString() == "1" ? "Yes" : "No",
+                        StayinterimGranted= result[i].IsActive.ToString() == "1" ? "Yes" : "No",
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+      
+
+
     }
 }

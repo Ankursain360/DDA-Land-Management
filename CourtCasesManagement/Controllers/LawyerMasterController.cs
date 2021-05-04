@@ -1,15 +1,17 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Core.Enum;
+using CourtCasesManagement.Filters;
+using Dto.Master;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Dto.Search;
-using CourtCasesManagement.Filters;
-using Core.Enum;
-
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Utility.Helper;
 
 namespace CourtCasesManagement.Controllers
 {
@@ -159,6 +161,31 @@ namespace CourtCasesManagement.Controllers
             }
             var list = await _lawyerService.GetAllLawyer();
             return View("Index", list);
+        }
+
+        public async Task<IActionResult> LawerMasterList()
+        {
+            var result = await _lawyerService.GetAllLawyer();
+            List<LawerMasterListDto> data = new List<LawerMasterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LawerMasterListDto()
+                    {
+                        Id = result[i].Id,
+                        LawyerName= result[i].Name,
+                        CourtPhoneNo = result[i].CourtPhoneNo,
+                        ChamberAddress = result[i].ChamberAddress,
+                        ValidForm = result[i].ValidFrom.ToString(),
+                        ValidTo = result[i].ValidTo.ToString(),                      
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

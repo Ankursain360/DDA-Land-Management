@@ -22,6 +22,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<Legalmanagementsystem>> GetFileNoList();
         Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId);
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model);
+        //Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReportForDownload();
+
+
         Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto);
         Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList();
         string GetDownload(int id);
