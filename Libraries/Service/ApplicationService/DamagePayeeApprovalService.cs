@@ -39,5 +39,12 @@ namespace Service.ApplicationService
         {
             return await _damagePayeeApprovalRepository.FetchSingleResult(id);
         }
+
+        public async Task<List<Damagepayeeregister>> GetAllDamagePayeeApprovallist()
+        {
+            return await _damagePayeeApprovalRepository.GetAllDamagePayeeApprovallist();
+        }
+
+
     }
 }

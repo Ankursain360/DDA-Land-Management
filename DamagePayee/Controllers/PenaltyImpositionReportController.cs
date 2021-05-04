@@ -11,6 +11,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using DamagePayee.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
 namespace DamagePayee.Controllers
 {
     public class PenaltyImpositionReportController : BaseController
@@ -51,6 +53,43 @@ namespace DamagePayee.Controllers
                 return PartialView();
             }
         }
+
+
+
+
+        public async Task<IActionResult> PenaltyImpositionReportList()
+        {
+            var result = await _demandLetterService.GetAllDemandletter();
+            List<PenalityImpositionReportListDto> data = new List<PenalityImpositionReportListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new PenalityImpositionReportListDto()
+                    {
+                        Id = result[i].Id,
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                      
+                     
+                        FileNo = result[i].FileNo,
+                        PropertyNumber = result[i].PropertyNo,
+                        PayeeName = result[i].Name,
+                        DemandNo = result[i].DemandNo,
+                        PenaltyInterestCharges = result[i].Penalty.ToString(),
+                       
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
+
+
+
 
     }
 }

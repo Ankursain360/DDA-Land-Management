@@ -880,5 +880,39 @@ namespace DamagePayee.Controllers
             return View(Data);
         }
         #endregion
+
+
+
+        public async Task<IActionResult> DamagePayeeRegisterApprovalList()
+        {
+            var result = await _damagePayeeApprovalService.GetAllDamagePayeeApprovallist();
+            List<DamagePayeeApprovalListDto> data = new List<DamagePayeeApprovalListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DamagePayeeApprovalListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        TypeOfDamageAssessee = result[i].TypeOfDamageAssessee,
+                        PropertyHouseMunicipalNo = result[i].PropertyNo,
+                        District = result[i].District.Name,
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        SubmittedOn = result[i].CreatedDate.ToString("dd MMM yyyy"),
+                      
+                        ApprovalStatus = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
+
+
     }
 }

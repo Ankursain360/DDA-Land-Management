@@ -20,6 +20,21 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<List<Damagepayeeregister>> GetAllDamagePayeeApprovallist()
+        {
+            return await _dbContext.Damagepayeeregister.Where(x => x.IsActive == 1)
+                   .Include(x => x.ApprovedStatusNavigation)
+           .Include(x => x.Locality)
+           .Include(x => x.District)
+           .ToListAsync();
+        }
+
+
+     
+
+
+
+
         public async Task<PagedResult<Damagepayeeregister>> GetPagedDamageForApproval(DamagepayeeRegisterApprovalDto model, int userId)
         {
             var AllDataList = await _dbContext.Damagepayeeregister.ToListAsync();

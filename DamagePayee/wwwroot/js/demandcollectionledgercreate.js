@@ -6,7 +6,7 @@ var currentSortOrderDescending = 2;
 $(document).ready(function () {
 
     $("#btnGenerate").click(function () {
-        debugger;
+       
         var param = GetSearchParam(currentPageNumber, currentPageSize);
         var IsValid = ValidCheck();//$("#frmDemandCollectionLedger").valid();
         if (IsValid) {

@@ -22,7 +22,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Demandletters>> GetAllDemandletter()
         {
-            return await _dbContext.Demandletters.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Demandletters.Where(x => x.IsActive == 1).Include(x => x.Locality).ToListAsync();
         }
         public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model)
         {

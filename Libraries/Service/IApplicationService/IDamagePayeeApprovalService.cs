@@ -15,5 +15,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Damagepayeeregister>> GetPagedDamageForApproval(DamagepayeeRegisterApprovalDto model, int userId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<Damagepayeeregister> FetchSingleResult(int id);
+        Task<List<Damagepayeeregister>> GetAllDamagePayeeApprovallist();
     }
 }

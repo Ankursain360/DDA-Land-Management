@@ -15,5 +15,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<Damagepayeeregister> FetchSingleResult(int id);
+        
+        Task<List<Damagepayeeregister>> GetAllDamagePayeeApprovallist();
     }
 }

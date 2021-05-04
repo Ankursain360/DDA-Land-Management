@@ -10,6 +10,9 @@ using System;
 using System.Threading.Tasks;
 using DamagePayee.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+using System.Collections.Generic;
 namespace DamagePayee.Controllers
 {
     public class DemandsLetterController : Controller
@@ -161,6 +164,39 @@ namespace DamagePayee.Controllers
             }
             return View(Data);
         }
+
+
+
+        public async Task<IActionResult> DemandsLetterList()
+        {
+            var result = await _demandLetterService.GetAllDemandletter();
+            List<DemandLetterListDto> data = new List<DemandLetterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemandLetterListDto()
+                    {
+                        Id = result[i].Id,
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        DemandNo = result[i].DemandNo,
+                        DueAmount = result[i].DepositDue,
+                        ReliefAmount = result[i].ReliefAmount.ToString(),
+                        FileNo = result[i].FileNo,
+                        Name = result[i].Name,
+                        FatherName = result[i].FatherName,
+                        Address = result[i].Address,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
 
 
 
