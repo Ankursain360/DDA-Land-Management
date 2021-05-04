@@ -38,6 +38,11 @@
     <None Include="Views\Column\Index.cshtml" />
     <None Include="Views\Column\View.cshtml" />
     <None Include="Views\Column\_List.cshtml" />
+    <None Include="Views\LawyerMaster\Create.cshtml" />
+    <None Include="Views\LawyerMaster\Edit.cshtml" />
+    <None Include="Views\LawyerMaster\Index.cshtml" />
+    <None Include="Views\LawyerMaster\View.cshtml" />
+    <None Include="Views\LawyerMaster\_List.cshtml" />
     <None Include="Views\ModuleCategory\Create.cshtml" />
     <None Include="Views\ModuleCategory\Edit.cshtml" />
     <None Include="Views\ModuleCategory\Index.cshtml" />

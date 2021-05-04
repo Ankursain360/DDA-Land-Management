@@ -1,0 +1,160 @@
+﻿@model Libraries.Model.Entity.Lawyer
+@await Component.InvokeAsync("PageHeader", new { pageName = "Lawyer Master" })
+
+<div class="pt-3">
+
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+
+
+            <div class="col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Type" required="required" requiredMsg="The Type field is required">
+                        <option selected="selected" disabled="disabled" value="">Select </option>
+                        <option value="1">Supreme Court Lawyer</option>
+                        <option value="2">High Court Lawyer</option>
+                    </select>
+                    <label asp-validation-for="Type" class="error"></label>
+                    <label asp-for="Type" class="floating-label">Lawyer Type </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                           limit="50">
+                    <span asp-validation-for="Name" class="text-danger "></span>
+                    <label class="floating-label">Lawyer Name</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            <div class="col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="CourtId" required="required" requiredMsg="The Type field is required">
+                        <option selected="selected" disabled="disabled" value="">Select </option>
+                        <option value="1">Supreme Court</option>
+                        <option value="2">High Court</option>
+
+                    </select>
+                    <label asp-validation-for="Type" class="error"></label>
+                    <label asp-for="CourtId" class="floating-label">Court Name </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="ChamberAddress" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Chamber Address"
+                           limit="500">
+                    <span asp-validation-for="ChamberAddress" class="text-danger "></span>
+                    <label class="floating-label">Chamber Address</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="CourtPhoneNo" type="number" class="floating-label-field floating-label-field--s3 " placeholder="Court phone No"
+                           limit="10">
+                    <span asp-validation-for="CourtPhoneNo" class="text-danger "></span>
+                    <label class="floating-label">Court Phone No</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PanNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Pan No"
+                           limit="10">
+                    <span asp-validation-for="PanNo" class="text-danger "></span>
+                    <label class="floating-label">Pan No</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="ResidentailAddress" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Pan No"
+                           limit="500">
+                    <span asp-validation-for="ResidentailAddress" class="text-danger "></span>
+                    <label class="floating-label">Residentail Address</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PhoneNo" type="number" class="floating-label-field floating-label-field--s3 " placeholder="Mobile /Phone No"
+                           limit="10">
+                    <span asp-validation-for="PhoneNo" class="text-danger "></span>
+                    <label class="floating-label">Mobile /Phone No</label>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="ValidFrom" type="date" value="" class="floating-label-field floating-label-field--s3" placeholder="Valid From Date">
+                    <span asp-validation-for="ValidFrom" class="text-danger "></span>
+                    <label class="floating-label">Valid From</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="ValidTo" type="date" value="" class="floating-label-field floating-label-field--s3" placeholder="Valid To Date">
+                    <span asp-validation-for="ValidTo" class="text-danger "></span>
+                    <label class="floating-label">Valid To</label>
+                </div>
+            </div>
+
+
+
+        </div>
+        <br />
+        <div class="row">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "LawyerMaster", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
+
+
+
