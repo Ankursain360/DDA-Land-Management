@@ -1,89 +1,95 @@
-﻿using Core.Enum;
-using CourtCasesManagement.Filters;
-using Dto.Master;
-using Dto.Search;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Mvc;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
 
-namespace CourtCasesManagement.Controllers
+namespace SiteMaster.Controllers
 {
-    public class LawyerMasterController : BaseController
+    public class AlmirahController : BaseController
     {
-        private readonly ILawyerService _lawyerService;
-
-
-        public LawyerMasterController(ILawyerService lawyerService)
+        private readonly IAlmirahService _almirahService;
+        public AlmirahController(IAlmirahService almiraService)
         {
-            _lawyerService = lawyerService;
+            _almirahService = almiraService;
         }
 
-        [AuthorizeContext(ViewAction.View)]
+
+
         public async Task<IActionResult> Index()
         {
-            var result = await _lawyerService.GetAllLawyer();
+            var result = await _almirahService.GetAllAlmirah();
             return View(result);
         }
 
+
+
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] LawyerSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] AlmirahSearchDto model)
         {
-            var result = await _lawyerService.GetPagedLawyer(model);
+            var result = await _almirahService.GetPagedAlmirah(model);
             return PartialView("_List", result);
         }
 
-        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
+
+
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Lawyer lawyer)
+        public async Task<IActionResult> Create(Almirah almirha)
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
-                    var result = await _lawyerService.Create(lawyer);
-
+                    var result = await _almirahService.Create(almirha);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _lawyerService.GetAllLawyer();
+                        var list = await _almirahService.GetAllAlmirah();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(lawyer);
+                        return View(almirha);
 
                     }
                 }
                 else
                 {
-                    return View(lawyer);
+                    return View(almirha);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(lawyer);
+                return View(almirha);
             }
         }
 
-        [AuthorizeContext(ViewAction.Edit)]
+
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _lawyerService.FetchSingleResult(id);
+            var Data = await _almirahService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -92,33 +98,32 @@ namespace CourtCasesManagement.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Lawyer lawyer)
+        public async Task<IActionResult> Edit(int id, Almirah almirah)
         {
             if (ModelState.IsValid)
             {
-                var result = await _lawyerService.Update(id, lawyer);
+                var result = await _almirahService.Update(id, almirah);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                    var list = await _lawyerService.GetAllLawyer();
+                    var list = await _almirahService.GetAllAlmirah();
                     return View("Index", list);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(lawyer);
+                    return View(almirah);
                 }
             }
-            return View(lawyer);
+            return View(almirah);
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
+
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _lawyerService.FetchSingleResult(id);
+            var Data = await _almirahService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -128,7 +133,7 @@ namespace CourtCasesManagement.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
-            var result = await _lawyerService.Delete(id);
+            var result = await _almirahService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -137,15 +142,14 @@ namespace CourtCasesManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            return RedirectToAction("Index", "Lawyer");
+            return RedirectToAction("Index", "Almirah");
         }
 
-        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
             try
             {
-                var result = await _lawyerService.Delete(id);
+                var result = await _almirahService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -159,33 +163,8 @@ namespace CourtCasesManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _lawyerService.GetAllLawyer();
+            var list = await _almirahService.GetAllAlmirah();
             return View("Index", list);
-        }
-
-        public async Task<IActionResult> LawerMasterList()
-        {
-            var result = await _lawyerService.GetAllLawyer();
-            List<LawerMasterListDto> data = new List<LawerMasterListDto>();
-            if (result != null)
-            {
-                for (int i = 0; i < result.Count; i++)
-                {
-                    data.Add(new LawerMasterListDto()
-                    {
-                        Id = result[i].Id,
-                        LawyerName= result[i].Name,
-                        CourtPhoneNo = result[i].CourtPhoneNo,
-                        ChamberAddress = result[i].ChamberAddress,
-                        ValidForm = result[i].ValidFrom.ToString(),
-                        ValidTo = result[i].ValidTo.ToString(),                      
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                    });
-                }
-            }
-
-            var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

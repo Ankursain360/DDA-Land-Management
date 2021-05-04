@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\AlmirahController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Infrastructure\Extensions\DependencyHelperExtension.cs~RF11b1339.TMP" />
   </ItemGroup>
 

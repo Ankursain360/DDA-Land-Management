@@ -17,6 +17,16 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <None Include="Views\Almirah\Create.cshtml" />
+    <None Include="Views\Almirah\Edit.cshtml" />
+    <None Include="Views\Almirah\Index.cshtml" />
+    <None Include="Views\Almirah\View.cshtml" />
+    <None Include="Views\Almirah\_List.cshtml" />
+    <None Include="Views\Bundle\Create.cshtml" />
+    <None Include="Views\Bundle\Edit.cshtml" />
+    <None Include="Views\Bundle\Index.cshtml" />
+    <None Include="Views\Bundle\View.cshtml" />
+    <None Include="Views\Bundle\_List.cshtml" />
     <None Include="Views\ModuleCategory\Create.cshtml" />
     <None Include="Views\ModuleCategory\Edit.cshtml" />
     <None Include="Views\ModuleCategory\Index.cshtml" />
