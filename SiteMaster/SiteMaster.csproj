@@ -27,11 +27,27 @@
     <None Include="Views\Bundle\Index.cshtml" />
     <None Include="Views\Bundle\View.cshtml" />
     <None Include="Views\Bundle\_List.cshtml" />
+    <None Include="Views\CaseNature\Create.cshtml" />
+    <None Include="Views\CaseNature\Delete.cshtml" />
+    <None Include="Views\CaseNature\Edit.cshtml" />
+    <None Include="Views\CaseNature\Index.cshtml" />
+    <None Include="Views\CaseNature\View.cshtml" />
+    <None Include="Views\CaseNature\_List.cshtml" />
+    <None Include="Views\Column\Create.cshtml" />
+    <None Include="Views\Column\Edit.cshtml" />
+    <None Include="Views\Column\Index.cshtml" />
+    <None Include="Views\Column\View.cshtml" />
+    <None Include="Views\Column\_List.cshtml" />
     <None Include="Views\ModuleCategory\Create.cshtml" />
     <None Include="Views\ModuleCategory\Edit.cshtml" />
     <None Include="Views\ModuleCategory\Index.cshtml" />
     <None Include="Views\ModuleCategory\View.cshtml" />
     <None Include="Views\ModuleCategory\_List.cshtml" />
+    <None Include="Views\Row\Create.cshtml" />
+    <None Include="Views\Row\Edit.cshtml" />
+    <None Include="Views\Row\Index.cshtml" />
+    <None Include="Views\Row\View.cshtml" />
+    <None Include="Views\Row\_List.cshtml" />
     <None Include="wwwroot\js\applicationnotificationtemplateindex.min.js" />
     <None Include="wwwroot\js\structureindex.min.js" />
   </ItemGroup>

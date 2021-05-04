@@ -1,38 +1,47 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
-using FileDataLoading.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
-
-namespace FileDataLoading.Controllers
+namespace SiteMaster.Controllers
 {
-    public class RowController : BaseController
+    public class ColumnController : BaseController
     {
-        private readonly IRowService _rowService;
+        private readonly IColumnService _columnService;
 
 
-        public RowController(IRowService rowService)
+        public ColumnController(IColumnService columnService)
         {
-            _rowService = rowService;
+            _columnService = columnService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var result = await _rowService.GetAllRow();
+            var result = await _columnService.GetAllColumn();
             return View(result);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] RowSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] ColumnSearchDto model)
         {
-            var result = await _rowService.GetPagedRow(model);
+            var result = await _columnService.GetPagedColumn(model);
             return PartialView("_List", result);
         }
 
@@ -42,44 +51,44 @@ namespace FileDataLoading.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Create(Row row)
+        public async Task<IActionResult> Create(Column column)
         {
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _rowService.Create(row);
+                    var result = await _columnService.Create(column);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _rowService.GetAllRow();
+                        var list = await _columnService.GetAllColumn();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(row);
+                        return View(column);
 
                     }
                 }
                 else
                 {
-                    return View(row);
+                    return View(column);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(row);
+                return View(column);
             }
         }
 
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _rowService.FetchSingleResult(id);
+            var Data = await _columnService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -88,32 +97,32 @@ namespace FileDataLoading.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Row row)
+        public async Task<IActionResult> Edit(int id, Column column)
         {
             if (ModelState.IsValid)
             {
-                var result = await _rowService.Update(id, row);
+                var result = await _columnService.Update(id, column);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                    var list = await _rowService.GetAllRow();
+                    var list = await _columnService.GetAllColumn();
                     return View("Index", list);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(row);
+                    return View(column);
                 }
             }
-            return View(row);
+            return View(column);
         }
 
 
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _rowService.FetchSingleResult(id);
+            var Data = await _columnService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -123,7 +132,7 @@ namespace FileDataLoading.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
-            var result = await _rowService.Delete(id);
+            var result = await _columnService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -132,14 +141,14 @@ namespace FileDataLoading.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            return RedirectToAction("Index", "Row");
+            return RedirectToAction("Index", "Column");
         }
 
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
             try
             {
-                var result = await _rowService.Delete(id);
+                var result = await _columnService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -153,7 +162,7 @@ namespace FileDataLoading.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _rowService.GetAllRow();
+            var list = await _columnService.GetAllColumn();
             return View("Index", list);
         }
     }

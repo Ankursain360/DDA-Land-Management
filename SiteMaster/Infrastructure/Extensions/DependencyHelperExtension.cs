@@ -56,6 +56,10 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IModuleCategoryRepository,ModuleCategoryRespository>();
             services.AddScoped<IAlmirahRepository, AlmirahRespository>();
             services.AddScoped<IBundleRepository, BundleRespository>();
+            services.AddScoped<IColumnRepository,ColumnRespository>();
+            services.AddScoped<IRowRepository, RowRepository>();
+            services.AddScoped<ICasenatureRepository, CasenatureRepository>();
+
             // new land acquisition masters
 
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
@@ -131,6 +135,9 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IModuleCategoryService, ModuleCategoryService>();
             services.AddScoped<IAlmirahService, AlmirahService>();
             services.AddScoped<IBundleService, BundleService>();
+            services.AddScoped<IColumnService, ColumnService>();
+            services.AddScoped<IRowService, RowService>();
+            services.AddScoped<ICasenatureService, CasenatureService>();
             // new land acquisition masters 
 
             services.AddScoped<INewlandvillageService, NewlandvillageService>();
