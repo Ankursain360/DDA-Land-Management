@@ -27,7 +27,9 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Request>> GetAllRequest()
         {
-            return await _dbContext.Request.OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Request
+                                    .Include(x => x.ApprovedStatusNavigation)
+                                    .OrderByDescending(x => x.Id).ToListAsync();
         }
 
 
@@ -37,6 +39,7 @@ namespace Libraries.Repository.EntityRepository
 
 
             var data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
               .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
                 && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
                  && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno))
@@ -58,6 +61,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data = null;
                         data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
                .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
                 && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
                  && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno))
@@ -69,6 +73,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("CODE"):
                         data = null;
                         data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
             .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
              && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
               && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno))
@@ -93,6 +98,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
            .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
             && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
              && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno)))
@@ -110,6 +116,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data = null;
                         data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
                .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
                 && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
                  && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno))
@@ -121,6 +128,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("CODE"):
                         data = null;
                         data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
             .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
              && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
               && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno))
@@ -133,6 +141,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("FILENO"):
                         data = null;
                         data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
              .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
               && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
                && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno))
@@ -145,6 +154,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Request
+                .Include(x => x.ApprovedStatusNavigation)
            .Where(x => (string.IsNullOrEmpty(model.name) || x.PproposalName.Contains(model.name))
             && (string.IsNullOrEmpty(model.area) || x.AreaLocality.Contains(model.area))
              && (string.IsNullOrEmpty(model.fileno) || x.PfileNo.Contains(model.fileno)))

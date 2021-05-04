@@ -435,7 +435,7 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
-        #region History Details Only For Approval Page
+        #region History Details Only For Approval Page Added by Renu 16 march 2021
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
             var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), id);
@@ -482,7 +482,7 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
-        #region Approval Status Dropdown Bind on User rights Basis Code Added By Renu 
+        #region Approval Status Dropdown Bind on User rights Basis Code Added By Renu 16 march 2021
         async Task BindApprovalStatusDropdown(Leaseapplication Data)
         {
             var dropdownValue = await GetApprovalStatusDropdownList(Data.Id);

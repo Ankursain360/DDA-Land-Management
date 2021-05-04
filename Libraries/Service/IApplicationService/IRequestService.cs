@@ -22,5 +22,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Request>> GetPagedRequest(RequestSearchDto model);
         Task<bool> UpdateBeforeApproval(int id, Request request);
         Task<List<TrackingListDataDto>> GetPagedTrackingList(TrackingListSearchDto model);
+        Task<bool> RollBackEntry(int id);
     }
 }

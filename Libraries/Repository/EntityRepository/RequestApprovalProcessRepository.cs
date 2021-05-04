@@ -24,12 +24,20 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Request>> GetPagedProcessRequest(RequestApprovalSearchDto model, int userId)
         {
-            var data = await _dbContext.Request.
-             
-               Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId 
-               //&& (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-               )
-                .GetPaged<Request>(model.PageNumber, model.PageSize);
+            var AllDataList = await _dbContext.Request.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Request myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+
+            var data = await _dbContext.Request
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        )
+                                        .GetPaged<Request>(model.PageNumber, model.PageSize);
 
 
 
@@ -47,7 +55,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("FILENO"):
                         data.Results = data.Results.OrderBy(x => x.PfileNo).ToList();
                         break;
-                  
+
                 }
             }
             else if (SortOrder == 2)
@@ -63,28 +71,42 @@ namespace Libraries.Repository.EntityRepository
                     case ("FILENO"):
                         data.Results = data.Results.OrderByDescending(x => x.PfileNo).ToList();
                         break;
-                
+
 
                 }
             }
             return data;
-
-
-
-
-
-
         }
 
+        public async Task<Request> FetchSingleResult(int id)
+        {
+            return await _dbContext.Request
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            var result = false;
+            var AllDataList = await _dbContext.Request
+                                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                                .ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString())).ToList();
 
+            if (UserWiseDataList.Count == 0)
+                result = false;
+            else
+                result = true;
 
-
-
-
-
-
-
-
+            return result;
+        }
+        public async Task<List<Request>> GetAllRequest()
+        {
+            return await _dbContext.Request
+                                    .Include(x => x.ApprovedStatusNavigation)
+                                    .Where(x =>x.IsActive == 1)
+                                    .OrderByDescending(x => x.Id)
+                                    .ToListAsync();
+        }
 
     }
 }

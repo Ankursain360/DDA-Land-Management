@@ -111,5 +111,12 @@ namespace Libraries.Service.ApplicationService
             return await _requestRepository.GetPagedTrackingList(model);
         }
 
+        public async Task<bool> RollBackEntry(int id)
+        {
+            var result = await _requestRepository.FindBy(a => a.Id == id);
+            Request model = result.FirstOrDefault();
+            _requestRepository.Delete(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }
