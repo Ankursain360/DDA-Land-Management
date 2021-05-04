@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<Request> FetchSingleResult(int id);
         Task<PagedResult<Request>> GetPagedProcessRequest(RequestApprovalSearchDto model, int userId);
-
-
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
+        Task<List<Request>> GetAllRequest();
     }
 }

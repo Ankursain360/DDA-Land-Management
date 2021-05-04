@@ -8,16 +8,18 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using CourtCasesManagement.Models;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
-using CourtCasesManagement.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
-
-namespace CourtCasesManagement.Controllers
+using Utility.Helper;
+using Dto.Master;
+namespace SiteMaster.Controllers
 {
     public class CaseNatureController : BaseController
     {
@@ -60,7 +62,7 @@ namespace CourtCasesManagement.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        
+
                         var list = await _casenatureService.GetAllcasenature();
                         return View("Index", list);
                     }
@@ -149,7 +151,7 @@ namespace CourtCasesManagement.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-           
+
 
             var result = await _casenatureService.Delete(id);
             if (result == true)
@@ -161,7 +163,7 @@ namespace CourtCasesManagement.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             return RedirectToAction("Index", "casenature");
-           
+
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
@@ -197,6 +199,27 @@ namespace CourtCasesManagement.Controllers
             return View("Index", list);
         }
 
-    }
 
+        public async Task<IActionResult> CaseNatureList()
+        {
+            var result = await _casenatureService.GetAllcasenature();
+            List<CaseNatureListDto> data = new List<CaseNatureListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new CaseNatureListDto()
+                    {
+                        Id = result[i].Id,
+                        CaseNature = result[i].Name,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+    }
 }

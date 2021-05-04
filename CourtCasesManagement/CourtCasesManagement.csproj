@@ -11,8 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\CaseNature\Create.cshtml" />
-    <None Include="Views\CaseNature\Index.cshtml" />
     <None Include="Views\CaseYear\Create.cshtml" />
     <None Include="Views\CaseYear\Index.cshtml" />
   </ItemGroup>

@@ -648,7 +648,7 @@ namespace DamagePayee.Controllers
 
         #endregion
 
-        #region History Details Only For Approval Page
+        #region History Details Only For Approval Page Added By Renu 26 April  2021
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
             var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowPreccessGuidDamagePayee").Value), id);
@@ -676,7 +676,7 @@ namespace DamagePayee.Controllers
         }
         #endregion
 
-        #region Approval Status Dropdown Bind on User rights Basis Code Added By Renu 
+        #region Approval Status Dropdown Bind on User rights Basis Code Added By Renu 26 April  2021
         async Task BindApprovalStatusDropdown(Damagepayeeregister Data)
         {
             var dropdownValue = await GetApprovalStatusDropdownList(Data.Id);

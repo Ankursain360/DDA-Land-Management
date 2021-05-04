@@ -29,20 +29,20 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<Request> FetchSingleResult(int id)
         {
-            var result = await _requestApprovalProcessRepository.FindBy(a => a.Id == id);
-            Request model = result.FirstOrDefault();
-            return model;
+            return await _requestApprovalProcessRepository.FetchSingleResult(id);
         }
-
-
-
-
         public async Task<PagedResult<Request>> GetPagedProcessRequest(RequestApprovalSearchDto model, int userId)
         {
             return await _requestApprovalProcessRepository.GetPagedProcessRequest(model, userId);
         }
-
-
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _requestApprovalProcessRepository.IsApplicationPendingAtUserEnd(id, userId);
+        }
+        public async Task<List<Request>> GetAllRequest()
+        {
+            return await _requestApprovalProcessRepository.GetAllRequest();
+        }
 
 
     }

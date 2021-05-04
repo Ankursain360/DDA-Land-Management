@@ -1,0 +1,65 @@
+﻿@model Libraries.Model.Entity.Request
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutApproval.cshtml";
+}
+<div class="row mt-md-3">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h6 class="pull-left" style="color:#007bff;margin-top:5px;">Request Approval Process</h6>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <h3 class="mb-3 d-flex"> Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div id="RequestDiv">
+
+    </div>
+    <div id="divHistoryDetails">
+
+    </div>
+
+    <br />
+
+    @*@if (ViewBag.userid == 1)
+        {
+            <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
+        }
+        else
+        {
+            <a asp-action="View" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
+        }
+
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <p id="demo"></p>
+                <input type="hidden" asp-for="Id" />
+
+                <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="IdentificationOfLandAnnexure2" id="createlink"></a>
+                <a asp-action="View" asp-controller="IdentificationOfLandAnnexure2" id="viewlink"></a>
+                <a asp-action="Edit" asp-controller="IdentificationOfLandAnnexure2" id="editlink"></a>
+
+
+            </div>
+        </div>
+    *@
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+            @Html.ActionLink("Back", "Index", "RequestApprovalProcess", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
+</form>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/requestapprovalprocesschange.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/requestapprovalprocesschange.min.js" asp-append-version="true"></script>
+</environment>

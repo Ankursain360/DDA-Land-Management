@@ -1,85 +1,96 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
-using FileDataLoading.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
-
-namespace FileDataLoading.Controllers
+namespace SiteMaster.Controllers
 {
-    public class RowController : BaseController
+    public class LawyerMasterController : BaseController
     {
-        private readonly IRowService _rowService;
+        private readonly ILawyerService _lawyerService;
 
 
-        public RowController(IRowService rowService)
+        public LawyerMasterController(ILawyerService lawyerService)
         {
-            _rowService = rowService;
+            _lawyerService = lawyerService;
         }
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-            var result = await _rowService.GetAllRow();
+            var result = await _lawyerService.GetAllLawyer();
             return View(result);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] RowSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] LawyerSearchDto model)
         {
-            var result = await _rowService.GetPagedRow(model);
+            var result = await _lawyerService.GetPagedLawyer(model);
             return PartialView("_List", result);
         }
 
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-
-        public async Task<IActionResult> Create(Row row)
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(Lawyer lawyer)
         {
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _rowService.Create(row);
+                    var result = await _lawyerService.Create(lawyer);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _rowService.GetAllRow();
+                        var list = await _lawyerService.GetAllLawyer();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(row);
+                        return View(lawyer);
 
                     }
                 }
                 else
                 {
-                    return View(row);
+                    return View(lawyer);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(row);
+                return View(lawyer);
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _rowService.FetchSingleResult(id);
+            var Data = await _lawyerService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -88,32 +99,33 @@ namespace FileDataLoading.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Row row)
+        [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, Lawyer lawyer)
         {
             if (ModelState.IsValid)
             {
-                var result = await _rowService.Update(id, row);
+                var result = await _lawyerService.Update(id, lawyer);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                    var list = await _rowService.GetAllRow();
+                    var list = await _lawyerService.GetAllLawyer();
                     return View("Index", list);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(row);
+                    return View(lawyer);
                 }
             }
-            return View(row);
+            return View(lawyer);
         }
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _rowService.FetchSingleResult(id);
+            var Data = await _lawyerService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -123,7 +135,7 @@ namespace FileDataLoading.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
-            var result = await _rowService.Delete(id);
+            var result = await _lawyerService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -132,14 +144,15 @@ namespace FileDataLoading.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            return RedirectToAction("Index", "Row");
+            return RedirectToAction("Index", "Lawyer");
         }
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
             try
             {
-                var result = await _rowService.Delete(id);
+                var result = await _lawyerService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -153,8 +166,33 @@ namespace FileDataLoading.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _rowService.GetAllRow();
+            var list = await _lawyerService.GetAllLawyer();
             return View("Index", list);
+        }
+
+        public async Task<IActionResult> LawerMasterList()
+        {
+            var result = await _lawyerService.GetAllLawyer();
+            List<LawerMasterListDto> data = new List<LawerMasterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LawerMasterListDto()
+                    {
+                        Id = result[i].Id,
+                        LawyerName = result[i].Name,
+                        CourtPhoneNo = result[i].CourtPhoneNo,
+                        ChamberAddress = result[i].ChamberAddress,
+                        ValidForm = result[i].ValidFrom.ToString(),
+                        ValidTo = result[i].ValidTo.ToString(),
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

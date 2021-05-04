@@ -10,12 +10,9 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IRequestApprovalProcessRepository : IGenericRepository<Request>
     {
-
-
-
         Task<PagedResult<Request>> GetPagedProcessRequest(RequestApprovalSearchDto model, int userId);
-
-
-
+        Task<Request> FetchSingleResult(int id);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
+        Task<List<Request>> GetAllRequest();
     }
 }

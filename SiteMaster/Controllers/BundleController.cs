@@ -1,27 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
-using FileDataLoading.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
-
-namespace FileDataLoading.Controllers
+namespace SiteMaster.Controllers
 {
     public class BundleController : BaseController
     {
         private readonly IBundleService _bundleService;
 
-
         public BundleController(IBundleService bundleService)
         {
             _bundleService = bundleService;
         }
+
+
 
         public async Task<IActionResult> Index()
         {
@@ -76,7 +86,6 @@ namespace FileDataLoading.Controllers
             }
         }
 
-
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _bundleService.FetchSingleResult(id);
@@ -108,8 +117,6 @@ namespace FileDataLoading.Controllers
             }
             return View(bundle);
         }
-
-
 
         public async Task<IActionResult> View(int id)
         {
@@ -158,3 +165,5 @@ namespace FileDataLoading.Controllers
         }
     }
 }
+
+    

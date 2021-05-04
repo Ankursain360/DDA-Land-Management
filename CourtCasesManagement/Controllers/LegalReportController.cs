@@ -11,6 +11,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using CourtCasesManagement.Filters;
 using Core.Enum;
+using Dto.Master;
+using Utility.Helper;
+
 namespace CourtCasesManagement.Controllers
 {
     public class LegalReportController : BaseController
@@ -66,5 +69,31 @@ namespace CourtCasesManagement.Controllers
             filenoId = filenoId ?? 0;
             return Json(await _legalmanagementsystemservice.GetCourtCaseNoList(Convert.ToInt32(filenoId)));
         }
+
+        //public async Task<IActionResult> LegalReportList([FromBody] LegalReportSearchDto report)
+        //{
+           
+        //    var result = await_legalmanagementsystemservice.GetPagedLegalReportForDownload(report);
+        //    List<BranchListDto> data = new List<BranchListDto>();
+        //    if (result != null)
+        //    {
+        //        for (int i = 0; i < result.Count; i++)
+        //        {
+        //            data.Add(new BranchListDto()
+        //            {
+        //                Id = result[i].Id,
+        //                BranchCode = result[i].Code,
+        //                BranchName = result[i].Name,
+        //                Department = result[i].Department == null ? "" : result[i].Department.Name,
+        //                IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+        //            });
+        //        }
+        //    }
+
+        //    var memory = ExcelHelper.CreateExcel(data);
+        //    return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        //}
+
+
     }
 }

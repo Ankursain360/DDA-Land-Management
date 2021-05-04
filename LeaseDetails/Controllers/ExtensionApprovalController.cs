@@ -356,7 +356,7 @@ namespace LeaseDetails.Controllers
 
                         #region HTML Body Generation
                         ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                        bodyDTO.ApplicationName = "Lease Application";
+                        bodyDTO.ApplicationName = "Extension Application";
                         bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
                         bodyDTO.SenderName = senderUser.User.Name;
                         bodyDTO.Link = link;
@@ -367,7 +367,7 @@ namespace LeaseDetails.Controllers
                         string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                         #endregion
 
-                        string strMailSubject = "Pending Lease Application Approval Request Details ";
+                        string strMailSubject = "Pending Extension Application Approval Request Details ";
                         string strMailCC = "", strMailBCC = "", strAttachPath = "";
                         sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
                         #endregion
@@ -432,7 +432,7 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
-        #region History Details Only For Approval Page
+        #region History Details Only For Approval Page Added By Renu 26 April  2021
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
             var Data = await _approvalproccessService.GetHistoryDetails((_configuration.GetSection("workflowProcessGuidExtensionService").Value), id);
@@ -477,7 +477,7 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
-        #region Approval Status Dropdown Bind on User rights Basis Code Added By Renu 
+        #region Approval Status Dropdown Bind on User rights Basis Code Added By Renu 26 April  2021
         async Task BindApprovalStatusDropdown(Extension Data)
         {
             var dropdownValue = await GetApprovalStatusDropdownList(Data.Id);

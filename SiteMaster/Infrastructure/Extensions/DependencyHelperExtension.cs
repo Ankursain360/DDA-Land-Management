@@ -54,8 +54,12 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IApprovalCompleteRepository, ApprovalCompleteRepository>();
             services.AddScoped<IApplicationNotificationTemplateRepository, ApplicationNotificationTemplateRepository>();
             services.AddScoped<IModuleCategoryRepository,ModuleCategoryRespository>();
-
-
+            services.AddScoped<IAlmirahRepository, AlmirahRespository>();
+            services.AddScoped<IBundleRepository, BundleRespository>();
+            services.AddScoped<IColumnRepository,ColumnRespository>();
+            services.AddScoped<IRowRepository, RowRepository>();
+            services.AddScoped<ICasenatureRepository, CasenatureRepository>();
+            services.AddScoped<ILawyerRepository, LawyerRespository>();
             // new land acquisition masters
 
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
@@ -94,9 +98,6 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IHonbleRepository, HonbleRepository>();
             services.AddScoped<ILeasePaymentTypeRepository, LeasePaymentTypeRepository>();
 
-
-
-
             /************ Application Services ************/
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
@@ -132,6 +133,12 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IApprovalCompleteService, ApprovalCompleteService>();
             services.AddScoped<IApplicationNotificationTemplateService, ApplicationNotificationTemplateService>();
             services.AddScoped<IModuleCategoryService, ModuleCategoryService>();
+            services.AddScoped<IAlmirahService, AlmirahService>();
+            services.AddScoped<IBundleService, BundleService>();
+            services.AddScoped<IColumnService, ColumnService>();
+            services.AddScoped<IRowService, RowService>();
+            services.AddScoped<ICasenatureService, CasenatureService>();
+            services.AddScoped<ILawyerService, LawyerService>();
             // new land acquisition masters 
 
             services.AddScoped<INewlandvillageService, NewlandvillageService>();
@@ -170,7 +177,6 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
             services.AddScoped<IJudgementstatusService, JudgementstatusService>();
             services.AddScoped<IHonbleService, HonbleService>();
-
             services.AddScoped<ILeasePaymentTypeService, LeasePaymentTypeService>();
 
         }

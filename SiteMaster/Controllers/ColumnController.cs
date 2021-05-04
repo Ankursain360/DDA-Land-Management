@@ -1,87 +1,94 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
-using CourtCasesManagement.Filters;
+using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
+using Dto.Master;
 
-
-namespace CourtCasesManagement.Controllers
+namespace SiteMaster.Controllers
 {
-    public class LawyerMasterController : BaseController
+    public class ColumnController : BaseController
     {
-        private readonly ILawyerService _lawyerService;
+        private readonly IColumnService _columnService;
 
 
-        public LawyerMasterController(ILawyerService lawyerService)
+        public ColumnController(IColumnService columnService)
         {
-            _lawyerService = lawyerService;
+            _columnService = columnService;
         }
 
-        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-            var result = await _lawyerService.GetAllLawyer();
+            var result = await _columnService.GetAllColumn();
             return View(result);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] LawyerSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] ColumnSearchDto model)
         {
-            var result = await _lawyerService.GetPagedLawyer(model);
+            var result = await _columnService.GetPagedColumn(model);
             return PartialView("_List", result);
         }
 
-        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Lawyer lawyer)
+
+        public async Task<IActionResult> Create(Column column)
         {
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _lawyerService.Create(lawyer);
+                    var result = await _columnService.Create(column);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _lawyerService.GetAllLawyer();
+                        var list = await _columnService.GetAllColumn();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(lawyer);
+                        return View(column);
 
                     }
                 }
                 else
                 {
-                    return View(lawyer);
+                    return View(column);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(lawyer);
+                return View(column);
             }
         }
 
-        [AuthorizeContext(ViewAction.Edit)]
+
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _lawyerService.FetchSingleResult(id);
+            var Data = await _columnService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -90,33 +97,32 @@ namespace CourtCasesManagement.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Lawyer lawyer)
+        public async Task<IActionResult> Edit(int id, Column column)
         {
             if (ModelState.IsValid)
             {
-                var result = await _lawyerService.Update(id, lawyer);
+                var result = await _columnService.Update(id, column);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                    var list = await _lawyerService.GetAllLawyer();
+                    var list = await _columnService.GetAllColumn();
                     return View("Index", list);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(lawyer);
+                    return View(column);
                 }
             }
-            return View(lawyer);
+            return View(column);
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
+
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _lawyerService.FetchSingleResult(id);
+            var Data = await _columnService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -126,7 +132,7 @@ namespace CourtCasesManagement.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
-            var result = await _lawyerService.Delete(id);
+            var result = await _columnService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -135,15 +141,14 @@ namespace CourtCasesManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            return RedirectToAction("Index", "Lawyer");
+            return RedirectToAction("Index", "Column");
         }
 
-        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
             try
             {
-                var result = await _lawyerService.Delete(id);
+                var result = await _columnService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -157,7 +162,7 @@ namespace CourtCasesManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _lawyerService.GetAllLawyer();
+            var list = await _columnService.GetAllColumn();
             return View("Index", list);
         }
     }
