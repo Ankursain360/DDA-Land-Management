@@ -489,5 +489,52 @@ namespace Libraries.Repository.EntityRepository
             await _dbContext.SaveChangesAsync();
             return propertyRegistrationHistory.Id > 0 ? true : false;
         }
+
+
+        public async Task<List<Propertyregistration>> GetAllHandOverTakeOverList()
+        {
+
+            var data = await _dbContext.Landtransfer.Where(y => y.IsValidate == 0).Select(y => y.PropertyRegistrationId).ToListAsync();
+
+            var data1 = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Division)
+                                .Include(x => x.Locality)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                        .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1) && (!data.Contains(x.Id))
+
+
+                                        )
+
+                                        .ToListAsync();
+            return data1;
+        }
+
+
+        public async Task<List<Propertyregistration>> GetAllUnverifiedTransferRecordList()
+        {
+
+            var data = await _dbContext.Landtransfer.Where(y => y.IsValidate == 0).Select(y => y.PropertyRegistrationId).ToListAsync();
+
+            var data1 = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Division)
+                                .Include(x => x.Locality)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                        .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1) && (data.Contains(x.Id))
+
+
+                                        )
+
+                                        .ToListAsync();
+            return data1;
+        }
+
+
+
     }
 }

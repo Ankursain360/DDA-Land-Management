@@ -38,5 +38,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model);
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationUnverifiedDataForLandTransfer(LandTransferSearchDto model);
         Task<bool> CreateHistory(PropertyRegistrationHistory propertyRegistrationHistory);
+        Task<List<Propertyregistration>> GetAllUnverifiedTransferRecordList();
+        Task<List<Propertyregistration>> GetAllHandOverTakeOverList();
+
     }
 }

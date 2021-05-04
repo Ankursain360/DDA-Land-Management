@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Libraries.Model;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -216,6 +217,19 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.CreateHistory(propertyRegistrationHistory);
         }
+
+
+
+        public async Task<List<Propertyregistration>> GetAllHandOverTakeOverList()
+        {
+            return await _landTransferRepository.GetAllHandOverTakeOverList();
+        }
+
+        public async Task<List<Propertyregistration>> GetAllUnverifiedTransferRecordList()
+        {
+            return await _landTransferRepository.GetAllUnverifiedTransferRecordList();
+        }
+
     }
 
 }

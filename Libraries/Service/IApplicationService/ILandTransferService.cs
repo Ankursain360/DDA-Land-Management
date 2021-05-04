@@ -44,5 +44,9 @@ namespace Libraries.Service.IApplicationService
 
         Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model); //added by ishu
         Task<bool> CreateHistory(PropertyRegistrationHistory propertyRegistrationHistory);
+
+        Task<List<Propertyregistration>> GetAllUnverifiedTransferRecordList();
+        Task<List<Propertyregistration>> GetAllHandOverTakeOverList();
+
     }
 }
