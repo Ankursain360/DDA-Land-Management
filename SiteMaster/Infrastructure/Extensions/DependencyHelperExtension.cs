@@ -54,8 +54,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IApprovalCompleteRepository, ApprovalCompleteRepository>();
             services.AddScoped<IApplicationNotificationTemplateRepository, ApplicationNotificationTemplateRepository>();
             services.AddScoped<IModuleCategoryRepository,ModuleCategoryRespository>();
-
-
+            services.AddScoped<IAlmirahRepository, AlmirahRespository>();
+            services.AddScoped<IBundleRepository, BundleRespository>();
             // new land acquisition masters
 
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
@@ -94,9 +94,6 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IHonbleRepository, HonbleRepository>();
             services.AddScoped<ILeasePaymentTypeRepository, LeasePaymentTypeRepository>();
 
-
-
-
             /************ Application Services ************/
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
@@ -132,6 +129,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IApprovalCompleteService, ApprovalCompleteService>();
             services.AddScoped<IApplicationNotificationTemplateService, ApplicationNotificationTemplateService>();
             services.AddScoped<IModuleCategoryService, ModuleCategoryService>();
+            services.AddScoped<IAlmirahService, AlmirahService>();
+            services.AddScoped<IBundleService, BundleService>();
             // new land acquisition masters 
 
             services.AddScoped<INewlandvillageService, NewlandvillageService>();
@@ -170,7 +169,6 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILeasesubpurposeService, LeasesubpurposeService>();
             services.AddScoped<IJudgementstatusService, JudgementstatusService>();
             services.AddScoped<IHonbleService, HonbleService>();
-
             services.AddScoped<ILeasePaymentTypeService, LeasePaymentTypeService>();
 
         }
