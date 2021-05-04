@@ -37,8 +37,6 @@ $("#btnDescending").click(function () {
 function GetDivision(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Request/List`, 'html', param, function (response) {
-        console.log(response);
-
         $('#divScheme').html("");
         $('#divScheme').html(response);
     });
