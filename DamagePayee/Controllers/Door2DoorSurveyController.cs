@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Utility.Helper;
 using DamagePayee.Filters;
 using Core.Enum;
+using Dto.Master;
+
 
 namespace DamagePayee.Controllers
 {
@@ -319,6 +321,40 @@ namespace DamagePayee.Controllers
 
             }
         }
+
+
+
+        public async Task<IActionResult> DoorToDoorSurveyList()
+        {
+            var result = await _doortodoorsurveyService.GetDoortodoorsurvey();
+            List<DoorToDoorSurveyListDto> data = new List<DoorToDoorSurveyListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DoorToDoorSurveyListDto()
+                    {
+                        Id = result[i].Id,
+                        LocationAddressofProperty = result[i].PropertyAddress,
+                        MunicipalNumberifany = result[i].MuncipalNo,
+                        GeoReferencing = result[i].GeoReferencing,
+                        ApproxAreaoftheProperty = result[i].ApproxPropertyArea.ToString(),
+                        NumberofFloors = result[i].NumberOfFloors,
+                  
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
+
+
+
 
 
     }

@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Http;
 using DamagePayee.Helper;
 using DamagePayee.Filters;
 using Core.Enum;
+using Dto.Master;
 
 namespace DamagePayee.Controllers
 {
@@ -480,6 +481,37 @@ namespace DamagePayee.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, file.GetContentType(filename));
         }
+
+
+        public async Task<IActionResult> ApplyForMutationList()
+        {
+            var result = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+            List<ApplyForMutationListDto> data = new List<ApplyForMutationListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ApplyForMutationListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        TypeOfDamageAssessee = result[i].TypeOfDamageAssessee,
+                        PropertyHouseMunicipalNo = result[i].PropertyNo,
+                        District = result[i].District.Name,
+                        Locality = result[i].Locality.Name,
+                        SubmittedOn = result[i].CreatedDate.ToString("dd MMM yyyy"),
+
+                       
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
     }
 }
 

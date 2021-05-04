@@ -854,6 +854,34 @@ namespace DamagePayee.Controllers
                 return View("Index", result1);
             }
         }
+      
+
+        public async Task<IActionResult> DamagePayeeRegisterList()
+        {
+            var result = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+            List<DamagePayeeRegisterListDto> data = new List<DamagePayeeRegisterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DamagePayeeRegisterListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        TypeOfDamageAssessee = result[i].TypeOfDamageAssessee,
+                        PropertyNo = result[i].PropertyNo,
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        IsDdadamagePayee = result[i].IsDdadamagePayee,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        ApprovalStatus = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
     }
 }

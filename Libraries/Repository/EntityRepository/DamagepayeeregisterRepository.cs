@@ -116,6 +116,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
         {
             return await _dbContext.Damagepayeeregister
+                   .Include(x => x.ApprovedStatusNavigation)
            .Include(x => x.Locality)
            .Include(x => x.District)
            .ToListAsync();
