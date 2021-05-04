@@ -1,0 +1,59 @@
+﻿@model Libraries.Model.Entity.ModuleCategory
+@await Component.InvokeAsync("PageHeader", new { pageName = "Module Category Master" })
+
+<div class="pt-3">
+
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="CategoryName" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                           limit="50">
+                    <span asp-validation-for="CategoryName" class="text-danger "></span>
+                    <label class="floating-label">Category Name</label>
+                </div>
+            </div>
+
+
+
+
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "ModuleCategory", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
+
+
+

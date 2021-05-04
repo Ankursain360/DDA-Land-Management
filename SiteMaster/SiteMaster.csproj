@@ -17,6 +17,11 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <None Include="Views\ModuleCategory\Create.cshtml" />
+    <None Include="Views\ModuleCategory\Edit.cshtml" />
+    <None Include="Views\ModuleCategory\Index.cshtml" />
+    <None Include="Views\ModuleCategory\View.cshtml" />
+    <None Include="Views\ModuleCategory\_List.cshtml" />
     <None Include="wwwroot\js\applicationnotificationtemplateindex.min.js" />
     <None Include="wwwroot\js\structureindex.min.js" />
   </ItemGroup>

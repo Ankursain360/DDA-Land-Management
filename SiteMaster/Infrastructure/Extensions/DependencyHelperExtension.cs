@@ -53,6 +53,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILogRepository, LogRepository>();
             services.AddScoped<IApprovalCompleteRepository, ApprovalCompleteRepository>();
             services.AddScoped<IApplicationNotificationTemplateRepository, ApplicationNotificationTemplateRepository>();
+            services.AddScoped<IModuleCategoryRepository,ModuleCategoryRespository>();
 
 
             // new land acquisition masters
@@ -130,7 +131,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILogService, LogService>();
             services.AddScoped<IApprovalCompleteService, ApprovalCompleteService>();
             services.AddScoped<IApplicationNotificationTemplateService, ApplicationNotificationTemplateService>();
-
+            services.AddScoped<IModuleCategoryService, ModuleCategoryService>();
             // new land acquisition masters 
 
             services.AddScoped<INewlandvillageService, NewlandvillageService>();
