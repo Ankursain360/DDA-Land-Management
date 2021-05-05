@@ -12,5 +12,6 @@ namespace Repository.IEntityRepository
     {
         Task<List<ApprovalCompleteListDataDto>> GetApprovalCompleteModule(ApprovalCompleteSearchDto model);
         Task<List<ApprovalCompleteListDataDto>> BindModuleName();
+        Task<Approvalurltemplatemapping> SingleResultProcessGuidBasisFromMapping(string processguid);
     }
 }

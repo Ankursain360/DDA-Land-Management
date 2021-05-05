@@ -10,6 +10,9 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("module", "lms");
 
+            builder.HasIndex(e => e.ModuleCategoryId)
+                     .HasName("fk_ModuleCategoryId_idx");
+
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")
                 .IsUnique();
@@ -22,7 +25,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Description)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
 
             builder.Property(e => e.Guid)
@@ -35,7 +38,10 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.ModuleCategoryId).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
                 .IsRequired()
@@ -51,6 +57,11 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.HasOne(d => d.ModuleCategory)
+                .WithMany(p => p.Module)
+                .HasForeignKey(d => d.ModuleCategoryId)
+                .HasConstraintName("fk_ModuleCategoryId");
         }
     }
 }

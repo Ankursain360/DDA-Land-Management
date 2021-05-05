@@ -148,5 +148,13 @@ namespace Libraries.Repository.EntityRepository
                                        .Where(x => x.RoleId == roleId).ToListAsync();
             return (Data.GroupBy(x => x.ModuleId).SelectMany(g => g.OrderBy(d => d.ModuleId).Take(1)).ToList());
         }
+
+        public async Task<List<ModuleCategory>> GetModuleCategory()
+        {
+            List<ModuleCategory> ModuleCategoryList = await _dbContext.ModuleCategory
+                .Where(x => x.IsActive == 1).ToListAsync();
+            return ModuleCategoryList;
+        }
+
     }
 }

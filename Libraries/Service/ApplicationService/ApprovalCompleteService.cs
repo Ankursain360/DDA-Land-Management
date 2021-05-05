@@ -17,28 +17,32 @@ using System.Linq;
 
 namespace Service.ApplicationService
 {
-   public class ApprovalCompleteService : EntityService<Approvalproccess>, IApprovalCompleteService
+    public class ApprovalCompleteService : EntityService<Approvalproccess>, IApprovalCompleteService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IApprovalCompleteRepository _userrightRepository;
+        private readonly IApprovalCompleteRepository _approvalCompleteRepository;
 
-        public ApprovalCompleteService(IUnitOfWork unitOfWork, IApprovalCompleteRepository userrightRepository)
- : base(unitOfWork, userrightRepository)
+        public ApprovalCompleteService(IUnitOfWork unitOfWork, IApprovalCompleteRepository approvalCompleteRepository)
+        : base(unitOfWork, approvalCompleteRepository)
         {
             _unitOfWork = unitOfWork;
-            _userrightRepository = userrightRepository;
+            _approvalCompleteRepository = approvalCompleteRepository;
         }
 
 
         public async Task<List<ApprovalCompleteListDataDto>> GetApprovalCompleteModule(ApprovalCompleteSearchDto model)
         {
-            return await _userrightRepository.GetApprovalCompleteModule(model);
+            return await _approvalCompleteRepository.GetApprovalCompleteModule(model);
         }
 
         public async Task<List<ApprovalCompleteListDataDto>> BindModuleName()
         {
-            return await _userrightRepository.BindModuleName();
+            return await _approvalCompleteRepository.BindModuleName();
         }
 
+        public async Task<Approvalurltemplatemapping> SingleResultProcessGuidBasisFromMapping(string processguid)
+        {
+            return await _approvalCompleteRepository.SingleResultProcessGuidBasisFromMapping(processguid);
+        }
     }
 }

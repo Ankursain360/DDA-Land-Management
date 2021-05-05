@@ -316,6 +316,7 @@ namespace Libraries.Model
         public virtual DbSet<Extension> Extension { get; set; }
         public virtual DbSet<Allotmentletter> Allotmentletter { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
+        public virtual DbSet<Approvalurltemplatemapping> Approvalurltemplatemapping { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -568,6 +569,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new TimeextensionConfiguration());
             modelBuilder.ApplyConfiguration(new AllotmentletterConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+            modelBuilder.ApplyConfiguration(new ApprovalUrlTemplateMappingConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

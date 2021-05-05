@@ -11,8 +11,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("modulecategory", "lms");
 
             builder.Property(e => e.Id)
-                .HasColumnName("id")
-                .HasColumnType("int(11)");
+                  .HasColumnName("id")
+                  .HasColumnType("int(11)");
 
             builder.Property(e => e.CategoryName)
                 .HasMaxLength(200)

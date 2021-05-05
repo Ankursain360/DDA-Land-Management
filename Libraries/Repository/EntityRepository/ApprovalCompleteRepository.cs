@@ -26,8 +26,8 @@ namespace Repository.EntityRepository
         {
             try
             {  
-                var data = await _dbContext.LoadStoredProcedure("BindPendingAtUserEnd")
-                                            .WithSqlParams(("User_Id", model.userid))
+                var data = await _dbContext.LoadStoredProcedure("ApprovalProcessPendingAtUserEnd")
+                                            .WithSqlParams(("P_UserId", model.userid))
                                             .ExecuteStoredProcedureAsync<ApprovalCompleteListDataDto>();
                 return (List<ApprovalCompleteListDataDto>)data;
             }
@@ -36,9 +36,6 @@ namespace Repository.EntityRepository
                 throw;
             }
         }
-
-
-
         public async Task<List<ApprovalCompleteListDataDto>> BindModuleName()
         {
             try
@@ -54,10 +51,11 @@ namespace Repository.EntityRepository
             }
         }
 
-
-
-
-
-
+        public async Task<Approvalurltemplatemapping> SingleResultProcessGuidBasisFromMapping(string processguid)
+        {
+            return await _dbContext.Approvalurltemplatemapping
+                                     .Where(x => x.ProcessGuid == processguid && x.IsActive == 1)
+                                     .FirstOrDefaultAsync();
+        }
     }
 }

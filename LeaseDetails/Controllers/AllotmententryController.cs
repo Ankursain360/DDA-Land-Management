@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -53,8 +52,7 @@ namespace LeaseDetails.Controllers
 
         {
             Allotmententry allotmententry = new Allotmententry();
-            allotmententry.IsActive = 1;
-           
+            allotmententry.IsActive = 1;          
 
 
             allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
@@ -361,5 +359,36 @@ namespace LeaseDetails.Controllers
            
 
         }
+
+
+        public async Task<IActionResult> AllotmententryList()
+        {
+            var result = await _allotmentEntryService.GetAllAllotmententry();
+            List<AllotmentEntryListDto> data = new List<AllotmentEntryListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new AllotmentEntryListDto()
+                    {
+                        Id = result[i].Id,
+                        AllicationName = result[i].Application == null ? "" : result[i].Application.Name,
+                        TotalArea = result[i].TotalArea.ToString(),
+                        PlayGroundArea = result[i].PlayGroundArea.ToString(),
+                        AllotmentDate = result[i].AllotmentDate == null ? "" : result[i].AllotmentDate.ToString(),
+                        PhaseNo = result[i].PhaseNo == null ? "" : result[i].PhaseNo,
+                        SectorNo = result[i].SectorNo == null ? "" : result[i].SectorNo,
+                        PocketNo = result[i].PocketNo == null ? "" : result[i].PocketNo,
+                        PlotNo = result[i].PlotNo == null ? "" : result[i].PlotNo,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ; ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
     }
 }
