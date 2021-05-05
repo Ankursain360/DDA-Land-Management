@@ -36,7 +36,7 @@ namespace Repository.EntityRepository
                         data = null;
                         data = await _dbContext.ModuleCategory
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.CategoryName.Contains(model.name)))
-                           .OrderBy(s => s.CategoryName)
+                           .OrderBy(s => s.Id)
                            .GetPaged<ModuleCategory>(model.PageNumber, model.PageSize);
 
                         break;                  
@@ -44,7 +44,7 @@ namespace Repository.EntityRepository
                         data = null;
                         data = await _dbContext.ModuleCategory
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.CategoryName.Contains(model.name)))
-                            .OrderBy(s => s.CategoryName)
+                            .OrderBy(s => s.Id)
                             .GetPaged<ModuleCategory>(model.PageNumber, model.PageSize);
                         break;
 
