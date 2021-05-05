@@ -30,6 +30,11 @@ namespace Libraries.Service.ApplicationService
             return await _licenceFeesRepository.GetAllLicencefees();
         }
 
+        public async Task<List<Licencefees>> GetAllLicencefeesList()
+        {
+            return await _licenceFeesRepository.GetAllLicencefeesList();
+        }
+
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
             List<Leasepurpose> leasePurposeList = await _licenceFeesRepository.GetAllLeasepurpose();

@@ -12,5 +12,6 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<PropertyType>> GetPagedPropertyType(PropertyTypeSearchDto model);
         Task<List<PropertyType>> GetAllPropertyType();
+        Task<List<PropertyType>> GetAllPropertyTypeList();
     }
 }

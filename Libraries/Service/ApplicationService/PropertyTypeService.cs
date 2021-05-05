@@ -29,7 +29,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _PropertyTypeRepository.GetAllPropertyType();
         }
-       
+
+        public async Task<List<PropertyType>> GetAllPropertyTypeList()
+        {
+            return await _PropertyTypeRepository.GetAllPropertyTypeList();
+        }
+
 
         public async Task<PropertyType> FetchSingleResult(int id)
         {

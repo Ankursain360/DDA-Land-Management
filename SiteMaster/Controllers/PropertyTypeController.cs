@@ -13,6 +13,8 @@ using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
 
+using Dto.Master;
+
 namespace SiteMaster.Controllers
 {
     public class PropertyTypeController : BaseController
@@ -187,6 +189,30 @@ namespace SiteMaster.Controllers
             string sFileName = @"PropertyType.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
+
+
+        public async Task<IActionResult> PropertyTypeList()
+        {
+            var result = await _PropertyTypeService.GetAllPropertyTypeList();
+            List<PropertyTypeListDto> data = new List<PropertyTypeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new PropertyTypeListDto()
+                    {
+                        Id = result[i].Id,
+                        PropertyType = result[i].Name == null ? "" : result[i].Name.ToString(),
+                      
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

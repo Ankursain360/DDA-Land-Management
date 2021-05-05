@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<bool> Any(int id, string name, int ServiceTypeId);
         Task<List<Servicetype>> GetServiceTypeList();
+        Task<List<Documentchecklist>> GetAllDocumentchecklist();
         Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
         Task<Documentchecklist> FetchSingleResult(int id);
     }

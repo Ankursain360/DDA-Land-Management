@@ -32,6 +32,11 @@ namespace Libraries.Repository.EntityRepository
                                         .FirstOrDefaultAsync();
         }
 
+        public async Task<List<Documentchecklist>> GetAllDocumentchecklist()
+        {
+            return await _dbContext.Documentchecklist.Include(x => x.ServiceType).ToListAsync();
+        }
+
         public async Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model)
         {
             var data = await _dbContext.Documentchecklist

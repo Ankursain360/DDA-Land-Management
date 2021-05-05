@@ -21,6 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<Licencefees> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Licencefees>> GetPagedLicencefees(LicencefeesSearchDto model);
+        Task<List<Licencefees>> GetAllLicencefeesList();
 
     }
 }

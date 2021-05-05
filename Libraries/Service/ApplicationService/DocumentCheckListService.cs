@@ -70,8 +70,15 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<List<Servicetype>> GetServiceTypeList()
         {
+            
             return await _documentCheckListRepository.GetServiceTypeList();
         }
+
+        public async Task<List<Documentchecklist>> GetAllDocumentchecklist()
+        {
+            return await _documentCheckListRepository.GetAllDocumentchecklist();
+        }
+
 
         public async Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model)
         {

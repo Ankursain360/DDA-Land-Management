@@ -202,6 +202,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Documentcharges.Include(x => x.LeasePurposesType).Include(x => x.LeaseSubPurpose).Where(x => x.IsActive == 1).ToListAsync();
         }
 
+        public async Task<List<Documentcharges>> GetAllDocumentchargesList()
+        {
+            return await _dbContext.Documentcharges.Include(x => x.LeasePurposesType).Include(x => x.LeaseSubPurpose).ToListAsync();
+        }
 
     }
 }

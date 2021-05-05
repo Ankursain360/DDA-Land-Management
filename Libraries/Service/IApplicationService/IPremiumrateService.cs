@@ -21,6 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<Premiumrate> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Premiumrate>> GetPagedPremiumrate(PremiumrateSearchDto model);
+        Task<List<Premiumrate>> GetAllPremiumrateList();
 
     }
 }

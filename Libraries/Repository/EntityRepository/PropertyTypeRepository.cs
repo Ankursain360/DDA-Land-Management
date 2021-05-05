@@ -80,5 +80,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();
         }
 
+        public async Task<List<PropertyType>> GetAllPropertyTypeList()
+        {
+            return await _dbContext.PropertyType.ToListAsync();
+        }
+
     }
 }
