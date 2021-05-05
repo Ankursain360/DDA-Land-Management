@@ -20,5 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Module>> GetActiveModule();
         Task<Module> GetModuleByGuid(string guid);
         Task<List<Menuactionrolemap>> ModuleFromMenuRoleActionMap(int roleId);
+
+        Task<List<ModuleCategory>> GetModuleCategory();
     }
 }

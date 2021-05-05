@@ -57,6 +57,7 @@ namespace Libraries.Service.ApplicationService
             model.ModifiedDate = DateTime.Now;
             model.IsActive = module.IsActive;
             model.ModifiedBy = 1;
+            model.ModuleCategoryId = module.ModuleCategoryId;
             _moduleRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -99,5 +100,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _moduleRepository.ModuleFromMenuRoleActionMap(roleId);
         }
+
+        public async Task<List<ModuleCategory>> GetModuleCategory()
+        {
+            List<ModuleCategory> ModuleCategoryList = await _moduleRepository.GetModuleCategory();
+            return ModuleCategoryList;
+        }
+
+
+
     }
 }

@@ -8,6 +8,19 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <div class="row">
+
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ModuleCategoryId" asp-items="@(new SelectList(Model.ModuleCategoryList, "Id","CategoryName"))">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="ModuleCategoryId" class="text-danger"></span>
+                    <label class="floating-label">Module Category Name  </label>
+                </div>
+
+            </div>
+
             <div class=" col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Name" placeholder="Name" type="text"
@@ -17,6 +30,10 @@
                 </div>
 
             </div>
+
+        </div>
+
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Description" placeholder="Description" type="text"
@@ -27,10 +44,6 @@
                 </div>
 
             </div>
-        </div>
-
-        <div class="row mt-md-3">
-
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Url" placeholder="Url" type="text"
@@ -40,6 +53,9 @@
                     <label class="floating-label">Url   </label>
                 </div>
             </div>
+
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Icon" placeholder="Icon" type="text"
@@ -49,9 +65,7 @@
                     <label class="floating-label">Icon   </label>
                 </div>
             </div>
-        </div>
 
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Target" placeholder="Target" type="text"
@@ -63,6 +77,8 @@
 
 
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
