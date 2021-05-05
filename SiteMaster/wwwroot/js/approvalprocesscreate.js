@@ -2,11 +2,7 @@
     
     CallGetDetails();
 
-    $('.btnclick').click(function () {
-        debugger;
-        var templateId = $(this).val();
-        $("#ddlModuleWise").val(templateId).trigger('change');
-    });
+   
 });
 
 function CallGetDetails() {
@@ -24,9 +20,19 @@ function GetSearchParam() {
     return model;
 }
 
-function GetApprovalProccessList(workflowtemplateid) {
-    HttpGet(`/ApprovalProcess/GetApprovalProcessDetails/?worktemplateId=${workflowtemplateid}`, 'json', function (response) {
+$("#btnId").click(function () {
+    debugger;
+    var templateId = $(this).val();
+    $("#ddlModuleWise").val(templateId).trigger('change');
+});
+
+function GetApprovalProccessList(processguid) {
+    var process = processguid;
+    HttpGet(`/ApprovalProcess/GetApprovalProcessDetails/?processguid=${process}`, 'json', function (response) {
         debugger;
-        window.location = response;
+        if (response != null)
+            window.open(response, 'newwindow');// window.location = response;
+        else
+            WarningMessage('Unable to process request, Please contact to system administrator');
     });
 }

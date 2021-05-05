@@ -3,21 +3,18 @@
     <tr>
         @foreach (var item in Model)
         {
-            <td>
-                @if (@item.TotalPendingReq == 0)
-                {
-                    <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.ProcessGuid" disabled>
-                        @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
-                    </button>
-                }
-                else
-                {
-                    <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.ProcessGuid"  >
-                        @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
-
-                    </button>
-                }
-            </td>
+        <td>
+            @if (@item.TotalPendingReq == 0)
+            {
+                <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.ProcessGuid" disabled>
+                    @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
+                </button>
+            }
+            else
+            {
+                <a class="btn btn-primary btnclick" asp-action="GetApprovalProcessDetailsLink" asp-route-ProcessGuid="@item.ProcessGuid" target="_blank">   @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span></a>               
+            }
+        </td>
         }
     </tr>
 </table>

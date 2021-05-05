@@ -60,16 +60,27 @@ namespace SiteMaster.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetApprovalProcessDetails(string worktemplateId)
+        public async Task<JsonResult> GetApprovalProcessDetails(string processguid)
         {
-            int worktemplateProcessId = Convert.ToInt32(worktemplateId);
+            var mappingData = await _approvalCompleteService.SingleResultProcessGuidBasisFromMapping(processguid);
 
-            if (worktemplateProcessId == 20)
-                return Json(_configuration.GetSection("ApprovalProccessPath:LeaseApplicationFormApproval").Value.ToString());
-            else if (worktemplateProcessId == 2)
-                return Json(_configuration.GetSection("ApprovalProccessPath:WatchWardApproval").Value.ToString());
+            if(mappingData != null)
+            {
+                return Json(mappingData.SubModuleUrl);
+            }
             else
-                return Json(_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value.ToString());
+                return Json(null);
+        }
+        public async Task<IActionResult> GetApprovalProcessDetailsLink(string processguid)
+        {
+            var mappingData = await _approvalCompleteService.SingleResultProcessGuidBasisFromMapping(processguid);
+                        
+            if (mappingData != null)
+            {
+                return Redirect(mappingData.SubModuleUrl);
+            }
+            else
+                return Json(null);
         }
 
     }

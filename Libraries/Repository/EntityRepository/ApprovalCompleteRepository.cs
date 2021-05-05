@@ -36,9 +36,6 @@ namespace Repository.EntityRepository
                 throw;
             }
         }
-
-
-
         public async Task<List<ApprovalCompleteListDataDto>> BindModuleName()
         {
             try
@@ -54,10 +51,11 @@ namespace Repository.EntityRepository
             }
         }
 
-
-
-
-
-
+        public async Task<Approvalurltemplatemapping> SingleResultProcessGuidBasisFromMapping(string processguid)
+        {
+            return await _dbContext.Approvalurltemplatemapping
+                                     .Where(x => x.ProcessGuid == processguid && x.IsActive == 1)
+                                     .FirstOrDefaultAsync();
+        }
     }
 }
