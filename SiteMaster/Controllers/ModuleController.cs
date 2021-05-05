@@ -38,9 +38,14 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
         [AuthorizeContext(ViewAction.Add)]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            Module module = new Module();
+            module.IsActive = 1;
+           
+            module.ModuleCategoryList = await _moduleService.GetModuleCategory();
+            return View(module);
+            
         }
 
 
@@ -74,8 +79,9 @@ namespace SiteMaster.Controllers
 
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
-        {
+        {           
             var Data = await _moduleService.FetchSingleResult(id);
+            Data.ModuleCategoryList = await _moduleService.GetModuleCategory();
             if (Data == null)
             {
                 return NotFound();
@@ -171,6 +177,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _moduleService.FetchSingleResult(id);
+            Data.ModuleCategoryList = await _moduleService.GetModuleCategory();
             if (Data == null)
             {
                 return NotFound();

@@ -9,9 +9,15 @@ namespace Libraries.Model.Entity
 {
     public class ModuleCategory : AuditableEntity<int>
     {
-       
+        public ModuleCategory()
+        {
+            Module = new HashSet<Module>();
+        }
+
         [Required(ErrorMessage = "Category Name is Mandatory Field")]
         public string CategoryName { get; set; }      
         public byte? IsActive { get; set; }
+        public ICollection<Module> Module { get; set; }
     }
 }
+

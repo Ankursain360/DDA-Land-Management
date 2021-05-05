@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Libraries.Model.Entity
 {
     public class Module : AuditableEntity<int>
@@ -27,9 +28,18 @@ namespace Libraries.Model.Entity
         public string Icon { get; set; }
         public string Target { get; set; }
         public string Guid { get; set; }
+
+        [Required(ErrorMessage = "Module Category is mandatory", AllowEmptyStrings = false)]
+        public int? ModuleCategoryId { get; set; }
+
+        public ModuleCategory ModuleCategory { get; set; }
         public ICollection<WorkflowTemplate> WorkflowTemplate { get; set; }
         public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public virtual ICollection<Menu> Menu { get; set; }
         public virtual ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
+
+        [NotMapped]
+        public List<ModuleCategory> ModuleCategoryList { get; set; }
     }
 }
+

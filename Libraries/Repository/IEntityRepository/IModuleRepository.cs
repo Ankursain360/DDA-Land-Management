@@ -13,5 +13,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> Any(int id, string name);
         Task<Module> GetModuleByGuid(string guid);
         Task<List<Menuactionrolemap>> ModuleFromMenuRoleActionMap(int roleId);
+        Task<List<ModuleCategory>> GetModuleCategory();
     }
 }
