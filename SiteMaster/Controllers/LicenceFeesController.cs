@@ -15,6 +15,8 @@ using Notification.OptionEnums;
 using SiteMaster.Filters;
 using Utility.Helper;
 
+using Dto.Master;
+
 namespace SiteMaster.Controllers
 {
 
@@ -188,6 +190,36 @@ namespace SiteMaster.Controllers
             purposeUseId = purposeUseId ?? 0;
             return Json(await _licenceFeesService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
+
+        public async Task<IActionResult> LicenceFeesList()
+        {
+            var result = await _licenceFeesService.GetAllLicencefeesList();
+            List<LicenceFeesListDto> data = new List<LicenceFeesListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LicenceFeesListDto()
+                    {
+                        Id = result[i].Id,
+                       
+                        LeaseSubPurpose = result[i].LeaseSubPurpose == null ? "" : result[i].LeaseSubPurpose.SubPurposeUse.ToString(),
+                        LicenceFees = result[i].LicenceFees.ToString(),
+                        FromDate = result[i].FromDate.ToString("dd/MM/yyyy"),
+                        ToDate = result[i].ToDate.ToString("dd/MM/yyyy"),
+
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
     }
 }
 

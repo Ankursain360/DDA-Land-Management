@@ -13,6 +13,9 @@ using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
 
+
+using Dto.Master;
+
 namespace SiteMaster.Controllers
 {
     public class GroundRentController : BaseController
@@ -196,6 +199,34 @@ namespace SiteMaster.Controllers
         {
             purposeUseId = purposeUseId ?? 0;
             return Json(await _groundRentService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
+        }
+
+
+        public async Task<IActionResult> GroundRateList()
+        {
+            var result = await _groundRentService.GetAllGroundRentList();
+            List<GroundRateListDto> data = new List<GroundRateListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new GroundRateListDto()
+                    {
+                        Id = result[i].Id,
+                        LeasePurpose = result[i].LeasePurposesType == null ? "" : result[i].LeasePurposesType.PurposeUse.ToString(),
+                        LeaseSubPurpose = result[i].LeaseSubPurpose == null ? "" : result[i].LeaseSubPurpose.SubPurposeUse.ToString(),
+                        GroundRate = result[i].GroundRate.ToString(),
+                        FromDate = result[i].FromDate.ToString("dd/MM/yyyy"),
+                        ToDate = result[i].ToDate.ToString("dd/MM/yyyy"),
+
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
 

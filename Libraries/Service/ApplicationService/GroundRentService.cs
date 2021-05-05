@@ -29,6 +29,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _groundRentRepository.GetAllGroundRent();
         }
+
+        public async Task<List<Groundrent>> GetAllGroundRentList()
+        {
+            return await _groundRentRepository.GetAllGroundRentList();
+        }
         public async Task<List<Leasepurpose>> GetAllLeasepurpose()
         {
             List<Leasepurpose> leasePurposeList = await _groundRentRepository.GetAllLeasepurpose();

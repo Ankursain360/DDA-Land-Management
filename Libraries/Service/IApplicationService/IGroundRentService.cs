@@ -21,5 +21,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Groundrent>> GetPagedGroundRent(GroundrentSearchDto model);
         Task<List<Leasepurpose>> GetAllLeasepurpose();
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
+        Task<List<Groundrent>> GetAllGroundRentList();
     }
 }

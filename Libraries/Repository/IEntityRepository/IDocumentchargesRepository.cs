@@ -14,6 +14,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IDocumentchargesRepository : IGenericRepository<Documentcharges>
     {
         Task<List<Documentcharges>> GetAllDocumentcharges();
+        Task<List<Documentcharges>> GetAllDocumentchargesList();
         //Task<List<PropertyType>> GetAllPropertyType();
         Task<PagedResult<Documentcharges>> GetPagedDocumentcharges(DocumentchargesSearchDto model);
         Task<List<Leasepurpose>> GetAllLeasepurpose();

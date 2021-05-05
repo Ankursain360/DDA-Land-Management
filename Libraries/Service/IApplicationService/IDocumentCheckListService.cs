@@ -21,6 +21,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> CheckUniqueName(int id, string zone,int ServiceTypeId);// To check Unique Value  for zone
         Task<List<Servicetype>> GetServiceTypeList();
+        Task<List<Documentchecklist>> GetAllDocumentchecklist();
         Task<PagedResult<Documentchecklist>> GetPagedDocumentChecklistData(DocumentChecklistSearchDto model);
     }
 }

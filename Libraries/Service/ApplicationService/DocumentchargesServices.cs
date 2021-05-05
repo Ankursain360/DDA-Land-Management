@@ -29,6 +29,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _documentchargesRepository.GetAllDocumentcharges();
         }
+        public async Task<List<Documentcharges>> GetAllDocumentchargesList()
+        {
+            return await _documentchargesRepository.GetAllDocumentchargesList();
+        }
 
         //public async Task<List<PropertyType>> GetAllPropertyType()
         //{

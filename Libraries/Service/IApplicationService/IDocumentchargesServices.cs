@@ -23,6 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<Documentcharges> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Documentcharges>> GetPagedDocumentcharges(DocumentchargesSearchDto model);
+        Task<List<Documentcharges>> GetAllDocumentchargesList();
 
     }
 }

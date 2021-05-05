@@ -15,6 +15,7 @@ using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
+using Dto.Master;
 using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
@@ -182,5 +183,36 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+
+
+
+        public async Task<IActionResult> DocumentChecklistList()
+        {
+            var result = await _documentCheckListService.GetAllDocumentchecklist();
+            List<DocumentChecklistListDto> data = new List<DocumentChecklistListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DocumentChecklistListDto()
+                    {
+                        Id = result[i].Id,
+
+                        ServiceType = result[i].ServiceType == null ? "" : result[i].ServiceType.Name.ToString(),
+                        DocumentName = result[i].Name.ToString(),
+                        IsMandatory = result[i].IsMandatory == 1 ? "Yes" : "No",
+                  
+
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
     }
 }

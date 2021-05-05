@@ -200,7 +200,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Premiumrate.Include(x => x.LeasePurposesType).Include(x => x.LeaseSubPurpose).Where(x => x.IsActive == 1).ToListAsync();
         }
-
+        public async Task<List<Premiumrate>> GetAllPremiumrateList()
+        {
+            return await _dbContext.Premiumrate.Include(x => x.LeasePurposesType).Include(x => x.LeaseSubPurpose).ToListAsync();
+        }
 
     }
 }

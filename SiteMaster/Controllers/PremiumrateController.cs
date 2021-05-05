@@ -14,6 +14,9 @@ using Notification.OptionEnums;
 using SiteMaster.Filters;
 using Utility.Helper;
 
+
+using Dto.Master;
+
 namespace SiteMaster.Controllers
 {
   
@@ -191,5 +194,36 @@ namespace SiteMaster.Controllers
             purposeUseId = purposeUseId ?? 0;
             return Json(await _premiumrateService.GetAllLeaseSubpurpose(Convert.ToInt32(purposeUseId)));
         }
+
+
+        public async Task<IActionResult> PremiumrateList()
+        {
+            var result = await _premiumrateService.GetAllPremiumrateList();
+            List<PremiumRateListDto> data = new List<PremiumRateListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new PremiumRateListDto()
+                    {
+                        Id = result[i].Id,
+                        LeasePurpose = result[i].LeasePurposesType == null ? "" : result[i].LeasePurposesType.PurposeUse.ToString(),
+                        LeaseSubPurpose = result[i].LeaseSubPurpose == null ? "" : result[i].LeaseSubPurpose.SubPurposeUse.ToString(),
+                        PremiumRate = result[i].PremiumRate.ToString(),
+                        FromDate = result[i].FromDate.ToString("dd/MM/yyyy"),
+                        ToDate = result[i].ToDate.ToString("dd/MM/yyyy"),
+
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
     }
 }

@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
     public interface IPropertyTypeService : IEntityService<PropertyType>
     {
         Task<List<PropertyType>> GetAllPropertyType();
+        Task<List<PropertyType>> GetAllPropertyTypeList();
         
         Task<bool> Update(int id, PropertyType rent);
         Task<bool> Create(PropertyType rate);

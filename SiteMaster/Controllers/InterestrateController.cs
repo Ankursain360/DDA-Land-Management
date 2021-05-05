@@ -14,6 +14,9 @@ using Notification.OptionEnums;
 using SiteMaster.Filters;
 using Utility.Helper;
 
+
+using Dto.Master;
+
 namespace SiteMaster.Controllers
 {
 
@@ -177,5 +180,37 @@ namespace SiteMaster.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
+
+
+
+        public async Task<IActionResult> InterestRateList()
+        {
+            var result = await _InterestrateService.GetAllInterestrate();
+            List<InterestRateListDto> data = new List<InterestRateListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new InterestRateListDto()
+                    {
+                        Id = result[i].Id,
+                        PropertyType = result[i].PropertyType == null ? "" : result[i].PropertyType.Name.ToString(),
+                        InterestRate = result[i].InterestRate.ToString() ,
+                       
+                        FromDate = result[i].FromDate.ToString("dd/MM/yyyy"),
+                        ToDate = result[i].ToDate.ToString("dd/MM/yyyy"),
+                        LateInterestRate = result[i].LateinterestRate.ToString(),
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
     }
 }
