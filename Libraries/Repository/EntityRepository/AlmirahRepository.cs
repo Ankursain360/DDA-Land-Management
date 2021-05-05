@@ -19,10 +19,63 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Almirah.Where(x => x.IsActive == 1).ToListAsync();
         }
 
+       
+
+
         public async Task<PagedResult<Almirah>> GetPagedAlmirah(AlmirahSearchDto model)
         {
-            return await _dbContext.Almirah.Where(x => x.IsActive == 1).GetPaged<Almirah>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Almirah
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.AlmirahNo.Contains(model.name)))
+                  .GetPaged<Almirah>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Almirah
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.AlmirahNo.Contains(model.name)))
+                           .OrderBy(s => s.Id)
+                           .GetPaged<Almirah>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Almirah
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.AlmirahNo.Contains(model.name)))
+                           .OrderBy(s => s.Id)
+                            .GetPaged<Almirah>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Almirah
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.AlmirahNo.Contains(model.name)))
+                           .OrderByDescending(s => s.AlmirahNo)
+                           .GetPaged<Almirah>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Almirah
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.AlmirahNo.Contains(model.name)))
+                           .OrderByDescending(s => s.AlmirahNo)
+                           .GetPaged<Almirah>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
         }
+
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Almirah.AnyAsync(t => t.Id != id && t.AlmirahNo.ToLower() == name.ToLower());
