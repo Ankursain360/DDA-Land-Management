@@ -34,7 +34,12 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.SubModuleUrl)
                 .IsRequired()
-                .HasMaxLength(45)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.SubModuleUrlLocal)
+                .IsRequired()
+                .HasMaxLength(200)
                 .IsUnicode(false);
         }
     }

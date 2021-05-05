@@ -11,6 +11,7 @@ namespace Libraries.Model.Entity
         public int ModuleId { get; set; }
         public string ProcessGuid { get; set; }
         public string SubModuleUrl { get; set; }
+        public string SubModuleUrlLocal { get; set; }
         public byte IsActive { get; set; }
     }
 }
