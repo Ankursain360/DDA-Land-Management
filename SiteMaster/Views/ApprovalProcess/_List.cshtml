@@ -6,13 +6,13 @@
             <td>
                 @if (@item.TotalPendingReq == 0)
                 {
-                    <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.workflowTemplateId" disabled>
+                    <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.ProcessGuid" disabled>
                         @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
                     </button>
                 }
                 else
                 {
-                    <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.workflowTemplateId"  >
+                    <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.ProcessGuid"  >
                         @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
 
                     </button>
@@ -27,7 +27,7 @@
             <option value="">--Select--</option>
             @foreach (var item in Model)
             {
-                <option value="@item.workflowTemplateId"> @item.ModuleName ( @item.SubModuleName )</option>
+                <option value="@item.ProcessGuid"> @item.ModuleName ( @item.SubModuleName )</option>
             }
         </select>
     </div>

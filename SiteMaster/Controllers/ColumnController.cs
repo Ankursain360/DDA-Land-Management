@@ -165,5 +165,33 @@ namespace SiteMaster.Controllers
             var list = await _columnService.GetAllColumn();
             return View("Index", list);
         }
+
+
+        public async Task<IActionResult> ColumnList()
+        {
+            var result = await _columnService.GetAllColumn();
+            List<ColumnListDto> data = new List<ColumnListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ColumnListDto()
+                    {
+                        Id = result[i].Id,
+                        ColumnNo = result[i].ColumnNo,
+
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
     }
 }
