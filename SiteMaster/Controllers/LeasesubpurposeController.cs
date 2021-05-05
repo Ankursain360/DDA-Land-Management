@@ -192,9 +192,11 @@ namespace SiteMaster.Controllers
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
-                {
+                {s
                     data.Add(new LeaseSubpurposeListDto()
                     {
+
+
                         Id = result[i].Id,
                         PurposeUse =result[i].PurposeUse == null ? "" : result[i].PurposeUse.PurposeUse,
                         SubpurposeUse = result[i].SubPurposeUse,
