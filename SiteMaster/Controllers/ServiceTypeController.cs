@@ -12,8 +12,10 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using Dto.Master;
 using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -167,7 +169,29 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+        public async Task<IActionResult> ServiceTypeList()
+        {
+            var result = await _serviceTypeService.GetAllServicetype();
+            List<ServiceTypeListDto> data = new List<ServiceTypeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ServiceTypeListDto()
+                    {
+                        Id = result[i].Id,
 
+                        Name = result[i].Name ,
+                     
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
 
     }
