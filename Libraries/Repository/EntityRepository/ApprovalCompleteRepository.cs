@@ -26,8 +26,8 @@ namespace Repository.EntityRepository
         {
             try
             {  
-                var data = await _dbContext.LoadStoredProcedure("BindPendingAtUserEnd")
-                                            .WithSqlParams(("User_Id", model.userid))
+                var data = await _dbContext.LoadStoredProcedure("ApprovalProcessPendingAtUserEnd")
+                                            .WithSqlParams(("P_UserId", model.userid))
                                             .ExecuteStoredProcedureAsync<ApprovalCompleteListDataDto>();
                 return (List<ApprovalCompleteListDataDto>)data;
             }

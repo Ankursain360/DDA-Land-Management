@@ -60,7 +60,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetApprovalProcessDetails(int? worktemplateId)
+        public async Task<JsonResult> GetApprovalProcessDetails(string worktemplateId)
         {
             int worktemplateProcessId = Convert.ToInt32(worktemplateId);
 
