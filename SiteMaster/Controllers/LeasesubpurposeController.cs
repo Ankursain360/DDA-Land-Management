@@ -13,7 +13,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using SiteMaster.Filters;
 using Utility.Helper;
-
+using Dto.Master;
 namespace SiteMaster.Controllers
 {
 
@@ -185,7 +185,29 @@ namespace SiteMaster.Controllers
         //    return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         //}
+        public async Task<IActionResult> SubPurposeUseList()
+        {
+            var result = await _LeasesubpurposeService.GetAllLeaseSubpurpose();
+            List<LeaseSubpurposeListDto> data = new List<LeaseSubpurposeListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LeaseSubpurposeListDto()
+                    {
+                        Id = result[i].Id,
+                        PurposeUse =result[i].PurposeUse == null ? "" : result[i].PurposeUse.PurposeUse,
+                        SubpurposeUse = result[i].SubPurposeUse,
+                      
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
 
     }
 }

@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using LeaseDetails.Filters;
 using Core.Enum;
+using Dto.Master;
 
 namespace LeaseDetails.Controllers
 {
@@ -270,6 +271,33 @@ namespace LeaseDetails.Controllers
             }
             memory.Position = 0;
             return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+
+
+
+        public async Task<IActionResult> PossesionPlanList()
+        {
+            var result = await _possesionplanService.GetAllPossesionplan();
+            List<PossesionListDto> data = new List<PossesionListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new PossesionListDto()
+                    {
+                        Id = result[i].Id,
+                        AllotmentNo = result[i].Allotment == null ? "" : result[i].Allotment.Name,
+                        DiffrenceInArea= result[i].DiffernceArea.ToString(),
+                        PossesionTakenName= result[i].PossessionTakenName.ToString(),
+                        PossesionHandoverName= result[i].PossesionHandOverName.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
         }
     }
 }
