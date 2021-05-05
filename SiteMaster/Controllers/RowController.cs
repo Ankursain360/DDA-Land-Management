@@ -45,6 +45,9 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
+
+
+
         public IActionResult Create()
         {
             return View();

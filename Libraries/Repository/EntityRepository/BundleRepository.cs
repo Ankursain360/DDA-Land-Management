@@ -20,11 +20,60 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Bundle.Where(x => x.IsActive == 1).ToListAsync();
         }
-
         public async Task<PagedResult<Bundle>> GetPagedBundle(BundleSearchDto model)
         {
-            return await _dbContext.Bundle.Where(x => x.IsActive == 1).GetPaged<Bundle>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Bundle
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.BundleNo.Contains(model.name)))
+                  .GetPaged<Bundle>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Bundle
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.BundleNo.Contains(model.name)))
+                           .OrderBy(s => s.Id)
+                           .GetPaged<Bundle>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Bundle
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.BundleNo.Contains(model.name)))
+                            .OrderBy(s => s.Id)
+                            .GetPaged<Bundle>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Bundle
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.BundleNo.Contains(model.name)))
+                           .OrderByDescending(s => s.BundleNo)
+                           .GetPaged<Bundle>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Bundle
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.BundleNo.Contains(model.name)))
+                           .OrderByDescending(s => s.BundleNo)
+                           .GetPaged<Bundle>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
         }
+        
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Bundle.AnyAsync(t => t.Id != id && t.BundleNo.ToLower() == name.ToLower());

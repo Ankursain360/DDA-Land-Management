@@ -370,5 +370,11 @@
     "inputFiles": [
       "wwwroot/js/applicationnotificationtemplateindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/departmenttargetindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/departmenttargetindex.js"
+    ]
   }
 ]
