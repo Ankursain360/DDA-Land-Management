@@ -410,6 +410,35 @@ namespace DocumentManagementSystem.Controllers
                 return Json($"Department: {Name} already exist");
             }
         }
+
+
+
+        public async Task<IActionResult> DmsFileUploadList()
+        {
+            var result = await _dmsfileuploadService.GetAllDMSFileUploadList();
+            List<DmsFileUploadListDto> data = new List<DmsFileUploadListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DmsFileUploadListDto()
+                    {
+                        Id = result[i].Id,
+                        FileNo = result[i].FileNo,
+                        AlloteeName = result[i].AlloteeName,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name.ToString(),
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.KhasraNo.ToString(),
+                      
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
     }
 
 }

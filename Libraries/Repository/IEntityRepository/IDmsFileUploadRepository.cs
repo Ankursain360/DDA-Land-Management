@@ -16,6 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> Any(int id, string fileNo);
         Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
         Task<List<Department>> GetDepartmentList();
+        Task<List<Dmsfileupload>> GetAllDMSFileUploadList();
         Task<List<Propertyregistration>> GetKhasraNoList();
         Task<List<Locality>> GetLocalityList();
         Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);

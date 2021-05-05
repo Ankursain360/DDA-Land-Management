@@ -13,6 +13,7 @@ using Core.Enum;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using System.IO;
+using System.Collections.Generic;
 
 namespace DocumentManagementSystem.Controllers
 {
@@ -94,5 +95,39 @@ namespace DocumentManagementSystem.Controllers
                 return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
             }
         }
+
+        public async Task<IActionResult> DmsRetriveFileList()
+        {
+            var result = await _dmsfileuploadService.GetAllDMSFileUploadList();
+            List<DMSRetrieveFileListDto> data = new List<DMSRetrieveFileListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DMSRetrieveFileListDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name.ToString(),
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.KhasraNo.ToString(),
+                        FileNo = result[i].FileNo,
+                        AlloteeName = result[i].AlloteeName,
+                        PropertyNo = result[i].PropertyNoAddress,
+                        AlmirahNo = result[i].AlmirahNo,
+                        Title = result[i].Title,
+                      
+                     
+                      
+
+                       
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
     }
 }
