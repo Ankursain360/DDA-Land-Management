@@ -24,5 +24,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckUniqueName(int id, string fileNo);
         Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
         Task<Dmsfileright> GetDMSUserRights(int userId);
+        Task<List<Dmsfileupload>> GetAllDMSFileUploadList();
     }
 }

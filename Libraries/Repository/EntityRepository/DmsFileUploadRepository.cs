@@ -51,6 +51,16 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+
+        public async Task<List<Dmsfileupload>> GetAllDMSFileUploadList()
+        {
+            return await _dbContext.Dmsfileupload
+                 .Include(x => x.Department)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.KhasraNo)
+                .ToListAsync();
+        }
+
         public async Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model)
         {
             var data = await _dbContext.Dmsfileupload

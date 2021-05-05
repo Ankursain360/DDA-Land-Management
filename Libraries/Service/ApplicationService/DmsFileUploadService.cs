@@ -29,6 +29,11 @@ namespace Service.ApplicationService
             return await _dmsFileUploadRepository.GetDepartmentList();
         }
 
+        public async Task<List<Dmsfileupload>> GetAllDMSFileUploadList()
+        {
+            return await _dmsFileUploadRepository.GetAllDMSFileUploadList();
+        }
+
         public async Task<List<Propertyregistration>> GetKhasraNoList()
         {
             return await _dmsFileUploadRepository.GetKhasraNoList();
