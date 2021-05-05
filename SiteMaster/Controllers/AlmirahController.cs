@@ -166,5 +166,35 @@ namespace SiteMaster.Controllers
             var list = await _almirahService.GetAllAlmirah();
             return View("Index", list);
         }
+
+
+        public async Task<IActionResult> AlmirahList()
+        {
+            var result = await _almirahService.GetAllAlmirah();
+            List<AlmirahMasterListDto> data = new List<AlmirahMasterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new AlmirahMasterListDto()
+                    {
+                        Id = result[i].Id,
+                        AlmirahNo = result[i].AlmirahNo,
+                      
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+
     }
 }

@@ -163,6 +163,33 @@ namespace SiteMaster.Controllers
             var list = await _bundleService.GetAllBundle();
             return View("Index", list);
         }
+
+        public async Task<IActionResult> BundleList()
+        {
+            var result = await _bundleService.GetAllBundle();
+            List<BundleListDto> data = new List<BundleListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new BundleListDto()
+                    {
+                        Id = result[i].Id,
+                        BundleNo = result[i].BundleNo,
+
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
     }
 }
 
