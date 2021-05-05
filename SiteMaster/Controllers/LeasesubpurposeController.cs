@@ -192,7 +192,7 @@ namespace SiteMaster.Controllers
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
-                {s
+                {
                     data.Add(new LeaseSubpurposeListDto()
                     {
 
