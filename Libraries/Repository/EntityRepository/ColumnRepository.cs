@@ -20,9 +20,59 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Column.Where(x => x.IsActive == 1).ToListAsync();
         }
 
+       
         public async Task<PagedResult<Column>> GetPagedColumn(ColumnSearchDto model)
         {
-            return await _dbContext.Column.Where(x => x.IsActive == 1).GetPaged<Column>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Column
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.ColumnNo.Contains(model.name)))
+                  .GetPaged<Column>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Column
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.ColumnNo.Contains(model.name)))
+                           .OrderBy(s => s.Id)
+                           .GetPaged<Column>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Column
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.ColumnNo.Contains(model.name)))
+                            .OrderBy(s => s.Id)
+                            .GetPaged<Column>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Column
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.ColumnNo.Contains(model.name)))
+                           .OrderByDescending(s => s.ColumnNo)
+                           .GetPaged<Column>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Column
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.ColumnNo.Contains(model.name)))
+                           .OrderByDescending(s => s.ColumnNo)
+                           .GetPaged<Column>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
         }
         public async Task<bool> Any(int id, string name)
         {
