@@ -322,5 +322,11 @@
     "inputFiles": [
       "wwwroot/js/demolitionstructureindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/watchandwardapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/watchandwardapprovalcreate.js"
+    ]
   }
 ]
