@@ -286,7 +286,7 @@ namespace LeaseDetails.Controllers
                     data.Add(new PossesionListDto()
                     {
                         Id = result[i].Id,
-                        AllotmentNo = result[i].Allotment == null ? "" : result[i].Allotment.Name,
+                        AllotmentNo = result[i].Allotment == null ? "" : result[i].Allotment.Application.RefNo,
                         DiffrenceInArea= result[i].DiffernceArea.ToString(),
                         PossesionTakenName= result[i].PossessionTakenName.ToString(),
                         PossesionHandoverName= result[i].PossesionHandOverName.ToString(),
