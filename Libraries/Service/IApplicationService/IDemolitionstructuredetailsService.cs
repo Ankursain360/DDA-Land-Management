@@ -36,6 +36,7 @@ namespace Libraries.Service.IApplicationService
         Task<Demolitionstructurebeforedemolitionphotofiledetails> GetDemolitionstructurebeforedemolitionphotofiledetails(int Id);
         Task<List<Demolitionstructure>> GetStructure();
         Task<List<Structure>> GetMasterStructure();
+        Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetailsList();
 
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto demolitionReportZoneDivisionLocalityWiseSearchDto);
         Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality);

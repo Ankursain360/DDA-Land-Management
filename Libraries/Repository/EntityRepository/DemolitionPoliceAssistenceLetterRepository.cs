@@ -40,6 +40,23 @@ namespace Repository.EntityRepository
             return data;
         }
 
+
+
+       // public async Task<List<Propertyregistration>> GetAllDemolitionPolicelist(int UserId)
+       // {
+       //     var badCodes = new[] { 3, 5 };
+       //     return await _dbContext.Propertyregistration
+       //.Include(x => x.ClassificationOfLand)
+       //                     .Include(x => x.Department)
+       //                     .Include(x => x.Division)
+       //                     .Include(x => x.DisposalType)
+       //                     .Include(x => x.MainLandUse)
+       //                     .Include(x => x.Zone)
+       //                     .Include(x => x.Locality)
+       //                             .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0)
+       //          .ToListAsync();
+       // }
+
         public async Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId)
         {
             var InDemolitionPoliceAssistenceTable = (from x in _dbContext.Demolitionpoliceassistenceletter

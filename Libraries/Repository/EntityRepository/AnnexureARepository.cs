@@ -68,6 +68,27 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Fixingdocument.Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1).ToListAsync();
         }
+
+        public async Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved)
+        {
+            var InInspectionId = (from x in _dbContext.Fixingdemolition
+                                  where x.IsActive == 1
+                                  select x.EncroachmentId).ToArray();
+
+            return await _dbContext.EncroachmentRegisteration
+    
+                
+                .Include(x => x.Locality)
+               
+                .Include(x => x.ApprovedStatusNavigation)
+                                    .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
+                                          && !(InInspectionId).Contains(x.Id))
+                 .ToListAsync();
+        }
+
+
+
+
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved)
         {
             var InInspectionId = (from x in _dbContext.Fixingdemolition

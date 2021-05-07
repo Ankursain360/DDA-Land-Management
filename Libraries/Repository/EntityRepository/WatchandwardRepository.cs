@@ -199,8 +199,9 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Watchandward>> GetAllWatchandward()
         {
-            return await _dbContext.Watchandward
-                .Include(x => x.PrimaryListNoNavigation)
+            return await _dbContext.Watchandward.Where(x=>x.IsActive==1)
+              .Include(x => x.PrimaryListNoNavigation)
+              .Include(x => x.ApprovedStatusNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)

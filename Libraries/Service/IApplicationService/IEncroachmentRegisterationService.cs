@@ -22,6 +22,8 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
+        Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved);
+      
         Task<List<Khasra>> GetAllKhasraList(int localityId);
         Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment);
         Task<bool> DeleteDetailsOfEncroachment(int Id);

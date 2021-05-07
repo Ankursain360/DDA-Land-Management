@@ -13,6 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Demolitionchecklist>> GetDemolitionchecklist();
        Task<List<Demolitionprogram>> GetDemolitionprogram();
         Task<List<Fixingdemolition>> GetFixingdemolition(int id);
+        Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved);
         Task<List<Demolitiondocument>> GetDemolitiondocument();
 
          Task<bool> SaveFixingprogram(Fixingprogram fixingprogram);//save 

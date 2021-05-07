@@ -688,21 +688,23 @@ namespace EncroachmentDemolition.Controllers
         #endregion
         public async Task<IActionResult> WatchWardApprovalList()
         {
-            var result = await _watchAndWardApprovalService.GetAllWatchandward();
-            List<WatchWardApprovalListDto> data = new List<WatchWardApprovalListDto>();
+            var result = await _watchandwardService.GetAllWatchandward();
+            List<WatchWardApprovalProcessListDto> data = new List<WatchWardApprovalProcessListDto>();
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    data.Add(new WatchWardApprovalListDto()
+                    data.Add(new WatchWardApprovalProcessListDto()
                     {
                         Id = result[i].Id,
-                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),
-                        Loaclity = result[i].PrimaryListNoNavigation == null ? "" : result[i].PrimaryListNoNavigation.Locality == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
-                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name.ToString(),
-                        PrimaryListNo = result[i].PrimaryListNo.ToString(),
+                        Date = Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy"),
+
+                        Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
+                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
+                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "" : result[i].PrimaryListNoNavigation.PrimaryListNo,
                         StatusOnGround = result[i].StatusOnGround.ToString(),
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
+
                     });
                 }
             }
