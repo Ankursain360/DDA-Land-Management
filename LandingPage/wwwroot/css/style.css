@@ -1484,3 +1484,33 @@ textarea.floating-label-field--s3 {
 
 @media(min-width:1200px) {}
 */
+/*New accordian style*/
+.permission {
+    font-size: .8rem;
+}
+
+    .permission .card {
+        border-radius: .3rem !important;
+        margin-bottom: .5rem !important;
+        border: 1px solid rgba(0, 0, 0, .125) !important;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .permission a {
+        color: #555;
+        font-weight: 700;
+    }
+
+    .permission li.form-check {
+        margin-left: 1rem;
+        -ms-flex-align: center !important;
+        align-items: center !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+    }
+
+        .permission li.form-check .form-check-input {
+            margin-top: 0rem;
+            margin-left: -1.1rem;
+        }
+

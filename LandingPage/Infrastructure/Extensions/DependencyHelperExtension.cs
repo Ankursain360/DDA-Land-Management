@@ -27,6 +27,7 @@ namespace LandingPage.Infrastructure.Extensions
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IModuleCategoryRepository, ModuleCategoryRespository>();
 
 
             /* Application Services */
@@ -38,6 +39,7 @@ namespace LandingPage.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
 
             services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IModuleCategoryService, ModuleCategoryService>();
 
         }
     }
