@@ -13,6 +13,7 @@ using NewLandAcquisition.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Utility.Helper;
 using Core.Enum;
+using Dto.Master;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -182,5 +183,42 @@ namespace NewLandAcquisition.Controllers
 
             return Json(await _newlandus17plotService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
         }
+
+
+        public async Task<IActionResult> NewLandUndersection17plotList()
+        {
+            var result = await _newlandus17plotService.GetAllUS17Plot();
+            List<NewLandUndersection6PlotListDto> data = new List<NewLandUndersection6PlotListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NewLandUndersection6PlotListDto()
+                    {
+                        Id = result[i].Id,
+                        NotificationNo = result[i].Notification == null ? "" : result[i].Notification.Name,
+                        VillageName = result[i].Village == null ? "" : result[i].Village.Name,
+                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
+                        ActualArea = result[i].Khasra.Bigha.ToString()
+                                  + '-' + result[i].Khasra.Biswa
+                                  + '-' + result[i].Khasra.Biswanshi,
+                        NotifyArea = result[i].Bigha.ToString()
+                                  + '-' + result[i].Biswa.ToString()
+                                  + '-' + result[i].Biswanshi.ToString(),
+                        Remarks = result[i].Remarks,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
+
+
+
     }
 }
