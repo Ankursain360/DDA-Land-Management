@@ -15,6 +15,7 @@ using Notification.OptionEnums;
 using Utility.Helper;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
+using Dto.Master;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -377,5 +378,39 @@ namespace EncroachmentDemolition.Controllers
         {
             return View();
         }
+
+
+        public async Task<IActionResult> DemolitionStructuredetailsList()
+        {
+            var result = await _demolitionstructuredetailsService.GetAllDemolitionstructuredetailsList();
+            List<DemolitionDiaryListDto> data = new List<DemolitionDiaryListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemolitionDiaryListDto()
+                    {
+                        Id = result[i].Id,
+
+                        Department = result[i].Department == null ? "" : result[i].Department.Name.ToString(),
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
+                        Division = result[i].Division == null ? "" : result[i].Division.Name.ToString(),
+                      
+                        Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
+                        DateOfapprovalofdemolition = Convert.ToDateTime(result[i].DateOfApprovalDemolition).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].DateOfApprovalDemolition).ToString("dd-MMM-yyyy"),
+
+
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
     }
 }

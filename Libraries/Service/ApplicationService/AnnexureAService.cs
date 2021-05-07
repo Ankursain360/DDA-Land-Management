@@ -28,6 +28,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureARepository.GetDemolitionchecklist();
         }
+
+        public async Task<List<EncroachmentRegisteration>> GetAllRequestForFixingDemolitionList(int approved)
+        {
+            return await _annexureARepository.GetAllRequestForFixingDemolitionList(approved);
+        }
         public async Task<List<Demolitionprogram>> GetDemolitionprogram()
         {
             return await _annexureARepository.GetDemolitionprogram();

@@ -589,7 +589,7 @@ namespace EncroachmentDemolition.Controllers
 
         public async Task<IActionResult> EncroachmentRegisterList()
         {
-            var result = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
+            var result = await _encroachmentRegisterationService.GetAllEncroachmentRegisterlist((int)ApprovalActionStatus.Approved);
             List<EncroachmentRegisterListDto> data = new List<EncroachmentRegisterListDto>();
             if (result != null)
             {
@@ -598,10 +598,14 @@ namespace EncroachmentDemolition.Controllers
                     data.Add(new EncroachmentRegisterListDto()
                     {
                         Id = result[i].Id,
-                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),
-                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.ToString(),
-                        PrimaryListNo = result[i].StatusOfLand,
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Date = Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy"),
+
+                        Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
+                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
+                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "" : result[i].PrimaryListNoNavigation.PrimaryListNo,
+                        StatusOnGround = result[i].StatusOnGround.ToString(),
+                        Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
+
                     }); ;
                 }
             }

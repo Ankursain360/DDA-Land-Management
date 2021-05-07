@@ -66,6 +66,16 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Demolitionstructuredetails.Where(x => x.IsActive == 1).ToListAsync();
         }
+        public async Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetailsList()
+        {
+            return await _dbContext.Demolitionstructuredetails
+
+                  .Include(x => x.Department)
+                                   .Include(x => x.Zone)
+                                   .Include(x => x.Division)
+                                   .Include(x => x.Locality)
+                .ToListAsync();
+        }
 
 
 

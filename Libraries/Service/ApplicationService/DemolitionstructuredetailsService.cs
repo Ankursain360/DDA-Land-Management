@@ -49,7 +49,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetAllDemolitionstructuredetails();
         }
-
+        public async Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetailsList()
+        {
+            return await _demolitionstructuredetailsRepository.GetAllDemolitionstructuredetailsList();
+        }
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
             return await _demolitionstructuredetailsRepository.GetAllLocalityList(divisionId);

@@ -642,13 +642,13 @@ namespace EncroachmentDemolition.Controllers
                     data.Add(new WatchWardListDto()
                     {
                         Id = result[i].Id,
-                        Date = result[i].Date.ToString() == null ? "" : result[i].Date.ToString(),
+                        Date = Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy") == null ? "" : Convert.ToDateTime(result[i].Date).ToString("dd-MMM-yyyy"),
 
-                        Loaclity = result[i].PrimaryListNoNavigation == null ? "" : result[i].PrimaryListNoNavigation.Locality == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
-                        KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name.ToString(),
-                        PrimaryListNo = result[i].PrimaryListNo.ToString(),
+                        Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
+                        KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
+                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo==null?"":result[i].PrimaryListNoNavigation.PrimaryListNo,
                         StatusOnGround = result[i].StatusOnGround.ToString(),
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        //IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
             }

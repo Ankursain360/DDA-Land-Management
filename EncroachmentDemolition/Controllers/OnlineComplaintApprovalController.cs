@@ -682,6 +682,41 @@ namespace EncroachmentDemolition.Controllers
             }
             return View(Data);
         }
+
+
+
+
+        public async Task<IActionResult> OnlineComplaintApprovalList()
+        {
+            var result = await _onlinecomplaintService.GetAllOnlinecomplaint();
+            List<OnlineComplaintApprovalListDto> data = new List<OnlineComplaintApprovalListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new OnlineComplaintApprovalListDto()
+                    {
+                        Id = result[i].Id,
+                      
+                        ComplaintName = result[i].Name,
+                        ContactNo = result[i].Contact,
+                        Email = result[i].Email,
+                        ComplaintType = result[i].ComplaintType.Name == null ? "" : result[i].ComplaintType.Name.ToString(),
+                        Location = result[i].Location.Name == null ? "" : result[i].Location.Name,
+                        ReferenceNo = result[i].ReferenceNo,
+                        Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName.ToString(),
+
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
         #endregion
 
     }

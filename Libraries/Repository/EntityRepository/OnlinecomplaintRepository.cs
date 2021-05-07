@@ -35,7 +35,9 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Onlinecomplaint>> GetAllOnlinecomplaint()
         {
-            return await _dbContext.Onlinecomplaint.Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Onlinecomplaint.Where(x=>x.IsActive==1)
+                .Include(x=>x.ApprovedStatusNavigation)
+                .Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id).ToListAsync();
         }
 
         public async Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintSearchDto model)

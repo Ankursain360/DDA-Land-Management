@@ -11,6 +11,8 @@ namespace Libraries.Repository.IEntityRepository
     public interface IEncroachmentRegisterationRepository:IGenericRepository<EncroachmentRegisteration>
     {
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
+        Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved);
+
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int encroachmentId);
         Task<EncroachmentPhotoFileDetails> GetEncroachmentPhotoFileDetails(int encroachmentId);

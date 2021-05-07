@@ -113,6 +113,27 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.EncroachmentPhotoFileDetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
 
+
+
+        public async Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved)
+        {
+            var InInspectionId = (from x in _dbContext.EncroachmentRegisteration
+                                  where x.WatchWard != null && x.IsActive == 1
+                                  select x.WatchWardId).ToArray();
+
+            return await _dbContext.Watchandward
+        .Include(x => x.PrimaryListNoNavigation)
+                .Include(x => x.PrimaryListNoNavigation.Locality)
+                .Include(x => x.Locality)
+                .Include(x => x.Khasra)
+                .Include(x => x.ApprovedStatusNavigation)
+                                    .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                 && !(InInspectionId).Contains(x.Id))
+                 .ToListAsync();
+        }
+
+
+
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved)
         {
             //try {
