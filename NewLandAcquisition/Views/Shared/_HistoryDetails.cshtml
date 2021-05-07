@@ -17,7 +17,7 @@
                         {
                             <div class="tracking-item d-md-flex align-items-top w-100">
                                 <div class="tracking-date text-md-right mr-3 text-nowrap py-2 pr-2">
-                                    <small class="d-block" style="color: #00d8ba;font-weight: 800;">Submit</small>
+                                    <small class="d-block" style="color: #00d8ba;font-weight: 800;">Received on</small>
                                     <strong> @item.SubmitDate</strong>
                                     <small class="d-block text-muted"></small>
                                 </div>
@@ -25,14 +25,14 @@
                                     <p class="d-md-flex align-items-center">
                                         <strong class="mr-auto d-block mb-2">From: @item.SendFrom<span class="text-muted d-block" style="font-weight: 400;">To: @item.SendTo</span></strong>
                                         <span class="d-block mb-2 ">
-                                            <small class="d-block" style="color: #cc2243;font-weight: 800;">Reply</small>
+                                            <small class="d-block" style="color: #cc2243;font-weight: 800;">Action Taken on</small>
                                             <strong>@item.ActionTakenDate</strong>
                                             <small class="d-block text-muted"></small>
                                         </span>
                                     </p>
-                                    <span class="d-block"> @item.Remarks <a href="#" class="text-primary"> Read More..</a></span>
+                                    <span class="d-block"> @item.Remarks</span>
                                     <p class="d-md-flex align-items-center mb-0">
-                                        <strong class="d-block text-primary"><span>Status : </span> @(item.SentStatusName == null ? "" : item.SentStatusName)</strong>
+                                        <strong class="d-block"><span style="font-weight: 800;">Status : </span><span style="font-weight: 800; color:#d08a0a;">@(item.SentStatusName == null ? "" : item.SentStatusName) </span> </strong>
                                         @if (item.DocumentName != "")
                                         {
                                             <a class="d-block text-primary ml-md-auto" asp-action="ViewDocumentApprovalProccess" asp-route-id="@item.Id" target="_blank"><img src="~/images/pdf.png" alt="png" width="25px" class="d-block"></a>

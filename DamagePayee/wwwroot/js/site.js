@@ -65,6 +65,18 @@ $('.numbers').keyup(function () {
 	//	ValidateForm();
 	//});
 });
+
+//For Loader
+$(window).on('load', function () {
+	$("#loader-wrapper").css("display", "none");
+});
+$(window).on('beforeunload', function () {
+	$("#loader-wrapper").css("display", "block");
+});
+
+//
+
+
 function ValidateForm() {
 	var isFormValid = true;
 	$("form input,select,textarea").each(function ()
@@ -172,6 +184,15 @@ function numericDecimal(elementRef) {
 
 }
 
+//For Loader
+$(window).on('load', function () {
+	$("#loader-wrapper").css("display", "none");
+});
+$(window).on('beforeunload', function () {
+	$("#loader-wrapper").css("display", "block");
+});
+//
+ 
 function SuccessMessage(message) {
 	toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }
@@ -190,7 +211,7 @@ function InfoMessage(message) {
 
 function DisplayLoader(show) {
 	var styleValue = show === true ? "block" : "none";
-	$(".spinner").css("display", styleValue);
+	$("#loader-wrapper").css("display", styleValue);
 }
 
 function DisplayErrorMessages(response) {

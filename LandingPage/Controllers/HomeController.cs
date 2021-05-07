@@ -10,6 +10,7 @@ using Libraries.Service.IApplicationService;
 using LandingPage.Helper;
 using Service.IApplicationService;
 using Dto.Master;
+using Libraries.Model.Entity;
 
 namespace LandingPage.Controllers
 {
@@ -17,43 +18,66 @@ namespace LandingPage.Controllers
     {
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
+        private readonly IModuleService _moduleService;
+        private readonly IModuleCategoryService _modulecategoryService;
 
-       
+
+
         public HomeController(ISiteContext siteContext,
-          IUserProfileService userProfileService, IModuleService moduleService)
+          IUserProfileService userProfileService, IModuleService moduleService, IModuleCategoryService modulecategoryService)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _moduleService = moduleService;
+            _modulecategoryService = modulecategoryService;
         }
-       
 
-        private readonly IModuleService _moduleService;
-
-
+        #region changes regarding dynamic categorization of landing page based on module category   Renu added by 7 May 2021
         public async Task<IActionResult> Index()
         {
-            //  var list = await _moduleService.GetAllModule();
+            var moduleCategoryData = await _moduleService.GetModuleCategory();
             var result = await _moduleService.ModuleFromMenuRoleActionMap(SiteContext.RoleId ?? 0);
             List<RoleWiseModuleMappingDto> data = new List<RoleWiseModuleMappingDto>();
-            if (result != null)
+            if (moduleCategoryData != null)
             {
-                for (int i = 0; i < result.Count; i++)
+                for (int i = 0; i < moduleCategoryData.Count; i++)
                 {
                     data.Add(new RoleWiseModuleMappingDto()
                     {
-                        Id = result[i].ModuleId ?? 0,
-                        Url = result[i].Module == null ? "" : result[i].Module.Url,
-                        Target = result[i].Module == null ? "" : result[i].Module.Target,
-                        Icon = result[i].Module == null ? "" : result[i].Module.Icon,
-                        Name = result[i].Module == null ? "" : result[i].Module.Name,
-                        Description = result[i].Module == null ? "" : result[i].Module.Description
+                        ModuleCategoryId = moduleCategoryData[i].Id,
+                        ModuleCategoryName = moduleCategoryData[i].CategoryName,
+                        ParentId = 0
                     });
                 }
             }
-            return View(data);           
+            var mdoulecatlisting = GetModuleListing(data, result);
+            return View(mdoulecatlisting);
         }
 
+        private IList<RoleWiseModuleMappingDto> GetModuleListing(IList<RoleWiseModuleMappingDto> modulecatList, IList<Menuactionrolemap> result)
+        {
+            List<RoleWiseModuleMappingDto> vmList = modulecatList.ToList();
+            foreach (var item in modulecatList)
+            {
+                var filteredmodule = result.Where(x => x.Module.ModuleCategoryId == item.ModuleCategoryId).ToList();
+                foreach (var mdoulelist in filteredmodule)
+                {
+                    var vm = new RoleWiseModuleMappingDto
+                    {
+                        Id = mdoulelist.ModuleId ?? 0,
+                        Url = mdoulelist.Module == null ? "" : mdoulelist.Module.Url,
+                        Target = mdoulelist.Module == null ? "" : mdoulelist.Module.Target,
+                        Icon = mdoulelist.Module == null ? "" : mdoulelist.Module.Icon,
+                        Name = mdoulelist.Module == null ? "" : mdoulelist.Module.Name,
+                        Description = mdoulelist.Module == null ? "" : mdoulelist.Module.Description,
+                        ParentId = mdoulelist.Module.ModuleCategoryId ?? 0
+                    };
+                    vmList.Add(vm);
+                }
+            }
+            return vmList;
+        }
+        #endregion
         public IActionResult Privacy()
         {
             return View();

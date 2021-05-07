@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using LeaseDetails.Filters;
 using Core.Enum;
+using Dto.Master;
 
 namespace LeaseDetails.Controllers
 {
@@ -305,9 +306,37 @@ namespace LeaseDetails.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> RequestforproceedingList()
+        {
+            var result = await _requestforproceedingService.GetAllRequestForProceeding();
+            List<RequestforproceedingListDto> data = new List<RequestforproceedingListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new RequestforproceedingListDto()
+                    {
+                        Id = result[i].Id,
+                        ReferenceNo = result[i].Allotment == null ? "" : result[i].Allotment.Application.RefNo,
+                        SocietyName = result[i].Allotment == null ? "" : result[i].Allotment.Application.Name,
+                        AllotmentDate = Convert.ToDateTime(result[i].Allotment.AllotmentDate).ToString("dd-MMM-yyyy"),
+                        Area = result[i].Allotment == null ? "" : result[i].Allotment.TotalArea.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        LetterStatus = result[i].Status.ToString() == "1" ? "Generated":
+                                       result[i].Status.ToString() == "2" ?  "Uploaded":
+                                       result[i].Status.ToString() =="3" ? "Sent" : "Not Generated"
 
+                    }); ;
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-    }
+        }
+
+   
+}
 }

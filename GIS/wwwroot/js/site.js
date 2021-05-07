@@ -1,4 +1,13 @@
-﻿ 
+﻿
+//For Loader
+$(window).on('load', function () {
+    $("#loader-wrapper").css("display", "none");
+});
+$(window).on('beforeunload', function () {
+    $("#loader-wrapper").css("display", "block");
+});
+//
+
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }
@@ -13,6 +22,11 @@ function WarningMessage(message) {
 
 function InfoMessage(message) {
     toastr.info(message, 'Warning', { timeOut: 3000, "progressBar": true });
+}
+
+function DisplayLoader(show) {
+    var styleValue = show === true ? "block" : "none";
+    $("#loader-wrapper").css("display", styleValue);
 }
 
 

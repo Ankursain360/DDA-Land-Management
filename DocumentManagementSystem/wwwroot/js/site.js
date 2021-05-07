@@ -156,6 +156,15 @@ function numericDecimal(elementRef) {
     return false;
 }
 
+//For Loader
+$(window).on('load', function () {
+    $("#loader-wrapper").css("display", "none");
+});
+$(window).on('beforeunload', function () {
+    $("#loader-wrapper").css("display", "block");
+});
+//
+
 
 
 function SuccessMessage(message) {
@@ -176,7 +185,7 @@ function InfoMessage(message) {
 
 function DisplayLoader(show) {
     var styleValue = show === true ? "block" : "none";
-    $(".body-loading").css("display", styleValue);
+    $("#loader-wrapper").css("display", styleValue);
 }
 
 function DisplayErrorMessages(response) {

@@ -123,5 +123,11 @@ namespace Libraries.Service.ApplicationService
             List<Judgementstatus> List = await _judgementRepository.GetJudgementStatusList();
             return List;
         }
+        public async Task<List<Requestforproceeding>> GetAllJudgementIndex()
+        {
+
+            return await _judgementRepository.GetAllJudgementIndex();
+                                       
+        }
     }
 }

@@ -12,5 +12,9 @@ namespace Dto.Master
         public string Icon { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public int ModuleCategoryId { get; set; }
+        public string ModuleCategoryName { get; set; }
+        public int ParentId { get; set; }
+
     }
 }

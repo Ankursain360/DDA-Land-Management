@@ -155,7 +155,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _hearingdetailsRepository.FetchSingleEvidence(id);
         }
-
+        public async Task<List<Requestforproceeding>> GetHearingDetails()
+        {
+            return await _hearingdetailsRepository.GetHearingDetails();
+        }
         //public Task<bool> DeleteHphotofiledetails(int Id)
         //{
         //    throw new NotImplementedException();

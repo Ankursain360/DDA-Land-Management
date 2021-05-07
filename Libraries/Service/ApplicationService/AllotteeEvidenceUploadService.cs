@@ -28,7 +28,10 @@ namespace Libraries.Service.ApplicationService
             _allotteeEvidenceUploadRepository = allotteeEvidenceUploadRepository;
             _mapper = mapper;
         }
-
+        public async Task<List<Requestforproceeding>> GetAllotteeEvidenceDetails()
+        {
+            return await _allotteeEvidenceUploadRepository.GetAllotteeEvidenceDetails();
+        }
         public async Task<Allotteeevidenceupload> FetchAllotteeEvidenceUploadDetails(int id)
         {
             return await _allotteeEvidenceUploadRepository.FetchAllotteeEvidenceUploadDetails(id);

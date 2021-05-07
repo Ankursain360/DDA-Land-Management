@@ -26,6 +26,12 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _actionTakenByDdaRepository = actionTakenByDdaRepository;
         }
+
+        public async Task<List<Requestforproceeding>> GetAllActionIndex()
+        {
+
+            return await _actionTakenByDdaRepository.GetAllActionIndex();
+        }
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
         {
             var data = await _actionTakenByDdaRepository.GetPagedRequestForProceeding(model);

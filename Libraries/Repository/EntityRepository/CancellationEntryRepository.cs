@@ -25,7 +25,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Cancellationentry>> GetAllRequestForProceeding()
         {
-            return await _dbContext.Cancellationentry.Include(x => x.Allotment).Include(x => x.HonebleLgOrCommonNavigation).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Cancellationentry
+                                    .Include(x => x.Allotment)
+                                     .Include(x => x.Allotment.Application)
+                                    .Include(x => x.HonebleLgOrCommonNavigation)
+                                    .OrderByDescending(x => x.Id).ToListAsync();
         }
 
         public async Task<List<Honble>> GetAllHonble()

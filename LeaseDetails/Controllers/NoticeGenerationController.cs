@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Hosting;
 using LeaseDetails.Filters;
 using Core.Enum;
 using System.Data;
+using Dto.Master;
 
 namespace LeaseDetails.Controllers
 {
@@ -290,6 +291,34 @@ namespace LeaseDetails.Controllers
             string path = targetPathNotice + Data.NoticeFileName;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> LeasenoticegenerationList()
+        {
+            var result = await _noticeGenerationService.GetNoticeDetails();
+            List<LeasenoticegenerationListDto> data = new List<LeasenoticegenerationListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LeasenoticegenerationListDto()
+                    {
+                        Id = result[i].Id,
+                        ReferenceNo = result[i].Allotment == null ? "" : result[i].Allotment.Application.RefNo,
+                        SocietyName = result[i].Allotment == null ? "" : result[i].Allotment.Application.Name,
+                        AllotmentDate = Convert.ToDateTime(result[i].Allotment.AllotmentDate).ToString("dd-MMM-yyyy"),
+                        Area = result[i].Allotment == null ? "" : result[i].Allotment.TotalArea.ToString(),
+                        GroundOfViolations = result[i].GroundOfViolations,
+                        
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
         }
     }
 }

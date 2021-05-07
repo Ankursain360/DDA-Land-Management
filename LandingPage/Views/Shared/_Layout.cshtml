@@ -20,12 +20,16 @@
 </head>
 
 <body class="bg-gray">
-   
+    <div id="loader-wrapper" style="display:none">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
     <div class="top-header">
         <header>
             <div class="container-fluid">
                 <div class="d-flex align-items-center">
-                   
+
                     <div class="logo py-1 mr-auto mr-md-4 order-md-1">
                         <a href="/" class="d-block">
                             <figure class="m-0">
@@ -72,7 +76,7 @@
             </div>
         </header>
     </div>
-   
+
     <partial name="_CookieConsentPartial" />
     <section id="rightSection" class="slow bg-gray w-100">
         <div class="container-fluid ">

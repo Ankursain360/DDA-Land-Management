@@ -22,7 +22,16 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<List<Requestforproceeding>> GetNoticeDetails()
+        {
+            return await _dbContext.Requestforproceeding
+                                    .Include(x => x.Allotment)
+                                    .Include(x => x.Allotment.Application)
+                                    .Where(x => x.IsSend == 1 )
+                                    .ToListAsync();
+        }
 
+         
         public async Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id)
         {
             return await _dbContext.Leasenoticegeneration
