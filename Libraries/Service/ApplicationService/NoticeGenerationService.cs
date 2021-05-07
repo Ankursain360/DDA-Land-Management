@@ -28,7 +28,10 @@ namespace Libraries.Service.ApplicationService
             _noticeGenerationRepository = noticeGenerationRepository;
             _mapper = mapper;
         }
-
+        public async Task<List<Requestforproceeding>> GetNoticeDetails()
+        {
+            return await _noticeGenerationRepository.GetNoticeDetails();
+        }
         public async Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id)
         {
             return await _noticeGenerationRepository.FetchNoticeGenerationDetails(id);

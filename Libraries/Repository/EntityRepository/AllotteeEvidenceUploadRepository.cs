@@ -22,6 +22,14 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<List<Requestforproceeding>> GetAllotteeEvidenceDetails()
+        {
+            return await _dbContext.Requestforproceeding
+                                        .Include(x => x.Allotment)
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => x.IsSend == 1)
+                                        .ToListAsync();
+        }
 
         public async Task<Allotteeevidenceupload> FetchAllotteeEvidenceUploadDetails(int id)
         {

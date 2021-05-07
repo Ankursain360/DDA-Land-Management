@@ -13,5 +13,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(LeaseHearingDetailsSearchDto model);
         Task<Leasenoticegeneration> FetchNoticeGenerationDetails(int id);
         Task<List<Leasenoticegeneration>> GetNoticeHistoryDetails(int id);
+        Task<List<Requestforproceeding>> GetNoticeDetails();
     }
 }

@@ -19,6 +19,7 @@ using System.Data;
 using System;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using Dto.Master;
 
 namespace LeaseDetails.Controllers
 {
@@ -368,5 +369,34 @@ namespace LeaseDetails.Controllers
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
         }
         #endregion
+
+
+        [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> HearingDetailsList()
+        {
+            var result = await _hearingdetailsService.GetHearingDetails();
+            List<HearingdetailsListDto> data = new List<HearingdetailsListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new HearingdetailsListDto()
+                    {
+                        Id = result[i].Id,
+                        ReferenceNo = result[i].Allotment == null ? "" : result[i].Allotment.Application.RefNo,
+                        SocietyName = result[i].Allotment == null ? "" : result[i].Allotment.Application.Name,
+                        AllotmentDate = Convert.ToDateTime(result[i].Allotment.AllotmentDate).ToString("dd-MMM-yyyy"),
+                        Area = result[i].Allotment == null ? "" : result[i].Allotment.TotalArea.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

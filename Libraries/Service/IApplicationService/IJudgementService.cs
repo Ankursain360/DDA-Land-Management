@@ -31,5 +31,6 @@ namespace Libraries.Service.IApplicationService
         Task<Judgement> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<List<Judgementstatus>> GetJudgementStatusList();
+        Task<List<Requestforproceeding>> GetAllJudgementIndex();
     }
 }

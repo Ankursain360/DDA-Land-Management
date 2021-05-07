@@ -29,6 +29,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Actiontakenbydda actionbydda);
         Task<Actiontakenbydda> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<List<Requestforproceeding>> GetAllActionIndex();
     }
 }
 
