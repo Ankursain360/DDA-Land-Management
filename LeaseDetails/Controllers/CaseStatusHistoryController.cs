@@ -12,6 +12,9 @@ using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Core.Enum;
+using System;
+using Dto.Master;
+using System.Collections.Generic;
 
 namespace LeaseDetails.Controllers
 {
@@ -182,5 +185,33 @@ namespace LeaseDetails.Controllers
             return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
         }
         #endregion
+
+        //  [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> CaseStatusHistoryList()
+        {
+            var result = await _judgementService.GetAllJudgementIndex();
+            List<CaseStatusHistoryListDto> data = new List<CaseStatusHistoryListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new CaseStatusHistoryListDto()
+                    {
+                        Id = result[i].Id,
+                        ReferenceNo = result[i].Allotment == null ? "" : result[i].Allotment.Application.RefNo,
+                        SocietyName = result[i].Allotment == null ? "" : result[i].Allotment.Application.Name,
+                        AllotmentDate = Convert.ToDateTime(result[i].Allotment.AllotmentDate).ToString("dd-MMM-yyyy"),
+                        Area = result[i].Allotment == null ? "" : result[i].Allotment.TotalArea.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

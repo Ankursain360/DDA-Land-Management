@@ -25,7 +25,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Requestforproceeding>> GetAllRequestForProceeding()
         {
-            return await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x=>x.Honble).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Requestforproceeding
+                                   .Include(x => x.Allotment)
+                                   .Include(x => x.Allotment.Application)
+                                   .Include(x=>x.Honble)
+                                   .OrderByDescending(x => x.Id).ToListAsync();
         }
 
         public async Task<List<Honble>> GetAllHonble()

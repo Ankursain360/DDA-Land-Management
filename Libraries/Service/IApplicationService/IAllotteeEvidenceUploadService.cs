@@ -16,5 +16,6 @@ namespace Libraries.Service.IApplicationService
         Task<Allotteeevidenceupload> FetchAllotteeEvidenceUploadDetails(int id);
         Task<bool> Create(Allotteeevidenceupload allotteeevidenceupload);
         Task<bool> Update(int id, Allotteeevidenceupload allotteeevidenceupload);
+        Task<List<Requestforproceeding>> GetAllotteeEvidenceDetails();
     }
 }

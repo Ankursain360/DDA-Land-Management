@@ -16,5 +16,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Leasenoticegeneration>> GetNoticeHistoryDetails(int id);
         Task<bool> Create(Leasenoticegeneration leasenoticegeneration);
         Task<bool> Update(int id, Leasenoticegeneration leasenoticegeneration);
+        Task<List<Requestforproceeding>> GetNoticeDetails();
     }
 }

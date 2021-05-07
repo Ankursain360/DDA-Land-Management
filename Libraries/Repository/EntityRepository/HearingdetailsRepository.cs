@@ -29,6 +29,13 @@ namespace Repository.EntityRepository
 
             return File;
         }
+        public async Task<List<Requestforproceeding>> GetHearingDetails()
+        {
+            return await _dbContext.Requestforproceeding
+                                       .Include(x => x.Allotment)
+                                       .Include(x => x.Allotment.Application)
+                                       .Where(x => x.IsSend == 1).ToListAsync();
+        }
         public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(HearingdetailsSeachDto model)
         {
             //var data = await _dbContext.Requestforproceeding

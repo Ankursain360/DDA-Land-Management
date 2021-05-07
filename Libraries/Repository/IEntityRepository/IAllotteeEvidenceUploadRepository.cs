@@ -13,5 +13,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Requestforproceeding>> GetPagedRequestLetterDetails(AllotteeEvidenceSearchDto model);
         Task<List<Allotteeevidenceupload>> GetAllotteeEvidenceHistoryDetails(int id);
         Task<Allotteeevidenceupload> FetchAllotteeEvidenceUploadDetails(int id);
+        Task<List<Requestforproceeding>> GetAllotteeEvidenceDetails();
     }
 }

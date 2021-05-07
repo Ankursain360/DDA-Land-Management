@@ -32,5 +32,6 @@ namespace Libraries.Repository.IEntityRepository
        
         Task<Judgement> FetchSingleResult(int id);
         Task<List<Judgementstatus>> GetJudgementStatusList();
+        Task<List<Requestforproceeding>> GetAllJudgementIndex();
     }
 }

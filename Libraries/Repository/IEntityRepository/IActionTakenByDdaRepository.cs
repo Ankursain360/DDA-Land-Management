@@ -30,5 +30,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Actiontakenbydda>> GetAllActiontakenbydda();
 
         Task<Actiontakenbydda> FetchSingleResult(int id);
+        Task<List<Requestforproceeding>> GetAllActionIndex();
     }
 }
