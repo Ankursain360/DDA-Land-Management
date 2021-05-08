@@ -26,7 +26,6 @@ namespace Libraries.Repository.EntityRepository
                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                            && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
                                            && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
-                                          // && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description))
                                           )
                                           .GetPaged<Module>(model.PageNumber, model.PageSize);
 
@@ -43,6 +42,17 @@ namespace Libraries.Repository.EntityRepository
                                           && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
                                           )
                                         .OrderByDescending(s => s.IsActive)
+                                         .GetPaged<Module>(model.PageNumber, model.PageSize);
+                }
+                else if (model.SortBy.ToUpper() == "SORTBY")
+                {
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                         .OrderBy(s => s.SortBy)
                                          .GetPaged<Module>(model.PageNumber, model.PageSize);
                 }
                 else
@@ -76,6 +86,17 @@ namespace Libraries.Repository.EntityRepository
                                           && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
                                           )
                                          .OrderBy(s => s.IsActive)
+                                         .GetPaged<Module>(model.PageNumber, model.PageSize);
+                }
+                else if (model.SortBy.ToUpper() == "SORTBY")
+                {
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                         .OrderByDescending(s => s.SortBy)
                                          .GetPaged<Module>(model.PageNumber, model.PageSize);
                 }
                 else
