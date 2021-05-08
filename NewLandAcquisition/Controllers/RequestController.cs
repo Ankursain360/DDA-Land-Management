@@ -23,6 +23,7 @@ using Dto.Common;
 using Dto.Master;
 using Service.IApplicationService;
 using System.Text;
+using Microsoft.AspNetCore.Hosting;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -34,17 +35,19 @@ namespace NewLandAcquisition.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
 
         public RequestController(IRequestService requestService, IConfiguration configuration, 
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
-            IUserProfileService userProfileService)
+            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
         {
             _workflowtemplateService = workflowtemplateService;
             _requestService = requestService;
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
             _userProfileService = userProfileService;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -223,6 +226,59 @@ namespace NewLandAcquisition.Controllers
 
                         #endregion 
 
+                        #region Approval Proccess  Mail Generation Added by Renu 07 May 2021
+                        var sendMailResult = false;
+                        var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
+                        if (approvalproccess.SendTo != null)
+                        {
+                            #region Mail Generate
+                            //At successfull completion send mail and sms
+                            Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                            string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+
+                            var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                            StringBuilder multousermailId = new StringBuilder();
+                            if (approvalproccess.SendTo != null)
+                            {
+                                int col = 0;
+                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                foreach (string MultiUserId in multiTo)
+                                {
+                                    if (col > 0)
+                                        multousermailId.Append(",");
+                                    var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                    multousermailId.Append(RecevierUsers.User.Email);
+                                    col++;
+                                }
+                            }
+
+                            #region Mail Generation Added By Renu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                            bodyDTO.ApplicationName = "Request Application";
+                            bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                            bodyDTO.SenderName = senderUser.User.Name;
+                            bodyDTO.Link = link;
+                            bodyDTO.AppRefNo = request.ReferenceNo;
+                            bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                            bodyDTO.Remarks = approvalproccess.Remarks;
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                            #endregion
+
+                            string strMailSubject = "Pending Request Application Approval Request Details ";
+                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                            #endregion
+
+
+                            #endregion
+                        }
+                        #endregion
                         ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         var list = await _requestService.GetAllRequest();
                         return View("Index", list);
