@@ -366,6 +366,32 @@ namespace EncroachmentDemolition.Controllers
             return ObjList;
         }
         #endregion
+        //  [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> OnlineComplaintList()
+        {
+            var result = await _onlinecomplaintService.GetAllOnlinecomplaint();
+            List<OnlineComplaintListDto> data = new List<OnlineComplaintListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new OnlineComplaintListDto()
+                    {
+                        Id = result[i].Id,
+                        ReferenceNo = result[i].ReferenceNo,
+                        ComplaintName = result[i].Name,
+                        ContactNo = result[i].Contact,
+                        Email= result[i].Email,
+                        ApprovalStatus  = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

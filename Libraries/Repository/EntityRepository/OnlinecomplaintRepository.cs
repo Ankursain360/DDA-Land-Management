@@ -35,15 +35,20 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Onlinecomplaint>> GetAllOnlinecomplaint()
         {
-            return await _dbContext.Onlinecomplaint.Where(x=>x.IsActive==1)
+            return await _dbContext.Onlinecomplaint
+                .Where(x=>x.IsActive==1)
                 .Include(x=>x.ApprovedStatusNavigation)
-                .Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id).ToListAsync();
+                .Include(x => x.Location)
+                .Include(x => x.ComplaintType)
+                .OrderBy(x => x.Id).ToListAsync();
         }
 
         public async Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintSearchDto model)
         {
             var data = await _dbContext.Onlinecomplaint
-                                        .Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id)
+                                        .Include(x => x.Location)
+                                        .Include(x => x.ComplaintType)
+                                        .OrderByDescending(x => x.Id)
                                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                            && (string.IsNullOrEmpty(model.contact) || x.Contact.Contains(model.contact))
                                            && (string.IsNullOrEmpty(model.email) || x.Email.Contains(model.email))

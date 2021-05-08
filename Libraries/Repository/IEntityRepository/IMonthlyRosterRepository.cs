@@ -15,6 +15,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId, int departmentId, int zoneId, int localityId);
         Task<List<Userprofile>> SecurityGuardList();
+        Task<List<MonthlyRoaster>> GetAllmonthlyrosterlist();
         Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto monthlyRoasterSearchDto);
     }
 }
