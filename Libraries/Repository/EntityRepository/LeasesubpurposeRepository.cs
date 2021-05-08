@@ -36,9 +36,9 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Leasesubpurpose
                                         .Include(x => x.PurposeUse)
-                                        .Where(x => x.PurposeUseId == (model.purposeId == 0 ? x.PurposeUseId : model.purposeId)
-                                        && (x.SubPurposeUse != null ? x.SubPurposeUse.Contains(model.subpurposeuse == "" ? x.SubPurposeUse : model.subpurposeuse) : true)
-                                        )
+                                         .Where(x => (string.IsNullOrEmpty(model.purposeId) || x.PurposeUse.PurposeUse.Contains(model.purposeId))
+                                    && (string.IsNullOrEmpty(model.subpurposeuse) || x.SubPurposeUse.Contains(model.subpurposeuse))
+                                    )
                                         .GetPaged<Leasesubpurpose>(model.PageNumber, model.PageSize);
             //int SortOrder = (model.SortBy.ToUpper() == "ISACTIVE") && ((int)model.SortOrder == 1) ? 2 : (model.SortBy.ToUpper() == "ISACTIVE") && ((int)model.SortOrder == 1) ? 1 : (int)model.SortOrder;
             int SortOrder = (int)model.SortOrder;
@@ -49,9 +49,9 @@ namespace Libraries.Repository.EntityRepository
                 {
                     data = await _dbContext.Leasesubpurpose
                                    .Include(x => x.PurposeUse)
-                                   .Where(x => x.PurposeUseId == (model.purposeId == 0 ? x.PurposeUseId : model.purposeId)
-                                   && (x.SubPurposeUse != null ? x.SubPurposeUse.Contains(model.subpurposeuse == "" ? x.SubPurposeUse : model.subpurposeuse) : true)
-                                   )
+                                      .Where(x => (string.IsNullOrEmpty(model.purposeId) || x.PurposeUse.PurposeUse.Contains(model.purposeId))
+                                    && (string.IsNullOrEmpty(model.subpurposeuse) || x.SubPurposeUse.Contains(model.subpurposeuse))
+                                    )
                                    .OrderByDescending(s => s.IsActive)
                                    .GetPaged<Leasesubpurpose>(model.PageNumber, model.PageSize);
                 }
@@ -59,9 +59,9 @@ namespace Libraries.Repository.EntityRepository
                 {
                     data = await _dbContext.Leasesubpurpose
                                    .Include(x => x.PurposeUse)
-                                   .Where(x => x.PurposeUseId == (model.purposeId == 0 ? x.PurposeUseId : model.purposeId)
-                                   && (x.SubPurposeUse != null ? x.SubPurposeUse.Contains(model.subpurposeuse == "" ? x.SubPurposeUse : model.subpurposeuse) : true)
-                                   )
+                                      .Where(x => (string.IsNullOrEmpty(model.purposeId) || x.PurposeUse.PurposeUse.Contains(model.purposeId))
+                                    && (string.IsNullOrEmpty(model.subpurposeuse) || x.SubPurposeUse.Contains(model.subpurposeuse))
+                                    )
                                    .OrderBy(s =>
                                    (model.SortBy.ToUpper() == "SUBPURPOSEUSE" ? s.SubPurposeUse
                                    : model.SortBy.ToUpper() == "PURPOSEUSE" ? (s.PurposeUse == null ? null : s.PurposeUse.PurposeUse)
@@ -79,9 +79,9 @@ namespace Libraries.Repository.EntityRepository
                 {
                     data = await _dbContext.Leasesubpurpose
                                    .Include(x => x.PurposeUse)
-                                   .Where(x => x.PurposeUseId == (model.purposeId == 0 ? x.PurposeUseId : model.purposeId)
-                                   && (x.SubPurposeUse != null ? x.SubPurposeUse.Contains(model.subpurposeuse == "" ? x.SubPurposeUse : model.subpurposeuse) : true)
-                                   )
+                                     .Where(x => (string.IsNullOrEmpty(model.purposeId) || x.PurposeUse.PurposeUse.Contains(model.purposeId))
+                                    && (string.IsNullOrEmpty(model.subpurposeuse) || x.SubPurposeUse.Contains(model.subpurposeuse))
+                                    )
                                    .OrderBy(s => s.IsActive)
                                    .GetPaged<Leasesubpurpose>(model.PageNumber, model.PageSize);
                 }
@@ -89,9 +89,9 @@ namespace Libraries.Repository.EntityRepository
                 {
                     data = await _dbContext.Leasesubpurpose
                                    .Include(x => x.PurposeUse)
-                                   .Where(x => x.PurposeUseId == (model.purposeId == 0 ? x.PurposeUseId : model.purposeId)
-                                   && (x.SubPurposeUse != null ? x.SubPurposeUse.Contains(model.subpurposeuse == "" ? x.SubPurposeUse : model.subpurposeuse) : true)
-                                   )
+                                     .Where(x => (string.IsNullOrEmpty(model.purposeId) || x.PurposeUse.PurposeUse.Contains(model.purposeId))
+                                    && (string.IsNullOrEmpty(model.subpurposeuse) || x.SubPurposeUse.Contains(model.subpurposeuse))
+                                    )
                                    .OrderByDescending(s =>
                                    (model.SortBy.ToUpper() == "SUVPERPOUSUSE" ? s.SubPurposeUse
                                    : model.SortBy.ToUpper() == "PURPOSEUSE" ? (s.PurposeUse == null ? null : s.PurposeUse.PurposeUse)

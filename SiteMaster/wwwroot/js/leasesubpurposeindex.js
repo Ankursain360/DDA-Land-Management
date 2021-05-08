@@ -27,7 +27,7 @@ $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
-    $('#PurposeUseId').val('').trigger('change');
+    $('#txtPurposeUseId').val('').trigger('change');
     $('#txtSubPurposeUse').val('');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -42,13 +42,15 @@ function GetDetails(pageNumber, pageSize, sortOrder) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        PurposeUseId: parseInt($('#PurposeUseId').val()),
-        name: ($('#txtSubPurposeUse').val()),
+        purposeId: $('#txtPurposeUseId').val(),
+        
+        subpurposeuse: ($('#txtSubPurposeUse').val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
         pageNumber: pageNumber
     }
+  //  alert(JSON.stringify(model));
     return model;
 }
 
