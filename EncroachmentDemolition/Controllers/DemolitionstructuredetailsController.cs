@@ -380,7 +380,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-        public async Task<IActionResult> DemolitionStructuredetailsList()
+        public async Task<IActionResult> DemolitionDiaryList()
         {
             var result = await _demolitionstructuredetailsService.GetAllDemolitionstructuredetailsList();
             List<DemolitionDiaryListDto> data = new List<DemolitionDiaryListDto>();
