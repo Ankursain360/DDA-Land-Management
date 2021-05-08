@@ -21,6 +21,8 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Module name is mandatory")]
         [Remote(action: "Exist", controller: "Module", AdditionalFields = "Id")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Sort By field is mandatory")]
+        public int SortBy { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
         public string Description { get; set; }

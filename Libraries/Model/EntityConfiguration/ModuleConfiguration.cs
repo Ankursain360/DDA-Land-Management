@@ -43,6 +43,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModuleCategoryId).HasColumnType("int(11)");
 
+            builder.Property(e => e.SortBy).HasColumnType("int(11)");
+
             builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(100)

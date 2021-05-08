@@ -59,7 +59,9 @@ namespace LandingPage.Controllers
             List<RoleWiseModuleMappingDto> vmList = modulecatList.ToList();
             foreach (var item in modulecatList)
             {
-                var filteredmodule = result.Where(x => x.Module.ModuleCategoryId == item.ModuleCategoryId).ToList();
+                var filteredmodule = result.Where(x => x.Module.ModuleCategoryId == item.ModuleCategoryId)
+                                            .OrderBy(x => x.Module.SortBy)
+                                            .ToList();
                 foreach (var mdoulelist in filteredmodule)
                 {
                     var vm = new RoleWiseModuleMappingDto

@@ -58,6 +58,7 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = module.IsActive;
             model.ModifiedBy = 1;
             model.ModuleCategoryId = module.ModuleCategoryId;
+            model.SortBy = module.SortBy;
             _moduleRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }

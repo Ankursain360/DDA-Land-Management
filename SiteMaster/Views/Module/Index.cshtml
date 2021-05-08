@@ -6,20 +6,28 @@
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
             <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="modulecategoryId" asp-items="@(new SelectList(ViewBag.ModuleCategoryList, "Id", "CategoryName"))">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <label class="floating-label" for="modulecategoryId">Module Category</label>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3"/>
                     <label for="txtName" class="floating-label">Module Name</label>
                 </div>
             </div>
+            @*<div class="col-md-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" id="txtDescription" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                        <label for="txtDescription" class="floating-label">Description</label>
+                    </div>
+                </div>*@
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtDescription" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtDescription" class="floating-label">Description</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtUrl" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <input type="text" id="txtUrl" class="floating-label-field floating-label-field--s3"/>
                     <label for="txtUrl" class="floating-label">Url</label>
                 </div>
             </div>
@@ -44,10 +52,11 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="MODULECATEGORY">Module Category</option>
                         <option value="NAME">Module Name</option>
-                        <option value="Description">Description</option>
+                        @*<option value="Description">Description</option>*@
                         <option value="Url">Url</option>
-                        <option value="Status">Status</option>
+                        <option value="IsActive">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
