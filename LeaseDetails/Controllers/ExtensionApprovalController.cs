@@ -330,7 +330,7 @@ namespace LeaseDetails.Controllers
                     {
                         #region Mail Generate
                         //At successfull completion send mail and sms
-                        Uri uri = new Uri("https://www.managemybusinessess.com/");
+                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                         string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
 
