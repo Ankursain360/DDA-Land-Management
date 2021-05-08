@@ -208,7 +208,7 @@ namespace LeaseDetails.Controllers
                         #region Approval Proccess At 1st level start Added by Renu 21 April 2021
                         var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value));
                         var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
-                       
+
                         for (int i = 0; i < DataFlow.Count; i++)
                         {
                             if (!DataFlow[i].parameterSkip)
@@ -252,7 +252,61 @@ namespace LeaseDetails.Controllers
                             }
                         }
 
-                        #endregion 
+                        #endregion
+
+                        #region Approval Proccess  Mail Generation Added by Renu 07 May 2021
+                        var sendMailResult = false;
+                        var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
+                        if (approvalproccess.SendTo != null)
+                        {
+                            #region Mail Generate
+                            //At successfull completion send mail and sms
+                            Uri uri = new Uri("https://www.managemybusinessess.com/");
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                            string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+
+                            var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                            StringBuilder multousermailId = new StringBuilder();
+                            if (approvalproccess.SendTo != null)
+                            {
+                                int col = 0;
+                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                foreach (string MultiUserId in multiTo)
+                                {
+                                    if (col > 0)
+                                        multousermailId.Append(",");
+                                    var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                    multousermailId.Append(RecevierUsers.User.Email);
+                                    col++;
+                                }
+                            }
+
+                            #region Mail Generation Added By Renu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                            bodyDTO.ApplicationName = "Lease Application";
+                            bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                            bodyDTO.SenderName = senderUser.User.Name;
+                            bodyDTO.Link = link;
+                            bodyDTO.AppRefNo = leaseapplication.RefNo;
+                            bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                            bodyDTO.Remarks = approvalproccess.Remarks;
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                            #endregion
+
+                            string strMailSubject = "Pending Lease Application Approval Request Details ";
+                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                            #endregion
+
+
+                            #endregion
+                        }
+                        #endregion
 
                         if (leaseapplication.EmailId != null)
                         {
@@ -277,7 +331,7 @@ namespace LeaseDetails.Controllers
 
                             string strMailSubject = "User Reference No. Details ";
                             string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                            var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, leaseapplication.EmailId, strMailCC, strMailBCC, strAttachPath);
+                            sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, leaseapplication.EmailId, strMailCC, strMailBCC, strAttachPath);
                             #endregion
 
                             if (sendMailResult)
@@ -293,7 +347,7 @@ namespace LeaseDetails.Controllers
                             ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                             TempData["Message"] = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         }
-
+                       
                         ViewBag.IsPrintable = 1;
                         ViewBag.Id = leaseapplication.Id;
                         return View("Create", leaseapplication);

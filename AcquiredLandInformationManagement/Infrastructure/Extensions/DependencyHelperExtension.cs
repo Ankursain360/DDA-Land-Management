@@ -72,7 +72,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IMutationRepository, MutationRepository>();
             services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
             services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
-
+            services.AddScoped<IKhasraRepository, KhasraRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -123,7 +123,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
            
             services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
             services.AddScoped<INewlandnotificationService, NewlandnotificationService>();
-
+            services.AddScoped<IKhasraService, KhasraService>();
         }
     }
 }

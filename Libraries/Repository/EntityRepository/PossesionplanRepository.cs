@@ -30,7 +30,7 @@ namespace Repository.EntityRepository
         }
         public async Task<List<Possesionplan>> GetAllPossesionplan()
         {
-            return await _dbContext.Possesionplan.Include(x => x.Allotment)
+            return await _dbContext.Possesionplan.Include(x => x.Allotment).Include(x => x.Allotment.Application)
                 //.Where(x=> x.Id == Allotmententry.Id)
                 .OrderByDescending(x => x.Id).ToListAsync();
         }
