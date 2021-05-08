@@ -21,5 +21,6 @@ namespace Service.IApplicationService
         Task<MonthlyRoaster> GetMonthlyRoasterById(int id);
         Task<bool> Update(int id, MonthlyRoaster monthlyRoaster);
         Task<bool> DeleteRoaster(int id);
+        Task<List<MonthlyRoaster>> GetAllmonthlyrosterlist();
     }
 }

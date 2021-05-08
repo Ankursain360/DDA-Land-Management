@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
+using Utility.Helper;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class MonthlyRosterController : BaseController
@@ -258,6 +260,34 @@ namespace EncroachmentDemolition.Controllers
         {
             DivisionId = DivisionId ?? 0;
             return Json(await _monthlyRosterService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
+        }
+      //  [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> MonthlyRoasterList()
+        {
+            var result = await _monthlyRosterService.GetAllmonthlyrosterlist();
+            List<MonthlyRoasterListDto> data = new List<MonthlyRoasterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new MonthlyRoasterListDto()
+                    {
+                        Id = result[i].Id,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name,
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        Division = result[i].Division == null ? "" : result[i].Division.Name,
+                        LocalityVillage = result[i].Locality == null ? "" : result[i].Locality.Name,
+                        SecurityGuard = result[i].Userprofile == null ? "" : result[i].Userprofile.User.NormalizedUserName,
+                        Year = result[i].Year.ToString(),
+                        Month = new DateTime(result[i].Year, result[i].Month, 1).ToString("MMMM"),
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
         }
     }
 }

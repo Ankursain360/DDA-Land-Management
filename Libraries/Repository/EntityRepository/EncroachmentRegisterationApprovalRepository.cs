@@ -89,6 +89,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration()
         {
             return await _dbContext.EncroachmentRegisteration.Include(x => x.Locality)
+                .Include(x => x.ApprovedStatusNavigation)
                 .ToListAsync();
         }
         public async Task<List<Khasra>> GetAllKhasra()

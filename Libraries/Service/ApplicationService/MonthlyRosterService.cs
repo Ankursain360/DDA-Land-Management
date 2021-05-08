@@ -94,5 +94,9 @@ namespace Libraries.Service.ApplicationService
             _monthlyRosterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<List<MonthlyRoaster>> GetAllmonthlyrosterlist()
+        {
+            return await _monthlyRosterRepository.GetAllmonthlyrosterlist();
+        }
     }
 }

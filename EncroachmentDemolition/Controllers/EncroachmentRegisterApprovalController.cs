@@ -719,6 +719,31 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
         #endregion
+        //  [AuthorizeContext(ViewAction.Download)]
 
+        public async Task<IActionResult> EncroachmentRegisterApprovalList()
+        {
+            var result = await _encroachmentRegisterationApprovalService.GetAllEncroachmentRegisteration();
+            List<EncroachmentRegisterApprovalListDto> data = new List<EncroachmentRegisterApprovalListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new EncroachmentRegisterApprovalListDto()
+                    {
+                        Id = result[i].Id,
+                        Date = Convert.ToDateTime(result[i].EncrochmentDate).ToString("dd-MMM-yyyy"),
+                        LocalityVillage = result[i].Locality == null ? "" : result[i].Locality.Name,
+                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo,
+                        Status = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName,
+                      
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
     }
 }

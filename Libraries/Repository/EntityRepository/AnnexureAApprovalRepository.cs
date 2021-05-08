@@ -19,6 +19,14 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<List<Fixingdemolition>> GetAllFixingdemolition()
+        {
+            return await _dbContext.Fixingdemolition
+                                        .Include(x => x.Encroachment.Locality)
+                                        .Include(x => x.Encroachment)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                .ToListAsync();
+        }
         public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId)
         {
             var AllDataList = await _dbContext.Fixingdemolition.ToListAsync();
