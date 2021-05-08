@@ -18,7 +18,7 @@ $('#ddlSort').change(function () {
 
 $("#btnReset").click(function () {
     $('#txtName').val('');
-    $('#txtDescription').val('');
+    $('#modulecategoryId').val('0').trigger('change');
     $('#txtUrl').val('')
     GetModule(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -49,7 +49,7 @@ function GetSearchParam(pageNumber, pageSize,sortOrder) {
    
     var model = {
         name: $('#txtName').val(),
-        description: $('#txtDescription').val(),
+        modulecategoryId: parseInt($('#modulecategoryId option:selected').val()),
         url: $('#txtUrl').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),

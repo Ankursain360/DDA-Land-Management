@@ -16,108 +16,108 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-       
+
 
         public async Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model)
         {
-            
+
             var data = await _dbContext.Module
-                  .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                   && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                  .GetPaged<Module>(model.PageNumber, model.PageSize);
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                           && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                          .GetPaged<Module>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
-                switch (model.SortBy.ToUpper())
+                data = null;
+                if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderBy(s => s.Name)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("DESCRIPTION"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderBy(s => s.Description)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-                       
-                        break;
-                    case ("URL"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderBy(s => s.Url)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-                     
-                        break;
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderByDescending(s => s.IsActive)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-                        break;
-
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                        .OrderByDescending(s => s.IsActive)
+                                         .GetPaged<Module>(model.PageNumber, model.PageSize);
                 }
+                else if (model.SortBy.ToUpper() == "SORTBY")
+                {
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                         .OrderBy(s => s.SortBy)
+                                         .GetPaged<Module>(model.PageNumber, model.PageSize);
+                }
+                else
+                {
+                    data = null;
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                           .OrderBy(s =>
+                                           (model.SortBy.ToUpper() == "MODULECATEGORY" ? (s.ModuleCategory == null ? null : s.ModuleCategory.CategoryName)
+                                           : model.SortBy.ToUpper() == "NAME" ? (s.Name)
+                                           : model.SortBy.ToUpper() == "URL" ? (s.Url)
+                                           : (s.ModuleCategory == null ? null : s.ModuleCategory.CategoryName))
+                                           )
+                                           .GetPaged<Module>(model.PageNumber, model.PageSize);
+                }
+
             }
             else if (SortOrder == 2)
             {
-                switch (model.SortBy.ToUpper())
+                data = null;
+                if (model.SortBy.ToUpper() == "ISACTIVE")
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderByDescending(s => s.Name)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("DESCRIPTION"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderByDescending(s => s.Description)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-
-                        break;
-                    case ("URL"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderByDescending(s => s.Url)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-
-                        break;
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Module
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
-                                 && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
-                                .OrderBy(s => s.IsActive)
-                                .GetPaged<Module>(model.PageNumber, model.PageSize);
-                        break;
-
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                         .OrderBy(s => s.IsActive)
+                                         .GetPaged<Module>(model.PageNumber, model.PageSize);
+                }
+                else if (model.SortBy.ToUpper() == "SORTBY")
+                {
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                         .OrderByDescending(s => s.SortBy)
+                                         .GetPaged<Module>(model.PageNumber, model.PageSize);
+                }
+                else
+                {
+                    data = null;
+                    data = await _dbContext.Module
+                                          .Include(x => x.ModuleCategory)
+                                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                           && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                                          && x.ModuleCategoryId == ((model.modulecategoryId == 0) ? x.ModuleCategoryId : model.modulecategoryId)
+                                          )
+                                           .OrderByDescending(s =>
+                                           (model.SortBy.ToUpper() == "MODULECATEGORY" ? (s.ModuleCategory == null ? null : s.ModuleCategory.CategoryName)
+                                           : model.SortBy.ToUpper() == "NAME" ? (s.Name)
+                                           : model.SortBy.ToUpper() == "URL" ? (s.Url)
+                                           : (s.ModuleCategory == null ? null : s.ModuleCategory.CategoryName))
+                                           )
+                                           .GetPaged<Module>(model.PageNumber, model.PageSize);
                 }
             }
+
             return data;
         }
 

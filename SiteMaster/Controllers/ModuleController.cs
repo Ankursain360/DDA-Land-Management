@@ -26,8 +26,9 @@ namespace SiteMaster.Controllers
             _moduleService = moduleService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.ModuleCategoryList = await _moduleService.GetModuleCategory();
             return View();
         }
 
@@ -42,44 +43,44 @@ namespace SiteMaster.Controllers
         {
             Module module = new Module();
             module.IsActive = 1;
-           
+
             module.ModuleCategoryList = await _moduleService.GetModuleCategory();
             return View(module);
-            
+
         }
 
 
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
-    
+
         public async Task<IActionResult> Create(Module module)
         {
-                if (ModelState.IsValid)
-                {
-                    var result = await _moduleService.Create(module);
+            if (ModelState.IsValid)
+            {
+                var result = await _moduleService.Create(module);
 
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _moduleService.GetAllModule();
-                        return View("Index", list);
-                     }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(module);
-                    }
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    ViewBag.ModuleCategoryList = await _moduleService.GetModuleCategory();
+                    return View("Index");
                 }
                 else
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(module);
                 }
+            }
+            else
+            {
+                return View(module);
+            }
         }
 
 
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
-        {           
+        {
             var Data = await _moduleService.FetchSingleResult(id);
             Data.ModuleCategoryList = await _moduleService.GetModuleCategory();
             if (Data == null)
@@ -101,8 +102,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _moduleService.GetAllModule();
-                        return View("Index", list);
+                        ViewBag.ModuleCategoryList = await _moduleService.GetModuleCategory();
+                        return View("Index");
                     }
                     else
                     {
@@ -139,39 +140,21 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            
+
             var result = await _moduleService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _moduleService.GetAllModule();
-                return View("Index", result1);
+                ViewBag.ModuleCategoryList = await _moduleService.GetModuleCategory();
+                return View("Index");
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _moduleService.GetAllModule();
-                return View("Index", result1);
+                ViewBag.ModuleCategoryList = await _moduleService.GetModuleCategory();
+                return View("Index");
             }
         }
-
-        public async Task<IActionResult> DeleteConfirmed(int id)  
-        {
-            var result = await _moduleService.Delete(id);
-            if (result == true)
-            {
-                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _moduleService.GetAllModule();
-                return View("Index", result1);
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _moduleService.GetAllModule();
-                return View("Index", result1);
-            }
-        }
-
 
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)

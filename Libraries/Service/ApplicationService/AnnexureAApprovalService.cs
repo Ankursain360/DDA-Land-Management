@@ -29,7 +29,10 @@ namespace Libraries.Service.ApplicationService
             Fixingdemolition model = result.FirstOrDefault();
             return model;
         }
-
+        public async Task<List<Fixingdemolition>> GetAllFixingdemolition()
+        {
+            return await _annexureAApprovalRepository.GetAllFixingdemolition();
+        }
         public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId)
         {
             return await _annexureAApprovalRepository.GetPagedAnnexureA(model, userId);

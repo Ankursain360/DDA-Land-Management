@@ -41,6 +41,18 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Propertyregistration.Where(x => x.DepartmentId == departmentId && x.ZoneId == zoneId && x.DivisionId == divisionId && x.LocalityId == localityId && x.IsActive == 1).ToListAsync();
         }
 
+        public async Task<List<MonthlyRoaster>> GetAllmonthlyrosterlist()
+        {
+            return await _dbContext.MonthlyRoaster
+                                       .Where(x => x.IsActive == 1)
+                                       .Include(x => x.Department)
+                                       .Include(x => x.Zone)
+                                       .Include(x => x.Division)
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.Userprofile)
+                                       .ThenInclude(x => x.User)
+                                       .ToListAsync();
+        }
         public async Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto model)
         {
             var data = await _dbContext.MonthlyRoaster
