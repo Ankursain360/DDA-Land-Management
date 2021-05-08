@@ -2,34 +2,45 @@
 var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
-    $("#btnGenerate").click(function () {
-        debugger;
-        var sort = $('#ddlSort option:selected').val();
-        var vil = $('#NewLandvillageId option:selected').val();
-        var name = $('#Name option:selected').val();
-        if (vil == null) {
-            alert("Please select village")
 
-        } else
-            if (name == null) {
-                alert("Please select khasra no")
-            } else
-                if (sort == null) {
-                    alert("Please select valid sort by option");
-                    $('#ddlSort option:selected').val('Village');
-                }
 
-                else {
-                    GetDetails(currentPageNumber, currentPageSize, sortby);
-                }
+    var param = GetSearchParam(currentPageNumber, currentPageSize, sortby);
 
+    HttpPost(`/newlandvillagekhasrareport/GetDetails`, 'html', param, function (response) {
+
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
     });
+  
+})
+
+$("#btnGenerate").click(function () {
+
+    var sort = $('#ddlSort option:selected').val();
+    var vil = $('#NewLandvillageId option:selected').val();
+    var name = $('#Name option:selected').val();
+    if (vil == null) {
+        alert("Please select village")
+
+    } else
+        if (name == null) {
+            alert("Please select khasra no")
+        } else
+            if (sort == null) {
+                alert("Please select valid sort by option");
+                $('#ddlSort option:selected').val('Village');
+            }
+
+            else {
+                GetDetails(currentPageNumber, currentPageSize, sortby);
+            }
 
 });
 
+
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    debugger
+  
     HttpPost(`/newlandvillagekhasrareport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
@@ -37,7 +48,7 @@ function GetDetails(pageNumber, pageSize, order) {
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
-    debugger;
+
     var name = $('#Name option:selected').val();
     var villageid = $('#NewLandvillageId option:selected').val();
 

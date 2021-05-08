@@ -4,7 +4,7 @@ var sortby = 1;//default Ascending
 $(document).ready(function () {
 
     var param = GetSearchParam(currentPageNumber, currentPageSize, sortby);
-    debugger
+ 
     HttpPost(`/NewlandVillageReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
@@ -15,7 +15,6 @@ $(document).ready(function () {
 
 $("#btnGenerate").click(function () {
 
-    debugger;
     var result = ValidateForm();
     var name = $('#Name option:selected').val();
 
