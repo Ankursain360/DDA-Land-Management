@@ -51,7 +51,7 @@ namespace LeaseDetails.Controllers
 
 
         }
-       // [AuthorizeContext(ViewAction.View)]
+       [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             var Msg = TempData["Message"] as string;
@@ -66,7 +66,7 @@ namespace LeaseDetails.Controllers
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_ListExtensionApproval", result);
         }
-      //  [AuthorizeContext(ViewAction.Add)]
+       [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _extensionApprovalService.FetchSingleResult(id);
@@ -79,7 +79,7 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
         [HttpPost]
-       // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Extension extension)
         {
             var result = false;
@@ -333,6 +333,7 @@ namespace LeaseDetails.Controllers
                         Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                         string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
 
                         var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                         StringBuilder multousermailId = new StringBuilder();
@@ -359,7 +360,7 @@ namespace LeaseDetails.Controllers
                         bodyDTO.ApplicationName = "Extension Application";
                         bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
                         bodyDTO.SenderName = senderUser.User.Name;
-                        bodyDTO.Link = link;
+                        bodyDTO.Link = linkhref;
                         bodyDTO.AppRefNo = extension.RefNo;
                         bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
                         bodyDTO.Remarks = extension.ApprovalRemarks;
@@ -403,7 +404,7 @@ namespace LeaseDetails.Controllers
             else
             {
                 ViewBag.Message = Alert.Show("Application Already Submited ", "", AlertType.Warning);
-                TempData["Message"] = Alert.Show("Application Already Submited ", "", AlertType.Warning);
+                TempData["Message"] = Alert.Show("Application Already Submited ", "", AlertType.Warning).ToString();
 
                 return RedirectToAction("Index");
             }

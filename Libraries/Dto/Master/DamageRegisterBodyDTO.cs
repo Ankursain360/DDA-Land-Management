@@ -12,5 +12,6 @@ namespace Dto.Master
         public string path { get; set; }
         public string emailId { get; set; }
         public string contactNo { get; set; }
+        public string Link { get; set; }
     }
 }

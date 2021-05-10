@@ -107,6 +107,7 @@ namespace Utility.Helper
             body = body.Replace("{Password}", bodyDTO.password);
             body = body.Replace("{EmailID}", bodyDTO.emailId);
             body = body.Replace("{PhoneNumber}", bodyDTO.contactNo);
+            body = body.Replace("{Link}", bodyDTO.Link);
 
 
             return body;
@@ -144,6 +145,20 @@ namespace Utility.Helper
             body = body.Replace("{Link}", element.Link);
 
 
+            return body;
+        }
+
+
+        public string GenerateMailFormatForComplaint(ComplaintRegisteredMailBodyDto element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{DisplayName}", element.DisplayName);
+            body = body.Replace("{complainttype}", element.complainttype);
+            body = body.Replace("{ReferenceNo}", element.ReferenceNo);
             return body;
         }
 

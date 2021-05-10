@@ -19,6 +19,8 @@ using Core.Enum;
 using Service.IApplicationService;
 using Dto.Master;
 using System.Text;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -31,16 +33,18 @@ namespace EncroachmentDemolition.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IApprovalProccessService approvalproccessService,
             IWorkflowTemplateService workflowtemplateService, IConfiguration configuration,
-            IUserProfileService userProfileService)
+            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
         {
             _workflowtemplateService = workflowtemplateService;
             _onlinecomplaintService = onlinecomplaintService;
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
             _userProfileService = userProfileService;
+            _hostingEnvironment = hostingEnvironment;
         }
         public IActionResult Index()
         {
@@ -218,12 +222,66 @@ namespace EncroachmentDemolition.Controllers
 
                         #endregion
 
+                        #region Approval Proccess  Mail Generation Added by Renu 07 May 2021
+                        var sendMailResult = false;
+                        var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
+                        if (approvalproccess.SendTo != null)
+                        {
+                            #region Mail Generate
+                            //At successfull completion send mail and sms
+                            Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                            string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                            string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
+
+                            var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                            StringBuilder multousermailId = new StringBuilder();
+                            if (approvalproccess.SendTo != null)
+                            {
+                                int col = 0;
+                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                foreach (string MultiUserId in multiTo)
+                                {
+                                    if (col > 0)
+                                        multousermailId.Append(",");
+                                    var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                    multousermailId.Append(RecevierUsers.User.Email);
+                                    col++;
+                                }
+                            }
+
+                            #region Mail Generation Added By Renu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                            bodyDTO.ApplicationName = "Online Compalint Application";
+                            bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                            bodyDTO.SenderName = senderUser.User.Name;
+                            bodyDTO.Link = linkhref;
+                            bodyDTO.AppRefNo = onlinecomplaint.ReferenceNo;
+                            bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                            bodyDTO.Remarks = approvalproccess.Remarks;
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                            #endregion
+
+                            string strMailSubject = "Pending Online Compalint Application Approval Request Details ";
+                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                            #endregion
+
+
+                            #endregion
+                        }
+                        #endregion
                     }
                     if (result == true)
                     {
                         string DisplayName = onlinecomplaint.Name.ToString();
                         string EmailID = onlinecomplaint.Email.ToString();
-
+                        string complainttype = onlinecomplaint.ComplaintType.Name;
                         string Action = "Dear Requester, <br> Your Request for <b>" + onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
                         String Mobile = onlinecomplaint.Contact;
                         SendMailDto mail = new SendMailDto();
@@ -231,9 +289,30 @@ namespace EncroachmentDemolition.Controllers
                         SMS.GenerateSendSMS(Action, Mobile);
                         try
                         {
-                            mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
+                            // mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
+                            #region Mail Generate for Complaint Registered
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "OnlineComplaintAlert.html");
+                           
+                            #region Mail Generation Added By Renu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            ComplaintRegisteredMailBodyDto bodyDTO = new ComplaintRegisteredMailBodyDto();
+                            bodyDTO.DisplayName = DisplayName;
+                            bodyDTO.complainttype = complainttype;
+                            bodyDTO.ReferenceNo = onlinecomplaint.ReferenceNo;
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.GenerateMailFormatForComplaint(bodyDTO);
+                            #endregion
+
+                            string strMailSubject = "DDA Alert-Your Complaint has been successfully submitted";
+                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                            #endregion
 
 
+                            #endregion
                             TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
 
                             return Redirect("/Complaint/Create");

@@ -22,5 +22,29 @@
     "inputFiles": [
       "wwwroot/js/common.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagecalculatorindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagecalculatorindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/CaptchaCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/CaptchaCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SubstitutionMutationDetailsCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/SubstitutionMutationDetailsCreate.js"
+    ]
   }
 ]
