@@ -28,11 +28,11 @@
                     @{
                         if (item.Type == 1)
                         {
-                         <td>Supreme Court Lawyer</td>
+                            <td>Supreme Court Lawyer</td>
                         }
                         else
                         {
-                          <td>High Court Lawyer</td>
+                            <td>High Court Lawyer</td>
                         }
                     }
                     @{
@@ -49,8 +49,8 @@
                     <td>@item.PhoneNo</td>
                     <td>@item.ChamberAddress</td>
                     <td>@item.CourtPhoneNo</td>
-                    <td>@item.ValidFrom</td>
-                    <td>@item.ValidTo</td>
+                    <td>@(Convert.ToDateTime(item.ValidFrom).ToString("dd-MMM-yyyy"))</td>
+                    <td>@(Convert.ToDateTime(item.ValidTo).ToString("dd-MMM-yyyy"))</td>                 
                     <td>
                         @if (item.IsActive == 1)
                         {

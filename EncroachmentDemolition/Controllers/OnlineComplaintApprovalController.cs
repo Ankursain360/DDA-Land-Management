@@ -343,6 +343,7 @@ namespace EncroachmentDemolition.Controllers
                         Uri uri = new Uri("https://www.managemybusinessess.com/");
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                         string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
 
                         var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                         StringBuilder multousermailId = new StringBuilder();
@@ -369,7 +370,7 @@ namespace EncroachmentDemolition.Controllers
                         bodyDTO.ApplicationName = "Online Compalint Application";
                         bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
                         bodyDTO.SenderName = senderUser.User.Name;
-                        bodyDTO.Link = link;
+                        bodyDTO.Link = linkhref;
                         bodyDTO.AppRefNo = onlinecomplaint.ReferenceNo;
                         bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
                         bodyDTO.Remarks = onlinecomplaint.ApprovalRemarks;

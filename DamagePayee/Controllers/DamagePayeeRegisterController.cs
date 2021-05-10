@@ -211,7 +211,7 @@ namespace DamagePayee.Controllers
                             string ContactNo = damagepayeeregister.MobileNo[0].ToString();
                             string Password = resultpassword;
                             string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "UserMailDetails.html");
-
+                            string loginlink = "https://damage.managemybusinessess.com/DamagePayeeRegistration/Create";
                             #region Mail Generation Added By Renu
 
                             MailSMSHelper mailG = new MailSMSHelper();
@@ -224,6 +224,7 @@ namespace DamagePayee.Controllers
                             bodyDTO.path = path;
                             bodyDTO.emailId = EmailID;
                             bodyDTO.contactNo = ContactNo;
+                            bodyDTO.Link = loginlink;
                             string strBodyMsg = mailG.PopulateBodyRegister(bodyDTO);
                             #endregion
 
@@ -434,6 +435,7 @@ namespace DamagePayee.Controllers
                                     Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
                                     string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                                     string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                    string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
 
                                     var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                                     StringBuilder multousermailId = new StringBuilder();
@@ -460,7 +462,7 @@ namespace DamagePayee.Controllers
                                     bodyDTO.ApplicationName = "Damage Payee Register Application";
                                     bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
                                     bodyDTO.SenderName = senderUser.User.Name;
-                                    bodyDTO.Link = link;
+                                    bodyDTO.Link = linkhref;
                                     bodyDTO.AppRefNo = damagepayeeregister.RefNo;
                                     bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
                                     bodyDTO.Remarks = approvalproccess.Remarks;
