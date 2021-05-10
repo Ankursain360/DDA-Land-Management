@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.ApplicationService;
@@ -209,6 +210,29 @@ namespace SiteMaster.Controllers
             string sFileName = @"Schemefileloading.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> SchemeFileLoadingList()
+        {
+            var result = await _schemeFileLoadingService.GetAllSchemeFileLoading();
+            List<SchemeFileLoadingListDto> data = new List<SchemeFileLoadingListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new SchemeFileLoadingListDto()
+                    {
+                        Id = result[i].Id,
+                        SchemeName = result[i].SchemeName,
+                        SchemeCode = result[i].SchemeCode,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 

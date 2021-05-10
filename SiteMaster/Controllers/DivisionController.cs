@@ -230,7 +230,7 @@ namespace SiteMaster.Controllers
                         Zone = result[i].Zone==null ?"" : result[i].Zone.Name,                      
                         DivisionCode = result[i].Code,
                         DivisionName= result[i].Name,
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
             }

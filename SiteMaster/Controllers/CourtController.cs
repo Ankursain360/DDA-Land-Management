@@ -189,7 +189,7 @@ namespace SiteMaster.Controllers
                         CourtName = result[i].Name,
                         CourtAddress = result[i].Address,
                         PhoneNo = result[i].PhoneNo,
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
             }

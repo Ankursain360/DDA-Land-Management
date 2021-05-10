@@ -8,7 +8,7 @@ namespace Dto.Master
         public string Zone { get; set; }
         public string DivisionCode { get; set; }
         public string DivisionName { get; set; }
+        
         public string Status { get; set; }
-        public string IsActive { get; set; }
     }
 }

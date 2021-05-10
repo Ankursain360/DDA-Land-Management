@@ -19,7 +19,7 @@ using Core.Enum;
 
 
 using Utility.Helper;
-
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -211,15 +211,31 @@ namespace SiteMaster.Controllers
 
 
 
-        public async Task<IActionResult> Download()
+       
+
+        public async Task<IActionResult> DepartmentList()
         {
-            List<Department> result = await _departmentService.GetAllDepartment();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Department.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _departmentService.GetAllDepartment();
+            List<DepartmentListDto> data = new List<DepartmentListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DepartmentListDto()
+                    {
+                        Id = result[i].Id,
+                        
+                        DepartmentName = result[i].Name,
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
-
 
 
 

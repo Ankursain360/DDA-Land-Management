@@ -15,7 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Zone zone); // To Upadte Particular data added by renu
 
         Task<bool> Create(Zone zone);
-
+        Task<List<Zone>> GetAllZone();
         Task<Zone> FetchSingleResult(int id);  // To fetch Particular data added by renu
 
         Task<bool> Delete(int id);    // To Delete Data  added by renu

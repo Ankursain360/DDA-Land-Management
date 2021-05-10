@@ -12,6 +12,7 @@ namespace Repository.IEntityRepository
     {
         Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model);
         Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model);
+        Task<List<Userprofile>> GetAllUser();
         Task<List<Userprofile>> GetUser();
         Task<List<ApplicationRole>> GetRole();
         Task<Userprofile> GetUserById(int userId);

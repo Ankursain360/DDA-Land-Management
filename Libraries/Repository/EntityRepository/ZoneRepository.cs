@@ -20,10 +20,17 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
+        public async Task<List<Zone>> GetAllZone()
+        {
+            return  await _dbContext.Zone
+                                    .Include(s => s.Department)
+                                    .OrderBy(s => s.Id)
+                                    .ToListAsync();
+        }
         public async Task<List<Zone>> GetAllDetails()
         {
-            var data = await _dbContext.Zone.Include(s => s.Department).Where(s => s.IsActive == 1).OrderBy( s => s.Id).ToListAsync();
+            var data = await _dbContext.Zone
+                .Include(s => s.Department).Where(s => s.IsActive == 1).OrderBy( s => s.Id).ToListAsync();
             return data;
         }
         public async Task<bool> Any(int id,int DepartmentId, string name)

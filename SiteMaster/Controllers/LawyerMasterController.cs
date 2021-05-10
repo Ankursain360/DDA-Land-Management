@@ -186,7 +186,7 @@ namespace SiteMaster.Controllers
                         ChamberAddress = result[i].ChamberAddress,
                         ValidForm = result[i].ValidFrom.ToString(),
                         ValidTo = result[i].ValidTo.ToString(),
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
             }

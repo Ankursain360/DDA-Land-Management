@@ -32,7 +32,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _zoneRepository.GetAllDetails();
         }
-
+        public async Task<List<Zone>> GetAllZone()
+        {
+            return await _zoneRepository.GetAllZone();
+        }
         public async Task<List<ZoneDto>> GetZone()
         {
             var zones = await _zoneRepository.FindBy(a => a.IsActive == 1);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -180,5 +181,28 @@ namespace SiteMaster.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> StructureList()
+        {
+            var result = await _structureService.GetAllStructure();
+            List<StructureListDto> data = new List<StructureListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new StructureListDto()
+                    {
+                        Id = result[i].Id,
+                        StructureName = result[i].Name,
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
     }
 }

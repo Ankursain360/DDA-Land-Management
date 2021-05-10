@@ -18,7 +18,17 @@ namespace Repository.EntityRepository
         public UserProfileRepository(DataContext dbContext) : base(dbContext)
         {
         }
-
+        public async Task<List<Userprofile>> GetAllUser()
+        {
+            return await _dbContext.Userprofile
+                                    .Include(a => a.User)
+                                    .Include(a => a.Role)
+                                    .Include(a => a.Department)
+                                    .Include(a => a.Zone)
+                                    .Include(a => a.District)
+                                    
+                                    .ToListAsync();
+        }
         public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model)
         {
 
@@ -312,7 +322,7 @@ namespace Repository.EntityRepository
             }
             return data;
         }
-
+        
         public async Task<List<Userprofile>> GetUser()
         {
             return await _dbContext.Userprofile

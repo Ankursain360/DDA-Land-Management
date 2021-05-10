@@ -222,15 +222,36 @@ namespace SiteMaster.Controllers
 
 
 
-        public async Task<IActionResult> Download()
+       
+        public async Task<IActionResult> UserList()
         {
-            List<Userprofile> result = await _userProfileService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"UserProfile.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _userProfileService.GetAllUser();
+            List<UserListDto> data = new List<UserListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new UserListDto()
+                    {
+                        Id = result[i].Id,
+                        UserName= result[i].User == null ? "" : result[i].User.UserName,
+                        Name = result[i].User == null ? "" : result[i].User.Name,
+                        Role = result[i].Role == null ? "" : result[i].Role.Name,
+                        EmailId = result[i].User == null ? "" : result[i].User.Email,
+                        ContactNumber = result[i].User == null ? "" : result[i].User.PhoneNumber,
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        District = result[i].District == null ? "" : result[i].District.Name,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name,
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
-
 
 
     }

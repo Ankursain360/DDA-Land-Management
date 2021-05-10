@@ -118,7 +118,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Village>> GetVillage()
         {
-            return await _dbContext.Village.Include(x => x.Zone).OrderByDescending(x=>x.Id).ToListAsync();
+            return await _dbContext.Village
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Division)
+                                    .OrderByDescending(x=>x.Id)
+                                    .ToListAsync();
         }
         public async Task<bool> Any(int id, string name)
         {

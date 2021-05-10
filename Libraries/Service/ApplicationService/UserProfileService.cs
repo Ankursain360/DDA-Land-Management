@@ -34,7 +34,10 @@ namespace Service.ApplicationService
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-
+        public async Task<List<Userprofile>> GetAllUser()
+        {
+            return await _userProfileRepository.GetAllUser();
+        }
         public async Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model)
         {
             var role = await _userProfileRepository.GetPagedRole(model);

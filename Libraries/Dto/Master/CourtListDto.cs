@@ -9,6 +9,6 @@ namespace Dto.Master
         public string CourtName { get; set; }
         public string CourtAddress{ get; set; }
         public string PhoneNo { get; set; }
-        public string IsActive { get; set; }
+        public string Status { get; set; }
     }
 }

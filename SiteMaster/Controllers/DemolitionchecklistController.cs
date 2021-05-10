@@ -17,6 +17,7 @@ using Dto.Search;
 using Core.Enum;
 using SiteMaster.Filters;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -180,7 +181,27 @@ namespace SiteMaster.Controllers
 
         }
 
+        public async Task<IActionResult> DemolitionchecklistList()
+        {
+            var result = await _demolitionchecklistService.GetDemolitionchecklist();
+            List<DemolitioncheckListDto> data = new List<DemolitioncheckListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemolitioncheckListDto()
+                    {
+                        Id = result[i].Id,
+                        ChecklistDescription = result[i].ChecklistDescription,
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
 
     }

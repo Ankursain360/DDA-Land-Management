@@ -210,10 +210,12 @@ namespace SiteMaster.Controllers
                     data.Add(new BranchListDto()
                     {
                         Id = result[i].Id,
-                        BranchCode= result[i].Code,
+                        Department = result[i].Department == null ? "" : result[i].Department.Name,
                         BranchName = result[i].Name,
-                        Department=result[i].Department==null ? "" :result[i].Department.Name,
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        BranchCode = result[i].Code,
+                      
+                       
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
             }

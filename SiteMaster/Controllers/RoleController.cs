@@ -152,15 +152,28 @@ namespace SiteMaster.Controllers
             }
             return View(result);
         }
+     
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> RoleList()
         {
-            List<RoleDto> result = await _userProfileService.GetActiveRole();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Role.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _userProfileService.GetRole();
+            List<RoleListDto> data = new List<RoleListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new RoleListDto()
+                    {
+                        Id = result[i].Id,
+                        RoleName = result[i].Name,
+                      
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-
     }
 }
