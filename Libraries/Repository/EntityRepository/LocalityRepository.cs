@@ -212,7 +212,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Locality>> GetAllLocality()
         {
-            var data = await _dbContext.Locality.Include(x => x.Zone).Include(x => x.Department).OrderByDescending(x => x.Id).ToListAsync();
+            var data = await _dbContext.Locality
+                .Include(x => x.Zone)
+                .Include(x => x.Department)
+                .Include(x => x.Division)
+                .OrderByDescending(x => x.Id).ToListAsync();
             return data;
         }
 

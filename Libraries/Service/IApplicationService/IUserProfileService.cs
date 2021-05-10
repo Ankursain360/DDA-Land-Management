@@ -13,6 +13,7 @@ namespace Service.IApplicationService
     {
         Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model);
         Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model);
+        Task<List<Userprofile>> GetAllUser();
         Task<RoleDto> GetRoleById(int id);
         Task<bool> UpdateRole(RoleDto model);
         Task<List<UserProfileDto>> GetUser();

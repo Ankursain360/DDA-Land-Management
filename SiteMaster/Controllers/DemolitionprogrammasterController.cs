@@ -18,6 +18,8 @@ using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Core.Enum;
 using SiteMaster.Filters;
+using Dto.Master;
+
 namespace SiteMaster.Controllers
 {
     public class DemolitionprogrammasterController : BaseController
@@ -177,15 +179,29 @@ namespace SiteMaster.Controllers
         }
 
 
-        public async Task<IActionResult> Download()
+       
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> DemolitionProgramList()
         {
-            List<Demolitionprogram> result = await _demolitionprogrammasterService.GetDemolitionprogrammaster();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"DemolitionProgrammaster.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _demolitionprogrammasterService.GetDemolitionprogrammaster();
+            List<DemolitionProgramListDto> data = new List<DemolitionProgramListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new DemolitionProgramListDto()
+                    {
+                        Id = result[i].Id,
+                        Items = result[i].Items,
+                        ItemsType = result[i].ItemsType,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
 
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-
 
 
     }

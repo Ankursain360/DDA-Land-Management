@@ -212,7 +212,7 @@ namespace SiteMaster.Controllers
                     {
                         Id = result[i].Id,
                         CaseNature = result[i].Name,
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
             }

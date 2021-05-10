@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -189,16 +190,30 @@ namespace SiteMaster.Controllers
 
         }
 
-        public async Task<IActionResult> Download()
+       
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> CaseYearList()
         {
-            List<Caseyear> result = await _caseService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"CaseYear.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _caseService.GetAll();
+            List<CaseYearListDto> data = new List<CaseYearListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new CaseYearListDto()
+                    {
+                        Id = result[i].Id,
+                        CaseYear = result[i].Name,
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-
-
 
     }
 }

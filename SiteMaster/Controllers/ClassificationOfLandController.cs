@@ -17,6 +17,7 @@ using Dto.Search;
 using Core.Enum;
 using SiteMaster.Filters;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -188,13 +189,28 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-        public async Task<IActionResult> Download()
+      
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> ClassificationoflandList()
         {
-            List<Classificationofland> result = await _classificationoflandService.GetAllClassificationOfLand();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"ClassificationOfLand.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _classificationoflandService.GetAllClassificationOfLand();
+            List<ClassificationoflandListDto> data = new List<ClassificationoflandListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ClassificationoflandListDto()
+                    {
+                        Id = result[i].Id,
+                        Name = result[i].Name,
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

@@ -19,6 +19,6 @@ namespace Dto.Master
         public string ValidForm { get; set; }
         public string ValidTo { get; set; }
 
-        public string IsActive { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> anyCode(int id, int DepartmentId, string name);
         Task<List<Department>> GetDepartmentList();
         Task<List<Zone>> GetAllDetails();
+        Task<List<Zone>> GetAllZone();
         Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model);
     }
 }

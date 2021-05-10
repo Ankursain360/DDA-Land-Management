@@ -16,8 +16,7 @@ using System.Collections.Generic;
 
 
 using Utility.Helper;
-
-
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -217,16 +216,33 @@ namespace SiteMaster.Controllers
         }
 
 
-         public async Task<IActionResult> Download()
+       
+
+        [AuthorizeContext(ViewAction.Download)]
+
+        public async Task<IActionResult> VillageList()
         {
-            List<Village> result = await _villageService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Village.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _villageService.GetAllVillage();
+            List<VillageListDto> data = new List<VillageListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new VillageListDto()
+                    {
+                        Id = result[i].Id,
+                        ZoneName = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        VillageName = result[i].Name,
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
-
-
 
 
 

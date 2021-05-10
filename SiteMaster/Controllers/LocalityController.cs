@@ -213,7 +213,7 @@ namespace SiteMaster.Controllers
                         LocalityVillageCode = result[i].LocalityCode,
                         LocalityVillageName = result[i].Name,
                         Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
             }

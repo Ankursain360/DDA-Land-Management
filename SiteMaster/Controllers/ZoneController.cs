@@ -18,6 +18,7 @@ using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -197,14 +198,33 @@ namespace SiteMaster.Controllers
         }
 
 
-        public async Task<IActionResult> Download()
+       
+
+        public async Task<IActionResult> ZoneList()
         {
-            List<Zone> result = await _zoneService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Zone.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _zoneService.GetAllZone();
+            List<ZoneListDto> data = new List<ZoneListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new ZoneListDto()
+                    {
+                        Id = result[i].Id,
+
+                        Department = result[i].Department== null ?"": result[i].Department.Name,
+                        ZoneName = result[i].Name,
+                        ZoneCode = result[i].Code,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
+
 
 
     }

@@ -29,7 +29,9 @@ namespace Repository.EntityRepository
 
         public async Task<List<Allotmententry>> GetAllAllotmententry()
         {
-            List<Allotmententry> allotmententryList = await _dbContext.Allotmententry.Include(x => x.Application).Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1)).ToListAsync();
+            List<Allotmententry> allotmententryList = await _dbContext.Allotmententry
+                .Include(x => x.Application)
+                .Where(x => (x.ApplicationId == x.Application.Id && x.IsActive == 1)).ToListAsync();
             return allotmententryList;
         }
         public async Task<List<Leasepaymentdetails>> GetAllLeasepaymentdetails()

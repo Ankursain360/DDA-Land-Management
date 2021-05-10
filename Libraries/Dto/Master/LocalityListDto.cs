@@ -14,6 +14,6 @@ namespace Dto.Master
 
         public string LocalityVillageCode { get; set; }
 
-        public string IsActive { get; set; }
+        public string Status { get; set; }
     }
 }
