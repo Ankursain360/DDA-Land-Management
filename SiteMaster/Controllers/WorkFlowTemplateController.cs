@@ -12,6 +12,7 @@ using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
 using System;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -299,6 +300,31 @@ namespace SiteMaster.Controllers
             var memory = ExcelHelper.CreateExcel(result);
             string sFileName = @"WorkFlowTemplate.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
+        public async Task<IActionResult> WorkFlowTemplateList()
+        {
+            var result = await _workflowtemplateService.GetAllWorkflowTemplate();
+            List<WorkFlowTemplateListDto> data = new List<WorkFlowTemplateListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new WorkFlowTemplateListDto()
+                    {
+                        Id = result[i].Id,
+                        Version = result[i].Version,
+                        SLATimeLine = result[i].Slatime.ToString(),
+                        Name = result[i].Name,
+                        Description = result[i].Description,
+                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
 
