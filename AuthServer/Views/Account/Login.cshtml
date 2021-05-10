@@ -6,34 +6,42 @@
 
     @if (Model.EnableLocalLogin)
     {
-        <form asp-route="Login" class="input-form">
-            <input type="hidden" asp-for="ReturnUrl" />
+    <form asp-route="Login" class="input-form">
+        <input type="hidden" asp-for="ReturnUrl" />
 
-            <div class="form-group icon">
-                <i class="ri-user-line"></i>
-                <label asp-for="Username"></label>
-                <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
-            </div>
-            <div class="form-group icon">
-                <i class="ri-lock-line"></i>
-                <label asp-for="Password"></label>
-                <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
-            </div>
-            @if (Model.AllowRememberLogin)
-            {
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" asp-for="RememberLogin">
-                        <label class="form-check-label" asp-for="RememberLogin">
-                            Remember Me
-                        </label>
-                    </div>
+        <div class="form-group icon">
+            <i class="ri-user-line"></i>
+            <label asp-for="Username"></label>
+            <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
+        </div>
+        <div class="form-group icon">
+            <i class="ri-lock-line"></i>
+            <label asp-for="Password"></label>
+            <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
+        </div>
+        @if (Model.AllowRememberLogin)
+        {
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="RememberLogin">
+                    <label class="form-check-label" asp-for="RememberLogin">
+                        Remember Me
+                    </label>
                 </div>
-            }
+            </div>
+        }
 
-            <button class="btn btn-theme px-4" name="button" value="login">Login</button>
-            <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
-        </form>
+        <button class="btn btn-theme px-4" name="button" value="login">Login</button>
+        <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
+        <div class="container-fluid">
+            <p class="my-0 py-2">
+                <a href="https://damagepayee.managemybusinessess.com/">Damage Payee Public Interface</a>
+                | <a href="https://publiclims.managemybusinessess.com/">LIMS Public Interface</a>
+                | <a href="https://leaseallottee.managemybusinessess.com/">Lease Public Interface</a>              
+               
+            </p>
+        </div>
+    </form>
     }
 
     @if (Model.VisibleExternalProviders.Any())
