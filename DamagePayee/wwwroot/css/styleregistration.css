@@ -106,7 +106,7 @@
 .capcha {
     position: absolute;
     right: 20px;
-    top: 16px;
+    top: 1px;
 }
 
 #form .btn i {
