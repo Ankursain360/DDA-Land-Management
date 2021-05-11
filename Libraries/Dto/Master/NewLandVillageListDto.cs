@@ -11,6 +11,6 @@ namespace Dto.Master
         public string ZoneName { get; set; }
         public string Acquired { get; set; }
         public string VillageType { get; set; }
-        public string IsActive { get; set; }
+        public string Status { get; set; }
     }
 }

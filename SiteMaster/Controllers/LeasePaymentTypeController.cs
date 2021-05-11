@@ -12,6 +12,7 @@ using SiteMaster.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -179,18 +180,31 @@ namespace SiteMaster.Controllers
         }
 
 
+      
+
+
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> LeasepaymenttypeList()
         {
-            List<Leasepaymenttype> result = await _LeasePaymentTypeService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Leasepaymenttype.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _LeasePaymentTypeService.GetAll();
+            List<LeasepaymenttypeDto> data = new List<LeasepaymenttypeDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LeasepaymenttypeDto()
+                    {
+                        Id = result[i].Id,
+                        LeasePaymentType = result[i].Name,
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-
-
-
 
 
     }

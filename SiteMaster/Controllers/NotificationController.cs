@@ -13,6 +13,7 @@ using SiteMaster.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -190,14 +191,29 @@ namespace SiteMaster.Controllers
             return View("Index", list);
         }
 
-        [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
-        {
-            List<LandNotification> result = await _notificationService.GetAllNotification();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"LandNotification.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+       
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> NotificationList()
+        {
+            var result =  await _notificationService.GetAllNotification();
+            List<NotificationListDto> data = new List<NotificationListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new NotificationListDto()
+                    {
+                        Id = result[i].Id,
+                        Notification = result[i].Name,
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 

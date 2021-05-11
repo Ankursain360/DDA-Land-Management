@@ -12,6 +12,7 @@ using SiteMaster.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -202,7 +203,28 @@ namespace SiteMaster.Controllers
 
         }
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> HonourableList()
+        {
+            var result = await _HonbleService.GetAll();
+            List<HonourableListDto> data = new List<HonourableListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new HonourableListDto()
+                    {
+                        Id = result[i].Id,
+                        HonourableName = result[i].HonbleName,
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
 
 
 

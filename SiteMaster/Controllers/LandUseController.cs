@@ -17,6 +17,7 @@ using Dto.Search;
 using Core.Enum;
 using SiteMaster.Filters;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -187,14 +188,29 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
-        [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
-        {
-            List<Landuse> result = await _landuseService.GetAllLandUse();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Landuse.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+       
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> LandUseList()
+        {
+            var result = await _landuseService.GetAllLandUse();
+            List<LandUseListDto> data = new List<LandUseListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new LandUseListDto()
+                    {
+                        Id = result[i].Id,
+                       Name = result[i].Name,
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 }

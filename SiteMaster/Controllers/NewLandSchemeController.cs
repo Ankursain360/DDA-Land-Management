@@ -184,10 +184,10 @@ namespace SiteMaster.Controllers
                         Id = result[i].Id,  
                         SchemeCode=result[i].Code,
                         SchemeName=result[i].Name,
-                        SchemeDate=result[i].SchemeDate.ToString(),
+                        SchemeDate=Convert.ToDateTime(result[i].SchemeDate).ToString("dd-MMM-yyyy"),
                         SchemeFileNo=result[i].FileNo,
                         Description=result[i].Description,
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
             }

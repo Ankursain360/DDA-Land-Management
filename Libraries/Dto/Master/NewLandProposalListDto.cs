@@ -10,6 +10,6 @@ namespace Dto.Master
         public string ProposalNo { get; set; }
         public string ProposalDate { get; set; }
         public string Area { get; set; }
-        public string IsActive { get; set; }
+        public string Status { get; set; }
     }
 }
