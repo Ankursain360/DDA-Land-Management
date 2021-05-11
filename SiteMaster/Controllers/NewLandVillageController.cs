@@ -211,7 +211,7 @@ namespace SiteMaster.Controllers
                         ZoneName = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),                      
                         Acquired=result[i].Acquired,
                         VillageType=result[i].VillageType,                        
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
             }
