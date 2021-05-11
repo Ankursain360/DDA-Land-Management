@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Rate>> GetAllDetails();
         Task<List<PropertyType>> GetPropertyTypeList();
-
+        Task<List<Rate>> GetAllRate();
         object GetFromDateData(int propertyId);
         //Task<Rate> GetFromDateData(int propertyId);
         Task<PagedResult<Rate>> GetPagedRate(RateSearchDto model);

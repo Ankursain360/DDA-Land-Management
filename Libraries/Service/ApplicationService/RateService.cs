@@ -28,7 +28,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<Rate>> GetAllRate()
         {
-            return await _rateRepository.GetAllDetails();
+            return await _rateRepository.GetAllRate();
         }
 
         public async Task<List<PropertyType>> GetDropDownList()

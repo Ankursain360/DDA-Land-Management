@@ -17,6 +17,7 @@ using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -198,14 +199,33 @@ namespace SiteMaster.Controllers
             }
         }
 
-        public async Task<IActionResult> Download()
-        {
-            List<Interest> result = await _interestService.GetAllInterest();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Interest.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+      
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> InterestList()
+        {
+            var result = await _interestService.GetAllInterest();
+            List<InterestListDto> data = new List<InterestListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new InterestListDto()
+                    {
+                        Id = result[i].Id,
+                        PropertyType = result[i].Property == null ? "": result[i].Property.Name,
+                        FromDate = result[i].FromDate.ToString("dd-MMM-yyyy"),
+                        ToDate = result[i].ToDate.ToString("dd-MMM-yyyy"),
+                        InterestPercentage = result[i].Percentage.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+
     }
 
 }

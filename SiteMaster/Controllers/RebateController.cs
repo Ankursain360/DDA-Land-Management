@@ -17,6 +17,7 @@ using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -208,14 +209,31 @@ namespace SiteMaster.Controllers
             }
         }
 
-        [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
-        {
-            List<Rebate> result = await _rebateService.GetAllRebate();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Rebate.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+       
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> RebateList()
+        {
+            var result = await _rebateService.GetAllRebate();
+            List<RebateListDto> data = new List<RebateListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new RebateListDto()
+                    {
+                        Id = result[i].Id,
+                        RebateOn = result[i].IsRebateOn == 0 ? "Rebate on Principal Amount" : result[i].IsRebateOn == 1 ? "Rebate on Interest" : "Both",
+                        FromDate = result[i].FromDate.ToString("dd-MMM-yyyy"),
+                        ToDate = result[i].ToDate.ToString("dd-MMM-yyyy"),
+                        RebatePercentage = result[i].RebatePercentage.ToString(),
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
     }
 

@@ -36,7 +36,7 @@ $("#btnReset").click(function () {
 
 function GetAward(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/AwardMasterDetails/List`, 'html', param, function (response) {
+    HttpPost(`/AcqAwardMasterDetails/List`, 'html', param, function (response) {
         $('#divAwardTable').html("");
         $('#divAwardTable').html(response);
     });
