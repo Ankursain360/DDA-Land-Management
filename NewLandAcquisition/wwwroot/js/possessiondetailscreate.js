@@ -1,4 +1,4 @@
-﻿function onChange(id) {
+﻿    function onChange(id) {
  
     HttpGet(`/NewlandPossesionDetails/GetKhasraList/?villageId=${id}`, 'json', function (response) {
       

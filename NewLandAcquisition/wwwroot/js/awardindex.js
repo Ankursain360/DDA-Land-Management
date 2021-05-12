@@ -33,6 +33,9 @@ $("#btnReset").click(function () {
     GetAward(currentPageNumber, currentPageSize, sortby);
 });
 
+$('#ddlSort').change(function () {
+    GetAward(currentPageNumber, currentPageSize, sortby);
+});
 
 function GetAward(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);

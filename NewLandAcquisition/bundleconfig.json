@@ -298,5 +298,17 @@
     "inputFiles": [
       "wwwroot/js/newlandnotificationdetailsindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus17plotedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus17plotedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newus22plotedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/newus22plotedit.js"
+    ]
   }
 ]
