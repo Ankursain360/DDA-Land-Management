@@ -29,9 +29,10 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
+                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" 
+                            asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        <option  disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                     <label asp-for="VillageId" class="floating-label">Village Name</label>
@@ -45,8 +46,9 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" 
+                            asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <option  disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
                     <label class="floating-label">Khasra No</label>
@@ -171,7 +173,7 @@
 <div class="table-section bg-white border shadow rounded">
 
 
-    <div class="table-responsive px-2">
+    <div class="table-responsive ">
         <div id="divnotification6Table"></div>
     </div>
 

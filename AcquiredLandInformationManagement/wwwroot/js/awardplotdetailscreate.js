@@ -6,8 +6,8 @@ var currentPageSize = 5;
 
 $(document).ready(function () {
     var id = $("#AwardMasterId").val();
-    $("#VillageId").val('');
-    $("#KhasraId").val('');
+    //$("#VillageId").val('');
+    //$("#KhasraId").val('');
     var param = {
         AwardId: id,
         pageSize: parseInt(currentPageSize),
@@ -21,6 +21,20 @@ $(document).ready(function () {
             $('#divAwardTable').html("");
             $('#divAwardTable').html(response);
 
+        });
+
+    }
+    var kid = $("#KhasraId").val();
+
+    if (kid) {
+        HttpGet(`/AwardPlotDetails/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+
+            $("#Bigha1").val(response.bigha);
+            $("#Biswa1").val(response.biswa);
+            $("#Biswanshi1").val(response.biswanshi);
+
+
+            // alert(JSON.stringify(response));
         });
 
     }

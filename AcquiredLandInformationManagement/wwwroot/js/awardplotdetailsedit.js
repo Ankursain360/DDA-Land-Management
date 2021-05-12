@@ -27,14 +27,13 @@ $(document).ready(function () {
     var kid = $("#KhasraId").val();
 
     if (kid) {
-        HttpGet(`/UnderSection4PlotForm/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+        HttpGet(`/AwardPlotDetails/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
 
             $("#Bigha1").val(response.bigha);
             $("#Biswa1").val(response.biswa);
             $("#Biswanshi1").val(response.biswanshi);
 
-
-            // alert(JSON.stringify(response));
+       
         });
 
     }

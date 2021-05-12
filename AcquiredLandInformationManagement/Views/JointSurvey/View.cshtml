@@ -10,8 +10,8 @@
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
-        <div class="row" mt-md-3">
-            <div class="col-md-3">
+        <div class="row mt-md-3">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select asp-for="VillageId" disabled="disabled" class="floating-label-field floating-label-field--s3"
                             asp-items="@(new SelectList(Model.VillageList,"Id","Name"))">
@@ -22,7 +22,7 @@
                     <label class="floating-label">Village </label>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select asp-for="KhasraId" disabled="disabled" class="floating-label-field floating-label-field--s3"
                             asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
@@ -78,7 +78,7 @@
         </div>
 
         <h3 class="my-3 d-flex sub-heading">Area</h3>
-        <div class="row" mt-md-3">
+        <div class="row mt-md-3">
 
 
             <div class="col-md-3">
@@ -97,7 +97,7 @@
                     <label class="floating-label">Area in Biswa</label>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NatureOfStructure" disabled="disabled" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
                            limit="10">
@@ -107,8 +107,8 @@
             </div>
         </div>
 
-        <div class="row" mt-md-3">
-            <div class="col-md-3">
+        <div class="row mt-md-3">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="JointSurveyDate" disabled="disabled" type="date" class="floating-label-field floating-label-field--s3">
                     <span asp-validation-for="JointSurveyDate" class="text-danger "></span>
@@ -116,14 +116,8 @@
                 </div>
             </div>
 
+
             <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Remarks" disabled="disabled" type="text" class="floating-label-field floating-label-field--s3" limit="500">
-                    <span asp-validation-for="Remarks" class="text-danger "></span>
-                    <label class="floating-label">Remarks</label>
-                </div>
-            </div>
-            <div class="col-md-3">
                 <div class="floating-label-wrap">
                     <select disabled="disabled" class="floating-label-field floating-label-field--s3" asp-for="IsActive">
 
@@ -135,15 +129,28 @@
                 </div>
             </div>
         </div>
-        <div class="row" mt-md-3">
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea disabled asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label">Remarks  </label>
+                </div>
+
+
+            </div>
 
         </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
 
-        <div class="col-md-12">
 
-
-            @Html.ActionLink("Back", "Index", "JointSurvey", null, new { @class = "btn btn-theme" })
+                @Html.ActionLink("Back", "Index", "JointSurvey", null, new { @class = "btn btn-theme" })
+            </div>
         </div>
+       
 
 
 
