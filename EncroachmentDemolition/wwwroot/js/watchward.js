@@ -37,50 +37,14 @@ function GetLocalityList() {
 }
 
 function GetOtherDetails(id) {
-    
-    //HttpGet(`/WatchWard/GetOtherDetails/?propertyId=${id}`, 'json', function (response) {
         debugger;
-        //$('#PlannedUnplanedDiv').show();
-        //var value = response.plannedUnplannedLand;
-        //if (value == 'Planned Land') {
-        //  //  $('#DivLandUse').show();
-        //    $('#divPlannedSelection').show();
-        //  //  $("#divLayoutPlan").show();
-        //    $('#divUnplannedSelection').hide();
-        //    callSelect2();
-
-        //    $("#PlannedUnplannedLand").val(response.plannedUnplannedLand);
-        //    $("#PlannedUnplannedLand").trigger('change');
-        //    $('#Colony').val(response.colony);
-        //    $('#Sector').val(response.sector);
-        //    $('#Block').val(response.block);
-        //    $('#Pocket').val(response.pocket);
-        //    $('#PlotNo').val(response.plotNo);
-        //}
-        //else {
-        // //   $('#DivLandUse').hide();
-        //    $('#divPlannedSelection').hide();
-        // //   $("#divLayoutPlan").hide();
-        //    $('#divUnplannedSelection').show();
-        //    callSelect2();
-
-        //  //  $(".link").attr('href', '/WatchWard/View/' + response.id);
-        //    $("#PlannedUnplannedLand").val(response.plannedUnplannedLand);
-        //    $("#PlannedUnplannedLand").trigger('change');
-        //    $("#LocalityId").val(response.localityId);
-        //    $("#LocalityId").trigger('change');
-        //    $('#KhasraNo').val(response.khasraNo);
-        //}
-
         HttpGet(`/WatchWard/InventoryView/?Id=${id}`, 'html', function (response) {
             $('#InventoryOtherDiv').html("");
             $('#InventoryOtherDiv').html(response);
         });
-    //});
 };
 $(function () {
     var dtToday = new Date();
-
     var month = dtToday.getMonth() + 1;
     var day = dtToday.getDate();
     var year = dtToday.getFullYear();
@@ -88,14 +52,10 @@ $(function () {
         month = '0' + month.toString();
     if (day < 10)
         day = '0' + day.toString();
-
     var maxDate = year + '-' + month + '-' + day;
-    //alert(maxDate);
     $('#txtDate').attr('max', maxDate);
     $('#txtDateRep').attr('max', maxDate);
 });
-
-
 
 $('#Photo').change(function () {
     var fileInput = document.getElementById('Photo');
@@ -116,13 +76,6 @@ function fileValidation(filePath, fileInput, size) {
         fileInput.value = '';
         return false;
     }
-    //else {
-    //    HttpGet(`/WatchWard/GetLattLongDetails/?path=${filePath}`, 'string', function (response) {
-    //        $("#Longitude").val(response);
-    //        $("#Longitude").val();
-    //    });
-    //}
-
 }
 
 function callSelect2() {
@@ -140,8 +93,6 @@ $("#collapse").click(function () {
         });
     })
 });
-
-
 $("input[name='grpEncroachment']").click(function () {
     var selected = $("input[type='radio'][name='grpEncroachment']:checked");
     $("#Encroachment").val(selected.val());

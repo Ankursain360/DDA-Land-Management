@@ -68,9 +68,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisterlist(approved);
         }
-        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved)
+        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId)
         {
-            return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model, approved);
+            return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model, approved, zoneId);
         }
         public async Task<bool> Update(int id, EncroachmentRegisteration encroachmentRegisteration)
         {

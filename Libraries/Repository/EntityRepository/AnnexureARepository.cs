@@ -89,7 +89,7 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved)
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved, int zoneId)
         {
             var InInspectionId = (from x in _dbContext.Fixingdemolition
                                   where  x.IsActive == 1
@@ -99,8 +99,9 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
                                          .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
-                                          && !(InInspectionId).Contains(x.Id)
-                                          && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra))
+                                            && (x.ZoneId == (zoneId == 0 ? x.ZoneId : zoneId))
+                                            && !(InInspectionId).Contains(x.Id)
+                                            && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra))
                                             && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
                                             && (string.IsNullOrEmpty(model.policestation) || x.PoliceStation.Contains(model.policestation)
                                             )
