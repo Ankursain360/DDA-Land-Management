@@ -20,7 +20,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto);
         //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
 
-        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
+        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int zoneId);
 
 
         //*****multiple files*********

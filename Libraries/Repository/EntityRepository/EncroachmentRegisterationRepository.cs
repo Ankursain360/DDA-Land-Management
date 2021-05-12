@@ -134,7 +134,7 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved)
+        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId)
         {
             //try {
 
@@ -149,6 +149,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Khasra)
                 .Include(x => x.ApprovedStatusNavigation)
                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                  && !(InInspectionId).Contains(x.Id)
                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -171,6 +172,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -195,6 +197,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -215,6 +218,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -235,6 +239,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -261,6 +266,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -281,6 +287,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -302,6 +309,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
@@ -322,6 +330,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Khasra)
                                                 .Include(x => x.ApprovedStatusNavigation)
                                                 .Where(x => x.ApprovedStatusNavigation.StatusCode == approved && x.IsActive == 1
+                                                 && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                                  && !(InInspectionId).Contains(x.Id)
                                                  && x.Date == (model.date == "" ? x.Date : Convert.ToDateTime(model.date))
                                                  && (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))

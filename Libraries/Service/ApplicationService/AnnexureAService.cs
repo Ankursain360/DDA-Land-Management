@@ -96,9 +96,9 @@ namespace Libraries.Service.ApplicationService
             return await _annexureARepository.SaveFixingdocument(fixingdocument);
         }
 
-        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved)
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved, int zoneId)
         {
-            return await _annexureARepository.GetPagedDetails(model,approved);
+            return await _annexureARepository.GetPagedDetails(model,approved, zoneId);
         }
 
         public async Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition)

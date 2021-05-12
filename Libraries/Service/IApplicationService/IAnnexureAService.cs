@@ -28,7 +28,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> SaveFixingprogram(Fixingprogram fixingprogram);//save 
         Task<bool> SaveFixingdocument(Fixingdocument fixingdocument);
-        Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved);
+        Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved, int zoneId);
         Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition);
         Task<Fixingdemolition> FetchSingleResult(int id);
         Task<Fixingdocument> GetAnnexureAfiledetails(int id);
