@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
     public class Awardmasterdetail : AuditableEntity<int>
     {
         [Required(ErrorMessage = "Award Number is mandatory")]
-        [Remote(action: "Exist", controller: "Awardmasterdetails", AdditionalFields = "Id")]
+        [Remote(action: "Exist", controller: "AcqAwardMasterDetails", AdditionalFields = "Id")]
         public string AwardNumber { get; set; }
         [Required(ErrorMessage = "Award Date is mandatory")]
         public DateTime? AwardDate { get; set; }

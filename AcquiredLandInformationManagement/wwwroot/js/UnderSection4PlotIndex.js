@@ -7,11 +7,11 @@ var sortOrder = 1;//default Ascending
 
 
 $(document).ready(function () {
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetUS4(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetUS4(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -19,14 +19,18 @@ $("#btnReset").click(function () {
     $('#txtPName').val('');
     $('#txtNotificationN').val('');
 
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetUS4(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$('#ddlSort').change(function () {
+    GetUS4(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetUS4(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -34,10 +38,10 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetUS4(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDivision(pageNumber, pageSize, order) {
+function GetUS4(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/UnderSection4PlotForm/List`, 'html', param, function (response) {
         console.log(response);
@@ -66,12 +70,12 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
 
 function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetUS4(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetUS4(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
 

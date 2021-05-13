@@ -80,7 +80,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUndersection17Repository, Undersection17Repository>();
             services.AddScoped<IUndersection22Repository, Undersection22Repository>();
             services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
-
+            services.AddScoped<ISchemeRepository, SchemeRepository>();
+           
             //Lease masters 
 
 
@@ -154,12 +155,14 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<IKhasraService, KhasraService>();
             services.AddScoped<ITehsilService, TehsilService>();//added by anuj 8-feb-21
+
             services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
             services.AddScoped<IUndersection4service, Undersection4Service>();
             services.AddScoped<IUnderSection6Service, UnderSection6Service>();
             services.AddScoped<IUndersection17Service, Undersection17Service>();
             services.AddScoped<IUndersection22Service, Undersection22Service>();
             services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
+            services.AddScoped<ISchemeService, SchemeService>();
 
             // Lease masters
 

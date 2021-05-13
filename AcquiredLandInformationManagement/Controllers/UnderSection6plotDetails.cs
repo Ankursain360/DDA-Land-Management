@@ -137,7 +137,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _undersection6plotservice.GetAllUndersection6Plot();
-                        return View("Index", list);
+                        return View("Edit", undersection4plot);
                     }
                     else
                     {

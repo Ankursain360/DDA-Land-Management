@@ -6,8 +6,7 @@ $(document).ready(function () {
     //
     var id = $("#UnderSection17Id").val();
 
-    //$("#VillageId").val('');
-    //$("#KhasraId").val('');
+   
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -37,13 +36,12 @@ $(document).ready(function () {
             $("#Biswanshi1").val(response.biswanshi);
 
 
-            // alert(JSON.stringify(response));
         });
 
     }
 
 });
-function GetDivision(pageNumber, pageSize) {
+function GetUS17(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/Undersection17plotdetail/Notification4View/`, 'html', param, function (response) {
         $('#divnotification17Table').html("");
@@ -103,7 +101,7 @@ function onChange(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
 
-        // $("#KhasraId").select2('val', '')
+         $("#KhasraId").select2('val', '')
         $("#KhasraId").html(html);
     });
 };
@@ -160,11 +158,11 @@ $("#Biswanshi").keyup(function () {
 
 
 function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize));
+    GetUS17(parseInt(pageNo), parseInt(currentPageSize));
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize));
+    GetUS17(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }

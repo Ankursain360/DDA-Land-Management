@@ -150,13 +150,14 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.section17List,"Id","Number"))">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Us4id" asp-items="@(new SelectList(Model.section4List,"Id","Number"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <span asp-validation-for="Us17id" class="text-danger"></span>
-                    <label asp-for="Us17id" class="floating-label">Undersection No 17 </label>
+                    <span asp-validation-for="Us4id" class="text-danger"></span>
+                    <label asp-for="Us4id" class="floating-label">Undersection No 4 </label>
                 </div>
             </div>
+          
         </div>
 
 
@@ -172,11 +173,11 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="Us4id" asp-items="@(new SelectList(Model.section4List,"Id","Number"))">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.section17List,"Id","Number"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <span asp-validation-for="Us4id" class="text-danger"></span>
-                    <label asp-for="Us4id" class="floating-label">Undersection No 4 </label>
+                    <span asp-validation-for="Us17id" class="text-danger"></span>
+                    <label asp-for="Us17id" class="floating-label">Undersection No 17 </label>
                 </div>
             </div>
         </div>
