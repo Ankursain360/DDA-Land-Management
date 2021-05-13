@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SiteMaster.Filters;
+using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
 using Dto.Master;
 using Dto.Search;
@@ -15,7 +15,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
 
-namespace SiteMaster.Controllers
+namespace AcquiredLandInformationManagement.Controllers
 
 {
     

@@ -155,6 +155,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<IKhasraService, KhasraService>();
             services.AddScoped<ITehsilService, TehsilService>();//added by anuj 8-feb-21
+
             services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
             services.AddScoped<IUndersection4service, Undersection4Service>();
             services.AddScoped<IUnderSection6Service, UnderSection6Service>();
