@@ -28,7 +28,7 @@ namespace NewLandAcquisition.Controllers
             _configuration = configuration;
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             
@@ -37,7 +37,7 @@ namespace NewLandAcquisition.Controllers
             return View(model);
         }
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id,Newlandannexure2 newlandannexure2)
         {
             try
