@@ -28,10 +28,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
 
            
-            services.AddScoped<ISchemeRepository, SchemeRepository>();
+           
 
-            
-            
             services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
            
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
@@ -83,7 +81,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IJointsurveyService, JointsurveyService>();
           
-            services.AddScoped<ISchemeService, SchemeService>();
+            
           
             services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
           
