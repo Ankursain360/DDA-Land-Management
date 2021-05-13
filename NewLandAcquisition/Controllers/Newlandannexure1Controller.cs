@@ -56,7 +56,7 @@ namespace NewLandAcquisition.Controllers
             Annexure1.MunicipalityList = await _newlandannexure1Service.GetAllMunicipality();
             Annexure1.DistrictList = await _newlandannexure1Service.GetAllDistrict();
         }
-        [AuthorizeContext(ViewAction.Add)]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             Newlandannexure1 Annexure1 = new Newlandannexure1();
@@ -82,7 +82,7 @@ namespace NewLandAcquisition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id ,Newlandannexure1 Annexure1)
         {
 
@@ -208,7 +208,7 @@ namespace NewLandAcquisition.Controllers
             }
 
         }
-        [AuthorizeContext(ViewAction.View)]
+        //[AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             Newlandannexure1 Annexure1 = new Newlandannexure1();
