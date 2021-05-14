@@ -171,6 +171,7 @@ namespace EncroachmentDemolition.Controllers
                         onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
                    
                     }
+                    onlinecomplaint.CreatedBy = SiteContext.UserId;
                     var result = await _onlinecomplaintService.Create(onlinecomplaint);
                     if (result)
                     {
@@ -375,6 +376,7 @@ namespace EncroachmentDemolition.Controllers
             {
                 try
                 {
+                    onlinecomplaint.ModifiedBy = SiteContext.UserId;
                     var result = await _onlinecomplaintService.Update(id, onlinecomplaint);
                     if (result == true)
                     {

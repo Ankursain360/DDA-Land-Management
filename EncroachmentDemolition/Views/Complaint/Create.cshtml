@@ -19,10 +19,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <textarea type="text" asp-for="AddressOfComplaint" placeholder="Area/Address of Complaint" class="floating-label-field floating-label-field--s3" limit="500"></textarea>
+                        <textarea type="text" asp-for="AddressOfComplaint" class="floating-label-field floating-label-field--s3" limit="500"></textarea>
                         <span asp-validation-for="AddressOfComplaint" class="text-danger"></span>
-                        <label class="floating-label">Area/Address of Complaint</label>
+                        <label class="floating-label">Area/Address of Complainant</label>
                     </div>
                 </div>
             </div>
@@ -93,7 +92,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea type="text" asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3" limit="200"></textarea>
+                        <textarea type="text" asp-for="AddressOfEncroachedProperty"  class="floating-label-field floating-label-field--s3" limit="200"></textarea>
+                        <span asp-validation-for="AddressOfEncroachedProperty" class="text-danger"></span>
                         <label class="floating-label">Address/Landmark of Encroached Property</label>
                     </div>
                 </div>

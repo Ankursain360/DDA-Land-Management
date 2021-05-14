@@ -23,6 +23,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
+            builder.Property(e => e.AddressOfEncroachedProperty).HasColumnType("longtext");
+
             builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
 
             builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
