@@ -21,6 +21,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
+            builder.Property(e => e.AddressKhasraNo).HasColumnType("longtext");
+
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -28,6 +30,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.FilePath).HasColumnType("longtext");
 
             builder.Property(e => e.FixingDemolitionId).HasColumnType("int(11)");
+
+            builder.Property(e => e.IsReligiousStructure)
+                .HasMaxLength(10)
+                .IsUnicode(false);
 
             builder.Property(e => e.MeetingDate).HasColumnType("date");
 
@@ -38,6 +44,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedDate).HasColumnType("date");
+
+            builder.Property(e => e.PoliceStationName)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
 
             builder.HasOne(d => d.FixingDemolition)
                 .WithMany(p => p.Demolitionpoliceassistenceletter)

@@ -12,8 +12,21 @@ namespace Libraries.Model.Entity
     public class Demolitionpoliceassistenceletter : AuditableEntity<int>
     {
         public int FixingDemolitionId { get; set; }
+
+        [Required(ErrorMessage = "Meeting Date is mandatory field")]
         public DateTime? MeetingDate { get; set; }
+
+        [Required(ErrorMessage = "Meeting Time is mandatory field")]
         public string MeetingTime { get; set; }
+
+        [Required(ErrorMessage = "Police Station Name is mandatory field")]
+        public string PoliceStationName { get; set; }
+
+        [Required(ErrorMessage = "Address/KhasraNo is mandatory field")]
+        public string AddressKhasraNo { get; set; }
+
+        [Required(ErrorMessage = "Religious is mandatory field")]
+        public string IsReligiousStructure { get; set; }
         public string FilePath { get; set; }
         public Fixingdemolition FixingDemolition { get; set; }
 

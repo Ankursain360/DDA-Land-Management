@@ -1,26 +1,17 @@
 ﻿$(document).ready(function () {
-    var value = $("#GenerateUpload").val();
-    if (value == 0) {
-        $("#divGenerate").show();
-        $("#divUpload").hide();
-        $("#btnSubmit").val("Generate");
-    }
-    else {
-        $("#divGenerate").hide();
-        $("#divUpload").show();
-        $("#btnSubmit").val("Upload");
-
-    }
-    //if ($("#Generate").is(":checked")) {
+    //var value = $("#GenerateUpload").val();
+    //if (value == 0) {
     //    $("#divGenerate").show();
     //    $("#divUpload").hide();
     //    $("#btnSubmit").val("Generate");
     //}
-    //else if ($("#Upload").is(":checked")) {
+    //else {
     //    $("#divGenerate").hide();
     //    $("#divUpload").show();
     //    $("#btnSubmit").val("Upload");
+
     //}
+  
 });
 
 $("input[name='radioStatus']").click(function () {
@@ -128,35 +119,35 @@ function getPDF() {
 
 function check() {
     var checkresult = false;
-    var selected = $("input[type='radio'][name='radioStatus']:checked");
-    $("#GenerateUpload").val(selected.val());
-    if (selected.val() == 0) {
-        var Date_val = $('#MeetingDate').val();
-        if (Date_val == "") {
-            checkresult = false;
-            $("#MessageDate").show();
-        } else {
-            checkresult = true;
-            $("#MessageDate").hide();
-        }
+    //var selected = $("input[type='radio'][name='radioStatus']:checked");
+    //$("#GenerateUpload").val(selected.val());
+    //if (selected.val() == 0) {
+    //    var Date_val = $('#MeetingDate').val();
+    //    if (Date_val == "") {
+    //        checkresult = false;
+    //        $("#MessageDate").show();
+    //    } else {
+    //        checkresult = true;
+    //        $("#MessageDate").hide();
+    //    }
 
-        var Time_val = $('#MeetingTime').val();
-        if (Time_val == "") {
-            checkresult = false;
-            $("#MessageTime").show();
-        } else {
-            checkresult = true;
-            $("#MessageTime").hide();
-        }
-        if (Date_val == "" || Time_val == "") {
-            checkresult = false;
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
-    else {
+    //    var Time_val = $('#MeetingTime').val();
+    //    if (Time_val == "") {
+    //        checkresult = false;
+    //        $("#MessageTime").show();
+    //    } else {
+    //        checkresult = true;
+    //        $("#MessageTime").hide();
+    //    }
+    //    if (Date_val == "" || Time_val == "") {
+    //        checkresult = false;
+    //        return false;
+    //    }
+    //    else {
+    //        return true;
+    //    }
+    //}
+    //else {
         var fileInput = document.getElementById('Document');
         var filePath = fileInput.value;
         if (filePath == "") {
@@ -174,13 +165,21 @@ function check() {
             return true;
         }
 
-    }
+   // }
 }
 $('#Document').change(function () {
     var fileInput = document.getElementById('Document');
     var filePath = fileInput.value;
     const size = (fileInput.files[0].size);
     fileValidation(filePath, fileInput, size);
+    if (fileInput.value != "") {
+        $("#FilePath").val("filePath");
+        $("#MessageFileUpload").hide();
+    }
+    else {
+        $("#FilePath").val('');
+        $("#MessageFileUpload").show();
+    }
 });
 
 

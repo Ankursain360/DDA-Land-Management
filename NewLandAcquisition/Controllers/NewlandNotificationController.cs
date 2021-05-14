@@ -30,7 +30,7 @@ namespace NewLandAcquisition.Controllers
             _newlandnotificationService = newlandnotificationService;
             _configuration = configuration;
         }
-        [AuthorizeContext(ViewAction.View)]
+       // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -42,7 +42,7 @@ namespace NewLandAcquisition.Controllers
 
             return PartialView("_List", result);
         }
-         [AuthorizeContext(ViewAction.Add)]
+     //    [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Newlandnotification newlandnotification = new Newlandnotification();

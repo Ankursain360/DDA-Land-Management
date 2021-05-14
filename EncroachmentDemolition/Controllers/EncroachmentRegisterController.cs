@@ -188,6 +188,7 @@ namespace EncroachmentDemolition.Controllers
                     }
                     #endregion
                     encroachmentRegisterations.WatchWardId = encroachmentRegisterations.WatchWardId == 0 ? null : encroachmentRegisterations.WatchWardId;
+                    encroachmentRegisterations.CreatedBy = SiteContext.UserId;
                     var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
                     if (result)
                     {
@@ -479,6 +480,7 @@ namespace EncroachmentDemolition.Controllers
             string FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
             if (ModelState.IsValid)
             {
+                encroachmentRegisterations.ModifiedBy = SiteContext.UserId;
                 var result = await _encroachmentRegisterationService.Update(id, encroachmentRegisterations);
                 if (result)
                 {

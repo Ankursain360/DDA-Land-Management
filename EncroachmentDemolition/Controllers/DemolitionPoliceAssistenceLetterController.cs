@@ -66,7 +66,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> List([FromBody] DemolitionPoliceAssistenceLetterSearchDto model)
         {
             
-                var result = await _demolitionPoliceAssistenceLetterService.GetPagedApprovedAnnexureA(model, SiteContext.UserId);
+                var result = await _demolitionPoliceAssistenceLetterService.GetPagedApprovedAnnexureA(model, SiteContext.UserId, (int)ApprovalActionStatus.Approved);
                 ViewBag.IsApproved = model.StatusId;
                 return PartialView("_List", result);
            
@@ -100,22 +100,22 @@ namespace EncroachmentDemolition.Controllers
             targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
             if(ModelState.IsValid)
             {
-                if (demolitionpoliceassistenceletter.GenerateUpload == 0)
-                {
-                    if (demolitionpoliceassistenceletter.MeetingDate == null || demolitionpoliceassistenceletter.MeetingTime == null)
-                    {
-                        ViewBag.Message = Alert.Show("Meeting Date and Time is Mandatory", "", AlertType.Warning);
-                        return View(demolitionpoliceassistenceletter);
-                    }
-                }
-                else if (demolitionpoliceassistenceletter.GenerateUpload == 1)
-                {
-                    if (demolitionpoliceassistenceletter.Document == null)
-                    {
-                        ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
-                        return View(demolitionpoliceassistenceletter);
-                    }
-                }
+                //if (demolitionpoliceassistenceletter.GenerateUpload == 0)
+                //{
+                //    if (demolitionpoliceassistenceletter.MeetingDate == null || demolitionpoliceassistenceletter.MeetingTime == null)
+                //    {
+                //        ViewBag.Message = Alert.Show("Meeting Date and Time is Mandatory", "", AlertType.Warning);
+                //        return View(demolitionpoliceassistenceletter);
+                //    }
+                //}
+                //else if (demolitionpoliceassistenceletter.GenerateUpload == 1)
+                //{
+                //    if (demolitionpoliceassistenceletter.Document == null)
+                //    {
+                //        ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
+                //        return View(demolitionpoliceassistenceletter);
+                //    }
+                //}
                 string LetterFileName = "";
                 string LetterfilePath = "";
                 if (demolitionpoliceassistenceletter.Document != null)

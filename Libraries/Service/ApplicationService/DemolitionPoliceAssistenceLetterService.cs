@@ -24,9 +24,9 @@ namespace Libraries.Service.ApplicationService
             _demolitionPoliceAssistenceLetterRepository = demolitionPoliceAssistenceLetterRepository;
         }
 
-        public async Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId)
+        public async Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId, int approved)
         {
-            return await _demolitionPoliceAssistenceLetterRepository.GetPagedApprovedAnnexureA(model, userId);
+            return await _demolitionPoliceAssistenceLetterRepository.GetPagedApprovedAnnexureA(model, userId, approved);
         }
 
         public async Task<bool> Create(Demolitionpoliceassistenceletter demolitionpoliceassistenceletter)

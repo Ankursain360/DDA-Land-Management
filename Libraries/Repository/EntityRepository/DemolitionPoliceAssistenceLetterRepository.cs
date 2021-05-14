@@ -57,7 +57,7 @@ namespace Repository.EntityRepository
        //          .ToListAsync();
        // }
 
-        public async Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId)
+        public async Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId, int approved)
         {
             var InDemolitionPoliceAssistenceTable = (from x in _dbContext.Demolitionpoliceassistenceletter
                                                      where x.FixingDemolitionId == x.FixingDemolition.Id && x.FixingDemolition.IsActive == 1
@@ -67,9 +67,10 @@ namespace Repository.EntityRepository
             {
                 var data= await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
-                                      //  && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-                                       // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
+                                        //  && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                        // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)
                                         )
                                         .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
 
