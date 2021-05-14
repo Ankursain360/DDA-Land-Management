@@ -73,7 +73,10 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IKhasraRepository, KhasraRepository>();
             services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
 
-
+            services.AddScoped<IUndersection4Repository, Undersection4Repository>();
+            services.AddScoped<IUnderSection6Repository, UnderSection6Repository>();
+            services.AddScoped<IUndersection17Repository, Undersection17Repository>();
+            services.AddScoped<IUndersection22Repository, Undersection22Repository>();
 
             /* Application Services */
 
@@ -130,6 +133,10 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IKhasraService, KhasraService>();
             services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
 
+            services.AddScoped<IUndersection4service, Undersection4Service>();
+            services.AddScoped<IUnderSection6Service, UnderSection6Service>();
+            services.AddScoped<IUndersection17Service, Undersection17Service>();
+            services.AddScoped<IUndersection22Service, Undersection22Service>();
 
         }
     }

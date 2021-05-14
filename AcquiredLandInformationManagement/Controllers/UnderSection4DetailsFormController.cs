@@ -12,14 +12,14 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using SiteMaster.Filters;
+using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
 
-namespace SiteMaster.Controllers
+namespace AcquiredLandInformationManagement.Controllers
 {
-    public class UnderSection4DetailsFormController : Controller
+    public class UnderSection4DetailsFormController : BaseController
     {
 
         private readonly IUndersection4service _undersection4service;
