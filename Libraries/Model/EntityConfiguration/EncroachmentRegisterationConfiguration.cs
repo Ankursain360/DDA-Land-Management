@@ -41,6 +41,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
+            builder.Property(e => e.AreaUnit).HasColumnType("int(11)");
+
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -108,6 +110,8 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 

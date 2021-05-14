@@ -41,7 +41,7 @@
             <div class="floating-label-wrap">
 
                 <select asp-for="DivisionId" id="DivisionId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 DivisionClass" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))">
-                   
+
                     <option value="value">Select</option>
                 </select>
                 <span asp-validation-for="DivisionId" class="text-danger"></span>
@@ -80,15 +80,51 @@
             </div>
         </div>
     </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+    <div id="DivArea">
+        <h2 class="my-3 sub-heading">Area</h2>
+        <div class="row mt-md-3">
 
-                <input type="text" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
-                <span asp-validation-for="Area" class="text-danger"></span>
-                <label class="floating-label">Area</label>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                        <option value="1">Sq Yd.</option>
+                        <option value="2">Acre</option>
+                        <option value="3">Hectare</option>
+                        <option value="4">Sq. Mt.</option>
+                    </select>
+                    <span asp-validation-for="AreaUnit" class="text-danger"></span>
+                    <label asp-for="AreaUnit" class="floating-label">Area Unit </label>
+                </div>
             </div>
         </div>
+
+        <div id="AreainSqAcreHec" >
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="TotalAreaInSqAcreHt" value="" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                        <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="text" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
+                    <span asp-validation-for="Area" class="text-danger"></span>
+                    <label class="floating-label">Area(in sq. mt.)</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -97,12 +133,10 @@
                 <label class="floating-label">Location/Address with land mark</label>
             </div>
         </div>
-    </div>
-    <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" placeholder="Name of Encroacher" limit="100"  class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
+                <input type="text" placeholder="Name of Encroacher" limit="100" class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
                 <span asp-validation-for="EncroacherName" class="text-danger"></span>
                 <label class="floating-label">Name of Encroacher</label>
             </div>
@@ -181,7 +215,7 @@
                                     <input asp-for="CountOfStructure" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" id="CountOfStructure" />
                                 </div>
                             </td>
-                          
+
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
@@ -273,7 +307,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" asp-for="PoliceStation" limit="100"  placeholder="Police Station" class="floating-label-field floating-label-field--s3" />
+                <input type="text" asp-for="PoliceStation" limit="100" placeholder="Police Station" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="PoliceStation" class="text-danger"></span>
                 <label class="floating-label">Police Station</label>
             </div>
@@ -283,7 +317,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" placeholder="Security Guard on Duty"  limit="100"  asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
+                <input type="text" placeholder="Security Guard on Duty" limit="100" asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="SecurityGuardOnDuty" class="text-danger"></span>
                 <label class="floating-label">Security Guard on Duty</label>
             </div>
@@ -314,7 +348,7 @@
     <div class="row mt-md-3">
         <div class="col-md-12">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="Remarks" placeholder="Remarks"  limit="950"  class="floating-label-field floating-label-field--s3"></textarea>
+                <textarea type="text" asp-for="Remarks" placeholder="Remarks" limit="950" class="floating-label-field floating-label-field--s3"></textarea>
                 <span asp-validation-for="Remarks" class="text-danger"></span>
                 <label class="floating-label">Remarks</label>
             </div>

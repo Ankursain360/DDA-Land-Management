@@ -43,6 +43,14 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Khasra No is Mandatory Field")]
         public string KhasraNo { get; set; }
 
+        [Required(ErrorMessage = "Area Unit is Mandatory Field", AllowEmptyStrings = false)]
+        public int AreaUnit { get; set; }
+
+        [Required(ErrorMessage = "Total Area(Sq Yd./Acre/Hectare) is Mandatory Field")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area(Sq Yd./Acre/Hectare); Max 18 digits")]
+        public decimal TotalAreaInSqAcreHt { get; set; }
+
         [Required(ErrorMessage = "Area is Mandatory Field")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]

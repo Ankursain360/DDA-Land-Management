@@ -1,7 +1,26 @@
 ﻿$(document).ready(function () {
-
+    $("#Area").attr("readonly", "readonly");
     var id = parseInt($('#WatchWardId').val());
     GetOtherDetails(id);
+
+    $(".TotalCalculation").keyup(function () {
+        debugger;
+        var value = $('#AreaUnit option:selected').val();
+        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        if (value == 1) {
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
+        }
+        else if (value == 2) {
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
+        }
+        else if (value == 3) {
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+        }
+        else if (value == 4) {
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
+        }
+    });
+
 });
 
 function GetOtherDetails(id) {
