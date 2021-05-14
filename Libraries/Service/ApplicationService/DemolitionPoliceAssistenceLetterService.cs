@@ -46,13 +46,13 @@ namespace Libraries.Service.ApplicationService
             var result = await _demolitionPoliceAssistenceLetterRepository.FindBy(a => a.Id == id);
             Demolitionpoliceassistenceletter model = result.FirstOrDefault();
             model.FixingDemolitionId = demolitionpoliceassistenceletter.FixingDemolitionId;
-            if(demolitionpoliceassistenceletter.GenerateUpload == 0)
-            {
+            //if(demolitionpoliceassistenceletter.GenerateUpload == 0)
+            //{
 
-                model.MeetingDate = demolitionpoliceassistenceletter.MeetingDate;
-                model.MeetingTime = demolitionpoliceassistenceletter.MeetingTime;
-            }
-            else
+            model.MeetingDate = demolitionpoliceassistenceletter.MeetingDate;
+            model.MeetingTime = demolitionpoliceassistenceletter.MeetingTime;
+            ////}
+            ////else
             model.FilePath = demolitionpoliceassistenceletter.FilePath;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = demolitionpoliceassistenceletter.ModifiedBy;
@@ -68,6 +68,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<Demolitionpoliceassistenceletter> FetchSingleResultButOnAneexureId(int id)
         {
             return await _demolitionPoliceAssistenceLetterRepository.FetchSingleResultButOnAneexureId(id);
+        }
+
+        public async Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id)
+        {
+            return await _demolitionPoliceAssistenceLetterRepository.FetchSingleResultOfFixingDemolition(id);
         }
     }
 }
