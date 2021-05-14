@@ -73,7 +73,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IKhasraRepository, KhasraRepository>();
             services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
 
-
+          
 
             /* Application Services */
 
@@ -129,7 +129,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INewlandnotificationService, NewlandnotificationService>();
             services.AddScoped<IKhasraService, KhasraService>();
             services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
-
+        
 
         }
     }

@@ -109,6 +109,22 @@
     <None Include="Views\AwardPlotDetails\Index.cshtml" />
     <None Include="Views\AwardPlotDetails\View.cshtml" />
     <None Include="Views\AwardPlotDetails\_List.cshtml" />
+    <None Include="Views\UnderSection17Details\Create.cshtml" />
+    <None Include="Views\UnderSection17Details\Edit.cshtml" />
+    <None Include="Views\UnderSection17Details\Index.cshtml" />
+    <None Include="Views\UnderSection17Details\View.cshtml" />
+    <None Include="Views\UnderSection17Details\_List.cshtml" />
+    <None Include="Views\UnderSection22Details\Create.cshtml" />
+    <None Include="Views\UnderSection22Details\Delete.cshtml" />
+    <None Include="Views\UnderSection22Details\Edit.cshtml" />
+    <None Include="Views\UnderSection22Details\Index.cshtml" />
+    <None Include="Views\UnderSection22Details\View.cshtml" />
+    <None Include="Views\UnderSection22Details\_List.cshtml" />
+    <None Include="Views\UnderSection6Master\Create.cshtml" />
+    <None Include="Views\UnderSection6Master\Edit.cshtml" />
+    <None Include="Views\UnderSection6Master\Index.cshtml" />
+    <None Include="Views\UnderSection6Master\View.cshtml" />
+    <None Include="Views\UnderSection6Master\_List.cshtml" />
     <None Include="wwwroot\js\mutationcreate.min.js" />
   </ItemGroup>
 

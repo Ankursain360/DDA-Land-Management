@@ -1,0 +1,74 @@
+﻿@model Libraries.Model.Entity.Undersection17
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-17" })
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="pt-3">
+    <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="mb-3 d-flex">Edit Details</h3>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Number" placeholder="Notification No." class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Number" class="text-danger"></span>
+                    <label class="floating-label">Notification No.</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="NotificationDate" class="text-danger"></span>
+                    <label class="floating-label"> Notification Date</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="Divclsification">
+
+            <h2 class="my-3 sub-heading">Notification Type</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection6Id" asp-items="@(new SelectList(Model.Undersection6List, "Id","Number"))">
+                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        </select>
+                        <span asp-validation-for="UnderSection6Id" class="text-danger"></span>
+                        <label class="floating-label">Notification U/S-6</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <label class="floating-label"> Status</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <input type="submit" value="Update" class="btn btn-theme" onclick="return PasswordMatch();" />
+                @Html.ActionLink("Back", "Index", "UnderSection17Details", null, new { @class = "btn btn-theme" })
+            </div>
+        </div>
+
+    </form>
+        </div>
+   
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
