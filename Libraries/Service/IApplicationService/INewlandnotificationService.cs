@@ -16,6 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Newlandnotification newlandnotification);
         Task<bool> Update(int id, Newlandnotification newlandnotification);
         Task<Newlandnotification> FetchSingleResult(int id);
+        Task<Newlandnotification> FetchSingleResult1(int id);
         Task<PagedResult<Newlandnotification>> GetPagedNewlandnotificationdetails(NewlandnotificationSearchDto model);
         Task<List<Newlandnotification>> GetNewlandnotification();
 

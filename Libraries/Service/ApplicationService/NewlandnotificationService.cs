@@ -33,6 +33,16 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+
+
+        public async Task<Newlandnotification> FetchSingleResult1(int id)
+        {
+            var result = await _newlandnotificationRepository.FindBy(a => a.Id == id);
+            Newlandnotification model = result.FirstOrDefault();
+            return model;
+        }
+
+
         public async Task<Newlandnotification> FetchSingleResult(int id)
         {
             return await _newlandnotificationRepository.FetchSingleResult(id);

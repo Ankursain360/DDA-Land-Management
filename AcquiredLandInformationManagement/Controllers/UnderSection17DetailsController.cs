@@ -12,93 +12,95 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-using SiteMaster.Filters;
+using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
 
-namespace SiteMaster.Controllers
+namespace AcquiredLandInformationManagement.Controllers
 {
-    public class UnderSection4DetailsFormController : Controller
+    public class UnderSection17DetailsController : Controller
     {
+        private readonly IUndersection17Service _undersection17Service;
 
-        private readonly IUndersection4service _undersection4service;
 
-
-        public UnderSection4DetailsFormController(IUndersection4service undersection4service)
+        public UnderSection17DetailsController(IUndersection17Service undersection17Service)
         {
-            _undersection4service = undersection4service;
+          _undersection17Service = undersection17Service;
         }
-
         [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
-            return View();
+            var list = await _undersection17Service.GetAllUndersection17();
+            return View(list);
         }
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] Undersection4SearchDto model)
+        public async Task<PartialViewResult> List([FromBody] UnderSection17SearchDto model)
         {
-            var result = await _undersection4service.GetPagedUndersection4details(model);
-
+            var result = await _undersection17Service.GetPagedUndersection17(model);
             return PartialView("_List", result);
         }
-
-
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
+
         {
-            Undersection4 undersection4 = new Undersection4();
-            undersection4.IsActive = 1;
-            undersection4.ProposalList = await _undersection4service.GetAllProposal();
-           
-            return View(undersection4);
+            Undersection17 undersection17 = new Undersection17();
+            undersection17.IsActive = 1;
+
+
+            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
+            return View(undersection17);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Undersection4 undersection4)
+        public async Task<IActionResult> Create(Undersection17 undersection17)
         {
             try
             {
-                undersection4.ProposalList = await _undersection4service.GetAllProposal();
+
+
+                undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _undersection4service.Create(undersection4);
+                    var result = await _undersection17Service.Create(undersection17);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4service.GetAllUndersection4();
+                        var list = await _undersection17Service.GetAllUndersection17();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4);
+                        return View(undersection17);
                     }
                 }
                 else
                 {
-                    return View(undersection4);
+                    return View(undersection17);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(undersection4);
+                return View(undersection17);
             }
         }
+
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _undersection4service.FetchSingleResult(id);
-         
-            Data.ProposalList = await _undersection4service.GetAllProposal();
+            var Data = await _undersection17Service.FetchSingleResult(id);
+           
+
+            Data.Undersection6List = await _undersection17Service.GetAllUndersection6List();
 
             if (Data == null)
             {
@@ -110,34 +112,35 @@ namespace SiteMaster.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Edit)]
-        public async Task<IActionResult> Edit(int id, Undersection4 undersection4)
+        public async Task<IActionResult> Edit(int id, Undersection17 undersection17)
         {
+            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _undersection4service.Update(id, undersection4);
+                    var result = await _undersection17Service.Update(id, undersection17);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4service.GetAllUndersection4();
+                        var list = await _undersection17Service.GetAllUndersection17();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection4);
+                        return View(undersection17);
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(undersection4);
+                    return View(undersection17);
                 }
             }
             else
             {
-                return View(undersection4);
+                return View(undersection17);
             }
         }
         [AuthorizeContext(ViewAction.Delete)]
@@ -146,7 +149,7 @@ namespace SiteMaster.Controllers
             try
             {
 
-                var result = await _undersection4service.Delete(id);
+                var result = await _undersection17Service.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -160,15 +163,17 @@ namespace SiteMaster.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _undersection4service.GetAllUndersection4();
+            var list = await _undersection17Service.GetAllUndersection17();
             return View("Index", list);
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _undersection4service.FetchSingleResult(id);
-            Data.ProposalList = await _undersection4service.GetAllProposal();
-           
+            var Data = await _undersection17Service.FetchSingleResult(id);
+
+         
+            Data.Undersection6List = await _undersection17Service.GetAllUndersection6List();
+
 
             if (Data == null)
             {
@@ -177,24 +182,23 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+
         [AuthorizeContext(ViewAction.Download)]
-
-
-        public async Task<IActionResult> UnderSection4List()
+        public async Task<IActionResult> Undersection17List()
         {
-            var result = await _undersection4service.GetAllUndersection4();
-            List<UnderSection4ListDto> data = new List<UnderSection4ListDto>();
+            var result = await _undersection17Service.GetAllUndersection17();
+            List<Undersection17ListDto> data = new List<Undersection17ListDto>();
             if (result != null)
             {
                 for (int i = 0; i < result.Count; i++)
                 {
-                    data.Add(new UnderSection4ListDto()
+                    data.Add(new Undersection17ListDto()
                     {
                         Id = result[i].Id,
-                        ProposalName = result[i].Proposal == null ? "" : result[i].Proposal.Name,
                         NotificationNo = result[i].Number,
-                        NotificationDate = Convert.ToDateTime(result[i].Ndate).ToString("dd-MMM-yyyy"),
-                        Type = result[i].TypeDetails,
+                        NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
+                        NotificationUS6 = result[i].UnderSection6 == null ? "" : result[i].UnderSection6.Number,
+                        
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
@@ -205,6 +209,6 @@ namespace SiteMaster.Controllers
 
         }
 
-
     }
 }
+

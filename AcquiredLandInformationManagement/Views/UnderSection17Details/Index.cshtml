@@ -1,30 +1,25 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Undersection22plotdetails>
-@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-22 Plot" })
+﻿@model IEnumerable<Libraries.Model.Entity.Undersection17>
 
-
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-17" })
 <div class="pt-3">
+
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtNo" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtNo" class="floating-label"> Notification U/S 22 </label>
+                    <input type="text" id="txtNumber" class="floating-label-field floating-label-field--s3" placeholder="Notification U/S-17" />
+                    <label for="txtNumber" class="floating-label"> Notification U/S-17</label>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtVillage" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtVillage" class="floating-label"> Village Name</label>
+                    <input type="text" id="txtNotification6" class="floating-label-field floating-label-field--s3" placeholder="Notification U/S-6" />
+                    <label for="txtNotification6" class="floating-label"> Notification U/S-6</label>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtKhasra" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtKhasra" class="floating-label"> Khasra No</label>
-                </div>
-            </div>
-          
+
+
 
         </div>
         <div class="row mt-md-3">
@@ -47,9 +42,9 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Name">Notification U/S 22 </option>
-                        <option value="Village">Village Name</option>
-                        <option value="Khasra">Khasra No.</option>
+                        <option value="Number">Notification U/S-17</option>
+                        <option value="NotificationDate">Notification Date </option>
+                        <option value="Section6">Notification U/S-6</option>
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
@@ -62,31 +57,29 @@
 
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/UnderSection22PlotDetails/create" class="d-flex align-items-center btn btn-primary mr-2">
+                <a href="/UnderSection17Details/create" class="d-flex align-items-center btn btn-primary mr-2">
                     <i class="ri-add-fill mr-2 mr-lg-1"></i>
                     <small>Add More</small>
                 </a>
-                <a href="/UnderSection22PlotDetails/Undersection22plotList" class="d-flex align-items-center btn btn-success">
+                <a href="/UnderSection17Details/Undersection17List" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
                 </a>
             </div>
         </div>
 
-        <div class="table-responsive px-2">
-            <div id="divUS22PlotTable"></div>
+        <div class="table-responsive px-2" id="divUnderSection17Table">
+
         </div>
 
 
     </div>
-
+    
 </div>
-
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/us22plotindex.js"></script>
+    <script src="~/js/undersection17index.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/us22plotindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/undersection17index.min.js" asp-append-version="true"></script>
 </environment>
