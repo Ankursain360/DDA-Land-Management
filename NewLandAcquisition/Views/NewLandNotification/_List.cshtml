@@ -2,10 +2,10 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-           
+            <th> Notification Type </th>
             <th> Notification Number </th>
             <th> Notification date </th>
-         
+
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -14,6 +14,7 @@
         @foreach (var item in Model.Results)
         {
         <tr>
+            <td>@item.NewlandNotificationType.NotificationType</td>
 
             <td>@item.NotificationNo</td>
             <td>@(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
