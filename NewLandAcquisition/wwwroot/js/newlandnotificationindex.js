@@ -35,7 +35,7 @@ function GetDemolitionstructuredetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     //HttpPost('Demolitionstructuredetails/List', 'html', param, function (response) {
     HttpPost(`/NewLandNotification/List`, 'html', param, function (response) {
-        debugger
+    
         $('#divNotificationMasterTable').html("");
         $('#divNotificationMasterTable').html(response);
     });

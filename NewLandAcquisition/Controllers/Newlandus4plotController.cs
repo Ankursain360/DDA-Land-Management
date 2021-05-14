@@ -87,6 +87,9 @@ namespace NewLandAcquisition.Controllers
                 }
            
         }
+
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
@@ -101,6 +104,8 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
+
+
         [HttpPost]
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandus4plot us4plot)
@@ -129,6 +134,11 @@ namespace NewLandAcquisition.Controllers
             }
             return View(us4plot);
         }
+
+
+
+
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
