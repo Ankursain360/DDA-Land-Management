@@ -118,12 +118,12 @@ namespace NewLandAcquisition.Controllers
         }
 
 
-
-
        
+
+
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _newlandnotificationService.FetchSingleResult(id);          
+            var Data = await _newlandnotificationService.FetchSingleResult1(id);          
             Data.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
 
             if (Data == null)
@@ -165,7 +165,7 @@ namespace NewLandAcquisition.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _newlandnotificationService.FetchSingleResult(id);
+            var Data = await _newlandnotificationService.FetchSingleResult1(id);
             Data.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
             if (Data == null)
             {
