@@ -72,8 +72,6 @@ namespace EncroachmentDemolition.Controllers
             }
         }
 
-
-
         //  [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
@@ -429,7 +427,7 @@ namespace EncroachmentDemolition.Controllers
             return PartialView("_OnlineComplaintView", Data);
         }
 
-        public async Task<FileResult> ViewLetter(int Id)
+        public async Task<FileResult> ViewPhoto(int Id)
         {
             try
             {

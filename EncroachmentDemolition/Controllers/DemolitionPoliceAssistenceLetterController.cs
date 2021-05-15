@@ -53,6 +53,7 @@ namespace EncroachmentDemolition.Controllers
             _annexureAService = annexureAService;
             _annexureAApprovalService = annexureAApprovalService;
             _hostingEnvironment = en;
+            targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
         }
 
 
@@ -79,14 +80,19 @@ namespace EncroachmentDemolition.Controllers
             if(demolitionpoliceData == null)
             {
                 Demolitionpoliceassistenceletter Data = new Demolitionpoliceassistenceletter();
+                var Data1 = await _demolitionPoliceAssistenceLetterService.FetchSingleResultOfFixingDemolition(id);
                 Data.FixingDemolitionId = id;
                 ViewBag.PrimaryId = 0;
+                ViewBag.EncroachmentId = Data1.EncroachmentId;
+                ViewBag.WatchWardId = Data1.Encroachment.WatchWardId;
                 return View(Data);
             }
             else
             {
                 demolitionpoliceData.FixingDemolitionId = id;
                 ViewBag.PrimaryId = demolitionpoliceData.Id;
+                ViewBag.EncroachmentId = demolitionpoliceData.FixingDemolition.EncroachmentId;
+                ViewBag.WatchWardId = demolitionpoliceData.FixingDemolition.Encroachment.WatchWardId;
                 return View(demolitionpoliceData);
             }
         }
@@ -97,8 +103,10 @@ namespace EncroachmentDemolition.Controllers
         {
             var result = false;
             ViewBag.PrimaryId = demolitionpoliceassistenceletter.Id;
-            targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
-            if(ModelState.IsValid)
+            var Data1 = await _demolitionPoliceAssistenceLetterService.FetchSingleResultOfFixingDemolition(demolitionpoliceassistenceletter.FixingDemolitionId);
+            ViewBag.EncroachmentId = Data1.EncroachmentId;
+            ViewBag.WatchWardId = Data1.Encroachment.WatchWardId;
+            if (ModelState.IsValid)
             {
                 //if (demolitionpoliceassistenceletter.GenerateUpload == 0)
                 //{
@@ -130,7 +138,7 @@ namespace EncroachmentDemolition.Controllers
                     {
                         demolitionpoliceassistenceletter.Document.CopyTo(stream);
                     }
-                    demolitionpoliceassistenceletter.FilePath = LetterfilePath;
+                    demolitionpoliceassistenceletter.FilePath = LetterFileName;
                 }
 
 
@@ -153,17 +161,17 @@ namespace EncroachmentDemolition.Controllers
                     demolitionpoliceassistenceletter.FilePath = Data.FilePath;
                     string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
                     var Body = PopulateBody(Data, path);
-                    if(demolitionpoliceassistenceletter.GenerateUpload == 0)
-                    {
-                        ViewBag.IsVisible = true;
-                        ViewBag.DataLetter = Body;
-                        ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
-                    }
-                    else
-                    {
+                    //if(demolitionpoliceassistenceletter.GenerateUpload == 0)
+                    //{
+                    //    ViewBag.IsVisible = true;
+                    //    ViewBag.DataLetter = Body;
+                    //    ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
+                    //}
+                    //else
+                    //{
                         ViewBag.IsVisible = false;
-                        ViewBag.Message = Alert.Show("File Uploaded Successfully", "", AlertType.Success);
-                    }
+                        ViewBag.Message = Alert.Show("Record Submitted and  Uploaded Successfully", "", AlertType.Success);
+                    //}
                     return View(demolitionpoliceassistenceletter);
                 }
                 else
@@ -230,7 +238,7 @@ namespace EncroachmentDemolition.Controllers
                     {
                         demolitionpoliceassistenceletter.Document.CopyTo(stream);
                     }
-                    demolitionpoliceassistenceletter.FilePath = LetterfilePath;
+                    demolitionpoliceassistenceletter.FilePath = LetterFileName;
                 }
 
                 demolitionpoliceassistenceletter.ModifiedBy = SiteContext.UserId;
@@ -280,10 +288,102 @@ namespace EncroachmentDemolition.Controllers
         {
             FileHelper file = new FileHelper();
             var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(Id);
-            string path = Data.FilePath;
+            string path = targetPathDocument + Data.FilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+        #region Watch & Ward  Details
+        public async Task<PartialViewResult> WatchWardView(int id)
+        {
+            var Data = await _watchandwardService.FetchSingleResult(id);
+            if (Data != null)
+                Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+
+            return PartialView("_WatchWard", Data);
+        }
+
+
+
+        public async Task<FileResult> ViewDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
+            string path = Data.PhotoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        #endregion
+
+        #region EncroachmentRegisteration Details
+        public async Task<PartialViewResult> EncroachmentRegisterView(int id)
+        {
+            var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
+            encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
+            encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
+            encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
+            encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
+            encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
+
+            return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
+        }
+
+
+
+
+        public async Task<IActionResult> DownloadPhotoFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            EncroachmentPhotoFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentPhotoFileDetails(Id);
+            string filename = Data.PhotoFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+
+        public async Task<JsonResult> DetailsOfRepeater(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _encroachmentRegisterationService.GetDetailsOfEncroachment(Convert.ToInt32(Id));
+            return Json(data.Select(x => new { x.CountOfStructure, x.DateOfEncroachment, x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus, x.ReligiousStructure }));
+        }
+
+        public async Task<IActionResult> DownloadFirfile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            EncroachmentFirFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentFirFileDetails(Id);
+            string filename = Data.FirFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadLocationMapFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            EncroachmentLocationMapFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentLocationMapFileDetails(Id);
+            string filename = Data.LocationMapFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        #endregion
+
+        #region AnnexureA Details
+        public async Task<PartialViewResult> AnnexureADetails(int id)
+        {
+            var Data = await _annexureAService.FetchSingleResult(id);
+            Data.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
+            Data.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
+            Data.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
+            return PartialView("_AnnexureAView", Data);
+        }
+
+        public async Task<FileResult> ViewDocumentAnnexureA(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Fixingdocument Data = await _annexureAService.GetAnnexureAfiledetails(Id);
+            string path = Data.DocumentDetails;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        #endregion
+
 
     }
 }

@@ -7,8 +7,19 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="FixingDemolitionId" />
     <input type="hidden" asp-for="Id" value="@ViewBag.PrimaryId" />
-    <h3 class="mb-3 d-flex">Police Assistance letter By</h3>
+    <input type="hidden" id="EncroachmentId" value="@ViewBag.EncroachmentId" />
+    <input type="hidden" id="WatchWardId" value="@ViewBag.WatchWardId" />
+    <h3 class="mb-3 d-flex">Police Assistance letter</h3>
+    <div id="WatchWardDetailsDiv">
 
+    </div>
+
+    <div id="EncroachmentRegisterDetailsDiv">
+
+    </div>
+    <div id="AnnexureADetailsDiv">
+
+    </div>
     @*<div class="row mt-md-3">
             <input type="hidden" asp-for="GenerateUpload" value="0" id="GenerateUpload" />
             <div class="col-md-3">
@@ -37,7 +48,7 @@
                     <input type="Date" asp-for="MeetingDate" class="floating-label-field floating-label-field--s3" />
                     @*<span asp-validation-for="MeetingDate" class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>*@
                     <span asp-validation-for="MeetingDate" class="text-danger"></span>
-                    <label class="floating-label">Meeting Date</label>
+                    <label class="floating-label">Proposed Meeting Date</label>
                 </div>
             </div>
             <div class="col-md-3">
@@ -45,33 +56,36 @@
                     <input type="time" asp-for="MeetingTime" class="floating-label-field floating-label-field--s3" />
                     @*<span asp-validation-for="MeetingTime" class="text-danger" style="display:none;" id="MessageTime">Meeting Time is Mandatory</span>*@
                     <span asp-validation-for="MeetingTime" class="text-danger"></span>
-                    <label class="floating-label">Meeting Time</label>
+                    <label class="floating-label">Proposed Meeting Time</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" asp-for="PoliceStationName" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="PoliceStationName" class="text-danger"></span>
-                    <label class="floating-label">Meeting Date</label>
+                    <label class="floating-label">Name of Police Station </label>
                 </div>
             </div>
-            <div class="floating-label-wrap">
-                <select class="floating-label-field floating-label-field--s3" asp-for="IsReligiousStructure">
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
-                </select>
-                <span asp-validation-for="IsReligiousStructure" class="text-danger"></span>
-                <label asp-for="IsReligiousStructure" class="floating-label">Is Religious Structure </label>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsReligiousStructure">
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                    <span asp-validation-for="IsReligiousStructure" class="text-danger"></span>
+                    <label asp-for="IsReligiousStructure" class="floating-label">Whether any religious structure</label>
+                </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
+
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea type="text" asp-for="AddressKhasraNo" class="floating-label-field floating-label-field--s3" ></textarea>
+                    <textarea type="text" asp-for="AddressKhasraNo" class="floating-label-field floating-label-field--s3"></textarea>
                     <span asp-validation-for="AddressKhasraNo" class="text-danger"></span>
-                    <label class="floating-label">Meeting Date</label>
+                    <label class="floating-label">Khasra number/address of location</label>
                 </div>
             </div>
         </div>
@@ -80,28 +94,30 @@
         <div class="row pt-3">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="hidden" asp-for="FilePath" />
+                    <label style="color:#2196F3;font-size:.7rem;">
+                        Upload Document
+                    </label>
+                    <input type="hidden" asp-for="FilePath" value="@Model.FilePath" />
                     @{
                         @if (Model.FilePath != null)
                         {
-                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         }
                         else
                         {
-                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            <label class="floating-label">Upload Document</label>
+                            <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @*<label class="floating-label">Upload Document</label>*@
                         }
                     }
 
-                    <span asp-validation-for="Document" class="text-danger" style="display:none;" id="MessageFileUpload">File Upload is Mandatory</span>
-
+                    <span asp-validation-for="FilePath" class="text-danger" style="display:none;" id="MessageFileUpload">File Upload is Mandatory</span>
 
                 </div>
             </div>
             @{
                 @if (Model.FilePath != null)
                 {
-                    <div class="col-md-3 mt-2">
+                    <div class="col-md-3 mt-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             @Html.ActionLink(" (View Uploaded Document)", "ViewLetter", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
                         </div>

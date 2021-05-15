@@ -34,28 +34,38 @@ namespace Repository.EntityRepository
             var data = await _dbContext.Demolitionpoliceassistenceletter
                                    .Include(x => x.FixingDemolition)
                                   .Include(x => x.FixingDemolition.Encroachment)
+                                  .Include(x => x.FixingDemolition.Encroachment.WatchWard)
                                   .Include(x => x.FixingDemolition.Encroachment.Locality)
                                   .Where(x => x.FixingDemolitionId == id)
                                   .FirstOrDefaultAsync();
             return data;
         }
 
+        public async Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id)
+        {
+            return await _dbContext.Fixingdemolition
+                                     .Include(x => x.Encroachment)
+                                     .Include(x => x.Encroachment.WatchWard)
+                                     .Where(x => x.Id == id)
+                                     .FirstOrDefaultAsync();
+        }
 
 
-       // public async Task<List<Propertyregistration>> GetAllDemolitionPolicelist(int UserId)
-       // {
-       //     var badCodes = new[] { 3, 5 };
-       //     return await _dbContext.Propertyregistration
-       //.Include(x => x.ClassificationOfLand)
-       //                     .Include(x => x.Department)
-       //                     .Include(x => x.Division)
-       //                     .Include(x => x.DisposalType)
-       //                     .Include(x => x.MainLandUse)
-       //                     .Include(x => x.Zone)
-       //                     .Include(x => x.Locality)
-       //                             .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0)
-       //          .ToListAsync();
-       // }
+
+        // public async Task<List<Propertyregistration>> GetAllDemolitionPolicelist(int UserId)
+        // {
+        //     var badCodes = new[] { 3, 5 };
+        //     return await _dbContext.Propertyregistration
+        //.Include(x => x.ClassificationOfLand)
+        //                     .Include(x => x.Department)
+        //                     .Include(x => x.Division)
+        //                     .Include(x => x.DisposalType)
+        //                     .Include(x => x.MainLandUse)
+        //                     .Include(x => x.Zone)
+        //                     .Include(x => x.Locality)
+        //                             .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0)
+        //          .ToListAsync();
+        // }
 
         public async Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId, int approved)
         {
@@ -74,10 +84,10 @@ namespace Repository.EntityRepository
                                         )
                                         .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
 
-                int SortOrder = (int)model.orderby;
+                int SortOrder = (int)model.SortOrder;
                 if (SortOrder == 1)
                 {
-                    switch (model.colname.ToUpper())
+                    switch (model.SortBy.ToUpper())
                     {
 
                         case ("INSPECTIONDATE"):
@@ -96,7 +106,7 @@ namespace Repository.EntityRepository
                 }
                 else if (SortOrder == 2)
                 {
-                    switch (model.colname.ToUpper())
+                    switch (model.SortBy.ToUpper())
                     {
 
                         case ("INSPECTIONDATE"):

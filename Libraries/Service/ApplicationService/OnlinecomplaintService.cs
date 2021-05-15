@@ -81,14 +81,13 @@ namespace Libraries.Service.ApplicationService
             model.AddressOfComplaint = onlinecomplaint.AddressOfComplaint;
             model.LocationId = onlinecomplaint.LocationId;
             model.Lattitude = onlinecomplaint.Lattitude;
-
+            model.AddressOfEncroachedProperty = onlinecomplaint.AddressOfEncroachedProperty;
             model.Longitude = onlinecomplaint.Longitude;
             model.PhotoPath = onlinecomplaint.PhotoPath;
             model.Remarks = onlinecomplaint.Remarks;
             model.IsActive = onlinecomplaint.IsActive;
             model.ApprovedStatus = onlinecomplaint.ApprovedStatus;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
             _onlinecomplaintRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
@@ -96,7 +95,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Onlinecomplaint onlinecomplaint)
         {
-            onlinecomplaint.CreatedBy = 1;
             onlinecomplaint.CreatedDate = DateTime.Now;
             onlinecomplaint.IsActive = 1;
             _onlinecomplaintRepository.Add(onlinecomplaint);

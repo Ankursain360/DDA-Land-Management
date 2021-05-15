@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
 {
     public class Onlinecomplaint : AuditableEntity<int>
     {
-        [Required(ErrorMessage = " Complaint Name Is Mandatory")]
+        [Required(ErrorMessage = " Complainant Name Is Mandatory")]
         public string Name { get; set; }
        
 
@@ -30,6 +30,9 @@ namespace Libraries.Model.Entity
         public string Lattitude { get; set; }
         [Required(ErrorMessage = "Longitude Is Mandatory ")]
         public string Longitude { get; set; }
+
+        [Required(ErrorMessage = " Address/Landmark of Encroached Property Is Mandatory")]
+        public string AddressOfEncroachedProperty { get; set; }
         public byte? IsActive { get; set; }
 
      
