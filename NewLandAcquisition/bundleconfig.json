@@ -310,5 +310,11 @@
     "inputFiles": [
       "wwwroot/js/newus22plotedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlandacquiredvillagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlandacquiredvillagereportindex.js"
+    ]
   }
 ]
