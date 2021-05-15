@@ -11,7 +11,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IAnnexureAApprovalService : IEntityService<Fixingdemolition>
     {
-        Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId);
+        Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId);
         Task<Fixingdemolition> FetchSingleResult(int id);
         Task<List<Fixingdemolition>> GetAllFixingdemolition();
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
