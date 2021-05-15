@@ -9,6 +9,6 @@ namespace Dto.Master
         public string MenuName { get; set; }
         public string SortBy { get; set; }
         public string ParentMenu { get; set; }
-        public string IsActive { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -90,13 +90,14 @@
     </div>
     <br />
 
+
     @if (ViewBag.userid == 1)
     {
         <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
     }
     else
     {
-        <a asp-action="View" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
+        <a asp-action="Create" asp-route-id="@Model.Id" asp-controller="Newlandannexure1"> Annexure 1 </a>
     }
 
     <div class="row pt-3">

@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Model.Entity;
+using NewLandAcquisition.Filters;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Utility.Helper;
-using NewLandAcquisition.Filters;
-using Core.Enum;
 
 
 namespace NewLandAcquisition.Controllers
@@ -30,11 +27,12 @@ namespace NewLandAcquisition.Controllers
             _newlandnotificationService = newlandnotificationService;
             _configuration = configuration;
         }
-        [AuthorizeContext(ViewAction.View)]
+       // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] NewlandnotificationSearchDto model)
         {
@@ -115,6 +113,64 @@ namespace NewLandAcquisition.Controllers
                 return View(newlandnotification);
             }
         }
+
+
+       
+
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _newlandnotificationService.FetchSingleResult1(id);          
+            Data.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        
+
+
+       [HttpPost]
+       
+        public async Task<IActionResult> Edit(int id, Newlandnotification newlandnotification)
+        {
+            newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
+
+            if (ModelState.IsValid)
+            {
+                newlandnotification.ModifiedBy = SiteContext.UserId;
+                var result = await _newlandnotificationService.Update(id, newlandnotification);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    var list = await _newlandnotificationService.GetAllNewlandNotification();
+                    return View("Index", list);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(newlandnotification);
+
+                }
+
+            }
+            return View(newlandnotification);
+        }
+
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _newlandnotificationService.FetchSingleResult1(id);
+            Data.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
 
     }
 }

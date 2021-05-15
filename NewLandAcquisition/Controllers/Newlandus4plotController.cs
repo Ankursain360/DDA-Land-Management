@@ -15,7 +15,6 @@ using Notification.OptionEnums;
 using Utility.Helper;
 
 
-
 namespace NewLandAcquisition.Controllers
 {
     public class Newlandus4plotController : BaseController
@@ -87,6 +86,9 @@ namespace NewLandAcquisition.Controllers
                 }
            
         }
+
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
@@ -101,6 +103,8 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
+
+
         [HttpPost]
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandus4plot us4plot)
@@ -129,6 +133,11 @@ namespace NewLandAcquisition.Controllers
             }
             return View(us4plot);
         }
+
+
+
+
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
@@ -204,7 +213,7 @@ namespace NewLandAcquisition.Controllers
                     data.Add(new NewLandUndersection4PlotListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].Notification == null ? "" : result[i].Notification.Name,
+                        NotificationNo = result[i].Notification == null ? "" : result[i].Notification.NotificationNo,
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
                         ActualArea = result[i].Khasra.Bigha.ToString()

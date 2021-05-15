@@ -1,10 +1,8 @@
 ﻿@model Libraries.Model.Entity.Possessiondetails
 @await Component.InvokeAsync("PageHeader", new { pageName = "Possession Detail" })
 
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-
-        <div class="panel-body">
+<div class="pt-3" >
+   
             <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <h3 class="mb-3 d-flex">Add Details</h3>
@@ -213,8 +211,7 @@
 
 
             </form>
-        </div>
-    </div>
+       
 </div>
 
 

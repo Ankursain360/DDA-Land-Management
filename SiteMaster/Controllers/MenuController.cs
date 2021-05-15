@@ -218,8 +218,8 @@ namespace SiteMaster.Controllers
                         ModuleName = result[i].ModuleId==null ?"": result[i].Module.Name,
                         MenuName = result[i].Name,
                         SortBy = result[i].SortBy.ToString(),
-                        ParentMenu = result[i].ParentMenuId == null ? "" : result[i].ParentMenu.Name,                     
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        ParentMenu = result[i].ParentMenuId == null ? "" : result[i].ParentMenu.Name,
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     });
                 }
             }

@@ -14,22 +14,22 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("newlandus22plot", "lms");
 
             builder.HasIndex(e => e.KhasraId)
-                .HasName("FK22khasraId_idx");
+                    .HasName("fkus22khasra_idx");
 
             builder.HasIndex(e => e.NotificationId)
-                .HasName("FK22notifId_idx");
+                .HasName("fkus22newlandnotification_idx");
 
             builder.HasIndex(e => e.Us17Id)
-                .HasName("FKus17Id_idx");
+                .HasName("fkplot17usid_idx");
 
             builder.HasIndex(e => e.Us4Id)
-                .HasName("FKus4Id_idx");
+                .HasName("fkplot4usid_idx");
 
             builder.HasIndex(e => e.Us6Id)
-                .HasName("FKus6Id_idx");
+                .HasName("fkplot6usid_idx");
 
             builder.HasIndex(e => e.VillageId)
-                .HasName("FK22vilId_idx");
+                .HasName("fkus22village_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -97,7 +97,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.VillageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk22usvilage");
-
         }
     } 
 }

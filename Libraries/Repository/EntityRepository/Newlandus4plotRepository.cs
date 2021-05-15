@@ -26,7 +26,7 @@ namespace Libraries.Repository.EntityRepository
                                   .Include(x => x.Notification)
                                   .Include(x => x.Khasra)
                                   .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                   && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                   && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                    && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                   .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -42,9 +42,9 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Notification)
                                                .Include(x => x.Khasra)
                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
-                                               .OrderBy(a => a.Notification.Name)
+                                               .OrderBy(a => a.Notification.NotificationNo)
                                                .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
 
                         break;
@@ -56,7 +56,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Notification)
                                                .Include(x => x.Khasra)
                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                                .OrderBy(a => a.Village.Name)
                                                .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize); 
@@ -69,7 +69,7 @@ namespace Libraries.Repository.EntityRepository
                                               .Include(x => x.Notification)
                                               .Include(x => x.Khasra)
                                               .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                               .OrderBy(a => a.Khasra.Name)
                                               .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
@@ -85,7 +85,7 @@ namespace Libraries.Repository.EntityRepository
                                               .Include(x => x.Notification)
                                               .Include(x => x.Khasra)
                                               .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                               .OrderByDescending(a => a.IsActive)
                                               .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
@@ -107,9 +107,9 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Notification)
                                                .Include(x => x.Khasra)
                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
-                                               .OrderByDescending(a => a.Notification.Name)
+                                               .OrderByDescending(a => a.Notification.NotificationNo)
                                                .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
 
                         break;
@@ -121,7 +121,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Notification)
                                                .Include(x => x.Khasra)
                                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                                && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                 && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                                .OrderByDescending(a => a.Village.Name)
                                                .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
@@ -134,7 +134,7 @@ namespace Libraries.Repository.EntityRepository
                                               .Include(x => x.Notification)
                                               .Include(x => x.Khasra)
                                               .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                               .OrderByDescending(a => a.Khasra.Name)
                                               .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
@@ -150,7 +150,7 @@ namespace Libraries.Repository.EntityRepository
                                               .Include(x => x.Notification)
                                               .Include(x => x.Khasra)
                                               .Where(x => (string.IsNullOrEmpty(model.locality) || x.Village.Name.Contains(model.locality))
-                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.Name.Contains(model.notification))
+                                               && (string.IsNullOrEmpty(model.notification) || x.Notification.NotificationNo.Contains(model.notification))
                                                && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                               .OrderBy(a => a.IsActive)
                                               .GetPaged<Newlandus4plot>(model.PageNumber, model.PageSize);
@@ -171,11 +171,16 @@ namespace Libraries.Repository.EntityRepository
                                    .ToListAsync();
         }
 
-        public async Task<List<LandNotification>> GetAllNotification()
+        public async Task<List<Newlandnotification>> GetAllNotification()
         {
-            List<LandNotification> notificationList = await _dbContext.LandNotification.Where(x => x.IsActive == 1).ToListAsync();
+            List<Newlandnotification> notificationList = await _dbContext.Newlandnotification
+                                                          .Where(x => x.IsActive == 1 && x.NotificationTypeId==1 ).ToListAsync();
             return notificationList;
         }
+
+
+
+
         public async Task<List<Newlandvillage>> GetAllVillage()
         {
             List<Newlandvillage> villageList = await _dbContext.Newlandvillage.Where(x => x.IsActive == 1).ToListAsync();

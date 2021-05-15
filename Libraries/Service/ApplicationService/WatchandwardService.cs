@@ -120,9 +120,9 @@ namespace Libraries.Service.ApplicationService
             return await _watchandwardRepository.GetWatchandwardReportData(watchAndWardPeriodReportSearchDto);
         }
 
-        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int zoneId)
         {
-            return await _watchandwardRepository.GetPagedWatchandward(model);
+            return await _watchandwardRepository.GetPagedWatchandward(model, zoneId);
         }
 
 

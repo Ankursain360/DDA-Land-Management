@@ -472,5 +472,29 @@
     "inputFiles": [
       "wwwroot/js/UnderSection4plotEdit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardplotdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardplotdetailsedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UnderSection17plotEdit.min.js",
+    "inputFiles": [
+      "wwwroot/js/UnderSection17plotEdit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection6plotedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection6plotedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/us22plotedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/us22plotedit.js"
+    ]
   }
 ]

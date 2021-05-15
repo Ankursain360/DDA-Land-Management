@@ -7,11 +7,11 @@ var sortOrder = 1;//default Ascending
 
 
 $(document).ready(function () {
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetPossession(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetPossession(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -19,14 +19,20 @@ $("#btnReset").click(function () {
  
     $('#txtNotificationN').val('');
 
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetPossession(currentPageNumber, currentPageSize, sortOrder);
 });
+
+
+$('#ddlSort').change(function () {
+    GetPossession(currentPageNumber, currentPageSize, sortOrder);
+});
+
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetPossession(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -34,10 +40,10 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetPossession(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDivision(pageNumber, pageSize, order) {
+function GetPossession(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/PossessionDetail/List`, 'html', param, function (response) {
         console.log(response);
@@ -66,12 +72,12 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
 
 function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetPossession(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetPossession(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
 

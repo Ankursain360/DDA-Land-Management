@@ -28,7 +28,7 @@ namespace Libraries.Service.IApplicationService
 
         public async Task<List<Interest>> GetAllInterest()
         {
-            return await _interestRepository.GetAllDetails();
+            return await _interestRepository.GetAllInterest();
         }
 
         public async Task<List<PropertyType>> GetDropDownList()

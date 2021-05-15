@@ -19,7 +19,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select  asp-for="DepartmentId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                <select asp-for="DepartmentId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
                     <option value="">Select</option>
                 </select>
                 <label asp-validation-for="DepartmentId" class="error"></label>
@@ -29,7 +29,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="ZoneId"  class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
+                <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
                     <option value="value">Select</option>
                 </select>
                 <label asp-validation-for="ZoneId" class="error"></label>
@@ -41,7 +41,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="DivisionId"  class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
+                <select asp-for="DivisionId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
                     <option value="value">Select</option>
                 </select>
                 <label asp-validation-for="DivisionId" class="error"></label>
@@ -51,7 +51,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="LocalityId"  class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                     <option value="value">Select</option>
                 </select>
                 <label asp-validation-for="LocalityId" class="error"></label>
@@ -63,7 +63,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="KhasraNo"  class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.KhasraList,"Name","Name"))">
+                <select asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.KhasraList,"Name","Name"))">
                     <option value="0">Select</option>
                 </select>
                 <label asp-validation-for="KhasraNo" class="error"></label>
@@ -79,29 +79,63 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+    <div id="DivArea">
+        <h2 class="my-3 sub-heading">Area</h2>
+        <div class="row mt-md-3">
 
-                <input type="text" class="floating-label-field floating-label-field--s3 numbers" disabled asp-for="Area" />
-                <span asp-validation-for="Area" class="text-danger"></span>
-                <label class="floating-label">Area</label>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                        <option value="1">Sq Yd.</option>
+                        <option value="2">Acre</option>
+                        <option value="3">Hectare</option>
+                        <option value="4">Sq. Mt.</option>
+                    </select>
+                    <span asp-validation-for="AreaUnit" class="text-danger"></span>
+                    <label asp-for="AreaUnit" class="floating-label">Area Unit </label>
+                </div>
             </div>
         </div>
+
+        <div id="AreainSqAcreHec">
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                        <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
+                    <span asp-validation-for="Area" class="text-danger"></span>
+                    <label class="floating-label">Area(in sq. mt.)</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <textarea class="floating-label-field floating-label-field--s3" asp-for="LocationAddressWithLandMark"></textarea>
+                <textarea class="floating-label-field floating-label-field--s3" limit="1000" placeholder="Location/Address with land mark" asp-for="LocationAddressWithLandMark"></textarea>
                 <span asp-validation-for="LocationAddressWithLandMark" class="text-danger"></span>
                 <label class="floating-label">Location/Address with land mark</label>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
+                <input type="text" placeholder="Name of Encroacher" limit="100" class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
                 <span asp-validation-for="EncroacherName" class="text-danger"></span>
                 <label class="floating-label">Name of Encroacher</label>
             </div>
@@ -252,7 +286,7 @@
             </div>
         </div>
     </div>
-   
+
     <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap">
@@ -260,11 +294,11 @@
                 @{
                     if (Model.EncroachmentFirFileDetails != null && Model.EncroachmentFirFileDetails.Count > 0)
                     {
-                       
+
                         foreach (var item in Model.EncroachmentFirFileDetails)
                         {
                             <a class="badge badge-primary px-2" asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View Existing Document @(FirFile += 1) )</a>
-                           
+
                         }
                         <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="Firfile" class="text-danger"></span>
@@ -280,7 +314,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <input type="text" asp-for="PoliceStation"  class="floating-label-field floating-label-field--s3" />
+                <input type="text" asp-for="PoliceStation" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="PoliceStation" class="text-danger"></span>
                 <label class="floating-label">Police Station</label>
             </div>
@@ -302,11 +336,11 @@
                 @{
                     if (Model.EncroachmentLocationMapFileDetails != null && Model.EncroachmentLocationMapFileDetails.Count > 0)
                     {
-                      
+
                         foreach (var item in Model.EncroachmentLocationMapFileDetails)
                         {
                             <a asp-action="DownloadLocationMapFile" class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
-                           
+
                         }
                         <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="LocationMapFile" class="text-danger"></span>
@@ -327,11 +361,11 @@
                 @{
                     if (Model.EncroachmentPhotoFileDetails != null && Model.EncroachmentPhotoFileDetails.Count > 0)
                     {
-                        
+
                         foreach (var item in Model.EncroachmentPhotoFileDetails)
                         {
                             <a asp-action="DownloadPhotoFile" class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(PhotoFile += 1 ))</a>
-                            
+
                         }
                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="PhotoFile" class="text-danger"></span>

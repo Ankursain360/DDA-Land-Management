@@ -30,7 +30,7 @@ namespace Libraries.Service.IApplicationService
 
 
 
-        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
+        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int zoneId);
 
 
 

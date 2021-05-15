@@ -84,14 +84,48 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Encroachment.Area" placeholder="Area" disabled
-                                           class="floating-label-field floating-label-field--s3 numbers" />
-                                    <label class="floating-label">Area</label>
+                        <div id="DivArea">
+                            <h2 class="my-3 sub-heading">Area</h2>
+                            <div class="row mt-md-3">
+
+                                <div class="col-md-4">
+                                    <div class="floating-label-wrap">
+                                        <select class="floating-label-field floating-label-field--s3" asp-for="Encroachment.AreaUnit" disabled>
+                                            <option value="1">Sq Yd.</option>
+                                            <option value="2">Acre</option>
+                                            <option value="3">Hectare</option>
+                                            <option value="4">Sq. Mt.</option>
+                                        </select>
+                                        <label asp-for="Encroachment.AreaUnit" class="floating-label">Area Unit </label>
+                                    </div>
                                 </div>
                             </div>
+
+                            <div id="AreainSqAcreHec">
+                                <div class="row mt-md-3">
+                                    <div class="col-md-4">
+                                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                            <input asp-for="Encroachment.TotalAreaInSqAcreHt" type="text" disabled class="floating-label-field floating-label-field--s3 numbers TotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                            <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row mt-md-3">
+                                <div class="col-md-6">
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" disabled placeholder="Area" asp-for="Encroachment.Area" />
+                                        <label class="floating-label">Area(in sq. mt.)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row mt-md-3">
                             <div class="form-group col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <textarea asp-for="Encroachment.LocationAddressWithLandMark" placeholder="Location/Address with land mark" disabled
@@ -99,7 +133,15 @@
                                     <label class="floating-label">Location/Address with land mark</label>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" disabled placeholder="Name of Encroacher" limit="100" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.EncroacherName" />
+                                    <label class="floating-label">Name of Encroacher</label>
+                                </div>
+                            </div>
                         </div>
+
+                        
                         <div id="Divclsification">
                             <h2 class="my-3 sub-heading">Details of Encroachment</h2>
                             <div class="table-section bg-white border shadow rounded">

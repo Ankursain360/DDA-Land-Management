@@ -32,7 +32,7 @@ namespace Libraries.Model.Entity
 
 
         public Newlandkhasra Khasra { get; set; }
-        public LandNotification Notification { get; set; }
+        public Newlandnotification Notification { get; set; }
         public Newlandvillage Village { get; set; }
         //Area//
         [NotMapped]
@@ -51,7 +51,7 @@ namespace Libraries.Model.Entity
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? ABiswanshi { get; set; }
         [NotMapped]
-        public List<LandNotification> NotificationList { get; set; }
+        public List<Newlandnotification> NotificationList { get; set; }
         [NotMapped]
         public List<Newlandvillage> VillageList { get; set; }
         [NotMapped]

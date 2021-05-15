@@ -17,7 +17,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Newlandus6plot>> GetPagedUS6Plot(Newlandus6plotSearchDto model);
         Task<List<Newlandus6plot>> GetAllUS6Plot();
-        Task<List<LandNotification>> GetAllNotification();
+        Task<List<Newlandnotification>> GetAllNotification();
         Task<List<Newlandvillage>> GetAllVillage();
         Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
         Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);

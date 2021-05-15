@@ -12,6 +12,7 @@ using SiteMaster.Filters;
 using Core.Enum;
 using System.Collections.Generic;
 using Utility.Helper;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -179,17 +180,31 @@ namespace SiteMaster.Controllers
         }
 
 
+      
+      
+
         [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> Download()
+        public async Task<IActionResult> JudgementstatusList()
         {
-            List<Judgementstatus> result = await _JudgementstatusService.GetAll();
-            var memory = ExcelHelper.CreateExcel(result);
-            string sFileName = @"Judgementstatus.xlsx";
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+            var result = await _JudgementstatusService.GetAll();
+            List<JudgementstatusListDto> data = new List<JudgementstatusListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new JudgementstatusListDto()
+                    {
+                        Id = result[i].Id,
+                        JudgementStatus = result[i].Status,
 
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
-
-
 
 
 

@@ -1,26 +1,83 @@
 ﻿$(document).ready(function () {
-    var value = $("#GenerateUpload").val();
-    if (value == 0) {
-        $("#divGenerate").show();
-        $("#divUpload").hide();
-        $("#btnSubmit").val("Generate");
-    }
-    else {
-        $("#divGenerate").hide();
-        $("#divUpload").show();
-        $("#btnSubmit").val("Upload");
-
-    }
-    //if ($("#Generate").is(":checked")) {
+    //var value = $("#GenerateUpload").val();
+    //if (value == 0) {
     //    $("#divGenerate").show();
     //    $("#divUpload").hide();
     //    $("#btnSubmit").val("Generate");
     //}
-    //else if ($("#Upload").is(":checked")) {
+    //else {
     //    $("#divGenerate").hide();
     //    $("#divUpload").show();
     //    $("#btnSubmit").val("Upload");
+
     //}
+    var id = parseInt($('#FixingDemolitionId').val());
+    var encroachmentId = parseInt($('#EncroachmentId').val());
+    var watchWardId = parseInt($('#WatchWardId').val());
+    GetWatchWardDetails(watchWardId);
+    GetEncroachmentDetails(encroachmentId);
+    GetAnnexureADetails(id);
+});
+function GetWatchWardDetails(id) {
+    HttpGet(`/DemolitionPoliceAssistenceLetter/WatchWardView/?Id=${id}`, 'html', function (response) {
+        $('#WatchWardDetailsDiv').html("");
+        $('#WatchWardDetailsDiv').html(response);
+    });
+};
+function GetEncroachmentDetails(id) {
+    HttpGet(`/DemolitionPoliceAssistenceLetter/EncroachmentRegisterView/?Id=${id}`, 'html', function (response) {
+        $('#EncroachmentRegisterDetailsDiv').html("");
+        $('#EncroachmentRegisterDetailsDiv').html(response);
+    });
+};
+
+function GetAnnexureADetails(id) {
+    HttpGet(`/DemolitionPoliceAssistenceLetter/AnnexureADetails/?Id=${id}`, 'html', function (response) {
+        $('#AnnexureADetailsDiv').html("");
+        $('#AnnexureADetailsDiv').html(response);
+    });
+};
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
+
+$("#collapse").click(function () {
+    $('#collapseApprroval').collapse("toggle").promise().done(function () {
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+
+$("#collapse").click(function () {
+    $("#collapseHistoryApprroval").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+$("#collapse").click(function () {
+    $("#collapseWatchWardApprroval").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+
+$("#collapse").click(function () {
+    $("#collapseAnnexureA").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
 });
 
 $("input[name='radioStatus']").click(function () {
@@ -35,7 +92,7 @@ $("input[name='radioStatus']").click(function () {
         $("#divGenerate").hide();
         $("#divUpload").show();
         $("#btnSubmit").val("Upload");
-       
+
     }
     //if ($("#Generate").is(":checked")) {
     //    $("#divGenerate").show();
@@ -128,63 +185,71 @@ function getPDF() {
 
 function check() {
     var checkresult = false;
-    var selected = $("input[type='radio'][name='radioStatus']:checked");
-    $("#GenerateUpload").val(selected.val());
-    if (selected.val() == 0) {
-        var Date_val = $('#MeetingDate').val();
-        if (Date_val == "") {
-            checkresult = false;
-            $("#MessageDate").show();
-        } else {
-            checkresult = true;
-            $("#MessageDate").hide();
-        }
+    //var selected = $("input[type='radio'][name='radioStatus']:checked");
+    //$("#GenerateUpload").val(selected.val());
+    //if (selected.val() == 0) {
+    //    var Date_val = $('#MeetingDate').val();
+    //    if (Date_val == "") {
+    //        checkresult = false;
+    //        $("#MessageDate").show();
+    //    } else {
+    //        checkresult = true;
+    //        $("#MessageDate").hide();
+    //    }
 
-        var Time_val = $('#MeetingTime').val();
-        if (Time_val == "") {
-            checkresult = false;
-            $("#MessageTime").show();
-        } else {
-            checkresult = true;
-            $("#MessageTime").hide();
-        }
-        if (Date_val == "" || Time_val == "") {
-            checkresult = false;
-            return false;
-        }
-        else {
-            return true;
-        }
+    //    var Time_val = $('#MeetingTime').val();
+    //    if (Time_val == "") {
+    //        checkresult = false;
+    //        $("#MessageTime").show();
+    //    } else {
+    //        checkresult = true;
+    //        $("#MessageTime").hide();
+    //    }
+    //    if (Date_val == "" || Time_val == "") {
+    //        checkresult = false;
+    //        return false;
+    //    }
+    //    else {
+    //        return true;
+    //    }
+    //}
+    //else {
+    var fileInput = document.getElementById('Document');
+    var filePath = $("#FilePath").val(); // fileInput.value;
+    if (filePath == "") {
+        checkresult = false;
+        $("#MessageFileUpload").show();
+    } else {
+        checkresult = true;
+    }
+
+    if (filePath == "") {
+        checkresult = false;
+        return false;
     }
     else {
-        var fileInput = document.getElementById('Document');
-        var filePath = fileInput.value;
-        if (filePath == "") {
-            checkresult = false;
-            $("#MessageFileUpload").show();
-        } else {
-            checkresult = true;
-        }
-
-        if (filePath == "") {
-            checkresult = false;
-            return false;
-        }
-        else {
-            return true;
-        }
-
+        return true;
     }
+
+    // }
 }
 $('#Document').change(function () {
     var fileInput = document.getElementById('Document');
     var filePath = fileInput.value;
     const size = (fileInput.files[0].size);
-    fileValidation(filePath, fileInput, size);
+    fileValidationLetter(filePath, fileInput, size);
+    if (fileInput.value != "") {
+        $("#FilePath").val("filePath");
+        $("#MessageFileUpload").hide();
+    }
+    else {
+        $("#FilePath").val('');
+        $("#MessageFileUpload").show();
+    }
 });
 
 
-function fileValidation(filePath, fileInput, size) {
+function fileValidationLetter(filePath, fileInput, size) {
     var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.docx|\.doc)$/i;
     if (!allowedExtensions.exec(filePath)) {
         alert('Invalid file type');

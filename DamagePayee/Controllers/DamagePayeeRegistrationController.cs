@@ -102,7 +102,7 @@ namespace DamagePayee.Controllers
 
                         string link = "<a target=\"_blank\" href=\"" + aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id) + "\">Click Here</a>";
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
-                        string linkhrefregistration  = aburl + " ? " + encryptionHelper.EncryptString(AesKey, "EmailID") + " = " + encryptionHelper.EncryptString(AesKey, EmailID) + " & " + encryptionHelper.EncryptString(AesKey, "Id") + " = " + encryptionHelper.EncryptString(AesKey, Id);
+                        string linkhrefregistration = aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id);
                         #region Mail Generation Added By Renu
 
                         MailSMSHelper mailG = new MailSMSHelper();

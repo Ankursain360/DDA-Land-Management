@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<EncroachmentRegisteration> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    //To Delete Data added by Praveen
         Task<List<Locality>> GetAllLocalityList(int divisionId);
-        Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved);
+        Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Watchandward>> GetAllEncroachmentRegisterlist(int approved);

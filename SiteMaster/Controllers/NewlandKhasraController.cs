@@ -202,7 +202,7 @@ namespace SiteMaster.Controllers
                         LandCategory = result[i].LandCategory == null ? "" : result[i].LandCategory.Name,
                         KhasraNo = result[i].Name,                      
                         Area= result[i].Bigha.ToString() +'-'+ result[i].Biswa.ToString()+'-' + result[i].Biswanshi.ToString(),
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
             }

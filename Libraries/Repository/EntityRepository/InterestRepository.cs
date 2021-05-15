@@ -20,7 +20,13 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<List<Interest>> GetAllInterest()
+        {
+            return (await _dbContext.Interest.Include(x => x.Property).ToListAsync())
+                          .GroupBy(x => x.PropertyId)
+                          .SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList();
 
+        }
         public async Task<List<Interest>> GetAllDetails()
         {
             List<Interest> olist = new List<Interest>();

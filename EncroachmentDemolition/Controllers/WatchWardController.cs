@@ -64,7 +64,7 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] WatchandwardSearchDto model)
         {
-            var result = await _watchandwardService.GetPagedWatchandward(model);
+            var result = await _watchandwardService.GetPagedWatchandward(model, SiteContext.ZoneId ?? 0);
             return PartialView("_List", result);
         }
 

@@ -204,9 +204,10 @@ namespace SiteMaster.Controllers
                         ProposalName = result[i].Name,
                         RequiredAgency = result[i].RequiredAgency,
                         ProposalNo = result[i].ProposalFileNo,
-                        ProposalDate = result[i].ProposalDate.ToString(),
+                        ProposalDate = Convert.ToDateTime(result[i].ProposalDate).ToString("dd-MMM-yyyy"),
+                       
                         Area = result[i].Bigha.ToString()+'-'+result[i].Biswa.ToString() + '-'+ result[i].Biswanshi.ToString(),
-                        IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
             }

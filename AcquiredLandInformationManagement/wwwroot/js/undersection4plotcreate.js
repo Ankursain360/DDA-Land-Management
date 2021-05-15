@@ -4,8 +4,8 @@ var currentPageSize = 5;
 
 $(document).ready(function () {
     var id = $("#UnderSection4Id").val();
-    $("#VillageId").val('');
-    $("#KhasraId").val('');
+    //$("#VillageId").val('');
+    //$("#KhasraId").val('');
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -20,6 +20,20 @@ $(document).ready(function () {
             $('#divnotification4Table').html("");
             $('#divnotification4Table').html(response);
 
+        });
+
+    }
+    var kid = $("#KhasraId").val();
+
+    if (kid) {
+        HttpGet(`/UnderSection4PlotForm/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+
+            $("#Bigha1").val(response.bigha);
+            $("#Biswa1").val(response.biswa);
+            $("#Biswanshi1").val(response.biswanshi);
+
+
+            // alert(JSON.stringify(response));
         });
 
     }
@@ -84,7 +98,7 @@ function onChange(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
 
-       // $("#KhasraId").select2('val', '')
+        $("#KhasraId").select2('val', '')
         $("#KhasraId").html(html);
     });
 };

@@ -18,7 +18,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Newlandus4plot> FetchUS4Plot(int? notificationId);
         Task<Newlandus6plot> FetchUS6Plot(int? notificationId);
         Task<Newlandus17plot> FetchUS17Plot(int? notificationId);
-        Task<List<LandNotification>> GetAllNotification();
+        Task<List<Newlandnotification>> GetAllNotification();
         Task<List<Newlandvillage>> GetAllVillage();
         Task<List<Newlandkhasra>> GetAllKhasra(int? villageId);
         Task<Newlandkhasra> FetchSingleKhasraResult(int? khasraId);

@@ -104,7 +104,7 @@ function onChange(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
 
-        // $("#KhasraId").select2('val', '')
+         $("#KhasraId").select2('val', '')
         $("#KhasraId").html(html);
     });
 };

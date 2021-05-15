@@ -27,11 +27,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
           
             services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
 
-           
-            services.AddScoped<ISchemeRepository, SchemeRepository>();
 
-            
-            
+            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
+           
             services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
            
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
@@ -73,13 +71,22 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INewlandkhasraRepository, NewlandkhasraRepository>();
             services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
             services.AddScoped<IKhasraRepository, KhasraRepository>();
+            services.AddScoped<IAwardmasterdetailsRepository, AwardmasterdetailsRepository>();
+
+            services.AddScoped<IUndersection4Repository, Undersection4Repository>();
+            services.AddScoped<IUnderSection6Repository, UnderSection6Repository>();
+            services.AddScoped<IUndersection17Repository, Undersection17Repository>();
+            services.AddScoped<IUndersection22Repository, Undersection22Repository>();
+
             /* Application Services */
+
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IJointsurveyService, JointsurveyService>();
-          
-            services.AddScoped<ISchemeService, SchemeService>();
-          
+
+
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
+
             services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
           
             services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
@@ -124,6 +131,13 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
             services.AddScoped<INewlandnotificationService, NewlandnotificationService>();
             services.AddScoped<IKhasraService, KhasraService>();
+            services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
+
+            services.AddScoped<IUndersection4service, Undersection4Service>();
+            services.AddScoped<IUnderSection6Service, UnderSection6Service>();
+            services.AddScoped<IUndersection17Service, Undersection17Service>();
+            services.AddScoped<IUndersection22Service, Undersection22Service>();
+
         }
     }
 }

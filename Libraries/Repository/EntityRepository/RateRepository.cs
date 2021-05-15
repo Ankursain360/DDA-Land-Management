@@ -19,6 +19,13 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<List<Rate>> GetAllRate()
+        {
+            return (await _dbContext.Rate.Include(x => x.Property)
+                .ToListAsync())
+                .GroupBy(x => x.PropertyId).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList();
+
+        }
 
         public async Task<List<Rate>> GetAllDetails()
         {

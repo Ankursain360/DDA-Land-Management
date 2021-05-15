@@ -53,7 +53,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeasePublicInterface", "Lea
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaseForPublic", "LeaseForPublic\LeaseForPublic.csproj", "{27D657D3-EB22-427E-8F92-2085DED838DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacant.Land.Api", "Vacant.Land.Api\Vacant.Land.Api.csproj", "{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vacant.Land.Api", "Vacant.Land.Api\Vacant.Land.Api.csproj", "{3A20693B-03A7-46C1-8E21-100A8AA2C3F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

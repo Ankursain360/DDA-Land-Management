@@ -1,100 +1,74 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
+var StatusId = 1;
 
 $(document).ready(function () {
     var StatusId = 1;
-    GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
+    GetDemolitionList(currentPageNumber, currentPageSize, sortOrder, StatusId);
 });
 
-function GetDemolitionList(pageNumber, pageSize, StatusId) {
-    var param = GetSearchParam(pageNumber, pageSize, StatusId);
+function GetDemolitionList(pageNumber, pageSize, order, StatusId) {
+    var param = GetSearchParam(pageNumber, pageSize, order, StatusId);
     HttpPost(`/DemolitionPoliceAssistenceLetter/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize, StatusId) {
-
-    var sorbyname = $('#Sortbyd').val();
-    var sortdesc = $("#sortdesc").val();
-    if (sorbyname) { } else {
-        sorbyname = 'InspectionDate';
-    }
+function GetSearchParam(pageNumber, pageSize, sortOrder, StatusId) {
 
     var model = {
-        colname: sorbyname,
-        orderby: sortdesc,
         StatusId: StatusId,
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
-$("#Sortbyd").change(function () {
-
-    
-        var StatusId = 1;
-
-        GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
-    
- 
-
-
-  
-
-});
-
-$("#ascId").click(function () {
-    $("#descId").removeClass("active");
-    $("#ascId").addClass("active");
-    $("#sortdesc").val(2);
-
-
+$("#ddlSort").change(function () {
     var StatusId = 1;
+    GetDemolitionList(currentPageNumber, currentPageSize, sortOrder, StatusId);
+});
 
-    GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    var StatusId = 1;
+    sortOrder = 1;//for Ascending
+    GetDemolitionList(currentPageNumber, currentPageSize, sortOrder, StatusId);
 
 });
 
-$("#descId").click(function () {
-    $("#ascId").removeClass("active");
-    $("#descId").addClass("active");
-    $("#sortdesc").val(1);
-  
-        var StatusId = 1;
-  
-
-
-
-    GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    var StatusId = 1;
+    GetDemolitionList(currentPageNumber, currentPageSize, sortOrder, StatusId);
 });
-
-
 
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetDemolitionList(pageNo, currentPageSize);
+    GetDemolitionList(parseInt(pageNo), parseInt(currentPageSize), sortOrder, StatusId);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetDemolitionList(currentPageNumber, pageSize);
+    GetDemolitionList(parseInt(currentPageNumber), parseInt(pageSize), sortOrder, StatusId);
     currentPageSize = pageSize;
 }
-
 
 $("input[name='radioStatus']").click(function () {
     if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-        GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
+        GetDemolitionList(currentPageNumber, currentPageSize, sortOrder, StatusId);
 
     }
     else if ($("#Generated").is(":checked")) {
         var StatusId = 2;
-        GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
+        GetDemolitionList(currentPageNumber, currentPageSize, sortOrder, StatusId);
     }
 
 });

@@ -9,7 +9,7 @@ namespace Dto.Master
         public string LandCategory { get; set; }
         public string KhasraNo { get; set; }      
         public string Area { get; set; }
-        public string IsActive { get; set; }
+        public string Status { get; set; }
     
       }
 }

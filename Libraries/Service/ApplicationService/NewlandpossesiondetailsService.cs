@@ -106,9 +106,9 @@ namespace Libraries.Service.ApplicationService
             model.Bigha = possessiondetails.Bigha;
             model.Biswa = possessiondetails.Biswa;
             model.Biswanshi = possessiondetails.Biswanshi;
-            model.Us17id = model.Us17id;
-            model.Us4id = model.Us4id;
-            model.Us6id = model.Us6id;
+            model.Us17id = possessiondetails.Us17id;
+            model.Us4id = possessiondetails.Us4id;
+            model.Us6id = possessiondetails.Us6id;
             model.ReasonNonPoss = possessiondetails.ReasonNonPoss;
             model.IsActive = possessiondetails.IsActive;
             model.Remarks = possessiondetails.Remarks;

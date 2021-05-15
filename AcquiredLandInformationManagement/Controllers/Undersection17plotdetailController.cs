@@ -46,7 +46,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             Undersection17plotdetail undersection17plotdetail = new Undersection17plotdetail();
             undersection17plotdetail.IsActive = 1;
-
+            undersection17plotdetail.VillageId = null;
 
             undersection17plotdetail.KhasraList = await _undersection17plotdetailService.BindKhasra(undersection17plotdetail.VillageId);
             undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
@@ -62,10 +62,10 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-                Undersection17plotdetail undersection17plotdetail = new Undersection17plotdetail();
+                
                 undersection17Plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
-                undersection17plotdetail.KhasraList = await _undersection17plotdetailService.BindKhasra(undersection17plotdetail.VillageId);
-                undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
+                undersection17Plotdetail.KhasraList = await _undersection17plotdetailService.BindKhasra(undersection17Plotdetail.VillageId);
+                undersection17Plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
 
                 if (ModelState.IsValid)
                 {
@@ -129,7 +129,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _undersection17plotdetailService.GetAllUndersection17plotdetail();
-                        return View("Index", list);
+                        return View("Edit", undersection17plotdetail);
                     }
                     else
                     {

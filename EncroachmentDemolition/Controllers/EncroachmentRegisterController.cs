@@ -53,7 +53,7 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] EncroachmentRegisterationDto model)
         {
-            var result = await _encroachmentRegisterationService.GetPagedEncroachmentRegisteration(model, (int)ApprovalActionStatus.Approved);
+            var result = await _encroachmentRegisterationService.GetPagedEncroachmentRegisteration(model, (int)ApprovalActionStatus.Approved, SiteContext.ZoneId ?? 0);
             return PartialView("_List", result);
         }
 
@@ -80,6 +80,15 @@ namespace EncroachmentDemolition.Controllers
 
 
             return PartialView("_WatchWard", Data);
+        }
+
+        public async Task<FileResult> ViewDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
+            string path = Data.PhotoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
         }
 
         [HttpPost]
@@ -179,6 +188,7 @@ namespace EncroachmentDemolition.Controllers
                     }
                     #endregion
                     encroachmentRegisterations.WatchWardId = encroachmentRegisterations.WatchWardId == 0 ? null : encroachmentRegisterations.WatchWardId;
+                    encroachmentRegisterations.CreatedBy = SiteContext.UserId;
                     var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
                     if (result)
                     {
@@ -470,6 +480,7 @@ namespace EncroachmentDemolition.Controllers
             string FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
             if (ModelState.IsValid)
             {
+                encroachmentRegisterations.ModifiedBy = SiteContext.UserId;
                 var result = await _encroachmentRegisterationService.Update(id, encroachmentRegisterations);
                 if (result)
                 {

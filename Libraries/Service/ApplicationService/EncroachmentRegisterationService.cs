@@ -68,14 +68,16 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisterlist(approved);
         }
-        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved)
+        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model, int approved, int zoneId)
         {
-            return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model, approved);
+            return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model, approved, zoneId);
         }
         public async Task<bool> Update(int id, EncroachmentRegisteration encroachmentRegisteration)
         {
             var result = await _encroachmentRegisterationRepository.FindBy(a => a.Id == id);
             EncroachmentRegisteration model = result.FirstOrDefault();
+            model.AreaUnit = encroachmentRegisteration.AreaUnit;
+            model.TotalAreaInSqAcreHt = encroachmentRegisteration.TotalAreaInSqAcreHt;
             model.Area = encroachmentRegisteration.Area;
             model.LocationAddressWithLandMark = encroachmentRegisteration.LocationAddressWithLandMark;
             model.DepartmentId = encroachmentRegisteration.DepartmentId;
@@ -93,14 +95,12 @@ namespace Libraries.Service.ApplicationService
             model.ZoneId = encroachmentRegisteration.ZoneId;
             model.EncroacherName = encroachmentRegisteration.EncroacherName;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
             model.IsActive = 1;
             _encroachmentRegisterationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
         public async Task<bool> Create(EncroachmentRegisteration encroachmentRegisteration)
         {
-            encroachmentRegisteration.CreatedBy = 1;
             encroachmentRegisteration.CreatedDate = DateTime.Now;
             _encroachmentRegisterationRepository.Add(encroachmentRegisteration);
             return await _unitOfWork.CommitAsync() > 0;

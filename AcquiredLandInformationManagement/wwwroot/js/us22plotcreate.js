@@ -5,7 +5,7 @@ var currentPageSize = 5;
 $(document).ready(function () {
     var id = $("#UnderSection22Id").val();
     $("#VillageId").val('');
-    $("#KhasraId").val('');
+   // $("#KhasraId").val('');
     var param = {
         NotificationId: id,
         pageSize: parseInt(currentPageSize),
@@ -19,6 +19,20 @@ $(document).ready(function () {
 
             $('#divnotification22Table').html("");
             $('#divnotification22Table').html(response);
+
+        });
+
+    }
+    var kid = $("#KhasraId").val();
+
+    if (kid) {
+        HttpGet(`/UnderSection22PlotDetails/GetAreaList/?khasraid=${kid}`, 'json', function (response) {
+
+            $("#Bigha1").val(response.bigha);
+            $("#Biswa1").val(response.biswa);
+            $("#Biswanshi1").val(response.biswanshi);
+
+
 
         });
 

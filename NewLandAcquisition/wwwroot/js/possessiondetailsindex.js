@@ -14,6 +14,10 @@ $("#btnSearch").click(function () {
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });
 
+$('#ddlSort').change(function () {
+    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+});
+
 
 $("#btnReset").click(function () {
  

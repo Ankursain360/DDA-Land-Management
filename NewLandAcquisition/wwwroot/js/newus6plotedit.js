@@ -23,7 +23,7 @@ $(document).ready(function () {
             $('#divnotificationTable').html(response);
 
         });
-
+      
     }
 
     //

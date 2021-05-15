@@ -1,80 +1,41 @@
 ﻿@model IEnumerable<Dto.Search.ApprovalCompleteListDataDto>
-<table class="table-responsive px-2">
-    <tr>
-        @foreach (var item in Model)
-        {
-        <td>
-            @if (@item.TotalPendingReq == 0)
-            {
-                <button type="button" class="btn btn-primary btnclick" id="btnId" value="@item.ProcessGuid" disabled>
-                    @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
-                </button>
-            }
-            else
-            {
-                <a class="btn btn-primary btnclick" asp-action="GetApprovalProcessDetailsLink" asp-route-ProcessGuid="@item.ProcessGuid" target="_blank">   @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span></a>               
-            }
-        </td>
-        }
-    </tr>
-</table>
-<div class="row mt-md-3">
-    <div class="col-md-6">
-        <select class="floating-label-field floating-label-field--s3" id="ddlModuleWise"  onchange="return GetApprovalProccessList(this.options[this.selectedIndex].value);">
-            <option value="">--Select--</option>
-            @foreach (var item in Model)
-            {
-                <option value="@item.ProcessGuid"> @item.ModuleName ( @item.SubModuleName )</option>
-            }
-        </select>
-    </div>
-</div>
-
-
-@*<div class="row">
+    <div class="row my-md-3">
         <div class="col-md-6">
-            <div class="floating-label-wrap">
-
-                <select class="floating-label-field floating-label-field--s3" id="possessionDate" asp-items="@(new SelectList( @ViewBag.PossessionDateList, "User_Id","ModuleName"))">
-                    <option value="0">All</option>
+            <div class="mb-2">
+                <select class="floating-label-field floating-label-field--s3" id="ddlModuleWise" onchange="return GetApprovalProccessList(this.options[this.selectedIndex].value);">
+                    <option value="">--Select--</option>
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.ProcessGuid"> @item.ModuleName ( @item.SubModuleName )</option>
+                    }
                 </select>
-                <label class="floating-label">Possession Date</label>
+            </div>
+
+            <div id="LoadReportView" class="table-responsive">
+                <table class="table table-borderless">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="px-0 py-1">
+                                    @if (@item.TotalPendingReq == 0)
+                                    {
+                                        <button type="button" class="btn btn-primary d-flex w-100 align-items-center align-content-center  justify-content-between btnclick" id="btnId" value="@item.ProcessGuid" disabled>
+                                            @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-primary d-flex w-100 align-items-center align-content-center  justify-content-between btnclick" asp-action="GetApprovalProcessDetailsLink" asp-route-ProcessGuid="@item.ProcessGuid" target="_blank">   @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span></a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>*@
-@*<table class="table table-sm table-bordered mb-0 table-striped">
-        <thead class="text-nowrap">
-            <tr>
-                <th>Module Name</th>
-                <th> Process Name</th>
-                <th>Pending Number</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null && Model.Count() > 0)
-            {
-                @foreach (var item in Model)
-                {
-            <tr>
-                <td>
-                    @item.ModuleName
-
-                </td>
-                <td>@item.SubModuleName</td>
-                <td>@item.TotalPendingReq</td>
-            </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <th colspan="12" style="text-align:center"> No Record Available! </th>
-                </tr>
-            }
-        </tbody>
-    </table>*@
-
-
-
-
-
+        <div class="col-md-6 d-none d-md-block">
+            <img src="~/images/approval.jpg" class="img-fluid d-block mx-auto">
+        </div>
+    </div>

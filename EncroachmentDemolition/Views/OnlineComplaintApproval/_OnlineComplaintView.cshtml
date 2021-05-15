@@ -1,142 +1,134 @@
 ﻿@model Libraries.Model.Entity.Onlinecomplaint
-    <div class="permission mt-2 accordion list-unstyled m-0 ">
-        <div class="card">
-            <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
-               aria-controls="collapseApprroval">
-                <i class="ri-arrow-right-s-fill"></i>
-                <span class="text ml-1 mr-auto">View Online Complaint Details</span>
-                <i class="arrow ri-arrow-drop-down-line slow"></i>
-            </a>
-            <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">
-                <div id="allDetails">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <textarea type="text" asp-for="Name" placeholder="Name of Complaint" class="floating-label-field floating-label-field--s3" disabled></textarea>
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                                <label class="floating-label">Name of Complaint</label>
-                            </div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <input placeholder="Contact No." class="floating-label-field floating-label-field--s3" asp-for="Contact" disabled />
-                                <span asp-validation-for="Contact" class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">Contact No. </label>
-                            </div>
+<div class="permission mt-2 accordion list-unstyled m-0 ">
+    <div class="card">
+        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
+           aria-controls="collapseApprroval">
+            <i class="ri-arrow-right-s-fill"></i>
+            <span class="text ml-1 mr-auto">View Online Complaint Details</span>
+            <i class="arrow ri-arrow-drop-down-line slow"></i>
+        </a>
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">
+            <div id="allDetails">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea type="text" disabled asp-for="Name" class="floating-label-field floating-label-field--s3" limit="400"></textarea>
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label class="floating-label">Name of Complainant</label>
                         </div>
                     </div>
-                    <div class="row pt-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <input class="floating-label-field floating-label-field--s3" type="email" placeholder="Email Id" asp-for="Email" disabled />
-                                <span asp-validation-for="Email" class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">Email Id  </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="ComplaintTypeId" asp-items="@(new SelectList(Model.ComplaintList, "Id","Name"))">
-                                    <option>Select</option>
-                                </select>
-
-                                <span asp-validation-for="ComplaintTypeId" class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">Type of Complaint </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pt-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-
-                                <input asp-for="Photo" id="Photo" type="file" class="floating-label-field floating-label-field--s3" disabled multiple />
-
-                                <a class="badge badge-primary px-2" asp-action="ViewLetter" asp-route-id="@Model.Id" target="_blank"> (View Photo )</a>
-
-
-                                <label class="floating-label">Photograph</label>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <textarea type="text" asp-for="AddressOfComplaint" placeholder="Area/Address of Complaint" disabled class="floating-label-field floating-label-field--s3"></textarea>
-                                <span asp-validation-for="AddressOfComplaint" class="text-danger"></span>
-                                <label class="floating-label">Area/Address of Complaint</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pt-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="LocationId" asp-items="@(new SelectList(Model.LocationList, "Id","Name"))">
-                                    <option>Select</option>
-                                </select>
-                                <span asp-validation-for="LocationId" class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">Location </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-                                <input class="floating-label-field floating-label-field--s3" disabled placeholder="Lattitude" asp-for="Lattitude" />
-                                <span asp-validation-for="Lattitude" class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">Lattitude </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row pt-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <input placeholder="Longitude" class="floating-label-field floating-label-field--s3" disabled asp-for="Longitude" />
-                                <span asp-validation-for="Longitude" class="text-danger"></span>
-                                <label class="floating-label">Longitude </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <textarea type="text" asp-for="Remarks" placeholder="Remarks" disabled class="floating-label-field floating-label-field--s3"></textarea>
-                                <label class="floating-label">Remarks</label>
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-md-6" style="display:none;">
-                            <div class="floating-label-wrap">
-                                <label class="floating-label">Status</label>
-                                <select disabled asp-for="IsActive" class="form-control dda-dropdown">
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                </select>
-                                <span asp-validation-for="IsActive" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12" style="display:none;">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <textarea asp-for="Remarks" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                                <span asp-validation-for="Remarks" class="text-danger"></span>
-                                <label class="floating-label">Remarks</label>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea type="text" disabled asp-for="AddressOfComplaint" class="floating-label-field floating-label-field--s3" limit="500"></textarea>
+                            <span asp-validation-for="AddressOfComplaint" class="text-danger"></span>
+                            <label class="floating-label">Area/Address of Complainant</label>
                         </div>
                     </div>
                 </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input class="floating-label-field floating-label-field--s3" disabled asp-for="Contact" limit="10" />
+                            <span asp-validation-for="Contact" class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label">Contact No.</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input class="floating-label-field floating-label-field--s3" disabled asp-for="Email" limit="30" />
+                            <span asp-validation-for="Email" class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label">Email Id  </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" disabled asp-for="ComplaintTypeId" asp-items="@(new SelectList(Model.ComplaintList, "Id","Name"))">
+                                <option>Select</option>
+                            </select>
+                            <span asp-validation-for="ComplaintTypeId" class="text-danger"></span>
+                            <label class="floating-label">Type of Complaint </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            @{
+                                if (Model.PhotoPath != null)
+                                {
+                                    <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" multiple />
+                                    <span asp-validation-for="Photo" class="text-danger"></span>
+                                    <label class="floating-label">Photograph</label>
+                                    <label class="err" style="color:red;display:none;">
+                                        system is unable to find the coordinates in uploaded image.
+                                        kindly upload the image which is having location information or
+                                        enter latitude and longitude manually.
+                                    </label>
 
+                                    <a class="badge badge-primary px-2" asp-action="ViewPhoto" asp-route-id="@Model.Id" target="_blank"> (View Photo)</a>
 
+                                }
+                                else
+                                {
+                                    <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" multiple />
+                                    <span asp-validation-for="Photo" class="text-danger"></span>
+                                    <label class="floating-label">Photograph</label>
+                                    <label class="err" style="color:red;display:none;">
+                                        system is unable to find the coordinates in uploaded image.
+                                        kindly upload the image which is having location information or
+                                        enter latitude and longitude manually.
+                                    </label>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <input class="floating-label-field floating-label-field--s3" id="slat" placeholder="Lattitude" disabled asp-for="Lattitude" />
+                            <span asp-validation-for="Lattitude" class="text-danger"></span>
+                            <label class="floating-label">Lattitude </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Longitude" id="slong" class="floating-label-field floating-label-field--s3" disabled asp-for="Longitude" />
+                            <span asp-validation-for="Longitude" class="text-danger"></span>
+                            <label class="floating-label">Longitude </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" disabled asp-for="LocationId" asp-items="@(new SelectList(Model.LocationList, "Id","Name"))">
+                                <option>Select</option>
+                            </select>
+                            <span asp-validation-for="LocationId" class="text-danger"></span>
+                            <label class="floating-label">Location </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea type="text" disabled asp-for="AddressOfEncroachedProperty" class="floating-label-field floating-label-field--s3" limit="200"></textarea>
+                            <span asp-validation-for="AddressOfEncroachedProperty" class="text-danger"></span>
+                            <label class="floating-label">Address/Landmark of Encroached Property</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea type="text" disabled asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3" limit="200"></textarea>
+                            <label class="floating-label">Remarks</label>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </div>
     </div>
+</div>
 

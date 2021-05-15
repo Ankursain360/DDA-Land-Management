@@ -26,7 +26,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Fixingprogram>> Getfixingprogram(int fixingdemolitionId);
         Task<List<Fixingdocument>> Getfixingdocument(int fixingdemolitionId);
-        Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved);
+        Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model, int approved, int zoneId);
         Task<Fixingdemolition> FetchSingleResult(int id);
         Task<Fixingdocument> GetAnnexureAfiledetails(int id);
         Task<bool> RollBackEntryFixingdocument(int id);

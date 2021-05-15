@@ -14,13 +14,13 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("newlandus17plot", "lms");
 
             builder.HasIndex(e => e.KhasraId)
-                .HasName("Fkus17khasra_idx");
+                     .HasName("fkus17khasra_idx");
 
             builder.HasIndex(e => e.NotificationId)
-                .HasName("Fkus17notif_idx");
+                .HasName("fkus17newlandnotification_idx");
 
             builder.HasIndex(e => e.VillageId)
-                .HasName("Fkus17village_idx");
+                .HasName("fkus17village_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -54,7 +54,7 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Newlandus17plot)
                 .HasForeignKey(d => d.KhasraId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Fkus17khasra");
+                .HasConstraintName("fkus17khasra");
 
             builder.HasOne(d => d.Notification)
                 .WithMany(p => p.Newlandus17plot)
@@ -66,8 +66,7 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Newlandus17plot)
                 .HasForeignKey(d => d.VillageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Fkus17village");
-
+                .HasConstraintName("fkus17village");
         }
     }
 }
