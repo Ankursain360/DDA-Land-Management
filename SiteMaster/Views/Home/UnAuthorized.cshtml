@@ -1,36 +1,56 @@
 ﻿@{
     Layout = null;
 }
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
 
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>401 :: Unauthorize request</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="img/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <style>
-        .error-page {
-            text-align: center;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }
+    <!--Site Title-->
+    <title>DDA-Access Denied</title>
 
-            .error-page h1 {
-                font-size: 7rem;
-                text-shadow: 0 0 8px #999;
-                color: #fff;
-                margin: 30px 0 10px;
-            }
+    <!--font css-->
+    <link href="~/font/open-sans/stylesheet.css" rel="stylesheet">
 
-            .error-page p {
-                margin: 10px;
-            }
-    </style>
+    <!--    icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="~/css/style.css">
 
 </head>
-<body>
+
+<body class="bg-gray">
+
     <div class="error-page">
-        <h1>401</h1>
-        <p>Unauthorize request.</p>
+        <div class="error-bg d-flex align-items-center">
+            <div class="error-text-box text-center p-4 m-auto">
+                <img src="~/images/logo-circle.png" alt="DDA logo" class="img-fluid d-block mx-auto mb-5" />
+                <h1 class="error-type text-white zoomRotate" error-type="Access Denied">404</h1>
+                <p class="error-text text-white">You are trying to access a web page without proper authorization.This account doesn't have permission to access the information. If you believe this is a mistake, please contact to the system administrator.</p>
+                <a href="/Home/Index" class="btn btn-theme d-inline-flex align-items-center px-4 py-2"><img src="~/images/error-btn-arrow.png" class="mr-3 d-block arrow-error"> Back to Home</a>
+            </div>
+        </div>
+
+
     </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS , any custom js-->
+    <script src="~/js/main.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/js.js"></script>
+     
 </body>
+
 </html>
