@@ -235,7 +235,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Newlandnotification>> GetAllNotification()
         {
-            List<Newlandnotification> notificationList = await _dbContext.Newlandnotification.Where(x => x.IsActive == 1).ToListAsync();
+            List<Newlandnotification> notificationList = await _dbContext.Newlandnotification.Where(x => x.IsActive == 1 && x.NotificationTypeId == 4).ToListAsync();
             return notificationList;
         }
         public async Task<List<Newlandvillage>> GetAllVillage()
