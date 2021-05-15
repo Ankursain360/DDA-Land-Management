@@ -51,7 +51,7 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
 
         [NotMapped]
-        public List<LandNotification> NotificationList { get; set; }
+        public List<Newlandnotification> NotificationList { get; set; }
         [NotMapped]
         public List<Newlandvillage> VillageList { get; set; }
         [NotMapped]
@@ -69,7 +69,7 @@ namespace Libraries.Model.Entity
         //public List<LandNotification> Name { get; set; }
 
         public Newlandkhasra Khasra { get; set; }
-        public LandNotification Notification { get; set; }
+        public Newlandnotification Notification { get; set; }
         public Newlandus17plot Us17 { get; set; }
         public Newlandus4plot Us4 { get; set; }
         public Newlandus6plot Us6 { get; set; }

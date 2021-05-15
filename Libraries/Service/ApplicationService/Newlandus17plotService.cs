@@ -72,9 +72,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _newlandus17plotRepository.GetAllUS17Plot();
         }
-        public async Task<List<LandNotification>> GetAllNotification()
+        public async Task<List<Newlandnotification>> GetAllNotification()
         {
-            List<LandNotification> notificationList = await _newlandus17plotRepository.GetAllNotification();
+            List<Newlandnotification> notificationList = await _newlandus17plotRepository.GetAllNotification();
             return notificationList;
         }
         public async Task<List<Newlandvillage>> GetAllVillage()

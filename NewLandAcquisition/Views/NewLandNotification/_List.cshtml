@@ -14,7 +14,7 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@item.NewlandNotificationType.NotificationType</td>
+            <td>@item.NotificationType.NotificationType</td>
 
             <td>@item.NotificationNo</td>
             <td>@(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>

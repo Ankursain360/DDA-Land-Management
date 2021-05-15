@@ -1,4 +1,5 @@
-﻿@model Libraries.Model.Entity.Newlandus17plot
+﻿
+@model Libraries.Model.Entity.Newlandus17plot
 @await Component.InvokeAsync("PageHeader", new { pageName = "Under Section 17 Plot" })
 
 
@@ -10,7 +11,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
-                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","Name"))">
+                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","NotificationNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
 
@@ -42,7 +43,7 @@
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
                 </div>
             </div>
-           
+
         </div>
 
         <h3 class="my-3 d-flex sub-heading pt-4"> Actual Area </h3>

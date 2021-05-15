@@ -206,7 +206,7 @@ namespace NewLandAcquisition.Controllers
                     data.Add(new NewLandUndersection6PlotListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].Notification == null ? "" : result[i].Notification.Name,
+                        NotificationNo = result[i].Notification == null ? "" : result[i].Notification.NotificationNo,
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
                         ActualArea = result[i].Khasra.Bigha.ToString()

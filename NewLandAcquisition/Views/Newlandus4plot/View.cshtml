@@ -1,4 +1,5 @@
-﻿@model Libraries.Model.Entity.Newlandus4plot
+﻿
+@model Libraries.Model.Entity.Newlandus4plot
 @await Component.InvokeAsync("PageHeader", new { pageName = "Under Section 4 Plot" })
 
 
@@ -12,7 +13,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select disabled class="floating-label-field floating-label-field--s3"
-                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","Name"))">
+                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","NotificationNo"))">
                         <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="NotificationId" class="text-danger"></span>
@@ -43,10 +44,10 @@
                     <label asp-for="KhasraId" class="floating-label">Khasra No </label>
                 </div>
             </div>
-            
+
         </div>
 
-        
+
         <div class="pt-3">
             <h3 class="mb-3 d-flex">Actual Area</h3>
         </div>

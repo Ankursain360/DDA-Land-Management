@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
-                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","Name"))">
+                            asp-for="NotificationId" asp-items="@(new SelectList(Model.NotificationList, "Id","NotificationNo"))">
                         <option selected disabled="disabled" value="">Select</option>
                     </select>
                     <span asp-validation-for="NotificationId" class="text-danger"></span>

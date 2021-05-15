@@ -80,17 +80,17 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Newlandnotification
                              // .Include(x => x.Newlandnotificationfilepath)
-                             .Include(x => x.NewlandNotificationType)
+                             .Include(x => x.NotificationType)
                              //    // .Include(x => x.Proposal)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
-                              .OrderBy(s => s.NewlandNotificationType.NotificationType)
+                              .OrderBy(s => s.NotificationType.NotificationType)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Newlandnotification
                               .Include(x => x.Newlandnotificationfilepath)
-                             .Include(x => x.NewlandNotificationType)
+                             .Include(x => x.NotificationType)
                                    .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
                                 .OrderByDescending(s => s.IsActive)
                                  .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
@@ -99,7 +99,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Newlandnotification
                               .Include(x => x.Newlandnotificationfilepath)
-                             .Include(x => x.NewlandNotificationType)
+                             .Include(x => x.NotificationType)
                                   .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
                                .OrderBy(s => s.NotificationNo)
                                 .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize); break;
@@ -114,16 +114,16 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Newlandnotification
                               .Include(x => x.Newlandnotificationfilepath)
-                             .Include(x => x.NewlandNotificationType)
+                             .Include(x => x.NotificationType)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
-                              .OrderByDescending(s => s.NewlandNotificationType.NotificationType)
+                              .OrderByDescending(s => s.NotificationType.NotificationType)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Newlandnotification
                               .Include(x => x.Newlandnotificationfilepath)
-                             .Include(x => x.NewlandNotificationType)
+                             .Include(x => x.NotificationType)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
                               .OrderBy(s => s.IsActive)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);
@@ -132,7 +132,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Newlandnotification
                               .Include(x => x.Newlandnotificationfilepath)
-                             .Include(x => x.NewlandNotificationType)
+                             .Include(x => x.NotificationType)
                                  .Where(x => string.IsNullOrEmpty(model.name) || x.NotificationNo.Contains(model.name))
                               .OrderByDescending(s => s.NotificationNo)
                                .GetPaged<Newlandnotification>(model.PageNumber, model.PageSize);

@@ -14,10 +14,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("newlandus6plot", "lms");
 
             builder.HasIndex(e => e.KhasraId)
-                .HasName("Fkus6khasra_idx");
+                      .HasName("fkus6khasra_idx");
 
             builder.HasIndex(e => e.NotificationId)
-                .HasName("Fkus6notif_idx");
+                .HasName("fkus6notif_idx");
 
             builder.HasIndex(e => e.VillageId)
                 .HasName("fkus6village_idx");
@@ -54,7 +54,7 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Newlandus6plot)
                 .HasForeignKey(d => d.KhasraId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("Fkus6khasra");
+                .HasConstraintName("fkus6khasra");
 
             builder.HasOne(d => d.Notification)
                 .WithMany(p => p.Newlandus6plot)

@@ -19,7 +19,7 @@
                     @foreach (var item in Model.Results)
                     {
                 <tr>
-                    <td>@(item.Notification==null?"": item.Notification.Name)</td>
+                    <td>@(item.Notification==null?"": item.Notification.NotificationNo)</td>
                     <td>@(item.Village==null?"": item.Village.Name)</td>
                     <td>@(item.Khasra == null?"": item.Khasra.Name)</td>
                     <td>

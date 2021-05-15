@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("newlandnotification", "lms");
 
             builder.HasIndex(e => e.NotificationTypeId)
-                     .HasName("fk_NotificationType_idx");
+                .HasName("fk_NotificationType_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -38,11 +38,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Remarks).HasColumnType("longtext");
 
-            builder.HasOne(d => d.NewlandNotificationType)
+            builder.HasOne(d => d.NotificationType)
                 .WithMany(p => p.Newlandnotification)
                 .HasForeignKey(d => d.NotificationTypeId)
                 .HasConstraintName("fk_NotificationType");
-
         }
     }
 }

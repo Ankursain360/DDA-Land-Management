@@ -14,13 +14,13 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("newlandus4plot", "lms");
 
             builder.HasIndex(e => e.KhasraId)
-                .HasName("Fknewlandkhasra_idx");
+                .HasName("fk_newlandkhasra_idx");
 
             builder.HasIndex(e => e.NotificationId)
                 .HasName("FKnotifus4_idx");
 
             builder.HasIndex(e => e.VillageId)
-                .HasName("fkNLAvil_idx");
+                .HasName("fk_Village_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

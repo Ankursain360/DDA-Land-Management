@@ -15,7 +15,6 @@ using Notification.OptionEnums;
 using Utility.Helper;
 
 
-
 namespace NewLandAcquisition.Controllers
 {
     public class Newlandus4plotController : BaseController
@@ -214,7 +213,7 @@ namespace NewLandAcquisition.Controllers
                     data.Add(new NewLandUndersection4PlotListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].Notification == null ? "" : result[i].Notification.Name,
+                        NotificationNo = result[i].Notification == null ? "" : result[i].Notification.NotificationNo,
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name,
                         ActualArea = result[i].Khasra.Bigha.ToString()
