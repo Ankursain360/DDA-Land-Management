@@ -67,7 +67,7 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AnnexureAApprovalSearchDto model)
         {
-            var result = await _annexureAApprovalService.GetPagedAnnexureA(model, SiteContext.UserId);
+            var result = await _annexureAApprovalService.GetPagedAnnexureA(model, SiteContext.UserId, SiteContext.ZoneId ?? 0);
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }

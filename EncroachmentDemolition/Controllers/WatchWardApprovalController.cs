@@ -69,7 +69,7 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] WatchandwardApprovalSearchDto model)
         {
-            var result = await _watchAndWardApprovalService.GetPagedWatchandward(model, SiteContext.UserId);
+            var result = await _watchAndWardApprovalService.GetPagedWatchandward(model, SiteContext.UserId, SiteContext.ZoneId ?? 0);
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }

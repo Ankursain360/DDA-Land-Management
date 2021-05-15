@@ -18,7 +18,7 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId, int zoneId)
         {
             var AllDataList = await _dbContext.Watchandward.ToListAsync();
             var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
@@ -32,6 +32,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
+                                            && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
                                             && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                             && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                             )

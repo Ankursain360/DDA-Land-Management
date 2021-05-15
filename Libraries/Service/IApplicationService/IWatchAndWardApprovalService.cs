@@ -16,7 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Village>> GetAllVillage();
         Task<List<Locality>> GetAllLocality();
         Task<Watchandward> FetchSingleResult(int id);
-        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId);
+        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId, int zoneId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
     }
 }

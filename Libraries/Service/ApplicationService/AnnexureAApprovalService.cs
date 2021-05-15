@@ -33,9 +33,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureAApprovalRepository.GetAllFixingdemolition();
         }
-        public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId)
         {
-            return await _annexureAApprovalRepository.GetPagedAnnexureA(model, userId);
+            return await _annexureAApprovalRepository.GetPagedAnnexureA(model, userId, zoneId);
         }
 
         public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)

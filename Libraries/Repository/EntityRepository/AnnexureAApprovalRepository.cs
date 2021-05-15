@@ -27,7 +27,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.ApprovedStatusNavigation)
                 .ToListAsync();
         }
-        public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId)
         {
             var AllDataList = await _dbContext.Fixingdemolition.ToListAsync();
             var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
@@ -41,6 +41,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Encroachment)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
+                                            && (x.Encroachment.ZoneId == (zoneId == 0 ? x.Encroachment.ZoneId : zoneId))
                                             && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                             && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                             )
