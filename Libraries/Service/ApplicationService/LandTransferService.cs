@@ -131,7 +131,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetPagedLandtransferReportDeptWise(model);
         }
-        public async Task<PagedResult<Landtransfer>> GetPagedLandTransferReportData(LandTransferSearchDto model)//added by shalini
+        public async Task<PagedResult<Landtransfer>> GetPagedLandTransferReportData(LandTransferReportDivisionLocalitySearchDto model)//added by shalini
 
         {
             return await _landTransferRepository.GetPagedLandtransferReportData(model);

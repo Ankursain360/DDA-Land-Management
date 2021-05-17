@@ -635,7 +635,7 @@
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <br />
                                     <a target="_blank" href="/CurrentStatusOfHandedOverTakenOverLand/ViewDocument?path=@(Model.LandTransfer.HandedOverFile)">@(Model.LandTransfer.HandedOverFile == "" || Model.LandTransfer.HandedOverFile == string.Empty || Model.LandTransfer.HandedOverFile == null ? "Not Available": "Handed Over File")</a>
-                                    <label class="floating-label" asp-for="LandTransfer.HandedOverFiles">Document</label>
+                                    <label class="floating-label" asp-for="LandTransfer.HandedOverFiles">Handover/Other Document</label>
                                 </div>
                             </div>
                         </div>
@@ -717,7 +717,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <br /> <a target="_blank" href="/CurrentStatusOfHandedOverTakenOverLand/ViewDocument?path=@(Model.LandTransfer.TakenOverDocument)">@(Model.LandTransfer.TakenOverDocument == "" || Model.LandTransfer.TakenOverDocument == string.Empty || Model.LandTransfer.TakenOverDocument == null ? "Not Available": "Taken Over Document")</a>
-                                    <label class="floating-label">Document</label>
+                                           <label class="floating-label">Takenover/Other Document</label>
                                 </div>
                             </div>
                         </div>
@@ -994,7 +994,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3" asp-for="NatureOfUtilization" onchange="ChangeNatureOfUtilizationStatus(this.value)">
-                                        <option value="0">Temporary Relocation</option>
+                                        <option value="0">Temporary Allocation/Relocation</option>
                                         <option value="1">Function Site</option>
                                     </select>
                                     <label class="floating-label">Nature of Utilization</label>

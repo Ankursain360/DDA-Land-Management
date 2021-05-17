@@ -61,13 +61,12 @@ namespace LandInventory.Controllers
 
        
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] LandTransferReportDivisionLocalitySearchDto model)
         {
-
             if (model != null)
-            {
+            {              
                 var result = await _landtransferService.GetPagedLandTransferReportData(model);
-                ViewBag.ReportType = model.reportType;
+               // ViewBag.ReportType = model.reportType;
                 return PartialView("_List", result);
             }
             else

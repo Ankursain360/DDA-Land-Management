@@ -88,7 +88,7 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportData(LandTransferSearchDto model)
+        public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportData(LandTransferReportDivisionLocalitySearchDto model)
         {
             var data = await _dbContext.Landtransfer
                 .Include(x => x.PropertyRegistration)
@@ -99,7 +99,10 @@ namespace Libraries.Repository.EntityRepository
                 .Where(x => (x.PropertyRegistration.DepartmentId == ((model.departmentId??0) == 0 ? x.PropertyRegistration.DepartmentId : model.departmentId))
                 && (x.PropertyRegistration.ZoneId == (model.zoneId == 0 ? x.PropertyRegistration.ZoneId : model.zoneId))
                 && (x.PropertyRegistration.DivisionId == (model.divisionId == 0 ? x.PropertyRegistration.DivisionId : model.divisionId))
-                && (x.PropertyRegistration.LocalityId == (model.localityId == 0 ? x.PropertyRegistration.LocalityId : model.localityId)))
+                && (x.PropertyRegistration.LocalityId == (model.localityId == 0 ? x.PropertyRegistration.LocalityId : model.localityId))
+                && (x.HandedOverDate > (model.StartDate == null ? x.HandedOverDate : Convert.ToDateTime(model.StartDate)))
+                && (x.HandedOverDate < (model.EndDate == null ? x.HandedOverDate : Convert.ToDateTime(model.EndDate)))
+                )
                 .OrderBy(x => x.PropertyRegistration.Department.Name)
                                                 .OrderByDescending(x => x.IsActive)
                                                 .ThenBy(x => x.PropertyRegistration.Zone.Name)

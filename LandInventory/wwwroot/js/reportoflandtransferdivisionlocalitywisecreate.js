@@ -5,13 +5,33 @@ var sortby = 1;//default Ascending
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         var result = ValidateForm();
-        var departmentid = $('#DepartmentId option:selected').val();
-        var zoneid = $('#ZoneId option:selected').val();
-        var divisionid = $('#DivisionId option:selected').val();
-        var localityid = $('#LocalityId option:selected').val();
-        var FromDate = $('#txtFromDate').val();
-        var ToDate = $('#txtToDate').val();
-        if (result) {
+        //var IsValid = $("#frmUserPersonalInfo").valid(); 
+        debugger;
+        var StartDate = $('#txtFromDate').val();
+        if (StartDate == "") {
+            checkresult = false;
+            $("#txtFromDateMsg").show();
+        } else {
+            $("#txtFromDateMsg").hide();
+            checkresult = true;
+        }
+        var EndDate = $('#txtToDate').val();
+        if (EndDate == "") {
+            checkresult = false;
+            $("#txtToDateMsg").show();
+        } else {
+            $("#txtToDateMsg").hide();
+            checkresult = true;
+        }
+
+        if (StartDate == "" || EndDate == "") {
+
+            checkresult = false;
+        }
+        else {
+            checkresult = true;
+        }
+        if (checkresult) {
             GetDetails(currentPageNumber, currentPageSize, sortby);
         }
     });
@@ -34,6 +54,8 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var zoneid = $('#ZoneId option:selected').val();
     var divisionid = $('#DivisionId option:selected').val();
     var localityid = $('#LocalityId option:selected').val();
+    var FromDate = $('#txtFromDate').val();
+    var ToDate = $('#txtToDate').val();
    
     var model = {
         name: "report",
@@ -43,7 +65,8 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         zoneId: parseInt(zoneid),
         divisionId: parseInt(divisionid),
         localityId: parseInt(localityid),
-       
+        StartDate: FromDate,
+        EndDate: ToDate,
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
 
@@ -72,7 +95,8 @@ $("#btnReset").click(function () {
     $('#ZoneId').val('0').trigger('change');
     $('#DivisionId').val('0').trigger('change');
     $('#LocalityId').val('0').trigger('change');
-   
+    $('#txtFromDate').val('');
+    $('#txtToDate').val('');
 
 
     GetDetails(currentPageNumber, currentPageSize, sortby);
@@ -118,3 +142,4 @@ function onChangeDivision(id) {
         $("#LocalityId").html(html);
     });
 };
+
