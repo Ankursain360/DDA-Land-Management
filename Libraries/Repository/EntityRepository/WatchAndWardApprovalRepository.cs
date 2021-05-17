@@ -32,7 +32,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.PrimaryListNoNavigation.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
-                                            && (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId))
+                                            && (model.StatusId == 0 ? (x.PrimaryListNoNavigation.ZoneId == x.PrimaryListNoNavigation.ZoneId) : (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId)))
                                             && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                             && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                             )
