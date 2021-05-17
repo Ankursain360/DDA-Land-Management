@@ -5,10 +5,14 @@
         <tr>
             <th>Locality(Village) </th>
             <th>File No </th>
+            <th>Payee Name</th>
+            @*<th>Property/Plot Area(Sq.Yds)</th>*@
             <th>Property Number </th>
-         
+
             <th>Demand No</th>
-           
+            <th>Demand Date</th>
+            <th>Demand Amount</th>
+
         </tr>
 
     </thead>
@@ -20,11 +24,11 @@
         <tr>
             <td>@item.Locality.Name</td>
             <td>@item.FileNo</td>
+            <td>@item.Name</td>
             <td>@item.PropertyNo</td>
-         
             <td>@item.DemandNo</td>
-            
-           
+            <td>@item.CreatedDate.ToString("dd/MMM/yyyy")</td>
+            <td>@item.DepositDue</td>
         </tr>
             }
         }

@@ -12,5 +12,7 @@ namespace Dto.Search
         public string PayeeName { get; set; }
         public string DemandAmount { get; set; }
         public string PaidAmount { get; set; }
+        public string DemandNo { get; set; }
+        public DateTime DemandDate { get; set; }
     }
 }
