@@ -1389,7 +1389,7 @@ textarea.floating-label-field--s3 {
     font-size: 16px;
     margin: 6px 0;
     font-weight: 700;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
 }
 
 .card-body .pro-detail {
