@@ -73,7 +73,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="EffectiveDate" type="date" value=""
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3"  onkeypress="return false;" />
                     <span asp-validation-for="EffectiveDate" class="text-danger" style="display:none;" id="EffectiveDateMessage">Effective Date  Is Mandatory</span>
                     <label asp-for="EffectiveDate" class="floating-label">Effective Date  </label>
                 </div>

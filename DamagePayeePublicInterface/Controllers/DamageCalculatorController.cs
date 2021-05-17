@@ -50,7 +50,6 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<PartialViewResult> DamageCalculate([FromBody] DamageCalculationDto dto)
         {
             List<DamageChargesCalculation> damagecalculation = new List<DamageChargesCalculation>();
-
             if (dto.PropertyTypeId == "" || dto.LocalityId == "" || dto.Area == "")
             {
                 ViewBag.Message = Alert.Show("All Mandatory Must be Filled", "", AlertType.Warning);
@@ -91,6 +90,7 @@ namespace DamagePayeePublicInterface.Controllers
             if (EndDate.Month > 3)
             {
                 string ddtt = "31/03/" + ((EndDate.Year) + 1).ToString();
+                //  ddtt = Convert.ToDateTime(ddtt).ToString("d/M/yyyy");
                 EndDate = DateTime.ParseExact(ddtt, "d/M/yyyy", CultureInfo.InvariantCulture);
             }
 
@@ -120,7 +120,7 @@ namespace DamagePayeePublicInterface.Controllers
 
             DateTime fromdate = dto.FromDate;
             DateTime toodate = dto.ToDate;
-
+            GlobalRow = year;
             string listFromDate;
             string listToDate;
             string listMonth;
@@ -151,7 +151,7 @@ namespace DamagePayeePublicInterface.Controllers
                         listFromDate = fromdate.ToString();
                         if (m1 >= 4)
                         {
-                            if (m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -163,7 +163,7 @@ namespace DamagePayeePublicInterface.Controllers
                         }
                         else
                         {
-                            if (m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -181,7 +181,7 @@ namespace DamagePayeePublicInterface.Controllers
                         if (m1 >= 4)
                         {
                             listFromDate = "01/04/" + (y1 + 1).ToString();
-                            if (m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -195,7 +195,7 @@ namespace DamagePayeePublicInterface.Controllers
                         else
                         {
                             listFromDate = "01/04/" + y1.ToString();
-                            if (m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -212,7 +212,7 @@ namespace DamagePayeePublicInterface.Controllers
                         if (m1 >= 4)
                         {
                             listFromDate = "01/04/" + (y1 + IndxCounter2).ToString();
-                            if (m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -226,7 +226,7 @@ namespace DamagePayeePublicInterface.Controllers
                         else
                         {
                             listFromDate = "01/04/" + (y1 + IndxCounter2 - 1).ToString();
-                            if (m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -337,7 +337,10 @@ namespace DamagePayeePublicInterface.Controllers
                     }
                     else
                     {
-                        if (DateTime.ParseExact("21/06/2015", "d/M/yyyy", CultureInfo.InvariantCulture) < DateTime.ParseExact(listToDate, "d/M/yyyy", CultureInfo.InvariantCulture))
+
+                        listToDate = Convert.ToDateTime(listToDate).ToString("d/M/yyyy");
+                        if (Convert.ToDateTime("21/06/2015") < Convert.ToDateTime(listToDate))
+                        //if (DateTime.ParseExact("21/06/2015", "d/M/yyyy", CultureInfo.InvariantCulture) < DateTime.ParseExact(listToDate, "d/M/yyyy", CultureInfo.InvariantCulture))
                         {
                             if (CIntrst2 == 1)
                             {
@@ -373,7 +376,7 @@ namespace DamagePayeePublicInterface.Controllers
                         {
                             if (i > 0)
                             {
-                                 listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
                                 listRemainAmt = Math.Round((Convert.ToDouble(listCompoundAmt) * 0.07 * ValMonth), 0).ToString();
                             }
                             else
