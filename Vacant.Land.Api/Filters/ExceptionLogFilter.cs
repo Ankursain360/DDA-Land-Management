@@ -1,0 +1,26 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Routing;
+using NLog;
+using NLog.Web;
+using System;
+
+namespace Vacant.Land.Api.Filters
+{
+    public class ExceptionLogFilter : IExceptionFilter
+    {
+        public void OnException(ExceptionContext filterContext)
+        {
+            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            string traceId = Guid.NewGuid().ToString();
+            LogManager.Configuration.Variables["traceId"] = traceId;
+            logger.Error(filterContext.Exception, filterContext.Exception.Message);
+            filterContext.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary {
+                                            { "controller", "Home" },
+                                            { "action", "ErrorLog" },
+                                            { "traceId", traceId}
+                                        });
+        }
+    }
+}
