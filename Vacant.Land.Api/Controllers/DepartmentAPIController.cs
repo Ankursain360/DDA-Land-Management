@@ -15,7 +15,8 @@ using Notification.OptionEnums;
 namespace Vacant.Land.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
+    [Produces("application/json")]
     public class DepartmentAPIController : ControllerBase
     {
         private readonly IPropertyRegistrationService _propertyRegistrationService;
@@ -28,11 +29,21 @@ namespace Vacant.Land.Api.Controllers
         }
         
         [HttpGet]
-        //[Route("[action]")]
-        //[Route("api/DepartmentAPI/GetDepartment")]
-        public async Task<IEnumerable<Department>> GetDepartment()
+        [Route("[action]")]
+        [Route("api/DepartmentAPI/GetDepartment")]
+        public async Task<IActionResult> GetDepartment()
         {
-            return await _propertyRegistrationService.GetDepartmentDropDownList();
+            var data= await _propertyRegistrationService.GetDepartmentDropDownList();
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("[action]")]
+        [Route("api/DepartmentAPI/GetZone")]
+        public async Task<IActionResult> GetZone()
+        {
+            var data = await _propertyRegistrationService.GetDepartmentDropDownList();
+            return NotFound();
+            //return Ok(data);
         }
     }
 }
