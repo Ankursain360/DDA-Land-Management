@@ -601,6 +601,8 @@ $('#AreaUnit').change(function () {
             $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
         else if (value == 3)
             $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+        else if (value == 4)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq. Mt." + ')');
     }
 });
 

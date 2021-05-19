@@ -11,6 +11,7 @@ using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Dto.Master;
 
 namespace Vacant.Land.Api.Controllers
 {
@@ -27,23 +28,101 @@ namespace Vacant.Land.Api.Controllers
             _configuration = configuration;
             _propertyRegistrationService = propertyRegistrationService;
         }
-        
+
         [HttpGet]
         [Route("[action]")]
         [Route("api/DepartmentAPI/GetDepartment")]
         public async Task<IActionResult> GetDepartment()
         {
-            var data= await _propertyRegistrationService.GetDepartmentDropDownList();
-            return Ok(data);
+            ApiResponseDetails apiResponseDetails = new ApiResponseDetails();
+            List<ApiDepartmentListDto> dtoData = new List<ApiDepartmentListDto>();
+            var data = await _propertyRegistrationService.GetDepartmentDropDownList();
+            if (data != null)
+            {
+                for (int i = 0; i < data.Count; i++)
+                {
+                    dtoData.Add(new ApiDepartmentListDto()
+                    {
+                        DEPTID = data[i].Id,
+                        DEPT_NAME = data[i].Name,
+                        CREATIONDATE = data[i].CreatedDate,
+                        CREATEDBY = data[i].CreatedBy,
+                    });
+                }
+
+                apiResponseDetails = new ApiResponseDetails
+                {
+                    responseCode = "200",
+                    responseMessage = "details fetched successfully",
+                    ApiDepartmentListDto = dtoData
+                };
+
+                return Ok(apiResponseDetails);
+            }
+            else
+            {
+                apiResponseDetails = new ApiResponseDetails
+                {
+                    responseCode = "404",
+                    responseMessage = " details not found",
+                    ApiDepartmentListDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
         }
-        [HttpGet]
+        [HttpPost]
         [Route("[action]")]
         [Route("api/DepartmentAPI/GetZone")]
-        public async Task<IActionResult> GetZone()
+        public async Task<IActionResult> GetZone(int id)
         {
-            var data = await _propertyRegistrationService.GetDepartmentDropDownList();
-            return NotFound();
-            //return Ok(data);
+            ApiResponseDetails apiResponseDetails = new ApiResponseDetails();
+            List<ApiDepartmentListDto> dtoData = new List<ApiDepartmentListDto>();
+            if (id != 0)
+            {
+                var data = await _propertyRegistrationService.GetZoneDropDownList(id);
+                if (data != null)
+                {
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        dtoData.Add(new ApiDepartmentListDto()
+                        {
+                            DEPTID = data[i].Id,
+                            DEPT_NAME = data[i].Name,
+                            CREATIONDATE = data[i].CreatedDate,
+                            CREATEDBY = data[i].CreatedBy,
+                        });
+                    }
+
+                    apiResponseDetails = new ApiResponseDetails
+                    {
+                        responseCode = "200",
+                        responseMessage = "details fetched successfully",
+                        ApiDepartmentListDto = dtoData
+                    };
+
+                    return Ok(apiResponseDetails);
+                }
+                else
+                {
+                    apiResponseDetails = new ApiResponseDetails
+                    {
+                        responseCode = "404",
+                        responseMessage = " details not found",
+                        ApiDepartmentListDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+            }
+            else
+            {
+                apiResponseDetails = new ApiResponseDetails
+                {
+                    responseCode = "400",
+                    responseMessage = "Bad Request. Insufficient Parameters",
+                    ApiDepartmentListDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
         }
     }
 }

@@ -200,13 +200,15 @@
             $('#TotalAreaInBiswani').val('');
             $('#TotalArea').val('');
             $("#AreainSqAcreHecForCurrentStatus").show();
-            $("#bighabis").hide();
+            $("#bighabisForCurrentStatus").hide();
             if (value == 1)
                 $('#LabelTotalAreaSqAcreHecForCurrentStatus').html('Total Area(' + "Sq Yd." + ')');
             else if (value == 2)
                 $('#LabelTotalAreaSqAcreHecForCurrentStatus').html('Total Area(' + "Acre" + ')');
             else if (value == 3)
                 $('#LabelTotalAreaSqAcreHecForCurrentStatus').html('Total Area(' + "Hectare" + ')');
+            else if (value == 4)
+                $('#LabelTotalAreaSqAcreHecForCurrentStatus').html('Total Area(' + "Sq. Mt." + ')');
         }
     });
     callSelect2();

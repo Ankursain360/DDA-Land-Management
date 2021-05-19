@@ -1,5 +1,5 @@
 ﻿function onChangeLandStatus(status) {
-    if (status == 'DDA Land') {
+    if (status == 'Other Govt. Land') {
         $("#divForLandStatus").show();
     }
     else {
@@ -138,7 +138,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         $("#tbl_posts #add #ConstructionStatus").trigger('change');
         $(".select2-disabled").prop("disabled", false);
         $(".select2-disabled-multi").prop("disabled", false);
-        
+
     }
     else {
         alert('Please fill record before add new record ');

@@ -31,7 +31,7 @@ function GetOtherDetails(id) {
 };
 
 function onChangeLandStatus(status) {
-    if (status == 'DDA Land') {
+    if (status == 'Other Govt. Land') {
         $("#divForLandStatus").show();
     }
     else {
