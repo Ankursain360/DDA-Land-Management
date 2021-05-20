@@ -48,9 +48,9 @@
                 </div>
                 <div class="col-md-6"></div>
                 <div class="col-md-3">
-                    <label> दिनांक -  <b>@Model.GenerateDate</b></label>
+                    <label> दिनांक -  <b>@Model.GenerateDate.ToString("dd/MMM/yyyy")</b></label>
 
-                    <p style="color:black">Dated - <b>@Model.GenerateDate</b></p>
+                    <p style="color:black">Dated - <b>@Model.GenerateDate.ToString("dd/MMM/yyyy")</b></p>
                 </div>
 
             </div>
@@ -116,7 +116,7 @@
                         <br />
                     </p>   <p style="color:black; text-align-last:justify">
                         अंतर्गत नोटिस के संम्बंध में आपको आयेतंत्द्वारा निर्देश दिया जाता है कि आप नोटिस की अपनी<br />
-                        आपतियो के समर्थन में प्रमाण प्रस्तुत करे और अधोहस्ताछरी के न्यायालय में दिनाक <b>@Model.UndersignedDate</b>को
+                        आपतियो के समर्थन में प्रमाण प्रस्तुत करे और अधोहस्ताछरी के न्यायालय में दिनाक <b>@Model.UndersignedDate.ToString("dd/MMM/yyyy")</b>को
 
                         <br />
 
@@ -139,7 +139,7 @@
 
 
                     </p>
-                    <p style="color: black;margin-top: -1.2%;">court of undersigned on <b>@Model.UndersignedDate</b> at <b>@Model.UndersignedTime</b></p>
+                    <p style="color: black;margin-top: -1.2%;">court of undersigned on <b>@Model.UndersignedDate.ToString("dd/MMM/yyyy")</b> at <b>@Model.UndersignedTime</b></p>
 
 
         </div>
@@ -174,7 +174,7 @@
         <div class="row">
             <div class="col-md-12">
                 <p style="color: black; margin-left: 55px;">
-                    Deposit the dues [Rs . <b>@Model.DepositDue</b>] - upto <b>@Model.UptoDate</b> (Provisional)].
+                    Deposit the dues [Rs . <b>@Model.DepositDue</b>] - upto <b>@Model.UptoDate.ToString("dd/MMM/yyyy")</b> (Provisional)].
                 </p>
             
             </div>

@@ -14,7 +14,7 @@
 
         <div id="DivForFileName">
 
-            <div class="row">
+            <div class="row mt-md-3">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3" style="width:100%;" asp-for="LocalityId"
@@ -37,7 +37,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-md-3">
 
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -53,7 +53,7 @@
                         <input placeholder="Date of Encroachment" type="text"
                                class="floating-label-field floating-label-field--s3" asp-for="ReliefAmount" />
                         <span asp-validation-for="ReliefAmount" class="text-danger"></span>
-                      
+
                         <label class="floating-label"> Relief Amount <span style="color:red">*</span></label>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
 
 
 
-            <div class="row">
+            <div class="row mt-md-3">
 
 
                 <div class="form-group col-md-6">
@@ -86,7 +86,7 @@
 
             </div>
 
-            <div class="row">
+            <div class="row mt-md-3">
 
 
                 <div class="form-group col-md-6">
@@ -101,7 +101,7 @@
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <textarea placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3" asp-for="Address" ></textarea>
+                                  class="floating-label-field floating-label-field--s3" asp-for="Address"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
                         <label class="floating-label">Full Address <span style="color:red">*</span></label>
                     </div>
@@ -111,7 +111,7 @@
 
 
 
-            <div class="row">
+            <div class="row mt-md-3">
 
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -133,18 +133,13 @@
 
             </div>
 
-            <div class="row">
+            <div class="row mt-md-3">
 
 
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-
-
-
-
-
-                        <input  placeholder="Date of Encroachment" type="date" value=""
+                        <input placeholder="Date of Encroachment" type="date" value=""
                                class="floating-label-field floating-label-field--s3" asp-for="UndersignedDate" id="txtundate" />
                         <span asp-validation-for="UndersignedDate" class="text-danger"></span>
                         <label class="floating-label"> UnderSigned Date <span style="color:red">*</span></label>
@@ -153,7 +148,7 @@
 
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Date of Encroachment" type="text" 
+                        <input placeholder="Date of Encroachment" type="text"
                                class="floating-label-field floating-label-field--s3" asp-for="UndersignedTime" />
                         <span asp-validation-for="UndersignedTime" class="text-danger"></span>
                         <label class="floating-label">UnderSigned Time<span style="color:red">*</span></label>
@@ -162,16 +157,35 @@
 
             </div>
 
+            <div class="row mt-md-3">
 
-            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="date" value=""
+                               class="floating-label-field floating-label-field--s3" asp-for="DemandPeriodFromDate" />
+                        <span asp-validation-for="DemandPeriodFromDate" class="text-danger"></span>
+                        <label class="floating-label">Demand Period (From Date)<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="date" value=""
+                               class="floating-label-field floating-label-field--s3" asp-for="DemandPeriodToDate" />
+                        <span asp-validation-for="DemandPeriodToDate" class="text-danger"></span>
+                        <label class="floating-label">Demand Period (To Date)<span style="color:red">*</span></label>
+                    </div>
+                </div>
 
+            </div>
+
+            <div class="row mt-md-3">
 
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
                                class="floating-label-field floating-label-field--s3" asp-for="DepositDue" />
                         <span asp-validation-for="DepositDue" class="text-danger"></span>
-                        <label class="floating-label"> Deposit Due <span style="color:red">*</span></label>
+                        <label class="floating-label"> Total Amount Due <span style="color:red">*</span></label>
                     </div>
                 </div>
 
@@ -180,7 +194,7 @@
                         <input placeholder="Date of Encroachment" type="date" value=""
                                class="floating-label-field floating-label-field--s3" asp-for="UptoDate" />
                         <span asp-validation-for="UptoDate" class="text-danger"></span>
-                        <label class="floating-label">Upto Date<span style="color:red">*</span></label>
+                        <label class="floating-label">Due Date<span style="color:red">*</span></label>
                     </div>
                 </div>
 
@@ -189,10 +203,10 @@
 
 
 
-            <div class="row pt-3">
+            <div class="row mt-md-3">
                 <div class="col-md-12">
                     <input type="submit" value="Generate" class="btn btn-theme " />
-                   
+
                     @Html.ActionLink("Back", "Index", "DemandsLetter", null, new { @class = "btn btn-theme " })
                 </div>
             </div>
@@ -202,7 +216,7 @@
 
         <div id="DivForPayeeName" style="display:none">
             <h3 class="my-3 d-flex sub-heading">By Payee Name</h3>
-            <div class="row">
+            <div class="row mt-md-3">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3" style="width:100%;">
@@ -224,7 +238,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row mt-md-3">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3" style="width:100%;">

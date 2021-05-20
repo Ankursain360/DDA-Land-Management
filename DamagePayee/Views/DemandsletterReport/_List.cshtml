@@ -11,6 +11,8 @@
 
             <th>Demand No</th>
             <th>Demand Date</th>
+            <th>Demand Period From Date </th>
+            <th>Demand Period To Date </th>
             <th>Demand Amount</th>
 
         </tr>
@@ -28,7 +30,11 @@
             <td>@item.PropertyNo</td>
             <td>@item.DemandNo</td>
             <td>@item.CreatedDate.ToString("dd/MMM/yyyy")</td>
-            <td>@item.DepositDue</td>
+            <td>@Convert.ToDateTime(item.DemandPeriodFromDate).ToString("dd-MMM-yyyy")</td>
+            <td>@Convert.ToDateTime(item.DemandPeriodToDate).ToString("dd-MMM-yyyy")</td>
+            <td style="text-align:right;">@item.DepositDue</td>
+
+
         </tr>
             }
         }

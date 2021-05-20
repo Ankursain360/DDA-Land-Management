@@ -39,6 +39,8 @@ namespace Libraries.Model.Entity
         public DateTime UptoDate { get; set; }
         [Required(ErrorMessage = " The Relief Amount field is required")]
         public decimal? ReliefAmount { get; set; }
+        public DateTime? DemandPeriodFromDate { get; set; }
+        public DateTime? DemandPeriodToDate { get; set; }
         public byte IsActive { get; set; }
 
         [Required(ErrorMessage = " The Penalty field is required")]

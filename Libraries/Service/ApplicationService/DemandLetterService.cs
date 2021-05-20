@@ -76,7 +76,8 @@ namespace Service.ApplicationService
             model.UndersignedTime = demandletter.UndersignedTime;
             model.DepositDue = demandletter.DepositDue;
             model.UptoDate = demandletter.UptoDate;
-          
+            model.DemandPeriodFromDate = demandletter.DemandPeriodFromDate;
+            model.DemandPeriodToDate = demandletter.DemandPeriodToDate;
             model.ModifiedBy = 1;
             _demandLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
