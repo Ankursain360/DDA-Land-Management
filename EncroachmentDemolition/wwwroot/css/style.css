@@ -1507,7 +1507,7 @@ textarea.floating-label-field--s3 {
     transition: all 0.3s 1s ease-out;
 }
 
-/*error page css*/
+/*404 error page css*/
 
 .error-bg {
     background: url(../images/error_bg.jpg);
@@ -1638,6 +1638,12 @@ textarea.floating-label-field--s3 {
     }
 }
 
+
+/* 500 error css*/
+.error-type-2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
 /*
 
 @media(min-width:576px) {}

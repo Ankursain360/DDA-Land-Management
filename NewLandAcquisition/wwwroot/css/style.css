@@ -1719,4 +1719,9 @@ textarea.floating-label-field--s3 {
     }
 }
 
-/*
+
+/* 500 error css*/
+.error-type-2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
