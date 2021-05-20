@@ -98,6 +98,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IJudgementstatusRepository, JudgementstatusRepository>();
             services.AddScoped<IHonbleRepository, HonbleRepository>();
             services.AddScoped<ILeasePaymentTypeRepository, LeasePaymentTypeRepository>();
+            services.AddScoped<IDamageRateListRepository, DamageRateListRepository>();
 
             /************ Application Services ************/
             services.AddScoped<ICountryService, CountryService>();
@@ -181,6 +182,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IJudgementstatusService, JudgementstatusService>();
             services.AddScoped<IHonbleService, HonbleService>();
             services.AddScoped<ILeasePaymentTypeService, LeasePaymentTypeService>();
+            services.AddScoped<IDamageRateListService, DamageRateListService>();
 
         }
     }

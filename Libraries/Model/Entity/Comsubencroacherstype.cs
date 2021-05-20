@@ -8,8 +8,8 @@ namespace Libraries.Model.Entity
 {
     public class Comsubencroacherstype : AuditableEntity<int>
     {
-        public DateTime? EncroachStartDate { get; set; }
-        public DateTime? EncroachEndDate { get; set; }
+        public DateTime EncroachStartDate { get; set; }
+        public DateTime EncroachEndDate { get; set; }
         public string EncroachName { get; set; }
         public byte IsActive { get; set; }
     }
