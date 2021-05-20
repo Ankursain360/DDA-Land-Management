@@ -1584,3 +1584,139 @@ textarea.floating-label-field--s3 {
     -webkit-transition: all 0.3s 1s ease-out;
     transition: all 0.3s 1s ease-out;
 }
+
+
+
+
+/*error page css*/
+
+.error-bg {
+    background: url(../images/error_bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+.error-text-box .error-type {
+    font-size: 170px;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1;
+    margin-top: -50px;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+
+.error-text-box .error-text {
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin-left: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: auto
+}
+
+.error-text-box .btn {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+    .error-text-box .btn img {
+        width: 35px
+    }
+
+
+
+@-webkit-keyframes zoomRotate {
+    0% {
+        -webkit-transform: rotate(0deg) scale3d(1, 1, 1);
+        transform: rotate(0deg) scale3d(1, 1, 1)
+    }
+
+    100% {
+        -webkit-transform: rotate(500deg) scale3d(0, 0, 0);
+        transform: rotate(500deg) scale3d(0, 0, 0)
+    }
+}
+
+@keyframes zoomRotate {
+    0% {
+        -webkit-transform: rotate(0deg) scale3d(1, 1, 1);
+        transform: rotate(0deg) scale3d(1, 1, 1)
+    }
+
+    100% {
+        -webkit-transform: rotate(500deg) scale3d(0, 0, 0);
+        transform: rotate(500deg) scale3d(0, 0, 0)
+    }
+}
+
+.zoomRotate {
+    -webkit-animation-name: zoomRotate;
+    animation-name: zoomRotate
+}
+
+.error-text-box .error-type::after {
+    content: '';
+    width: 125px;
+    height: 165px;
+    background: url(../images/error_img.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 25px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    -webkit-animation-duration: 120s;
+    animation-duration: 120s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: zoomRotate;
+    animation-name: zoomRotate
+}
+
+.error-text-box .error-type::before {
+    content: attr(error-type);
+    display: block;
+    font-size: 20px;
+    position: absolute;
+    z-index: 1;
+    top: auto;
+    bottom: -10px;
+    left: auto;
+    right: 0;
+    margin: auto;
+    font-weight: 600;
+    color: #ffbf00;
+}
+
+@media(min-width:992px) {
+    .error-text-box .error-type {
+        font-size: 230px;
+        margin-top: -60px;
+    }
+
+    .error-text-box .error-text {
+        font-size: 14px;
+    }
+
+
+    .error-text-box .error-type::after {
+        width: 200px;
+        height: 280px;
+    }
+}
+
+/*
