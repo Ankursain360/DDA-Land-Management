@@ -135,7 +135,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" disabled placeholder="Name of Encroacher" limit="100" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.EncroacherName" />
+                                    <input type="text" disabled placeholder="Name of Encroacher" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.EncroacherName" />
                                     <label class="floating-label">Name of Encroacher</label>
                                 </div>
                             </div>
@@ -238,7 +238,8 @@
                                             asp-for="Encroachment.StatusOfLand"
                                             onchange="onChangeLandStatus(this.value)" style="width:100%;">
                                         <option value="DDA Land">DDA Land</option>
-                                        <option value="Non DDA Land">Non DDA Land</option>
+                                        <option value="Other Govt. Land">Other Govt. Land</option>
+                                        <option vlaue="Private Land">Private Land</option>
                                     </select>
                                     <label class="floating-label">Staus of Land</label>
                                 </div>

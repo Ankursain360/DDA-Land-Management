@@ -21,6 +21,14 @@
         }
     });
 
+    if ($('#StatusOfLand').val() == 'Other Govt. Land') {
+        $("#divForLandStatus").show();
+        callSelect2();
+    }
+    else {
+        $("#divForLandStatus").hide();
+    }
+
 });
 
 function GetOtherDetails(id) {
@@ -33,6 +41,7 @@ function GetOtherDetails(id) {
 function onChangeLandStatus(status) {
     if (status == 'Other Govt. Land') {
         $("#divForLandStatus").show();
+        callSelect2();
     }
     else {
         $("#divForLandStatus").hide();
@@ -157,3 +166,10 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         return false;
     }
 });
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
