@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using Libraries.Model;
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -25,6 +26,29 @@ namespace Libraries.Service.ApplicationService
             _damageRateListRepository = damageRateListRepository;
         }
 
+        public async Task<List<DateRangeConcatedListDto>> GetDateRangeDropdownListCommercial()
+        {
+            return await _damageRateListRepository.GetDateRangeDropdownListCommercial();
+        }
 
+        public async Task<List<DateRangeConcatedListDto>> GetDateRangeDropdownListResidential()
+        {
+            return await _damageRateListRepository.GetDateRangeDropdownListResidential();
+        }
+
+        public async Task<List<Locality>> GetLocalities()
+        {
+            return await _damageRateListRepository.GetLocalities();
+        }
+
+        public async Task<List<PropertyType>> GetPropertyTypes()
+        {
+            return await _damageRateListRepository.GetPropertyTypes();
+        }
+
+        public async Task<List<DamageRateListDataDto>> GetSearchResultPagedData(DamageRateListSearchDto model, List<DamageRateListDataDto> damageRateListDataDtos)
+        {
+            return await _damageRateListRepository.GetSearchResultPagedData( model, damageRateListDataDtos);
+        }
     }
 }
