@@ -40,7 +40,7 @@ namespace DamagePayee.Controllers
             Damagecalculation damagecalculation = new Damagecalculation();
             damagecalculation.PropertyType1 = await _damagecalculationService.GetPropertyTypes();
             damagecalculation.LocalityList = await _damagecalculationService.GetLocalities();
-            if(LocalityId !=0)
+            if (LocalityId != 0)
             {
                 damagecalculation.LocalityId = LocalityId;
                 ViewBag.BackButton = 1;
@@ -93,7 +93,7 @@ namespace DamagePayee.Controllers
             if (EndDate.Month > 3)
             {
                 string ddtt = "31/03/" + ((EndDate.Year) + 1).ToString();
-              //  ddtt = Convert.ToDateTime(ddtt).ToString("d/M/yyyy");
+                //  ddtt = Convert.ToDateTime(ddtt).ToString("d/M/yyyy");
                 EndDate = DateTime.ParseExact(ddtt, "d/M/yyyy", CultureInfo.InvariantCulture);
             }
 
@@ -154,7 +154,7 @@ namespace DamagePayee.Controllers
                         listFromDate = fromdate.ToString();
                         if (m1 >= 4)
                         {
-                            if ( i == GlobalRow-1 && m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -166,7 +166,7 @@ namespace DamagePayee.Controllers
                         }
                         else
                         {
-                            if ( i == GlobalRow-1 && m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -184,7 +184,7 @@ namespace DamagePayee.Controllers
                         if (m1 >= 4)
                         {
                             listFromDate = "01/04/" + (y1 + 1).ToString();
-                            if ( i == GlobalRow-1 && m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -198,7 +198,7 @@ namespace DamagePayee.Controllers
                         else
                         {
                             listFromDate = "01/04/" + y1.ToString();
-                            if ( i == GlobalRow-1 && m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -215,7 +215,7 @@ namespace DamagePayee.Controllers
                         if (m1 >= 4)
                         {
                             listFromDate = "01/04/" + (y1 + IndxCounter2).ToString();
-                            if ( i == GlobalRow-1 && m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -229,7 +229,7 @@ namespace DamagePayee.Controllers
                         else
                         {
                             listFromDate = "01/04/" + (y1 + IndxCounter2 - 1).ToString();
-                            if ( i == GlobalRow-1 && m2 > 3)
+                            if (i == GlobalRow - 1 && m2 > 3)
                             {
                                 listToDate = toodate.ToString();
                             }
@@ -340,7 +340,7 @@ namespace DamagePayee.Controllers
                     }
                     else
                     {
-                        
+
                         listToDate = Convert.ToDateTime(listToDate).ToString("d/M/yyyy");
                         if (Convert.ToDateTime("21/06/2015") < Convert.ToDateTime(listToDate))
                         //if (DateTime.ParseExact("21/06/2015", "d/M/yyyy", CultureInfo.InvariantCulture) < DateTime.ParseExact(listToDate, "d/M/yyyy", CultureInfo.InvariantCulture))
@@ -363,7 +363,7 @@ namespace DamagePayee.Controllers
                             {
                                 if (i > 0)
                                 {
-                                     listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                    listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
                                     listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
                                 }
                                 else
@@ -379,7 +379,7 @@ namespace DamagePayee.Controllers
                         {
                             if (i > 0)
                             {
-                               listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                listCompoundAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
                                 listRemainAmt = Math.Round((Convert.ToDouble(listCompoundAmt) * 0.07 * ValMonth), 0).ToString();
                             }
                             else
@@ -449,17 +449,17 @@ namespace DamagePayee.Controllers
                         {
                             var subEncroachersId = new[] { 1, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                         else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 2, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                             }
+                        }
                         else
                         {
                             var subEncroachersId = new[] { 3, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
@@ -467,18 +467,18 @@ namespace DamagePayee.Controllers
                         {
                             var subEncroachersId = new[] { 4 };
                             result1 = await _damagecalculationService.RateListTypeBSpecific(Convert.ToDateTime("31/03/2001"), Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                         else
                         {
                             var subEncroachersId = new[] { 4 };
                             result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                           }
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                       }
+                    }
                 }
                 else
                 {
@@ -491,12 +491,12 @@ namespace DamagePayee.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 1, 4 };
                                 result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 1, 4 };
                                 result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                }
+                            }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
@@ -505,29 +505,29 @@ namespace DamagePayee.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 2, 4 };
                                 result1 = await _damagecalculationService.RateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                }
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 2, 4 };
                                 result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                            }
                         }
                         else
                         {
                             var subEncroachersId = new[] { 3, 4 };
                             result1 = await _damagecalculationService.RateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        }
+                    }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 4 };
                         result1 = await _damagecalculationService.RateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                      }
+                    }
                 }
 
             }
@@ -576,33 +576,33 @@ namespace DamagePayee.Controllers
                         {
                             var subEncroachersId = new[] { 1, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                             }
+                        }
                         else if (date1 >= Convert.ToDateTime("01/04/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 2, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                         else if (date1 >= Convert.ToDateTime("01/04/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//31/3/1981  1/4/1960
                         {
                             var subEncroachersId = new[] { 3, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                            }
+                        }
                         else
                         {
                             var subEncroachersId = new[] { 4, 5 };
                             result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                           }
+                        }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        }
+                    }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                       }
+                    }
                 }
                 else
                 {
@@ -615,13 +615,13 @@ namespace DamagePayee.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 1, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                              
+
                             }
                             else
                             {
                                 var subEncroachersId = new[] { 1, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                              }
+                            }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1960") && date1 <= Convert.ToDateTime("31/03/1976"))//03/31/1981  1/4/1960
                         {
@@ -630,12 +630,12 @@ namespace DamagePayee.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 2, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 2, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                              }
+                            }
                         }
                         else if (date1 >= Convert.ToDateTime("04/01/1976") && date1 <= Convert.ToDateTime("31/03/1981"))//03/31/1981  1/4/1960
                         {
@@ -644,12 +644,12 @@ namespace DamagePayee.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 3, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 3, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                             }
+                            }
                         }
                         else
                         {
@@ -659,24 +659,24 @@ namespace DamagePayee.Controllers
                                 DateTime specificDateTime = Convert.ToDateTime("31/07/2001");
                                 var subEncroachersId = new[] { 4, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeASpecific(specificDateTime, Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                               }
+                            }
                             else
                             {
                                 var subEncroachersId = new[] { 4, 5 };
                                 result1 = await _damagecalculationService.ComRateListTypeA(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                                 }
+                            }
                         }
                     }
                     else if (dt.EncroachName == "TYPE_B" && dt.Id.ToString() == "2")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeB(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                        }
+                    }
                     else if (dt.EncroachName == "TYPE_C" && dt.Id.ToString() == "3")
                     {
                         var subEncroachersId = new[] { 5 };
                         result1 = await _damagecalculationService.ComRateListTypeC(Convert.ToDateTime(e_date), dto.LocalityId, subEncroachersId);
-                       }
+                    }
                 }
 
             }
@@ -708,7 +708,7 @@ namespace DamagePayee.Controllers
             return damageCalculatorRateMappingDto;
         }
 
-       
+
 
     }
 }
