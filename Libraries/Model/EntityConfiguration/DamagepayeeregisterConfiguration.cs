@@ -26,13 +26,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.LocalityId)
                 .HasName("fk_TempLocality_idx");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
-
             builder.Property(e => e.Achknowledgement).HasColumnType("longtext");
 
-            builder.Property(e => e.ApprovalZoneId).HasColumnType("int(11)");
-
-            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
+            builder.Property(e => e.AtsfilePath)
+                .HasColumnName("ATSFilePath")
+                .HasColumnType("longtext");
 
             builder.Property(e => e.CalculatorValue).HasColumnType("decimal(18,3)");
 
@@ -48,17 +46,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
-
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-            builder.Property(e => e.Declaration1).HasColumnType("int(11)");
-
-            builder.Property(e => e.Declaration2).HasColumnType("int(11)");
-
-            builder.Property(e => e.Declaration3).HasColumnType("int(11)");
-
-            builder.Property(e => e.DistrictId).HasColumnType("int(11)");
 
             builder.Property(e => e.DocumentForFilePath).HasColumnType("longtext");
 
@@ -78,13 +66,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.GpafilePath)
+                .HasColumnName("GPAFilePath")
+                .HasColumnType("longtext");
+
             builder.Property(e => e.InterestDueAmountCompund).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.IsActive)
-                .HasColumnType("tinyint(4)")
-                .HasDefaultValueSql("1");
-
-            builder.Property(e => e.IsApplyForMutation).HasColumnType("int(11)");
+            builder.Property(e => e.IsActive).HasDefaultValueSql("1");
 
             builder.Property(e => e.IsDdadamagePayee)
                 .HasColumnName("IsDDADamagePayee")
@@ -99,17 +87,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
-
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+            builder.Property(e => e.MutationFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.OppositionName)
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Otp)
-                .HasColumnName("OTP")
-                .HasColumnType("int(11)");
+            builder.Property(e => e.Otp).HasColumnName("OTP");
 
             builder.Property(e => e.PendingAt)
                 .HasMaxLength(100)
@@ -127,8 +111,6 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.PlotAreaSqYard).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.ProceedToPay).HasColumnType("int(11)");
-
             builder.Property(e => e.PropertyNo)
                 .HasMaxLength(45)
                 .IsUnicode(false);
@@ -140,7 +122,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.RefNo)
                 .HasMaxLength(45)
                 .IsUnicode(false);
-
 
             builder.Property(e => e.ResidentialSqMt).HasColumnType("decimal(18,3)");
 
@@ -166,7 +147,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.UserId).HasColumnType("int(11)");
+            builder.Property(e => e.UserId)
+                .HasMaxLength(45)
+                .IsUnicode(false);
+
+            builder.Property(e => e.WillFilePath).HasColumnType("longtext");
 
             builder.HasOne(d => d.ApprovedStatusNavigation)
                 .WithMany(p => p.Damagepayeeregister)
@@ -182,7 +167,6 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Damagepayeeregister)
                 .HasForeignKey(d => d.LocalityId)
                 .HasConstraintName("fk_TempLocality");
-
 
         }
     }

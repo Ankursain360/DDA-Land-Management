@@ -96,6 +96,11 @@ namespace DamagePayee.Controllers
                 string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
                 string BillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Bill").Value.ToString();
 
+                string ATSDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ATS").Value.ToString();
+                string GPADocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:GPA").Value.ToString();
+                string MutationDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Mutation").Value.ToString();
+                string WillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Will").Value.ToString();
+
                 Random r = new Random();
                 int num = r.Next();
                 damagepayeeregister.RefNo = DateTime.Now.Year.ToString() + num.ToString();
@@ -119,6 +124,26 @@ namespace DamagePayee.Controllers
                     {
                         damagepayeeregister.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregister.DocumentForFile);
                     }
+
+                    if (damagepayeeregister.ATSFile != null)
+                    {
+                        damagepayeeregister.AtsfilePath = fileHelper.SaveFile(ATSDocument, damagepayeeregister.ATSFile);
+                    }
+                    if (damagepayeeregister.GPAFile != null)
+                    {
+                        damagepayeeregister.GpafilePath = fileHelper.SaveFile(GPADocument, damagepayeeregister.GPAFile);
+                    }
+                    if (damagepayeeregister.MutationFile != null)
+                    {
+                        damagepayeeregister.MutationFilePath = fileHelper.SaveFile(MutationDocument, damagepayeeregister.MutationFile);
+                    }
+                    if (damagepayeeregister.WillFile != null)
+                    {
+                        damagepayeeregister.WillFilePath = fileHelper.SaveFile(WillDocument, damagepayeeregister.WillFile);
+                    }
+
+
+
 
                     #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
 
@@ -598,6 +623,10 @@ namespace DamagePayee.Controllers
             string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
             string BillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Bill").Value.ToString();
 
+            string ATSDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ATS").Value.ToString();
+            string GPADocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:GPA").Value.ToString();
+            string MutationDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Mutation").Value.ToString();
+            string WillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Will").Value.ToString();
 
             if (ModelState.IsValid)
 
@@ -619,6 +648,22 @@ namespace DamagePayee.Controllers
                 if (damagepayeeregister.DocumentForFile != null)
                 {
                     damagepayeeregister.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregister.DocumentForFile);
+                }
+                if (damagepayeeregister.ATSFile != null)
+                {
+                    damagepayeeregister.AtsfilePath = fileHelper.SaveFile(ATSDocument, damagepayeeregister.ATSFile);
+                }
+                if (damagepayeeregister.GPAFile != null)
+                {
+                    damagepayeeregister.GpafilePath = fileHelper.SaveFile(GPADocument, damagepayeeregister.GPAFile);
+                }
+                if (damagepayeeregister.MutationFile != null)
+                {
+                    damagepayeeregister.MutationFilePath = fileHelper.SaveFile(MutationDocument, damagepayeeregister.MutationFile);
+                }
+                if (damagepayeeregister.WillFile != null)
+                {
+                    damagepayeeregister.WillFilePath = fileHelper.SaveFile(WillDocument, damagepayeeregister.WillFile);
                 }
 
                 var result = await _damagepayeeregisterService.Update(id, damagepayeeregister);
@@ -827,7 +872,34 @@ namespace DamagePayee.Controllers
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
 
-
+        public async Task<IActionResult> DownloadATS(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.AtsfilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadGPA(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.GpafilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadMutation(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.MutationFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadWill(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.WillFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
         //**********************  download repeater files****************************
         public async Task<FileResult> ViewPersonelInfoAadharFile(int Id)
         {

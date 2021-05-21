@@ -92,6 +92,11 @@ namespace Service.ApplicationService
             model.IsDocumentFor = damagepayeeregister.IsDocumentFor;
             model.DocumentForFilePath = damagepayeeregister.DocumentForFilePath;
 
+            model.GpafilePath = damagepayeeregister.GpafilePath;
+            model.AtsfilePath = damagepayeeregister.AtsfilePath;
+            model.MutationFilePath = damagepayeeregister.MutationFilePath;
+            model.WillFilePath = damagepayeeregister.WillFilePath;
+
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _damagepayeeregisterRepository.Edit(model);

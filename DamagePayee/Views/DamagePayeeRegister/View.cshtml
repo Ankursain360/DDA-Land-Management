@@ -634,21 +634,44 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                        @*<span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>*@
-                        <label for="field-1" class="floating-label"> GPA(General Power Attorny If any) </label>
+
+                        @{ if (Model.GpafilePath != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="DownloadGPA" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                <input disabled type="file" asp-for="GPAFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="GPAFile" class="d-block text-danger field-validation-valid"></span>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="GPAFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="GPAFile" class="d-block text-danger field-validation-valid"></span>
+                                <label for="field-1" class="floating-label">  GPA(General Power Attorny If any) </label>
+                            }
+                        }
+
 
                     </div>
                 </div>
+
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                        @*<span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>*@
-                        <label for="field-1" class="floating-label">  ATS(Agreement To sell) </label>
+                        @{ if (Model.AtsfilePath != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="DownloadATS" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                <input disabled type="file" asp-for="ATSFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="ATSFile" class="d-block text-danger field-validation-valid"></span>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="ATSFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="ATSFile" class="d-block text-danger field-validation-valid"></span>
+                                <label for="field-1" class="floating-label"> ATS(Agreement To sell) </label>
+                            }
+                        }
+
 
                     </div>
                 </div>
@@ -656,22 +679,49 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                        @*<span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>*@
-                        <label for="field-1" class="floating-label"> Mutation Document </label>
+
+                        @{ if (Model.MutationFilePath != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="DownloadMutation" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                <input disabled type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="MutationFile" class="d-block text-danger field-validation-valid"></span>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="MutationFile" class="d-block text-danger field-validation-valid"></span>
+                                <label for="field-1" class="floating-label">  Mutation Document </label>
+                            }
+                        }
+
+
+
 
                     </div>
                 </div>
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                        @*<span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>*@
-                        <label for="field-1" class="floating-label"> Registered Will </label>
+
+                        @{ if (Model.WillFilePath != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="DownloadWill" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                <input disabled type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
+                            }
+                            else
+                            {
+                                <input disabled type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
+                                <label for="field-1" class="floating-label">  Registered Will </label>
+                            }
+                        }
+
+
+
 
                     </div>
                 </div>
             </div>
-
             <br />
         </div>
         <div id="DivMainContentForm">

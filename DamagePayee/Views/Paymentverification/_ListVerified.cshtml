@@ -23,44 +23,54 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Results)
+        @if (Model != null && Model.Results.Count() > 0)
         {
-        <tr>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
 
-            <td>@item.FileNo </td>
-            <td>@item.PayeeName  </td>
-            <td>@item.PropertyNo </td>
-            <td>@item.AmountPaid </td>
-            <td>@item.InterestPaid </td>
-            <td>@item.TotalAmount </td>
-            <td>@item.TransactionId </td>
-            <td>@item.BankTransactionId </td>
-            <td>@item.PaymentMode </td>
-            <td>@item.BankName </td>
+                    <td>@item.FileNo </td>
+                    <td>@item.PayeeName  </td>
+                    <td>@item.PropertyNo </td>
+                    <td>@item.AmountPaid </td>
+                    <td>@item.InterestPaid </td>
+                    <td>@item.TotalAmount </td>
+                    <td>@item.TransactionId </td>
+                    <td>@item.BankTransactionId </td>
+                    <td>@item.PaymentMode </td>
+                    <td>@item.BankName </td>
 
-          
-            <td>
-                @if (item.IsVerified == 1)
-                {
-                    <span class="badge badge-primary px-2 py-1">yes</span> }
-                else
-                {
-                    <span class="badge badge-danger px-2 py-1">no</span>}
-            </td>
-            <td>@item.VerifiedBy </td>
-            <td>@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
-            <td>
-                @if (item.IsActive == 1)
-                {
-                    <span class="badge badge-primary px-2 py-1">Active</span> }
-                else
-                {
-                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
-            </td>
-           
 
-        </tr>
+                    <td>
+                        @if (item.IsVerified == 1)
+                        {
+                            <span class="badge badge-primary px-2 py-1">yes</span> }
+                        else
+                        {
+                            <span class="badge badge-danger px-2 py-1">no</span>}
+                    </td>
+                    <td>@item.VerifiedBy </td>
+                    <td>@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
+                    <td>
+                        @if (item.IsActive == 1)
+                        {
+                            <span class="badge badge-primary px-2 py-1">Active</span> }
+                        else
+                        {
+                            <span class="badge badge-danger px-2 py-1">Inactive</span>}
+                    </td>
+
+
+                </tr>
+            }
         }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+
     </tbody>
 
 </table>

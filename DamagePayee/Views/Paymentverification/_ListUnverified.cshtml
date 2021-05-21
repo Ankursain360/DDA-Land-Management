@@ -22,49 +22,59 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Results)
+        @if (Model != null && Model.Results.Count() > 0)
         {
-        <tr>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
 
-            <td>@item.FileNo </td>
-            <td>@item.PayeeName  </td>
-            <td>@item.PropertyNo </td>
-            <td>@item.AmountPaid </td>
-            <td>@item.InterestPaid </td>
-            <td>@item.TotalAmount </td>
-            <td>@item.TransactionId </td>
-            <td>@item.BankTransactionId </td>
-            <td>@item.PaymentMode </td>
-            <td>@item.BankName </td>
-           
-            <td>
-                @if (item.IsVerified == 0)
-                {
-                    <span class="badge badge-danger px-2 py-1">no</span> }
-                else
-                {
-                    <span class="badge badge-primary px-2 py-1">yes</span>}
-            </td>
-           
-            <td>
-                @if (item.IsActive == 1)
-                {
-                    <span class="badge badge-primary px-2 py-1">Active</span> }
-                else
-                {
-                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
-            </td>
-            <td style="min-width:100px;">
-                <div class="form-check">
-                    
-                  <a asp-action="Verify"  asp-route-id="@item.Id"><input id="btnverify" value="Verify" type="submit" class="btn btn-theme" /></a>
-                   
-                </div>
-            </td>
-           
+                    <td>@item.FileNo </td>
+                    <td>@item.PayeeName  </td>
+                    <td>@item.PropertyNo </td>
+                    <td>@item.AmountPaid </td>
+                    <td>@item.InterestPaid </td>
+                    <td>@item.TotalAmount </td>
+                    <td>@item.TransactionId </td>
+                    <td>@item.BankTransactionId </td>
+                    <td>@item.PaymentMode </td>
+                    <td>@item.BankName </td>
 
-        </tr>
+                    <td>
+                        @if (item.IsVerified == 0)
+                        {
+                            <span class="badge badge-danger px-2 py-1">no</span> }
+                        else
+                        {
+                            <span class="badge badge-primary px-2 py-1">yes</span>}
+                    </td>
+
+                    <td>
+                        @if (item.IsActive == 1)
+                        {
+                            <span class="badge badge-primary px-2 py-1">Active</span> }
+                        else
+                        {
+                            <span class="badge badge-danger px-2 py-1">Inactive</span>}
+                    </td>
+                    <td style="min-width:100px;">
+                        <div class="form-check">
+
+                            <a asp-action="Verify" asp-route-id="@item.Id"><input id="btnverify" value="Verify" type="submit" class="btn btn-theme" /></a>
+
+                        </div>
+                    </td>
+
+
+                </tr>
+            }
         }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+
     </tbody>
 
 </table>

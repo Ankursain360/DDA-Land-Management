@@ -100,6 +100,11 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public string PropertyPhotoPath { get; set; }
 
+        public string AtsfilePath { get; set; }
+        public string GpafilePath { get; set; }
+        public string MutationFilePath { get; set; }
+        public string WillFilePath { get; set; }
+
         public District District { get; set; }
         public Locality Locality { get; set; }
         [NotMapped]
@@ -116,6 +121,16 @@ namespace Libraries.Model.Entity
         public IFormFile Fgform { get; set; }
         [NotMapped]
         public IFormFile DocumentForFile { get; set; }
+
+        [NotMapped]
+        public IFormFile ATSFile { get; set; }
+        [NotMapped]
+        public IFormFile GPAFile { get; set; }
+        [NotMapped]
+        public IFormFile MutationFile { get; set; }
+        [NotMapped]
+        public IFormFile WillFile { get; set; }
+
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Allottetype> Allottetype { get; set; }
         public ICollection<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
