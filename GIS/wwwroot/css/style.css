@@ -726,7 +726,7 @@ a.no-dec {
 /* 404 error page css*/
 
 .error-bg {
-    background: url(../images/error_bg.jpg);
+    background: url(../img/error_bg.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -802,7 +802,7 @@ a.no-dec {
     content: '';
     width: 125px;
     height: 165px;
-    background: url(../images/error_img.png);
+    background: url(../img/error_img.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100%;
@@ -856,6 +856,12 @@ a.no-dec {
 
 /*
 
+/* 500 error css*/
+.error-type-2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+/*
 @media(min-width:576px) {}
 
 @media(min-width:768px) {}

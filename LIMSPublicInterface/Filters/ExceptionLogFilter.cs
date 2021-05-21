@@ -19,7 +19,7 @@ namespace LIMSPublicInterface.Filters
             filterContext.Result = new RedirectToRouteResult(
                         new RouteValueDictionary {
                                             { "controller", "Home" },
-                                            { "action", "ErrorLog" },
+                                            { "action", "ExceptionLog" },
                                             { "traceId", traceId}
                                         });
         }
