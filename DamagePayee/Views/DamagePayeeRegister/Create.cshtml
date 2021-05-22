@@ -10,7 +10,6 @@
         <input type="hidden" asp-for="ApprovedStatus" />
         <div id="DivOpenSubstitutionForm">
             <div id="DivFileInformation">
-
                 <h3 class="my-3 d-flex sub-heading">File Information</h3>
                 <div class="row">
                     <div class="col-md-6">
@@ -33,16 +32,16 @@
 
                                 <tr>
                                     <th>Sr.No</th>
-                                    <th>Name</th>
+                                    <th style="min-width:150px;">Name</th>
                                     <th>Father's/Husband's Name</th>
-                                    <th style="min-width:100px;">Gender</th>
-                                    <th>Address</th>
-                                    <th>Mobile No.</th>
-                                    <th>Email-Id</th>
-                                    <th style="min-width:200px;">Aadhar No.</th>
-                                    <th style="min-width:200px;">Pan No.</th>
-                                    <th style="min-width:200px;">Photo</th>
-                                    <th style="min-width:200px;">Signature</th>
+                                    <th style="min-width:120px;">Gender</th>
+                                    <th style="min-width:200px;">Address</th>
+                                    <th style="min-width:130px;">Mobile No.</th>
+                                    <th style="min-width:200px;">Email-Id</th>
+                                    <th style="min-width:210px;">Aadhar No.</th>
+                                    <th style="min-width:210px;">PAN No.</th>
+                                    <th style="min-width:250px;">Photo</th>
+                                    <th style="min-width:250px;">Signature</th>
                                     <th>Operation</th>
                                 </tr>
                             </thead>
@@ -71,7 +70,9 @@
 
                                     </td>
                                     <td>
-                                        <input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />
+                                        <textarea asp-for="Address" maxlength="100" required type="text"  class="floating-label-field floating-label-field--s3"></textarea>
+
+                                        @*<input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />*@
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
@@ -86,12 +87,12 @@
 
                                     </td>
                                     <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="AadharNo" type="text" maxlength="15" placeholder="Aadhar No." class=" floating-label-field--s3" />
+                                       
+                                            <input asp-for="AadharNo" type="text" maxlength="15"  class="floating-label-field floating-label-field--s3" />
                                             <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
                                             <input type="hidden" asp-for="AadharNoFilePath" />
-
+                                        <br />
                                             @**********  new upload btn design ***********@
                                             @*<div class="d-flex align-items-center">
 
@@ -120,19 +121,19 @@
                                             <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
                                             <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
-                                        </div>
+                                       
                                     </td>
                                     <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="PanNo" maxlength="15" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
+                                       
+                                            <input asp-for="PanNo" maxlength="15" type="text"  class="floating-label-field floating-label-field--s3" />
                                             <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
 
                                             <input type="hidden" asp-for="PanNoFilePath" />
-                                          
+                                          <br />
                                           <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
                                             <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
 
-                                        </div>
+                                       
                                     </td>
                                     <td>
                                         <input type="hidden" asp-for="PhotographFilePath" />
@@ -164,7 +165,7 @@
                 </div>
 
             </div>
-            <br />
+            
             <div id="Divclsification" class="mt-md-3">
                 <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
 
@@ -173,7 +174,7 @@
                         <input type="hidden" asp-for="TypeOfDamageAssessee" id="TypeOfDamageAssessee" value="Original" />
 
                         <div class="form-check theme">
-                            <input class="form-check-input" type="radio" asp-for="TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked="checked">
+                            <input class="form-check-input" type="radio" asp-for="TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rOriginal" value="Original"checked="checked" >
                             <label class="form-check-label" for="radio">
                                 Original
                             </label>
@@ -249,7 +250,7 @@
 
             </div>
 
-            <div id="MainContentForm">
+            <div id="propertyidentification">
                 <h3 class="my-3 d-flex sub-heading">Property Identification Details</h3>
 
                 <div class="row">
@@ -368,9 +369,9 @@
 
             </div>
 
-            <div id="DivMainContentForm">
+            <div id="DivUseofProperty" style="margin-top:-15px;">
                 <h3 class="my-3 d-flex sub-heading">Use of Property</h3>
-                <div class="row mt-md-3">
+                <div class="row">
                     <div class="col-md-2">
                         <input type="hidden" asp-for="UseOfProperty" id="UseOfProperty" value="Residential" />
 
@@ -398,7 +399,7 @@
                         </div>
                     </div>
                 </div>
-                <br />
+               
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
@@ -554,13 +555,13 @@
              
             </div>
         </div>
-        <div id="DivDamagePropertyDocs">
+        <div id="DivDamagePropertyDocs" style="margin-top:-15px;">
             <h3 class="my-3 d-flex sub-heading"> Upload documents of damage property </h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <h6 class="my-3" style="color:blue;"> Note: If you have more than one document, create a single PDF and upload.</h6>
+            <b style="color:red;"> Note: If you have more than one document, create a single PDF and upload.</b>
 
 
-            <div class="row">
+            <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="Name">
@@ -614,8 +615,8 @@
                 </div>
 
             </div>
-            <div class="row">
-                <div class="form-group col-md-6">
+            <div class="row mt-md-3">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>
@@ -625,8 +626,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group col-md-6">
+            <div class="row mt-md-3">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="GPAFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span asp-validation-for="GPAFile" class="d-block text-danger field-validation-valid"></span>
@@ -634,7 +635,7 @@
 
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="ATSFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span asp-validation-for="ATSFile" class="d-block text-danger field-validation-valid"></span>
@@ -643,8 +644,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-6">
+            <div class="row mt-md-3">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span asp-validation-for="MutationFile" class="d-block text-danger field-validation-valid"></span>
@@ -652,7 +653,7 @@
 
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
@@ -664,7 +665,7 @@
 
             <br />
         </div>
-        <div id="DivMainContentForm">
+        <div id="payment" style="margin-top:-15px;">
             <h3 class="my-3 d-flex sub-heading">Payment History</h3>
 
             <div class="table-section bg-white border shadow rounded">
@@ -678,8 +679,8 @@
                                 <th>Receipt No.</th>
                                 <th>Mode of Payment</th>
                                 <th>Date of Payment</th>
-                                <th>Amount</th>
-                                <th>Upload receipt</th>
+                                <th>Amount(Rs.)</th>
+                                <th>Upload Receipt</th>
                                 <th>Operation</th>
                             </tr>
                         </thead>
@@ -741,7 +742,7 @@
 
         <div class="row mt-md-3">
             <div class="col-md-12">
-                <input type="submit" value="Create" class="btn btn-theme" />
+                <input type="submit" value="Submit" class="btn btn-theme" />
               
                 @Html.ActionLink("Back", "Index", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
             </div>

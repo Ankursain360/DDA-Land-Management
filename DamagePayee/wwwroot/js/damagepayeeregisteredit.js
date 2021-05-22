@@ -1,6 +1,13 @@
 ﻿
 $(document).ready(function () {
+    $('#Gender').removeAttr('multiple');
 
+
+});
+
+
+
+$(document).ready(function () {
 
     FillRepeatorAtEdit();
     FillAllotteAtEdit();

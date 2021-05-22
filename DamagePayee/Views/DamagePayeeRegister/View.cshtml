@@ -33,17 +33,17 @@
 
                                 <tr>
                                     <th>Sr.No</th>
-                                    <th>Name</th>
+                                    <th style="min-width:150px;">Name</th>
                                     <th>Father's/Husband's Name</th>
-                                    <th style="min-width:100px;">Gender</th>
-                                    <th>Address</th>
-                                    <th>Mobile No.</th>
-                                    <th>Email-Id</th>
-                                    <th style="min-width:200px;">Aadhar No.</th>
-                                    <th style="min-width:200px;">Pan No.</th>
-                                    <th style="min-width:200px;">Photo</th>
-                                    <th style="min-width:200px;">Signature</th>
-                                   
+                                    <th style="min-width:120px;">Gender</th>
+                                    <th style="min-width:200px;">Address</th>
+                                    <th style="min-width:130px;">Mobile No.</th>
+                                    <th style="min-width:200px;">Email-Id</th>
+                                    <th style="min-width:210px;">Aadhar No.</th>
+                                    <th style="min-width:210px;">PAN No.</th>
+                                    <th style="min-width:250px;">Photo</th>
+                                    <th style="min-width:250px;">Signature</th>
+
                                 </tr>
                             </thead>
                             <tbody id="tbl_posts_body">
@@ -71,7 +71,7 @@
 
                                     </td>
                                     <td>
-                                        <input readonly="readonly" asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />
+                                        <textarea readonly asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3"></textarea>
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
@@ -86,26 +86,28 @@
 
                                     </td>
                                     <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input readonly="readonly" asp-for="AadharNo" type="text" maxlength="15" placeholder="Aadhar No." class="floating-label-field floating-label-field--s3" />
+                                        
+                                            <input readonly="readonly" asp-for="AadharNo" type="text" maxlength="15"  class="floating-label-field floating-label-field--s3" />
                                             <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
                                             <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                             <input type="hidden" asp-for="AadharNoFilePath" />
+                                        <br />
                                             <input disabled asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
                                             <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
-                                        </div>
+                                       
                                     </td>
                                     <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input readonly="readonly" asp-for="PanNo" maxlength="15" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
+                                       
+                                            <input readonly="readonly" asp-for="PanNo" maxlength="15" type="text" class="  floating-label-field floating-label-field--s3" />
                                             <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
                                             <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                             <input type="hidden" asp-for="PanNoFilePath" />
+                                        <br />
                                             <input disabled asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
                                             <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
 
-                                        </div>
+                                        
                                     </td>
                                     <td>
                                         <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
@@ -132,7 +134,7 @@
                 </div>
 
             </div>
-            <br />
+           
             <div id="Divclsification" class="mt-md-3">
                 <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
 
@@ -341,9 +343,9 @@
 
             </div>
 
-            <div id="DivMainContentForm">
+            <div id="DivMainContentForm"style="margin-top:-15px;">
                 <h3 class="my-3 d-flex sub-heading">Use of Property</h3>
-                <div class="row mt-md-3">
+                <div class="row">
                     <div class="col-md-2">
                         <input  type="hidden" asp-for="UseOfProperty" id="UseOfProperty" value="Residential" />
 
@@ -371,7 +373,7 @@
                         </div>
                     </div>
                 </div>
-                <br />
+               
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
@@ -534,13 +536,13 @@
                 </div>
             </div>
         </div>
-        <div id="DivDamagePropertyDocs">
+        <div id="DivDamagePropertyDocs" style="margin-top:-45px;">
             <h3 class="my-3 d-flex sub-heading"> Upload documents of damage property </h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <h6 class="my-3" style="color:blue;"> Note: If you have more than one document, create a single PDF and upload.</h6>
+            <b style="color:red;"> Note: If you have more than one document, create a single PDF and upload.</b>
 
 
-            <div class="row">
+            <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @{ if (Model.ShowCauseNoticePath != null)
@@ -615,7 +617,7 @@
 
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         @{ if (Model.DocumentForFilePath != null)
@@ -634,8 +636,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-6">
+            <div class="row mt-md-3">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         @{ if (Model.GpafilePath != null)
@@ -656,7 +658,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @{ if (Model.AtsfilePath != null)
                             {
@@ -676,8 +678,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-6">
+            <div class="row mt-md-3">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         @{ if (Model.MutationFilePath != null)
@@ -699,7 +701,7 @@
 
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         @{ if (Model.WillFilePath != null)
@@ -722,7 +724,7 @@
                     </div>
                 </div>
             </div>
-            <br />
+          
         </div>
         <div id="DivMainContentForm">
             <h3 class="my-3 d-flex sub-heading">Payment History</h3>
@@ -738,7 +740,7 @@
                                 <th>Receipt No.</th>
                                 <th>Mode of Payment</th>
                                 <th>Date of Payment</th>
-                                <th>Amount</th>
+                                <th>Amount(Rs.)</th>
                                 <th>Upload receipt</th>
                                 
                             </tr>

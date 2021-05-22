@@ -1,4 +1,8 @@
-﻿
+﻿$(document).ready(function () {
+    $('#Gender').removeAttr('multiple');
+    
+
+});
 
 
 
