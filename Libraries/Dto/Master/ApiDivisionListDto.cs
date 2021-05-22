@@ -8,6 +8,7 @@ namespace Dto.Master
     {
         public int DIVSIONID { get; set; }
         public string DIVISION_CONTACT { get; set; }
+        public string CODE { get; set; }
         public DateTime CREATIONDATE { get; set; }
         public int CREATEDBY { get; set; }
     }

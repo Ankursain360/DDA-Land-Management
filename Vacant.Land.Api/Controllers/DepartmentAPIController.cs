@@ -88,6 +88,7 @@ namespace Vacant.Land.Api.Controllers
                         {
                             ZONEID = data[i].Id,
                             ZONE = data[i].Name,
+                            CODE = data[i].Code,
                             CREATIONDATE = data[i].CreatedDate,
                             CREATEDBY = data[i].CreatedBy,
                         });
@@ -143,6 +144,7 @@ namespace Vacant.Land.Api.Controllers
                         {
                             DIVSIONID = data[i].Id,
                             DIVISION_CONTACT = data[i].Name,
+                            CODE = data[i].Code,
                             CREATIONDATE = data[i].CreatedDate,
                             CREATEDBY = data[i].CreatedBy,
                         });
@@ -179,5 +181,59 @@ namespace Vacant.Land.Api.Controllers
                 return NotFound(apiResponseDetails);
             }
         }
+
+        [HttpPost]
+        [Route("[action]")]
+        [Route("api/DepartmentAPI/GetPrimaryList")]
+        public async Task<IActionResult> GetPrimaryList(int id)
+        {
+            ApiPrimaryListResponseDetails apiResponseDetails = new ApiPrimaryListResponseDetails();
+            List<ApiPrimaryListDto> dtoData = new List<ApiPrimaryListDto>();
+            if (id != 0)
+            {
+                var data = await _propertyRegistrationService.GetPrimaryListOnZone(id);
+                if (data != null)
+                {
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        dtoData.Add(new ApiPrimaryListDto()
+                        {
+                            Id = data[i].Id,
+                            Name = data[i].PrimaryListNo
+                        });
+                    }
+
+                    apiResponseDetails = new ApiPrimaryListResponseDetails
+                    {
+                        responseCode = "200",
+                        responseMessage = "details fetched successfully",
+                        ApiPrimaryListDto = dtoData
+                    };
+
+                    return Ok(apiResponseDetails);
+                }
+                else
+                {
+                    apiResponseDetails = new ApiPrimaryListResponseDetails
+                    {
+                        responseCode = "404",
+                        responseMessage = " details not found",
+                        ApiPrimaryListDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+            }
+            else
+            {
+                apiResponseDetails = new ApiPrimaryListResponseDetails
+                {
+                    responseCode = "400",
+                    responseMessage = "Bad Request. Insufficient Parameters",
+                    ApiPrimaryListDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
+        }
+
     }
 }

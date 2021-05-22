@@ -1236,8 +1236,12 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)).ToListAsync();
         }
 
-
-
+        public async Task<List<Propertyregistration>> GetPrimaryListOnZone(int zone)// for api added by renu
+        {
+           return await _dbContext.Propertyregistration
+                                  .Where(x => x.ZoneId == zone && x.IsActive == 1)
+                                  .ToListAsync();
+        }
     }
 
 

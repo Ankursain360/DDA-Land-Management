@@ -8,6 +8,7 @@ namespace Dto.Master
     {
         public int ZONEID { get; set; }
         public string ZONE { get; set; }
+        public string CODE { get; set; }
         public DateTime CREATIONDATE { get; set; }
         public int CREATEDBY { get; set; }
     }
