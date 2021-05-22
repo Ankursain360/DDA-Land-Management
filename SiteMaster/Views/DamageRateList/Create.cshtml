@@ -5,7 +5,7 @@
     <div method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" id="startdate" />
+        <input type="hidden" asp-for="Id" value="0" />
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
@@ -14,7 +14,7 @@
                             onchange="return GetDateRangeDetails(this.options[this.selectedIndex].value);">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <span asp-validation-for="PropertyId" class="text-danger"></span>
+                    <span asp-validation-for="PropertyId" class="text-danger" id="PropertyTypeIdMsg" style="display:none;">Property Type is mandatory</span>
                     <label asp-for="PropertyId" class="floating-label">Property Type<span style="color:red">*</span> </label>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                     <select asp-for="DateRangeId" class="floating-label-field floating-label-field--s3">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <span asp-validation-for="DateRangeId" class="text-danger"></span>
+                    <span asp-validation-for="DateRangeId" class="text-danger" id="DateRangeIdMsg" style="display:none;">Date Range is mandatory</span>
                     <label class="floating-label">Date Range<span style="color:red">*</span></label>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                             asp-items="@(new SelectList(ViewBag.LocalityList,"Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <span asp-validation-for="LocalityId" class="text-danger" id="LocalityIdMsg" style="display:none;">Mandatory</span>
+                    <span asp-validation-for="LocalityId" class="text-danger" id="LocalityIdMsg" style="display:none;">Locality is mandatory</span>
                     <label class="floating-label">Locality<span style="color:red">*</span></label>
                 </div>
             </div>
@@ -46,22 +46,20 @@
             </div>
         </div>
 
-        <br />
         <div id="SaveNewRateDiv" style="display:none;">
+            <h3 class="my-3 d-flex sub-heading">Save/Update Damage Rate List</h3>
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input type="date" value="" class="floating-label-field floating-label-field--s3">
-
-                        <span class="text-danger "></span>
+                        <input asp-for="StartDate" type="date" value="" class="floating-label-field floating-label-field--s3" onkeypress="return false;">
+                        <span class="text-danger" id="StartDateMsg" style="display:none;">From Date is mandatory</span>
                         <label class="floating-label">From Date</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="date" value="" class="floating-label-field floating-label-field--s3">
-                        <span class="text-danger "></span>
+                        <input asp-for="EndDate" type="date" value="" class="floating-label-field floating-label-field--s3" onkeypress="return false;">
+                        <span class="text-danger" id="EndDateMsg" style="display:none;">To Date is mandatory</span>
                         <label class="floating-label">To Date</label>
                     </div>
                 </div>
@@ -69,16 +67,16 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input value="" type="text" class="floating-label-field floating-label-field--s3 numbers">
-                        <span class="text-danger "></span>
+                        <input asp-for="Rate" value="" type="text" class="floating-label-field floating-label-field--s3 numbers" >
+                        <span class="text-danger" id="RateMsg" style="display:none;">Rate is mandatory</span>
                         <label class="floating-label">Rate Amount per Sqr Yrd</label>
                     </div>
                 </div>
             </div>
             <div class="row mt-md-3">
                 <div class=" col-md-12">
-                    <button class="btn btn-theme " type="submit" >Save New Rate</button>
+                    <input type="submit" value="Save New Rate" class="btn btn-theme " id="btnSaveNewRate" />
+                    <input type="submit" value="Clear" class="btn btn-theme " id="btnReset" />
                 </div>
             </div>
         </div>

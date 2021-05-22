@@ -31,8 +31,8 @@ namespace SiteMaster.Controllers
         {
             _damageRateListService = damageRateListService;
         }
-      
-        [AuthorizeContext(ViewAction.Add)]
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             DamageRateListCreateDto damageRateListCreatedto = new DamageRateListCreateDto();
@@ -49,133 +49,101 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
-        //[HttpPost]
-        //[AuthorizeContext(ViewAction.Add)]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(Zone zone)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            await BindDropDown(zone);
-        //            var result = await _zoneService.Create(zone);
-
-        //            if (result == true)
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-        //                var result1 = await _zoneService.GetAllDetails();
-        //                return View("Index", result1);
-        //            }
-        //            else
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //                return View(zone);
-
-        //            }
-        //        }
-        //        else
-        //        {
-        //            return View(zone);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return View(zone);
-        //    }
-        //}
-        //[AuthorizeContext(ViewAction.Edit)]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var Data = await _zoneService.FetchSingleResult(id);
-        //    await BindDropDown(Data);
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
-
-        //[HttpPost]
-        //[AuthorizeContext(ViewAction.Edit)]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, Zone zone)
-        //{
-        //    await BindDropDown(zone);
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-
-        //            var result = await _zoneService.Update(id, zone);
-        //            if (result == true)
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-        //                var result1 = await _zoneService.GetAllDetails();
-        //                return View("Index", result1);
-        //            }
-        //            else
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //                return View(zone);
-
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(zone);
-        //        }
-        //    }
-        //    return View(zone);
-        //}
-
-
-        //public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
-        //{
-        //    var result = await _zoneService.Delete(id);
-        //    if (result == true)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //    }
-        //    return RedirectToAction("Index", "Zone");
-
-        //}
-        //[AuthorizeContext(ViewAction.View)]
-        //public async Task<IActionResult> View(int id)
-        //{
-        //    var Data = await _zoneService.FetchSingleResult(id);
-        //    await BindDropDown(Data);
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
-
         [HttpGet]
         public async Task<JsonResult> GetDateRangeList(int? Id)
         {
-            Id = Id ?? 0;
-            if (Id == 1)
+            var Idvalue = Id ?? 0;
+            var propertytype = await _damageRateListService.FetchSinglePropertyType(Idvalue);
+            if (propertytype != null)
             {
-                var data = await _damageRateListService.GetDateRangeDropdownListResidential();
-                return Json(data);
+                if (propertytype.StatusCode == (int)PropertyTypeStatus.Residential)
+                {
+                    var data = await _damageRateListService.GetDateRangeDropdownListResidential();
+                    return Json(data);
+                }
+                else
+                {
+                    var data = await _damageRateListService.GetDateRangeDropdownListCommercial();
+                    return Json(data);
+                }
             }
-            else
-            {
-                var data = await _damageRateListService.GetDateRangeDropdownListCommercial();
-                return Json(data);
-            }
+
+            return Json(null);
         }
 
+        [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create([FromBody] DamageRateListCreateDto damageRateListCreateDto)
+        {
+            List<string> JsonMsg = new List<string>();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    if (damageRateListCreateDto == null)
+                    {
+                        JsonMsg.Add("false");
+                        JsonMsg.Add("Please Enter Correct data");
+                        return Json(JsonMsg);
+                    }
+                    if (damageRateListCreateDto.Id == 0)
+                    {
+                        damageRateListCreateDto.CreatedBy = SiteContext.UserId;
+                        var result = await _damageRateListService.Create(damageRateListCreateDto);
 
+                        if (result == true)
+                        {
+                            JsonMsg.Add("true");
+                            JsonMsg.Add("Record added successfully.");
+                            return Json(JsonMsg);
+                        }
+                        else
+                        {
+                            JsonMsg.Add("false");
+                            JsonMsg.Add("Unable to process the request.");
+                            return Json(JsonMsg);
+                        }
+                    }
+                    else
+                    {
+                        damageRateListCreateDto.ModifiedBy = SiteContext.UserId;
+                        var result = await _damageRateListService.Update(damageRateListCreateDto);
 
+                        if (result == true)
+                        {
+                            JsonMsg.Add("/WorkFlowTemplate/Index");
+                            JsonMsg.Add("Record Updated successfully.");
+                            return Json(JsonMsg);
+                        }
+                        else
+                        {
+                            JsonMsg.Add("false");
+                            JsonMsg.Add("Unable to process the request.");
+                            return Json(JsonMsg);
+                        }
+                    }
+                }
+                else
+                {
+                    JsonMsg.Add("false");
+                    JsonMsg.Add("Please enter a correct number in Rate Field, format xxxx.xxx");
+                    return Json(JsonMsg);
+                }
+            }
+            catch(Exception ex)
+            {
+                JsonMsg.Add("false");
+                JsonMsg.Add("Unable to process the request.");
+                return Json(JsonMsg);
+            }
+           
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> EditDetails(int Id, int EncroachmentTypeId, int LocalityId, int PropertypeId)
+        {
+            return Json(await _damageRateListService.FetchSingleResult(Id, EncroachmentTypeId, LocalityId, PropertypeId));
+        }
 
 
     }

@@ -376,5 +376,17 @@
     "inputFiles": [
       "wwwroot/js/departmenttargetindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damageratelistcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/damageratelistcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/branchindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/branchindex.js"
+    ]
   }
 ]

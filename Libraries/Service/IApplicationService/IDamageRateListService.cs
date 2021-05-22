@@ -16,5 +16,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<DateRangeConcatedListDto>> GetDateRangeDropdownListResidential();
         Task<List<DateRangeConcatedListDto>> GetDateRangeDropdownListCommercial();
         Task<List<DamageRateListDataDto>> GetSearchResultPagedData(DamageRateListSearchDto model, List<DamageRateListDataDto> damageRateListDataDtos);
+        Task<PropertyType> FetchSinglePropertyType(int id);
+        Task<bool> Create(DamageRateListCreateDto damageRateListCreateDto);
+        Task<bool> Update(DamageRateListCreateDto damageRateListCreateDto);
+        Task<dynamic> FetchSingleResult(int id, int EncroachmentTypeId, int LocalityId, int PropertypeId);
     }
 }

@@ -26,6 +26,21 @@ namespace Libraries.Service.ApplicationService
             _damageRateListRepository = damageRateListRepository;
         }
 
+        public async Task<bool> Create(DamageRateListCreateDto damageRateListCreateDto)
+        {
+            return await _damageRateListRepository.Create(damageRateListCreateDto);
+        }
+
+        public async Task<PropertyType> FetchSinglePropertyType(int id)
+        {
+            return await _damageRateListRepository.FetchSinglePropertyType(id);
+        }
+
+        public async Task<dynamic> FetchSingleResult(int id, int EncroachmentTypeId, int LocalityId, int PropertypeId)
+        {
+            return await _damageRateListRepository.FetchSingleResult(id, EncroachmentTypeId, LocalityId, PropertypeId);
+        }
+
         public async Task<List<DateRangeConcatedListDto>> GetDateRangeDropdownListCommercial()
         {
             return await _damageRateListRepository.GetDateRangeDropdownListCommercial();
@@ -49,6 +64,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<DamageRateListDataDto>> GetSearchResultPagedData(DamageRateListSearchDto model, List<DamageRateListDataDto> damageRateListDataDtos)
         {
             return await _damageRateListRepository.GetSearchResultPagedData( model, damageRateListDataDtos);
+        }
+
+        public async Task<bool> Update(DamageRateListCreateDto damageRateListCreateDto)
+        {
+            return await _damageRateListRepository.Update(damageRateListCreateDto);
         }
     }
 }

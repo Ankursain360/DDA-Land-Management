@@ -15,5 +15,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetLocalities();
         Task<List<PropertyType>> GetPropertyTypes();
         Task<List<DamageRateListDataDto>> GetSearchResultPagedData(DamageRateListSearchDto model, List<DamageRateListDataDto> damageRateListDataDtos);
+        Task<PropertyType> FetchSinglePropertyType(int id);
+        Task<bool> Create(DamageRateListCreateDto damageRateListCreateDto);
+        Task<bool> Update(DamageRateListCreateDto damageRateListCreateDto);
+        Task<dynamic> FetchSingleResult(int id, int EncroachmentTypeId, int LocalityId, int PropertypeId);
     }
 }

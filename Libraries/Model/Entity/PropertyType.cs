@@ -19,6 +19,8 @@ namespace Libraries.Model.Entity
             Intersetrate = new HashSet<Interestrate>();
             //Licencefees = new HashSet<Licencefees>();
         }
+        public int StatusCode { get; set; }
+
         [Required(ErrorMessage = "Name is mandatory")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
