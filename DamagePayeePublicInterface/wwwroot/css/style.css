@@ -1689,3 +1689,22 @@ textarea.floating-label-field--s3 {
 
 @media(min-width:1200px) {}
 */
+
+
+/*** mutation link css ***/
+
+.mutationlink {
+
+    border: none;
+    background-color: white;
+    color: Highlight;
+   
+}
+  .mutationlink:hover {
+        border: none;
+        background-color: white;
+        color: Highlight;
+        
+        text-decoration:underline !important;
+    }
+   

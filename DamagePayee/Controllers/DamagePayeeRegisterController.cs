@@ -596,7 +596,7 @@ namespace DamagePayee.Controllers
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
             await BindDropDown(Data);
-
+           
             if (Data == null)
             {
                 return NotFound();
@@ -608,6 +608,7 @@ namespace DamagePayee.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Damagepayeeregister damagepayeeregister)
         {
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
             ViewBag.LocalityList = await _damagepayeeregisterService.GetLocalityList();
 
             await BindDropDown(damagepayeeregister);
@@ -637,35 +638,66 @@ namespace DamagePayee.Controllers
                 {
                     damagepayeeregister.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregister.PropertyPhoto);
                 }
+                else
+                {
+                    damagepayeeregister.PropertyPhotoPath = Data.PropertyPhotoPath;
+                }
                 if (damagepayeeregister.ShowCauseNotice != null)
                 {
                     damagepayeeregister.ShowCauseNoticePath = fileHelper.SaveFile(ShowCauseNoticeDocument, damagepayeeregister.ShowCauseNotice);
+                }
+                else
+                {
+                    damagepayeeregister.ShowCauseNoticePath = Data.ShowCauseNoticePath;
                 }
                 if (damagepayeeregister.Fgform != null)
                 {
                     damagepayeeregister.FgformPath = fileHelper.SaveFile(FGFormDocument, damagepayeeregister.Fgform);
                 }
+                else
+                {
+                    damagepayeeregister.FgformPath = Data.FgformPath;
+                }
                 if (damagepayeeregister.DocumentForFile != null)
                 {
                     damagepayeeregister.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregister.DocumentForFile);
+                }
+                else
+                {
+                    damagepayeeregister.DocumentForFilePath = Data.DocumentForFilePath;
                 }
                 if (damagepayeeregister.ATSFile != null)
                 {
                     damagepayeeregister.AtsfilePath = fileHelper.SaveFile(ATSDocument, damagepayeeregister.ATSFile);
                 }
+                else
+                {
+                    damagepayeeregister.AtsfilePath = Data.AtsfilePath;
+                }
                 if (damagepayeeregister.GPAFile != null)
                 {
                     damagepayeeregister.GpafilePath = fileHelper.SaveFile(GPADocument, damagepayeeregister.GPAFile);
+                }
+                else
+                {
+                    damagepayeeregister.GpafilePath = Data.GpafilePath;
                 }
                 if (damagepayeeregister.MutationFile != null)
                 {
                     damagepayeeregister.MutationFilePath = fileHelper.SaveFile(MutationDocument, damagepayeeregister.MutationFile);
                 }
+                else
+                {
+                    damagepayeeregister.MutationFilePath = Data.MutationFilePath;
+                }
                 if (damagepayeeregister.WillFile != null)
                 {
                     damagepayeeregister.WillFilePath = fileHelper.SaveFile(WillDocument, damagepayeeregister.WillFile);
                 }
-
+                else
+                {
+                    damagepayeeregister.WillFilePath = Data.WillFilePath;
+                }
                 var result = await _damagepayeeregisterService.Update(id, damagepayeeregister);
                 if (result)
                 {
@@ -906,6 +938,7 @@ namespace DamagePayee.Controllers
             FileHelper file = new FileHelper();
             Damagepayeepersonelinfo Data = await _damagepayeeregisterService.GetPersonelInfoFilePath(Id);
             string path = Data.AadharNoFilePath;
+           
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
@@ -1010,6 +1043,14 @@ namespace DamagePayee.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
+        //view file
+        public FileResult ViewDocument(string path)
+        {
+            FileHelper file = new FileHelper();
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
 
     }
 }

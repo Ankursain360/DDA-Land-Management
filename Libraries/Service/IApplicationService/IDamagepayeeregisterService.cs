@@ -15,6 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Damagepayeeregister>> GetAllDamagepayeeregister();
       
         Task<bool> Update(int id, Damagepayeeregister damagepayeeregister);
+        Task<bool> UpdateUserId(int id, int UserId);
         Task<bool> Create(Damagepayeeregister damagepayeeregister);
         Task<Damagepayeeregister> FetchSingleResult(int id);
         Task<bool> Delete(int id);

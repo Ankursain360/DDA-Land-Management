@@ -307,13 +307,25 @@ namespace Service.ApplicationService
             string password = "Pass123$";
 
             var userSavedResult = await _userManager.CreateAsync(user, password);
+            var result = await UpdateUserId(model.Id,user.Id);
+
           //  var userSavedResult = await _userManager.CreateAsync(user, userDto.Password);
             if (userSavedResult.Succeeded)
             { 
-                return password;
+                return (password);
             }
               return "False";
            
         }
-    }
+        public async Task<bool> UpdateUserId(int id, int UserId)
+        {
+            var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+            Damagepayeeregister model = result.FirstOrDefault();
+            model.UserId = UserId;
+            
+            _damagepayeeregisterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        }
 }

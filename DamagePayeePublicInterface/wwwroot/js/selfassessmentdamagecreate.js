@@ -1,4 +1,10 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
+    $('#Gender').removeAttr('multiple');
+});
+
+$(document).ready(function () {
     /* -----------Apply for Mutation Added by Renu  --------------- */
     $("#Rebate").attr("readonly", "readonly");
     $("#TotalPayable").attr("readonly", "readonly");
