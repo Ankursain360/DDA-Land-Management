@@ -326,16 +326,20 @@
                     <div class="form-group col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             @{ if (Model.PropertyPhotoPath != null)
-                                            {
-                                <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                               {
+                                                        <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id"> 
+                                                    View File - (@Model.PropertyPhotoPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))</a>
 
                                                 <input disabled type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" asp-for="PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                                                <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span> }
-                                                                            else
-                                                                            {
+                                                                <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
+                               }
+                                  else
+                                  {
                                                                 <input disabled type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" placeholder="Property Photo">
                                                                                 <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
-                                                                                                <label for="field-1" class="floating-label">Upload Photograph of Property </label> } }
+                                                                                                <label for="field-1" class="floating-label">Upload Photograph of Property </label> 
+                                  } 
+                                }
 
                         </div>
                     </div>
@@ -547,7 +551,9 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @{ if (Model.ShowCauseNoticePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id">
+                                                    View File - (@Model.ShowCauseNoticePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input disabled type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="ShowCauseNotice">
                                 <span asp-validation-for="ShowCauseNotice" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -566,7 +572,9 @@
 
                         @{ if (Model.FgformPath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id">
+                                                    View File - (@Model.FgformPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input disabled type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="Fgform" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -622,7 +630,9 @@
 
                         @{ if (Model.DocumentForFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id">
+                                                    View File - (@Model.DocumentForFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input disabled type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -642,7 +652,9 @@
 
                         @{ if (Model.GpafilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadGPA" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadGPA" asp-route-id="@Model.Id">
+                                                    View File - (@Model.GpafilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input disabled type="file" asp-for="GPAFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="GPAFile" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -662,7 +674,9 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @{ if (Model.AtsfilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadATS" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadATS" asp-route-id="@Model.Id">
+                                                    View File - (@Model.AtsfilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input disabled type="file" asp-for="ATSFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="ATSFile" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -684,7 +698,9 @@
 
                         @{ if (Model.MutationFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadMutation" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadMutation" asp-route-id="@Model.Id">
+                                                    View File - (@Model.MutationFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input disabled type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="MutationFile" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -706,7 +722,9 @@
 
                         @{ if (Model.WillFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadWill" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadWill" asp-route-id="@Model.Id">
+                                                    View File - (@Model.WillFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input disabled type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
                             }

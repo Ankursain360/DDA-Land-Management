@@ -33,21 +33,21 @@
                     <div class="table-responsive">
                         <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
                             <thead class="text-nowrap">
-
                                 <tr>
                                     <th>Sr.No</th>
-                                    <th>Name</th>
+                                    <th style="min-width:150px;">Name</th>
                                     <th>Father's/Husband's Name</th>
-                                    <th style="min-width:100px;">Gender</th>
-                                    <th>Address</th>
-                                    <th>Mobile No.</th>
-                                    <th>Email-Id</th>
-                                    <th style="min-width:200px;">Aadhar No.</th>
-                                    <th style="min-width:200px;">Pan No.</th>
-                                    <th style="min-width:200px;">Photo</th>
-                                    <th style="min-width:200px;">Signature</th>
+                                    <th style="min-width:120px;">Gender</th>
+                                    <th style="min-width:200px;">Address</th>
+                                    <th style="min-width:130px;">Mobile No.</th>
+                                    <th style="min-width:200px;">Email-Id</th>
+                                    <th style="min-width:210px;">Aadhar No.</th>
+                                    <th style="min-width:210px;">PAN No.</th>
+                                    <th style="min-width:250px;">Photo</th>
+                                    <th style="min-width:250px;">Signature</th>
                                     <th>Operation</th>
                                 </tr>
+
                             </thead>
                             <tbody id="tbl_posts_body">
                             </tbody>
@@ -64,18 +64,20 @@
 
                                     </td>
                                     <td>
-                                        <div class="floating-label-wrap">
-                                            <select asp-for="Gender" required class="floating-label-field floating-label-field--s3">
-                                                <option value="0">---Select---</option>
-                                                <option value="1">Male</option>
-                                                <option value="2">Female</option>
-                                                <option value="3">Other</option>
-                                            </select>
-                                            <span asp-validation-for="Gender" class="d-block text-danger field-validation-valid"></span>
-                                        </div>
+
+                                        <select asp-for="Gender" required class="floating-label-field floating-label-field--s3">
+                                            <option value="0">---Select---</option>
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                            <option value="3">Other</option>
+                                        </select>
+                                        <span asp-validation-for="Gender" class="d-block text-danger field-validation-valid"></span>
+
                                     </td>
                                     <td>
-                                        <input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />
+                                        <textarea asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3"></textarea>
+
+                                        @*<input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />*@
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
@@ -90,28 +92,29 @@
 
                                     </td>
                                     <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="AadharNo" type="text" maxlength="15" placeholder="Aadhar No." class=" floating-label-field--s3" />
-                                            <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
-                                            <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                            <input type="hidden" asp-for="AadharNoFilePath" />
-                                            <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
-                                            <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
+                                        <input asp-for="AadharNo" type="text" maxlength="15" class="floating-label-field floating-label-field--s3" />
+                                        <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
+                                        <br />
+                                        <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <input type="hidden" asp-for="AadharNoFilePath" />
 
-                                        </div>
+                                        <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
+
+
                                     </td>
                                     <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="PanNo" maxlength="15" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
-                                            <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
 
-                                            <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
-                                            <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
-                                            <input type="hidden" asp-for="PanNoFilePath" />
-                                            <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
+                                        <input asp-for="PanNo" maxlength="15" type="text" class="floating-label-field floating-label-field--s3" />
+                                        <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
+                                        <br />
+                                        <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <input type="hidden" asp-for="PanNoFilePath" />
+                                        <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
 
-                                        </div>
+
                                     </td>
                                     <td>
                                         <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
@@ -143,7 +146,7 @@
                 </div>
 
             </div>
-            <br />
+
             <div id="Divclsification" class="mt-md-3">
                 <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
 
@@ -329,7 +332,9 @@
                             @{
                                 if (Model.PropertyPhotoPath != null)
                                 {
-                                    <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                                        <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank">
+                                                            View File - (@Model.PropertyPhotoPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                        </a>
 
                                     <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" asp-for="PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
@@ -347,7 +352,7 @@
 
             </div>
 
-            <div id="DivMainContentForm">
+            <div id="DivMainContentForm" style="margin-top:-15px;">
                 <h3 class="my-3 d-flex sub-heading">Use of Property</h3>
                 <div class="row mt-md-3">
                     <div class="col-md-2">
@@ -519,30 +524,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-3">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <div class="form-group" id="DivForPayeeNo" style="display:none;">
                             <label class="control-label lb-sm">Apply for mutation/ substitution</label>
-                            <input type="submit" value="Open Substitution Form" class="btn btn-theme" onclick="return CheckToApply();" />
+                            <input type="submit" value="Open Substitution Form"  class="btn mutationlink" onclick="return CheckToApply();" />
+                            @*   <a href="javascript:void(0)" onclick="return CheckToApply();">Open Substitution Form</a> *@
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="DivDamagePropertyDocs">
+        <div id="DivDamagePropertyDocs" style="margin-top:-40px;">
             <h3 class="my-3 d-flex sub-heading"> Upload documents of damage property </h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <h6 class="my-3" style="color:blue;"> Note: If you have more than one document, create a single PDF and upload.</h6>
 
+            <b style="color:red;"> Note: If you have more than one document, create a single PDF and upload.</b>
 
-            <div class="row">
+            <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="hidden" asp-for="ShowCauseNoticePath" />
                         @{
                             if (Model.ShowCauseNoticePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank">
+                                                    View File - (@Model.ShowCauseNoticePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="ShowCauseNotice">
                                 <span asp-validation-for="ShowCauseNotice" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -561,7 +569,9 @@
                         @{
                             if (Model.FgformPath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank">
+                                                    View File - (@Model.FgformPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="Fgform" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -613,13 +623,15 @@
 
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="hidden" asp-for="DocumentForFilePath" />
                         @{
                             if (Model.DocumentForFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank">
+                                                    View File - (@Model.DocumentForFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                                </a>
                                 <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -636,9 +648,9 @@
 
 
 
-            <br />
+
         </div>
-        <div id="DivMainContentForm">
+        <div id="DivMainContentForm" style="margin-top:-15px;">
             <h3 class="my-3 d-flex sub-heading">Payment History</h3>
 
             <div class="table-section bg-white border shadow rounded">
@@ -652,7 +664,7 @@
                                 <th>Receipt No.</th>
                                 <th>Mode of Payment</th>
                                 <th>Date of Payment</th>
-                                <th>Amount</th>
+                                <th>Amount(Rs.)</th>
                                 <th>Upload receipt</th>
                                 <th>Operation</th>
                             </tr>
@@ -702,13 +714,19 @@
             <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
             <a class="btn btn-theme" asp-action="Index" asp-controller="DamageCalculator" asp-route-id="@Model.LocalityId" onclick="return CheckToApply();">Damage Calculator</a>
         </div>
-        <div class="row mt-3 mb-3">
+        <br />
+        <b style="color:red;">
+            Note: Please calculate Damage CHARGES on FINANCIAL year basis. For any FINANCIAL year (or part thereof) & the due date of payment would be 31st MARCH of that FINANCIAL year.
+        </b>
+
+        @*<div class="row mt-3 mb-3">
             <div class="col-md-12">
-                <h5 class="my-3" style="color:Black;font:bold"> Note: Please calculate Damage CHARGES on FINANCIAL year basis. For any FINANCIAL year (or part thereof) & the due date of payment would be 31st MARCH of that FINANCIAL year.</h5>
+                <h5 class="my-3" style="color:Black;font:bold"> 
+            Note: Please calculate Damage CHARGES on FINANCIAL year basis. For any FINANCIAL year (or part thereof) & the due date of payment would be 31st MARCH of that FINANCIAL year.</h5>
 
             </div>
-        </div>
-        <div id="divSelfAssessmentAmount">
+        </div>*@
+        <div id="divSelfAssessmentAmount" style="margin-top:-10px;">
             <h3 class="my-3 d-flex sub-heading">Amount Payable as per self assessment</h3>
             <input id="RebatePercentage" type="hidden" value="@ViewBag.RebateValue" />
             <div class="row mt-md-3">
@@ -767,8 +785,9 @@
                         I understand that any email sent to me on the ID provided by me shall be deemed service of notice to me.
                         <span asp-validation-for="DeclarationStatus3" id="DeclarationStatus3Msg" class="text-danger" style="display:none;">Mandatory</span>
                         <br /><br />
-                        Note: The compliance of above section will not entitle occupancy rights and super structure claim of the property and all the occupent will continue to be considered as unauthorised occupent of the property.
-
+                              <b style="color:red;">
+                                  Note: The compliance of above section will not entitle occupancy rights and super structure claim of the property and all the occupent will continue to be considered as unauthorised occupent of the property.
+                              </b>
                     </div>
                 </div>
             </div>
@@ -784,12 +803,12 @@
         </div>
     </form>
 
-</div>
+        </div>
 
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/selfassessmentdamagecreate.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/selfassessmentdamagecreate.min.js" asp-append-version="true"></script>
-</environment>
+        <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+        <environment include="Development">
+            <script src="~/js/selfassessmentdamagecreate.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="~/js/selfassessmentdamagecreate.min.js" asp-append-version="true"></script>
+        </environment>
