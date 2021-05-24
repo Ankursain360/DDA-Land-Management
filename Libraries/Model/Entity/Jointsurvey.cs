@@ -9,6 +9,10 @@ namespace Libraries.Model.Entity
 {
     public class Jointsurvey : AuditableEntity<int>
     {
+        public Jointsurvey()
+        {
+            Jointsurveysitepositionmapped = new HashSet<Jointsurveysitepositionmapped>();
+        }
 
         [Required(ErrorMessage = "Village Name is Mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
@@ -40,9 +44,20 @@ namespace Libraries.Model.Entity
         public List<Khasra> KhasraList { get; set; }
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
+        public ICollection<Jointsurveysitepositionmapped> Jointsurveysitepositionmapped { get; set; }
 
 
+        [NotMapped]
+        public List<int> IsAvailable { get; set; }
 
+        [NotMapped]
+        public bool IsChecked { get; set; }
+
+        [NotMapped]
+        public List<int> SitepositionId { get; set; }
+
+        [NotMapped]
+        public List<int> MappedId { get; set; }
 
     }
 }

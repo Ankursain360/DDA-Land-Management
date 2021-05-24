@@ -7,7 +7,8 @@
 }
 <div class="permission mt-2">
     @foreach (var menu in Model)
-    {@if (menu.ParentId == 0)
+    {
+        @if (menu.ParentId == 0)
         {
             <ul class="accordion list-unstyled m-0" id="permission_@menu.ModuleCategoryId">
                 <li class="card" id="sub-permission_@menu.ModuleCategoryId">
@@ -65,5 +66,5 @@
             </ul>
         }
 
-}
+    }
 </div>

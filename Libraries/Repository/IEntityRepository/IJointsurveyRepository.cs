@@ -14,6 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Khasra>> BindKhasra();
         Task<PagedResult<Jointsurvey>> GetPagedJointsurvey(JointSurveySearchDto model);
-
+        Task<ICollection<Jointsurveysitepositionmapped>> BindJointSiteMapped();
+        Task<bool> SaveSitePosition(List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds);
     }
 }

@@ -18,7 +18,7 @@ using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class JointSurveyController : Controller
+    public class JointSurveyController : BaseController
     {
         private readonly IJointsurveyService _jointsurveyService;
         public JointSurveyController(IJointsurveyService jointsurveyService)
@@ -50,7 +50,7 @@ namespace AcquiredLandInformationManagement.Controllers
             jointsurvey.IsActive = 1;
             jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
-
+            jointsurvey.Jointsurveysitepositionmapped = await _jointsurveyService.BindJointSiteMapped();
             return View(jointsurvey);
         }
 
@@ -71,6 +71,23 @@ namespace AcquiredLandInformationManagement.Controllers
                 {
                     var result = await _jointsurveyService.Create(jointsurvey);
 
+                    if (result)
+                    {
+                        List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds = new List<Jointsurveysitepositionmapped>();
+                        for (int i = 0; i < jointsurvey.SitepositionId.Count; i++)
+                        {
+                            jointsurveysitepositionmappeds.Add(new Jointsurveysitepositionmapped
+                            {
+                                SitePositionId = jointsurvey.SitepositionId.Count <= i ? 0 : jointsurvey.SitepositionId[i],
+                                JointSurveyId = jointsurvey.Id,
+                                IsAvailable = jointsurvey.IsAvailable.Count <= i ? 0 : jointsurvey.IsAvailable[i],
+                                CreatedBy = SiteContext.UserId
+                            });
+                        }
+                        if (jointsurveysitepositionmappeds.Count > 0)
+                            result = await _jointsurveyService.SaveSitePosition(jointsurveysitepositionmappeds);
+
+                    }
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);

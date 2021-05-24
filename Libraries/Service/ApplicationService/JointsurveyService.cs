@@ -106,7 +106,14 @@ namespace Libraries.Service.ApplicationService
             return await _JointsurveyRepository.GetPagedJointsurvey(model);
         }
 
+        public async Task<ICollection<Jointsurveysitepositionmapped>> BindJointSiteMapped()
+        {
+            return await _JointsurveyRepository.BindJointSiteMapped();
+        }
 
-
+        public async Task<bool> SaveSitePosition(List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds)
+        {
+            return await _JointsurveyRepository.SaveSitePosition(jointsurveysitepositionmappeds);
+        }
     }
 }

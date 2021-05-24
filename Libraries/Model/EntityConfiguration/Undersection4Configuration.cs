@@ -53,7 +53,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ProposalId).HasColumnType("int(11)");
 
             builder.Property(e => e.TypeDetails)
-                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 

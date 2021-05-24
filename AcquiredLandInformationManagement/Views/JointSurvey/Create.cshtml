@@ -37,43 +37,69 @@
 
 
 
-        <h3 class="my-3 d-flex sub-heading">Site Position</h3>
-
+        <h3 class="my-3 d-flex sub-heading">Site Position</h3>       
         <div class="row">
-            <div class="col-md-3">
-                <input type="hidden" asp-for="SitePosition" id="Type" value="B" />
+            @foreach (var item in Model.Jointsurveysitepositionmapped)
+            {
 
-                <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="builtup" value="B" checked>
-                    <label class="form-check-label" for="radio">
-                        Built Up
-                    </label>
-                </div>
-            </div>
             <div class="col-md-3">
+                <input type="hidden" asp-for="IsAvailable" value="@(item.IsAvailable)" />
+                <input type="hidden" asp-for="SitepositionId" value="@(item.SitePositionId)" />
+                <input type="hidden" asp-for="MappedId" value="@(item.Id)" />
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="Partialbuiltup" value="P">
-                    <label class="form-check-label" for="radio">
-                        Partial Built Up
+                    @if (item.IsAvailable == 1)
+                                {
+                    <input class="form-check-input" type="checkbox" asp-for="IsChecked" checked>
+                    <input type="hidden" asp-for="IsAvailable" value="1" />
+                    }
+                    else
+                    {
+                    <input class="form-check-input" type="checkbox" asp-for="IsChecked" >
+                    <input type="hidden" asp-for="IsAvailable" value="0" />
+                    }
+
+
+                    <label class="form-check-label" for="checkbox">
+                        @item.SitePositionName
                     </label>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="vacant" value="V">
-                    <label class="form-check-label" for="radio">
-                        Vacant
-                    </label>
+            }
+
+            @*<div class="col-md-3">
+                    <input type="hidden" asp-for="SitePosition" id="Type" value="B" />
+
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="builtup" value="B" checked>
+                        <label class="form-check-label" for="checkbox">
+                            Built Up
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="boundry" value="W">
-                    <label class="form-check-label" for="radio">
-                        Boundry Wall
-                    </label>
+                <div class="col-md-3">
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="Partialbuiltup" value="P">
+                        <label class="form-check-label" for="checkbox">
+                            Partial Built Up
+                        </label>
+                    </div>
                 </div>
-            </div>
+                <div class="col-md-3">
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="vacant" value="V">
+                        <label class="form-check-label" for="checkbox">
+                            Vacant
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="boundry" value="W">
+                        <label class="form-check-label" for="checkbox">
+                            Boundry Wall
+                        </label>
+                    </div>
+                </div>*@
         </div>
 
         <h3 class="my-3 d-flex sub-heading">Area</h3>
