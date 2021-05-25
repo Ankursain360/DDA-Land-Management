@@ -33,6 +33,8 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IDamagePayeeRegistrationRepository, DamagePayeeRegistrationRepository>();
             services.AddScoped<IDamagepayeeregisterRepository, DamagepayeeregisterRepository>();
             services.AddScoped<IDamageCalculationRepository, DamageCalculationRepository>();
+            services.AddScoped<IDPPublicPaymentRepository, DPPublicPaymentRepository>();
+
 
             /* Application Services */
             services.AddScoped<IUserProfileService, UserProfileService>();
@@ -47,6 +49,9 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IDamagePayeeRegistrationService, DamagePayeeRegistrationService>();
             services.AddScoped<IDamagepayeeregisterService, DamagepayeeregisterService>();
             services.AddScoped<IDamageCalculationService, DamageCalculationService>();
+            services.AddScoped<IDPPublicPaymentService, DPPublicPaymentService>();
+
+
         }
     }
 }
