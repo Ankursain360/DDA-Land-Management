@@ -1,152 +1,61 @@
-﻿
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Details</h3>
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-
+﻿@model IEnumerable<Libraries.Model.Entity.Demandletters>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Payment" })
+<div class="pt-3">
+   
     <div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end mr-auto">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Demand No</option>
-                        <option>Due Date</option>
-                        <option>Payee Name</option>
-                      
 
-                    </select>
-                    <label for="field-1" class="floating-label">Sort by</label>
-                </div>
-                <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
-                </div>
-            </div>
+      
+       
+        <table class="table table-sm table-bordered mb-0 table-striped">
+            <thead class="text-nowrap">
+                <tr>
+                    <th>File No</th>
+                    <th> Demand No</th>
+                    <th> Payee Name</th>
+                    <th> Demand Amount</th>
+                    <th>Relief Amount</th>
+                    <th>Interest Amount</th>
+                    <th>Total Amount</th>
+                    <th> Due Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
 
-           
-        </div>
-        <div class="table-responsive px-2" id="divEncroachmentRegisterationTable">
+                            <td>@item.FileNo</td>
+                            <td>@item.DemandNo</td>
+                            <td>@item.Name</td>
+                            <td>@item.DepositDue</td>
+                            <td>@item.ReliefAmount</td>
+                            <td>@item.InterestAmount</td>
+                            <td>@item.DepositDue</td>
 
-        </div>
+                            <td> @(Convert.ToDateTime(item.UptoDate).ToString("dd-MMM-yyyy"))</td>
+
+                            <td>  <a href="" class="btn btn-theme">Pay Now </a> </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <th colspan="14" style="text-align:center"> No Record Available! </th>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+      
+
     </div>
 
-
-
-    <div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end mr-auto">
-                <table class="table table-responsive table-bordered table-card">
-
-                    <thead class="text-nowrap">
-                        <tr>
-                            
-                            <th>
-
-                                Demand No
-
-                            </th>
-                            <th>
-                                Due Date
-                            </th>
-                            <th>
-                                Payee Name
-                            </th>
-                            <th>
-                                Demand Amount
-                            </th>
-                            <th>Interest Amount</th>
-                            <th>Rebate Amount</th>
-                            <th>Total Amount</th>
-                            <th colspan="2">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="tbody">
-                        <tr>
-                            
-                            <td>
-                                F-1(73)
-
-                            </td>
-                            <td>
-                                11/8/2021
-                            </td>
-                            <td>
-                                Ragav
-                            </td>
-                            <td>40000</td>
-                            <td>1000</td>
-                            <td>3000</td>
-                            <td>38000</td>
-                            <td>
-
-                                <input type="button" value="PayNow" class="btn btn-theme" disabled/>
-
-
-
-                            </td>
-
-                        </tr>
-
-
-                        <tr>
-                            
-                            <td>
-                                F-7(89)
-
-                            </td>
-                            <td>
-                                11/9/2021
-                            </td>
-                            <td>
-                                Payee name
-                            </td>
-                            <td>20000</td>
-                            <td>1000</td>
-                            <td>3000</td>
-                            <td>18000</td>
-                            <td>
-
-                                <input type="button" value="PayNow" class="btn btn-theme" disabled/>
-
-
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-            
-
-        </div>
-    </div>
 </div>
 
-
-        
-    <script>
-        $(function () {
-            $("input[name=btnsubmit]").click(function () {
-                if ($(this).val() == "Search") {
-                    $("#DivForSubsequentPurchaser").show();
-                } else {
-                    $("#DivForSubsequentPurchaser").hide();
-                }
-            });
-        });
-
-    </script>
-
-
-    <script>
-        function showcollection() {
-            $("#showcollection").toggle();
-            $("#showtr").toggle();
-
-        }
-    </script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
