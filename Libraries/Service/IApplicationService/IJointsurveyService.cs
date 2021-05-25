@@ -20,7 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<Jointsurvey> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Jointsurvey>> GetPagedJointsurvey(JointSurveySearchDto model);
-        Task<ICollection<Jointsurveysitepositionmapped>> BindJointSiteMapped();
+        Task<List<Jointsurveysitepositionmapped>> BindJointSiteMapped(int jointsurveyid);
         Task<bool> SaveSitePosition(List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds);
     }
 }

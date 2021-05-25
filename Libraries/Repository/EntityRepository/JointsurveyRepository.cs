@@ -94,7 +94,7 @@ namespace Libraries.Repository.EntityRepository
             //return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
         }
 
-        public async Task<ICollection<Jointsurveysitepositionmapped>> BindJointSiteMapped()
+        public async Task<List<Jointsurveysitepositionmapped>> BindJointSiteMapped(int jointsurveyid)
         {
             List<Jointsurveysitepositionmapped> olist = new List<Jointsurveysitepositionmapped>();
 
@@ -102,17 +102,17 @@ namespace Libraries.Repository.EntityRepository
                               join B in _dbContext.Jointsurveysitepositionmapped on A.Id equals B.SitePositionId
                               into combine
                               from C in combine.DefaultIfEmpty()
-                              where A.IsActive == 1
+                              where A.IsActive == 1 && C.JointSurveyId == (jointsurveyid == 0 ? C.JointSurveyId : jointsurveyid)
                               select new
                               {
                                   Id = A.Id,
                                   SitePositionName = A.Name,
                                   SitePositionId = A.Id,
                                   JointSurveyId = C.JointSurveyId, 
-                                  IsAvailable = C != null ? 1 : 0
+                                  IsAvailable = C == null ? 0 : C.IsAvailable
                               }).OrderByDescending(x => x.Id).ToListAsync();
 
-            if (Data != null)
+            if (Data != null && Data.Count > 0)
             {
                 for (int i = 0; i < Data.Count; i++)
 
@@ -123,7 +123,25 @@ namespace Libraries.Repository.EntityRepository
                         SitePositionName = Data[i].SitePositionName,
                         SitePositionId = Data[i].SitePositionId,
                         JointSurveyId = Data[i].JointSurveyId,
-                        IsAvailable = Data[i].IsAvailable
+                        IsAvailable = Data[i].IsAvailable,
+                        checkboxchecked = Data[i].IsAvailable == 1 ? true : false
+                    });
+                }
+            }
+            else
+            {
+                var sitepositiondata = await _dbContext.Siteposition.Where(x => x.IsActive == 1).ToListAsync();
+                for (int i = 0; i < sitepositiondata.Count; i++)
+
+                {
+                    olist.Add(new Jointsurveysitepositionmapped()
+                    {
+                        Id = 0,
+                        SitePositionName = sitepositiondata[i].Name,
+                        SitePositionId = sitepositiondata[i].Id,
+                        JointSurveyId = 0,
+                        IsAvailable = 0,
+                        checkboxchecked =  false
                     });
                 }
             }
@@ -138,8 +156,26 @@ namespace Libraries.Repository.EntityRepository
             _dbContext.RemoveRange(_dbContext.Jointsurveysitepositionmapped.Where(x => x.JointSurveyId == jointsurveyId));
             var Result = await _dbContext.SaveChangesAsync();
 
+            List<Jointsurveysitepositionmapped> mappeds = new List<Jointsurveysitepositionmapped>();
+            for (int i = 0; i < jointsurveysitepositionmappeds.Count; i++)
+            {
+                mappeds.Add(new Jointsurveysitepositionmapped
+                {
+                    SitePositionId =jointsurveysitepositionmappeds[i].SitePositionId,
+                    JointSurveyId = jointsurveysitepositionmappeds[i].JointSurveyId,
+                    IsAvailable = jointsurveysitepositionmappeds[i].IsAvailable,
+                    CreatedBy = jointsurveysitepositionmappeds[i].CreatedBy,
+                    CreatedDate = DateTime.Now
+                });
+            }
 
-            await _dbContext.Jointsurveysitepositionmapped.AddRangeAsync(jointsurveysitepositionmappeds);
+            foreach(var item in mappeds)
+            {
+                await _dbContext.Jointsurveysitepositionmapped.AddAsync(item);
+
+            }
+
+           // await _dbContext.Jointsurveysitepositionmapped.AddRangeAsync(mappeds);
             var Result1 = await _dbContext.SaveChangesAsync();
             return Result1 > 0 ? true : false;
         }

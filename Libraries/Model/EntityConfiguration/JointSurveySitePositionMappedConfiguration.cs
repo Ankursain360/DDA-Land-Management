@@ -13,8 +13,8 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("jointsurveysitepositionmapped", "lms");
 
-            builder.HasIndex(e => e.JointSurveyId)
-                .HasName("fk_JointSurvey_idx");
+            //builder.HasIndex(e => e.JointSurveyId)
+            //    .HasName("fk_JointSurvey_idx");
 
             builder.HasIndex(e => e.SitePositionId)
                 .HasName("fk_SitePositionId_idx");
@@ -33,11 +33,11 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.SitePositionId).HasColumnType("int(11)");
 
-            builder.HasOne(d => d.JointSurvey)
-                .WithMany(p => p.Jointsurveysitepositionmapped)
-                .HasForeignKey(d => d.JointSurveyId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_JointSurveyId");
+            //builder.HasOne(d => d.JointSurvey)
+            //    .WithMany(p => p.Jointsurveysitepositionmapped)
+            //    .HasForeignKey(d => d.JointSurveyId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("fk_JointSurveyId");
 
             builder.HasOne(d => d.SitePosition)
                 .WithMany(p => p.Jointsurveysitepositionmapped)

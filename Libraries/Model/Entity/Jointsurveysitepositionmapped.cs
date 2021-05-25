@@ -13,11 +13,14 @@ namespace Libraries.Model.Entity
         public int SitePositionId { get; set; }
         public int IsAvailable { get; set; }
 
-        public Jointsurvey JointSurvey { get; set; }
+        //public Jointsurvey JointSurvey { get; set; }
         public Siteposition SitePosition { get; set; }
 
         [NotMapped]
         public string SitePositionName { get; set; }
+
+        [NotMapped]
+        public bool checkboxchecked { get; set; }
 
     }
 }

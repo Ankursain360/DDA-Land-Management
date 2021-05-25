@@ -15,10 +15,11 @@
 //});
 
 
-//$("input[name='DeclarationStatus1']").click(function () {/* -----------Added by Renu  --------------- */
-//    if ($("#DeclarationStatus1").is(":checked"))
-//        $("#Declaration1").val(1);
-//    else
-//        $("#Declaration1").val(0);
+$('#CheckBoxList').on('change', 'input[type=checkbox]', function () {
 
-//});
+    var id = $(this).val(); // this gives me null
+    if (id != null) {
+        alert(id)
+    }
+
+});

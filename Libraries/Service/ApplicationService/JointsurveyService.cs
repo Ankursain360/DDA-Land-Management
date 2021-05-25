@@ -92,7 +92,15 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Jointsurvey jointsurvey)
         {
-            jointsurvey.CreatedBy = 1;
+            //Jointsurvey model = new Jointsurvey();
+            //model.VillageId = jointsurvey.VillageId;
+            //model.KhasraId = jointsurvey.KhasraId;
+            //model.AreaInBigha = jointsurvey.AreaInBigha;
+            //model.AreaInBiswa = jointsurvey.AreaInBiswa;
+            //model.Remarks = jointsurvey.Remarks;
+            //model.NatureOfStructure = jointsurvey.NatureOfStructure;
+            //model.JointSurveyDate = jointsurvey.JointSurveyDate;
+            jointsurvey.CreatedBy = jointsurvey.CreatedBy;
             jointsurvey.CreatedDate = DateTime.Now;
             jointsurvey.IsActive = 1;
 
@@ -106,9 +114,9 @@ namespace Libraries.Service.ApplicationService
             return await _JointsurveyRepository.GetPagedJointsurvey(model);
         }
 
-        public async Task<ICollection<Jointsurveysitepositionmapped>> BindJointSiteMapped()
+        public async Task<List<Jointsurveysitepositionmapped>> BindJointSiteMapped(int jointsurveyid)
         {
-            return await _JointsurveyRepository.BindJointSiteMapped();
+            return await _JointsurveyRepository.BindJointSiteMapped(jointsurveyid);
         }
 
         public async Task<bool> SaveSitePosition(List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds)

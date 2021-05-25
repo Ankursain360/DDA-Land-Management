@@ -37,69 +37,67 @@
 
 
 
-        <h3 class="my-3 d-flex sub-heading">Site Position</h3>       
+        <h3 class="my-3 d-flex sub-heading">Site Position</h3>
         <div class="row">
-            @foreach (var item in Model.Jointsurveysitepositionmapped)
+
+            @for (int i = 0; i < Model.Jointpositionmapped.Capacity; i++)
             {
 
-            <div class="col-md-3">
-                <input type="hidden" asp-for="IsAvailable" value="@(item.IsAvailable)" />
-                <input type="hidden" asp-for="SitepositionId" value="@(item.SitePositionId)" />
-                <input type="hidden" asp-for="MappedId" value="@(item.Id)" />
-                <div class="form-check theme">
-                    @if (item.IsAvailable == 1)
-                                {
-                    <input class="form-check-input" type="checkbox" asp-for="IsChecked" checked>
-                    <input type="hidden" asp-for="IsAvailable" value="1" />
-                    }
-                    else
-                    {
-                    <input class="form-check-input" type="checkbox" asp-for="IsChecked" >
-                    <input type="hidden" asp-for="IsAvailable" value="0" />
-                    }
+                <div class="col-md-3">
+                    <input type="hidden" asp-for="@Model.Jointpositionmapped[i].SitePositionId" value="@Model.Jointpositionmapped[i].SitePositionId" />
+                    <input type="hidden" asp-for="@Model.Jointpositionmapped[i].JointSurveyId" value="@Model.Jointpositionmapped[i].JointSurveyId" />
+                    <div class="form-check theme">
+                        @*@if (item.IsAvailable == 1)
+        {
+            <input class="form-check-input" type="checkbox" asp-for="@Model.Jointpositionmapped[i].checkboxchecked" checked>
+        }
+        else
+        {
+            <input class="form-check-input" type="checkbox" asp-for="@item.checkboxchecked">
+        }*@
+                        @Html.CheckBoxFor(x => Model.Jointpositionmapped[i].checkboxchecked)
 
-
-                    <label class="form-check-label" for="checkbox">
-                        @item.SitePositionName
-                    </label>
+                        <label class="form-check-label" for="checkbox">
+                            @Model.Jointpositionmapped[i].SitePositionName
+                        </label>
+                    </div>
                 </div>
-            </div>
             }
 
             @*<div class="col-md-3">
-                    <input type="hidden" asp-for="SitePosition" id="Type" value="B" />
+            <input type="hidden" asp-for="SitePosition" id="Type" value="B" />
 
-                    <div class="form-check theme">
-                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="builtup" value="B" checked>
-                        <label class="form-check-label" for="checkbox">
-                            Built Up
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-check theme">
-                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="Partialbuiltup" value="P">
-                        <label class="form-check-label" for="checkbox">
-                            Partial Built Up
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-check theme">
-                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="vacant" value="V">
-                        <label class="form-check-label" for="checkbox">
-                            Vacant
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-check theme">
-                        <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="boundry" value="W">
-                        <label class="form-check-label" for="checkbox">
-                            Boundry Wall
-                        </label>
-                    </div>
-                </div>*@
+            <div class="form-check theme">
+                <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="builtup" value="B" checked>
+                <label class="form-check-label" for="checkbox">
+                    Built Up
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="Partialbuiltup" value="P">
+                <label class="form-check-label" for="checkbox">
+                    Partial Built Up
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="vacant" value="V">
+                <label class="form-check-label" for="checkbox">
+                    Vacant
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="boundry" value="W">
+                <label class="form-check-label" for="checkbox">
+                    Boundry Wall
+                </label>
+            </div>
+        </div>*@
         </div>
 
         <h3 class="my-3 d-flex sub-heading">Area</h3>

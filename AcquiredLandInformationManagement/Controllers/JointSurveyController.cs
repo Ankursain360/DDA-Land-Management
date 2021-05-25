@@ -50,7 +50,7 @@ namespace AcquiredLandInformationManagement.Controllers
             jointsurvey.IsActive = 1;
             jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
-            jointsurvey.Jointsurveysitepositionmapped = await _jointsurveyService.BindJointSiteMapped();
+            jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(0);
             return View(jointsurvey);
         }
 
@@ -59,13 +59,14 @@ namespace AcquiredLandInformationManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
-        public async Task<IActionResult> Create(Jointsurvey jointsurvey)
+        public async Task<IActionResult> Create(Jointsurvey jointsurvey, List<Jointsurveysitepositionmapped> Jointpositionmapped)
         {
             try
             {
 
                 jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
                 jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
+                jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(0);
 
                 if (ModelState.IsValid)
                 {
@@ -74,14 +75,15 @@ namespace AcquiredLandInformationManagement.Controllers
                     if (result)
                     {
                         List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds = new List<Jointsurveysitepositionmapped>();
-                        for (int i = 0; i < jointsurvey.SitepositionId.Count; i++)
+                        for (int i = 0; i < jointsurvey.Jointpositionmapped.Count; i++)
                         {
                             jointsurveysitepositionmappeds.Add(new Jointsurveysitepositionmapped
                             {
-                                SitePositionId = jointsurvey.SitepositionId.Count <= i ? 0 : jointsurvey.SitepositionId[i],
+                                SitePositionId = jointsurvey.Jointpositionmapped.Count <= i ? 0 : jointsurvey.Jointpositionmapped[i].SitePositionId,
                                 JointSurveyId = jointsurvey.Id,
-                                IsAvailable = jointsurvey.IsAvailable.Count <= i ? 0 : jointsurvey.IsAvailable[i],
-                                CreatedBy = SiteContext.UserId
+                                IsAvailable = jointsurvey.Jointpositionmapped.Count <= i ? 0 : jointsurvey.Jointpositionmapped[i].checkboxchecked == true ? 1 : 0,
+                                CreatedBy = SiteContext.UserId,
+                                CreatedDate = DateTime.Now
                             });
                         }
                         if (jointsurveysitepositionmappeds.Count > 0)
@@ -120,7 +122,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
             jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
-           
+
+            jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(id);
 
             if (jointsurvey == null)
             {
@@ -140,6 +143,26 @@ namespace AcquiredLandInformationManagement.Controllers
                     try
                     {
                         var result = await _jointsurveyService.Update(id, jointsurvey);
+
+                        if (result)
+                        {
+                            List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds = new List<Jointsurveysitepositionmapped>();
+                            for (int i = 0; i < jointsurvey.Jointpositionmapped.Count; i++)
+                            {
+                                jointsurveysitepositionmappeds.Add(new Jointsurveysitepositionmapped
+                                {
+                                    SitePositionId = jointsurvey.Jointpositionmapped.Count <= i ? 0 : jointsurvey.Jointpositionmapped[i].SitePositionId,
+                                    JointSurveyId = jointsurvey.Id,
+                                    IsAvailable = jointsurvey.Jointpositionmapped.Count <= i ? 0 : jointsurvey.Jointpositionmapped[i].checkboxchecked == true ? 1 : 0,
+                                    CreatedBy = SiteContext.UserId,
+                                    CreatedDate = DateTime.Now
+                                });
+                            }
+                            if (jointsurveysitepositionmappeds.Count > 0)
+                                result = await _jointsurveyService.SaveSitePosition(jointsurveysitepositionmappeds);
+
+                        }
+
                         if (result == true)
                         {
                             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
@@ -148,23 +171,27 @@ namespace AcquiredLandInformationManagement.Controllers
                         }
                         else
                         {
+                            jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(id);
                             ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                             return View(jointsurvey);
                         }
                     }
                     catch (Exception ex)
                     {
+                        jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(id);
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(jointsurvey);
                     }
                 }
                 else
                 {
+                    jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(id);
                     return View(jointsurvey);
                 }
             }
             catch (Exception ex)
             {
+                jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(id);
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(jointsurvey);
 
@@ -198,6 +225,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Data.KhasraList = await _jointsurveyService.BindKhasra();
             Data.VillageList = await _jointsurveyService.GetAllVillage();
+            jointsurvey.Jointpositionmapped = await _jointsurveyService.BindJointSiteMapped(id);
 
 
             if (Data == null)
