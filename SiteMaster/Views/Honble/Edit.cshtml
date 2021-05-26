@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Honble
-@await Component.InvokeAsync("PageHeader", new { pageName = "Honble" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Honourable" })
 
 <div class="pt-3">
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -10,10 +10,10 @@
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="HonbleName" placeholder="Name" type="text"
+                    <input asp-for="HonbleName" placeholder="Name" type="text" limit="100"
                            class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="HonbleName" class="text-danger"></span>
-                    <label class="floating-label">HonbleName  </label>
+                    <label class="floating-label">Honourable Name  </label>
                 </div>
             </div>
             <div class=" col-md-6">

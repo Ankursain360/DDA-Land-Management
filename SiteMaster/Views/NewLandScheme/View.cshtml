@@ -16,7 +16,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="Name" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="Name"limit="100" disabled/>
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Scheme Name  </label>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="Code" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="Code"limit="10" disabled/>
                     <span asp-validation-for="Code" class="text-danger"></span>
                     <label class="floating-label">Scheme Code </label>
                 </div>
@@ -46,7 +46,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme File No." asp-for="FileNo" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" limit="100" placeholder="Scheme File No." asp-for="FileNo" disabled/>
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label class="floating-label">Scheme File No.  </label>
                 </div>
@@ -63,7 +63,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <textarea type="text" asp-for="Description" class="floating-label-field floating-label-field--s3" placeholder="Description" disabled></textarea>
+                    <textarea type="text" asp-for="Description"limit="500" class="floating-label-field floating-label-field--s3" placeholder="Description" disabled></textarea>
 
                     <label class="floating-label">Description</label>
                 </div>

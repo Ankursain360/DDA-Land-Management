@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 function GetAcquiredLandVillage(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/Village/List`, 'html', param, function (response) {
+    HttpPost(`/NewLandVillage/List`, 'html', param, function (response) {
         $('#divAcquiredLandVillage').html("");
         $('#divAcquiredLandVillage').html(response);
     });

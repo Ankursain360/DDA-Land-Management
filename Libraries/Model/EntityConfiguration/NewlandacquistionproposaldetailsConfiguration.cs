@@ -43,13 +43,13 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.ProposalDate).HasColumnType("date");
 
             builder.Property(e => e.ProposalFileNo)
-                .HasMaxLength(50)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.RequiredAgency)

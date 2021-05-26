@@ -13,7 +13,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="CategoryName" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
-                           limit="50">
+                           limit="200">
                     <span asp-validation-for="CategoryName" class="text-danger "></span>
                     <label class="floating-label">Category Name</label>
                 </div>
@@ -39,7 +39,7 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Submit</button>
                 @Html.ActionLink("Back", "Index", "ModuleCategory", null, new { @class = "btn btn-theme " })
 
             </div>

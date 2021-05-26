@@ -8,28 +8,22 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="row">
-                        <div class="col-md-6    ">
+                        <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
                                 <input asp-for="ChecklistDescription" placeholder="Name" type="text"
                                        class="floating-label-field floating-label-field--s3" limit="1000" />
-
                                 <span asp-validation-for="ChecklistDescription" class="text-danger"></span>
-
                                 <label class="floating-label">Checklist Description   </label>
                             </div>
                         </div>
 
-
-                        <div class="col-md-6    ">
+                        <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
                                 <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
                                 <span asp-validation-for="IsActive" class="text-danger"></span>
-
                                 <label for="field-1" class="floating-label">Status</label>
                             </div>
                         </div>

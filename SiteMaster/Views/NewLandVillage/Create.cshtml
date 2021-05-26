@@ -10,7 +10,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input asp-for="Code" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3"limit="10" />
                     <span asp-validation-for="Code" class="text-danger"></span>
                     <label class="floating-label">Village Code    </label>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3"limit="100" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Village Name    </label>
                 </div>
@@ -103,7 +103,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="WorkingVillage" placeholder="WorkingVillage" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea asp-for="WorkingVillage" placeholder="WorkingVillage" class="floating-label-field floating-label-field--s3"limit="1000"></textarea>
 
                     <span asp-validation-for="WorkingVillage" class="text-danger"></span>
                     <label class="floating-label">Working Village  </label>
@@ -163,8 +163,8 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
-                @Html.ActionLink("Back", "Index", "Village", null, new { @class = "btn btn-theme " })
+                <button class="btn btn-theme " type="submit">Submit</button>
+                @Html.ActionLink("Back", "Index", "NewLandVillage", null, new { @class = "btn btn-theme " })
             </div>
         </div>
     </form>
