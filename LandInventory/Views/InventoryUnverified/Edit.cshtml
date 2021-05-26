@@ -173,11 +173,12 @@
 
         <div id="DivArea">
             <h2 class="my-3 sub-heading">Area</h2>
-            <div class="row">
+            <div class="row mt-md-3">
+
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
-
                         <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                            <option value="">--Select--</option>
                             <option value="0">bigha-biswa-bishwani</option>
                             <option value="1">Sq Yd.</option>
                             <option value="2">Acre</option>
@@ -185,18 +186,19 @@
                             <option value="4">Sq. Mt.</option>
                         </select>
                         <span asp-validation-for="AreaUnit" class="text-danger"></span>
-                        <label class="floating-label">Area Unit</label>
+                        <label asp-for="AreaUnit" class="floating-label">Area Unit </label>
                     </div>
                 </div>
+
             </div>
             <div class="row pt-3">
                 <div class="col-md-4">
                     <div id="bighabis">
-                        <div class="row">
+                        <div class="row mt-md-3">
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input asp-for="TotalAreaInBigha" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input asp-for="TotalAreaInBigha" type="text" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
                                     <label class="floating-label">Bigha</label>
                                 </div>
@@ -204,7 +206,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input asp-for="TotalAreaInBiswa" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input asp-for="TotalAreaInBiswa" type="text" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
                                     <label class="floating-label">Biswa</label>
                                 </div>
@@ -212,7 +214,7 @@
                             <div class="col-md-4">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input asp-for="TotalAreaInBiswani" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input asp-for="TotalAreaInBiswani" type="text" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
                                     <label class="floating-label">Biswani</label>
                                 </div>
@@ -221,22 +223,31 @@
                     </div>
                 </div>
             </div>
-            <div class="row pt-3">
-                <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
-                    <div class="floating-label-wrap">
-                        <input asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
-                        <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+
+            <div id="AreainSqAcreHec" style="display:none;">
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                            <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                            <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+                        </div>
                     </div>
                 </div>
+
+            </div>
+
+            <div class="row mt-md-3">
                 <div class="col-md-4">
-                    <div class="floating-label-wrap">
-                        <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3  numbers" placeholder="Total Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                         <span asp-validation-for="TotalArea" class="text-danger"></span>
                         <label class="floating-label">Total Area(in sq. mt.)</label>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div id="divEncroachment">

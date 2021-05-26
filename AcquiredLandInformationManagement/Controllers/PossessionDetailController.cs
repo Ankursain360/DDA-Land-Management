@@ -16,6 +16,7 @@ using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using System.Text;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -67,10 +68,21 @@ namespace AcquiredLandInformationManagement.Controllers
              
                 undersection4plot.KhasraList = await _Possessiondetailservice.BindKhasra(undersection4plot.VillageId);
                 undersection4plot.VillageList = await _Possessiondetailservice.GetAllVillage();
-
+                StringBuilder str = new StringBuilder();
+                if(undersection4plot.IsVacant == true)
+                {
+                   str.Append("Vacant");
+                }
+                if (undersection4plot.IsBuiltup == true)
+                {
+                    if(str != null)
+                        str.Append("|");
+                    str.Append("Built Up");
+                }
 
                 if (ModelState.IsValid)
                 {
+                    undersection4plot.PossType = str.ToString();
                     var result = await _Possessiondetailservice.Create(undersection4plot);
 
                     if (result == true)
@@ -101,14 +113,21 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _Possessiondetailservice.FetchSingleResult(id);
-
-
-         
+            var Data = await _Possessiondetailservice.FetchSingleResult(id);         
             Data.KhasraList = await _Possessiondetailservice.BindKhasra(Data.VillageId);
             Data.VillageList = await _Possessiondetailservice.GetAllVillage();
 
-
+            if (Data.PossType != "")
+            {
+                string[] multiTo = Data.PossType.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        Data.IsVacant = true;
+                    if (Multi == "Built Up")
+                        Data.IsBuiltup = true;
+                }
+            }
             if (Data == null)
             {
                 return NotFound();
@@ -124,11 +143,23 @@ namespace AcquiredLandInformationManagement.Controllers
 
             undersection4plot.KhasraList = await _Possessiondetailservice.BindKhasra(undersection4plot.VillageId);
             undersection4plot.VillageList = await _Possessiondetailservice.GetAllVillage();
+            StringBuilder str = new StringBuilder();
+            if (undersection4plot.IsVacant == true)
+            {
+                str.Append("Vacant");
+            }
+            if (undersection4plot.IsBuiltup == true)
+            {
+                if (str.Length != 0)
+                    str.Append("|");
+                str.Append("Built Up");
+            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
+                    undersection4plot.PossType = str.ToString();
                     var result = await _Possessiondetailservice.Update(id, undersection4plot);
                     if (result == true)
                     {
@@ -183,7 +214,17 @@ namespace AcquiredLandInformationManagement.Controllers
          
             Data.KhasraList = await _Possessiondetailservice.BindKhasra(Data.VillageId);
             Data.VillageList = await _Possessiondetailservice.GetAllVillage();
-
+            if (Data.PossType != "")
+            {
+                string[] multiTo = Data.PossType.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        Data.IsVacant = true;
+                    if (Multi == "Built Up")
+                        Data.IsBuiltup = true;
+                }
+            }
 
             if (Data == null)
             {

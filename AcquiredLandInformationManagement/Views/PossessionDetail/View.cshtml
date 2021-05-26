@@ -4,12 +4,10 @@
 
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-
         <div class="panel-body">
             <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <h3 class="mb-3 d-flex">View Details</h3>
-
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
@@ -21,9 +19,6 @@
                             <label asp-for="VillageId" class="floating-label">Village Name</label>
                         </div>
                     </div>
-
-
-
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
                             <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))" disabled>
@@ -34,41 +29,29 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
                 <div class="pt-3">
                     <h3 class="mb-3 d-flex">Type of possession</h3>
 
                     <div class="row">
-
-
-
                         <div class="col-md-3">
+                            <input type="hidden" asp-for="PossType" />
                             <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="PossType" value="V" disabled/>    <label class="radio-inline">
+                                <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" disabled/>
+                                <label class="radio-inline">
                                     Vacant
                                 </label>
                             </div>
-                        </div>   <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="PossType" value="B"  disabled/>
+                                <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" disabled/>
                                 <label class="radio-inline">
                                     Built Up
                                 </label>
                             </div>
                         </div>
+
+                        <span asp-validation-for="PossType" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -76,153 +59,153 @@
 
 
 
-                <div class="pt-3">
+        <div class="pt-3">
 
-                    <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
-
-
-
-                    <div class="row">
-
-                        <div class="col-md-3">
-                            <div class="form-check theme">
+            <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
 
 
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" disabled/>    <label class="radio-inline">
-                                    Built-Up
-                                </label>
-                            </div>
-                        </div>   <div class="col-md-3">
-                            <div class="form-check theme">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="form-check theme">
 
 
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" disabled/>
-                                <label class="radio-inline">
-                                    Litigation
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" disabled/>
-                                <label class="radio-inline">
-                                    Others if Any
-                                </label>
-                            </div>
-                        </div>
-
-
+                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" disabled />    <label class="radio-inline">
+                            Built-Up
+                        </label>
                     </div>
+                </div>   <div class="col-md-3">
+                    <div class="form-check theme">
 
+
+                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" disabled />
+                        <label class="radio-inline">
+                            Litigation
+                        </label>
+                    </div>
                 </div>
 
+                <div class="col-md-3">
+                    <div class="form-check theme">
 
 
-
-                <div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="Date" asp-for="PossDate" placeholder="poss Date" class="floating-label-field floating-label-field--s3" disabled/>
-                            <span asp-validation-for="PossDate" class="text-danger"></span>
-                            <label class="floating-label"> Date</label>
-                        </div>
-                    </div>
-
-                    @*<div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="text" asp-for="PlotNo" placeholder="Plot No" class="floating-label-field floating-label-field--s3" disabled/>
-                            <span asp-validation-for="PlotNo" class="text-danger"></span>
-                            <label class="floating-label">Plot No</label>
-                        </div>
-                    </div>*@
-
-
-                </div>
-
-
-
-                <div class="pt-3">
-
-                    <h3 class="mb-3 d-flex">Area</h3>
-
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                                <input type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3" />
-                                <label class="floating-label">Bigha</label>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                                <input type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3" placeholder="Biswa" disabled/>
-                                <label class="floating-label">Biswa</label>
-                            </div>
-                        </div>
-
+                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" disabled />
+                        <label class="radio-inline">
+                            Others if Any
+                        </label>
                     </div>
                 </div>
 
 
+            </div>
 
-
-                <div class="form-row">
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks" disabled></textarea>
-                            <label class="floating-label">Remarks</label>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class=" col-md-6">
-                        <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            </select>
-                            <span asp-validation-for="IsActive" class="text-danger"></span>
-                            <label asp-for="IsActive" class="floating-label">Status </label>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-
-               
-
-                <div class="row mt-md-3">
-                    <div class=" col-md-12">
-                     
-                        @Html.ActionLink("Back", "Index", "PossessionDetail", null, new { @class = "btn btn-theme " })
-                    </div>
-                </div>
-
-
-
-            </form>
         </div>
+
+
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="Date" asp-for="PossDate" placeholder="poss Date" class="floating-label-field floating-label-field--s3" disabled />
+                    <span asp-validation-for="PossDate" class="text-danger"></span>
+                    <label class="floating-label"> Date</label>
+                </div>
+            </div>
+
+            @*<div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="text" asp-for="PlotNo" placeholder="Plot No" class="floating-label-field floating-label-field--s3" disabled/>
+                        <span asp-validation-for="PlotNo" class="text-danger"></span>
+                        <label class="floating-label">Plot No</label>
+                    </div>
+                </div>*@
+
+
+        </div>
+
+
+
+        <div class="pt-3">
+
+            <h3 class="mb-3 d-flex">Area</h3>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">Bigha</label>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3" placeholder="Biswa" disabled />
+                        <label class="floating-label">Biswa</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="form-row">
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks" disabled></textarea>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+
+
+
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+
+                @Html.ActionLink("Back", "Index", "PossessionDetail", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+
+
+
+        </form>
     </div>
+</div>
 </div>
 
 

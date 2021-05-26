@@ -155,9 +155,9 @@
         var inbiswa = $('#TotalAreaInBiswa').val();
         var inbiswani = $('#TotalAreaInBiswani').val();
 
-        var inbighavalue = parseFloat(inbigha == '' ? 0 : inbigha) * 1621.344;
-        var inbiswavalue = parseFloat(inbiswa == '' ? 0 : inbiswa) * 32408.640;
-        var inbiswanivalue = parseFloat(inbiswani == '' ? 0 : inbiswani) * 6.323;
+        var inbighavalue = parseInt(inbigha == '' ? 0 : inbigha) * 1008 * 0.836;    //1008 * 0.836 = 842.688
+        var inbiswavalue = parseInt(inbiswa == '' ? 0 : inbiswa) * 42.134;    //842.688/20  = 42.134
+        var inbiswanivalue = parseInt(inbiswani == '' ? 0 : inbiswani) * 2.1067;     //42.134/20 = 2.1067
 
         var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
 
@@ -169,13 +169,13 @@
         var value = $('#AreaUnit option:selected').val();
         var totalOther = $('#TotalAreaInSqAcreHt').val();
         if (value == 1) {
-            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));   //1/1.196 = 0.836 sq mt
         }
         else if (value == 2) {
-            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 4840 * 0.836).toFixed(3));
         }
         else if (value == 3) {
-            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10000).toFixed(3));
         }
         else if (value == 4) {
             $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));

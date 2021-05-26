@@ -46,7 +46,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.PossType)
                 .IsRequired()
-                .HasMaxLength(1)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.ReasonNonPoss)

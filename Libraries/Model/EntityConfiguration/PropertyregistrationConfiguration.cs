@@ -294,11 +294,11 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.TotalAreaInBigha).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.TotalAreaInBigha).HasColumnType("int(11)");
 
-            builder.Property(e => e.TotalAreaInBiswa).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.TotalAreaInBiswa).HasColumnType("int(11)");
 
-            builder.Property(e => e.TotalAreaInBiswani).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.TotalAreaInBiswani).HasColumnType("int(11)");
 
             builder.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
 

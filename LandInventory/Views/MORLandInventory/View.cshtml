@@ -228,12 +228,16 @@
                         <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
-                        <span asp-validation-for="TotalArea" class="text-danger"></span>
-                        <label class="floating-label">Total Area(in sq. mt.)</label>
-                    </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                    <span asp-validation-for="TotalArea" class="text-danger"></span>
+                    <label class="floating-label">Total Area(in sq. mt.)</label>
                 </div>
             </div>
         </div>
@@ -840,7 +844,7 @@
         <div class="col-md-12">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <textarea placeholder="Remarks"disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                <textarea placeholder="Remarks" disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
                 <label class="floating-label">Remarks</label>
                 <div id="feedbackRemarks"></div>
             </div>
@@ -892,7 +896,7 @@
 
 
 </form>
-     
+
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

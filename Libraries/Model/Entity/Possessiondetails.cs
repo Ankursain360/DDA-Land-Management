@@ -41,5 +41,11 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
         public Acquiredlandvillage Village { get; set; }
+
+        [NotMapped]
+        public bool IsVacant { get; set; }
+        [NotMapped]
+        public bool IsBuiltup { get; set; }
+
     }
 }

@@ -13,13 +13,3 @@
 //        $("#Type").val('W');
 //    }
 //});
-
-
-$('#CheckBoxList').on('change', 'input[type=checkbox]', function () {
-
-    var id = $(this).val(); // this gives me null
-    if (id != null) {
-        alert(id)
-    }
-
-});

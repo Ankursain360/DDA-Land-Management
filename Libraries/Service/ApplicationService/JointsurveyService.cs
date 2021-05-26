@@ -113,15 +113,5 @@ namespace Libraries.Service.ApplicationService
         {
             return await _JointsurveyRepository.GetPagedJointsurvey(model);
         }
-
-        public async Task<List<Jointsurveysitepositionmapped>> BindJointSiteMapped(int jointsurveyid)
-        {
-            return await _JointsurveyRepository.BindJointSiteMapped(jointsurveyid);
-        }
-
-        public async Task<bool> SaveSitePosition(List<Jointsurveysitepositionmapped> jointsurveysitepositionmappeds)
-        {
-            return await _JointsurveyRepository.SaveSitePosition(jointsurveysitepositionmappeds);
-        }
     }
 }

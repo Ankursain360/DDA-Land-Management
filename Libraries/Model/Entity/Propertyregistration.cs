@@ -54,9 +54,9 @@ namespace Libraries.Model.Entity
         [StringLength(4000)]
         public string Palandmark { get; set; }
         public int? AreaUnit { get; set; }
-        public decimal? TotalAreaInBigha { get; set; }
-        public decimal? TotalAreaInBiswa { get; set; }
-        public decimal? TotalAreaInBiswani { get; set; }
+        public int? TotalAreaInBigha { get; set; }
+        public int? TotalAreaInBiswa { get; set; }
+        public int? TotalAreaInBiswani { get; set; }
         public decimal? TotalAreaInSqAcreHt { get; set; }
 
 

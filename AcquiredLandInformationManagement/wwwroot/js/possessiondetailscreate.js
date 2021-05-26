@@ -24,3 +24,28 @@ $("#KhasraId").change(function () {
 
     }
 });
+
+$("input[name='IsVacant']").click(function () {/* -----------Added by Renu  --------------- */
+    if ($("#IsVacant").is(":checked"))
+        $("#PossType").val("Vacant");
+    else
+        $("#PossType").val("");
+
+    $('.chkAction:checkbox:checked').each(function () {
+        var arrIds = $(this).attr("id");
+        $("#PossType").val(arrIds);
+    });
+});
+
+$("input[name='IsBuiltup']").click(function () {/* -----------Added by Renu  --------------- */
+    if ($("#IsBuiltup").is(":checked"))
+        $("#PossType").val("Built Up");
+    else
+        $("#PossType").val("");
+
+    $('.chkAction:checkbox:checked').each(function () {
+        var arrIds = $(this).attr("id");
+        $("#PossType").val(arrIds);
+    });
+});
+

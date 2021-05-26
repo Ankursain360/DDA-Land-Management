@@ -59,7 +59,7 @@
             <div class="floating-label-wrap">
 
                 <select class="floating-label-field floating-label-field--s3" disabled asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Zone is Mandatory">
-                 
+
                     <option value="">--Select--</option>
                 </select>
                 <label asp-validation-for="ZoneId" class="error"></label>
@@ -71,7 +71,7 @@
             <div class="floating-label-wrap">
 
                 <select class="floating-label-field floating-label-field--s3" disabled asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" required="required" requiredmsg="Division is Mandatory">
-                    
+
                     <option value="">--Select--</option>
                 </select>
                 <label asp-validation-for="DivisionId" class="error"></label>
@@ -85,7 +85,7 @@
                 <div class="floating-label-wrap">
 
                     <select class="floating-label-field floating-label-field--s3" disabled asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
-                      
+
                         <option value="">--Select--</option>
                     </select>
                     <label asp-validation-for="LocalityId" class="error"></label>
@@ -229,12 +229,16 @@
                         <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
-                        <span asp-validation-for="TotalArea" class="text-danger"></span>
-                        <label class="floating-label">Total Area(in sq. mt.)</label>
-                    </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                    <span asp-validation-for="TotalArea" class="text-danger"></span>
+                    <label class="floating-label">Total Area(in sq. mt.)</label>
                 </div>
             </div>
         </div>
@@ -314,7 +318,7 @@
 
                                 <input type="file" class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                                
+
                             }
                             else
                             {
@@ -323,7 +327,7 @@
                             }
                         }
                         <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
-                       <label class="floating-label">Upload Action Taken Report(ATR)</label>
+                        <label class="floating-label">Upload Action Taken Report(ATR)</label>
                     </div>
                 </div>
 
@@ -535,13 +539,13 @@
                         @{
                             @if (ViewBag.GeoDocView != null)
                             {
-                            <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                        }
-                        else
-                        {
-                            <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                        }
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                            }
+                            else
+                            {
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            }
                         }
                         <span asp-validation-for="GeoFileData" class="text-danger"></span>
                         <br /> <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
@@ -668,13 +672,13 @@
                     @{
                         @if (ViewBag.HandedOverCopyofOrderView != null)
                         {
-                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                        @Html.ActionLink(" (View File)", "HandedOverCopyofOrderDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                    }
-                    else
-                    {
-                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                    }
+                            <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "HandedOverCopyofOrderDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                        }
+                        else
+                        {
+                            <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
                     }
 
                     <span asp-validation-for="HandedOverCopyofOrderDoc" class="text-danger"></span>
@@ -691,7 +695,7 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-    
+
                     <input type="hidden" asp-for="HandedOverFilePath" />
                     @{
                         @if (ViewBag.HandedOverDocView != null)
@@ -803,7 +807,7 @@
 
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-                   
+
                     <input type="hidden" asp-for="TakenOverFilePath" />
                     @{
                         @if (ViewBag.TakenOverDocView != null)
@@ -818,7 +822,7 @@
                         }
                     }
                     <span asp-validation-for="TakenOverFileData" class="text-danger"></span>
-                   <label class="floating-label" asp-for="TakenOverFileData">Document</label>
+                    <label class="floating-label" asp-for="TakenOverFileData">Document</label>
                 </div>
             </div>
         </div>
@@ -890,7 +894,7 @@
     </div>
 
 </form>
-      
+
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
