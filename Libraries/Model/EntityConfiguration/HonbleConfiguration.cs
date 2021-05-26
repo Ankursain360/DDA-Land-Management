@@ -21,7 +21,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.HonbleName)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.IsActive)

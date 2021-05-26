@@ -24,7 +24,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input disabled asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3" limit="100"/>
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Proposal Name    </label>
                 </div>
@@ -33,7 +33,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input disabled asp-for="RequiredAgency" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3"limit="200" />
                     <span asp-validation-for="RequiredAgency" class="text-danger"></span>
                     <label class="floating-label">Requiring Agency     </label>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input disabled asp-for="ProposalFileNo" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3" limit="100"/>
                     <span asp-validation-for="ProposalFileNo" class="text-danger"></span>
                     <label class="floating-label">Proposal No./ File No.  </label>
                 </div>
@@ -62,28 +62,28 @@
         <div id="Divclsification">
             <h3 class="my-3 d-flex sub-heading">Total Area of the Proposal</h3>
             <div class="row mt-md-3">
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input disabled asp-for="Bigha" placeholder="Name" type="text"
+                        <input disabled asp-for="Bigha" placeholder="Name" type="text"limit="18"
                                class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Bigha" class="text-danger"></span>
                         <label class="floating-label">Bigha    </label>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input disabled asp-for="Biswa" placeholder="Name" type="text"
+                        <input disabled asp-for="Biswa" placeholder="Name"limit="18" type="text"
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Biswa" class="text-danger"></span>
                         <label class="floating-label">Biswa  </label>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input disabled asp-for="Biswanshi" placeholder="Name" type="text"
+                        <input disabled asp-for="Biswanshi" limit="18" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3 numbers" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
                         <label class="floating-label">Biswanshi </label>
@@ -94,7 +94,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea disabled asp-for="Description" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea disabled asp-for="Description"limit="1000" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
 
                     <span asp-validation-for="Description" class="text-danger"></span>
                     <label class="floating-label">Description  </label>

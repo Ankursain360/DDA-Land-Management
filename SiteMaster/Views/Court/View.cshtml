@@ -13,7 +13,7 @@
 
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" disabled />
+                           class="floating-label-field floating-label-field--s3" disabled limit="100"/>
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Court Name  </label>
                 </div>
@@ -22,7 +22,7 @@
             <div class=" col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Address" placeholder="Address" type="text"
-                           class="floating-label-field floating-label-field--s3" disabled />
+                           class="floating-label-field floating-label-field--s3" disabled limit="100"/>
                     <span asp-validation-for="Address" class="text-danger"></span>
                     <label class="floating-label">Court Address </label>
                 </div>
@@ -38,7 +38,7 @@
 
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="PhoneNo" placeholder="Phone Number" type="text"
-                           class="floating-label-field floating-label-field--s3" disabled />
+                           class="floating-label-field floating-label-field--s3" disabled limit="10"/>
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
                     <label class="floating-label">PhoneNo </label>
                 </div>

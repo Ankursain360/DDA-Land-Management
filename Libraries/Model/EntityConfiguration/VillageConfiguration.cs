@@ -30,7 +30,7 @@ namespace Libraries.Model.EntityConfiguration
 
             entity.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(300)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             entity.Property(e => e.Polygon).HasColumnType("longtext");

@@ -10,7 +10,7 @@
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="PurposeUse" placeholder="Demand List No" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="30" />
+                           class="floating-label-field floating-label-field--s3" limit="200" />
 
                     <span asp-validation-for="PurposeUse" class="text-danger"></span>
 
@@ -35,7 +35,7 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Submit</button>
                 @Html.ActionLink("Back", "Index", "Leasepurpose", null, new { @class = "btn btn-theme " })
 
             </div>

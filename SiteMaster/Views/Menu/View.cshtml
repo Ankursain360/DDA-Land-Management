@@ -34,7 +34,7 @@
                 <input asp-for="Name" type="text"
                        class="floating-label-field floating-label-field--s3"
                        placeholder="Menu Name"
-                       limit="200">
+                       limit="150">
                 <span asp-validation-for="Name" class="text-danger"></span>
                 <label class="floating-label">Menu Name</label>
             </div>
@@ -46,7 +46,7 @@
                 <input asp-for="Url" type="text"
                        class="floating-label-field floating-label-field--s3"
                        placeholder="/ControllerName/Actionname"
-                       limit="150">
+                       limit="200">
                 <span asp-validation-for="Url" class="text-danger"></span>
                 <label class="floating-label">Url</label>
             </div>
@@ -56,7 +56,7 @@
                 <input asp-for="SortBy" type="number"
                        class="floating-label-field floating-label-field--s3 onlynumbers"
                        placeholder="Sort By"
-                       limit="11">
+                       >
                 <span asp-validation-for="SortBy" class="text-danger"></span>
                 <label class="floating-label">Sort By</label>
             </div>

@@ -17,7 +17,7 @@ namespace Libraries.Model.EntityConfiguration
                     .HasColumnType("int(11)");
 
             builder.Property(e => e.BundleNo)
-                    .HasMaxLength(200)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");

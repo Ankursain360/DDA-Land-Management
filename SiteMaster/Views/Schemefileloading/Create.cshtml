@@ -13,7 +13,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                  
                     <input asp-for="SchemeName" placeholder="District Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="500" />
+                           class="floating-label-field floating-label-field--s3" limit="100" />
 
                     <span asp-validation-for="SchemeName" class="text-danger"></span>
 
@@ -24,7 +24,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                 
                     <input asp-for="SchemeCode" placeholder="Code" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                           class="floating-label-field floating-label-field--s3" limit="10" />
 
                     <span asp-validation-for="SchemeCode" class="text-danger"></span>
 
@@ -51,7 +51,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Submit</button>
                 @Html.ActionLink("Back", "Index", "Schemefileloading", null, new { @class = "btn btn-theme " })
 
             </div>

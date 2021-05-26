@@ -16,7 +16,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="Name" />
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="Name"limit="100" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Scheme Name  </label>
                 </div>
@@ -25,7 +25,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="Code" />
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="Code"limit="10" />
                     <span asp-validation-for="Code" class="text-danger"></span>
                     <label class="floating-label">Scheme Code </label>
                 </div>
@@ -46,7 +46,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme File No." asp-for="FileNo" />
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme File No." asp-for="FileNo" limit="100"/>
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label class="floating-label">Scheme File No.  </label>
                 </div>
@@ -63,7 +63,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <textarea type="text" asp-for="Description" class="floating-label-field floating-label-field--s3" placeholder="Description"></textarea>
+                    <textarea type="text" asp-for="Description" class="floating-label-field floating-label-field--s3" limit="500" placeholder="Description"></textarea>
 
                     <label class="floating-label">Description</label>
                 </div>
@@ -86,7 +86,7 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Submit</button>
                 @Html.ActionLink("Back", "Index", "NewLandScheme", null, new { @class = "btn btn-theme " })
             </div>
         </div>
