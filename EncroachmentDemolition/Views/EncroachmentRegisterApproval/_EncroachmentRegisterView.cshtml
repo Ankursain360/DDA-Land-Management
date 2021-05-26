@@ -237,7 +237,7 @@
                         <div class="col-md-6">
                             <div class="floating-label-wrap">
 
-                                <select disabled class="floating-label-field floating-label-field--s3" asp-for="IsPossession" onchange="onChangePossationStatus(this.value)">
+                                <select disabled class="floating-label-field floating-label-field--s3" asp-for="IsPossession">
                                     <option value="Yes">Yes</option>
                                     <option value="No">No</option>
                                 </select>
@@ -247,27 +247,27 @@
                     </div>
 
                     <div class="row pt-3">
-                        <div class="col-md-6" id="divPossessionGroup" style="display:block;">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
-                                    <input type="hidden" asp-for="Id" id="hdnId" />
-                                    <input type="hidden" asp-for="IsActive" value="1" />
-                                    <div class="form-check theme">
+                        @*<div class="col-md-6" id="divPossessionGroup" style="display:block;">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
+                                        <input type="hidden" asp-for="Id" id="hdnId" />
+                                        <input type="hidden" asp-for="IsActive" value="1" />
+                                        <div class="form-check theme">
 
-                                        <input type="radio" name="grpPossession" id="rdbFormal" checked disabled>
-                                        <label class="radio-inline">Formal Possession </label>
+                                            <input type="radio" name="grpPossession" id="rdbFormal" checked disabled>
+                                            <label class="radio-inline">Formal Possession </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-check theme">
+
+                                            <input type="radio" name="grpPossession" id="rdbFlexible" disabled>
+                                            <label class="radio-inline">Physical Possession </label>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-check theme">
-
-                                        <input type="radio" name="grpPossession" id="rdbFlexible" disabled>
-                                        <label class="radio-inline">Physical Possession </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            </div>*@
                         <div class="form-group col-md-6" id="divDepartment" style="display:block;">
                             <div class="floating-label-wrap">
                                 <select asp-for="OtherDepartment" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
@@ -318,7 +318,7 @@
 
                             <input disabled type="text" asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="SecurityGuardOnDuty" class="text-danger"></span>
-                            <label class="floating-label">Security Guard on Duty</label>
+                            <label class="floating-label">Officer on Duty</label>
                         </div>
                     </div>
 

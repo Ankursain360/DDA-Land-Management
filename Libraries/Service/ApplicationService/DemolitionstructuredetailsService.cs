@@ -99,15 +99,15 @@ namespace Libraries.Service.ApplicationService
             model.StartOfDemolitionActionDate = demolitionstructuredetails.StartOfDemolitionActionDate;
             model.EndOfDemolitionActionDate = demolitionstructuredetails.EndOfDemolitionActionDate;
             model.AreaReclaimed = demolitionstructuredetails.AreaReclaimed;
+            model.DemilitionReportPath = demolitionstructuredetails.DemilitionReportPath;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = demolitionstructuredetails.ModifiedBy; 
             model.IsActive = 1;
             _demolitionstructuredetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
         public async Task<bool> Create(Demolitionstructuredetails demolitionstructuredetails)
         {
-            demolitionstructuredetails.CreatedBy = 1;
             demolitionstructuredetails.IsActive = 1;
             demolitionstructuredetails.CreatedDate = DateTime.Now;
             _demolitionstructuredetailsRepository.Add(demolitionstructuredetails);

@@ -250,7 +250,7 @@
                                 <div class="form-group col-md-6">
                                     <div class="floating-label-wrap">
                                         <select class="floating-label-field floating-label-field--s3" asp-for="Encroachment.IsPossession"
-                                                onchange="onChangePossationStatus(this.value)" disabled style="width:100%;">
+                                                disabled style="width:100%;">
                                             <option value="Yes">Yes</option>
                                             <option value="No">No</option>
                                         </select>
@@ -259,7 +259,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6" id="divPossessionGroup" style="display:block;">
+                                @*<div class="col-md-6" id="divPossessionGroup" style="display:block;">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <input type="hidden" asp-for="Encroachment.PossessionType" id="PossessionType" value="Formal Possession" disabled />
@@ -281,7 +281,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                                 <div class="col-md-6" id="divDepartment" style="display:block;">
                                     <div class="floating-label-wrap">
                                         <select class="floating-label-field floating-label-field--s3" disabled
@@ -335,7 +335,7 @@
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input type="text" asp-for="Encroachment.SecurityGuardOnDuty" placeholder="Security Guard on Duty" disabled class="floating-label-field floating-label-field--s3" />
                                     <span asp-validation-for="Encroachment.SecurityGuardOnDuty" class="text-danger"></span>
-                                    <label class="floating-label">Security Guard on Duty</label>
+                                    <label class="floating-label">Officer on Duty</label>
                                 </div>
                             </div>
 

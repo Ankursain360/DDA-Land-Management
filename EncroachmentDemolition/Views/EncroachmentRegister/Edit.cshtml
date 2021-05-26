@@ -244,7 +244,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsPossession" onchange="onChangePossationStatus(this.value)">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsPossession" >
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -254,7 +254,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6" id="divPossessionGroup" style="display:block;">
+            @*<div class="col-md-6" id="divPossessionGroup" style="display:block;">
                 <div class="row">
                     <div class="col-md-6">
                         <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
@@ -274,7 +274,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div class="col-md-6" id="divDepartment" style="display:block;">
                 <div class="floating-label-wrap">
                     <select asp-for="OtherDepartment" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
@@ -326,7 +326,7 @@
 
                 <input type="text" asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="SecurityGuardOnDuty" class="text-danger"></span>
-                <label class="floating-label">Security Guard on Duty</label>
+                <label class="floating-label">Officer on Duty</label>
             </div>
         </div>
 

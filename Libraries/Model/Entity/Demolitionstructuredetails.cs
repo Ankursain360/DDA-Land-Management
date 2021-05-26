@@ -41,6 +41,7 @@ namespace Libraries.Model.Entity
         public DateTime? EndOfDemolitionActionDate { get; set; }
         [Required(ErrorMessage = " Area is mandatory")]
         public decimal? AreaReclaimed { get; set; }
+        public string DemilitionReportPath { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
         public Department Department { get; set; }
@@ -70,6 +71,8 @@ namespace Libraries.Model.Entity
         public List<IFormFile> AfterPhotoFile { get; set; }
         [NotMapped]
         public List<IFormFile> BeforePhotoFile { get; set; }
+        [NotMapped]
+        public IFormFile DemolitionReportFile { get; set; }
         public ICollection<Demolitionstructure> Demolitionstructure { get; set; }
         public ICollection<Demolitionstructureafterdemolitionphotofiledetails> Demolitionstructureafterdemolitionphotofiledetails { get; set; }
         public ICollection<Demolitionstructurebeforedemolitionphotofiledetails> Demolitionstructurebeforedemolitionphotofiledetails { get; set; }

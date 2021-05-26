@@ -6,7 +6,7 @@
 
 
 <div class="pt-3">
-        
+
     <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex"> Edit Details</h3>
         <input type="hidden" asp-for="Id" />
@@ -49,7 +49,7 @@
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="DivisionId"></span>
                     <label class="floating-label">Division</label>
                 </div>
-             </div>
+            </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
@@ -143,7 +143,7 @@
                 </div>
             </div>
             <div class="form-group col-md-6">
-              
+
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @{
                         if (Model.Demolitionstructurebeforedemolitionphotofiledetails != null && Model.Demolitionstructurebeforedemolitionphotofiledetails.Count > 0)
@@ -180,7 +180,7 @@
                 </div>
             </div>
             <div class="form-group col-md-6">
-                       @{
+                @{
                     if (Model.Demolitionstructureafterdemolitionphotofiledetails != null && Model.Demolitionstructureafterdemolitionphotofiledetails.Count > 0)
                     {
 
@@ -203,6 +203,29 @@
 
             </div>
         </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DemilitionReportPath" />
+                    @{
+                        @if (Model.DemilitionReportPath != null)
+                        {
+                            <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            @*@Html.ActionLink("(View Report)", "ViewDemolitionReport", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })*@
+                            <a class="badge badge-primary px-2" asp-action="ViewDemolitionReport" asp-route-id="@Model.Id" target="_blank"> (View Report)</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DemolitionReportFile"></span>
+                    <label class="floating-label">Demolition Report</label>
+                </div>
+            </div>
+        </div>
+
         <div class="row pt-3">
             <div class="col-md-12">
                 <div class="table-section bg-white border shadow rounded">
@@ -216,7 +239,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
+
                                 @foreach (var item in Model.Demolitionstructure)
                                 {
                                     <tr>
@@ -236,41 +259,41 @@
                     </div>
                 </div>
             </div>
-         </div>
-                <br />
-                <div class="row pt-3">
-                    <div class="form-group col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
-                                   class="floating-label-field floating-label-field--s3" />
-                            <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
-                            <label class="floating-label">Area Reclaimed(approx.)</label>
-                        </div>
-
-                    </div>
-                    <div class="form-group col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea asp-for="Remarks" type="text" placeholder="Remarks"
-                                      class="floating-label-field floating-label-field--s3"></textarea>
-                            <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
-                            <label class="floating-label">Remarks, If Any</label>
-                        </div>
-
-                    </div>
+        </div>
+        <br />
+        <div class="row pt-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
+                    <label class="floating-label">Area Reclaimed(approx.)</label>
                 </div>
 
-                <div class="row mt-md-4">
-                    <div class="col-md-12">
-                        <input type="submit" value="Update" class="btn btn-theme" />
-                       
-                        @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
-
-                    </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remarks" type="text" placeholder="Remarks"
+                              class="floating-label-field floating-label-field--s3"></textarea>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
+                    <label class="floating-label">Remarks, If Any</label>
                 </div>
 
+            </div>
+        </div>
 
-</form>
-        
+        <div class="row mt-md-4">
+            <div class="col-md-12">
+                <input type="submit" value="Update" class="btn btn-theme" />
+
+                @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
+
+            </div>
+        </div>
+
+
+    </form>
+
 </div>
 <environment include="Development">
     <script src="~/js/DemolitionstructuredetailsView.js"></script>

@@ -167,70 +167,78 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DemolitionReportFile"></span>
+                    <label class="floating-label">Demolition Report</label>
+                </div>
+            </div>
+        </div>
 
-
-        <div class="row pt-3">
-            <div class="col-md-12">
-                <div class="table-section bg-white border shadow rounded">
-                    <div class="table-responsive ">
-                        <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th>Name of Structure</th>
-                                    <th>No of Structure</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Structure)
-                                {
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive ">
+                            <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
                                     <tr>
-                                        <td>@(recNo += 1)</td>
-                                        <td>@(item.Name)</td>
-                                        <td>
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="NoOfStructrure" type="text" placeholder="No Of Structrure"
-                                                       class="floating-label-field floating-label-field--s3" />
-                                                <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
-                                            </div>
-
-                                        </td>
+                                        <th>Sr.No</th>
+                                        <th>Name of Structure</th>
+                                        <th>No of Structure</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Structure)
+                                    {
+                                        <tr>
+                                            <td>@(recNo += 1)</td>
+                                            <td>@(item.Name)</td>
+                                            <td>
+                                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                                    <input asp-for="NoOfStructrure" type="text" placeholder="No Of Structrure"
+                                                           class="floating-label-field floating-label-field--s3" />
+                                                    <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row pt-4">
-            <div class="form-group col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
-                    <label class="floating-label">Area Reclaimed(approx.)</label>
+            <div class="row pt-4">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
+                        <label class="floating-label">Area Reclaimed(approx.)</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea asp-for="Remarks" type="text" placeholder="Remarks"
+                                  class="floating-label-field floating-label-field--s3"></textarea>
+                        <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
+                        <label class="floating-label">Remarks, If Any</label>
+                    </div>
                 </div>
             </div>
-            <div class="form-group col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Remarks" type="text" placeholder="Remarks"
-                              class="floating-label-field floating-label-field--s3"></textarea>
-                    <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
-                    <label class="floating-label">Remarks, If Any</label>
+            <div class="row mt-md-4">
+                <div class="col-md-12">
+                    <input type="submit" value="Create" class="btn btn-theme" />
+
+                    @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
+
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-4">
-            <div class="col-md-12">
-                <input type="submit" value="Create" class="btn btn-theme" />
-              
-                @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
 
-            </div>
-        </div>
-        
 
     </form>
        

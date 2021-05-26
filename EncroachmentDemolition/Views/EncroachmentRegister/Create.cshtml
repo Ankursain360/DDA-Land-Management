@@ -40,7 +40,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="DivisionId" id="DivisionId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 DivisionClass" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))">
+                <select asp-for="DivisionId" id="DivisionId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 DivisionClass" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
 
                     <option value="value">Select</option>
                 </select>
@@ -250,7 +250,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsPossession" onchange="onChangePossationStatus(this.value)">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsPossession">
+                        @*onchange="onChangePossationStatus(this.value)"*@
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -259,7 +260,7 @@
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-6" id="divPossessionGroup" style="display:block;">
+            @*<div class="col-md-6" id="divPossessionGroup" style="display:block;">
                 <div class="row">
                     <div class="col-md-6">
                         <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
@@ -281,7 +282,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
             <div id="divDepartment" class="col-md-6" style="display:block;">
                 <div class="floating-label-wrap">
                     <select asp-for="OtherDepartment" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
@@ -319,7 +320,7 @@
 
                 <input type="text" placeholder="Security Guard on Duty" limit="100" asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="SecurityGuardOnDuty" class="text-danger"></span>
-                <label class="floating-label">Security Guard on Duty</label>
+                <label class="floating-label">Officer on Duty</label>
             </div>
         </div>
 

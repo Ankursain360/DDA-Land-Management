@@ -5,7 +5,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Demolition Diary" })
 
 <div class="pt-3">
-   
+
     <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex"> View Details</h3>
         <input type="hidden" asp-for="Id" />
@@ -208,6 +208,26 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DemilitionReportPath" />
+                    @{
+                        @if (Model.DemilitionReportPath != null)
+                        {
+                            <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <label class="badge badge-primary px-2">(View Report)</label>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DemolitionReportFile"></span>
+                    <label class="floating-label">Demolition Report</label>
+                </div>
+            </div>
+        </div>
 
         <div class="row pt-3">
             <div class="col-md-12">
@@ -229,7 +249,7 @@
                                         <td>@(item.Structure.Name)</td>
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input disabled type="text" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)" class="floating-label-field floating-label-field--s3" readonly="readonly"/>
+                                                <input disabled type="text" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)" class="floating-label-field floating-label-field--s3" readonly="readonly" />
                                                 <input type="hidden" asp-for="Id" value="@(item.Id)" />
                                                 <input type="hidden" asp-for="StructrureId" value="@(item.StructureId)" />
                                             </div>
@@ -264,14 +284,14 @@
         </div>
         <div class="row mt-md-4">
             <div class="col-md-12">
-               
+
                 @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
 
             </div>
         </div>
 
     </form>
-       
+
 </div>
 <environment include="Development">
     <script src="~/js/DemolitionstructuredetailsView.js"></script>

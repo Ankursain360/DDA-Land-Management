@@ -22,7 +22,7 @@ namespace Model.EntityConfiguration
             builder.HasIndex(e => e.ZoneId)
     .HasName("fkdemolitionstructuredetailszone_idx");
 
-    
+
             builder.Property(e => e.Area)
     .HasMaxLength(500)
     .IsUnicode(false);
@@ -42,6 +42,8 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.DivisionId).HasColumnType("int(11)");
+
+            builder.Property(e => e.DemilitionReportPath).HasColumnType("longtext");
 
             builder.Property(e => e.EncroachmentSinceDate).HasColumnType("date");
 

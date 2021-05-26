@@ -1,4 +1,34 @@
-﻿function onChangeDepartment(id) {
+﻿$(document).ready(function () {
+    //HttpGet(`/Demolitionstructuredetails/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
+    //    debugger
+    //    for (var i = 0; i < data.length; i++) {
+
+    //        $("#tbl_posts #add #NoOfStructure").val(data[i].noOfStructure);
+    //        $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
+    //        $('#tbl_posts #add #nameOfStructure').trigger('change');
+    //        if (i < data.length - 1) {
+    //            var ConstructionStatus = $("#tbl_posts #add #NameOfStructure").children("option:selected").val();
+    //            var content = jQuery('#tbl_posts #add tr'),
+    //                size = jQuery('#tbl_posts >tbody >tr').length,
+    //                element = null,
+    //                element = content.clone();
+    //            element.attr('id', 'rec-' + size);
+    //            element.find('.delete-record').attr('data-id', size);
+    //            element.appendTo('#tbl_posts_body');
+    //            $('#tbl_posts_body #rec-' + size + ' #NameOfStructure').val(NameOfStructure);
+    //            element.find('.sn').html(size);
+    //            $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+    //            $("#tbl_posts #add .add").remove();
+    //            $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+    //            element.find(".add-record").hide();
+    //            element.find(".delete-record").show();
+    //        }
+    //    }
+    //});
+
+});
+
+function onChangeDepartment(id) {
     HttpGet(`/Demolitionstructuredetails/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
@@ -28,32 +58,6 @@ function onChangeDivision(id) {
         $("#LocalityId").html(html);
     });
 };
-HttpGet(`/Demolitionstructuredetails/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
-    debugger
-    for (var i = 0; i < data.length; i++) {
-       
-        $("#tbl_posts #add #NoOfStructure").val(data[i].noOfStructure);
-        $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
-        $('#tbl_posts #add #nameOfStructure').trigger('change');
-        if (i < data.length - 1) {
-            var ConstructionStatus = $("#tbl_posts #add #NameOfStructure").children("option:selected").val();
-            var content = jQuery('#tbl_posts #add tr'),
-                size = jQuery('#tbl_posts >tbody >tr').length,
-                element = null,
-                element = content.clone();
-            element.attr('id', 'rec-' + size);
-            element.find('.delete-record').attr('data-id', size);
-            element.appendTo('#tbl_posts_body');
-            $('#tbl_posts_body #rec-' + size + ' #NameOfStructure').val(NameOfStructure);
-            element.find('.sn').html(size);
-            $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-            $("#tbl_posts #add .add").remove();
-            $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-            element.find(".add-record").hide();
-            element.find(".delete-record").show();
-        }
-    }
-});
 
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
@@ -99,3 +103,26 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         return false;
     }
 });
+
+$('#DemolitionReportFile').change(function () {
+    var fileInput = document.getElementById('DemolitionReportFile');
+    var filePath = fileInput.value;
+    const size = (DemolitionReportFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}

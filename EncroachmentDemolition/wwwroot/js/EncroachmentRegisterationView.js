@@ -11,10 +11,10 @@
             $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
         }
         else if (value == 2) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 4840 * 0.836).toFixed(3));
         }
         else if (value == 3) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10000).toFixed(3));
         }
         else if (value == 4) {
             $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
@@ -41,14 +41,14 @@ function onChangeLandStatus(status) {
         $("#divForLandStatus").hide();
     }
 };
-function onChangePossationStatus(status) {
-    if (status == 'Yes') {
-        $("#divPossessionGroup").show();
-    }
-    else {
-        $("#divPossessionGroup").hide();
-    }
-};
+//function onChangePossationStatus(status) {
+//    if (status == 'Yes') {
+//        $("#divPossessionGroup").show();
+//    }
+//    else {
+//        $("#divPossessionGroup").hide();
+//    }
+//};
 function onChangeDepartment(id) {
     HttpGet(`/EncroachmentRegister/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
@@ -88,12 +88,12 @@ $(function () {
     //else {
     //    $("#divForLandStatus").hide();
     //}
-    if ($('#IsPossession option:selected').val() == 'Yes') {
-        $("#divPossessionGroup").show();
-    }
-    else {
-        $("#divPossessionGroup").hide();
-    }
+    //if ($('#IsPossession option:selected').val() == 'Yes') {
+    //    $("#divPossessionGroup").show();
+    //}
+    //else {
+    //    $("#divPossessionGroup").hide();
+    //}
     debugger;
     $("input[name='grpPossession']").click(function () {
         if ($("#rdbFormal").is(":checked")) {

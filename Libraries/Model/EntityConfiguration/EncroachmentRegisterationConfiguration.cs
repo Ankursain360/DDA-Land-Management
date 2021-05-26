@@ -79,7 +79,6 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.PossessionType)
-                .IsRequired()
                 .HasMaxLength(45)
                 .IsUnicode(false);
 

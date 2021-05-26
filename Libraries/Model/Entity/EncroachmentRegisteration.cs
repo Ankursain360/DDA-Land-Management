@@ -64,7 +64,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Possession is Mandatory Field")]
         public string IsPossession { get; set; }
 
-        [Required(ErrorMessage = "Possession Type is Mandatory Field")]
+      //  [Required(ErrorMessage = "Possession Type is Mandatory Field")]
         public string PossessionType { get; set; }
         public int? OtherDepartment { get; set; }
 

@@ -11,10 +11,10 @@
             $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
         }
         else if (value == 2) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 4840 * 0.836).toFixed(3));
         }
         else if (value == 3) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10000).toFixed(3));
         }
         else if (value == 4) {
             $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
@@ -29,6 +29,11 @@
         $("#divForLandStatus").hide();
     }
 
+});
+
+$('#AreaUnit').change(function () {
+    $('#TotalAreaInSqAcreHt').val('');
+    $('#Area').val('');
 });
 
 function GetOtherDetails(id) {
@@ -47,14 +52,14 @@ function onChangeLandStatus(status) {
         $("#divForLandStatus").hide();
     }
 };
-function onChangePossationStatus(status) {
-    if (status == 'Yes') {
-        $("#divPossessionGroup").show();
-    }
-    else {
-        $("#divPossessionGroup").hide();
-    }
-};
+//function onChangePossationStatus(status) {
+//    if (status == 'Yes') {
+//        $("#divPossessionGroup").show();
+//    }
+//    else {
+//        $("#divPossessionGroup").hide();
+//    }
+//};
 function onChangeDepartment(id) {
     HttpGet(`/EncroachmentRegister/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
@@ -82,14 +87,14 @@ function onChangeZone(id) {
     });
 
 
-    HttpGet(`/EncroachmentRegister/GetLocalityList/?DivisionId=${id}`, 'json', function (response) {
-        var html = '<option value="">Select</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }
-        $(".LocalitiyClass").html(html);
-        $(".LocalitiyClass").select2('val', '')
-    });
+    //HttpGet(`/EncroachmentRegister/GetLocalityList/?DivisionId=${id}`, 'json', function (response) {
+    //    var html = '<option value="">Select</option>';
+    //    for (var i = 0; i < response.length; i++) {
+    //        html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+    //    }
+    //    $(".LocalitiyClass").html(html);
+    //    $(".LocalitiyClass").select2('val', '')
+    // });
 };
 function onChangeDivision(id) {
     HttpGet(`/EncroachmentRegister/GetLocalityList/?DivisionId=${id}`, 'json', function (response) {
@@ -139,7 +144,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        /*$("#tbl_posts #add .form-control").val('');*/ 
+        /*$("#tbl_posts #add .form-control").val('');*/
         $("#tbl_posts #add .floating-label-field").val('');
         $("#tbl_posts #add #ConstructionStatus").val("").trigger('change');
         $("#tbl_posts #add #ReligiousStructure").val("").trigger('change');

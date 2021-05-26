@@ -23,10 +23,12 @@ namespace EncroachmentDemolition.Controllers
     {
         public IConfiguration _configuration;
         public readonly IDemolitionstructuredetailsService _demolitionstructuredetailsService;
+        string DemolitionReportFilePath = "";
         public DemolitionstructuredetailsController(IDemolitionstructuredetailsService demolitionstructuredetailsService, IConfiguration configuration)
         {
             _demolitionstructuredetailsService = demolitionstructuredetailsService;
             _configuration = configuration;
+            DemolitionReportFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -71,17 +73,14 @@ namespace EncroachmentDemolition.Controllers
 
             if (ModelState.IsValid)
             {
-
+                FileHelper fileHelper = new FileHelper();
+                demolitionstructuredetails.DemilitionReportPath = demolitionstructuredetails.DemolitionReportFile == null ? demolitionstructuredetails.DemilitionReportPath : fileHelper.SaveFile1(DemolitionReportFilePath, demolitionstructuredetails.DemolitionReportFile);
+                demolitionstructuredetails.CreatedBy = SiteContext.UserId;
                 var result = await _demolitionstructuredetailsService.Create(demolitionstructuredetails);
 
                 if (result)
                 {
-
-                    FileHelper fileHelper = new FileHelper();
-
-
                     ///for after file:
-
 
                     if (demolitionstructuredetails.AfterPhotoFile != null && demolitionstructuredetails.AfterPhotoFile.Count > 0)
                     {
@@ -197,14 +196,13 @@ namespace EncroachmentDemolition.Controllers
 
             if (ModelState.IsValid)
             {
-                
+                FileHelper fileHelper = new FileHelper();
+                demolitionstructuredetails.DemilitionReportPath = demolitionstructuredetails.DemolitionReportFile == null ? demolitionstructuredetails.DemilitionReportPath : fileHelper.SaveFile1(DemolitionReportFilePath, demolitionstructuredetails.DemolitionReportFile);
+                demolitionstructuredetails.ModifiedBy = SiteContext.UserId;
 
                 var result = await _demolitionstructuredetailsService.Update(id, demolitionstructuredetails);
                 if (result)
-                {
-                    FileHelper fileHelper = new FileHelper();
-
-
+                {                   
                     //for after file:
 
                     if (demolitionstructuredetails.AfterPhotoFile != null && demolitionstructuredetails.AfterPhotoFile.Count > 0)
@@ -409,7 +407,16 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-
+        public async Task<IActionResult> ViewDemolitionReport(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Demolitionstructuredetails Data = await _demolitionstructuredetailsService.FetchSingleResult(Id);
+            string filename = DemolitionReportFilePath + Data.DemilitionReportPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+            //string filename = Data.DocumentFileName;
+            //return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
 
 
     }

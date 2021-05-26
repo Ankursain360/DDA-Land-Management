@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\demolitionreportindex.min.js" />
+    <Content Remove="wwwroot\js\EncroachmentRegisterCreate.js~RF20e51f21.TMP" />
     <Content Remove="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
   </ItemGroup>
 
