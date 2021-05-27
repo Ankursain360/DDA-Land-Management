@@ -25,21 +25,20 @@
                 {
                     @foreach (var item in Model)
                     {
-                        <tr>
+                <tr>
 
-                            <td>@item.FileNo</td>
-                            <td>@item.DemandNo</td>
-                            <td>@item.Name</td>
-                            <td>@item.DepositDue</td>
-                            <td>@item.ReliefAmount</td>
-                            <td>@item.InterestAmount</td>
-                            <td>@item.DepositDue</td>
+                    <td>@item.FileNo</td>
+                    <td>@item.DemandNo</td>
+                    <td>@item.Name</td>
+                    <td>@item.DepositDue</td>
+                    <td>@item.ReliefAmount</td>
+                    <td>@item.InterestAmount</td>
+                    <td>@item.DepositDue</td>
 
-                            <td> @(Convert.ToDateTime(item.UptoDate).ToString("dd-MMM-yyyy"))</td>
+                    <td> @(Convert.ToDateTime(item.UptoDate).ToString("dd-MMM-yyyy"))</td>
 
-                            <td>  <a href="" class="btn btn-theme">Pay Now </a> </td>
-
-                        </tr>
+                    <td>  <a href="https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=@item.FileNo&Amount=@item.DepositDue" target="_blank" class="btn btn-theme">Pay Now </a> </td>
+                   </tr>
                     }
                 }
                 else

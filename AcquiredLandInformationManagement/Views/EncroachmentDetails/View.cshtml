@@ -95,7 +95,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input disabled asp-for="FileNo" type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input disabled asp-for="FileNo" type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="100">
 
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label asp-for="FileNo" class="floating-label">Reference No / FileNo </label>
@@ -108,7 +108,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input disabled asp-for="ActionDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input disabled asp-for="ActionDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" >
 
                     <span asp-validation-for="ActionDate" class="text-danger"></span>
                     <label asp-for="ActionDate" class="floating-label">ActionDate </label>

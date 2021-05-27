@@ -65,7 +65,7 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="Area" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" limit="20" value="">
+                    <input asp-for="Area" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" limit="18" value="">
 
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label" asp-for="Area">Area (Acre)</label>
@@ -114,7 +114,7 @@
                 <div class=" col-md-6">
 
                     <div class="floating-label-wrap">
-                        <input asp-for="DateofPossession" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                        <input asp-for="DateofPossession" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" >
 
                         <span asp-validation-for="DateofPossession" class="text-danger"></span>
                         <label class="floating-label" asp-for="DateofPossession">Date of Possession</label>
@@ -128,7 +128,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="400">
 
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label asp-for="Remarks" class="floating-label">Remarks </label>
@@ -151,7 +151,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Submit</button>
                 @Html.ActionLink("Back", "Index", "BookTransferLand", null, new { @class = "btn btn-theme " })
 
             </div>

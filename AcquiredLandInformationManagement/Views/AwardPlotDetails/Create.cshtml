@@ -119,7 +119,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="1000">
 
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label asp-for="Remarks" class="floating-label">Remarks </label>
@@ -142,7 +142,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Submit</button>
                 @Html.ActionLink("Back", "Index", "AwardPlotDetails", null, new { @class = "btn btn-theme " })
 
             </div>
