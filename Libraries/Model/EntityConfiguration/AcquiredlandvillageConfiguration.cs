@@ -40,7 +40,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Code)
-                .HasMaxLength(10)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
