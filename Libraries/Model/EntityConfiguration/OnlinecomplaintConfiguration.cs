@@ -29,9 +29,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
 
-            builder.Property(e => e.AddressOfComplaint)
-                .HasMaxLength(500)
-                .IsUnicode(false);
+            builder.Property(e => e.AddressOfComplaint).HasColumnType("longtext");
 
             builder.Property(e => e.ComplaintTypeId).HasColumnType("int(11)");
 
@@ -78,9 +76,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ReferenceNo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            builder.Property(e => e.Remarks)
-               .HasMaxLength(200)
-               .IsUnicode(false);
+            builder.Property(e => e.Remarks).HasColumnType("longtext");
 
             builder.HasOne(d => d.ApprovedStatusNavigation)
                 .WithMany(p => p.Onlinecomplaint)
