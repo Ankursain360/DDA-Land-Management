@@ -193,7 +193,7 @@
                 <div class="col-md-6 ">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input disabled asp-for="PartyName" placeholder="Party Name" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="30" />
+                               class="floating-label-field floating-label-field--s3" limit="100" />
 
                         <span asp-validation-for="PartyName" class="text-danger"></span>
 
@@ -280,7 +280,7 @@
         <div class="row pt-3">
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea disabled asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea disabled asp-for="Remarks"  limit="4000" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label class="floating-label">Remarks</label>
                 </div>

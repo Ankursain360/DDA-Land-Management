@@ -74,13 +74,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ProposalId).HasColumnType("int(11)");
 
-            builder.Property(e => e.Purpose)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.Purpose).HasColumnType("longtext");
 
-            builder.Property(e => e.Remarks)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.Remarks).HasColumnType("longtext");
 
             builder.Property(e => e.Type)
                 .HasMaxLength(100)

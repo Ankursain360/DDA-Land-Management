@@ -32,7 +32,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.CourtCaseNo)
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -43,17 +43,17 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DdafileNo)
                 .HasColumnName("DDAFileNo")
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.DemandListNo)
                 .IsRequired()
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.EnmSno)
                 .HasColumnName("EnmSNo")
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
@@ -62,17 +62,17 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.LacfileNo)
                 .HasColumnName("LACFileNo")
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.Lacno)
                 .HasColumnName("LACNo")
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.Lbno)
                 .HasColumnName("LBNo")
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.Lbrefdate)
@@ -82,20 +82,18 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.PartyName)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.PayableAppealable)
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Remarks)
-                .HasMaxLength(1000)
-                .IsUnicode(false);
+            builder.Property(e => e.Remarks).HasColumnType("longtext");
 
             builder.Property(e => e.Rfano)
                 .HasColumnName("RFANo")
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");

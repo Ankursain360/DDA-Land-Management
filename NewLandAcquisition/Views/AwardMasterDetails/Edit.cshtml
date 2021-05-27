@@ -20,7 +20,7 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="50">
+                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name">
 
                     <span asp-validation-for="AwardDate" class="text-danger"></span>
                     <label asp-for="AwardDate" class="floating-label">Award Date </label>
@@ -143,7 +143,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000">
                     <span asp-validation-for="Purpose" class="text-danger"></span>
                     <label class="floating-label">Purpose</label>
                 </div>
@@ -184,7 +184,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
+                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000">
 
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label asp-for="Remarks" class="floating-label">Remarks </label>

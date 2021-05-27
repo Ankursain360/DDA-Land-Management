@@ -19,7 +19,7 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="50" disabled>
+                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name"  disabled>
 
                     <span asp-validation-for="AwardDate" class="text-danger"></span>
                     <label asp-for="AwardDate" class="floating-label">Award Date </label>
@@ -142,7 +142,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <textarea asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200" disabled></textarea>
+                    <textarea asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000" disabled></textarea>
                     <span asp-validation-for="Purpose" class="text-danger"></span>
                     <label class="floating-label">Purpose</label>
                 </div>
@@ -184,7 +184,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200" disabled></textarea>
+                    <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000" disabled></textarea>
 
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label asp-for="Remarks" class="floating-label">Remarks </label>

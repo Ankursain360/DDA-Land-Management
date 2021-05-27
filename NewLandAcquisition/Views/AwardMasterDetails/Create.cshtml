@@ -21,7 +21,7 @@
 
 
                 <div class="floating-label-wrap">
-                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="50">
+                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name">
 
                     <span asp-validation-for="AwardDate" class="text-danger"></span>
                     <label asp-for="AwardDate" class="floating-label">Award Date </label>
@@ -145,7 +145,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <textarea asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200"></textarea>
+                        <textarea asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000"></textarea>
                         <span asp-validation-for="Purpose" class="text-danger"></span>
                         <label class="floating-label">Purpose</label>
                     </div>
@@ -188,7 +188,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200"></textarea>
+                        <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000"></textarea>
 
                         <span asp-validation-for="Remarks" class="text-danger"></span>
                         <label asp-for="Remarks" class="floating-label">Remarks </label>
@@ -211,7 +211,7 @@
             </div>
             <div class="row mt-md-3">
                 <div class=" col-md-12">
-                    <button class="btn btn-theme " type="submit">Create</button>
+                    <button class="btn btn-theme " type="submit">Submit</button>
                     @Html.ActionLink("Back", "Index", "AwardMasterDetails", null, new { @class = "btn btn-theme " })
 
                 </div>

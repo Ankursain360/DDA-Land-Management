@@ -43,9 +43,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Remarks)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.Remarks).HasColumnType("longtext");
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
 
