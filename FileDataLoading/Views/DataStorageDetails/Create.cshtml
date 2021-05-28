@@ -40,7 +40,7 @@
                 <div class="col-md-3">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="CategoryNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
-                               limit="10">
+                               limit="45">
                         <span asp-validation-for="CategoryNo" class="text-danger "></span>
                         <label class="floating-label">Category No</label>
                     </div>
@@ -48,7 +48,7 @@
                 <div class="col-md-3">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="HeaderNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
-                               limit="10">
+                               limit="45">
                         <span asp-validation-for="HeaderNo" class="text-danger "></span>
                         <label class="floating-label">Header No</label>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="col-md-3">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="SequenceNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
-                               limit="10">
+                               limit="45">
                         <span asp-validation-for="SequenceNo" class="text-danger "></span>
                         <label class="floating-label">Sequence No</label>
                     </div>
@@ -120,7 +120,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
-                               limit="50">
+                               limit="45">
                         <span asp-validation-for="Name" class="text-danger "></span>
                         <label class="floating-label">Name/Subject</label>
                     </div>
@@ -241,7 +241,7 @@
                 <div class="col-md-3">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="RecordRoomNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
-                               limit="10">
+                               limit="500">
                         <span asp-validation-for="RecordRoomNo" class="text-danger "></span>
                         <label class="floating-label">Record Room No</label>
                     </div>
@@ -313,7 +313,7 @@
 
                    
                <div class="col-md-12">
-                            <input type="submit" value="Create" class="btn btn-theme" />
+                            <input type="submit" value="Submit" class="btn btn-theme" />
                          
                             @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-theme" })
                         </div>
