@@ -42,35 +42,34 @@
 
         <div class="row">
             <div class="col-md-3">
-                <input type="hidden" disabled="disabled" asp-for="SitePosition" id="Type" value="0" />
-
+                <input type="hidden" asp-for="SitePosition" />
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="A" id="rFile" value="B" checked>
-                    <label class="form-check-label" for="radio">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" disabled>
+                    <label class="form-check-label" for="checkbox">
                         Built Up
                     </label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" disabled="disabled" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="P">
-                    <label class="form-check-label" for="radio">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsPartialBuiltup" disabled>
+                    <label class="form-check-label" for="checkbox">
                         Partial Built Up
                     </label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" disabled="disabled" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="V">
-                    <label class="form-check-label" for="radio">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" disabled>
+                    <label class="form-check-label" for="checkbox">
                         Vacant
                     </label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" disabled="disabled" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="W">
-                    <label class="form-check-label" for="radio">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsBoundary" disabled>
+                    <label class="form-check-label" for="checkbox">
                         Boundry Wall
                     </label>
                 </div>

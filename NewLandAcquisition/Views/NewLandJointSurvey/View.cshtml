@@ -57,54 +57,43 @@
                 </div>
             </div>
         </div>
-        <h3 class="my-3 d-flex sub-heading pt-4">Site Position </h3>
-        <div class="row pt-3">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>
-                            Site Position:
-                        </label>
-                    </div>
-                    <div class="col-md-2">
-
-
-                        <div class="form-check theme">
-                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Built Up" checked="checked">
-                            <label class="form-check-label" for="radio">
-                                Built Up
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-check theme">
-                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Partial Built Up">
-                            <label class="form-check-label" for="radio">
-                                Partial Built Up
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-check theme">
-                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Vacant">
-                            <label class="form-check-label" for="radio">
-                                Vacant
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-check theme">
-                            <input disabled asp-for="SitePosition" class="form-check-input" type="radio" value="Boundary wall">
-                            <label class="form-check-label" for="radio">
-                                Boundary wall
-                            </label>
-                        </div>
-                    </div>
-
+        <h3 class="my-3 d-flex sub-heading">Site Position</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="hidden" asp-for="SitePosition" />
+                <div class="form-check theme">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" disabled>
+                    <label class="form-check-label" for="checkbox">
+                        Built Up
+                    </label>
                 </div>
-                <span asp-validation-for="SitePosition" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsPartialBuiltup" disabled>
+                    <label class="form-check-label" for="checkbox">
+                        Partial Built Up
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" disabled>
+                    <label class="form-check-label" for="checkbox">
+                        Vacant
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsBoundary" disabled>
+                    <label class="form-check-label" for="checkbox">
+                        Boundry Wall
+                    </label>
+                </div>
             </div>
         </div>
+
         <h3 class="my-3 d-flex sub-heading pt-4">Area </h3>
         <div class="row pt-3">
             <div class="col-md-4">
@@ -163,7 +152,7 @@
                                 <th>Sr.No</th>
                                 <th>Document Name</th>
                                 <th>Upload Document</th>
-                               
+
                             </tr>
                         </thead>
                         <tbody id="tbl_posts_body">
@@ -212,7 +201,7 @@
                             <th> Name</th>
                             <th>Designation</th>
                             <th>Attendance</th>
-                           
+
                         </tr>
                     </thead>
                     <tbody id="tbl_posts2_body">

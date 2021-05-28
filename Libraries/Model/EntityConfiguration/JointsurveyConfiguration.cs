@@ -64,7 +64,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.SitePosition)
-                .HasMaxLength(50)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.SurveyReport)

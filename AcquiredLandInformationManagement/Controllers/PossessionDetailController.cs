@@ -75,7 +75,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 }
                 if (undersection4plot.IsBuiltup == true)
                 {
-                    if(str != null)
+                    if(str.Length != 0)
                         str.Append("|");
                     str.Append("Built Up");
                 }

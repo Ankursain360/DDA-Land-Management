@@ -36,35 +36,28 @@
 
                 <div class="pt-3">
                     <h3 class="mb-3 d-flex">Type of possession</h3>
-
                     <div class="row">
-
-
-
                         <div class="col-md-3">
+                            <input type="hidden" asp-for="PossType" />
                             <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="PossType" value="V" />    <label class="radio-inline">
+                                <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" />
+                                <label class="form-check-label">
                                     Vacant
                                 </label>
                             </div>
-                        </div>   <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-check theme">
-
-
-                                <input class="form-check-input" type="radio" asp-for="PossType" value="B" checked />
-                                <label class="radio-inline">
+                                <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" />
+                                <label class="form-check-label">
                                     Built Up
                                 </label>
                             </div>
                         </div>
+
+                        <span asp-validation-for="PossType" class="text-danger"></span>
                     </div>
                 </div>
-
-
-
-
 
                 <div class="pt-3">
 
@@ -148,7 +141,7 @@
 
 
 
-                                <input type="text"  asp-for="Bigha" class="floating-label-field floating-label-field--s3 number" />
+                                <input type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3 number" />
                                 <label class="floating-label">Bigha</label>
 
                             </div>
@@ -159,7 +152,7 @@
 
 
 
-                                <input type="text" asp-for="Biswa"  class="floating-label-field floating-label-field--s3 number" placeholder="Biswa" />
+                                <input type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 number" placeholder="Biswa" />
                                 <label class="floating-label">Biswa</label>
                             </div>
                         </div>
@@ -168,7 +161,7 @@
 
 
 
-                                <input type="text"  asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 number" placeholder="Biswanshi" />
+                                <input type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 number" placeholder="Biswanshi" />
                                 <label class="floating-label">Biswanshi</label>
                             </div>
                         </div>
@@ -255,16 +248,16 @@
 
 
 
-                    <div class="row mt-md-3">
-                        <div class=" col-md-12">
-                            <button class="btn btn-theme " type="submit">Submit</button>
-                            @Html.ActionLink("Back", "Index", "NewlandPossesionDetails", null, new { @class = "btn btn-theme " })
-                        </div>
+                <div class="row mt-md-3">
+                    <div class=" col-md-12">
+                        <button class="btn btn-theme " type="submit">Submit</button>
+                        @Html.ActionLink("Back", "Index", "NewlandPossesionDetails", null, new { @class = "btn btn-theme " })
                     </div>
+                </div>
 
 
 
-</form>
+            </form>
         </div>
     </div>
 </div>

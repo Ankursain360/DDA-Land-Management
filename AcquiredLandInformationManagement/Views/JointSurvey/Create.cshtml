@@ -40,10 +40,9 @@
         <h3 class="my-3 d-flex sub-heading">Site Position</h3>
         <div class="row">
             <div class="col-md-3">
-                <input type="hidden" asp-for="SitePosition" id="Type" value="B" />
-
+                <input type="hidden" asp-for="SitePosition" />              
                 <div class="form-check theme">
-                    <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="builtup" value="B" checked>
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup">
                     <label class="form-check-label" for="checkbox">
                         Built Up
                     </label>
@@ -51,7 +50,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="Partialbuiltup" value="P">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsPartialBuiltup">
                     <label class="form-check-label" for="checkbox">
                         Partial Built Up
                     </label>
@@ -59,7 +58,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="vacant" value="V">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant">
                     <label class="form-check-label" for="checkbox">
                         Vacant
                     </label>
@@ -67,7 +66,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="checkbox" name="grpDamageAssesseeType" id="boundry" value="W">
+                    <input class="form-check-input chkAction" type="checkbox" asp-for="IsBoundary">
                     <label class="form-check-label" for="checkbox">
                         Boundry Wall
                     </label>

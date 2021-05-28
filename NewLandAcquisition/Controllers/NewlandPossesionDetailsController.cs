@@ -16,6 +16,7 @@ using NewLandAcquisition.Filters;
 using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
+using System.Text;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -78,6 +79,18 @@ namespace NewLandAcquisition.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    StringBuilder str = new StringBuilder();
+                    if (newlandpossessiondetails.IsVacant == true)
+                    {
+                        str.Append("Vacant");
+                    }
+                    if (newlandpossessiondetails.IsBuiltup == true)
+                    {
+                        if (str.Length != 0)
+                            str.Append("|");
+                        str.Append("Built Up");
+                    }
+                    newlandpossessiondetails.PossType = str.ToString();
                     var result = await _Possessiondetailservice.Create(newlandpossessiondetails);
 
                     if (result == true)
@@ -118,7 +131,17 @@ namespace NewLandAcquisition.Controllers
             Data.us17List = await _Possessiondetailservice.GetAllus17();
             Data.us4List = await _Possessiondetailservice.GetAllus4();
             Data.us6List = await _Possessiondetailservice.GetAllus6();
-
+            if (Data.PossType != "")
+            {
+                string[] multiTo = Data.PossType.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        Data.IsVacant = true;
+                    if (Multi == "Built Up")
+                        Data.IsBuiltup = true;
+                }
+            }
             if (Data == null)
             {
                 return NotFound();
@@ -142,6 +165,18 @@ namespace NewLandAcquisition.Controllers
             {
                 try
                 {
+                    StringBuilder str = new StringBuilder();
+                    if (newlandpossessiondetails.IsVacant == true)
+                    {
+                        str.Append("Vacant");
+                    }
+                    if (newlandpossessiondetails.IsBuiltup == true)
+                    {
+                        if (str.Length != 0)
+                            str.Append("|");
+                        str.Append("Built Up");
+                    }
+                    newlandpossessiondetails.PossType = str.ToString();
                     var result = await _Possessiondetailservice.Update(id, newlandpossessiondetails);
                     if (result == true)
                     {
@@ -201,7 +236,17 @@ namespace NewLandAcquisition.Controllers
             Data.us17List = await _Possessiondetailservice.GetAllus17();
             Data.us4List = await _Possessiondetailservice.GetAllus4();
             Data.us6List = await _Possessiondetailservice.GetAllus6();
-
+            if (Data.PossType != "")
+            {
+                string[] multiTo = Data.PossType.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        Data.IsVacant = true;
+                    if (Multi == "Built Up")
+                        Data.IsBuiltup = true;
+                }
+            }
             if (Data == null)
             {
                 return NotFound();

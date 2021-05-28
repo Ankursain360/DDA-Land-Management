@@ -15,6 +15,7 @@ using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
+using System.Text;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -68,6 +69,31 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    StringBuilder str = new StringBuilder();
+                    if (jointsurvey.IsBuiltup == true)
+                    {
+                        str.Append("Built Up");
+                    }
+                    if (jointsurvey.IsPartialBuiltup == true)
+                    {
+                        if (str.Length != 0)
+                            str.Append("|");
+                        str.Append("Partial Built Up");
+                    }
+                    if (jointsurvey.IsVacant == true)
+                    {
+                        if (str.Length != 0)
+                            str.Append("|");
+                        str.Append("Vacant");
+                    }
+                    if (jointsurvey.IsBoundary == true)
+                    {
+                        if (str.Length != 0)
+                            str.Append("|");
+                        str.Append("Boundry Wall");
+                    }
+
+                    jointsurvey.SitePosition = str.ToString();
                     var result = await _jointsurveyService.Create(jointsurvey);
 
                     if (result == true)
@@ -102,7 +128,21 @@ namespace AcquiredLandInformationManagement.Controllers
 
             jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
-
+            if (jointsurvey.SitePosition != "")
+            {
+                string[] multiTo = jointsurvey.SitePosition.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        jointsurvey.IsVacant = true;
+                    if (Multi == "Built Up")
+                        jointsurvey.IsBuiltup = true;
+                    if (Multi == "Partial Built Up")
+                        jointsurvey.IsPartialBuiltup = true;
+                    if (Multi == "Boundry Wall")
+                        jointsurvey.IsBoundary = true;
+                }
+            }
             if (jointsurvey == null)
             {
                 return NotFound();
@@ -120,6 +160,31 @@ namespace AcquiredLandInformationManagement.Controllers
                 {
                     try
                     {
+                        StringBuilder str = new StringBuilder();
+                        if (jointsurvey.IsBuiltup == true)
+                        {
+                            str.Append("Built Up");
+                        }
+                        if (jointsurvey.IsPartialBuiltup == true)
+                        {
+                            if (str.Length != 0)
+                                str.Append("|");
+                            str.Append("Partial Built Up");
+                        }
+                        if (jointsurvey.IsVacant == true)
+                        {
+                            if (str.Length != 0)
+                                str.Append("|");
+                            str.Append("Vacant");
+                        }
+                        if (jointsurvey.IsBoundary == true)
+                        {
+                            if (str.Length != 0)
+                                str.Append("|");
+                            str.Append("Boundry Wall");
+                        }
+
+                        jointsurvey.SitePosition = str.ToString();
                         var result = await _jointsurveyService.Update(id, jointsurvey);
 
                         if (result == true)
@@ -180,7 +245,21 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Data.KhasraList = await _jointsurveyService.BindKhasra();
             Data.VillageList = await _jointsurveyService.GetAllVillage();
-
+            if (jointsurvey.SitePosition != "")
+            {
+                string[] multiTo = jointsurvey.SitePosition.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        jointsurvey.IsVacant = true;
+                    if (Multi == "Built Up")
+                        jointsurvey.IsBuiltup = true;
+                    if (Multi == "Partial Built Up")
+                        jointsurvey.IsPartialBuiltup = true;
+                    if (Multi == "Boundry Wall")
+                        jointsurvey.IsBoundary = true;
+                }
+            }
             if (Data == null)
             {
                 return NotFound();

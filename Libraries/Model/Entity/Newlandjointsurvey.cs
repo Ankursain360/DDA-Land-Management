@@ -78,6 +78,18 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<IFormFile> Document { get; set; }
 
+        [NotMapped]
+        public bool IsBuiltup { get; set; }
+
+        [NotMapped]
+        public bool IsPartialBuiltup { get; set; }
+
+        [NotMapped]
+        public bool IsVacant { get; set; }
+
+        [NotMapped]
+        public bool IsBoundary { get; set; }
+
 
     }
 }

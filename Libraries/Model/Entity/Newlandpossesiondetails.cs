@@ -63,5 +63,10 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Undersection6> us6List { get; set; }
         public Undersection6 Us6 { get; set; }
+
+        [NotMapped]
+        public bool IsVacant { get; set; }
+        [NotMapped]
+        public bool IsBuiltup { get; set; }
     }
 }

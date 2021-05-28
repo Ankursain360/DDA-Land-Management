@@ -58,7 +58,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.SitePosition)
                 .IsRequired()
-                .HasMaxLength(50)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");

@@ -39,5 +39,18 @@ namespace Libraries.Model.Entity
         public List<Khasra> KhasraList { get; set; }
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
+
+        [NotMapped]
+        public bool IsBuiltup { get; set; }
+
+        [NotMapped]
+        public bool IsPartialBuiltup { get; set; }
+
+        [NotMapped]
+        public bool IsVacant { get; set; }
+
+        [NotMapped]
+        public bool IsBoundary { get; set; }
+
     }
 }

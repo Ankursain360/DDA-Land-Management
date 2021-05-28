@@ -16,6 +16,7 @@ using Utility.Helper;
 using NewLandAcquisition.Filters;
 using Core.Enum;
 using Dto.Master;
+using System.Text;
 
 namespace NewLandAcquisition.Controllers
 {
@@ -64,6 +65,32 @@ namespace NewLandAcquisition.Controllers
             string SurveyNoDocument = _configuration.GetSection("FilePaths:NewJointSurvey:SurveyNoDocument").Value.ToString();
             if (ModelState.IsValid)
             {
+                StringBuilder str = new StringBuilder();
+                if (newlandjointsurvey.IsBuiltup == true)
+                {
+                    str.Append("Built Up");
+                }
+                if (newlandjointsurvey.IsPartialBuiltup == true)
+                {
+                    if (str.Length != 0)
+                        str.Append("|");
+                    str.Append("Partial Built Up");
+                }
+                if (newlandjointsurvey.IsVacant == true)
+                {
+                    if (str.Length != 0)
+                        str.Append("|");
+                    str.Append("Vacant");
+                }
+                if (newlandjointsurvey.IsBoundary == true)
+                {
+                    if (str.Length != 0)
+                        str.Append("|");
+                    str.Append("Boundry Wall");
+                }
+
+                newlandjointsurvey.SitePosition = str.ToString();
+
                 FileHelper fileHelper = new FileHelper();
                 newlandjointsurvey.CreatedBy = SiteContext.UserId;
                 var result = await _newLandJointSurveyService.Create(newlandjointsurvey);
@@ -183,6 +210,22 @@ namespace NewLandAcquisition.Controllers
             Data.KhasraList = await _newLandJointSurveyService.GetAllKhasra(Data.VillageId);
             Newlandjointsurvey newlandjointsurvey = new Newlandjointsurvey();
             newlandjointsurvey.IsActive = newlandjointsurvey.IsActive;
+
+            if (Data.SitePosition != null)
+            {
+                string[] multiTo = Data.SitePosition.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        Data.IsVacant = true;
+                    if (Multi == "Built Up")
+                        Data.IsBuiltup = true;
+                    if (Multi == "Partial Built Up")
+                        Data.IsPartialBuiltup = true;
+                    if (Multi == "Boundry Wall")
+                        Data.IsBoundary = true;
+                }
+            }
             if (Data == null)
             {
                 return NotFound();
@@ -201,6 +244,31 @@ namespace NewLandAcquisition.Controllers
             string SurveyNoDocument = _configuration.GetSection("FilePaths:NewJointSurvey:SurveyNoDocument").Value.ToString(); ;
             if (ModelState.IsValid)
             {
+                StringBuilder str = new StringBuilder();
+                if (newlandjointsurvey.IsBuiltup == true)
+                {
+                    str.Append("Built Up");
+                }
+                if (newlandjointsurvey.IsPartialBuiltup == true)
+                {
+                    if (str.Length != 0)
+                        str.Append("|");
+                    str.Append("Partial Built Up");
+                }
+                if (newlandjointsurvey.IsVacant == true)
+                {
+                    if (str.Length != 0)
+                        str.Append("|");
+                    str.Append("Vacant");
+                }
+                if (newlandjointsurvey.IsBoundary == true)
+                {
+                    if (str.Length != 0)
+                        str.Append("|");
+                    str.Append("Boundry Wall");
+                }
+
+                newlandjointsurvey.SitePosition = str.ToString();
                 FileHelper fileHelper = new FileHelper();
 
                 newlandjointsurvey.ModifiedBy = SiteContext.UserId;
@@ -346,7 +414,21 @@ namespace NewLandAcquisition.Controllers
             Data.ZoneList = await _newLandJointSurveyService.GetAllZone();
             Data.VillageList = await _newLandJointSurveyService.GetAllVillage(Data.ZoneId);
             Data.KhasraList = await _newLandJointSurveyService.GetAllKhasra(Data.VillageId);
-
+            if (Data.SitePosition != "")
+            {
+                string[] multiTo = Data.SitePosition.Split('|');
+                foreach (string Multi in multiTo)
+                {
+                    if (Multi == "Vacant")
+                        Data.IsVacant = true;
+                    if (Multi == "Built Up")
+                        Data.IsBuiltup = true;
+                    if (Multi == "Partial Built Up")
+                        Data.IsPartialBuiltup = true;
+                    if (Multi == "Boundry Wall")
+                        Data.IsBoundary = true;
+                }
+            }
             if (Data == null)
             {
                 return NotFound();
