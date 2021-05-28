@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\AwardMasterDetails\**" />
+    <Content Remove="Views\AwardMasterDetails\**" />
+    <EmbeddedResource Remove="Views\AwardMasterDetails\**" />
+    <None Remove="Views\AwardMasterDetails\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\AwardPlotDetails\Createold.cshtml" />
     <Content Remove="wwwroot\js\JavaScript.js" />
     <Content Remove="wwwroot\js\mutationcreate.min.js" />
@@ -99,11 +106,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\AwardMasterDetails\Create.cshtml" />
-    <None Include="Views\AwardMasterDetails\Edit.cshtml" />
-    <None Include="Views\AwardMasterDetails\Index.cshtml" />
-    <None Include="Views\AwardMasterDetails\View.cshtml" />
-    <None Include="Views\AwardMasterDetails\_List.cshtml" />
     <None Include="Views\AwardPlotDetails\Create.cshtml" />
     <None Include="Views\AwardPlotDetails\Edit.cshtml" />
     <None Include="Views\AwardPlotDetails\Index.cshtml" />
