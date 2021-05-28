@@ -298,7 +298,7 @@ $("#btnCreate").click(function () {
         var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
         if (i < count - 1) {
             if (jQuery.inArray(remove_ForwardItem, parameterAction) == -1)
-                return InfoMessage('Forward Action is mandatroy at each level apart from last level.');
+                return InfoMessage('Submit Action is mandatroy at each level apart from last level.');
         }
         if (i == count - 1) {
             if (jQuery.inArray(remove_ApprovedItem, parameterAction) == -1)
