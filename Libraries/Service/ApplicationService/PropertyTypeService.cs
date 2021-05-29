@@ -47,6 +47,7 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _PropertyTypeRepository.FindBy(a => a.Id == id);
             PropertyType model = result.FirstOrDefault();
+            model.StatusCode = rent.StatusCode;
             model.Name = rent.Name;
             
 

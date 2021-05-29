@@ -43,6 +43,8 @@ namespace Service.ApplicationService
             var result = await _approvalstatusRepository.FindBy(a => a.Id == id);
             Approvalstatus model = result.FirstOrDefault();
             
+            model.StatusCode = approvalstatus.StatusCode;         
+            model.SentStatusName = approvalstatus.SentStatusName;         
             model.Name = approvalstatus.Name;         
             model.IsActive = approvalstatus.IsActive;
             model.ModifiedDate = DateTime.Now;
