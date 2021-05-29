@@ -28,6 +28,7 @@ namespace Libraries.Model.Entity
             Issuereturnfile = new HashSet<Issuereturnfile>();
             Dmsfileupload = new HashSet<Dmsfileupload>();
             Village = new HashSet<Village>();
+            Vacantlandimage = new HashSet<Vacantlandimage>();
             //  Departmenttarget = new HashSet<Departmenttarget>();
         }
 
@@ -60,5 +61,6 @@ namespace Libraries.Model.Entity
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
         public ICollection<Departmenttarget> Departmenttarget { get; set; }
         public ICollection<Village> Village { get; set; }
+        public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
     }
 }

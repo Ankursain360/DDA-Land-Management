@@ -317,6 +317,7 @@ namespace Libraries.Model
         public virtual DbSet<Allotmentletter> Allotmentletter { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<Approvalurltemplatemapping> Approvalurltemplatemapping { get; set; }
+        public virtual DbSet<Vacantlandimage> Vacantlandimage { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -570,6 +571,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new AllotmentletterConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalUrlTemplateMappingConfiguration());
+            modelBuilder.ApplyConfiguration(new VacantLandImageConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

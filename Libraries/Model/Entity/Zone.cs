@@ -26,6 +26,7 @@ namespace Libraries.Model.Entity
             Mutationdetails = new HashSet<Mutationdetails>();
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
             Newlandjointsurvey = new HashSet<Newlandjointsurvey>();
+            Vacantlandimage = new HashSet<Vacantlandimage>();
         }
 
         [Required(ErrorMessage = " Department is mandatory", AllowEmptyStrings = false)]
@@ -75,5 +76,6 @@ namespace Libraries.Model.Entity
         public ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public ICollection<Newlandvillage> Newlandvillage { get; set; }
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
+        public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
     }
 }

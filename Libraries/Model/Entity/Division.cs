@@ -22,6 +22,7 @@ namespace Libraries.Model.Entity
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             Planning = new HashSet<Planning>();
             Village = new HashSet<Village>();
+            Vacantlandimage = new HashSet<Vacantlandimage>();
         }
 
         [Required(ErrorMessage = "Division name is mandatory")]
@@ -58,5 +59,6 @@ namespace Libraries.Model.Entity
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
         public virtual ICollection<Planning> Planning { get; internal set; }
         public ICollection<Village> Village { get; set; }
+        public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
     }
 }
