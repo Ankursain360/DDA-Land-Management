@@ -20,11 +20,13 @@ namespace Libraries.Model.Entity
             Request = new HashSet<Request>();
             Watchandward = new HashSet<Watchandward>();
         }
-
+        [Required(ErrorMessage = "Status Code is mandatory")]
         public int StatusCode { get; set; }
 
         [Required(ErrorMessage = "Approval Status is mandatory")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Status Name is mandatory")]
         public string SentStatusName { get; set; }
         public int IsActive { get; set; }
 
