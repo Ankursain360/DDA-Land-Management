@@ -5,6 +5,7 @@
             <th>Date</th>
             <th>Locality(Village)</th>
             <th>Khasra No</th>
+            <th>Encroachment</th>
             <th>Police Station</th>
             <th>Security Guard on duty</th>
             <th>Status</th>
@@ -21,6 +22,7 @@
             <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
             <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
             <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>
+            <td>@(item.IsEncroachment== "" ? "No" : item.IsEncroachment)</td>
             <td>@item.PoliceStation</td>
             <td>@item.SecurityGuardOnDuty</td>
             <td>
