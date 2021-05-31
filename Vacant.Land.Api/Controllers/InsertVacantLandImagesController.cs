@@ -36,15 +36,18 @@ namespace Vacant.Land.Api.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        [Route("api/DepartmentAPI/GetPrimaryList")]
-        public async Task<IActionResult> GetPrimaryList([FromBody] ApiInsertVacantLandImageDto dto)
+        [Route("api/InsertVacantLandImages/SaveVacantLandImage")]
+        public async Task<IActionResult> SaveVacantLandImage([FromBody] ApiInsertVacantLandImageDto dto)
         {
             ApiInsertVacantLandImageResponseDetails apiResponseDetails = new ApiInsertVacantLandImageResponseDetails();
             if (dto != null)
             {
                 FileHelper fileHelper = new FileHelper();
-                //  dto.ImagePath = dto.ImageData == null ? dto.ImageData : fileHelper.SaveFile1(VacantLandImagePath, dto.ImageData);
-                dto.ImagePath = VacantLandImagePath + Guid.NewGuid().ToString() + ".jpg";
+                dto.ImagePath = Guid.NewGuid().ToString() + ".jpg";
+                if (!Directory.Exists(VacantLandImagePath))
+                {
+                    DirectoryInfo directoryInfo = Directory.CreateDirectory(VacantLandImagePath);
+                }
                 using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.ImageData)))
                 {
                     using (Bitmap bm2 = new Bitmap(ms))
@@ -53,7 +56,7 @@ namespace Vacant.Land.Api.Controllers
                     }
                 }
                 var data = await _insertVacantLandImagesService.Create(dto);
-                if (data != true)
+                if (data == true)
                 {
 
                     List<ApiInsertVacantLandImageDto> dtoData = new List<ApiInsertVacantLandImageDto>();

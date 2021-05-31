@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>abd6b76a-2cc3-4baa-8463-cd2200986339</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />

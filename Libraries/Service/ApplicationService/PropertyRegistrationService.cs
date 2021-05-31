@@ -404,9 +404,11 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetDeletedLandReportData( model);
         }
 
-        public async Task<List<Propertyregistration>> GetPrimaryListOnZone(int zone) // for api added by renu
+
+        public async Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid) // for api added by renu
         {
-            return await _propertyregistrationRepository.GetPrimaryListOnZone(zone);
+
+            return await _propertyregistrationRepository.GetPrimaryListForAPI( deptid,  zoneid,  divisionid);
         }
     }
 }

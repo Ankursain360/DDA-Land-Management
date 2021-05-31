@@ -185,14 +185,14 @@ namespace Vacant.Land.Api.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("api/DepartmentAPI/GetPrimaryList")]
-        public async Task<IActionResult> GetPrimaryList(int id)
+        public async Task<IActionResult> GetPrimaryList(int deptid, int zoneid , int divisionid)
         {
             ApiPrimaryListResponseDetails apiResponseDetails = new ApiPrimaryListResponseDetails();
             List<ApiPrimaryListDto> dtoData = new List<ApiPrimaryListDto>();
-            if (id != 0)
+            if (deptid != 0 && zoneid != 0 && divisionid != 0)
             {
-                var data = await _propertyRegistrationService.GetPrimaryListOnZone(id);
-                if (data != null)
+                var data = await _propertyRegistrationService.GetPrimaryListForAPI(deptid, zoneid, divisionid);
+                if (data != null && data.Count > 0)
                 {
                     for (int i = 0; i < data.Count; i++)
                     {

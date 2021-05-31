@@ -16,8 +16,6 @@ namespace Libraries.Model.Entity
         public int? PrimaryListId { get; set; }
         public string PrimaryList { get; set; }
         public string Location { get; set; }
-        public string ImageExtension { get; set; }
-        public byte[] Image { get; set; }
         public string ImagePath { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
@@ -32,9 +30,6 @@ namespace Libraries.Model.Entity
         public int? UniqueId { get; set; }
         public string IsExistanceEncroachment { get; set; }
         public string EncroachmentDetails { get; set; }
-        public string ZoneEd4sedi { get; set; }
-        public string DivisionEd4sedi { get; set; }
-        public string RemarksEd4sedi { get; set; }
         public string IsEncroached { get; set; }
         public string PerEncroached { get; set; }
         public string AreaEncroached { get; set; }

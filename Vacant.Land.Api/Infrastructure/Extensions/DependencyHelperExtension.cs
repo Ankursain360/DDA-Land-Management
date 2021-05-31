@@ -29,7 +29,8 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<ICurrentstatusoflandhistoryRepository, CurrentstatusoflandhistoryRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IPlanningRepositry, PlanningRepositry>();
-           
+            services.AddScoped<IInsertVacantLandImagesRepository, InsertVacantLandImagesRepository>();
+
 
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
@@ -40,7 +41,8 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<ICurrentstatusoflandhistoryService, CurrentstatusoflandhistoryService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IPlanningService, PlanningService>();
-            
+            services.AddScoped<IInsertVacantLandImagesService, InsertVacantLandImagesService>();
+
         }
     }
 }

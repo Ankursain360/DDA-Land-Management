@@ -53,11 +53,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.DivisionEd4sedi)
-                .HasColumnName("DivisionED4SEDI")
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
             builder.Property(e => e.DivisionId).HasColumnType("int(11)");
 
             builder.Property(e => e.EncroachmentDetails).HasColumnType("longtext");
@@ -68,12 +63,6 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Flag)
                 .HasMaxLength(50)
-                .IsUnicode(false);
-
-            builder.Property(e => e.Image).HasColumnType("blob");
-
-            builder.Property(e => e.ImageExtension)
-                .HasMaxLength(10)
                 .IsUnicode(false);
 
             builder.Property(e => e.ImagePath).HasColumnType("longtext");
@@ -120,11 +109,6 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Remarks).HasColumnType("longtext");
 
-            builder.Property(e => e.RemarksEd4sedi)
-                .HasColumnName("RemarksED4SEDI")
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
             builder.Property(e => e.ScurityGuard)
                 .HasMaxLength(20)
                 .IsUnicode(false);
@@ -137,11 +121,6 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Zone)
                 .HasMaxLength(100)
-                .IsUnicode(false);
-
-            builder.Property(e => e.ZoneEd4sedi)
-                .HasColumnName("ZoneED4SEDI")
-                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");

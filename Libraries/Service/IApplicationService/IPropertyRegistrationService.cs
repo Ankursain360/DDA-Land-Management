@@ -60,7 +60,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Propertyregistration>> GetAllPropertyRegistrationReportList();
         Task<List<Propertyregistration>> GetAllRestorePropertyReportList();
         Task<List<Propertyregistration>> GetAllPropertyRegistrationMORlist(int UserId);
-
-        Task<List<Propertyregistration>> GetPrimaryListOnZone(int zone);  // for api added by renu
+        Task<List<Propertyregistration>> GetPrimaryListForAPI(int deptid, int zoneid, int divisionid); // for api added by renu
     }
 }
