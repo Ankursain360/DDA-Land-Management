@@ -10,6 +10,7 @@
             <th>Locality(Village)</th>
             <th>Khasra No.</th>
             <th>Primary List No.</th>
+            <th>Encroachment</th>
             <th>Status on Ground</th>
             <th>Status</th>
             <th>Operations</th>
@@ -21,21 +22,22 @@
             @foreach (var item in Model.Results)
 
             {
-                <tr>
-                    <td> @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
-                    <td>@item.PrimaryListNoNavigation.KhasraNo</td>
-                    <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
-                    <td>@item.StatusOnGround</td>
-                    <td>
-                        @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
-                    </td>
-                    <td style="min-width:120px;">
-                        <div class="action-btns">
-                            <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                        </div>
-                    </td>
-                </tr>
+        <tr>
+            <td> @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
+            <td>@item.PrimaryListNoNavigation.KhasraNo</td>
+            <td>@(item.PrimaryListNoNavigation.PrimaryListNo == null ? "" : item.PrimaryListNoNavigation.PrimaryListNo)</td>
+            <td>@(item.Encroachment.ToString() == "1" ? "Yes" : "No")</td>
+            <td>@item.StatusOnGround</td>
+            <td>
+                @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+            </td>
+            <td style="min-width:120px;">
+                <div class="action-btns">
+                    <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                </div>
+            </td>
+        </tr>
             }
         }
         else

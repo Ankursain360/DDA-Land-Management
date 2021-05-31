@@ -76,6 +76,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Remarks is Mandatory Field")]
         public string Remarks { get; set; }
+        public string IsEncroachment { get; set; }
 
         [Required(ErrorMessage = "Location Address with Landmark is Mandatory Field")]
         public string LocationAddressWithLandMark { get; set; }

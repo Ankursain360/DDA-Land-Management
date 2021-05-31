@@ -141,7 +141,29 @@
             </div>
         </div>
     </div>
-
+    <div class="row mt-md-3">
+        <div class="col-md-6">
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <label>Encroachment</label>
+                </div>
+                <input type="hidden" asp-for="IsEncroachment" value="No" />
+                <div class="col-md-4">
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="radio" asp-for="IsEncroachment" name="grpIsEncroachment" value="No" checked>
+                        <label class="form-check-label">No </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="radio" asp-for="IsEncroachment" name="grpIsEncroachment" value="Yes">
+                        <label class="form-check-label">Yes </label>
+                    </div>
+                </div>
+            </div>
+            <span asp-validation-for="IsEncroachment" class="text-danger"></span>
+        </div>
+    </div>
     <div id="Divclsification">
         <h2 class="my-3 sub-heading">Details Of Encroachment</h2>
 
@@ -244,7 +266,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsPossession" >
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsPossession">
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select>
@@ -255,26 +277,26 @@
 
         <div class="row">
             @*<div class="col-md-6" id="divPossessionGroup" style="display:block;">
-                <div class="row">
-                    <div class="col-md-6">
-                        <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
-                        <input type="hidden" asp-for="Id" id="hdnId" />
-                        <input type="hidden" asp-for="IsActive" value="1" />
-                        <div class="form-check theme">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
+                            <input type="hidden" asp-for="Id" id="hdnId" />
+                            <input type="hidden" asp-for="IsActive" value="1" />
+                            <div class="form-check theme">
 
-                            <input type="radio" name="grpPossession" id="rdbFormal" checked>
-                            <label class="radio-inline">Formal Possession </label>
+                                <input type="radio" name="grpPossession" id="rdbFormal" checked>
+                                <label class="radio-inline">Formal Possession </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check theme">
+
+                                <input type="radio" name="grpPossession" id="rdbFlexible">
+                                <label class="radio-inline">Physical Possession </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-check theme">
-
-                            <input type="radio" name="grpPossession" id="rdbFlexible">
-                            <label class="radio-inline">Physical Possession </label>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+                </div>*@
             <div class="col-md-6" id="divDepartment" style="display:block;">
                 <div class="floating-label-wrap">
                     <select asp-for="OtherDepartment" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">

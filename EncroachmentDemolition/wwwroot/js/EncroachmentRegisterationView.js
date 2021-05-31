@@ -205,3 +205,9 @@ function callSelect2() {
         allowClear: true
     });
 }
+
+$("input[name='grpIsEncroachment']").click(function () {
+    var selected = $("input[type='radio'][name='grpIsEncroachment']:checked");
+    $("#IsEncroachment").val(selected.val());
+
+});

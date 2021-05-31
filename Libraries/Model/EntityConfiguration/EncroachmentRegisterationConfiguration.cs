@@ -60,6 +60,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.IsEncroachment)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
             builder.Property(e => e.KhasraNo)
                 .IsRequired()
                 .HasMaxLength(100)

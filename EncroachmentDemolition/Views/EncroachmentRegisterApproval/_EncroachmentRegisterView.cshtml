@@ -138,7 +138,29 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <label>Encroachment</label>
+                            </div>
+                            <input type="hidden" asp-for="IsEncroachment" value="No" />
+                            <div class="col-md-4">
+                                <div class="form-check theme">
+                                    <input class="form-check-input" disabled type="radio" asp-for="IsEncroachment" name="grpIsEncroachment" value="No" checked>
+                                    <label class="form-check-label">No </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check theme">
+                                    <input class="form-check-input" disabled type="radio" asp-for="IsEncroachment" name="grpIsEncroachment" value="Yes">
+                                    <label class="form-check-label">Yes </label>
+                                </div>
+                            </div>
+                        </div>
+                        <span asp-validation-for="IsEncroachment" class="text-danger"></span>
+                    </div>
+                </div>
                 <div id="Divclsification">
                     <h2 class="my-3 sub-heading">Details Of Encroachment</h2>
 
