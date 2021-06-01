@@ -44,17 +44,21 @@ namespace Vacant.Land.Api.Controllers
             {
                 FileHelper fileHelper = new FileHelper();
                 dto.ImagePath = Guid.NewGuid().ToString() + ".jpg";
-                if (!Directory.Exists(VacantLandImagePath))
+                if(dto.ImageData != "")
                 {
-                    DirectoryInfo directoryInfo = Directory.CreateDirectory(VacantLandImagePath);
-                }
-                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.ImageData)))
-                {
-                    using (Bitmap bm2 = new Bitmap(ms))
+                    if (!Directory.Exists(VacantLandImagePath))
                     {
-                        bm2.Save(VacantLandImagePath + Guid.NewGuid().ToString() + ".jpg");
+                        DirectoryInfo directoryInfo = Directory.CreateDirectory(VacantLandImagePath);
+                    }
+                    using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.ImageData)))
+                    {
+                        using (Bitmap bm2 = new Bitmap(ms))
+                        {
+                            bm2.Save(VacantLandImagePath + Guid.NewGuid().ToString() + ".jpg");
+                        }
                     }
                 }
+               
                 var data = await _insertVacantLandImagesService.Create(dto);
                 if (data == true)
                 {

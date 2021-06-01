@@ -31,10 +31,13 @@ namespace Libraries.Service.ApplicationService
         {
             Vacantlandimage model = new Vacantlandimage();
             model.ZoneId = dto.ZoneId;
+            model.Zone = dto.Zone;
             model.DepartmentId = dto.DepartmentId;
+            model.Department = dto.Department;
             model.DivisionId = dto.DivisionId;
-            model.DepartmentId = dto.DepartmentId;
+            model.Division = dto.Division;
             model.PrimaryListId = dto.PrimaryListId;
+            model.PrimaryList = dto.PrimaryList;
             model.Location = dto.Location;
             model.ImagePath = dto.ImagePath;
             model.Longitude = dto.Longitude;
