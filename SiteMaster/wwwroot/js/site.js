@@ -55,14 +55,6 @@ $(document).ready(function () {
         ValidateForm();
     });
 });
-//For Loader
-$(window).on('load', function () {
-    $(".body-loading").css("display", "none");
-});
-$(window).on('beforeunload', function () {
-    $(".body-loading").css("display", "block");
-});
-//
 
 function ValidateForm() {
     var isFormValid = true;

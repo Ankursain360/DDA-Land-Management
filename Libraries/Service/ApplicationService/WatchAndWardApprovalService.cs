@@ -34,11 +34,6 @@ namespace Libraries.Service.ApplicationService
         {
             return await _watchAndWardApprovalRepository.GetAllKhasra();
         }
-
-        public async Task<List<Village>> GetAllVillage()
-        {
-            return await _watchAndWardApprovalRepository.GetAllVillage();
-        }
         public async Task<List<Locality>> GetAllLocality()
         {
             return await _watchAndWardApprovalRepository.GetAllLocality();

@@ -30,7 +30,11 @@
 
 </head>
 <body>
-    <div class="body-loading loader-active" style="display:none"></div>
+    <div id="loader-wrapper" style="display:none">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
     <section class="map-section">
         <!--live map-->
         <div class="liveMap" id="map-canvas">
@@ -225,7 +229,8 @@
                 <p style="font-size: .7rem" class="my-2">
                     State : <strong class="text-dark">Delhi</strong><br />
                     No of Zones : <strong class="text-dark">18</strong><br />
-                    Total Area : <strong class="text-dark">366704 Acres</strong>
+                    Total Area : <strong class="text-dark">366704 Acres</strong><br />
+                    Lat Long : <strong class="text-dark" id="tdCursor"></strong>
                 </p>
             </div>
             <!--bottom btns-->

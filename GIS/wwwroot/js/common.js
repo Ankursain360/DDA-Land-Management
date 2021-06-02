@@ -209,3 +209,11 @@ $(document).on('change', '#OpacityRange', function () {
 });
 
 
+function displayCoordinates(pnt) {
+    var coordsLabel = document.getElementById("tdCursor");
+    var lat = pnt.lat();
+    lat = lat.toFixed(6);
+    var lng = pnt.lng();
+    lng = lng.toFixed(6);
+    coordsLabel.innerHTML = lng + "," + lat;
+}

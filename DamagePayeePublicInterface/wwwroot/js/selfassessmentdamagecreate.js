@@ -255,10 +255,10 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
 
-            $("#tbl_posts #add #viewAadharId").text(data[i]?.aadharNoFilePath?.split("\\")[data[i]?.aadharNoFilePath?.split("\\")?.length - 1].slice(37));
-            $("#tbl_posts #add #viewPanId").text(data[i]?.panNoFilePath?.split("\\")[data[i]?.panNoFilePath?.split("\\")?.length - 1].slice(37));
-            $("#tbl_posts #add #viewPhotoId").text(data[i]?.photographPath?.split("\\")[data[i]?.photographPath?.split("\\")?.length - 1].slice(37));
-            $("#tbl_posts #add #viewSignatureId").text(data[i]?.signaturePath?.split("\\")[data[i]?.signaturePath?.split("\\")?.length - 1].slice(37));
+            $("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
+            $("#tbl_posts #add #viewPanId").text(data[i].panNoFilePath.split("\\")[data[i].panNoFilePath.split("\\").length - 1].slice(37));
+            $("#tbl_posts #add #viewPhotoId").text(data[i].photographPath.split("\\")[data[i].photographPath.split("\\").length - 1].slice(37));
+            $("#tbl_posts #add #viewSignatureId").text(data[i].signaturePath.split("\\")[data[i].signaturePath.split("\\").length - 1].slice(37));
 
 
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
@@ -315,7 +315,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
             $("#tbl_DamageAssessee #addDamageAssessee #ATSGPAFilePath").val(data[i].atsgpadocumentPath);
 
-            $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").text(data[i]?.atsgpadocumentPath?.split("\\")[data[i]?.atsgpadocumentPath?.split("\\")?.length - 1].slice(37));
+            $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").text(data[i].atsgpadocumentPath.split("\\")[data[i].atsgpadocumentPath.split("\\").length - 1].slice(37));
 
             if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/SelfAssessmentDamage/ViewATSGPAFile/' + data[i].id)
@@ -352,7 +352,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_Payment #addPayment #txtAmount").val(data[i].amount);
             $("#tbl_Payment #addPayment #RecieptFilePath").val(data[i].recieptDocumentPath);
 
-            $("#tbl_Payment #addPayment #viewRecieptId").text(data[i]?.recieptDocumentPath?.split("\\")[data[i]?.recieptDocumentPath?.split("\\")?.length - 1].slice(37));
+            $("#tbl_Payment #addPayment #viewRecieptId").text(data[i].recieptDocumentPath.split("\\")[data[i].recieptDocumentPath.split("\\").length - 1].slice(37));
 
             if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
                 $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/SelfAssessmentDamage/ViewRecieptFile/' + data[i].id)

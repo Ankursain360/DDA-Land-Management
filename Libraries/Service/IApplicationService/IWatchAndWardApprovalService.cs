@@ -13,7 +13,6 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Watchandward>> GetAllWatchandward();
         Task<List<Khasra>> GetAllKhasra();
-        Task<List<Village>> GetAllVillage();
         Task<List<Locality>> GetAllLocality();
         Task<Watchandward> FetchSingleResult(int id);
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId, int zoneId);

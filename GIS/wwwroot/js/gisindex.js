@@ -112,6 +112,11 @@ function initialize() {
     map.addListener('zoom_changed', function () {
         Zoom_change(map);
     });
+
+    google.maps.event.addListener(map, 'mousemove', function (event) {
+        displayCoordinates(event.latLng);
+    });
+
     //Loads custom zoom controls
     var zoomDiv = document.createElement('div');
     var renderZoomControls = new ZoomControl(zoomDiv, this.map);
@@ -171,7 +176,12 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
     zoomZone.push(sl);
     map.setZoom(10);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
-
+    google.maps.event.addListener(map, 'mousemove', function (event) {
+        displayCoordinates(event.latLng);
+    });
+    //google.maps.event.addListener(poly, 'mousemove', function (event) {
+    //    displayCoordinates(event.latLng);
+    //});
 }
 /*Zone Boundary End*/
 
@@ -194,6 +204,9 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
 
     showvillagelayers(villageid);
+    google.maps.event.addListener(map, 'mousemove', function (event) {
+        displayCoordinates(event.latLng);
+    });
 }
 function showvillagelayers(villageid) {
 
@@ -652,7 +665,7 @@ function showDisBoundariesWell(response) {
     var well = $.map(response, function (el) { return el; })
     for (al = 0; al < well.length; al++) {
         var ln = createLine(getLatLongArr(well[al].polygon));
-        ln.setOptions({ strokeWeight: 1, strokeColor: clean[al].fillColor });
+        ln.setOptions({ strokeWeight: 1, strokeColor: well[al].fillColor });
         WELL_LAYER.push(ln);
         Polys.push(ln);
     }

@@ -53,9 +53,9 @@ namespace Libraries.Model.Entity
         public decimal? TotalArea { get; set; }
         public string Polygon { get; set; }
         public byte IsActive { get; set; }
-        [Required(ErrorMessage = " Department is mandatory")]
+    //    [Required(ErrorMessage = " Department is mandatory")]
         public int? DepartmentId { get; set; }
-        [Required(ErrorMessage = "Division is mandatory")]
+     //   [Required(ErrorMessage = "Division is mandatory")]
         public int? DivisionId { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }

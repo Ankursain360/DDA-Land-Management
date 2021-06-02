@@ -7,7 +7,6 @@ $(window).on('beforeunload', function () {
     $("#loader-wrapper").css("display", "block");
 });
 //
-
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }
@@ -28,7 +27,6 @@ function DisplayLoader(show) {
     var styleValue = show === true ? "block" : "none";
     $("#loader-wrapper").css("display", styleValue);
 }
-
 
 function DisplayErrorMessages(response) {
     var messageList = "";
