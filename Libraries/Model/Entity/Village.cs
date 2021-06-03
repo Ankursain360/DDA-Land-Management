@@ -64,12 +64,6 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Division> DivisionList { get; set; }
-        //[Required(ErrorMessage = "Division is mandatory")]
-        //[NotMapped]
-        //public int DivisionId { get; set; }
-        //[Required(ErrorMessage = " Department is mandatory")]
-        //[NotMapped]
-        //public int DepartmentId { get; set; }
         public Department Department { get; set; }
         public Division Division { get; set; }
         public virtual Zone Zone { get; set; }

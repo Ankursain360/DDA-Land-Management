@@ -147,5 +147,11 @@ namespace Libraries.Repository.EntityRepository
             List<Department> departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
         }
+        public async Task<List<Zone>> GetAllZone()
+        {
+            return  await _dbContext.Zone
+                                    .Where(x => x.IsActive == 1)
+                                    .ToListAsync();
+        }
     }
 }

@@ -3,51 +3,33 @@
 
 
 <div class="pt-3">
-   
+
     <form asp-action="View" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">View Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input asp-for="Id" type="hidden" />
 
         <div class="row">
+            @*<div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
+                                asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
+                                onchange="return onChange(this.options[this.selectedIndex].value);">
+                            <option selected="selected" disabled="disabled" value="">Select </option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        <label asp-for="DepartmentId" class="floating-label">Department </label>
+                    </div>
+                </div>*@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
-                            asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
-                            onchange="return onChange(this.options[this.selectedIndex].value);">
-                        <option selected="selected" disabled="disabled" value="">Select </option>
-                    </select>
-                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                    <label asp-for="DepartmentId" class="floating-label">Department </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId"
-                            onchange="return onChangeZone(this.options[this.selectedIndex].value)"
-                             asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
-
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" 
+                            asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">Select </option>
                     </select>
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
                 </div>
-            </div>
-        </div>
-        <br />
-        <div class="row">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId"
-                             asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))">
-
-                        <option selected="selected" disabled="disabled" value="">Select </option>
-                    </select>
-                    <span asp-validation-for="DivisionId" class="text-danger"></span>
-                    <label asp-for="DivisionId" class="floating-label">Division </label>
-                </div>
-
-
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -58,6 +40,29 @@
                 </div>
             </div>
         </div>
+        @*<div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId"
+                                 asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))">
+
+                            <option selected="selected" disabled="disabled" value="">Select </option>
+                        </select>
+                        <span asp-validation-for="DivisionId" class="text-danger"></span>
+                        <label asp-for="DivisionId" class="floating-label">Division </label>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="Name" placeholder="Name" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="100" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label class="floating-label">Village Name  </label>
+                    </div>
+                </div>
+            </div>*@
         <div class="row">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
@@ -75,14 +80,14 @@
         <br />
         <div class="row">
             <div class="col-md-12">
-               
+
                 @Html.ActionLink("Back", "Index", "Village", null, new { @class = "btn btn-theme " })
             </div>
 
         </div>
 
     </form>
-       
+
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

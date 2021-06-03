@@ -35,10 +35,6 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationApprovalRepository.GetAllKhasra();
         }
 
-        public async Task<List<Village>> GetAllVillage()
-        {
-            return await _encroachmentRegisterationApprovalRepository.GetAllVillage();
-        }
         public async Task<List<Locality>> GetAllLocality()
         {
             return await _encroachmentRegisterationApprovalRepository.GetAllLocality();

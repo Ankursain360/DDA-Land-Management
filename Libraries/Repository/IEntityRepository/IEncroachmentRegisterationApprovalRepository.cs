@@ -12,7 +12,6 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<EncroachmentRegisteration>> GetEncroachmentRegisteration();
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
-        Task<List<Village>> GetAllVillage();
         Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId, int zoneId);

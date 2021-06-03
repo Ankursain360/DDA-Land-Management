@@ -20,5 +20,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zoneId); // To Get all data added by Praveen
         Task<List<Department>> GetAllDepartment();
+        Task<List<Zone>> GetAllZone();
     }
 }

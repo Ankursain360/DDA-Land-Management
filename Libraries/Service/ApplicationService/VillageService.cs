@@ -101,5 +101,10 @@ namespace Libraries.Service.ApplicationService
             List<Department> departmentList = await _villageRepository.GetAllDepartmentList();
             return departmentList;
         }
+
+        public async Task<List<Zone>> GetAllZone()
+        {
+            return await _villageRepository.GetAllZone();
+        }
     }
 }
