@@ -4,7 +4,12 @@
     var validateForm = $("#frmUserPersonalInfo").valid();
     if (validateForm) {
         HttpPost(`/UserManagement/UpdatePersonalDetails`, 'json', param, function (response) {
-            SuccessMessage('Personal Data updated successfully.');
+            if (response[0] == "false") {
+                WarningMessage(response[1]);
+            }
+            else {
+                SuccessMessage('Personal Data updated successfully.');
+            }
         });
     }
 });

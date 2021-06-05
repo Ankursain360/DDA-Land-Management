@@ -31,5 +31,7 @@ namespace Repository.IEntityRepository
         Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId);
         Task<List<UserProfileInfoDetailsDto>> GetUserByIdZoneConcatedName(int userid, int zoneId);
         Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums);
+        Task<bool> ValidateUniqueEmail(int id, string email);
+        Task<bool> ValidateUniquePhone(int id, string phonenumber);
     }
 }

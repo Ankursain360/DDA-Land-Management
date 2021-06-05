@@ -13,13 +13,15 @@ namespace Dto.Master
         public string Name { get; set; }
 
         [Required(ErrorMessage = "User Name is required")]
-        [Remote(action: "Exist", controller: "UserManagement", AdditionalFields = "Id")]
+        [Remote(action: "ExistLoginName", controller: "UserManagement", AdditionalFields = "Id")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
+        [Remote(action: "ExistEmail", controller: "UserManagement", AdditionalFields = "Id")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Phone Number is required")]
+        [Remote(action: "ExistPhoneNumber", controller: "UserManagement", AdditionalFields = "Id")]
         public string PhoneNumber { get; set; }
     }
 }

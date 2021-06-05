@@ -52,6 +52,7 @@ namespace SiteMaster.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ForgetPasswordMailDto model)
         {
@@ -72,7 +73,7 @@ namespace SiteMaster.Controllers
                         return View(model);
                     }
 
-                    Email = model.Username; 
+                    Email = model.Username;
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                     var callback = Url.Action(nameof(ResetPassword), "ForgetPassword", new { token, username = user.UserName }, Request.Scheme);
 
@@ -105,7 +106,7 @@ namespace SiteMaster.Controllers
                         #endregion
 
                         if (sendMailResult)
-                            TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + "a link for password reset sent on your registered email and mobile no., Please check and Reset password", "", AlertType.Success);
+                            TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " a link for password reset sent on your registered email and mobile no., Please check!", "", AlertType.Success);
                         else
                             TempData["Message"] = Alert.Show("Dear User,<br/>" + DisplayName + " Enable to send mail or sms ", "", AlertType.Info);
 
@@ -155,17 +156,21 @@ namespace SiteMaster.Controllers
                     }
                     var user = await _userManager.FindByNameAsync(resetPasswordDto.Username);
                     if (user == null)
-                        RedirectToAction("logout", "home");
+                    {
+                        ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
+                        return View(resetPasswordDto);
+                    }
                     var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
                     if (!resetPassResult.Succeeded)
                     {
                         foreach (var error in resetPassResult.Errors)
                         {
                             ModelState.TryAddModelError(error.Code, error.Description);
+                            ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
                         }
-                        return View();
+                        return View(resetPasswordDto);
                     }
-                    return RedirectToAction("logout", "home");
+                    return RedirectToAction(nameof(ResetPasswordConfirmation));
                 }
                 else
                 {
@@ -180,11 +185,19 @@ namespace SiteMaster.Controllers
             }
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation(string token, string username)
+        {
+            var model = new ResetPasswordDto { Token = token, Username = username };
+            return View(model);
+        }
+
         [Route("get-captcha-image")]
         public IActionResult GetCaptchaImage(Payeeregistration payeeregistration)
         {
             int width = 170;
-            int height = 36;
+            int height = 75;
             var captchaCode = Captcha.GenerateCaptchaCode();
             var result = Captcha.GenerateCaptchaImage(width, height, captchaCode);
             HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);

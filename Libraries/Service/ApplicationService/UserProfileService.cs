@@ -286,5 +286,15 @@ namespace Service.ApplicationService
         {
             return await _userProfileRepository.UserListSkippingmultiusersConcatedName(nums);
         }
+
+        public async Task<bool> ValidateUniqueEmail(int id, string email)
+        {
+            return await _userProfileRepository.ValidateUniqueEmail(id, email);
+        }
+
+        public async Task<bool> ValidateUniquePhone(int id, string phonenumber)
+        {
+            return await _userProfileRepository.ValidateUniquePhone(id, phonenumber);
+        }
     }
 }

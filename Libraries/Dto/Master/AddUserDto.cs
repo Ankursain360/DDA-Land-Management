@@ -30,9 +30,11 @@ namespace Dto.Master
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Email is mandatory")]
+        [Remote(action: "ExistEmail", controller: "UserManagement", AdditionalFields = "Id")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Phone Number is mandatory")]
+        [Remote(action: "ExistPhoneNumber", controller: "UserManagement", AdditionalFields = "Id")]
         public string PhoneNumber { get; set; }
 
         [Required(ErrorMessage = "Department is mandatory", AllowEmptyStrings = false)]

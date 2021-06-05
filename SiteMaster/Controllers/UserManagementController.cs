@@ -96,7 +96,37 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                return Json($"User: {UserName} already exist");
+                return Json($"This Username is already Linked with Another Account. Kindly use different Username");
+            }
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExistEmail(int Id, string email)
+        {
+            var result = await _userProfileService.ValidateUniqueEmail(Id, email);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"This Email is already Linked with Another Account. Kindly use different Email");
+            }
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExistPhoneNumber(int Id, string phonenumber)
+        {
+            var result = await _userProfileService.ValidateUniquePhone(Id, phonenumber);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"This Phone Number is already Linked with Another Account. Kindly use different Phone Number");
             }
         }
 
@@ -195,10 +225,34 @@ namespace SiteMaster.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdatePersonalDetails([FromBody] UserPersonalInfoDto model)
         {
+            List<string> JsonMsg = new List<string>();
             if (ModelState.IsValid)
             {
+                var IsUsernameExist = await _userProfileService.ValidateUniqueUserName(model.Id, model.UserName);
+                if (IsUsernameExist)
+                {
+                    JsonMsg.Add("false");
+                    JsonMsg.Add("This Username is already Linked with Another Account. Kindly use different Username");
+                    return Json(JsonMsg);
+                }
+                var IsEmailExist = await _userProfileService.ValidateUniqueEmail(model.Id, model.Email);
+                if (IsEmailExist)
+                {
+                    JsonMsg.Add("false");
+                    JsonMsg.Add("This Email Id is already Linked with Another Account. Kindly use different Email Id");
+                    return Json(JsonMsg);
+                }
+                var IsPhoneExist = await _userProfileService.ValidateUniquePhone(model.Id, model.PhoneNumber);
+                if (IsPhoneExist)
+                {
+                    JsonMsg.Add("false");
+                    JsonMsg.Add("This Phone Number is already Linked with Another Account. Kindly use different Phone Number");
+                    return Json(JsonMsg);
+                }
                 await _userProfileService.UpdateUserPersonalDetails(model);
-                return Json(Url.Action("Index", "UserManagement"));
+                JsonMsg.Add("true");
+                return Json(JsonMsg);
+                //return Json(Url.Action("Index", "UserManagement"));
             }
             else
             {
