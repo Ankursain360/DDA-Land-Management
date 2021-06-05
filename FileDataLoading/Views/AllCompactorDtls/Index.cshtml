@@ -1,0 +1,79 @@
+﻿@model Dto.Master.ApiResponseCompactor
+
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "All Compactor Details" })
+<div class="pt-3">
+
+    <div class="table-section bg-white border shadow rounded">
+
+
+        <div class="table-responsive ">
+            @*<div id="divStructureTable"></div>*@
+            <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
+
+                        <th> MAIN FILE NO</th>
+                        <th> PART FILE NO</th>
+                        <th>SUBJECT</th>
+                        <th>NAME</th>
+                        <th>ROOM NO</th>
+                        <th>COMPACTOR NO</th>
+                        <th>ROW NO</th>
+                        <th>COLUMN NO</th>
+                        <th>ALMIRAH NO</th>
+                        <th>FLT CTGRY ID</th>
+                        <th>LOCALITY HEADER</th>
+                        <th>SEQUENCE NO</th>
+                        <th>YEAR</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model.cargo)
+                        {
+
+                            <tr>
+
+                                <td>@item.MAIN_FILE_NO</td>
+                                <td>@item.PART_FILE_NO</td>
+                                <td>@item.SUBJECT</td>
+                                <td>@item.NAME</td>
+                                <td>@item.RM_NO</td>
+                                <td>@item.CMPCTR_NO</td>
+                                <td>@item.RW_NO</td>
+                                <td>@item.CLMN_NO</td>
+                                <td>@item.ALMRH_NO</td>
+                                <td>@item.FLT_CTGRY_ID</td>
+                                <td>@item.LCLTY_HDR</td>
+                                <td>@item.SQNC_NO</td>
+                                <td>@item.YR</td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="13" style="text-align:center"> No Record Available! </th>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+
+</div>
+
+@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/structureindex.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/structureindex.min.js" asp-append-version="true"></script>
+    </environment>*@
