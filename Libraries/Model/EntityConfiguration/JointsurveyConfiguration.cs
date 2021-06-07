@@ -29,9 +29,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.Property(e => e.AreaInBigha).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.AreaInBigha).HasColumnType("int(11)");
 
-            builder.Property(e => e.AreaInBiswa).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.AreaInBiswa).HasColumnType("int(11)");
 
             builder.Property(e => e.Attendance).HasColumnType("int(11)");
 

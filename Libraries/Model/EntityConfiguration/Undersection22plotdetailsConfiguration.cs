@@ -24,11 +24,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.UnderSection22Id)
                 .HasName("fkus22id_idx");
 
-            builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.Bigha).HasColumnType("int(11)");
 
-            builder.Property(e => e.Biswa).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.Biswa).HasColumnType("int(11)");
 
-            builder.Property(e => e.Biswanshi).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.Biswanshi).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 

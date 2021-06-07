@@ -16,7 +16,7 @@ namespace Libraries.Model.Entity
 
         public string SitePosition { get; set; }
         [Required(ErrorMessage = "Area in Bigha No is Mandatory")]
-        public decimal AreaInBigha { get; set; }
+        public int AreaInBigha { get; set; }
 
         public string NatureOfStructure { get; set; }
         [Required(ErrorMessage = "Joint Survey Date is Mandatory")]
@@ -32,7 +32,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Area in Biswa No is Mandatory")]
-        public decimal? AreaInBiswa { get; set; }
+        public int? AreaInBiswa { get; set; }
         public Khasra Khasra { get; set; }
         public Acquiredlandvillage Village { get; set; }
         [NotMapped]
