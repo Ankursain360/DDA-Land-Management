@@ -22,7 +22,7 @@
                 <tr>
                     <td>@(item.Village == null ? "" : item.Village.Name)</td>
                     <td>@(item.Khasra == null ? "" : item.Khasra.Name)</td>
-                    <td>@(item.Khasra == null ? "" : (item.Khasra.Bigha +  '-' + item.Khasra.Biswa + '-' + item.Khasra.Biswanshi))</td>
+                    <td>@(item.Khasra == null ? "" : (item.Khasra.Bigha.ToString() +  '-' + item.Khasra.Biswa.ToString() + '-' + item.Khasra.Biswanshi.ToString()))</td>
                     <td>@((item.Bigha.ToString() +  '-' + item.Biswa.ToString() + '-' + item.Biswanshi.ToString()))</td>
                     <td> @(item.AwardMaster == null ? "" : Convert.ToDateTime((item.AwardMaster.AwardDate)).ToString("dd-MMM-yyyy"))</td>
                 </tr>

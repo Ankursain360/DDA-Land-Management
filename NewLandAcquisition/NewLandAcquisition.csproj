@@ -10,6 +10,10 @@
     <Content Remove="wwwroot\js\Newlandnotificationdetailscreate.min.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Views\Newlandus22plot\Edit.cshtml~RF5e5314f4.TMP" />
+  </ItemGroup>
+
 	<ItemGroup> 
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" /> 
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" /> 

@@ -196,7 +196,7 @@
                                 <div class="col-md-4">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                        <input asp-for="TotalAreaInBigha" type="text" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                        <input limit="4"  asp-for="TotalAreaInBigha" type="text" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                         <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
                                         <label class="floating-label">Bigha</label>
                                     </div>
@@ -204,7 +204,7 @@
                                 <div class="col-md-4">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                        <input asp-for="TotalAreaInBiswa" type="text" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                        <input limit="2"  asp-for="TotalAreaInBiswa" type="text" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                         <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
                                         <label class="floating-label">Biswa</label>
                                     </div>
@@ -212,7 +212,7 @@
                                 <div class="col-md-4">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                        <input asp-for="TotalAreaInBiswani" type="text"  class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                        <input limit="2"  asp-for="TotalAreaInBiswani" type="text"  class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                         <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
                                         <label class="floating-label">Biswani</label>
                                     </div>

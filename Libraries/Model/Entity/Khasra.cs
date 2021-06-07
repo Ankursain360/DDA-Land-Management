@@ -36,11 +36,12 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Land Category is mandatory", AllowEmptyStrings = false)]
         public int? LandCategoryId { get; set; }
         [Required(ErrorMessage = "Bigha is mandatory")]
-        public string Bigha { get; set; }
+        public int Bigha { get; set; }
         [Required(ErrorMessage = "Biswa is mandatory")]
-        public string Biswa { get; set; }
+        public int Biswa { get; set; }
+
         [Required(ErrorMessage = "Biswanshi is mandatory")]
-        public string Biswanshi { get; set; }
+        public int Biswanshi { get; set; }
         public string Description { get; set; }
         [Required(ErrorMessage = "Rect No is mandatory")]
         public string RectNo { get; set; }
