@@ -328,10 +328,22 @@ namespace EncroachmentDemolition.Controllers
                         bodyDTO.path = path;
                         string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                         #endregion
+                        
+                        //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                        #region Common Mail Genration
+                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                        maildto.strMailSubject = "Pending Request for Demolition Application Approval Request Details ";
+                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                        maildto.strBodyMsg = strBodyMsg;
+                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
 
-                        string strMailSubject = "Pending Request for Demolition Application Approval Request Details ";
-                        string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                        sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                        maildto.strMailTo = multousermailId.ToString();
+                        sendMailResult = mailG.SendMailWithAttachment(maildto);
+                        #endregion
                         #endregion
 
 

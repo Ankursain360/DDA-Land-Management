@@ -296,9 +296,23 @@ namespace LeaseForPublic.Controllers
                             string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                             #endregion
 
-                            string strMailSubject = "Pending Extension Application Approval Request Details ";
-                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                            sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                            //string strMailSubject = "Pending Extension Application Approval Request Details ";
+                            //string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                            #region Common Mail Genration
+                            SentMailGenerationDto maildto = new SentMailGenerationDto();
+                            maildto.strMailSubject = "Pending Extension Application Approval Request Details ";
+                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                            maildto.strBodyMsg = strBodyMsg;
+                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                            maildto.strMailTo = multousermailId.ToString();
+                            sendMailResult = mailG.SendMailWithAttachment(maildto);
+                            #endregion
                             #endregion
 
 
