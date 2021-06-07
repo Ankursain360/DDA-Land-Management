@@ -20,30 +20,30 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Khasra no is mandatory")]
         public int KhasraId { get; set; }
        
-        public decimal? Bigha { get; set; }
+        public int? Bigha { get; set; }
        
-        public decimal? Biswa { get; set; }
+        public int? Biswa { get; set; }
        
-        public decimal? Biswanshi { get; set; }
+        public int? Biswanshi { get; set; }
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
 
         [NotMapped]
         //[Required(ErrorMessage = " Bigha is mandatory")]
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
-        public decimal? ABigha { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        public int? ABigha { get; set; }
         [NotMapped]
         //[Required(ErrorMessage = " Biswa is mandatory")]
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
-        public decimal? ABiswa { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        public int? ABiswa { get; set; }
         [NotMapped]
         //[Required(ErrorMessage = " Biswanshi is mandatory")]
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
-        public decimal? ABiswanshi { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        public int? ABiswanshi { get; set; }
         public Newlandkhasra Khasra { get; set; }
         public Newlandnotification Notification { get; set; }
         public Newlandvillage Village { get; set; }

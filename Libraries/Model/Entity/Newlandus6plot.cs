@@ -20,11 +20,11 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Khasra no is mandatory")]
         public int KhasraId { get; set; }
         
-        public decimal? Bigha { get; set; }
+        public int? Bigha { get; set; }
        
-        public decimal? Biswa { get; set; }
+        public int? Biswa { get; set; }
       
-        public decimal? Biswanshi { get; set; }
+        public int? Biswanshi { get; set; }
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
