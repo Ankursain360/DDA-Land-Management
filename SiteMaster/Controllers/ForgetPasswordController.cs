@@ -100,9 +100,20 @@ namespace SiteMaster.Controllers
                         string strBodyMsg = mailG.PopulateBody(bodyDTO);
                         #endregion
 
-                        string strMailSubject = "Reset Password";
-                        string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                        var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                        #region Common Mail Genration
+                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                        maildto.strMailSubject = "Reset Password";
+                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                        maildto.strBodyMsg = strBodyMsg;
+                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                        maildto.strMailTo = EmailID;
+                        var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                        #endregion
                         #endregion
 
                         if (sendMailResult)

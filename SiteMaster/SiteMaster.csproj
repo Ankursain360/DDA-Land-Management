@@ -75,6 +75,14 @@
 
   <ItemGroup>
     <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="wwwroot\images\login-img.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\images\logo-circle.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

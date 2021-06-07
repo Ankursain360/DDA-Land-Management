@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Site Title-->
+    <title>DDA!</title>
+    <!--font css-->
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="~/css/styleforgetpassword.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <section id="LoginPage" class="d-flex fixed-bg">
+        <div class="container m-auto">
+            <div class="row  justify-content-center">
+                <div class="col-xl-10">
+                    <div class="bg-white rounded overflow-hidden">
+                        <div class="row no-gutters">
+                            <div class="col-md-6 col-lg-5 col-xl-5">
+                                <div class="login-container">
+                                    <figure class="mx-auto my-0 d-block mb-4">
+                                        <img src="~/images/logo-circle.png" alt="DDA logo" class="d-block mx-auto mb-2">
+                                        <figcaption class="text-center">
+                                            <h6 class="m-0">Delhi Development Authority<br>Government of India</h6>
+                                        </figcaption>
+                                    </figure>
+                                    @RenderBody()
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-7 col-xl-7 d-none d-md-block">
+                                <figure class="m-0 d-block overflow-hidden">
+                                    <img src="~/images/login-img.jpg" alt="DDA login" />
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS , any custom js-->
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+    @RenderSection("Scripts", required: false)
+    @Html.Raw(ViewBag.Message)
+</body>
+
+</html>

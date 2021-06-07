@@ -148,6 +148,72 @@ namespace Utility.Helper
             return body;
         }
 
+        public bool SendMailWithAttachment(SentMailGenerationDto maildto)
+        {
+            bool result = false;
+            MailMessage message = null;
+            try
+            {
+                message = new MailMessage();
+                message.From = new MailAddress(maildto.fromMail);
+                message.IsBodyHtml = true;
+                message.Body = maildto.strBodyMsg;
+                message.Subject = maildto.strMailSubject;
+                SmtpClient smtp = new SmtpClient(maildto.mailHost);
+                smtp.Port = maildto.port;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential(maildto.fromMail, maildto.fromMailPwd);
+
+                //recipients To
+                if (maildto.strMailTo != "")
+                {
+                    string[] multiTo = maildto.strMailTo.Split(',');
+                    foreach (string MultiEmailID in multiTo)
+                    {
+                        message.To.Add(new MailAddress(MultiEmailID));
+                    }
+                }
+                //recipients CC
+                if (maildto.strMailCC != "")
+                {
+                    string[] multiCC = maildto.strMailCC.Split(',');
+                    foreach (string MultiEmailID in multiCC)
+                    {
+                        message.CC.Add(new MailAddress(maildto.strMailCC));
+                    }
+                }
+                //recipients BCC
+                if (maildto.strMailBCC != "")
+                {
+                    string[] multiBCC = maildto.strMailBCC.Split(',');
+                    foreach (string MultiEmailID in multiBCC)
+                    {
+                        message.Bcc.Add(new MailAddress(maildto.strMailBCC));
+                    }
+                }
+                if (maildto.strAttachPath != "")
+                {
+                    Attachment attachment = new System.Net.Mail.Attachment(maildto.strAttachPath);
+                    message.Attachments.Add(attachment);
+                }
+
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+
+                result = true;
+
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+                return result;
+            }
+            finally
+            {
+                message.Dispose();
+            }
+        }
 
         public string GenerateMailFormatForComplaint(ComplaintRegisteredMailBodyDto element)
         {
