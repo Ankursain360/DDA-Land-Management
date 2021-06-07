@@ -252,10 +252,22 @@ namespace DamagePayee.Controllers
                             bodyDTO.Link = loginlink;
                             string strBodyMsg = mailG.PopulateBodyRegister(bodyDTO);
                             #endregion
+                                                        
+                            //var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                            #region Common Mail Genration
+                            SentMailGenerationDto maildto = new SentMailGenerationDto();
+                            maildto.strMailSubject = "Damage Payee User Details ";
+                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                            maildto.strBodyMsg = strBodyMsg;
+                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
 
-                            string strMailSubject = "Damage Payee User Details ";
-                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                            var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                            maildto.strMailTo = EmailID;
+                            var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                            #endregion
                             #endregion
                         }
 
@@ -495,9 +507,22 @@ namespace DamagePayee.Controllers
                                     string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                                     #endregion
 
-                                    string strMailSubject = "Pending Damage Payee Register Application Approval Request Details ";
-                                    string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                                    sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                    
+                                    //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                    #region Common Mail Genration
+                                    SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                    maildto.strMailSubject = "Pending Damage Payee Register Application Approval Request Details ";
+                                    maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                    maildto.strBodyMsg = strBodyMsg;
+                                    maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                    maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                    maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                    maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                    maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                    maildto.strMailTo = multousermailId.ToString();
+                                    sendMailResult = mailG.SendMailWithAttachment(maildto);
+                                    #endregion
                                     #endregion
 
 

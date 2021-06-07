@@ -95,59 +95,6 @@ namespace Utility.Helper
             }
         }
 
-        public string PopulateBodyRegister(DamageRegisterBodyDTO bodyDTO)
-        {
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader(bodyDTO.path))
-            {
-                body = reader.ReadToEnd();
-            }
-            body = body.Replace("{DisplayName}", bodyDTO.displayName);
-            body = body.Replace("{LoginName}", bodyDTO.loginName);
-            body = body.Replace("{Password}", bodyDTO.password);
-            body = body.Replace("{EmailID}", bodyDTO.emailId);
-            body = body.Replace("{PhoneNumber}", bodyDTO.contactNo);
-            body = body.Replace("{Link}", bodyDTO.Link);
-
-
-            return body;
-        }
-
-        public string PopulateBodyLeaseRefernceNo(LeaseRefBodyDto element)
-        {
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader(element.path))
-            {
-                body = reader.ReadToEnd();
-            }
-            body = body.Replace("{DisplayName}", element.displayName);
-            body = body.Replace("{RefNo}", element.RefNo);
-            body = body.Replace("{Link}", element.link);
-
-
-            return body;
-        }
-
-
-        public string PopulateBodyApprovalMailDetails(ApprovalMailBodyDto element)
-        {
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader(element.path))
-            {
-                body = reader.ReadToEnd();
-            }
-            body = body.Replace("{ApplicationName}", element.ApplicationName);
-            body = body.Replace("{AppRefNo}", element.AppRefNo);
-            body = body.Replace("{SubmitDate}", element.SubmitDate);
-            body = body.Replace("{SenderName}", element.SenderName);
-            body = body.Replace("{Remarks}", element.Remarks);
-            body = body.Replace("{Status}", element.Status);
-            body = body.Replace("{Link}", element.Link);
-
-
-            return body;
-        }
-
         public bool SendMailWithAttachment(SentMailGenerationDto maildto)
         {
             bool result = false;
@@ -213,6 +160,59 @@ namespace Utility.Helper
             {
                 message.Dispose();
             }
+        }
+
+        public string PopulateBodyRegister(DamageRegisterBodyDTO bodyDTO)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(bodyDTO.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{DisplayName}", bodyDTO.displayName);
+            body = body.Replace("{LoginName}", bodyDTO.loginName);
+            body = body.Replace("{Password}", bodyDTO.password);
+            body = body.Replace("{EmailID}", bodyDTO.emailId);
+            body = body.Replace("{PhoneNumber}", bodyDTO.contactNo);
+            body = body.Replace("{Link}", bodyDTO.Link);
+
+
+            return body;
+        }
+
+        public string PopulateBodyLeaseRefernceNo(LeaseRefBodyDto element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{DisplayName}", element.displayName);
+            body = body.Replace("{RefNo}", element.RefNo);
+            body = body.Replace("{Link}", element.link);
+
+
+            return body;
+        }
+
+
+        public string PopulateBodyApprovalMailDetails(ApprovalMailBodyDto element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{ApplicationName}", element.ApplicationName);
+            body = body.Replace("{AppRefNo}", element.AppRefNo);
+            body = body.Replace("{SubmitDate}", element.SubmitDate);
+            body = body.Replace("{SenderName}", element.SenderName);
+            body = body.Replace("{Remarks}", element.Remarks);
+            body = body.Replace("{Status}", element.Status);
+            body = body.Replace("{Link}", element.Link);
+
+
+            return body;
         }
 
         public string GenerateMailFormatForComplaint(ComplaintRegisteredMailBodyDto element)
