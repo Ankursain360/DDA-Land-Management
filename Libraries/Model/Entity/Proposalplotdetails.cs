@@ -16,11 +16,11 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Khasra  No is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
         [Required(ErrorMessage = "Bigha is mandatory")]
-        public decimal Bigha { get; set; }
+        public int Bigha { get; set; }
         [Required(ErrorMessage = "Biswa is mandatory")]
-        public decimal Biswa { get; set; }
+        public int Biswa { get; set; }
         [Required(ErrorMessage = "Biswanshi is mandatory")]
-        public decimal Biswanshi { get; set; }
+        public int Biswanshi { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
 

@@ -16,17 +16,17 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Khasra is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
         [Required(ErrorMessage = "Bigha is mandatory")]
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
-        public decimal Bigha { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        public int Bigha { get; set; }
         [Required(ErrorMessage = "Biswa is mandatory")]
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
-        public decimal Biswa { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        public int Biswa { get; set; }
         [Required(ErrorMessage = "Biswanshi is mandatory")]
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
-        public decimal Biswanshi { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        public int Biswanshi { get; set; }
             public string Remarks { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }

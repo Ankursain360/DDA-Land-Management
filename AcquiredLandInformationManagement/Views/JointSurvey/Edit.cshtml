@@ -80,7 +80,7 @@
 
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaInBigha" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" />
+                    <input asp-for="AreaInBigha" type="text" limit="2" class="floating-label-field floating-label-field--s3 " placeholder="Name" />
 
                     <span asp-validation-for="AreaInBigha" class="text-danger "></span>
                     <label class="floating-label">Area in Bigha</label>
@@ -88,7 +88,7 @@
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaInBiswa" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" />
+                    <input asp-for="AreaInBiswa" limit="2" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" />
 
                     <span asp-validation-for="AreaInBiswa" class="text-danger "></span>
                     <label class="floating-label">Area in Biswa</label>

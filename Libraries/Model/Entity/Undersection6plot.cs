@@ -20,19 +20,19 @@ namespace Libraries.Model.Entity
 
        
 
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
         [Required(ErrorMessage = "Bigha field is mandatory")]
-        public decimal Bigha { get; set; }
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid  Biswa; Max 18 digits")]
+        public int Bigha { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid  Biswa; Max 18 digits")]
         [Required(ErrorMessage = "Biswa field is mandatory")]
-        public decimal Biswa { get; set; }
-        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
-        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid  Biswanshi; Max 18 digits")]
+        public int Biswa { get; set; }
+        //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid  Biswanshi; Max 18 digits")]
         [Required(ErrorMessage = "Biswanshi field is mandatory")]
 
-        public decimal Biswanshi { get; set; }
+        public int Biswanshi { get; set; }
         [Required(ErrorMessage = "Status field is mandatory")]
         public byte IsActive { get; set; }
         [NotMapped]
