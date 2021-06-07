@@ -27,15 +27,45 @@ namespace FileDataLoading.Controllers
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(_configuration.GetSection("compactorallApi").Value))
-               // using (var response = await httpClient.GetAsync("http://119.226.139.196/compactorfilesearch/Damage.asmx/GetCompactorDtls_All"))
-                {
+               {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                   // var data1 = JsonSerializer.Deserialize<List<CompactorApiDto>>(apiResponse);
+                
                     var data2 = JsonSerializer.Deserialize<ApiResponseCompactor>(apiResponse);
 
                     return View(data2);
                 }
             }
         }
+        public IActionResult Index1()
+        {
+            return View();
+        }
+            [HttpPost]
+        public async Task<IActionResult> Index1(string fileno)
+        {
+            //Reservation reservation = new Reservation();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(_configuration.GetSection("compactorFileNoApi").Value + fileno))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        var data = JsonSerializer.Deserialize<ApiResponseCompactor>(apiResponse);
+                        return View(data);
+                       
+                    }
+                    else
+                    {
+                        return View(fileno);
+
+                    }
+                   
+                }
+            }
+           
+
+        }
+       
     }
 }

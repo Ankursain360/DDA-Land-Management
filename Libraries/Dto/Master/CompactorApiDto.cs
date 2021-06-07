@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Dto.Master
@@ -24,5 +25,7 @@ namespace Dto.Master
     public class ApiResponseCompactor
     {
         public List<CompactorApiDto> cargo { get; set; }
+         [NotMapped]
+        public string FileNo { get; set; }
     }
 }
