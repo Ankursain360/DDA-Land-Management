@@ -52,6 +52,7 @@ namespace SiteMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    templates.UserNotificationGuid = Guid.NewGuid().ToString();
                     templates.CreatedDate = DateTime.Now;
                     templates.CreatedBy = SiteContext.UserId;
                     var result = await _applicationNotificationService.Create(templates);
