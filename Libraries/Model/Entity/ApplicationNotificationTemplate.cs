@@ -7,7 +7,7 @@ namespace Libraries.Model.Entity
 {
     public class ApplicationNotificationTemplate : AuditableEntity<int>
     {
-       
+        public string UserNotificationGuid { get; set; }
         [Required(ErrorMessage = " Template name is mandatory")]
         public string Name { get; set; }
         [Required(ErrorMessage = " Template is mandatory")]

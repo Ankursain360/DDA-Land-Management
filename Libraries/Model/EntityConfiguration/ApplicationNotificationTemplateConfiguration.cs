@@ -24,6 +24,10 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
+            builder.Property(e => e.UserNotificationGuid)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
             builder.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(45)

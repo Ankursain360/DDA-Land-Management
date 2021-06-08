@@ -181,12 +181,14 @@ function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
             $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
 
-            $("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewPanId").text(data[i].panNoFilePath.split("\\")[data[i].panNoFilePath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewPhotoId").text(data[i].photographPath.split("\\")[data[i].photographPath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewSignatureId").text(data[i].signaturePath.split("\\")[data[i].signaturePath.split("\\").length - 1].slice(37));
+            //$("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
+            //$("#tbl_posts #add #viewPanId").text(data[i].panNoFilePath.split("\\")[data[i].panNoFilePath.split("\\").length - 1].slice(37));
+            //$("#tbl_posts #add #viewPhotoId").text(data[i].photographPath.split("\\")[data[i].photographPath.split("\\").length - 1].slice(37));
+            //$("#tbl_posts #add #viewSignatureId").text(data[i].signaturePath.split("\\")[data[i].signaturePath.split("\\").length - 1].slice(37));
 
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
+                $("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
+
                 $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
             } else {
