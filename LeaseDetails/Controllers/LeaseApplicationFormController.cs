@@ -34,6 +34,7 @@ namespace LeaseDetails.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IUserNotificationService _userNotificationService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserProfileService _userProfileService;
 
@@ -246,6 +247,18 @@ namespace LeaseDetails.Controllers
                                     approvalproccess.Version = workflowtemplatedata.Version;
                                     approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                                    if (result)
+                                    {
+                                        Usernotification usernotification = new Usernotification();
+
+                                        usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
+                                        usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                        usernotification.ServiceId = approvalproccess.ServiceId;
+                                        usernotification.SendFrom = approvalproccess.SendFrom;
+                                        usernotification.SendTo = approvalproccess.SendTo;
+                                        result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                    }
                                 }
 
                                 break;
@@ -264,7 +277,7 @@ namespace LeaseDetails.Controllers
                             Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
                             string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                             string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                            string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
+                            string linkhref = (_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value).ToString();
 
                             var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                             StringBuilder multousermailId = new StringBuilder();
@@ -376,7 +389,7 @@ namespace LeaseDetails.Controllers
                             ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                             TempData["Message"] = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         }
-                       
+
                         ViewBag.IsPrintable = 1;
                         ViewBag.Id = leaseapplication.Id;
                         return View("Create", leaseapplication);
@@ -400,6 +413,7 @@ namespace LeaseDetails.Controllers
                 var deleteResult = false;
                 if (leaseapplication.Id != 0)
                 {
+                    deleteResult = await _userNotificationService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), leaseapplication.Id);
                     deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidLeaseApplicationForm").Value), leaseapplication.Id);
                     deleteResult = await _leaseApplicationFormService.RollBackEntryDocument(leaseapplication.Id);
                     deleteResult = await _leaseApplicationFormService.RollBackEntry(leaseapplication.Id);
