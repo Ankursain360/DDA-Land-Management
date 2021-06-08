@@ -496,5 +496,11 @@
     "inputFiles": [
       "wwwroot/js/us22plotedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection4detailsformcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection4detailsformcreate.js"
+    ]
   }
 ]

@@ -72,11 +72,10 @@ namespace Libraries.Service.ApplicationService
             model.Npurpose = undersection4.Npurpose;
             model.TypeDetails = undersection4.TypeDetails;
             model.BoundaryDescription = undersection4.BoundaryDescription;
-         //   model.TypePurpose = undersection4.TypePurpose;
-          
+            model.DocumentName = undersection4.DocumentName;
             model.IsActive = undersection4.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = undersection4.ModifiedBy;
             _undersection4Repository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
@@ -84,10 +83,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Undersection4 undersection4)
         {
-            undersection4.CreatedBy = 1;
-          
             undersection4.CreatedDate = DateTime.Now;
-
             _undersection4Repository.Add(undersection4);
             return await _unitOfWork.CommitAsync() > 0;
         }

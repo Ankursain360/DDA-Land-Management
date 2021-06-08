@@ -1,4 +1,5 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ namespace Libraries.Model.Entity
         public int US6Id { get; set; }
         [Required(ErrorMessage = "Undersection 17  is mandatory")]
         public int US17Id { get; set; }
+        public string DocumentName { get; set; }
         public string Remarks { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
@@ -61,5 +63,8 @@ namespace Libraries.Model.Entity
         public List<Proposaldetails> purposalList { get; set; }
         [NotMapped]
         public List<Acquiredlandvillage> AcquiredlandvillageList { get; set; }
+
+        [NotMapped]
+        public IFormFile DocumentIFormFile { get; set; }
     }
 }

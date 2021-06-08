@@ -215,12 +215,12 @@
                     @{
                         @if (Model.DemilitionReportPath != null)
                         {
-                            <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input disabled type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
                             <label class="badge badge-primary px-2">(View Report)</label>
                         }
                         else
                         {
-                            <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input disabled  type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
                         }
                     }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="DemolitionReportFile"></span>
