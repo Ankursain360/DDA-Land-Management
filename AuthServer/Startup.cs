@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
@@ -16,19 +17,20 @@ namespace AuthServer
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostEnvironment { get; }
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        {
+            Configuration = configuration;
+            HostEnvironment = env;
+        }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
 
-            string connectionString = "server=49.50.87.108;port=3306;user=root;password=Google@123;database=authserver";
-            string lmsConnection = "server=49.50.87.108;port=3306;user=root;password=Google@123;database=lms";
+            string connectionString = (Configuration.GetSection("ConnectionString:connectionString").Value).ToString();
+            string lmsConnection = (Configuration.GetSection("ConnectionString:lmsConnection").Value).ToString();
 
-            //string connectionString = "server=localhost;port=3306;user=root;password=Google@123;database=authserver";
-            //string lmsConnection = "server=localhost;port=3306;user=root;password=Google@123;database=lms";
-
-
-            //string connectionString = "server=127.0.0.1;port=3306;user=root;password=Google@123;database=authserver";
-            //string lmsConnection = "server=127.0.0.1;port=3306;user=root;password=Google@123;database=lms";
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options =>
