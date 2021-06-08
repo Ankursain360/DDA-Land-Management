@@ -164,12 +164,12 @@ namespace EncroachmentDemolition.Controllers
                     #endregion
 
                     targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
-                   
+
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
                     {
                         onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
-                   
+
                     }
                     onlinecomplaint.CreatedBy = SiteContext.UserId;
                     var result = await _onlinecomplaintService.Create(onlinecomplaint);
@@ -305,7 +305,7 @@ namespace EncroachmentDemolition.Controllers
                             // mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
                             #region Mail Generate for Complaint Registered
                             string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "OnlineComplaintAlert.html");
-                           
+
                             #region Mail Generation Added By Renu
 
                             MailSMSHelper mailG = new MailSMSHelper();
@@ -319,9 +319,21 @@ namespace EncroachmentDemolition.Controllers
                             string strBodyMsg = mailG.GenerateMailFormatForComplaint(bodyDTO);
                             #endregion
 
-                            string strMailSubject = "DDA Alert-Your Complaint has been successfully submitted";
-                            string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                            var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                            //  var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                            #region Common Mail Genration
+                            SentMailGenerationDto maildto = new SentMailGenerationDto();
+                            maildto.strMailSubject = "Pending Online Compalint Application Approval Request Details ";
+                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                            maildto.strBodyMsg = strBodyMsg;
+                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                            maildto.strMailTo = EmailID;
+                            var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                            #endregion
                             #endregion
 
 
@@ -358,7 +370,7 @@ namespace EncroachmentDemolition.Controllers
                 var deleteResult = false;
                 if (onlinecomplaint.Id != 0)
                 {
-                    deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), onlinecomplaint.Id);                    
+                    deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), onlinecomplaint.Id);
                     deleteResult = await _onlinecomplaintService.RollBackEntry(onlinecomplaint.Id);
                 }
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
@@ -475,8 +487,8 @@ namespace EncroachmentDemolition.Controllers
                         ReferenceNo = result[i].ReferenceNo,
                         ComplaintName = result[i].Name,
                         ContactNo = result[i].Contact,
-                        Email= result[i].Email,
-                        ApprovalStatus  = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName,
+                        Email = result[i].Email,
+                        ApprovalStatus = result[i].ApprovedStatusNavigation == null ? "" : result[i].ApprovedStatusNavigation.SentStatusName,
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }

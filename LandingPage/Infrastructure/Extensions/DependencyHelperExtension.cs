@@ -28,6 +28,7 @@ namespace LandingPage.Infrastructure.Extensions
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IModuleCategoryRepository, ModuleCategoryRespository>();
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
 
 
             /* Application Services */
@@ -40,6 +41,7 @@ namespace LandingPage.Infrastructure.Extensions
 
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IModuleCategoryService, ModuleCategoryService>();
+            services.AddScoped<IUserNotificationService, UserNotificationService>();
 
         }
     }

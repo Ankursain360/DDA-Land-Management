@@ -28,73 +28,7 @@ namespace Utility.Helper
 
             return body;
         }
-        public bool SendMailWithAttachment(string strMailSubject, string strBodyMsg, string strMailTo, string strMailCC, string strMailBCC, string strAttachPath)
-        {
-            bool result = false;
-            MailMessage message = null;
-            try
-            {
-                message = new MailMessage();
-                message.From = new MailAddress(AppConstantsHelper.fromMail);
-                message.IsBodyHtml = true;
-                message.Body = strBodyMsg;
-                message.Subject = strMailSubject;
-                SmtpClient smtp = new SmtpClient(AppConstantsHelper.mailHost);
-                smtp.Port = AppConstantsHelper.port;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential(AppConstantsHelper.fromMail, AppConstantsHelper.fromMailPwd);
-
-                //recipients To
-                if (strMailTo != "")
-                {
-                    string[] multiTo = strMailTo.Split(',');
-                    foreach (string MultiEmailID in multiTo)
-                    {
-                        message.To.Add(new MailAddress(MultiEmailID));
-                    }
-                }
-                //recipients CC
-                if (strMailCC != "")
-                {
-                    string[] multiCC = strMailCC.Split(',');
-                    foreach (string MultiEmailID in multiCC)
-                    {
-                        message.CC.Add(new MailAddress(strMailCC));
-                    }
-                }
-                //recipients BCC
-                if (strMailBCC != "")
-                {
-                    string[] multiBCC = strMailBCC.Split(',');
-                    foreach (string MultiEmailID in multiBCC)
-                    {
-                        message.Bcc.Add(new MailAddress(strMailBCC));
-                    }
-                }
-                if (strAttachPath != "")
-                {
-                    Attachment attachment = new System.Net.Mail.Attachment(strAttachPath);
-                    message.Attachments.Add(attachment);
-                }
-
-                smtp.EnableSsl = true;
-                smtp.Send(message);
-
-                result = true;
-
-                return result;
-
-            }
-            catch (Exception ex)
-            {
-                return result;
-            }
-            finally
-            {
-                message.Dispose();
-            }
-        }
-
+        
         public bool SendMailWithAttachment(SentMailGenerationDto maildto)
         {
             bool result = false;

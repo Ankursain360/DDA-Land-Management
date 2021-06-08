@@ -41,8 +41,8 @@ namespace NewLandAcquisition.Controllers
         string ApprovalDocumentPath = "";
 
 
-        public RequestApprovalProcess(IRequestApprovalProcessService requestApprovalProcessService, 
-            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService, 
+        public RequestApprovalProcess(IRequestApprovalProcessService requestApprovalProcessService,
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IConfiguration configuration, IRequestService requestService, INewlandannexure2Service newlandannexure2Service,
             IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
         {
@@ -95,7 +95,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
         [HttpPost]
-   //[AuthorizeContext(ViewAction.Add)]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Request request)
         {
             var result = false;
@@ -383,9 +383,21 @@ namespace NewLandAcquisition.Controllers
                         string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                         #endregion
 
-                        string strMailSubject = "Pending Request Approval Details ";
-                        string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                        sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                        //  sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                        #region Common Mail Genration
+                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                        maildto.strMailSubject = "Pending Request Approval Details ";
+                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                        maildto.strBodyMsg = strBodyMsg;
+                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                        maildto.strMailTo = multousermailId.ToString();
+                        sendMailResult = mailG.SendMailWithAttachment(maildto);
+                        #endregion
                         #endregion
 
 
@@ -428,28 +440,30 @@ namespace NewLandAcquisition.Controllers
         public async Task<PartialViewResult> RequestView(int id)
         {
 
-            var Data = await _requestService.FetchSingleResult(id);         
+            var Data = await _requestService.FetchSingleResult(id);
             return PartialView("_RequestView", Data);
         }
-        
+
         public async Task<JsonResult> RequestIdHistory(int id)
-        {           
+        {
             int ReqId = 0;
             int CreatedBy = 0;
             int UserId = SiteContext.UserId;
             var ReqExists = await _newlandannexure2Service.CheckReqExists(id);
-            var CheckReqExistancy = ReqExists.Select(a => new { a.Id});
+            var CheckReqExistancy = ReqExists.Select(a => new { a.Id });
             if ((ReqExists.Count == 0) || (ReqExists == null))
             {
-                return Json(ReqExists.Select(a=>new { a.Id,a.ReqId,a.CreatedBy})); }
+                return Json(ReqExists.Select(a => new { a.Id, a.ReqId, a.CreatedBy }));
+            }
             else
             {
                 var Data = await _newlandannexure2Service.FetchSingleResultForReqId(id, UserId);
-               
+
                 if (Data.Count == 0)
-                { return Json(ReqExists.Select(a => new { a.Id , ReqId, CreatedBy })); }
-               
-                else {
+                { return Json(ReqExists.Select(a => new { a.Id, ReqId, CreatedBy })); }
+
+                else
+                {
                     int UserCheck = Data[0].CreatedBy;
                     if (UserCheck == UserId)
                     {
@@ -474,8 +488,8 @@ namespace NewLandAcquisition.Controllers
 
 
                 }
-            }           
-        }   
+            }
+        }
 
         //[HttpGet]
         //public async Task<JsonResult> getannexuredetails()  //Bind Dropdown of Approval Status
@@ -494,7 +508,7 @@ namespace NewLandAcquisition.Controllers
         //                if (i == DataFlow.Count - 1)
         //                {
 
-                          
+
         //                    return Json(ViewBag.data = true);
         //                }
         //                else
@@ -505,10 +519,10 @@ namespace NewLandAcquisition.Controllers
         //            }
         //        }
         //    }
-           
+
         //    return Json(DataFlow);
         //}
-       
+
         public async Task<FileResult> ViewLetter(int Id)
         {
             try

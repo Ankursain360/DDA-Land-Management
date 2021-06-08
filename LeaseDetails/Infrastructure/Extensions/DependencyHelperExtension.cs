@@ -61,6 +61,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IAllotmentLetterRepository, AllotmentLetterRepository>();
             services.AddScoped<IExtensionApprovalRepository, ExtensionApprovalRepository>();
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
 
 
 
@@ -109,6 +110,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IAllotmentLetterService,AllotmentLetterService>();
             services.AddScoped<IExtensionApprovalService, ExtensionApprovalService>();
             services.AddScoped<IExtensionService, ExtensionService>();
+            services.AddScoped<IUserNotificationService, UserNotificationService>();
         }
     }
 }
