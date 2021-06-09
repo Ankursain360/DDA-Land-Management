@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using Microsoft.AspNetCore.Http;
 namespace Libraries.Model.Entity
 {
     public class Mutation : AuditableEntity<int>
@@ -39,7 +39,7 @@ namespace Libraries.Model.Entity
         public string MutationType { get; set; }
         public string Remark { get; set; }
         public byte IsActive { get; set; }
-
+        public string DocumentName { get; set; }
         public Acquiredlandvillage AcquiredVillage { get; set; }
         public Khasra Khasra { get; set; }
         public ICollection<Mutationparticulars> Mutationparticulars { get; set; }
@@ -57,5 +57,7 @@ namespace Libraries.Model.Entity
         public List<string> Share { get; set; }
         [NotMapped]
         public List<string> Address { get; set; }
+        [NotMapped]
+        public IFormFile DocumentIFormFile { get; set; }
     }
 }

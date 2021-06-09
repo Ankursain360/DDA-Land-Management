@@ -17,17 +17,22 @@ using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+
 
 namespace NewLandAcquisition.Controllers
 {
     
    public class NewlandPossesionDetailsController : BaseController
     {
+        public IConfiguration _configuration;
         private readonly INewlandpossessiondetailsService _Possessiondetailservice;
-
-        public NewlandPossesionDetailsController(INewlandpossessiondetailsService possessiondetailsService)
+        string DocumentFilePath = "";
+        public NewlandPossesionDetailsController(INewlandpossessiondetailsService possessiondetailsService, IConfiguration configuration)
         {
             _Possessiondetailservice = possessiondetailsService;
+            _configuration = configuration;
+            DocumentFilePath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -79,6 +84,9 @@ namespace NewLandAcquisition.Controllers
 
                 if (ModelState.IsValid)
                 {
+
+                    FileHelper fileHelper = new FileHelper();
+                    newlandpossessiondetails.DocumentName = newlandpossessiondetails.DocumentIFormFile == null ? newlandpossessiondetails.DocumentName : fileHelper.SaveFile1(DocumentFilePath, newlandpossessiondetails.DocumentIFormFile);
                     StringBuilder str = new StringBuilder();
                     if (newlandpossessiondetails.IsVacant == true)
                     {
@@ -163,6 +171,7 @@ namespace NewLandAcquisition.Controllers
             newlandpossessiondetails.us6List = await _Possessiondetailservice.GetAllus6();
             if (ModelState.IsValid)
             {
+               
                 try
                 {
                     StringBuilder str = new StringBuilder();
@@ -176,6 +185,8 @@ namespace NewLandAcquisition.Controllers
                             str.Append("|");
                         str.Append("Built Up");
                     }
+                    FileHelper fileHelper = new FileHelper();
+                    newlandpossessiondetails.DocumentName = newlandpossessiondetails.DocumentIFormFile == null ? newlandpossessiondetails.DocumentName : fileHelper.SaveFile1(DocumentFilePath, newlandpossessiondetails.DocumentIFormFile);
                     newlandpossessiondetails.PossType = str.ToString();
                     var result = await _Possessiondetailservice.Update(id, newlandpossessiondetails);
                     if (result == true)
@@ -287,7 +298,7 @@ namespace NewLandAcquisition.Controllers
                         Id = result[i].Id,
                         VillageName = result[i].Village == null ? "" : result[i].Village.Name.ToString(),
                         KhasraNo = result[i].Khasra == null ? "" : result[i].Khasra.Name.ToString(),
-                        Date = result[i].PossDate.ToString(),
+                        //Date = result[i].PossDate.ToString(),
                       
                         IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
@@ -298,6 +309,13 @@ namespace NewLandAcquisition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newlandpossessiondetails Data = await _Possessiondetailservice.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
     }
 }

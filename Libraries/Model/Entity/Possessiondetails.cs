@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Http;
 namespace Libraries.Model.Entity
 {
     public class Possessiondetails : AuditableEntity<int>
@@ -35,6 +35,7 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
   
         public byte IsActive { get; set; }
+        public string DocumentName { get; set; }
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }
         public Khasra Khasra { get; set; }
@@ -46,6 +47,7 @@ namespace Libraries.Model.Entity
         public bool IsVacant { get; set; }
         [NotMapped]
         public bool IsBuiltup { get; set; }
-
+        [NotMapped]
+        public IFormFile DocumentIFormFile { get; set; }
     }
 }
