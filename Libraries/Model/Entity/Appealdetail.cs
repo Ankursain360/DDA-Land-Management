@@ -18,6 +18,9 @@ namespace Libraries.Model.Entity
         public string AppealNo { get; set; }
         [Required(ErrorMessage = "AppealByDept name is Mandatory")]
         public string AppealByDept { get; set; }
+
+        public string Department { get; set; }
+        
         public DateTime? DateOfAppeal { get; set; }
         
         public string PanelLawer { get; set; }
