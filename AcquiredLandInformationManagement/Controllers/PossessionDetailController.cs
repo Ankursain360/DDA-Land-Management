@@ -17,16 +17,21 @@ using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
 using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class PossessionDetailController : Controller
     {
+        public IConfiguration _configuration;
         private readonly IPossessiondetailsService _Possessiondetailservice;
+        string DocumentFilePath = "";
 
-        public PossessionDetailController(IPossessiondetailsService possessiondetailsService)
+        public PossessionDetailController(IPossessiondetailsService possessiondetailsService, IConfiguration configuration)
         {
             _Possessiondetailservice = possessiondetailsService;
+            _configuration = configuration;
+            DocumentFilePath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -82,6 +87,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    undersection4plot.DocumentName = undersection4plot.DocumentIFormFile == null ? undersection4plot.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection4plot.DocumentIFormFile);
                     undersection4plot.PossType = str.ToString();
                     var result = await _Possessiondetailservice.Create(undersection4plot);
 
@@ -159,6 +166,8 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 try
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    undersection4plot.DocumentName = undersection4plot.DocumentIFormFile == null ? undersection4plot.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection4plot.DocumentIFormFile);
                     undersection4plot.PossType = str.ToString();
                     var result = await _Possessiondetailservice.Update(id, undersection4plot);
                     if (result == true)
@@ -277,6 +286,14 @@ namespace AcquiredLandInformationManagement.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Possessiondetails Data = await _Possessiondetailservice.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
 
     }

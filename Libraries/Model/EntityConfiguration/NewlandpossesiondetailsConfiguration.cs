@@ -22,8 +22,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkpkhasraid_idx");
 
-            builder.HasIndex(e => e.PossKhasraId)
-                .HasName("fk_PossKId_idx");
+            //builder.HasIndex(e => e.PossKhasraId)
+            //    .HasName("fk_PossKId_idx");
 
             builder.HasIndex(e => e.Us6id)
                 .HasName("fk_us6id_idx");
@@ -52,10 +52,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.PossKhasraId).HasColumnType("int(11)");
+            //builder.Property(e => e.PossKhasraId).HasColumnType("int(11)");
                 
 
-            builder.Property(e => e.PossDate).HasColumnType("date");
+            //builder.Property(e => e.PossDate).HasColumnType("date");
 
             builder.Property(e => e.PossType)
                 .IsRequired()
@@ -66,10 +66,15 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(1)
                 .IsUnicode(false);
-
+            builder.Property(e => e.DocumentName)
+              .HasMaxLength(1000)
+              .IsUnicode(false);
             builder.Property(e => e.Remarks)
                 .HasMaxLength(4000)
                 .IsUnicode(false);
+            builder.Property(e => e.Reason)
+              .HasMaxLength(4000)
+              .IsUnicode(false);
 
             builder.Property(e => e.Us17id)
                 .HasColumnName("US17Id")
@@ -96,10 +101,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.KhasraId)
                 .HasConstraintName("fk_khasraid");
             
-            builder.HasOne(d => d.Khasra)
-                .WithMany(p => p.newlandpossessiondetails)
-                .HasForeignKey(d => d.KhasraId)
-                .HasConstraintName("fk_PossKId");
+            //builder.HasOne(d => d.Khasra)
+            //    .WithMany(p => p.newlandpossessiondetails)
+            //    .HasForeignKey(d => d.KhasraId)
+            //    .HasConstraintName("fk_PossKId");
 
           
 

@@ -89,7 +89,7 @@ namespace Libraries.Service.ApplicationService
             model.ReasonNonPoss = possessiondetails.ReasonNonPoss;
             model.IsActive = possessiondetails.IsActive;
             model.Remarks = possessiondetails.Remarks;
-
+            model.DocumentName = possessiondetails.DocumentName;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _possessiondetailsRepository.Edit(model);
