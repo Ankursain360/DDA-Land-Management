@@ -112,6 +112,7 @@ namespace Libraries.Service.ApplicationService
             model.ReasonNonPoss = possessiondetails.ReasonNonPoss;
             model.IsActive = possessiondetails.IsActive;
             model.Remarks = possessiondetails.Remarks;
+            model.Reason = possessiondetails.Reason;
             model.DocumentName = possessiondetails.DocumentName;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

@@ -101,41 +101,48 @@
                     </div>
 
                 </div>
-
-
-
-
-                @*<div class="row mt-md-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="Date" asp-for="PossDate" value="" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="PossDate" class="text-danger"></span>
-                            <label class="floating-label"> Date</label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="PossKhasraId" asp-items="@(new SelectList(Model.PossKhasraList, "Id","Name"))">
-                                <option value="" selected="selected" disabled>Select</option>
-                            </select>
-                            <span asp-validation-for="PossKhasraId" class="text-danger"></span>
-                            <label class="floating-label" asp-for="PossKhasraId">Possesion Khasra No</label>
-                        </div>
-                    </div>
-
-
-                </div>*@
                 <div class="row mt-md-3">
-                    <div class="form-group col-md-6">
+                    <div class="col-md-12">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
-                            <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentIFormFile"></span>
-                            <label class="floating-label">Upload Copy Of Possession/Kabza Proceeding</label>
+                            <textarea asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
+
+                            <span asp-validation-for="Reason" class="text-danger"></span>
+                            <label class="floating-label">Reason </label>
                         </div>
+                    </div>
+                    </div>
+
+                    @*<div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="Date" asp-for="PossDate" value="" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="PossDate" class="text-danger"></span>
+                        <label class="floating-label"> Date</label>
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="PossKhasraId" asp-items="@(new SelectList(Model.PossKhasraList, "Id","Name"))">
+                            <option value="" selected="selected" disabled>Select</option>
+                        </select>
+                        <span asp-validation-for="PossKhasraId" class="text-danger"></span>
+                        <label class="floating-label" asp-for="PossKhasraId">Possesion Khasra No</label>
+                    </div>
+                </div>
+
+
+            </div>*@
+                    <div class="row mt-md-3">
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                                <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentIFormFile"></span>
+                                <label class="floating-label">Upload Copy Of Possession/Kabza Proceeding</label>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="pt-3">
 

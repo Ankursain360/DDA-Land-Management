@@ -56,7 +56,7 @@ namespace Libraries.Model.Entity
         public Newlandvillage Village { get; set; }
         [NotMapped]
         public List<Newlandkhasra> PossKhasraList { get; set; }
-        public Newlandkhasra PossKhasra { get; set; }
+        //public Newlandkhasra PossKhasra { get; set; }
         [NotMapped]
         public List<Undersection17> us17List { get; set; }
         public Undersection17 Us17 { get; set; }

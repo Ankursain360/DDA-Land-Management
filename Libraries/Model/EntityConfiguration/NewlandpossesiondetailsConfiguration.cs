@@ -101,10 +101,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.KhasraId)
                 .HasConstraintName("fk_khasraid");
             
-            builder.HasOne(d => d.Khasra)
-                .WithMany(p => p.newlandpossessiondetails)
-                .HasForeignKey(d => d.KhasraId)
-                .HasConstraintName("fk_PossKId");
+            //builder.HasOne(d => d.Khasra)
+            //    .WithMany(p => p.newlandpossessiondetails)
+            //    .HasForeignKey(d => d.KhasraId)
+            //    .HasConstraintName("fk_PossKId");
 
           
 
