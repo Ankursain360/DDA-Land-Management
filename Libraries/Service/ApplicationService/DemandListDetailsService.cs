@@ -80,6 +80,8 @@ namespace Service.ApplicationService
             model.ReasonForNonPay = demandlistdetails.ReasonForNonPay;
             model.Remarks = demandlistdetails.Remarks;
             model.TotalAmount = demandlistdetails.TotalAmount;
+            model.ENMDocumentName = demandlistdetails.ENMDocumentName;
+            model.ModifiedBy = demandlistdetails.ModifiedBy;
             model.IsActive = demandlistdetails.IsActive;
             model.ModifiedDate = DateTime.Now;
             _demandListDetailsRepository.Edit(model);

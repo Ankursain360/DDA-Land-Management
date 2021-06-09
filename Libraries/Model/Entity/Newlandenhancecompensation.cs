@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
@@ -48,6 +49,8 @@ namespace Libraries.Model.Entity
         //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]
         [Required(ErrorMessage = "Biswanshi is mandatory")]
         public int Biswanshi { get; set; }
+        public string ENMDocumentName { get; set; }
+
         public string Remarks { get; set; }
 
         [Required(ErrorMessage = "Status is mandatory")]
@@ -59,5 +62,8 @@ namespace Libraries.Model.Entity
         public List<Newlandvillage> VillageList { get; set; }
         [NotMapped]
         public List<Newlandkhasra> KhasraList { get; set; }
+
+        [NotMapped]
+        public IFormFile ENMDocumentIFormFile { get; set; }
     }
 }

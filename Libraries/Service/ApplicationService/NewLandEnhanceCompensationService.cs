@@ -93,20 +93,16 @@ namespace Libraries.Service.ApplicationService
             model.DateOfJudgement = newlandenhancecompensation.DateOfJudgement;
             model.CaseInvolesWhichCourt = newlandenhancecompensation.CaseInvolesWhichCourt;
             model.PartyName = newlandenhancecompensation.PartyName;
-            model.VillageId = newlandenhancecompensation.VillageId;
-           
-
+            model.VillageId = newlandenhancecompensation.VillageId; 
             model.KhasraId = newlandenhancecompensation.KhasraId;
-         
             model.Bigha = newlandenhancecompensation.Bigha;
             model.Biswa = newlandenhancecompensation.Biswa;
-            model.Biswanshi = newlandenhancecompensation.Biswanshi;
-           
+            model.Biswanshi = newlandenhancecompensation.Biswanshi;           
             model.Remarks = newlandenhancecompensation.Remarks;
-
+            model.ENMDocumentName = newlandenhancecompensation.ENMDocumentName;
             model.IsActive = newlandenhancecompensation.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = newlandenhancecompensation.ModifiedBy;
             _newLandEnhanceCompensationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
@@ -114,9 +110,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Newlandenhancecompensation newlandenhancecompensation)
         {
-            newlandenhancecompensation.CreatedBy = 1;
             newlandenhancecompensation.CreatedDate = DateTime.Now;
-
             _newLandEnhanceCompensationRepository.Add(newlandenhancecompensation);
             return await _unitOfWork.CommitAsync() > 0;
         }

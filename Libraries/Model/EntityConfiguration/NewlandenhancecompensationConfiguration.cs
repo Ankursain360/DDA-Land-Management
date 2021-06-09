@@ -56,6 +56,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(30)
                 .IsUnicode(false);
 
+            builder.Property(e => e.ENMDocumentName)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
+
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");

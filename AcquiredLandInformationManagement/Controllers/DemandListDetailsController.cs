@@ -27,12 +27,13 @@ namespace AcquiredLandInformationManagement.Controllers
     {
         private readonly IDemandListDetailsService _demandListDetailsService;
         public IConfiguration _Configuration;
-        string UploadFilePath = "";
-        string targetPathGeo = "";
+        string ENMDocumentFilePath = "";
+
         public DemandListDetailsController(IDemandListDetailsService demandListDetailsService, IConfiguration configuration)
         {
             _demandListDetailsService = demandListDetailsService;
             _Configuration = configuration;
+            ENMDocumentFilePath = _Configuration.GetSection("FilePaths:DemandListDetails:DocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -72,6 +73,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
                 demandlistdetails.CreatedBy = SiteContext.UserId;
                 var result = await _demandListDetailsService.Create(demandlistdetails);
 
@@ -122,6 +125,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
                 demandlistdetails.ModifiedBy = SiteContext.UserId;
                 var result = await _demandListDetailsService.Update(id, demandlistdetails);
 
@@ -208,6 +213,15 @@ namespace AcquiredLandInformationManagement.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+
+        public async Task<IActionResult> ViewENMDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Demandlistdetails Data = await _demandListDetailsService.FetchSingleResult(Id);
+            string filename = ENMDocumentFilePath + Data.ENMDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 

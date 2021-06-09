@@ -1,4 +1,5 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entity;
 using System;
@@ -55,6 +56,7 @@ namespace Libraries.Model.Entity
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Amount; Max 18 digits")]
         public decimal? TotalAmount { get; set; }
         public string ReasonForNonPay { get; set; }
+        public string ENMDocumentName { get; set; }
         public string Remarks { get; set; }
         public Khasra KhasraNo { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
@@ -64,5 +66,8 @@ namespace Libraries.Model.Entity
         public List<Acquiredlandvillage> VillageList { get; set; }
         [NotMapped]
         public List<Khasra> KhasraNoList { get; set; }
+
+        [NotMapped]
+        public IFormFile ENMDocumentIFormFile { get; set; }
     }
 }
