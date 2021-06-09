@@ -43,6 +43,9 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(45)
                 .IsUnicode(false);
+            builder.Property(e => e.DocumentName)
+              .HasMaxLength(1000)
+              .IsUnicode(false);
 
             builder.Property(e => e.MutationOwnerLessee)
                 .IsRequired()

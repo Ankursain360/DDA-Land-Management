@@ -50,18 +50,19 @@ namespace Libraries.Service.ApplicationService
             model.LandNotificationId = ldoland.LandNotificationId;
             model.NotificationDate = ldoland.NotificationDate;
             model.SerialNumber = ldoland.SerialNumber;
-
             model.PropertySiteNo = ldoland.PropertySiteNo;
             model.Location = ldoland.Location;
             model.SiteDescription = ldoland.SiteDescription;
-            model.Area = ldoland.Area;
-           
+            model.Area = ldoland.Area;           
             model.StatusOfLand = ldoland.StatusOfLand;
             model.OccupiedBy = ldoland.OccupiedBy;
             model.DateofPossession = ldoland.DateofPossession;
+            model.DateOfLandResume = ldoland.DateOfLandResume;
+            model.GOINotificationDocumentName = ldoland.GOINotificationDocumentName;
+            model.OrderDocumentName = ldoland.OrderDocumentName;
+            model.PossessionDocumentName = ldoland.PossessionDocumentName;
             model.Remarks = ldoland.Remarks;
             model.IsActive = ldoland.IsActive;
-
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = ldoland.ModifiedBy;
             _ldolandRepository.Edit(model);

@@ -65,6 +65,7 @@ namespace Service.ApplicationService
             model.MutationType = mutation.MutationType;
             model.Remark = mutation.Remark;
             model.IsActive = mutation.IsActive;
+            model.DocumentName = mutation.DocumentName;
             model.ModifiedDate = DateTime.Now;
             _mutationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

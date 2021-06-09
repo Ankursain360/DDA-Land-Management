@@ -37,6 +37,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
+            builder.Property(e => e.GOINotificationDocumentName)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");

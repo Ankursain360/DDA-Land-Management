@@ -8,7 +8,7 @@
             $('#StatusOfLand').val('Vacant');
 
         } else if ($("#E").is(":checked")) {
-            $('#StatusOfLand').val('Enchroched');
+            $('#StatusOfLand').val('Buildup/Encroached');
         } 
         else if ($("#G").is(":checked")) {
             $('#StatusOfLand').val('Green');
@@ -38,3 +38,38 @@ $("input[name='grpLand']").click(function () {
     $("#StatusOfLand").val(selected.val());
 
 });
+
+
+$('#GOINotificationDocumentIFormFile').change(function () {
+    var fileInput = document.getElementById('GOINotificationDocumentIFormFile');
+    var filePath = fileInput.value;
+    const size = (GOINotificationDocumentIFormFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+$('#OrderDocumentIFormFile').change(function () {
+    var fileInput = document.getElementById('OrderDocumentIFormFile');
+    var filePath = fileInput.value;
+    const size = (OrderDocumentIFormFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+$('#PossessionDocumentIFormFile').change(function () {
+    var fileInput = document.getElementById('PossessionDocumentIFormFile');
+    var filePath = fileInput.value;
+    const size = (PossessionDocumentIFormFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}

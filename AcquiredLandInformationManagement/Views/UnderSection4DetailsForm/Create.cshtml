@@ -1,10 +1,10 @@
 ﻿@model Libraries.Model.Entity.Undersection4
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-4 Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-4 Master" })
 
 
 <div class="pt-3">
-    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
         <h3 class="mb-3 d-flex">Add Details</h3>
 
@@ -60,7 +60,13 @@
         </div>
 
         <div class="row mt-md-3">
-
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentIFormFile"></span>
+                    <label class="floating-label">Upload Document</label>
+                </div>
+            </div>
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
@@ -76,32 +82,32 @@
 
 
         @*<div class="pt-3">
-            <h3 class="mb-3 d-flex">Notification Type</h3>
+                <h3 class="mb-3 d-flex">Notification Type</h3>
 
-            <div class="row">
-
-
-
-                <div class="col-md-3">
-                    <div class="form-check theme">
+                <div class="row">
 
 
-                        <input class="form-check-input" type="radio" id="khasra_id" asp-for="TypeDetails" value="Khasra" checked="checked" />    <label class="radio-inline">
-                            Khasra
-                        </label>
-                    </div>
-                </div>   <div class="col-md-3">
-                    <div class="form-check theme">
+
+                    <div class="col-md-3">
+                        <div class="form-check theme">
 
 
-                        <input class="form-check-input" type="radio" id="boundary_id" asp-for="TypeDetails" value="Boundary" />
-                        <label class="radio-inline">
-                            Boundary
-                        </label>
+                            <input class="form-check-input" type="radio" id="khasra_id" asp-for="TypeDetails" value="Khasra" checked="checked" />    <label class="radio-inline">
+                                Khasra
+                            </label>
+                        </div>
+                    </div>   <div class="col-md-3">
+                        <div class="form-check theme">
+
+
+                            <input class="form-check-input" type="radio" id="boundary_id" asp-for="TypeDetails" value="Boundary" />
+                            <label class="radio-inline">
+                                Boundary
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
 
 
         <div class="row mt-md-3" id="boundary_div" style="display:none">
@@ -140,15 +146,9 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<script>
-
-
-    $('#khasra_id').click(function () {
-        $("#boundary_div").hide();
-    });
-
-    $('#boundary_id').click(function () {
-        $("#boundary_div").show();
-    });
-
-</script>
+<environment include="Development">
+    <script src="~/js/undersection4detailsformcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/undersection4detailsformcreate.min.js" asp-append-version="true"></script>
+</environment>

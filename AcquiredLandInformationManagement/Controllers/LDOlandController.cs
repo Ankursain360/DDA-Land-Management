@@ -10,6 +10,7 @@ using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
@@ -21,10 +22,19 @@ namespace AcquiredLandInformationManagement.Controllers
    public class LDOlandController : BaseController
     {
         private readonly ILdolandService _ldolandService;
+        public IConfiguration _configuration;
+        string GOINotificationDocumentFilePath = "";
+        string OrderDocumentFilePath = "";
+        string PossessionDocumentFilePath = "";
 
-        public LDOlandController(ILdolandService ldolandService)
+        public LDOlandController(ILdolandService ldolandService, IConfiguration configuration)
         {
             _ldolandService = ldolandService;
+            _configuration = configuration;
+            GOINotificationDocumentFilePath = _configuration.GetSection("FilePaths:LDOLands:GOINotificationDocumentFIlePath").Value.ToString();
+            OrderDocumentFilePath = _configuration.GetSection("FilePaths:LDOLands:OrderDocumentFIlePath").Value.ToString();
+            PossessionDocumentFilePath = _configuration.GetSection("FilePaths:LDOLands:PossessionDocumentFIlePath").Value.ToString();
+
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -60,6 +70,11 @@ namespace AcquiredLandInformationManagement.Controllers
             
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    ldoland.GOINotificationDocumentName = ldoland.GOINotificationDocumentIFormFile == null ? ldoland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, ldoland.GOINotificationDocumentIFormFile);
+                    ldoland.OrderDocumentName = ldoland.OrderDocumentIFormFile == null ? ldoland.OrderDocumentName : fileHelper.SaveFile1(OrderDocumentFilePath, ldoland.OrderDocumentIFormFile);
+                    ldoland.PossessionDocumentName = ldoland.PossessionDocumentIFormFile == null ? ldoland.PossessionDocumentName : fileHelper.SaveFile1(PossessionDocumentFilePath, ldoland.PossessionDocumentIFormFile);
+
 
                     ldoland.IsActive = 1;
                     ldoland.CreatedBy = SiteContext.UserId;
@@ -111,6 +126,11 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 try
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    ldoland.GOINotificationDocumentName = ldoland.GOINotificationDocumentIFormFile == null ? ldoland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, ldoland.GOINotificationDocumentIFormFile);
+                    ldoland.OrderDocumentName = ldoland.OrderDocumentIFormFile == null ? ldoland.OrderDocumentName : fileHelper.SaveFile1(OrderDocumentFilePath, ldoland.OrderDocumentIFormFile);
+                    ldoland.PossessionDocumentName = ldoland.PossessionDocumentIFormFile == null ? ldoland.PossessionDocumentName : fileHelper.SaveFile1(PossessionDocumentFilePath, ldoland.PossessionDocumentIFormFile);
+
                     ldoland.ModifiedBy = SiteContext.UserId;
                     var result = await _ldolandService.Update(id, ldoland);
                     if (result == true)
@@ -195,6 +215,30 @@ namespace AcquiredLandInformationManagement.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+        public async Task<IActionResult> ViewGOINotificationDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Ldoland Data = await _ldolandService.FetchSingleResult(Id);
+            string filename = GOINotificationDocumentFilePath + Data.GOINotificationDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+        public async Task<IActionResult> ViewOrderDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Ldoland Data = await _ldolandService.FetchSingleResult(Id);
+            string filename = OrderDocumentFilePath + Data.OrderDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+        public async Task<IActionResult> ViewPossessionDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Ldoland Data = await _ldolandService.FetchSingleResult(Id);
+            string filename = PossessionDocumentFilePath + Data.PossessionDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 }

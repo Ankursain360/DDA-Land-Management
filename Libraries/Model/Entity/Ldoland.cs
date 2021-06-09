@@ -1,4 +1,5 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +31,15 @@ namespace Libraries.Model.Entity
         public string OccupiedBy { get; set; }
         [Required(ErrorMessage = " Date of Possesion is mandatory")]
         public DateTime? DateofPossession { get; set; }
+
+        public string GOINotificationDocumentName { get; set; }
+
+        public string OrderDocumentName { get; set; }
+
+        public string PossessionDocumentName { get; set; }
+
+        public DateTime? DateOfLandResume { get; set; }
+
         [Required(ErrorMessage = " Remarks is mandatory")]
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
@@ -38,6 +48,15 @@ namespace Libraries.Model.Entity
         public List<LandNotification> LandNotificationList { get; set; }
         public virtual LandNotification LandNotification { get; set; }
 
-        
+        [NotMapped]
+        public IFormFile GOINotificationDocumentIFormFile { get; set; }
+
+        [NotMapped]
+        public IFormFile OrderDocumentIFormFile { get; set; }
+
+        [NotMapped]
+        public IFormFile PossessionDocumentIFormFile { get; set; }
+
+
     }
 }

@@ -76,21 +76,18 @@ namespace Libraries.Service.ApplicationService
             Morland model = result.FirstOrDefault();
             model.LandNotificationId = morland.LandNotificationId;
             model.NotificationDate = morland.NotificationDate;
-          
             model.PropertySiteNo = morland.PropertySiteNo;
             model.Name = morland.Name;
             model.SiteDescription = morland.SiteDescription;
-           
-
             model.StatusOfLand = morland.StatusOfLand;
             model.OccupiedBy = morland.OccupiedBy;
             model.Developed = morland.Developed;
             model.LandType = morland.LandType;
             model.Remarks = morland.Remarks;
-
+            model.GOINotificationDocumentName = morland.GOINotificationDocumentName;
             model.IsActive = morland.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = morland.ModifiedBy;
             _morlandRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
@@ -98,9 +95,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Morland morland)
         {
-            morland.CreatedBy = 1;
-            morland.CreatedDate = DateTime.Now;
-           
+            morland.CreatedDate = DateTime.Now;           
             _morlandRepository.Add(morland);
             return await _unitOfWork.CommitAsync() > 0;
         }

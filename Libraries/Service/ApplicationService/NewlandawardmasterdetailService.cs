@@ -62,17 +62,16 @@ namespace Libraries.Service.ApplicationService
             model.Purpose = newlandawardmasterdetail.Purpose;
             model.ProposalId = newlandawardmasterdetail.ProposalId;
             model.Nature = newlandawardmasterdetail.Nature;
+            model.DocumentName = newlandawardmasterdetail.DocumentName;
             model.IsActive = newlandawardmasterdetail.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = newlandawardmasterdetail.ModifiedBy;
             _newlandawardmasterdetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public new async Task<bool> Create(Newlandawardmasterdetail newlandawardmasterdetail)
         {
-
-            newlandawardmasterdetail.CreatedBy = 1;
             newlandawardmasterdetail.CreatedDate = DateTime.Now;
             _newlandawardmasterdetailsRepository.Add(newlandawardmasterdetail);
             return await _unitOfWork.CommitAsync() > 0;

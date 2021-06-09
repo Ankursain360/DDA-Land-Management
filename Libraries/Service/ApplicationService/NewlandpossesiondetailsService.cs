@@ -100,8 +100,8 @@ namespace Libraries.Service.ApplicationService
             model.VillageId = possessiondetails.VillageId;
             model.KhasraId = possessiondetails.KhasraId;
             model.IsActive = possessiondetails.IsActive;
-            model.PossKhasraId = possessiondetails.PossKhasraId;
-            model.PossDate = possessiondetails.PossDate;
+            //model.PossKhasraId = possessiondetails.PossKhasraId;
+            //model.PossDate = possessiondetails.PossDate;
             model.PossType = possessiondetails.PossType;
             model.Bigha = possessiondetails.Bigha;
             model.Biswa = possessiondetails.Biswa;
@@ -112,7 +112,8 @@ namespace Libraries.Service.ApplicationService
             model.ReasonNonPoss = possessiondetails.ReasonNonPoss;
             model.IsActive = possessiondetails.IsActive;
             model.Remarks = possessiondetails.Remarks;
-
+            model.Reason = possessiondetails.Reason;
+            model.DocumentName = possessiondetails.DocumentName;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _possessiondetailsRepository.Edit(model);

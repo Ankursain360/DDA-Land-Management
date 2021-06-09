@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -22,7 +23,8 @@ namespace Libraries.Model.Entity
         public DateTime? Ndate { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
-    
+        public string DocumentName { get; set; }
+
 
         [Required(ErrorMessage ="Notification field is mandatory")]
         public int? Undersection4Id { get; set; }
@@ -35,5 +37,8 @@ namespace Libraries.Model.Entity
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
         public ICollection<Newlandawardmasterdetail> Newlandawardmasterdetail { get; set; }
         public ICollection<Newlandpossessiondetails> NewlandPossessiondetails { get; set; }
+
+        [NotMapped]
+        public IFormFile DocumentIFormFile { get; set; }
     }
 }

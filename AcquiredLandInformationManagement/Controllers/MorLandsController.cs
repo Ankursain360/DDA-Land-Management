@@ -11,6 +11,7 @@ using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
@@ -18,14 +19,18 @@ using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class MorLandsController : Controller
+    public class MorLandsController : BaseController
     {
         private readonly IMorlandService _morlandService;
+        public IConfiguration _configuration;
+        string GOINotificationDocumentFilePath = "";
 
 
-        public MorLandsController(IMorlandService morlandService)
+        public MorLandsController(IMorlandService morlandService, IConfiguration configuration)
         {
             _morlandService = morlandService;
+            _configuration = configuration;
+            GOINotificationDocumentFilePath = _configuration.GetSection("FilePaths:MorLands:GOINotificationDocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -79,6 +84,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    morland.GOINotificationDocumentName = morland.GOINotificationDocumentIFormFile == null ? morland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, morland.GOINotificationDocumentIFormFile);
+                    morland.CreatedBy = SiteContext.UserId;
                     var result = await _morlandService.Create(morland);
 
                     if (result == true)
@@ -131,6 +139,9 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 try
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    morland.GOINotificationDocumentName = morland.GOINotificationDocumentIFormFile == null ? morland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, morland.GOINotificationDocumentIFormFile);
+                    morland.ModifiedBy = SiteContext.UserId;
                     var result = await _morlandService.Update(id, morland);
                     if (result == true)
                     {
@@ -222,6 +233,15 @@ namespace AcquiredLandInformationManagement.Controllers
 
         }
 
+
+        public async Task<IActionResult> ViewGOINotificationDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Morland Data = await _morlandService.FetchSingleResult(Id);
+            string filename = GOINotificationDocumentFilePath + Data.GOINotificationDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
 
     }
 }

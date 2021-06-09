@@ -6,7 +6,7 @@
 
 
 <div class="pt-3">
-    <form asp-action="View" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="View" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <div class="row">
@@ -35,9 +35,28 @@
         </div>
 
         <div class="row pt-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="GOINotificationDocumentName" />
+                    @{
+                        @if (Model.GOINotificationDocumentName != null)
+                        {
+                            <input disabled type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <label class="badge badge-primary px-2">(View File)</label>
+                        }
+                        else
+                        {
+                            <input disabled type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="GOINotificationDocumentName"></span>
+                    <label class="floating-label">Upload GOI Nofication(MOR)</label>
+                </div>
+            </div>
+
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                  
+
                     <input asp-for="SerialNumber" placeholder="Serial No" class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="SerialNumber" class="text-danger"></span>
@@ -45,21 +64,21 @@
 
                 </div>
             </div>
+        </div>
+
+
+        <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="PropertySiteNo" placeholder="Property/Site No" class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="PropertySiteNo" class="floating-label-field floating-label-field--s3" disabled />
                     <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
-                    <label class="floating-label">Property/Site No.</label>
+                    <label class="floating-label">Property/Site/KhasraNo</label>
 
                 </div>
 
 
             </div>
-        </div>
-
-
-        <div class="row pt-3">
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -72,6 +91,10 @@
             </div>
 
 
+
+        </div>
+        <div class="row pt-3">
+
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -82,9 +105,7 @@
                 </div>
             </div>
 
-
         </div>
-
         <div id="Divclsification">
 
             <h2 class="my-3 sub-heading">Area</h2>
@@ -136,7 +157,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="radio-inline  ">
-                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Encroached
+                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Buildup/Encroached" id="E">Buildup/Encroached
                             </label>
                         </div>
                         <div class="form-group col-md-4">
@@ -163,7 +184,7 @@
                     <input type="hidden" asp-for="Developed" id="Developed" value="Yes" />
 
 
-                   <span asp-validation-for="Developed" class="text-danger"></span>
+                    <span asp-validation-for="Developed" class="text-danger"></span>
 
                     <div class="form-row">
 
@@ -196,14 +217,14 @@
             <div class="row pt-3">
 
                 <div class="col-md-6">
-                    <input type="hidden" asp-for="LandType" id="LandType" value="Surveied" />
+                    <input type="hidden" asp-for="LandType" id="LandType" value="Surveyed" />
 
                     <span asp-validation-for="LandType" class="text-danger"></span>
                     <div class="form-row">
 
                         <div class="form-group col-md-4">
                             <label class="radio-inline  ">
-                                <input asp-for="LandType" type="radio" class="floating-label-field  floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Surveied" id="Surveied">Surveied
+                                <input asp-for="LandType" type="radio" class="floating-label-field  floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Surveyed" id="Surveied">Surveyed
                             </label>
                         </div>
                         <div class="form-group col-md-4">
@@ -213,7 +234,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="radio-inline  ">
-                                <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="UnSurveied" id="UnSurveied">Un-Surveied
+                                <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="UnSurveyed" id="UnSurveied">Un-Surveyed
                             </label>
                         </div>
 
@@ -264,8 +285,8 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                
-               
+
+
                 @Html.ActionLink("Back", "Index", "MorLands", null, new { @class = "btn btn-theme " })
 
 

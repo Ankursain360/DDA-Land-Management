@@ -1,7 +1,9 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
@@ -17,6 +19,10 @@ namespace Libraries.Model.Entity
         public DateTime? NotificationDate { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
+        public string DocumentName { get; set; }
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+
+        [NotMapped]
+        public IFormFile DocumentIFormFile { get; set; }
     }
 }

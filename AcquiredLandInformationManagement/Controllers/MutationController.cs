@@ -30,11 +30,13 @@ namespace AcquiredLandInformationManagement.Controllers
         public IConfiguration _Configuration;
         string UploadFilePath = "";
         string targetPathGeo = "";
+        string DocumentFilePath = "";
         public MutationController(IMutationService mutationService, IConfiguration configuration, IKhasraService khasraService)
         {
             _mutationService = mutationService;
             _Configuration = configuration;
             _khasraService = khasraService;
+            DocumentFilePath = _Configuration.GetSection("FilePaths:Mutation:DocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -74,6 +76,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                mutation.DocumentName = mutation.DocumentIFormFile == null ? mutation.DocumentName : fileHelper.SaveFile1(DocumentFilePath, mutation.DocumentIFormFile);
                 mutation.CreatedBy = SiteContext.UserId;
                 var result = await _mutationService.Create(mutation);
 
@@ -149,6 +153,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                mutation.DocumentName = mutation.DocumentIFormFile == null ? mutation.DocumentName : fileHelper.SaveFile1(DocumentFilePath, mutation.DocumentIFormFile);
                 mutation.ModifiedBy = SiteContext.UserId;
                 var result = await _mutationService.Update(id, mutation);
 
@@ -284,6 +290,14 @@ namespace AcquiredLandInformationManagement.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutation Data = await _mutationService.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 

@@ -14,16 +14,21 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
+using Microsoft.Extensions.Configuration;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class UnderSection22DetailsController : BaseController
     {
         private readonly IUndersection22Service _undersection22Service;
+        public IConfiguration _configuration;
+        string DocumentFilePath = "";
 
-        public UnderSection22DetailsController(IUndersection22Service undersection22Service)
+        public UnderSection22DetailsController(IUndersection22Service undersection22Service, IConfiguration configuration)
         {
             _undersection22Service = undersection22Service;
+            _configuration = configuration;
+            DocumentFilePath = _configuration.GetSection("FilePaths:US22:DocumentFIlePath").Value.ToString();
         }
 
 
@@ -57,6 +62,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    undersection22.DocumentName = undersection22.DocumentIFormFile == null ? undersection22.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection22.DocumentIFormFile);
+                   
                     undersection22.CreatedBy = SiteContext.UserId;
                     var result = await _undersection22Service.Create(undersection22);
 
@@ -103,8 +111,10 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 try
                 {
-
+                    FileHelper fileHelper = new FileHelper();
+                    undersection22.DocumentName = undersection22.DocumentIFormFile == null ? undersection22.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection22.DocumentIFormFile);
                     undersection22.ModifiedBy = SiteContext.UserId;
+
                     var result = await _undersection22Service.Update(id, undersection22);
                     if (result == true)
                     {
@@ -182,6 +192,15 @@ namespace AcquiredLandInformationManagement.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Undersection22 Data = await _undersection22Service.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 }

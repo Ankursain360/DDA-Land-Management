@@ -16,16 +16,21 @@ using Core.Enum;
 using AcquiredLandInformationManagement.Filters;
 using Dto.Master;
 using Utility.Helper;
+using Microsoft.Extensions.Configuration;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class UnderSection6Master : Controller
+    public class UnderSection6Master : BaseController
     {
         private readonly IUnderSection6Service _undersection4service;
+        public IConfiguration _configuration;
+        string DocumentFilePath = "";
 
-        public UnderSection6Master(IUnderSection6Service undersection4service)
+        public UnderSection6Master(IUnderSection6Service undersection4service, IConfiguration configuration)
         {
             _undersection4service = undersection4service;
+            _configuration = configuration;
+            DocumentFilePath = _configuration.GetSection("FilePaths:US6:DocumentFIlePath").Value.ToString();
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -65,6 +70,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    undersection6.DocumentName = undersection6.DocumentIFormFile == null ? undersection6.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection6.DocumentIFormFile);
+                    undersection6.CreatedBy = SiteContext.UserId;
                     var result = await _undersection4service.Create(undersection6);
 
                     if (result == true)
@@ -117,6 +125,10 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 try
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    undersection6.DocumentName = undersection6.DocumentIFormFile == null ? undersection6.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection6.DocumentIFormFile);
+                    undersection6.ModifiedBy = SiteContext.UserId;
+
                     var result = await _undersection4service.Update(id, undersection6);
                     if (result == true)
                     {
@@ -208,6 +220,15 @@ namespace AcquiredLandInformationManagement.Controllers
 
         }
 
+
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Undersection6 Data = await _undersection4service.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
 
     }
 }
