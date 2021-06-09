@@ -4,7 +4,7 @@
 
 
 <div class="pt-3">
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -19,7 +19,7 @@
                     <label asp-for="LandNotificationId" class="floating-label">Notification No </label>
                 </div>
             </div>
-           
+
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -34,6 +34,13 @@
         </div>
 
         <div class="row pt-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="GOINotificationDocumentIFormFile"></span>
+                    <label class="floating-label">Upload GOI Nofication(MOR)</label>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
@@ -44,22 +51,22 @@
 
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PropertySiteNo" placeholder="Property/Site No" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
-                    <label class="floating-label">Property/Site No.</label>
-
-                </div>
-
-
-            </div>
         </div>
 
 
         <div class="row pt-3">
 
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="PropertySiteNo" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
+                    <label class="floating-label">Property/Site/KhasraNo</label>
+
+                </div>
+
+
+            </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -71,6 +78,9 @@
             </div>
 
 
+        </div>
+
+        <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -80,10 +90,7 @@
 
                 </div>
             </div>
-
-
         </div>
-
         <div id="Divclsification">
 
             <h2 class="my-3 sub-heading">Area</h2>
@@ -135,7 +142,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="radio-inline  ">
-                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Encroached
+                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Buildup/Encroached" id="E">Buildup/Encroached
                             </label>
                         </div>
                         <div class="form-group col-md-4">
@@ -195,14 +202,14 @@
             <div class="row pt-3">
 
                 <div class="col-md-6">
-                    <input type="hidden" asp-for="LandType" id="LandType" value="Surveied" />
+                    <input type="hidden" asp-for="LandType" id="LandType" value="Surveyed" />
 
                     <span asp-validation-for="LandType" class="text-danger"></span>
                     <div class="form-row">
 
                         <div class="form-group col-md-4">
                             <label class="radio-inline  ">
-                                <input asp-for="LandType" type="radio" class="floating-label-field  floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Surveied" id="Surveied" checked="checked">Surveied
+                                <input asp-for="LandType" type="radio" class="floating-label-field  floating-label-field--s3 " placeholder="Name" name="grpLandType" value="Surveyed" id="Surveied" checked="checked">Surveyed
                             </label>
                         </div>
                         <div class="form-group col-md-4">
@@ -212,7 +219,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="radio-inline  ">
-                                <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="UnSurveied" id="UnSurveied">Un-Surveied
+                                <input asp-for="LandType" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLandType" value="UnSurveyed" id="UnSurveied">Un-Surveyed
                             </label>
                         </div>
 

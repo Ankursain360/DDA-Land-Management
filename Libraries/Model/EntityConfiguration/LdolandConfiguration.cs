@@ -23,6 +23,13 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DateofPossession).HasColumnType("date");
 
+            builder.Property(e => e.DateOfLandResume).HasColumnType("date");
+
+            builder.Property(e => e.GOINotificationDocumentName)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
+
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
@@ -38,6 +45,16 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.OccupiedBy)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            builder.Property(e => e.OrderDocumentName)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
+
+            builder.Property(e => e.PossessionDocumentName)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
 
             builder.Property(e => e.PropertySiteNo)
                 .HasMaxLength(200)

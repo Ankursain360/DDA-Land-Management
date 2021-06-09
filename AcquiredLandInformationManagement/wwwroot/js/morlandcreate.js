@@ -1,4 +1,23 @@
-﻿
+﻿$(document).ready(function () {
+    debugger
+    if ($("#A").is(":checked")) {
+        $('#StatusOfLand').val('Alloted');
+    }
+    else if ($("#V").is(":checked")) {
+        $('#StatusOfLand').val('Vacant');
+
+    } else if ($("#E").is(":checked")) {
+        $('#StatusOfLand').val('Buildup/Encroached');
+    }
+    else if ($("#G").is(":checked")) {
+        $('#StatusOfLand').val('Green');
+    }
+
+    else {
+        $('#StatusOfLand').val('Green');
+    }
+
+});
 $(function () {
     $("input[name='grpLand']").click(function () {
         debugger
@@ -9,7 +28,7 @@ $(function () {
             $('#StatusOfLand').val('Vacant');
 
         } else if ($("#E").is(":checked")) {
-            $('#StatusOfLand').val('Enchroched');
+            $('#StatusOfLand').val('Buildup/Encroached');
         }
         else if ($("#G").is(":checked")) {
             $('#StatusOfLand').val('Green');
@@ -30,18 +49,18 @@ $(function () {
     $("input[name='grpLandType']").click(function () {
         debugger
         if ($("#Surveied").is(":checked")) {
-            $('#LandType').val('Surveied');
+            $('#LandType').val('Surveyed');
         }
         else if ($("#Retained").is(":checked")) {
             $('#LandType').val('Retained');
 
         } else if ($("#UnSurveied").is(":checked")) {
-            $('#LandType').val('UnSurveied');
+            $('#LandType').val('UnSurveyed');
         }
        
 
         else {
-            $('#LandType').val('Green');
+            $('#LandType').val('Surveyed');
         }
     });
 });
@@ -96,6 +115,30 @@ $(function () {
         }
     });
 });
-$(function () {
-    $("#date").datepicker({ dateFormat: 'yy' });
+//$(function () {
+//    $("#date").datepicker({ dateFormat: 'yy' });
+//});
+
+
+$('#GOINotificationDocumentIFormFile').change(function () {
+    var fileInput = document.getElementById('GOINotificationDocumentIFormFile');
+    var filePath = fileInput.value;
+    const size = (GOINotificationDocumentIFormFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
 });
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}

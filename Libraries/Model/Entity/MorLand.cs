@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
@@ -38,16 +39,20 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
 
 
+        public string GOINotificationDocumentName { get; set; }
 
 
 
-       
+
 
 
 
         [NotMapped]
         public List<LandNotification> LandNotificationList { get; set; }
         public virtual LandNotification LandNotification { get; set; }
+
+        [NotMapped]
+        public IFormFile GOINotificationDocumentIFormFile { get; set; }
 
 
 

@@ -1,8 +1,8 @@
 ﻿@model Libraries.Model.Entity.Ldoland
-@await Component.InvokeAsync("PageHeader", new { pageName = "LDO Lands" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "L&DO Lands" })
 
 <div class="pt-3">
-    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -11,7 +11,7 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId"
                             asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
-                        <option  value="" selected="selected" disabled="disabled">Select</option>
+                        <option value="" selected="selected" disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="LandNotificationId" class="text-danger"></span>
                     <label asp-for="LandNotificationId" class="floating-label">Notification No </label>
@@ -27,6 +27,24 @@
             </div>
         </div>
         <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="GOINotificationDocumentName" />
+                    @{
+                        @if (Model.GOINotificationDocumentName != null)
+                        {
+                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <a class="badge badge-primary px-2" asp-action="ViewGOINotificationDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="GOINotificationDocumentName"></span>
+                    <label class="floating-label">Upload GOI Nofication(L&DO)</label>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <input asp-for="SerialNumber" placeholder="Name" type="text"
@@ -35,16 +53,16 @@
                     <label asp-for="SerialNumber" class="floating-label">Serial Number </label>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="PropertySiteNo" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
-                    <label class="floating-label">Property/Site No.  </label>
-                </div>
-            </div>
         </div>
         <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PropertySiteNo" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
+                    <label class="floating-label">Property/Site/KhasraNo </label>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Location" placeholder="Name" type="text"
@@ -53,6 +71,8 @@
                     <label class="floating-label">Location Name(Village)  </label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="SiteDescription" placeholder="Name" type="text"
@@ -61,6 +81,7 @@
                     <label class="floating-label">Site Description(With Khasra No)  </label>
                 </div>
             </div>
+
         </div>
         <div id="Divclsification">
             <h3 class="my-3 d-flex sub-heading"> Area </h3>
@@ -83,7 +104,7 @@
             <div class="row pt-3">
 
                 <div class="col-md-6">
-                    <input type="hidden" asp-for="StatusOfLand" id="StatusOfLand"  />
+                    <input type="hidden" asp-for="StatusOfLand" id="StatusOfLand" />
                     <span asp-validation-for="StatusOfLand" class="text-danger"></span>
 
                     <div class="form-row">
@@ -100,7 +121,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="radio-inline  ">
-                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Enchroched" id="E">Encroached
+                                <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Buildup/Encroached" id="E">Buildup/Encroached
                             </label>
                         </div>
                         <div class="form-group col-md-4">
@@ -136,6 +157,54 @@
                     <label class="floating-label">Date Of Possession  </label>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DateOfLandResume" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="DateOfLandResume" class="text-danger"></span>
+                    <label class="floating-label">Date of  Land Resume/Taken Back by L&DO </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="OrderDocumentName" />
+                    @{
+                        @if (Model.OrderDocumentName != null)
+                        {
+                            <input type="file" asp-for="OrderDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <a class="badge badge-primary px-2" asp-action="ViewOrderDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="OrderDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="OrderDocumentName"></span>
+                    <label class="floating-label">Upload Order</label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="PossessionDocumentName" />
+                    @{
+                        @if (Model.PossessionDocumentName != null)
+                        {
+                            <input type="file" asp-for="PossessionDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <a class="badge badge-primary px-2" asp-action="ViewPossessionDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="PossessionDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="PossessionDocumentName"></span>
+                    <label class="floating-label">Upload Possession proceedings</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
