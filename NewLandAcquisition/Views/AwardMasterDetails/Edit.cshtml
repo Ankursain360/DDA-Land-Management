@@ -3,7 +3,7 @@
 
 <div class="pt-3">
 
-    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -102,16 +102,16 @@
             </div>
 
         </div>
-     
+
         <div class="row mt-md-3">
-           
+
             <div class="col-md-6">
                 <input type="hidden" asp-for="Type" id="Type" value="1" />
                 <label class="control-label lb-sm" asp-for="Type">Type</label>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpType" id="1" checked="checked" asp-for="Type" value="1"/>Permanent
+                            <input type="radio" name="grpType" id="1" checked="checked" asp-for="Type" value="1" />Permanent
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -133,7 +133,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
-                            <input type="radio" name="grpN" id="N2" value="0"  asp-for="Nature" />Non-Plan
+                            <input type="radio" name="grpN" id="N2" value="0" asp-for="Nature" />Non-Plan
                         </label>
                     </div>
                 </div>
@@ -141,13 +141,19 @@
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="floating-label-wrap">
                     <input asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000">
                     <span asp-validation-for="Purpose" class="text-danger"></span>
                     <label class="floating-label">Purpose</label>
                 </div>
             </div>
+
+
+        </div>
+
+
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="Us4id" asp-items="@(new SelectList(Model.section4List,"Id","Number"))">
@@ -157,11 +163,6 @@
                     <label asp-for="Us4id" class="floating-label">Undersection No 4 </label>
                 </div>
             </div>
-          
-        </div>
-
-
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="Us6id" asp-items="@(new SelectList(Model.section6List,"Id","Number"))">
@@ -171,6 +172,9 @@
                     <label asp-for="Us6id" class="floating-label">Undersection No 6 </label>
                 </div>
             </div>
+            
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="Us17id" asp-items="@(new SelectList(Model.section17List,"Id","Number"))">
@@ -180,16 +184,26 @@
                     <label asp-for="Us17id" class="floating-label">Undersection No 17 </label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <input asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000">
-
-                    <span asp-validation-for="Remarks" class="text-danger"></span>
-                    <label asp-for="Remarks" class="floating-label">Remarks </label>
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DocumentName" />
+                    @{
+                        @if (Model.DocumentName != null)
+                        {
+                            <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <a class="badge badge-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
+                    <label class="floating-label">Upload Document</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
@@ -203,8 +217,24 @@
                 </div>
 
             </div>
+        </div>
+
+
+
+
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap">
+                    <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="4000"></textarea>
+
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label asp-for="Remarks" class="floating-label">Remarks </label>
+                </div>
+            </div>
+
 
         </div>
+
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>

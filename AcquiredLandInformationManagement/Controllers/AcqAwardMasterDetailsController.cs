@@ -13,15 +13,20 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
 using Dto.Master;
+using Microsoft.Extensions.Configuration;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class AcqAwardMasterDetailsController : BaseController
     {
         public readonly IAwardmasterdetailsService _awardmasterdetailsService;
-        public AcqAwardMasterDetailsController(IAwardmasterdetailsService awardmasterdetailsService)
+        public IConfiguration _configuration;
+        string DocumentFilePath = "";
+        public AcqAwardMasterDetailsController(IAwardmasterdetailsService awardmasterdetailsService, IConfiguration configuration)
         {
             _awardmasterdetailsService = awardmasterdetailsService;
+            _configuration = configuration;
+            DocumentFilePath = _configuration.GetSection("FilePaths:AwardMaster:DocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -94,6 +99,10 @@ namespace AcquiredLandInformationManagement.Controllers
             awardmasterdetail.section17List = await _awardmasterdetailsService.Getundersection17();
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                awardmasterdetail.DocumentName = awardmasterdetail.DocumentIFormFile == null ? awardmasterdetail.DocumentName : fileHelper.SaveFile1(DocumentFilePath, awardmasterdetail.DocumentIFormFile);
+                awardmasterdetail.ModifiedBy = SiteContext.UserId;
+
                 var result = await _awardmasterdetailsService.Update(id, awardmasterdetail);
                 if (result == true)
                 {
@@ -199,7 +208,10 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
-                   
+
+                    FileHelper fileHelper = new FileHelper();
+                    Award.DocumentName = Award.DocumentIFormFile == null ? Award.DocumentName : fileHelper.SaveFile1(DocumentFilePath, Award.DocumentIFormFile);
+                    Award.CreatedBy = SiteContext.UserId;
 
                     var result = await _awardmasterdetailsService.Create(Award);
 
@@ -227,6 +239,14 @@ namespace AcquiredLandInformationManagement.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(Award);
             }
+        }
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Awardmasterdetail Data = await _awardmasterdetailsService.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 }

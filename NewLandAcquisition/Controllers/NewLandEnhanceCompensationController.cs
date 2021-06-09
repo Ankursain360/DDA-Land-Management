@@ -16,17 +16,23 @@ using NewLandAcquisition.Filters;
 using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
+using Microsoft.Extensions.Configuration;
 
 namespace NewLandAcquisition.Controllers
 {
     public class NewLandEnhanceCompensationController : BaseController
     {
         private readonly INewLandEnhanceCompensationService _newLandEnhanceCompensationService;
+        public IConfiguration _Configuration;
+        string ENMDocumentFilePath = "";
 
 
-        public NewLandEnhanceCompensationController(INewLandEnhanceCompensationService newLandEnhanceCompensationService)
+        public NewLandEnhanceCompensationController(INewLandEnhanceCompensationService newLandEnhanceCompensationService, IConfiguration configuration)
         {
             _newLandEnhanceCompensationService = newLandEnhanceCompensationService;
+            _Configuration = configuration;
+            ENMDocumentFilePath = _Configuration.GetSection("FilePaths:EnhanceCompensationMaster:DocumentFIlePath").Value.ToString();
+
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -69,6 +75,9 @@ namespace NewLandAcquisition.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    newlandenhancecompensation.ENMDocumentName = newlandenhancecompensation.ENMDocumentIFormFile == null ? newlandenhancecompensation.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, newlandenhancecompensation.ENMDocumentIFormFile);
+                    newlandenhancecompensation.CreatedBy = SiteContext.UserId;
                     var result = await _newLandEnhanceCompensationService.Create(newlandenhancecompensation);
 
                     if (result == true)
@@ -123,6 +132,9 @@ namespace NewLandAcquisition.Controllers
             {
                 try
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    newlandenhancecompensation.ENMDocumentName = newlandenhancecompensation.ENMDocumentIFormFile == null ? newlandenhancecompensation.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, newlandenhancecompensation.ENMDocumentIFormFile);
+                    newlandenhancecompensation.ModifiedBy = SiteContext.UserId;
                     var result = await _newLandEnhanceCompensationService.Update(id, newlandenhancecompensation);
                     if (result == true)
                     {
@@ -230,6 +242,14 @@ namespace NewLandAcquisition.Controllers
         }
 
 
+        public async Task<IActionResult> ViewENMDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newlandenhancecompensation Data = await _newLandEnhanceCompensationService.FetchSingleResult(Id);
+            string filename = ENMDocumentFilePath + Data.ENMDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
 
 
 

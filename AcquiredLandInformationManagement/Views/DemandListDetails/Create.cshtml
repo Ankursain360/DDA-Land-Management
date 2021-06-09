@@ -25,6 +25,13 @@
             </div>
         </div>
         <div class="row mt-md-3">
+             <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="ENMDocumentIFormFile"></span>
+                    <label class="floating-label">Upload ENM Document</label>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="LacfileNo" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -32,6 +39,9 @@
                     <label class="floating-label">LAC File No.</label>
                 </div>
             </div>
+           
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="LbrefDate" type="date" class="floating-label-field floating-label-field--s3 ">
@@ -39,8 +49,6 @@
                     <label class="floating-label">L&B Ref. Date</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Lbno" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -48,6 +56,9 @@
                     <label class="floating-label">L&B No.</label>
                 </div>
             </div>
+            
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Rfano" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -55,8 +66,6 @@
                     <label class="floating-label">RFA No.</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Lacno" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -64,6 +73,8 @@
                     <label class="floating-label">LAC No.</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="DdafileNo" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -71,8 +82,6 @@
                     <label class="floating-label">DDA File No.</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3 ">
@@ -80,6 +89,8 @@
                     <label class="floating-label">Date of Notification(U/S-6)</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="AwardNo" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -87,8 +98,6 @@
                     <label class="floating-label">Award No.</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 ">
@@ -96,6 +105,8 @@
                     <label class="floating-label">Award Date</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))" onchange="return GetKhasraList(this.options[this.selectedIndex].value);">
@@ -105,8 +116,6 @@
                     <label asp-for="VillageId" class="floating-label">Village</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="KhasraNoId">
@@ -116,6 +125,8 @@
                     <label asp-for="KhasraNoId" class="floating-label">Khasra No.</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="row mt-md-3">
                     <div class="col-md-4">
@@ -138,8 +149,6 @@
                 </div>
                 <span asp-validation-for="PayableAppealable" class="text-danger"></span>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="row mt-md-3">
                     <div class="col-md-4">
@@ -162,6 +171,9 @@
                 </div>
                 <span asp-validation-for="BalanceInterestCase" class="text-danger"></span>
             </div>
+        </div>
+
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="row mt-md-3">
                     <div class="col-md-4">
@@ -189,9 +201,6 @@
                 </div>
                 <span asp-validation-for="CourtInvolves" class="text-danger"></span>
             </div>
-        </div>
-
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="EnhancedRatePerBigha" type="text" class="floating-label-field floating-label-field--s3 numbers">
@@ -199,6 +208,8 @@
                     <label class="floating-label">Enhanced Rate(per Bigha)</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="ExistingRatePerBigha" type="text" class="floating-label-field floating-label-field--s3 numbers">
@@ -206,8 +217,6 @@
                     <label class="floating-label">Existing Rate(per Bigha)</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="ApealableAmt" type="text" class="floating-label-field floating-label-field--s3 numbers">
@@ -215,6 +224,8 @@
                     <label class="floating-label">Apealable Amount</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="PayableAmt" type="text" class="floating-label-field floating-label-field--s3 numbers">
@@ -222,8 +233,6 @@
                     <label class="floating-label">Payable Amount</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="TotalAmount" type="text" class="floating-label-field floating-label-field--s3 numbers">
@@ -231,6 +240,8 @@
                     <label class="floating-label">Total Amount</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="PartyName" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -238,8 +249,6 @@
                     <label class="floating-label">Party Name</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Slpno" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
@@ -247,6 +256,8 @@
                     <label class="floating-label">SLP No.</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="ReasonForNonPay" type="text" class="floating-label-field floating-label-field--s3 " limit="4000">
@@ -254,8 +265,6 @@
                     <label class="floating-label">Reason of Non Payment</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">

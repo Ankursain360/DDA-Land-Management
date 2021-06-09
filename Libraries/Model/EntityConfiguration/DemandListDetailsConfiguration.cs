@@ -55,6 +55,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnName("ENMSNo")
                 .HasColumnType("int(11)");
 
+            builder.Property(e => e.ENMDocumentName)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
             builder.Property(e => e.ExistingRatePerBigha).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");

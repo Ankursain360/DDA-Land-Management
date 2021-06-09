@@ -13,15 +13,20 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Utility.Helper;
 using Dto.Master;
+using Microsoft.Extensions.Configuration;
 
 namespace NewLandAcquisition.Controllers
 {
     public class AwardMasterDetailsController : BaseController
     {
         public readonly INewlandawardmasterdetailService _newlandawardmasterdetailService;
-        public AwardMasterDetailsController(INewlandawardmasterdetailService newlandawardmasterdetailsService)
+        public IConfiguration _configuration;
+        string DocumentFilePath = "";
+        public AwardMasterDetailsController(INewlandawardmasterdetailService newlandawardmasterdetailsService, IConfiguration configuration)
         {
             _newlandawardmasterdetailService = newlandawardmasterdetailsService;
+            _configuration = configuration;
+            DocumentFilePath = _configuration.GetSection("FilePaths:AwardMaster:DocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -64,6 +69,9 @@ namespace NewLandAcquisition.Controllers
                 awardmasterdetail.section17List = await _newlandawardmasterdetailService.Getundersection17();
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    awardmasterdetail.DocumentName = awardmasterdetail.DocumentIFormFile == null ? awardmasterdetail.DocumentName : fileHelper.SaveFile1(DocumentFilePath, awardmasterdetail.DocumentIFormFile);
+                    awardmasterdetail.CreatedBy = SiteContext.UserId;
                     var result = await _newlandawardmasterdetailService.Create(awardmasterdetail);
 
                     if (result == true)
@@ -131,6 +139,10 @@ namespace NewLandAcquisition.Controllers
             newlandawardmasterdetail.section17List = await _newlandawardmasterdetailService.Getundersection17();
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                newlandawardmasterdetail.DocumentName = newlandawardmasterdetail.DocumentIFormFile == null ? newlandawardmasterdetail.DocumentName : fileHelper.SaveFile1(DocumentFilePath, newlandawardmasterdetail.DocumentIFormFile);
+                newlandawardmasterdetail.ModifiedBy = SiteContext.UserId;
+
                 var result = await _newlandawardmasterdetailService.Update(id, newlandawardmasterdetail);
                 if (result == true)
                 {
@@ -221,5 +233,13 @@ namespace NewLandAcquisition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newlandawardmasterdetail Data = await _newlandawardmasterdetailService.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
     }
 }
