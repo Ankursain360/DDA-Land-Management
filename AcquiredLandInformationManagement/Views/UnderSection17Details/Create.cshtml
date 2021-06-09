@@ -6,7 +6,7 @@
 }
 
 <div class="pt-3">
-    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -29,7 +29,7 @@
         </div>
 
         <div id="Divclsification">
-            
+
             <h2 class="my-3 sub-heading">Notification Type</h2>
 
             <div class="row">
@@ -43,30 +43,48 @@
                         <label class="floating-label">Notification U/S-6</label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                            <option value="1">Active</option>
-                            <option value="0">InActive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                        <label class="floating-label"> Status</label>
+                        <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                        <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentIFormFile"></span>
+                        <label class="floating-label">Upload Document</label>
                     </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">InActive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label class="floating-label"> Status</label>
                 </div>
             </div>
         </div>
 
 
-
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <input type="submit" value="Submit" class="btn btn-theme " />
-              
+
                 @Html.ActionLink("Back", "Index", "UnderSection17Details", null, new { @class = "btn btn-theme " })
             </div>
         </div>
 
     </form>
-        </div>
-    
+</div>
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/undersection17detailscreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/undersection17detailscreate.min.js" asp-append-version="true"></script>
+</environment>

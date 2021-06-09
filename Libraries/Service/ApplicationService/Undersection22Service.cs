@@ -47,10 +47,8 @@ namespace Libraries.Service.ApplicationService
             Undersection22 model = result.FirstOrDefault();
             model.NotificationNo = undersection22.NotificationNo;
             model.NotificationDate = undersection22.NotificationDate;
+            model.DocumentName = undersection22.DocumentName;
             model.IsActive = undersection22.IsActive;
-
-
-
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = undersection22.ModifiedBy;
             _undersection22Repository.Edit(model);
@@ -59,7 +57,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Undersection22 undersection22)
         {
-
             undersection22.CreatedBy = undersection22.CreatedBy;
             undersection22.CreatedDate = DateTime.Now;
             _undersection22Repository.Add(undersection22);

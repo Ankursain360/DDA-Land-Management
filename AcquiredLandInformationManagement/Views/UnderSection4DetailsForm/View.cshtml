@@ -1,6 +1,6 @@
 ﻿@model Libraries.Model.Entity.Undersection4
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-4 Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-4 Master" })
 
 
 <div class="pt-3">
@@ -70,7 +70,7 @@
                         @if (Model.DocumentName != null)
                         {
                             <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View Report)</label>
+                            <label class="badge badge-primary px-2">(View File)</label>
                         }
                         else
                         {

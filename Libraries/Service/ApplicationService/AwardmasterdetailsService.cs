@@ -62,17 +62,16 @@ namespace Libraries.Service.ApplicationService
             model.Purpose = awardmasterdetail.Purpose;
             model.ProposalId = awardmasterdetail.ProposalId;
             model.Nature = awardmasterdetail.Nature;
+            model.DocumentName = awardmasterdetail.DocumentName;
             model.IsActive = awardmasterdetail.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = awardmasterdetail.ModifiedBy;
             _awardmasterdetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public  async Task<bool> Create(Awardmasterdetail awardmasterdetail)
         {
-
-            awardmasterdetail.CreatedBy = 1;
             awardmasterdetail.CreatedDate = DateTime.Now;
             _awardmasterdetailsRepository.Add(awardmasterdetail);
             return await _unitOfWork.CommitAsync() > 0;

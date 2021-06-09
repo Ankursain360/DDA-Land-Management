@@ -22,8 +22,8 @@ namespace AcquiredLandInformationManagement.Controllers
 {
     public class UnderSection4DetailsFormController : BaseController
     {
-        public IConfiguration _configuration;
         private readonly IUndersection4service _undersection4service;
+        public IConfiguration _configuration;
         string DocumentFilePath = "";
 
 
