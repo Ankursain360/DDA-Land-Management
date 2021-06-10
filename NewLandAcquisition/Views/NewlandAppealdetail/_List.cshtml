@@ -8,7 +8,7 @@
                 <th>ENM SNO </th>
                 <th>Appeal No</th>
                 <th>Appeal By Department</th>
-
+                <th>Department</th>
                 <th>Date Of Appeal</th>
                 <th>Panel Lawyer</th>
                 <th>Status</th>
@@ -23,9 +23,11 @@
 
                 <td>@item.DemandListNo</td>
                 <td>@item.EnmSno</td>
+                
                 <td>@item.AppealNo</td>
                 <td>@item.AppealByDept</td>
-               
+                <td>@item.Department</td>
+
                 <td>@(Convert.ToDateTime(item.DateOfAppeal).ToString("dd-MMM-yyyy"))</td>
                 <td>@item.PanelLawer</td>
 

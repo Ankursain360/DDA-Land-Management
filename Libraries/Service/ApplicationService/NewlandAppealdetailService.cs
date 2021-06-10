@@ -50,6 +50,7 @@ namespace Libraries.Service.ApplicationService
             model.AppealByDept = newlandappealdetail.AppealByDept;
             model.DateOfAppeal = newlandappealdetail.DateOfAppeal;
             model.PanelLawer = newlandappealdetail.PanelLawer;
+            model.Department = newlandappealdetail.Department;
 
             model.ModifiedDate = DateTime.Now;
             model.IsActive = newlandappealdetail.IsActive;

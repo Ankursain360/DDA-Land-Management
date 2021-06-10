@@ -24,6 +24,8 @@ namespace Libraries.Model.Entity
 
         public string PanelLawer { get; set; }
 
+        public string Department { get; set; }
+
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
