@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Reason  is mandatory")]
         public string ReasonNonPoss { get; set; }
         public string Reason { get; set; }
+        public string PossessionTake { get; set; }
         //[Required(ErrorMessage = " Possesssion date  is mandatory")]
         //public DateTime PossDate { get; set; }
         //[Required(ErrorMessage = " Possesssion Khasra No  is mandatory")]

@@ -62,6 +62,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.Property(e => e.PossessionTake)
+                 .HasMaxLength(10)
+                 .IsUnicode(false);
+
+
             builder.Property(e => e.ReasonNonPoss)
                 .IsRequired()
                 .HasMaxLength(1)

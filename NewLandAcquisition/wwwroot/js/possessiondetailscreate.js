@@ -74,3 +74,18 @@ function fileValidation(filePath, fileInput, size) {
     }
 
 }
+
+function funHideAnd(value) {
+    if (value == "No") {
+        $("#Show_1").show();
+        $("#Show_2").show();
+
+    }
+
+    else {
+        $("#Show_1").hide();
+        $("#Show_2").hide();
+    }
+
+
+}

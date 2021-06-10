@@ -34,12 +34,28 @@
         </div>
 
         <div class="pt-3">
+            <h3 class="mb-3 d-flex">possession take</h3>
+            <div class="row">
+                <div class=" col-md-6">
+                    <div class="floating-label-wrap">
+                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="PossessionTake" onchange="funHideAnd(this.value);">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <span asp-validation-for="PossessionTake" class="text-danger"></span>
+                        <label asp-for="PossessionTake" class="floating-label">Possession take </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-3">
             <h3 class="mb-3 d-flex">Type of possession</h3>
             <div class="row">
                 <div class="col-md-3">
                     <input type="hidden" asp-for="PossType" />
                     <div class="form-check theme">
-                        <input class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" />
+                        <input disabled class="form-check-input chkAction" type="checkbox" asp-for="IsVacant" />
                         <label class="form-check-label">
                             Vacant
                         </label>
@@ -47,7 +63,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-check theme">
-                        <input class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" />
+                        <input disabled class="form-check-input chkAction" type="checkbox" asp-for="IsBuiltup" />
                         <label class="form-check-label">
                             Built Up
                         </label>
@@ -58,59 +74,121 @@
             </div>
         </div>
 
-        <div class="pt-3">
+        @if (Model.PossessionTake == "No")
+        {
+            <div class="pt-3" style="display:block;" id="Show_1">
 
-            <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
-
-
-
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="form-check theme">
+                <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
 
 
-                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" disabled />    <label class="radio-inline">
-                            Built-Up
-                        </label>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+
+
+                            <input disabled class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />    <label class="radio-inline">
+                                Built-Up
+                            </label>
+                        </div>
+                    </div>   <div class="col-md-3">
+                        <div class="form-check theme">
+
+
+                            <input disabled class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" />
+                            <label class="radio-inline">
+                                Litigation
+                            </label>
+                        </div>
                     </div>
-                </div>   <div class="col-md-3">
-                    <div class="form-check theme">
+
+                    <div class="col-md-3">
+                        <div class="form-check theme">
 
 
-                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" disabled />
-                        <label class="radio-inline">
-                            Litigation
-                        </label>
+                            <input disabled class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" />
+                            <label class="radio-inline">
+                                Others if Any
+                            </label>
+                        </div>
                     </div>
+
+
                 </div>
-
-                <div class="col-md-3">
-                    <div class="form-check theme">
-
-
-                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" disabled />
-                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" disabled />
-                        <label class="radio-inline">
-                            Others if Any
-                        </label>
-                    </div>
-                </div>
-
 
             </div>
+            <div class="row mt-md-3" style="display:block;" id="Show_2">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea disabled asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
 
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea disabled asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
-
-                    <span asp-validation-for="Reason" class="text-danger"></span>
-                    <label class="floating-label">Reason  </label>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                        <label class="floating-label">Reason  </label>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+        else
+        {
+
+
+            <div class="pt-3" style="display:none;" id="Show_1">
+
+                <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
+
+
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+
+
+                            <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />    <label class="radio-inline">
+                                Built-Up
+                            </label>
+                        </div>
+                    </div>   <div class="col-md-3">
+                        <div class="form-check theme">
+
+
+                            <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" />
+                            <label class="radio-inline">
+                                Litigation
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+
+
+                            <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" />
+                            <label class="radio-inline">
+                                Others if Any
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="row mt-md-3" style="display:none;" id="Show_2">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea disabled asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
+
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                        <label class="floating-label">Reason  </label>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+
         @*<div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
