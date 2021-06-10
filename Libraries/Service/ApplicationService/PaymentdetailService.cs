@@ -52,11 +52,10 @@ namespace Libraries.Service.ApplicationService
             model.BankName = paymentdetail.BankName;
             model.VoucherNo = paymentdetail.VoucherNo;
             model.PercentPaid = paymentdetail.PercentPaid;
-          
-
+            model.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentName;
             model.ModifiedDate = DateTime.Now;
             model.IsActive = paymentdetail.IsActive;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = paymentdetail.ModifiedBy;
             _paymentdetailRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -74,8 +73,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Paymentdetail paymentdetail)
         {
-
-            paymentdetail.CreatedBy = 1;
             paymentdetail.CreatedDate = DateTime.Now;
             _paymentdetailRepository.Add(paymentdetail);
             return await _unitOfWork.CommitAsync() > 0;

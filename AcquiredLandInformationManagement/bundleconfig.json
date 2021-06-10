@@ -502,5 +502,29 @@
     "inputFiles": [
       "wwwroot/js/undersection4detailsformcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentdetailcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentdetailcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection6mastercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection6mastercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection22detailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection22detailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection17detailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection17detailscreate.js"
+    ]
   }
 ]
