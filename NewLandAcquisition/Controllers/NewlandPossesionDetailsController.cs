@@ -191,7 +191,7 @@ namespace NewLandAcquisition.Controllers
                     var result = await _Possessiondetailservice.Update(id, newlandpossessiondetails);
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _Possessiondetailservice.GetAllPossessiondetails();
                         return View("Index", list);
                         // return View("Index");
