@@ -12,47 +12,46 @@ namespace Libraries.Model.EntityConfiguration
     public class NazulConfiguration : IEntityTypeConfiguration<Nazul>
     {
 
-        public void Configure(EntityTypeBuilder<Nazul> builder)
+        public void Configure(EntityTypeBuilder<Nazul> entity)
         {
-            builder.ToTable("nazul", "lms");
+            entity.ToTable("nazul", "lms");
 
-            builder.HasIndex(e => e.VillageId)
+            entity.HasIndex(e => e.VillageId)
                 .HasName("fkNazulvillageId_idx");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+            entity.Property(e => e.Bigha).HasColumnType("int(11)");
 
-            builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            entity.Property(e => e.Biswa).HasColumnType("int(11)");
 
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+            entity.Property(e => e.Biswanshi).HasColumnType("int(11)");
 
-            builder.Property(e => e.JaraiSakani)
-                .HasMaxLength(50)
+            entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            entity.Property(e => e.DateOfNotification).HasColumnType("date");
+
+            entity.Property(e => e.DocumentName)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Language)
-                .HasMaxLength(100)
+            entity.Property(e => e.DocumentNameSizra)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LastMutationNo)
-                .IsRequired()
-                .HasMaxLength(500)
-                .IsUnicode(false);
+            entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+            entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.VillageId).HasColumnType("int(11)");
+            entity.Property(e => e.VillageId).HasColumnType("int(11)");
 
-            builder.Property(e => e.YearOfConsolidation).HasColumnType("date");
-
-            builder.Property(e => e.YearOfJamabandi).HasColumnType("date");
-
-            builder.HasOne(d => d.Village)
-                    .WithMany(p => p.Nazul)
-                    .HasForeignKey(d => d.VillageId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fkNazulvillageId_idx");
+            entity.HasOne(d => d.Village)
+                .WithMany(p => p.Nazul)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkNazulvillageId_idx");
         }
     }
 }

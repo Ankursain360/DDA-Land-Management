@@ -18,23 +18,30 @@ using AcquiredLandInformationManagement.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using Microsoft.Extensions.Configuration;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
+   
     public class NazulController : Controller
     {
+        public IConfiguration _configuration;
 
         private readonly INazulService _nazulService;
-
-        public NazulController(INazulService nazulService)
+        string DocumentFilePath = "";
+        string DocumentSizraFilePath = "";
+        public NazulController(INazulService nazulService, IConfiguration configuration)
         {
             _nazulService = nazulService;
+            _configuration = configuration;
+            DocumentFilePath = _configuration.GetSection("FilePaths:Nazul:DocumentFIlePath").Value.ToString();
+            DocumentSizraFilePath = _configuration.GetSection("FilePaths:SizraNazul:DocumentFIlesPath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-            var result = await _nazulService.GetAllNazul();
-            return View(result);
+          //  var result = await _nazulService.GetAllNazul();
+            return View();
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] NazulSearchDto model)
@@ -66,6 +73,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    nazul.DocumentName = nazul.DocumentIFormFile == null ? nazul.DocumentName : fileHelper.SaveFile1(DocumentFilePath, nazul.DocumentIFormFile);
+                    nazul.DocumentNameSizra = nazul.DocumentSizraIFormFile == null ? nazul.DocumentNameSizra : fileHelper.SaveFile1(DocumentSizraFilePath, nazul.DocumentSizraIFormFile);
                     var result = await _nazulService.Create(nazul);
 
                     if (result == true)
@@ -111,6 +121,9 @@ namespace AcquiredLandInformationManagement.Controllers
             nazul.VillageList = await _nazulService.GetAllVillageList();
             if (ModelState.IsValid)
             {
+                FileHelper fileHelper = new FileHelper();
+                nazul.DocumentName = nazul.DocumentIFormFile == null ? nazul.DocumentName : fileHelper.SaveFile1(DocumentFilePath, nazul.DocumentIFormFile);
+                nazul.DocumentNameSizra = nazul.DocumentSizraIFormFile == null ? nazul.DocumentNameSizra : fileHelper.SaveFile1(DocumentSizraFilePath, nazul.DocumentSizraIFormFile);
                 try
                 {
                     var result = await _nazulService.Update(id, nazul);
@@ -180,12 +193,12 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         Id = result[i].Id,
                         Village = result[i].Village == null ? "" : result[i].Village.Name,
-                        JaraiSakni = result[i].JaraiSakani,
-                        Language = result[i].Language,
-                        DateOfConsolidation = Convert.ToDateTime(result[i].YearOfConsolidation).ToString("dd-MMM-yyyy"),
-                        DateOfJamabandi = Convert.ToDateTime(result[i].YearOfJamabandi).ToString("dd-MMM-yyyy"),
-                        LastMutationNo = result[i].LastMutationNo,
-                       
+                        //JaraiSakni = result[i].JaraiSakani,
+                        //Language = result[i].Language,
+                        //DateOfConsolidation = Convert.ToDateTime(result[i].DateOfNotification).ToString("dd-MMM-yyyy"),
+                        //DateOfJamabandi = Convert.ToDateTime(result[i].YearOfJamabandi).ToString("dd-MMM-yyyy"),
+                        //LastMutationNo = result[i].LastMutationNo,
+
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
@@ -194,6 +207,24 @@ namespace AcquiredLandInformationManagement.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Nazul Data = await _nazulService.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+           
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+        public async Task<IActionResult> ViewUploadedDocumentSizra(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Nazul Data = await _nazulService.FetchSingleResult(Id);
+            string filename = DocumentSizraFilePath + Data.DocumentNameSizra;
+
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 

@@ -71,14 +71,17 @@ namespace Libraries.Service.ApplicationService
             var result = await _nazulRepository.FindBy(a => a.Id == id);
             Nazul model = result.FirstOrDefault();
             model.VillageId = nazul.VillageId;
-            model.JaraiSakani = nazul.JaraiSakani;
-            model.Language = nazul.Language;
-            model.YearOfConsolidation = nazul.YearOfConsolidation;
-            model.YearOfJamabandi = nazul.YearOfJamabandi;
-            model.LastMutationNo = nazul.LastMutationNo;
-           
-
-            
+            //model.JaraiSakani = nazul.JaraiSakani;
+            //model.Language = nazul.Language;
+            //model.YearOfConsolidation = nazul.YearOfConsolidation;
+            //model.YearOfJamabandi = nazul.YearOfJamabandi;
+            //model.LastMutationNo = nazul.LastMutationNo;
+            model.DocumentName = nazul.DocumentName;
+            model.DocumentNameSizra = nazul.DocumentNameSizra;
+            model.Bigha = nazul.Bigha;
+            model.Biswa = nazul.Biswa;
+            model.Biswa = nazul.Biswanshi;
+            model.DateOfNotification = nazul.DateOfNotification;
 
             model.IsActive = nazul.IsActive;
             model.ModifiedDate = DateTime.Now;

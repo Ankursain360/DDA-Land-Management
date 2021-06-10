@@ -8,7 +8,7 @@
 
 
 <div class="pt-3">
-    <form asp-action="Edit" id="create_user" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Edit" id="create_user" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="row">
@@ -25,100 +25,158 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="YearOfConsolidation" type="date" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="YearOfConsolidation" class="text-danger"></span>
-                    <label class="floating-label">Date of Consolidation</label>
+                    <input asp-for="DateOfNotification" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="DateOfNotification" class="text-danger"></span>
+                    <label class="floating-label">Date Of Notification</label>
                 </div>
 
             </div>
         </div>
 
+        @*<div class="row pt-3">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>
+                                Jarai/Sakni:
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+
+
+                            <div class="form-check theme">
+
+                                <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Jarai" checked>
+                                <label class="form-check-label" for="radio">
+                                    Jarai
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check theme">
+                                <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Sakni">
+                                <label class="form-check-label" for="radio">
+                                    Sakni
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <span asp-validation-for="JaraiSakani" class="text-danger"></span>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>
+                                Language:
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+
+
+                            <div class="form-check theme">
+                                <input asp-for="Language" class="form-check-input" type="radio" value="Hindi">
+                                <label class="form-check-label" for="radio">
+                                    Hindi
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check theme">
+                                <input asp-for="Language" class="form-check-input" type="radio" value="Urdu">
+                                <label class="form-check-label" for="radio">
+                                    Urdu
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <span asp-validation-for="Language" class="text-danger"></span>
+                </div>
+            </div>*@
+
+
+
         <div class="row pt-3">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>
-                            Jarai/Sakni:
-                        </label>
-                    </div>
-                    <div class="col-md-3">
 
-
-                        <div class="form-check theme">
-
-                            <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Jarai" checked>
-                            <label class="form-check-label" for="radio">
-                                Jarai
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check theme">
-                            <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Sakni">
-                            <label class="form-check-label" for="radio">
-                                Sakni
-                            </label>
-                        </div>
-                    </div>
-
-
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DocumentName" />
+                    @{
+                        @if (Model.DocumentName != null)
+                        {
+                            <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <a class="badge badge-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
+                    <label class="floating-label">Upload GOI Notification Documentg</label>
                 </div>
-                <span asp-validation-for="JaraiSakani" class="text-danger"></span>
             </div>
-
-
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label>
-                            Language:
-                        </label>
-                    </div>
-                    <div class="col-md-3">
-
-
-                        <div class="form-check theme">
-                            <input asp-for="Language" class="form-check-input" type="radio" value="Hindi">
-                            <label class="form-check-label" for="radio">
-                                Hindi
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-check theme">
-                            <input asp-for="Language" class="form-check-input" type="radio" value="Urdu">
-                            <label class="form-check-label" for="radio">
-                                Urdu
-                            </label>
-                        </div>
-                    </div>
-
-
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DocumentNameSizra" />
+                    @{
+                        @if (Model.DocumentNameSizra != null)
+                        {
+                            <input type="file" asp-for="DocumentSizraIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <a class="badge badge-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="DocumentSizraIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentNameSizra"></span>
+                    <label class="floating-label">Sizra Map Upload</label>
                 </div>
-                <span asp-validation-for="Language" class="text-danger"></span>
             </div>
         </div>
+        <div class="pt-3">
+
+            <h3 class="mb-3 d-flex">Area</h3>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
 
 
-        <div class="row pt-3">
+                        <input limit="4" placeholder="Bigha" type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3 onlynumbers" />
+                        <span asp-validation-for="Bigha" class="text-danger"></span>
+                        <label class="floating-label">Bigha</label>
 
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                    <input asp-for="YearOfJamabandi" type="date" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="YearOfJamabandi" class="text-danger"></span>
-                    <label class="floating-label">Date of Jamabandi</label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="LastMutationNo" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="LastMutationNo" class="text-danger"></span>
-                    <label class="floating-label">Last Mutation No.</label>
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input limit="2" type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" />
+                        <span asp-validation-for="Biswa" class="text-danger"></span>
+                        <label class="floating-label">Biswa</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input limit="2" type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" />
+                        <span asp-validation-for="Biswanshi" class="text-danger"></span>
+                        <label class="floating-label">Biswanshi</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,7 +204,13 @@
 
     </form>
 </div>
-   
+
+<environment include="Development">
+    <script src="~/js/nazulcreateedit.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/nazulcreateedit.min.js" asp-append-version="true"></script>
+</environment>
 
 
 
