@@ -1,9 +1,11 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
@@ -22,9 +24,13 @@ namespace Libraries.Model.Entity
         public string VoucherNo { get; set; }
         [Required(ErrorMessage = "Percent Paid is mandatory")]
         public decimal PercentPaid { get; set; }
+        public string PaymentProofDocumentName { get; set; }
 
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
-       
+
+        [NotMapped]
+        public IFormFile PaymentProofDocumentIFormFile { get; set; }
+
     }
 }

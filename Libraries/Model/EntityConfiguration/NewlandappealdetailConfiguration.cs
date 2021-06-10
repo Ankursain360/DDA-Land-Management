@@ -47,6 +47,12 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.PanelLawer)
                     .HasMaxLength(500)
                     .IsUnicode(false);
+
+
+
+            builder.Property(e => e.Department)
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
         }
     }
 }

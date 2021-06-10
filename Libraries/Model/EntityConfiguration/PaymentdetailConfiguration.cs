@@ -49,6 +49,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.PercentPaid).HasColumnType("decimal(18,3)");
 
+            builder.Property(e => e.PaymentProofDocumentName)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
             builder.Property(e => e.VoucherNo)
                     .HasMaxLength(100)
                     .IsUnicode(false);

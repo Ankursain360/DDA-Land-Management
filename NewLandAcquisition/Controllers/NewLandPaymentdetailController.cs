@@ -16,17 +16,22 @@ using NewLandAcquisition.Filters;
 using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
+using Microsoft.Extensions.Configuration;
 
 namespace NewLandAcquisition.Controllers
 {
-    public class NewLandPaymentdetailController : Controller
+    public class NewLandPaymentdetailController : BaseController
     {
         private readonly INewLandPaymentdetailService _newLandPaymentdetailService;
+        public IConfiguration _configuration;
+        string PaymentProofDocumentFilePath = "";
 
 
-        public NewLandPaymentdetailController(INewLandPaymentdetailService newLandPaymentdetailService)
+        public NewLandPaymentdetailController(INewLandPaymentdetailService newLandPaymentdetailService, IConfiguration configuration)
         {
             _newLandPaymentdetailService = newLandPaymentdetailService;
+            _configuration = configuration;
+            PaymentProofDocumentFilePath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -58,6 +63,9 @@ namespace NewLandAcquisition.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    newlandpaymentdetail.PaymentProofDocumentName = newlandpaymentdetail.PaymentProofDocumentIFormFile == null ? newlandpaymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, newlandpaymentdetail.PaymentProofDocumentIFormFile);
+                    newlandpaymentdetail.CreatedBy = SiteContext.UserId;
                     var result = await _newLandPaymentdetailService.Create(newlandpaymentdetail);
 
                     if (result == true)
@@ -107,6 +115,9 @@ namespace NewLandAcquisition.Controllers
             {
                 try
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    newlandpaymentdetail.PaymentProofDocumentName = newlandpaymentdetail.PaymentProofDocumentIFormFile == null ? newlandpaymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, newlandpaymentdetail.PaymentProofDocumentIFormFile);
+                    newlandpaymentdetail.ModifiedBy = SiteContext.UserId;
                     var result = await _newLandPaymentdetailService.Update(id, newlandpaymentdetail);
                     if (result == true)
                     {
@@ -197,27 +208,14 @@ namespace NewLandAcquisition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public async Task<IActionResult> ViewPaymentProofDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newlandpaymentdetail Data = await _newLandPaymentdetailService.FetchSingleResult(Id);
+            string filename = PaymentProofDocumentFilePath + Data.PaymentProofDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
 
     }
 }
