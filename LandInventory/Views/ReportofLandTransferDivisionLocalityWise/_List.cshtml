@@ -36,9 +36,10 @@
 
                     <td>@item.HandedOverDate</td>
                     <td>@item.TakenOverByNameDesingnation</td>
-                    <td>@item.DateofTakenOver</td>
+                    <td>@(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
+                   </td>
 
-                    <td>@item.TransferorderIssueAuthority/td>
+                    <td>@item.TransferorderIssueAuthority</td>
                     <td>@item.Remarks</td>
                    
                 </tr>

@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function GetLandTransfer(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/Planning/VerificationPageList`, 'html', param, function (response) {
+    HttpPost(`/PlanningVerification/VerificationPageList`, 'html', param, function (response) {
        
         $('#divLandTransferTable').html("");
         $('#divLandTransferTable').html(response);

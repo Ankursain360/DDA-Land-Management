@@ -86,7 +86,7 @@
 
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit" id="inspectionAreaUnit">
                         <option value="1">Sq Yd.</option>
                         <option value="2">Acre</option>
                         <option value="3">Hectare</option>
@@ -102,7 +102,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="TotalAreaInSqAcreHt" value="" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <input asp-for="TotalAreaInSqAcreHt" id="inspectionTotalAreaInSqAcreHt" value="" type="text" class="floating-label-field floating-label-field--s3 numbers inspectionTotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                         <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
                         <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
                     </div>
@@ -115,7 +115,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="text" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
+                    <input type="text" value="" id="inspectionArea" class="floating-label-field floating-label-field--s3 numbers" asp-for="Area" />
                     <span asp-validation-for="Area" class="text-danger"></span>
                     <label class="floating-label">Area(in sq. mt.)</label>
                 </div>

@@ -3,21 +3,21 @@
     var id = parseInt($('#WatchWardId').val());
     GetOtherDetails(id);
 
-    $(".TotalCalculation").keyup(function () {
+    $(".inspectionTotalCalculation").keyup(function () {
         debugger;
-        var value = $('#AreaUnit option:selected').val();
-        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        var value = $('#inspectionAreaUnit option:selected').val();
+        var totalOther = $('#inspectionTotalAreaInSqAcreHt').val();
         if (value == 1) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
         }
         else if (value == 2) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 4840 * 0.836).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 4840 * 0.836).toFixed(3));
         }
         else if (value == 3) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10000).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10000).toFixed(3));
         }
         else if (value == 4) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
         }
     });
 
@@ -31,9 +31,9 @@
 
 });
 
-$('#AreaUnit').change(function () {
-    $('#TotalAreaInSqAcreHt').val('');
-    $('#Area').val('');
+$('#inspectionAreaUnit').change(function () {
+    $('#inspectionTotalAreaInSqAcreHt').val('');
+    $('#inspectionArea').val('');
 });
 
 function GetOtherDetails(id) {
