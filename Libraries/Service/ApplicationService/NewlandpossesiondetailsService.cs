@@ -113,6 +113,7 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = possessiondetails.IsActive;
             model.Remarks = possessiondetails.Remarks;
             model.Reason = possessiondetails.Reason;
+            model.PossessionTake = possessiondetails.PossessionTake;
             model.DocumentName = possessiondetails.DocumentName;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

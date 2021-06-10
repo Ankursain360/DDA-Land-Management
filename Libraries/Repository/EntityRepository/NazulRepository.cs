@@ -59,7 +59,7 @@ namespace Libraries.Repository.EntityRepository
 
 
                           .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
-                                    .OrderBy(a => a.YearOfConsolidation)
+                                    .OrderBy(a => a.DateOfNotification)
                                     .GetPaged<Nazul>(model.PageNumber, model.PageSize);
                         break;
 
@@ -73,26 +73,26 @@ namespace Libraries.Repository.EntityRepository
                                     .OrderBy(a => a.Village.Name)
                                     .GetPaged<Nazul>(model.PageNumber, model.PageSize);
                         break;
-                    case ("YEAROFJAMABANDI"):
-                        data = null;
-                        data = await _dbContext.Nazul
-                                   .Include(x => x.Village)
+                    //case ("YEAROFJAMABANDI"):
+                    //    data = null;
+                    //    data = await _dbContext.Nazul
+                    //               .Include(x => x.Village)
 
-                          .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
+                    //      .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
               
-                                   .OrderBy(a => a.YearOfJamabandi)
-                                    .GetPaged<Nazul>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("NUMBER"):
-                        data = null;
-                        data = await _dbContext.Nazul
-                                   .Include(x => x.Village)
+                    //               .OrderBy(a => a.YearOfJamabandi)
+                    //                .GetPaged<Nazul>(model.PageNumber, model.PageSize);
+                    //    break;
+                    //case ("NUMBER"):
+                    //    data = null;
+                    //    data = await _dbContext.Nazul
+                    //               .Include(x => x.Village)
 
-                          .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
+                    //      .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
 
-                                   .OrderBy(a => a.LastMutationNo)
-                                    .GetPaged<Nazul>(model.PageNumber, model.PageSize);
-                        break;
+                    //               .OrderBy(a => a.LastMutationNo)
+                    //                .GetPaged<Nazul>(model.PageNumber, model.PageSize);
+                    //    break;
 
 
                     case ("STATUS"):
@@ -120,7 +120,7 @@ namespace Libraries.Repository.EntityRepository
 
 
                           .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
-                                    .OrderByDescending(a => a.YearOfConsolidation)
+                                    .OrderByDescending(a => a.DateOfNotification)
                                     .GetPaged<Nazul>(model.PageNumber, model.PageSize);
                         break;
 
@@ -134,26 +134,26 @@ namespace Libraries.Repository.EntityRepository
                                     .OrderByDescending(a => a.Village.Name)
                                     .GetPaged<Nazul>(model.PageNumber, model.PageSize);
                         break;
-                    case ("YEAROFJAMABANDI"):
-                        data = null;
-                        data = await _dbContext.Nazul
-                                   .Include(x => x.Village)
+                    //case ("YEAROFJAMABANDI"):
+                    //    data = null;
+                    //    data = await _dbContext.Nazul
+                    //               .Include(x => x.Village)
 
-                          .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
+                    //      .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
 
-                                   .OrderByDescending(a => a.YearOfJamabandi)
-                                    .GetPaged<Nazul>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("NUMBER"):
-                        data = null;
-                        data = await _dbContext.Nazul
-                                   .Include(x => x.Village)
+                    //               .OrderByDescending(a => a.YearOfJamabandi)
+                    //                .GetPaged<Nazul>(model.PageNumber, model.PageSize);
+                    //    break;
+                    //case ("NUMBER"):
+                    //    data = null;
+                    //    data = await _dbContext.Nazul
+                    //               .Include(x => x.Village)
 
-                          .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
+                    //      .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village)))
 
-                                   .OrderByDescending(a => a.LastMutationNo)
-                                    .GetPaged<Nazul>(model.PageNumber, model.PageSize);
-                        break;
+                    //               .OrderByDescending(a => a.LastMutationNo)
+                    //                .GetPaged<Nazul>(model.PageNumber, model.PageSize);
+                    //    break;
 
 
                     case ("STATUS"):
