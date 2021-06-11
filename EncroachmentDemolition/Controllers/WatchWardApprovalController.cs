@@ -57,13 +57,15 @@ namespace EncroachmentDemolition.Controllers
 
         }
 
-        //   [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
         {
+            Watchandward data = new Watchandward();
+            data.ApprovalStatusList =await _approvalproccessService.BindDropdownApprovalStatusAtIndex(SiteContext.UserId);
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
-            return View();
+            return View(data);
         }
 
         [HttpPost]
@@ -74,7 +76,7 @@ namespace EncroachmentDemolition.Controllers
             return PartialView("_List", result);
         }
 
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
@@ -88,7 +90,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Watchandward watchandward)
         {
             var result = false;
