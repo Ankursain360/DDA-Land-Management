@@ -71,7 +71,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
+            builder.Property(e => e.EncroacherName)
+              .HasMaxLength(400)
+              .IsUnicode(false);
 
+            builder.Property(e => e.DDALand)
+                .HasMaxLength(400)
+                .IsUnicode(false);
 
             builder.Property(e => e.ReferenceNo)
                 .HasMaxLength(100)

@@ -32,3 +32,13 @@
           }
         });
     });
+
+$(document).ready(function () {
+
+    $("input[name='DDA']").click(function () {
+        var selected = $("input[type='radio'][name='DDA']:checked");
+        $("#DDAid").val(selected.val());
+
+    });
+
+});
