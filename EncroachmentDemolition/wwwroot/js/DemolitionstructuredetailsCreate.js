@@ -1,4 +1,11 @@
-﻿function onChangeDepartment(id) {
+﻿
+
+$(document).ready(function () {
+    $('#StructureId').removeAttr('multiple');
+
+
+});
+function onChangeDepartment(id) {
     HttpGet(`/Demolitionstructuredetails/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
@@ -99,3 +106,117 @@ function fileValidation(filePath, fileInput, size) {
     }
 
 }
+
+
+
+
+
+//****************** code for saving Demolishedstructurerpt Rpt ************************
+
+$(document).delegate('a.add-record', 'click', function (e) {
+    debugger
+
+    if ($("#tbl_posts #add #Date1").val() != ''
+        && $("#tbl_posts #add #StructureId").children("option:selected").val() != undefined)
+    {
+        var struct = $("#tbl_posts #add #StructureId").children("option:selected").val();
+        e.preventDefault();
+        var content = jQuery('#tbl_posts #add tr'),
+            size = jQuery('#tbl_posts >tbody >tr').length,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-record').attr('data-id', size);
+        element.appendTo('#tbl_posts_body');
+        // $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+        $('#tbl_posts_body #rec-' + size + ' #StructureId').val(struct);
+        element.find('.sn').html(size);
+        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+        $("#tbl_posts #add .add").remove();
+        $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+        element.find(".add-record").hide();
+        element.find(".delete-record").show();
+        debugger
+
+        $("#tbl_posts #add .floating-label-field").val('');
+    }
+    else {
+        alert('Please fill record before add new record ');
+    }
+});
+$(document).delegate('a.delete-record', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#rec-' + id).remove();
+        //regnerate index number on table
+        $('#tbl_posts_body tr').each(function (index) {
+            //alert(index);
+            $(this).find('span.sn').html(index + 1);
+        });
+        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});
+
+
+
+
+
+
+//****************** code for saving Areareclaimedrpt Rpt ************************
+
+$(document).delegate('a.add-record1', 'click', function (e) {
+    debugger
+
+    if ($("#tbl_posts1 #add1 #Date2").val() != ''
+        && $("#tbl_posts1 #add1 #Area1").val() != '') {
+
+        e.preventDefault();
+        var content = jQuery('#tbl_posts1 #add1 tr'),
+            size = jQuery('#tbl_posts1 >tbody >tr').length,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec1-' + size);
+        element.find('.delete-record1').attr('data-id', size);
+        element.appendTo('#tbl_posts1_body');
+        // $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+
+        element.find('.sn1').html(size);
+        $("#tbl_posts1 #add1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
+        $("#tbl_posts1 #add1 .add").remove();
+        $("#tbl_posts1 #tbl_posts1_body .floating-label-field").attr("readonly", true);
+        element.find(".add-record1").hide();
+        element.find(".delete-record1").show();
+        debugger
+
+        $("#tbl_posts1 #add1 .floating-label-field").val('');
+    }
+    else {
+        alert('Please fill record before add new record ');
+    }
+});
+$(document).delegate('a.delete-record1', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#rec1-' + id).remove();
+        //regnerate index number on table
+        $('#tbl_posts1_body tr').each(function (index) {
+            //alert(index);
+            $(this).find('span.sn1').html(index + 1);
+        });
+        $("#tbl_posts1 #add1 .sn1").text($('#tbl_posts1 >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});
+
+

@@ -41,5 +41,10 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto demolitionReportZoneDivisionLocalityWiseSearchDto);
         Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality);
 
+        //added by ishu 11june2021
+
+        Task<List<Structure>> GetAllStructure();
+        Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt);
+        Task<bool> SaveAreareclaimedrpt(Areareclaimedrpt rpt);
     }
 }

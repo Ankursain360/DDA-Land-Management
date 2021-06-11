@@ -177,67 +177,172 @@
             </div>
         </div>
 
-            @*<div class="row pt-3">
-                <div class="col-md-12">
-                    <div class="table-section bg-white border shadow rounded">
-                        <div class="table-responsive ">
-                            <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                                <thead class="text-nowrap">
+        @*<div class="row pt-3">
+            <div class="col-md-12">
+                <div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive ">
+                        <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Name of Structure</th>
+                                    <th>No of Structure</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Structure)
+                                {
                                     <tr>
-                                        <th>Sr.No</th>
-                                        <th>Name of Structure</th>
-                                        <th>No of Structure</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Structure)
-                                    {
-                                        <tr>
-                                            <td>@(recNo += 1)</td>
-                                            <td>@(item.Name)</td>
-                                            <td>
-                                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                                    <input asp-for="NoOfStructrure" type="text" placeholder="No Of Structrure"
-                                                           class="floating-label-field floating-label-field--s3" />
-                                                    <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
-                                                </div>
+                                        <td>@(recNo += 1)</td>
+                                        <td>@(item.Name)</td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="NoOfStructrure" type="text" placeholder="No Of Structrure"
+                                                       class="floating-label-field floating-label-field--s3" />
+                                                <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
+                                            </div>
 
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
+                </div>
+            </div>
+        </div>*@
+    <h3 class="my-3 d-flex sub-heading pt-4"> Demolished Structure  </h3>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                    <thead class="text-nowrap">
+
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Demolition Date</th>
+                            <th>Structure Name  </th>
+                            <th>No Of Structure Demolished</th>
+                            <th>No Of Structure Remaining</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_posts_body">
+                    </tbody>
+                    <tbody class="tbody" id="add">
+                        <tr id="">
+                            <td style="text-align:center;"><span class="sn">1</span></td>
+                            <td>
+                                <input asp-for="Date1" type="date" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="Date1" class="d-block text-danger field-validation-valid msg"></span>
+                            </td>
+                            <td>
+                               
+                                <select class="floating-label-field floating-label-field--s3"
+                                        asp-for="StructureId"
+                                        asp-items="@(new SelectList(Model.StructureList,"Id","Name"))"
+                                       >
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="StructureId" class="d-block text-danger field-validation-valid"></span>
+                            </td>
+
+                            <td>
+                                <input asp-for="NoOfStructureDemolished" type="text" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="NoOfStructureDemolished" class="d-block text-danger field-validation-valid"></span>
+                            </td>
+                            <td>
+                                <input asp-for="NoOfStructureRemaining" type="text" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="NoOfStructureRemaining" class="d-block text-danger field-validation-valid"></span>
+                            </td>
+                            <td>
+                                <div class="action-btns">
+                                    <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                    <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <h3 class="my-3 d-flex sub-heading pt-4"> Area Reclaimed</h3>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts1">
+                    <thead class="text-nowrap">
+
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Demolition Date</th>
+                            <th>AreaReclaimed </th>
+                            <th>AreaToBeReclaimed</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_posts1_body">
+                    </tbody>
+                    <tbody class="tbody" id="add1">
+                        <tr id="">
+                            <td style="text-align:center;"><span class="sn1">1</span></td>
+                            <td>
+                                <input asp-for="Date2" type="date" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="Date2" class="d-block text-danger field-validation-valid "></span>
+                            </td>
+                            <td>
+                                <input asp-for="Area1" type="text" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="Area1" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="AreaToBeReclaimed" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="AreaToBeReclaimed" class="d-block text-danger field-validation-valid "></span>
+
+                            </td>
+                          
+
+                            <td>
+                                <div class="action-btns">
+                                    <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                    <a class="view add-record1" data-added1="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+        <div class="row pt-4">
+            @*<div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
+                    <label class="floating-label">Area Reclaimed(approx.)</label>
                 </div>
             </div>*@
-
-            <div class="row pt-4">
-                @*<div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
-                        <label class="floating-label">Area Reclaimed(approx.)</label>
-                    </div>
-                </div>*@
-                <div class="form-group col-md-12">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Remarks" type="text" placeholder="Remarks"
-                                  class="floating-label-field floating-label-field--s3"></textarea>
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
-                        <label class="floating-label">Remarks, If Any</label>
-                    </div>
+            <div class="form-group col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remarks" type="text" placeholder="Remarks"
+                              class="floating-label-field floating-label-field--s3"></textarea>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
+                    <label class="floating-label">Remarks, If Any</label>
                 </div>
             </div>
-            <div class="row mt-md-4">
-                <div class="col-md-12">
-                    <input type="submit" value="Submit" class="btn btn-theme" />
+        </div>
+        <div class="row mt-md-4">
+            <div class="col-md-12">
+                <input type="submit" value="Submit" class="btn btn-theme" />
 
-                    @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
+                @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
 
-                </div>
             </div>
+        </div>
 
 
     </form>

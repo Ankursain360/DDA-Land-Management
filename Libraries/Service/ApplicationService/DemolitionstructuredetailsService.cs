@@ -180,5 +180,29 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetMasterStructure();
         }
+
+        //********* rpt 1 Details **********added by ishu
+
+        
+        public async Task<List<Structure>> GetAllStructure()
+        {
+            List<Structure> List = await _demolitionstructuredetailsRepository.GetAllStructure();
+            return List;
+        }
+        public async Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt)
+        {
+            rpt.CreatedBy = rpt.CreatedBy;
+            rpt.CreatedDate = DateTime.Now;
+            rpt.IsActive = 1;
+            return await _demolitionstructuredetailsRepository.SaveDemolishedstructurerpt(rpt);
+        }
+        public async Task<bool> SaveAreareclaimedrpt(Areareclaimedrpt rpt)
+        {
+            rpt.CreatedBy = rpt.CreatedBy;
+            rpt.CreatedDate = DateTime.Now;
+            rpt.IsActive = 1;
+            return await _demolitionstructuredetailsRepository.SaveAreareclaimedrpt(rpt);
+        }
     }
+   
 }
