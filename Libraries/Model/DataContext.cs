@@ -131,7 +131,8 @@ namespace Libraries.Model
         public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
 
 
-
+        public virtual DbSet<Areareclaimedrpt> Areareclaimedrpt { get; set; }
+        public virtual DbSet<Demolishedstructurerpt> Demolishedstructurerpt { get; set; }
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
 
@@ -422,6 +423,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Undersection22plotdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection6plotConfiguration());
             modelBuilder.ApplyConfiguration(new PossessiondetailsConfiguration());
+
+            modelBuilder.ApplyConfiguration(new DemolishedstructurerptConfiguration());
+            modelBuilder.ApplyConfiguration(new Areareclaimedrptconfiguration());
 
             //************* Data Loading **********************
             modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
