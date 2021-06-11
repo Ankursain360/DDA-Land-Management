@@ -15,6 +15,8 @@ namespace Libraries.Model.Entity
             Demolitionstructure = new HashSet<Demolitionstructure>();
             Demolitionstructureafterdemolitionphotofiledetails = new HashSet<Demolitionstructureafterdemolitionphotofiledetails>();
             Demolitionstructurebeforedemolitionphotofiledetails = new HashSet<Demolitionstructurebeforedemolitionphotofiledetails>();
+            Areareclaimedrpt = new HashSet<Areareclaimedrpt>();
+            Demolishedstructurerpt = new HashSet<Demolishedstructurerpt>();
         }
 
         [Required(ErrorMessage = " Department is mandatory")]
@@ -76,6 +78,7 @@ namespace Libraries.Model.Entity
         public ICollection<Demolitionstructure> Demolitionstructure { get; set; }
         public ICollection<Demolitionstructureafterdemolitionphotofiledetails> Demolitionstructureafterdemolitionphotofiledetails { get; set; }
         public ICollection<Demolitionstructurebeforedemolitionphotofiledetails> Demolitionstructurebeforedemolitionphotofiledetails { get; set; }
-        
+        public ICollection<Areareclaimedrpt> Areareclaimedrpt { get; set; }
+        public ICollection<Demolishedstructurerpt> Demolishedstructurerpt { get; set; }
     }
 }

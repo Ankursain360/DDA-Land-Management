@@ -12,7 +12,9 @@ namespace Libraries.Model.Entity
     {
         [Required(ErrorMessage = " Complainant Name Is Mandatory")]
         public string Name { get; set; }
-       
+
+        public string EncroacherName { get; set; }
+        public string DDALand { get; set; }
 
         [Required(ErrorMessage = "Contact No Is Mandatory ")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
