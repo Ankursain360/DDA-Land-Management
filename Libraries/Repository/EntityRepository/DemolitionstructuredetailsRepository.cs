@@ -412,5 +412,28 @@ namespace Libraries.Repository.EntityRepository
                 .OrderByDescending(x => x.Id).ToListAsync();
             return data;
         }
+
+        //********* rpt 1 Details **********added by ishu
+
+
+        public async Task<List<Structure>> GetAllStructure()
+        {
+            List<Structure> List = await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
+            return List;
+        }
+        public async Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt)
+        {
+            _dbContext.Demolishedstructurerpt.Add(rpt);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        //********* rpt 2 Details **********added by ishu
+        public async Task<bool> SaveAreareclaimedrpt(Areareclaimedrpt rpt)
+        {
+            _dbContext.Areareclaimedrpt.Add(rpt);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 }

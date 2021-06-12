@@ -95,6 +95,8 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(EncroachmentRegisteration encroachmentRegisterations)
         {
+
+            ViewBag.PrimaryId = 0;
             try
             {
                 encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
@@ -187,6 +189,7 @@ namespace EncroachmentDemolition.Controllers
                         }
                     }
                     #endregion
+                    encroachmentRegisterations.IsActive = 1;
                     encroachmentRegisterations.WatchWardId = encroachmentRegisterations.WatchWardId == 0 ? null : encroachmentRegisterations.WatchWardId;
                     encroachmentRegisterations.CreatedBy = SiteContext.UserId;
                     var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);

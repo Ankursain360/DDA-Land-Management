@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Planning
-@await Component.InvokeAsync("PageHeader", new { pageName = "Planning" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Planning Verification" })
 
 <div class="pt-3">
 
@@ -80,7 +80,7 @@
                     <div class="row mt-md-4">
                         <div class=" col-md-12">
                             <input type="submit" value="Submit" class="btn btn-theme" />
-                            @Html.ActionLink("Back", "VerificationPage", "Planning", null, new { @class = "btn btn-theme" })
+                            @Html.ActionLink("Back", "VerificationPage", "PlanningVerification", null, new { @class = "btn btn-theme" })
                         </div>
                     </div>
                 </form>

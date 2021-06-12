@@ -15,6 +15,8 @@ namespace Libraries.Model.Entity
             Demolitionstructure = new HashSet<Demolitionstructure>();
             Demolitionstructureafterdemolitionphotofiledetails = new HashSet<Demolitionstructureafterdemolitionphotofiledetails>();
             Demolitionstructurebeforedemolitionphotofiledetails = new HashSet<Demolitionstructurebeforedemolitionphotofiledetails>();
+            Areareclaimedrpt = new HashSet<Areareclaimedrpt>();
+            Demolishedstructurerpt = new HashSet<Demolishedstructurerpt>();
         }
 
         [Required(ErrorMessage = " Department is mandatory")]
@@ -39,7 +41,7 @@ namespace Libraries.Model.Entity
         public string NameOfEncroacherIfAny { get; set; }
         public DateTime? StartOfDemolitionActionDate { get; set; }
         public DateTime? EndOfDemolitionActionDate { get; set; }
-        [Required(ErrorMessage = " Area is mandatory")]
+       // [Required(ErrorMessage = " Area is mandatory")]
         public decimal? AreaReclaimed { get; set; }
         public string DemilitionReportPath { get; set; }
         public string Remarks { get; set; }
@@ -73,9 +75,33 @@ namespace Libraries.Model.Entity
         public List<IFormFile> BeforePhotoFile { get; set; }
         [NotMapped]
         public IFormFile DemolitionReportFile { get; set; }
+
+
+        //*************  Demolishedstructurerpt***************
+        [NotMapped]
+        public List<DateTime?> Date1 { get; set; }
+        [NotMapped]
+        public List<int?> StructureId { get; set; }
+        [NotMapped]
+        public List<int?> NoOfStructureDemolished { get; set; }
+        [NotMapped]
+        public List<int?> NoOfStructureRemaining { get; set; }
+
+        //*************  Areareclaimedrpt ***************
+        [NotMapped]
+        public List<DateTime?> Date2 { get; set; }
+       
+        [NotMapped]
+        public List<decimal?> Area1 { get; set; }
+        [NotMapped]
+        public List<decimal?> AreaToBeReclaimed { get; set; }
+
+        [NotMapped]
+        public List<Structure> StructureList { get; set; }
         public ICollection<Demolitionstructure> Demolitionstructure { get; set; }
         public ICollection<Demolitionstructureafterdemolitionphotofiledetails> Demolitionstructureafterdemolitionphotofiledetails { get; set; }
         public ICollection<Demolitionstructurebeforedemolitionphotofiledetails> Demolitionstructurebeforedemolitionphotofiledetails { get; set; }
-        
+        public ICollection<Areareclaimedrpt> Areareclaimedrpt { get; set; }
+        public ICollection<Demolishedstructurerpt> Demolishedstructurerpt { get; set; }
     }
 }

@@ -26,17 +26,17 @@ namespace Libraries.Repository.EntityRepository
             foreach (Watchandward myLine in UserWiseDataList)
                 myIdList.Add(myLine.Id);
             int[] myIdArray = myIdList.ToArray();
-
             var data = await _dbContext.Watchandward
-                                        .Include(x => x.PrimaryListNoNavigation)
-                                        .Include(x => x.PrimaryListNoNavigation.Locality)
-                                        .Include(x => x.ApprovedStatusNavigation)
-                                        .Where(x => x.IsActive == 1
-                                            && (model.StatusId == 0 ? (x.PrimaryListNoNavigation.ZoneId == x.PrimaryListNoNavigation.ZoneId) : (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId)))
-                                            && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
-                                            && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
-                                            )
-                                        .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                                      .Include(x => x.PrimaryListNoNavigation)
+                                      .Include(x => x.PrimaryListNoNavigation.Locality)
+                                      .Include(x => x.ApprovedStatusNavigation)
+                                      .Where(x => x.IsActive == 1
+                                          && (model.StatusId == 0 ? (x.PrimaryListNoNavigation.ZoneId == x.PrimaryListNoNavigation.ZoneId) : (x.PrimaryListNoNavigation.ZoneId == (zoneId == 0 ? x.PrimaryListNoNavigation.ZoneId : zoneId)))
+                                          && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                          && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                          && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus ): (x.ApprovedStatus == model.approvalstatusId))
+                                          )
+                                      .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -113,13 +113,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<Watchandward> FetchSingleResult(int id)
         {
-           return await _dbContext.Watchandward
-                                        .Include(x => x.PrimaryListNoNavigation)
-                                        .Include(x => x.PrimaryListNoNavigation.Locality)
-                                        .Include(x => x.Locality)
-                                        .Include(x => x.Khasra)
-                                        .Where(x => x.IsActive == 1 && x.Id == id)
-                                        .FirstOrDefaultAsync();
+            return await _dbContext.Watchandward
+                                         .Include(x => x.PrimaryListNoNavigation)
+                                         .Include(x => x.PrimaryListNoNavigation.Locality)
+                                         .Include(x => x.Locality)
+                                         .Include(x => x.Khasra)
+                                         .Where(x => x.IsActive == 1 && x.Id == id)
+                                         .FirstOrDefaultAsync();
         }
     }
 }

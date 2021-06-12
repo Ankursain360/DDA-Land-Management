@@ -10,6 +10,19 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using Repository.Common;
+
+using Dto.Search;
+using Libraries.Model;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Repository.IEntityRepository;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Libraries.Repository.EntityRepository
 {
     public class ApprovalProccessRepository : GenericRepository<Approvalproccess>, IApprovalProccessRepository
@@ -101,6 +114,20 @@ namespace Libraries.Repository.EntityRepository
                                      .OrderBy(x => x.Id)
                                      .Take(1)
                                      .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Approvalstatus>> BindDropdownApprovalStatusAtIndex(int userId)
+        {
+            var AllDataList = await _dbContext.Approvalproccess.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.SendTo != null && x.SendTo.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Approvalproccess myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
+
+            return await _dbContext.Approvalstatus
+                                     .Where(x => x.IsActive == 1 && myIdArray.Contains(x.Id))
+                                     .ToListAsync();
         }
     }
 }
