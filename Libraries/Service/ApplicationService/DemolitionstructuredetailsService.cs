@@ -181,14 +181,10 @@ namespace Libraries.Service.ApplicationService
             return await _demolitionstructuredetailsRepository.GetMasterStructure();
         }
 
-        //********* rpt 1 Details **********added by ishu
+        //********* rpt  Details **********added by ishu
 
         
-        public async Task<List<Structure>> GetAllStructure()
-        {
-            List<Structure> List = await _demolitionstructuredetailsRepository.GetAllStructure();
-            return List;
-        }
+      
         public async Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt)
         {
             rpt.CreatedBy = rpt.CreatedBy;
@@ -202,6 +198,23 @@ namespace Libraries.Service.ApplicationService
             rpt.CreatedDate = DateTime.Now;
             rpt.IsActive = 1;
             return await _demolitionstructuredetailsRepository.SaveAreareclaimedrpt(rpt);
+        }
+
+        public async Task<List<Demolishedstructurerpt>> GetAlldemolitionrptdetails(int id)
+        {
+            return await _demolitionstructuredetailsRepository.GetAlldemolitionrptdetails(id);
+        }
+        public async Task<bool> Deletedemolitionrptdetails(int Id)
+        {
+            return await _demolitionstructuredetailsRepository.Deletedemolitionrptdetails(Id);
+        }
+        public async Task<List<Areareclaimedrpt>> GetAllArearptdetails(int id)
+        {
+            return await _demolitionstructuredetailsRepository.GetAllArearptdetails(id);
+        }
+        public async Task<bool> Deletedearearptdetails(int Id)
+        {
+            return await _demolitionstructuredetailsRepository.Deletedearearptdetails(Id);
         }
     }
    

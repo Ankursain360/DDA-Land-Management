@@ -416,22 +416,40 @@ namespace Libraries.Repository.EntityRepository
         //********* rpt 1 Details **********added by ishu
 
 
-        public async Task<List<Structure>> GetAllStructure()
-        {
-            List<Structure> List = await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
-            return List;
-        }
+      
         public async Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt)
         {
             _dbContext.Demolishedstructurerpt.Add(rpt);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<List<Demolishedstructurerpt>> GetAlldemolitionrptdetails(int id)
+        {
+            return await _dbContext.Demolishedstructurerpt.Include(x=>x.Structure)
+                .Where(x => x.DemolitionStructureDetailsId == id && x.IsActive == 1).ToListAsync();
+        }
 
+        public async Task<bool> Deletedemolitionrptdetails(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Demolishedstructurerpt.Where(x => x.DemolitionStructureDetailsId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
         //********* rpt 2 Details **********added by ishu
         public async Task<bool> SaveAreareclaimedrpt(Areareclaimedrpt rpt)
         {
             _dbContext.Areareclaimedrpt.Add(rpt);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Areareclaimedrpt>> GetAllArearptdetails(int id)
+        {
+            return await _dbContext.Areareclaimedrpt.Where(x => x.DemolitionStructureDetailsId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> Deletedearearptdetails(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Areareclaimedrpt.Where(x => x.DemolitionStructureDetailsId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }

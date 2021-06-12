@@ -81,11 +81,13 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<DateTime?> Date1 { get; set; }
         [NotMapped]
-        public List<int?> StructureId { get; set; }
+        public List<int?> StructureId1 { get; set; }
         [NotMapped]
         public List<int?> NoOfStructureDemolished { get; set; }
         [NotMapped]
         public List<int?> NoOfStructureRemaining { get; set; }
+
+       
 
         //*************  Areareclaimedrpt ***************
         [NotMapped]
