@@ -16,8 +16,8 @@ namespace Libraries.Model.Entity
         public int? NoOfStructureDemolished { get; set; }
         public int? NoOfStructureRemaining { get; set; }
         public byte? IsActive { get; set; }
-        
 
+      
         public Demolitionstructuredetails DemolitionStructureDetails { get; set; }
         public Structure Structure { get; set; }
     }

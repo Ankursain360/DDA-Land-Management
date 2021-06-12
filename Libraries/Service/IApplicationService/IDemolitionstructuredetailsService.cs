@@ -43,8 +43,13 @@ namespace Libraries.Service.IApplicationService
 
         //added by ishu 11june2021
 
-        Task<List<Structure>> GetAllStructure();
+        
         Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt);
         Task<bool> SaveAreareclaimedrpt(Areareclaimedrpt rpt);
+        Task<List<Demolishedstructurerpt>> GetAlldemolitionrptdetails(int id);
+        Task<bool> Deletedemolitionrptdetails(int Id);
+        Task<List<Areareclaimedrpt>> GetAllArearptdetails(int id);
+        Task<bool> Deletedearearptdetails(int Id);
+
     }
 }

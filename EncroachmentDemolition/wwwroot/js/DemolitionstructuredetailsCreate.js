@@ -1,7 +1,7 @@
 ﻿
 
 $(document).ready(function () {
-    $('#StructureId').removeAttr('multiple');
+    $('#StructureId1').removeAttr('multiple');
 
 
 });
@@ -117,9 +117,9 @@ $(document).delegate('a.add-record', 'click', function (e) {
     debugger
 
     if ($("#tbl_posts #add #Date1").val() != ''
-        && $("#tbl_posts #add #StructureId").children("option:selected").val() != undefined)
+        && $("#tbl_posts #add #StructureId1").children("option:selected").val() != undefined)
     {
-        var struct = $("#tbl_posts #add #StructureId").children("option:selected").val();
+        var struct = $("#tbl_posts #add #StructureId1").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -129,7 +129,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
         // $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
-        $('#tbl_posts_body #rec-' + size + ' #StructureId').val(struct);
+        $('#tbl_posts_body #rec-' + size + ' #StructureId1').val(struct);
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
