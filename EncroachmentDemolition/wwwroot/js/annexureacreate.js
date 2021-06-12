@@ -64,6 +64,18 @@ $(function () {
             $("#PossessionType").val("Physical Possession");
         }
     });
+
+
+    var value = $('#inspectionAreaUnit option:selected').val();
+    if (value == 0) {
+        $("#inspectionAreainSqAcreHec").hide();
+        $("#inspectionbighabis").show();
+    }
+    else {
+        $("#inspectionAreainSqAcreHec").show();
+        $("#inspectionbighabis").hide();
+    }
+
     HttpGet(`/EncroachmentRegister/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
        for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);

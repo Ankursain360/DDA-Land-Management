@@ -3,6 +3,20 @@
     var id = parseInt($('#WatchWardId').val());
     GetOtherDetails(id);
 
+    $(".inspectionbbbcalculation").keyup(function () {
+        var inbigha = $('#TotalAreaInBighaInspection').val();
+        var inbiswa = $('#TotalAreaInBiswaInspection').val();
+        var inbiswani = $('#TotalAreaInBiswaniInspection').val();
+        var inbighavalue = parseInt(inbigha == '' ? 0 : inbigha) * 1008 * 0.836;    //1008 * 0.836 = 842.688
+        var inbiswavalue = parseInt(inbiswa == '' ? 0 : inbiswa) * 42.134;    //842.688/20  = 42.134
+        var inbiswanivalue = parseInt(inbiswani == '' ? 0 : inbiswani) * 2.1067;     //42.134/20 = 2.1067
+
+        var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
+
+        $("input[id='inspectionArea']").val(totalarea.toFixed(3));
+    });
+
+
     $(".inspectionTotalCalculation").keyup(function () {
         debugger;
         var value = $('#inspectionAreaUnit option:selected').val();
@@ -32,8 +46,34 @@
 });
 
 $('#inspectionAreaUnit').change(function () {
-    $('#inspectionTotalAreaInSqAcreHt').val('');
-    $('#inspectionArea').val('');
+    debugger;
+    var value = $('#inspectionAreaUnit option:selected').val();
+    if (value == 0) {
+        $('#inspectionTotalAreaInSqAcreHt').val('');
+        $('#TotalAreaInBighaInspection').val('');
+        $('#TotalAreaInBiswaInspection').val('');
+        $('#TotalAreaInBiswaniInspection').val('');
+        $('#inspectionArea').val('');
+        $("#inspectionAreainSqAcreHec").hide();
+        $("#inspectionbighabis").show();
+    }
+    else {
+        $('#inspectionTotalAreaInSqAcreHt').val('');
+        $('#TotalAreaInBighaInspection').val('');
+        $('#TotalAreaInBiswaInspection').val('');
+        $('#TotalAreaInBiswaniInspection').val('');
+        $('#inspectionArea').val('');
+        $("#inspectionAreainSqAcreHec").show();
+        $("#inspectionbighabis").hide();
+        if (value == 1)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq Yd." + ')');
+        else if (value == 2)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
+        else if (value == 3)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+        else if (value == 4)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq. Mt." + ')');
+    }
 });
 
 function GetOtherDetails(id) {

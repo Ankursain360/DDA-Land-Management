@@ -81,12 +81,14 @@
         </div>
     </div>
     <div id="DivArea">
-        <h2 class="my-3 sub-heading">Area</h2>
+        <h2 class="my-3 sub-heading">Site Details</h2>
         <div class="row mt-md-3">
 
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit" id="inspectionAreaUnit">
+                        <option value="">--Select--</option>
+                        <option value="0">bigha-biswa-bishwani</option>
                         <option value="1">Sq Yd.</option>
                         <option value="2">Acre</option>
                         <option value="3">Hectare</option>
@@ -97,8 +99,35 @@
                 </div>
             </div>
         </div>
+        <div id="inspectionbighabis">
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
-        <div id="AreainSqAcreHec">
+                        <input limit="4" asp-for="TotalAreaInBighaInspection" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                        <span asp-validation-for="TotalAreaInBighaInspection" class="text-danger"></span>
+                        <label class="floating-label">Bigha</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input limit="2" asp-for="TotalAreaInBiswaInspection" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                        <span asp-validation-for="TotalAreaInBiswaInspection" class="text-danger"></span>
+                        <label class="floating-label">Biswa</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input limit="2" asp-for="TotalAreaInBiswaniInspection" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers inspectionbbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                        <span asp-validation-for="TotalAreaInBiswaniInspection" class="text-danger"></span>
+                        <label class="floating-label">Biswani</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="inspectionAreainSqAcreHec" style="display:none;">
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -134,16 +163,6 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                <input type="text" placeholder="Name of Encroacher" limit="100" class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
-                <span asp-validation-for="EncroacherName" class="text-danger"></span>
-                <label class="floating-label">Name of Encroacher</label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <label>Encroachment</label>
@@ -167,6 +186,15 @@
     </div>
     <div id="Divclsification">
         <h2 class="my-3 sub-heading">Details Of Encroachment</h2>
+        <div class="row mt-md-3 mb-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" placeholder="Name of Encroacher" limit="100" class="floating-label-field floating-label-field--s3" asp-for="EncroacherName" />
+                    <span asp-validation-for="EncroacherName" class="text-danger"></span>
+                    <label class="floating-label">Name of Encroacher</label>
+                </div>
+            </div>
+        </div>
         <div class="table-section bg-white border shadow rounded">
             <div class="table-responsive ">
                 <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
