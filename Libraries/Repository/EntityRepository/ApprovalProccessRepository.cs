@@ -116,18 +116,6 @@ namespace Libraries.Repository.EntityRepository
                                      .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Approvalstatus>> BindDropdownApprovalStatusAtIndex(int userId)
-        {
-            var AllDataList = await _dbContext.Approvalproccess.ToListAsync();
-            var UserWiseDataList = AllDataList.Where(x => x.SendTo != null && x.SendTo.Split(',').Contains(userId.ToString()));
-            List<int> myIdList = new List<int>();
-            foreach (Approvalproccess myLine in UserWiseDataList)
-                myIdList.Add(myLine.Id);
-            int[] myIdArray = myIdList.ToArray();
 
-            return await _dbContext.Approvalstatus
-                                     .Where(x => x.IsActive == 1 && myIdArray.Contains(x.Id))
-                                     .ToListAsync();
-        }
     }
 }

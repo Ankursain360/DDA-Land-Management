@@ -24,6 +24,5 @@ namespace Libraries.Service.IApplicationService
         Task<bool> RollBackEntry(string processguid, int serviceid);
         Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid);
         Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level);
-        Task<List<Approvalstatus>> BindDropdownApprovalStatusAtIndex(int userId);
     }
 }

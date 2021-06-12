@@ -107,9 +107,5 @@ namespace Libraries.Service.ApplicationService
             return await _approvalproccessRepository.CheckLastUserForRevert( processguid,  serviceid,  level);
         }
 
-        public async Task<List<Approvalstatus>> BindDropdownApprovalStatusAtIndex(int userId)
-        {
-            return await _approvalproccessRepository.BindDropdownApprovalStatusAtIndex(userId);
-        }
     }
 }

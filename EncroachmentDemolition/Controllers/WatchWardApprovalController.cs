@@ -61,7 +61,9 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Index()
         {
             Watchandward data = new Watchandward();
-            data.ApprovalStatusList =await _approvalproccessService.BindDropdownApprovalStatusAtIndex(SiteContext.UserId);
+            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
@@ -228,7 +230,7 @@ namespace EncroachmentDemolition.Controllers
                                             {
                                                 if (!DataFlow[d].parameterSkip)
                                                 {
-                                                    var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), watchandward.Id , Convert.ToInt32(DataFlow[i].parameterLevel));
+                                                    var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), watchandward.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
                                                     approvalproccess.SendTo = CheckLastUserForRevert == null ? null : CheckLastUserForRevert.SendFrom;
                                                     approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
 
@@ -284,7 +286,7 @@ namespace EncroachmentDemolition.Controllers
                                             }
                                             approvalproccess.SendToProfileId = multouserprofileid.ToString();
                                         }
-                                        else if(approvalproccess.SendTo == null && (watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
+                                        else if (approvalproccess.SendTo == null && (watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
                                         {
                                             ViewBag.Items = await _userProfileService.GetRole();
                                             await BindApprovalStatusDropdown(watchandward);
@@ -545,6 +547,34 @@ namespace EncroachmentDemolition.Controllers
             return (List<string>)dropdown;
         }
 
+        public async Task<string[]> GetApprovalStatusDropdownListAtIndex()  //Bind Dropdown of Approval Status
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> dropdown = null;
+            int col = 0;
+            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowPreccessGuidWatchWard").Value));
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                var template = DataFlow[i].Template;
+                List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+                for (int j = 0; j < ObjList.Count; j++)
+                {
+                    for (int k = 0; k < ObjList[j].parameterAction.Count; k++)
+                    {
+                        if (col > 0)
+                            stringBuilder.Append(",");
+                        stringBuilder.Append(ObjList[j].parameterAction[k]);
+                        col++;
+                    }
+                }
+
+            }
+            string[] stringArray = stringBuilder.ToString().Split(',').ToArray();
+            return stringArray;
+        }
+
+
         public List<int> ConvertStringListToIntList(List<string> list)
         {
             List<int> resultList = new List<int>();
@@ -646,7 +676,7 @@ namespace EncroachmentDemolition.Controllers
                                             {
                                                 string[] multiTo = SendTo.Split(',');
                                                 foreach (string MultiUserId in multiTo)
-                                                {                                                    
+                                                {
                                                     var UserProfile = await _userProfileService.GetUserByIdZoneConcatedName(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
                                                     if (UserProfile != null)
                                                     {
@@ -690,7 +720,7 @@ namespace EncroachmentDemolition.Controllers
             return Json(dropdown);
         }
 
-       // [AuthorizeContext(ViewAction.View)]
+        // [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _watchAndWardApprovalService.FetchSingleResult(id);

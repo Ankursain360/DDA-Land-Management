@@ -38,6 +38,10 @@ var VILLAGEID_UNIVERSAL = [];
 var RECTWITHKHASRANO_LAYER = [];
 var WELL_LAYER = [];
 var alljsondata = [];
+var CALVERT_LAYER = [];
+var MICK_LAYER = [];
+
+
 $(document).ready(function () {
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
         var html = '';
@@ -339,6 +343,14 @@ function showvillagelayers(villageid) {
         var RectWithKhasraNo = response.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
         if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].checkedStatus == 1)
             showDisBoundariesRectWithKhasraNo(RectWithKhasraNo);
+
+        var Calvert = response.filter((x) => x.gisLayerId === 34);//Calvert
+        if (Calvert.length > 0 && Calvert[0].checkedStatus == 1)
+            showDisBoundariesCalvert(Calvert);
+
+        var Mick = response.filter((x) => x.gisLayerId === 33);//Mick
+        if (Mick.length > 0 && Mick[0].checkedStatus == 1)
+            showDisBoundariesMick(Mick);
     });
     VILLAGEID_UNIVERSAL = [];
     VILLAGEID_UNIVERSAL.push(villageid);
@@ -533,6 +545,24 @@ function showDisBoundariesKhasraBoundary(response) {
         var ln = createLine(getLatLongArr(khasraboundary[x].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: khasraboundary[x].fillColor });
         KHASRABOUNDARY_LAYER.push(ln);
+        Polys.push(ln);
+    }
+}
+function showDisBoundariesCalvert(response) {
+    var Calvert = $.map(response, function (el) { return el; })
+    for (x = 0; x < Calvert.length; x++) {
+        var ln = createLine(getLatLongArr(Calvert[x].polygon));
+        ln.setOptions({ strokeWeight: 1, strokeColor: Calvert[x].fillColor });
+        CALVERT_LAYER.push(ln);
+        Polys.push(ln);
+    }
+}
+function showDisBoundariesMick(response) {
+    var mick = $.map(response, function (el) { return el; })
+    for (x = 0; x < mick.length; x++) {
+        var ln = createLine(getLatLongArr(mick[x].polygon));
+        ln.setOptions({ strokeWeight: 1, strokeColor: mick[x].fillColor });
+        MICK_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -914,6 +944,14 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         var Well = data.filter((x) => x.gisLayerId === 31);//Well
         if (Well.length > 0)
             showDisBoundariesWell(Well);
+
+        var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
+        if (Calvert.length > 0)
+            showDisBoundariesCalvert(Calvert);
+
+        var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
+        if (Mick.length > 0)
+            showDisBoundariesMick(Mick);
     }
     else {
         $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').prop('checked', false);
@@ -1136,6 +1174,20 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
             }
         }
 
+        var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
+        if (Calvert.length > 0) {
+            for (h = 0; h < CALVERT_LAYER.length; h++) {
+                CALVERT_LAYER[h].setMap(null);
+            }
+        }
+
+        var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
+        if (Mick.length > 0) {
+            for (h = 0; h < MICK_LAYER.length; h++) {
+                MICK_LAYER[h].setMap(null);
+            }
+        }
+
 
     }
 });
@@ -1295,6 +1347,14 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         var Well = data.filter((x) => x.gisLayerId === 31);//Well
         if (Well.length > 0 && Well[0].code == id)
             showDisBoundariesWell(Well);
+
+        var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
+        if (Calvert.length > 0 && Calvert[0].code == id)
+            showDisBoundariesCalvert(Calvert);
+
+        var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
+        if (Mick.length > 0 && Mick[0].code == id)
+            showDisBoundariesMick(Mick);
 
     }
     else {
@@ -1512,6 +1572,20 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         if (Well.length > 0 && Well[0].code == id) {
             for (h = 0; h < WELL_LAYER.length; h++) {
                 WELL_LAYER[h].setMap(null);
+            }
+        }
+
+        var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
+        if (Calvert.length > 0 && Calvert[0].code == id) {
+            for (h = 0; h < CALVERT_LAYER.length; h++) {
+                CALVERT_LAYER[h].setMap(null);
+            }
+        }
+
+        var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
+        if (Mick.length > 0 && Mick[0].code == id) {
+            for (h = 0; h < MICK_LAYER.length; h++) {
+                MICK_LAYER[h].setMap(null);
             }
         }
 
