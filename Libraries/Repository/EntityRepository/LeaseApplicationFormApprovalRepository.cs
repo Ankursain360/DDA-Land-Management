@@ -44,6 +44,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Where(x => x.IsActive == 1
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                         )
                                         .GetPaged<Leaseapplication>(model.PageNumber, model.PageSize);
                         
@@ -57,6 +58,7 @@ namespace Libraries.Repository.EntityRepository
                                          .Where(x => x.IsActive == 1
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                         )
                                        .OrderBy(s =>
                                        (model.SortBy.ToUpper() == "REFNO" ? s.RefNo
@@ -75,6 +77,7 @@ namespace Libraries.Repository.EntityRepository
                                          .Where(x => x.IsActive == 1
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                         )
                                        .OrderByDescending(s =>
                                        (model.SortBy.ToUpper() == "REFNO" ? s.RefNo

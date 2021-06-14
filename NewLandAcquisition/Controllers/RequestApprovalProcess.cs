@@ -57,13 +57,18 @@ namespace NewLandAcquisition.Controllers
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:RequestPhoto:ApprovalDocumentPath").Value.ToString();
 
         }
-        //  [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
         {
+            Request data = new Request();
+            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
-            return View();
+            return View(data);
         }
 
         [HttpPost]
@@ -81,7 +86,7 @@ namespace NewLandAcquisition.Controllers
             }
         }
 
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _requestApprovalProcessService.FetchSingleResult(id);
@@ -95,7 +100,7 @@ namespace NewLandAcquisition.Controllers
             return View(Data);
         }
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Request request)
         {
             var result = false;
@@ -672,6 +677,33 @@ namespace NewLandAcquisition.Controllers
 
             return resultList;
         }
+        public async Task<string[]> GetApprovalStatusDropdownListAtIndex()  //Bind Dropdown of Approval Status
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> dropdown = null;
+            int col = 0;
+            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowProcessGuidRequestApproval").Value));
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                var template = DataFlow[i].Template;
+                List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+                for (int j = 0; j < ObjList.Count; j++)
+                {
+                    for (int k = 0; k < ObjList[j].parameterAction.Count; k++)
+                    {
+                        if (col > 0)
+                            stringBuilder.Append(",");
+                        stringBuilder.Append(ObjList[j].parameterAction[k]);
+                        col++;
+                    }
+                }
+
+            }
+            string[] stringArray = stringBuilder.ToString().Split(',').ToArray();
+            return stringArray;
+        }
+
         #endregion
 
         #region Approval Related changes Added By Renu 26 April  2021
