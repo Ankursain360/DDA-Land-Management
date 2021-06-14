@@ -1,4 +1,13 @@
-﻿$("input[name='villageradio']").click(function () {
+﻿
+$(document).ready(function () {
+    if ($("#AppealByDept").val() == "Department") {
+        $("#Departmentdiv").show();
+    } else {
+        $("#Departmentdiv").hide();
+    }
+});
+
+$("input[name='villageradio']").click(function () {
     var selected = $("input[type='radio'][name='villageradio']:checked");
     $("#AppealByDept").val(selected.val());
 
