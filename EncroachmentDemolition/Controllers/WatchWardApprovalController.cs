@@ -416,7 +416,14 @@ namespace EncroachmentDemolition.Controllers
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
 
-                        return View("Index");
+                        if ((approvalproccess.Level-1) == Convert.ToInt32(_configuration.GetSection("WatchWardApprovalLevelSpecific").Value))
+                        {
+                            return RedirectToAction("Create", "EncroachmentRegister", new { id = watchandward.Id });
+                        }
+                        else
+                        {
+                            return View("Index");
+                        }
                     }
                     else
                     {
@@ -546,7 +553,7 @@ namespace EncroachmentDemolition.Controllers
             }
             return (List<string>)dropdown;
         }
-              
+
         public List<int> ConvertStringListToIntList(List<string> list)
         {
             List<int> resultList = new List<int>();
