@@ -546,7 +546,15 @@ namespace EncroachmentDemolition.Controllers
             }
             return (List<string>)dropdown;
         }
+              
+        public List<int> ConvertStringListToIntList(List<string> list)
+        {
+            List<int> resultList = new List<int>();
+            for (int i = 0; i < list.Count; i++)
+                resultList.Add(Convert.ToInt32(list[i]));
 
+            return resultList;
+        }
         public async Task<string[]> GetApprovalStatusDropdownListAtIndex()  //Bind Dropdown of Approval Status
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -574,15 +582,6 @@ namespace EncroachmentDemolition.Controllers
             return stringArray;
         }
 
-
-        public List<int> ConvertStringListToIntList(List<string> list)
-        {
-            List<int> resultList = new List<int>();
-            for (int i = 0; i < list.Count; i++)
-                resultList.Add(Convert.ToInt32(list[i]));
-
-            return resultList;
-        }
         #endregion
 
         #region Approval Related changes Added By Renu 26 April  2021

@@ -19,6 +19,7 @@ function GetSearchParam(pageNumber, pageSize, StatusId, sortOrder) {
     var model = {
         name: "test",
         StatusId: parseInt(StatusId),
+        approvalstatusId: parseInt($("#ApprovalStatus option:selected").val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -102,4 +103,17 @@ $("input[name='radioStatus']").click(function () {
         GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId, sortby);
     }
 
+});
+
+
+$('#ApprovalStatus').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetWatchandward(currentPageNumber, currentPageSize, StatusId, sortby);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetWatchandward(currentPageNumber, currentPageSize, StatusId, sortby);
+    }
 });
