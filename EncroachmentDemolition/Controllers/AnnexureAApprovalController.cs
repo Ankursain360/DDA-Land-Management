@@ -55,13 +55,18 @@ namespace EncroachmentDemolition.Controllers
 
         }
 
-        //  [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
         {
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
-            return View();
+            Fixingdemolition data = new Fixingdemolition();
+            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+
+            return View(data);
         }
 
         [HttpPost]
@@ -74,7 +79,7 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-        // [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _annexureAApprovalService.FetchSingleResult(id);
@@ -88,7 +93,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
         {
             var result = false;
@@ -467,16 +472,13 @@ namespace EncroachmentDemolition.Controllers
 
             return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
         }
-
-
-
-
         public async Task<IActionResult> DownloadPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
             EncroachmentPhotoFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentPhotoFileDetails(Id);
             string filename = Data.PhotoFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
 
         public async Task<JsonResult> DetailsOfRepeater(int? Id)
@@ -491,14 +493,16 @@ namespace EncroachmentDemolition.Controllers
             FileHelper file = new FileHelper();
             EncroachmentFirFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentFirFileDetails(Id);
             string filename = Data.FirFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadLocationMapFile(int Id)
         {
             FileHelper file = new FileHelper();
             EncroachmentLocationMapFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentLocationMapFileDetails(Id);
             string filename = Data.LocationMapFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         #endregion
 
@@ -609,6 +613,33 @@ namespace EncroachmentDemolition.Controllers
                 resultList.Add(Convert.ToInt32(list[i]));
 
             return resultList;
+        }
+
+        public async Task<string[]> GetApprovalStatusDropdownListAtIndex()  //Bind Dropdown of Approval Status
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> dropdown = null;
+            int col = 0;
+            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowPreccessGuidRequestDemolition").Value));
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                var template = DataFlow[i].Template;
+                List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+                for (int j = 0; j < ObjList.Count; j++)
+                {
+                    for (int k = 0; k < ObjList[j].parameterAction.Count; k++)
+                    {
+                        if (col > 0)
+                            stringBuilder.Append(",");
+                        stringBuilder.Append(ObjList[j].parameterAction[k]);
+                        col++;
+                    }
+                }
+
+            }
+            string[] stringArray = stringBuilder.ToString().Split(',').ToArray();
+            return stringArray;
         }
         #endregion
 

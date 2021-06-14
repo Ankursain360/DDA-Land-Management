@@ -359,7 +359,7 @@
                                             <input type="file" asp-for="Encroachment.Firfile" placeholder="Fir Details" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                                             foreach (var item in Model.Encroachment.EncroachmentFirFileDetails)
                                             {
-                                                <a asp-action="DownloadFirfile" asp-route-id="@item.Id" target="_blank" class="badge badge-primary px-2"> (View Existing Document @(FirFile += 1) )</a>
+                                                <a asp-action="DownloadFirfile" target="_blank"  asp-route-id="@item.Id" target="_blank" class="badge badge-primary px-2"> (View Existing Document @(FirFile += 1) )</a>
 
                                             }
                                             <span asp-validation-for="Encroachment.Firfile" class="text-danger"></span>
@@ -403,7 +403,7 @@
                                             <input type="file" asp-for="Encroachment.LocationMapFile" id="LocationMapFile" placeholder="Location Map" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                                             foreach (var item in Model.Encroachment.EncroachmentLocationMapFileDetails)
                                             {
-                                                <a asp-action="DownloadLocationMapFile" asp-route-id="@item.Id" target="_blank" c class="badge badge-primary px-2"> (View Existing Document @(LocationMapFile += 1) )</a>
+                                                <a asp-action="DownloadLocationMapFile" target="_blank"  asp-route-id="@item.Id" target="_blank" c class="badge badge-primary px-2"> (View Existing Document @(LocationMapFile += 1) )</a>
 
                                             }
                                             <span asp-validation-for="Encroachment.LocationMapFile" class="text-danger"></span>
@@ -429,7 +429,7 @@
                                             <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                                             foreach (var item in Model.Encroachment.EncroachmentPhotoFileDetails)
                                             {
-                                                <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" target="_blank" c class="badge badge-primary px-2"> (View Existing Document @(PhotoFile += 1 ))</a>
+                                                <a asp-action="DownloadPhotoFile" target="_blank"  asp-route-id="@item.Id" target="_blank" c class="badge badge-primary px-2"> (View Existing Document @(PhotoFile += 1 ))</a>
 
                                             }
                                             <span asp-validation-for="Encroachment.PhotoFile" class="text-danger"></span>

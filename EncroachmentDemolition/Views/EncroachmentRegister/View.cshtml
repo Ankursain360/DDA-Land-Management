@@ -341,7 +341,7 @@
 
                             foreach (var item in Model.EncroachmentFirFileDetails)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View File @(FirFile += 1) )</a>
+                                <a class="badge badge-primary px-2" target="_blank"  asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View File @(FirFile += 1) )</a>
 
                             }
                         }
@@ -382,7 +382,7 @@
                             <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg, image/gif" multiple />
                             foreach (var item in Model.EncroachmentLocationMapFileDetails)
                             {
-                                <a asp-action="DownloadLocationMapFile" class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Document @(LocationMapFile += 1) )</a>
+                                <a asp-action="DownloadLocationMapFile"  target="_blank" class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Document @(LocationMapFile += 1) )</a>
 
                             }
                         }
@@ -406,7 +406,7 @@
                             <input type="file" class="floating-label-field floating-label-field--s3" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf,  image/png, image/jpeg, image/gif" multiple />
                             foreach (var item in Model.EncroachmentPhotoFileDetails)
                             {
-                                <a asp-action="DownloadPhotoFile" class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Document @(PhotoFile += 1 ))</a>
+                                <a asp-action="DownloadPhotoFile" target="_blank"  class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Document @(PhotoFile += 1 ))</a>
 
                             }
                         }

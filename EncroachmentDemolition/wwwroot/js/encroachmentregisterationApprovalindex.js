@@ -109,11 +109,11 @@ $("input[name='radioStatus']").click(function () {
 $('#ApprovalStatus').change(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-        GetWatchandward(currentPageNumber, currentPageSize, StatusId, sortby);
+        GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId, sortby);
 
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-        GetWatchandward(currentPageNumber, currentPageSize, StatusId, sortby);
+        GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId, sortby);
     }
 });

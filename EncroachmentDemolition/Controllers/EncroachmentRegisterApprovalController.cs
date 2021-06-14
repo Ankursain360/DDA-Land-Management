@@ -597,7 +597,7 @@ namespace EncroachmentDemolition.Controllers
             StringBuilder stringBuilder = new StringBuilder();
             List<string> dropdown = null;
             int col = 0;
-            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowPreccessGuidWatchWard").Value));
+            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowPreccessGuidInspection").Value));
 
             for (int i = 0; i < DataFlow.Count; i++)
             {
