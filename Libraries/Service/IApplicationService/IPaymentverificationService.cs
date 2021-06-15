@@ -23,6 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<PaymentTransactionReportListDataDto>> GetPagedPaymentTransactionReportData(PaymentTransactionReportSearchDto model);
         Task<List<PaymentTransactionReportListDataDto>> GetPagedPaidReportData(DueVsPaidReportSearchDto model);
         Task<List<Paymentverification>> BindFileNoList();
+        Task<PagedResult<Paymentverification>> GetPagedPaymentVerificationDoneByAcc(PaymentVerificationAccountSection model);
         Task<List<Locality>> BindLoclityList();
     }
 }

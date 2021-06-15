@@ -154,5 +154,33 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentVerificationDoneByAcc(PaymentVerificationAccountSection model)
+        {
+            var data = await _dbContext.Paymentverification
+
+
+
+                           // .Where(a => a.IsVerified == 0)
+                           .Where(x =>
+                           (x.VerifiedOn >= model.fromdate && x.VerifiedOn <= model.todate) &&
+                           (x.IsVerified == (model.IsVerified == 3 ? x.IsVerified : model.IsVerified))
+                          // && (x.IsVerified == model.IsVerified) 
+                           )
+
+                            .OrderByDescending(s => s.IsActive)
+                            .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+            return data;
+
+        }
+
+
+
+
+
+
+
+
+
     }
 }

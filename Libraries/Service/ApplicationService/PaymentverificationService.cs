@@ -47,6 +47,11 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetPagedPaymentListVerified(model);
         }
+
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentVerificationDoneByAcc(PaymentVerificationAccountSection model)
+        {
+            return await _paymentverificationRepository.GetPagedPaymentVerificationDoneByAcc(model);
+        }
         //public async Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto)
         //{
         //    return await _paymentverificationRepository.GetPaymentTransactionReportData(paymentTransactionReportSearchDto);
