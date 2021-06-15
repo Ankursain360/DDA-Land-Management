@@ -1,0 +1,71 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Paymentverification>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+
+            <th> File No  </th>
+            <th> Payee Name </th>
+            <th> Property No</th>
+            <th> Amount Paid</th>
+            <th> Interest Paid</th>
+            <th> Total Amount</th>
+            <th> Transaction Id</th>
+            <th> Bank Transaction Id</th>
+            <th> Payment Mode</th>
+            <th> Bank Name</th>
+            <th> Is Verified</th>
+            <th> Verified By</th>
+            <th> Verified On</th>
+          
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+
+                    <td>@item.FileNo </td>
+                    <td>@item.PayeeName  </td>
+                    <td>@item.PropertyNo </td>
+                    <td>@item.AmountPaid </td>
+                    <td>@item.InterestPaid </td>
+                    <td>@item.TotalAmount </td>
+                    <td>@item.TransactionId </td>
+                    <td>@item.BankTransactionId </td>
+                    <td>@item.PaymentMode </td>
+                    <td>@item.BankName </td>
+
+
+                    <td>
+                        @if (item.IsVerified == 1)
+                        {
+                            <span class="badge badge-success px-2 py-1">yes</span> }
+                        else
+                        {
+                            <span class="badge badge-danger px-2 py-1">no</span>}
+                    </td>
+                    <td>@item.VerifiedBy </td>
+                    <td>@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
+                  
+
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

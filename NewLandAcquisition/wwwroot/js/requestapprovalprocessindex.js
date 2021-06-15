@@ -33,6 +33,7 @@ function GetSearchParam(pageNumber, pageSize, StatusId) {
         orderby: sortdesc,
 
         StatusId: StatusId,
+        approvalstatusId: parseInt($("#ApprovalStatus option:selected").val()),
         pageSize: pageSize,
         pageNumber: pageNumber
     }
@@ -133,4 +134,15 @@ $("input[name='radioStatus']").click(function () {
         GetWatchandward(currentPageNumber, currentPageSize, StatusId);
     }
 
+});
+$('#ApprovalStatus').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+    }
 });

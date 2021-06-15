@@ -44,6 +44,7 @@ namespace Libraries.Repository.EntityRepository
                                             && (model.StatusId == 0 ? (x.Encroachment.ZoneId == x.Encroachment.ZoneId) : (x.Encroachment.ZoneId == (zoneId == 0 ? x.Encroachment.ZoneId : zoneId)))
                                             && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                             && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                            && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                             )
                                         .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
 

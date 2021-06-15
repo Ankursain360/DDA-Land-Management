@@ -28,5 +28,6 @@ namespace Libraries.Service.IApplicationService
         int ProcessGuidBasisCount(string ProcessGuid);
         Task<WorkflowTemplate> FetchSingleResultOnProcessGuid(string processguid);
         Task<WorkflowTemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version);
+        Task<List<WorkflowTemplate>> GetWorkFlowDataOnGuid(string processguid);
     }
 }

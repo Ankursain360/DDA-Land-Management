@@ -57,13 +57,17 @@ namespace EncroachmentDemolition.Controllers
 
         }
 
-        //   [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
         {
+            Watchandward data = new Watchandward();
+            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
-            return View();
+            return View(data);
         }
 
         [HttpPost]
@@ -74,7 +78,7 @@ namespace EncroachmentDemolition.Controllers
             return PartialView("_List", result);
         }
 
-        //   [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
@@ -88,10 +92,11 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Watchandward watchandward)
         {
             var result = false;
+            int initiallyLevel = 0;
             var IsApplicationPendingAtUserEnd = await _watchAndWardApprovalService.IsApplicationPendingAtUserEnd(id, SiteContext.UserId);
             if (IsApplicationPendingAtUserEnd)
             {
@@ -175,6 +180,7 @@ namespace EncroachmentDemolition.Controllers
 
                     if (checkLastApprovalStatuscode.StatusCode == ((int)ApprovalActionStatus.QueryForward)) // check islast approvalrow is of query type then return to the same user
                     {
+                        initiallyLevel = ApprovalProcessBackData.Level;
                         approvalproccess.Level = ApprovalProcessBackData.Level;
                         approvalproccess.SendTo = ApprovalProcessBackData.SendFrom;
                         #region set sendto and sendtoprofileid 
@@ -216,6 +222,7 @@ namespace EncroachmentDemolition.Controllers
                                     {
                                         if (watchandward.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
                                         {
+                                            initiallyLevel = ApprovalProcessBackData.Level;
                                             approvalproccess.Level = ApprovalProcessBackData.Level;
                                             approvalproccess.SendTo = watchandward.ApprovalUserId.ToString();
                                         }
@@ -226,24 +233,26 @@ namespace EncroachmentDemolition.Controllers
                                             {
                                                 if (!DataFlow[d].parameterSkip)
                                                 {
-                                                    var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), watchandward.Id , Convert.ToInt32(DataFlow[i].parameterLevel));
+                                                    var CheckLastUserForRevert = await _approvalproccessService.CheckLastUserForRevert((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), watchandward.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
                                                     approvalproccess.SendTo = CheckLastUserForRevert == null ? null : CheckLastUserForRevert.SendFrom;
                                                     approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
-
+                                                    initiallyLevel = Convert.ToInt32(DataFlow[d].parameterLevel);
                                                     break;
                                                 }
                                             }
                                         }
                                         else if (watchandward.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
                                         {
+                                            initiallyLevel = ApprovalProcessBackData.Level;
                                             approvalproccess.Level = ApprovalProcessBackData.Level;
                                             approvalproccess.SendTo = null;
                                             approvalproccess.PendingStatus = 0;
                                         }
                                         else  // Forward Check
                                         {
-                                            if (i == DataFlow.Count - 1)
+                                            if (i == DataFlow.Count - 1) // approved
                                             {
+                                                initiallyLevel = ApprovalProcessBackData.Level;
                                                 approvalproccess.Level = 0;
                                                 approvalproccess.SendTo = null;
                                                 approvalproccess.PendingStatus = 0;
@@ -255,6 +264,7 @@ namespace EncroachmentDemolition.Controllers
                                                 {
                                                     if (!DataFlow[d].parameterSkip)
                                                     {
+                                                        initiallyLevel = Convert.ToInt32(DataFlow[d].parameterLevel);
                                                         approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
                                                         break;
                                                     }
@@ -282,7 +292,7 @@ namespace EncroachmentDemolition.Controllers
                                             }
                                             approvalproccess.SendToProfileId = multouserprofileid.ToString();
                                         }
-                                        else if(approvalproccess.SendTo == null && (watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
+                                        else if (approvalproccess.SendTo == null && (watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && watchandward.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
                                         {
                                             ViewBag.Items = await _userProfileService.GetRole();
                                             await BindApprovalStatusDropdown(watchandward);
@@ -412,7 +422,18 @@ namespace EncroachmentDemolition.Controllers
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
 
-                        return View("Index");
+                        if (initiallyLevel == Convert.ToInt32(_configuration.GetSection("WatchWardApprovalLevelSpecific").Value) && watchandward.ApprovalStatusCode == ((int)ApprovalActionStatus.Approved))
+                        {
+                            return RedirectToAction("Create", "EncroachmentRegister", new { id = watchandward.Id });
+                        }
+                        else
+                        {
+                            Watchandward data = new Watchandward();
+                            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+                            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+                            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+                            return View("Index", data);
+                        }
                     }
                     else
                     {
@@ -551,6 +572,33 @@ namespace EncroachmentDemolition.Controllers
 
             return resultList;
         }
+        public async Task<string[]> GetApprovalStatusDropdownListAtIndex()  //Bind Dropdown of Approval Status
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> dropdown = null;
+            int col = 0;
+            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowPreccessGuidWatchWard").Value));
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                var template = DataFlow[i].Template;
+                List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+                for (int j = 0; j < ObjList.Count; j++)
+                {
+                    for (int k = 0; k < ObjList[j].parameterAction.Count; k++)
+                    {
+                        if (col > 0)
+                            stringBuilder.Append(",");
+                        stringBuilder.Append(ObjList[j].parameterAction[k]);
+                        col++;
+                    }
+                }
+
+            }
+            string[] stringArray = stringBuilder.ToString().Split(',').ToArray();
+            return stringArray;
+        }
+
         #endregion
 
         #region Approval Related changes Added By Renu 26 April  2021
@@ -644,7 +692,7 @@ namespace EncroachmentDemolition.Controllers
                                             {
                                                 string[] multiTo = SendTo.Split(',');
                                                 foreach (string MultiUserId in multiTo)
-                                                {                                                    
+                                                {
                                                     var UserProfile = await _userProfileService.GetUserByIdZoneConcatedName(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
                                                     if (UserProfile != null)
                                                     {
@@ -688,7 +736,7 @@ namespace EncroachmentDemolition.Controllers
             return Json(dropdown);
         }
 
-       // [AuthorizeContext(ViewAction.View)]
+        // [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _watchAndWardApprovalService.FetchSingleResult(id);

@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         public Structure()
         {
             Demolitionstructure = new HashSet<Demolitionstructure>();
+            Demolishedstructurerpt = new HashSet<Demolishedstructurerpt>();
         }
 
         [Required(ErrorMessage = " Structure name is mandatory")]
@@ -20,5 +21,6 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
 
         public ICollection<Demolitionstructure> Demolitionstructure { get; set; }
+        public ICollection<Demolishedstructurerpt> Demolishedstructurerpt { get; set; }
     }
 }

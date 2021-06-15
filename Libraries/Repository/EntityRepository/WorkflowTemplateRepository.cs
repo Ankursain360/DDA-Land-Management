@@ -144,5 +144,15 @@ namespace Libraries.Repository.EntityRepository
                                    .Take(1)
                                    .FirstOrDefaultAsync();
         }
+
+        public async Task<List<WorkflowTemplate>> GetWorkFlowDataOnGuid(string processguid)
+        {
+            return await _dbContext.WorkflowTemplate
+                                     .Where(x => x.ProcessGuid == processguid
+                                     && x.IsActive == 1
+                                     )
+                                     .OrderByDescending(x => x.Id)
+                                     .ToListAsync();
+        }
     }
 }

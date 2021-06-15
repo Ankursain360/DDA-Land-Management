@@ -38,5 +38,16 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Structure>> GetMasterStructure();
         Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality);
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto dto);
+
+        //added by ishu 11june2021
+       
+        Task<bool> SaveDemolishedstructurerpt(Demolishedstructurerpt rpt);
+        Task<bool> SaveAreareclaimedrpt(Areareclaimedrpt rpt);
+        Task<List<Demolishedstructurerpt>> GetAlldemolitionrptdetails(int id);
+        Task<bool> Deletedemolitionrptdetails(int Id);
+        Task<List<Areareclaimedrpt>> GetAllArearptdetails(int id);
+        Task<bool> Deletedearearptdetails(int Id);
+
+
     }
 }

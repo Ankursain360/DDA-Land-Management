@@ -116,6 +116,12 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
 
+            builder.Property(e => e.TotalAreaInBighaInspection).HasColumnType("int(11)");
+
+            builder.Property(e => e.TotalAreaInBiswaInspection).HasColumnType("int(11)");
+
+            builder.Property(e => e.TotalAreaInBiswaniInspection).HasColumnType("int(11)");
+
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.ApprovedStatusNavigation)

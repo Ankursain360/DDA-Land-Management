@@ -7,15 +7,15 @@
         }
     });
 });
-$(function () {
-    $("input[name='grpNature']").click(function () {
-        if ($("#N2").is(":checked")) {
-            $('#Nature').val('0');
-        } else {
-            $('#Nature').val('1');
-        }
-    });
-});
+//$(function () {
+//    $("input[name='grpNature']").click(function () {
+//        if ($("#N2").is(":checked")) {
+//            $('#Nature').val('0');
+//        } else {
+//            $('#Nature').val('1');
+//        }
+//    });
+//});
 $("input[name='grpType']").click(function () {
     var selected = $("input[type='radio'][name='grpType']:checked");
     $("#Type").val(selected.val());

@@ -154,5 +154,85 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentVerificationDoneByAcc(PaymentVerificationAccountSection model)
+        {
+            var data = await _dbContext.Paymentverification
+
+
+
+                           // .Where(a => a.IsVerified == 0)
+                           .Where(x =>
+                          (model.IsVerified==1 ? (x.VerifiedOn >= model.fromdate && x.VerifiedOn <= model.todate): (x.CreatedDate >= model.fromdate && x.VerifiedOn <= model.todate)) &&
+                       //    (x.IsVerified == (model.IsVerified == 3 ? x.IsVerified : model.IsVerified))
+                          (x.IsVerified == model.IsVerified) 
+                           )
+
+                            .OrderByDescending(s => s.IsActive)
+                            .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+
+
+
+
+
+
+
+
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                    case ("PAYEENAME"):
+                        data.Results = data.Results.OrderBy(x => x.PayeeName).ToList();
+                        break;
+                    case ("PROPERTYNO"):
+                        data.Results = data.Results.OrderBy(x => x.PropertyNo).ToList();
+                        break;
+                 
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                    case ("PAYEENAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.PayeeName).ToList();
+                        break;
+                    case ("PROPERTYNO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PropertyNo).ToList();
+                        break;
+                  
+
+
+                }
+            }
+            return data;
+
+
+
+
+
+
+
+         //   return data;
+
+        }
+
+      //  model.stat===1? ():
+
+
+
+
+
+
+
     }
 }

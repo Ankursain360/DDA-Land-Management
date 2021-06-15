@@ -3,24 +3,49 @@
     var id = parseInt($('#WatchWardId').val());
     GetOtherDetails(id);
 
-    $(".TotalCalculation").keyup(function () {
+   
+    var value = $('#inspectionAreaUnit option:selected').val();
+    if (value == 0) {
+        $("#inspectionAreainSqAcreHec").hide();
+        $("#inspectionbighabis").show();
+    }
+    else {
+        $("#inspectionAreainSqAcreHec").show();
+        $("#inspectionbighabis").hide();
+    }
+
+    $(".inspectionbbbcalculation").keyup(function () {
+        var inbigha = $('#TotalAreaInBighaInspection').val();
+        var inbiswa = $('#TotalAreaInBiswaInspection').val();
+        var inbiswani = $('#TotalAreaInBiswaniInspection').val();
+        var inbighavalue = parseInt(inbigha == '' ? 0 : inbigha) * 1008 * 0.836;    //1008 * 0.836 = 842.688
+        var inbiswavalue = parseInt(inbiswa == '' ? 0 : inbiswa) * 42.134;    //842.688/20  = 42.134
+        var inbiswanivalue = parseInt(inbiswani == '' ? 0 : inbiswani) * 2.1067;     //42.134/20 = 2.1067
+
+        var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
+
+        $("input[id='inspectionArea']").val(totalarea.toFixed(3));
+    });
+
+
+    $(".inspectionTotalCalculation").keyup(function () {
         debugger;
-        var value = $('#AreaUnit option:selected').val();
-        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        var value = $('#inspectionAreaUnit option:selected').val();
+        var totalOther = $('#inspectionTotalAreaInSqAcreHt').val();
         if (value == 1) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
         }
         else if (value == 2) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 4840 * 0.836).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 4840 * 0.836).toFixed(3));
         }
         else if (value == 3) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10000).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10000).toFixed(3));
         }
         else if (value == 4) {
-            $("input[name='Area']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
+            $("input[id='inspectionArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
         }
     });
-    debugger;
+
     if ($('#StatusOfLand').val() == 'Other Govt. Land') {
         $("#divForLandStatus").show();
         callSelect2();
@@ -31,7 +56,36 @@
 
 });
 
-
+$('#inspectionAreaUnit').change(function () {
+    debugger;
+    var value = $('#inspectionAreaUnit option:selected').val();
+    if (value == 0) {
+        $('#inspectionTotalAreaInSqAcreHt').val('');
+        $('#TotalAreaInBighaInspection').val('');
+        $('#TotalAreaInBiswaInspection').val('');
+        $('#TotalAreaInBiswaniInspection').val('');
+        $('#inspectionArea').val('');
+        $("#inspectionAreainSqAcreHec").hide();
+        $("#inspectionbighabis").show();
+    }
+    else {
+        $('#inspectionTotalAreaInSqAcreHt').val('');
+        $('#TotalAreaInBighaInspection').val('');
+        $('#TotalAreaInBiswaInspection').val('');
+        $('#TotalAreaInBiswaniInspection').val('');
+        $('#inspectionArea').val('');
+        $("#inspectionAreainSqAcreHec").show();
+        $("#inspectionbighabis").hide();
+        if (value == 1)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq Yd." + ')');
+        else if (value == 2)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
+        else if (value == 3)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+        else if (value == 4)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq. Mt." + ')');
+    }
+});
 function onChangeLandStatus(status) {
     if (status == 'Other Govt. Land') {
         $("#divForLandStatus").show();
@@ -79,6 +133,7 @@ function onChangeDivision(id) {
         $("#LocalityId").html(html);
     });
 };
+debugger;
 $(function () {
     $("#tbl_posts #tbl_posts_body .odd").remove();
     $("#tbl_posts #add .floating-label-field").attr("multiple", false);

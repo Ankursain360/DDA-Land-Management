@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <label> दिनांक -</label><b>@Model.GenerateDate</b>
+                    <label> दिनांक -</label><b>@Model.GenerateDate.ToString("dd/MMM/yyyy")</b>
 
 
                 </div>
@@ -63,7 +63,7 @@
                 <div class="col-md-4">
 
 
-                    <label>Dated -</label><b>@Model.GenerateDate</b>
+                    <label>Dated -</label><b>@Model.GenerateDate.ToString("dd/MMM/yyyy")</b>
                 </div>
 
             </div>
@@ -399,10 +399,10 @@
 
                 <div class="col-md-9">
                     <p style="color:black">Date - </p><p style="color:black">
-                                                          <b> @Model.GenerateDate</b>
+                                                          <b> @Model.GenerateDate.ToString("dd/MMM/yyyy")</b>
 
 
-                        दिनांक -<b> @Model.GenerateDate</b>
+                        दिनांक -<b> @Model.GenerateDate.ToString("dd/MMM/yyyy")</b>
                     </p>
 
                 </div>

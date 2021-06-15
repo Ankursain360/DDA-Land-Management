@@ -105,5 +105,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _workflowtemplateRepository.FetchSingleResultOnProcessGuidWithVersion(processguid , version);
         }
+
+        public async Task<List<WorkflowTemplate>> GetWorkFlowDataOnGuid(string processguid)
+        {
+            return await _workflowtemplateRepository.GetWorkFlowDataOnGuid(processguid);
+        }
     }
 }

@@ -260,6 +260,7 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         var id = jQuery(this).attr('data-id');
         //   var targetDiv = jQuery(this).attr('targetDiv');
         $('#recordDiv' + id).remove();
+      //  $("input[data-id='recordDiv1" + id + "'").remove();
         // jQuery("#recordDiv" + id).remove();
         //  $('#recordDiv' + id).empty();
 
@@ -341,8 +342,8 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 
         var i = 1;
         $(".recordDiv").each(function () {
-            $(this).removeAttr("data-id");
-            $(this).attr("data-id", "recordDiv" + i);
+            $(this).removeAttr("id");
+            $(this).attr("id", "recordDiv" + i);
             i = i + 1;
         });
         return true;
