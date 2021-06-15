@@ -14,6 +14,7 @@ namespace Dto.Search
         public string fileno { get; set; }
         public string colname { get; set; }
         public int orderby { get; set; }
+        public int approvalstatusId { get; set; }
 
 
     }

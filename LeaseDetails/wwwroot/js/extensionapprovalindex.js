@@ -62,6 +62,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder, StatusId) {
     var model = {
         name: "test",
         StatusId: parseInt(StatusId),
+        approvalstatusId: parseInt($("#ApprovalStatus option:selected").val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
@@ -107,4 +108,15 @@ $("input[name='radioStatus']").click(function () {
         GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
     }
 
+});
+$('#ApprovalStatus').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
 });

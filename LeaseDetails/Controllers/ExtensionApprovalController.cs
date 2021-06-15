@@ -51,9 +51,14 @@ namespace LeaseDetails.Controllers
 
 
         }
-       [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
         {
+            Watchandward data = new Watchandward();
+            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
@@ -545,6 +550,33 @@ namespace LeaseDetails.Controllers
 
             return resultList;
         }
+        public async Task<string[]> GetApprovalStatusDropdownListAtIndex()  //Bind Dropdown of Approval Status
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> dropdown = null;
+            int col = 0;
+            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowProcessGuidExtensionService").Value));
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                var template = DataFlow[i].Template;
+                List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+                for (int j = 0; j < ObjList.Count; j++)
+                {
+                    for (int k = 0; k < ObjList[j].parameterAction.Count; k++)
+                    {
+                        if (col > 0)
+                            stringBuilder.Append(",");
+                        stringBuilder.Append(ObjList[j].parameterAction[k]);
+                        col++;
+                    }
+                }
+
+            }
+            string[] stringArray = stringBuilder.ToString().Split(',').ToArray();
+            return stringArray;
+        }
+
         #endregion
 
         #region Approval Related changes Added By Renu 26 April  2021

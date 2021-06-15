@@ -105,7 +105,8 @@
                         @if (Model.PaymentProofDocumentName != null)
                         {
                             <input disabled type="file" asp-for="PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View File)</label>
+                            <a class="badge badge-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+
                         }
                         else
                         {

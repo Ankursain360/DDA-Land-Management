@@ -64,7 +64,9 @@ namespace AcquiredLandInformationManagement.Controllers
                 if (ModelState.IsValid)
                 {
                     FileHelper fileHelper = new FileHelper();
-                    paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ? paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, paymentdetail.PaymentProofDocumentIFormFile);
+                    paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
+                        paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                        paymentdetail.PaymentProofDocumentIFormFile);
                     paymentdetail.CreatedBy = SiteContext.UserId;
                     var result = await _paymentdetailService.Create(paymentdetail);
 
@@ -116,7 +118,9 @@ namespace AcquiredLandInformationManagement.Controllers
                 try
                 {
                     FileHelper fileHelper = new FileHelper();
-                    paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ? paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, paymentdetail.PaymentProofDocumentIFormFile);
+                    paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
+                        paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                        paymentdetail.PaymentProofDocumentIFormFile);
                     paymentdetail.ModifiedBy = SiteContext.UserId;
                     var result = await _paymentdetailService.Update(id, paymentdetail);
                     if (result == true)
