@@ -61,7 +61,17 @@ $("#btnGenerate").click(function () {
 });
 
 function GetSearchParam(pageNumber, pageSize) {
+    var sorbyname = $('#Sortbyd').val();
+    var sortdesc = $("#sortdesc").val();
+    if (sorbyname) {
+        sorbyname = sorbyname;
+    } else {
+        sorbyname = 'FileNo';
+    }
+
     var model = {
+        colname: sorbyname,
+        orderby: sortdesc,
         IsVerified: $('#IsVerified').val(),
       
         fromdate: $('#FromDateMsg').val(),
@@ -83,3 +93,24 @@ function onChangePageSize(pageSize) {
     GetPaymentVerification(currentPageNumber, pageSize);
     currentPageSize = parseInt(pageSize);;
 }
+
+
+$("#Sortbyd").change(function () {
+
+    GetPaymentVerification(currentPageNumber, currentPageSize);
+
+});
+$("#ascId").click(function () {
+  
+
+    $("#descId").removeClass("active");
+    $("#ascId").addClass("active");
+    $("#sortdesc").val(2);
+    GetPaymentVerification(currentPageNumber, currentPageSize);
+});
+$("#descId").click(function () {
+    $("#ascId").removeClass("active");
+    $("#descId").addClass("active");
+    $("#sortdesc").val(1);
+    GetPaymentVerification(currentPageNumber, currentPageSize);
+});
