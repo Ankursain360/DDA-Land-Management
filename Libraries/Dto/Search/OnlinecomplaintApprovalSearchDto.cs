@@ -10,5 +10,6 @@ namespace Dto.Search
      
         public int StatusId { get; set; }
         public string name { get; set; }
+        public int approvalstatusId { get; set; }
     }
 }

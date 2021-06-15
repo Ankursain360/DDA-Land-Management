@@ -1,6 +1,7 @@
 ﻿using Core.Enum;
 using Dto.Master;
 using Dto.Search;
+using EncroachmentDemolition.Filters;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
@@ -48,13 +49,18 @@ namespace EncroachmentDemolition.Controllers
 
 
         }
-        //  [AuthorizeContext(ViewAction.View)]
-        public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
         {
+            Onlinecomplaint data = new Onlinecomplaint();
+            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
-            return View();
+            return View(data);
         }
 
         [HttpPost]
@@ -72,7 +78,7 @@ namespace EncroachmentDemolition.Controllers
             }
         }
 
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _onlinecomplaintApprovalService.FetchSingleResult(id);
@@ -86,7 +92,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        //  [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Onlinecomplaint onlinecomplaint)
         {
             var result = false;
@@ -406,7 +412,12 @@ namespace EncroachmentDemolition.Controllers
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
 
-                        return View("Index");
+                        Onlinecomplaint data = new Onlinecomplaint();
+                        var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+                        int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+                        data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+
+                        return View("Index", data);
                     }
                     else
                     {
@@ -546,6 +557,33 @@ namespace EncroachmentDemolition.Controllers
 
             return resultList;
         }
+        public async Task<string[]> GetApprovalStatusDropdownListAtIndex()  //Bind Dropdown of Approval Status
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            List<string> dropdown = null;
+            int col = 0;
+            var DataFlow = await _workflowtemplateService.GetWorkFlowDataOnGuid((_configuration.GetSection("workflowPreccessGuidOnlineComplaintId").Value));
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                var template = DataFlow[i].Template;
+                List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+                for (int j = 0; j < ObjList.Count; j++)
+                {
+                    for (int k = 0; k < ObjList[j].parameterAction.Count; k++)
+                    {
+                        if (col > 0)
+                            stringBuilder.Append(",");
+                        stringBuilder.Append(ObjList[j].parameterAction[k]);
+                        col++;
+                    }
+                }
+
+            }
+            string[] stringArray = stringBuilder.ToString().Split(',').ToArray();
+            return stringArray;
+        }
+
         #endregion
 
         #region Approval Related changes Added By Renu 26 April  2021
