@@ -241,6 +241,12 @@ namespace EncroachmentDemolition.Controllers
                                             approvalproccess.SendTo = null;
                                             approvalproccess.PendingStatus = 0;
                                         }
+                                        else if (encroachmentRegisterations.ApprovalStatusCode == ((int)ApprovalActionStatus.Approved))
+                                        {
+                                            approvalproccess.Level = 0;
+                                            approvalproccess.SendTo = null;
+                                            approvalproccess.PendingStatus = 0;
+                                        }
                                         else  // Forward Check
                                         {
                                             if (i == DataFlow.Count - 1)
@@ -307,6 +313,11 @@ namespace EncroachmentDemolition.Controllers
                                                 encroachmentRegisterations.PendingAt = approvalproccess.SendTo;
                                             }
                                             else if (encroachmentRegisterations.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
+                                            {
+                                                encroachmentRegisterations.ApprovedStatus = Convert.ToInt32(encroachmentRegisterations.ApprovalStatus);
+                                                encroachmentRegisterations.PendingAt = "0";
+                                            }
+                                            else if (encroachmentRegisterations.ApprovalStatusCode == ((int)ApprovalActionStatus.Approved))
                                             {
                                                 encroachmentRegisterations.ApprovedStatus = Convert.ToInt32(encroachmentRegisterations.ApprovalStatus);
                                                 encroachmentRegisterations.PendingAt = "0";
@@ -412,8 +423,11 @@ namespace EncroachmentDemolition.Controllers
                         else
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
-
-                        return View("Index");
+                        EncroachmentRegisteration data = new EncroachmentRegisteration();
+                        var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+                        int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+                        data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+                        return View("Index", data);
                     }
                     else
                     {

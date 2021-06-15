@@ -412,8 +412,12 @@ namespace EncroachmentDemolition.Controllers
                         else
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
+                        Fixingdemolition data = new Fixingdemolition();
+                        var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+                        int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+                        data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
 
-                        return View("Index");
+                        return View("Index", data);
                     }
                     else
                     {

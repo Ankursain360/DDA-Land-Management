@@ -418,7 +418,12 @@ namespace NewLandAcquisition.Controllers
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
 
-                        return View("Index");
+                        Request data = new Request();
+                        var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+                        int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+                        data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+
+                        return View("Index", data);
                     }
                     else
                     {
