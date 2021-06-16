@@ -57,6 +57,7 @@ namespace Libraries.Service.ApplicationService
             model.ModifiedDate = DateTime.Now;
             model.IsActive = module.IsActive;
             model.ModifiedBy = 1;
+            model.LandingPage = module.LandingPage;
             model.ModuleCategoryId = module.ModuleCategoryId;
             model.SortBy = module.SortBy;
             _moduleRepository.Edit(model);
