@@ -48,12 +48,31 @@ namespace Libraries.Service.ApplicationService
             model.FixingDemolitionId = demolitionpoliceassistenceletter.FixingDemolitionId;
             //if(demolitionpoliceassistenceletter.GenerateUpload == 0)
             //{
-
+            model.OfficeName = demolitionpoliceassistenceletter.OfficeName;
+            model.OfficeDepartment = demolitionpoliceassistenceletter.OfficeDepartment;
+            model.OfficeZone = demolitionpoliceassistenceletter.OfficeZone;
+            model.OfficeAddress = demolitionpoliceassistenceletter.OfficeAddress;
+            model.FileNo = demolitionpoliceassistenceletter.FileNo;
+            model.LetterDate = demolitionpoliceassistenceletter.LetterDate;
+            model.DyCommOffcAddress = demolitionpoliceassistenceletter.DyCommOffcAddress;
+            model.KhasraNo = demolitionpoliceassistenceletter.KhasraNo;
+            model.VillageName = demolitionpoliceassistenceletter.VillageName;
+            model.KhasraAddress = demolitionpoliceassistenceletter.KhasraAddress;
+            model.PoliceStationName = demolitionpoliceassistenceletter.PoliceStationName;
+            model.OperationDate = demolitionpoliceassistenceletter.OperationDate;
+            model.OperationDay = demolitionpoliceassistenceletter.OperationDay;
+            model.RevenueOfficerZone = demolitionpoliceassistenceletter.RevenueOfficerZone;
+            model.RevenueOfficerWing = demolitionpoliceassistenceletter.RevenueOfficerWing;
+            model.RevenueOfficerBranch = demolitionpoliceassistenceletter.RevenueOfficerBranch;
             model.MeetingDate = demolitionpoliceassistenceletter.MeetingDate;
             model.MeetingTime = demolitionpoliceassistenceletter.MeetingTime;
+            model.ChiefEngineerAddress = demolitionpoliceassistenceletter.ChiefEngineerAddress;
+            model.Shoaddress = demolitionpoliceassistenceletter.Shoaddress;
+            model.GeneralConditions = demolitionpoliceassistenceletter.GeneralConditions;
+           
             ////}
             ////else
-            model.FilePath = demolitionpoliceassistenceletter.FilePath;
+           // model.FilePath = demolitionpoliceassistenceletter.FilePath;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = demolitionpoliceassistenceletter.ModifiedBy;
             _demolitionPoliceAssistenceLetterRepository.Edit(model);
@@ -73,6 +92,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id)
         {
             return await _demolitionPoliceAssistenceLetterRepository.FetchSingleResultOfFixingDemolition(id);
+        }
+        public async Task<Demolitionpoliceassistenceletter> Fetchletterdetails(int id)
+        {
+            Demolitionpoliceassistenceletter model = await _demolitionPoliceAssistenceLetterRepository.Fetchletterdetails(id);
+            return model;
         }
     }
 }

@@ -152,7 +152,7 @@
                             <div class="col-md-3">
                                 <br />
                                 <div class="floating-label-wrap">
-                                    <select required asp-for="ParameterActionList[0]" asp-items="@(new SelectList(ViewBag.ApprovalStatus,"Id","Name"))"
+                                    <select required asp-for="ParameterActionList[0]" asp-items="@(new SelectList(ViewBag.ApprovalStatus,"idcode","Name"))"
                                             class="floating-label-field floating-label-field--s3 drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
                                     </select>
                                     <label class="floating-label">Actions</label>

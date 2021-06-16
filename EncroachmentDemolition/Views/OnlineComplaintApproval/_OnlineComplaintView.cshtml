@@ -21,7 +21,7 @@
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <textarea type="text" disabled asp-for="AddressOfComplaint" class="floating-label-field floating-label-field--s3" limit="4000"></textarea>
                             <span asp-validation-for="AddressOfComplaint" class="text-danger"></span>
-                            <label class="floating-label">Area/Address of Complainant</label>
+                            <label class="floating-label">Address of Complainant</label>
                         </div>
                     </div>
                 </div>
@@ -53,33 +53,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            @{
-                                if (Model.PhotoPath != null)
-                                {
-                                    <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" multiple />
-                                    <span asp-validation-for="Photo" class="text-danger"></span>
-                                    <label class="floating-label">Photograph</label>
-                                    <label class="err" style="color:red;display:none;">
-                                        system is unable to find the coordinates in uploaded image.
-                                        kindly upload the image which is having location information or
-                                        enter latitude and longitude manually.
-                                    </label>
-
-                                    <a class="badge badge-primary px-2" asp-action="ViewPhoto" asp-route-id="@Model.Id" target="_blank"> (View Photo)</a>
-
-                                }
-                                else
-                                {
-                                    <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" multiple />
-                                    <span asp-validation-for="Photo" class="text-danger"></span>
-                                    <label class="floating-label">Photograph</label>
-                                    <label class="err" style="color:red;display:none;">
-                                        system is unable to find the coordinates in uploaded image.
-                                        kindly upload the image which is having location information or
-                                        enter latitude and longitude manually.
-                                    </label>
-                                }
-                            }
+                            <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" multiple />
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                            <label class="floating-label">Photograph</label>
+                            <label class="err" style="color:red;display:none;">
+                                system is unable to find the coordinates in uploaded image.
+                                kindly upload the image which is having location information or
+                                enter latitude and longitude manually.
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -119,6 +100,36 @@
                 </div>
                 <div class="row pt-3">
                     <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input class="floating-label-field floating-label-field--s3" disabled asp-for="EncroacherName" placeholder="name" />
+                            <span asp-validation-for="EncroacherName" class="text-danger"></span>
+                            <label class="floating-label">Name of Encroacher</label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="floating-label">  DDA Land</label>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="hidden" disabled asp-for="DDALand" id="DDAid" value="yes" />
+
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" disabled asp-for="DDALand" name="DDA" id="ryes" value="yes" checked="checked">
+                            <label class="form-check-label" for="radio">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" disabled asp-for="DDALand" name="DDA" id="rno" value="no">
+                            <label class="form-check-label" for="radio">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-12">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <textarea type="text" disabled asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3" limit="4000"></textarea>
                             <label class="floating-label">Remarks</label>

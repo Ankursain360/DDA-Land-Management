@@ -59,16 +59,19 @@ namespace SiteMaster.Controllers
         {
             WorkflowTemplate model = new WorkflowTemplate();
             await BindDropDown(model);
-            var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
-            for (int i = 0; i < StatusList.Count; i++)
-            {
-                if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
-                    ViewBag.RevertCodeValue = StatusList[i].Id;
-                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
-                    ViewBag.ApprovedCodeValue = StatusList[i].Id;
-                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
-                    ViewBag.ForwardCodeValue = StatusList[i].Id;
-            }
+            //var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
+            //for (int i = 0; i < StatusList.Count; i++)
+            //{
+            //    if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
+            //        ViewBag.RevertCodeValue = StatusList[i].Id;
+            //    else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
+            //        ViewBag.ApprovedCodeValue = StatusList[i].Id;
+            //    else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
+            //        ViewBag.ForwardCodeValue = StatusList[i].Id;
+            //}
+            ViewBag.RevertCodeValue = (int)ApprovalActionStatus.Revert;
+            ViewBag.ApprovedCodeValue = (int)ApprovalActionStatus.Approved;
+            ViewBag.ForwardCodeValue = (int)ApprovalActionStatus.Forward;
             return View(model);
         }
 
@@ -159,16 +162,19 @@ namespace SiteMaster.Controllers
             else
                 Data.IsActiveData = false;
 
-            var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
-            for (int i = 0; i < StatusList.Count; i++)
-            {
-                if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
-                    ViewBag.RevertCodeValue = StatusList[i].Id;
-                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
-                    ViewBag.ApprovedCodeValue = StatusList[i].Id;
-                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
-                    ViewBag.ForwardCodeValue = StatusList[i].Id;
-            }
+            //var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
+            //for (int i = 0; i < StatusList.Count; i++)
+            //{
+            //    if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
+            //        ViewBag.RevertCodeValue = StatusList[i].Id;
+            //    else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
+            //        ViewBag.ApprovedCodeValue = StatusList[i].Id;
+            //    else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
+            //        ViewBag.ForwardCodeValue = StatusList[i].Id;
+            //}
+            ViewBag.RevertCodeValue = (int)ApprovalActionStatus.Revert;
+            ViewBag.ApprovedCodeValue = (int)ApprovalActionStatus.Approved;
+            ViewBag.ForwardCodeValue = (int)ApprovalActionStatus.Forward;
 
             if (Data == null)
             {
@@ -182,7 +188,16 @@ namespace SiteMaster.Controllers
         {
             var Data = await _workflowtemplateService.FetchSingleResult(id);
             var template = Data.Template;
-            return Json(template);
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            for (int j = 0; j < ObjList.Count; j++)
+            {
+                for (int k = 0; k < ObjList[j].parameterAction.Count; k++)
+                {
+                    var StatusCode = await _workflowtemplateService.GetStatusCodeFromId(Convert.ToInt32(ObjList[j].parameterAction[k]));
+                    ObjList[j].parameterAction[k] = ObjList[j].parameterAction[k] + "|" + StatusCode;
+                }
+            }
+            return Json(ObjList);
         }
 
         [HttpPost]
@@ -261,16 +276,19 @@ namespace SiteMaster.Controllers
             else
                 Data.IsActiveData = false;
 
-            var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
-            for (int i = 0; i < StatusList.Count; i++)
-            {
-                if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
-                    ViewBag.RevertCodeValue = StatusList[i].Id;
-                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
-                    ViewBag.ApprovedCodeValue = StatusList[i].Id;
-                else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
-                    ViewBag.ForwardCodeValue = StatusList[i].Id;
-            }
+            //var StatusList = await _workflowtemplateService.GetApprovalStatusListData();
+            //for (int i = 0; i < StatusList.Count; i++)
+            //{
+            //    if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
+            //        ViewBag.RevertCodeValue = StatusList[i].Id;
+            //    else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Approved)
+            //        ViewBag.ApprovedCodeValue = StatusList[i].Id;
+            //    else if (StatusList[i].StatusCode == (int)ApprovalActionStatus.Forward)
+            //        ViewBag.ForwardCodeValue = StatusList[i].Id;
+            //}
+            ViewBag.RevertCodeValue = (int)ApprovalActionStatus.Revert;
+            ViewBag.ApprovedCodeValue = (int)ApprovalActionStatus.Approved;
+            ViewBag.ForwardCodeValue = (int)ApprovalActionStatus.Forward;
 
             if (Data == null)
             {

@@ -19,21 +19,31 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.FixingDemolitionId)
                 .HasName("fk_LetterFixingDemolitionId_idx");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
-
-            builder.Property(e => e.AddressKhasraNo).HasColumnType("longtext");
-
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+            builder.Property(e => e.ChiefEngineerAddress)
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.Property(e => e.FilePath).HasColumnType("longtext");
-
-            builder.Property(e => e.FixingDemolitionId).HasColumnType("int(11)");
-
-            builder.Property(e => e.IsReligiousStructure)
-                .HasMaxLength(10)
+            builder.Property(e => e.DyCommOffcAddress)
+                .HasMaxLength(500)
                 .IsUnicode(false);
+
+            builder.Property(e => e.FileNo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.GeneralConditions).HasColumnType("longtext");
+
+            builder.Property(e => e.KhasraAddress)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+
+            builder.Property(e => e.KhasraNo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.LetterDate).HasColumnType("date");
 
             builder.Property(e => e.MeetingDate).HasColumnType("date");
 
@@ -41,12 +51,51 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+            builder.Property(e => e.OfficeAddress)
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
-            builder.Property(e => e.ModifiedDate).HasColumnType("date");
+            builder.Property(e => e.OfficeDepartment)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.OfficeName)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.OfficeZone)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.OperationDate).HasColumnType("date");
+
+            builder.Property(e => e.OperationDay)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.Property(e => e.PoliceStationName)
-                .HasMaxLength(1000)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.RevenueOfficerBranch)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.RevenueOfficerWing)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.RevenueOfficerZone)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.Shoaddress)
+                .HasColumnName("SHOAddress")
+                .HasMaxLength(500)
+                .IsUnicode(false);
+
+            builder.Property(e => e.VillageName)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.HasOne(d => d.FixingDemolition)
@@ -54,6 +103,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.FixingDemolitionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_LetterFixingDemolitionId");
+
         }
     }
 }

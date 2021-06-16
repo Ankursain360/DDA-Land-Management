@@ -62,7 +62,18 @@ namespace EncroachmentDemolition.Controllers
         {
             return View();
         }
+       
+        public async Task<IActionResult> _PoliceAssistanceLetter(int id)
+        {
 
+            var Data = await _demolitionPoliceAssistenceLetterService.Fetchletterdetails(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return PartialView(Data);
+
+        }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemolitionPoliceAssistenceLetterSearchDto model)
         {
@@ -85,6 +96,7 @@ namespace EncroachmentDemolition.Controllers
                 ViewBag.PrimaryId = 0;
                 ViewBag.EncroachmentId = Data1.EncroachmentId;
                 ViewBag.WatchWardId = Data1.Encroachment.WatchWardId;
+                Data.LetterDate = DateTime.Now;
                 return View(Data);
             }
             else
@@ -126,20 +138,20 @@ namespace EncroachmentDemolition.Controllers
                 //}
                 string LetterFileName = "";
                 string LetterfilePath = "";
-                if (demolitionpoliceassistenceletter.Document != null)
-                {
-                    if (!Directory.Exists(targetPathDocument))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathDocument);// Try to create the directory.
-                    }
-                    LetterFileName = Guid.NewGuid().ToString() + "_" + demolitionpoliceassistenceletter.Document.FileName;
-                    LetterfilePath = Path.Combine(targetPathDocument, LetterFileName);
-                    using (var stream = new FileStream(LetterfilePath, FileMode.Create))
-                    {
-                        demolitionpoliceassistenceletter.Document.CopyTo(stream);
-                    }
-                    demolitionpoliceassistenceletter.FilePath = LetterFileName;
-                }
+                //if (demolitionpoliceassistenceletter.Document != null)
+                //{
+                //    if (!Directory.Exists(targetPathDocument))
+                //    {
+                //        DirectoryInfo di = Directory.CreateDirectory(targetPathDocument);// Try to create the directory.
+                //    }
+                //    LetterFileName = Guid.NewGuid().ToString() + "_" + demolitionpoliceassistenceletter.Document.FileName;
+                //    LetterfilePath = Path.Combine(targetPathDocument, LetterFileName);
+                //    using (var stream = new FileStream(LetterfilePath, FileMode.Create))
+                //    {
+                //        demolitionpoliceassistenceletter.Document.CopyTo(stream);
+                //    }
+                //    demolitionpoliceassistenceletter.FilePath = LetterFileName;
+                //}
 
 
                 var demolitionpoliceData =await _demolitionPoliceAssistenceLetterService.FetchSingleResultButOnAneexureId(demolitionpoliceassistenceletter.FixingDemolitionId);
@@ -158,20 +170,20 @@ namespace EncroachmentDemolition.Controllers
                 if(result)
                 {
                     var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResultButOnAneexureId(demolitionpoliceassistenceletter.FixingDemolitionId);
-                    demolitionpoliceassistenceletter.FilePath = Data.FilePath;
+                   // demolitionpoliceassistenceletter.FilePath = Data.FilePath;
                     string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
                     var Body = PopulateBody(Data, path);
-                    //if(demolitionpoliceassistenceletter.GenerateUpload == 0)
-                    //{
-                    //    ViewBag.IsVisible = true;
-                    //    ViewBag.DataLetter = Body;
-                    //    ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
-                    //}
-                    //else
-                    //{
+                    if (demolitionpoliceassistenceletter.GenerateUpload == 0)
+                    {
+                        ViewBag.IsVisible = true;
+                        ViewBag.DataLetter = Body;
+                        ViewBag.Message = Alert.Show("Generate Letter Successfully", "", AlertType.Success);
+                    }
+                    else
+                    {
                         ViewBag.IsVisible = false;
                         ViewBag.Message = Alert.Show("Record Submitted and  Uploaded Successfully", "", AlertType.Success);
-                    //}
+                    }
                     return View(demolitionpoliceassistenceletter);
                 }
                 else
@@ -208,38 +220,38 @@ namespace EncroachmentDemolition.Controllers
             if (ModelState.IsValid)
             {
                
-                if(demolitionpoliceassistenceletter.GenerateUpload == 0 )
-                {
-                    if(demolitionpoliceassistenceletter.MeetingDate == null || demolitionpoliceassistenceletter.MeetingTime == null)
-                    {
-                        ViewBag.Message = Alert.Show("Meeting Date and Time is Mandatory", "", AlertType.Warning);
-                        return View(demolitionpoliceassistenceletter);
-                    }
-                }
-                else if (demolitionpoliceassistenceletter.GenerateUpload == 1)
-                {
-                    if (demolitionpoliceassistenceletter.Document == null )
-                    {
-                        ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
-                        return View(demolitionpoliceassistenceletter);
-                    }
-                }
+                //if(demolitionpoliceassistenceletter.GenerateUpload == 0 )
+                //{
+                //    if(demolitionpoliceassistenceletter.MeetingDate == null || demolitionpoliceassistenceletter.MeetingTime == null)
+                //    {
+                //        ViewBag.Message = Alert.Show("Meeting Date and Time is Mandatory", "", AlertType.Warning);
+                //        return View(demolitionpoliceassistenceletter);
+                //    }
+                //}
+                //else if (demolitionpoliceassistenceletter.GenerateUpload == 1)
+                //{
+                //    if (demolitionpoliceassistenceletter.Document == null )
+                //    {
+                //        ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
+                //        return View(demolitionpoliceassistenceletter);
+                //    }
+                //}
                 string LetterFileName = "";
                 string LetterfilePath = "";
-                if (demolitionpoliceassistenceletter.Document != null)
-                {
-                    if (!Directory.Exists(targetPathDocument))
-                    {
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathDocument);// Try to create the directory.
-                    }
-                    LetterFileName = Guid.NewGuid().ToString() + "_" + demolitionpoliceassistenceletter.Document.FileName;
-                    LetterfilePath = Path.Combine(targetPathDocument, LetterFileName);
-                    using (var stream = new FileStream(LetterfilePath, FileMode.Create))
-                    {
-                        demolitionpoliceassistenceletter.Document.CopyTo(stream);
-                    }
-                    demolitionpoliceassistenceletter.FilePath = LetterFileName;
-                }
+                //if (demolitionpoliceassistenceletter.Document != null)
+                //{
+                //    if (!Directory.Exists(targetPathDocument))
+                //    {
+                //        DirectoryInfo di = Directory.CreateDirectory(targetPathDocument);// Try to create the directory.
+                //    }
+                //    LetterFileName = Guid.NewGuid().ToString() + "_" + demolitionpoliceassistenceletter.Document.FileName;
+                //    LetterfilePath = Path.Combine(targetPathDocument, LetterFileName);
+                //    using (var stream = new FileStream(LetterfilePath, FileMode.Create))
+                //    {
+                //        demolitionpoliceassistenceletter.Document.CopyTo(stream);
+                //    }
+                //    demolitionpoliceassistenceletter.FilePath = LetterFileName;
+                //}
 
                 demolitionpoliceassistenceletter.ModifiedBy = SiteContext.UserId;
                 var result = await _demolitionPoliceAssistenceLetterService.Update(id, demolitionpoliceassistenceletter);
@@ -247,7 +259,7 @@ namespace EncroachmentDemolition.Controllers
                 if (result)
                 {
                     var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(id);
-                    demolitionpoliceassistenceletter.FilePath = Data.FilePath;
+                  //  demolitionpoliceassistenceletter.FilePath = Data.FilePath;
                     string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
                     var Body = PopulateBody(Data, path);
                     ViewBag.IsVisible = true;
@@ -276,22 +288,43 @@ namespace EncroachmentDemolition.Controllers
             {
                 body = reader.ReadToEnd();
             }
+
+            body = body.Replace("{OfficeName}", demolitionpoliceassistenceletter.OfficeName);
+            body = body.Replace("{OfficeDepartment}", demolitionpoliceassistenceletter.OfficeDepartment);
+            body = body.Replace("{OfficeZone}", demolitionpoliceassistenceletter.OfficeZone);
+            body = body.Replace("{OfficeAddress}", demolitionpoliceassistenceletter.OfficeAddress);
+            body = body.Replace("{FileNo}", demolitionpoliceassistenceletter.FileNo);
+            body = body.Replace("{LetterDate}", Convert.ToDateTime((demolitionpoliceassistenceletter.LetterDate)).ToString("dd-MMM-yyyy"));
+            body = body.Replace("{DyCommOffcAddress}", demolitionpoliceassistenceletter.DyCommOffcAddress);
+            body = body.Replace("{KhasraNo}", demolitionpoliceassistenceletter.KhasraNo);
+            body = body.Replace("{VillageName}", demolitionpoliceassistenceletter.VillageName);
+            body = body.Replace("{KhasraAddress}", demolitionpoliceassistenceletter.KhasraAddress);
+            body = body.Replace("{PoliceStationName}", demolitionpoliceassistenceletter.PoliceStationName);
+            body = body.Replace("{OperationDate}", Convert.ToDateTime((demolitionpoliceassistenceletter.OperationDate)).ToString("dd-MMM-yyyy"));
+            body = body.Replace("{OperationDay}", demolitionpoliceassistenceletter.MeetingTime);
+            body = body.Replace("{RevenueOfficerZone}", demolitionpoliceassistenceletter.RevenueOfficerZone);
+            body = body.Replace("{RevenueOfficerWing}", demolitionpoliceassistenceletter.RevenueOfficerWing);
+            body = body.Replace("{RevenueOfficerBranch}", demolitionpoliceassistenceletter.RevenueOfficerBranch);
             body = body.Replace("{MeetingDate}", Convert.ToDateTime((demolitionpoliceassistenceletter.MeetingDate)).ToString("dd-MMM-yyyy"));
-            body = body.Replace("{KhasraNo}", demolitionpoliceassistenceletter.FixingDemolition.Encroachment.KhasraNo);
-            body = body.Replace("{Locality}", demolitionpoliceassistenceletter.FixingDemolition.Encroachment.Locality.Name);
             body = body.Replace("{MeetingTime}", demolitionpoliceassistenceletter.MeetingTime);
+            body = body.Replace("{ChiefEngineerAddress}", demolitionpoliceassistenceletter.ChiefEngineerAddress);
+            body = body.Replace("{MeetingTime}", demolitionpoliceassistenceletter.MeetingTime);
+            body = body.Replace("{SHOAddress}", demolitionpoliceassistenceletter.Shoaddress);
+            body = body.Replace("{GeneralConditions}", demolitionpoliceassistenceletter.GeneralConditions==null?"": "4. General Conditions:<br/>"+ demolitionpoliceassistenceletter.GeneralConditions);
+
+
 
             return body;
         }
 
-        public async Task<FileResult> ViewLetter(int Id)
-        {
-            FileHelper file = new FileHelper();
-            var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(Id);
-            string path = targetPathDocument + Data.FilePath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-            return File(FileBytes, file.GetContentType(path));
-        }
+        //public async Task<FileResult> ViewLetter(int Id)
+        //{
+        //    FileHelper file = new FileHelper();
+        //    var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(Id);
+        //   // string path = targetPathDocument + Data.FilePath;
+        //    byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+        //    return File(FileBytes, file.GetContentType(path));
+        //}
 
         #region Watch & Ward  Details
         public async Task<PartialViewResult> WatchWardView(int id)

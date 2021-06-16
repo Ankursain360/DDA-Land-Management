@@ -18,5 +18,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<WorkflowTemplate> FetchSingleResultOnProcessGuid(string processguid);
         Task<WorkflowTemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version);
         Task<List<WorkflowTemplate>> GetWorkFlowDataOnGuid(string processguid);
+        Task<int> GetStatusCodeFromId(int id);
     }
 }
