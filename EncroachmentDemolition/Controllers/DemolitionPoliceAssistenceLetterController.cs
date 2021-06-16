@@ -62,11 +62,18 @@ namespace EncroachmentDemolition.Controllers
         {
             return View();
         }
-        public IActionResult PoliceAssistanceLetter()
+       
+        public async Task<IActionResult> _PoliceAssistanceLetter(int id)
         {
-            return View();
-        }
 
+            var Data = await _demolitionPoliceAssistenceLetterService.Fetchletterdetails(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return PartialView(Data);
+
+        }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemolitionPoliceAssistenceLetterSearchDto model)
         {
