@@ -2,7 +2,12 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Police Assistance letter" })
 <br />
 <br />
-
+<script src="https://cdn.tiny.cloud/1/cl671uygj7y4cusxf9g7bi3mejfcqetflsi10j6vvuln9x9c/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: '#GeneralConditions'
+    });
+</script>
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="FixingDemolitionId" />
@@ -41,194 +46,196 @@
 
         </div>*@
 
-<div id="divGenerate" class="pt-3">
-    <h3 class="my-3 d-flex sub-heading">Office Details</h3>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="OfficeName" placeholder="OfficeName" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="OfficeName" class="text-danger"></span>
-                <label class="floating-label">Office Name</label>
+    <div id="divGenerate" class="pt-3">
+        <h3 class="my-3 d-flex sub-heading">Office Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="OfficeName" placeholder="OfficeName" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="OfficeName" class="text-danger"></span>
+                    <label class="floating-label">Office Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="OfficeDepartment" placeholder="OfficeDepartment" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="OfficeDepartment" class="text-danger"></span>
+                    <label class="floating-label">Office Department </label>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="OfficeDepartment" placeholder="OfficeDepartment" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="OfficeDepartment" class="text-danger"></span>
-                <label class="floating-label">Office Department </label>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="OfficeZone" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="OfficeZone" class="text-danger"></span>
+                    <label class="floating-label">Office Zone </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea type="text" asp-for="OfficeAddress" placeholder="OfficeName" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="OfficeAddress" class="text-danger"></span>
+                    <label class="floating-label">Office Address with Pincode</label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="OfficeZone" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="OfficeZone" class="text-danger"></span>
-                <label class="floating-label">Office Zone </label>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="FileNo" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                    <label class="floating-label">File No</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" asp-for="LetterDate" placeholder="OfficeName" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="LetterDate" class="text-danger"></span>
+                    <label class="floating-label">Letter Date   </label>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="OfficeAddress" placeholder="OfficeName" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="OfficeAddress" class="text-danger"></span>
-                <label class="floating-label">Office Address with Pincode</label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="FileNo" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="FileNo" class="text-danger"></span>
-                <label class="floating-label">File No</label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="date" asp-for="LetterDate" placeholder="OfficeName" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="LetterDate" class="text-danger"></span>
-                <label class="floating-label">Letter Date   </label>
-            </div>
-        </div>
-    </div>
-    <h3 class="my-3 d-flex sub-heading">Deputy Commissioner Of Police Address with Pin Code</h3>
-    <div class="row mt-md-3">
-        <div class="col-md-12">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="DyCommOffcAddress" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="DyCommOffcAddress" class="text-danger"></span>
-                <label class="floating-label">Deputy Commissioner Office Address </label>
-            </div>
-        </div>
-    </div>
-
-    <h3 class="my-3 d-flex sub-heading">Khasra Details</h3>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="KhasraNo " placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="KhasraNo " class="text-danger"></span>
-                <label class="floating-label">Khasra No  </label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="VillageName" placeholder="VillageName" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="VillageName" class="text-danger"></span>
-                <label class="floating-label">Village Name</label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-12">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="KhasraAddress" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="KhasraAddress" class="text-danger"></span>
-                <label class="floating-label">Khasra Address </label>
-            </div>
-        </div>
-    </div>
-    <h3 class="my-3 d-flex sub-heading">Police Station Details</h3>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="PoliceStationName " placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="PoliceStationName " class="text-danger"></span>
-                <label class="floating-label">Police Station Name   </label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="date" asp-for="OperationDate " placeholder="VillageName" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="OperationDate " class="text-danger"></span>
-                <label class="floating-label">Operation Date </label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="OperationDay" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="OperationDay" class="text-danger"></span>
-                <label class="floating-label">Operation Day   </label>
+        <h3 class="my-3 d-flex sub-heading">Deputy Commissioner Of Police Address with Pin Code</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea type="text" asp-for="DyCommOffcAddress" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="DyCommOffcAddress" class="text-danger"></span>
+                    <label class="floating-label">Deputy Commissioner Office Address </label>
+                </div>
             </div>
         </div>
 
-    </div>
+        <h3 class="my-3 d-flex sub-heading">Khasra Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="KhasraNo " placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="KhasraNo " class="text-danger"></span>
+                    <label class="floating-label">Khasra No  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="VillageName" placeholder="VillageName" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="VillageName" class="text-danger"></span>
+                    <label class="floating-label">Village Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea type="text" asp-for="KhasraAddress" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="KhasraAddress" class="text-danger"></span>
+                    <label class="floating-label">Khasra Address </label>
+                </div>
+            </div>
+        </div>
+        <h3 class="my-3 d-flex sub-heading">Police Station Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="PoliceStationName " placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="PoliceStationName " class="text-danger"></span>
+                    <label class="floating-label">Police Station Name   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" asp-for="OperationDate " placeholder="VillageName" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="OperationDate " class="text-danger"></span>
+                    <label class="floating-label">Operation Date </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="OperationDay" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="OperationDay" class="text-danger"></span>
+                    <label class="floating-label">Operation Day   </label>
+                </div>
+            </div>
 
-    <h3 class="my-3 d-flex sub-heading">Revenue Officer Details:</h3>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="RevenueOfficerZone " placeholder="RevenueOfficerZone" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="RevenueOfficerZone " class="text-danger"></span>
-                <label class="floating-label"> Zone  </label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="RevenueOfficerWing" placeholder="RevenueOfficerWing" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="RevenueOfficerWing" class="text-danger"></span>
-                <label class="floating-label"> Wing</label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="RevenueOfficerBranch" placeholder="RevenueOfficerBranch" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="RevenueOfficerBranch" class="text-danger"></span>
-                <label class="floating-label"> Branch  </label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="Date" asp-for="MeetingDate" placeholder="MeetingDate" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="MeetingDate" class="text-danger"></span>
-                <label class="floating-label">Demolition Date</label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="time" asp-for="MeetingTime" placeholder="MeetingTime" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="MeetingTime" class="text-danger"></span>
-                <label class="floating-label">Demolition Time</label>
-            </div>
-        </div>
-    </div>
-    <h3 class="my-3 d-flex sub-heading">Other Details</h3>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="ChiefEngineerAddress" placeholder="ChiefEngineerAddress" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="ChiefEngineerAddress" class="text-danger"></span>
-                <label class="floating-label">Chief Engineer Address </label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="Shoaddress" placeholder="Shoaddress" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="Shoaddress" class="text-danger"></span>
-                <label class="floating-label">SHO Address </label>
-            </div>
-        </div>
-    </div>
-    <h3 class="my-3 d-flex sub-heading">General Conditions</h3>
-    <div class="row mt-md-3">
-        <div class="col-md-12">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="GeneralConditions " placeholder="GeneralConditions" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="GeneralConditions " class="text-danger"></span>
-                <label class="floating-label">General Conditions </label>
-            </div>
         </div>
 
-    </div>
+        <h3 class="my-3 d-flex sub-heading">Revenue Officer Details:</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="RevenueOfficerZone " placeholder="RevenueOfficerZone" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="RevenueOfficerZone " class="text-danger"></span>
+                    <label class="floating-label"> Zone  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="RevenueOfficerWing" placeholder="RevenueOfficerWing" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="RevenueOfficerWing" class="text-danger"></span>
+                    <label class="floating-label"> Wing</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" asp-for="RevenueOfficerBranch" placeholder="RevenueOfficerBranch" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="RevenueOfficerBranch" class="text-danger"></span>
+                    <label class="floating-label"> Branch  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="Date" asp-for="MeetingDate" placeholder="MeetingDate" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="MeetingDate" class="text-danger"></span>
+                    <label class="floating-label">Demolition Date</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="time" asp-for="MeetingTime" placeholder="MeetingTime" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="MeetingTime" class="text-danger"></span>
+                    <label class="floating-label">Demolition Time</label>
+                </div>
+            </div>
+        </div>
+        <h3 class="my-3 d-flex sub-heading">Other Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea type="text" asp-for="ChiefEngineerAddress" placeholder="ChiefEngineerAddress" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="ChiefEngineerAddress" class="text-danger"></span>
+                    <label class="floating-label">Chief Engineer Address </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea type="text" asp-for="Shoaddress" placeholder="Shoaddress" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="Shoaddress" class="text-danger"></span>
+                    <label class="floating-label">SHO Address </label>
+                </div>
+            </div>
+        </div>
+        <h3 class="my-3 d-flex sub-heading">General Conditions</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                @*<label class="floating-label">General Conditions </label>
+                <br />*@
+                @*<div class="floating-label-wrap mb-3 mb-md-0">*@
+                    <textarea type="text" asp-for="GeneralConditions " placeholder="General Conditions" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="GeneralConditions " class="text-danger"></span>
 
-</div>
-            <!--<div id="divUpload">
+                    @*</div>*@
+                </div>
+
+            </div>
+
+    </div>
+    <!--<div id="divUpload">
                 <div class="row pt-3">
                     <div class="col-md-3">
                         <div class="floating-label-wrap mb-3 mb-md-0">
@@ -306,7 +313,6 @@ else
 {
 
 }
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/demolitionpoliceassistencelettercreate.js"></script>
