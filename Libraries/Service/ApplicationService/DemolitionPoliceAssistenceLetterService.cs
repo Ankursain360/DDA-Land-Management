@@ -93,5 +93,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionPoliceAssistenceLetterRepository.FetchSingleResultOfFixingDemolition(id);
         }
+        public async Task<Demolitionpoliceassistenceletter> Fetchletterdetails(int id)
+        {
+            Demolitionpoliceassistenceletter model = await _demolitionPoliceAssistenceLetterRepository.Fetchletterdetails(id);
+            return model;
+        }
     }
 }
