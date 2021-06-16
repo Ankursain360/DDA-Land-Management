@@ -110,5 +110,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _workflowtemplateRepository.GetWorkFlowDataOnGuid(processguid);
         }
+
+        public async Task<int> GetStatusCodeFromId(int id)
+        {
+            return await _workflowtemplateRepository.GetStatusCodeFromId(id);
+        }
     }
 }

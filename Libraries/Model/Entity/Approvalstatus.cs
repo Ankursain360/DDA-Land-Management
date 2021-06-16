@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Libraries.Model.Entity
@@ -40,5 +41,8 @@ namespace Libraries.Model.Entity
         public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Request> Request { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
+
+        [NotMapped]
+        public string idcode { get; set; }
     }
 }
