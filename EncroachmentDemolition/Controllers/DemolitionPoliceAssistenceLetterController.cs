@@ -310,7 +310,7 @@ namespace EncroachmentDemolition.Controllers
             body = body.Replace("{ChiefEngineerAddress}", demolitionpoliceassistenceletter.ChiefEngineerAddress);
             body = body.Replace("{MeetingTime}", demolitionpoliceassistenceletter.MeetingTime);
             body = body.Replace("{SHOAddress}", demolitionpoliceassistenceletter.Shoaddress);
-            body = body.Replace("{GeneralConditions}", demolitionpoliceassistenceletter.GeneralConditions);
+            body = body.Replace("{GeneralConditions}", demolitionpoliceassistenceletter.GeneralConditions==null?"": "4. General Conditions:<br/>"+ demolitionpoliceassistenceletter.GeneralConditions);
 
 
 
