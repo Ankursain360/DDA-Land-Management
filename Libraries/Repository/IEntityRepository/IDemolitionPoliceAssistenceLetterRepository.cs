@@ -13,5 +13,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Demolitionpoliceassistenceletter> FetchSingleResult(int id);
         Task<Demolitionpoliceassistenceletter> FetchSingleResultButOnAneexureId(int id);
         Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
+        Task<Demolitionpoliceassistenceletter> Fetchletterdetails(int id);
     }
 }

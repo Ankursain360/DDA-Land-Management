@@ -7,6 +7,7 @@
             <th>Locality(Village)</th>
             <th>Khasra No.</th>
             <th>Status</th>
+            <th>Letter Status</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -15,29 +16,47 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                 
-                    <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(item.Encroachment.Locality == null ? ""  : item.Encroachment.Locality.Name)</td>
-                    <td>@(item.Encroachment.KhasraNo == null ? ""  :item.Encroachment.KhasraNo)</td>
-                    <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
-                    @if (ViewBag.IsApproved == 1)
-                    {
-                        <td>
+        <tr>
 
-                            <a asp-action="Create" asp-route-id="@item.Id" title="create" class="edit"><i class="ri-edit-line"></i> </a>
+            <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.Encroachment.Locality == null ? ""  : item.Encroachment.Locality.Name)</td>
+            <td>@(item.Encroachment.KhasraNo == null ? ""  :item.Encroachment.KhasraNo)</td>
+            <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+            <td>@(item.Demolitionpoliceassistenceletter.Count != 0 ?  "Generated" : "Not Generated")</td>
+            @*@if (ViewBag.IsApproved == 1)
+        {
+            <td>
 
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
+                <a asp-action="Create" asp-route-id="@item.Id" title="create" class="edit"><i class="ri-edit-line"></i> </a>
 
-                            <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+            </td>
+        }
+        else
+        {
+            <td>
 
-                        </td>
-                    }
-                </tr>
+                <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+
+            </td>
+        }*@
+            @if (item.Demolitionpoliceassistenceletter.Count != 0)
+            {
+                <td>
+
+                    <a asp-action="Create" asp-route-id="@item.Id" title="create" class="edit"><i class="ri-edit-line"></i> </a>
+                    <a asp-action="_PoliceAssistanceLetter" target="_blank" asp-route-id="@item.Id" title="View letter" class="view">| <i class="ri-eye-fill"></i> </a>
+
+                </td>
+            }
+            else
+            {
+                <td>
+
+                    <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+
+                </td>
+            }
+        </tr>
             }
         }
         else

@@ -70,7 +70,7 @@
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="Propertyregistration.ZoneId">Zone</label><span class="text-danger">*</span>
                             <select class="form-control dda-dropdown" asp-for="Propertyregistration.ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Zone is Mandatory">
-                            
+
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="Propertyregistration.ZoneId" class="text-danger lb-sm"></span>
@@ -79,7 +79,7 @@
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="Propertyregistration.DivisionId">Division</label><span class="text-danger">*</span>
                             <select class="form-control dda-dropdown" asp-for="Propertyregistration.DivisionId" required="required" requiredmsg="Division is Mandatory">
-                              
+
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="Propertyregistration.DivisionId" class="text-danger lb-sm"></span>
@@ -88,7 +88,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm" asp-for="Propertyregistration.LocalityId">Locality(Village)</label>
                                 <select class="form-control dda-dropdown" asp-for="Propertyregistration.LocalityId">
-                                  
+
                                     <option value="">--Select--</option>
                                 </select>
                                 <span asp-validation-for="Propertyregistration.LocalityId" class="text-danger lb-sm"></span>
@@ -102,7 +102,7 @@
                         <div id="divPlannedSelection">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Colony</label>
-                                <input type="text" class="form-control" asp-for="PropertyRegistration.Colony"/>
+                                <input type="text" class="form-control" asp-for="PropertyRegistration.Colony" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Sector</label>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Block</label>
-                                <input type="text" class="form-control" asp-for="PropertyRegistration.Block"/>
+                                <input type="text" class="form-control" asp-for="PropertyRegistration.Block" />
                                 <span class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -140,8 +140,81 @@
                         </div>
                     </div>
 
-
                     <div id="DivArea">
+                        <h2 class="my-3 sub-heading">Area</h2>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap">
+
+                                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="Propertyregistration.AreaUnit">
+                                        <option value="0">Bigha-Biswa-Biswansi</option>
+                                        <option value="1">Sq Yd.</option>
+                                        <option value="2">Acre</option>
+                                        <option value="3">Hectare</option>
+                                        <option value="4">Sq. Mt.</option>
+                                    </select>
+                                    <span asp-validation-for="Propertyregistration.AreaUnit" class="text-danger"></span>
+                                    <label class="floating-label">Area Unit</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-md-4">
+                                <div id="bighabis">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                                <input asp-for="Propertyregistration.TotalAreaInBigha" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                                <span asp-validation-for="Propertyregistration.TotalAreaInBigha" class="text-danger"></span>
+                                                <label class="floating-label">Bigha</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                                <input asp-for="Propertyregistration.TotalAreaInBiswa" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                                <span asp-validation-for="Propertyregistration.TotalAreaInBiswa" class="text-danger"></span>
+                                                <label class="floating-label">Biswa</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                                <input asp-for="Propertyregistration.TotalAreaInBiswani" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                                <span asp-validation-for="Propertyregistration.TotalAreaInBiswani" class="text-danger"></span>
+                                                <label class="floating-label">Biswansi</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="AreainSqAcreHec" style="display:none;">
+                            <div class="row pt-3">
+                                <div class="col-md-4">
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input asp-for="Propertyregistration.TotalAreaInSqAcreHt" type="text" disabled class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                        <span asp-validation-for="Propertyregistration.TotalAreaInSqAcreHt" class="text-danger"></span>
+                                        <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="Propertyregistration.TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                                    <span asp-validation-for="Propertyregistration.TotalArea" class="text-danger"></span>
+                                    <label class="floating-label">Total Area(in sq. mt.)</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div id="DivArea">
                         <div class="row" style="margin-bottom:35px;">
                             <div class="col-sm-12">
                                 <div class="dda-innerheading">
@@ -155,18 +228,18 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm lb-sm">Area Unit</label>
                                 <select class="form-control dda-dropdown" asp-for="PropertyRegistration.AreaUnit">
-                                    <option value="0">bigha-biswa-bishwani</option>
+                                    <option value="0">Bigha-Biswa-Biswansi</option>
                                     <option value="1">Sq Yd.</option>
                                     <option value="2">Acre</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label lb-sm lb-sm">Total Area(In bigha-biswa-bishwani/Sq Yd./Acre)</label>
+                                <label class="control-label lb-sm lb-sm">Total Area(In Bigha-Biswa-Biswansi/Sq Yd./Acre)</label>
                                 <input asp-for="Propertyregistration.TotalAreaInBigha" type="text" class="form-control" limit="200" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                                <input asp-for="Propertyregistration.TotalArea"  class="form-control numbers" required="required" requiredmsg="Total Area is Mandatory" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="Propertyregistration.TotalArea" class="form-control numbers" required="required" requiredmsg="Total Area is Mandatory" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="Propertyregistration.TotalArea" class="text-danger lb-sm"></span>
                             </div>
                         </div>
@@ -175,7 +248,7 @@
 
 
                         </div>
-                    </div>
+                    </div>*@
 
                     <div id="divEncroachment">
                         <div class="row" style="margin-bottom:35px;">
@@ -207,7 +280,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="control-label lb-sm">Encroched Area(in sq. mt.)</label>
-                                    <input asp-for="Propertyregistration.Encroached"  class="form-control numbers" onchange="return ComapareTotalArea(this);" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                    <input asp-for="Propertyregistration.Encroached" class="form-control numbers" onchange="return ComapareTotalArea(this);" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                                     <span id="EncroachedValidation" asp-validation-for="Propertyregistration.Encroached" class="text-danger lb-sm"></span>
                                 </div>
 
@@ -218,7 +291,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
-                                    <input asp-for="Propertyregistration.Vacant"  class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" onchange="return ComapareTotalArea(this);" />
+                                    <input asp-for="Propertyregistration.Vacant" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" onchange="return ComapareTotalArea(this);" />
                                     <span asp-validation-for="Propertyregistration.Vacant" class="text-danger lb-sm"></span>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -645,7 +718,7 @@
                     <table class="table table-responsive table-bordered table-card">
                         <thead class="thead">
                             <tr class="dda-pageheading">
-                               
+
                                 <th>Department</th>
                                 <th>Zone</th>
                                 <th>Division</th>
@@ -661,7 +734,7 @@
                             @foreach (var item in Model.LandTransferList)
                             {
                                 <tr>
-                                   
+
                                     <td>@item.PropertyRegistration.Department.Name</td>
                                     <td>@item.PropertyRegistration.Zone.Name</td>
                                     <td>@item.PropertyRegistration.Division.Name</td>
@@ -772,7 +845,7 @@
 
                     </div>
                 </div>
-             
+
                 <div id="DivTakenOver">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
@@ -850,7 +923,7 @@
                             <div id="feedbackTakenOverComments"></div>
                         </div>
                     </div>
-                  
+
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">

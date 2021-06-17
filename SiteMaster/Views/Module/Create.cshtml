@@ -72,13 +72,29 @@
             </div>
         </div>
         <div class="row mt-md-3">
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ShowonLandingPage" id="DDLandingPage">
+                        <option value="yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                    <span asp-validation-for="ShowonLandingPage" class="text-danger"></span>
+                    <label asp-for="ShowonLandingPage" class="floating-label">Show On Landing Page </label>
+                </div>
+            </div>
+
+
+
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="SortBy"  type="text" class="floating-label-field floating-label-field--s3 onlynumbers" limit="2" />
+                    <input asp-for="SortBy" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" limit="2" />
                     <span asp-validation-for="SortBy" class="text-danger"></span>
                     <label class="floating-label">Sort By</label>
                 </div>
             </div>
+        </div>
+
+        <div class="row mt-md-3 ">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">

@@ -192,6 +192,7 @@ namespace EncroachmentDemolition.Controllers
                     encroachmentRegisterations.IsActive = 1;
                     encroachmentRegisterations.WatchWardId = encroachmentRegisterations.WatchWardId == 0 ? null : encroachmentRegisterations.WatchWardId;
                     encroachmentRegisterations.CreatedBy = SiteContext.UserId;
+                    encroachmentRegisterations.OtherDepartment = encroachmentRegisterations.OtherDepartment == 0 ? null : encroachmentRegisterations.OtherDepartment;
                     var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
                     if (result)
                     {

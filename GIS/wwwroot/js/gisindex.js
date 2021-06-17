@@ -40,6 +40,8 @@ var WELL_LAYER = [];
 var alljsondata = [];
 var CALVERT_LAYER = [];
 var MICK_LAYER = [];
+var LINE_LAYER = [];
+
 
 
 $(document).ready(function () {
@@ -351,6 +353,10 @@ function showvillagelayers(villageid) {
         var Mick = response.filter((x) => x.gisLayerId === 33);//Mick
         if (Mick.length > 0 && Mick[0].checkedStatus == 1)
             showDisBoundariesMick(Mick);
+
+        var Line = response.filter((x) => x.gisLayerId === 35);//Line
+        if (Line.length > 0 && Line[0].checkedStatus == 1)
+            showDisBoundariesLine(Line);
     });
     VILLAGEID_UNIVERSAL = [];
     VILLAGEID_UNIVERSAL.push(villageid);
@@ -563,6 +569,15 @@ function showDisBoundariesMick(response) {
         var ln = createLine(getLatLongArr(mick[x].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: mick[x].fillColor });
         MICK_LAYER.push(ln);
+        Polys.push(ln);
+    }
+}
+function showDisBoundariesLine(response) {
+    var line = $.map(response, function (el) { return el; })
+    for (x = 0; x < line.length; x++) {
+        var ln = createLine(getLatLongArr(line[x].polygon));
+        ln.setOptions({ strokeWeight: 1, strokeColor: line[x].fillColor });
+        LINE_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -952,6 +967,10 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
         if (Mick.length > 0)
             showDisBoundariesMick(Mick);
+
+        var Line = data.filter((x) => x.gisLayerId === 35);//Line
+        if (Line.length > 0)
+            showDisBoundariesLine(Line);
     }
     else {
         $('#chkAllImpInfra').closest('table').find('td input[type="checkbox"]').prop('checked', false);
@@ -1188,6 +1207,13 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
             }
         }
 
+        var Line = data.filter((x) => x.gisLayerId === 35);//Line
+        if (Line.length > 0) {
+            for (h = 0; h < LINE_LAYER.length; h++) {
+                LINE_LAYER[h].setMap(null);
+            }
+        }
+
 
     }
 });
@@ -1355,6 +1381,10 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
         var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
         if (Mick.length > 0 && Mick[0].code == id)
             showDisBoundariesMick(Mick);
+
+        var Line = data.filter((x) => x.gisLayerId === 35);//Line
+        if (Line.length > 0 && Line[0].code == id)
+            showDisBoundariesLine(Line);
 
     }
     else {
@@ -1588,6 +1618,14 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
                 MICK_LAYER[h].setMap(null);
             }
         }
+
+        var Line = data.filter((x) => x.gisLayerId === 35);//Line
+        if (Line.length > 0 && Line[0].code == id) {
+            for (h = 0; h < LINE_LAYER.length; h++) {
+                LINE_LAYER[h].setMap(null);
+            }
+        }
+
 
     }
 });

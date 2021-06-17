@@ -1725,3 +1725,49 @@ textarea.floating-label-field--s3 {
     font-size: 1.2rem;
     font-weight: 700;
 }
+.left-menu .sub-menu {
+    background: #f7f7fa;
+}
+
+.left-menu a {
+    background: #f7f7fa;
+    color: #242883;
+    border-bottom: 1px solid #ccc;
+}
+
+    .left-menu a.collapsed {
+        border-bottom: 0px solid #ccc;
+    }
+
+.small.left-menu .sub-menu {
+    top: 58px !important;
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: auto;
+    box-shadow: 7px 7px 17px 0px rgb(0 0 0 / 30%);
+    border-left: 0;
+}
+
+.left-menu .sub-menu {
+    margin-top: 0px !important;
+}
+
+@media (min-width: 992px) {
+    .small.left-menu .sub-menu {
+        margin-top: 0px !important;
+        top: 0 !important;
+    }
+
+    .left-menu .sub-menu {
+        top: 65px !important;
+        max-height: 500px;
+        overflow: hidden;
+        overflow-y: auto;
+        box-shadow: 7px 7px 17px 0px rgb(0 0 0 / 30%);
+        border-left: 0;
+    }
+
+    .left-menu .sub-menu {
+        border-left: 0;
+    }
+}
