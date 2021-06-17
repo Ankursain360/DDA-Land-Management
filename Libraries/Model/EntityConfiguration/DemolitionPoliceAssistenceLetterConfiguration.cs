@@ -66,7 +66,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.OfficeZone)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-
+            builder.Property(e => e.AuthorityDesignation)
+                .HasMaxLength(100)
+                .IsUnicode(false);
             builder.Property(e => e.OperationDate).HasColumnType("date");
 
             builder.Property(e => e.OperationDay)

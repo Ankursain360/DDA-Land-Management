@@ -99,13 +99,14 @@
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap">
-                <select class="floating-label-field floating-label-field--s3" >
+                <select asp-for="AuthorityDesignation" class="floating-label-field floating-label-field--s3">
                     <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     <option value="Deputy Director">Deputy Director </option>
                     <option value="Director ">Director </option>
                     <option value="Commissioner (LM)">Commissioner (LM) </option>
                 </select>
-                <label class="floating-label" >Signing Authority Designation</label>
+                <span asp-validation-for="AuthorityDesignation" class="text-danger"></span>
+                <label class="floating-label">Signing Authority Designation</label>
             </div>
         </div>
     </div>
