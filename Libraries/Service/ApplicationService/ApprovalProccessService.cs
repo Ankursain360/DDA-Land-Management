@@ -94,8 +94,15 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _approvalproccessRepository.FindBy(a => a.ProcessGuid == processguid && a.ServiceId == serviceid);
             Approvalproccess model = result.FirstOrDefault();
-            _approvalproccessRepository.Edit(model);
-            return await _unitOfWork.CommitAsync() > 0;
+            if (model != null)
+            {
+                _approvalproccessRepository.Delete(model);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            else
+            {
+                return true;
+            }
         }
         public async Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid)
         {
@@ -107,5 +114,9 @@ namespace Libraries.Service.ApplicationService
             return await _approvalproccessRepository.CheckLastUserForRevert( processguid,  serviceid,  level);
         }
 
+        public async Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid)
+        {
+            return await _approvalproccessRepository.FetchSingleNotificationTemplate(guid);
+        }
     }
 }

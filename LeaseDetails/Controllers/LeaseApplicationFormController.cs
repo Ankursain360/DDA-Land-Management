@@ -39,13 +39,15 @@ namespace LeaseDetails.Controllers
         private readonly IUserProfileService _userProfileService;
 
         public LeaseApplicationFormController(ILeaseApplicationFormService leaseApplicationFormService,
-            IConfiguration configuration, IApprovalProccessService approvalproccessService,
+            IConfiguration configuration, IApprovalProccessService approvalproccessService, 
+            IUserNotificationService userNotificationService,
             IWorkflowTemplateService workflowtemplateService, IHostingEnvironment hostingEnvironment,
             IUserProfileService userProfileService)
         {
             _leaseApplicationFormService = leaseApplicationFormService;
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
+            _userNotificationService = userNotificationService;
             _workflowtemplateService = workflowtemplateService;
             _hostingEnvironment = hostingEnvironment;
             _userProfileService = userProfileService;
@@ -250,7 +252,17 @@ namespace LeaseDetails.Controllers
 
                                     if (result)
                                     {
+                                        var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
+                                        var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                         Usernotification usernotification = new Usernotification();
+
+                                        MailSMSHelper templatechange = new MailSMSHelper();
+                                        notificatiTemplateMessageDTO notificatiTemplateMessageDTO = new notificatiTemplateMessageDTO();
+                                        notificatiTemplateMessageDTO.ProcessName = "Lease Application";
+                                        notificatiTemplateMessageDTO.FromUser = user.User.UserName;
+                                        notificatiTemplateMessageDTO.Datetime = DateTime.Now;
+                                        notificatiTemplateMessageDTO.MessageContent = notificationtemplate.Template;
+                                        usernotification.Message = templatechange.PopulateBodyNotificationTemplateMessage(notificatiTemplateMessageDTO);
 
                                         usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
                                         usernotification.ProcessGuid = approvalproccess.ProcessGuid;

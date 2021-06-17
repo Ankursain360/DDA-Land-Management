@@ -116,6 +116,11 @@ namespace Libraries.Repository.EntityRepository
                                      .FirstOrDefaultAsync();
         }
 
-
+        public async Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid)
+        {
+            return await _dbContext.ApplicationNotificationTemplate
+                                     .Where(x => x.UserNotificationGuid == guid && x.IsActive == 1)
+                                     .FirstOrDefaultAsync();
+        }
     }
 }

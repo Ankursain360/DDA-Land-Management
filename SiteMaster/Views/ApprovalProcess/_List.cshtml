@@ -21,7 +21,7 @@
                                     @if (@item.TotalPendingReq == 0)
                                     {
                                         <button type="button" class="btn btn-primary d-flex w-100 align-items-center align-content-center  justify-content-between btnclick" id="btnId" value="@item.ProcessGuid" disabled>
-                                            @item.ModuleName - @item.SubModuleName <span class="badge badge-light">@item.TotalPendingReq</span>
+                                            <span class="badge badge-light">@item.TotalPendingReq</span>  @item.ModuleName - @item.SubModuleName 
                                         </button>
                                     }
                                     else
