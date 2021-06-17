@@ -453,5 +453,81 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        // added by ishu 17 june 2021
+
+        public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved)
+        {
+            var InDemolitionPoliceAssistenceTable = (from x in _dbContext.Demolitionpoliceassistenceletter
+                                                     where x.FixingDemolitionId == x.FixingDemolition.Id && x.FixingDemolition.IsActive == 1
+                                                     select x.FixingDemolitionId).ToArray();
+
+            if (model.StatusId == 1)
+            {
+                var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
+                                        .Include(x => x.Encroachment)
+                                         //.Include(x => x.Demolitionpoliceassistenceletter)
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Where(x => x.IsActive == 1 && x.ApprovedStatusNavigation.StatusCode == approved
+                                        //  && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                        // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)
+                                        )
+                                        .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
+
+                int SortOrder = (int)model.SortOrder;
+                if (SortOrder == 1)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+
+                        case ("INSPECTIONDATE"):
+                            data.Results = data.Results.OrderBy(x => x.Encroachment.EncrochmentDate).ToList();
+                            break;
+                        case ("LOCALITY"):
+                            data.Results = data.Results.OrderBy(x => x.Encroachment.Locality.Name).ToList();
+                            break;
+
+                        case ("KHASRA"):
+                            data.Results = data.Results.OrderBy(x => x.Encroachment.KhasraNo).ToList();
+                            break;
+
+
+                    }
+                }
+                else if (SortOrder == 2)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+
+                        case ("INSPECTIONDATE"):
+                            data.Results = data.Results.OrderByDescending(x => x.Encroachment.EncrochmentDate).ToList();
+                            break;
+                        case ("LOCALITY"):
+                            data.Results = data.Results.OrderByDescending(x => x.Encroachment.Locality.Name).ToList();
+                            break;
+                        case ("KHASRA"):
+                            data.Results = data.Results.OrderByDescending(x => x.Encroachment.KhasraNo).ToList();
+                            break;
+
+                    }
+                }
+                return data;
+
+
+
+            }
+            else
+            {
+
+                return await _dbContext.Fixingdemolition
+                                       .Include(x => x.Encroachment).Include(x => x.Encroachment.Locality)
+                                       .Include(x => x.Demolitionpoliceassistenceletter)
+                                       .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
+                                       // && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                       && !(InDemolitionPoliceAssistenceTable).Contains(x.Id))
+                                       .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
+            }
+
+        }
     }
 }

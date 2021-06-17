@@ -216,6 +216,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.Deletedearearptdetails(Id);
         }
+
+        //added by ishu 17/6/2021
+        public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved)
+        {
+            return await _demolitionstructuredetailsRepository.GetPagedDemolitiondiary(model, userId, approved);
+        }
     }
    
 }
