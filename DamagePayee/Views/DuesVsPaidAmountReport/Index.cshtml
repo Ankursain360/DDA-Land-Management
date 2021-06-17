@@ -1,116 +1,97 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@*@model Dto.Master.DemandletterReportDto*@
+@model Libraries.Model.Entity.Demandletters
+
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Dues Vs Paid Amount Report" })
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Details</h3>
 
-<div class="pt-3">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
 
-    <form method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" asp-action="Index" id="1">
-        <h2 class="my-3 sub-heading">Details</h2>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select style="width:100%" id="" required="" class="floating-label-field floating-label-field--s3">
-                        <option value="0">---Select---</option>
-                        <option value="1">Nimri</option>
-                    </select>
-                    <label class="floating-label">Locality Name(Village)</label>
-                </div>
+                <select class="floating-label-field floating-label-field--s3" asp-for="FileNo" asp-items="@(new SelectList( @ViewBag.FileNoList, "Id","FileNo"))">
+                    <option value="">--Select--</option>
+                </select>
+                <label asp-validation-for="FileNo" class="error"></label>
+                <label class="floating-label" asp-for="FileNo">File No.</label>
             </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
-                    <label class="floating-label">From Date</label>
-                </div>
+        </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="date" id="FromDateMsg" class="floating-label-field floating-label-field--s3" placeholder="Date" />
+                <label class="floating-label">From Date</label>
             </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
-                    <label class="floating-label">To Date</label>
+        </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="date" id="ToDateMsg" class="floating-label-field floating-label-field--s3" placeholder="Date" />
+                <label class="floating-label">To Date</label>
+            </div>
+        </div>
+    </div>
+
+
+  
+
+    <div class="row mt-md-3">
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+
+
+                    <a class="btn btn-link btn-block d-flex align-items-center justify-content-center" href="/DuesVsPaidAmountReport/Index"> <i class="ri-refresh-line mr-2"></i>Reset</a>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
                 </div>
             </div>
         </div>
-
-        <div class="row pt-3">
-            <div class="col-md-12" style="margin-bottom:40px;">
-                <input type="submit" value="Generate" class="btn btn-theme" />
-               
-                @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-theme" })
-            </div>
-        </div>
-
-        @{
-            @if (ViewBag.IsShowData == "Yes")
-            {
-                <div id="DivReportDetails">
-                   
-                    <h2 class="my-3 sub-heading">Report</h2>
-                    <div class="table-section">
-                        <div class="table-responsive px-2">
-                            <table class="table table-sm table-bordered mb-0 table-striped">
-
-                                <thead class="text-nowrap">
-                                    <tr>
-                                       
-                                        <th>Locality(Village)</th>
-                                        <th>File No.</th>
-                                        <th>Payee Name</th>
-                                        <th>Property No.</th>
-                                        <th>Address</th>
-                                        <th>Property/Plot Area(Sq. Yds)</th>
-                                        <th>Demand No.</th>
-                                        <th>Demand Amount</th>
-                                        <th>Paid Amount</th>
-                                        <th>Balance Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tbody">
-                                    <tr>
-                                       
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                       
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            }
-            else
-            {
-
-            }
-        }
-
-
-    </form>
+    </div>
 
 
 </div>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" id="Sortbyd">
+                    <option value="FileNo">File No</option>
+                    <option value="PAYEENAME">Payee Name</option>
+                    <option value="PROPERTYNO">Property No</option>
+
+
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
+                <input type="hidden" name="sortdesc" id="sortdesc" value="1">
+            </div>
+            <div class="short-btn d-flex align-items-center">
+                @*<span class="btn slow active" id="descId" title="Ascending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" id="ascId" title="Descending order"><i class="ri-sort-asc"></i></span>*@
+                <span class="btn slow active" id="descId" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow" id="ascId" title="Descending order"><i class="ri-sort-desc"></i></span>
+
+
+            </div>
+        </div>
+
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+
+            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive px-2" id="LoadDuesVsPaidAmount">
+
+    </div>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/duesvspaidamountlist.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/duesvspaidamountlist.min.js" asp-append-version="true"></script>
+</environment>
