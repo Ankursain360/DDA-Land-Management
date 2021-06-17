@@ -47,7 +47,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> Deletedemolitionrptdetails(int Id);
         Task<List<Areareclaimedrpt>> GetAllArearptdetails(int id);
         Task<bool> Deletedearearptdetails(int Id);
-
+        //added by ishu 17 june 2021
+        Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved);
 
     }
 }

@@ -19,6 +19,7 @@ namespace Libraries.Model.Entity
         public string OfficeAddress { get; set; }
         public string FileNo { get; set; }
         public DateTime? LetterDate { get; set; }
+        public string AuthorityDesignation { get; set; }
         public string DyCommOffcAddress { get; set; }
         public string KhasraNo { get; set; }
         public string VillageName { get; set; }

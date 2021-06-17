@@ -118,7 +118,7 @@ namespace Libraries.Repository.EntityRepository
                                             ("P_LocalityId", model.Locality)
                                             , ("P_FromDate", model.FromDate)
                                             , ("P_ToDate", model.ToDate)
-                                            , ("P_SortOrder", SortOrder)
+                                            , ("P_SortOrder", model.SortOrder)
                                             , ("P_SortBy", model.SortBy))
                                             .ExecuteStoredProcedureAsync<PaymentTransactionReportListDataDto>();
                 return (List<PaymentTransactionReportListDataDto>)data;

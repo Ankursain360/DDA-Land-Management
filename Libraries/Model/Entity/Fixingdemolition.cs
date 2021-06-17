@@ -17,6 +17,7 @@ namespace Libraries.Model.Entity
             Fixingprogram = new HashSet<Fixingprogram>();
             Fixingdocument = new HashSet<Fixingdocument>();
             Demolitionpoliceassistenceletter = new HashSet<Demolitionpoliceassistenceletter>();
+            Demolitionstructuredetails = new HashSet<Demolitionstructuredetails>();
         }
         public string RefNo { get; set; }
 
@@ -68,7 +69,7 @@ namespace Libraries.Model.Entity
         public ICollection<Fixingprogram> Fixingprogram { get; set; }
         public ICollection<Fixingdocument> Fixingdocument { get; set; }
         public ICollection<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
-
+        public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
         [NotMapped]
         public string ApprovalStatus { get; set; }
 

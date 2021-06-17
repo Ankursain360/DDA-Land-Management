@@ -16,6 +16,7 @@ using Utility.Helper;
 using EncroachmentDemolition.Filters;
 using Core.Enum;
 using Dto.Master;
+using Microsoft.AspNetCore.Hosting;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -24,11 +25,38 @@ namespace EncroachmentDemolition.Controllers
         public IConfiguration _configuration;
         public readonly IDemolitionstructuredetailsService _demolitionstructuredetailsService;
         string DemolitionReportFilePath = "";
-        public DemolitionstructuredetailsController(IDemolitionstructuredetailsService demolitionstructuredetailsService, IConfiguration configuration)
+
+       public readonly IAnnexureAApprovalService _annexureAApprovalService;
+        public readonly IAnnexureAService _annexureAService;
+        public readonly IEncroachmentRegisterationApprovalService _encroachmentRegisterationApprovalService;
+       
+        public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
+        private readonly IWatchandwardService _watchandwardService;
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        
+
+        public DemolitionstructuredetailsController(IDemolitionstructuredetailsService demolitionstructuredetailsService,
+             IEncroachmentRegisterationApprovalService encroachmentRegisterationApprovalService,
+            IEncroachmentRegisterationService encroachmentRegisterationService,
+            IConfiguration configuration, IWatchandwardService watchandwardService,
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
+            IAnnexureAService annexureAService, IAnnexureAApprovalService annexureAApprovalService,
+             IHostingEnvironment en)
         {
             _demolitionstructuredetailsService = demolitionstructuredetailsService;
             _configuration = configuration;
             DemolitionReportFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
+            _encroachmentRegisterationApprovalService = encroachmentRegisterationApprovalService;
+            _encroachmentRegisterationService = encroachmentRegisterationService;
+            _watchandwardService = watchandwardService;
+            _workflowtemplateService = workflowtemplateService;
+            _approvalproccessService = approvalproccessService;
+            _annexureAService = annexureAService;
+            _annexureAApprovalService = annexureAApprovalService;
+            _hostingEnvironment = en;
+           
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -566,5 +594,26 @@ namespace EncroachmentDemolition.Controllers
                 x.AreaToBeReclaimed
             }));
         }
+
+        //added by ishu 17june2021
+
+
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index1()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List1([FromBody] DemolitionstructuredetailsDto1 model)
+        {
+
+            var result = await _demolitionstructuredetailsService.GetPagedDemolitiondiary(model, SiteContext.UserId, (int)ApprovalActionStatus.Approved);
+            ViewBag.IsApproved = model.StatusId;
+            return PartialView("_List1", result);
+
+
+        }
+
     }
 }
