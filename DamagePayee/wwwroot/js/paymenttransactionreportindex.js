@@ -8,6 +8,7 @@ $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
         var param = GetSearchParam(currentPageNumber, currentPageSize);
+       // alert(JSON.stringify(param));
         var IsValid = ValidCheck();//$("#frmReliefReport").valid();
         if (IsValid) {
             HttpPost(`/PaymentTransactionReport/GetDetails`, 'html', param, function (response) {
@@ -37,7 +38,7 @@ function GetSearchParam(pageNumber, pageSize) {
     var model = {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
-        FileNo: parseInt(($('#FileNo option:selected').val())),
+        FileNo: ($('#FileNo option:selected').val()),
         Locality: parseInt(($('#LocalityId option:selected').val())),
         FromDate: (($('#FromDate').val())),
         ToDate: (($('#ToDate').val()))
