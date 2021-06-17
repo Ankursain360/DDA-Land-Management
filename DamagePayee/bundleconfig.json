@@ -172,5 +172,17 @@
     "inputFiles": [
       "wwwroot/js/damagepayeeregisterview.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/payementverificationdocebyaccountsection.min.js",
+    "inputFiles": [
+      "wwwroot/js/payementverificationdocebyaccountsection.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/duesvspaidamountlist.min.js",
+    "inputFiles": [
+      "wwwroot/js/duesvspaidamountlist.js"
+    ]
   }
 ]

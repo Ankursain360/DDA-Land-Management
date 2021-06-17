@@ -4,6 +4,7 @@ using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Master;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -38,5 +39,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model);
         Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model);
         /*-----------------Demand Collection Ledger Report Start------------------*/
+
+        Task<List<DuesVsPaidAmountDto>> GetDuesVsPaidAmountListDto(DuesVsPaidAmountSearchDto model);
     }
 }

@@ -18,7 +18,7 @@ namespace Libraries.Model.Entity
             Areareclaimedrpt = new HashSet<Areareclaimedrpt>();
             Demolishedstructurerpt = new HashSet<Demolishedstructurerpt>();
         }
-
+        public int FixingDemolitionId { get; set; }
         [Required(ErrorMessage = " Department is mandatory")]
         public int? DepartmentId { get; set; }
         [Required(ErrorMessage = " Zone is mandatory")]
@@ -50,6 +50,7 @@ namespace Libraries.Model.Entity
         public Division Division { get; set; }
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
+        public Fixingdemolition FixingDemolition { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
        

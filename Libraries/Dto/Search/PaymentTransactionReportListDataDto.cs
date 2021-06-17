@@ -7,6 +7,9 @@ namespace Dto.Search
     {
         public int Id { get; set; }
         public string FileNo { get; set; }
+        public string TransactionId { get; set; }
+        public string BankReference { get; set; }
+        public string BankName { get; set; }
 
         public string LocalityName { get; set; }
         public string PropertyNo { get; set; }
