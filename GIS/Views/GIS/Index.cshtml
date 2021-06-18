@@ -44,6 +44,10 @@
         <div class="container-fluid p-4 MapContent position-relative" id="topRightActionButton">
             <!--top buttons-->
             <div class="text-right TopActionBtns">
+                <a href="#" class="btn actionBtn slow" title="Village" id="aVillageName" style="display:none">
+                    <i class="ri-map-pin-fill"></i>  ChaukhariMubarakbad
+                </a>
+
                 <a href="/GIS/Index" class="btn actionBtn slow" title="Home">
                     <i class="ri-home-4-line"></i>
                 </a>
@@ -228,9 +232,10 @@
                 <!--area text-->
                 <p style="font-size: .7rem" class="my-2">
                     State : <strong class="text-dark">Delhi</strong><br />
-                    No of Zones : <strong class="text-dark">18</strong><br />
-                    Total Area : <strong class="text-dark">366704 Acres</strong><br />
-                    Lat Long : <strong class="text-dark" id="tdCursor"></strong>
+                    Village : <strong class="text-dark" id="spanVillage"></strong><br />
+                    @*No of Zones : <strong class="text-dark">18</strong><br />
+                        Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
+                    Lat & Long : <strong class="text-dark" id="tdCursor"></strong>
                 </p>
             </div>
             <!--bottom btns-->
