@@ -145,7 +145,7 @@ namespace Libraries.Repository.EntityRepository
             var Data = await _dbContext.Menuactionrolemap
                                        .Include(x => x.Module)
                                        .OrderBy(x => x.ModuleId)
-                                       .Where(x => x.RoleId == roleId && x.Module.IsActive==1 && x.Module.ShowonLandingPage=="yes").ToListAsync();
+                                       .Where(x => x.RoleId == roleId && x.Module.ShowonLandingPage=="yes").ToListAsync();
             return (Data.GroupBy(x => x.ModuleId).SelectMany(g => g.OrderBy(d => d.ModuleId).Take(1)).ToList());
         }
 
