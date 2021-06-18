@@ -2,7 +2,12 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Police Assistance letter" })
 <br />
 <br />
-
+<script src="https://cdn.tiny.cloud/1/cl671uygj7y4cusxf9g7bi3mejfcqetflsi10j6vvuln9x9c/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: '#GeneralConditions'
+    });
+</script>
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="FixingDemolitionId" />
@@ -78,9 +83,9 @@
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="FileNo" placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
+                <input type="text" asp-for="FileNo" placeholder="Reference No" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="FileNo" class="text-danger"></span>
-                <label class="floating-label">File No</label>
+                <label class="floating-label">Reference No</label>
             </div>
         </div>
         <div class="col-md-6">
@@ -88,6 +93,20 @@
                 <input type="date" asp-for="LetterDate" placeholder="OfficeName" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="LetterDate" class="text-danger"></span>
                 <label class="floating-label">Letter Date   </label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-md-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <select asp-for="AuthorityDesignation" class="floating-label-field floating-label-field--s3">
+                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    <option value="Deputy Director">Deputy Director </option>
+                    <option value="Director ">Director </option>
+                    <option value="Commissioner (LM)">Commissioner (LM) </option>
+                </select>
+                <span asp-validation-for="AuthorityDesignation" class="text-danger"></span>
+                <label class="floating-label">Signing Authority Designation</label>
             </div>
         </div>
     </div>
@@ -128,13 +147,13 @@
             </div>
         </div>
     </div>
-    <h3 class="my-3 d-flex sub-heading">Police Station Details</h3>
+    <h3 class="my-3 d-flex sub-heading">Meeting Point Details</h3>
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <input type="text" asp-for="PoliceStationName " placeholder="OfficeZone" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="PoliceStationName " class="text-danger"></span>
-                <label class="floating-label">Police Station Name   </label>
+                <label class="floating-label">Meeting Point Name   </label>
             </div>
         </div>
         <div class="col-md-6">
@@ -198,7 +217,7 @@
             </div>
         </div>
     </div>
-    <h3 class="my-3 d-flex sub-heading">Other Details</h3>
+    <h3 class="my-3 d-flex sub-heading">Copy To</h3>
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -218,17 +237,19 @@
     <h3 class="my-3 d-flex sub-heading">General Conditions</h3>
     <div class="row mt-md-3">
         <div class="col-md-12">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-                <textarea type="text" asp-for="GeneralConditions " placeholder="GeneralConditions" class="floating-label-field floating-label-field--s3"></textarea>
-                <span asp-validation-for="GeneralConditions " class="text-danger"></span>
-                <label class="floating-label">General Conditions </label>
-            </div>
+            @*<label class="floating-label">General Conditions </label>
+                <br />*@
+            @*<div class="floating-label-wrap mb-3 mb-md-0">*@
+            <textarea type="text" asp-for="GeneralConditions " placeholder="General Conditions" class="floating-label-field floating-label-field--s3"></textarea>
+            <span asp-validation-for="GeneralConditions " class="text-danger"></span>
+
+            @*</div>*@
         </div>
 
     </div>
 
 </div>
-            <!--<div id="divUpload">
+    <!--<div id="divUpload">
                 <div class="row pt-3">
                     <div class="col-md-3">
                         <div class="floating-label-wrap mb-3 mb-md-0">
@@ -306,7 +327,6 @@ else
 {
 
 }
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/demolitionpoliceassistencelettercreate.js"></script>

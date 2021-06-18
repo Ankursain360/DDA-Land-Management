@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Master;
 
 namespace Service.ApplicationService
 {
@@ -145,5 +146,10 @@ namespace Service.ApplicationService
             return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport1(model);
         }
         /*-----------------Demand Collection Ledger Report Start------------------*/
+
+        public async Task<List<DuesVsPaidAmountDto>> GetDuesVsPaidAmountListDto(DuesVsPaidAmountSearchDto model)
+        {
+            return await _demandLetterRepository.GetDuesVsPaidAmountListDto(model);
+        }
     }
 }

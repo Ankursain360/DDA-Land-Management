@@ -1,4 +1,15 @@
-﻿
+﻿$(document).ready(function () {
+var value = $('#inspectionAreaUnit option:selected').val();
+if (value == 0) {
+    $("#inspectionAreainSqAcreHec").hide();
+    $("#inspectionbighabis").show();
+}
+else {
+    $("#inspectionAreainSqAcreHec").show();
+    $("#inspectionbighabis").hide();
+}
+
+});
 
 function GetZoneListForHandOver(id) {
     debugger

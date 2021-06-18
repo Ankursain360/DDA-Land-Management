@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
 
     GetTaskDetails();
 });
@@ -8,7 +9,7 @@ function GetTaskDetails() {
     var id = $('#Id').val();
     HttpGetAsync(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
         debugger;
-        response = JSON.parse(response);
+        response = response //JSON.parse(response);
         var count = response.length;
 
         for (var i = 0; i < response.length; i++) {
@@ -415,13 +416,19 @@ $("#btnCreate").click(function () {
         else {
             parameterSkip = false;
         }
+        var parameterActionArrayCode = [];
+        var parameterActionArrayId = [];
         var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
+        for (var r = 0; r < parameterAction.length; r++) {
+            parameterActionArrayCode.push(parameterAction[r].split('|')[1]);
+            parameterActionArrayId.push(parameterAction[r].split('|')[0]);
+        }
         if (i < count - 1) {
-            if (jQuery.inArray(remove_ForwardItem, parameterAction) == -1)
+            if (jQuery.inArray(remove_ForwardItem, parameterActionArrayCode) == -1)
                 return InfoMessage('Submit Action is mandatroy at each level apart from last level.');
         }
         if (i == count - 1) {
-            if (jQuery.inArray(remove_ApprovedItem, parameterAction) == -1)
+            if (jQuery.inArray(remove_ApprovedItem, parameterActionArrayCode) == -1)
                 return InfoMessage('Approved action is missing at last level. Kindly include Approved Action at Last level.');
 
             if (parameterSkip == true)
@@ -477,6 +484,7 @@ function GetListData() {
     var workflow = [];
     var model = {};
     var data = {};
+
     debugger;
     var count = $('.myWebsiteTable').find('table').length;
     for (var i = 0; i < count; i++) {
@@ -492,6 +500,15 @@ function GetListData() {
         var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
         var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
 
+
+        var parameterActionArrayCode = [];
+        var parameterActionArrayId = [];
+
+        for (var r = 0; r < parameterAction.length; r++) {
+            parameterActionArrayCode.push(parameterAction[r].split('|')[1]);
+            parameterActionArrayId.push(parameterAction[r].split('|')[0]);
+        }
+
         if (parameterValue == "Role" && (parameterName == null || parameterName == "")) {
             return false;
         }
@@ -500,23 +517,33 @@ function GetListData() {
         }
 
         if (i == 0) {
-            parameterAction = $.grep(parameterAction, function (value) {
-                return value != remove_RevertItem;
-            });
-            //  InfoMessage('Revert and Approved not allowed at first level');
+            for (var w = 0; w < parameterActionArrayCode.length; w++) {
+                if (parameterActionArrayCode[w] == remove_RevertItem) {
+                    parameterActionArrayCode.splice(w, 1);
+                    parameterActionArrayId.splice(w, 1);
+                }
+            }
+            //  InfoMessage('Revert  not allowed at first level');
         }
         if (i < count - 1) {
-            parameterAction = $.grep(parameterAction, function (value) {
-                return value != remove_ApprovedItem;
-            });
+            for (var q = 0; q < parameterActionArrayCode.length; q++) {
+                if (parameterActionArrayCode[q] == remove_ApprovedItem) {
+                    parameterActionArrayCode.splice(q, 1);
+                    parameterActionArrayId.splice(q, 1);
+                }
+            }
+            //  InfoMessage('Approved  not allowed at any level');
         }
         if (i == count - 1) {
-            parameterAction = $.grep(parameterAction, function (value) {
-                return value != remove_ForwardItem;
-            });
+            for (var v = 0; v < parameterActionArrayCode.length; v++) {
+                if (parameterActionArrayCode[v] == remove_ForwardItem) {
+                    parameterActionArrayCode.splice(v, 1);
+                    parameterActionArrayId.splice(v, 1);
+                }
+            }
             //  InfoMessage('Forward not allowed at Last level');
         }
-
+        parameterAction = parameterActionArrayId;
         if (parameterAction.length == 0) {
             return false;
         }

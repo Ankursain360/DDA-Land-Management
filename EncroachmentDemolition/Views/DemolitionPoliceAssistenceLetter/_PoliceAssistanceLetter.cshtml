@@ -73,13 +73,16 @@
                 </tr>
                 <tr>
                     <td>
-                        <p style="color:black;"><b>No.: @Model.FileNo</b> <span style="padding-left:520px;">
-                            <b>Date : @(Convert.ToDateTime(Model.LetterDate).ToString("dd-MMM-yyyy")) </b></span></p>
+                        <p style="color:black;">
+                            <b>No.: @Model.FileNo</b> <span style="padding-left:520px;">
+                                <b>Date : @(Convert.ToDateTime(Model.LetterDate).ToString("dd-MMM-yyyy")) </b>
+                            </span>
+                        </p>
                     </td>
 
                     <!--<td style="padding-right:-200px;">
-                    <p style="color:black;"><b>Date : {LetterDate}</b></p>
-                </td>-->
+            <p style="color:black;"><b>Date : {LetterDate}</b></p>
+        </td>-->
 
                 </tr>
 
@@ -127,7 +130,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <p style="color:black;margin-top: -3%;text-align-last:justify;">
+                        <p style="color:black;margin-top: -3%;">
                             With the approval of competent authority,it has been decided to organize a demolition programme
                             for removal of unauthorized construction / encroachment from the DDA/Govt land bearing
                             Khasra No. <b>@Model.KhasraNo</b> Of Village <b> @Model.VillageName</b> address <b>@Model.KhasraAddress</b>.
@@ -151,19 +154,25 @@
                 </tr>
                 <tr>
                     <td>
-                        <p style="color: black;margin-top: -3%;text-align-last:justify;">
+                        <p style="color: black;margin-top: -3%;">
                             3. The meeting point will be Police Station <b>@Model.PoliceStationName</b> on date <b>@(Convert.ToDateTime(Model.MeetingDate).ToString("dd-MMM-yyyy"))</b> and time
                             <b>@Model.MeetingTime</b>
                         </p>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <p style=" color: black; margin-top: -3%;">
-                            4. General Conditions:<b>@Model.GeneralConditions</b>
-                        </p>
-                    </td>
-                </tr>
+                @if (Model.GeneralConditions != null)
+                {
+                    <tr>
+                        <td>
+                            <p style=" color: black; margin-top: -3%;">
+                                4. General Conditions: <br/>  <b> @Html.Raw(Model.GeneralConditions)</b>
+                               
+                            </p>
+                        </td>
+                    </tr>
+                }
+                else { }
+
                 <tr>
                     <td align="right">
                         <p style="color:black">

@@ -107,9 +107,24 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Approvalstatus>> GetApprovalStatusListData()
         {
-            return await _dbContext.Approvalstatus
+            List<Approvalstatus> listData = new List<Approvalstatus>();
+            var Data = await _dbContext.Approvalstatus
                                     .Where(x => x.IsActive == 1)
                                     .ToListAsync();
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new Approvalstatus()
+                    {
+                        Id= Data[i].Id,
+                        Name = Data[i].Name,
+                        idcode = string.Format("{0}|{1}", Data[i].Id, Data[i].StatusCode)
+                    });
+                }
+            }
+
+            return listData;
         }
 
         public int ProcessGuidBasisCount(string processGuid)
@@ -153,6 +168,15 @@ namespace Libraries.Repository.EntityRepository
                                      )
                                      .OrderByDescending(x => x.Id)
                                      .ToListAsync();
+        }
+
+        public async Task<int> GetStatusCodeFromId(int id)
+        {
+            var data =await (from f in _dbContext.Approvalstatus
+                        where f.Id == id
+                      select f.StatusCode).FirstOrDefaultAsync();
+
+            return data;
         }
     }
 }

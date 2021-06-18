@@ -1,7 +1,7 @@
 ﻿@model Libraries.Model.Entity.Currentstatusoflandhistory
 @{int rowNo = 0;}
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Update Plot Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Additional Information of Plot" })
 
 
 
@@ -156,9 +156,11 @@
                                     <div class="floating-label-wrap">
                                         <select class="floating-label-field floating-label-field--s3 select2destroy"
                                                 disabled asp-for="LandTransfer.Propertyregistration.AreaUnit">
-                                            <option value="0">bigha-biswa-bishwani</option>
+                                            <option value="0">Bigha-Biswa-Biswansi</option>
                                             <option value="1">Sq Yd.</option>
                                             <option value="2">Acre</option>
+                                            <option value="3">Hectare</option>
+                                            <option value="4">Sq. Mt.</option>
                                         </select>
                                         <label class="floating-label">Area Unit</label>
                                     </div>
@@ -188,7 +190,7 @@
                                     <div class="col-md-4">
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <input asp-for="LandTransfer.Propertyregistration.TotalAreaInBiswani" placeholder="Biswani" class="floating-label-field floating-label-field--s3 numbers" disabled>
-                                            <label class="floating-label">Biswani</label>
+                                            <label class="floating-label">Biswansi</label>
                                         </div>
                                     </div>
                                 </div>
@@ -833,280 +835,280 @@
 
 
 
-                    <div id="DivAddStatusDetails ">
-                        <h3 class="mb-3 d-flex sub-heading">Current Status Of Handed Over/Taken over details</h3>
-                        <div id="tsssurvey">
-                            <h2 class="mt-3 mb-4 sub-heading"> TSS Survey</h2>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
+    <div id="DivAddStatusDetails ">
+        <h3 class="mb-3 d-flex sub-heading">Current Status Of Handed Over/Taken over details</h3>
+        <div id="tsssurvey">
+            <h2 class="mt-3 mb-4 sub-heading"> TSS Survey</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                        <input type="hidden" asp-for="LandTransferId" value="@(Model.LandTransfer.Id)" />
-                                        <select class="floating-label-field floating-label-field--s3" asp-for="Tsssurvey">
-                                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        <input type="hidden" asp-for="LandTransferId" value="@(Model.LandTransfer.Id)" />
+                        <select class="floating-label-field floating-label-field--s3" asp-for="Tsssurvey">
+                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
 
-                                            <option value="No">No</option>
-                                            <option value="Yes">Yes</option>
-                                        </select>
-                                        <label asp-for="LandTransferId" class="floating-label">TSS Survey </label>
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <label asp-for="LandTransferId" class="floating-label">TSS Survey </label>
 
-                                    </div>
-                                </div>
-                                @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
-                                <div id="TssSurvey" class="col-md-4" style="display:none;">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                    </div>
+                </div>
+                @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
+                <div id="TssSurvey" class="col-md-4" style="display:none;">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                                        <input type="file" asp-for="SurveyReportFile" placeholder="Upload Survey Report" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" />
-                                        <label class="floating-label">Upload Survey Report</label>
-                                    </div>
-                                </div>
+                        <input type="file" asp-for="SurveyReportFile" placeholder="Upload Survey Report" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" />
+                        <label class="floating-label">Upload Survey Report</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="encroachmentDiv">
+            <h2 class="mt-3 mb-4 sub-heading">Encroached Details</h2>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="Encroachment" onchange="ChangeEncroachmentStatus(this.value)">
+                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                        <label class="floating-label">Encroachment </label>
+
+                    </div>
+                </div>
+                <div class="mt-md-3 col-12" id="divEncroachmentYesSelectionForLandChangeStatus" style="display:none;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="EncroachmentStatus">
+                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                                    <option value="0">Vacant</option>
+                                    <option value="1">Partially Vacant</option>
+                                </select>
+                                <label class="floating-label">Encroachment Status</label>
+
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <div id="encroachmentDiv">
-                            <h2 class="mt-3 mb-4 sub-heading">Encroached Details</h2>
+                                <input type="text" asp-for="EncroachementArea" placeholder="Encroched Area(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers" />
+                                <span asp-validation-for="EncroachementArea" class="text-danger"></span>
 
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                <label class="floating-label">Encroched Area(in sq. mt.) </label>
 
-                                        <select class="floating-label-field floating-label-field--s3" asp-for="Encroachment" onchange="ChangeEncroachmentStatus(this.value)">
-                                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                                            <option value="0">No</option>
-                                            <option value="1">Yes</option>
-                                        </select>
-                                        <label class="floating-label">Encroachment </label>
-
-                                    </div>
-                                </div>
-                                <div class="mt-md-3 col-12" id="divEncroachmentYesSelectionForLandChangeStatus" style="display:none;">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <select class="floating-label-field floating-label-field--s3" asp-for="EncroachmentStatus">
-                                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                                                    <option value="0">Vacant</option>
-                                                    <option value="1">Partially Vacant</option>
-                                                </select>
-                                                <label class="floating-label">Encroachment Status</label>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                                <input type="text" asp-for="EncroachementArea" placeholder="Encroched Area(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers" />
-                                                <span asp-validation-for="EncroachementArea" class="text-danger"></span>
-
-                                                <label class="floating-label">Encroched Area(in sq. mt.) </label>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                                <input type="text" asp-for="BuildUpInEncroachementArea" placeholder="Builtup in Encroachment Area(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers" />
-                                                <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-md-4">
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input type="text" placeholder="Builtup in Encroachment Area(in sq. mt.)" asp-for="BuildUpInEncroachementArea" class="floating-label-field floating-label-field--s3 numbers" />
-                                                <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input type="text" asp-for="VacantArea" placeholder="Vacant(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers" />
-                                                <label class="floating-label">Vacant(in sq. mt.)</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Upload Action Taken Report(ATR)" asp-for="ActionReportFile" />
-                                                <label class="floating-label">Upload Action Taken Report(ATR)</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 mt-3">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <textarea type="text" placeholder="Action On Encroachment" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" asp-for="LandTransfer.Propertyregistration.ActionOnEncroachment"></textarea>
-                                                <label class="floating-label">Action On Encroachment</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-md-4" id="divEncroachmentDetails" style="display:none;">
-                                <div class=" col-md-12">
-                                    <label class="control-label lb-sm">Encroachment Details</label>
-                                    <input asp-for="EncroachmentDetails" placeholder="Encroachment Details" class="form-control" />
-                                </div>
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <div id="FencingBoundaryWall">
-                            <h2 class="my-3 sub-heading">Fencing/Boundary Wall</h2>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <select asp-for="FencingBoundaryWall" class="floating-label-field floating-label-field--s3">
-                                            <option value="0" selected="selected">Boundary Wall</option>
-                                            <option value="1">Fencing</option>
-                                            <option value="2">None</option>
-                                        </select>
-                                        <label class="floating-label">Protection of Land</label>
-                                        @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div id="Boundary" class="row" style="display:none;">
-                                        <div class="form-group col-md-4">
-                                            <label class="control-label lb-sm">Area Covered(Sq. mtr)</label>
-                                            <input asp-for="AreaCovered" placeholder="Area Covered(Sq. mtr)" type="text" class="form-control" id="txtTakenOverDate" />
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <label class="control-label lb-sm">Dimension (L*B*H)(mtr)</label>
-                                            <input asp-for="Dimension" placeholder="Dimension (L*B*H)(mtr)" type="text" class="form-control" id="txtTakenOverDate" />
-                                        </div>
-                                    </div>
-                                </div>
+                                <input type="text" asp-for="BuildUpInEncroachementArea" placeholder="Builtup in Encroachment Area(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers" />
+                                <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
+
                             </div>
                         </div>
-                        <div id="AreaPlotUtilization">
-                            <h2 class="my-3 sub-heading">Area /Plot Utilization</h2>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <select asp-for="PlotUtilization" class="floating-label-field floating-label-field--s3">
-                                            <option value="No">No</option>
-                                            <option value="Yes">Yes</option>
-                                        </select>
-                                        <label class="floating-label">Area /Plot Utilization</label>
-                                    </div>
-                                </div>
-                                <div class="col-12" id="Utilization" style="display:none;">
-                                    <div class="row mt-md-3">
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap">
-                                                <select class="floating-label-field floating-label-field--s3" asp-for="NatureOfUtilization" onchange="ChangeNatureOfUtilizationStatus(this.value)">
-                                                    <option value="0">Temporary Allocation/Relocation</option>
-                                                    <option value="1">Function Site</option>
-                                                    <option value="2">Other</option>
-                                                </select>
-                                                <label class="floating-label">Nature of Utilization</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4" id="divNatureOfUtilization">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="VacationDate" placeholder="Vacation Date" class="floating-label-field floating-label-field--s3" type="Date" />
-                                                <label class="floating-label">Utilization Date</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap">
-                                                <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
-                                                    <option value="0">bigha-biswa-bishwani</option>
-                                                    <option value="1">Sq Yd.</option>
-                                                    <option value="2">Acre</option>
-                                                    <option value="3">Hectare</option>
-                                                    <option value="4">Sq. Mt.</option>
-                                                </select>
-                                                <span asp-validation-for="AreaUnit" class="text-danger lb-sm"></span>
-                                                <label class="floating-label">Area Unit</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="bighabisForCurrentStatus">
-                                        <div class="row mt-md-3">
-                                            <div class="col-md-2">
-                                                <div class="floating-label-wrap">
-                                                    <input asp-for="TotalAreaInBigha" placeholder="Bigha" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                                                    <span asp-validation-for="TotalAreaInBigha" class="text-danger lb-sm"></span>
-                                                    <label class="floating-label">Bigha</label>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                                    <input asp-for="TotalAreaInBiswa" placeholder="Biswa" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                                                    <span asp-validation-for="TotalAreaInBiswa" class="text-danger lb-sm"></span>
-                                                    <label class="floating-label">Biswa</label>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                                    <input asp-for="TotalAreaInBiswani" placeholder="Biswani" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                                                    <span asp-validation-for="TotalAreaInBiswani" class="text-danger lb-sm"></span>
-                                                    <label class="floating-label">Biswani</label>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                    <div id="AreainSqAcreHecForCurrentStatus" class="col-md-3" style="display:none;">
-                                        <div class="row mt-md-3">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="TotalAreaInSqAcreHt" placeholder="Total Area" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                                                <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger lb-sm"></span>
-                                                <label class="floating-label" id="LabelTotalAreaSqAcreHecForCurrentStatus">Total Area(Sq Yd./Acre/Hectare)</label>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-md-3">
-                                        <div class="col-md-6">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="TotalArea" value="" placeholder="Total Area(in sq. mt.)"
-                                                       class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                                                <span asp-validation-for="TotalArea" class="text-danger lb-sm"></span>
-                                                <label class="floating-label">Total Area(in sq. mt.)</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-md-3">
-                                        <div class="col-md-4">
-                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="Status" type="text" placeholder="Status" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" />
-                                                <label class="floating-label">Status </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row mt-md-4">
-                            <div class="col-md-12">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <textarea asp-for="Remarks" placeholder="Remarks" type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                                    @*<span asp-validation-for="Remarks" class="text-danger"></span>*@
-                                    <label class="floating-label">Remarks</label>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        @*</div>*@
                     </div>
                     <div class="row mt-md-4">
-                        <div class="col-md-12">
-                            <input type="submit" value="Submit" class="btn btn-theme" />
-                            <a asp-action="Index" class="btn btn-theme">Back </a>
-
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" placeholder="Builtup in Encroachment Area(in sq. mt.)" asp-for="BuildUpInEncroachementArea" class="floating-label-field floating-label-field--s3 numbers" />
+                                <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" asp-for="VacantArea" placeholder="Vacant(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers" />
+                                <label class="floating-label">Vacant(in sq. mt.)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Upload Action Taken Report(ATR)" asp-for="ActionReportFile" />
+                                <label class="floating-label">Upload Action Taken Report(ATR)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <textarea type="text" placeholder="Action On Encroachment" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" asp-for="LandTransfer.Propertyregistration.ActionOnEncroachment"></textarea>
+                                <label class="floating-label">Action On Encroachment</label>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row mt-md-4" id="divEncroachmentDetails" style="display:none;">
+                <div class=" col-md-12">
+                    <label class="control-label lb-sm">Encroachment Details</label>
+                    <input asp-for="EncroachmentDetails" placeholder="Encroachment Details" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div id="FencingBoundaryWall">
+            <h2 class="my-3 sub-heading">Fencing/Boundary Wall</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select asp-for="FencingBoundaryWall" class="floating-label-field floating-label-field--s3">
+                            <option value="0" selected="selected">Boundary Wall</option>
+                            <option value="1">Fencing</option>
+                            <option value="2">None</option>
+                        </select>
+                        <label class="floating-label">Protection of Land</label>
+                        @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div id="Boundary" class="row" style="display:none;">
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Area Covered(Sq. mtr)</label>
+                            <input asp-for="AreaCovered" placeholder="Area Covered(Sq. mtr)" type="text" class="form-control" id="txtTakenOverDate" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Dimension (L*B*H)(mtr)</label>
+                            <input asp-for="Dimension" placeholder="Dimension (L*B*H)(mtr)" type="text" class="form-control" id="txtTakenOverDate" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="AreaPlotUtilization">
+            <h2 class="my-3 sub-heading">Area /Plot Utilization</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select asp-for="PlotUtilization" class="floating-label-field floating-label-field--s3">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                        <label class="floating-label">Area /Plot Utilization</label>
+                    </div>
+                </div>
+                <div class="col-12" id="Utilization" style="display:none;">
+                    <div class="row mt-md-3">
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="NatureOfUtilization" onchange="ChangeNatureOfUtilizationStatus(this.value)">
+                                    <option value="0">Temporary Allocation/Relocation</option>
+                                    <option value="1">Function Site</option>
+                                    <option value="2">Other</option>
+                                </select>
+                                <label class="floating-label">Nature of Utilization</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="divNatureOfUtilization">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="VacationDate" placeholder="Vacation Date" class="floating-label-field floating-label-field--s3" type="Date" />
+                                <label class="floating-label">Utilization Date</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                                    <option value="0">bigha-biswa-bishwani</option>
+                                    <option value="1">Sq Yd.</option>
+                                    <option value="2">Acre</option>
+                                    <option value="3">Hectare</option>
+                                    <option value="4">Sq. Mt.</option>
+                                </select>
+                                <span asp-validation-for="AreaUnit" class="text-danger lb-sm"></span>
+                                <label class="floating-label">Area Unit</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bighabisForCurrentStatus">
+                        <div class="row mt-md-3">
+                            <div class="col-md-2">
+                                <div class="floating-label-wrap">
+                                    <input asp-for="TotalAreaInBigha" placeholder="Bigha" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <span asp-validation-for="TotalAreaInBigha" class="text-danger lb-sm"></span>
+                                    <label class="floating-label">Bigha</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                    <input asp-for="TotalAreaInBiswa" placeholder="Biswa" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <span asp-validation-for="TotalAreaInBiswa" class="text-danger lb-sm"></span>
+                                    <label class="floating-label">Biswa</label>
+
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                    <input asp-for="TotalAreaInBiswani" placeholder="Biswani" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <span asp-validation-for="TotalAreaInBiswani" class="text-danger lb-sm"></span>
+                                    <label class="floating-label">Biswani</label>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <div id="AreainSqAcreHecForCurrentStatus" class="col-md-3" style="display:none;">
+                        <div class="row mt-md-3">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="TotalAreaInSqAcreHt" placeholder="Total Area" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger lb-sm"></span>
+                                <label class="floating-label" id="LabelTotalAreaSqAcreHecForCurrentStatus">Total Area(Sq Yd./Acre/Hectare)</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="TotalArea" value="" placeholder="Total Area(in sq. mt.)"
+                                       class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <span asp-validation-for="TotalArea" class="text-danger lb-sm"></span>
+                                <label class="floating-label">Total Area(in sq. mt.)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="Status" type="text" placeholder="Status" class="floating-label-field floating-label-field--s3" id="txtTakenOverDate" />
+                                <label class="floating-label">Status </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-4">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remarks" placeholder="Remarks" type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                    @*<span asp-validation-for="Remarks" class="text-danger"></span>*@
+                    <label class="floating-label">Remarks</label>
+
+                </div>
+            </div>
+        </div>
+
+        @*</div>*@
+    </div>
+    <div class="row mt-md-4">
+        <div class="col-md-12">
+            <input type="submit" value="Submit" class="btn btn-theme" />
+            <a asp-action="Index" class="btn btn-theme">Back </a>
+
+        </div>
+    </div>
 </form>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

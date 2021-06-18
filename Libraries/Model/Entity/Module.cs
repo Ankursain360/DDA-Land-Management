@@ -43,7 +43,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<ModuleCategory> ModuleCategoryList { get; set; }
 
-        public string LandingPage { get; set; }
+        public string ShowonLandingPage { get; set; }
     }
 }
 

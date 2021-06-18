@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Master;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -700,5 +701,46 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+
+
+
+
+
+
+
+
+
+        public async Task<List<DuesVsPaidAmountDto>> GetDuesVsPaidAmountListDto(DuesVsPaidAmountSearchDto model)
+
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("Get_DuesvsPaidAmount")
+                                            .WithSqlParams(("P_filenoId", model.fileno)
+                                            ,("P_fromdate",Convert.ToDateTime(model.fromdate))
+                                            , ("P_todate", Convert.ToDateTime(model.todate))
+                                            )
+
+
+
+                                            .ExecuteStoredProcedureAsync<DuesVsPaidAmountDto>();
+
+                return (List<DuesVsPaidAmountDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
+
+
+
+
+
     }
 }

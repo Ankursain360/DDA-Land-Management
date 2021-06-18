@@ -65,7 +65,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.ModuleCategoryId)
                 .HasConstraintName("fk_ModuleCategoryId");
 
-            builder.Property(e => e.LandingPage)
+            builder.Property(e => e.ShowonLandingPage)
               .HasMaxLength(100)
               .IsUnicode(false);
         }

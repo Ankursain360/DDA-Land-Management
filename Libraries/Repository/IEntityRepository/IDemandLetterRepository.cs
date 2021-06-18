@@ -3,6 +3,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Master;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -28,6 +29,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model);
         Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model);
-        
+        Task<List<DuesVsPaidAmountDto>> GetDuesVsPaidAmountListDto(DuesVsPaidAmountSearchDto model);
+
+
     }
 }

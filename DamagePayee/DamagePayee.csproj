@@ -31,6 +31,7 @@
   <ItemGroup>
   <Content Remove="wwwroot\js\damagepayeeregisterview.min.js" />
   <Content Remove="wwwroot\js\demandletterindex.min.js" />
+  <Content Remove="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
   <Content Remove="wwwroot\js\reliefreportindex.min.js" />
   <Content Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
@@ -38,6 +39,7 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\damagepayeeregisterview.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\demandletterindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\reliefreportindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
@@ -45,6 +47,7 @@
   <ItemGroup>
     <None Include="wwwroot\js\damagepayeeregisterview.min.js" />
     <None Include="wwwroot\js\demandletterindex.min.js" />
+    <None Include="wwwroot\js\payementverificationdocebyaccountsection.min.js" />
     <None Include="wwwroot\js\reliefreportindex.min.js" />
     <None Include="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>

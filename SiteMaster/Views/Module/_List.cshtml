@@ -7,7 +7,7 @@
             <th>Module Name</th>
             @*<th>Description</th>*@
             <th>Url</th>
-            <th>LandingPage</th>
+            <th>Show On Landing Page</th>
             <th>Sort By</th>
             @*<th>Target</th>*@
             <th>Status</th>
@@ -24,7 +24,7 @@
             @*<td>@item.Description</td>*@
             <td>@item.Url</td>
             <td>
-                @if (item.LandingPage == "yes")
+                @if (item.ShowonLandingPage == "yes")
                 {
                     <span>Yes</span> }
                 else
