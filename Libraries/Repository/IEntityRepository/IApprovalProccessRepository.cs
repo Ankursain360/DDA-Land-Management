@@ -18,5 +18,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Approvalstatus> GetStatusIdFromStatusCode(int statuscode);
         Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid);
         Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level);
+        Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid);
     }
 }

@@ -83,8 +83,15 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _userNotificationRepository.FindBy(a => a.ProcessGuid == processguid && a.ServiceId == serviceid);
             Usernotification model = result.FirstOrDefault();
-            _userNotificationRepository.Edit(model);
-            return await _unitOfWork.CommitAsync() > 0;
+            if(model != null)
+            {
+                _userNotificationRepository.Delete(model);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            else
+            {
+                return true;
+            }
         }
         public async Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid)
         {

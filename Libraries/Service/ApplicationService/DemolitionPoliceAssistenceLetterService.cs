@@ -54,6 +54,7 @@ namespace Libraries.Service.ApplicationService
             model.OfficeAddress = demolitionpoliceassistenceletter.OfficeAddress;
             model.FileNo = demolitionpoliceassistenceletter.FileNo;
             model.LetterDate = demolitionpoliceassistenceletter.LetterDate;
+            model.AuthorityDesignation = demolitionpoliceassistenceletter.AuthorityDesignation;
             model.DyCommOffcAddress = demolitionpoliceassistenceletter.DyCommOffcAddress;
             model.KhasraNo = demolitionpoliceassistenceletter.KhasraNo;
             model.VillageName = demolitionpoliceassistenceletter.VillageName;

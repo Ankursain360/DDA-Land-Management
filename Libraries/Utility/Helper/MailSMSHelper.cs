@@ -161,7 +161,20 @@ namespace Utility.Helper
             body = body.Replace("{ReferenceNo}", element.ReferenceNo);
             return body;
         }
+        public string PopulateBodyNotificationTemplateMessage(notificatiTemplateMessageDTO element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.MessageContent))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{proccess name}", element.ProcessName);
+            body = body.Replace("{from user}", element.FromUser);
+            body = body.Replace("{datetime}", (element.Datetime).ToString());
 
+
+            return body;
+        }
         #endregion
 
         #region SMS

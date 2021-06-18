@@ -87,8 +87,15 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _leaseApplicationRepository.FindBy(a => a.Id == id);
             Leaseapplication model = result.FirstOrDefault();
-            _leaseApplicationRepository.Delete(model);
-            return await _unitOfWork.CommitAsync() > 0;
+            if (model != null)
+            {
+                _leaseApplicationRepository.Delete(model);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public async Task<bool> RollBackEntryDocument(int id)
