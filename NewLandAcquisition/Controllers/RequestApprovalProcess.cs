@@ -37,6 +37,7 @@ namespace NewLandAcquisition.Controllers
         private readonly INewlandannexure2Service _newlandannexure2Service;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUserNotificationService _userNotificationService;
 
         string ApprovalDocumentPath = "";
 
@@ -44,7 +45,8 @@ namespace NewLandAcquisition.Controllers
         public RequestApprovalProcess(IRequestApprovalProcessService requestApprovalProcessService,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IConfiguration configuration, IRequestService requestService, INewlandannexure2Service newlandannexure2Service,
-            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
+            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
+            IUserNotificationService userNotificationService)
         {
             _workflowtemplateService = workflowtemplateService;
             _requestApprovalProcessService = requestApprovalProcessService;
@@ -54,6 +56,7 @@ namespace NewLandAcquisition.Controllers
             _newlandannexure2Service = newlandannexure2Service;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:RequestPhoto:ApprovalDocumentPath").Value.ToString();
 
         }
@@ -299,6 +302,23 @@ namespace NewLandAcquisition.Controllers
                                         #endregion
 
                                         result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                        
+                                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                                        if (result == true && approvalproccess.SendTo != null)
+                                        {
+                                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestService").Value);
+                                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                            Usernotification usernotification = new Usernotification();
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            usernotification.Message = replacement;
+                                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestService").Value);
+                                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                            usernotification.ServiceId = approvalproccess.ServiceId;
+                                            usernotification.SendFrom = approvalproccess.SendFrom;
+                                            usernotification.SendTo = approvalproccess.SendTo;
+                                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                        }
+                                        #endregion
 
                                         if (result)
                                         {

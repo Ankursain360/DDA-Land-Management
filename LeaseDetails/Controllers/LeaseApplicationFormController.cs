@@ -250,20 +250,14 @@ namespace LeaseDetails.Controllers
                                     approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
+                                    #region Insert Into usernotification table Added By Renu 18 June 2021
                                     if (result)
                                     {
                                         var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
                                         var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                         Usernotification usernotification = new Usernotification();
-
-                                        MailSMSHelper templatechange = new MailSMSHelper();
-                                        notificatiTemplateMessageDTO notificatiTemplateMessageDTO = new notificatiTemplateMessageDTO();
-                                        notificatiTemplateMessageDTO.ProcessName = "Lease Application";
-                                        notificatiTemplateMessageDTO.FromUser = user.User.UserName;
-                                        notificatiTemplateMessageDTO.Datetime = DateTime.Now;
-                                        notificatiTemplateMessageDTO.MessageContent = notificationtemplate.Template;
-                                        usernotification.Message = templatechange.PopulateBodyNotificationTemplateMessage(notificatiTemplateMessageDTO);
-
+                                        var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                        usernotification.Message = replacement;
                                         usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
                                         usernotification.ProcessGuid = approvalproccess.ProcessGuid;
                                         usernotification.ServiceId = approvalproccess.ServiceId;
@@ -271,6 +265,7 @@ namespace LeaseDetails.Controllers
                                         usernotification.SendTo = approvalproccess.SendTo;
                                         result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
                                     }
+                                    #endregion
                                 }
 
                                 break;

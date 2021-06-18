@@ -28,6 +28,7 @@ namespace LeaseDetails.Controllers
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
+        private readonly IUserNotificationService _userNotificationService;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
 
@@ -35,6 +36,7 @@ namespace LeaseDetails.Controllers
         string ApprovalDocumentPath = "";
         public LeaseApplicationFormApprovalController(ILeaseApplicationFormApprovalService leaseApplicationFormApprovalService,
             ILeaseApplicationFormService leaseApplicationFormService, IConfiguration configuration,
+            IUserNotificationService userNotificationService,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
         {
@@ -45,6 +47,7 @@ namespace LeaseDetails.Controllers
             _workflowtemplateService = workflowtemplateService;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
             LeaseFilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
 
@@ -287,6 +290,24 @@ namespace LeaseDetails.Controllers
 
                                         result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
+                                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                                        if (result)
+                                        {
+                                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
+                                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                            Usernotification usernotification = new Usernotification();
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            usernotification.Message = replacement;
+                                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
+                                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                            usernotification.ServiceId = approvalproccess.ServiceId;
+                                            usernotification.SendFrom = approvalproccess.SendFrom;
+                                            usernotification.SendTo = approvalproccess.SendTo;
+                                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                        }
+                                        #endregion
+
+
                                         if (result)
                                         {
                                             if (leaseapplication.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
@@ -322,9 +343,7 @@ namespace LeaseDetails.Controllers
                                     }
                                     break;
 
-
-
-
+                                   
                                 }
                             }
                         }

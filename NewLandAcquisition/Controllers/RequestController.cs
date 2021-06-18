@@ -36,11 +36,13 @@ namespace NewLandAcquisition.Controllers
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUserNotificationService _userNotificationService;
 
 
         public RequestController(IRequestService requestService, IConfiguration configuration, 
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
-            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
+            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
+            IUserNotificationService userNotificationService)
         {
             _workflowtemplateService = workflowtemplateService;
             _requestService = requestService;
@@ -48,6 +50,7 @@ namespace NewLandAcquisition.Controllers
             _approvalproccessService = approvalproccessService;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
         }
 
         [AuthorizeContext(ViewAction.View)]
@@ -218,6 +221,24 @@ namespace NewLandAcquisition.Controllers
                                     approvalproccess.Version = workflowtemplatedata.Version;
                                     approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                                    #region Insert Into usernotification table Added By Renu 18 June 2021
+                                    if (result == true && approvalproccess.SendTo != null)
+                                    {
+                                        var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestService").Value);
+                                        var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                        Usernotification usernotification = new Usernotification();
+                                        var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                        usernotification.Message = replacement;
+                                        usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestService").Value);
+                                        usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                        usernotification.ServiceId = approvalproccess.ServiceId;
+                                        usernotification.SendFrom = approvalproccess.SendFrom;
+                                        usernotification.SendTo = approvalproccess.SendTo;
+                                        result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                    }
+                                    #endregion
+
                                 }
 
                                 break;
@@ -312,6 +333,7 @@ namespace NewLandAcquisition.Controllers
                 var deleteResult = false;
                 if (request.Id != 0)
                 {
+                    deleteResult = await _userNotificationService.RollBackEntry((_configuration.GetSection("workflowProcessGuidRequestApproval").Value), request.Id);
                     deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowProcessGuidRequestApproval").Value), request.Id);
                     deleteResult = await _requestService.RollBackEntry(request.Id);
                 }

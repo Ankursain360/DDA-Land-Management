@@ -30,13 +30,16 @@ namespace LeaseDetails.Controllers
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUserNotificationService _userNotificationService;
+
         string LeaseFilePath = "";
         string ApprovalDocumentPath = "";
         string targetPathExtensionDocuments = "";
         public ExtensionApprovalController(IExtensionApprovalService extensionApprovalService,
            IExtensionService extensionService,   IConfiguration configuration,
            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
-           IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
+           IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
+            IUserNotificationService userNotificationService)
         {
             _extensionApprovalService = extensionApprovalService;
             _extensionService = extensionService;
@@ -45,6 +48,7 @@ namespace LeaseDetails.Controllers
             _workflowtemplateService = workflowtemplateService;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
             LeaseFilePath = _configuration.GetSection("FilePaths:LeaseApplicationForm:DocumentFilePath").Value.ToString();
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:LeaseApplicationForm:ApprovalDocumentPath").Value.ToString();
             targetPathExtensionDocuments = _configuration.GetSection("FilePaths:Extension:ExtensionFilePath").Value.ToString();
@@ -54,7 +58,7 @@ namespace LeaseDetails.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-            Watchandward data = new Watchandward();
+            Extension data = new Extension();
             var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
             int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
             data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
@@ -62,7 +66,7 @@ namespace LeaseDetails.Controllers
             var Msg = TempData["Message"] as string;
             if (Msg != null)
                 ViewBag.Message = Msg;
-            return View();
+            return View(data);
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] ExtensionApprovalSearchDto model)
@@ -284,6 +288,23 @@ namespace LeaseDetails.Controllers
 
                                         result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
+                                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                                        if (result)
+                                        {
+                                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidExtensionService").Value);
+                                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                            Usernotification usernotification = new Usernotification();
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Extension").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            usernotification.Message = replacement;
+                                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidExtensionService").Value);
+                                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                            usernotification.ServiceId = approvalproccess.ServiceId;
+                                            usernotification.SendFrom = approvalproccess.SendFrom;
+                                            usernotification.SendTo = approvalproccess.SendTo;
+                                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                        }
+                                        #endregion
+
                                         if (result)
                                         {
                                             if (extension.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
@@ -318,8 +339,6 @@ namespace LeaseDetails.Controllers
                                         }
                                     }
                                     break;
-
-
 
 
                                 }
@@ -403,7 +422,7 @@ namespace LeaseDetails.Controllers
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
 
-                        Watchandward data = new Watchandward();
+                        Extension data = new Extension();
                         var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
                         int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
                         data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
