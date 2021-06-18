@@ -29,7 +29,8 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-          
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
+
             services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
 
             services.AddScoped<INewLandProposalPlotDetailsRepository, NewLandProposalPlotDetailsRepository>();
@@ -81,7 +82,8 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-           
+            services.AddScoped<IUserNotificationService, UserNotificationService>();
+
             services.AddScoped<INewLandProposalPlotDetailsService, NewLandProposalPlotDetailsService>();
             services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
 
