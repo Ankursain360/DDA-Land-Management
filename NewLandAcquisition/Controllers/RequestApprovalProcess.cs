@@ -373,7 +373,7 @@ namespace NewLandAcquisition.Controllers
                         //At successfull completion send mail and sms
                         Uri uri = new Uri("https://www.managemybusinessess.com/");
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                        string link = "https://master.managemybusinessess.com/ApprovalProcess/Index";
 
                         var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                         StringBuilder multousermailId = new StringBuilder();
