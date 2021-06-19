@@ -32,8 +32,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveDemolitionstructurebeforedemolitionphotofiledetails(Demolitionstructurebeforedemolitionphotofiledetails demolitionstructurebeforedemolitionphotofiledetails);
         Task<bool> DeleteDemolitionstructurebeforedemolitionphotofiledetails(int Id);
         Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId);
-        Task<Demolitionstructureafterdemolitionphotofiledetails> GetDemolitionstructureafterdemolitionphotofiledetails(int Id);
-        Task<Demolitionstructurebeforedemolitionphotofiledetails> GetDemolitionstructurebeforedemolitionphotofiledetails(int Id);
+        Task<Demolitionstructureafterdemolitionphotofiledetails> GetAfterphotofile(int Id);
+
+        Task<Demolitionstructurebeforedemolitionphotofiledetails> GetBeforephotofile(int Id);
         Task<List<Demolitionstructure>> GetStructure();
         Task<List<Structure>> GetMasterStructure();
         Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetailsList();
@@ -53,6 +54,7 @@ namespace Libraries.Service.IApplicationService
 
         //added by ishu 17 june 2021
         Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved);
-
+        Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
+        Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
     }
 }

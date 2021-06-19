@@ -14,10 +14,13 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetails();
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId);
-        Task<Demolitionstructureafterdemolitionphotofiledetails> GetDemolitionstructureafterdemolitionphotofiledetails(int Id);
-        Task<Demolitionstructurebeforedemolitionphotofiledetails> GetDemolitionstructurebeforedemolitionphotofiledetails(int Id);
+        //Task<Demolitionstructureafterdemolitionphotofiledetails> GetDemolitionstructureafterdemolitionphotofiledetails(int Id);
+        //Task<Demolitionstructurebeforedemolitionphotofiledetails> GetDemolitionstructurebeforedemolitionphotofiledetails(int Id);
 
-
+        Task<Demolitionstructureafterdemolitionphotofiledetails> GetAfterphotofile(int Id);
+       
+        Task<Demolitionstructurebeforedemolitionphotofiledetails> GetBeforephotofile(int Id);
+       
         Task<bool> SaveDemolitionstructure(Demolitionstructure demolitionstructure);
         Task<bool> DeleteDemolitionstructure(int Id);
 
@@ -49,6 +52,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> Deletedearearptdetails(int Id);
         //added by ishu 17 june 2021
         Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved);
-
+        Task<Demolitionstructuredetails> FetchSingleResultonId(int id);
+        Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id);
     }
 }

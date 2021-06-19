@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿//$(document).ready(function () {
     //HttpGet(`/Demolitionstructuredetails/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
     //    debugger
     //    for (var i = 0; i < data.length; i++) {
@@ -26,15 +26,83 @@
     //    }
     //});
 
-});
+//});
 
 $(document).ready(function () {
     $('#StructureId1').removeAttr('multiple');
+
+    var id = parseInt($('#FixingDemolitionId').val());
+    var encroachmentId = parseInt($('#EncroachmentId').val());
+    var watchWardId = parseInt($('#WatchWardId').val());
+    GetWatchWardDetails(watchWardId);
+    GetEncroachmentDetails(encroachmentId);
+    GetAnnexureADetails(id);
 
     FillDemolitionRptAtEdit();
     FillAreaRptAtEdit();
 });
 
+function GetWatchWardDetails(id) {
+    HttpGet(`/Demolitionstructuredetails/WatchWardView/?Id=${id}`, 'html', function (response) {
+        $('#WatchWardDetailsDiv').html("");
+        $('#WatchWardDetailsDiv').html(response);
+    });
+};
+function GetEncroachmentDetails(id) {
+    HttpGet(`/Demolitionstructuredetails/EncroachmentRegisterView/?Id=${id}`, 'html', function (response) {
+        $('#EncroachmentRegisterDetailsDiv').html("");
+        $('#EncroachmentRegisterDetailsDiv').html(response);
+    });
+};
+
+function GetAnnexureADetails(id) {
+    HttpGet(`/Demolitionstructuredetails/AnnexureADetails/?Id=${id}`, 'html', function (response) {
+        $('#AnnexureADetailsDiv').html("");
+        $('#AnnexureADetailsDiv').html(response);
+    });
+};
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
+
+$("#collapse").click(function () {
+    $('#collapseApprroval').collapse("toggle").promise().done(function () {
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+
+$("#collapse").click(function () {
+    $("#collapseHistoryApprroval").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+$("#collapse").click(function () {
+    $("#collapseWatchWardApprroval").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+
+$("#collapse").click(function () {
+    $("#collapseAnnexureA").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
 function onChangeDepartment(id) {
     HttpGet(`/Demolitionstructuredetails/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
