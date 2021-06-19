@@ -78,6 +78,8 @@ namespace DamagePayeePublicInterface.Controllers
             string PanNoDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PanNoDocument").Value.ToString();
             string PhotographPersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
             string SignaturePersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
+            string OtherDocDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:OtherDocument").Value.ToString();
+
             string PropertyPhotographLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:PropertyPhotograph").Value.ToString();
             string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
             string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
@@ -152,7 +154,14 @@ namespace DamagePayeePublicInterface.Controllers
                                                                 damagepayeeregistertemp.SignatureFile.Count <= i ? string.Empty :
                                                                 fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i]) :
                                                                 damagepayeeregistertemp.SignatureFilePath[i] != null || damagepayeeregistertemp.SignatureFilePath[i] != "" ?
-                                                                damagepayeeregistertemp.SignatureFilePath[i] : string.Empty
+                                                                damagepayeeregistertemp.SignatureFilePath[i] : string.Empty,
+                                        OtherDocPath = damagepayeeregistertemp.OtherDocFile != null ?
+                                                                    damagepayeeregistertemp.OtherDocFile.Count <= i ? string.Empty :
+                                                                    fileHelper.SaveFile(OtherDocDocument, damagepayeeregistertemp.OtherDocFile[i]) :
+                                                                    damagepayeeregistertemp.OtherDocFilePath[i] != null || damagepayeeregistertemp.OtherDocFilePath[i] != "" ?
+                                                                    damagepayeeregistertemp.OtherDocFilePath[i] : string.Empty
+
+
                                     });
                                 }
                                 foreach (var item in damagepayeepersonelinfotemp)
@@ -332,6 +341,12 @@ namespace DamagePayeePublicInterface.Controllers
                                                                 fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i]) :
                                                                 damagepayeeregistertemp.SignatureFilePath[i] != null || damagepayeeregistertemp.SignatureFilePath[i] != "" ?
                                                                 damagepayeeregistertemp.SignatureFilePath[i] : string.Empty,
+                                        OtherDocPath = damagepayeeregistertemp.OtherDocFile != null ?
+                                                                    damagepayeeregistertemp.OtherDocFile.Count <= i ? string.Empty :
+                                                                    fileHelper.SaveFile(OtherDocDocument, damagepayeeregistertemp.OtherDocFile[i]) :
+                                                                    damagepayeeregistertemp.OtherDocFilePath[i] != null || damagepayeeregistertemp.OtherDocFilePath[i] != "" ?
+                                                                    damagepayeeregistertemp.OtherDocFilePath[i] : string.Empty
+
                                     });
                                 }
                                 foreach (var item in damagepayeepersonelinfotemp)
@@ -497,6 +512,7 @@ namespace DamagePayeePublicInterface.Controllers
                 x.PanNoFilePath,
                 x.PhotographPath,
                 x.SignaturePath,
+                x.OtherDocPath,
                 x.AadharNo,
                 x.PanNo
             }));
@@ -559,6 +575,14 @@ namespace DamagePayeePublicInterface.Controllers
             FileHelper file = new FileHelper();
             Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.SignaturePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewOtherDocumentFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            string path = Data.OtherDocPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
