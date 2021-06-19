@@ -1,0 +1,43 @@
+﻿@model System.Collections.Generic.IList<Dto.Master.UserNotificationAlertDto>
+
+<div class="dropdown noti text-white my-2  mr-3 order-md-3 ml-auto">
+    <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
+        <i class="ri-notification-2-line"></i>
+        <small class="bg-success rounded-circle position-absolute nofi-active">@Model[0].TotalNotification</small>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
+        @foreach (var menu in Model)
+        {
+            <ul class="list-unstyled m-0 p-0">
+                <li class="px-3">
+                    @if (@menu.URL == "#")
+                    {
+                        <a href="@menu.URL" class="d-flex align-items-center py-2 border-bottom read">
+                            <div class="noti-time text-center pr-2">
+                                <i class="ri-discuss-line"></i>
+                                <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " Days")</small>
+                            </div>
+                            <p class="m-0  text-left">
+                                @menu.Message
+                            </p>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@menu.URL" class="d-flex align-items-center py-2 border-bottom read" target="_blank">
+                            <div class="noti-time text-center pr-2">
+                                <i class="ri-discuss-line"></i>
+                                <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + "Days")</small>
+                            </div>
+                            <p class="m-0  text-left">
+                                @menu.Message
+                            </p>
+                        </a>
+                    }
+                </li>
+            </ul>
+        }
+
+    <a class="badge badge-primary px-2" asp-controller="ViewDocumentLeaseApplicationForm" asp-action="ViewDocumentLeaseApplicationForm"  target="_blank"> See All</a>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -18,5 +19,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Approvalstatus> GetStatusIdFromStatusCode(int statuscode);
         Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid);
         Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level);
+        Task<List<UserNotificationAlertDto>> GetUserNotficationAlert(int userId);
     }
 }

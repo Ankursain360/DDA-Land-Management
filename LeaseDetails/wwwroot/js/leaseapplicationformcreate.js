@@ -63,27 +63,6 @@ function fileValidation(filePath, fileInput, size) {
 
 }
 
-function DocumentValidation() {/* -----------Check Validation Added by Renu  --------------- */
-    debugger;
-    var show = true;
-    var count = $('#DivDocument').find('tbody').length;
-    for (var i = 0; i < count; i++) {
-        var FileUploadedPath = $("input[name='FileUploadedPath[" + i + "]']").val();
-        var IsMandatory = $("input[name='IsMandatory[" + i + "]']").val();
-        if (IsMandatory == 1 && FileUploadedPath == "") {
-            show = false;
-        }
-    }
-    if (show) {
-        return true;
-    }
-    else {
-        WarningMessage('Please Upload All Mandatory Document');
-        return false;
-    }
-
-}
-
 function onDocumentChange(element) {
     debugger;
     var filePath = element.value;

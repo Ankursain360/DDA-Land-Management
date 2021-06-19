@@ -48,6 +48,7 @@ namespace Libraries.Service.ApplicationService
             ApplicationNotificationTemplate model = result.FirstOrDefault();
             model.Name = template.Name;
             model.Template = template.Template;
+            model.URL = template.URL;
             model.ModifiedDate = DateTime.Now;
             model.IsActive = template.IsActive;
             model.ModifiedBy = template.ModifiedBy;
