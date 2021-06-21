@@ -65,6 +65,8 @@ namespace Service.ApplicationService
                 model.Title = dmsfileupload.Title;
                 model.FileName = dmsfileupload.FileName;
                 model.FilePath = dmsfileupload.FilePath;
+                model.ZoneId = dmsfileupload.ZoneId;
+                model.VillageId = dmsfileupload.VillageId;
                 model.IsActive = 1;
                 model.CreatedDate = DateTime.Now;
                 _dmsFileUploadRepository.Add(model);
@@ -92,6 +94,8 @@ namespace Service.ApplicationService
             model.DepartmentId = dmsfileupload.DepartmentId;
             model.LocalityId = dmsfileupload.LocalityId;
             model.KhasraNoId = dmsfileupload.KhasraNoId;
+            model.ZoneId = dmsfileupload.ZoneId;
+            model.VillageId = dmsfileupload.VillageId;
             model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
             model.AlmirahNo = dmsfileupload.AlmirahNo;
             model.Title = dmsfileupload.Title;
@@ -124,6 +128,16 @@ namespace Service.ApplicationService
             return _dmsFileUploadRepository.GetKhasraByName(name);
         }
 
+        public int GetZoneByName(string name)
+        {
+            return _dmsFileUploadRepository.GetZoneByName(name);
+        }
+
+        public int GetVillageByName(string name)
+        {
+            return _dmsFileUploadRepository.GetVillageByName(name);
+        }
+
         public async Task<bool> CheckUniqueName(int id, string fileNo)
         {
             return await _dmsFileUploadRepository.Any( id, fileNo);
@@ -138,5 +152,17 @@ namespace Service.ApplicationService
         {
             return await _dmsFileUploadRepository.GetDMSUserRights(userId);
         }
+
+        public async Task<List<Zone>> allZoneList()
+        {
+            return await _dmsFileUploadRepository.allZoneList();
+        }
+     
+        public async Task<List<Village>> allVillageList(int? zoneid)
+        {
+            return await _dmsFileUploadRepository.allVillageList(zoneid);
+        }
+
+
     }
 }
