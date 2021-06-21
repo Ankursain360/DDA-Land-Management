@@ -42,6 +42,7 @@
                                     <th style="min-width:210px;">PAN No.</th>
                                     <th style="min-width:250px;">Photo</th>
                                     <th style="min-width:250px;">Signature</th>
+                                    <th style="min-width:250px;">Upload Other Document</th>
                                     <th>Operation</th>
                                 </tr>
                             </thead>
@@ -51,17 +52,17 @@
                                 <tr id="">
                                     <td style="text-align:center;"><span class="sn">1</span></td>
                                     <td>
-                                        <input asp-for="payeeName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
+                                        <input asp-for="payeeName" required maxlength="45"  type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
                                         <span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>
                                     </td>
                                     <td>
-                                        <input asp-for="payeeFatherName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="payeeFatherName" required maxlength="45"  type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="payeeFatherName" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
                                         <select asp-for="Gender" required class="floating-label-field floating-label-field--s3">
-                                            <option value="0">---Select---</option>
+                                            <option value="">---Select---</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
                                             <option value="3">Other</option>
@@ -70,83 +71,90 @@
 
                                     </td>
                                     <td>
-                                        <textarea asp-for="Address" maxlength="100" required type="text"  class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea asp-for="Address" required maxlength="100"  type="text" class="floating-label-field floating-label-field--s3"></textarea>
 
                                         @*<input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />*@
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo" maxlength="12" required type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                        <input asp-for="MobileNo" required maxlength="12"  type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" maxlength="30" required type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
+                                        <input asp-for="EmailId" required maxlength="30"  type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
 
                                     </td>
                                     <td>
-                                       
-                                            <input asp-for="AadharNo" type="text" maxlength="15"  class="floating-label-field floating-label-field--s3" />
-                                            <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
-                                            <input type="hidden" asp-for="AadharNoFilePath" />
+                                        <input asp-for="AadharNo" required type="text" maxlength="15" class="floating-label-field floating-label-field--s3" />
+                                        <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
+
+                                        <input type="hidden" asp-for="AadharNoFilePath" />
                                         <br />
-                                            @**********  new upload btn design ***********@
-                                            @*<div class="d-flex align-items-center">
+                                        @**********  new upload btn design ***********@
+                                        @*<div class="d-flex align-items-center">
 
-                                                <div class="file-btn my-3 d-flex align-items-center mr-3">
-                                                    <input asp-for="Aadhar" type="file" class="browes d-none" placeholder="Name"  value="">
-                                                    <label for="Aadhar" class="btn btn-theme px-4 mb-0">Browse</label>
-                                                </div>
-                                                <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
-                                                    <figure class="m-0 img-thumbnail">
-                                                        <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
-                                                        <figcaption class="m-0">
-                                                            <a href="#" title="Update this file" class="bg-primary">
-                                                                <label for="Aadhar">
-                                                                    <i class="ri-edit-2-line"></i>
-                                                                </label>
-                                                            </a>
-                                                            <a href="#" title="Download this file" class="bg-success">
-                                                                <label for="">
-                                                                    <i class="ri-download-2-line"></i>
-                                                                </label>
-                                                            </a>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                            </div>*@
-                                            <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
-                                            <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
+                <div class="file-btn my-3 d-flex align-items-center mr-3">
+                    <input asp-for="Aadhar" type="file" class="browes d-none" placeholder="Name"  value="">
+                    <label for="Aadhar" class="btn btn-theme px-4 mb-0">Browse</label>
+                </div>
+                <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
+                    <figure class="m-0 img-thumbnail">
+                        <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
+                        <figcaption class="m-0">
+                            <a href="#" title="Update this file" class="bg-primary">
+                                <label for="Aadhar">
+                                    <i class="ri-edit-2-line"></i>
+                                </label>
+                            </a>
+                            <a href="#" title="Download this file" class="bg-success">
+                                <label for="">
+                                    <i class="ri-download-2-line"></i>
+                                </label>
+                            </a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>*@
+                                        <input asp-for="Aadhar" required type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
-                                       
+
                                     </td>
                                     <td>
-                                       
-                                            <input asp-for="PanNo" maxlength="15" type="text"  class="floating-label-field floating-label-field--s3" />
-                                            <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
 
-                                            <input type="hidden" asp-for="PanNoFilePath" />
-                                          <br />
-                                          <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
-                                            <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
+                                        <input asp-for="PanNo"  maxlength="15" type="text" class="floating-label-field floating-label-field--s3" />
+                                        <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
 
-                                       
+                                        <input type="hidden" asp-for="PanNoFilePath" />
+                                        <br />
+                                        <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
+
+
                                     </td>
                                     <td>
                                         <input type="hidden" asp-for="PhotographFilePath" />
-                                        
-                                        <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" />
+
+                                        <input asp-for="Photograph" required type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
                                         <input type="hidden" asp-for="SignatureFilePath" />
-                                       
-                                        <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
+
+                                        <input asp-for="SignatureFile" required type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
+
+                                    </td>
+                                    <td>
+                                        <input type="hidden" asp-for="OtherDocFilePath" />
+
+                                        <input asp-for="OtherDocFile" type="file" class="floating-label-field floating-label-field--s3" />
+                                        <span asp-validation-for="OtherDocFile" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
@@ -184,7 +192,7 @@
                         <div class="form-check theme">
                             <input class="form-check-input" type="radio" asp-for="TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent">
                             <label class="form-check-label" for="radio">
-                                Subsequent Purchaser/Occupier
+                                Subsequent Assessee/Occupier
                             </label>
                         </div>
                     </div>
@@ -204,7 +212,7 @@
                                     <th>Sr.No</th>
                                     <th>Name</th>
                                     <th>Father's Name</th>
-                                    <th>Date of GPA/Will/Other Deed</th>
+                                    <th>Date of ATS & GPA/Will</th>
                                     <th>Upload ATS & GPA/Will</th>
                                     <th>Operation</th>
                                 </tr>
@@ -260,7 +268,7 @@
                             <input asp-for="PropertyNo" required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" placeholder="Municipal No." />
                             <span asp-validation-for="PropertyNo" class="d-block text-danger field-validation-valid"></span>
 
-                            <label class="floating-label">Property/House/Municipal No.</label>
+                            <label class="floating-label">Property/Khasra/House/Municipal No.</label>
 
                         </div>
                     </div>

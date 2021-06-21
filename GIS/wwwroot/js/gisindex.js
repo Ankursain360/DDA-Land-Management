@@ -45,6 +45,17 @@ var LINE_LAYER = [];
 
 
 $(document).ready(function () {
+
+    $(document).ajaxStart(function () {
+        var styleValue = "block";
+        $("#loader-wrapper").css("display", styleValue);
+    });
+
+    $(document).ajaxComplete(function () {
+        var styleValue = "none";
+        $("#loader-wrapper").css("display", styleValue);
+    });
+
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
         var html = '';
         for (var i = 0; i < response.length; i++) {
@@ -195,6 +206,9 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
 function showVillage(maxima) {
     var villageid = maxima.replace('V', '');
     HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
+        $('#spanVillageName').empty().append(response[0].name);
+        $('#spanVillage').empty().append('Village : ' + response[0].name)
+        $('#aVillageName').show();
         showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
     });
 }
@@ -425,7 +439,7 @@ function showDisBoundariesDim(response) {
         var poly = createPolygon(getLatLongArr(dim[h].polygon));
         poly.setOptions({ strokeWeight: 1, strokeColor: dim[h].fillColor, fillOpacity: 0, clickable: !0 });
         DIM_LAYER.push(poly);
-        map.panTo(new google.maps.LatLng(dim[h].ycoordinate, dim[h].xcoordinate));
+       // map.panTo(new google.maps.LatLng(dim[h].ycoordinate, dim[h].xcoordinate));
     }
 }
 function showDisBoundariesEncroachment(response) {
@@ -830,7 +844,7 @@ $(function () {
 $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functionality added by renu */
     e.preventDefault();
    // var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
-    var data = alljsondata;  //get data from local storage
+    var data = JSON.parse(alljsondata);  //get data from local storage
     $(this).closest('table').find('td input[type="checkbox"]').prop('checked', $(this).prop('checked'));
     if (this.checked) {
         $('#chkAllImpInfra').attr("checked", "checked");
