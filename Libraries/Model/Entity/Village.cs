@@ -11,6 +11,8 @@ namespace Libraries.Model.Entity
         public Village()
         {
             Plot = new HashSet<Plot>();
+
+            Dmsfileupload = new HashSet<Dmsfileupload>();
             Gisaabadi = new HashSet<Gisaabadi>();
             Gisburji = new HashSet<Gisburji>();
             Gisclean = new HashSet<Gisclean>();
@@ -69,6 +71,7 @@ namespace Libraries.Model.Entity
         public virtual Zone Zone { get; set; }
         //public virtual ICollection<Nazul> Nazul { get; set; }
         public ICollection<Plot> Plot { get; set; }
+        public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
         public ICollection<Gisaabadi> Gisaabadi { get; set; }
         public ICollection<Gisburji> Gisburji { get; set; }
         public ICollection<Gisclean> Gisclean { get; set; }

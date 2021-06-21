@@ -33,6 +33,10 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+        [NotMapped]
+        public List<Village> VillageList { get; set; }
 
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
@@ -47,5 +51,10 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string PdfLocationPath { get; set; }
+        public int? ZoneId { get; set; }
+        public int? VillageId { get; set; }
+
+        public Village Village { get; set; }
+        public Zone Zone { get; set; }
     }
 }
