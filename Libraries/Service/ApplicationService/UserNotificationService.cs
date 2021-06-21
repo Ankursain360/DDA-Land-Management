@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using Libraries.Model;
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -26,12 +27,17 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<bool> Update(int id, Usernotification usernotification, int userId)
+        public async Task<bool> Update(int id,  int userId)
         {
             var result = await _userNotificationRepository.FindBy(a => a.Id == id);
             Usernotification model = result.FirstOrDefault();
-            model.ModifiedBy = userId;
-            model.ModifiedDate = DateTime.Now;
+            if(model.IsSeen != "T")
+            {
+                model.ModifiedBy = userId;
+                model.SeenDateTime = DateTime.Now;
+                model.ModifiedDate = DateTime.Now;
+            }
+            model.IsSeen = "T";
             _userNotificationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -101,6 +107,15 @@ namespace Libraries.Service.ApplicationService
         public async Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level)
         {
             return await _userNotificationRepository.CheckLastUserForRevert(processguid, serviceid, level);
+        }
+
+        public async Task<List<UserNotificationAlertDto>> GetUserNotficationAlert(int userId)
+        {
+            return await _userNotificationRepository.GetUserNotficationAlert( userId);
+        }
+        public async Task<List<UserNotificationAlertDto>> GetUserNotficationAlertAll(int userId)
+        {
+            return await _userNotificationRepository.GetUserNotficationAlertAll(userId);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
@@ -102,5 +103,41 @@ namespace Libraries.Repository.EntityRepository
                                      .Take(1)
                                      .FirstOrDefaultAsync();
         }
+
+        public async Task<List<UserNotificationAlertDto>> GetUserNotficationAlert(int userId)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("UserNotificationAlert")
+                                            .WithSqlParams(("P_UserId", userId)
+                                            )
+                                            .ExecuteStoredProcedureAsync<UserNotificationAlertDto>();
+
+                return (List<UserNotificationAlertDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<UserNotificationAlertDto>> GetUserNotficationAlertAll(int userId)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("UserNotificationAlertAll")
+                                            .WithSqlParams(("P_UserId", userId)
+                                            )
+                                            .ExecuteStoredProcedureAsync<UserNotificationAlertDto>();
+
+                return (List<UserNotificationAlertDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

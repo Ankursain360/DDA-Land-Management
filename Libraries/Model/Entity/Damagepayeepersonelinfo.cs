@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
         public string PanNoFilePath { get; set; }
         public string PhotographPath { get; set; }
         public string SignaturePath { get; set; }
-       
+        public string OtherDocPath { get; set; }
         public byte? IsActive { get; set; }
 
         public Damagepayeeregister DamagePayeeRegister { get; set; }

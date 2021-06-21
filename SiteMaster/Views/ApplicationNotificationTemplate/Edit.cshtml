@@ -32,16 +32,23 @@
             </div>
         </div>
 
-        <div class="row mt-md-3"> 
-            <div class=" col-md-6"> 
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="URL" type="text" class="floating-label-field floating-label-field--s3" limit="2000" />
+                    <span asp-validation-for="URL" class="text-danger"></span>
+                    <label class="floating-label">URL </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive"> 
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
                     <label asp-for="IsActive" class="floating-label">Status </label>
-                </div> 
+                </div>
             </div>
         </div>
         <br/>

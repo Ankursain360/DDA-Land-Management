@@ -41,12 +41,13 @@ namespace FileDataLoading.Controllers
             return View();
         }
             [HttpPost]
-        public async Task<IActionResult> Index1(string fileno)
+        public async Task<IActionResult> Index1(string fileno,string subject,string scheme)
         {
             //Reservation reservation = new Reservation();
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.GetAsync(_configuration.GetSection("compactorFileNoApi").Value + fileno))
+                using (var response = await httpClient.GetAsync(_configuration.GetSection("compactorFileNoApi").Value + fileno + "&subject="+subject+ "&SchemeWise="+scheme))
+                   
                 {
                     if (response.StatusCode == System.Net.HttpStatusCode.OK)
                     {
@@ -57,7 +58,7 @@ namespace FileDataLoading.Controllers
                     }
                     else
                     {
-                        return View(fileno);
+                        return View();
 
                     }
                    

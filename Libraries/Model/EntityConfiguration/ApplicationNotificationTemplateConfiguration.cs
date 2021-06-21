@@ -37,6 +37,10 @@ namespace Model.EntityConfiguration
                     .IsRequired()
                     .HasColumnType("longtext");
 
+            builder.Property(e => e.URL)
+                    .HasMaxLength(2000)
+                    .IsUnicode(false);
+
         }
     }
 }

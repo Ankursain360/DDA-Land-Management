@@ -196,7 +196,12 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<string> SignatureFilePath { get; set; }
+        [NotMapped]
+        public List<IFormFile> OtherDocFile { get; set; }
 
+        [NotMapped]
+        public List<string> OtherDocFilePath { get; set; }
+        
 
         //****** Damagepaymenthistory temp ***
         [NotMapped]
