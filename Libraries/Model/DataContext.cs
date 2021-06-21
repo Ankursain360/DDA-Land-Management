@@ -36,6 +36,9 @@ namespace Libraries.Model
         public virtual DbSet<Nazulland> Nazulland { get; set; }
         public virtual DbSet<Tehsil> Tehsil { get; set; }
         public virtual DbSet<Villagetype> Villagetype { get; set; }
+        public virtual DbSet<Surveyuserdetail> Surveyuserdetail { get; set; }
+        public virtual DbSet<Surveyuserrole> Surveyuserrole { get; set; }
+
         public virtual DbSet<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public virtual DbSet<Classificationofland> Classificationofland { get; set; }
         public virtual DbSet<Disposaltype> Disposaltype { get; set; }
@@ -344,6 +347,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DisposaltypeConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyregistrationConfiguration());
             modelBuilder.ApplyConfiguration(new SchemeConfiguration());
+            modelBuilder.ApplyConfiguration(new SurveyuserdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new SurveyuserroleConfiguration());
             modelBuilder.ApplyConfiguration(new ProposaldetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection4Configuration());
             modelBuilder.ApplyConfiguration(new Undersection4plotConfiguration());
