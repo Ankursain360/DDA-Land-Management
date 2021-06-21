@@ -37,6 +37,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.FetchSingleResult(id);
         }
+        
         public async Task<List<Department>> GetAllDepartment()
         {
             return await _demolitionstructuredetailsRepository.GetAllDepartment();
@@ -161,15 +162,17 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetDemolitionstructure(Id);
         }
+       
 
-        public async Task<Demolitionstructureafterdemolitionphotofiledetails> GetDemolitionstructureafterdemolitionphotofiledetails(int Id)
+        
+        public async Task<Demolitionstructureafterdemolitionphotofiledetails> GetAfterphotofile(int Id)
         {
-            return await _demolitionstructuredetailsRepository.GetDemolitionstructureafterdemolitionphotofiledetails(Id);
+            return await _demolitionstructuredetailsRepository.GetAfterphotofile(Id);
         }
 
-        public async Task<Demolitionstructurebeforedemolitionphotofiledetails> GetDemolitionstructurebeforedemolitionphotofiledetails(int Id)
+        public async Task<Demolitionstructurebeforedemolitionphotofiledetails> GetBeforephotofile(int Id)
         {
-            return await _demolitionstructuredetailsRepository.GetDemolitionstructurebeforedemolitionphotofiledetails(Id);
+            return await _demolitionstructuredetailsRepository.GetBeforephotofile(Id);
         }
 
         public async Task<List<Demolitionstructure>> GetStructure()
@@ -221,6 +224,14 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<Fixingdemolition>> GetPagedDemolitiondiary(DemolitionstructuredetailsDto1 model, int userId, int approved)
         {
             return await _demolitionstructuredetailsRepository.GetPagedDemolitiondiary(model, userId, approved);
+        }
+        public async Task<Demolitionstructuredetails> FetchSingleResultonId(int id)
+        {
+            return await _demolitionstructuredetailsRepository.FetchSingleResultonId(id);
+        }
+        public async Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id)
+        {
+            return await _demolitionstructuredetailsRepository.FetchSingleResultOfFixingDemolition(id);
         }
     }
    

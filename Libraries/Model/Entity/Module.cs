@@ -23,7 +23,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         [Required(ErrorMessage = "Sort By field is mandatory")]
         public int SortBy { get; set; }
-        [Required(ErrorMessage = " Status is mandatory")]
+        //[Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }

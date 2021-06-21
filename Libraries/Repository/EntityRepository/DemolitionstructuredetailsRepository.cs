@@ -98,13 +98,14 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<Demolitionstructureafterdemolitionphotofiledetails> GetDemolitionstructureafterdemolitionphotofiledetails(int Id)
+        public async Task<Demolitionstructureafterdemolitionphotofiledetails> GetAfterphotofile(int Id)
         {
-            return await _dbContext.Demolitionstructureafterdemolitionphotofiledetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            var data= await _dbContext.Demolitionstructureafterdemolitionphotofiledetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return data;
         }
-        public async Task<Demolitionstructureafterdemolitionphotofiledetails> GetDemolitionstructurebeforedemolitionphotofiledetails(int Id)
+        public async Task<Demolitionstructurebeforedemolitionphotofiledetails> GetBeforephotofile(int Id)
         {
-            return await _dbContext.Demolitionstructureafterdemolitionphotofiledetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Demolitionstructurebeforedemolitionphotofiledetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
 
         public async Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model)
@@ -313,10 +314,10 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
-        Task<Demolitionstructurebeforedemolitionphotofiledetails> IDemolitionstructuredetailsRepository.GetDemolitionstructurebeforedemolitionphotofiledetails(int Id)
-        {
-            throw new NotImplementedException();
-        }
+        //Task<Demolitionstructurebeforedemolitionphotofiledetails> IDemolitionstructuredetailsRepository.GetBeforephotofile(int Id)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task<List<Demolitionstructure>> GetStructure()
         {
@@ -528,6 +529,28 @@ namespace Libraries.Repository.EntityRepository
                                        .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
             }
 
+        }
+        
+        public async Task<Demolitionstructuredetails> FetchSingleResultonId(int id)
+        {
+            return await _dbContext.Demolitionstructuredetails
+                            .Include(x => x.Demolitionstructureafterdemolitionphotofiledetails)
+                            .Include(x => x.Demolitionstructurebeforedemolitionphotofiledetails)
+                            .Include(x => x.Demolitionstructure)
+                            .Include(x => x.FixingDemolition)
+                            .Include(x => x.FixingDemolition.Encroachment)
+                            .Include(x => x.FixingDemolition.Encroachment.WatchWard)
+                            .Include(x => x.FixingDemolition.Encroachment.Locality)
+                            .Where(x => x.FixingDemolitionId == id)
+                            .FirstOrDefaultAsync();
+        }
+        public async Task<Fixingdemolition> FetchSingleResultOfFixingDemolition(int id)
+        {
+            return await _dbContext.Fixingdemolition
+                                     .Include(x => x.Encroachment)
+                                     .Include(x => x.Encroachment.WatchWard)
+                                     .Where(x => x.Id == id)
+                                     .FirstOrDefaultAsync();
         }
     }
 }

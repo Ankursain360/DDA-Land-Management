@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using Libraries.Model;
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -101,6 +102,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level)
         {
             return await _userNotificationRepository.CheckLastUserForRevert(processguid, serviceid, level);
+        }
+
+        public async Task<List<UserNotificationAlertDto>> GetUserNotficationAlert(int userId)
+        {
+            return await _userNotificationRepository.GetUserNotficationAlert( userId);
         }
     }
 }

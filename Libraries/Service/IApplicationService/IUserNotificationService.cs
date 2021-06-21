@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -23,5 +24,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> RollBackEntry(string processguid, int serviceid);
         Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid);
         Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level);
+        Task<List<UserNotificationAlertDto>> GetUserNotficationAlert(int userId);
     }
 }
