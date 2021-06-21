@@ -6,6 +6,7 @@ namespace Dto.Master
 {
     public class UserNotificationAlertDto
     {
+        public int Id { get; set; }
         public int TotalNotification { get; set; }
         public int User { get; set; }
         public string ProcessGuid { get; set; }

@@ -325,3 +325,13 @@ eval(
 		{}
 	)
 );
+
+function RefreshNotification() {
+	setTimeout(function () {
+		window.location.reload(1);
+	}, 5000);
+}
+
+function NoNotification() {
+	alert("Notification link expired.");
+}
