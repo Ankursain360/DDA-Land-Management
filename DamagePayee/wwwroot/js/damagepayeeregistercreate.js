@@ -476,3 +476,26 @@ $(function () {
 
     });
 });
+
+
+//$("form").submit(function () {
+//    if ('#payeeName' == ""
+//        && 'payeeFatherName' == ""
+//        && 'Gender' == ""
+//        && 'Address' == ""
+//        && ('MobileNo' == "" || 'MobileNo' == null)
+//        && 'EmailId' == ""
+//        && 'AadharNo' == ""
+//        && 'Photograph' == ""
+//        && 'SignatureFile' == ""
+//    ) {
+        
+//        alert('Please fill all mandatory feilds of Personal Information of Damage Assessee repeater');
+//        return false;
+//    }
+//    else
+//    {
+//        return true;
+//    }
+    
+//});

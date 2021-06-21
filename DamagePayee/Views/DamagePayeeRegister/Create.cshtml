@@ -52,17 +52,17 @@
                                 <tr id="">
                                     <td style="text-align:center;"><span class="sn">1</span></td>
                                     <td>
-                                        <input asp-for="payeeName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
+                                        <input asp-for="payeeName" required maxlength="45"  type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
                                         <span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>
                                     </td>
                                     <td>
-                                        <input asp-for="payeeFatherName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="payeeFatherName" required maxlength="45"  type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="payeeFatherName" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
                                         <select asp-for="Gender" required class="floating-label-field floating-label-field--s3">
-                                            <option value="0">---Select---</option>
+                                            <option value="">---Select---</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
                                             <option value="3">Other</option>
@@ -71,25 +71,25 @@
 
                                     </td>
                                     <td>
-                                        <textarea asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea asp-for="Address" required maxlength="100"  type="text" class="floating-label-field floating-label-field--s3"></textarea>
 
                                         @*<input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />*@
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo" maxlength="12" required type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                        <input asp-for="MobileNo" required maxlength="12"  type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" maxlength="30" required type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
+                                        <input asp-for="EmailId" required maxlength="30"  type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" type="text" maxlength="15" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="AadharNo" required type="text" maxlength="15" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
                                         <input type="hidden" asp-for="AadharNoFilePath" />
@@ -119,14 +119,14 @@
                     </figure>
                 </div>
             </div>*@
-                                        <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <input asp-for="Aadhar" required type="file" class="floating-label-field floating-label-field--s3 " />
                                         <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="PanNo" maxlength="15" type="text" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="PanNo"  maxlength="15" type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
 
                                         <input type="hidden" asp-for="PanNoFilePath" />
@@ -139,14 +139,14 @@
                                     <td>
                                         <input type="hidden" asp-for="PhotographFilePath" />
 
-                                        <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="Photograph" required type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
                                         <input type="hidden" asp-for="SignatureFilePath" />
 
-                                        <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="SignatureFile" required type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
