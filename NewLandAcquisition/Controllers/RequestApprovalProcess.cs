@@ -309,7 +309,7 @@ namespace NewLandAcquisition.Controllers
                                             var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestService").Value);
                                             var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                             Usernotification usernotification = new Usernotification();
-                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Identification of land").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
                                             usernotification.Message = replacement;
                                             usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestService").Value);
                                             usernotification.ProcessGuid = approvalproccess.ProcessGuid;
@@ -397,7 +397,7 @@ namespace NewLandAcquisition.Controllers
 
                         #region HTML Body Generation
                         ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                        bodyDTO.ApplicationName = "Request Application";
+                        bodyDTO.ApplicationName = "Identification of land Application";
                         bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
                         bodyDTO.SenderName = senderUser.User.Name;
                         bodyDTO.Link = link;
@@ -411,7 +411,7 @@ namespace NewLandAcquisition.Controllers
                         //  sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
                         #region Common Mail Genration
                         SentMailGenerationDto maildto = new SentMailGenerationDto();
-                        maildto.strMailSubject = "Pending Request Approval Details ";
+                        maildto.strMailSubject = "Pending Identification of land Approval Details ";
                         maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
                         maildto.strBodyMsg = strBodyMsg;
                         maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
