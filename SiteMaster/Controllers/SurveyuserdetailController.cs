@@ -62,8 +62,7 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    //string passwordencode = Convert.ToBase64String(Encoding.UTF8.GetBytes("user.password"));
-                    //user.Password = passwordencode;
+                    user.Password = (new EncryptionHelper()).Base64Encode(user.Password);
                     var result = await _surveyuserdetailService.Create(user);
 
                     if (result == true)
@@ -100,6 +99,8 @@ namespace SiteMaster.Controllers
             {
                 return NotFound();
             }
+
+            Data.Password = (new EncryptionHelper()).Base64Decode(Data.Password);
             return View(Data);
         }
 
@@ -113,6 +114,7 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
+                    user.Password = (new EncryptionHelper()).Base64Encode(user.Password);
                     var result = await _surveyuserdetailService.Update(id, user);
                     if (result == true)
                     {
