@@ -80,7 +80,7 @@ namespace Libraries.Service.ApplicationService
             model.DocumentNameSizra = nazul.DocumentNameSizra;
             model.Bigha = nazul.Bigha;
             model.Biswa = nazul.Biswa;
-            model.Biswa = nazul.Biswanshi;
+            model.Biswanshi = nazul.Biswanshi;
             model.DateOfNotification = nazul.DateOfNotification;
 
             model.IsActive = nazul.IsActive;
