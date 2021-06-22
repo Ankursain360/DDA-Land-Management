@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input asp-for="AwardNumber" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="100">
+                    <input asp-for="AwardNumber" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="30">
 
                     <span asp-validation-for="AwardNumber" class="text-danger"></span>
                     <label asp-for="AwardNumber" class="floating-label">Award Number </label>
@@ -19,7 +19,7 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="100">
+                    <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" >
 
                     <span asp-validation-for="AwardDate" class="text-danger"></span>
                     <label asp-for="AwardDate" class="floating-label">Award Date </label>
@@ -51,10 +51,10 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Compensation" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="100">
+                    <input asp-for="Compensation" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Name" limit="15">
 
                     <span asp-validation-for="Compensation" class="text-danger"></span>
-                    <label asp-for="Compensation" class="floating-label">Compensation </label>
+                    <label asp-for="Compensation" class="floating-label">Compensation (Rs.)</label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -63,37 +63,37 @@
                     <div class="col-md-3">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input asp-for="Rate1" type="text" class="floating-label-field floating-label-field--s3 numbers"
-                                   placeholder="Land A Rate" limit="100">
+                                   placeholder="Land A Rate" limit="15">
 
                             <span asp-validation-for="Rate1" class="text-danger"></span>
-                            <label class="floating-label">Land A Rate</label>
+                            <label class="floating-label">Land A Rate(Rs.)</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input asp-for="Rate2" type="text" class="floating-label-field floating-label-field--s3 numbers"
-                                   placeholder="Land B Rate" limit="100">
+                                   placeholder="Land B Rate" limit="15">
 
                             <span asp-validation-for="Rate2" class="text-danger"></span>
-                            <label class="floating-label">Land B Rate</label>
+                            <label class="floating-label">Land B Rate(Rs.)</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input asp-for="Rate3" type="text" class="floating-label-field floating-label-field--s3 numbers"
-                                   placeholder="Land C Rate" limit="100">
+                                   placeholder="Land C Rate" limit="15">
 
                             <span asp-validation-for="Rate3" class="text-danger"></span>
-                            <label class="floating-label">Land C Rate</label>
+                            <label class="floating-label">Land C Rate(Rs.)</label>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input asp-for="Rate4" type="text" class="floating-label-field floating-label-field--s3 numbers"
-                                   placeholder="Land C Rate" limit="100">
+                                   placeholder="Land C Rate" limit="15">
 
                             <span asp-validation-for="Rate4" class="text-danger"></span>
-                            <label class="floating-label">Land D Rate</label>
+                            <label class="floating-label">Land D Rate(Rs.)</label>
                         </div>
                     </div>
                 </div>

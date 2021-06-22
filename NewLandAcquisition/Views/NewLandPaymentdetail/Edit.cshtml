@@ -31,12 +31,12 @@
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AmountPaid" placeholder="Amount Paid" type="text"
+                    <input asp-for="AmountPaid" placeholder="Amount Paid(Rs.)" type="text"
                            class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="AmountPaid" class="text-danger"></span>
 
-                    <label class="floating-label">Amount Paid </label>
+                    <label class="floating-label">Amount Paid(Rs.) </label>
                 </div>
             </div>
             <div class="col-md-6 ">
@@ -53,12 +53,12 @@
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="ChequeNo"  type="text"
+                    <input asp-for="ChequeNo"  type="text" placeholder="Chaque/RTGS/NEFT/IMPS No"
                            class="floating-label-field floating-label-field--s3" limit="30" />
 
                     <span asp-validation-for="ChequeNo" class="text-danger"></span>
 
-                    <label class="floating-label">Chaque/RTGS/NEFT/IMPS No</label>
+                    <label class="floating-label">Cheque/RTGS/NEFT/IMPS No</label>
                 </div>
             </div>
             <div class="col-md-6 ">

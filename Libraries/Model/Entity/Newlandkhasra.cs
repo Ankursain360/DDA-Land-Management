@@ -18,6 +18,7 @@ namespace Libraries.Model.Entity
             Newlandus6plot = new HashSet<Newlandus6plot>();
             Newlandenhancecompensation = new HashSet<Newlandenhancecompensation>();
             Newlandnotificationdetails = new HashSet<Newlandnotificationdetails>();
+            Newlanddemandlistdetails = new HashSet<Newlanddemandlistdetails>();
         }
 
         [Required(ErrorMessage = "Khasra is mandatory")]
@@ -62,5 +63,6 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Newlandawardplotdetails> Newlandawardplotdetails { get; set; }
         public ICollection<Newlandpossessiondetails> newlandpossessiondetails { get; set; }
         public ICollection<Newlandnotificationdetails> Newlandnotificationdetails { get; set; }
+        public ICollection<Newlanddemandlistdetails> Newlanddemandlistdetails { get; set; }
     }
 }

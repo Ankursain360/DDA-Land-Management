@@ -1,0 +1,109 @@
+﻿@model Libraries.Model.Entity.Surveyuserdetail
+@await Component.InvokeAsync("PageHeader", new { pageName = "Survey User Detail" })
+
+<div class="pt-3">
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Edit Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="FirstName" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <label class="floating-label">First Name    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="LastName" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <label class="floating-label">Last Name    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="UserName" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <label class="floating-label">User Name    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="PhoneNo" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="12" />
+                    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                    <label class="floating-label">Phone Number    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="EmailId" placeholder="Name" type="email"
+                           class="floating-label-field floating-label-field--s3" limit="50" />
+                    <span asp-validation-for="EmailId" class="text-danger"></span>
+                    <label class="floating-label">Email Id   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="Password" placeholder="Name"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <label class="floating-label">Password   </label>
+                </div>
+            </div>
+        
+
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="RoleId"
+                                asp-items="@(new SelectList(Model.SurveyUserRoleList, "Id","Name"))">
+                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        </select>
+                        <span asp-validation-for="RoleId" class="text-danger"></span>
+                        <label asp-for="RoleId" class="floating-label">Role </label>
+                    </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Update</button>
+                @Html.ActionLink("Back", "Index", "Surveyuserdetail", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/zonecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/zonecreate.js" asp-append-version="true"></script>
+</environment>
