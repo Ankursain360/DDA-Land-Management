@@ -275,6 +275,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
         public virtual DbSet<Courtcasesmapping> Courtcasesmapping { get; set; }
+        public virtual DbSet<Newlanddemandlistdetails> Newlanddemandlistdetails { get; set; }
 
         // Lease Details module
         public virtual DbSet<Premiumrate> Premiumrate { get; set; }
