@@ -60,6 +60,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IRowRepository, RowRepository>();
             services.AddScoped<ICasenatureRepository, CasenatureRepository>();
             services.AddScoped<ILawyerRepository, LawyerRespository>();
+            services.AddScoped<ISurveyuserdetailRepository, SurveyuserdetailRepository>();
             // new land acquisition masters
 
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
@@ -141,6 +142,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IRowService, RowService>();
             services.AddScoped<ICasenatureService, CasenatureService>();
             services.AddScoped<ILawyerService, LawyerService>();
+            services.AddScoped<ISurveyuserdetailService, SurveyuserdetailService>();
             // new land acquisition masters 
 
             services.AddScoped<INewlandvillageService, NewlandvillageService>();

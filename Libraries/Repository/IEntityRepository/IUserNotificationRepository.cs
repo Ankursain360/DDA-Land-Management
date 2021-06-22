@@ -20,5 +20,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid);
         Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level);
         Task<List<UserNotificationAlertDto>> GetUserNotficationAlert(int userId);
+        Task<List<UserNotificationAlertDto>> GetUserNotficationAlertAll(int userId);
     }
 }

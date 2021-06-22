@@ -38,10 +38,15 @@ namespace DocumentManagementSystem.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
+            Dmsfileupload dmsfileupload = new Dmsfileupload();
             ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
             ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
-            return View();
+            dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
+            await BindDropDown(dmsfileupload);
+            //ViewBag.ZoneList = await _dmsfileuploadService.allZoneList();
+            //ViewBag.VillageList = await _dmsfileuploadService.allVillageList(ViewBag.ZoneId);
+            return View(dmsfileupload);
         }
 
         [HttpPost]
@@ -55,11 +60,14 @@ namespace DocumentManagementSystem.Controllers
             dmsfileupload.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
             dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            dmsfileupload.ZoneList = await _dmsfileuploadService.allZoneList();
+         
         }
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Dmsfileupload dmsfileupload = new Dmsfileupload();
+            dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
             dmsfileupload.IsActive = 1;
             await BindDropDown(dmsfileupload);
             ViewBag.PdfGenerate = "No";
@@ -70,6 +78,7 @@ namespace DocumentManagementSystem.Controllers
         [AuthorizeContext(ViewAction.Add)]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Create(Dmsfileupload dmsfileupload)
         {
@@ -77,6 +86,7 @@ namespace DocumentManagementSystem.Controllers
             dmsfileupload.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
             dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
 
             if (ModelState.IsValid)
             {
@@ -107,6 +117,9 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+                    ViewBag.ZoneList = await _dmsfileuploadService.allZoneList();
+                    dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
+
                     return View("Index");
                 }
                 else
@@ -129,6 +142,7 @@ namespace DocumentManagementSystem.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _dmsfileuploadService.FetchSingleResult(id);
+            Data.VillageList = await _dmsfileuploadService.allVillageList(Data.ZoneId);
             await BindDropDown(Data);
             if (Data == null)
             {
@@ -298,6 +312,9 @@ namespace DocumentManagementSystem.Controllers
             dmsfileupload.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
             dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            dmsfileupload.ZoneList = await _dmsfileuploadService.allZoneList();
+            dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
+
             var result = false;
             bool row = true;
             if (ModelState.IsValid)
@@ -320,18 +337,27 @@ namespace DocumentManagementSystem.Controllers
                         dmsfileupload.AlloteeName = (rows[1].ToString());
                         var LocalityId = _dmsfileuploadService.GetLocalityByName((rows[2].ToString())); //To convert locality name to id
                         var KhasraId = _dmsfileuploadService.GetKhasraByName((rows[3].ToString()));//To convert khasra name to id
+                   
                         dmsfileupload.LocalityId = LocalityId;
                         dmsfileupload.KhasraNoId = KhasraId;
+                      
+                      
+
                         dmsfileupload.PropertyNoAddress = (rows[4].ToString());
                         dmsfileupload.Title = (rows[5].ToString());
                         dmsfileupload.AlmirahNo = (rows[6].ToString());
                         dmsfileupload.FileName = (rows[7].ToString());
 
+                       
                         if ((dmsfileupload.PdfLocationPath[dmsfileupload.PdfLocationPath.Length - 1]).ToString() == @"\" ? true : false)
                             dmsfileupload.FilePath = dmsfileupload.PdfLocationPath + (rows[7].ToString());
                         else
                             dmsfileupload.FilePath = dmsfileupload.PdfLocationPath + @"\" + (rows[7].ToString());
+                        var ZoneId = _dmsfileuploadService.GetZoneByName((rows[8].ToString())); //To convert Zone name to id
+                        var VillageId = _dmsfileuploadService.GetVillageByName((rows[9].ToString()));//To convert Village name to id
 
+                        dmsfileupload.ZoneId = ZoneId;
+                        dmsfileupload.VillageId = VillageId;
                         dmsfileupload.IsFileBulkUpload = "File Upload";
                         dmsfileupload.IsActive = 1;
                         dmsfileupload.CreatedBy = SiteContext.UserId;
@@ -366,6 +392,10 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+                    dmsfileupload.ZoneList = await _dmsfileuploadService.allZoneList();
+                    dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
+
+
                     return View("Index");
                 }
                 else
@@ -379,6 +409,10 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+                    dmsfileupload.ZoneList = await _dmsfileuploadService.allZoneList();
+                    dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
+
+
                     dmsfileupload.IsActive = 1;
                     await BindDropDown(dmsfileupload);
                     return View("Create", dmsfileupload);
@@ -392,6 +426,10 @@ namespace DocumentManagementSystem.Controllers
                 ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                 ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                 ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+                dmsfileupload.ZoneList = await _dmsfileuploadService.allZoneList();
+                dmsfileupload.VillageList = await _dmsfileuploadService.allVillageList(dmsfileupload.ZoneId);
+
+
                 return View("Create");
             }
 
@@ -429,7 +467,10 @@ namespace DocumentManagementSystem.Controllers
                         Department = result[i].Department == null ? "" : result[i].Department.Name.ToString(),
                         Locality = result[i].Locality == null ? "" : result[i].Locality.Name.ToString(),
                         KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.KhasraNo.ToString(),
-                      
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
+                        Village = result[i].Village == null ? "" : result[i].Village.Name.ToString(),
+
+
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
@@ -438,6 +479,14 @@ namespace DocumentManagementSystem.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+
+        [HttpGet]
+        public async Task<JsonResult> AllVillagedataList(int? zoneid)
+        {
+            zoneid = zoneid ?? 0;
+            return Json(await _dmsfileuploadService.allVillageList(Convert.ToInt32(zoneid)));
+        }
+
 
     }
 

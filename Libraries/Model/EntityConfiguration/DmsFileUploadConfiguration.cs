@@ -93,6 +93,19 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Dmsfileupload)
                 .HasForeignKey(d => d.LocalityId)
                 .HasConstraintName("fk_LocalityIdDMSFileUpload");
+            builder.Property(e => e.VillageId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Dmsfileupload)
+                .HasForeignKey(d => d.VillageId)
+                .HasConstraintName("fk890_villageid22");
+
+            builder.HasOne(d => d.Zone)
+                .WithMany(p => p.Dmsfileupload)
+                .HasForeignKey(d => d.ZoneId)
+                .HasConstraintName("fkZoneid23");
         }
     }
 }

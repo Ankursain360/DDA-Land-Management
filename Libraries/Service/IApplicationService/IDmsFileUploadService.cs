@@ -21,9 +21,14 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id, int userId);
         int GetLocalityByName(string name);
         int GetKhasraByName(string name);
+
+        int GetZoneByName(string name);
+        int GetVillageByName(string name);
         Task<bool> CheckUniqueName(int id, string fileNo);
         Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
         Task<Dmsfileright> GetDMSUserRights(int userId);
         Task<List<Dmsfileupload>> GetAllDMSFileUploadList();
+        Task<List<Zone>> allZoneList();
+        Task<List<Village>> allVillageList(int? zoneid);
     }
 }

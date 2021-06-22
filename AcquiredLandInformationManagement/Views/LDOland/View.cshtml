@@ -105,28 +105,28 @@
 
             <div class="row pt-3">
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <input type="hidden" asp-for="StatusOfLand" id="StatusOfLand" />
                     <span asp-validation-for="StatusOfLand" class="text-danger"></span>
 
                     <div class="form-row">
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label class="radio-inline  ">
                                 <input asp-for="StatusOfLand" type="radio" class="floating-label-field  " placeholder="Name" name="grpLand" value="Allotted" id="A">Allotted
                             </label>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label class="radio-inline  ">
                                 <input asp-for="StatusOfLand" type="radio" class="floating-label-field " placeholder="Name" name="grpLand" value="Vacant" id="V">Vacant
                             </label>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label class="radio-inline  ">
                                 <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Buildup/Encroached" id="E">Buildup/Encroached
                             </label>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label class="radio-inline  ">
                                 <input asp-for="StatusOfLand" type="radio" class="floating-label-field floating-label-field--s3 " placeholder="Name" name="grpLand" value="Green" id="G">Green
                             </label>
@@ -148,9 +148,6 @@
                     <label class="floating-label">Occupied By </label>
                 </div>
             </div>
-        </div>
-
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="DateofPossession" placeholder="Name" type="date"
@@ -159,6 +156,10 @@
                     <label class="floating-label">Date Of Possession  </label>
                 </div>
             </div>
+        </div>
+
+        <div class="row mt-md-3">
+
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="DateOfLandResume" type="date" disabled
@@ -167,8 +168,7 @@
                     <label class="floating-label">Date of  Land Resume/Taken Back by L&DO </label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
+
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="hidden" asp-for="OrderDocumentName" />
@@ -187,6 +187,9 @@
                     <label class="floating-label">Upload Order</label>
                 </div>
             </div>
+        </div>
+        <div class="row mt-md-3">
+
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="hidden" asp-for="PossessionDocumentName" />
@@ -205,8 +208,6 @@
                     <label class="floating-label">Upload Possession proceedings</label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
@@ -218,6 +219,7 @@
                 </div>
             </div>
         </div>
+     
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">

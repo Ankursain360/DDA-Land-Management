@@ -120,5 +120,24 @@ namespace Libraries.Repository.EntityRepository
                 throw;
             }
         }
+
+        public async Task<List<UserNotificationAlertDto>> GetUserNotficationAlertAll(int userId)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("UserNotificationAlertAll")
+                                            .WithSqlParams(("P_UserId", userId)
+                                            )
+                                            .ExecuteStoredProcedureAsync<UserNotificationAlertDto>();
+
+                return (List<UserNotificationAlertDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

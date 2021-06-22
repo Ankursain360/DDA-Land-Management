@@ -58,6 +58,8 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                          .Include(x => x.Zone)
+                                        .Include(x => x.Village)
                 .ToListAsync();
         }
 
@@ -67,6 +69,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                         .Include(x => x.Zone)
+                                        .Include(x => x.Village)
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
@@ -80,6 +84,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                           .Include(x => x.Zone)
+                                        .Include(x => x.Village)
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
@@ -99,6 +105,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
+                                           .Include(x => x.Zone)
+                                        .Include(x => x.Village)
                                         .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
@@ -129,6 +137,24 @@ namespace Libraries.Repository.EntityRepository
         public int GetLocalityByName(string name)
         {
             var File = (from f in _dbContext.Locality
+                        where f.Name.ToUpper().Trim() == name.ToUpper().Trim()
+                        select f.Id).FirstOrDefault();
+
+            return File;
+        }
+
+        public int GetZoneByName(string name)
+        {
+            var File = (from f in _dbContext.Zone
+                        where f.Name.ToUpper().Trim() == name.ToUpper().Trim()
+                        select f.Id).FirstOrDefault();
+
+            return File;
+        }
+
+        public int GetVillageByName(string name)
+        {
+            var File = (from f in _dbContext.Village
                         where f.Name.ToUpper().Trim() == name.ToUpper().Trim()
                         select f.Id).FirstOrDefault();
 
@@ -230,5 +256,22 @@ namespace Libraries.Repository.EntityRepository
                                     .Where(x => x.UserId == userId)
                                     .FirstOrDefaultAsync();
         }
+
+        public async Task<List<Zone>> allZoneList()
+        {
+            return await _dbContext.Zone
+                                     .Where(x => x.IsActive == 1)
+                                     .ToListAsync();
+        }
+
+        public async Task<List<Village>> allVillageList(int? zoneid)
+        {
+            return await _dbContext.Village
+                                     .Where(x => x.IsActive == 1 && x.ZoneId == zoneid)
+                                     .ToListAsync();
+        }
+
+
+
     }
 }

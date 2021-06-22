@@ -33,9 +33,11 @@ namespace DamagePayee.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
+        private readonly IUserNotificationService _userNotificationService;
         public DamagePayeeRegisterController(IDamagepayeeregisterService damagepayeeregisterService,
             IConfiguration configuration, IHostingEnvironment en, IApprovalProccessService approvalproccessService,
-            IWorkflowTemplateService workflowtemplateService, IUserProfileService userProfileService)
+            IWorkflowTemplateService workflowtemplateService, IUserProfileService userProfileService,
+            IUserNotificationService userNotificationService)
         {
             _configuration = configuration;
             _damagepayeeregisterService = damagepayeeregisterService;
@@ -43,6 +45,7 @@ namespace DamagePayee.Controllers
             _approvalproccessService = approvalproccessService;
             _workflowtemplateService = workflowtemplateService;
             _userProfileService = userProfileService;
+            _userNotificationService = userNotificationService;
         }
 
 
@@ -461,6 +464,24 @@ namespace DamagePayee.Controllers
                                             approvalproccess.Version = workflowtemplatedata.Version;
                                             approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                             result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                                            #region Insert Into usernotification table Added By Renu 18 June 2021
+                                            if (result == true && approvalproccess.SendTo != null)
+                                            {
+                                                var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidDamagePayee").Value);
+                                                var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                Usernotification usernotification = new Usernotification();
+                                                var replacement = notificationtemplate.Template.Replace("{proccess name}", "Damage Payee Register").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                                usernotification.Message = replacement;
+                                                usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidDamagePayee").Value);
+                                                usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                                usernotification.ServiceId = approvalproccess.ServiceId;
+                                                usernotification.SendFrom = approvalproccess.SendFrom;
+                                                usernotification.SendTo = approvalproccess.SendTo;
+                                                result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                            }
+                                            #endregion
+
                                         }
 
                                         break;

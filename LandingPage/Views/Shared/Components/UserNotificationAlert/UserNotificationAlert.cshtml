@@ -12,7 +12,7 @@
                 <li class="px-3">
                     @if (@menu.URL == "#")
                     {
-                        <a href="@menu.URL" class="d-flex align-items-center py-2 border-bottom read">
+                        <a href="@menu.URL" class="d-flex align-items-center py-2 border-bottom read"  onclick="NoNotification()" >
                             <div class="noti-time text-center pr-2">
                                 <i class="ri-discuss-line"></i>
                                 <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " Days")</small>
@@ -24,20 +24,22 @@
                     }
                     else
                     {
-                        <a href="@menu.URL" class="d-flex align-items-center py-2 border-bottom read" target="_blank">
-                            <div class="noti-time text-center pr-2">
-                                <i class="ri-discuss-line"></i>
-                                <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + "Days")</small>
-                            </div>
-                            <p class="m-0  text-left">
-                                @menu.Message
-                            </p>
-                        </a>
+                <a asp-action="UpdateUserNotification" asp-controller="UserNotification" asp-route-id="@menu.Id" asp-route-url="@menu.URL" onclick="RefreshNotification()" target="_blank" class="d-flex align-items-center py-2 border-bottom read">
+                    @*onclick="UpdateStatus(@menu.Id,@menu.URL)"*@
+                    <div class="noti-time text-center pr-2">
+                        <i class="ri-discuss-line"></i>
+                        <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " Days")</small>
+                    </div>
+                    <p class="m-0  text-left">
+                        @menu.Message
+                    </p>
+                </a>
                     }
                 </li>
             </ul>
         }
 
-    <a class="badge badge-primary px-2" asp-controller="ViewDocumentLeaseApplicationForm" asp-action="ViewDocumentLeaseApplicationForm"  target="_blank"> See All</a>
+        <a class="badge badge-primary px-2" asp-controller="UserNotification" asp-action="Index"> See All</a>
     </div>
 </div>
+

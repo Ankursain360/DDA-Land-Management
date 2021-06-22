@@ -28,5 +28,11 @@
     "inputFiles": [
       "wwwroot/js/common.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/usernotificationalert.min.js",
+    "inputFiles": [
+      "wwwroot/js/usernotificationalert.js"
+    ]
   }
 ]
