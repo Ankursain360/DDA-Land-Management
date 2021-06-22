@@ -30,6 +30,7 @@ namespace DamagePayee.Controllers
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
         private readonly IHostingEnvironment _hostingEnvironment;
         public IConfiguration _configuration;
+        string DocumentFilePath = "";
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
@@ -46,6 +47,7 @@ namespace DamagePayee.Controllers
             _workflowtemplateService = workflowtemplateService;
             _userProfileService = userProfileService;
             _userNotificationService = userNotificationService;
+            DocumentFilePath = _configuration.GetSection("FilePaths:Dm:DocumentFIlePath").Value.ToString();
         }
 
 
@@ -111,6 +113,7 @@ namespace DamagePayee.Controllers
                 if (ModelState.IsValid)
                 {
                     FileHelper fileHelper = new FileHelper();
+                    damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
 
                     if (damagepayeeregister.PropertyPhoto != null)
                     {
@@ -688,6 +691,7 @@ namespace DamagePayee.Controllers
 
             {
                 FileHelper fileHelper = new FileHelper();
+                damagepayeeregister.DocumentName = damagepayeeregister.DocumentIFormFile == null ? damagepayeeregister.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregister.DocumentIFormFile);
 
                 if (damagepayeeregister.PropertyPhoto != null)
                 {
@@ -1118,7 +1122,14 @@ namespace DamagePayee.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
-
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
 
     }
 }
