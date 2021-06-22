@@ -106,7 +106,7 @@ namespace Libraries.Model.Entity
         public string GpafilePath { get; set; }
         public string MutationFilePath { get; set; }
         public string WillFilePath { get; set; }
-
+        public string DocumentName { get; set; }
         public District District { get; set; }
         public Locality Locality { get; set; }
         [NotMapped]
@@ -123,7 +123,8 @@ namespace Libraries.Model.Entity
         public IFormFile Fgform { get; set; }
         [NotMapped]
         public IFormFile DocumentForFile { get; set; }
-
+        [NotMapped]
+        public IFormFile DocumentIFormFile { get; set; }
         [NotMapped]
         public IFormFile ATSFile { get; set; }
         [NotMapped]

@@ -82,6 +82,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.IsDocumentFor)
                 .HasMaxLength(45)
                 .IsUnicode(false);
+            builder.Property(e => e.DocumentName)
+               .HasMaxLength(1000)
+               .IsUnicode(false);
 
             builder.Property(e => e.LitigationStatus)
                 .HasMaxLength(45)
