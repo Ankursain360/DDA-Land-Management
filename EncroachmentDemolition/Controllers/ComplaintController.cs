@@ -34,10 +34,12 @@ namespace EncroachmentDemolition.Controllers
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUserNotificationService _userNotificationService;
 
         public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IApprovalProccessService approvalproccessService,
             IWorkflowTemplateService workflowtemplateService, IConfiguration configuration,
-            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
+            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
+            IUserNotificationService userNotificationService)
         {
             _workflowtemplateService = workflowtemplateService;
             _onlinecomplaintService = onlinecomplaintService;
@@ -45,6 +47,7 @@ namespace EncroachmentDemolition.Controllers
             _approvalproccessService = approvalproccessService;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
         }
         public IActionResult Index()
         {
@@ -215,6 +218,23 @@ namespace EncroachmentDemolition.Controllers
                                     approvalproccess.Version = workflowtemplatedata.Version;
                                     approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                    #region Insert Into usernotification table Added By Renu 18 June 2021
+                                    if (result == true && approvalproccess.SendTo != null)
+                                    {
+                                        var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidOnlineComplaintId").Value);
+                                        var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                        Usernotification usernotification = new Usernotification();
+                                        var replacement = notificationtemplate.Template.Replace("{proccess name}", "Online Compalint").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                        usernotification.Message = replacement;
+                                        usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidOnlineComplaintId").Value);
+                                        usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                        usernotification.ServiceId = approvalproccess.ServiceId;
+                                        usernotification.SendFrom = approvalproccess.SendFrom;
+                                        usernotification.SendTo = approvalproccess.SendTo;
+                                        result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                    }
+                                    #endregion
+
                                 }
 
                                 break;
@@ -370,6 +390,7 @@ namespace EncroachmentDemolition.Controllers
                 var deleteResult = false;
                 if (onlinecomplaint.Id != 0)
                 {
+                    deleteResult = await _userNotificationService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), onlinecomplaint.Id);
                     deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowPreccessGuidWatchWard").Value), onlinecomplaint.Id);
                     deleteResult = await _onlinecomplaintService.RollBackEntry(onlinecomplaint.Id);
                 }
