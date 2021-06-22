@@ -53,8 +53,20 @@
                     <label class="floating-label">Email Id   </label>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="Password" placeholder="Name"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <label class="floating-label">Password   </label>
+                </div>
+            </div>
+        
+
+        </div>
+        <div class="row mt-md-3">
             <div class=" col-md-6">
-                <div class=" col-md-6">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3" asp-for="RoleId"
                                 asp-items="@(new SelectList(Model.SurveyUserRoleList, "Id","Name"))">
@@ -63,21 +75,7 @@
                         <span asp-validation-for="RoleId" class="text-danger"></span>
                         <label asp-for="RoleId" class="floating-label">Role </label>
                     </div>
-                </div>
-
             </div>
-            @*<div class="col-md-6">
-            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                <input asp-for="Password" placeholder="Name"
-                       class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-                <label class="floating-label">Password   </label>
-            </div>
-        </div>*@
-        </div>
-        <div class="row mt-md-3">
-         
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
@@ -88,7 +86,6 @@
                     <span asp-validation-for="IsActive" class="text-danger"></span>
                     <label asp-for="IsActive" class="floating-label">Status </label>
                 </div>
-
             </div>
         </div>
         <div class="row mt-md-3">
