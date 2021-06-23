@@ -72,6 +72,9 @@ namespace Libraries.Service.ApplicationService
             model.Email = doortodoorsurvey.Email;
             model.IsActive = 1;
             model.Remarks = doortodoorsurvey.Remarks;
+            model.MobileNo = doortodoorsurvey.MobileNo;
+            model.OccupantAadharNo = doortodoorsurvey.OccupantAadharNo;
+            model.VoterIdNo = doortodoorsurvey.VoterIdNo;
             model.OccupantIdentityPrrofFilePath = doortodoorsurvey.OccupantIdentityPrrofFilePath;
             model.PropertyFilePath = doortodoorsurvey.PropertyFilePath;
             model.ModifiedBy = doortodoorsurvey.ModifiedBy;

@@ -30,6 +30,7 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IPlanningRepositry, PlanningRepositry>();
             services.AddScoped<IInsertVacantLandImagesRepository, InsertVacantLandImagesRepository>();
+            services.AddScoped<IDoor2DoorAPIRepository, Door2DoorAPIRepository>();
 
 
             /* Application Services */
@@ -42,6 +43,7 @@ namespace Vacant.Land.Api.Infrastructure.Extensions
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IPlanningService, PlanningService>();
             services.AddScoped<IInsertVacantLandImagesService, InsertVacantLandImagesService>();
+            services.AddScoped<IDoor2DoorAPIService, Door2DoorAPIService>();
 
         }
     }
