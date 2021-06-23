@@ -390,9 +390,9 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/otherlandnotificationindex.min.js",
+    "outputFileName": "wwwroot/js/surveyuserindex.min.js",
     "inputFiles": [
-      "wwwroot/js/otherlandnotificationindex.js"
+      "wwwroot/js/surveyuserindex.js"
     ]
   }
 ]
