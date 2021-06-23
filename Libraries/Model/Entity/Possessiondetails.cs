@@ -14,6 +14,11 @@ namespace Libraries.Model.Entity
         public int? VillageId { get; set; }
         [Required(ErrorMessage = "Khasra No  is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }
+        public string PossessionTaken { get; set; }
+
+        public string Reason { get; set; }
+
+
         [Required(ErrorMessage = "Type of Possession name is mandatory")]
         public string PossType { get; set; }
         [Required(ErrorMessage = "Reason is mandatory")]

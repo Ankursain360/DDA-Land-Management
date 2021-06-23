@@ -12,8 +12,6 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Possessiondetails> builder)
         {
 
-
-
             builder.ToTable("possessiondetails", "lms");
 
             builder.HasIndex(e => e.KhasraId)
@@ -60,6 +58,14 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Remarks)
                 .HasMaxLength(4000)
                 .IsUnicode(false);
+
+            builder.Property(e => e.Reason)
+               .HasMaxLength(4000)
+               .IsUnicode(false);
+
+            builder.Property(e => e.PossessionTaken)
+                   .HasMaxLength(20)
+                   .IsUnicode(false);
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
 

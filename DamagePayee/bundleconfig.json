@@ -184,5 +184,11 @@
     "inputFiles": [
       "wwwroot/js/duesvspaidamountlist.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandlettercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandlettercreate.js"
+    ]
   }
 ]
