@@ -9,12 +9,12 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId"
-                            asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="OtherLandNotificationId"
+                            asp-items="@(new SelectList(Model.OtherlandnotificationList, "Id","NotificationNumber"))">
                         <option value="" selected="selected" disabled="disabled">Select</option>
                     </select>
-                    <span asp-validation-for="LandNotificationId" class="text-danger"></span>
-                    <label asp-for="LandNotificationId" class="floating-label">Notification No </label>
+                    <span asp-validation-for="OtherLandNotificationId" class="text-danger"></span>
+                    <label asp-for="OtherLandNotificationId" class="floating-label">Notification No </label>
                 </div>
             </div>
             <div class="col-md-6">

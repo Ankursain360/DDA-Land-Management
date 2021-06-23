@@ -54,8 +54,8 @@ namespace AcquiredLandInformationManagement.Controllers
             Ldoland ldoland = new Ldoland();
             ldoland.IsActive = 1;
 
-            ldoland.LandNotificationList = await _ldolandService.GetAllLandNotification();
-         
+            //ldoland.LandNotificationList = await _ldolandService.GetAllLandNotification();
+            ldoland.OtherlandnotificationList = await _ldolandService.GetAllOtherLandNotification();
             return View(ldoland);
         }
 
@@ -66,7 +66,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-                ldoland.LandNotificationList = await _ldolandService.GetAllLandNotification();
+                ldoland.OtherlandnotificationList = await _ldolandService.GetAllOtherLandNotification();
             
                 if (ModelState.IsValid)
                 {
@@ -109,7 +109,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
 
             var Data = await _ldolandService.FetchSingleResult(id);
-            Data.LandNotificationList = await _ldolandService.GetAllLandNotification();
+            Data.OtherlandnotificationList = await _ldolandService.GetAllOtherLandNotification();
       
             if (Data == null)
             {
@@ -122,6 +122,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Ldoland ldoland)
         {
+            ldoland.OtherlandnotificationList = await _ldolandService.GetAllOtherLandNotification();
             if (ModelState.IsValid)
             {
                 try
@@ -178,8 +179,8 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _ldolandService.FetchSingleResult(id);
            
-            Data.LandNotificationList = await _ldolandService.GetAllLandNotification();
-          
+            Data.OtherlandnotificationList = await _ldolandService.GetAllOtherLandNotification();
+
             if (Data == null)
             {
                 return NotFound();
@@ -202,7 +203,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     data.Add(new LdolandListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.Name,
+                        NotificationNo = result[i].OtherLandNotification == null ? "" : result[i].OtherLandNotification.NotificationNumber,
                         NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
                         SerialNo = result[i].SerialNumber == null ? ' ' : result[i].SerialNumber,
                         PropertySiteNo =result[i].PropertySiteNo,

@@ -10,10 +10,10 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("ldoland", "lms");
 
-            builder.HasIndex(e => e.LandNotificationId)
-                .HasName("fkLdoNotification_idx");
-
-             builder.Property(e => e.Id).HasColumnType("int(11)");
+            
+            builder.HasIndex(e => e.OtherLandNotificationId)
+                    .HasName("fk_otherlandnotifId_idx");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
 
@@ -32,7 +32,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
+            builder.Property(e => e.OtherLandNotificationId).HasColumnType("int(11)");
 
             builder.Property(e => e.Location)
                 .HasMaxLength(200)
@@ -76,12 +76,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.LandNotification)
-                .WithMany(p => p.Ldoland)
-                .HasForeignKey(d => d.LandNotificationId)
-                .HasConstraintName("fkLdoNotification");
+            builder.HasOne(d => d.OtherLandNotification)
+                    .WithMany(p => p.Ldoland)
+                    .HasForeignKey(d => d.OtherLandNotificationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_otherlandnotifId");
 
-            
+
         }
 
     }

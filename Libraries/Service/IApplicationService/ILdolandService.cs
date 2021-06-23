@@ -16,7 +16,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Ldoland>> GetLdolandUsingRepo();
 
         Task<List<LandNotification>> GetAllLandNotification();
-      //  Task<List<Serialnumber>> GetAllSerialnumber();
+        //  Task<List<Serialnumber>> GetAllSerialnumber();
+        Task<List<Otherlandnotification>> GetAllOtherLandNotification();
         Task<bool> Update(int id, Ldoland ldoland);
 
         Task<bool> Create(Ldoland ldoland);

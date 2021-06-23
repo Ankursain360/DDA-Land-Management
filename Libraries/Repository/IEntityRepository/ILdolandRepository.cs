@@ -17,6 +17,6 @@ namespace Libraries.Repository.IEntityRepository
        // Task<List<Serialnumber>> GetAllSerialnumber();
         Task<List<LandNotification>> GetAllLandNotification();
         Task<PagedResult<Ldoland>> GetPagedLdoland(LdolandSearchDto model);
-
+        Task<List<Otherlandnotification>> GetAllOtherLandNotification();
     }
 }
