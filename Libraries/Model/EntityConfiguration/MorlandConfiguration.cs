@@ -81,12 +81,17 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.StatusOfLand)
                 .HasMaxLength(200)
                 .IsUnicode(false);
-
             builder.HasOne(d => d.LandNotification)
-                .WithMany(p => p.Morland)
-                .HasForeignKey(d => d.LandNotificationId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("LandNotificationId");
+                   .WithMany(p => p.Morland)
+                   .HasForeignKey(d => d.LandNotificationId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("fkmor");
+
+            //builder.HasOne(d => d.LandNotification)
+            //    .WithMany(p => p.Morland)
+            //    .HasForeignKey(d => d.LandNotificationId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("LandNotificationId");
 
             //builder.HasOne(d => d.Serialnumber)
             //    .WithMany(p => p.Morland)

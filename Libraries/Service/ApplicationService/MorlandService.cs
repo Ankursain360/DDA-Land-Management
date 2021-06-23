@@ -56,9 +56,9 @@ namespace Libraries.Service.ApplicationService
             return await _morlandRepository.GetAllMorland();
         }
 
-        public async Task<List<LandNotification>> GetAllLandNotification()
+        public async Task<List<Otherlandnotification>> GetAllLandNotification()
         {
-            List<LandNotification> landnotificationList = await _morlandRepository.GetAllLandNotification();
+            List<Otherlandnotification> landnotificationList = await _morlandRepository.GetAllLandNotification();
             return landnotificationList;
         }
 

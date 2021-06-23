@@ -48,8 +48,9 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public List<LandNotification> LandNotificationList { get; set; }
-        public virtual LandNotification LandNotification { get; set; }
+        public List<Otherlandnotification> LandNotificationList { get; set; }
+        //public virtual LandNotification LandNotification { get; set; }
+        public Otherlandnotification LandNotification { get; set; }
 
         [NotMapped]
         public IFormFile GOINotificationDocumentIFormFile { get; set; }

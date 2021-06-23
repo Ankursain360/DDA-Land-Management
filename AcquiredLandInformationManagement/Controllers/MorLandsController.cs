@@ -216,7 +216,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     data.Add(new MorlandListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.Name,
+                        NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.NotificationNumber,
                         PropertySiteNo = result[i].PropertySiteNo,
                         LocationNameVillage = result[i].Name,
                         SiteDescription = result[i].SiteDescription,

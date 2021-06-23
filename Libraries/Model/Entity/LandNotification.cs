@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Status is mandatory")]
         public byte IsActive { get; set; }
 
-        public virtual ICollection<Morland> Morland { get; set; }
+        //public virtual ICollection<Morland> Morland { get; set; }
 
 
         //public ICollection<Ldoland> Propertyregistration { get; set; }

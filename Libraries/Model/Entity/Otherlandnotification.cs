@@ -9,10 +9,14 @@ namespace Libraries.Model.Entity
 {
     public  class Otherlandnotification : AuditableEntity<int>
     {
-      
+        public Otherlandnotification()
+        {
+            Morland = new HashSet<Morland>();
+        }
         public string LandType { get; set; }
         public string NotificationNumber { get; set; }
       
         public byte? IsActive { get; set; }
+        public ICollection<Morland> Morland { get; set; }
     }
 }
