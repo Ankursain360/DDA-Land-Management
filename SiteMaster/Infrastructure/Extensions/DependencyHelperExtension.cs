@@ -61,6 +61,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ICasenatureRepository, CasenatureRepository>();
             services.AddScoped<ILawyerRepository, LawyerRespository>();
             services.AddScoped<ISurveyuserdetailRepository, SurveyuserdetailRepository>();
+        
             // new land acquisition masters
 
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
@@ -73,6 +74,7 @@ namespace SiteMaster.Infrastructure.Extensions
 
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+            services.AddScoped<IOtherlandnotificationRepository, OtherlandnotificationRepository>();
             services.AddScoped<IKhasraRepository, KhasraRepository>();
             services.AddScoped<ITehsilRepository, TehsilRepository>();//added by anuj 8-feb-21
             services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
@@ -166,6 +168,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUndersection22Service, Undersection22Service>();
             services.AddScoped<IAwardmasterdetailsService, AwardmasterdetailsService>();
             services.AddScoped<ISchemeService, SchemeService>();
+            services.AddScoped<IOtherlandnotificationService, OtherlandnotificationService>();
 
             // Lease masters
 
