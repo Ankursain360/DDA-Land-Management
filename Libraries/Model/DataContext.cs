@@ -121,7 +121,6 @@ namespace Libraries.Model
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
-        public virtual DbSet<Familydetails> Familydetails { get; set; }
         public virtual DbSet<Lawyer> Lawyer { get; set; }
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
@@ -461,7 +460,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
-            modelBuilder.ApplyConfiguration(new FamilydetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentverificationConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
