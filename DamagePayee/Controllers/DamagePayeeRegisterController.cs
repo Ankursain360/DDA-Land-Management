@@ -95,7 +95,7 @@ namespace DamagePayee.Controllers
                 string PanNoDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PanNoDocument").Value.ToString();
                 string PhotographPersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
                 string SignaturePersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-                string OtherDocDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:OtherDocument").Value.ToString();
+                //string OtherDocDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:OtherDocument").Value.ToString();
 
                 string PropertyPhotographLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:PropertyPhotograph").Value.ToString();
                 string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
@@ -327,11 +327,11 @@ namespace DamagePayee.Controllers
                                                                     fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregister.SignatureFile[i]) :
                                                                     damagepayeeregister.SignatureFilePath[i] != null || damagepayeeregister.SignatureFilePath[i] != "" ?
                                                                     damagepayeeregister.SignatureFilePath[i] : string.Empty,
-                                        OtherDocPath = damagepayeeregister.OtherDocFile != null ?
-                                                                    damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
-                                                                    fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
-                                                                    damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
-                                                                    damagepayeeregister.OtherDocFilePath[i] : string.Empty
+                                        //OtherDocPath = damagepayeeregister.OtherDocFile != null ?
+                                        //                            damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
+                                        //                            fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
+                                        //                            damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
+                                        //                            damagepayeeregister.OtherDocFilePath[i] : string.Empty
 
 
 
@@ -605,7 +605,7 @@ namespace DamagePayee.Controllers
                 x.PanNoFilePath,
                 x.PhotographPath,
                 x.SignaturePath,
-                x.OtherDocPath,
+                //x.OtherDocPath,
                 x.AadharNo,
                 x.PanNo
             }));
@@ -675,7 +675,7 @@ namespace DamagePayee.Controllers
             string PanNoDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PanNoDocument").Value.ToString();
             string PhotographPersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
             string SignaturePersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-            string OtherDocDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:OtherDocument").Value.ToString();
+            //string OtherDocDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:OtherDocument").Value.ToString();
 
             string PropertyPhotographLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:PropertyPhotograph").Value.ToString();
             string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
@@ -811,11 +811,11 @@ namespace DamagePayee.Controllers
                                                                 fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregister.SignatureFile[i]) :
                                                                 damagepayeeregister.SignatureFilePath[i] != null || damagepayeeregister.SignatureFilePath[i] != "" ?
                                                                 damagepayeeregister.SignatureFilePath[i] : string.Empty,
-                                    OtherDocPath = damagepayeeregister.OtherDocFile != null ?
-                                                                    damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
-                                                                    fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
-                                                                    damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
-                                                                    damagepayeeregister.OtherDocFilePath[i] : string.Empty
+                                    //OtherDocPath = damagepayeeregister.OtherDocFile != null ?
+                                    //                                damagepayeeregister.OtherDocFile.Count <= i ? string.Empty :
+                                    //                                fileHelper.SaveFile(OtherDocDocument, damagepayeeregister.OtherDocFile[i]) :
+                                    //                                damagepayeeregister.OtherDocFilePath[i] != null || damagepayeeregister.OtherDocFilePath[i] != "" ?
+                                    //                                damagepayeeregister.OtherDocFilePath[i] : string.Empty
 
                                 });
 
@@ -1030,14 +1030,14 @@ namespace DamagePayee.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
-        public async Task<FileResult> ViewOtherDocumentFile(int Id)
-        {
-            FileHelper file = new FileHelper();
-            Damagepayeepersonelinfo Data = await _damagepayeeregisterService.GetPersonelInfoFilePath(Id);
-            string path = Data.OtherDocPath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-            return File(FileBytes, file.GetContentType(path));
-        }
+        //public async Task<FileResult> ViewOtherDocumentFile(int Id)
+        //{
+        //    FileHelper file = new FileHelper();
+        //    Damagepayeepersonelinfo Data = await _damagepayeeregisterService.GetPersonelInfoFilePath(Id);
+        //    string path = Data.OtherDocPath;
+        //    byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+        //    return File(FileBytes, file.GetContentType(path));
+        //}
 
 
         public async Task<FileResult> ViewATSFile(int Id)

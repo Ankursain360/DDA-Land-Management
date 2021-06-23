@@ -205,13 +205,13 @@ function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
             $("#tbl_posts #add #PanNoFilePath").val(data[i].panNoFilePath);
             $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
-            $("#tbl_posts #add #OtherDocFilePath").val(data[i].otherDocPath);
+            //$("#tbl_posts #add #OtherDocFilePath").val(data[i].otherDocPath);
 
             $("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
             $("#tbl_posts #add #viewPanId").text(data[i].panNoFilePath.split("\\")[data[i].panNoFilePath.split("\\").length - 1].slice(37));
             $("#tbl_posts #add #viewPhotoId").text(data[i].photographPath.split("\\")[data[i].photographPath.split("\\").length - 1].slice(37));
             $("#tbl_posts #add #viewSignatureId").text(data[i].signaturePath.split("\\")[data[i].signaturePath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewOtherDocId").text(data[i].otherDocPath.split("\\")[data[i].otherDocPath.split("\\").length - 1].slice(37));
+            //$("#tbl_posts #add #viewOtherDocId").text(data[i].otherDocPath.split("\\")[data[i].otherDocPath.split("\\").length - 1].slice(37));
 
            
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
@@ -238,12 +238,12 @@ function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
             } else {
                 $("#tbl_posts #add #viewSignatureId").hide();
             }
-            if (data[i].otherDocPath != "" && data[i].otherDocPath != null) {
-                $("#tbl_posts #add #viewOtherDocId").attr('href', '/DamagePayeeRegister/ViewOtherDocumentFile/' + data[i].id)
-                $("#tbl_posts #add #viewOtherDocId").show();
-            } else {
-                $("#tbl_posts #add #viewOtherDocId").hide();
-            }
+            //if (data[i].otherDocPath != "" && data[i].otherDocPath != null) {
+            //    $("#tbl_posts #add #viewOtherDocId").attr('href', '/DamagePayeeRegister/ViewOtherDocumentFile/' + data[i].id)
+            //    $("#tbl_posts #add #viewOtherDocId").show();
+            //} else {
+            //    $("#tbl_posts #add #viewOtherDocId").hide();
+            //}
             $('#tbl_posts #add #Gender').trigger('change');
             if (i < data.length - 1) {
                 var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();

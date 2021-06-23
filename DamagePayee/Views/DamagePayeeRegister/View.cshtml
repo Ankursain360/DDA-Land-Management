@@ -43,7 +43,7 @@
                                     <th style="min-width:210px;">PAN No.</th>
                                     <th style="min-width:250px;">Photo</th>
                                     <th style="min-width:250px;">Signature</th>
-                                    <th style="min-width:250px;">Upload Other Document</th>
+                                    @*<th style="min-width:250px;">Upload Other Document</th>*@
 
 
                                 </tr>
@@ -125,13 +125,13 @@
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <a id="viewOtherDocId" asp-action="ViewOtherDocumentFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="OtherDocFilePath" />
                                         <input disabled asp-for="OtherDocFile" type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="OtherDocFile" class="d-block text-danger field-validation-valid"></span>
 
-                                    </td>
+                                    </td>*@
                                 </tr>
 
                             </tbody>
