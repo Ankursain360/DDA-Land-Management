@@ -32,7 +32,22 @@
             </div>
         </div>
 
+        <div class="pt-3">
+            <h3 class="mb-3 d-flex">Possession Taken</h3>
+            <div class="row">
+                <div class=" col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="PossessionTaken">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <span asp-validation-for="PossessionTaken" class="d-block text-danger field-validation-valid"></span>
 
+                        <label class="floating-label">Possession Taken</label>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="pt-3">
             <h3 class="mb-3 d-flex">Type of possession</h3>
@@ -63,28 +78,25 @@
 
 
 
-        <div class="pt-3">
+        <div class="pt-3" id="divreason" style="display:none;">
 
             <h3 class="mb-3 d-flex">Reason, if Possession not Taken</h3>
-
-
 
             <div class="row">
 
                 <div class="col-md-3">
                     <div class="form-check theme">
-
-
-                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />    <label class="radio-inline">
+                        <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="B" />
+                        <label class="form-check-label" for="radio">
                             Built-Up
                         </label>
                     </div>
-                </div>   <div class="col-md-3">
+                </div>
+                <div class="col-md-3">
                     <div class="form-check theme">
 
-
                         <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="L" />
-                        <label class="radio-inline">
+                        <label class="form-check-label" for="radio">
                             Litigation
                         </label>
                     </div>
@@ -92,10 +104,8 @@
 
                 <div class="col-md-3">
                     <div class="form-check theme">
-
-
                         <input class="form-check-input" type="radio" asp-for="ReasonNonPoss" value="O" checked="checked" />
-                        <label class="radio-inline">
+                        <label class="form-check-label" for="radio">
                             Others if Any
                         </label>
                     </div>
@@ -103,7 +113,16 @@
 
 
             </div>
+            <div class="row mt-md-3">
+                <div class="col-md-12">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
 
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                        <label class="floating-label">Reason </label>
+                    </div>
+                </div>
+            </div>
         </div>
 
 

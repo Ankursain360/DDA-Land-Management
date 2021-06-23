@@ -90,6 +90,8 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = possessiondetails.IsActive;
             model.Remarks = possessiondetails.Remarks;
             model.DocumentName = possessiondetails.DocumentName;
+            model.PossessionTaken = possessiondetails.PossessionTaken;
+            model.Reason = possessiondetails.Reason;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _possessiondetailsRepository.Edit(model);

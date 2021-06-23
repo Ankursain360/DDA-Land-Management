@@ -1,4 +1,27 @@
-﻿function onChange(id) {
+﻿
+$(document).ready(function () {
+    var value = $('#PossessionTaken option:selected').val();
+
+    if (value == "Yes") {
+        $("#divreason").hide();
+    }
+    else {
+        $("#divreason").show();
+    }
+});
+$('#PossessionTaken').change(function () {
+    var value = $('#PossessionTaken option:selected').val();
+   
+    if (value == "Yes") {
+        $("#divreason").hide();
+    }
+    else {
+        $("#divreason").show();
+    }
+});
+
+
+function onChange(id) {
   
     HttpGet(`/PossessionDetail/GetKhasraList/?villageId=${id}`, 'json', function (response) {
       
@@ -74,3 +97,4 @@ function fileValidation(filePath, fileInput, size) {
     }
 
 }
+
