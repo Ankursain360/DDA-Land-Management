@@ -13,7 +13,9 @@ namespace Libraries.Model.Entity
         {
             Morland = new HashSet<Morland>();
         }
+        [Required(ErrorMessage = "Land Type is mandatory")]
         public string LandType { get; set; }
+        [Required(ErrorMessage = "Notification Number is mandatory")]
         public string NotificationNumber { get; set; }
       
         public byte? IsActive { get; set; }
