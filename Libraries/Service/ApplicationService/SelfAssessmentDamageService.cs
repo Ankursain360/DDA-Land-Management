@@ -83,6 +83,7 @@ namespace Service.ApplicationService
             model.IsDdadamagePayee = damagepayeeregistertemp.IsDdadamagePayee;
             model.IsApplyForMutation = damagepayeeregistertemp.IsApplyForMutation;
             model.ShowCauseNoticePath = damagepayeeregistertemp.ShowCauseNoticePath;
+            model.DocumentName = damagepayeeregistertemp.DocumentName;
             model.FgformPath = damagepayeeregistertemp.FgformPath;
             model.IsDocumentFor = damagepayeeregistertemp.IsDocumentFor;
             model.DocumentForFilePath = damagepayeeregistertemp.DocumentForFilePath;

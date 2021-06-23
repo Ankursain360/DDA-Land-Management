@@ -632,11 +632,12 @@
 
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentIFormFile"></span>
-                        <label class="floating-label"> Other Document</label>
+                        <input type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
+                        <label for="field-1" class="floating-label"> Registered Will </label>
+
                     </div>
                 </div>
             </div>
@@ -668,14 +669,14 @@
 
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                        <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
-                        <label for="field-1" class="floating-label"> Registered Will </label>
-
+                        <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                        <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentIFormFile"></span>
+                        <label class="floating-label"> Other Document</label>
                     </div>
                 </div>
+           
             </div>
 
             <br />

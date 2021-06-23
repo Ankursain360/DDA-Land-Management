@@ -60,7 +60,7 @@ $('#FileUpload').change(function () {
     }
 });
 
-$("#ZoneId1").change(function () {
+$("#ZoneId").change(function () {
    // alert(ZoneId);
     var ids = $(this).val();
     if (ids) {
@@ -78,23 +78,7 @@ $("#ZoneId1").change(function () {
     }
 });
 
-//$("#ZoneId1").change(function () {
-//    // alert(ZoneId);
-//    var ids = $(this).val();
-//    if (ids) {
-//        HttpGet(`/DMSFileUpload/AllVillagedataList/?zoneid=${ids}`, 'json', function (response) {
-//            var html = '<option value="">Select</option>';
-//            for (var i = 0; i < response.length; i++) {
-//                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-//            }
-//            $("#VillageId1").select2('val', '')
-//            $("#VillageId1").html(html);
 
-//            //  alert(JSON.stringify(response));
-//        });
-
-//    }
-//});
 
 
 

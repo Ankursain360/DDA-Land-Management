@@ -2,7 +2,7 @@
 var currentPageSize = 10;
 
 $(document).ready(function () {
-   
+
 
     var param = GetSearchParam(currentPageNumber, currentPageSize);
 
@@ -10,9 +10,9 @@ $(document).ready(function () {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
-   
 
-})
+
+});
 
 $("#btnGenerate").click(function () {
   

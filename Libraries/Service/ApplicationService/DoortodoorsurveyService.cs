@@ -59,8 +59,8 @@ namespace Libraries.Service.ApplicationService
             var result = await _doortodoorsurveyRepository.FindBy(a => a.Id == id);
             Doortodoorsurvey model = result.FirstOrDefault();
             model.PropertyAddress = doortodoorsurvey.PropertyAddress;
-            model.MuncipalNo = doortodoorsurvey.MuncipalNo;
-            model.GeoReferencing = doortodoorsurvey.GeoReferencing;
+            model.GeoReferencingLattitude = doortodoorsurvey.GeoReferencingLattitude;
+            model.Longitude = doortodoorsurvey.Longitude;
             model.PresentUseId = doortodoorsurvey.PresentUseId;
             model.ApproxPropertyArea = doortodoorsurvey.ApproxPropertyArea;
             model.NumberOfFloors = doortodoorsurvey.NumberOfFloors;
@@ -69,14 +69,12 @@ namespace Libraries.Service.ApplicationService
             model.KwaterNo = doortodoorsurvey.KwaterNo;
             model.PropertyHouseTaxNo = doortodoorsurvey.PropertyHouseTaxNo;
             model.OccupantName = doortodoorsurvey.OccupantName;
-            model.Address = doortodoorsurvey.Address;
             model.Email = doortodoorsurvey.Email;
-            model.TelephoneNo = doortodoorsurvey.TelephoneNo;
+            model.IsActive = 1;
             model.Remarks = doortodoorsurvey.Remarks;
             model.OccupantIdentityPrrofFilePath = doortodoorsurvey.OccupantIdentityPrrofFilePath;
             model.PropertyFilePath = doortodoorsurvey.PropertyFilePath;
-
-            model.ModifiedBy = 1;
+            model.ModifiedBy = doortodoorsurvey.ModifiedBy;
             _doortodoorsurveyRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
@@ -84,7 +82,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Doortodoorsurvey doortodoorsurvey)
         {
-            doortodoorsurvey.CreatedBy = 1;
             doortodoorsurvey.IsActive = 1;
             _doortodoorsurveyRepository.Add(doortodoorsurvey);
             return await _unitOfWork.CommitAsync() > 0;
@@ -104,25 +101,6 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-
-        public async Task<bool> SaveFamilyDetails(Familydetails familydetails)
-        {
-            familydetails.CreatedBy = 1;
-            // familydetails.CreatedDate =" 0001 - 01 - 01"
-            familydetails.IsActive = 1;
-            return await _doortodoorsurveyRepository.SaveFamilyDetails(familydetails);
-        }
-
-
-        public async Task<List<Familydetails>> GetFamilydetails(int Id)
-        {
-            return await _doortodoorsurveyRepository.GetFamilydetails(Id);
-        }
-
-        public async Task<bool> DeleteFamilyDetails(int Id)
-        {
-            return await _doortodoorsurveyRepository.DeleteFamilyDetails(Id);
-        }
 
     }
 }

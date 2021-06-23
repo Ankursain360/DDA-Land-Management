@@ -24,6 +24,7 @@ namespace DamagePayeePublicInterface.Controllers
     {
         private readonly ISelfAssessmentDamageService _selfAssessmentDamageService;
         public IConfiguration _configuration;
+        string DocumentFilePath = "";
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
@@ -41,6 +42,7 @@ namespace DamagePayeePublicInterface.Controllers
             _userProfileService = userProfileService;
             _userNotificationService = userNotificationService;
             _hostingEnvironment = en;
+            DocumentFilePath = _configuration.GetSection("FilePaths:SA:DocumentFIlePath").Value.ToString();
         }
         public IActionResult Index()
         {
@@ -100,6 +102,7 @@ namespace DamagePayeePublicInterface.Controllers
             if (ModelState.IsValid)
             {
                 FileHelper fileHelper = new FileHelper();
+                damagepayeeregistertemp.DocumentName = damagepayeeregistertemp.DocumentIFormFile == null ? damagepayeeregistertemp.DocumentName : fileHelper.SaveFile1(DocumentFilePath, damagepayeeregistertemp.DocumentIFormFile);
                 if (damagepayeeregistertemp.PropertyPhoto != null)
                 {
                     damagepayeeregistertemp.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregistertemp.PropertyPhoto);
@@ -876,5 +879,13 @@ namespace DamagePayeePublicInterface.Controllers
             return ObjList;
         }
         #endregion
+        public async Task<IActionResult> ViewUploadedDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            string filename = DocumentFilePath + Data.DocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
     }
 }
