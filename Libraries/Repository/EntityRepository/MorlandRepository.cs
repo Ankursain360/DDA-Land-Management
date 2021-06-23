@@ -18,9 +18,10 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<List<LandNotification>> GetAllLandNotification()
+        public async Task<List<Otherlandnotification>> GetAllLandNotification()
         {
-            List<LandNotification> notificationList = await _dbContext.LandNotification.Where(x => x.IsActive == 1)
+            List<Otherlandnotification> notificationList = await _dbContext.Otherlandnotification.Where(x =>( x.IsActive == 1)
+                  && (x.LandType == "MOR"))
                 .ToListAsync();
             return notificationList;
         }
@@ -46,10 +47,10 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Morland
                                         .Include(x => x.LandNotification)
 
-                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
-                                .OrderBy(x => x.LandNotification.Name)
+                                .OrderBy(x => x.LandNotification.NotificationNumber)
                                 .GetPaged<Morland>(model.PageNumber, model.PageSize);
             
             int SortOrder = (int)model.SortOrder;
@@ -62,10 +63,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Morland
                                         .Include(x => x.LandNotification)
                                      
-                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
-                                .OrderBy(x => x.LandNotification.Name)
+                                .OrderBy(x => x.LandNotification.NotificationNumber)
                                 .GetPaged<Morland>(model.PageNumber, model.PageSize);
                         break;
                     case ("PROPERTY"):
@@ -73,7 +74,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Morland
                                          .Include(x => x.LandNotification)
                                     
-                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                 && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                 && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
                                  .OrderBy(x => x.PropertySiteNo)
@@ -84,7 +85,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Morland
                                         .Include(x => x.LandNotification)
-                                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
                                 .OrderBy(x => x.SiteDescription)
@@ -94,7 +95,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Morland
                                .Include(x => x.LandNotification)
-                               .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
                                 .OrderByDescending(x => x.IsActive==1)
@@ -111,10 +112,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Morland
                                         .Include(x => x.LandNotification)
                                         
-                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
-                                .OrderByDescending(x => x.LandNotification.Name)
+                                .OrderByDescending(x => x.LandNotification.NotificationNumber)
                                 .GetPaged<Morland>(model.PageNumber, model.PageSize);
                         break;
                     case ("PROPERTY"):
@@ -122,7 +123,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Morland
                                          .Include(x => x.LandNotification)
                                          
-                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                 && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                 && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
                                  .OrderByDescending(x => x.PropertySiteNo)
@@ -134,7 +135,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Morland
                                         .Include(x => x.LandNotification)
                                        
-                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
                                 .OrderByDescending(x => x.SiteDescription)
@@ -145,7 +146,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Morland
                                         .Include(x => x.LandNotification)
                                        
-                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.NotificationNumber.Contains(model.name))
                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
                                 .OrderBy(x => x.IsActive == 1)
