@@ -43,7 +43,7 @@
                                     <th style="min-width:210px;">PAN No.</th>
                                     <th style="min-width:250px;">Photo</th>
                                     <th style="min-width:250px;">Signature</th>
-                                    <th style="min-width:250px;">Upload Other Document</th>
+                                    @*<th style="min-width:250px;">Upload Other Document</th>*@
 
 
                                 </tr>
@@ -125,13 +125,13 @@
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
-                                    <td>
+                                    @*<td>
                                         <a id="viewOtherDocId" asp-action="ViewOtherDocumentFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input type="hidden" asp-for="OtherDocFilePath" />
                                         <input disabled asp-for="OtherDocFile" type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="OtherDocFile" class="d-block text-danger field-validation-valid"></span>
 
-                                    </td>
+                                    </td>*@
                                 </tr>
 
                             </tbody>
@@ -653,24 +653,31 @@
 
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="hidden" asp-for="DocumentName" />
-                        @{
-                            @if (Model.DocumentName != null)
+
+                        @{ if (Model.WillFilePath != null)
                             {
-                                <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                <label class="badge badge-primary px-2">(View File)</label>
+                                <a class="badge badge-primary px-2" asp-action="DownloadWill" asp-route-id="@Model.Id">
+                                    View File - (@Model.WillFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                </a>
+                                <input disabled type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
                             }
                             else
                             {
-                                <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input disabled type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
+                                <label for="field-1" class="floating-label">  Registered Will </label>
                             }
                         }
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
-                        <label class="floating-label"> Other document</label>
+
+
+
+
                     </div>
                 </div>
+
             </div>
             <div class="row mt-md-3">
                 <div class="col-md-6">
@@ -724,9 +731,9 @@
 
                         @{ if (Model.MutationFilePath != null)
                             {
-                                                <a class="badge badge-primary px-2" asp-action="DownloadMutation" asp-route-id="@Model.Id">
-                                                    View File - (@Model.MutationFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
-                                                </a>
+                                <a class="badge badge-primary px-2" asp-action="DownloadMutation" asp-route-id="@Model.Id">
+                                    View File - (@Model.MutationFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                </a>
                                 <input disabled type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="MutationFile" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -743,28 +750,22 @@
 
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        @{ if (Model.WillFilePath != null)
+                        <input type="hidden" asp-for="DocumentName" />
+                        @{
+                            @if (Model.DocumentName != null)
                             {
-                                                <a class="badge badge-primary px-2" asp-action="DownloadWill" asp-route-id="@Model.Id">
-                                                    View File - (@Model.WillFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
-                                                </a>
-                                <input disabled type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                                <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
+                                <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <label class="badge badge-primary px-2">(View File)</label>
                             }
                             else
                             {
-                                <input disabled type="file" asp-for="WillFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
-                                <span asp-validation-for="WillFile" class="d-block text-danger field-validation-valid"></span>
-                                <label for="field-1" class="floating-label">  Registered Will </label>
+                                <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
                             }
                         }
-
-
-
-
+                        <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
+                        <label class="floating-label"> Other document</label>
                     </div>
                 </div>
             </div>

@@ -254,13 +254,13 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_posts #add #PanNoFilePath").val(data[i].panNoFilePath);
             $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
-            $("#tbl_posts #add #OtherDocFilePath").val(data[i].otherDocPath);
+            //$("#tbl_posts #add #OtherDocFilePath").val(data[i].otherDocPath);
 
             $("#tbl_posts #add #viewAadharId").text(data[i].aadharNoFilePath.split("\\")[data[i].aadharNoFilePath.split("\\").length - 1].slice(37));
             $("#tbl_posts #add #viewPanId").text(data[i].panNoFilePath.split("\\")[data[i].panNoFilePath.split("\\").length - 1].slice(37));
             $("#tbl_posts #add #viewPhotoId").text(data[i].photographPath.split("\\")[data[i].photographPath.split("\\").length - 1].slice(37));
             $("#tbl_posts #add #viewSignatureId").text(data[i].signaturePath.split("\\")[data[i].signaturePath.split("\\").length - 1].slice(37));
-            $("#tbl_posts #add #viewOtherDocId").text(data[i].otherDocPath.split("\\")[data[i].otherDocPath.split("\\").length - 1].slice(37));
+            //$("#tbl_posts #add #viewOtherDocId").text(data[i].otherDocPath.split("\\")[data[i].otherDocPath.split("\\").length - 1].slice(37));
 
 
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
@@ -692,3 +692,25 @@ $("#btnGenerate").click(function () {
         $('#LoadData').html(response);
     });
 });
+$('#DocumentIFormFile').change(function () {
+    var fileInput = document.getElementById('DocumentIFormFile');
+    var filePath = fileInput.value;
+    const size = (DocumentIFormFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}

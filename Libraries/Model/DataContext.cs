@@ -142,6 +142,7 @@ namespace Libraries.Model
         public virtual DbSet<ApplicationNotificationTemplate> ApplicationNotificationTemplate { get; set; }
 
         public virtual DbSet<ModuleCategory> ModuleCategory { get; set; }
+        public virtual DbSet<Otherlandnotification> Otherlandnotification { get; set; }
 
 
         //**********  Court case management**********
@@ -431,6 +432,7 @@ namespace Libraries.Model
 
             modelBuilder.ApplyConfiguration(new DemolishedstructurerptConfiguration());
             modelBuilder.ApplyConfiguration(new Areareclaimedrptconfiguration());
+            modelBuilder.ApplyConfiguration(new OtherlandnotificationConfiguration());
 
             //************* Data Loading **********************
             modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());

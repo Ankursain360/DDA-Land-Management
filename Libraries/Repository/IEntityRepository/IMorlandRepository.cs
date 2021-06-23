@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model);
         Task<List<Morland>> GetAllMorland();
 
-        Task<List<LandNotification>> GetAllLandNotification();
+        Task<List<Otherlandnotification>> GetAllLandNotification();
       // Task<List<Serialnumber>> GetAllSerialnumber();
         Task<bool> Any(int id, string Name);
 
