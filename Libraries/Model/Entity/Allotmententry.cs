@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "Applicant Name is Mandatory")]
         public int ApplicationId { get; set; }
-        [Required(ErrorMessage = "Reference Number is Mandatory")]
+        [Required(ErrorMessage = "Allotted Area is Mandatory")]
         public decimal TotalArea { get; set; }
         [Required(ErrorMessage = "Allotment Date is Mandatory")]
         public DateTime AllotmentDate { get; set; }
