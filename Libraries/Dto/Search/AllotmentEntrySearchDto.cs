@@ -7,7 +7,7 @@ namespace Dto.Search
 {
     public class AllotmentEntrySearchDto : BaseSearchDto
     {
-        public string application { get; set; }
-        public DateTime AllotmentDate { get; set; }
+        public string applicantname { get; set; }
+       // public DateTime AllotmentDate { get; set; }
     }
 }

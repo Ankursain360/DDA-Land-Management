@@ -21,8 +21,9 @@
             @foreach (var item in Model.Results)
             {
             <tr>
+                <td>@(item.Application == null?"": item.Application.Name)</td>
 
-                <td>@item.Application.Name</td>
+                @*<td>@item.Application.Name</td>*@
                 <td>@item.TotalArea</td>
                 <td>@item.PlayGroundArea</td>
                 @*<td>@item.AllotmentDate</td>*@

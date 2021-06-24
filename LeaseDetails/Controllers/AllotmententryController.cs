@@ -37,7 +37,7 @@ namespace LeaseDetails.Controllers
             _configuration = configuration;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
