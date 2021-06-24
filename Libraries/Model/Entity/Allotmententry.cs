@@ -26,7 +26,7 @@ namespace Libraries.Model.Entity
         public int ApplicationId { get; set; }
         [Required(ErrorMessage = "Reference Number is Mandatory")]
         public decimal TotalArea { get; set; }
-        [Required(ErrorMessage = "This field is Mandatory")]
+        [Required(ErrorMessage = "Allotment Date is Mandatory")]
         public DateTime AllotmentDate { get; set; }
         public string PhaseNo { get; set; }
         public string SectorNo { get; set; }
@@ -47,11 +47,11 @@ namespace Libraries.Model.Entity
         public int? NoOfYears { get; set; }
         public decimal? GroundRate { get; set; }
         public decimal? DocumentCharge { get; set; }
-        [Required(ErrorMessage = "This field is Mandatory")]
+        [Required(ErrorMessage = "Lease Type is Mandatory")]
         public int? LeasesTypeId { get; set; }
-        [Required(ErrorMessage = "This field is Mandatory")]
+        [Required(ErrorMessage = "Purpose is Mandatory")]
         public int? LeasePurposesTypeId { get; set; }
-        [Required(ErrorMessage = "This field is Mandatory")]
+        [Required(ErrorMessage = "SubPurpose is Mandatory")]
         public int? LeaseSubPurposeId { get; set; }
         public string OldNewEntry { get; set; }
         [NotMapped]

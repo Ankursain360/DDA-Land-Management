@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Libraries.Model.Entity
 {
@@ -13,6 +14,7 @@ namespace Libraries.Model.Entity
       
         public int RequestForProceedingId { get; set; }
         public string HandedTakenByDda { get; set; }
+        [Required(ErrorMessage = "Date Of HandedOver/TakenOver by DDA is Mandatory")]
         public DateTime HandedTakenByDdadate { get; set; }
         public string PlotRestored { get; set; }
         public string CurrentStatus { get; set; }
