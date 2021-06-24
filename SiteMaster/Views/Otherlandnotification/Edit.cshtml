@@ -3,7 +3,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Other land Notification" })
 
 <div class="pt-3">
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row mt-md-3">
@@ -11,9 +11,10 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="LandType">
+                      
                         <option value="MOR">MOR</option>
                         <option value="LDO">LDO</option>
-                        <option value="BOOKTRANSFER LAND">BOOKTRANSFER LAND</option>
+                        <option value="BOK">BOOKTRANSFER LAND</option>
                     </select>
                     <span asp-validation-for="LandType" class="text-danger"></span>
                     <label asp-for="LandType" class="floating-label">Land Type </label>

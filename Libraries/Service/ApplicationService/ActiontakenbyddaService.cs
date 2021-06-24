@@ -32,7 +32,7 @@ namespace Libraries.Service.ApplicationService
 
             return await _actionTakenByDdaRepository.GetAllActionIndex();
         }
-        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(ActionTakenByDDASearchDto model)
         {
             var data = await _actionTakenByDdaRepository.GetPagedRequestForProceeding(model);
             return data;

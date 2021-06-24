@@ -4,9 +4,11 @@
     <thead class="text-nowrap">
         <tr>
             <th>Reference No.</th>
+
             <th>Society Name </th>
             <th>Allotment Date</th>
             <th>Area(sq. mt.)</th>
+            <th>Subject</th>
             <th> Status</th>
             <th> Letter Status</th>
             <th>Operations</th>
@@ -19,9 +21,11 @@
             {
         <tr>
             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.RefNo)</td>
+
             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.Name)</td>
             <td>@(item.Allotment == null ? "" : (Convert.ToDateTime(item.Allotment.AllotmentDate)).ToString("dd-MMM-yyyy"))</td>
             <td>@(item.Allotment == null ? "" : item.Allotment.TotalArea.ToString())</td>
+            <td>@(item.Allotment == null ? "" : item.Subject == null ? "" : item.Subject)</td>
             <td>
                 @if (item.IsActive == 1)
                 {

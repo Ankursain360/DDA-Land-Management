@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     public interface IActiontakenbyddaService
     {
 
-        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
+        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(ActionTakenByDDASearchDto model);
         Task<List<UserBindDropdownDto>> BindUsernameNameList();
         Task<List<Allotmententry>> GetAllAllotment();
         Task<List<Honble>> GetAllHonble();

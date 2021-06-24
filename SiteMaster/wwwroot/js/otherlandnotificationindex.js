@@ -49,9 +49,18 @@ $("#btnSearch").click(function () {
 });
 
 $("#btnReset").click(function () {
-    $('#txtName').val('');
+    $('#LandType').val('');
+    $('#NotificationNumber').val('');
+   
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+
 
 function onPaging(pageNo) {
     GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
