@@ -47,7 +47,7 @@ namespace LeaseDetails.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] RequestForProceedingSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] ActionTakenByDDASearchDto model)
         {
             var result = await _actiontakenbyddaService.GetPagedRequestForProceeding(model);
 

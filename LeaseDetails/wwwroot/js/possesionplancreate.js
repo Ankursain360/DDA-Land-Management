@@ -2,28 +2,29 @@
 
     var kid = $("#AllotmentId").val();
     if (kid) {
-        HttpGet(`/Possesionplan/BindLeaseApplicationDetails/?appId=${kid}`, 'json', function (response) {
+        HttpGet(`/Possesionplan/GetLeaseappdetails/?appId=${kid}`, 'json', function (response) {
 
 
-            $("#LAName").val(response[0].name);
-            $("#LAContact").val(response[0].contactNo);
-            $("#LaAddress").val(response[0].address);
-            $("#txtAllotedArea").val(response[0].areaSqlMt);
+            $("#LAName").val(response[0].application.name);
+            $("#LAContact").val(response[0].application.contactNo);
+            $("#LaAddress").val(response[0].application.address);
+            $("#txtAllotedArea").val(response[0].application.areaSqlMt);
         });
 
     }
 });
-$("#AllotmentId").Onchange(function () {
+$("#AllotmentId").change(function () {
  debugger
     var kid = $(this).val();
     if (kid) {
-        HttpGet(`/Possesionplan/BindLeaseApplicationDetails/?appId=${kid}`, 'json', function (response) {
+        HttpGet(`/Possesionplan/GetLeaseappdetails/?appId=${kid}`, 'json', function (response) {
             
-           
-            $("#LAName").val(response[0].name);
-            $("#LAContact").val(response[0].contactNo);
-            $("#LaAddress").val(response[0].address);
-            $("#txtAllotedArea").val(response[0].areaSqlMt);
+            $("#LAName").val(response[0].application.name);
+            $("#LAContact").val(response[0].application.contactNo);
+            $("#LaAddress").val(response[0].application.address);
+            $("#txtAllotedArea").val(response[0].application.areaSqlMt);
+
+          
         });
 
     }

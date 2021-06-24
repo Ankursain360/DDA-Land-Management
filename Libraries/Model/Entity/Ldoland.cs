@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
     public  class Ldoland : AuditableEntity<int>
     {
         [Required(ErrorMessage = " Notification is mandatory")]
-        public int? LandNotificationId { get; set; }
+        public int? OtherLandNotificationId { get; set; }
         [Required(ErrorMessage = " Date is mandatory")]
         public DateTime? NotificationDate { get; set; }
         [Required(ErrorMessage = " Serial Number is mandatory")]
@@ -44,9 +44,14 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
+
         [NotMapped]
-        public List<LandNotification> LandNotificationList { get; set; }
-        public virtual LandNotification LandNotification { get; set; }
+        public List<Otherlandnotification> OtherlandnotificationList { get; set; }
+        public Otherlandnotification OtherLandNotification { get; set; }
+
+        //[NotMapped]
+        //public List<LandNotification> LandNotificationList { get; set; }
+        //public virtual LandNotification LandNotification { get; set; }
 
         [NotMapped]
         public IFormFile GOINotificationDocumentIFormFile { get; set; }

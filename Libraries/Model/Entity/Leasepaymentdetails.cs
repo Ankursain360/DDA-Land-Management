@@ -9,7 +9,7 @@ namespace Libraries.Model.Entity
 {
    public class Leasepaymentdetails : AuditableEntity<int>
     {
-        [Required(ErrorMessage = " Refernce number is mandatory")]
+        [Required(ErrorMessage = " Reference Number is mandatory")]
         public int? RefId { get; set; }
         [Required(ErrorMessage = "Payment Type is mandatory")]
         public int? PaymentTypeId { get; set; }

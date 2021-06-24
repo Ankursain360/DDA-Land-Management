@@ -12,6 +12,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model);
         Task<List<Otherlandnotification>> GetAllLandNotification();
+       
        // Task<List<Serialnumber>> GetAllSerialnumber();
         Task<List<Morland>> GetMorlandUsingRepo();
         Task<List<Morland>> GetAllMorland();

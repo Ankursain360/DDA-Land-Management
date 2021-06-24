@@ -7,11 +7,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId " asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
-                        <option>Select</option>
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="OtherLandNotificationId "
+                            asp-items="@(new SelectList(Model.OtherlandnotificationList, "Id","NotificationNumber"))">
+
+                        <option disabled="disabled" value="" selected="selected">Select</option>
                     </select>
-                    <span asp-validation-for="LandNotificationId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="LandNotificationId">Notification No.</label>
+                    <span asp-validation-for="OtherLandNotificationId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="OtherLandNotificationId">Notification No.</label>
                 </div>
             </div>
             <div class="col-md-6">

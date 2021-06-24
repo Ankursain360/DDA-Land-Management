@@ -388,5 +388,11 @@
     "inputFiles": [
       "wwwroot/js/branchindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/surveyuserindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/surveyuserindex.js"
+    ]
   }
 ]

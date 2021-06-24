@@ -47,7 +47,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _ldolandRepository.FindBy(a => a.Id == id);
             Ldoland model = result.FirstOrDefault();
 
-            model.LandNotificationId = ldoland.LandNotificationId;
+            model.OtherLandNotificationId = ldoland.OtherLandNotificationId;
             model.NotificationDate = ldoland.NotificationDate;
             model.SerialNumber = ldoland.SerialNumber;
             model.PropertySiteNo = ldoland.PropertySiteNo;
@@ -82,6 +82,12 @@ namespace Libraries.Service.ApplicationService
             List<LandNotification> landNotificationList = await _ldolandRepository.GetAllLandNotification();
             return landNotificationList;
         }
+        public async Task<List<Otherlandnotification>> GetAllOtherLandNotification()
+        {
+            List<Otherlandnotification> List = await _ldolandRepository.GetAllOtherLandNotification();
+            return List;
+        }
+        
         //public async Task<List<Serialnumber>> GetAllSerialnumber()
         //{
         //    List<Serialnumber> serialnumberList = await _ldolandRepository.GetAllSerialnumber();

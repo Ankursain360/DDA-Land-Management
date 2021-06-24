@@ -38,19 +38,27 @@ namespace LeaseDetails.Controllers
         {
             return View();
         }
-        public async Task<JsonResult> BindLeaseApplicationDetails(int? appId)
+
+        [HttpGet]
+        public async Task<JsonResult> GetLeaseappdetails(int? appId)
         {
             appId = appId ?? 0;
-            var leaseappId =0;
             var result = await _possesionplanService.BindAllotmentDetails(Convert.ToInt32(appId));
-            if (result != null)
-            {
-                 leaseappId = result[0].ApplicationId;
-              
-            }
-            return Json(await _possesionplanService.BindLeaseApplicationDetails(Convert.ToInt32(leaseappId)));
-
+            return Json(result);
         }
+        //public async Task<JsonResult> BindLeaseApplicationDetails(int? appId)
+        //{
+        //    appId = appId ?? 0;
+        //    var leaseappId =0;
+        //    var result = await _possesionplanService.BindAllotmentDetails(Convert.ToInt32(appId));
+        //    if (result != null)
+        //    {
+        //         leaseappId = result[0].ApplicationId;
+              
+        //    }
+        //    return Json(await _possesionplanService.BindLeaseApplicationDetails(Convert.ToInt32(leaseappId)));
+
+        //}
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] PossesionplanSearchDto model)

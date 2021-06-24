@@ -21,7 +21,8 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@item.LandNotification.Name</td>
+            <td> @(item.OtherLandNotification == null?"": item.OtherLandNotification.NotificationNumber)</td>
+
 
             <td>@(item.NotificationDate == null ? "" : (Convert.ToDateTime(item.NotificationDate)).ToString("dd-MMM-yyyy"))</td>
 
@@ -36,7 +37,7 @@
 
             <td>@(item.DateofPossession == null ? "" : (Convert.ToDateTime(item.DateofPossession)).ToString("dd-MMM-yyyy"))</td>
 
-           
+
             <td>@item.Remarks</td>
 
             <td>

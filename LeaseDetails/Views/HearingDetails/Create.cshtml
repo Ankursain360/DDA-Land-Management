@@ -97,7 +97,7 @@
 
 
                     <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Date" type="date" asp-for="HearingDate" />
-                    <span class="text-danger" ></span>
+                    <span asp-validation-for="HearingDate" class="text-danger" ></span>
                     <label class="floating-label">Hearing Date</label>
                 </div>
             </div>
@@ -105,7 +105,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Venue" type="time" asp-for="HearingTime"/>
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="HearingTime" class="text-danger"></span>
                     <label class="floating-label">Hearing Time  </label>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Time" type="text" asp-for="HearingVenue" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="HearingVenue" class="text-danger"></span>
                     <label class="floating-label">Hearing Venue </label>
                 </div>
             </div>
@@ -125,7 +125,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Attendee" disabled asp-for="Attendee" />
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Attendee"  asp-for="Attendee" />
                     <span class="text-danger"></span>
                     <label class="floating-label">Attendee </label>
                 </div>
@@ -135,7 +135,7 @@
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <textarea class="floating-label-field floating-label-field--s3" placeholder="Hearing Remarks" disabled asp-for="Remark">
+                    <textarea class="floating-label-field floating-label-field--s3" placeholder="Hearing Remarks"  asp-for="Remark">
                 </textarea>
                     <span class="text-danger"></span>
                     <label class="floating-label">Hearing Remarks </label>
@@ -148,7 +148,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Documents" type="file" disabled />
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Documents" type="file"  />
                     <span class="text-danger"></span>
                     <label class="floating-label">Hearing Documents (if any)</label>
                 </div>

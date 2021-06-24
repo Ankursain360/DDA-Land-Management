@@ -31,7 +31,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Allotment.Application)
                                         .Where(x => x.IsSend == 1).ToListAsync();
         }
-        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model)
+        public async Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(ActionTakenByDDASearchDto model)
         {
             var data = await _dbContext.Requestforproceeding
                                         .Include(x => x.Allotment)
