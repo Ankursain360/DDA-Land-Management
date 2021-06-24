@@ -32,11 +32,13 @@ namespace LeaseForPublic.Controllers
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUserNotificationService _userNotificationService;
 
         string targetPathExtensionDocuments = "";
         public ExtensionServiceController(IExtensionService extensionService,
             IConfiguration configuration, IWorkflowTemplateService workflowtemplateService,
-            IApprovalProccessService approvalproccessService, IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
+            IApprovalProccessService approvalproccessService, IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
+            IUserNotificationService userNotificationService)
         {
             _configuration = configuration;
             _extensionService = extensionService;
@@ -44,6 +46,7 @@ namespace LeaseForPublic.Controllers
             _approvalproccessService = approvalproccessService;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
             targetPathExtensionDocuments = _configuration.GetSection("FilePaths:Extension:ExtensionFilePath").Value.ToString();
 
         }
@@ -243,6 +246,24 @@ namespace LeaseForPublic.Controllers
                                     approvalproccess.Version = workflowtemplatedata.Version;
                                     approvalproccess.Remarks = "Record Added and Sent for Approval";///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                                    #region Insert Into usernotification table Added By Renu 18 June 2021
+                                    if (result == true && approvalproccess.SendTo != null)
+                                    {
+                                        var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidExtensionService").Value);
+                                        var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                        Usernotification usernotification = new Usernotification();
+                                        var replacement = notificationtemplate.Template.Replace("{proccess name}", "Extension").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                        usernotification.Message = replacement;
+                                        usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidExtensionService").Value);
+                                        usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                        usernotification.ServiceId = approvalproccess.ServiceId;
+                                        usernotification.SendFrom = approvalproccess.SendFrom;
+                                        usernotification.SendTo = approvalproccess.SendTo;
+                                        result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                    }
+                                    #endregion
+
                                 }
 
                                 break;
@@ -348,6 +369,7 @@ namespace LeaseForPublic.Controllers
                 var deleteResult = false;
                 if (extension.Id != 0)
                 {
+                    deleteResult = await _userNotificationService.RollBackEntry((_configuration.GetSection("workflowProcessGuidExtensionService").Value), extension.Id);
                     deleteResult = await _approvalproccessService.RollBackEntry((_configuration.GetSection("workflowProcessGuidExtensionService").Value), extension.Id);
                     deleteResult = await _extensionService.RollBackEntryDocument(extension.Id, Convert.ToInt32(_configuration.GetSection("ServiceTypeIdExtensionService").Value));
                     deleteResult = await _extensionService.RollBackEntry(extension.Id);

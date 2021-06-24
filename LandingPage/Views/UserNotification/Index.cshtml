@@ -1,0 +1,44 @@
+﻿@model System.Collections.Generic.IList<Dto.Master.UserNotificationAlertDto>
+@await Component.InvokeAsync("PageHeader", new { pageName = "User Notification" })
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+   
+    <div class="col-md-6">
+        @foreach (var menu in Model)
+        {
+        <ul class="list-unstyled m-0 p-0">
+            <li class="px-3">
+                @if (@menu.URL == "#")
+                {
+                    <a href="@menu.URL" class="d-flex align-items-center py-2 border-bottom read" onclick="NoNotification()">
+                        <div class="noti-time text-center pr-2">
+                            <i class="ri-discuss-line"></i>
+                            <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " Days")</small>
+                        </div>
+                        <p class="m-0  text-left">
+                            @menu.Message
+                        </p>
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="UpdateUserNotification" asp-controller="UserNotification" asp-route-id="@menu.Id" asp-route-url="@menu.URL" onclick="RefreshNotification()" target="_blank" class="d-flex align-items-center py-2 border-bottom read">
+                        @*onclick="UpdateStatus(@menu.Id,@menu.URL)"*@
+                        <div class="noti-time text-center pr-2">
+                            <i class="ri-discuss-line"></i>
+                            <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " Days")</small>
+                        </div>
+                        <p class="m-0  text-left">
+                            @menu.Message
+                        </p>
+                    </a>
+                }
+            </li>
+        </ul>
+        }
+    </div>
+</div>

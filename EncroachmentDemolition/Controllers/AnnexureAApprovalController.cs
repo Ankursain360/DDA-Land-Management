@@ -34,13 +34,16 @@ namespace EncroachmentDemolition.Controllers
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUserNotificationService _userNotificationService;
+
         string ApprovalDocumentPath = "";
 
         public AnnexureAApprovalController(IEncroachmentRegisterationService encroachmentRegisterationService,
             IConfiguration configuration, IWatchandwardService watchandwardService,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IAnnexureAService annexureAService, IAnnexureAApprovalService annexureAApprovalService,
-            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
+            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
+            IUserNotificationService userNotificationService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _configuration = configuration;
@@ -51,6 +54,7 @@ namespace EncroachmentDemolition.Controllers
             _annexureAApprovalService = annexureAApprovalService;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:ApprovalDocumentPath").Value.ToString();
 
         }
@@ -197,7 +201,22 @@ namespace EncroachmentDemolition.Controllers
                         #endregion
 
                         result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-
+                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                        if (result == true && approvalproccess.SendTo != null)
+                        {
+                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                            Usernotification usernotification = new Usernotification();
+                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                            usernotification.Message = replacement;
+                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                            usernotification.ServiceId = approvalproccess.ServiceId;
+                            usernotification.SendFrom = approvalproccess.SendFrom;
+                            usernotification.SendTo = approvalproccess.SendTo;
+                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                        }
+                        #endregion
                         if (result)
                         {
                             fixingdemolition.ApprovedStatus = Convert.ToInt32(fixingdemolition.ApprovalStatus);
@@ -293,6 +312,22 @@ namespace EncroachmentDemolition.Controllers
                                         #endregion
 
                                         result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                                        if (result == true && approvalproccess.SendTo != null)
+                                        {
+                                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                            Usernotification usernotification = new Usernotification();
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Request for Demolition").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            usernotification.Message = replacement;
+                                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestDemolition").Value);
+                                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                            usernotification.ServiceId = approvalproccess.ServiceId;
+                                            usernotification.SendFrom = approvalproccess.SendFrom;
+                                            usernotification.SendTo = approvalproccess.SendTo;
+                                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                        }
+                                        #endregion
 
                                         if (result)
                                         {

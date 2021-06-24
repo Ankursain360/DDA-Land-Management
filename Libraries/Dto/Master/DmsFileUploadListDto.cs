@@ -10,6 +10,8 @@ namespace Dto.Master
         public string Department { get; set; }
         public string Locality { get; set; }
         public string KhasraNo { get; set; }
+        public string Zone { get; set; }
+        public string Village { get; set; }
         public string Status { get; set; }
     }
 }

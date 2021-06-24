@@ -27,5 +27,9 @@ namespace Dto.Master
         public List<CompactorApiDto> cargo { get; set; }
          [NotMapped]
         public string FileNo { get; set; }
+        [NotMapped]
+        public string Subject { get; set; }
+        [NotMapped]
+        public string Scheme { get; set; }
     }
 }

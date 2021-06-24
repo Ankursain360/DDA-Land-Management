@@ -11,7 +11,8 @@ namespace Libraries.Service.IApplicationService
     public interface IMorlandService
     {
         Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model);
-        Task<List<LandNotification>> GetAllLandNotification();
+        Task<List<Otherlandnotification>> GetAllLandNotification();
+       
        // Task<List<Serialnumber>> GetAllSerialnumber();
         Task<List<Morland>> GetMorlandUsingRepo();
         Task<List<Morland>> GetAllMorland();

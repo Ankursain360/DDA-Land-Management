@@ -36,6 +36,9 @@ namespace Libraries.Model
         public virtual DbSet<Nazulland> Nazulland { get; set; }
         public virtual DbSet<Tehsil> Tehsil { get; set; }
         public virtual DbSet<Villagetype> Villagetype { get; set; }
+        public virtual DbSet<Surveyuserdetail> Surveyuserdetail { get; set; }
+        public virtual DbSet<Surveyuserrole> Surveyuserrole { get; set; }
+
         public virtual DbSet<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public virtual DbSet<Classificationofland> Classificationofland { get; set; }
         public virtual DbSet<Disposaltype> Disposaltype { get; set; }
@@ -118,7 +121,6 @@ namespace Libraries.Model
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
-        public virtual DbSet<Familydetails> Familydetails { get; set; }
         public virtual DbSet<Lawyer> Lawyer { get; set; }
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
@@ -140,6 +142,7 @@ namespace Libraries.Model
         public virtual DbSet<ApplicationNotificationTemplate> ApplicationNotificationTemplate { get; set; }
 
         public virtual DbSet<ModuleCategory> ModuleCategory { get; set; }
+        public virtual DbSet<Otherlandnotification> Otherlandnotification { get; set; }
 
 
         //**********  Court case management**********
@@ -275,6 +278,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Newlandannexure2> Newlandannexure2 { get; set; }
         public virtual DbSet<Courtcasesmapping> Courtcasesmapping { get; set; }
+        public virtual DbSet<Newlanddemandlistdetails> Newlanddemandlistdetails { get; set; }
 
         // Lease Details module
         public virtual DbSet<Premiumrate> Premiumrate { get; set; }
@@ -344,6 +348,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DisposaltypeConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyregistrationConfiguration());
             modelBuilder.ApplyConfiguration(new SchemeConfiguration());
+            modelBuilder.ApplyConfiguration(new SurveyuserdetailConfiguration());
+            modelBuilder.ApplyConfiguration(new SurveyuserroleConfiguration());
             modelBuilder.ApplyConfiguration(new ProposaldetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection4Configuration());
             modelBuilder.ApplyConfiguration(new Undersection4plotConfiguration());
@@ -426,6 +432,7 @@ namespace Libraries.Model
 
             modelBuilder.ApplyConfiguration(new DemolishedstructurerptConfiguration());
             modelBuilder.ApplyConfiguration(new Areareclaimedrptconfiguration());
+            modelBuilder.ApplyConfiguration(new OtherlandnotificationConfiguration());
 
             //************* Data Loading **********************
             modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
@@ -455,7 +462,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
-            modelBuilder.ApplyConfiguration(new FamilydetailsConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentverificationConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());

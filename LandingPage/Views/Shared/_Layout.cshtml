@@ -12,9 +12,12 @@
     <!--icon css-->
     <link rel="stylesheet" href="~/font/icon/remixicon.css" />
 
+
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/css/style.css" rel="stylesheet" />
-   
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -37,7 +40,7 @@
                             </figure>
                         </a>
                     </div>
-                    <div class="dropdown noti text-white my-2  mr-3 order-md-3 ml-auto">
+                    @*<div class="dropdown noti text-white my-2  mr-3 order-md-3 ml-auto">
                         <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
                             <i class="ri-notification-2-line"></i>
                             <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
@@ -70,7 +73,10 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div>*@
+
+                    @await Component.InvokeAsync("UserNotificationAlert")
+
                     @await Component.InvokeAsync("SignInProfile")
                 </div>
             </div>

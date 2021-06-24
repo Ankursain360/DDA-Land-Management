@@ -28,6 +28,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
             services.AddScoped<ISelfAssessmentDamageRepository, SelfAssessmentDamageRepository>();
             services.AddScoped<IMutationDetailsRepository, MutationDetailsRepository>();
             services.AddScoped<IDamagePayeeRegistrationRepository, DamagePayeeRegistrationRepository>();
@@ -44,6 +45,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IModuleService, ModuleService>();
+            services.AddScoped<IUserNotificationService, UserNotificationService>();
             services.AddScoped<ISelfAssessmentDamageService, SelfAssessmentDamageService>();
             services.AddScoped<IMutationDetailsService, MutationDetailsService>();
             services.AddScoped<IDamagePayeeRegistrationService, DamagePayeeRegistrationService>();

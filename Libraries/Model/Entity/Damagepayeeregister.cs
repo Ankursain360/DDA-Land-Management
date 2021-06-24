@@ -70,6 +70,7 @@ namespace Libraries.Model.Entity
         public string IsDdadamagePayee { get; set; }
         public int? IsApplyForMutation { get; set; }
         public string ShowCauseNoticePath { get; set; }
+        public string DocumentName { get; set; }
         public string FgformPath { get; set; }
         public string IsDocumentFor { get; set; }
         public string DocumentForFilePath { get; set; }
@@ -106,7 +107,7 @@ namespace Libraries.Model.Entity
         public string GpafilePath { get; set; }
         public string MutationFilePath { get; set; }
         public string WillFilePath { get; set; }
-
+       
         public District District { get; set; }
         public Locality Locality { get; set; }
         [NotMapped]
@@ -118,12 +119,14 @@ namespace Libraries.Model.Entity
         public IFormFile PropertyPhoto { get; set; }
         [NotMapped]
         public IFormFile ShowCauseNotice { get; set; }
+        [NotMapped]
+        public IFormFile DocumentIFormFile { get; set; }
 
         [NotMapped]
         public IFormFile Fgform { get; set; }
         [NotMapped]
         public IFormFile DocumentForFile { get; set; }
-
+       
         [NotMapped]
         public IFormFile ATSFile { get; set; }
         [NotMapped]
@@ -196,7 +199,12 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<string> SignatureFilePath { get; set; }
+        //[NotMapped]
+        //public List<IFormFile> OtherDocFile { get; set; }
 
+        //[NotMapped]
+        //public List<string> OtherDocFilePath { get; set; }
+        
 
         //****** Damagepaymenthistory temp ***
         [NotMapped]

@@ -13,11 +13,16 @@ namespace Libraries.Repository.IEntityRepository
     {
         int GetLocalityByName(string name);
         int GetKhasraByName(string name);
+
+        int GetZoneByName(string name);
+        int GetVillageByName(string name);
         Task<bool> Any(int id, string fileNo);
         Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
         Task<List<Department>> GetDepartmentList();
         Task<List<Dmsfileupload>> GetAllDMSFileUploadList();
         Task<List<Propertyregistration>> GetKhasraNoList();
+        Task<List<Zone>> allZoneList();
+        Task<List<Village>> allVillageList(int? zoneid);
         Task<List<Locality>> GetLocalityList();
         Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
         Task<Dmsfileupload> FetchSingleResult(int id);

@@ -38,14 +38,13 @@
     <section class="map-section">
         <!--live map-->
         <div class="liveMap" id="map-canvas">
-            @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d448181.163741622!2d76.81306442366602!3d28.64727993557044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1612367296523!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>*@
         </div>
         <!--live map end-->
         <div class="container-fluid p-4 MapContent position-relative" id="topRightActionButton">
             <!--top buttons-->
             <div class="text-right TopActionBtns">
                 <a href="#" class="btn actionBtn slow" title="Village" id="aVillageName" style="display:none">
-                    <i class="ri-map-pin-fill"></i>  ChaukhariMubarakbad
+                    <i class="ri-map-pin-fill"></i> <span id="spanVillageName"></span>
                 </a>
 
                 <a href="/GIS/Index" class="btn actionBtn slow" title="Home">
@@ -232,7 +231,7 @@
                 <!--area text-->
                 <p style="font-size: .7rem" class="my-2">
                     State : <strong class="text-dark">Delhi</strong><br />
-                    Village : <strong class="text-dark" id="spanVillage"></strong><br />
+                    <strong class="text-dark" id="spanVillage"></strong><br />
                     @*No of Zones : <strong class="text-dark">18</strong><br />
                         Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
                     Lat & Long : <strong class="text-dark" id="tdCursor"></strong>

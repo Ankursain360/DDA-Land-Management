@@ -8,19 +8,12 @@ namespace Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Doortodoorsurvey> builder)
         {
-            builder.ToTable("doortodoorsurvey");
-
-
-
+            builder.ToTable("doortodoorsurvey", "lms");
 
             builder.HasIndex(e => e.PresentUseId)
-                   .HasName("fkpresentuse_idx");
+                .HasName("fkpresentuse_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
-
-            builder.Property(e => e.Address)
-                .HasMaxLength(500)
-                .IsUnicode(false);
 
             builder.Property(e => e.ApproxPropertyArea).HasColumnType("decimal(18,3)");
 
@@ -41,13 +34,19 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.GeoReferencing)
-                .HasMaxLength(30)
+            builder.Property(e => e.GeoReferencingLattitude)
+                .HasMaxLength(50)
                 .IsUnicode(false);
+
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.KwaterNo)
                 .HasColumnName("KWaterNo")
                 .HasMaxLength(30)
+                .IsUnicode(false);
+
+            builder.Property(e => e.Longitude)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.MobileNo)
@@ -58,10 +57,6 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedDate).HasColumnType("date");
 
-            builder.Property(e => e.MuncipalNo)
-                .HasMaxLength(30)
-                .IsUnicode(false);
-
             builder.Property(e => e.NumberOfFloors)
                 .HasMaxLength(10)
                 .IsUnicode(false);
@@ -70,12 +65,9 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(15)
                 .IsUnicode(false);
 
-         //   builder.Property(e => e.OccupantIdentityPrrofFilePath).HasColumnType("longtext");
-
-
             builder.Property(e => e.OccupantIdentityPrrofFilePath)
-              .HasMaxLength(200)
-              .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.OccupantName)
                 .HasMaxLength(100)
@@ -87,12 +79,9 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-         //   builder.Property(e => e.PropertyFilePath).HasColumnType("longtext");
-
             builder.Property(e => e.PropertyFilePath)
-           .HasMaxLength(200)
-           .IsUnicode(false);
-
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.PropertyHouseTaxNo)
                 .HasMaxLength(30)
@@ -102,15 +91,9 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.Property(e => e.TelephoneNo)
-                .HasMaxLength(12)
-                .IsUnicode(false);
-
             builder.Property(e => e.VoterIdNo)
                 .HasMaxLength(15)
                 .IsUnicode(false);
-
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.HasOne(d => d.PresentUseNavigation)
                 .WithMany(p => p.Doortodoorsurvey)

@@ -29,7 +29,8 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-          
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
+
             services.AddScoped<INewlandnotificationRepository, NewlandnotificationRepository>();
 
             services.AddScoped<INewLandProposalPlotDetailsRepository, NewLandProposalPlotDetailsRepository>();
@@ -68,7 +69,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandvillageRepository, NewlandVillageRepository>();
             services.AddScoped<INewlandkhasraRepository,NewlandkhasraRepository>();
             services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
-
+            services.AddScoped<INewLandDemandListDetailsRepository, NewLandDemandListDetailsRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -81,7 +82,8 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-           
+            services.AddScoped<IUserNotificationService, UserNotificationService>();
+
             services.AddScoped<INewLandProposalPlotDetailsService, NewLandProposalPlotDetailsService>();
             services.AddScoped<INewLandPaymentdetailService, NewLandPaymentdetailService>();
 
@@ -116,6 +118,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandvillageService, NewlandvillageService>();
             services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
             services.AddScoped<INewlandawardmasterdetailService, NewlandawardmasterdetailsService>();
+            services.AddScoped<INewLandDemandListDetailsService, NewLandDemandListDetailsService>();
 
         }
     }

@@ -37,6 +37,7 @@ namespace NewLandAcquisition.Controllers
         private readonly INewlandannexure2Service _newlandannexure2Service;
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUserNotificationService _userNotificationService;
 
         string ApprovalDocumentPath = "";
 
@@ -44,7 +45,8 @@ namespace NewLandAcquisition.Controllers
         public RequestApprovalProcess(IRequestApprovalProcessService requestApprovalProcessService,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
             IConfiguration configuration, IRequestService requestService, INewlandannexure2Service newlandannexure2Service,
-            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment)
+            IUserProfileService userProfileService, IHostingEnvironment hostingEnvironment,
+            IUserNotificationService userNotificationService)
         {
             _workflowtemplateService = workflowtemplateService;
             _requestApprovalProcessService = requestApprovalProcessService;
@@ -54,6 +56,7 @@ namespace NewLandAcquisition.Controllers
             _newlandannexure2Service = newlandannexure2Service;
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
+            _userNotificationService = userNotificationService;
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:RequestPhoto:ApprovalDocumentPath").Value.ToString();
 
         }
@@ -299,6 +302,23 @@ namespace NewLandAcquisition.Controllers
                                         #endregion
 
                                         result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                        
+                                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                                        if (result == true && approvalproccess.SendTo != null)
+                                        {
+                                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidRequestService").Value);
+                                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                            Usernotification usernotification = new Usernotification();
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Identification of land").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            usernotification.Message = replacement;
+                                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidRequestService").Value);
+                                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                            usernotification.ServiceId = approvalproccess.ServiceId;
+                                            usernotification.SendFrom = approvalproccess.SendFrom;
+                                            usernotification.SendTo = approvalproccess.SendTo;
+                                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                        }
+                                        #endregion
 
                                         if (result)
                                         {
@@ -353,7 +373,7 @@ namespace NewLandAcquisition.Controllers
                         //At successfull completion send mail and sms
                         Uri uri = new Uri("https://www.managemybusinessess.com/");
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                        string link = "https://master.managemybusinessess.com/ApprovalProcess/Index";
 
                         var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                         StringBuilder multousermailId = new StringBuilder();
@@ -377,7 +397,7 @@ namespace NewLandAcquisition.Controllers
 
                         #region HTML Body Generation
                         ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                        bodyDTO.ApplicationName = "Request Application";
+                        bodyDTO.ApplicationName = "Identification of land Application";
                         bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
                         bodyDTO.SenderName = senderUser.User.Name;
                         bodyDTO.Link = link;
@@ -391,7 +411,7 @@ namespace NewLandAcquisition.Controllers
                         //  sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
                         #region Common Mail Genration
                         SentMailGenerationDto maildto = new SentMailGenerationDto();
-                        maildto.strMailSubject = "Pending Request Approval Details ";
+                        maildto.strMailSubject = "Pending Identification of land Approval Details ";
                         maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
                         maildto.strBodyMsg = strBodyMsg;
                         maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();

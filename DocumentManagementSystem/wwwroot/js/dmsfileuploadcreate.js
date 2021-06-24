@@ -60,6 +60,28 @@ $('#FileUpload').change(function () {
     }
 });
 
+$("#ZoneId").change(function () {
+   // alert(ZoneId);
+    var ids = $(this).val();
+    if (ids) {
+        HttpGet(`/DMSFileUpload/AllVillagedataList/?zoneid=${ids}`, 'json', function (response) {
+            var html = '<option value="">Select</option>';
+            for (var i = 0; i < response.length; i++) {
+                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+            }
+            $("#VillageId").select2('val', '')
+            $("#VillageId").html(html);
+
+          //  alert(JSON.stringify(response));
+        });
+
+    }
+});
+
+
+
+
+
 
 function fileValidation(filePath, fileInput, size) {
     var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
@@ -243,4 +265,10 @@ function fileValidationBulk(filePath, fileInput, size) {
         return false;
     }
 
+
+
+  
+
+
 }
+

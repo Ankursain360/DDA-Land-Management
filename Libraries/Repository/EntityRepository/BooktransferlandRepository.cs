@@ -24,7 +24,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Booktransferland
                                        .Include(x => x.Locality)
                                        .Include(x => x.Khasra)
-                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.OtherLandNotification)
                                          .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -38,9 +38,9 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.Khasra)
-                                                .Include(x => x.LandNotification)
+                                                .Include(x => x.OtherLandNotification)
                                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                                                .OrderBy(x => x.LandNotification.Name)
+                                                .OrderBy(x => x.OtherLandNotification.NotificationNumber)
                                                 .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
 
                         break;
@@ -49,7 +49,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                .Include(x => x.Locality)
                                                .Include(x => x.Khasra)
-                                               .Include(x => x.LandNotification)
+                                               .Include(x => x.OtherLandNotification)
                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                                .OrderBy(x => x.NotificationDate)
                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -62,7 +62,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.Khasra)
-                                                .Include(x => x.LandNotification)
+                                                .Include(x => x.OtherLandNotification)
                                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                                 .OrderBy(s => s.DateofPossession)
                                                 .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -76,7 +76,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.Khasra)
-                                                .Include(x => x.LandNotification)
+                                                .Include(x => x.OtherLandNotification)
                                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                                 .OrderBy(s => s.Part)
                                                 .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -94,7 +94,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                               .Include(x => x.Locality)
                                               .Include(x => x.Khasra)
-                                              .Include(x => x.LandNotification)
+                                              .Include(x => x.OtherLandNotification)
                                               .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                               .OrderByDescending(s => s.IsActive)
                                               .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -115,9 +115,9 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.Khasra)
-                                                .Include(x => x.LandNotification)
+                                                .Include(x => x.OtherLandNotification)
                                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
-                                                .OrderByDescending(s => s.LandNotification.Name)
+                                                .OrderByDescending(s => s.OtherLandNotification.NotificationNumber)
                                                 .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
 
                         break;
@@ -126,7 +126,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                .Include(x => x.Locality)
                                                .Include(x => x.Khasra)
-                                               .Include(x => x.LandNotification)
+                                               .Include(x => x.OtherLandNotification)
                                                .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                                .OrderByDescending(s => s.NotificationDate)
                                                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -139,7 +139,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.Khasra)
-                                                .Include(x => x.LandNotification)
+                                                .Include(x => x.OtherLandNotification)
                                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                                 .OrderByDescending(s => s.DateofPossession)
                                                 .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -153,7 +153,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.Khasra)
-                                                .Include(x => x.LandNotification)
+                                                .Include(x => x.OtherLandNotification)
                                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                                 .OrderByDescending(s => s.Part)
                                                 .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -171,7 +171,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Booktransferland
                                               .Include(x => x.Locality)
                                               .Include(x => x.Khasra)
-                                              .Include(x => x.LandNotification)
+                                              .Include(x => x.OtherLandNotification)
                                               .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
                                               .OrderBy(s => s.IsActive)
                                               .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
@@ -198,7 +198,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Booktransferland>> GetAllBooktransferland()
         {
             return await _dbContext.Booktransferland
-                .Include(x => x.LandNotification)
+                .Include(x => x.OtherLandNotification)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 
@@ -210,6 +210,12 @@ namespace Libraries.Repository.EntityRepository
         {
             List<LandNotification> landNotificationList = await _dbContext.LandNotification.Where(x => x.IsActive == 1).ToListAsync();
             return landNotificationList;
+        }
+
+        public async Task<List<Otherlandnotification>> GetAllOtherLandNotification()
+        {
+            List<Otherlandnotification> List = await _dbContext.Otherlandnotification.Where(x => (x.IsActive == 1) && (x.LandType == "BOOKTRANSFER LAND")).ToListAsync();
+            return List;
         }
         public async Task<List<Khasra>> BindKhasra(int? villageId)
         {

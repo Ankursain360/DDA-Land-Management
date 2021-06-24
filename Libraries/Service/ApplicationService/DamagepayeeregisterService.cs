@@ -82,7 +82,7 @@ namespace Service.ApplicationService
             model.LitigationStatus = damagepayeeregister.LitigationStatus;
             model.CourtName = damagepayeeregister.CourtName;
             model.CaseNo = damagepayeeregister.CaseNo;
-
+            model.DocumentName = damagepayeeregister.DocumentName;
             model.OppositionName = damagepayeeregister.OppositionName;
             model.PetitionerRespondent = damagepayeeregister.PetitionerRespondent;
             model.IsDdadamagePayee = damagepayeeregister.IsDdadamagePayee;

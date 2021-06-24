@@ -10,6 +10,8 @@ namespace Dto.Master
         public string AlloteeName { get; set; }
         public int? LocalityId { get; set; }
         public int? KhasraNoId { get; set; }
+        public int? VillageId { get; set; }
+        public int? ZoneId { get; set; }
         public string PropertyNoAddress { get; set; }
         public string Title { get; set; }
         public string AlmirahNo { get; set; }

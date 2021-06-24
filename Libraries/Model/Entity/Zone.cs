@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public Zone()
         {
             Acquiredlandvillage = new HashSet<Acquiredlandvillage>();
+            Dmsfileupload = new HashSet<Dmsfileupload>();
             PropertyregistrationHandedOverZone = new HashSet<Propertyregistration>();
             PropertyregistrationTakenOverZone = new HashSet<Propertyregistration>();
             LandtransferHandedOverZone = new HashSet<Landtransfer>();
@@ -59,6 +60,7 @@ namespace Libraries.Model.Entity
         public List<Department> DepartmentList { get; set; }
         //  public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<Landtransfer> LandtransferTakenOverZone { get; set; }
+        public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
         public virtual ICollection<Landtransfer> LandtransferHandedOverZone { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; internal set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }

@@ -73,6 +73,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.SignaturePath).HasColumnType("longtext");
 
+            builder.Property(e => e.OtherDocPath).HasColumnType("longtext");
+            
+
             builder.HasOne(d => d.DamagePayeeRegister)
                 .WithMany(p => p.Damagepayeepersonelinfo)
                 .HasForeignKey(d => d.DamagePayeeRegisterTempId)

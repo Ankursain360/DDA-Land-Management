@@ -27,7 +27,26 @@
                 </div>
             </div>
         </div>
-
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="DocumentName" />
+                    @{
+                        @if (Model.DocumentName != null)
+                        {
+                            <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <label class="badge badge-primary px-2">(View File)</label>
+                        }
+                        else
+                        {
+                            <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                        }
+                    }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
+                    <label class="floating-label"> Upload Gazette Notification</label>
+                </div>
+            </div>
+        </div>
         <div id="Divclsification">
 
             <h2 class="my-3 sub-heading">Notification Type</h2>
@@ -43,39 +62,21 @@
                         <label class="floating-label">Notification U/S-6</label>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="hidden" asp-for="DocumentName" />
-                        @{
-                            @if (Model.DocumentName != null)
-                            {
-                                <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                <label class="badge badge-primary px-2">(View File)</label>
-                            }
-                            else
-                            {
-                                <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            }
-                        }
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
-                        <label class="floating-label"> Upload Gazette Notification</label>
+
+                        <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <label class="floating-label"> Status</label>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                        <option value="1">Active</option>
-                        <option value="0">InActive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label class="floating-label"> Status</label>
-                </div>
             </div>
         </div>
+
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 @Html.ActionLink("Back", "Index", "UnderSection17Details", null, new { @class = "btn btn-theme" })

@@ -18,7 +18,7 @@ using Dto.Master;
 
 namespace DamagePayee.Controllers
 {
-    public class Door2DoorSurveyController : Controller
+    public class Door2DoorSurveyController : BaseController
     {
 
         private readonly IDoortodoorsurveyService _doortodoorsurveyService;
@@ -76,7 +76,6 @@ namespace DamagePayee.Controllers
 
 
                 if (ModelState.IsValid)
-
                 {
                    
                     FileHelper file = new FileHelper();
@@ -89,26 +88,8 @@ namespace DamagePayee.Controllers
                         doortodoorsurvey.PropertyFilePath = file.SaveFile(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto);
                     }
 
-
+                    doortodoorsurvey.CreatedBy = SiteContext.UserId;
                     var result = await _doortodoorsurveyService.Create(doortodoorsurvey);
-
-                    List<Familydetails> fixingprogram = new List<Familydetails>();
-                 
-                    for (int i = 0; i < doortodoorsurvey.Name.Count(); i++)
-                    {
-                        fixingprogram.Add(new Familydetails
-                        {
-                            Name = doortodoorsurvey.Name[i],
-                            Age = doortodoorsurvey.Age[i],
-                            FGender = doortodoorsurvey.FGender[i],
-                            D2dId = doortodoorsurvey.Id
-                        });
-                    }
-                    foreach (var item in fixingprogram)
-                    {
-                        result = await _doortodoorsurveyService.SaveFamilyDetails(item);
-                    }
-
 
                     if (result == true)
                     {
@@ -135,22 +116,6 @@ namespace DamagePayee.Controllers
                 return View(doortodoorsurvey);
             }
         }
-
-
-        public async Task<JsonResult> GetDetailsFamily(int? Id)
-        {
-            Id = Id ?? 0;
-            var data = await _doortodoorsurveyService.GetFamilydetails(Convert.ToInt32(Id));
-           return Json(data.Select(x => new {
-                x.Id,
-                x.Name,
-                x.FGender,
-                x.Age
-              
-            }));
-        }
-
-
 
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
@@ -185,32 +150,10 @@ namespace DamagePayee.Controllers
                 {
                     doortodoorsurvey.PropertyFilePath = file.SaveFile(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto);
                 }
-
-
-
                 try
                 {
+                    doortodoorsurvey.ModifiedBy = SiteContext.UserId;
                     var result = await _doortodoorsurveyService.Update(id, doortodoorsurvey);
-
-
-
-
-                    List<Familydetails> fixingprogram = new List<Familydetails>();
-                    result = await _doortodoorsurveyService.DeleteFamilyDetails(id);
-                    for (int i = 0; i < doortodoorsurvey.Name.Count(); i++)
-                    {
-                        fixingprogram.Add(new Familydetails
-                        {
-                            Name = doortodoorsurvey.Name[i],
-                            Age = doortodoorsurvey.Age[i],
-                            FGender = doortodoorsurvey.FGender[i],
-                            D2dId = doortodoorsurvey.Id
-                        });
-                    }
-                    foreach (var item in fixingprogram)
-                    {
-                        result = await _doortodoorsurveyService.SaveFamilyDetails(item);
-                    }
 
                     if (result == true)
                     {
@@ -276,7 +219,7 @@ namespace DamagePayee.Controllers
         }
 
 
-        public async Task<FileResult> ViewLetter(int Id)
+        public async Task<FileResult> ViewIdentityProof(int Id)
         {
             try
             {
@@ -300,7 +243,7 @@ namespace DamagePayee.Controllers
 
 
 
-        public async Task<FileResult> ViewLetter1(int Id)
+        public async Task<FileResult> ViewPropertyFile(int Id)
         {
             try
             {
@@ -336,8 +279,8 @@ namespace DamagePayee.Controllers
                     {
                         Id = result[i].Id,
                         LocationAddressofProperty = result[i].PropertyAddress,
-                        MunicipalNumberifany = result[i].MuncipalNo,
-                        GeoReferencing = result[i].GeoReferencing,
+                       // MunicipalNumberifany = result[i].MuncipalNo,
+                        GeoReferencing = result[i].GeoReferencingLattitude,
                         ApproxAreaoftheProperty = result[i].ApproxPropertyArea.ToString(),
                         NumberofFloors = result[i].NumberOfFloors,
                   

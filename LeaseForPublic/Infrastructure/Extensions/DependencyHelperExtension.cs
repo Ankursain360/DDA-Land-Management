@@ -26,6 +26,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IPremiumrateRepository, PremiumrateRepository>();
             services.AddScoped<IDocumentchargesRepository, DocumentchargesRepository>();
@@ -64,6 +65,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IUserNotificationService, UserNotificationService>();
             services.AddScoped<IPremiumrateService, PremiumrateService>();
             services.AddScoped<IDocumentchargesServices, DocumentchargesServices>();
             services.AddScoped<IGroundRentService, GroundRentService>();

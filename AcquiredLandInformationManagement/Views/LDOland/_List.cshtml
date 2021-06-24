@@ -7,6 +7,7 @@
                 <th>Serial No</th>
                 <th>Property/Site No.</th>
                 <th>Location Name(Village)</th>
+                <th>Status of Land</th>
                 <th>Status</th>
                 <th style="min-width:110px;">Operations</th>
             </tr>
@@ -16,13 +17,14 @@
             @foreach (var item in Model.Results)
             {
             <tr>
-                <td> @(item.LandNotification == null?"": item.LandNotification.Name)</td>
+                <td> @(item.OtherLandNotification == null?"": item.OtherLandNotification.NotificationNumber)</td>
 
                 <td>@(Convert.ToDateTime(item.NotificationDate).ToString("dd-MMM-yyyy"))</td>
                 <td> @(item.SerialNumber == null? ' ' : item.SerialNumber)</td>
                
                 <td>@item.PropertySiteNo</td>
                 <td>@item.Location</td>
+                <td>@item.StatusOfLand</td>
 
                 <td>
                     @if (item.IsActive == 1)

@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         [Required(ErrorMessage = " Template is mandatory")]
         public string Template { get; set; }
+        public string URL { get; set; }
         public short? IsActive { get; set; } 
     }
 }
