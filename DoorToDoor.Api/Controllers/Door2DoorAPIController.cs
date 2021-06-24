@@ -15,7 +15,7 @@ using Dto.Master;
 using System.IO;
 using System.Drawing;
 
-namespace Vacant.Land.Api.Controllers
+namespace DoorToDoor.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -107,7 +107,7 @@ namespace Vacant.Land.Api.Controllers
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                         {
                             responseCode = "200",
-                            responseMessage = "details fetched successfully",
+                            responseMessage = "details saved successfully",
                             ApiSaveDoor2DoorSurveyDto = dtoData
                         };
 
