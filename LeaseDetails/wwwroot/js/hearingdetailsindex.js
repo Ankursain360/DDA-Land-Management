@@ -13,9 +13,9 @@ $("#btnSearch").click(function () {
 
 $("#btnReset").click(function () {
 
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtFileNo').val('')
+    $('#txtRefNo').val('');
+    $('#txtSocietyName').val('');
+    //$('#txtFileNo').val('')
 
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });

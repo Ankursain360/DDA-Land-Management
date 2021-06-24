@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IActionTakenByDdaRepository : IGenericRepository<Actiontakenbydda>
     {
-        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(RequestForProceedingSearchDto model);
+        public Task<PagedResult<Requestforproceeding>> GetPagedRequestForProceeding(ActionTakenByDDASearchDto model);
 
         Task<List<Allotmententry>> GetAllAllotment();
         Task<List<Honble>> GetAllHonble();
