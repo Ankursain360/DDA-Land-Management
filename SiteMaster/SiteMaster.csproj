@@ -9,11 +9,13 @@
     <Content Remove="Views\Actions\Delete.cshtml" />
     <Content Remove="wwwroot\js\applicationnotificationtemplateindex.min.js" />
     <Content Remove="wwwroot\js\structureindex.min.js" />
+    <Content Remove="wwwroot\js\surveyuserindex.min.js" />
   </ItemGroup>
 	
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\applicationnotificationtemplateindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\structureindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\surveyuserindex.min.js" />
   </ItemGroup>
 	
   <ItemGroup>
@@ -55,6 +57,7 @@
     <None Include="Views\Row\_List.cshtml" />
     <None Include="wwwroot\js\applicationnotificationtemplateindex.min.js" />
     <None Include="wwwroot\js\structureindex.min.js" />
+    <None Include="wwwroot\js\surveyuserindex.min.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -53,7 +53,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _booktransferlandRepository.FindBy(a => a.Id == id);
             Booktransferland model = result.FirstOrDefault();
 
-            model.LandNotificationId= booktransferland.LandNotificationId;
+            model.OtherLandNotificationId= booktransferland.OtherLandNotificationId;
 
             model.NotificationDate = booktransferland.NotificationDate;
             model.LocalityId = booktransferland.LocalityId;
@@ -91,7 +91,11 @@ namespace Libraries.Service.ApplicationService
             List<LandNotification> landNotificationList = await _booktransferlandRepository.GetAllLandNotification();
             return landNotificationList;
         }
-       
+        public async Task<List<Otherlandnotification>> GetAllOtherLandNotification()
+        {
+            List<Otherlandnotification> List = await _booktransferlandRepository.GetAllOtherLandNotification();
+            return List;
+        }
         public async Task<List<Acquiredlandvillage>> GetAllLocality()
         {
             List<Acquiredlandvillage> localityList = await _booktransferlandRepository.GetAllLocality();

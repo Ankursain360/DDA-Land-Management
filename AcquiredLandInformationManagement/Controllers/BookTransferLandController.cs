@@ -42,7 +42,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             Booktransferland booktransferland = new Booktransferland();
             
-            booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
+            booktransferland.OtherlandnotificationList = await _booktransferlandService.GetAllOtherLandNotification();
             booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
            
             booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
@@ -65,7 +65,8 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-                booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
+                booktransferland.OtherlandnotificationList = await _booktransferlandService.GetAllOtherLandNotification();
+                //booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
                 booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
                 booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
                 if (ModelState.IsValid)
@@ -104,7 +105,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             var Data = await _booktransferlandService.FetchSingleResult(id);
                        
-            Data.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
+            Data.OtherlandnotificationList = await _booktransferlandService.GetAllOtherLandNotification();
             Data.LocalityList = await _booktransferlandService.GetAllLocality();
             Data.KhasraList = await _booktransferlandService.BindKhasra(Data.LocalityId);
 
@@ -120,7 +121,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Booktransferland booktransferland)
         {
-            booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
+            booktransferland.OtherlandnotificationList = await _booktransferlandService.GetAllOtherLandNotification();
             booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
             booktransferland.KhasraList = await _booktransferlandService.BindKhasra(booktransferland.LocalityId);
             if (ModelState.IsValid)
@@ -179,7 +180,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _booktransferlandService.FetchSingleResult(id);
 
-            Data.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
+            Data.OtherlandnotificationList = await _booktransferlandService.GetAllOtherLandNotification();
             Data.LocalityList = await _booktransferlandService.GetAllLocality();
             Data.KhasraList = await _booktransferlandService.BindKhasra(Data.LocalityId);
             if (Data == null)
@@ -202,7 +203,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     data.Add(new BooktransferlandListDto()
                     {
                         Id = result[i].Id,
-                        NotificationNo = result[i].LandNotification == null ? "" : result[i].LandNotification.Name,
+                        NotificationNo = result[i].OtherLandNotification == null ? "" : result[i].OtherLandNotification.NotificationNumber,
                         NotificationDate = Convert.ToDateTime(result[i].NotificationDate).ToString("dd-MMM-yyyy"),
                         Part = result[i].Part,
                         Area = result[i].Area.ToString(),

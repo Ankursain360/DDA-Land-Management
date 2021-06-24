@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
    
     {
         [Required(ErrorMessage = " Notification No is mandatory")]
-        public int? LandNotificationId { get; set; }
+        public int? OtherLandNotificationId { get; set; }
         [Required(ErrorMessage = "  Notification Date is mandatory")]
         public DateTime? NotificationDate { get; set; }
         [Required(ErrorMessage = " Village is mandatory")]
@@ -30,12 +30,13 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
-
-
-
         [NotMapped]
-        public List<LandNotification> LandNotificationList { get; set; }
-        public virtual LandNotification LandNotification { get; set; }
+        public List<Otherlandnotification> OtherlandnotificationList { get; set; }
+        public Otherlandnotification OtherLandNotification { get; set; }
+
+        //[NotMapped]
+        //public List<LandNotification> LandNotificationList { get; set; }
+        //public virtual LandNotification LandNotification { get; set; }
 
 
         [NotMapped]

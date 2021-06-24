@@ -11,12 +11,7 @@ namespace Libraries.Model.Entity
 {
     public class LandNotification : AuditableEntity<int>
     {
-        public LandNotification()
-        {
-            Booktransferland = new HashSet<Booktransferland>();
-            Ldoland = new HashSet<Ldoland>();         
-           
-        }
+       
 
         [Required(ErrorMessage = " Notification is mandatory")]
         [Remote(action: "Exist", controller: "Notification", AdditionalFields = "Id")]
@@ -28,8 +23,7 @@ namespace Libraries.Model.Entity
 
 
         //public ICollection<Ldoland> Propertyregistration { get; set; }
-        public ICollection<Booktransferland> Booktransferland { get; set; }
-        public ICollection<Ldoland> Ldoland { get; set; }
+       
      
     }
 }

@@ -15,7 +15,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Booktransferland>> GetAllBooktransferland();
 
         Task<List<LandNotification>> GetAllLandNotification();
-       
+        Task<List<Otherlandnotification>> GetAllOtherLandNotification();
+
         Task<List<Acquiredlandvillage>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<List<Khasra>> BindKhasra(int? villageId);

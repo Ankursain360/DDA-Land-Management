@@ -19,31 +19,17 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkBookTransferLandKhasra_idx");
 
-            builder.HasIndex(e => e.LandNotificationId)
-                .HasName("fkBookTransferLandNotification_idx");
-
             builder.HasIndex(e => e.LocalityId)
                 .HasName("fkBookTransferLandLocality_idx");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.HasIndex(e => e.OtherLandNotificationId)
+                .HasName("fk_OtherlandNotif_idx");
 
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
-
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.DateofPossession).HasColumnType("date");
-
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
-
-            builder.Property(e => e.KhasraId).HasColumnType("int(11)");
-
-            builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
-
-            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
-
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.NotificationDate).HasColumnType("date");
 
@@ -59,20 +45,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.Khasra)
+            builder.HasOne(d => d.OtherLandNotification)
                 .WithMany(p => p.Booktransferland)
-                .HasForeignKey(d => d.KhasraId)
-                .HasConstraintName("fkBookTransferLandKhasra");
-
-            builder.HasOne(d => d.LandNotification)
-                .WithMany(p => p.Booktransferland)
-                .HasForeignKey(d => d.LandNotificationId)
-                .HasConstraintName("fkBookTransferLandNotification");
-
-            builder.HasOne(d => d.Locality)
-                .WithMany(p => p.Booktransferland)
-                .HasForeignKey(d => d.LocalityId)
-                .HasConstraintName("fkBookTransferLandLocality");
+                .HasForeignKey(d => d.OtherLandNotificationId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_OtherlandNotif");
         }
     }
 }
