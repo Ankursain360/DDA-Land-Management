@@ -14,8 +14,8 @@ $("#btnSearch").click(function () {
 
 
 $("#btnReset").click(function () {
-    $('#txtName').val('');
-    $('#txtCode').val('');
+    $('#txtReferenceNo').val('');
+    $('#txtSubject').val('');
     $('#txtFileNo').val('')
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });

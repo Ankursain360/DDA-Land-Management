@@ -5,9 +5,13 @@ $("#btnGenerate").click(function () {
     
     var id = $("#ddlRefNo").children("option:selected").val(); 
    
-    
-   
+    var refni = $('#refNo').val();
+    var previous = $('#prevamt').val();
 
+    if (id == "" || refni == "" || previous == "") {
+        alert("Please Fill All Fields");
+    }
+    else {
     if (id) {
 
         var today = new Date();
@@ -17,25 +21,27 @@ $("#btnGenerate").click(function () {
 
         var LetterDate = dd + '-' + mm + '-' + yyyy;
 
+     
 
       
-        var param = {
+
+            var param = {
 
 
-            applicationid: id,
-          //  demanddate: LetterDate
-          
+                applicationid: id,
+                //  demanddate: LetterDate
 
+
+            }
+            HttpPost(`/DemandLetter/List`, 'html', param, function (response) {
+
+
+                $('#Vieww').html("");
+                $('#Vieww').html(response);
+
+
+            });
         }
-        HttpPost(`/DemandLetter/List`, 'html', param, function (response) {
-
-          
-           $('#Vieww').html("");
-            $('#Vieww').html(response);
-         
-
-        });
-
    }
 })
 

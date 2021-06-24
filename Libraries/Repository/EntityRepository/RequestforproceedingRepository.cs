@@ -88,12 +88,12 @@ namespace Libraries.Repository.EntityRepository
                     case ("LETTERREFNO"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                      && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                       && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                  )
-                                .OrderBy(s => s.LetterReferenceNo)
+                                .OrderBy(s => s.Allotment.Application.Name)
                                 .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
 
@@ -101,7 +101,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("ALLOTMENTNO"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                      && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                       && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
@@ -114,7 +114,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("SUBJECT"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
@@ -128,7 +128,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
@@ -146,12 +146,12 @@ namespace Libraries.Repository.EntityRepository
                     case ("LETTERREFNO"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                      && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                       && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
                  )
-                                .OrderByDescending(s => s.LetterReferenceNo)
+                                .OrderByDescending(s => s.Allotment.Application.Name)
                                 .GetPaged<Requestforproceeding>(model.PageNumber, model.PageSize);
                         break;
 
@@ -159,7 +159,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("ALLOTMENTNO"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                  .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                      && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                       && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
@@ -172,7 +172,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("SUBJECT"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
@@ -184,7 +184,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Requestforproceeding.Include(x => x.Allotment).Include(x => x.Allotment.Application)
-                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.LetterReferenceNo.Contains(model.letterReferenceNo))
+                 .Where(x => (string.IsNullOrEmpty(model.letterReferenceNo) || x.Allotment.Application.Name.Contains(model.letterReferenceNo))
                     && (string.IsNullOrEmpty(model.AllotmentNo) || x.Allotment.Application.RefNo.Contains(model.AllotmentNo))
                      && (string.IsNullOrEmpty(model.subject) || x.Subject.Contains(model.subject))
 
