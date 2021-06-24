@@ -11,5 +11,6 @@ namespace Libraries.Repository.IEntityRepository
     public interface IDoor2DoorAPIRepository : IGenericRepository<Doortodoorsurvey>
     {
         Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto);
+        Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto);
     }
 }

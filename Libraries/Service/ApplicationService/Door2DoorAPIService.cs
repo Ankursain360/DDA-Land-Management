@@ -56,6 +56,11 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto)
+        {
+            return await _door2DoorAPIRepository.GetAllSurveyDetails(dto);
+        }
+
         public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto)
         {
             return await _door2DoorAPIRepository.GetSurveyDetails(dto);
