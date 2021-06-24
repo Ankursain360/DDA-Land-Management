@@ -19,15 +19,14 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto)
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails()
         {
             List<ApiSaveDoor2DoorSurveyDto> listData = new List<ApiSaveDoor2DoorSurveyDto>();
 
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
-                                  //.Where(a => a.IsActive == 1 && a.Id == dto.Id)
                                   .ToListAsync();
-            if (Data != null)
+            if (Data != null && Data.Count > 0)
             {
                 for (int i = 0; i < Data.Count; i++)
                 {
@@ -38,6 +37,7 @@ namespace Libraries.Repository.EntityRepository
                         GeoReferencingLattitude = Data[i].GeoReferencingLattitude,
                         Longitude = Data[i].Longitude,
                         PresentUseId = Data[i].PresentUseId,
+                        PresentUseName = Data[i].PresentUseNavigation.Name,
                         ApproxPropertyArea = Data[i].ApproxPropertyArea,
                         NumberOfFloors = Data[i].NumberOfFloors,
                         CaelectricityNo = Data[i].CaelectricityNo,
@@ -67,7 +67,7 @@ namespace Libraries.Repository.EntityRepository
                                   .Include(a => a.PresentUseNavigation)
                                   .Where(a => a.IsActive == 1 && a.Id == dto.Id)
                                   .ToListAsync();
-            if (Data != null)
+            if (Data != null && Data.Count > 0)
             {
                 for (int i = 0; i < Data.Count; i++)
                 {
@@ -117,6 +117,36 @@ namespace Libraries.Repository.EntityRepository
             //    listData.Remarks = Data.Remarks;
             //}
 
+            return listData;
+        }
+
+        public async Task<List<ApiSurveyUserDetailsDto>> VerifySurveyUserDetailsLogin(ApiSurveyUserLoginDto dto)
+        {
+            List<ApiSurveyUserDetailsDto> listData = new List<ApiSurveyUserDetailsDto>();
+
+            var Data = await _dbContext.Surveyuserdetail
+                                  .Include(a => a.Role)
+                                  .Where(a => a.UserName == dto.username && a.Password == dto.password && a.IsActive == 1)
+                                  .ToListAsync();
+            if (Data != null && Data.Count > 0)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new ApiSurveyUserDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        FirstName = Data[i].FirstName,
+                        LastName = Data[i].LastName,
+                        UserName = Data[i].UserName,
+                        PhoneNo = Data[i].PhoneNo,
+                        RoleName = Data[i].Role.Name,
+                        EmailId = Data[i].EmailId,
+                        Password = Data[i].Password,
+                        RoleId = Data[i].RoleId,
+                        IsActive = Data[i].IsActive
+                    });
+                }
+            }
             return listData;
         }
     }
