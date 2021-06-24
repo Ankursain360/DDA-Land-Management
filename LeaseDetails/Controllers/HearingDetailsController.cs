@@ -99,28 +99,7 @@ namespace LeaseDetails.Controllers
             }
 
         }
-        //public async Task<IActionResult> Create(int id)
-        //{
-        //    Newlandannexure1 Annexure1 = new Newlandannexure1();
-        //    Annexure1.RequestId = id;
-        //    Annexure1.IsActive = 1;
-
-        //    var Data = await _newlandannexure1Service.FetchSingleResult(id);
-        //    if (Data != null)
-        //    {
-        //        ViewBag.Anexx1Id = Data.Id;
-        //        await BindDropDown(Data);
-        //        return View(Data);
-        //    }
-        //    else
-        //    {
-
-        //        ViewBag.Anexx1Id = 0;
-        //        await BindDropDown(Annexure1);
-        //        return View(Annexure1);
-        //    }
-
-        //}
+      
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -143,11 +122,14 @@ namespace LeaseDetails.Controllers
 
 
                 model.ReqProcId = id;
-               
-                model.Remark = "";
+
+               // model.Remark = "";
                 model.Id = 0;
                 model.CreatedBy = SiteContext.UserId;
                 model.IsActive = 1;
+                model.DocumentPatth = model.Photo != null ? fileHelper.SaveFile1(targetPathHearingDetails, model.Photo) :
+                                      model.Photo != null || model.DocumentPatth != "" ?
+                                      model.DocumentPatth : string.Empty;
                 var result = await _hearingdetailsService.Create(model);
 
                 if (result == true)
@@ -174,6 +156,9 @@ namespace LeaseDetails.Controllers
 
                 model.ModifiedBy = SiteContext.UserId;
                 model.IsActive = 1;
+                model.DocumentPatth = model.Photo != null ? fileHelper.SaveFile1(targetPathHearingDetails, model.Photo) :
+                                     model.Photo != null || model.DocumentPatth != "" ?
+                                     model.DocumentPatth : string.Empty;
                 var result = await _hearingdetailsService.Update(id, model);
                 if (result == true)
                 {
