@@ -93,7 +93,7 @@ namespace Libraries.Repository.EntityRepository
                        .Include(x => x.Application)
 
 
-                        .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.RefNo.Contains(model.application)))
+                        .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
 
                         .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
 
@@ -109,8 +109,8 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Application)
 
 
-                       .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.RefNo.Contains(model.application)))
-                                    .OrderBy(a => a.Application.RefNo)
+                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
+                                    .OrderBy(a => a.Application.Name)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
 
@@ -121,7 +121,7 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Application)
 
 
-                       .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.RefNo.Contains(model.application)))
+                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
                                     .OrderBy(a => a.AllotmentDate)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
@@ -133,7 +133,7 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Application)
 
 
-                       .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.RefNo.Contains(model.application)))
+                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
                                     .OrderByDescending(a => a.IsActive)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
@@ -154,8 +154,8 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Application)
 
 
-                       .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.RefNo.Contains(model.application)))
-                                    .OrderByDescending(a => a.Application.RefNo)
+                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
+                                    .OrderByDescending(a => a.Application.Name)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
 
@@ -166,7 +166,7 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Application)
 
 
-                       .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.RefNo.Contains(model.application)))
+                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
                                     .OrderByDescending(a => a.AllotmentDate)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
@@ -178,7 +178,7 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Application)
 
 
-                       .Where(x => (string.IsNullOrEmpty(model.application) || x.Application.RefNo.Contains(model.application)))
+                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
                                     .OrderBy(a => a.IsActive)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;

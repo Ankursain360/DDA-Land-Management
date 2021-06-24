@@ -12,9 +12,9 @@ namespace Libraries.Model.Entity
     public class Allotmentletter : AuditableEntity<int>
     
     {
-        [Required(ErrorMessage = "Application Refernce Number is Mandatory")]
+        [Required(ErrorMessage = "Application Reference Number is Mandatory")]
         public int AllotmentId { get; set; }
-        [Required(ErrorMessage = "Refernece Number is Mandatory")]
+        [Required(ErrorMessage = "Reference Number is Mandatory")]
         public string ReferenceNumber { get; set; }
         public int? FeeTypeId { get; set; }
         public DateTime? DemandDate { get; set; }

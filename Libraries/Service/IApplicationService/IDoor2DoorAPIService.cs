@@ -13,5 +13,6 @@ namespace Libraries.Service.IApplicationService
     {
         Task<bool> Create(ApiSaveDoor2DoorSurveyDto dto); // To Create Particular data added by renu
         Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto);
+        Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto);
     }
 }

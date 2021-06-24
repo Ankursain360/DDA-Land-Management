@@ -46,6 +46,26 @@ namespace Vacant.Land.Api.Controllers
             {
                 if (dto != null)
                 {
+                    if(dto.PropertyAddress == null || dto.PropertyAddress == "" || 
+                        dto.GeoReferencingLattitude == null || dto.GeoReferencingLattitude == "" ||
+                        dto.Longitude == null || dto.Longitude == "" ||
+                        dto.PresentUseId == null || dto.PresentUseId == 0 ||
+                        dto.ApproxPropertyArea == null || dto.ApproxPropertyArea == 0 ||
+                        dto.NumberOfFloors == null || dto.NumberOfFloors == "" ||
+                        dto.OccupantName == null || dto.OccupantName == "" ||
+                        dto.MobileNo == null || dto.MobileNo == "" ||
+                        dto.OccupantAadharNo == null || dto.OccupantAadharNo == "" ||
+                        dto.VoterIdNo == null || dto.VoterIdNo == "" )
+                    {
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "205",
+                            responseMessage = "Mandatory Fields missing",
+                            ApiSaveDoor2DoorSurveyDto = dtoData
+                        };
+                        return NotFound(apiResponseDetails);
+                    }
                     FileHelper fileHelper = new FileHelper();
                     if (dto.OccupantIdentityPrrofFileData != "" && dto.OccupantIdentityPrrofFileData != null)
                     {
@@ -191,6 +211,65 @@ namespace Vacant.Land.Api.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("[action]")]
+        [Route("api/Door2DoorAPI/GetAllDoor2DoorSurvey")]
+        public async Task<IActionResult> GetAllDoor2DoorSurvey([FromBody] ApiSaveDoor2DoorSurveyDto dto)
+        {
+            ApiSaveDoor2DoorSurveyResponseDetails apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails();
+            try
+            {
+                if (dto != null)
+               {
+                    var data = await _door2DoorAPIService.GetAllSurveyDetails(dto);
+                    if (data != null && data.Count > 0)
+                    {
 
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "200",
+                            responseMessage = "details fetched successfully",
+                            ApiSaveDoor2DoorSurveyDto = data
+                        };
+
+                        return Ok(apiResponseDetails);
+                    }
+                    else
+                    {
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "404",
+                            responseMessage = " details not found",
+                            ApiSaveDoor2DoorSurveyDto = dtoData
+                        };
+                        return NotFound(apiResponseDetails);
+                    }
+                }
+                else
+                {
+                    List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                    apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                    {
+                        responseCode = "400",
+                        responseMessage = "Bad Request. Insufficient Parameters",
+                        ApiSaveDoor2DoorSurveyDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+            }
+            catch (Exception ex)
+            {
+                List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                {
+                    responseCode = "500",
+                    responseMessage = "Internal Server Error",
+                    ApiSaveDoor2DoorSurveyDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
+        }
     }
 }

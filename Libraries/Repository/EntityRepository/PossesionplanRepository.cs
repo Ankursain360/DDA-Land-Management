@@ -51,7 +51,7 @@ namespace Repository.EntityRepository
 
         public async Task<List<Allotmententry>> BindAllotmentDetails(int? AllotmentId)
         {
-            return await _dbContext.Allotmententry.Where(x => x.Id == AllotmentId).ToListAsync();
+            return await _dbContext.Allotmententry.Include(x=>x.Application).Where(x => x.Id == AllotmentId).ToListAsync();
         }
         public async Task<List<Leaseapplication>> BindLeaseApplicationDetails(int? AppId)
         {
