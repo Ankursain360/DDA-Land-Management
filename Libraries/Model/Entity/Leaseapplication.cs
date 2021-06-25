@@ -23,28 +23,43 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Name is Mandatory")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Address is Mandatory")]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "Mobile No/Telephone No. is Mandatory")]
         public string ContactNo { get; set; }
 
+        [Required(ErrorMessage = "Email-Id is Mandatory")]
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "EmailId is not valid.")]
         public string EmailId { get; set; }
 
         [Required(ErrorMessage = "Registeration No. is Mandatory")]
         public string RegistrationNo { get; set; }
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Land Purpose is Mandatory")]
         public string LandPurpose { get; set; }
         public string LandDetailsArea { get; set; }
         public string IncomeTaxDescription { get; set; }
         public DateTime? SponsorshipDate { get; set; }
         public string SponsorshipDescription { get; set; }
         public string RecommendationDescription { get; set; }
+
+        [Required(ErrorMessage = "Area is Mandatory")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Area; Max 18 digits")]
         public decimal? LandAreaSqMt { get; set; }
         public string NotarizedUndertakingDescription { get; set; }
         public string IndemnityDescription { get; set; }
+
+        [Required(ErrorMessage = "Location1 is Mandatory")]
         public string Location1 { get; set; }
+
+        [Required(ErrorMessage = "Location2 is Mandatory")]
         public string Location2 { get; set; }
+
+        [Required(ErrorMessage = "Location3 is Mandatory")]
         public string Location3 { get; set; }
         public string LandAuthorisingDescription { get; set; }
         public string FinancialPositionDescription { get; set; }
@@ -133,7 +148,7 @@ namespace Libraries.Model.Entity
         public decimal TotalArea { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Allotment Date is Mandatory")]
+       // [Required(ErrorMessage = "Allotment Date is Mandatory")]
         public DateTime AllotmentDate { get; set; }
         [NotMapped]
         public string PlotNo { get; set; }

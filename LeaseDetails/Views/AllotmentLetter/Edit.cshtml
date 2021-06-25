@@ -10,7 +10,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="AllotmentId" class="floating-label-field floating-label-field--s3" id="ddlRefNo">
+                    <select asp-for="AllotmentId" class="floating-label-field floating-label-field--s3" id="ddlRefNo" disabled>
                         <option value="">--Select--</option>
                         @foreach (var item in Model.RefNoList)
                         {
@@ -43,15 +43,11 @@
 
             </div>
         </div>
-       
         <div class="row mt-md-3">
-            <div class="col-md-12 col-xl-3">
-                <div class="row">
-                     
-                        <button class="btn btn-theme " id="btnGenerate" type="submit">Update </button>
-                        <button class="btn btn-theme " id="btnGenerate" action="UploadAllotmentLetter">Upload </button>
-                    
-                </div>
+            <div class=" col-md-12">
+                <button class="btn btn-theme " id="btnGenerate" type="submit">Update </button>
+                @*<button class="btn btn-theme " id="btnGenerate" action="UploadAllotmentLetter">Back </button>*@
+                @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
             </div>
         </div>
         <div id="View"> </div>
