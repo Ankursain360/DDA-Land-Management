@@ -57,9 +57,9 @@ namespace Libraries.Service.ApplicationService
        
 
 
-        public async Task<List<Leaseapplication>> GetAllLeaseapplication()
+        public async Task<List<Leaseapplication>> GetAllLeaseapplication(int approved)
         {
-            List<Leaseapplication> leaseappList = await _allotmentEntryRepository.GetAllLeaseapplication();
+            List<Leaseapplication> leaseappList = await _allotmentEntryRepository.GetAllLeaseapplication(approved);
             return leaseappList;
         }
         public async Task<List<Leasetype>> GetAllLeasetype()

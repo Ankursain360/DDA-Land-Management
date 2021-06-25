@@ -45,8 +45,13 @@ $("#ApplicationId").change(function () {
     }
 });
 
-$("#TotalArea").change(function () {
-
+$("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #TotalArea").change(function () {
+    if ($('#TotalArea').val() == '') {
+        return;
+    }
+    else if (parseFloat($('#TotalArea').val()) <= 0) {
+        return;
+    }   
     var area = $('#TotalArea').val();
    
 
@@ -201,10 +206,13 @@ $("#TotalArea").change(function () {
     }
 });
 
-$("#AllotmentDate").change(function () {
-
-    var area = $('#TotalArea').val();
-   
+$("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #TotalArea").change(function () {
+    if ($('#TotalArea').val() == '') {
+        return;
+    }
+    else if (parseFloat($('#TotalArea').val()) <= 0) {
+        return;
+    }   
     var LeaseID = parseInt($('#LeasesTypeId option:selected').val());
     var kid = parseInt($('#LeaseSubPurposeId option:selected').val());
     var pid = parseInt($('#LeasePurposesTypeId option:selected').val());
@@ -462,10 +470,17 @@ $(function () {
         var GivenDate = $("#AllotmentDate").val();
         var CurrentDate = new Date();
         GivenDate = new Date(GivenDate);
-
+        if ($('#TotalArea').val()=='') {
+            $('#AllotmentDate').val(' ');
+           alert('Please enter alloted area.');
+        }
+        else if (parseFloat($('#TotalArea').val())<=0) {
+            $('#AllotmentDate').val(' ');
+            alert('Total area must be greater than zero.');
+        }
         if (GivenDate > CurrentDate) {
             $('#AllotmentDate').val(' ');
-           $('.msg').empty().html('Date Must not be Greater Than Current Date ');
+           $('.msg').empty().html('Date must not be Greater Than Current Date ');
         } else {
             $('#AllotmentDate').val($('#AllotmentDate').val());
         }

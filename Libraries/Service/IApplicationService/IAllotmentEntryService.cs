@@ -14,7 +14,7 @@ namespace Libraries.Service.IApplicationService
 
 
 
-        Task<List<Leaseapplication>> GetAllLeaseapplication();
+        Task<List<Leaseapplication>> GetAllLeaseapplication(int approved);
         Task<List<Leasetype>> GetAllLeasetype();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeUseId);
