@@ -26,9 +26,18 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<List<Leaseapplication>> GetAllLeaseapplication()
+        public async Task<List<Leaseapplication>> GetAllLeaseapplication(int approved)
         {
-            List<Leaseapplication> leaseappList = await _dbContext.Leaseapplication.Where(x => x.IsActive == 1).ToListAsync();
+            var InAllotmentId = (from x in _dbContext.Allotmententry
+                                  where x.Application != null && x.IsActive == 1
+                                  select x.ApplicationId).ToArray();
+            List<Leaseapplication> leaseappList = await _dbContext
+                                                  .Leaseapplication
+                                                  .Include(x => x.ApprovedStatusNavigation)
+                                                  .Where(x => (x.IsActive == 1) 
+                                                  &&( x.ApprovedStatusNavigation.StatusCode == approved)
+                                                  && !(InAllotmentId).Contains(x.Id))
+                                                  .ToListAsync();
             return leaseappList;
         }
 
@@ -73,14 +82,6 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-
-
-
-
-
-
-
-
         public async Task<List<Allotmententry>> GetAllAllotmententry()
         {
             return await _dbContext.Allotmententry.Include(x => x.Application).OrderByDescending(x => x.Id).ToListAsync();
@@ -91,11 +92,13 @@ namespace Libraries.Repository.EntityRepository
 
             var data = await _dbContext.Allotmententry
                        .Include(x => x.Application)
-
-
-                        .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
-
-                        .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
+                       .Include(x => x.LeasesType)
+                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname))
+                       && (string.IsNullOrEmpty(model.Lease) || x.LeasesType.Type.Contains(model.Lease))
+                       && (string.IsNullOrEmpty(model.RefNo) || x.Application.RefNo.Contains(model.RefNo))
+                       && x.AllotmentDate >= (model.FromDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.FromDate))
+                       && x.AllotmentDate <= (model.ToDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.ToDate)))
+                       .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
 
 
             int SortOrder = (int)model.SortOrder;
@@ -107,10 +110,12 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                     .Include(x => x.Application)
-
-
-                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
-                                    .OrderBy(a => a.Application.Name)
+                                    .Include(x => x.LeasesType)
+                                     .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname))
+                                     && (string.IsNullOrEmpty(model.Lease) || x.LeasesType.Type.Contains(model.Lease))
+                                     && (string.IsNullOrEmpty(model.RefNo) || x.Application.RefNo.Contains(model.RefNo))
+                                     && x.AllotmentDate >= (model.FromDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.FromDate))
+                                     && x.AllotmentDate <= (model.ToDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.ToDate))).OrderBy(a => a.Application.Name)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
 
@@ -119,9 +124,12 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                     .Include(x => x.Application)
-
-
-                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
+                                    .Include(x => x.LeasesType)
+                                     .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname))
+                                     && (string.IsNullOrEmpty(model.Lease) || x.LeasesType.Type.Contains(model.Lease))
+                                     && (string.IsNullOrEmpty(model.RefNo) || x.Application.RefNo.Contains(model.RefNo))
+                                     && x.AllotmentDate >= (model.FromDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.FromDate))
+                                     && x.AllotmentDate <= (model.ToDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.ToDate))).OrderBy(a => a.Application.Name)
                                     .OrderBy(a => a.AllotmentDate)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
@@ -131,10 +139,13 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                     .Include(x => x.Application)
-
-
-                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
-                                    .OrderByDescending(a => a.IsActive)
+                                    .Include(x => x.LeasesType)
+                                     .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname))
+                                     && (string.IsNullOrEmpty(model.Lease) || x.LeasesType.Type.Contains(model.Lease))
+                                     && (string.IsNullOrEmpty(model.RefNo) || x.Application.RefNo.Contains(model.RefNo))
+                                     && x.AllotmentDate >= (model.FromDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.FromDate))
+                                     && x.AllotmentDate <= (model.ToDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.ToDate))).OrderBy(a => a.Application.Name)
+                                     .OrderByDescending(a => a.IsActive)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
 
@@ -152,10 +163,14 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                     .Include(x => x.Application)
+                                    .Include(x => x.LeasesType)
 
-
-                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
-                                    .OrderByDescending(a => a.Application.Name)
+                                    .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname))
+                                     && (string.IsNullOrEmpty(model.Lease) || x.LeasesType.Type.Contains(model.Lease))
+                                     && (string.IsNullOrEmpty(model.RefNo) || x.Application.RefNo.Contains(model.RefNo))
+                                     && x.AllotmentDate >= (model.FromDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.FromDate))
+                                     && x.AllotmentDate <= (model.ToDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.ToDate))).OrderBy(a => a.Application.Name)
+                                     .OrderByDescending(a => a.Application.Name)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
 
@@ -164,9 +179,12 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                     .Include(x => x.Application)
-
-
-                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
+                                    .Include(x => x.LeasesType)
+                                     .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname))
+                                     && (string.IsNullOrEmpty(model.Lease) || x.LeasesType.Type.Contains(model.Lease))
+                                     && (string.IsNullOrEmpty(model.RefNo) || x.Application.RefNo.Contains(model.RefNo))
+                                     && x.AllotmentDate >= (model.FromDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.FromDate))
+                                     && x.AllotmentDate <= (model.ToDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.ToDate))).OrderBy(a => a.Application.Name)
                                     .OrderByDescending(a => a.AllotmentDate)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;
@@ -176,9 +194,12 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmententry
                                     .Include(x => x.Application)
-
-
-                       .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname)))
+                                    .Include(x => x.LeasesType)
+                                     .Where(x => (string.IsNullOrEmpty(model.applicantname) || x.Application.Name.Contains(model.applicantname))
+                                     && (string.IsNullOrEmpty(model.Lease) || x.LeasesType.Type.Contains(model.Lease))
+                                     && (string.IsNullOrEmpty(model.RefNo) || x.Application.RefNo.Contains(model.RefNo))
+                                     && x.AllotmentDate >= (model.FromDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.FromDate))
+                                     && x.AllotmentDate <= (model.ToDate == "" ? x.AllotmentDate : Convert.ToDateTime(model.ToDate))).OrderBy(a => a.Application.Name)
                                     .OrderBy(a => a.IsActive)
                                     .GetPaged<Allotmententry>(model.PageNumber, model.PageSize);
                         break;

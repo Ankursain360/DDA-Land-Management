@@ -5,7 +5,7 @@ namespace Dto.Search
     {
         public string name { get; set; }
         public string location { get; set; }
-        public string numberoffloor { get; set; }
+        public string occupantname { get; set; }
       
     }
 }

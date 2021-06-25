@@ -14,8 +14,7 @@ $("#btnSearch").click(function () {
 
 $("#btnReset").click(function () {
     $('#txtLocation').val('');
-    $('#txtMunicipalNo').val('');
-    $('#txtFloorNo').val('')
+    $('#txtOccupantName').val('')
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -33,12 +32,12 @@ $("#btnDescending").click(function () {
     sortOrder = 2;//for Descending
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });
-
+$('#ddlSort').change(function () {
+    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+});
 function GetDivision(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Door2DoorSurvey/List`, 'html', param, function (response) {
-        console.log(response);
-
         $('#divDoortodoorsurveyTable').html("");
         $('#divDoortodoorsurveyTable').html(response);
     });
@@ -50,8 +49,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
   
     var model = {
         location: $('#txtLocation').val(),
-        municipalno: $('#txtMunicipalNo').val(),
-        numberoffloor: $('#txtFloorNo').val(),
+        occupantname: $('#txtOccupantName').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
