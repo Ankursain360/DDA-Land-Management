@@ -2,191 +2,206 @@
 
 
 <link href="~/css/PrintLabel.css" rel="stylesheet" />
-    <div class="content contentstyle py-4" id="DivDemandReport" >
+<body class="bg-gray">
+    <section class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0 pt-md-3">
 
-        <div class="panel panel-default" style="border-color:black;">
-            <div class="panel-heading" style="border: groove;background-color:white;padding:5px;">
+                <div class="content bg-white mx-auto p-3" id="DivDemandReport" style="max-width: 780px;">
 
-                <table class="table table-bordered" border="0">
+                    <div class="panel panel-default" style="border-color:black;">
+                        <div class="card">
+                            <table class="table table-bordered" border="0" style="vertical-align: middle;margin: -1px;width: calc(100% + 2px);">
 
 
-                    <tr>
-                        <td >
-                            <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" class="img-responsive img" alt="">
-                        </td>
-                        <td  align="center">
-                            <div>
-                                <h style="font-size:20px; color:black">
 
-                                    <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
+                                <tr>
+                                    <td>
+                                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
+                                    </td>
+                                    <td style="vertical-align: middle">
+                                        <div>
+                                            <h5 class="mb-2 text-primary">
 
-                                </h>
-                                <p style="color:black; font-size:16px; text-align:center;">
+                                                <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
 
-                                    <b align="center">
-                                        <u>
-                                            Vikas Sadan, New Delhi 
-                                        </u>
-                                    </b>
+                                            </h5>
+                                            <p style="color:black; font-size:16px; text-align:center;">
 
-                                </p>
-                                <p style="color:black; font-size:16px; text-align:center;"><u>Calculation Sheet </u></p>
+                                                <b align="center">
+                                                    <u>
+                                                        Vikas Sadan, New Delhi
+                                                    </u>
+                                                </b>
+
+                                            </p>
+                                            <p style="color:black; font-size:16px; text-align:center;">
+                                                <b align="center">
+                                                    <u>Calculation Sheet </u>
+                                                </b>
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" class="img-responsive img" alt="">
+
+                                    </td>
+                                </tr>
+
+
+                            </table>
+
+
+
+                            <div class="card-body" style="font-size: .95rem; line-height: 1.8;">
+
+
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p style="color:black"><b> Ref No.</b>@Model.Application.RefNo</p>
+
+
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-3">
+                                        <p style="color:black"><b> Dated </b>-   @(Convert.ToDateTime(Model.Date).ToString("dd MMM yyyy"))</p>
+
+
+                                    </div>
+                                </div>
+
+
+                                <fieldset>
+                                    <legend style="font-size:medium;font-weight:700;">  Details</legend>
+
+                                    <table class="table" border="0" style="border:none;   ">
+                                        <tr>
+                                            <td class="tdstyle">
+                                                <p style="color:black; font-weight:700;">
+                                                    Allotted Area :
+                                                </p>
+                                            </td>
+                                            <td class="tdstyle" style="text-align: end; padding-right:18px;">
+                                                <label class="control-label" style="font-weight: 500;">
+                                                    @Model.TotalArea Sq Mtr.
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tdstyle">
+                                                <p style="color:black; font-weight:700;">
+                                                    Play Ground Area :
+                                                </p>
+                                            </td>
+                                            <td class="tdstyle" style="text-align: end">
+                                                <label class="control-label" style="font-weight: 500;">
+                                                    @Model.PlayGroundArea Sq Mtr.
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr></tr>
+                                        <tr>
+                                            <td class="tdstyle">
+                                                <p style="color:black; font-weight:700;">
+                                                    1. Premium of land  wearing of building Area rate @Model.PremiumRate cr per acre:
+                                                </p>
+                                            </td>
+                                            <td class="tdstyle" style="text-align: end; padding-right:32px;">
+                                                <label class="control-label" style="font-weight: 500;">
+                                                    &#8377 @Model.PremiumAmount
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tdstyle">
+                                                <p style="color:black; font-weight:700;">
+                                                    2. Ground Rent at @Model.GroundRate  per Annum on the premium of land :
+                                                </p>
+                                            </td>
+                                            <td class="tdstyle" style="text-align: end; padding-right:34px;">
+                                                <label class="control-label" style="font-weight: 500;">
+                                                    &#8377 @Model.AmountGroundRate
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="tdstyle">
+                                                <p style="color:black; font-weight:700;">
+                                                    3. Liscence Fee of   &#8377 @Model.LicenceFees  &#8377; per acre per annum
+                                                </p>
+                                            </td>
+                                            <td class="tdstyle" style="text-align: end; padding-right:34px;">
+                                                <label class="control-label" style="font-weight: 500;">
+                                                    &#8377 @Model.AmountLicFee
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tdstyle">
+                                                <p style="color:black; font-weight:700;">
+                                                    4.Document charges:
+                                                </p>
+                                            </td>
+                                            <td class="tdstyle" style="text-align: end; padding-right:34px;">
+                                                <label class="control-label" style="font-weight: 500;">
+                                                    &#8377  @Model.DocumentCharge
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="tdstyle">
+                                                <p style="color:black; font-weight:700;">
+                                                    Total Amount Payable:
+                                                </p>
+                                            </td>
+                                            <td class="tdstyle" style="text-align: end; padding-right:34px;">
+                                                <label class="control-label" style="font-weight: 500;">
+                                                    @*@(Model.PremiumAmount + Model.GroundRate + Model.AmountLicFee + Model.DocumentCharges)  Rs.*@
+                                                    &#8377 @Model.TotalAmount
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+                                </fieldset>
+
+
+
+
+
+
+
+
                             </div>
-                        </td>
-                        <td >
-                            <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" class="img-responsive img" alt="">
+                        </div>
+                    </div>
 
-                        </td>
-                    </tr>
+                    <div class="row mt-md-3">
+                        <div class="col-md-12 text-center">
 
-
-                </table>
-
-            </div>
-
-            <div class="panel-body" style="border:groove;">
-
-                <table class="table" border="0" style="border:none; border-top: none;  ">
-                    <tr>
-                        <td class="tdstyle">
-                            <p style="color:black; font-weight:700;">Ref No.</p>
-                        </td>
-                        <td class="tdstyle">
-                            <label class="control-label" style="font-weight: 500;">@Model.Application.RefNo</label>
-                        </td>
-                        <td class="tdstyle">
-                            <p style="color:black; font-weight:700;">Date: </p>
-                        </td>
-                        <td class="tdstyle">
-                            <label class="control-label">
-                                @(Convert.ToDateTime(Model.Date).ToString("dd MMM yyyy"))
-
-                            </label>
-                        </td>
-                    </tr>
-                </table>
-
-                <br />
-               
-                    <fieldset >
-                        <legend style="font-size:medium;font-weight:700;">  Details</legend>
-
-                        <table class="table" border="0" style="border:none;   ">
-                            <tr>
-                                <td class="tdstyle">
-                                    <p style="color:black; font-weight:700;">
-                                        Allotted Area :
-                                    </p>
-                                </td>
-                                <td class="tdstyle" style="text-align: end; padding-right:40px;" >
-                                    <label class="control-label" style="font-weight: 500;">
-                                        @Model.TotalArea   Sq Mtr.
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tdstyle">
-                                    <p style="color:black; font-weight:700;">
-                                        Play Ground Area :
-                                    </p>
-                                </td>
-                                <td class="tdstyle" style="text-align: end; padding-right:40px;" >
-                                    <label class="control-label" style="font-weight: 500;">
-                                        @Model.PlayGroundArea   Sq Mtr.
-                                    </label>
-                                </td>
-                            </tr>
+                            <button class="btn btn-theme px-5" id="btnPrint" type="submit">Print</button>
+                            @Html.ActionLink("Back", "Index", "CalculationSheet", null, new { @class = "btn btn-theme" })
 
 
-                            <tr></tr>
-                            <tr>
-                                <td class="tdstyle">
-                                    <p style="color:black; font-weight:700;">
-                                        1 Premium of land  wearing of building Area rate @Model.PremiumRate cr per acre:
-                                    </p>
-                                </td>
-                                <td class="tdstyle" style="text-align: end; padding-right:40px;" >
-                                    <label class="control-label" style="font-weight: 500;">
-                                        @Model.PremiumAmount   &#8377;
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tdstyle" >
-                                    <p style="color:black; font-weight:700;">
-                                        2 Ground Rent at @Model.GroundRate  per Annum on the premium of land :
-                                    </p>
-                                </td>
-                                <td class="tdstyle" style="text-align: end; padding-right:40px;" >
-                                    <label class="control-label" style="font-weight: 500;">
-                                        @Model.AmountGroundRate   &#8377;
-                                    </label>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="tdstyle">
-                                    <p style="color:black; font-weight:700;">
-                                        3 Liscence Fee of  @Model.LicenceFees  &#8377; per acre per annum
-                                    </p>
-                                </td>
-                                <td class="tdstyle" style="text-align: end; padding-right:40px;" >
-                                    <label class="control-label" style="font-weight: 500;">
-                                        @Model.AmountLicFee   &#8377;
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tdstyle">
-                                    <p style="color:black; font-weight:700;">
-                                        4 Document charges:
-                                    </p>
-                                </td>
-                                <td class="tdstyle" style="text-align: end; padding-right:40px;" >
-                                    <label class="control-label" style="font-weight: 500;">
-                                        @Model.DocumentCharge   &#8377;
-                                    </label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="tdstyle">
-                                    <p style="color:black; font-weight:700;">
-                                        Total Amount Payable:
-                                    </p>
-                                </td>
-                                <td class="tdstyle" style="text-align: end; padding-right:40px;" >
-                                    <label class="control-label" style="font-weight: 500;">
-                                        @*@(Model.PremiumAmount + Model.GroundRate + Model.AmountLicFee + Model.DocumentCharges)  Rs.*@
-                                        @Model.TotalAmount   &#8377;
-                                    </label>
-                                </td>
-                            </tr>
-                        </table>
+                        </div>
+                    </div>
 
 
-                    </fieldset>
-                
-                <br />
-
-                <br />
-                <br />
-                <div style="padding:20px;text-align:center">
-                   
-                        <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
-                        <a asp-action="Index" asp-controller="CalculationSheet" class="btn btn-primary jhide">Back</a>
-                   
                 </div>
-              
+
             </div>
         </div>
-    </div>
+</section>
+</body>
 
-
-
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/calculationsheet.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/calculationsheet.min.js" asp-append-version="true"></script>
-</environment>
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/calculationsheet.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/calculationsheet.min.js" asp-append-version="true"></script>
+    </environment>
