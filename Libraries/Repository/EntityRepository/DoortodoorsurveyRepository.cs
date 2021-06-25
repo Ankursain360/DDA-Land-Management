@@ -117,7 +117,104 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+   
+        public async Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurveyReport(DoorToDoorSurveyReportSearchDto model)
+        {
+            try
+            {
+                var data = await _dbContext.Doortodoorsurvey
+                                 .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                 && x.CreatedDate >= model.FromDate
+                                 && x.CreatedDate <= model.ToDate)
+                                .GetPaged(model.PageNumber, model.PageSize);
 
+                int SortOrder = (int)model.SortOrder;
+                if (SortOrder == 1)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+
+                        case ("PRESENTUSE"):
+                            data = null;
+                            data = await _dbContext.Doortodoorsurvey
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderBy(s => s.PresentUseId)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+
+                        case ("FLOOR NO"):
+                            data = null;
+                            data = await _dbContext.Doortodoorsurvey
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderBy(s => s.NumberOfFloors)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+                        case ("LONGITUDE"):
+                            data = null;
+                            data = await _dbContext.Doortodoorsurvey
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderBy(s => s.Longitude)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+
+
+                    }
+                }
+                else if (SortOrder == 2)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+
+                        case ("PRESENTUSE"):
+                            data = null;
+                            data = await _dbContext.Doortodoorsurvey
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderByDescending(s => s.PresentUseId)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+
+                        case ("FLOOR NO"):
+                            data = null;
+                            data = await _dbContext.Doortodoorsurvey
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderByDescending(s => s.NumberOfFloors)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+                        case ("LONGITUDE"):
+                            data = null;
+                            data = await _dbContext.Doortodoorsurvey
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderByDescending(s => s.Longitude)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+
+
+
+                    }
+                }
+
+                return data;
+
+            }
+            catch (System.Exception ex)
+            {
+
+                return null;
+            }
+
+        }
 
     }
 }
