@@ -36,10 +36,9 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
                                         .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                           && (string.IsNullOrEmpty(model.numberoffloor) || x.NumberOfFloors.Contains(model.numberoffloor))
+                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                          )
-                                        .
-                                        GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
+                                        .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
 
             int SortOrder = (int)model.SortOrder;
@@ -49,29 +48,30 @@ namespace Libraries.Repository.EntityRepository
                 {
                     case ("LOCATION"):
                         data = null;
-                        data = await _dbContext.Doortodoorsurvey
+                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                 && (string.IsNullOrEmpty(model.numberoffloor) || x.NumberOfFloors.Contains(model.numberoffloor))
+                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
                                 .OrderBy(s => s.PropertyAddress)
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                         break;
-                    case ("NUMBERFLOOR"):
+                    case ("OCCUPANTNAME"):
                         data = null;
-                        data = await _dbContext.Doortodoorsurvey
+                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
                                     .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                 && (string.IsNullOrEmpty(model.numberoffloor) || x.NumberOfFloors.Contains(model.numberoffloor))
+                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
-                                .OrderBy(s => s.NumberOfFloors)
+                                .OrderBy(s => s.OccupantName)
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
                         break;
                     case ("STATUS"):
                         data = null;
-                        data = await _dbContext.Doortodoorsurvey
+                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                 && (string.IsNullOrEmpty(model.numberoffloor) || x.NumberOfFloors.Contains(model.numberoffloor))
+                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
+                                .OrderByDescending(s => s.IsActive)
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                         break;
 
@@ -83,28 +83,29 @@ namespace Libraries.Repository.EntityRepository
                 {
                     case ("LOCATION"):
                         data = null;
-                        data = await _dbContext.Doortodoorsurvey
+                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                 && (string.IsNullOrEmpty(model.numberoffloor) || x.NumberOfFloors.Contains(model.numberoffloor))
+                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
                                 .OrderByDescending(s => s.PropertyAddress)
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                         break;
-                    case ("NUMBERFLOOR"):
+                    case ("OCCUPANTNAME"):
                         data = null;
-                        data = await _dbContext.Doortodoorsurvey
+                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                 && (string.IsNullOrEmpty(model.numberoffloor) || x.NumberOfFloors.Contains(model.numberoffloor))
+                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
-                                .OrderByDescending(s => s.NumberOfFloors)
+                                .OrderByDescending(s => s.OccupantName)
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
                         break;
                     case ("STATUS"):
                         data = null;
-                        data = await _dbContext.Doortodoorsurvey
+                        data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
-                                 && (string.IsNullOrEmpty(model.numberoffloor) || x.NumberOfFloors.Contains(model.numberoffloor)))
+                                           && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
+                                           )
                                 .OrderBy(s => s.IsActive)
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                         break;
