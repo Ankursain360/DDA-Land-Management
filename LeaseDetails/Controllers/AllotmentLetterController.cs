@@ -54,7 +54,7 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Create()
         {
             Allotmentletter allotmentletter = new Allotmentletter();
-            allotmentletter.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetter();
+            allotmentletter.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetterAtCreate();
             return View(allotmentletter);
         }
 
@@ -71,7 +71,7 @@ namespace LeaseDetails.Controllers
         {
 
             // Allotmentletter model= new Allotmentletter();
-            model.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetter();
+            model.RefNoList = await _leaseApplicationFormService.GetRefNoListforAllotmentLetterAtCreate();
 
             if (ModelState.IsValid)
             {

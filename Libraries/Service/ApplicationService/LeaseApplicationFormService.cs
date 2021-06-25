@@ -102,5 +102,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leaseApplicationRepository.RollBackEntryDocument(id);
         }
+
+        public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetterAtCreate()
+        {
+            return await _leaseApplicationRepository.GetRefNoListforAllotmentLetterAtCreate();
+        }
     }
 }

@@ -19,7 +19,10 @@ function GetAllotmentEntry(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         applicantname: $('#txtName').val(),
-       
+        Lease: $('#txtLease').val(),
+        RefNo: $('#txtRefNo').val(),
+        FromDate: ($("#txtFromDate").val()),
+        ToDate: ($("#txtToDate").val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -33,8 +36,13 @@ $("#btnSearch").click(function () {
 });
 
 $("#btnReset").click(function () {
-        $('#txtName').val(''),
-            GetAllotmentEntry(currentPageNumber, currentPageSize, sortOrder);
+    
+    $('#txtLease').val(''),
+    $('#txtRefNo').val(''),
+    $('#txtName').val(''),
+    $('#txtFromDate').val('');
+    $('#txtToDate').val('');
+     GetAllotmentEntry(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -68,3 +76,24 @@ function onChangePageSize(pageSize) {
     GetAllotmentEntry(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
+
+$(function () {
+    $('#txtToDate').on('change', function () {
+        debugger;
+
+        var FromDate = $("#txtFromDate").val();
+        var ToDate = $("#txtToDate").val();
+
+
+        if (ToDate < FromDate) {
+            $('#txtToDate').val(' ');
+            $('.msg').empty().html('To Date Must be Greater Than From Date ');
+        }
+        else {
+            $('.msg').empty();
+            $('#txtToDate').val('#txtToDate'.val());
+           
+        }
+
+    });
+});

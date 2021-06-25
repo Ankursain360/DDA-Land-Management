@@ -46,6 +46,7 @@
             </div>
         </div>
     </div>
+
     <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -138,8 +139,8 @@
                 @{
                     @if (Model.OccupantIdentityPrrofFilePath != null)
                     {
-                        <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3"  accept="application/pdf, image/png, image/jpeg, image/gif" />
-                        @Html.ActionLink(" (View File)", "ViewIdentityProof", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target="_blank" })
+                        <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
+                        @Html.ActionLink(" (View File)", "ViewIdentityProof", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
                     }
                     else
                     {
@@ -189,6 +190,14 @@
             </div>
         </div>
     </div>
+    <div class="row mt-md-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <a target="_blank" href="https://maps.google.com/?q=@Model.GeoReferencingLattitude,@Model.Longitude">View Location on Map<i class="ri-map-pin-fill"></i></a>
+            </div>
+        </div>
+    </div>
+
     <div class="row pt-3">
         <div class="col-md-12">
             <input type="submit" value="Update" class="btn btn-theme " />

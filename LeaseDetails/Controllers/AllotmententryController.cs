@@ -55,7 +55,7 @@ namespace LeaseDetails.Controllers
             allotmententry.IsActive = 1;          
 
 
-            allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
+            allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication((int)ApprovalActionStatus.Approved);
             allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
             allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
             allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(allotmententry.PurposeId);
@@ -72,7 +72,7 @@ namespace LeaseDetails.Controllers
             {
                 
                 //Allotmententry allotmententry = new Allotmententry();
-                allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
+                allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication((int)ApprovalActionStatus.Approved);
                 allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
                 allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
                 //allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(allotmententry.PurposeId);
@@ -215,7 +215,7 @@ namespace LeaseDetails.Controllers
             var Data = await _allotmentEntryService.FetchSingleResult(id);
 
 
-            Data.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
+            Data.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication((int)ApprovalActionStatus.Approved);
             Data.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
             Data.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
             Data.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(Data.LeasePurposesTypeId));
@@ -233,7 +233,7 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> Edit(int id, Allotmententry allotmententry)
         {
             allotmententry.ModifiedBy = SiteContext.UserId;
-            allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
+            allotmententry.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication((int)ApprovalActionStatus.Approved);
             allotmententry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
             allotmententry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
             allotmententry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(allotmententry.LeasePurposesTypeId));
@@ -293,7 +293,7 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _allotmentEntryService.FetchSingleResult(id);
-            Data.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication();
+            Data.LeaseappList = await _allotmentEntryService.GetAllLeaseapplication((int)ApprovalActionStatus.Approved);
             Data.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
             Data.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
             Data.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(Convert.ToInt32(Data.LeasePurposesTypeId));

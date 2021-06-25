@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Allotmententry>> GetPagedAllotmententry(AllotmentEntrySearchDto model);
         Task<List<Allotmententry>> GetAllAllotmententry();
 
-        Task<List<Leaseapplication>> GetAllLeaseapplication();
+        Task<List<Leaseapplication>> GetAllLeaseapplication(int approved);
         Task<List<Leasetype>> GetAllLeasetype();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);
