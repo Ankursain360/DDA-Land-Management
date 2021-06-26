@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="section-wraper px-3  pb-md-0 pt-md-3">
 
-                <div class="content bg-white mx-auto p-3" id="DivDemandReport" style="max-width: 780px;">
+                <div class="content bg-white mx-auto p-3" id="DivDemandReport" style="max-width: 820px;">
 
                     <div class="panel panel-default" style="border-color:black;">
                         <div class="card">
@@ -81,7 +81,7 @@
                                                     Allotted Area :
                                                 </p>
                                             </td>
-                                            <td class="tdstyle" style="text-align: end; padding-right:18px;">
+                                            <td class="tdstyle" style="text-align: end; padding-right:10px;">
                                                 <label class="control-label" style="font-weight: 500;">
                                                     @Model.TotalArea Sq Mtr.
                                                 </label>
@@ -93,7 +93,7 @@
                                                     Play Ground Area :
                                                 </p>
                                             </td>
-                                            <td class="tdstyle" style="text-align: end">
+                                            <td class="tdstyle" style="text-align: end; padding-right:10px;">
                                                 <label class="control-label" style="font-weight: 500;">
                                                     @Model.PlayGroundArea Sq Mtr.
                                                 </label>
@@ -108,7 +108,7 @@
                                                     1. Premium of land  wearing of building Area rate @Model.PremiumRate cr per acre:
                                                 </p>
                                             </td>
-                                            <td class="tdstyle" style="text-align: end; padding-right:32px;">
+                                            <td class="tdstyle" style="text-align: end; padding-right:12px;">
                                                 <label class="control-label" style="font-weight: 500;">
                                                     &#8377 @Model.PremiumAmount
                                                 </label>
@@ -120,7 +120,7 @@
                                                     2. Ground Rent at @Model.GroundRate  per Annum on the premium of land :
                                                 </p>
                                             </td>
-                                            <td class="tdstyle" style="text-align: end; padding-right:34px;">
+                                            <td class="tdstyle" style="text-align: end; padding-right:18px;">
                                                 <label class="control-label" style="font-weight: 500;">
                                                     &#8377 @Model.AmountGroundRate
                                                 </label>
@@ -145,7 +145,7 @@
                                                     4.Document charges:
                                                 </p>
                                             </td>
-                                            <td class="tdstyle" style="text-align: end; padding-right:34px;">
+                                            <td class="tdstyle" style="text-align: end; padding-right:28px;">
                                                 <label class="control-label" style="font-weight: 500;">
                                                     &#8377  @Model.DocumentCharge
                                                 </label>
@@ -157,7 +157,7 @@
                                                     Total Amount Payable:
                                                 </p>
                                             </td>
-                                            <td class="tdstyle" style="text-align: end; padding-right:34px;">
+                                            <td class="tdstyle" style="text-align: end; padding-right:10px;">
                                                 <label class="control-label" style="font-weight: 500;">
                                                     @*@(Model.PremiumAmount + Model.GroundRate + Model.AmountLicFee + Model.DocumentCharges)  Rs.*@
                                                     &#8377 @Model.TotalAmount
