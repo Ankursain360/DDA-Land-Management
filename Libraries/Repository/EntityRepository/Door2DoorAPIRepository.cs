@@ -19,12 +19,13 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails()
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto, int adminroleid)
         {
             List<ApiSaveDoor2DoorSurveyDto> listData = new List<ApiSaveDoor2DoorSurveyDto>();
 
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
+                                  .Where(a => a.CreatedBy == (adminroleid == dto.RoleId ? a.CreatedBy : dto.UserId))
                                   .ToListAsync();
             if (Data != null && Data.Count > 0)
             {
@@ -53,6 +54,28 @@ namespace Libraries.Repository.EntityRepository
                         OccupantIdentityPrrofFilePath = Data[i].OccupantIdentityPrrofFilePath,
                         PropertyFilePath = Data[i].PropertyFilePath,
                         CreatedBy = Data[i].CreatedBy
+                    });
+                }
+            }
+            return listData;
+        }
+
+        public async Task<List<ApiGetPresentUseDto>> GetPresentUseDetails()
+        {
+            List<ApiGetPresentUseDto> listData = new List<ApiGetPresentUseDto>();
+
+            var Data = await _dbContext.Presentuse
+                                  .Where(a => a.IsActive == 1)
+                                  .ToListAsync();
+            if (Data != null && Data.Count > 0)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new ApiGetPresentUseDto()
+                    {
+                        Id = Data[i].Id,
+                        Name = Data[i].Name,
+                        IsActive = Data[i].IsActive
                     });
                 }
             }
