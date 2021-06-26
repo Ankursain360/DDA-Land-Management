@@ -22,12 +22,12 @@ namespace DamagePayee.Controllers
             _DoortodoorsurveyService = DoortodoorsurveyService;
         }
 
-        [AuthorizeContext(ViewAction.View)]
+       // [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Doortodoorsurvey model = new Doortodoorsurvey();
 
-            model.presentuse = await _DoortodoorsurveyService.GetAllPresentuse();
+            model.PresentuseList = await _DoortodoorsurveyService.GetAllPresentuse();
             return View(model);
         }
 

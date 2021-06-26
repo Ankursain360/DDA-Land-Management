@@ -72,10 +72,7 @@ namespace Libraries.Model.Entity
         public IFormFile PropertyPhoto { get; set; }
 
 
-        [NotMapped]
-        public List<Presentuse> presentuse { get; set; }
-        [NotMapped]
-        public int? Presentid { get; set; }
+  
 
 
     }

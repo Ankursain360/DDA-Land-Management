@@ -6,11 +6,11 @@ $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
 
-        var Presentid = $('#PresentUseId option:selected').val();
+        var presentuse = $('#Id option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
-        if (Presentid != '' && Presentid != undefined && fromDate != '' && toDate != '' && fileid != null && fromDate != null && toDate != null) {
+        if (presentuse != '' && presentuse != undefined && fromDate != '' && toDate != '' && presentuse != null && fromDate != null && toDate != null) {
             GetDetails(currentPageNumber, currentPageSize, sortOrder);
         }
 
@@ -26,7 +26,7 @@ $('#ddlSort').change(function () {
 });
 
 $("#btnReset").click(function () {
-    $('#Presentid').val('0').trigger('change');
+    $('#presentuse').val('0').trigger('change');
     $('#txtFromDate').val('');
     $('#txtToDate').val('');
     $('#LoadReportView').html("");
@@ -58,7 +58,7 @@ function GetDetails(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
-    var Presentid = $('#PresentUseId option:selected').val();
+    var presentuse = $('#Id option:selected').val();
     var fromDate = $('#txtFromDate').val();
     var toDate = $('#txtToDate').val();
     var model = {
@@ -67,7 +67,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
-        Presentuse: parseInt(Presentuse),
+        Presentuse: parseInt(presentuse),
         FromDate: fromDate,
         ToDate: toDate
     }
