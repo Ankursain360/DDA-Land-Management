@@ -189,6 +189,14 @@
             </div>
         </div>
     </div>
+    <div class="row mt-md-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <a target="_blank" href="https://maps.google.com/?q=@Model.GeoReferencingLattitude,@Model.Longitude">View Location on Map<i class="ri-map-pin-fill"></i></a>
+            </div>
+        </div>
+    </div>
+
     <div class="row pt-3">
         <div class="col-md-12">
             @Html.ActionLink("Back", "Index", "Door2DoorSurvey", null, new { @class = "btn btn-theme " })

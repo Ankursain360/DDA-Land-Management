@@ -18,5 +18,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
         Task<Allotmentletter> FetchLeaseApplicationDetailsforAllotmentLetter(int id);
         Task<bool> RollBackEntryDocument(int id);
+        Task<List<Allotmententry>> GetRefNoListforAllotmentLetterAtCreate();
     }
 }

@@ -126,7 +126,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input class="floating-label-field floating-label-field--s3" placeholder="Attendee"  asp-for="Attendee" />
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Photo" class="text-danger"></span>
                     <label class="floating-label">Attendee </label>
                 </div>
             </div>
@@ -134,10 +134,9 @@
         <div class="row mt-md-3">
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <textarea class="floating-label-field floating-label-field--s3" placeholder="Hearing Remarks"  asp-for="Remark">
+                    <textarea class="floating-label-field floating-label-field--s3" placeholder="Hearing Remarks" asp-for="Remark">
                 </textarea>
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="Remark" class="text-danger"></span>
                     <label class="floating-label">Hearing Remarks </label>
                 </div>
             </div>
@@ -146,20 +145,18 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Documents" type="file"  />
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Hearing Documents" asp-for="Photo" type="file"  />
                     <span class="text-danger"></span>
                     <label class="floating-label">Hearing Documents (if any)</label>
                 </div>
             </div>
-            <div class=" col-md-6">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
+                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
-                    <span class="text-danger"></span>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
                     <label class="floating-label">Status </label>
                 </div>
             </div>

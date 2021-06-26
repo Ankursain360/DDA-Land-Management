@@ -9,21 +9,35 @@
             <div class="col-md-3 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtReferenceNo" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtName" class="floating-label"> Reference No.</label>
+                    <label for="txtReferenceNo" class="floating-label"> Reference No.</label>
                 </div>
             </div>
-            <div class="col-md-3 ">
+            <div class="col-md-2">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3" placeholder="Code" />
-                    <label for="txtCode" class="floating-label">Society Name</label>
+                    <label for="txtFileNo" class="floating-label">Society Name</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtSubject" class="floating-label-field floating-label-field--s3" placeholder="Code" />
-                    <label for="txtCode" class="floating-label">Subject</label>
+                    <label for="txtSubject" class="floating-label">Subject</label>
                 </div>
             </div>
+            <div class="col-md-2">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
+                    <label for="txtFromDate" class="floating-label">Allotment Date(From Date)</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
+                    <span class="text-danger msg"></span>
+                    <label for="txtToDate" class="floating-label">Allotment Date(To Date)</label>
+                </div>
+            </div>
+
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
@@ -77,7 +91,7 @@
 
         </div>
 
-        <div class="table-responsive px-2" id="divScheme">
+        <div class="table-responsive px-2" id="divTable">
 
         </div>
 

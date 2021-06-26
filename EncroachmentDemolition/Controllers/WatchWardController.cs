@@ -190,12 +190,12 @@ namespace EncroachmentDemolition.Controllers
                             for (int i = 0; i < watchandward.Photo.Count; i++)
                             {
                                 string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
-                                GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
-                                var LattitudeValue = TempData["LattitudeValue"] as string;
+                                GetLattLongDetailsDto dto = GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
+                                var LattitudeValue = dto.Lattitude;
                                 watchandward.Latitude = LattitudeValue;
-                                var LongitudeValue = TempData["LongitudeValue"] as string;
+                                var LongitudeValue = dto.Longitude;
                                 watchandward.Longitude = LongitudeValue;
-                                var lattlongurlvalue = TempData["url"] as string;
+                                var lattlongurlvalue = dto.Url;
                                 watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
                                 {
                                     WatchAndWardId = watchandward.Id,
@@ -459,12 +459,12 @@ namespace EncroachmentDemolition.Controllers
                         for (int i = 0; i < watchandward.Photo.Count; i++)
                         {
                             string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
-                            GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
-                            var LattitudeValue = TempData["LattitudeValue"] as string;
+                            GetLattLongDetailsDto dto = GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
+                            var LattitudeValue = dto.Lattitude;
                             watchandward.Latitude = LattitudeValue;
-                            var LongitudeValue = TempData["LongitudeValue"] as string;
+                            var LongitudeValue = dto.Longitude;
                             watchandward.Longitude = LongitudeValue;
-                            var lattlongurlvalue = TempData["url"] as string;
+                            var lattlongurlvalue = dto.Url;
                             watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
                             {
                                 WatchAndWardId = watchandward.Id,
@@ -588,8 +588,9 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpGet]
-        public void GetLattLongDetails(string path, string Latt, string Long)
+        public GetLattLongDetailsDto GetLattLongDetails(string path, string Latt, string Long)
         {
+            GetLattLongDetailsDto dtodata = new GetLattLongDetailsDto();
             double? latitdue = null;
             double? longitude = null;
             string url = null;
@@ -624,9 +625,12 @@ namespace EncroachmentDemolition.Controllers
                 }
                 bmp.Dispose();
             }
-            TempData["LattitudeValue"] = latitdue.ToString();
-            TempData["LongitudeValue"] = longitude.ToString();
-            TempData["url"] = url;
+            dtodata.Lattitude = latitdue.ToString();
+            dtodata.Longitude = longitude.ToString();
+            dtodata.Url = url;
+
+            return dtodata;
+
         }
 
         private static double? GetLatitudeAndLongitude(PropertyItem propItem)

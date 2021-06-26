@@ -18,5 +18,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Doortodoorsurvey doortodoorsurvey);
         Task<Doortodoorsurvey> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+
+        Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurveyReport(DoorToDoorSurveyReportSearchDto model);
     }
 }

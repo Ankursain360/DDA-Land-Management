@@ -11,6 +11,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Doortodoorsurvey>> GetDoortodoorsurvey();
         Task<List<Presentuse>> GetAllPresentuse();
         Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurvey(DoortodoorsurveySearchDto model);
-       
+
+        Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurveyReport(DoorToDoorSurveyReportSearchDto model);
+
     }
 }

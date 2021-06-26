@@ -16,7 +16,7 @@
                         @foreach (var item in Model.RefNoList)
                         {
                             <option value="@item.Id"> @item.Application.RefNo ( @item.Application.Name )</option>
-}
+                        }
                     </select>
                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
                     <label asp-for="AllotmentId" class="floating-label">Application Reference No  </label>
@@ -25,7 +25,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <input placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" limit="50"  asp-for="ReferenceNumber" />
+                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" limit="50" asp-for="ReferenceNumber" />
                     <span class="text-danger" asp-validation-for="ReferenceNumber"></span>
                     <label class="floating-label" asp-for="ReferenceNumber">Reference / Allotment Number   </label>
                 </div>
@@ -33,23 +33,11 @@
 
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-12 col-xl-3">
-                <div class="row">
-                    <div class="col-6 col-md-5 col-xl-6">
-                        @*<button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
-                            <i class="ri-refresh-line mr-2"></i>Reset
-                        </button>*@
-                        @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
-                    </div>
-                    <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme" type="submit" id="btnGenerate">Generate</button>
-                      
-                    </div>
-
-                </div>
+            <div class=" col-md-12">
+                <button class="btn btn-theme" type="submit" id="btnGenerate">Generate</button>
+                @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
             </div>
         </div>
-        
         <div id="View"> </div>
 
 

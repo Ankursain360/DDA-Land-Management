@@ -103,7 +103,10 @@ namespace Libraries.Service.ApplicationService
             return await _doortodoorsurveyRepository.GetDoortodoorsurvey();
         }
 
-
+        public async Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurveyReport(DoorToDoorSurveyReportSearchDto model)
+        {
+            return await _doortodoorsurveyRepository.GetPagedDoortodoorsurveyReport(model);
+        }
 
     }
 }

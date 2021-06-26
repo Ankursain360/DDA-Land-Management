@@ -29,21 +29,21 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3  " limit="200">
                     <span asp-validation-for="Name" class="text-danger"></span>
-                    <label class="floating-label">Society Name</label>
+                    <label class="floating-label">Society Name<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="ContactNo" type="text" class="floating-label-field floating-label-field--s3  onlynumbers" limit="10" min="10">
                     <span asp-validation-for="ContactNo" class="text-danger"></span>
-                    <label class="floating-label">Mobile No/Telephone No.</label>
+                    <label class="floating-label">Mobile No/Telephone No.<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="EmailId" type="text" class="floating-label-field floating-label-field--s3 " limit="45">
                     <span asp-validation-for="EmailId" class="text-danger"></span>
-                    <label class="floating-label">Email-Id</label>
+                    <label class="floating-label">Email-Id<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea asp-for="Address" type="text" class="floating-label-field floating-label-field--s3  " limit="4000"></textarea>
                     <span asp-validation-for="Address" class="text-danger"></span>
-                    <label class="floating-label">Address</label>
+                    <label class="floating-label">Address<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="RegistrationNo" type="text" class="floating-label-field floating-label-field--s3  " limit="200">
                     <span asp-validation-for="RegistrationNo" class="text-danger"></span>
-                    <label class="floating-label">Registeration No.</label>
+                    <label class="floating-label">Registeration No.<span style="color:red">*</span></label>
                 </div>
             </div>
             @*<div class="col-md-4">
@@ -91,7 +91,7 @@
         </div>
         <h3 class="my-3 d-flex sub-heading">
             4. (i)	 आवेदन किस उद्देश्य के लिए भूमि आवंटन करने के लिए है |<br />
-            Purpose for which land has been applied for.
+            Purpose for which land has been applied for.<span style="color:red">*</span>
         </h3>
         <div class="row mt-md-3">
             <div class="col-md-12">
@@ -184,14 +184,14 @@
         </div>
         <h3 class="my-3 d-flex sub-heading">
             8. आवेदन की गई  भूमि का क्षेत्रफल  वर्ग मी. में |<br />
-            Area of land applied for in sq. mtrs.
+            Area of land applied for in sq. mtrs.<span style="color:red">*</span>
         </h3>
         <div class="row mt-md-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="LandAreaSqMt" type="text" class="floating-label-field floating-label-field--s3 numbers">
                     <span asp-validation-for="LandAreaSqMt" class="text-danger"></span>
-                    <label class="floating-label">Area</label>
+                    <label class="floating-label">Area<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -236,29 +236,29 @@
                 </div>*@
         </div>
         <h3 class="my-3 d-flex sub-heading">
-            11.	स्थान अथवा क्षेत्र जहां भूमि अपेक्षित है , वरीयता क्रम से (कम  से कम तीन स्थान दें )| <br />
-            Locality or area where the land is required, in order of preference (give atleast three loca­tions).
+            11.	स्थान अथवा क्षेत्र जहां भूमि अपेक्षित है , वरीयता क्रम से (कम  से कम तीन स्थान दें )|<br />
+            Locality or area where the land is required, in order of preference (give atleast three loca­tions).<span style="color:red">*</span>
         </h3>
         <div class="row mt-md-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Location1" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
                     <span asp-validation-for="Location1" class="text-danger"></span>
-                    <label class="floating-label">1.</label>
+                    <label class="floating-label">1.<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Location2" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
                     <span asp-validation-for="Location2" class="text-danger"></span>
-                    <label class="floating-label">2.</label>
+                    <label class="floating-label">2.<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Location3" type="text" class="floating-label-field floating-label-field--s3 " limit="500">
                     <span asp-validation-for="Location3" class="text-danger"></span>
-                    <label class="floating-label">3.</label>
+                    <label class="floating-label">3.<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>

@@ -35,6 +35,9 @@ namespace Dto.Master
         public string OccupantIdentityPrrofFileData { get; set; }
         public string PropertyFileData { get; set; }
         public int CreatedBy { get; set; }
+        public string PresentUseName { get; set; }
+        public int RoleId { get; set; }
+        public int UserId { get; set; }
 
 
     }

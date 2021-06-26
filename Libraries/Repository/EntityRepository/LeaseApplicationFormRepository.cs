@@ -96,6 +96,19 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        public async Task<List<Allotmententry>> GetRefNoListforAllotmentLetterAtCreate()
+        {
+            var InId = (from x in _dbContext.Allotmentletter
+                                  where x.IsActive == 1
+                                  select x.AllotmentId).ToArray();
+            return await _dbContext.Allotmententry
+                                   .Include(x => x.Application)
+                                   .Where(x => x.IsActive == 1
+                                    && !(InId).Contains(x.Id)
+                                    )
+                                   .OrderByDescending(x => x.Application.RefNo).ToListAsync();
+        }
     }
 
 
