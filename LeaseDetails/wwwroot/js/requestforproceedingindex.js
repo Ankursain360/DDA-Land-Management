@@ -4,27 +4,29 @@ var sortOrder = 1;//default Ascending
 
 
 $(document).ready(function () {
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetRequestDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
  
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetRequestDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
 $("#btnReset").click(function () {
     $('#txtReferenceNo').val('');
     $('#txtSubject').val('');
-    $('#txtFileNo').val('')
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    $('#txtFileNo').val('');
+    $('#txtFromDate').val('');
+    $('#txtToDate').val('');
+    GetRequestDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetRequestDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -32,17 +34,17 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetDivision(currentPageNumber, currentPageSize, sortOrder);
+    GetRequestDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDivision(pageNumber, pageSize, order) {
+function GetRequestDetails(pageNumber, pageSize, order) {
   
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/RequestForProceedingEviction/List`, 'html', param, function (response) {
         console.log(response);
 
-        $('#divScheme').html("");
-        $('#divScheme').html(response);
+        $('#divTable').html("");
+        $('#divTable').html(response);
     });
 
 
@@ -54,6 +56,8 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         letterReferenceNo: $('#txtFileNo').val(),
         AllotmentNo: $('#txtReferenceNo').val(),
         subject: $('#txtSubject').val(),
+        FromDate: ($("#txtFromDate").val()),
+        ToDate: ($("#txtToDate").val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -65,13 +69,34 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
 
 function onPaging(pageNo) {
-    GetDivision(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetRequestDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDivision(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetRequestDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
 
 
+
+$(function () {
+    $('#txtToDate').on('change', function () {
+        debugger;
+
+        var FromDate = $("#txtFromDate").val();
+        var ToDate = $("#txtToDate").val();
+
+
+        if (ToDate < FromDate) {
+            $('#txtToDate').val(' ');
+            $('.msg').empty().html('To Date Must be Greater Than From Date ');
+        }
+        else {
+            $('.msg').empty();
+            $('#txtToDate').val('#txtToDate'.val());
+
+        }
+
+    });
+});

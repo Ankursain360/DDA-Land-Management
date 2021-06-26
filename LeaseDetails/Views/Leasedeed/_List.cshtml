@@ -5,8 +5,11 @@
         <tr>
 
             <th>Lease Application Ref No </th>
+            <th>Socity/Allottee Name</th>
+            <th>Lease Type </th>
+            <th>Area</th>
+            <th>Allotement Date</th>
             <th>Lease Deed Date </th>
-            <th>Remarks</th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -17,11 +20,11 @@
         <tr>
 
             <td>@item.Allotment.Application.RefNo</td>
+            <td>@(item.Allotment == null ? "" : item.Allotment.Application.Name)</td>
+            <td>@(item.Allotment == null ? "" : item.Allotment.LeasesType == null ? "" : item.Allotment.LeasesType.Type)</td>
+            <td>@(item.Allotment == null ? "" : item.Allotment.TotalArea.ToString())</td>
+            <td>@(item.Allotment == null ? "" : Convert.ToDateTime(item.Allotment.AllotmentDate).ToString("dd-MMM-yyyy"))</td>
             <td> @(Convert.ToDateTime(item.LeaseDeedDate).ToString("dd-MMM-yyyy"))</td>
-            <td>@item.Remarks</td>
-
-
-
             <td>
                 @if (item.IsActive == 1)
                 {
