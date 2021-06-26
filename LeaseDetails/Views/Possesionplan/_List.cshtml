@@ -6,9 +6,14 @@
         <tr>
 
             <th>Allotment Number</th>
+            <th>Allottee Name</th>
+            <th>Allotment Date</th>
+            <th>Allotted Area</th>
+            <th>Possession Date</th>
+            <th>Possession Area</th>
             <th>Difference in Area</th>
             <th>Possesion Taken Name</th>
-            <th>Possesion Handover Name</th>
+            @*<th>Possesion Handover Name</th>*@
             <th>Status</th>
             <th>Operations</th>
 
@@ -21,11 +26,14 @@
 
             @*<td>@item.Allotment.ApplicationId</td>*@
             <td>@item.Allotment.Application.RefNo</td>
-           
-            
+            <td>@item.Allotment.Application.Name</td>
+            <td>@(Convert.ToDateTime(item.Allotment.AllotmentDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.AllotedArea</td>
+            <td>@(Convert.ToDateTime(item.PossessionTakenDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@item.PossessionArea</td>
             <td>@item.DiffernceArea</td>
             <td>@item.PossessionTakenName</td>
-            <td>@item.PossesionHandOverName</td>
+            @*<td>@item.PossesionHandOverName</td>*@
 
 
             <td>
