@@ -6,49 +6,65 @@
         <tr>
 
             <th>Allotment Number</th>
+            <th>Allottee Name</th>
+            <th>Allotment Date</th>
+            <th>Allotted Area</th>
+            <th>Possession Date</th>
+            <th>Possession Area</th>
             <th>Difference in Area</th>
             <th>Possesion Taken Name</th>
-            <th>Possesion Handover Name</th>
+            @*<th>Possesion Handover Name</th>*@
             <th>Status</th>
             <th>Operations</th>
 
         </tr>
     </thead>
     <tbody class="tbody">
-        @foreach (var item in Model.Results)
+        @if (Model != null && Model.Results.Count() > 0)
         {
-        <tr>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
 
-            @*<td>@item.Allotment.ApplicationId</td>*@
-            <td>@item.Allotment.Application.RefNo</td>
-           
-            
-            <td>@item.DiffernceArea</td>
-            <td>@item.PossessionTakenName</td>
-            <td>@item.PossesionHandOverName</td>
-
-
-            <td>
-                @if (item.IsActive == 1)
-                {
-                    <span class="badge badge-primary px-2 py-1">Active</span> }
-                else
-                {
-                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
-            </td>
+                    @*<td>@item.Allotment.ApplicationId</td>*@
+                    <td>@item.Allotment.Application.RefNo</td>
+                    <td>@item.Allotment.Application.Name</td>
+                    <td>@(Convert.ToDateTime(item.Allotment.AllotmentDate).ToString("dd-MMM-yyyy"))</td>
+                    <td>@item.AllotedArea</td>
+                    <td>@(Convert.ToDateTime(item.PossessionTakenDate).ToString("dd-MMM-yyyy"))</td>
+                    <td>@item.PossessionArea</td>
+                    <td>@item.DiffernceArea</td>
+                    <td>@item.PossessionTakenName</td>
+                    @*<td>@item.PossesionHandOverName</td>*@
 
 
-            <td>
-                <div class="action-btns">
-                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                    <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are you sure, you want to delete this record?')">  <i class="ri-delete-bin-5-fill"></i></a>
-                </div>
-            </td>
+                    <td>
+                        @if (item.IsActive == 1)
+                        {
+                            <span class="badge badge-primary px-2 py-1">Active</span> }
+                        else
+                        {
+                            <span class="badge badge-danger px-2 py-1">Inactive</span>}
+                    </td>
 
-        </tr>
+
+                    <td>
+                        <div class="action-btns">
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are you sure, you want to delete this record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                        </div>
+                    </td>
+
+                </tr>
+            }
         }
-
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
     </tbody>
 </table>
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

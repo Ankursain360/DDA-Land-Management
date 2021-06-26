@@ -48,6 +48,7 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Leasedeed
                                 .Include(x => x.Allotment)
+                                .Include(x => x.Allotment.LeasesType)
                                 .Include(x => x.Allotment.Application)
                                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name)))
                                 .GetPaged<Leasedeed>(model.PageNumber, model.PageSize);
@@ -61,6 +62,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Leasedeed
                                                .Include(x => x.Allotment)
+                                               .Include(x => x.Allotment.LeasesType)
                                                 .Include(x => x.Allotment.Application)
                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name)))
                                                .OrderBy(x => x.Allotment.Application.RefNo)
@@ -71,6 +73,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Leasedeed
                                                .Include(x => x.Allotment)
+                                               .Include(x => x.Allotment.LeasesType)
                                                 .Include(x => x.Allotment.Application)
                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name)))
                                                .OrderBy(x => x.LeaseDeedDate)
@@ -81,6 +84,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Leasedeed
                                                 .Include(x => x.Allotment)
+                                               .Include(x => x.Allotment.LeasesType)
                                                  .Include(x => x.Allotment.Application)
                                                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name)))
                                                 .OrderByDescending(x => x.IsActive)
@@ -98,6 +102,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Leasedeed
                                                .Include(x => x.Allotment)
+                                               .Include(x => x.Allotment.LeasesType)
                                                 .Include(x => x.Allotment.Application)
                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name)))
                                                .OrderByDescending(x => x.Allotment.Application.RefNo)
@@ -108,6 +113,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Leasedeed
                                                .Include(x => x.Allotment)
+                                               .Include(x => x.Allotment.LeasesType)
                                                 .Include(x => x.Allotment.Application)
                                                .Where(x => (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name)))
                                                .OrderByDescending(x => x.LeaseDeedDate)
@@ -118,6 +124,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Leasedeed
                                                 .Include(x => x.Allotment)
+                                               .Include(x => x.Allotment.LeasesType)
                                                  .Include(x => x.Allotment.Application)
                                                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Allotment.Application.RefNo.Contains(model.name)))
                                                 .OrderBy(x => x.IsActive)

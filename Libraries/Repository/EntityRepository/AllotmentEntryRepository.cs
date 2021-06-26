@@ -40,7 +40,17 @@ namespace Libraries.Repository.EntityRepository
                                                   .ToListAsync();
             return leaseappList;
         }
-
+        public async Task<List<Leaseapplication>> GetAllLeaseapplicationforview(int approved)
+        {
+            
+            List<Leaseapplication> leaseappList = await _dbContext
+                                                  .Leaseapplication
+                                                  .Include(x => x.ApprovedStatusNavigation)
+                                                  .Where(x => (x.IsActive == 1)
+                                                  && (x.ApprovedStatusNavigation.StatusCode == approved))
+                                                  .ToListAsync();
+            return leaseappList;
+        }
 
         public async Task<List<Leasetype>> GetAllLeasetype()
         {

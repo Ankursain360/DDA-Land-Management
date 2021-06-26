@@ -43,7 +43,7 @@
 
                     @{ if (Model.DocumentPath != null)
                         {
-                            <a class="badge badge-primary px-2" asp-action="DownloadFile" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                            <a class="badge badge-primary px-2" asp-action="DownloadFile" asp-route-id="@Model.Id" target="_blank"> (View Document)</a>
                             <input disabled type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
                             <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
                         }

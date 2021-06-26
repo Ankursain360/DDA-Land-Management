@@ -52,9 +52,13 @@ namespace Libraries.Service.ApplicationService
             return await _allotmentEntryRepository.GetAllAllotmententry();
         }
 
+        public async Task<List<Leaseapplication>> GetAllLeaseapplicationforview(int approved)
+        {
+            List<Leaseapplication> leaseappList = await _allotmentEntryRepository.GetAllLeaseapplicationforview(approved);
+            return leaseappList;
+        }
 
 
-       
 
 
         public async Task<List<Leaseapplication>> GetAllLeaseapplication(int approved)

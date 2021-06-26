@@ -13,6 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Allotmententry>> GetAllAllotmententry();
 
         Task<List<Leaseapplication>> GetAllLeaseapplication(int approved);
+        Task<List<Leaseapplication>> GetAllLeaseapplicationforview(int approved);
         Task<List<Leasetype>> GetAllLeasetype();
         Task<List<Leasepurpose>> GetAllLeasepurpose();
         Task<List<Leasesubpurpose>> GetAllLeaseSubpurpose(int purposeId);

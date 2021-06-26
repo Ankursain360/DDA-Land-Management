@@ -56,9 +56,47 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails()
+
+        public async Task<bool> Update(ApiSaveDoor2DoorSurveyDto dto)
         {
-            return await _door2DoorAPIRepository.GetAllSurveyDetails();
+            var result = await _door2DoorAPIRepository.FindBy(a => a.Id == dto.Id);
+            Doortodoorsurvey model = result.FirstOrDefault();
+            model.PropertyAddress = dto.PropertyAddress;
+            model.GeoReferencingLattitude = dto.GeoReferencingLattitude;
+            model.Longitude = dto.Longitude;
+            model.PresentUseId = dto.PresentUseId;
+            model.ApproxPropertyArea = dto.ApproxPropertyArea;
+            model.NumberOfFloors = dto.NumberOfFloors;
+            model.CaelectricityNo = dto.CaelectricityNo;
+            model.IsActive = dto.IsActive;
+            model.KwaterNo = dto.KwaterNo;
+            model.PropertyHouseTaxNo = dto.PropertyHouseTaxNo;
+            model.OccupantName = dto.OccupantName;
+            model.Email = dto.Email;
+            model.IsActive = 1;
+            model.Remarks = dto.Remarks;
+            model.MobileNo = dto.MobileNo;
+            model.OccupantAadharNo = dto.OccupantAadharNo;
+            model.VoterIdNo = dto.VoterIdNo;
+            if (dto.OccupantIdentityPrrofFileData != "" && dto.OccupantIdentityPrrofFileData != null)
+                model.OccupantIdentityPrrofFilePath = dto.OccupantIdentityPrrofFilePath;
+            if (dto.PropertyFileData != "" && dto.PropertyFileData != null)
+                model.PropertyFilePath = dto.PropertyFilePath;
+            model.Remarks = dto.Remarks;
+            model.ModifiedBy = dto.CreatedBy;
+            model.ModifiedDate = DateTime.Now;
+            _door2DoorAPIRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto, int adminroleid)
+        {
+            return await _door2DoorAPIRepository.GetAllSurveyDetails(dto, adminroleid);
+        }
+
+        public async Task<List<ApiGetPresentUseDto>> GetPresentUseDetails()
+        {
+            return await _door2DoorAPIRepository.GetPresentUseDetails();
         }
 
         public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto)

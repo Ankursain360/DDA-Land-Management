@@ -23,10 +23,13 @@ namespace LeaseDetails.Controllers
     public class LeasedeedController : BaseController
     {
         private readonly ILeasedeedService _leasedeedService;
+        private readonly IAllotmentEntryService _allotmentEntryService;
         public IConfiguration _configuration;
-        public LeasedeedController(ILeasedeedService leasedeedService, IConfiguration configuration)
+        public LeasedeedController(ILeasedeedService leasedeedService, IConfiguration configuration,
+            IAllotmentEntryService allotmentEntryService)
         {
             _leasedeedService = leasedeedService;
+            _allotmentEntryService = allotmentEntryService;
             _configuration = configuration;
         }
 
@@ -35,7 +38,9 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> ApplicationDetails(int? Id)
         {
             Allotmententry entry = await _leasedeedService.FetchSingleDetails(Id ?? 0);
-
+            entry.LeaseTypeList = await _allotmentEntryService.GetAllLeasetype();
+            entry.LeasePurposeList = await _allotmentEntryService.GetAllLeasepurpose();
+            entry.LeaseSubPurposeList = await _allotmentEntryService.GetAllLeaseSubpurpose(entry.LeasePurposesTypeId ?? 0);
             return PartialView("_ApplicationDetails", entry);
         }
 
@@ -194,8 +199,9 @@ namespace LeaseDetails.Controllers
         {
             FileHelper file = new FileHelper();
             Leasedeed Data = await _leasedeedService.FetchSingleResult(Id);
-            string filename = Data.DocumentPath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = _configuration.GetSection("FilePaths:Leasedeed:Doc").Value.ToString() + Data.DocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 }

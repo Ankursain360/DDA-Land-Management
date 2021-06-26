@@ -152,6 +152,120 @@ namespace DoorToDoor.Api.Controllers
 
         [HttpPost]
         [Route("[action]")]
+        [Route("api/Door2DoorAPI/UpdateDoor2DoorSurvey")]
+        public async Task<IActionResult> UpdateDoor2DoorSurvey([FromBody] ApiSaveDoor2DoorSurveyDto dto)
+        {
+            ApiSaveDoor2DoorSurveyResponseDetails apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails();
+            try
+            {
+                if (dto != null)
+                {
+                    if (dto.PropertyAddress == null || dto.PropertyAddress == "" ||
+                        dto.GeoReferencingLattitude == null || dto.GeoReferencingLattitude == "" ||
+                        dto.Longitude == null || dto.Longitude == "" ||
+                        dto.PresentUseId == null || dto.PresentUseId == 0 ||
+                        dto.ApproxPropertyArea == null || dto.ApproxPropertyArea == 0 ||
+                        dto.NumberOfFloors == null || dto.NumberOfFloors == "" ||
+                        dto.OccupantName == null || dto.OccupantName == "" ||
+                        dto.MobileNo == null || dto.MobileNo == "" ||
+                        dto.OccupantAadharNo == null || dto.OccupantAadharNo == "" ||
+                        dto.VoterIdNo == null || dto.VoterIdNo == "" || dto.Id == 0)
+                    {
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "205",
+                            responseMessage = "Mandatory Fields missing",
+                            ApiSaveDoor2DoorSurveyDto = dtoData
+                        };
+                        return NotFound(apiResponseDetails);
+                    }
+                    FileHelper fileHelper = new FileHelper();
+                    if (dto.OccupantIdentityPrrofFileData != "" && dto.OccupantIdentityPrrofFileData != null)
+                    {
+                        dto.OccupantIdentityPrrofFilePath = Guid.NewGuid().ToString() + ".jpg";
+                        if (!Directory.Exists(IdentityDocumentPath))
+                        {
+                            DirectoryInfo directoryInfo = Directory.CreateDirectory(IdentityDocumentPath);
+                        }
+                        using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.OccupantIdentityPrrofFileData)))
+                        {
+                            using (Bitmap bm2 = new Bitmap(ms))
+                            {
+                                bm2.Save(IdentityDocumentPath + dto.OccupantIdentityPrrofFilePath);
+                            }
+                        }
+                    }
+
+                    if (dto.PropertyFileData != "" && dto.PropertyFileData != null)
+                    {
+                        dto.PropertyFilePath = Guid.NewGuid().ToString() + ".jpg";
+                        if (!Directory.Exists(PropertyDocumentPath))
+                        {
+                            DirectoryInfo directoryInfo = Directory.CreateDirectory(PropertyDocumentPath);
+                        }
+                        using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.PropertyFileData)))
+                        {
+                            using (Bitmap bm2 = new Bitmap(ms))
+                            {
+                                bm2.Save(PropertyDocumentPath + dto.PropertyFilePath);
+                            }
+                        }
+                    }
+
+                    var data = await _door2DoorAPIService.Update(dto);
+                    if (data == true)
+                    {
+
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "200",
+                            responseMessage = "details updated successfully",
+                            ApiSaveDoor2DoorSurveyDto = dtoData
+                        };
+
+                        return Ok(apiResponseDetails);
+                    }
+                    else
+                    {
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "404",
+                            responseMessage = " details not found",
+                            ApiSaveDoor2DoorSurveyDto = dtoData
+                        };
+                        return NotFound(apiResponseDetails);
+                    }
+                }
+                else
+                {
+                    List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                    apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                    {
+                        responseCode = "400",
+                        responseMessage = "Bad Request. Insufficient Parameters",
+                        ApiSaveDoor2DoorSurveyDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+            }
+            catch (Exception)
+            {
+                List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                {
+                    responseCode = "500",
+                    responseMessage = "Internal Server Error",
+                    ApiSaveDoor2DoorSurveyDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
+        }
+
+        [HttpPost]
+        [Route("[action]")]
         [Route("api/Door2DoorAPI/GetSingleDoor2DoorSurvey")]
         public async Task<IActionResult> GetSingleDoor2DoorSurvey([FromBody] ApiSaveDoor2DoorSurveyDto dto)
         {
@@ -211,40 +325,64 @@ namespace DoorToDoor.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("[action]")]
         [Route("api/Door2DoorAPI/GetAllDoor2DoorSurvey")]
-        public async Task<IActionResult> GetAllDoor2DoorSurvey()
+        public async Task<IActionResult> GetAllDoor2DoorSurvey([FromBody] ApiSaveDoor2DoorSurveyDto dto)
         {
             ApiSaveDoor2DoorSurveyResponseDetails apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails();
             try
             {
-                var data = await _door2DoorAPIService.GetAllSurveyDetails();
-                if (data != null && data.Count > 0)
+                if (dto != null)
                 {
-
-                    List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
-                    apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                    if (dto.RoleId == null || dto.RoleId == 0 || dto.UserId == null || dto.UserId == 0)
                     {
-                        responseCode = "200",
-                        responseMessage = "details fetched successfully",
-                        ApiSaveDoor2DoorSurveyDto = data
-                    };
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "400",
+                            responseMessage = "Bad Request. Insufficient Parameters",
+                            ApiSaveDoor2DoorSurveyDto = dtoData
+                        };
+                        return NotFound(apiResponseDetails);
+                    }
+                    var data = await _door2DoorAPIService.GetAllSurveyDetails(dto, Convert.ToInt32(_configuration.GetSection("DoorToDoorAdminRole").Value));
+                    if (data != null && data.Count > 0)
+                    {
 
-                    return Ok(apiResponseDetails);
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "200",
+                            responseMessage = "details fetched successfully",
+                            ApiSaveDoor2DoorSurveyDto = data
+                        };
+
+                        return Ok(apiResponseDetails);
+                    }
+                    else
+                    {
+                        List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
+                        apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
+                        {
+                            responseCode = "404",
+                            responseMessage = " details not found",
+                            ApiSaveDoor2DoorSurveyDto = dtoData
+                        };
+                        return NotFound(apiResponseDetails);
+                    }
                 }
                 else
                 {
                     List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
                     apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                     {
-                        responseCode = "404",
-                        responseMessage = " details not found",
+                        responseCode = "400",
+                        responseMessage = "Bad Request. Insufficient Parameters",
                         ApiSaveDoor2DoorSurveyDto = dtoData
                     };
                     return NotFound(apiResponseDetails);
                 }
-
             }
             catch (Exception ex)
             {
@@ -254,6 +392,54 @@ namespace DoorToDoor.Api.Controllers
                     responseCode = "500",
                     responseMessage = "Internal Server Error",
                     ApiSaveDoor2DoorSurveyDto = dtoData
+                };
+                return NotFound(apiResponseDetails);
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        [Route("api/Door2DoorAPI/GetPresentUse")]
+        public async Task<IActionResult> GetPresentUse()
+        {
+            ApiGetPresentUseResponseDetails apiResponseDetails = new ApiGetPresentUseResponseDetails();
+            try
+            {
+                var data = await _door2DoorAPIService.GetPresentUseDetails();
+                if (data != null && data.Count > 0)
+                {
+
+                    List<ApiGetPresentUseDto> dtoData = new List<ApiGetPresentUseDto>();
+                    apiResponseDetails = new ApiGetPresentUseResponseDetails
+                    {
+                        responseCode = "200",
+                        responseMessage = "details fetched successfully",
+                        ApiGetPresentUseDto = data
+                    };
+
+                    return Ok(apiResponseDetails);
+                }
+                else
+                {
+                    List<ApiGetPresentUseDto> dtoData = new List<ApiGetPresentUseDto>();
+                    apiResponseDetails = new ApiGetPresentUseResponseDetails
+                    {
+                        responseCode = "404",
+                        responseMessage = " details not found",
+                        ApiGetPresentUseDto = dtoData
+                    };
+                    return NotFound(apiResponseDetails);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                List<ApiGetPresentUseDto> dtoData = new List<ApiGetPresentUseDto>();
+                apiResponseDetails = new ApiGetPresentUseResponseDetails
+                {
+                    responseCode = "500",
+                    responseMessage = "Internal Server Error",
+                    ApiGetPresentUseDto = dtoData
                 };
                 return NotFound(apiResponseDetails);
             }
@@ -270,7 +456,7 @@ namespace DoorToDoor.Api.Controllers
                 if (dto != null)
                 {
                     if (dto.username == null || dto.username == "" ||
-                        dto.password == null || dto.password == "" )
+                        dto.password == null || dto.password == "")
                     {
                         List<ApiSurveyUserDetailsDto> dtoData = new List<ApiSurveyUserDetailsDto>();
                         apiResponseDetails = new ApiSurveyUserDetailsResponseDetails

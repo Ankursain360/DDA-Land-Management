@@ -1,307 +1,248 @@
-﻿@model IEnumerable< Dto.Search.DemandletterdatalistDto>
+﻿@model IEnumerable<Dto.Search.DemandletterdatalistDto>
+    <section  class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0 pt-md-3">
+
+                <div class="content bg-white mx-auto p-3" id="MainContentForm" style="max-width: 780px;">
+                    @*<div class="panel panel-default">*@
+                    <div class="card">
+
+                        @*<div class="row" style="border: groove; height:162px">*@
+                        <table class="table table-bordered" border="0" style="vertical-align: middle;margin: -1px;width: calc(100% + 2px);">
+                            <tr>
+                                <td style="vertical-align: middle" align="center">
+                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
+                                </td>
+                                <td style="vertical-align: middle">
+
+                                    <h5 class="mb-2 text-primary">
+
+                                        <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
+
+                                    </h5>
+                                    <p class="m-0">
 
 
-<div class="content" id="MainContentForm" style="max-width: 820px; margin: auto; background: white; padding: 10px;">
-    <div class="panel panel-default">
+                                        <strong style="line-height: 1.6;">
+                                            IN THE COURT OF ESTATE OFFICER-||<br />
+                                            संपदा अधिकारी-II कार्यालय<br />
+                                            Room No.-05, A-Block, Ground Floor,<br />
+                                            कमरा नं. 05, ए-ब्लॉक, भूतल<br />
+                                            VIKAS SADAN INA, NEW DELHI -110023<br />
+                                            विकास सदन, आई.एन.ए. नई दिल्ली
+                                        </strong>
+                                    </p>
 
-        <div class="row" style="border: groove; height:162px">
-            <table class="table table-bordered" border="0">
-                <tr>
-                    <td>
-                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
-                    </td>
-                    <td align="center">
+                                </td>
+                                <td style="vertical-align: middle" align="center">
+                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
 
-                        <h style="font-size:20px; color:black">
-
-                            <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
-
-                        </h>
-                        <p style="color:black; font-size:11px; margin-left:60px; text-align:justify">
-
-                            <b>
-                                The Authorized Signatory-||<br />
-                                Florence Nightangle Educational Society<br />
-                                Sector-16B Dwarka Phase-II,<br />
-                                New Delhi-110075<br />
-                                <br />
-
-                            </b>
-                        </p>
-
-                    </td>
-                    <td>
-                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
-
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-        @if (Model != null && Model.Count() > 0)
-        {
-            @foreach (var item in Model)
-            {
-
-                <div class="panel-body">
-
-                    @*<div class="row">
-                        <div class="col-md-4">
-                            <label> फाइल सं. -</label>
-
-                        </div>
-                        <div class="col-md-4"></div>
-                        <div class="col-md-4">
-                            <label> दिनांक -</label>
+                                </td>
+                            </tr>
+                        </table>
 
 
-                        </div>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            @foreach (var item in Model)
+                            {
 
-                    </div>*@
+                                @*<div class="panel-body">*@
+
+                                <div class="card-body" style="font-size: .95rem;">
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+
+                                            <label>
+
+                                                File No.-<b>@item.RefNo</b>
+
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-3">
+                                            Dated -
+
+                                            <b>  <label id="txtNewDate"></label></b>
+                                        </div>
+
+                                    </div>
 
 
-                    <div class="row">
-                        <div class="col-md-8">
 
-                            <label>
+                                    <br />
 
-                                File No.-<b>@item.RefNo</b>
 
-                            </label>
-                        </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p style="color: black" class="mb-1">
+                                                <b>
+                                                    Subject:</b>
+    Regarding outstanding dues in respect of land measuring <b>@item.TotalArea</b> allotted to
+    <b>  @item.Name</b> <br />
+    <b>@item.Address</b>
+    (occupants) Act ,for self-assessment of damage charges.
+</p>
+                                            @*<p style="margin-left:45px; color:black">
+                                                (occupants) Act ,for self-assessment of damage charges.
+                                            </p>*@
 
-                        <div class="col-md-4">
-                            Dated -
+                                        </div>
 
-                            <b>  <label id="txtNewDate"></label></b>
-                        </div>
+                                    </div>
 
+                                    <br />
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p style="color: black;margin-left: 65px;text-align: justify">
+
+                                                It has been examined and intimated by the accounting,DDA that an amount of Rs <b>@item.TotalAmount</b> is outstanding against
+                                                your society on account of outstanding ground rent<br />
+                                            </p>
+                                            <p style="color:black; margin-left:50px;">
+                                                अधिभोगी हैं/थेः-<br />
+                                            </p>
+
+                                            <br />
+
+
+                                        </div>
+                                    </div>
+                                    <br />
+
+                                    <div class="row" style="color:black; margin-left:12px">
+                                        <div class="col-md-6">
+                                            <p style="color:black"><b>Due Ground Rent:-</b><b>@item.GroundRate </b></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="color:black; margin-left:12px">
+                                        <div class="col-md-6">
+
+
+                                            <p style="color:black"><b>Licence Fee:-</b><b>@item.LicenceFees</b> </p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="color:black; margin-left:12px">
+                                        <div class="col-md-6">
+
+                                            <p style="color:black"><b>Due Interest On GroundRent:-</b><b>@item.Interestrate</b></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="color:black; margin-left:12px">
+                                        <div class="col-md-6">
+
+                                            <p style="color:black"><b> Due Interest on License/Fee:-</b><b>@item.LateInterestrent</b></p>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p style="color:black; margin-left:100px;margin-bottom:0.2%; text-align-last:justify">
+
+
+                                                Therefore you are requested to deposit the above amount within 15 days from the date of issue of this letter of the Public Premises <br />
+                                            </p>
+                                            <p style="color:black; margin-left:30px; text-align-last:justify">
+                                                (Eviction of Unauthorized Occupants)Act 1971, I consider that arrears of<br />
+                                                damages in respect of the said premises is due and payable by you to the Delhi Development<br />
+                                                Authority.
+
+
+
+                                            </p>
+
+                                        </div>
+
+
+                                    </div>
+                                    <br />
+
+
+
+
+
+
+
+
+
+
+                                    <br />
+
+
+                                    <br />
+
+
+
+
+
+                                    <br /><br />
+
+                                          <div class="row">
+                                              <div class="col-md-6">
+
+
+                                              </div>
+
+
+                                              @*<div class="col-md-2">
+
+
+        </div>*@
+
+                                              <div class="col-md-5 text-right">
+                                                  <p style="color:black">
+                                                      Sada Shiv<br />
+                                                      Dy.Director(IL)/DDA
+                                                  </p>
+
+                                              </div>
+                                          </div>
+
+
+                                </div>
+                            }
+                        }
                     </div>
-
-
-
-                    <br />
-                    @*<div class="row">
-                        <div class="col-md-6">
-                            <label> श्री/श्रीमती  -</label>
-                            <p style="color:black">Shri/smt -</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label> </label>
-                        </div>
-
-                    </div>*@
-
-
-                    @*<br />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label> पता- </label>
-                            <p style="color:black">Address-</p>
-                        </div>
-
-
-                    </div>
-
-                    <br />*@
-                    @*<div class="row">
-                        <div class="col-md-12">
-                            <p style="color: black">
-                                विषय :
-
-
-
-
-                                क्षतिपूर्ति प्रभारो के स्व आकलन हेतु सरकारी स्थान (अप्राधिकृत  अभिभोगियो  की  बेदखली )
-                            </p>
-                            <p style="margin-left:42px; color:black">
-                                अधिनियम , 1971  की  धारा 7 की उपधारा (3) के अंतर्गत नोटिस |
-                            </p>
-
-
-
-                        </div>
-
-
-                    </div><br />*@
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p style="color:black">
-                                Subject:Regariding outstanding dues in respect of land measuring <b>@item.TotalArea</b> allotted to
-                                <b>  @item.Name</b> <br />
-                                <b>@item.Address</b>
-                            </p>
-                            <p style="margin-left:50px; color:black">
-                                occupants) Act ,for self-assessment of damage charges.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <br />
-
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p style="color: black;margin-left: 50px;text-align: justify">
-
-                                It has been examined and intimated by the accountswing,DDA that an amount of Rs <b>@item.TotalAmount</b> is outstanding agianst
-                                ypur society on account of outstanding ground rent<br />
-                            </p>
-                            <p style="color:black; margin-left:30px;">
-                                अधिभोगी हैं/थेः-<br />
-                            </p>
-
-                            <br />
-                            @*<p style="color: black; margin-left: 50px; text-align: justify">
-                                Whereas , it  has  been  brought  to  my  notice  that    you   are /   were   in   unauthorized <br />
-                            </p>     <p style="color:black; margin-left:30px;">
-                                occupation of the public premises described below: -
-
-                            </p>*@
-
-                        </div>
-                    </div>
-                    <br />
-
-                    <div class="row" style="color:black; margin-left:12px">
-                        <div class="col-md-6">
-                            <p style="color:black">Due ground Rent:-<b>@item.GroundRate </b></p>
-                        </div>
-                    </div>
-
-                    <div class="row" style="color:black; margin-left:12px">
-                        <div class="col-md-6">
-
-
-                            <p style="color:black">Licence Fee:-<b>@item.LicenceFees</b> </p>
-
-                        </div>
-                    </div>
-
-                    <div class="row" style="color:black; margin-left:12px">
-                        <div class="col-md-6">
-
-                            <p style="color:black">Due Interest On GRent:-<b>@item.Interestrate</b></p>
-                        </div>
-                    </div>
-
-                    <div class="row" style="color:black; margin-left:12px">
-                        <div class="col-md-6">
-
-                            <p style="color:black"> Due Interest onL/Fee:-<b>@item.LateInterestrent</b></p>
-
-                        </div>
-
-                    </div>
-
-                    @*<div class="row">
-                        <div class="col-md-12">
-                            <p style="color:black; margin-left:100px;margin-bottom:0.2%; text-align-last:justify">
-
-
-                                और जबकि सरकारी स्थान (अप्राधिकृत अधिभागियों की बेदखली) अधिनियम, 1971 की धारा 7 <br />
-                            </p>  <p style="color:black; margin-left:30px; text-align-last:justify">
-                                की उपधारा (2ए) द्वारा प्रदत्त शक्तियों का प्रयोग करते हुए मेरा विचार है कि उक्त स्थान के संबंध में<br />
-                                क्षतिपूर्ति की बकाया राशि देय है, जिसका भुगतान आपके द्वारा दिल्ली विकास प्राधिकरण को किया जाना<br />
-                                है।
-
-
-
-                            </p>
-
-                        </div>
-
-
-                    </div><br />*@
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p style="color:black; margin-left:100px; margin-bottom:0.2%;text-align-last:justify">
-
-
-                                Therefore you are requested to deposit the above amountwithin 15 days from the date of issue of this leeter <br />
-                            </p>  <p style="color:black; margin-left:30px; text-align-last:justify">
-                                of the Public Premises (Eviction of Unauthorized Occupants)Act 1971, I consider that arrears of<br />
-                                damages in respect of the said premises is due and payable by you to the Delhi Development<br />
-                                Authority.
-
-
-
-                            </p>
-
-                        </div>
-
-
-                    </div>
-                    <br />
-
-                
-
-                
-
-                  
-                   
-
-
-
-                    <br />
-                 
-
-                    <br />
-                
-
-                 
-
-
-                    <br /><br />
-
-                    <div class="row">
-                        <div class="col-md-6">
-
-
-                        </div>
-
-
-                        <div class="col-md-2">
-
-
-                        </div>
-
-                        <div class="col-md-4">
-
-                            <p style="color:black">
-                                Sada Shiv<br />
-                                Dy.Director(IL)/DDA
-                            </p>
-
-                        </div>
-                    </div>
-
-                  
                 </div>
-            }
-        }
             </div>
-
-    <div class="row mt-md-3">
-        <div class="col-md-12">
-
-            <button class="btn btn-theme " id="btnCreate" type="button">Print</button>
-
-            @Html.ActionLink("Back", "Create", "DemandLetter", null, new { @class = "btn btn-theme" })
+            @*</div>*@
         </div>
+        </section>
+        @*<div class="row mt-md-3">
+            <div class="col-md-12">
+
+                <button class="btn btn-theme " id="btnCreate" type="button">Print</button>
+
+                @Html.ActionLink("Back", "Create", "DemandLetter", null, new { @class = "btn btn-theme" })
+            </div>
+        </div>*@
+<div class="row mt-md-3">
+    <div class="col-md-12 text-center">
+
+        <button class="btn btn-theme px-5" id="btnCreate" type="button">Print</button>
+        @Html.ActionLink("Back", "Create", "DemandLetter", null, new { @class = "btn btn-theme" })
+
+
     </div>
-
 </div>
-<!-- HTML content for PDF creation -->
+        @*</div>*@
+        <!-- HTML content for PDF creation -->
 
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-        <script src="~/js/DemandLetterCreate.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/DemandLetterCreate.min.js" asp-append-version="true"></script>
-    </environment>
+        <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+        <environment include="Development">
+            <script src="~/js/DemandLetterCreate.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="~/js/DemandLetterCreate.min.js" asp-append-version="true"></script>
+        </environment>
