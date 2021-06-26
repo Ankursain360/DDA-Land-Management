@@ -65,8 +65,13 @@ namespace Repository.EntityRepository
             var data = await _dbContext.Possesionplan
                                       .Include(x => x.Allotment)
                                       .Include(x=>x.Allotment.Application)
-                                          .OrderByDescending(x => x.Id)
-                          .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
+                                       .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                        && (string.IsNullOrEmpty(model.allotteename) || x.Allotment.Application.Name.Contains(model.allotteename))
+                                        && x.PossessionTakenDate >= (model.FromDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.FromDate))
+                                        && x.PossessionTakenDate <= (model.ToDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.ToDate)))
+
+                                      .OrderByDescending(x => x.Id)
+                                      .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -76,21 +81,26 @@ namespace Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Possesionplan
                                         .Include(x => x.Allotment)
-                                       .Include(x => x.Allotment.Application)
-                               //        .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
-                               .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
-                                .OrderBy(x => x.Allotment.Application.RefNo)
-                                .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                        && (string.IsNullOrEmpty(model.allotteename) || x.Allotment.Application.Name.Contains(model.allotteename))
+                                        && x.PossessionTakenDate >= (model.FromDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.FromDate))
+                                        && x.PossessionTakenDate <= (model.ToDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.ToDate)))
+                                        .OrderBy(x => x.Allotment.Application.RefNo)
+                                        .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
                         break;
                      case ("STATUS"):
                         data = null;
                         data = await _dbContext.Possesionplan
                                         .Include(x => x.Allotment)
                                         .Include(x => x.Allotment.Application)
-                                  .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                         .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                        && (string.IsNullOrEmpty(model.allotteename) || x.Allotment.Application.Name.Contains(model.allotteename))
+                                        && x.PossessionTakenDate >= (model.FromDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.FromDate))
+                                        && x.PossessionTakenDate <= (model.ToDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.ToDate)))
 
-                                .OrderByDescending(x => x.IsActive)
-                                .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
+                                       .OrderByDescending(x => x.IsActive)
+                                       .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -102,22 +112,26 @@ namespace Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Possesionplan
                                         .Include(x => x.Allotment)
-                                         .Include(x => x.Allotment.Application)
-                                //          .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
-                                .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
-                                .OrderByDescending(x => x.Allotment.Application.RefNo)
-                                .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
+                                        .Include(x => x.Allotment.Application)
+                                       .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                        && (string.IsNullOrEmpty(model.allotteename) || x.Allotment.Application.Name.Contains(model.allotteename))
+                                        && x.PossessionTakenDate >= (model.FromDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.FromDate))
+                                        && x.PossessionTakenDate <= (model.ToDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.ToDate)))
+                                        .OrderByDescending(x => x.Allotment.Application.RefNo)
+                                        .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Possesionplan
                                         .Include(x => x.Allotment)
-                                         .Include(x => x.Allotment.Application)
-                                         .Where(x => string.IsNullOrEmpty(model.AllotmentId) || (x.Allotment.ApplicationId == Convert.ToInt32(model.AllotmentId)))
-                                 .Where(x => string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                        .Include(x => x.Allotment.Application)
+                                        .Where(x => (string.IsNullOrEmpty(model.AllotmentId) || x.Allotment.Application.RefNo.Contains(model.AllotmentId))
+                                        && (string.IsNullOrEmpty(model.allotteename) || x.Allotment.Application.Name.Contains(model.allotteename))
+                                        && x.PossessionTakenDate >= (model.FromDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.FromDate))
+                                        && x.PossessionTakenDate <= (model.ToDate == "" ? x.PossessionTakenDate : Convert.ToDateTime(model.ToDate)))
 
-                                .OrderBy(x => x.IsActive)
-                                .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
+                                        .OrderBy(x => x.IsActive)
+                                       .GetPaged<Possesionplan>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
