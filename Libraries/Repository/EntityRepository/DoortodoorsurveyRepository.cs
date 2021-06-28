@@ -138,17 +138,17 @@ namespace Libraries.Repository.EntityRepository
                         case ("PRESENTUSE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
-                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
-                                          .OrderBy(s => s.PresentUseId)
+                                          .OrderBy(s => s.Id)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;
 
                         case ("FLOOR NO"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
-                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.NumberOfFloors)
@@ -157,7 +157,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("LONGITUDE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
-                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.Longitude)
@@ -175,17 +175,17 @@ namespace Libraries.Repository.EntityRepository
                         case ("PRESENTUSE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
-                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
-                                          .OrderByDescending(s => s.PresentUseId)
+                                          .OrderByDescending(s => s.Id)
                                           .GetPaged(model.PageNumber, model.PageSize);
                             break;
 
                         case ("FLOOR NO"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
-                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderByDescending(s => s.NumberOfFloors)
@@ -194,7 +194,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("LONGITUDE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
-                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
+                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderByDescending(s => s.Longitude)
