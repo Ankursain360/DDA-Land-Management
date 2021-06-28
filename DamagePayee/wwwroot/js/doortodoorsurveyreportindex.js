@@ -1,12 +1,12 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
 
-        var presentuse = $('#Id option:selected').val();
+        var presentuse = $('#PresentUseId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
@@ -25,13 +25,18 @@ $('#ddlSort').change(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
+//$("#btnReset").click(function () {
+//    $('#presentuse').val('0').trigger('change');
+//    $('#txtFromDate').val('');
+//    $('#txtToDate').val('');
+//    $('#LoadReportView').html("");
+//});
 $("#btnReset").click(function () {
-    $('#presentuse').val('0').trigger('change');
-    $('#txtFromDate').val('');
-    $('#txtToDate').val('');
+    $('#PresentUseId').val('0').trigger('change');
+  $('#txtFromDate').val('');
+  $('#txtToDate').val('');
     $('#LoadReportView').html("");
 });
-
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
@@ -58,7 +63,7 @@ function GetDetails(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
-    var presentuse = $('#Id option:selected').val();
+    var presentuse = $('#PresentUseId option:selected').val();
     var fromDate = $('#txtFromDate').val();
     var toDate = $('#txtToDate').val();
     var model = {
