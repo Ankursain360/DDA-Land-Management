@@ -127,7 +127,7 @@ namespace Libraries.Repository.EntityRepository
                                  .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                  && x.CreatedDate >= model.FromDate
                                  && x.CreatedDate <= model.ToDate)
-                                .GetPaged(model.PageNumber, model.PageSize);
+                                .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
                 int SortOrder = (int)model.SortOrder;
                 if (SortOrder == 1)
@@ -142,7 +142,7 @@ namespace Libraries.Repository.EntityRepository
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.Id)
-                                          .GetPaged(model.PageNumber, model.PageSize);
+                                          .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                             break;
 
                         case ("FLOOR NO"):
@@ -152,7 +152,7 @@ namespace Libraries.Repository.EntityRepository
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.NumberOfFloors)
-                                          .GetPaged(model.PageNumber, model.PageSize);
+                                          .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                             break;
                         case ("LONGITUDE"):
                             data = null;
@@ -161,7 +161,7 @@ namespace Libraries.Repository.EntityRepository
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.Longitude)
-                                          .GetPaged(model.PageNumber, model.PageSize);
+                                          .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                             break;
 
 
@@ -179,7 +179,7 @@ namespace Libraries.Repository.EntityRepository
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderByDescending(s => s.Id)
-                                          .GetPaged(model.PageNumber, model.PageSize);
+                                          .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                             break;
 
                         case ("FLOOR NO"):
@@ -198,7 +198,7 @@ namespace Libraries.Repository.EntityRepository
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderByDescending(s => s.Longitude)
-                                          .GetPaged(model.PageNumber, model.PageSize);
+                                         .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
                             break;
 
 
