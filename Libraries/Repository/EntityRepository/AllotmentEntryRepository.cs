@@ -230,7 +230,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Premiumrate> FetchSinglerateResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
         {
             //var data =  await _dbContext.Premiumrate.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (x.FromDate >= Convert.ToDateTime(allotmentDate) && x.ToDate <= Convert.ToDateTime(allotmentDate))).SingleOrDefaultAsync();
-            var data = await _dbContext.Premiumrate.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (Convert.ToDateTime(allotmentDate) >= x.FromDate && Convert.ToDateTime(allotmentDate) <= x.ToDate)).SingleOrDefaultAsync();
+            var data = await _dbContext.Premiumrate.Where(x => x.LeasePurposesTypeId == leasePurposeId && x.LeaseSubPurposeId == leaseSubPurposeId && (Convert.ToDateTime(allotmentDate) >= x.FromDate && Convert.ToDateTime(allotmentDate) <= x.ToDate) && x.IsActive==1).SingleOrDefaultAsync();
             return data;
         }
         public async Task<Groundrent> FetchSinglegroundrentResult(int? leasePurposeId, int? leaseSubPurposeId, string allotmentDate)
