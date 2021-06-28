@@ -19,13 +19,18 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto, int adminroleid)
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid)
         {
             List<ApiSaveDoor2DoorSurveyDto> listData = new List<ApiSaveDoor2DoorSurveyDto>();
 
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
-                                  .Where(a => a.CreatedBy == (adminroleid == dto.RoleId ? a.CreatedBy : dto.UserId))
+                                  .Where(a => a.CreatedBy == (adminroleid == dto.RoleId ? a.CreatedBy : dto.UserId)
+                                  && (a.OccupantName.ToUpper().Trim().Contains(dto.OccupantName == "" || dto.OccupantName == null ? a.OccupantName.ToUpper().Trim() : dto.OccupantName.ToUpper().Trim()))
+                                  && (a.MobileNo.ToUpper().Trim().Contains(dto.OccupantContactNo == "" || dto.OccupantContactNo == null ? a.MobileNo.ToUpper().Trim() : dto.OccupantContactNo.ToUpper().Trim()))
+                                  && (a.PropertyAddress.ToUpper().Trim().Contains(dto.PropertyAddress == "" || dto.PropertyAddress == null ? a.PropertyAddress.ToUpper().Trim() : dto.PropertyAddress.ToUpper().Trim()))
+                                  )
+                                  .OrderByDescending(a => a.Id)
                                   .ToListAsync();
             if (Data != null && Data.Count > 0)
             {
