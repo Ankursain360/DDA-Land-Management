@@ -22,8 +22,9 @@ namespace Libraries.Model.Entity
             Documentcharges = new HashSet<Documentcharges>();
         }
 
-       
+        [Required(ErrorMessage = "Purpose is Mandatory")]
         public int PurposeUseId { get; set; }
+        [Required(ErrorMessage = "SubPurpose is Mandatory")]
         public string SubPurposeUse { get; set; }
         public byte? IsActive { get; set; }
 
