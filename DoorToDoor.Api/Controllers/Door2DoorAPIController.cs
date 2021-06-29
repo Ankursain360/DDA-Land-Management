@@ -328,14 +328,14 @@ namespace DoorToDoor.Api.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("api/Door2DoorAPI/GetAllDoor2DoorSurvey")]
-        public async Task<IActionResult> GetAllDoor2DoorSurvey([FromBody] ApiSaveDoor2DoorSurveyDto dto)
+        public async Task<IActionResult> GetAllDoor2DoorSurvey([FromBody] ApiGetAllDoor2DoorSurveyParamsDto dto)
         {
             ApiSaveDoor2DoorSurveyResponseDetails apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails();
             try
             {
                 if (dto != null)
                 {
-                    if (dto.RoleId == null || dto.RoleId == 0 || dto.UserId == null || dto.UserId == 0)
+                    if ( dto.RoleId == 0 || dto.UserId == 0)
                     {
                         List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails

@@ -188,6 +188,8 @@ namespace Libraries.Model
         public virtual DbSet<Noticetodamagepayee> Noticetodamagepayee { get; set; }
         public virtual DbSet<Presentuse> Presentuse { get; set; }
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
+        public virtual DbSet<Doortodoorsurveyidentityproof> Doortodoorsurveyidentityproof { get; set; }
+        public virtual DbSet<Doortodoorsurveypropertyproof> Doortodoorsurveypropertyproof { get; set; }
         public virtual DbSet<Processworkflow> Processworkflow { get; set; }
         public virtual DbSet<Workflowaction> Workflowaction { get; set; }
         public virtual DbSet<Encrochmenttype> Encrochmenttype { get; set; }
@@ -462,6 +464,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
+            modelBuilder.ApplyConfiguration(new DoorToDoorSurveyIdentityProofConfiguration());
+            modelBuilder.ApplyConfiguration(new DoorToDoorSurveyProperyProofConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentverificationConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());

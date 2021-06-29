@@ -1850,3 +1850,31 @@ textarea.floating-label-field--s3 {
 
 @media(min-width:1200px) {}
 */
+
+
+/*Style for Notification added on 28 June 2021 by Renu*/
+.notification-list {
+    padding: 20px;
+    border-radius: 5px;
+    background: #fff;
+    -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+.notification-list--unread {
+    border-left: 5px solid #0c4da2;
+}
+
+
+.notification-list .notification-list_content .notification-list_img img {
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+}
+
+.notification-list .notification-list_content .notification-list_detail p {
+    margin-bottom: 5px;
+}
+
+
+/*End*/
