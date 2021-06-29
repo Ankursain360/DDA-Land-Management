@@ -217,5 +217,54 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<bool> SaveDoorToDoorSurveyIdentityProofs(Doortodoorsurveyidentityproof item)
+        {
+            _dbContext.Doortodoorsurveyidentityproof.Add(item);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> SaveDoorToDoorSurveyPropertyProofs(Doortodoorsurveypropertyproof item)
+        {
+            _dbContext.Doortodoorsurveypropertyproof.Add(item);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<bool> DeleteDoorToDoorSurveyIdentityProofs(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Doortodoorsurveyidentityproof.Where(x => x.DoorToDoorSurveyId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> DeleteDoorToDoorSurveyPropertyProofs(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Doortodoorsurveypropertyproof.Where(x => x.DoorToDoorSurveyId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<Doortodoorsurvey> FetchSingleResult(int id)
+        {
+            return await _dbContext.Doortodoorsurvey
+                                    .Include(x => x.Doortodoorsurveyidentityproof)
+                                    .Include(x => x.Doortodoorsurveypropertyproof)
+                                    .Where(x => x.Id == id && x.IsActive == 1)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<Doortodoorsurveyidentityproof> FetchSingleResultDoor2DoorSurveyIdentity(int id)
+        {
+            return await _dbContext.Doortodoorsurveyidentityproof
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<Doortodoorsurveypropertyproof> FetchSingleResultDoor2DoorSurveyProperty(int id)
+        {
+            return await _dbContext.Doortodoorsurveypropertyproof
+                                   .Where(x => x.Id == id)
+                                   .FirstOrDefaultAsync();
+        }
     }
 }

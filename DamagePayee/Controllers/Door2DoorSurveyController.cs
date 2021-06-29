@@ -30,6 +30,9 @@ namespace DamagePayee.Controllers
         {
             _doortodoorsurveyService = doortodoorsurveyService;
             _configuration = configuration;
+            documentPhotoPathLayout = _configuration.GetSection("FilePaths:Door2DoorSurvey:SurveyIdentityDocumentPath").Value.ToString();
+            propertyPhotoPathLayout = _configuration.GetSection("FilePaths:Door2DoorSurvey:SurveyPropertyDocumentPath").Value.ToString();
+
         }
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
@@ -71,29 +74,54 @@ namespace DamagePayee.Controllers
             try
             {
                 doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
-                documentPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
-                propertyPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:PropertyFilePath").Value.ToString();
-
-
                 if (ModelState.IsValid)
                 {
-                   
-                    FileHelper file = new FileHelper();
-                    if (doortodoorsurvey.DocumentPhoto != null)
-                    {
-                        doortodoorsurvey.OccupantIdentityPrrofFilePath = file.SaveFile(documentPhotoPathLayout, doortodoorsurvey.DocumentPhoto);
-                    }
-                    if (doortodoorsurvey.PropertyPhoto != null)
-                    {
-                        doortodoorsurvey.PropertyFilePath = file.SaveFile(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto);
-                    }
-
                     doortodoorsurvey.CreatedBy = SiteContext.UserId;
                     var result = await _doortodoorsurveyService.Create(doortodoorsurvey);
 
                     if (result == true)
                     {
+                        FileHelper fileHelper = new FileHelper();
+                        ///for Identity Proof file:
+                        if (doortodoorsurvey.DocumentPhoto != null && doortodoorsurvey.DocumentPhoto.Count > 0)
+                        {
+                            List<Doortodoorsurveyidentityproof> doortodoorsurveyidentityproofs = new List<Doortodoorsurveyidentityproof>();
+                            for (int i = 0; i < doortodoorsurvey.DocumentPhoto.Count; i++)
+                            {
+                                string filename = fileHelper.SaveFile1(documentPhotoPathLayout, doortodoorsurvey.DocumentPhoto[i]);
+                                doortodoorsurveyidentityproofs.Add(new Doortodoorsurveyidentityproof
+                                {
+                                    DoorToDoorSurveyId = doortodoorsurvey.Id,
+                                    OccupantIdentityPrrofFilePath = filename,
+                                    CreatedBy = SiteContext.UserId
 
+                                });
+                            }
+                            foreach (var item in doortodoorsurveyidentityproofs)
+                            {
+                                result = await _doortodoorsurveyService.SaveDoorToDoorSurveyIdentityProofs(item);
+                            }
+                        }
+                        ///for Property Proof file:
+                        if (doortodoorsurvey.PropertyPhoto != null && doortodoorsurvey.PropertyPhoto.Count > 0)
+                        {
+                            List<Doortodoorsurveypropertyproof> doortodoorsurveypropertyproofs = new List<Doortodoorsurveypropertyproof>();
+                            for (int i = 0; i < doortodoorsurvey.PropertyPhoto.Count; i++)
+                            {
+                                string filename = fileHelper.SaveFile1(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto[i]);
+                                doortodoorsurveypropertyproofs.Add(new Doortodoorsurveypropertyproof
+                                {
+                                    DoorToDoorSurveyId = doortodoorsurvey.Id,
+                                    PropertyFilePath = filename,
+                                    CreatedBy = SiteContext.UserId
+
+                                });
+                            }
+                            foreach (var item in doortodoorsurveypropertyproofs)
+                            {
+                                result = await _doortodoorsurveyService.SaveDoorToDoorSurveyPropertyProofs(item);
+                            }
+                        }
 
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _doortodoorsurveyService.GetDoortodoorsurvey();
@@ -141,15 +169,6 @@ namespace DamagePayee.Controllers
 
             if (ModelState.IsValid)
             {
-                FileHelper file = new FileHelper();
-                if (doortodoorsurvey.DocumentPhoto != null)
-                {
-                    doortodoorsurvey.OccupantIdentityPrrofFilePath = file.SaveFile(documentPhotoPathLayout, doortodoorsurvey.DocumentPhoto);
-                }
-                if (doortodoorsurvey.PropertyPhoto != null)
-                {
-                    doortodoorsurvey.PropertyFilePath = file.SaveFile(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto);
-                }
                 try
                 {
                     doortodoorsurvey.ModifiedBy = SiteContext.UserId;
@@ -157,6 +176,51 @@ namespace DamagePayee.Controllers
 
                     if (result == true)
                     {
+                        FileHelper fileHelper = new FileHelper();
+                        ///for Identity Proof file:
+                        if (doortodoorsurvey.DocumentPhoto != null && doortodoorsurvey.DocumentPhoto.Count > 0)
+                        {
+                            List<Doortodoorsurveyidentityproof> doortodoorsurveyidentityproofs = new List<Doortodoorsurveyidentityproof>();
+                            result = await _doortodoorsurveyService.DeleteDoorToDoorSurveyIdentityProofs(doortodoorsurvey.Id);
+                            for (int i = 0; i < doortodoorsurvey.DocumentPhoto.Count; i++)
+                            {
+                                string filename = fileHelper.SaveFile1(documentPhotoPathLayout, doortodoorsurvey.DocumentPhoto[i]);
+                                doortodoorsurveyidentityproofs.Add(new Doortodoorsurveyidentityproof
+                                {
+                                    DoorToDoorSurveyId = doortodoorsurvey.Id,
+                                    OccupantIdentityPrrofFilePath = filename,
+                                    CreatedBy = SiteContext.UserId
+
+                                });
+                            }
+                            foreach (var item in doortodoorsurveyidentityproofs)
+                            {
+                                result = await _doortodoorsurveyService.SaveDoorToDoorSurveyIdentityProofs(item);
+                            }
+                        }
+                        ///for Property Proof file:
+                        if (doortodoorsurvey.PropertyPhoto != null && doortodoorsurvey.PropertyPhoto.Count > 0)
+                        {
+                            List<Doortodoorsurveypropertyproof> doortodoorsurveypropertyproofs = new List<Doortodoorsurveypropertyproof>();
+                            result = await _doortodoorsurveyService.DeleteDoorToDoorSurveyPropertyProofs(doortodoorsurvey.Id);
+                            for (int i = 0; i < doortodoorsurvey.PropertyPhoto.Count; i++)
+                            {
+                                string filename = fileHelper.SaveFile1(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto[i]);
+                                doortodoorsurveypropertyproofs.Add(new Doortodoorsurveypropertyproof
+                                {
+                                    DoorToDoorSurveyId = doortodoorsurvey.Id,
+                                    PropertyFilePath = filename,
+                                    CreatedBy = SiteContext.UserId
+
+                                });
+                            }
+                            foreach (var item in doortodoorsurveypropertyproofs)
+                            {
+                                result = await _doortodoorsurveyService.SaveDoorToDoorSurveyPropertyProofs(item);
+                            }
+                        }
+
+
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var list = await _doortodoorsurveyService.GetDoortodoorsurvey();
                         return View("Index", list);
@@ -224,8 +288,8 @@ namespace DamagePayee.Controllers
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _doortodoorsurveyService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.OccupantIdentityPrrofFilePath;
+                var Data = await _doortodoorsurveyService.FetchSingleResultDoor2DoorSurveyIdentity(Id);
+                string targetPhotoPathLayout = documentPhotoPathLayout +  Data.OccupantIdentityPrrofFilePath;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
@@ -248,8 +312,8 @@ namespace DamagePayee.Controllers
             try
             {
                 FileHelper file = new FileHelper();
-                var Data = await _doortodoorsurveyService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.PropertyFilePath;
+                var Data = await _doortodoorsurveyService.FetchSingleResultDoor2DoorSurveyProperty(Id);
+                string targetPhotoPathLayout = propertyPhotoPathLayout +  Data.PropertyFilePath;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
