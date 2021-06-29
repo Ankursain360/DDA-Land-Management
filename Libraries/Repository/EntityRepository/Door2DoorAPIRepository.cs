@@ -8,6 +8,7 @@ using Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
@@ -19,13 +20,34 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiSaveDoor2DoorSurveyDto dto, int adminroleid)
+        public async Task<bool> DeleteDoorToDoorSurveyIdentityProofs(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Doortodoorsurveyidentityproof.Where(x => x.DoorToDoorSurveyId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> DeleteDoorToDoorSurveyPropertyProofs(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Doortodoorsurveypropertyproof.Where(x => x.DoorToDoorSurveyId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid)
         {
             List<ApiSaveDoor2DoorSurveyDto> listData = new List<ApiSaveDoor2DoorSurveyDto>();
 
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
-                                  .Where(a => a.CreatedBy == (adminroleid == dto.RoleId ? a.CreatedBy : dto.UserId))
+                                  .Where(a => a.CreatedBy == (adminroleid == dto.RoleId ? a.CreatedBy : dto.UserId)
+                                  && (a.OccupantName.ToUpper().Trim().Contains(dto.OccupantName == "" || dto.OccupantName == null ? a.OccupantName.ToUpper().Trim() : dto.OccupantName.ToUpper().Trim()))
+                                  && (a.MobileNo.ToUpper().Trim().Contains(dto.OccupantContactNo == "" || dto.OccupantContactNo == null ? a.MobileNo.ToUpper().Trim() : dto.OccupantContactNo.ToUpper().Trim()))
+                                  && (a.PropertyAddress.ToUpper().Trim().Contains(dto.PropertyAddress == "" || dto.PropertyAddress == null ? a.PropertyAddress.ToUpper().Trim() : dto.PropertyAddress.ToUpper().Trim()))
+                                  &&( a.CreatedDate >= ((dto.FromDate != null || dto.FromDate != "") ? Convert.ToDateTime(dto.FromDate) : a.CreatedDate))
+                                  && (a.CreatedDate <= ((dto.ToDate != null || dto.ToDate != "") ? Convert.ToDateTime(dto.ToDate) : a.CreatedDate))
+                                  )
+                                  .OrderByDescending(a => a.Id)
                                   .ToListAsync();
             if (Data != null && Data.Count > 0)
             {
@@ -51,8 +73,6 @@ namespace Libraries.Repository.EntityRepository
                         MobileNo = Data[i].MobileNo,
                         OccupantAadharNo = Data[i].OccupantAadharNo,
                         VoterIdNo = Data[i].VoterIdNo,
-                        OccupantIdentityPrrofFilePath = Data[i].OccupantIdentityPrrofFilePath,
-                        PropertyFilePath = Data[i].PropertyFilePath,
                         CreatedBy = Data[i].CreatedBy
                     });
                 }
@@ -82,18 +102,43 @@ namespace Libraries.Repository.EntityRepository
             return listData;
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto)
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto, string identityDocumentPath, string propertyDocumentPath)
         {
             List<ApiSaveDoor2DoorSurveyDto> listData = new List<ApiSaveDoor2DoorSurveyDto>();
-
+            List<string> propertyDocument = new List<string>();
+            List<string> identityDocument = new List<string>();
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
+                                  .Include(a => a.Doortodoorsurveyidentityproof)
+                                  .Include(a => a.Doortodoorsurveypropertyproof)
                                   .Where(a => a.IsActive == 1 && a.Id == dto.Id)
                                   .ToListAsync();
             if (Data != null && Data.Count > 0)
             {
                 for (int i = 0; i < Data.Count; i++)
                 {
+                    //Fetch identity document
+                    var identityDocumentData = await _dbContext.Doortodoorsurveyidentityproof
+                                                         .Where(x => x.DoorToDoorSurveyId == Data[i].Id)
+                                                         .ToListAsync();
+                    if (identityDocumentData != null)
+                    {
+                        for (int h = 0; h < identityDocumentData.Count; h++)
+                        {
+                            identityDocument.Add(identityDocumentPath + identityDocumentData[h].OccupantIdentityPrrofFilePath);
+                        }
+                    }
+                    //Fetch Property document
+                    var propertyDocumentData = await _dbContext.Doortodoorsurveypropertyproof
+                                                        .Where(x => x.DoorToDoorSurveyId == Data[i].Id)
+                                                        .ToListAsync();
+                    if (propertyDocumentData != null)
+                    {
+                        for (int h = 0; h < propertyDocumentData.Count; h++)
+                        {
+                            propertyDocument.Add(propertyDocumentPath + propertyDocumentData[h].PropertyFilePath);
+                        }
+                    }
                     listData.Add(new ApiSaveDoor2DoorSurveyDto()
                     {
                         Id = Data[i].Id,
@@ -113,34 +158,27 @@ namespace Libraries.Repository.EntityRepository
                         MobileNo = Data[i].MobileNo,
                         OccupantAadharNo = Data[i].OccupantAadharNo,
                         VoterIdNo = Data[i].VoterIdNo,
-                        OccupantIdentityPrrofFilePath = Data[i].OccupantIdentityPrrofFilePath,
-                        PropertyFilePath = Data[i].PropertyFilePath,
+                        OccupantIdentityPrrofFilePath = identityDocument,
+                        PropertyFilePath = propertyDocument,
                         CreatedBy = Data[i].CreatedBy
                     });
                 }
             }
-            //if (Data != null)
-            //{
-            //    listData.PropertyAddress = Data.PropertyAddress;
-            //    listData.GeoReferencingLattitude = Data.GeoReferencingLattitude;
-            //    listData.Longitude = Data.Longitude;
-            //    listData.PresentUseId = Data.PresentUseId;
-            //    listData.ApproxPropertyArea = Data.ApproxPropertyArea;
-            //    listData.NumberOfFloors = Data.NumberOfFloors;
-            //    listData.CaelectricityNo = Data.CaelectricityNo;
-            //    listData.IsActive = Data.IsActive;
-            //    listData.KwaterNo = Data.KwaterNo;
-            //    listData.PropertyHouseTaxNo = Data.PropertyHouseTaxNo;
-            //    listData.OccupantName = Data.OccupantName;
-            //    listData.Email = Data.Email;
-            //    listData.IsActive = 1;
-            //    listData.Remarks = Data.Remarks;
-            //    listData.OccupantIdentityPrrofFilePath = Data.OccupantIdentityPrrofFilePath;
-            //    listData.PropertyFilePath = Data.PropertyFilePath;
-            //    listData.Remarks = Data.Remarks;
-            //}
-
             return listData;
+        }
+
+        public async Task<bool> SaveDoorToDoorSurveyIdentityProofs(Doortodoorsurveyidentityproof item)
+        {
+            _dbContext.Doortodoorsurveyidentityproof.Add(item);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> SaveDoorToDoorSurveyPropertyProofs(Doortodoorsurveypropertyproof item)
+        {
+            _dbContext.Doortodoorsurveypropertyproof.Add(item);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
 
         public async Task<List<ApiSurveyUserDetailsDto>> VerifySurveyUserDetailsLogin(ApiSurveyUserLoginDto dto)

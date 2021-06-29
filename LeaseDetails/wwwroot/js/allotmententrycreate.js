@@ -3,11 +3,11 @@
 $(document).ready(function () {
     $('#aarea').hide();
     $('#fee').hide();
-    //debugger
+    
     var kid = $("#ApplicationId").val();
     if (kid) {
         HttpGet(`/AllotmentEntry/GetAreaList/?applicationid=${kid}`, 'json', function (response) {
-            //debugger;
+           
             $("#Name").val(response.name);
             $("#Address").val(response.address);
             $("#ContactNo").val(response.contactNo);
@@ -45,168 +45,169 @@ $("#ApplicationId").change(function () {
     }
 });
 
-$("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #TotalArea").change(function () {
-    if ($('#TotalArea').val() == '') {
-        return;
-    }
-    else if (parseFloat($('#TotalArea').val()) <= 0) {
-        return;
-    }   
-    var area = $('#TotalArea').val();
+//$("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #TotalArea").change(function () {
+//    if ($('#TotalArea').val() == '') {
+//        return;
+//    }
+//    else if (parseFloat($('#TotalArea').val()) <= 0) {
+//        return;
+//    }   
+//    var area = $('#TotalArea').val();
    
 
-    if ($('#LeasePurposesTypeId option:selected').val() != ""
-        && $('#LeaseSubPurposeId option:selected').val() != ""
-        && $("#AllotmentDate").val() != "")
-    {
-        $("#PremiumRate").val("");
-        $("#PremiumAmount").val("");
-        $("#GroundRate").val("");
-        $("#AmountGroundRate").val("");
-        $("#LicenceFees").val("");
-        $("#AmountLicFee").val("");
-        $("#DocumentCharge").val("");
-        $("#TotalAmount").val("");
+//    if ($('#LeasePurposesTypeId option:selected').val() != ""
+//        && $('#LeaseSubPurposeId option:selected').val() != ""
+//        && $("#AllotmentDate").val() != "")
+//    {
+//        $("#PremiumRate").val("");
+//        $("#PremiumAmount").val("");
+//        $("#GroundRate").val("");
+//        $("#AmountGroundRate").val("");
+//        $("#LicenceFees").val("");
+//        $("#AmountLicFee").val("");
+//        $("#DocumentCharge").val("");
+//        $("#TotalAmount").val("");
 
-        var LeaseID = parseInt($('#LeasesTypeId option:selected').val());
-        var kid = parseInt($('#LeaseSubPurposeId option:selected').val());
-        var pid = parseInt($('#LeasePurposesTypeId option:selected').val());
-        var adate = $("#AllotmentDate").val();
+//        var LeaseID = parseInt($('#LeasesTypeId option:selected').val());
+//        var kid = parseInt($('#LeaseSubPurposeId option:selected').val());
+//        var pid = parseInt($('#LeasePurposesTypeId option:selected').val());
+//        var adate = $("#AllotmentDate").val();
 
-        if (LeaseID == 1) {
+//        if (LeaseID == 1) {
 
 
            
 
-                HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+//                HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                    // debugger;
-                    $("#PremiumRate").val(response.premiumRate);
-                    var area = $('#TotalArea').val();
-                    var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
-                    $("#PremiumAmount").val((pamount).toFixed(3));
+//                    // debugger;
+//                    $("#PremiumRate").val(response.premiumRate);
+//                    var area = $('#TotalArea').val();
+//                    var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
+//                    $("#PremiumAmount").val((pamount).toFixed(3));
 
-                });
-                HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+//                });
+//                HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                    //debugger;
-                    $("#GroundRate").val(response.groundRate);
+//                    //debugger;
+//                    $("#GroundRate").val(response.groundRate);
 
-                    var ppamount = $('#PremiumAmount').val();
-                    var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
-                    $("#AmountGroundRate").val((gamount).toFixed(3));
+//                    var ppamount = $('#PremiumAmount').val();
+//                    var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+//                    $("#AmountGroundRate").val((gamount).toFixed(3));
 
 
-                });
-                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+//                });
+//                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                    // debugger;
-                    $("#DocumentCharge").val(response.documentCharge);
+//                    // debugger;
+//                    $("#DocumentCharge").val(response.documentCharge);
 
-                    var pa = $("#PremiumAmount").val();
+//                    var pa = $("#PremiumAmount").val();
 
-                    var ga = $("#AmountGroundRate").val();
+//                    var ga = $("#AmountGroundRate").val();
 
-                    var dc = $("#DocumentCharge").val();
-                    var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(dc);
-                    $("#TotalAmount").val((totalamount).toFixed(3));
+//                    var dc = $("#DocumentCharge").val();
+//                    var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(dc);
+//                    $("#TotalAmount").val((totalamount).toFixed(3));
 
-                });
+//                });
             
 
-        } else if (LeaseID == 2) {
+//        } else if (LeaseID == 2) {
 
             
-                HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+//                HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                    // debugger;
-                    $("#LicenceFees").val(response.licenceFees);
-                    var years = $('#NoOfYears').val();
-                    var lamount = parseFloat(years * (response.licenceFees));
-                    $("#AmountLicFee").val((lamount).toFixed(3));
+//                    // debugger;
+//                    $("#LicenceFees").val(response.licenceFees);
+//                    var years = $('#NoOfYears').val();
+//                    var lamount = parseFloat(years * (response.licenceFees));
+//                    $("#AmountLicFee").val((lamount).toFixed(3));
 
-                });
+//                });
 
 
-                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+//                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                    // debugger;
-                    $("#DocumentCharge").val(response.documentCharge);
-                    var al = $("#AmountLicFee").val();
-                    var dc = $("#DocumentCharge").val();
+//                    // debugger;
+//                    $("#DocumentCharge").val(response.documentCharge);
+//                    var al = $("#AmountLicFee").val();
+//                    var dc = $("#DocumentCharge").val();
 
                   
-                    var totalamount = parseFloat(al) + parseFloat(dc);
-                    $("#TotalAmount").val((totalamount).toFixed(3));
+//                    var totalamount = parseFloat(al) + parseFloat(dc);
+//                    $("#TotalAmount").val((totalamount).toFixed(3));
 
-                });
+//                });
      
 
-        } else if (LeaseID == 3) {
+//        } else if (LeaseID == 3) {
 
         
 
-                HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+//                HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                    // debugger;
-                    $("#PremiumRate").val(response.premiumRate);
-                    var area = $('#TotalArea').val();
-                    var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
-                    $("#PremiumAmount").val((pamount).toFixed(3));
+//                    // debugger;
+//                    $("#PremiumRate").val(response.premiumRate);
+//                    var area = $('#TotalArea').val();
+//                    var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
+//                    $("#PremiumAmount").val((pamount).toFixed(3));
 
-                });
-                HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+//                });
+//                HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                    //debugger;
-                    $("#GroundRate").val(response.groundRate);
+//                    //debugger;
+//                    $("#GroundRate").val(response.groundRate);
 
-                    var ppamount = $('#PremiumAmount').val();
-                    var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
-                    $("#AmountGroundRate").val((gamount).toFixed(3));
-
-
-                });
-
-                HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-
-                    // debugger;
-                    $("#LicenceFees").val(response.licenceFees);
-                    var years = $('#NoOfYears').val();
-                    var lamount = parseFloat(years * (response.licenceFees));
-                    $("#AmountLicFee").val((lamount).toFixed(3));
-
-                });
-                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-
-                    // debugger;
-                    $("#DocumentCharge").val(response.documentCharge);
-
-                    var pa = $("#PremiumAmount").val();
-
-                    var ga = $("#AmountGroundRate").val();
-
-                    var dc = $("#DocumentCharge").val();
+//                    var ppamount = $('#PremiumAmount').val();
+//                    var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+//                    $("#AmountGroundRate").val((gamount).toFixed(3));
 
 
-                    var al = $("#AmountLicFee").val();
+//                });
+
+//                HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+
+//                    // debugger;
+//                    $("#LicenceFees").val(response.licenceFees);
+//                    var years = $('#NoOfYears').val();
+//                    var lamount = parseFloat(years * (response.licenceFees));
+//                    $("#AmountLicFee").val((lamount).toFixed(3));
+
+//                });
+//                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+
+//                    // debugger;
+//                    $("#DocumentCharge").val(response.documentCharge);
+
+//                    var pa = $("#PremiumAmount").val();
+
+//                    var ga = $("#AmountGroundRate").val();
+
+//                    var dc = $("#DocumentCharge").val();
 
 
-                     var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
+//                    var al = $("#AmountLicFee").val();
+
+
+//                     var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
                    
-                    $("#TotalAmount").val((totalamount).toFixed(3));
+//                    $("#TotalAmount").val((totalamount).toFixed(3));
 
-                });
+//                });
           
 
-        }
+//        }
 
        
-    } else {
+//    } else {
         
-    }
-});
+//    }
+//});
 
 $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #TotalArea").change(function () {
+    debugger;
     if ($('#TotalArea').val() == '') {
         return;
     }
@@ -240,38 +241,86 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
 
 
             HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                debugger;
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    $("#PremiumRate").val(response.premiumRate);
+                    var area = $('#TotalArea').val();
+                    if ($("#PremiumRate").val() == '') {
+                        
+                        var pamount = 0;
+                        $("#PremiumAmount").val(pamount);
+                    } else {
 
-                // debugger;
-                $("#PremiumRate").val(response.premiumRate);
-                var area = $('#TotalArea').val();
-                var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
-                $("#PremiumAmount").val((pamount).toFixed(3));
+                        var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
+                        $("#PremiumAmount").val((pamount).toFixed(3));
+                    }
 
+
+                //$("#PremiumRate").val(response.premiumRate);
+                //var area = $('#TotalArea').val();
+                //var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
+                //$("#PremiumAmount").val((pamount).toFixed(3));
+                }
             });
             HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                debugger;
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    
+                    //$("#GroundRate").val(response.groundRate);
 
-                //debugger;
-                $("#GroundRate").val(response.groundRate);
+                    //var ppamount = $('#PremiumAmount').val();
+                    //var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+                    //$("#AmountGroundRate").val((gamount).toFixed(3));
 
-                var ppamount = $('#PremiumAmount').val();
-                var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
-                $("#AmountGroundRate").val((gamount).toFixed(3));
 
+                    $("#GroundRate").val(response.groundRate);
+                   // var area = $('#TotalArea').val();
+                    if ($("#GroundRate").val() == '') {
+
+                        var gamount = 0;
+                        $("#AmountGroundRate").val(gamount);
+                    } else {
+
+                        var ppamount = $('#PremiumAmount').val();
+                        var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+                        $("#AmountGroundRate").val((gamount).toFixed(3));
+                    }
+
+                }
 
             });
             HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                debugger;
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    
+                    $("#DocumentCharge").val(response.documentCharge);
 
-                // debugger;
-                $("#DocumentCharge").val(response.documentCharge);
+                    if ($("#DocumentCharge").val() == '') {
 
-                var pa = $("#PremiumAmount").val();
+                        var dc = 0;
+                        $("#DocumentCharge").val(dc);
+                    } else {
 
-                var ga = $("#AmountGroundRate").val();
+                        var pa = $("#PremiumAmount").val();
 
-                var dc = $("#DocumentCharge").val();
-                var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(dc);
-                $("#TotalAmount").val((totalamount).toFixed(3));
+                        var ga = $("#AmountGroundRate").val();
 
+                        var dc = $("#DocumentCharge").val();
+                        var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(dc);
+                        $("#TotalAmount").val((totalamount).toFixed(3));
+                    }
+
+                  
+                }
             });
 
 
@@ -279,27 +328,52 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
 
 
             HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-
-                // debugger;
-                $("#LicenceFees").val(response.licenceFees);
-                var years = $('#NoOfYears').val();
-                var lamount = parseFloat(years * (response.licenceFees));
-                $("#AmountLicFee").val((lamount).toFixed(3));
-
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    // debugger;
+                    $("#LicenceFees").val(response.licenceFees);
+                    var years = $('#NoOfYears').val();
+                    if (years == '') {
+                        years = 0;
+                        var lamount = 0;
+                        $("#AmountLicFee").val(lamount);
+                    } else {
+                        
+                        var lamount = parseFloat(years * (response.licenceFees));
+                        $("#AmountLicFee").val((lamount).toFixed(3));
+                    }
+                   
+                }
             });
 
 
             HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    $("#DocumentCharge").val(response.documentCharge);
+                    if ($("#DocumentCharge").val() == '') {
 
-                // debugger;
-                $("#DocumentCharge").val(response.documentCharge);
-                var al = $("#AmountLicFee").val();
-                var dc = $("#DocumentCharge").val();
+                        var dc = 0;
+                        $("#DocumentCharge").val(dc);
+                    } else {
+
+                        
+                        var al = $("#AmountLicFee").val();
+
+                        var dc = $("#DocumentCharge").val();
 
 
-                var totalamount = parseFloat(al) + parseFloat(dc);
-                $("#TotalAmount").val((totalamount).toFixed(3));
+                        var totalamount = parseFloat(al) + parseFloat(dc);
+                        $("#TotalAmount").val((totalamount).toFixed(3));
+                    }
 
+
+                   
+                }
             });
 
 
@@ -308,54 +382,131 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
 
 
             HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    $("#PremiumRate").val(response.premiumRate);
+                    var area = $('#TotalArea').val();
+                    if ($("#PremiumRate").val() == '') {
 
-                // debugger;
-                $("#PremiumRate").val(response.premiumRate);
-                var area = $('#TotalArea').val();
-                var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
-                $("#PremiumAmount").val((pamount).toFixed(3));
+                        var pamount = 0;
+                        $("#PremiumAmount").val(pamount);
+                    } else {
 
+                        var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
+                        $("#PremiumAmount").val((pamount).toFixed(3));
+                    }
+
+
+
+                    //$("#PremiumRate").val(response.premiumRate);
+                    //var area = $('#TotalArea').val();
+                    //var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
+                    //$("#PremiumAmount").val((pamount).toFixed(3));
+                }
             });
             HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    $("#GroundRate").val(response.groundRate);
+                    // var area = $('#TotalArea').val();
+                    if ($("#GroundRate").val() == '') {
 
-                //debugger;
-                $("#GroundRate").val(response.groundRate);
+                        var gamount = 0;
+                        $("#AmountGroundRate").val(gamount);
+                    } else {
 
-                var ppamount = $('#PremiumAmount').val();
-                var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
-                $("#AmountGroundRate").val((gamount).toFixed(3));
+                        var ppamount = $('#PremiumAmount').val();
+                        var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+                        $("#AmountGroundRate").val((gamount).toFixed(3));
+                    }
 
+
+
+                    //$("#GroundRate").val(response.groundRate);
+
+                    //var ppamount = $('#PremiumAmount').val();
+                    //var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+                    //$("#AmountGroundRate").val((gamount).toFixed(3));
+                }
 
             });
 
             HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                // debugger;
-                $("#LicenceFees").val(response.licenceFees);
-                var years = $('#NoOfYears').val();
-                var lamount = parseFloat(years * (response.licenceFees));
-                $("#AmountLicFee").val((lamount).toFixed(3));
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
 
+                    //$("#LicenceFees").val(response.licenceFees);
+                    //var years = $('#NoOfYears').val();
+                    //var lamount = parseFloat(years * (response.licenceFees));
+                    //$("#AmountLicFee").val((lamount).toFixed(3));
+
+
+                    $("#LicenceFees").val(response.licenceFees);
+                    var years = $('#NoOfYears').val();
+                    if (years == '') {
+                        years = 0;
+                        var lamount = 0;
+                        $("#AmountLicFee").val(lamount);
+                    } else {
+
+                        var lamount = parseFloat(years * (response.licenceFees));
+                        $("#AmountLicFee").val((lamount).toFixed(3));
+                    }
+                }
             });
             HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
-                // debugger;
-                $("#DocumentCharge").val(response.documentCharge);
+                if (response == null) {
+                    alert('Please enter correct allotment date.');
+                    return;
+                } else {
+                    $("#DocumentCharge").val(response.documentCharge);
 
-                var pa = $("#PremiumAmount").val();
+                    if ($("#DocumentCharge").val() == '') {
 
-                var ga = $("#AmountGroundRate").val();
+                        var dc = 0;
+                        $("#DocumentCharge").val(dc);
+                    } else {
 
-                var dc = $("#DocumentCharge").val();
+                        var pa = $("#PremiumAmount").val();
+
+                        var ga = $("#AmountGroundRate").val();
+
+                        var dc = $("#DocumentCharge").val();
 
 
-                var al = $("#AmountLicFee").val();
+                        var al = $("#AmountLicFee").val();
 
 
-                var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
+                        var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
+                        $("#TotalAmount").val((totalamount).toFixed(3));
+                    }
 
-                $("#TotalAmount").val((totalamount).toFixed(3));
 
+
+                    //$("#DocumentCharge").val(response.documentCharge);
+
+                    //var pa = $("#PremiumAmount").val();
+
+                    //var ga = $("#AmountGroundRate").val();
+
+                    //var dc = $("#DocumentCharge").val();
+
+
+                    //var al = $("#AmountLicFee").val();
+
+
+                    //var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
+
+                    //$("#TotalAmount").val((totalamount).toFixed(3));
+                }
             });
 
 
@@ -482,6 +633,7 @@ $(function () {
             $('#AllotmentDate').val(' ');
            $('.msg').empty().html('Date must not be Greater Than Current Date ');
         } else {
+            $('.msg').empty();
             $('#AllotmentDate').val($('#AllotmentDate').val());
         }
 
@@ -561,3 +713,42 @@ $('#LeaseSubPurposeId').change(function () {
         var value = $('#LeaseSubPurposeId option:selected').val();
     }
 });
+
+
+$(function () {
+
+    $('#NoOfYears').on('change', function () {
+
+        $("#LicenceFees").val();
+
+        var years = $('#NoOfYears').val();
+        var lamount = parseFloat(years * ($("#LicenceFees").val()));
+        $("#AmountLicFee").val((lamount).toFixed(3));
+        var LeaseID = parseInt($('#LeasesTypeId option:selected').val());
+
+        if (LeaseID == 2)
+        {
+            var al = $("#AmountLicFee").val();
+            var dc = $("#DocumentCharge").val();
+            var totalamount = parseFloat(al) + parseFloat(dc);
+            $("#TotalAmount").val((totalamount).toFixed(3));
+        }
+        else if (LeaseID == 3)
+        {
+            var pa = $("#PremiumAmount").val();
+
+            var ga = $("#AmountGroundRate").val();
+
+            var dc = $("#DocumentCharge").val();
+
+
+            var al = $("#AmountLicFee").val();
+
+
+            var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
+
+            $("#TotalAmount").val((totalamount).toFixed(3));
+        } else {}
+    });
+});
+
