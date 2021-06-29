@@ -22,7 +22,25 @@ $(document).ready(function () {
 });
 
 $('#ddlSort').change(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    debugger;
+    var sortingvalue = $("#ddlSort").children("option:selected").val();
+    if (sortingvalue == '' || sortingvalue == 'undefined' || sortingvalue == null) {
+
+        //ddlDepartment.html(s);
+        $('#ddlSort [value=PRESENTUSE]').attr('selected', 'true');       
+        $('#ddlSort').trigger('change');
+
+        //alert("Please select sort by value from the dropdown");    
+        //return;
+    }
+    else
+    {
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+     
+    }
+        
+
+   
 });
 
 

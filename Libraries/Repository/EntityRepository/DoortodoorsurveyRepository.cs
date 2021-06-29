@@ -130,6 +130,7 @@ namespace Libraries.Repository.EntityRepository
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
 
                 int SortOrder = (int)model.SortOrder;
+                
                 if (SortOrder == 1)
                 {
                     switch (model.SortBy.ToUpper())
