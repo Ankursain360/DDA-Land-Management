@@ -67,39 +67,76 @@ namespace DoorToDoor.Api.Controllers
                         return NotFound(apiResponseDetails);
                     }
                     FileHelper fileHelper = new FileHelper();
-                    if (dto.OccupantIdentityPrrofFileData != "" && dto.OccupantIdentityPrrofFileData != null)
-                    {
-                        dto.OccupantIdentityPrrofFilePath = Guid.NewGuid().ToString() + ".jpg";
-                        if (!Directory.Exists(IdentityDocumentPath))
-                        {
-                            DirectoryInfo directoryInfo = Directory.CreateDirectory(IdentityDocumentPath);
-                        }
-                        using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.OccupantIdentityPrrofFileData)))
-                        {
-                            using (Bitmap bm2 = new Bitmap(ms))
-                            {
-                                bm2.Save(IdentityDocumentPath + dto.OccupantIdentityPrrofFilePath);
-                            }
-                        }
-                    }
-
-                    if (dto.PropertyFileData != "" && dto.PropertyFileData != null)
-                    {
-                        dto.PropertyFilePath = Guid.NewGuid().ToString() + ".jpg";
-                        if (!Directory.Exists(PropertyDocumentPath))
-                        {
-                            DirectoryInfo directoryInfo = Directory.CreateDirectory(PropertyDocumentPath);
-                        }
-                        using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.PropertyFileData)))
-                        {
-                            using (Bitmap bm2 = new Bitmap(ms))
-                            {
-                                bm2.Save(PropertyDocumentPath + dto.PropertyFilePath);
-                            }
-                        }
-                    }
 
                     var data = await _door2DoorAPIService.Create(dto);
+
+                    if (dto.OccupantIdentityPrrofFileData != null && dto.OccupantIdentityPrrofFileData.Count > 0)
+                    {
+                        List<Doortodoorsurveyidentityproof> doortodoorsurveyidentityproofs = new List<Doortodoorsurveyidentityproof>();
+                        for (int i = 0; i < dto.OccupantIdentityPrrofFileData.Count; i++)
+                        {
+                            if (dto.OccupantIdentityPrrofFileData[i] != "" && dto.OccupantIdentityPrrofFileData != null)
+                            {
+                                var OccupantIdentityPrrofFilePathData = Guid.NewGuid().ToString() + ".jpg";
+                                if (!Directory.Exists(IdentityDocumentPath))
+                                {
+                                    DirectoryInfo directoryInfo = Directory.CreateDirectory(IdentityDocumentPath);
+                                }
+                                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.OccupantIdentityPrrofFileData[i])))
+                                {
+                                    using (Bitmap bm2 = new Bitmap(ms))
+                                    {
+                                        bm2.Save(IdentityDocumentPath + OccupantIdentityPrrofFilePathData);
+                                    }
+                                }
+                                doortodoorsurveyidentityproofs.Add(new Doortodoorsurveyidentityproof
+                                {
+                                    DoorToDoorSurveyId = dto.Id,
+                                    OccupantIdentityPrrofFilePath = OccupantIdentityPrrofFilePathData,
+                                    CreatedBy = dto.CreatedBy
+                                });
+                            }
+                        }
+
+                        foreach (var item in doortodoorsurveyidentityproofs)
+                        {
+                            data = await _door2DoorAPIService.SaveDoorToDoorSurveyIdentityProofs(item);
+                        }
+                    }
+                    if (dto.PropertyFileData != null && dto.PropertyFileData.Count > 0)
+                    {
+                        List<Doortodoorsurveypropertyproof> doortodoorsurveypropertyproofs = new List<Doortodoorsurveypropertyproof>();
+                        for (int i = 0; i < dto.PropertyFileData.Count; i++)
+                        {
+                            if (dto.PropertyFileData[i] != "" && dto.PropertyFileData[i] != null)
+                            {
+                                var PropertyFilePathdata = Guid.NewGuid().ToString() + ".jpg";
+                                if (!Directory.Exists(PropertyDocumentPath))
+                                {
+                                    DirectoryInfo directoryInfo = Directory.CreateDirectory(PropertyDocumentPath);
+                                }
+                                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.PropertyFileData[i])))
+                                {
+                                    using (Bitmap bm2 = new Bitmap(ms))
+                                    {
+                                        bm2.Save(PropertyDocumentPath + PropertyFilePathdata);
+                                    }
+                                }
+                                doortodoorsurveypropertyproofs.Add(new Doortodoorsurveypropertyproof
+                                {
+                                    DoorToDoorSurveyId = dto.Id,
+                                    PropertyFilePath = PropertyFilePathdata,
+                                    CreatedBy = dto.CreatedBy
+                                });
+                            }
+                        }
+
+                        foreach (var item in doortodoorsurveypropertyproofs)
+                        {
+                            data = await _door2DoorAPIService.SaveDoorToDoorSurveyPropertyProofs(item);
+                        }
+                    }
+
                     if (data == true)
                     {
 
@@ -107,7 +144,7 @@ namespace DoorToDoor.Api.Controllers
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                         {
                             responseCode = "200",
-                            responseMessage = "details saved successfully",
+                            responseMessage = "Record saved successfully",
                             ApiSaveDoor2DoorSurveyDto = dtoData
                         };
 
@@ -119,7 +156,7 @@ namespace DoorToDoor.Api.Controllers
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                         {
                             responseCode = "404",
-                            responseMessage = " details not found",
+                            responseMessage = "Details not found",
                             ApiSaveDoor2DoorSurveyDto = dtoData
                         };
                         return NotFound(apiResponseDetails);
@@ -181,39 +218,79 @@ namespace DoorToDoor.Api.Controllers
                         return NotFound(apiResponseDetails);
                     }
                     FileHelper fileHelper = new FileHelper();
-                    if (dto.OccupantIdentityPrrofFileData != "" && dto.OccupantIdentityPrrofFileData != null)
-                    {
-                        dto.OccupantIdentityPrrofFilePath = Guid.NewGuid().ToString() + ".jpg";
-                        if (!Directory.Exists(IdentityDocumentPath))
-                        {
-                            DirectoryInfo directoryInfo = Directory.CreateDirectory(IdentityDocumentPath);
-                        }
-                        using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.OccupantIdentityPrrofFileData)))
-                        {
-                            using (Bitmap bm2 = new Bitmap(ms))
-                            {
-                                bm2.Save(IdentityDocumentPath + dto.OccupantIdentityPrrofFilePath);
-                            }
-                        }
-                    }
-
-                    if (dto.PropertyFileData != "" && dto.PropertyFileData != null)
-                    {
-                        dto.PropertyFilePath = Guid.NewGuid().ToString() + ".jpg";
-                        if (!Directory.Exists(PropertyDocumentPath))
-                        {
-                            DirectoryInfo directoryInfo = Directory.CreateDirectory(PropertyDocumentPath);
-                        }
-                        using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.PropertyFileData)))
-                        {
-                            using (Bitmap bm2 = new Bitmap(ms))
-                            {
-                                bm2.Save(PropertyDocumentPath + dto.PropertyFilePath);
-                            }
-                        }
-                    }
 
                     var data = await _door2DoorAPIService.Update(dto);
+
+
+                    if (dto.OccupantIdentityPrrofFileData != null && dto.OccupantIdentityPrrofFileData.Count > 0)
+                    {
+                        List<Doortodoorsurveyidentityproof> doortodoorsurveyidentityproofs = new List<Doortodoorsurveyidentityproof>();
+                        data = await _door2DoorAPIService.DeleteDoorToDoorSurveyIdentityProofs(dto.Id);
+                        for (int i = 0; i < dto.OccupantIdentityPrrofFileData.Count; i++)
+                        {
+                            if (dto.OccupantIdentityPrrofFileData[i] != "" && dto.OccupantIdentityPrrofFileData != null)
+                            {
+                                var OccupantIdentityPrrofFilePathData = Guid.NewGuid().ToString() + ".jpg";
+                                if (!Directory.Exists(IdentityDocumentPath))
+                                {
+                                    DirectoryInfo directoryInfo = Directory.CreateDirectory(IdentityDocumentPath);
+                                }
+                                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.OccupantIdentityPrrofFileData[i])))
+                                {
+                                    using (Bitmap bm2 = new Bitmap(ms))
+                                    {
+                                        bm2.Save(IdentityDocumentPath + OccupantIdentityPrrofFilePathData);
+                                    }
+                                }
+                                doortodoorsurveyidentityproofs.Add(new Doortodoorsurveyidentityproof
+                                {
+                                    DoorToDoorSurveyId = dto.Id,
+                                    OccupantIdentityPrrofFilePath = OccupantIdentityPrrofFilePathData,
+                                    CreatedBy = dto.CreatedBy
+                                });
+                            }
+                        }
+
+                        foreach (var item in doortodoorsurveyidentityproofs)
+                        {
+                            data = await _door2DoorAPIService.SaveDoorToDoorSurveyIdentityProofs(item);
+                        }
+                    }
+                    if (dto.PropertyFileData != null && dto.PropertyFileData.Count > 0)
+                    {
+                        List<Doortodoorsurveypropertyproof> doortodoorsurveypropertyproofs = new List<Doortodoorsurveypropertyproof>();
+                        data = await _door2DoorAPIService.DeleteDoorToDoorSurveyPropertyProofs(dto.Id);
+                        for (int i = 0; i < dto.PropertyFileData.Count; i++)
+                        {
+                            if (dto.PropertyFileData[i] != "" && dto.PropertyFileData[i] != null)
+                            {
+                                var PropertyFilePathdata = Guid.NewGuid().ToString() + ".jpg";
+                                if (!Directory.Exists(PropertyDocumentPath))
+                                {
+                                    DirectoryInfo directoryInfo = Directory.CreateDirectory(PropertyDocumentPath);
+                                }
+                                using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(dto.PropertyFileData[i])))
+                                {
+                                    using (Bitmap bm2 = new Bitmap(ms))
+                                    {
+                                        bm2.Save(PropertyDocumentPath + PropertyFilePathdata);
+                                    }
+                                }
+                                doortodoorsurveypropertyproofs.Add(new Doortodoorsurveypropertyproof
+                                {
+                                    DoorToDoorSurveyId = dto.Id,
+                                    PropertyFilePath = PropertyFilePathdata,
+                                    CreatedBy = dto.CreatedBy
+                                });
+                            }
+                        }
+
+                        foreach (var item in doortodoorsurveypropertyproofs)
+                        {
+                            data = await _door2DoorAPIService.SaveDoorToDoorSurveyPropertyProofs(item);
+                        }
+                    }
+
                     if (data == true)
                     {
 
@@ -221,7 +298,7 @@ namespace DoorToDoor.Api.Controllers
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                         {
                             responseCode = "200",
-                            responseMessage = "details updated successfully",
+                            responseMessage = "Record updated successfully.",
                             ApiSaveDoor2DoorSurveyDto = dtoData
                         };
 
@@ -251,7 +328,7 @@ namespace DoorToDoor.Api.Controllers
                     return NotFound(apiResponseDetails);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
                 apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
@@ -274,7 +351,7 @@ namespace DoorToDoor.Api.Controllers
             {
                 if (dto != null)
                 {
-                    var data = await _door2DoorAPIService.GetSurveyDetails(dto);
+                    var data = await _door2DoorAPIService.GetSurveyDetails(dto, (_configuration.GetSection("FileAPiPaths:Door2DoorSurvey:SurveyIdentityDocumentPath").Value).ToString(), (_configuration.GetSection("FileAPiPaths:Door2DoorSurvey:SurveyPropertyDocumentPath").Value).ToString());
                     if (data != null && data.Count > 0)
                     {
 
@@ -335,7 +412,7 @@ namespace DoorToDoor.Api.Controllers
             {
                 if (dto != null)
                 {
-                    if ( dto.RoleId == 0 || dto.UserId == 0)
+                    if (dto.RoleId == 0 || dto.UserId == 0)
                     {
                         List<ApiSaveDoor2DoorSurveyDto> dtoData = new List<ApiSaveDoor2DoorSurveyDto>();
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails

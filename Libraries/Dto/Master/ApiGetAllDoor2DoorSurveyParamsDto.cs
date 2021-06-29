@@ -11,6 +11,8 @@ namespace Dto.Master
         public string OccupantName { get; set; }
         public string OccupantContactNo { get; set; }
         public string PropertyAddress { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
 
     }
 }

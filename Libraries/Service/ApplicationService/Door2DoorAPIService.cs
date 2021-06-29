@@ -47,13 +47,13 @@ namespace Libraries.Service.ApplicationService
             model.MobileNo = dto.MobileNo;
             model.OccupantAadharNo = dto.OccupantAadharNo;
             model.VoterIdNo = dto.VoterIdNo;
-            model.OccupantIdentityPrrofFilePath = dto.OccupantIdentityPrrofFilePath;
-            model.PropertyFilePath = dto.PropertyFilePath;
             model.Remarks = dto.Remarks;
             model.CreatedBy = dto.CreatedBy;
             model.CreatedDate = DateTime.Now;
-            _door2DoorAPIRepository.Add(model);
-            return await _unitOfWork.CommitAsync() > 0;
+            _door2DoorAPIRepository.Add(model); 
+            var result = await _unitOfWork.CommitAsync() > 0;
+            dto.Id =  model.Id;
+            return result;
         }
 
 
@@ -78,10 +78,6 @@ namespace Libraries.Service.ApplicationService
             model.MobileNo = dto.MobileNo;
             model.OccupantAadharNo = dto.OccupantAadharNo;
             model.VoterIdNo = dto.VoterIdNo;
-            if (dto.OccupantIdentityPrrofFileData != "" && dto.OccupantIdentityPrrofFileData != null)
-                model.OccupantIdentityPrrofFilePath = dto.OccupantIdentityPrrofFilePath;
-            if (dto.PropertyFileData != "" && dto.PropertyFileData != null)
-                model.PropertyFilePath = dto.PropertyFilePath;
             model.Remarks = dto.Remarks;
             model.ModifiedBy = dto.CreatedBy;
             model.ModifiedDate = DateTime.Now;
@@ -99,14 +95,36 @@ namespace Libraries.Service.ApplicationService
             return await _door2DoorAPIRepository.GetPresentUseDetails();
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto)
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto, string identityDocumentPath, string propertyDocumentPath)
         {
-            return await _door2DoorAPIRepository.GetSurveyDetails(dto);
+            return await _door2DoorAPIRepository.GetSurveyDetails(dto, identityDocumentPath, propertyDocumentPath);
         }
 
         public async Task<List<ApiSurveyUserDetailsDto>> VerifySurveyUserDetailsLogin(ApiSurveyUserLoginDto dto)
         {
             return await _door2DoorAPIRepository.VerifySurveyUserDetailsLogin(dto);
+        }
+
+        public async Task<bool> SaveDoorToDoorSurveyIdentityProofs(Doortodoorsurveyidentityproof item)
+        {
+            item.CreatedDate = DateTime.Now;
+            return await _door2DoorAPIRepository.SaveDoorToDoorSurveyIdentityProofs(item);
+        }
+
+        public async Task<bool> SaveDoorToDoorSurveyPropertyProofs(Doortodoorsurveypropertyproof item)
+        {
+            item.CreatedDate = DateTime.Now;
+            return await _door2DoorAPIRepository.SaveDoorToDoorSurveyPropertyProofs(item);
+        }
+
+        public async Task<bool> DeleteDoorToDoorSurveyIdentityProofs(int id)
+        {
+            return await _door2DoorAPIRepository.DeleteDoorToDoorSurveyIdentityProofs(id);
+        }
+
+        public async Task<bool> DeleteDoorToDoorSurveyPropertyProofs(int id)
+        {
+            return await _door2DoorAPIRepository.DeleteDoorToDoorSurveyPropertyProofs(id);
         }
     }
 }
