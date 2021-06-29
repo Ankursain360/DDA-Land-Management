@@ -144,7 +144,7 @@ namespace DoorToDoor.Api.Controllers
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                         {
                             responseCode = "200",
-                            responseMessage = "details saved successfully",
+                            responseMessage = "Record saved successfully",
                             ApiSaveDoor2DoorSurveyDto = dtoData
                         };
 
@@ -156,7 +156,7 @@ namespace DoorToDoor.Api.Controllers
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                         {
                             responseCode = "404",
-                            responseMessage = " details not found",
+                            responseMessage = "Details not found",
                             ApiSaveDoor2DoorSurveyDto = dtoData
                         };
                         return NotFound(apiResponseDetails);
@@ -298,7 +298,7 @@ namespace DoorToDoor.Api.Controllers
                         apiResponseDetails = new ApiSaveDoor2DoorSurveyResponseDetails
                         {
                             responseCode = "200",
-                            responseMessage = "details updated successfully",
+                            responseMessage = "Record updated successfully.",
                             ApiSaveDoor2DoorSurveyDto = dtoData
                         };
 
