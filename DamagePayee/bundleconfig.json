@@ -190,5 +190,11 @@
     "inputFiles": [
       "wwwroot/js/demandlettercreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/doortodoorsurveyreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/doortodoorsurveyreportindex.js"
+    ]
   }
 ]
