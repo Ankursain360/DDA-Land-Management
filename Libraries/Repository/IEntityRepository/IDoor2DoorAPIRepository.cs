@@ -10,9 +10,13 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IDoor2DoorAPIRepository : IGenericRepository<Doortodoorsurvey>
     {
-        Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto);
+        Task<List<ApiSaveDoor2DoorSurveyDto>> GetSurveyDetails(ApiSaveDoor2DoorSurveyDto dto, string identityDocumentPath, string propertyDocumentPath);
         Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid);
         Task<List<ApiSurveyUserDetailsDto>> VerifySurveyUserDetailsLogin(ApiSurveyUserLoginDto dto);
         Task<List<ApiGetPresentUseDto>> GetPresentUseDetails();
+        Task<bool> SaveDoorToDoorSurveyIdentityProofs(Doortodoorsurveyidentityproof item);
+        Task<bool> SaveDoorToDoorSurveyPropertyProofs(Doortodoorsurveypropertyproof item);
+        Task<bool> DeleteDoorToDoorSurveyIdentityProofs(int id);
+        Task<bool> DeleteDoorToDoorSurveyPropertyProofs(int id);
     }
 }
