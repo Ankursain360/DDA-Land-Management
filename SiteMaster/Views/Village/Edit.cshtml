@@ -27,7 +27,7 @@
                         <option selected="selected" disabled="disabled" value="">Select </option>
                     </select>
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
-                    <label asp-for="ZoneId" class="floating-label">Zone </label>
+                    <label asp-for="ZoneId" class="floating-label">Zone<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -35,7 +35,7 @@
                     <input asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" limit="100" />
                     <span asp-validation-for="Name" class="text-danger"></span>
-                    <label class="floating-label">Village Name  </label>
+                    <label class="floating-label">Village Name<span style="color:red">*</span>  </label>
                 </div>
             </div>
         </div>

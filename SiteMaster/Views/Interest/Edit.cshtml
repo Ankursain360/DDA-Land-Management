@@ -15,7 +15,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="PropertyId" class="text-danger"></span>
-                    <label asp-for="PropertyId" class="floating-label">Property Type </label>
+                    <label asp-for="PropertyId" class="floating-label">Property Type<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -26,7 +26,7 @@
 
                     <span asp-validation-for="FromDate" class="text-danger"></span>
 
-                    <label class="floating-label">From Date   </label>
+                    <label class="floating-label">From Date<span style="color:red">*</span>   </label>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                     <input asp-for="ToDate" type="date" class="floating-label-field floating-label-field--s3" placeholder="To Date"
                            >
                     <span asp-validation-for="ToDate" class="text-danger "></span>
-                    <label class="floating-label">To Date</label>
+                    <label class="floating-label">To Date<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -47,7 +47,7 @@
                     <input asp-for="Percentage" type="text"  class="floating-label-field floating-label-field--s3" placeholder="To Date"
                            limit="18">
                     <span asp-validation-for="Percentage" class="text-danger "></span>
-                    <label class="floating-label">Interest Percentage</label>
+                    <label class="floating-label">Interest Percentage<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
