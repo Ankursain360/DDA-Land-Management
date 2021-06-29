@@ -1,44 +1,30 @@
 ﻿@model System.Collections.Generic.IList<Dto.Master.UserNotificationAlertDto>
-@await Component.InvokeAsync("PageHeader", new { pageName = "User Notification" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "All Notifications" })
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row">
-   
-    <div class="col-md-6">
-        @foreach (var menu in Model)
-        {
-        <ul class="list-unstyled m-0 p-0">
-            <li class="px-3">
-                @if (@menu.URL == "#")
+<section class="slow bg-gray">
+    <div class="container-fluid">
+        <div class="section-wraper px-3  pb-md-0 pt-md-3">
+            @*<h6 class="pull-left my-3" style="color:#007bff;margin-top:5px;">All Notifications</h6>*@
+            <div class="">
+                @foreach (var menu in Model)
                 {
-                    <a href="@menu.URL" class="d-flex align-items-center py-2 border-bottom read" onclick="NoNotification()">
-                        <div class="noti-time text-center pr-2">
-                            <i class="ri-discuss-line"></i>
-                            <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " Days")</small>
+                    <div class="notification-list notification-list--unread d-md-flex align-items-center mb-3">
+                        <div class="notification-list_content d-md-flex align-items-center">
+                            <div class="notification-list_img mb-3 mb-md-0 mr-4">
+                                <img src="https://auth.managemybusinessess.com/login/logo-circle.png" alt="user" style="width: 60px;height: 60px;">
+                            </div>
+                            <div class="notification-list_detail">
+                                <h6 class="mb-2"><a asp-action="UpdateUserNotification" asp-controller="UserNotification" asp-route-id="@menu.Id" asp-route-url="@menu.URL" target="_blank"> @menu.Message</a> </h6>
+                                <p class="text-muted"><small>@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " days ago")</small></p>
+                            </div>
                         </div>
-                        <p class="m-0  text-left">
-                            @menu.Message
-                        </p>
-                    </a>
+                    </div>
                 }
-                else
-                {
-                    <a asp-action="UpdateUserNotification" asp-controller="UserNotification" asp-route-id="@menu.Id" asp-route-url="@menu.URL" onclick="RefreshNotification()" target="_blank" class="d-flex align-items-center py-2 border-bottom read">
-                        @*onclick="UpdateStatus(@menu.Id,@menu.URL)"*@
-                        <div class="noti-time text-center pr-2">
-                            <i class="ri-discuss-line"></i>
-                            <small class="d-block w-100">@(menu.SubmitDate == "0" ?"Today" : menu.SubmitDate + " Days")</small>
-                        </div>
-                        <p class="m-0  text-left">
-                            @menu.Message
-                        </p>
-                    </a>
-                }
-            </li>
-        </ul>
-        }
+            </div>
+        </div>
     </div>
-</div>
+</section>
