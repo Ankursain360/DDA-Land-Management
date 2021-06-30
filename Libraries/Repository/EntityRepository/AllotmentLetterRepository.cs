@@ -51,6 +51,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                             // && (model.GenerateDate==null || x.DemandDate==(model.GenerateDate))
@@ -64,6 +65,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                             // && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
@@ -74,6 +76,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                           ) //)  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
@@ -84,6 +87,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                            )//  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
@@ -102,6 +106,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                            //  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
@@ -114,6 +119,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                             )// && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
@@ -124,6 +130,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                            )//  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))
@@ -134,6 +141,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Allotmentletter
                             .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
                             .Include(s => s.Allotment.Application)
                             .Where(x => (string.IsNullOrEmpty(model.AppRefNo) || x.Allotment.Application.RefNo.Contains(model.AppRefNo))
                            )//  && (model.GenerateDate == null || x.DemandDate == (model.GenerateDate)))

@@ -99,16 +99,19 @@
 
                                     <td align="left">
 
-                                        <br />
+                                        <br />To <br /> <br />
                                     </td>
                                 </tr>
 
-                                <tr>
 
+
+                                <tr>
+                               
                                     <td align="left">
                                         <b>  The Deputy Director,</b><br />
                                         <b>   Dte. of Education,</b><br />
-                                        <b>Land & Estate Branch. GNCTD, Lucknow Road,</b><br />
+                                        <b>Land & Estate Branch. GNCTD,</b><br />
+                                      <b>  Lucknow Road,</b><br />
                                         <b> Delhi-110054</b><br />
                                         <br />
                                     </td>
@@ -144,17 +147,18 @@
                                     <tr>
                                         <td>
                                             <p style="color:black;margin-bottom:0.4%; text-align-last:justify">
-                                                With reference to letter No.<b> @Model.Allotment.Application.RefNo </b>I dated<b> @Model.Allotment.Application.RefNoOfAllotmentLetterDate</b> on the subject noted above. I am directed to  inform you that
+                                                With reference to letter No.<b> @Model.Allotment.Application.RefNo </b>dated<b> @Model.Allotment.Application.RefNoOfAllotmentLetterDate</b> on the subject noted above, I am directed to  inform you that
                                             </p> <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
-                                                under the provision of DDA (Disposal of Developed Nazul land) Rules. 1981. it is proposed to allot a plot  of land measuring
+                                                under the provision of DDA (Disposal of Developed Nazul land) Rules, 1981, it is proposed to allot a plot  of land measuring
                                             </p>
                                             <p style="color:black;margin-bottom:0.2%">
-                                                <b>@Model.Allotment.TotalArea</b> Sqm.<b>
-                                                    @if (Model.Allotment.LeasePurposesTypeId == 1)
+                                                <b>@Model.Allotment.TotalArea</b> Sqm.
+    @if (Model.Allotment.LeasePurposesTypeId == 1)
+    
                                                     {<span>(on perpetual lease hold basis)</span>}
                                                     else
                                                     { <span>(on temp lease hold basis)</span>}
-                                                </b>for the purpose of
+                                                for the purpose of
 
 
                                                 <b>
@@ -179,7 +183,7 @@
     {<span>0.00</span>}
     else
     {<span>@Model.Allotment.PremiumRate</span>}
-                                                            </b> /- per acre (Aggregate of the provisional land final premium). The revision of rates of land is under consideration of the Central Govt. The allottee shall have to pay balance premium for the land as per rates determined by the Central Government under Rule-5 of DDA (Disposal of Developed Nazul land) Rules 1981, and within the time demanded by DDA. The rates of land. determined. by Central Government, shall be binding upon the allottee and shall not be called in question by it in any proceeding.
+                                                            </b> /- per acre (Aggregate of the provisional land final premium). The revision of rates of land is under consideration of the Central Govt. The allottee shall have to pay balance premium for the land as per rates determined by the Central Government under Rule-5 of DDA (Disposal of Developed Nazul land) Rules, 1981, and within the time demanded by DDA. The rates of land. determined. by Central Government, shall be binding upon the allottee and shall not be called in question by it in any proceeding.
                                                         </span>
                                                     </span>
                                                 </li>
