@@ -174,7 +174,7 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
             HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
                 debugger;
                 if (response == null) {
-                    msg = (msg == null ? 'Ground rate is not defined for particular allotment date' : msg + ', Ground rate is not defined for particular allotment date');
+                    msg = (msg == null ? 'Ground rate is not defined for particular allotment date' : msg + ', \nGround rate is not defined for particular allotment date');
                 }
                 else {
                     $("#GroundRate").val(response.groundRate);
@@ -196,10 +196,10 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
             HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
                 debugger;
                 if (response == null) {
-                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', Document Charge is not defined for particular allotment date');
+                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
 
                     if (msg != null) {
-                        alert(msg + ' ,Please contact system administrator.');
+                        alert(msg + ' ,\nPlease contact system administrator.');
                     }
                 }
                 else {
@@ -254,9 +254,9 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
 
             HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
                 if (response == null) {
-                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', Document Charge is not defined for particular allotment date');
+                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
                     if (msg != null) {
-                        alert(msg + ' ,Please contact system administrator.');
+                        alert(msg + ', \nPlease contact system administrator.');
                     }
                 }
                 else {
@@ -301,7 +301,7 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
 
             HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
                 if (response == null) {
-                    msg = (msg == null ? 'Ground Rent is not defined for particular allotment date' : msg + ',Ground Rent is not defined for particular allotment date');
+                    msg = (msg == null ? 'Ground Rent is not defined for particular allotment date' : msg + ', \nGround Rent is not defined for particular allotment date');
 
                 }
                 else {
@@ -324,7 +324,7 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
             HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
                 if (response == null) {
-                    msg = (msg == null ? 'Licence Fees is not defined for particular allotment date' : msg + ',Licence Fees is not defined for particular allotment date');
+                    msg = (msg == null ? 'Licence Fees is not defined for particular allotment date' : msg + ', \nLicence Fees is not defined for particular allotment date');
 
                 }
                 else {
@@ -347,9 +347,9 @@ $("#AllotmentDate, #LeaseSubPurposeId, #LeasePurposesTypeId, #LeasesTypeId, #Tot
             HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
                 if (response == null) {
-                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ',Document Charge is not defined for particular allotment date');
+                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
                     if (msg != null) {
-                        alert(msg + ' ,Please contact system administrator.');
+                        alert(msg + ', \nPlease contact system administrator.');
                     }
                 }
                 else {
