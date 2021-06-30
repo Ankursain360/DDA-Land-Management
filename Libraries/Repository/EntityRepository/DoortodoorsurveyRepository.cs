@@ -35,6 +35,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurvey(DoortodoorsurveySearchDto model)
         {
             var data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                        .Include(x => x.CreatedByNavigation)
                                         .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                          )
@@ -49,6 +50,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCATION"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -58,6 +60,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("OCCUPANTNAME"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                     .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -68,6 +71,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -84,6 +88,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCATION"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -93,6 +98,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("OCCUPANTNAME"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -103,6 +109,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                            )

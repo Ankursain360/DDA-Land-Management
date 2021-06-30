@@ -41,6 +41,8 @@ namespace EncroachmentDemolition.Controllers
         private readonly IUserNotificationService _userNotificationService;
 
 
+        string targetPhotoPathLayout = "";
+        string targetReportfilePathLayout = "";
         string ApprovalDocumentPath = "";
         public WatchWardApprovalController(IWatchAndWardApprovalService watchAndWardApprovalService,
             IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
@@ -56,6 +58,8 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+            targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:WatchAndWard:ApprovalDocumentPath").Value.ToString();
 
         }
@@ -517,11 +521,10 @@ namespace EncroachmentDemolition.Controllers
         {
             FileHelper file = new FileHelper();
             Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
-            string path = Data.PhotoFilePath;
+            string path = targetPhotoPathLayout + Data.PhotoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
-
         #endregion
 
         #region History Details Only For Approval Page Added By Renu 26 April 2021

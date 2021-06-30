@@ -29,7 +29,6 @@ namespace EncroachmentDemolition.Controllers
         private readonly IOnlinecomplaintService _onlinecomplaintService;
         public IConfiguration _configuration;
         string targetPhotoPathLayout = string.Empty;
-        string targetReportfilePathLayout = string.Empty;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserProfileService _userProfileService;
@@ -48,6 +47,7 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
         }
         public IActionResult Index()
         {
@@ -166,12 +166,11 @@ namespace EncroachmentDemolition.Controllers
                     }
                     #endregion
 
-                    targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
 
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
                     {
-                        onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
+                        onlinecomplaint.PhotoPath = file.SaveFile1(targetPhotoPathLayout, onlinecomplaint.Photo);
 
                     }
                     onlinecomplaint.CreatedBy = SiteContext.UserId;

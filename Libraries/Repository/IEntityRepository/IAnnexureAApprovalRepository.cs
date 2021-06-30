@@ -17,5 +17,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Fixingdemolition>> GetAllFixingdemolition();
         Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId, int zoneId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
+        Task<Fixingdemolition> FetchSingleResult(int id);
     }
 }

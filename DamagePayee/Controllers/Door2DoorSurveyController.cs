@@ -60,7 +60,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Create()
         {
             Doortodoorsurvey doortodoorsurvey = new Doortodoorsurvey();
-           
+
             doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
             return View(doortodoorsurvey);
         }
@@ -136,7 +136,7 @@ namespace DamagePayee.Controllers
                 else
                 {
                     return View(doortodoorsurvey);
-               }
+                }
             }
             catch (Exception ex)
             {
@@ -163,13 +163,11 @@ namespace DamagePayee.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Doortodoorsurvey doortodoorsurvey)
         {
-            doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
-            documentPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
-            propertyPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:PropertyFilePath").Value.ToString();
-
-            if (ModelState.IsValid)
+            try
             {
-                try
+                doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+
+                if (ModelState.IsValid)
                 {
                     doortodoorsurvey.ModifiedBy = SiteContext.UserId;
                     var result = await _doortodoorsurveyService.Update(id, doortodoorsurvey);
@@ -230,15 +228,16 @@ namespace DamagePayee.Controllers
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(doortodoorsurvey);
                     }
+
                 }
-                catch (Exception ex)
+                else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(doortodoorsurvey);
                 }
             }
-            else
+            catch (Exception ex)
             {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(doortodoorsurvey);
             }
         }
@@ -289,7 +288,7 @@ namespace DamagePayee.Controllers
             {
                 FileHelper file = new FileHelper();
                 var Data = await _doortodoorsurveyService.FetchSingleResultDoor2DoorSurveyIdentity(Id);
-                string targetPhotoPathLayout = documentPhotoPathLayout +  Data.OccupantIdentityPrrofFilePath;
+                string targetPhotoPathLayout = documentPhotoPathLayout + Data.OccupantIdentityPrrofFilePath;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
@@ -313,7 +312,7 @@ namespace DamagePayee.Controllers
             {
                 FileHelper file = new FileHelper();
                 var Data = await _doortodoorsurveyService.FetchSingleResultDoor2DoorSurveyProperty(Id);
-                string targetPhotoPathLayout = propertyPhotoPathLayout +  Data.PropertyFilePath;
+                string targetPhotoPathLayout = propertyPhotoPathLayout + Data.PropertyFilePath;
                 byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
                 return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
             }
@@ -343,11 +342,11 @@ namespace DamagePayee.Controllers
                     {
                         Id = result[i].Id,
                         LocationAddressofProperty = result[i].PropertyAddress,
-                       // MunicipalNumberifany = result[i].MuncipalNo,
+                        // MunicipalNumberifany = result[i].MuncipalNo,
                         GeoReferencing = result[i].GeoReferencingLattitude,
                         ApproxAreaoftheProperty = result[i].ApproxPropertyArea.ToString(),
                         NumberofFloors = result[i].NumberOfFloors,
-                  
+
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }

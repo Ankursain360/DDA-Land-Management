@@ -80,17 +80,18 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
+
                             @{
                                 if (Model.Watchandwardphotofiledetails != null && Model.Watchandwardphotofiledetails.Count > 0)
                                 {
-                                    <br />
+
                                     foreach (var item in Model.Watchandwardphotofiledetails)
                                     {
                                         <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id" target="_blank"> (View Photo @(Photo += 1 ))</a>
 
                                         if (item.LattLongUrl != null)
                                         {
-                                            <a target="_blank" href="@item.LattLongUrl">View Location on Map</a>
+                                            <a target="_blank" class="badge badge-primary px-2" href="@item.LattLongUrl">View Location on Map</a>
                                         }
                                         <br />
                                     }
