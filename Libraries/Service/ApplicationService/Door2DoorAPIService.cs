@@ -85,9 +85,9 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid)
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid, string identityDocumentPath, string propertyDocumentPath)
         {
-            return await _door2DoorAPIRepository.GetAllSurveyDetails(dto, adminroleid);
+            return await _door2DoorAPIRepository.GetAllSurveyDetails(dto, adminroleid, identityDocumentPath, propertyDocumentPath);
         }
 
         public async Task<List<ApiGetPresentUseDto>> GetPresentUseDetails()

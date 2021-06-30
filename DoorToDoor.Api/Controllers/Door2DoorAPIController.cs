@@ -423,7 +423,7 @@ namespace DoorToDoor.Api.Controllers
                         };
                         return NotFound(apiResponseDetails);
                     }
-                    var data = await _door2DoorAPIService.GetAllSurveyDetails(dto, Convert.ToInt32(_configuration.GetSection("DoorToDoorAdminRole").Value));
+                    var data = await _door2DoorAPIService.GetAllSurveyDetails(dto, Convert.ToInt32(_configuration.GetSection("DoorToDoorAdminRole").Value), (_configuration.GetSection("FileAPiPaths:Door2DoorSurvey:SurveyIdentityDocumentPath").Value).ToString(), (_configuration.GetSection("FileAPiPaths:Door2DoorSurvey:SurveyPropertyDocumentPath").Value).ToString());
                     if (data != null && data.Count > 0)
                     {
 
