@@ -26,7 +26,7 @@
                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
                            limit="100">
                     <span asp-validation-for="Name" class="text-danger "></span>
-                    <label class="floating-label">Lawyer Name</label>
+                    <label class="floating-label">Lawyer Name<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
                     <input asp-for="PanNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Pan No"
                            limit="10">
                     <span asp-validation-for="PanNo" class="text-danger "></span>
-                    <label class="floating-label">Pan No</label>
+                    <label class="floating-label">Pan No<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                     <input asp-for="ValidFrom" type="date" class="floating-label-field floating-label-field--s3" placeholder="Valid From"
                            >
                     <span asp-validation-for="ValidFrom" class="text-danger "></span>
-                    <label class="floating-label">Valid Form</label>
+                    <label class="floating-label">Valid Form<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -113,7 +113,7 @@
                     <input asp-for="ValidTo" type="date" class="floating-label-field floating-label-field--s3" placeholder="Valid To"
                            >
                     <span asp-validation-for="ValidTo" class="text-danger "></span>
-                    <label class="floating-label">Valid To</label>
+                    <label class="floating-label">Valid To<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>

@@ -9,6 +9,11 @@ namespace Libraries.Model.Entity
 {
     public class Doortodoorsurvey : AuditableEntity<int>
     {
+        public Doortodoorsurvey()
+        {
+            Doortodoorsurveyidentityproof = new HashSet<Doortodoorsurveyidentityproof>();
+            Doortodoorsurveypropertyproof = new HashSet<Doortodoorsurveypropertyproof>();
+        }
 
         [Required(ErrorMessage = " The Property Address field is required")]
         public string PropertyAddress { get; set; }
@@ -67,12 +72,14 @@ namespace Libraries.Model.Entity
         public virtual Presentuse PresentUseNavigation { get; set; }
 
         [NotMapped]
-        public IFormFile DocumentPhoto { get; set; }
+        public List<IFormFile> DocumentPhoto { get; set; }
         [NotMapped]
-        public IFormFile PropertyPhoto { get; set; }
+        public List<IFormFile> PropertyPhoto { get; set; }
+        public ICollection<Doortodoorsurveyidentityproof> Doortodoorsurveyidentityproof { get; set; }
+        public ICollection<Doortodoorsurveypropertyproof> Doortodoorsurveypropertyproof { get; set; }
 
 
-  
+
 
 
     }

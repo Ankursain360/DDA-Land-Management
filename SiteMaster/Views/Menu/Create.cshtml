@@ -15,7 +15,7 @@
                     <option selected="selected" disabled="disabled" value="">--Select--</option>
                 </select>
                 <span asp-validation-for="ModuleId" class="text-danger"></span>
-                <label asp-for="ModuleId" class="floating-label">Module Name</label>
+                <label asp-for="ModuleId" class="floating-label">Module Name<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-4">
@@ -36,7 +36,7 @@
                        placeholder="Menu Name"
                        limit="150">
                 <span asp-validation-for="Name" class="text-danger"></span>
-                <label class="floating-label">Menu Name</label>
+                <label class="floating-label">Menu Name<span style="color:red">*</span></label>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                        placeholder="Sort By"
                        >
                 <span asp-validation-for="SortBy" class="text-danger"></span>
-                <label class="floating-label">Sort By</label>
+                <label class="floating-label">Sort By<span style="color:red">*</span></label>
             </div>
         </div>
         <div class=" col-md-4">

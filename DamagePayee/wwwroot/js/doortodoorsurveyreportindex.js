@@ -1,37 +1,64 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
-
-        var presentuse = $('#Id option:selected').val();
+        var presentuse = $('#PresentUseId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
-        if (presentuse != '' && presentuse != undefined && fromDate != '' && toDate != '' && presentuse != null && fromDate != null && toDate != null) {
-            GetDetails(currentPageNumber, currentPageSize, sortOrder);
+       
+        if (presentuse == '' || presentuse == undefined || fromDate == '' || toDate == '' || presentuse == null || fromDate == null || toDate == null) {
+            alert('Please Fill All Fields');
         }
 
         else {
-            alert('Please Fill All Fields');
+            GetDetails(currentPageNumber, currentPageSize, sortOrder);
         }
     });
 
 });
 
 $('#ddlSort').change(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    debugger;
+    var sortingvalue = $("#ddlSort").children("option:selected").val();
+    
+        var frmdate = $('#txtFromDate').val();
+        var todate = $('#txtToDate').val();
+
+        if (frmdate == '' || todate == '')
+        {
+
+        alert("Please Fill From Date and To Date");    
+         return;
+
+        }
+        else if (sortingvalue == '' || sortingvalue == 'undefined' || sortingvalue == null) {
+
+            //ddlDepartment.html(s);
+            $('#ddlSort [value=PRESENTUSE]').attr('selected', 'true');
+            $('#ddlSort').trigger('change');
+
+    }
+    else
+    {
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+     
+    }
+        
+
+   
 });
+
 
 $("#btnReset").click(function () {
-    $('#presentuse').val('0').trigger('change');
-    $('#txtFromDate').val('');
-    $('#txtToDate').val('');
+    $('#PresentUseId').val('0').trigger('change');
+  $('#txtFromDate').val('');
+  $('#txtToDate').val('');
     $('#LoadReportView').html("");
 });
-
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
@@ -58,7 +85,7 @@ function GetDetails(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
-    var presentuse = $('#Id option:selected').val();
+    var presentuse = $('#PresentUseId option:selected').val();
     var fromDate = $('#txtFromDate').val();
     var toDate = $('#txtToDate').val();
     var model = {

@@ -17,7 +17,7 @@
                         <option value="BOK">BOOKTRANSFER LAND</option>
                     </select>
                     <span asp-validation-for="LandType" class="text-danger"></span>
-                    <label asp-for="LandType" class="floating-label">Land Type </label>
+                    <label asp-for="LandType" class="floating-label">Land Type<span style="color:red">*</span> </label>
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                     <input asp-for="NotificationNumber" placeholder="Name" type="text" limit="100"
                            class="floating-label-field floating-label-field--s3 " value="" />
                     <span asp-validation-for="NotificationNumber" class="text-danger"></span>
-                    <label class="floating-label">Notification Number</label>
+                    <label class="floating-label">Notification Number<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>

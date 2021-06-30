@@ -1,5 +1,6 @@
 ﻿@model Libraries.Model.Entity.Doortodoorsurvey
-
+@{int Identity = 0;}
+@{int Property = 0;}
 @await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
 
 <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -137,14 +138,29 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <input type="hidden" asp-for="OccupantIdentityPrrofFilePath" />
                 @{
-                    @if (Model.OccupantIdentityPrrofFilePath != null)
+                    @*@if (Model.OccupantIdentityPrrofFilePath != null)
+            {
+                <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
+                @Html.ActionLink(" (View File)", "ViewIdentityProof", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
+            }
+            else
+            {
+                <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
+            }*@
+                    if (Model.Doortodoorsurveyidentityproof != null && Model.Doortodoorsurveyidentityproof.Count > 0)
                     {
-                        <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
-                        @Html.ActionLink(" (View File)", "ViewIdentityProof", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
+                        <br />
+                        <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" multiple accept="image/jpeg" />
+
+                        foreach (var item in Model.Doortodoorsurveyidentityproof)
+                        {
+                            <a class="badge badge-primary px-2" asp-action="ViewIdentityProof" asp-route-id="@item.Id" target="_blank"> (View Photo @(Identity += 1 ))</a>
+                            <br />
+                        }
                     }
                     else
                     {
-                        <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
+                        <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" multiple accept="image/jpeg" />
                     }
                 }
                 <span asp-validation-for="OccupantIdentityPrrofFilePath" class="text-danger"></span>
@@ -166,14 +182,29 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <input type="hidden" asp-for="PropertyFilePath" />
                 @{
-                    @if (Model.PropertyFilePath != null)
+                    @*@if (Model.PropertyFilePath != null)
+            {
+                <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
+                @Html.ActionLink(" (View File)", "ViewPropertyFile", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
+            }
+            else
+            {
+                <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
+            }*@
+                    if (Model.Doortodoorsurveypropertyproof != null && Model.Doortodoorsurveypropertyproof.Count > 0)
                     {
-                        <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
-                        @Html.ActionLink(" (View File)", "ViewPropertyFile", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
+                        <br />
+                        <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" multiple accept="image/jpeg" />
+
+                        foreach (var item in Model.Doortodoorsurveypropertyproof)
+                        {
+                            <a class="badge badge-primary px-2" asp-action="ViewPropertyFile" asp-route-id="@item.Id" target="_blank"> (View Photo @(Property += 1 ))</a>
+                            <br />
+                        }
                     }
                     else
                     {
-                        <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
+                        <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" multiple accept="image/jpeg" />
                     }
                 }
                 <span asp-validation-for="PropertyPhoto" class="text-danger"></span>

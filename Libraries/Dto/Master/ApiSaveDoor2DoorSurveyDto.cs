@@ -25,19 +25,17 @@ namespace Dto.Master
         public string OccupantAadharNo { get; set; }
         public string VoterIdNo { get; set; }
 
-        public string OccupantIdentityPrrofFilePath { get; set; }
+        public IList<string> OccupantIdentityPrrofFilePath { get; set; }
 
         public string DamagePaidPast { get; set; }
-        public string PropertyFilePath { get; set; }
+        public IList<string> PropertyFilePath { get; set; }
         public string Remarks { get; set; }
 
         public byte IsActive { get; set; }
-        public string OccupantIdentityPrrofFileData { get; set; }
-        public string PropertyFileData { get; set; }
+        public IList<string> OccupantIdentityPrrofFileData { get; set; }
+        public IList<string> PropertyFileData { get; set; }
         public int CreatedBy { get; set; }
         public string PresentUseName { get; set; }
-        public int RoleId { get; set; }
-        public int UserId { get; set; }
 
 
     }

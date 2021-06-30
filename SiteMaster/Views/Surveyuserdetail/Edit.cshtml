@@ -12,7 +12,7 @@
                     <input asp-for="FirstName" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" limit="100" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
-                    <label class="floating-label">First Name    </label>
+                    <label class="floating-label">First Name <span style="color:red">*</span>   </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -40,7 +40,7 @@
                     <input asp-for="PhoneNo" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" limit="12" />
                     <span asp-validation-for="PhoneNo" class="text-danger"></span>
-                    <label class="floating-label">Phone Number    </label>
+                    <label class="floating-label">Phone Number <span style="color:red">*</span>   </label>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                     <input asp-for="EmailId" placeholder="Name" type="email"
                            class="floating-label-field floating-label-field--s3" limit="50" />
                     <span asp-validation-for="EmailId" class="text-danger"></span>
-                    <label class="floating-label">Email Id   </label>
+                    <label class="floating-label">Email Id <span style="color:red">*</span>  </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -73,7 +73,7 @@
                             <option selected="selected" disabled="disabled" value="">--Select-- </option>
                         </select>
                         <span asp-validation-for="RoleId" class="text-danger"></span>
-                        <label asp-for="RoleId" class="floating-label">Role </label>
+                        <label asp-for="RoleId" class="floating-label">Role<span style="color:red">*</span> </label>
                     </div>
             </div>
             <div class=" col-md-6">

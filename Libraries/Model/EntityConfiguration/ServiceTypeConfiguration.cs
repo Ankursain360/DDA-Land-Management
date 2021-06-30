@@ -30,7 +30,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.Url)
