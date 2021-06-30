@@ -8,7 +8,9 @@ $(document).ready(function () {
         var presentuse = $('#PresentUseId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
-
+        if (fromDate > toDate) {
+            alert("To Date Must be Greater or equals to From Date");
+        }
        
         if (presentuse == '' || presentuse == undefined || fromDate == '' || toDate == '' || presentuse == null || fromDate == null || toDate == null) {
             alert('Please Fill All Fields');
