@@ -16,6 +16,8 @@
             <th>Damage Paid Past</th>
             <th>Remarks</th>
             <th>Aadhar Number</th>
+            <th>Submitted By</th>
+            <th>Submitted On</th>
 
         </tr>
 
@@ -38,6 +40,8 @@
             <td>@item.DamagePaidPast</td>
             <td>@item.Remarks</td>
             <td>@item.OccupantAadharNo</td>
+            <td>@item.CreatedByNavigation.UserName</td>
+            <td>@item.CreatedDate.ToString("dd-MMM-yyyy")</td>
 
         </tr>
             }
