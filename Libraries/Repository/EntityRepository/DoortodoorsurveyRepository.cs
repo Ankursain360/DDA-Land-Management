@@ -132,6 +132,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 var data = await _dbContext.Doortodoorsurvey
                                     .Include(x=> x.PresentUseNavigation)
+                                    .Include(x => x.CreatedByNavigation)
                                  .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                  && x.CreatedDate >= model.FromDate
                                  && x.CreatedDate <= model.ToDate)
@@ -148,6 +149,7 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                               .Include(x => x.PresentUseNavigation)
+                                              .Include(x => x.CreatedByNavigation)
                                           .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -159,6 +161,7 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
+                                .Include(x => x.CreatedByNavigation)
                                           .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -188,6 +191,7 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
+                                .Include(x => x.CreatedByNavigation)
                                           .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -199,6 +203,7 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
+                                .Include(x => x.CreatedByNavigation)
                                           .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -209,6 +214,7 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
+                                .Include(x => x.CreatedByNavigation)
                                           .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
