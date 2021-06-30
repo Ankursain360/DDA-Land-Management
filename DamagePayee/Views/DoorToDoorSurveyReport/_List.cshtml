@@ -4,13 +4,13 @@
 
     <thead class="text-nowrap">
         <tr>
-           
+            <th>Present Use</th>
             <th>Location/Address of Property</th>
             <th>Lattitude</th>
             <th>Longitude</th>
             <th>Approx Area of the Property</th>
             <th>Number of Floors</th>
-       
+
         </tr>
 
     </thead>
@@ -20,7 +20,7 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-           
+            <td>@item.PresentUseNavigation.Name</td>
             <td>@item.PropertyAddress</td>
             <td>@item.GeoReferencingLattitude</td>
             <td>@item.Longitude</td>
