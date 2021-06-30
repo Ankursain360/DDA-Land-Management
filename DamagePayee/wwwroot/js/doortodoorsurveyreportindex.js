@@ -5,32 +5,45 @@ var sortOrder = 1;//default Ascending
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
-
         var presentuse = $('#PresentUseId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
-        if (presentuse != '' && presentuse != undefined && fromDate != '' && toDate != '' && presentuse != null && fromDate != null && toDate != null) {
-            GetDetails(currentPageNumber, currentPageSize, sortOrder);
+       
+        if (presentuse == '' || presentuse == undefined || fromDate == '' || toDate == '' || presentuse == null || fromDate == null || toDate == null) {
+            alert('Please Fill All Fields');
         }
 
         else {
-            alert('Please Fill All Fields');
+            GetDetails(currentPageNumber, currentPageSize, sortOrder);
         }
     });
 
 });
 
 $('#ddlSort').change(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+    debugger;
+    var sortingvalue = $("#ddlSort").children("option:selected").val();
+    if (sortingvalue == '' || sortingvalue == 'undefined' || sortingvalue == null) {
+
+        //ddlDepartment.html(s);
+        $('#ddlSort [value=PRESENTUSE]').attr('selected', 'true');       
+        $('#ddlSort').trigger('change');
+
+        //alert("Please select sort by value from the dropdown");    
+        //return;
+    }
+    else
+    {
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
+     
+    }
+        
+
+   
 });
 
-//$("#btnReset").click(function () {
-//    $('#presentuse').val('0').trigger('change');
-//    $('#txtFromDate').val('');
-//    $('#txtToDate').val('');
-//    $('#LoadReportView').html("");
-//});
+
 $("#btnReset").click(function () {
     $('#PresentUseId').val('0').trigger('change');
   $('#txtFromDate').val('');

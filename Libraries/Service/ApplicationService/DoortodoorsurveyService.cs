@@ -4,6 +4,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,9 +37,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<Doortodoorsurvey> FetchSingleResult(int id)
         {
-            var result = await _doortodoorsurveyRepository.FindBy(a => a.Id == id);
-            Doortodoorsurvey model = result.FirstOrDefault();
-            return model;
+            return await _doortodoorsurveyRepository.FetchSingleResult(id);
         }
 
 
@@ -75,8 +74,6 @@ namespace Libraries.Service.ApplicationService
             model.MobileNo = doortodoorsurvey.MobileNo;
             model.OccupantAadharNo = doortodoorsurvey.OccupantAadharNo;
             model.VoterIdNo = doortodoorsurvey.VoterIdNo;
-            model.OccupantIdentityPrrofFilePath = doortodoorsurvey.OccupantIdentityPrrofFilePath;
-            model.PropertyFilePath = doortodoorsurvey.PropertyFilePath;
             model.ModifiedBy = doortodoorsurvey.ModifiedBy;
             _doortodoorsurveyRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
@@ -107,6 +104,36 @@ namespace Libraries.Service.ApplicationService
         {
             return await _doortodoorsurveyRepository.GetPagedDoortodoorsurveyReport(model);
         }
+        public async Task<bool> SaveDoorToDoorSurveyIdentityProofs(Doortodoorsurveyidentityproof item)
+        {
+            item.CreatedDate = DateTime.Now;
+            return await _doortodoorsurveyRepository.SaveDoorToDoorSurveyIdentityProofs(item);
+        }
 
+        public async Task<bool> SaveDoorToDoorSurveyPropertyProofs(Doortodoorsurveypropertyproof item)
+        {
+            item.CreatedDate = DateTime.Now;
+            return await _doortodoorsurveyRepository.SaveDoorToDoorSurveyPropertyProofs(item);
+        }
+
+        public async Task<bool> DeleteDoorToDoorSurveyIdentityProofs(int id)
+        {
+            return await _doortodoorsurveyRepository.DeleteDoorToDoorSurveyIdentityProofs(id);
+        }
+
+        public async Task<bool> DeleteDoorToDoorSurveyPropertyProofs(int id)
+        {
+            return await _doortodoorsurveyRepository.DeleteDoorToDoorSurveyPropertyProofs(id);
+        }
+
+        public async Task<Doortodoorsurveyidentityproof> FetchSingleResultDoor2DoorSurveyIdentity(int id)
+        {
+            return await _doortodoorsurveyRepository.FetchSingleResultDoor2DoorSurveyIdentity(id);
+        }
+
+        public async Task<Doortodoorsurveypropertyproof> FetchSingleResultDoor2DoorSurveyProperty(int id)
+        {
+            return await _doortodoorsurveyRepository.FetchSingleResultDoor2DoorSurveyProperty(id);
+        }
     }
 }
