@@ -7,7 +7,6 @@
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
-        <input type="hidden" asp-for="Encroachment.WatchWardId" />
         <div id="WatchWardDetailsDiv">
 
         </div>
@@ -459,6 +458,7 @@
         </div>
         <form asp-action="Create" enctype="multipart/form-data">
             <h3 class="my-3 d-flex sub-heading">Summary</h3>
+            <input type="hidden" asp-for="Encroachment.WatchWardId" />
             <input type="hidden" asp-for="EncroachmentId" value="@(Model.Encroachment.Id)" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="table-section bg-white border shadow rounded">

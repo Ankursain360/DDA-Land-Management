@@ -74,6 +74,7 @@ namespace Libraries.Service.ApplicationService
             model.MobileNo = doortodoorsurvey.MobileNo;
             model.OccupantAadharNo = doortodoorsurvey.OccupantAadharNo;
             model.VoterIdNo = doortodoorsurvey.VoterIdNo;
+            model.DamagePaidPast = doortodoorsurvey.DamagePaidPast;
             model.ModifiedBy = doortodoorsurvey.ModifiedBy;
             _doortodoorsurveyRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

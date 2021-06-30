@@ -6,9 +6,7 @@
 <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">Edit Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-
+    <input type="hidden" asp-for="Id" />
     <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -138,15 +136,6 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <input type="hidden" asp-for="OccupantIdentityPrrofFilePath" />
                 @{
-                    @*@if (Model.OccupantIdentityPrrofFilePath != null)
-            {
-                <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
-                @Html.ActionLink(" (View File)", "ViewIdentityProof", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
-            }
-            else
-            {
-                <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
-            }*@
                     if (Model.Doortodoorsurveyidentityproof != null && Model.Doortodoorsurveyidentityproof.Count > 0)
                     {
                         <br />
@@ -182,15 +171,6 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <input type="hidden" asp-for="PropertyFilePath" />
                 @{
-                    @*@if (Model.PropertyFilePath != null)
-            {
-                <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
-                @Html.ActionLink(" (View File)", "ViewPropertyFile", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target = "_blank" })
-            }
-            else
-            {
-                <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg, image/gif" />
-            }*@
                     if (Model.Doortodoorsurveypropertyproof != null && Model.Doortodoorsurveypropertyproof.Count > 0)
                     {
                         <br />
@@ -209,6 +189,16 @@
                 }
                 <span asp-validation-for="PropertyPhoto" class="text-danger"></span>
                 <label class="floating-label">Document of Property, if any</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+                <label for="field-1" class="floating-label">Status</label>
             </div>
         </div>
     </div>

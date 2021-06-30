@@ -172,7 +172,8 @@ namespace LeaseDetails.Controllers
                                 }
 
                                 #endregion
-                                return View(allotmententry);
+                                return View("Index");
+                                //return RedirectToAction("Index");
 
                             }
 

@@ -69,6 +69,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Presentuse> PresentuseList { get; set; }
+        public Surveyuserdetail CreatedByNavigation { get; set; }
         public virtual Presentuse PresentUseNavigation { get; set; }
 
         [NotMapped]

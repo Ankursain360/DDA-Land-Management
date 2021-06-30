@@ -35,7 +35,9 @@ namespace Dto.Master
         public IList<string> OccupantIdentityPrrofFileData { get; set; }
         public IList<string> PropertyFileData { get; set; }
         public int CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
         public string PresentUseName { get; set; }
+        public String CreatedByName { get; set; }
 
 
     }

@@ -11,6 +11,8 @@
             <th>Approx Area of the Property</th>
             <th>Mobile</th>
             <th>View on Map</th>
+            <th>Submitted By</th>
+            <th>Submitted On</th>
             <th>Status</th>
             <th>Operation</th>
         </tr>
@@ -28,6 +30,8 @@
                     <td>@item.ApproxPropertyArea</td>
                     <td>@item.MobileNo</td>
                     <td align="center"> <a target="_blank" href="https://maps.google.com/?q=@item.GeoReferencingLattitude,@item.Longitude" title="View Location on Map"><i class="ri-map-pin-fill"></i></a></td>
+                    <td>@item.CreatedByNavigation.UserName</td>
+                    <td>@item.CreatedDate.ToString("dd-MMM-yyyy")</td>
                     <td>
                         @if (item.IsActive == 1)
                         {
