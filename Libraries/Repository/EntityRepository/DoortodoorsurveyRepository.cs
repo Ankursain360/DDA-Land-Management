@@ -124,6 +124,7 @@ namespace Libraries.Repository.EntityRepository
             try
             {
                 var data = await _dbContext.Doortodoorsurvey
+                                    .Include(x=> x.PresentUseNavigation)
                                  .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                  && x.CreatedDate >= model.FromDate
                                  && x.CreatedDate <= model.ToDate)
@@ -139,6 +140,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("PRESENTUSE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
+                                              .Include(x => x.PresentUseNavigation)
                                           .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -149,6 +151,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("FLOOR NO"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
+                                .Include(x => x.PresentUseNavigation)
                                           .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -158,6 +161,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("LONGITUDE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
+                                .Include(x => x.PresentUseNavigation)
                                           .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -176,6 +180,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("PRESENTUSE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
+                                .Include(x => x.PresentUseNavigation)
                                           .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -186,6 +191,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("FLOOR NO"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
+                                .Include(x => x.PresentUseNavigation)
                                           .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
@@ -195,6 +201,7 @@ namespace Libraries.Repository.EntityRepository
                         case ("LONGITUDE"):
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
+                                .Include(x => x.PresentUseNavigation)
                                           .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)

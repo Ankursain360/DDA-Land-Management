@@ -1,15 +1,16 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Doortodoorsurvey>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
+
     <thead class="text-nowrap">
         <tr>
-
+            <th>Present Use</th>
             <th>Location/Address of Property</th>
             <th>Lattitude</th>
             <th>Longitude</th>
             <th>Approx Area of the Property</th>
             <th>Number of Floors</th>
-       
+
         </tr>
 
     </thead>
@@ -18,15 +19,15 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
+        <tr>
+            <td>@item.PresentUseNavigation.Name</td>
+            <td>@item.PropertyAddress</td>
+            <td>@item.GeoReferencingLattitude</td>
+            <td>@item.Longitude</td>
+            <td>@item.ApproxPropertyArea</td>
+            <td>@item.NumberOfFloors</td>
 
-                    <td>@item.PropertyAddress</td>
-                    <td>@item.GeoReferencingLattitude</td>
-                    <td>@item.Longitude</td>
-                    <td>@item.ApproxPropertyArea</td>
-                    <td>@item.NumberOfFloors</td>
-   
-                </tr>
+        </tr>
             }
         }
         else
