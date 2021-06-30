@@ -227,6 +227,10 @@ namespace LeaseDetails.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+
+
+
         private Dictionary<string, string> GetMimeTypes()
         {
             return new Dictionary<string, string>

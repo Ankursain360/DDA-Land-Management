@@ -24,14 +24,23 @@ $(document).ready(function () {
 $('#ddlSort').change(function () {
     debugger;
     var sortingvalue = $("#ddlSort").children("option:selected").val();
-    if (sortingvalue == '' || sortingvalue == 'undefined' || sortingvalue == null) {
+    
+        var frmdate = $('#txtFromDate').val();
+        var todate = $('#txtToDate').val();
 
-        //ddlDepartment.html(s);
-        $('#ddlSort [value=PRESENTUSE]').attr('selected', 'true');       
-        $('#ddlSort').trigger('change');
+        if (frmdate == '' || todate == '')
+        {
 
-        //alert("Please select sort by value from the dropdown");    
-        //return;
+        alert("Please Fill From Date and To Date");    
+         return;
+
+        }
+        else if (sortingvalue == '' || sortingvalue == 'undefined' || sortingvalue == null) {
+
+            //ddlDepartment.html(s);
+            $('#ddlSort [value=PRESENTUSE]').attr('selected', 'true');
+            $('#ddlSort').trigger('change');
+
     }
     else
     {

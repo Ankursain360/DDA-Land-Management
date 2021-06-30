@@ -26,7 +26,6 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Index()
         {
             Doortodoorsurvey model = new Doortodoorsurvey();
-
             model.PresentuseList = await _DoortodoorsurveyService.GetAllPresentuse();
             return View(model);
         }

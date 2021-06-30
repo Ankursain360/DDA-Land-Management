@@ -3,12 +3,15 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
+            <th>Lease Type</th>
             <th>Reference No.</th>
-            <th>Application Reference No.</th>
-            <th>Letter Generate Date</th>
+            <th>Allotment Reference No.</th>
+
             <th>Society Name </th>
-            @*<th>Allotment Date</th>*@
+
+            <th>Allotment Date</th>
             <th>Area(sq. mt.)</th>
+            <th>Letter Generate Date</th>
             <th>Operations</th>
         </tr>
     </thead>
@@ -18,12 +21,15 @@
             @foreach (var item in Model.Results)
             {
         <tr>
+            <td>@(item.Allotment.LeasesType == null?"": item.Allotment.LeasesType.Type)</td>
             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.RefNo)</td>
             <td>@(item.ReferenceNumber)</td>
-            <td>@( (Convert.ToDateTime(item.CreatedDate)).ToString("dd-MMM-yyyy"))</td>
+
             <td>@(item.Allotment == null ? "" : item.Allotment.Application == null ? "" : item.Allotment.Application.Name)</td>
-            @*<td>@(item.Allotment == null ? "" : (Convert.ToDateTime(item.Allotment.AllotmentDate)).ToString("dd-MMM-yyyy"))</td>*@
+            <td>@(item.Allotment == null ? "" : (Convert.ToDateTime(item.Allotment.AllotmentDate)).ToString("dd-MMM-yyyy"))</td>
+            @*<td>@item.AllotmentDate.ToString("dd-MM-yyyy")</td>*@
             <td>@(item.Allotment == null ? "" : item.Allotment.TotalArea.ToString())</td>
+            <td>@( (Convert.ToDateTime(item.CreatedDate)).ToString("dd-MMM-yyyy"))</td>
             <td>
 
                 @if (item.FilePath == null)
