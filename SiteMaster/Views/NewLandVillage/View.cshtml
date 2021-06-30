@@ -22,7 +22,7 @@
                     <input disabled asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3"limit="100" />
                     <span asp-validation-for="Name" class="text-danger"></span>
-                    <label class="floating-label">Village Name    </label>
+                    <label class="floating-label">Village Name<span style="color:red">*</span>    </label>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="DistrictId" class="text-danger"></span>
-                    <label asp-for="DistrictId" class="floating-label">District Name </label>
+                    <label asp-for="DistrictId" class="floating-label">District Name<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -45,7 +45,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="TehsilId" class="text-danger"></span>
-                    <label asp-for="TehsilId" class="floating-label">Tehsil Name </label>
+                    <label asp-for="TehsilId" class="floating-label">Tehsil Name<span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
-                    <label asp-for="ZoneId" class="floating-label">Zone </label>
+                    <label asp-for="ZoneId" class="floating-label">Zone<span style="color:red">*</span> </label>
                 </div>
 
             </div>
