@@ -23,7 +23,7 @@
                     <option value="">Select</option>
                 </select>
                 <label asp-validation-for="DepartmentId" class="error"></label>
-                <label class="floating-label">Department</label>
+                <label class="floating-label">Department<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-6">
@@ -75,7 +75,7 @@
 
                 <input type="Date" asp-for="EncrochmentDate" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="EncrochmentDate" class="text-danger"></span>
-                <label class="floating-label">Date</label>
+                <label class="floating-label">Date<span style="color:red">*</span></label>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
 
                     <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
                     <span asp-validation-for="Area" class="text-danger"></span>
-                    <label class="floating-label">Area(in sq. mt.)</label>
+                    <label class="floating-label">Area(in sq. mt.)<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
 
                 <textarea class="floating-label-field floating-label-field--s3" limit="1000" placeholder="Location/Address with land mark" asp-for="LocationAddressWithLandMark"></textarea>
                 <span asp-validation-for="LocationAddressWithLandMark" class="text-danger"></span>
-                <label class="floating-label">Location/Address with land mark</label>
+                <label class="floating-label">Location/Address with land mark<span style="color:red">*</span></label>
             </div>
         </div>
        
@@ -340,7 +340,7 @@
 
                 <input type="text" asp-for="PoliceStation" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="PoliceStation" class="text-danger"></span>
-                <label class="floating-label">Police Station</label>
+                <label class="floating-label">Police Station<span style="color:red">*</span></label>
             </div>
         </div>
     </div>
@@ -350,7 +350,7 @@
 
                 <input type="text" asp-for="SecurityGuardOnDuty" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="SecurityGuardOnDuty" class="text-danger"></span>
-                <label class="floating-label">Officer on Duty</label>
+                <label class="floating-label">Officer on Duty<span style="color:red">*</span></label>
             </div>
         </div>
 
@@ -410,7 +410,7 @@
 
                 <textarea type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
                 <span asp-validation-for="Remarks" class="text-danger"></span>
-                <label class="floating-label">Remarks</label>
+                <label class="floating-label">Remarks<span style="color:red">*</span></label>
             </div>
         </div>
     </div>

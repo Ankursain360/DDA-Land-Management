@@ -14,7 +14,7 @@
                             <option value="2">Used/Allocated</option>
                         </select>
                         <span asp-validation-for="Propertyregistration.InventoriedInId" class="text-danger lb-sm"></span>
-                        <label class="floating-label">Inventoried In</label>
+                        <label class="floating-label">Inventoried In<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -26,7 +26,7 @@
                             <option value="Unplanned Land">Unplanned Land</option>
                         </select>
                         <span asp-validation-for="Propertyregistration.PlannedUnplannedLand" class="text-danger lb-sm"></span>
-                        <label class="floating-label" asp-for="Propertyregistration.PlannedUnplannedLand">Planned/Unplanned Land</label>
+                        <label class="floating-label" asp-for="Propertyregistration.PlannedUnplannedLand">Planned/Unplanned Land<span style="color:red">*</span></label>
 
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             <option selected="selected" value="0">All</option>
                         </select>
                         <span asp-validation-for="Propertyregistration.ClassificationOfLandId" class="text-danger lb-sm"></span>
-                        <label class="floating-label" asp-for="Propertyregistration.ClassificationOfLandId">Classification of Land</label>
+                        <label class="floating-label" asp-for="Propertyregistration.ClassificationOfLandId">Classification of Land<span style="color:red">*</span></label>
 
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                             <option selected="selected" value="0">All</option>
                         </select>
                         <span asp-validation-for="Propertyregistration.DepartmentId" class="text-danger lb-sm"></span>
-                        <label class="floating-label" asp-for="Propertyregistration.DepartmentId">Department</label>
+                        <label class="floating-label" asp-for="Propertyregistration.DepartmentId">Department<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -65,7 +65,7 @@
                             <option selected="selected" value="0">All</option>
                         </select>
                         <span asp-validation-for="Propertyregistration.ZoneId" class="text-danger lb-sm"></span>
-                        <label class="floating-label" asp-for="Propertyregistration.ZoneId">Zone</label>
+                        <label class="floating-label" asp-for="Propertyregistration.ZoneId">Zone<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -74,7 +74,7 @@
                             <option selected="selected" value="0">All</option>
                         </select>
                         <span asp-validation-for="Propertyregistration.DivisionId" class="text-danger lb-sm"></span>
-                        <label class="floating-label" asp-for="Propertyregistration.DivisionId">Division</label>
+                        <label class="floating-label" asp-for="Propertyregistration.DivisionId">Division<span style="color:red">*</span></label>
                     </div>
                 </div>
             </div>

@@ -19,7 +19,7 @@
                                 <option disabled="disabled" selected value="">Select</option>
                             </select>
                             <span asp-validation-for="AllotmentId" class="text-danger"></span>
-                            <label asp-for="AllotmentId" class="floating-label">Allotment Number</label>
+                            <label asp-for="AllotmentId" class="floating-label">Allotment Number<span style="color:red">*</span></label>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -106,7 +106,7 @@
 
                             <input type="text" asp-for="PossessionArea" placeholder="North East" class="floating-label-field floating-label-field--s3 numbers" disabled />
                             <span asp-validation-for="PossessionArea" class="text-danger"></span>
-                            <label class="floating-label">Possesion Area</label>
+                            <label class="floating-label">Possesion Area<span style="color:red">*</span></label>
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
 
                             <input type="text" asp-for="PossessionTakenName" placeholder="South East" class="floating-label-field floating-label-field--s3 " disabled />
                             <span asp-validation-for="PossessionTakenName" class="text-danger"></span>
-                            <label class="floating-label"> Possession Taken Over By Name</label>
+                            <label class="floating-label"> Possession Taken Over By Name<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -154,7 +154,7 @@
 
                             <input type="date" asp-for="PossessionTakenDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " disabled />
                             <span asp-validation-for="PossessionTakenDate" class="text-danger"></span>
-                            <label class="floating-label">Possesion Taken Over By Date</label>
+                            <label class="floating-label">Possesion Taken Over By Date<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -167,7 +167,7 @@
 
                             <input type="text" asp-for="PossesionHandOverName" placeholder="South East" class="floating-label-field floating-label-field--s3 " disabled />
                             <span asp-validation-for="PossesionHandOverName" class="text-danger"></span>
-                            <label class="floating-label"> Possession Handed Over By Name</label>
+                            <label class="floating-label"> Possession Handed Over By Name<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -176,7 +176,7 @@
 
                             <input type="date" asp-for="PossesionHandOverDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " disabled />
                             <span asp-validation-for="PossesionHandOverDate" class="text-danger"></span>
-                            <label class="floating-label">Possesion Handed Over By Date</label>
+                            <label class="floating-label">Possesion Handed Over By Date<span style="color:red">*</span></label>
                         </div>
                     </div>
 

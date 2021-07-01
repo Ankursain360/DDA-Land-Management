@@ -64,5 +64,13 @@ namespace Libraries.Service.ApplicationService
         {
             return _allotmentLetterRepository.GetDownload(id);
         }
+
+
+        public async Task<List<Allotmentletter>> GetAllotmentLetterData()
+        {
+            return await _allotmentLetterRepository.GetAllotmentLetterData();
+        }
+
+
     }
 }

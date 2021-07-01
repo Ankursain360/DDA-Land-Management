@@ -154,6 +154,24 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+
+
+
+
+        public async Task<List<Allotmentletter>> GetAllotmentLetterData()
+        {
+            var data = await _dbContext.Allotmentletter
+               .Include(s => s.Allotment)
+                            .Include(s => s.Allotment.LeasesType)
+                            .Include(s => s.Allotment.Application).
+
+
+                OrderByDescending(x => x.Id).ToListAsync();
+            return data;
+        }
+
+
+
         public async Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id)
         {
             var data = await _dbContext.Allotmentletter

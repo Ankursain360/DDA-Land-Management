@@ -17,7 +17,7 @@
 
                     </select>
                     <span asp-validation-for="LeasePurposesTypeId" class="text-danger"></span>
-                    <label class="floating-label">Purpose </label>
+                    <label class="floating-label">Purpose<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -30,7 +30,7 @@
 
 
                     <span asp-validation-for="LeaseSubPurposeId" class="text-danger"></span>
-                    <label class="floating-label">SubPurpose </label>
+                    <label class="floating-label">SubPurpose<span style="color:red">*</span> </label>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     <input asp-for="FromDate" placeholder="Name" type="date" id="txtFromDate"
                            class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="FromDate" class="text-danger"></span>
-                    <label class="floating-label">From Date    </label>
+                    <label class="floating-label">From Date <span style="color:red">*</span>   </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -50,7 +50,7 @@
                            class="floating-label-field floating-label-field--s3 " onblur="checkTextField(this);" />
                     <span asp-validation-for="ToDate" class="text-danger"></span>
                     <p id="error" style="color:red;"></p>
-                    <label class="floating-label">  To Date   </label>
+                    <label class="floating-label">  To Date <span style="color:red">*</span>  </label>
                 </div>
             </div>
 
@@ -62,7 +62,7 @@
                     <input asp-for="PremiumRate" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="PremiumRate" class="text-danger"></span>
-                    <label class="floating-label">Premium Rate   </label>
+                    <label class="floating-label">Premium Rate<span style="color:red">*</span>   </label>
                 </div>
             </div>
             <div class=" col-md-6">

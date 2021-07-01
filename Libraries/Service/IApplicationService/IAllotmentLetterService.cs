@@ -19,5 +19,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Allotmententry>> GetRefNoListforAllotmentLetter();
         Task<bool> Update(int id, Allotmentletter allotmentletter);
         string GetDownload(int id);
+        Task<List<Allotmentletter>> GetAllotmentLetterData();
     }
 }

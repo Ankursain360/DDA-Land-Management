@@ -22,7 +22,7 @@
                     <option value="5">Query Forward</option>
                 </select>
                 <span asp-validation-for="StatusCode" class="text-danger"></span>
-                <label asp-for="StatusCode" class="floating-label">Status Code</label>
+                <label asp-for="StatusCode" class="floating-label">Status Code<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-6">
@@ -32,7 +32,7 @@
                        placeholder="Sent Status Name"
                        limit="50">
                 <span asp-validation-for="SentStatusName" class="text-danger"></span>
-                <label class="floating-label">Sent Status Name</label>
+                <label class="floating-label">Sent Status Name<span style="color:red">*</span></label>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                        placeholder="Menu Name"
                        limit="50">
                 <span asp-validation-for="Name" class="text-danger"></span>
-                <label class="floating-label">Menu Name</label>
+                <label class="floating-label">Menu Name<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-6">

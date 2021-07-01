@@ -19,6 +19,8 @@ using System.Data;
 using System;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using Dto.Master;
+
 
 
 namespace LeaseDetails.Controllers
@@ -248,5 +250,55 @@ namespace LeaseDetails.Controllers
                 {".csv", "text/csv"}
             };
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(id);
+            Data.RefNoList = await _allotmentLetterService.GetRefNoListforAllotmentLetter();
+            ViewBag.ExistDocFile = Data.FilePath;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+      //  SchemeDate=Convert.ToDateTime(result[i].SchemeDate).ToString("dd-MMM-yyyy"),
+
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> AllotmentletterList()
+        {
+            var result = await _allotmentLetterService.GetAllotmentLetterData();
+            List<AllotmentletterListDto> data = new List<AllotmentletterListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new AllotmentletterListDto()
+                    {
+                        Id = result[i].Id,
+                        LeaseType = result[i].Allotment.LeasesType.Type == null ? "" : result[i].Allotment.LeasesType.Type,
+                        ReferenceNo = result[i].Allotment.Application.RefNo == null ? "" : result[i].Allotment.Application.RefNo,
+                        AllotmentReferenceNo = result[i].ReferenceNumber,
+                        SocietyName = result[i].Allotment.Application.Name== null ? "" : result[i].Allotment.Application.Name,
+                        AllotmentDate = result[i].Allotment.AllotmentDate.ToString("dd-MM-yyyy")== null ? "" : result[i].Allotment.AllotmentDate.ToString("dd-MM-yyyy"),
+                        Area = result[i].Allotment.TotalArea.ToString(),
+                        LetterGenerateDate = result[i].CreatedDate.ToString("dd-MM-yyyy")== null ? "" : result[i].CreatedDate.ToString("dd-MM-yyyy"),
+                      
+                    });
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
     }
 }
