@@ -76,7 +76,7 @@
                         <span asp-validation-for="DocumentName" class="text-danger" style="display:none;" id="MessageDocumentName">Document Name is Mandatory</span>
 
                         @* <span asp-validation-for="DocumentName" class="text-danger"></span>*@
-                        <label class="floating-label">Document Name</label>
+                        <label class="floating-label">Document Name<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -86,7 +86,7 @@
                     @if (Model.DocumentPatth != null)
                     {*@
                         <input asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
-                        <label class="floating-label">Document Upload</label>
+                        <label class="floating-label">Document Upload<span style="color:red">*</span></label>
                         @*}
                         else
                         {

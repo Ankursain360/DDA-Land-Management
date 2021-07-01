@@ -14,7 +14,7 @@
                         <option disabled="disabled" selected value="">Select</option>
                     </select>
                     <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
-                    <label asp-for="PropertyTypeId" class="floating-label">Property Type </label>
+                    <label asp-for="PropertyTypeId" class="floating-label">Property Type<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -22,7 +22,7 @@
                     <input asp-for="InterestRate" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="InterestRate" class="text-danger"></span>
-                    <label class="floating-label">Interest Rate   </label>
+                    <label class="floating-label">Interest Rate <span style="color:red">*</span>  </label>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                     <input asp-for="FromDate" placeholder="Name" type="date"
                            class="floating-label-field floating-label-field--s3 " id="txtFromDate" />
                     <span asp-validation-for="FromDate" class="text-danger"></span>
-                    <label class="floating-label">From Date    </label>
+                    <label class="floating-label">From Date<span style="color:red">*</span>    </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -41,7 +41,7 @@
                            class="floating-label-field floating-label-field--s3 " id="txtToDate" onblur="checkTextField(this);" />
                     <span asp-validation-for="ToDate" class="text-danger"></span>
                     <p id="error" style="color:red;"></p>
-                    <label class="floating-label">  To Date   </label>
+                    <label class="floating-label">  To Date <span style="color:red">*</span>  </label>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <input asp-for="LateinterestRate" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="LateinterestRate" class="text-danger"></span>
-                    <label class="floating-label">LateInterest Rate   </label>
+                    <label class="floating-label">Late Interest Rate<span style="color:red">*</span>   </label>
                 </div>
             </div>
 

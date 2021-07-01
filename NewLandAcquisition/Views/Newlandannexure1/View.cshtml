@@ -22,7 +22,7 @@
                                class="floating-label-field floating-label-field--s3 " />
 
                         <span asp-validation-for="VillageName" class="text-danger"></span>
-                        <label class="floating-label"> Name of Village   </label>
+                        <label class="floating-label"> Name of Village<span style="color:red">*</span>   </label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -30,7 +30,7 @@
                         <textarea disabled asp-for="Address" placeholder="Address" class="floating-label-field floating-label-field--s3"></textarea>
 
                         <span asp-validation-for="Address" class="text-danger"></span>
-                        <label class="floating-label">Address </label>
+                        <label class="floating-label">Address<span style="color:red">*</span> </label>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                         <input disabled asp-for="TalukName" placeholder="TalukName" type="text"
                                class="floating-label-field floating-label-field--s3 " />
                         <span asp-validation-for="TalukName" class="text-danger"></span>
-                        <label class="floating-label">Name of Taluk/Sub-Division/Tehsil/Block(As Applicable) </label>
+                        <label class="floating-label">Name of Taluk/Sub-Division/Tehsil/Block(As Applicable)<span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -50,7 +50,7 @@
                             <option selected disabled="disabled" value="">Select</option>
                         </select>
                         <span asp-validation-for="MunicipalityId" class="text-danger"></span>
-                        <label asp-for="MunicipalityId" class="floating-label">Name of Municipality  </label>
+                        <label asp-for="MunicipalityId" class="floating-label">Name of Municipality <span style="color:red">*</span> </label>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                             <option disabled="disabled" selected value="">Select</option>
                         </select>
                         <span asp-validation-for="DistrictId" class="text-danger"></span>
-                        <label asp-for="DistrictId" class="floating-label">District/Zone </label>
+                        <label asp-for="DistrictId" class="floating-label">District/Zone<span style="color:red">*</span> </label>
                     </div>
                 </div>
 
@@ -97,7 +97,7 @@
                                         <input disabled required asp-for="KhasraNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Khasra No" />
                                         <span asp-validation-for="KhasraNo" class="d-block text-danger field-validation-valid "></span>
 
-                                        <label class="floating-label"> Khasra No  </label>
+                                        <label class="floating-label"> Khasra No<span style="color:red">*</span>  </label>
                                     </div>
                                 </td>
                                 <td class="py-3">
@@ -110,13 +110,13 @@
                                     <div  class="floating-label-wrap mb-3 mb-md-0">
                                         <input disabled required asp-for="Biswa" type="text" placeholder="Biswa" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="Biswa" class="d-block text-danger field-validation-valid "></span>
-                                        <label class="floating-label"> Biswa </label>
+                                        <label class="floating-label"> Biswa<span style="color:red">*</span> </label>
                                     </div>
                                     <br />
                                     <div  class="floating-label-wrap mb-3 mb-md-0">
                                         <input disabled required asp-for="Biswanshi" placeholder="Biswanshi" type="text" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="Biswanshi" class="d-block text-danger field-validation-valid"></span>
-                                        <label class="floating-label"> Biswanshi   </label>
+                                        <label class="floating-label"> Biswanshi <span style="color:red">*</span>  </label>
                                     </div>
                                     <br />
 

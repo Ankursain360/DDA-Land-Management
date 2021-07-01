@@ -18,7 +18,7 @@
                                 <option disabled="disabled" selected value="">Select</option>
                             </select>
                             <span asp-validation-for="AllotmentId" class="text-danger"></span>
-                            <label asp-for="AllotmentId" class="floating-label">Allotment Number</label>
+                            <label asp-for="AllotmentId" class="floating-label">Allotment Number<span style="color:red">*</span></label>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -103,7 +103,7 @@
 
                             <input type="text" asp-for="PossessionArea" placeholder="area" class="floating-label-field floating-label-field--s3 numbers" id="txtPossesionArea"  value="" onblur="checkTextField(this);"/>
                             <span asp-validation-for="PossessionArea" class="text-danger"></span>
-                            <label class="floating-label">Possession Area</label>
+                            <label class="floating-label">Possession Area<span style="color:red">*</span></label>
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
 
                             <input type="text" asp-for="PossessionTakenName" value="" placeholder="South East" class="floating-label-field floating-label-field--s3 " />
                             <span asp-validation-for="PossessionTakenName" class="text-danger"></span>
-                            <label class="floating-label"> Possession Taken Over By Name</label>
+                            <label class="floating-label"> Possession Taken Over By Name<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -140,7 +140,7 @@
 
                             <input type="date" asp-for="PossessionTakenDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " id="txtFromDate"/>
                             <span asp-validation-for="PossessionTakenDate" class="text-danger"></span>
-                            <label class="floating-label">Possesion Taken Over By Date</label>
+                            <label class="floating-label">Possesion Taken Over By Date<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -153,7 +153,7 @@
 
                             <input type="text" asp-for="PossesionHandOverName" value="" placeholder="South East" class="floating-label-field floating-label-field--s3 " />
                             <span asp-validation-for="PossesionHandOverName" class="text-danger"></span>
-                            <label class="floating-label"> Possession Handed Over By Name</label>
+                            <label class="floating-label"> Possession Handed Over By Name<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -163,7 +163,7 @@
                             <input type="date" asp-for="PossesionHandOverDate" placeholder="North East" class="floating-label-field floating-label-field--s3 " id="txtToDate" onblur="checkDate(this);" />
                             <span asp-validation-for="PossesionHandOverDate" class="text-danger"></span>
                             <p id="error" style="color:red;"></p>
-                            <label class="floating-label">Possesion Handed Over By Date</label>
+                            <label class="floating-label">Possesion Handed Over By Date<span style="color:red">*</span></label>
                         </div>
                     </div>
 

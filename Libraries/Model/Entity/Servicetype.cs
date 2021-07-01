@@ -17,7 +17,7 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "Name is mandatory ")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Status is mandatory ")]
+        [Required(ErrorMessage = "URL is mandatory ")]
 
         public string Url { get; set; }
         public int? Timeline { get; set; }

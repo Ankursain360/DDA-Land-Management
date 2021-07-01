@@ -19,14 +19,14 @@
                     <option value="5">Institution</option>
                 </select>
                 <span asp-validation-for="ReqBodyType" class="text-danger"></span>
-                <label asp-for="ReqBodyType" class="floating-label">Requiring Body Type </label>
+                <label asp-for="ReqBodyType" class="floating-label">Requiring Body Type<span style="color:red">*</span> </label>
 
             </div>
             <div class="col-md-6">
                 <input asp-for="OfficialDesigOfReqBody" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
                 <span asp-validation-for="OfficialDesigOfReqBody" class="text-danger"></span>
-                <label class="floating-label">Official Designation of Requiring Body</label>
+                <label class="floating-label">Official Designation of Requiring Body<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="row mt-md-3">
@@ -34,7 +34,7 @@
 
                 <textarea type="text" class="floating-label-field floating-label-field--s3" asp-for="PurposeOfAcqDetails"></textarea>
                 <span asp-validation-for="PurposeOfAcqDetails" class="text-danger"></span>
-                <label class="floating-label">Purpose of Acquitions(in details)</label>
+                <label class="floating-label">Purpose of Acquitions(in details)<span style="color:red">*</span></label>
                 <br />
                 <br />
 
@@ -170,7 +170,7 @@
             <div class="form-group col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" class="floating-label-field floating-label-field--s3" placeholder="in Years (Number only)" asp-for="ProjectYear" />
-                    <label class="floating-label" asp-for="ProjectYear">Project will be (in yrs.)</label>
+                    <label class="floating-label" asp-for="ProjectYear">Project will be (in yrs.)<span style="color:red">*</span></label>
                     <span asp-validation-for="ProjectYear" class="text-danger"></span>
 
                 </div>
@@ -180,7 +180,7 @@
             <div class="form-group col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" class="floating-label-field floating-label-field--s3" placeholder="in Years (Number only)" asp-for="ProjectMonth" />
-                    <label class="floating-label" asp-for="ProjectMonth">Project will be (in months.)</label>
+                    <label class="floating-label" asp-for="ProjectMonth">Project will be (in months.)<span style="color:red">*</span></label>
                     <span asp-validation-for="ProjectMonth" class="text-danger"></span>
 
                 </div>
@@ -191,7 +191,7 @@
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" class="floating-label-field floating-label-field--s3" placeholder="in Years (Number only)" asp-for="ProjectCost" limit="15"/>
-                    <label class="floating-label" asp-for="ProjectCost">Estimated Cost of the Project(in Rs.)</label>
+                    <label class="floating-label" asp-for="ProjectCost">Estimated Cost of the Project(in Rs.)<span style="color:red">*</span></label>
                     <span asp-validation-for="ProjectCost" class="text-danger"></span>
 
                 </div>
