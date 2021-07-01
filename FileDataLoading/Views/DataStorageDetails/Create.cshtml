@@ -7,7 +7,7 @@
     <form asp-action="Create" autocomplete="off" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <h3 class="mb-3 d-flex">Add Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div id="Divclsification" class="mt-md-3">
             <h3 class="my-3 d-flex sub-heading">Type</h3>
 
@@ -42,7 +42,7 @@
                         <input asp-for="CategoryNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
                                limit="45">
                         <span asp-validation-for="CategoryNo" class="text-danger "></span>
-                        <label class="floating-label">Category No</label>
+                        <label class="floating-label">Category No<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -50,7 +50,7 @@
                         <input asp-for="HeaderNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
                                limit="45">
                         <span asp-validation-for="HeaderNo" class="text-danger "></span>
-                        <label class="floating-label">Header No</label>
+                        <label class="floating-label">Header No<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -58,7 +58,7 @@
                         <input asp-for="SequenceNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
                                limit="45">
                         <span asp-validation-for="SequenceNo" class="text-danger "></span>
-                        <label class="floating-label">Sequence No</label>
+                        <label class="floating-label">Sequence No<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -109,7 +109,7 @@
 
                         </select>
                         <span asp-validation-for="LocalityId" class="text-danger "></span>
-                        <label class="floating-label">Locality </label>
+                        <label class="floating-label">Locality<span style="color:red">*</span> </label>
                     </div>
                 </div>
 
@@ -250,11 +250,11 @@
                     <div class="floating-label-wrap">
                         <select asp-for="AlmirahId" class="floating-label-field floating-label-field--s3"
                                 asp-items="@(new SelectList(Model.AlmirahList,"Id","AlmirahNo"))">
-                            <option value="">---Select---</option>
+                            <option value="">---Select--- </option>
 
                         </select>
                         <span asp-validation-for="AlmirahId" class="text-danger "></span>
-                        <label class="floating-label">Almirah No </label>
+                        <label class="floating-label">Almirah No <span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -265,7 +265,7 @@
 
                         </select>
                         <span asp-validation-for="RowId" class="text-danger "></span>
-                        <label class="floating-label">Row No </label>
+                        <label class="floating-label">Row No<span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -276,7 +276,7 @@
 
                         </select>
                         <span asp-validation-for="ColumnId" class="text-danger "></span>
-                        <label class="floating-label">Column No </label>
+                        <label class="floating-label">Column No<span style="color:red">*</span> </label>
                     </div>
                 </div>
 
@@ -290,7 +290,7 @@
 
                         </select>
                         <span asp-validation-for="BundleId" class="text-danger "></span>
-                        <label class="floating-label">Bundle No </label>
+                        <label class="floating-label">Bundle No<span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class=" col-md-3">
