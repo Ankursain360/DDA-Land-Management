@@ -10,7 +10,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="AllotmentId" class="floating-label-field floating-label-field--s3" id="ddlRefNo" disabled>
+                    <select asp-for="AllotmentId" class="floating-label-field floating-label-field--s3" id="ddlRefNo" >
                         <option value="">--Select--</option>
                         @foreach (var item in Model.RefNoList)
                         {
@@ -33,6 +33,7 @@
 
         </div>
         <div class="row mt-md-3">
+
             <div class="col-md-6">
                 <input type="hidden" asp-for="FilePath" />
                 <input class="floating-label-field floating-label-field--s3" asp-for="DocFile" placeholder="AllotmentLetter Upload" type="file" id="file" />
