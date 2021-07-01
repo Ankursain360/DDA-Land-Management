@@ -167,71 +167,78 @@ $(" #TotalArea, #LeasesTypeId, #LeasePurposesTypeId, #LeaseSubPurposeId, #Allotm
 
                             var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
                             $("#PremiumAmount").val((pamount).toFixed(3));
+
+                            HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                                debugger;
+                                if (response == null) {
+                                    msg = (msg == null ? 'Ground rate is not defined for particular allotment date' : msg + ', \nGround rate is not defined for particular allotment date');
+                                    if (msg != null) {
+                                        alert(msg + ' ,\nPlease contact system administrator.');
+
+                                        return;
+                                    }
+
+                                }
+                                else {
+                                    $("#GroundRate").val(response.groundRate);
+
+                                    if ($("#GroundRate").val() == '') {
+
+
+                                        $("#AmountGroundRate").val(0);
+                                    }
+                                    else {
+
+                                        var ppamount = $('#PremiumAmount').val();
+                                        var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+                                        $("#AmountGroundRate").val((gamount).toFixed(3));
+
+                                        HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                                            debugger;
+                                            if (response == null) {
+                                                msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
+
+                                                if (msg != null) {
+                                                    alert(msg + ' ,\nPlease contact system administrator.');
+                                                    return;
+                                                }
+                                            }
+                                            else {
+
+                                                $("#DocumentCharge").val(response.documentCharge);
+
+                                                if ($("#DocumentCharge").val() == '') {
+
+                                                    $("#DocumentCharge").val(0);
+                                                }
+                                                else {
+
+                                                    var pa = $("#PremiumAmount").val();
+
+                                                    var ga = $("#AmountGroundRate").val();
+
+                                                    var dc = $("#DocumentCharge").val();
+                                                    var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(dc);
+                                                    $("#TotalAmount").val((totalamount).toFixed(3));
+                                                }
+                                                //if (msg != null) {
+                                                //    alert(msg + ' ,Please contact system administrator.');
+                                                //}
+                                            }
+                                        });
+
+
+                                    }
+
+
+
+                                }
+                            });
+
                         }
                     }
                 });
-            HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-                debugger;
-                if (response == null) {
-                    msg = (msg == null ? 'Ground rate is not defined for particular allotment date' : msg + ', \nGround rate is not defined for particular allotment date');
-                    if (msg != null) {
-                        alert(msg + ' ,\nPlease contact system administrator.');
-
-                        return;
-                    }
-
-                }
-                else {
-                    $("#GroundRate").val(response.groundRate);
-
-                    if ($("#GroundRate").val() == '') {
-
-
-                        $("#AmountGroundRate").val(0);
-                    }
-                    else {
-
-                        var ppamount = $('#PremiumAmount').val();
-                        var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
-                        $("#AmountGroundRate").val((gamount).toFixed(3));
-                    }
-
-                }
-            });
-            HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-                debugger;
-                if (response == null) {
-                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
-
-                    if (msg != null) {
-                        alert(msg + ' ,\nPlease contact system administrator.');
-                        return;
-                    }
-                }
-                else {
-
-                    $("#DocumentCharge").val(response.documentCharge);
-
-                    if ($("#DocumentCharge").val() == '') {
-
-                        $("#DocumentCharge").val(0);
-                    }
-                    else {
-
-                        var pa = $("#PremiumAmount").val();
-
-                        var ga = $("#AmountGroundRate").val();
-
-                        var dc = $("#DocumentCharge").val();
-                        var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(dc);
-                        $("#TotalAmount").val((totalamount).toFixed(3));
-                    }
-                    //if (msg != null) {
-                    //    alert(msg + ' ,Please contact system administrator.');
-                    //}
-                }
-            });
-        }
+           }
         else if (LeaseID == 2) {
 
 
@@ -254,46 +261,76 @@ $(" #TotalArea, #LeasesTypeId, #LeasePurposesTypeId, #LeaseSubPurposeId, #Allotm
                         years = 0;
                         var lamount = 0;
                         $("#AmountLicFee").val(lamount);
+
+                        HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                            if (response == null) {
+                                msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
+                                if (msg != null) {
+                                    alert(msg + ', \nPlease contact system administrator.');
+                                    return;
+                                }
+                            }
+                            else {
+                                $("#DocumentCharge").val(response.documentCharge);
+                                if ($("#DocumentCharge").val() == '') {
+
+                                    var dc = 0;
+                                    $("#DocumentCharge").val(dc);
+                                }
+                                else {
+                                    var al = $("#AmountLicFee").val();
+                                    var dc = $("#DocumentCharge").val();
+                                    var totalamount = parseFloat(al) + parseFloat(dc);
+                                    $("#TotalAmount").val((totalamount).toFixed(3));
+                                }
+
+                            }
+                        });
+
                     } else {
 
                         var lamount = parseFloat(years * (response.licenceFees));
                         $("#AmountLicFee").val((lamount).toFixed(3));
+
+                        HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                            if (response == null) {
+                                msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
+                                if (msg != null) {
+                                    alert(msg + ', \nPlease contact system administrator.');
+                                    return;
+                                }
+                            }
+                            else {
+                                $("#DocumentCharge").val(response.documentCharge);
+                                if ($("#DocumentCharge").val() == '') {
+
+                                    var dc = 0;
+                                    $("#DocumentCharge").val(dc);
+                                }
+                                else {
+                                    var al = $("#AmountLicFee").val();
+                                    var dc = $("#DocumentCharge").val();
+                                    var totalamount = parseFloat(al) + parseFloat(dc);
+                                    $("#TotalAmount").val((totalamount).toFixed(3));
+                                }
+
+                            }
+                        });
+
                     }
 
                 }
             });
 
 
-            HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-                if (response == null) {
-                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
-                    if (msg != null) {
-                        alert(msg + ', \nPlease contact system administrator.');
-                        return;
-                    }
-                }
-                else {
-                    $("#DocumentCharge").val(response.documentCharge);
-                    if ($("#DocumentCharge").val() == '') {
-
-                        var dc = 0;
-                        $("#DocumentCharge").val(dc);
-                    }
-                    else {
-                        var al = $("#AmountLicFee").val();
-                        var dc = $("#DocumentCharge").val();
-                        var totalamount = parseFloat(al) + parseFloat(dc);
-                        $("#TotalAmount").val((totalamount).toFixed(3));
-                    }
-
-                }
-            });
-        }
+           }
         else if (LeaseID == 3) {
             HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-                if (response == null) {
+                if (response == null)
+                {
                     msg = 'Premium Rate is not defined for particular allotment date';
-                    if (msg != null) {
+                    if (msg != null)
+                    {
 
                         alert(msg + ' ,\nPlease contact system administrator.');
 
@@ -312,96 +349,132 @@ $(" #TotalArea, #LeasesTypeId, #LeasePurposesTypeId, #LeaseSubPurposeId, #Allotm
 
                         var pamount = parseFloat((area * (response.premiumRate)) * 4046.86);
                         $("#PremiumAmount").val((pamount).toFixed(3));
+
+                        HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+                            if (response == null) {
+                                msg = (msg == null ? 'Ground Rent is not defined for particular allotment date' : msg + ', \nGround Rent is not defined for particular allotment date');
+                                if (msg != null) {
+
+                                    alert(msg + ' ,\nPlease contact system administrator.');
+
+                                    return;
+                                }
+                            }
+                            else {
+                                $("#GroundRate").val(response.groundRate);
+
+                                if ($("#GroundRate").val() == '') {
+
+                                    var gamount = 0;
+                                    $("#AmountGroundRate").val(gamount);
+                                }
+                                else {
+
+                                    var ppamount = $('#PremiumAmount').val();
+                                    var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
+                                    $("#AmountGroundRate").val((gamount).toFixed(3));
+
+                                    HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+
+                                        if (response == null) {
+                                            msg = (msg == null ? 'License Fees is not defined for particular allotment date' : msg + ', \nLicence Fees is not defined for particular allotment date');
+                                            if (msg != null) {
+
+                                                alert(msg + ' ,\nPlease contact system administrator.');
+
+                                                return;
+                                            }
+                                        }
+                                        else {
+
+                                            $("#LicenceFees").val(response.licenceFees);
+                                            var years = $('#NoOfYears').val();
+                                            if (years == '') {
+                                                years = 0;
+                                                var lamount = 0;
+                                                $("#AmountLicFee").val(lamount);
+                                                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+
+                                                    if (response == null) {
+                                                        msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
+                                                        if (msg != null) {
+                                                            alert(msg + ', \nPlease contact system administrator.');
+                                                        }
+                                                    }
+                                                    else {
+                                                        $("#DocumentCharge").val(response.documentCharge);
+
+                                                        if ($("#DocumentCharge").val() == '') {
+
+                                                            var dc = 0;
+                                                            $("#DocumentCharge").val(dc);
+                                                        }
+                                                        else {
+
+                                                            var pa = $("#PremiumAmount").val();
+                                                            var ga = $("#AmountGroundRate").val();
+                                                            var dc = $("#DocumentCharge").val();
+                                                            var al = $("#AmountLicFee").val();
+                                                            var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
+                                                            $("#TotalAmount").val((totalamount).toFixed(3));
+                                                        }
+
+
+                                                    }
+                                                });
+
+                                            }
+                                            else {
+
+                                                var lamount = parseFloat(years * (response.licenceFees));
+                                                $("#AmountLicFee").val((lamount).toFixed(3));
+                                                HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
+
+                                                    if (response == null) {
+                                                        msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
+                                                        if (msg != null) {
+                                                            alert(msg + ', \nPlease contact system administrator.');
+                                                        }
+                                                    }
+                                                    else {
+                                                        $("#DocumentCharge").val(response.documentCharge);
+
+                                                        if ($("#DocumentCharge").val() == '') {
+
+                                                            var dc = 0;
+                                                            $("#DocumentCharge").val(dc);
+                                                        }
+                                                        else {
+
+                                                            var pa = $("#PremiumAmount").val();
+                                                            var ga = $("#AmountGroundRate").val();
+                                                            var dc = $("#DocumentCharge").val();
+                                                            var al = $("#AmountLicFee").val();
+                                                            var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
+                                                            $("#TotalAmount").val((totalamount).toFixed(3));
+                                                        }
+
+
+                                                    }
+                                                });
+
+                                            }
+                                        }
+                                    });
+
+
+                                }
+                            }
+                        });
+
                     }
 
                 }
             });
 
-            HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-                if (response == null) {
-                    msg = (msg == null ? 'Ground Rent is not defined for particular allotment date' : msg + ', \nGround Rent is not defined for particular allotment date');
-                    if (msg != null) {
-
-                        alert(msg + ' ,\nPlease contact system administrator.');
-
-                        return;
-                    }
-                }
-                else {
-                    $("#GroundRate").val(response.groundRate);
-
-                    if ($("#GroundRate").val() == '') {
-
-                        var gamount = 0;
-                        $("#AmountGroundRate").val(gamount);
-                    }
-                    else {
-
-                        var ppamount = $('#PremiumAmount').val();
-                        var gamount = parseFloat(((response.groundRate) * ppamount) / 100);
-                        $("#AmountGroundRate").val((gamount).toFixed(3));
-                    }
-                }
-            });
-
-            HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-
-                if (response == null) {
-                    msg = (msg == null ? 'License Fees is not defined for particular allotment date' : msg + ', \nLicence Fees is not defined for particular allotment date');
-                    if (msg != null) {
-
-                        alert(msg + ' ,\nPlease contact system administrator.');
-
-                        return;
-                    }
-                }
-                else {
-
-                    $("#LicenceFees").val(response.licenceFees);
-                    var years = $('#NoOfYears').val();
-                    if (years == '') {
-                        years = 0;
-                        var lamount = 0;
-                        $("#AmountLicFee").val(lamount);
-                    }
-                    else {
-
-                        var lamount = parseFloat(years * (response.licenceFees));
-                        $("#AmountLicFee").val((lamount).toFixed(3));
-                    }
-                }
-            });
-
-            HttpGet("/AllotmentEntry/GetDocumentList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
-
-                if (response == null) {
-                    msg = (msg == null ? 'Document Charge is not defined for particular allotment date' : msg + ', \nDocument Charge is not defined for particular allotment date');
-                    if (msg != null) {
-                        alert(msg + ', \nPlease contact system administrator.');
-                    }
-                }
-                else {
-                    $("#DocumentCharge").val(response.documentCharge);
-
-                    if ($("#DocumentCharge").val() == '') {
-
-                        var dc = 0;
-                        $("#DocumentCharge").val(dc);
-                    }
-                    else {
-
-                        var pa = $("#PremiumAmount").val();
-                        var ga = $("#AmountGroundRate").val();
-                        var dc = $("#DocumentCharge").val();
-                        var al = $("#AmountLicFee").val();
-                        var totalamount = parseFloat(pa) + parseFloat(ga) + parseFloat(al) + parseFloat(dc);
-                        $("#TotalAmount").val((totalamount).toFixed(3));
-                    }
-
-
-                }
-            });
-        }
+         
+           
+           }
     }
     else {
 
