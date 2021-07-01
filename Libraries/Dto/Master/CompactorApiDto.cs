@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
+
+using System.ComponentModel.DataAnnotations;
+
+
 namespace Dto.Master
 {
     public class CompactorApiDto
     {
         public string MAIN_FILE_NO { get; set; }
+       
         public string PART_FILE_NO { get; set; }
         public string SUBJECT { get; set; }
         public string NAME { get; set; }
@@ -26,6 +31,7 @@ namespace Dto.Master
     {
         public List<CompactorApiDto> cargo { get; set; }
          [NotMapped]
+        [Required(ErrorMessage = "File No is Mandatory Field")]
         public string FileNo { get; set; }
         [NotMapped]
         public string Subject { get; set; }

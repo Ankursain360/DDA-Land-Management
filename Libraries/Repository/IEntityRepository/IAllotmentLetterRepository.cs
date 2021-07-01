@@ -15,7 +15,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<Allotmentletter> FetchSingleAllotmentLetterDetails(int id);
         Task<Allotmentletter> FetchAllotmentLetterDetails(int id);
         string GetDownload(int id);
+        Task<List<Allotmentletter>> GetAllotmentLetterData();
 
 
-     }
+    }
 }
