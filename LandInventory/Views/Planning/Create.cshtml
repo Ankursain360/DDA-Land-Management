@@ -21,7 +21,7 @@
 
                                 <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="GetDivisionList(this.value);">
                                 </select>
-                                <label asp-for="ZoneId" class="floating-label">Zone</label>
+                                <label asp-for="ZoneId" class="floating-label">Zone<span style="color:red">*</span></label>
 
                                 <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
                             </div>
@@ -32,7 +32,7 @@
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" onchange="GetProperties()">
                                 </select>
-                                <label asp-for="DivisionId" class="floating-label">Division</label>
+                                <label asp-for="DivisionId" class="floating-label">Division<span style="color:red">*</span></label>
 
                                 <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
                             </div>
@@ -41,7 +41,7 @@
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
                                 <textarea asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
-                                <label asp-for="Remarks" class="floating-label">Remarks</label>
+                                <label asp-for="Remarks" class="floating-label">Remarks<span style="color:red">*</span></label>
 
                                 <span asp-validation-for="Remarks" class="text-danger lb-sm"></span>
                             </div>

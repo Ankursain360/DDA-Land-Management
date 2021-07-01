@@ -11,7 +11,7 @@
                     <select class="floating-label-field floating-label-field--s3" id="awardDate"  asp-items="@(new SelectList( @ViewBag.AwardNoDateList, "Id","AwardName"))">
                         <option value="0">All</option>
                     </select>
-                    <label class="floating-label">Award No.(Date)</label>
+                    <label class="floating-label">Award No.(Date)<span style="color:red">*</span></label>
                 </div>
             </div>
             
