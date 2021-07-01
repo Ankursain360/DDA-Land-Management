@@ -15,7 +15,7 @@ namespace Libraries.Model.Entity
         public int RequestForProceedingId { get; set; }
         public int? ForwardToUserId { get; set; }
         public string FilePath { get; set; }
-        [Required(ErrorMessage = "This field is Mandatory")]
+        [Required(ErrorMessage = "Judgement Status is Mandatory")]
         public int? JudgementStatusId { get; set; }
         public string Remarks { get; set; }
 

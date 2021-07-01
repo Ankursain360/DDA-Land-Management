@@ -1,64 +1,472 @@
 ﻿@model Libraries.Model.Entity.Allotmentletter
-@await Component.InvokeAsync("PageHeader", new { pageName = "Allotment Letter" })
+<link href="~/css/PrintLabel.css" rel="stylesheet" />
 
-<div class="pt-3">
-    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-        <h3 class="mb-3 d-flex">Add Details</h3>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
+<!DOCTYPE html>
+<html>
 
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select asp-for="AllotmentId" class="floating-label-field floating-label-field--s3" id="ddlRefNo">
-                        <option value="">--Select--</option>
-                        @foreach (var item in Model.RefNoList)
-                        {
-                            <option value="@item.Id"> @item.Application.RefNo ( @item.Application.Name )</option>
-                        }
-                    </select>
-                     <span asp-validation-for="AllotmentId" class="text-danger"></span>
-                    <label asp-for="AllotmentId" class="floating-label">Application Reference No<span style="color:red">*</span>  </label>
+<head>
+    <meta charset="utf-8">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="https://master.managemybusinessess.com/images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Dashboard</title>
+    <!--font css-->
+    <link rel="stylesheet" href="https://master.managemybusinessess.com/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <!--    <link rel="stylesheet" href="https://master.managemybusinessess.com/font/icon/remixicon.css" />-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <link href="https://master.managemybusinessess.com/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://master.managemybusinessess.com/css/style.css" rel="stylesheet" />
+    <link href="https://master.managemybusinessess.com/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <script src="https://master.managemybusinessess.com/lib/jquery/dist/jquery.min.js"></script>
+    <link href="https://master.managemybusinessess.com/lib/select2/select2.css" rel="stylesheet" />
+    <script src="https://master.managemybusinessess.com/lib/select2/select2.js"></script>
+
+</head>
+
+<style>
+    #rightSection {
+        width: calc(100% - 50px);
+        margin-top: -4px !important;
+        margin-bottom: 60px;
+    }
+</style>
+
+<body class="bg-gray">
+    <div id="loader-wrapper" style="display:none">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+
+
+
+
+    <section id="rightSection" class="slow bg-gray">
+        <div class="container-fluid">
+            <div class="section-wraper px-3  pb-md-0 pt-md-3">
+
+                <div class="content bg-white mx-auto p-3" id="MainContentForm" style="max-width: 1000px;">
+                    <div class="card">
+                        <table class="table table-bordered" border="0" style="vertical-align: middle;margin: -1px;width: calc(100% + 2px);">
+                            <tr>
+                                <td style="vertical-align: middle" align="center">
+                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
+                                </td>
+                                <td style="vertical-align: middle">
+                                    <h5 class="mb-2 text-primary">
+                                        <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
+                                    </h5>
+                                    <p class="m-0">
+                                        <strong style="line-height: 1.6;">
+                                            INSTITUTIONAL LAND BRANCH<br />
+                                            Room No.216, A-Block, 2" Floor,<br />
+                                            VIKAS SADAN INA, NEW DELHI -110023<br />
+                                        </strong>
+                                    </p>
+                                </td>
+                                <td style="vertical-align: middle" align="center">
+                                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="card-body" style="font-size: .95rem; line-height: 1.8;">
+
+                            <table style="border:none; border-top: none;">
+
+                                <tr>
+                                    <td align="left">
+                                        <table style="border:none; border-top: none; width:100%">
+                                            <tr>
+
+                                                <td align="left">
+                                                    Letter No. :<b> @Model.ReferenceNumber    </b>
+                                                </td>
+                                                <td align="right">
+                                                    Dated :  <b>@(Convert.ToDateTime(Model.CreatedDate).ToString("dd-MMM-yyyy"))</b>
+
+                                                </td>
+                                            </tr>
+
+
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td align="left">
+
+                                        <br />To <br /> <br />
+                                    </td>
+                                </tr>
+
+
+
+                                <tr>
+
+                                    <td align="left">
+                                        <b>  The Deputy Director,</b><br />
+                                        <b>   Dte. of Education,</b><br />
+                                        <b>Land & Estate Branch. GNCTD,</b><br />
+                                        <b>  Lucknow Road,</b><br />
+                                        <b> Delhi-110054</b><br />
+                                        <br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <b>
+                                            Subject : Allotment of land measuring <b> @Model.Allotment.TotalArea </b> Sqm. to Dte. of Education (Land & Estate Branch), GNCTD for construction of <b> @Model.Allotment.Application.Name,@(Model.Allotment.Application.Address)</b> .
+                                        </b>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="color:black">
+                                        Sir,
+
+
+                                    </p>
+
+
+                                </div>
+
+                            </div>
+
+
+
+
+                            <table class="" border="0" style="border:none; border-top: none;border-bottom:none;  ">
+                                <tbody class="tbody">
+                                    <tr>
+                                        <td>
+                                            <p style="color:black;margin-bottom:0.4%; text-align-last:justify">
+                                                With reference to letter No.<b> @Model.Allotment.Application.RefNo </b>dated<b> @Model.Allotment.Application.RefNoOfAllotmentLetterDate</b> on the subject noted above, I am directed to  inform you that
+                                            </p> <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
+                                                under the provision of DDA (Disposal of Developed Nazul land) Rules, 1981, it is proposed to allot a plot  of land measuring
+                                            </p>
+                                            <p style="color:black;margin-bottom:0.2%">
+                                                <b>@Model.Allotment.TotalArea</b> Sqm.
+                                                @if (Model.Allotment.LeasePurposesTypeId == 1)
+
+                                                {<span>(on perpetual lease hold basis)</span>}
+                                                else
+                                                { <span>(on temp lease hold basis)</span>}
+                                                for the purpose of
+
+
+                                                <b>
+                                                    @Model.Allotment.Application.Name,
+                                                    @Model.Allotment.Application.Address
+                                                </b>
+                                            </p><p style="margin-top:0.6% ">
+                                                as per enclosed Lay Out Plan on the usual tenets and conditions as given in the approved format of perpetual lease deed and the following conditions: -
+                                            </p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <ol>
+
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            That the allottee Dte. of Education (Land &amp; Estate Branch), GNCTD will be require to pay provisional premium of land measuring <b>@Model.Allotment.TotalArea</b> Sqm. Re.<b>
+                                                                @if (Model.Allotment.PremiumRate == null)
+                                                                {<span>0.00</span>}
+                                                                else
+                                                                {<span>@Model.Allotment.PremiumRate</span>}
+                                                            </b> /- per acre (Aggregate of the provisional land final premium). The revision of rates of land is under consideration of the Central Govt. The allottee shall have to pay balance premium for the land as per rates determined by the Central Government under Rule-5 of DDA (Disposal of Developed Nazul land) Rules, 1981, and within the time demanded by DDA. The rates of land. determined. by Central Government, shall be binding upon the allottee and shall not be called in question by it in any proceeding.
+                                                        </span>
+                                                    </span>
+                                                </li>
+
+
+
+                                                <ol style="list-style-type:lower-roman">
+                                                    <li style="text-align:justify; margin-top:1px"><span style="font-size: .95rem"><span>The allottee shall give an undertaking to the effect that it will pay the balance premium of land as and when demanded by DDA on the basis of the rates determined by Central Govt.</span></span></li>
+                                                    <li style="text-align:justify"><span style="font-size: .95rem"><span>The area of the land/ plot is also subject to variation in size, as per requirement of layout plan and actual demarcation of the plot at site etc.</span></span></li>
+                                                    <li style="text-align:justify"><span style="font-size: .95rem"><span>The allotted land shall be used for the purpose of Govt. Sr. Sec. School and no other purpose whatsoever.</span></span></li>
+                                                    <li style="text-align:justify"><span style="font-size: .95rem"><span>The building plans should be got approved from the Lessor/DDA/Local body, before getting the same sanctioned for the construction on allotted land and construction as per sanctioned plan shall be completed thereon within a period of 2 years from the date of taking over physical possession of the plot allotted.</span></span></li>
+                                                    <li style="text-align:justify;margin-top:4px">
+                                                        <span style="font-size: .95rem"><span style="font-size: .95rem">The allottee shall not sell, transfer, assign or otherwise part with possession of the whole or any part of the said and or any building thereon except with the previous consent in writing of the Lessor which he shall be entitled to refuse in his absolute discretion.</span></span>
+
+                                                        <ol style="list-style-type:lower-alpha">
+                                                            <li style="text-align:justify"><span style="font-size: .95rem"><span>PROVIDED  that , in the event of the consent being given, the Lessor may impose such conditions as he thinks fit and the LESSOR shall be entitled to calm and recover the whole or a portion (as the Lessor may in his absolute discretion determine) of the un-earned increase in the value (i.e. the difference between the premium paid and market value ) of the said land at the time of sale, transfer assignment. or parting with the possession and the decision of Lessor in the respect of the market value shall he final & binding.</span></span></li>
+                                                            <li style="text-align:justify">
+                                                                <span style="font-size: .95rem">
+                                                                    <span>
+                                                                        Notwithstanding anything contained in sub-clause (a) above. the lessee may
+                                                                        with the previous consent in writing of the Lt. Governor of Delhi (here in after called The L.G.) mortgage or charge, the said land to such person as may
+                                                                        be approved by the Lt.
+                                                                        Governor in his absolute discretion.
+                                                                    </span>
+                                                                </span>
+                                                            </li>
+
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            That it is the ,whole responsibility of the allottee to keep proper
+                                                            watch and ward  of the land and property against any encroachment.
+                                                        </span>
+                                                    </span>
+                                                </li>
+
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            The offer of allotment of land herein made is on "AS IS WHERE IS BASIS". The allottee is advised to got himself acquainted with the conditions herein mentioned and also the site conditions before acceptance of the offer of allotment. It may be noted that the DDA shall not entertain any claim/exemption from the payment of ground rent, License final & binding. Fee, composition fee etc. once the offer of allotment is accepted and possession is taken over.
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            The allottee shall abide by all the terms and conditions given in the allotment letter/lease deed and other conditions as may be imposed by the Competent Authority from time to time
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            The allottee shall pay the cost of fencing/Boundary
+                                                            wall if any, as and when demanded by DDA.
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            No property development permitted on the allotted
+                                                            land
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            The payment and the acceptance letter with the
+                                                            required undertaking must be sent within 60 days from the date of issue of Demand-Cum-Allotment letter,failing
+                                                            which interest at the rate of 14% shall be chargeable for the delay period upto 180 days of issue of this letter.
+                                                            On completion of 180 days from the date of issue ,the allotment shall be automatically cancelled.
+                                                            If the allottee has made partial payment, after 180 days of issue of this letter the allottee shall
+                                                            have to m-apply for allotment
+                                                        </span>
+                                                    </span>
+                                                </li>
+
+                                                <li style="text-align:justify; margin-top:1px">
+                                                    <span style="font-size: .95rem">
+                                                        <span>
+                                                            If the above terms and conditions are
+                                                            acceptable to you, the acceptance there of with an undertaking may be sent to the undersigned
+                                                            along with the demand draft for Rs. 46/- (Rupees Forty Six Only) including documentation charges
+                                                            <b>
+                                                                @*@if(Model.PremiumRate == null) { Model.PremiumRate=0; }*@
+                                                                @if (Model.Allotment.DocumentCharge == null)
+                                                                {<span>0.00</span> }
+                                                                else
+                                                                {<span>@Model.Allotment.DocumentCharge</span>}
+                                                            </b> /- in favour of DDA within 60 days from the date of issue of demand-cum-allotment letter.
+                                                            The said amount can also be deposited in the bank counter situated in I.N.A. office complex and a copy
+                                                            of the challan may also be submitted to this office
+                                                        </span>
+                                                    </span>
+                                                </li>
+                                            </ol>
+
+
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+
+
+                                    <tr>
+                                        <td>
+                                            <p><span style="font-size: .95rem"><span><strong><span style="font-size: .95rem"><span>Details of Demand</span></span></strong></span></span></p>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            1.	Premium of land measuring
+                                            :
+                                            <span style="text-align:right">
+
+
+
+                                                Rs.<b>
+                                                    @if (Model.Allotment.PremiumAmount == null)
+                                                    {<span>0.00</span>}
+                                                    else
+                                                    {<span>@Model.Allotment.PremiumAmount</span>}
+                                                </b>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <br />
+
+                                            <b>@Model.Allotment.TotalArea</b> Sqm. at  Re.
+                                            <b>
+                                                @if (Model.Allotment.PremiumRate == null)
+                                                {<span>0.00</span>}
+                                                else
+                                                {<span>@Model.Allotment.PremiumRate</span>}
+                                            </b>/- per acre
+
+                                            <br />
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>
+
+                                            <br />
+
+                                            2.	Documentation Charge
+
+                                            :	Rs.	<b>
+                                                @if (Model.Allotment.DocumentCharge == null)
+                                                {<span>0.00</span>}
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+
+                                            <br />
+                                            Total Rs.  :	<b>
+                                                @if (Model.Allotment.TotalAmount == null)
+                                                {<span>0.00</span>}
+                                                else
+                                                {<span>@Model.Allotment.TotalAmount</span>}
+                                            </b>
+
+
+
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td style="text-align:right;">
+                                            (Sada Shiv)<br />
+                                            Dy. Director (IL)/DDA
+
+                                        </td>
+                                    </tr>
+
+
+
+
+                                    <tr>
+                                        <td style="background-color:white">
+                                            <p><span style="font-size:.95rem"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="font-family:&quot;Open Sans&quot;,sans-serif"><span style="color:black">Encl : As stated </span></span></span></span></span></p>
+
+                                            <p>&nbsp;</p>
+
+                                            <p><span style="font-size:.95rem"><span style="font-family:Calibri,sans-serif"><span style="font-size:12.0pt"><span style="font-family:&quot;Open Sans&quot;,sans-serif"><span style="color:black">Copy to :-</span></span></span></span></span></p>
+
+                                            <p>
+                                                <ol>
+                                                    <li>
+                                                        Commissioner (Plg.) DDA. Vikas Minar, New Delhi-I 10002
+                                                    </li>
+                                                    <li>
+                                                        Commissioner (LM), DDA, Vikas Sadan, New Delhi-I 10023
+                                                    </li>
+                                                    <li>Chief Engineer (Rohini), DDA, Madhuban Chowk, Delhi-1 10085</li>
+                                                    <li>Dy. Director (Survey) LD, DDA, Vikas Sadan, New Delhi-I 10023</li>
+                                                    <li>Dy. CAO (LC)-I,DDA, Vikas Sadan, New Delhi-110023</li>
+                                                </ol>
+                                                <br />
+
+                                            </p>
+
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="text-align:right;">
+                                            Dy. Director (IL)/DDA
+
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="col-md-12 text-center">
+
+                    <button class="btn btn-theme px-5" type="button" onclick="window.print()">Print</button>
+                    @Html.ActionLink("Back", "Index", "AllotmentLetter", null, new { @class = "btn btn-theme " })
+
+
+
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <input placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3 " id="txtRefernceNumber" required asp-for="ReferenceNumber" />
-                    <span class="text-danger"></span>
-                    <label class="floating-label">Refernce / Allotment Number<span style="color:red">*</span>   </label>
-                </div>
-            </div>
+
+
+
+
 
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <input type="hidden" asp-for="FilePath" />
-                <input class="floating-label-field floating-label-field--s3" asp-for="DocFile" placeholder="AllotmentLetter Upload" type="file" id="file" />
-
-                <
-                <span class="text-danger" asp-validation-for="FilePath"></span>
-                <label class="floating-label">Upload Allotment Letter  </label>
-
-            </div>
         </div>
-        <div class="row mt-md-3">
-            <div class=" col-md-12">
+    </section>
 
-                
 
-            </div>
-        </div>
-       
+    <script src="https://master.managemybusinessess.com/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://master.managemybusinessess.com/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="https://master.managemybusinessess.com/lib/toaster/toastr.min.js"></script>
 
-    </form>
-</div>
+
+
+    <script src="https://master.managemybusinessess.com/js/site.min.js?v=vWVFonNvAoCNljRoLxgUMRUjqGJWFtfjinr9jBuIAtE"></script>
+
+
+
+</body>
+
+</html>
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/allotmentletter.js"></script>
+    <script src="~/js/allotmentlettercreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/allotmentletter.min.js" asp-append-version="true"></script>
+    <script src="~/js/allotmentlettercreate.min.js" asp-append-version="true"></script>
 </environment>

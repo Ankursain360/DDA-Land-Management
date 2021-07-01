@@ -35,7 +35,7 @@
                         <option selected="selected" disabled="disabled" value="0">Select </option>
                     </select>
                     <span asp-validation-for="ModuleId" class="text-danger" style="display:none;" id="ModuleIdMessage">Module Name Is Mandatory</span>
-                    <label asp-for="ModuleId" class="floating-label">Module </label>
+                    <label asp-for="ModuleId" class="floating-label">Module<span style="color:red">*</span> </label>
                 </div>
 
             </div>
@@ -45,7 +45,7 @@
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Name" class="text-danger" style="display:none;" id="NameMessage">Process Name Is Mandatory</span>
 
-                    <label asp-for="Name" class="floating-label">Proccess Name  </label>
+                    <label asp-for="Name" class="floating-label">Proccess Name <span style="color:red">*</span> </label>
                 </div>
 
 
@@ -56,7 +56,7 @@
                               class="floating-label-field floating-label-field--s3 "></textarea>
                     <span asp-validation-for="Description" class="text-danger" style="display:none;" id="DescriptionMessage">Proccess Description Is Mandatory</span>
 
-                    <label asp-for="Description" class="floating-label">Proccess Description  </label>
+                    <label asp-for="Description" class="floating-label">Proccess Description <span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                     <input asp-for="Slatime" type="text" value="" maxlength="3"
                            class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="Slatime" class="text-danger" style="display:none;" id="SlatimeMessage">SLA Time Is Mandatory</span>
-                    <label asp-for="Slatime" class="floating-label">SLA Time(in days)  </label>
+                    <label asp-for="Slatime" class="floating-label">SLA Time(in days) <span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -75,7 +75,7 @@
                     <input asp-for="EffectiveDate" type="date" value=""
                            class="floating-label-field floating-label-field--s3"  onkeypress="return false;" />
                     <span asp-validation-for="EffectiveDate" class="text-danger" style="display:none;" id="EffectiveDateMessage">Effective Date  Is Mandatory</span>
-                    <label asp-for="EffectiveDate" class="floating-label">Effective Date  </label>
+                    <label asp-for="EffectiveDate" class="floating-label">Effective Date <span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-3">

@@ -15,7 +15,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="PurposeUseId" class="text-danger"></span>
-                    <label asp-for="PurposeUseId" class="floating-label">Purpose Use </label>
+                    <label asp-for="PurposeUseId" class="floating-label">Purpose Use<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -23,7 +23,7 @@
                     <input asp-for="SubPurposeUse" type="text" disabled  
                            class="floating-label-field floating-label-field--s3" limit="200" />
                     <span asp-validation-for="SubPurposeUse" class="text-danger"></span>
-                    <label class="floating-label">Sub Purpose Use </label>
+                    <label class="floating-label">Sub Purpose Use<span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
