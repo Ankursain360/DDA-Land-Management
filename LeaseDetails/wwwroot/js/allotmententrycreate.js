@@ -237,7 +237,7 @@ $(" #TotalArea, #LeasesTypeId, #LeasePurposesTypeId, #LeaseSubPurposeId, #Allotm
 
             HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
                 if (response == null) {
-                    msg = 'Licence Fees is not defined for particular allotment date';
+                    msg = 'License Fees is not defined for particular allotment date';
 
                     if (msg != null) {
 
@@ -293,7 +293,12 @@ $(" #TotalArea, #LeasesTypeId, #LeasePurposesTypeId, #LeaseSubPurposeId, #Allotm
             HttpGet("/AllotmentEntry/GetRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
                 if (response == null) {
                     msg = 'Premium Rate is not defined for particular allotment date';
+                    if (msg != null) {
 
+                        alert(msg + ' ,\nPlease contact system administrator.');
+
+                        return;
+                    }
                 }
                 else {
                     $("#PremiumRate").val(response.premiumRate);
@@ -315,7 +320,12 @@ $(" #TotalArea, #LeasesTypeId, #LeasePurposesTypeId, #LeaseSubPurposeId, #Allotm
             HttpGet("/AllotmentEntry/GetGroundRateList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
                 if (response == null) {
                     msg = (msg == null ? 'Ground Rent is not defined for particular allotment date' : msg + ', \nGround Rent is not defined for particular allotment date');
+                    if (msg != null) {
 
+                        alert(msg + ' ,\nPlease contact system administrator.');
+
+                        return;
+                    }
                 }
                 else {
                     $("#GroundRate").val(response.groundRate);
@@ -337,8 +347,13 @@ $(" #TotalArea, #LeasesTypeId, #LeasePurposesTypeId, #LeaseSubPurposeId, #Allotm
             HttpGet("/AllotmentEntry/GetFeeList?leasePurposeId=" + pid + "&leaseSubPurposeId=" + kid + "&allotmentDate=" + adate, 'json', function (response) {
 
                 if (response == null) {
-                    msg = (msg == null ? 'Licence Fees is not defined for particular allotment date' : msg + ', \nLicence Fees is not defined for particular allotment date');
+                    msg = (msg == null ? 'License Fees is not defined for particular allotment date' : msg + ', \nLicence Fees is not defined for particular allotment date');
+                    if (msg != null) {
 
+                        alert(msg + ' ,\nPlease contact system administrator.');
+
+                        return;
+                    }
                 }
                 else {
 
