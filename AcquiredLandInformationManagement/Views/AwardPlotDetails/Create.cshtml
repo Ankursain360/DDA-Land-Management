@@ -16,7 +16,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="AwardMasterId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="AwardMasterId">Award No.</label>
+                    <label class="floating-label" asp-for="AwardMasterId">Award No.<span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -29,7 +29,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="VillageId">Village Name</label>
+                    <label class="floating-label" asp-for="VillageId">Village Name<span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -42,7 +42,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="KhasraId">Khasra No</label>
+                    <label class="floating-label" asp-for="KhasraId">Khasra No<span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -134,7 +134,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span></label>
                 </div>
 
             </div>
