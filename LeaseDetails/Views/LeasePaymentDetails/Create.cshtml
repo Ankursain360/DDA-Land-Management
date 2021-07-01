@@ -26,7 +26,7 @@
                         }
                     </select>
                     <span class="text-danger" asp-validation-for="RefId"></span>
-                    <label class="floating-label">Reference Number(Allotee Name) </label>
+                    <label class="floating-label">Reference Number(Allotee Name)<span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -133,7 +133,7 @@
                             <option disabled="disabled" selected value="">Select</option>
                         </select>
                         <span class="text-danger" asp-validation-for="PaymentTypeId"></span>
-                        <label class="floating-label" asp-for="PaymentTypeId">Payment Type </label>
+                        <label class="floating-label" asp-for="PaymentTypeId">Payment Type<span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -141,7 +141,7 @@
                         <input placeholder="Name" type="date"
                                class="floating-label-field floating-label-field--s3 " asp-for="PaymentDate" id="txtpdate" />
                         <span class="text-danger" asp-validation-for="PaymentDate"></span>
-                        <label class="floating-label">Payment Date    </label>
+                        <label class="floating-label">Payment Date <span style="color:red">*</span>   </label>
                     </div>
                 </div>
 
@@ -153,7 +153,7 @@
                     <input placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" asp-for="ChallanUtrnumber" id="txtchallan" />
                     <span class="text-danger msg" asp-validation-for="ChallanUtrnumber"></span>
-                    <label class="floating-label">  Challan/UTR  Number   </label>
+                    <label class="floating-label">  Challan/UTR  Number<span style="color:red">*</span>   </label>
                 </div>
                 @*<div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -169,7 +169,7 @@
                     <input placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3 numbers" asp-for="PaymentAmount" id="txtamount" limit="18"/>
                     <span class="text-danger msg" asp-validation-for="PaymentAmount"></span>
-                    <label class="floating-label"> Payment Amount   </label>
+                    <label class="floating-label"> Payment Amount <span style="color:red">*</span>  </label>
                 </div>
             </div>
 

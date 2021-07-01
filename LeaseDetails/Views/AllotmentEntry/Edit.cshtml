@@ -23,7 +23,7 @@
                         }
                     </select>
                     <span asp-validation-for="ApplicationId" class="text-danger"></span>
-                    <label asp-for="ApplicationId" class="floating-label">Society Name </label>
+                    <label asp-for="ApplicationId" class="floating-label">Society Name<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -76,7 +76,7 @@
                     <input asp-for="TotalArea" placeholder="Alloted Area" type="text" 
                            class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="TotalArea" class="text-danger"></span>
-                    <label class="floating-label">AllotedArea (in sq mt) </label>
+                    <label class="floating-label">AllotedArea (in sq mt)<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -90,7 +90,7 @@
             <option value="3">Both</option>*@
                     </select>
                     <span asp-validation-for="LeasesTypeId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="LeasesTypeId">Lease Type</label>
+                    <label class="floating-label" asp-for="LeasesTypeId">Lease Type<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
 
                     </select>
                     <span asp-validation-for="LeasePurposesTypeId" class="text-danger"></span>
-                    <label class="floating-label">Purpose </label>
+                    <label class="floating-label">Purpose<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -175,7 +175,7 @@
 
 
                     <span asp-validation-for="LeaseSubPurposeId" class="text-danger"></span>
-                    <label class="floating-label">SubPurpose </label>
+                    <label class="floating-label">SubPurpose<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -184,7 +184,7 @@
                     <input  asp-for="AllotmentDate" placeholder="Allotment Date" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="AllotmentDate" class="text-danger msg"></span>
-                    <label class="floating-label">Allotment Date </label>
+                    <label class="floating-label">Allotment Date<span style="color:red">*</span> </label>
                 </div>
 
             </div>
