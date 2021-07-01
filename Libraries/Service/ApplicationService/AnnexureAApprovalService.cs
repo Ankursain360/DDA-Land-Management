@@ -25,9 +25,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<Fixingdemolition> FetchSingleResult(int id)
         {
-            var result = await _annexureAApprovalRepository.FindBy(a => a.Id == id);
-            Fixingdemolition model = result.FirstOrDefault();
-            return model;
+            return await _annexureAApprovalRepository.FetchSingleResult(id);
         }
         public async Task<List<Fixingdemolition>> GetAllFixingdemolition()
         {

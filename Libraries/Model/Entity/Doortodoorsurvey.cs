@@ -69,12 +69,13 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Presentuse> PresentuseList { get; set; }
+        public Surveyuserdetail CreatedByNavigation { get; set; }
         public virtual Presentuse PresentUseNavigation { get; set; }
 
         [NotMapped]
-        public IFormFile DocumentPhoto { get; set; }
+        public List<IFormFile> DocumentPhoto { get; set; }
         [NotMapped]
-        public IFormFile PropertyPhoto { get; set; }
+        public List<IFormFile> PropertyPhoto { get; set; }
         public ICollection<Doortodoorsurveyidentityproof> Doortodoorsurveyidentityproof { get; set; }
         public ICollection<Doortodoorsurveypropertyproof> Doortodoorsurveypropertyproof { get; set; }
 

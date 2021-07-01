@@ -103,11 +103,11 @@
                        
                         foreach (var item in Model.Watchandwardphotofiledetails)
                         {
-                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id"> (View Photo @(Photo += 1 ))</a>
+                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id"  target="_blank"> (View Photo @(Photo += 1 ))</a>
 
                             if (item.LattLongUrl != null)
                             {
-                                <a target="_blank" href="@item.LattLongUrl">View Location on Map</a>
+                                <a target="_blank" class="badge badge-primary px-2" href="@item.LattLongUrl">View Location on Map</a>
                             }
                            <br/>
                         }
@@ -132,7 +132,7 @@
                         
                         foreach (var item in Model.Watchandwardreportfiledetails)
                         {
-                            <a class="badge badge-primary px-2" asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
+                            <a class="badge badge-primary px-2" asp-action="DownloadReportFile" asp-route-id="@item.Id"  target="_blank"> (View Existing Document @(ReportFile += 1 ))</a>
                            
                         }
                         <input disabled type="file" class="floating-label-field floating-label-field--s3" asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />

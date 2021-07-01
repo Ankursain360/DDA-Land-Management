@@ -125,5 +125,12 @@ namespace Libraries.Repository.EntityRepository
             return result;
         }
 
+        public async Task<Fixingdemolition> FetchSingleResult(int id)
+        {
+            return await _dbContext.Fixingdemolition
+                                     .Include(x => x.Encroachment)
+                                     .Where(x => x.Id == id)
+                                     .FirstOrDefaultAsync();
+        }
     }
 }

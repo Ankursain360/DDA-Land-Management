@@ -227,6 +227,10 @@ namespace LeaseDetails.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+
+
+
         private Dictionary<string, string> GetMimeTypes()
         {
             return new Dictionary<string, string>
@@ -244,5 +248,21 @@ namespace LeaseDetails.Controllers
                 {".csv", "text/csv"}
             };
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _allotmentLetterService.FetchSingleAllotmentLetterDetails(id);
+            Data.RefNoList = await _allotmentLetterService.GetRefNoListforAllotmentLetter();
+            ViewBag.ExistDocFile = Data.FilePath;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
     }
 }
