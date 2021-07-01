@@ -17,7 +17,7 @@ namespace EncroachmentDemolition.Controllers
 
 
         [AuthorizeContext(ViewAction.Add)]
-        public IActionResult Create()
+        public IActionResult Create() 
         {
             return View();
         }

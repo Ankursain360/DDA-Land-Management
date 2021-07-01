@@ -22,7 +22,7 @@ namespace Libraries.Model.Entity
             Extensionservice = new HashSet<Extension>();
             Payment = new HashSet<Payment>();
         }
-        [Required(ErrorMessage = "Applicant Name is Mandatory")]
+        [Required(ErrorMessage = "Society Name is Mandatory")]
         public int ApplicationId { get; set; }
         [Required(ErrorMessage = "Allotted Area is Mandatory")]
         public decimal TotalArea { get; set; }

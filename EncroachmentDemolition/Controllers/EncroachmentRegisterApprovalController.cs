@@ -33,6 +33,11 @@ namespace EncroachmentDemolition.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserNotificationService _userNotificationService;
 
+        string targetPhotoPathLayout = "";
+        string targetReportfilePathLayout = "";
+        string PhotoFilePath = "";
+        string LocationMapFilePath = "";
+        string FirfilePath = "";
         string ApprovalDocumentPath = "";
 
         public EncroachmentRegisterApprovalController(IEncroachmentRegisterationApprovalService encroachmentRegisterationApprovalService, IEncroachmentRegisterationService encroachmentRegisterationService,
@@ -50,6 +55,11 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+            targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+            PhotoFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:PhotoFilePath").Value.ToString();
+            LocationMapFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:LocationMapFilePath").Value.ToString();
+            FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:ApprovalDocumentPath").Value.ToString();
 
         }
@@ -504,7 +514,7 @@ namespace EncroachmentDemolition.Controllers
         {
             FileHelper file = new FileHelper();
             Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
-            string path = Data.PhotoFilePath;
+            string path = targetPhotoPathLayout + Data.PhotoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
@@ -523,14 +533,6 @@ namespace EncroachmentDemolition.Controllers
 
             return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
         }
-        public async Task<IActionResult> DownloadPhotoFile(int Id)
-        {
-            FileHelper file = new FileHelper();
-            EncroachmentPhotoFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentPhotoFileDetails(Id);
-            string filename = Data.PhotoFilePath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
-            return File(FileBytes, file.GetContentType(filename));
-        }
 
         public async Task<JsonResult> DetailsOfRepeater(int? Id)
         {
@@ -543,18 +545,24 @@ namespace EncroachmentDemolition.Controllers
         {
             FileHelper file = new FileHelper();
             EncroachmentFirFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentFirFileDetails(Id);
-            string filename = Data.FirFilePath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
-            return File(FileBytes, file.GetContentType(filename));
+            string filename = FirfilePath  + Data.FirFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         public async Task<IActionResult> DownloadLocationMapFile(int Id)
         {
             FileHelper file = new FileHelper();
             EncroachmentLocationMapFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentLocationMapFileDetails(Id);
-            string filename = Data.LocationMapFilePath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
-            return File(FileBytes, file.GetContentType(filename));
+            string filename = LocationMapFilePath + Data.LocationMapFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+        public async Task<IActionResult> DownloadPhotoFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            EncroachmentPhotoFileDetails Data = await _encroachmentRegisterationService.GetEncroachmentPhotoFileDetails(Id);
+            string filename = PhotoFilePath + Data.PhotoFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+
         #endregion
 
 

@@ -9,6 +9,11 @@ namespace Libraries.Model.Entity
 {
     public  class Surveyuserdetail : AuditableEntity<int>
     {
+        public Surveyuserdetail()
+        {
+            Doortodoorsurvey = new HashSet<Doortodoorsurvey>();
+        }
+
 
         [Required(ErrorMessage = "First Name is mandatory")]
         public string FirstName { get; set; }
@@ -32,5 +37,6 @@ namespace Libraries.Model.Entity
         public Surveyuserrole Role { get; set; }
         [NotMapped]
         public List<Surveyuserrole> SurveyUserRoleList { get; set; }
+        public ICollection<Doortodoorsurvey> Doortodoorsurvey { get; set; }
     }
 }

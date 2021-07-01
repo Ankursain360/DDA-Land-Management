@@ -34,12 +34,14 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid)
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid,string identityDocumentPath,string propertyDocumentPath)
         {
             List<ApiSaveDoor2DoorSurveyDto> listData = new List<ApiSaveDoor2DoorSurveyDto>();
+          
 
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
+                                  .Include(a => a.CreatedByNavigation)
                                   .Where(a => a.CreatedBy == (adminroleid == dto.RoleId ? a.CreatedBy : dto.UserId)
                                   && (a.OccupantName.ToUpper().Trim().Contains(dto.OccupantName == "" || dto.OccupantName == null ? a.OccupantName.ToUpper().Trim() : dto.OccupantName.ToUpper().Trim()))
                                   && (a.MobileNo.ToUpper().Trim().Contains(dto.OccupantContactNo == "" || dto.OccupantContactNo == null ? a.MobileNo.ToUpper().Trim() : dto.OccupantContactNo.ToUpper().Trim()))
@@ -53,6 +55,33 @@ namespace Libraries.Repository.EntityRepository
             {
                 for (int i = 0; i < Data.Count; i++)
                 {
+                    List<string> propertyDocument = new List<string>();
+                    List<string> identityDocument = new List<string>();
+                    //Fetch identity document
+                    var identityDocumentData = await _dbContext.Doortodoorsurveyidentityproof
+                                                         .Where(x => x.DoorToDoorSurveyId == Data[i].Id)
+                                                         .ToListAsync();
+                    if (identityDocumentData != null)
+                    {
+                        for (int h = 0; h < identityDocumentData.Count; h++)
+                        {
+                            identityDocument.Add(identityDocumentPath + identityDocumentData[h].OccupantIdentityPrrofFilePath);
+                        }
+                    }
+                    //Fetch Property document
+                    var propertyDocumentData = await _dbContext.Doortodoorsurveypropertyproof
+                                                        .Where(x => x.DoorToDoorSurveyId == Data[i].Id)
+                                                        .ToListAsync();
+                    if (propertyDocumentData != null)
+                    {
+                        for (int h = 0; h < propertyDocumentData.Count; h++)
+                        {
+                            propertyDocument.Add(propertyDocumentPath + propertyDocumentData[h].PropertyFilePath);
+                        }
+                    }
+
+
+
                     listData.Add(new ApiSaveDoor2DoorSurveyDto()
                     {
                         Id = Data[i].Id,
@@ -71,9 +100,13 @@ namespace Libraries.Repository.EntityRepository
                         Email = Data[i].Email,
                         Remarks = Data[i].Remarks,
                         MobileNo = Data[i].MobileNo,
+                        OccupantIdentityPrrofFilePath = identityDocument,
+                        PropertyFilePath = propertyDocument,
                         OccupantAadharNo = Data[i].OccupantAadharNo,
                         VoterIdNo = Data[i].VoterIdNo,
-                        CreatedBy = Data[i].CreatedBy
+                        CreatedBy = Data[i].CreatedBy,
+                        CreatedByName = Data[i].CreatedByNavigation.UserName,
+                        CreatedDate = Data[i].CreatedDate
                     });
                 }
             }
@@ -109,6 +142,7 @@ namespace Libraries.Repository.EntityRepository
             List<string> identityDocument = new List<string>();
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
+                                  .Include(a => a.CreatedByNavigation)
                                   .Include(a => a.Doortodoorsurveyidentityproof)
                                   .Include(a => a.Doortodoorsurveypropertyproof)
                                   .Where(a => a.IsActive == 1 && a.Id == dto.Id)
@@ -160,7 +194,9 @@ namespace Libraries.Repository.EntityRepository
                         VoterIdNo = Data[i].VoterIdNo,
                         OccupantIdentityPrrofFilePath = identityDocument,
                         PropertyFilePath = propertyDocument,
-                        CreatedBy = Data[i].CreatedBy
+                        CreatedBy = Data[i].CreatedBy,
+                        CreatedByName = Data[i].CreatedByNavigation.UserName,
+                        CreatedDate = Data[i].CreatedDate
                     });
                 }
             }

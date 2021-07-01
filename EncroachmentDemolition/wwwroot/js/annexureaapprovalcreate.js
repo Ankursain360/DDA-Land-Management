@@ -2,7 +2,7 @@
 
     var id = parseInt($('#Id').val());
     var encroachmentId = parseInt($('#EncroachmentId').val());
-    var watchWardId = parseInt($('#WatchWardId').val());
+    var watchWardId = parseInt($('#Encroachment_WatchWardId').val());
     GetWatchWardDetails(watchWardId);
     GetEncroachmentDetails(encroachmentId);
     GetHistoryDetails(id);

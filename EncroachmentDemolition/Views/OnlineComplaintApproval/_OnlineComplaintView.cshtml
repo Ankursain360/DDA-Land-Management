@@ -53,9 +53,22 @@
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" multiple />
+                            <input type="hidden" asp-for="PhotoPath" />
+                            @{
+                                if (Model.PhotoPath != null && Model.PhotoPath != "")
+                                {
+                                    <br />
+                                    <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" />
+                                    <a class="badge badge-primary px-2" asp-action="ViewPhoto" asp-route-id="@Model.Id" target="_blank"> (View Photo)</a>
+
+                                }
+                                else
+                                {
+                                    <input disabled asp-for="Photo" id="Photolatlong" type="file" class="floating-label-field floating-label-field--s3" />
+                                }
+                            }
                             <span asp-validation-for="Photo" class="text-danger"></span>
-                            <label class="floating-label">Photograph</label>
+                            <label class="floating-label">Photograph</label>                           
                             <label class="err" style="color:red;display:none;">
                                 system is unable to find the coordinates in uploaded image.
                                 kindly upload the image which is having location information or

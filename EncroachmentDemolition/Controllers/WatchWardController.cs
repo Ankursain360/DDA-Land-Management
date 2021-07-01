@@ -40,6 +40,8 @@ namespace EncroachmentDemolition.Controllers
         private readonly IUserNotificationService _userNotificationService;
 
         public IConfiguration _configuration;
+        string targetPhotoPathLayout = "";
+        string targetReportfilePathLayout = "";
         string targetPathLayout = "";
         public WatchWardController(IWatchandwardService watchandwardService, IApprovalProccessService approvalproccessService,
             IWorkflowTemplateService workflowtemplateService, IConfiguration configuration,
@@ -54,6 +56,9 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+            targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+
         }
 
 
@@ -95,10 +100,7 @@ namespace EncroachmentDemolition.Controllers
                 watchandward.PrimaryListNoNavigation = await _watchandwardService.FetchSingleResultOnPrimaryList(Convert.ToInt32(watchandward.PrimaryListNo));
                 Random r = new Random();
                 int num = r.Next();
-                watchandward.RefNo = DateTime.Now.Year.ToString()+ watchandward.PrimaryListNoNavigation.Zone.Code   + num.ToString();
-
-                string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
-                string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+                watchandward.RefNo = DateTime.Now.Year.ToString() + watchandward.PrimaryListNoNavigation.Zone.Code + num.ToString();
                 if (ModelState.IsValid)
                 {
                     #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
@@ -189,8 +191,8 @@ namespace EncroachmentDemolition.Controllers
                             List<Watchandwardphotofiledetails> watchandwardphotofiledetails = new List<Watchandwardphotofiledetails>();
                             for (int i = 0; i < watchandward.Photo.Count; i++)
                             {
-                                string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
-                                GetLattLongDetailsDto dto = GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
+                                string FilePath = fileHelper.SaveFile1(targetPhotoPathLayout, watchandward.Photo[i]);
+                                GetLattLongDetailsDto dto = GetLattLongDetails(targetPhotoPathLayout + FilePath, watchandward.Latitude, watchandward.Longitude);
                                 var LattitudeValue = dto.Lattitude;
                                 watchandward.Latitude = LattitudeValue;
                                 var LongitudeValue = dto.Longitude;
@@ -217,7 +219,7 @@ namespace EncroachmentDemolition.Controllers
                             List<Watchandwardreportfiledetails> watchandwardreportfiledetails = new List<Watchandwardreportfiledetails>();
                             for (int i = 0; i < watchandward.Photo.Count; i++)
                             {
-                                string FilePath = fileHelper.SaveFile(targetReportfilePathLayout, watchandward.Photo[i]);
+                                string FilePath = fileHelper.SaveFile1(targetReportfilePathLayout, watchandward.Photo[i]);
                                 watchandwardreportfiledetails.Add(new Watchandwardreportfiledetails
                                 {
                                     WatchAndWardId = watchandward.Id,
@@ -345,7 +347,7 @@ namespace EncroachmentDemolition.Controllers
                                 string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                                 #endregion
 
-                               // sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                // sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
                                 #region Common Mail Genration
                                 SentMailGenerationDto maildto = new SentMailGenerationDto();
                                 maildto.strMailSubject = "Pending Watch & Ward Application Approval Request Details ";
@@ -435,8 +437,6 @@ namespace EncroachmentDemolition.Controllers
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
-            string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
-            string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
 
             if (ModelState.IsValid)
             {
@@ -458,7 +458,7 @@ namespace EncroachmentDemolition.Controllers
                         result = await _watchandwardService.DeleteWatchandwardphotofiledetails(id);
                         for (int i = 0; i < watchandward.Photo.Count; i++)
                         {
-                            string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
+                            string FilePath = fileHelper.SaveFile1(targetPhotoPathLayout, watchandward.Photo[i]);
                             GetLattLongDetailsDto dto = GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
                             var LattitudeValue = dto.Lattitude;
                             watchandward.Latitude = LattitudeValue;
@@ -489,7 +489,7 @@ namespace EncroachmentDemolition.Controllers
                         result = await _watchandwardService.DeleteWatchandwardreportfiledetails(id);
                         for (int i = 0; i < watchandward.Photo.Count; i++)
                         {
-                            string FilePath = fileHelper.SaveFile(targetReportfilePathLayout, watchandward.Photo[i]);
+                            string FilePath = fileHelper.SaveFile1(targetReportfilePathLayout, watchandward.Photo[i]);
                             watchandwardreportfiledetails.Add(new Watchandwardreportfiledetails
                             {
                                 WatchAndWardId = watchandward.Id,
@@ -566,7 +566,7 @@ namespace EncroachmentDemolition.Controllers
         {
             FileHelper file = new FileHelper();
             Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
-            string filename = Data.PhotoFilePath;
+            string filename = targetPhotoPathLayout + Data.PhotoFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         //***to download report file ***
@@ -574,7 +574,7 @@ namespace EncroachmentDemolition.Controllers
         {
             FileHelper file = new FileHelper();
             Watchandwardreportfiledetails Data = await _watchandwardService.GetWatchandwardreportfiledetails(Id);
-            string filename = Data.ReportFilePath;
+            string filename = targetReportfilePathLayout + Data.ReportFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         public IActionResult WatchWardApproval()
@@ -671,7 +671,7 @@ namespace EncroachmentDemolition.Controllers
         {
             FileHelper file = new FileHelper();
             Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
-            string path = Data.PhotoFilePath;
+            string path = targetPhotoPathLayout + Data.PhotoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
@@ -742,7 +742,7 @@ namespace EncroachmentDemolition.Controllers
 
                         Loaclity = result[i].PrimaryListNoNavigation.LocalityId == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name == null ? "" : result[i].PrimaryListNoNavigation.Locality.Name,
                         KhasraNo = result[i].PrimaryListNoNavigation.KhasraNo == null ? "" : result[i].PrimaryListNoNavigation.KhasraNo.ToString(),
-                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo==null?"":result[i].PrimaryListNoNavigation.PrimaryListNo,
+                        PrimaryListNo = result[i].PrimaryListNoNavigation.PrimaryListNo == null ? "" : result[i].PrimaryListNoNavigation.PrimaryListNo,
                         StatusOnGround = result[i].StatusOnGround.ToString(),
                         //IsActive = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;

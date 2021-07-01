@@ -35,6 +35,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurvey(DoortodoorsurveySearchDto model)
         {
             var data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                        .Include(x => x.CreatedByNavigation)
                                         .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                          )
@@ -49,6 +50,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCATION"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -58,6 +60,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("OCCUPANTNAME"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                     .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -68,6 +71,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -84,6 +88,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("LOCATION"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -93,6 +98,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("OCCUPANTNAME"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                   )
@@ -103,6 +109,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Doortodoorsurvey.Include(x => x.PresentUseNavigation)
+                                                .Include(x => x.CreatedByNavigation)
                                 .Where(x => (string.IsNullOrEmpty(model.location) || x.PropertyAddress.Contains(model.location))
                                            && (string.IsNullOrEmpty(model.occupantname) || x.OccupantName.Contains(model.occupantname))
                                            )
@@ -125,7 +132,8 @@ namespace Libraries.Repository.EntityRepository
             {
                 var data = await _dbContext.Doortodoorsurvey
                                     .Include(x=> x.PresentUseNavigation)
-                                 .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                    .Include(x => x.CreatedByNavigation)
+                                 .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                  && x.CreatedDate >= model.FromDate
                                  && x.CreatedDate <= model.ToDate)
                                 .GetPaged<Doortodoorsurvey>(model.PageNumber, model.PageSize);
@@ -141,7 +149,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                               .Include(x => x.PresentUseNavigation)
-                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                              .Include(x => x.CreatedByNavigation)
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.Id)
@@ -152,7 +161,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
-                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                .Include(x => x.CreatedByNavigation)
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.NumberOfFloors)
@@ -162,7 +172,7 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
-                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderBy(s => s.Longitude)
@@ -181,7 +191,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
-                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                .Include(x => x.CreatedByNavigation)
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderByDescending(s => s.Id)
@@ -192,7 +203,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
-                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                .Include(x => x.CreatedByNavigation)
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderByDescending(s => s.NumberOfFloors)
@@ -202,7 +214,8 @@ namespace Libraries.Repository.EntityRepository
                             data = null;
                             data = await _dbContext.Doortodoorsurvey
                                 .Include(x => x.PresentUseNavigation)
-                                          .Where(x => x.Id == (model.Presentuse == 0 ? x.Id : model.Presentuse)
+                                .Include(x => x.CreatedByNavigation)
+                                          .Where(x => x.PresentUseId == (model.Presentuse == 0 ? x.PresentUseId : model.Presentuse)
                                           && x.CreatedDate >= model.FromDate
                                           && x.CreatedDate <= model.ToDate)
                                           .OrderByDescending(s => s.Longitude)

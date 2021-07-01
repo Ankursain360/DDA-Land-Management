@@ -32,6 +32,7 @@ namespace EncroachmentDemolition.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserNotificationService _userNotificationService;
 
+        string targetPhotoPathLayout = string.Empty;
         string ApprovalDocumentPath = "";
 
 
@@ -49,6 +50,7 @@ namespace EncroachmentDemolition.Controllers
             _userProfileService = userProfileService;
             _hostingEnvironment = hostingEnvironment;
             _userNotificationService = userNotificationService;
+            targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:OnlineComplaint:ApprovalDocumentPath").Value.ToString();
 
 
@@ -494,18 +496,18 @@ namespace EncroachmentDemolition.Controllers
             {
                 FileHelper file = new FileHelper();
                 var Data = await _onlinecomplaintService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.PhotoPath;
-                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+                string targetPhotoPathLayout1 = targetPhotoPathLayout +  Data.PhotoPath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout1);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout1));
             }
             catch (Exception ex)
             {
 
                 FileHelper file = new FileHelper();
                 var Data = await _onlinecomplaintService.FetchSingleResult(Id);
-                string targetPhotoPathLayout = Data.PhotoPath;
-                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
-                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+                string targetPhotoPathLayout1 = targetPhotoPathLayout + Data.PhotoPath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout1);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout1));
 
             }
         }

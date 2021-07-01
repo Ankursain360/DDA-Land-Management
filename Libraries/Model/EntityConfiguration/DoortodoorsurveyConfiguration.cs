@@ -10,6 +10,9 @@ namespace Model.EntityConfiguration
         {
             builder.ToTable("doortodoorsurvey", "lms");
 
+            builder.HasIndex(e => e.CreatedBy)
+                .HasName("fk_CreatedByDoortoDoorSurvey_idx");
+
             builder.HasIndex(e => e.PresentUseId)
                 .HasName("fkpresentuse_idx");
 
@@ -94,6 +97,13 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.VoterIdNo)
                 .HasMaxLength(15)
                 .IsUnicode(false);
+
+            builder.HasOne(d => d.CreatedByNavigation)
+                .WithMany(p => p.Doortodoorsurvey)
+                .HasForeignKey(d => d.CreatedBy)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_CreatedByDoortoDoorSurvey");
+
 
             builder.HasOne(d => d.PresentUseNavigation)
                 .WithMany(p => p.Doortodoorsurvey)
