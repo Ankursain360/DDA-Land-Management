@@ -16,7 +16,7 @@
                         <option value="" selected="selected" disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="LandNotificationId" class="text-danger"></span>
-                    <label asp-for="LandNotificationId" class="floating-label">Notification No </label>
+                    <label asp-for="LandNotificationId" class="floating-label">Notification No <span style="color:red">*</span> </label>
                 </div>
             </div>
 
@@ -25,7 +25,7 @@
 
                     <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="NotificationDate" class="text-danger"></span>
-                    <label class="floating-label">Notification Date</label>
+                    <label class="floating-label">Notification Date <span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     <input asp-for="SerialNumber" placeholder="Serial No" class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="SerialNumber" class="text-danger"></span>
-                    <label class="floating-label" asp-for="SerialNumber">Serial No</label>
+                    <label class="floating-label" asp-for="SerialNumber">Serial No <span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -61,7 +61,7 @@
 
                     <input asp-for="PropertySiteNo" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="PropertySiteNo" class="text-danger"></span>
-                    <label class="floating-label">Property/Site/KhasraNo</label>
+                    <label class="floating-label">Property/Site/KhasraNo <span style="color:red">*</span> </label>
 
                 </div>
 
@@ -72,7 +72,7 @@
 
                     <input asp-for="Name" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Name" class="text-danger"></span>
-                    <label class="floating-label">Location Name(Village)</label>
+                    <label class="floating-label">Location Name(Village) <span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -253,7 +253,7 @@
                         <option value="0">InActive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label class="floating-label"> Status</label>
+                    <label class="floating-label"> Status <span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
