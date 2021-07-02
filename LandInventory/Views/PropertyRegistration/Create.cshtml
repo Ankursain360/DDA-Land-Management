@@ -46,7 +46,7 @@
                             <option selected="selected" disabled="disabled" value="">--Select-- </option>
                         </select>
                         <span asp-validation-for="ClassificationOfLandId" class="text-danger"></span>
-                        <label asp-for="ClassificationOfLandId" class="floating-label">Classification of Land </label>
+                        <label asp-for="ClassificationOfLandId" class="floating-label">Classification of Land<span style="color:red">*</span> </label>
                     </div>
                     @*<label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
                         <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))" required="required" requiredmsg="Classification of Land is Mandatory">
@@ -67,7 +67,7 @@
                             <option selected="selected" disabled="disabled" value="">--Select-- </option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                        <label asp-for="DepartmentId" class="floating-label">Maintaining Department </label>
+                        <label asp-for="DepartmentId" class="floating-label">Maintaining Department<span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -77,7 +77,7 @@
                             <option selected="selected" disabled="disabled" value="">--Select-- </option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
-                        <label asp-for="ZoneId" class="floating-label">Zone </label>
+                        <label asp-for="ZoneId" class="floating-label">Zone<span style="color:red">*</span> </label>
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
                             <option selected="selected" disabled="disabled" value="">--Select-- </option>
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger"></span>
-                        <label asp-for="DivisionId" class="floating-label">Division </label>
+                        <label asp-for="DivisionId" class="floating-label">Division<span style="color:red">*</span> </label>
                     </div>
                 </div>
             </div>
@@ -246,7 +246,7 @@
 
                             <input asp-for="TotalArea" value="" class="floating-label-field floating-label-field--s3  numbers" placeholder="Total Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                             <span asp-validation-for="TotalArea" class="text-danger"></span>
-                            <label class="floating-label">Total Area(in sq. mt.)</label>
+                            <label class="floating-label">Total Area(in sq. mt.)<span style="color:red">*</span></label>
                         </div>
                     </div>
                 </div>

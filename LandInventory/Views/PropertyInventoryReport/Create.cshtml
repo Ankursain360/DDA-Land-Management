@@ -14,7 +14,7 @@
                     <option value="2">Used</option>
                 </select>
                 <span asp-validation-for="InventoriedInId" class="text-danger"></span>
-                <label asp-for="InventoriedInId" class="floating-label">Inventoried In</label>
+                <label asp-for="InventoriedInId" class="floating-label">Inventoried In<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-4">
@@ -26,7 +26,7 @@
                     <option value="Unplanned Land">Unplanned Land</option>
                 </select>
                 <span asp-validation-for="PlannedUnplannedLand" class="text-danger"></span>
-                <label class="floating-label" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
+                <label class="floating-label" asp-for="PlannedUnplannedLand">Planned/Unplanned Land<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-4">
@@ -36,7 +36,7 @@
                     <option value="0">All</option>
                 </select>
                 <label asp-validation-for="ClassificationOfLandId" class="error"></label>
-                <label class="floating-label" asp-for="ClassificationOfLandId">Classification of Land</label>
+                <label class="floating-label" asp-for="ClassificationOfLandId">Classification of Land<span style="color:red">*</span></label>
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
                     <option value="0">All</option>
                 </select>
                 <label asp-validation-for="DepartmentId" class="error"></label>
-                <label class="floating-label" asp-for="DepartmentId">Department</label>
+                <label class="floating-label" asp-for="DepartmentId">Department<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-4">
@@ -58,7 +58,7 @@
                     <option value="0">All</option>
                 </select>
                 <label asp-validation-for="ZoneId" class="error"></label>
-                <label class="floating-label" asp-for="ZoneId">Zone</label>
+                <label class="floating-label" asp-for="ZoneId">Zone<span style="color:red">*</span></label>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
                     <option value="0">All</option>
                 </select>
                 <label asp-validation-for="DivisionId" class="error"></label>
-                <label class="floating-label" asp-for="DivisionId">Division</label>
+                <label class="floating-label" asp-for="DivisionId">Division<span style="color:red">*</span></label>
             </div>
         </div>
     </div>
@@ -82,14 +82,14 @@
                         <option value="0">All</option>
                     </select>
                     <label asp-validation-for="LocalityId" class="error"></label>
-                    <label class="floating-label" asp-for="LocalityId">Locality(Village)</label>
+                    <label class="floating-label" asp-for="LocalityId">Locality(Village)<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <input asp-for="KhasraNo" placeholder="Khasra No" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="KhasraNo" class="text-danger"></span>
-                    <label class="floating-label">Khasra No</label>
+                    <label class="floating-label">Khasra No<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -149,7 +149,7 @@
                 <select class="floating-label-field floating-label-field--s3" asp-for="MainLandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id","Name"))">
                     <option value="0">All</option>
                 </select>
-                <label class="floating-label">Main Land Use</label>
+                <label class="floating-label">Main Land Use<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-4">
@@ -160,7 +160,7 @@
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
-                <label class="floating-label">Litigation Status</label>
+                <label class="floating-label">Litigation Status<span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-4">
@@ -171,7 +171,7 @@
                     <option value="1">Yes</option>
                     <option value="0">No</option>
                 </select>
-                <label class="floating-label">Encroachment</label>
+                <label class="floating-label">Encroachment<span style="color:red">*</span></label>
             </div>
         </div>
     </div>

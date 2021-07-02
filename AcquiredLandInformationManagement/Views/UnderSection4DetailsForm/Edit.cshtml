@@ -20,7 +20,7 @@
 
                     </select>
                     <span asp-validation-for="ProposalId" class="text-danger"></span>
-                    <label asp-for="ProposalId" class="floating-label">Proposal Name </label>
+                    <label asp-for="ProposalId" class="floating-label">Proposal Name <span style="color:red">*</span> </label>
                 </div>
 
 
@@ -31,7 +31,7 @@
 
                     <input type="text" asp-for="Number" placeholder="Notification No" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Number" class="text-danger"></span>
-                    <label class="floating-label">Notification No</label>
+                    <label class="floating-label">Notification No <span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
 
                     <input type="Date" asp-for="Ndate" placeholder="Notification Date" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Ndate" class="text-danger"></span>
-                    <label class="floating-label">Notification Date</label>
+                    <label class="floating-label">Notification Date <span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -52,7 +52,7 @@
 
                     <input type="text" asp-for="Npurpose" placeholder="Purpose" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Npurpose" class="text-danger"></span>
-                    <label class="floating-label">Purpose</label>
+                    <label class="floating-label">Purpose <span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -88,7 +88,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>

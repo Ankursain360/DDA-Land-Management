@@ -13,7 +13,7 @@
                     <input disabled asp-for="NotificationNo" placeholder="Notification" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="NotificationNo" class="text-danger"></span>
-                    <label class="floating-label">Notification No.    </label>
+                    <label class="floating-label">Notification No. <span style="color:red">*</span>   </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -21,7 +21,7 @@
                     <input disabled asp-for="NotificationDate" placeholder="Name" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="NotificationDate" class="text-danger"></span>
-                    <label class="floating-label">Notification Date </label>
+                    <label class="floating-label">Notification Date <span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span></label>
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@
                     <input asp-for="AwardNumber" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="30">
 
                     <span asp-validation-for="AwardNumber" class="text-danger"></span>
-                    <label asp-for="AwardNumber" class="floating-label">Award Number </label>
+                    <label asp-for="AwardNumber" class="floating-label">Award Number <span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -22,7 +22,7 @@
                     <input asp-for="AwardDate" type="date" class="floating-label-field floating-label-field--s3 " placeholder="Name" >
 
                     <span asp-validation-for="AwardDate" class="text-danger"></span>
-                    <label asp-for="AwardDate" class="floating-label">Award Date </label>
+                    <label asp-for="AwardDate" class="floating-label">Award Date <span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
-                    <label asp-for="VillageId" class="floating-label">Village </label>
+                    <label asp-for="VillageId" class="floating-label">Village<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -43,7 +43,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="ProposalId" class="text-danger"></span>
-                    <label asp-for="ProposalId" class="floating-label">Proposal Name </label>
+                    <label asp-for="ProposalId" class="floating-label">Proposal Name <span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -54,7 +54,7 @@
                     <input asp-for="Compensation" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Name" limit="15">
 
                     <span asp-validation-for="Compensation" class="text-danger"></span>
-                    <label asp-for="Compensation" class="floating-label">Compensation (Rs.)</label>
+                    <label asp-for="Compensation" class="floating-label">Compensation (Rs.)<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -75,7 +75,7 @@
                                    placeholder="Land B Rate" limit="15">
 
                             <span asp-validation-for="Rate2" class="text-danger"></span>
-                            <label class="floating-label">Land B Rate(Rs.)</label>
+                            <label class="floating-label">Land B Rate(Rs.)<span style="color:red">*</span></label>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -123,7 +123,7 @@
             </div>
             <div class="col-md-6">
                 <input type="hidden" asp-for="Nature" id="Type" value="1" />
-                <label class="control-label lb-sm" asp-for="Nature">Nature</label>
+                <label class="control-label lb-sm" asp-for="Nature">Nature<span style="color:red">*</span></label>
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
@@ -144,7 +144,7 @@
                 <div class="floating-label-wrap">
                     <input asp-for="Purpose" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="100">
                     <span asp-validation-for="Purpose" class="text-danger"></span>
-                    <label class="floating-label">Purpose</label>
+                    <label class="floating-label">Purpose<span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -159,7 +159,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="US17Id" class="text-danger"></span>
-                    <label asp-for="US17Id" class="floating-label">Undersection No 17 </label>
+                    <label asp-for="US17Id" class="floating-label">Undersection No 17<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -169,7 +169,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="US6Id" class="text-danger"></span>
-                    <label asp-for="US6Id" class="floating-label">Undersection No 6 </label>
+                    <label asp-for="US6Id" class="floating-label">Undersection No 6 <span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -182,7 +182,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="US4Id" class="text-danger"></span>
-                    <label asp-for="US4Id" class="floating-label">Undersection No 4 </label>
+                    <label asp-for="US4Id" class="floating-label">Undersection No 4<span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="form-group col-md-6">
@@ -218,7 +218,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span></label>
                 </div>
 
             </div>
