@@ -14,7 +14,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="SchemeId" class="text-danger"></span>
-                    <label asp-for="SchemeId" class="floating-label">Scheme </label>
+                    <label asp-for="SchemeId" class="floating-label">Scheme <span style="color:red">*</span> </label>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     <input asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Name" class="text-danger"></span>
-                    <label class="floating-label">Proposal Name    </label>
+                    <label class="floating-label">Proposal Name  <span style="color:red">*</span>  </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -35,7 +35,7 @@
                     <input asp-for="RequiredAgency" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="RequiredAgency" class="text-danger"></span>
-                    <label class="floating-label">Requiring Agency     </label>
+                    <label class="floating-label">Requiring Agency <span style="color:red">*</span>    </label>
                 </div>
             </div>
 
@@ -47,7 +47,7 @@
                     <input asp-for="ProposalFileNo" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="ProposalFileNo" class="text-danger"></span>
-                    <label class="floating-label">Proposal No./ File No.  </label>
+                    <label class="floating-label">Proposal No./ File No. <span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -55,7 +55,7 @@
                     <input asp-for="ProposalDate" placeholder="Name" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="ProposalDate" class="text-danger"></span>
-                    <label class="floating-label">ProposalDate </label>
+                    <label class="floating-label">ProposalDate <span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                         <input asp-for="Bigha" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3 onlynumbers"limit="4" />
                         <span asp-validation-for="Bigha" class="text-danger"></span>
-                        <label class="floating-label">Bigha    </label>
+                        <label class="floating-label">Bigha <span style="color:red">*</span>   </label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -77,7 +77,7 @@
                         <input asp-for="Biswa" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3 onlynumbers" limit="2"/>
                         <span asp-validation-for="Biswa" class="text-danger"></span>
-                        <label class="floating-label">Biswa  </label>
+                        <label class="floating-label">Biswa <span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -86,7 +86,7 @@
                         <input asp-for="Biswanshi" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3 onlynumbers"limit="2" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
-                        <label class="floating-label">Biswanshi </label>
+                        <label class="floating-label">Biswanshi <span style="color:red">*</span> </label>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                     <textarea asp-for="Description" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
 
                     <span asp-validation-for="Description" class="text-danger"></span>
-                    <label class="floating-label">Description  </label>
+                    <label class="floating-label">Description <span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class=" col-md-6">
@@ -107,7 +107,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
