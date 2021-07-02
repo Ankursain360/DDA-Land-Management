@@ -4,7 +4,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
 <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Add Details</h3>
+  
+    <h3 class="mb-3 d-flex">Add Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="pt-3">
@@ -34,14 +36,14 @@
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input asp-for="FileNo" type="text" class="floating-label-field floating-label-field--s3 IsValidData">
                                     <span asp-validation-for="FileNo" id="FileNoMsg" class="text-danger" style="display:none;">File No. is Mandatory Field</span>
-                                    <label class="floating-label">File No.</label>
+                                    <label class="floating-label">File No. <span style="color:red">*</span></label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input asp-for="AlloteeName" type="text" class="floating-label-field floating-label-field--s3 IsValidData">
                                     <span asp-validation-for="AlloteeName" id="AlloteeNameMsg" class="text-danger" style="display:none;">Allotee Name is Mandatory Field</span>
-                                    <label class="floating-label">Allotee Name</label>
+                                    <label class="floating-label">Allotee Name <span style="color:red">*</span></label>
                                 </div>
                             </div>
                         </div>
@@ -73,94 +75,94 @@
 
 
 
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
-                                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                                        </select>
-                                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                                        <label asp-for="DepartmentId" class="floating-label">Department </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
-                                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                                        </select>
-                                        <span asp-validation-for="LocalityId" class="text-danger"></span>
-                                        <label asp-for="LocalityId" class="floating-label">Locality </label>
-                                    </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                    </select>
+                                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                                    <label asp-for="DepartmentId" class="floating-label">Department </label>
                                 </div>
                             </div>
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap">
-                                        <select class="floating-label-field floating-label-field--s3" asp-for="KhasraNoId" asp-items="@(new SelectList(Model.KhasraNoList, "Id","KhasraNo"))">
-                                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                                        </select>
-                                        <span asp-validation-for="KhasraNoId" class="text-danger"></span>
-                                        <label asp-for="KhasraNoId" class="floating-label">Khasra No. </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input asp-for="PropertyNoAddress" type="text" class="floating-label-field floating-label-field--s3 IsValidData">
-                                        <span asp-validation-for="PropertyNoAddress" id="PropertyNoAddressMsg" class="text-danger" style="display:none;">Property No./Address is Mandatory Field</span>
-                                        <label class="floating-label">Property No./Address</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap">
-                                        <input asp-for="Title" type="text" class="floating-label-field floating-label-field--s3 IsValidData">
-                                        <span asp-validation-for="Title" id="TitleMsg" class="text-danger" style="display:none;">Title is Mandatory Field</span>
-                                        <label class="floating-label">Title/Subject</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input asp-for="AlmirahNo" type="text" class="floating-label-field floating-label-field--s3 ">
-                                        <span asp-validation-for="AlmirahNo" class="text-danger"></span>
-                                        <label class="floating-label">Almirah No.</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-md-3">
-                                <div class="col-md-6">
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input type="hidden" asp-for="FilePath" />
-                                        <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3">
-                                        <span asp-validation-for="FileUpload" id="FilePathMsg" class="text-danger" style="display:none;">Upload File is Mandatory Field</span>
-                                        <label for="field-1" class="floating-label">Upload File</label>
-                                    </div>
-                                </div>
-                                <div class=" col-md-6">
-                                    <div class="floating-label-wrap">
-                                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
-                                        </select>
-                                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                                        <label asp-for="IsActive" class="floating-label">Status </label>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                    </select>
+                                    <span asp-validation-for="LocalityId" class="text-danger"></span>
+                                    <label asp-for="LocalityId" class="floating-label">Locality </label>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-md-3">
-                            <div class=" col-md-12">
-                                <button class="btn btn-theme " type="submit" onclick="return CheckFileValidation();">Submit</button>
-                                @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
-
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraNoId" asp-items="@(new SelectList(Model.KhasraNoList, "Id","KhasraNo"))">
+                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                    </select>
+                                    <span asp-validation-for="KhasraNoId" class="text-danger"></span>
+                                    <label asp-for="KhasraNoId" class="floating-label">Khasra No. </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="PropertyNoAddress" type="text" class="floating-label-field floating-label-field--s3 IsValidData">
+                                    <span asp-validation-for="PropertyNoAddress" id="PropertyNoAddressMsg" class="text-danger" style="display:none;">Property No./Address is Mandatory Field</span>
+                                    <label class="floating-label">Property No./Address <span style="color:red">*</span></label>
+                                </div>
                             </div>
                         </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <input asp-for="Title" type="text" class="floating-label-field floating-label-field--s3 IsValidData">
+                                    <span asp-validation-for="Title" id="TitleMsg" class="text-danger" style="display:none;">Title is Mandatory Field</span>
+                                    <label class="floating-label">Title/Subject <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="AlmirahNo" type="text" class="floating-label-field floating-label-field--s3 ">
+                                    <span asp-validation-for="AlmirahNo" class="text-danger"></span>
+                                    <label class="floating-label">Almirah No.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="hidden" asp-for="FilePath" />
+                                    <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3">
+                                    <span asp-validation-for="FileUpload" id="FilePathMsg" class="text-danger" style="display:none;">Upload File is Mandatory Field</span>
+                                    <label for="field-1" class="floating-label">Upload File <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class=" col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                                    <label asp-for="IsActive" class="floating-label">Status </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class=" col-md-12">
+                            <button class="btn btn-theme " type="submit" onclick="return CheckFileValidation();">Submit</button>
+                            @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
 
-</form>
+                        </div>
+                    </div>
+
+                </form>
 
             </div>
             <div id="divBulkFileUpload" style="display:none;">
-               
+
 
                 <form asp-action="CreateBulkUpload" method="post" id="frmInfo" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
                     <div>
@@ -171,7 +173,7 @@
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input asp-for="PdfLocationPath" type="text" class="floating-label-field floating-label-field--s3 ">
                                     <span asp-validation-for="PdfLocationPath" id="PdfLocationPathMsg" class="text-danger" style="display:none;">Mandatory</span>
-                                    <label class="floating-label">Enter Pdf File Location </label>
+                                    <label class="floating-label">Enter Pdf File Location  <span style="color:red">*</span></label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -180,37 +182,37 @@
                                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                                     </select>
                                     <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                                    <label asp-for="DepartmentId" class="floating-label">Department </label>
+                                    <label asp-for="DepartmentId" class="floating-label">Department  <span style="color:red">*</span></label>
                                 </div>
                             </div>
                         </div>
 
 
                         @*<div class="row mt-md-3">
-                            <div class=" col-md-6">
-                                <div class="floating-label-wrap">
-                                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" id="ZoneId1"
-                                            asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
-                                            onchange="return">
-                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                                    </select>
-                                    <span asp-validation-for="ZoneId" class="text-danger"></span>
-                                    <label class="floating-label" asp-for="ZoneId">Zone Name</label>
+                                <div class=" col-md-6">
+                                    <div class="floating-label-wrap">
+                                        <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" id="ZoneId1"
+                                                asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
+                                                onchange="return">
+                                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                        </select>
+                                        <span asp-validation-for="ZoneId" class="text-danger"></span>
+                                        <label class="floating-label" asp-for="ZoneId">Zone Name</label>
 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class=" col-md-6">
-                                <div class="floating-label-wrap">
-                                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" id="VillageId1"
-                                            asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                                    </select>
-                                    <span asp-validation-for="VillageId" class="text-danger"></span>
-                                    <label class="floating-label" asp-for="VillageId">Village</label>
+                                <div class=" col-md-6">
+                                    <div class="floating-label-wrap">
+                                        <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" id="VillageId1"
+                                                asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                        </select>
+                                        <span asp-validation-for="VillageId" class="text-danger"></span>
+                                        <label class="floating-label" asp-for="VillageId">Village</label>
 
+                                    </div>
                                 </div>
-                            </div>
-                        </div>*@
+                            </div>*@
 
 
                         <div class="row mt-md-3">
@@ -218,7 +220,7 @@
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input type="file" asp-for="BulkUpload" class="floating-label-field floating-label-field--s3" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                                     <span asp-validation-for="BulkUpload" id="BulkUploadMsg" class="text-danger" style="display:none;">Mandatory</span>
-                                    <label for="field-1" class="floating-label">Upload CSV File</label>
+                                    <label for="field-1" class="floating-label">Upload CSV File <span style="color:red">*</span></label>
 
                                 </div>
                             </div>
@@ -242,7 +244,7 @@
                     @{
                         if (ViewBag.Summary != null)
                         {
-                        @Html.Raw(ViewBag.Summary);
+                            @Html.Raw(ViewBag.Summary);
                         }
                     }
 
@@ -251,7 +253,7 @@
                     @{
                         if (ViewBag.SummaryUniq != null)
                         {
-                        @Html.Raw(ViewBag.SummaryUniq);
+                            @Html.Raw(ViewBag.SummaryUniq);
                         }
                     }
 
@@ -260,13 +262,13 @@
             @{
                 if (ViewBag.PdfGenerate == "Yes")
                 {
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>You Can Download!</strong> Error while Bulk Uploading .
-                    <button onclick="saveDiv('pdf','Title')" class="btn btn-theme">Download Error List</button>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>You Can Download!</strong> Error while Bulk Uploading .
+                        <button onclick="saveDiv('pdf','Title')" class="btn btn-theme">Download Error List</button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 
                 }
             }

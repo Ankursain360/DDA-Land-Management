@@ -4,12 +4,13 @@
 <br />
 <br />
 <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
-    <h3 class="mb-3 d-flex">Edit Details</h3>
+  
+    <h3 class="mb-3 d-flex">Edit Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <div id="allDetails">
         <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
-      
+
         <div id="divfileupload">
             <h3 class="my-3 d-flex sub-heading">File Upload</h3>
             <div class="row mt-md-3">
@@ -17,14 +18,14 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="FileNo" type="text" class="floating-label-field floating-label-field--s3  IsValidData">
                         <span asp-validation-for="FileNo" id="FileNoMsg" class="text-danger" style="display:none;">File No. is Mandatory Field</span>
-                        <label class="floating-label">File No.</label>
+                        <label class="floating-label">File No. <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="AlloteeName" type="text" class="floating-label-field floating-label-field--s3  IsValidData">
                         <span asp-validation-for="AlloteeName" id="AlloteeNameMsg" class="text-danger" style="display:none;">Allotee Name is Mandatory Field</span>
-                        <label class="floating-label">Allotee Name</label>
+                        <label class="floating-label">Allotee Name <span style="color:red">*</span></label>
                     </div>
                 </div>
             </div>
@@ -92,7 +93,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="PropertyNoAddress" type="text" class="floating-label-field floating-label-field--s3  IsValidData">
                         <span asp-validation-for="PropertyNoAddress" id="PropertyNoAddressMsg" class="text-danger" style="display:none;">Property No./Address is Mandatory Field</span>
-                        <label class="floating-label">Property No./Address</label>
+                        <label class="floating-label">Property No./Address <span style="color:red">*</span></label>
                     </div>
                 </div>
             </div>
@@ -101,7 +102,7 @@
                     <div class="floating-label-wrap">
                         <input asp-for="Title" type="text" class="floating-label-field floating-label-field--s3  IsValidData">
                         <span asp-validation-for="Title" id="TitleMsg" class="text-danger" style="display:none;">Title is Mandatory Field</span>
-                        <label class="floating-label">Title/Subject</label>
+                        <label class="floating-label">Title/Subject <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -127,7 +128,7 @@
                             {
                                 <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" id="FilePathMsg" class="text-danger" style="display:none;">Upload File is Mandatory Field</span>
-                                <label for="field-1" class="floating-label">Upload File</label>
+                                <label for="field-1" class="floating-label">Upload File <span style="color:red">*</span></label>
                             }
                         }
 
@@ -148,7 +149,7 @@
     </div>
     <div class="row mt-md-3">
         <div class=" col-md-12">
-            <button class="btn btn-theme " type="submit"  onclick="return CheckFileValidation();">Update</button>
+            <button class="btn btn-theme " type="submit" onclick="return CheckFileValidation();">Update</button>
             @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
 
         </div>
