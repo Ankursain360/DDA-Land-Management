@@ -6,7 +6,8 @@
 
 
     <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-        <h3 class="mb-3 d-flex">Edit Details</h3>
+        <h3 class="mb-3 d-flex">Edit Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <div class="row mt-md-3">
@@ -151,7 +152,7 @@
                         </label>
                     </div>
                 </div>
-                
+
 
             </div>
             <div class="col-md-6">
@@ -169,7 +170,7 @@
                         </label>
                     </div>
                 </div>
-               
+
             </div>
         </div>
         <div class="row mt-md-3">
@@ -216,7 +217,7 @@
                     <label class="floating-label">StayInterimGrantedRemarks</label>
                 </div>
             </div>
-           
+
         </div>
 
         <div class="row mt-md-3">
@@ -298,18 +299,18 @@
                 </div>
             </div>
         </div>
-     
-                <div class="row mt-md-3">
-                    <div class=" col-md-12">
-                        <button class="btn btn-theme " type="Submit">Update</button>
-                        @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
 
-                    </div>
-                </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="Submit">Update</button>
+                @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
 
 
 
-</form>
+    </form>
     </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 

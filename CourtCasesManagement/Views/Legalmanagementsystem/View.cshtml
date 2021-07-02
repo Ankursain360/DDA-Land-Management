@@ -4,14 +4,16 @@
 
 <div class="pt-3">
     <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-        <h3 class="mb-3 d-flex">View Details</h3>
+       
+        <h3 class="mb-3 d-flex">View Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="FileNo" placeholder="LegalFileNo" type="text" class="floating-label-field floating-label-field--s3" limit="100" disabled/>
+                    <input asp-for="FileNo" placeholder="LegalFileNo" type="text" class="floating-label-field floating-label-field--s3" limit="100" disabled />
 
                     <span asp-validation-for="FileNo" class="text-danger"></span>
 
@@ -36,7 +38,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Subject" placeholder="Subject" type="text" class="floating-label-field floating-label-field--s3" disabled/>
+                    <input asp-for="Subject" placeholder="Subject" type="text" class="floating-label-field floating-label-field--s3" disabled />
                     <span asp-validation-for="Subject" class="text-danger"></span>
                     <label class="floating-label">Subject</label>
 
@@ -46,7 +48,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="HearingDate" placeholder="HearingDate" class="floating-label-field floating-label-field--s3" type="date" onpaste="return false;" disabled/>
+                    <input asp-for="HearingDate" placeholder="HearingDate" class="floating-label-field floating-label-field--s3" type="date" onpaste="return false;" disabled />
                     <span asp-validation-for="HearingDate" class="text-danger"></span>
                     <label class="floating-label">Hearing Date</label>
 
@@ -54,7 +56,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="NextHearingDate" placeholder="HearingDate" class="floating-label-field floating-label-field--s3" type="date" onpaste="return false;" disabled/>
+                    <input asp-for="NextHearingDate" placeholder="HearingDate" class="floating-label-field floating-label-field--s3" type="date" onpaste="return false;" disabled />
                     <span asp-validation-for="NextHearingDate" class="text-danger"></span>
                     <label class="floating-label">Next Hearing Date</label>
 
@@ -140,16 +142,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpCaseType" id="Case" checked="checked" asp-for="CaseType" value="24(2) Case" disabled/>24(2) Case
+                            <input type="radio" name="grpCaseType" id="Case" checked="checked" asp-for="CaseType" value="24(2) Case" disabled />24(2) Case
                         </label>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
-                            <input type="radio" name="grpCaseType" id="Other" asp-for="CaseType" value="Other" disabled/>Other
+                            <input type="radio" name="grpCaseType" id="Other" asp-for="CaseType" value="Other" disabled />Other
                         </label>
                     </div>
                 </div>
-               
+
 
             </div>
             <div class="col-md-6">
@@ -158,7 +160,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpInfavour" id="DDA" checked="checked" asp-for="InFavour" value="DDA" disabled/>DDA
+                            <input type="radio" name="grpInfavour" id="DDA" checked="checked" asp-for="InFavour" value="DDA" disabled />DDA
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -167,7 +169,7 @@
                         </label>
                     </div>
                 </div>
-               
+
             </div>
         </div>
         <div class="row mt-md-3">
@@ -276,26 +278,26 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <input type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" disabled/>
+                    <input type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" disabled />
                     <label class="floating-label">Remarks</label>
                 </div>
             </div>
             <div class="col-md-6">
-            
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive"  disabled>
-                            <option value="1">Active</option>
-                            <option value="0">InActive</option>
-                        </select>
-                        <span class="text-danger"></span>
-                        <label class="floating-label">Status</label>
-                 
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
+                        <option value="1">Active</option>
+                        <option value="0">InActive</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Status</label>
+
                 </div>
             </div>
         </div>
-                <div class="row mt-md-3">
+        <div class="row mt-md-3">
             <div class=" col-md-12">
-               
+
 
                 @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
 

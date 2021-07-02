@@ -1,38 +1,39 @@
 ﻿@model Dto.Master.PossessionReportDtoProfile
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Possession Report" })
-    <div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Details</h3>
+<div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" id="possessionDate"  asp-items="@(new SelectList( @ViewBag.PossessionDateList, "ID","POSSDATE"))">
-                        <option value="0">All</option>
-                    </select>
-                    <label class="floating-label">Possession Date<span style="color:red">*</span></label>
-                </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+
+                <select class="floating-label-field floating-label-field--s3" id="possessionDate" asp-items="@(new SelectList( @ViewBag.PossessionDateList, "ID","POSSDATE"))">
+                    <option value="0">All</option>
+                </select>
+                <label class="floating-label">Possession Date<span style="color:red">*</span></label>
             </div>
-            
         </div>
 
-        
-        <div class="row mt-md-3">
-            <div class="col-md-12 col-xl-3">
-                <div class="row">
-                    <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
-                            <i class="ri-refresh-line mr-2"></i>Reset
-                        </button>
-                    </div>
-                    <div class="col-6 col-md-7 col-xl-6">
-                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
-                    </div>
+    </div>
+
+
+    <div class="row mt-md-3">
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+                    <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                        <i class="ri-refresh-line mr-2"></i>Reset
+                    </button>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
                 </div>
             </div>
         </div>
     </div>
+</div>
 <div class="table-section bg-white border shadow rounded">
     <div class="short-section d-md-flex align-items-center">
         <div class="p-3 d-flex align-items-end mr-auto">
