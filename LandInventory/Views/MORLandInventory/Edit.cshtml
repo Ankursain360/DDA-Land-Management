@@ -2,7 +2,9 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Ministry of rehabilitation (MOR)/LDO Land Inventory" })
 <div class="pt-3">
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
-        <h3 class="mb-3 d-flex">Edit Details</h3>@*id="myForm"*@
+        <h3 class="mb-3 d-flex">
+            Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+        </h3>@*id="myForm"*@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="IsValidate" />

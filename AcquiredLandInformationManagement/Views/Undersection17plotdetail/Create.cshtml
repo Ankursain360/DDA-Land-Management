@@ -11,7 +11,7 @@
 <div class="pt-3">
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
 
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <h3 class="mb-3 d-flex">Add Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
 
 
 
@@ -19,7 +19,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection17Id" 
+                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection17Id"
                             asp-items="@(new SelectList(Model.Undersection17List, "Id","Number"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" 
+                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId"
                             asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
@@ -44,7 +44,7 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId" 
+                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId"
                             asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -56,7 +56,6 @@
         </div>
 
 
-        
 
 
 
@@ -65,7 +64,8 @@
 
 
 
-       
+
+
         <div class="pt-3">
             <h3 class="my-3 d-flex sub-heading">Actual Area</h3>
         </div>
@@ -75,7 +75,7 @@
 
 
 
-                    <input  type="text" id="Bigha1" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Bigha" readonly />
+                    <input type="text" id="Bigha1" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Bigha" readonly />
 
                     <label class="floating-label">Bigha</label>
 
@@ -87,8 +87,8 @@
 
 
 
-                    <input   type="text" id="Biswa1" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" readonly />
-                  
+                    <input type="text" id="Biswa1" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" readonly />
+
                     <label class="floating-label">Biswa</label>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input  type="text" id="Biswanshi1" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswanshi" readonly />
+                    <input type="text" id="Biswanshi1" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswanshi" readonly />
 
                     <label class="floating-label">Biswanshi</label>
                 </div>
@@ -125,7 +125,7 @@
 
 
 
-                    <input limit="2"  type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" />
+                    <input limit="2" type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" />
                     <span asp-validation-for="Biswa" class="text-danger"></span>
                     <label class="floating-label">Biswa</label>
                 </div>
@@ -134,7 +134,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input limit="2"  type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswanshi" />
+                    <input limit="2" type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswanshi" />
                     <span asp-validation-for="Biswanshi" class="text-danger"></span>
                     <label class="floating-label">Biswanshi</label>
                 </div>
