@@ -5,7 +5,9 @@
 
 
 <form asp-action="Edit" id="myForm" method="post" disabled="disabled" enctype="multipart/form-data" autocomplete="off" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex"> View Details</h3>
+    <h3 class="mb-3 d-flex">
+        View Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+    </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="IsValidate" />
