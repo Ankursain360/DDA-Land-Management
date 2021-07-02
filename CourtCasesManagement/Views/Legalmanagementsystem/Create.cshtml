@@ -3,8 +3,9 @@
 
 <div class="pt-3">
 
-    <form asp-action="Create"  method="post"  class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+     
+        <h3 class="mb-3 d-flex">Add Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row mt-md-3">
@@ -73,10 +74,10 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap" title="Court Type">
-                     <select class="floating-label-field floating-label-field--s3" asp-for="CourtTypeId" asp-items="@(new SelectList(Model.CourttypeList, "Id","CourtType"))">
-                             <option value="0">All</option>
-                                            </select>
-                    <span class="d-block text-danger field-validation-valid" asp-validation-for="CourtTypeId" ></span>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="CourtTypeId" asp-items="@(new SelectList(Model.CourttypeList, "Id","CourtType"))">
+                        <option value="0">All</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="CourtTypeId"></span>
                     <label class="floating-label" asp-for="CourtTypeId">Court Type</label>
 
 
@@ -141,11 +142,11 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
-                            <input type="radio" name="grpCaseType" id="Other"/>Other
+                            <input type="radio" name="grpCaseType" id="Other" />Other
                         </label>
                     </div>
                 </div>
-               
+
 
             </div>
             <div class="col-md-6">
@@ -154,16 +155,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline  ">
-                            <input type="radio" name="grpInfavour"  id="DDA"  checked="checked" />DDA
+                            <input type="radio" name="grpInfavour" id="DDA" checked="checked" />DDA
                         </label>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
-                            <input type="radio" name="grpInfavour"  id="ADDA"/>Against DDA
+                            <input type="radio" name="grpInfavour" id="ADDA" />Against DDA
                         </label>
                     </div>
                 </div>
-               
+
             </div>
         </div>
         <div class="row mt-md-3">
@@ -191,83 +192,83 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <label class="control-label lb-sm">Stay Interim Granted Document</label>
                     <input type="file" asp-for="StayFile" class="floating-label-field floating-label-field--s3" id="Stayfile" />
-                                  </div>
                 </div>
+            </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
 
                     <input type="text" class="floating-label-field floating-label-field--s3" asp-for="StayInterimGrantedRemarks">
                     <label class="floating-label">Stay Interim Granted Remarks</label>
                 </div>
-                </div>
             </div>
+        </div>
 
         <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" id="ddlJudgement" asp-for="Judgement">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        <label class="floating-label" asp-for="Judgement">Judgement</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input asp-for="DocumentFile" type="file" class="floating-label-field floating-label-field--s3" id="DocFile">
-                        <span asp-validation-for="DocumentFile" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Document(if any)</label>
-                    </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="ddlJudgement" asp-for="Judgement">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <label class="floating-label" asp-for="Judgement">Judgement</label>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="DocumentFile" type="file" class="floating-label-field floating-label-field--s3" id="DocFile">
+                    <span asp-validation-for="DocumentFile" class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label">Document(if any)</label>
+                </div>
+            </div>
+        </div>
         <div style="display:none;" id="DivJudgement" class="row mt-md-3">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                   
+
                     <label class="control-label lb-sm">Judgement Document</label>
                     <input asp-for="JudgementFile" type="file" class="floating-label-field floating-label-field--s3" id="JudgeFile">
                 </div>
-                </div>
+            </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
                     <input type="text" class="floating-label-field floating-label-field--s3" asp-for="JudgementRemarks">
                     <label class="floating-label">Judgement Remarks</label>
-                    </div>
                 </div>
             </div>
+        </div>
         <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <input type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                        <label class="floating-label">Remarks</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                   
-                        <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3">
-                                <option value="1">Active</option>
-                                <option value="0">InActive</option>
-                            </select>
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Status</label>
-                        </div>
-                   
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                    <label class="floating-label">Remarks</label>
                 </div>
             </div>
-        <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <div class=" col-md-12">
-                            <button class="btn btn-theme" type="submit">Submit</button>
-                            @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
+            <div class="col-md-6">
 
-                        </div>
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">InActive</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Status</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <div class=" col-md-12">
+                        <button class="btn btn-theme" type="submit">Submit</button>
+                        @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
+
                     </div>
                 </div>
             </div>
-</form>
+        </div>
+    </form>
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

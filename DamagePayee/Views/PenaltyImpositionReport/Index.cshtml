@@ -4,12 +4,12 @@
 
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Details</h3>
+        <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
-                               asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                            asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                         <option value="0">All</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId"></span>
@@ -28,14 +28,14 @@
                 </div>
             </div>
         </div>
-       
-     
-       
+
+
+
         <div class="row mt-md-3">
             <div class="col-md-12 ">
                 <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
-               <input type="button" value="Reset"  id="btnReset" class="btn btn-theme" />
-               
+                <input type="button" value="Reset" id="btnReset" class="btn btn-theme" />
+
             </div>
         </div>
     </div>
