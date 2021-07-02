@@ -8,7 +8,8 @@
 
     <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
 
-        <h3 class="mb-3 d-flex">View Details</h3>
+        <h3 class="mb-3 d-flex">View Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -16,7 +17,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="PproposalName" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="PproposalName" disabled />
                     <span asp-validation-for="PproposalName" class="text-danger"></span>
                     <label class="floating-label">Scheme/Proposal Name<span style="color:red">*</span>  </label>
                 </div>
@@ -25,7 +26,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="PfileNo" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="PfileNo" disabled />
                     <span asp-validation-for="PfileNo" class="text-danger"></span>
                     <label class="floating-label">File No <span style="color:red">*</span></label>
                 </div>
@@ -36,7 +37,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="RequiringBody" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="RequiringBody" disabled />
                     <span asp-validation-for="RequiringBody" class="text-danger"></span>
                     <label class="floating-label">Requiring Body <span style="color:red">*</span> </label>
                 </div>
@@ -45,7 +46,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="AreaLocality" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Code" asp-for="AreaLocality" disabled />
                     <span asp-validation-for="AreaLocality" class="text-danger"></span>
                     <label class="floating-label">Area/Locality<span style="color:red">*</span> </label>
                 </div>
@@ -64,7 +65,7 @@
                     <div class="form-check theme">
 
 
-                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="HA" checked disabled/>    <label class="radio-inline">
+                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="HA" checked disabled />    <label class="radio-inline">
                             HA
                         </label>
                     </div>
@@ -72,7 +73,7 @@
                     <div class="form-check theme">
 
 
-                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="Acre" disabled/>
+                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="Acre" disabled />
                         <label class="radio-inline">
                             Acre
                         </label>
@@ -82,7 +83,7 @@
                     <div class="form-check theme">
 
 
-                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="SqMeter" disabled/>
+                        <input class="form-check-input" type="radio" asp-for="TaunderRequest" value="SqMeter" disabled />
                         <label class="radio-inline">
                             Sq. Meter
                         </label>
@@ -96,7 +97,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Date" asp-for="UnitArea" disabled/>
+                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Date" asp-for="UnitArea" disabled />
                     <span asp-validation-for="UnitArea" class="text-danger"></span>
 
                 </div>
@@ -116,12 +117,12 @@
 
         <div class="row mt-md-3">
 
-            
+
 
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="RequestPhotos" id="Photo" type="file" class="floating-label-field floating-label-field--s3" multiple disabled/>
+                    <input asp-for="RequestPhotos" id="Photo" type="file" class="floating-label-field floating-label-field--s3" multiple disabled />
 
                     <a class="badge badge-primary px-2" asp-action="ViewLetter" target="_blank" asp-route-id="@Model.Id
                            "> (View Photo )</a>
@@ -164,7 +165,7 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-             
+
                 @Html.ActionLink("Back", "Index", "Request", null, new { @class = "btn btn-theme " })
             </div>
         </div>
