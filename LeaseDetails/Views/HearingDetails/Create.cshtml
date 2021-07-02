@@ -6,11 +6,15 @@
 
         @if (Model.Id == 0)
         {
-            <h3 class="mb-3 d-flex">Add Details</h3>
+        <h3 class="mb-3 d-flex">
+            Add Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+        </h3>
         }
         else
         {
-            <h3 class="mb-3 d-flex">Edit Details</h3>
+    <h3 class="mb-3 d-flex">
+        Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+    </h3>
         }
 
         <input type="hidden" asp-for="ReqProcId" />
