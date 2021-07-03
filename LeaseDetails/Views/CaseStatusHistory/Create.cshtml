@@ -225,14 +225,14 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <a class="btn btn-info" href="javascript:getPDF();">Print</a>
+                <a class="btn btn-theme" href="javascript:getPDF();">Print</a>
                 @*<button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>*@
                 @Html.ActionLink("Back", "Index", "CaseStatusHistory", null, new { @class = "btn btn-theme " })
             </div>
         </div>
     </form>
 </div>
-//
+
 <script type="text/javascript">
     function getPDF() {
         var html_width = $("#pagepdf").width();
