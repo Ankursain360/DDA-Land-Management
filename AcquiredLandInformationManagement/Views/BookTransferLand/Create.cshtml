@@ -3,7 +3,7 @@
 
 <div class="pt-3">
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <h3 class="mb-3 d-flex">Add Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-md-6">
@@ -14,14 +14,14 @@
                         <option disabled="disabled"  value="" selected="selected">Select</option>
                     </select>
                     <span asp-validation-for="OtherLandNotificationId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="OtherLandNotificationId">Notification No.</label>
+                    <label class="floating-label" asp-for="OtherLandNotificationId">Notification No. <span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <input asp-for="NotificationDate" type="date" class="floating-label-field floating-label-field--s3 " required>
                     <span asp-validation-for="NotificationDate" class="text-danger"></span>
-                    <label class="floating-label" asp-for="NotificationDate">Notification Date</label>
+                    <label class="floating-label" asp-for="NotificationDate">Notification Date <span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                         <option disabled="disabled"  value="" selected="selected">Select</option>
                     </select>
                     <span asp-validation-for="LocalityId" class="text-danger"></span>
-                    <label class="floating-label" asp-for="LocalityId">Locality Name (Village)</label>
+                    <label class="floating-label" asp-for="LocalityId">Locality Name (Village) <span style="color:red">*</span></label>
 
 
                 </div>
@@ -45,7 +45,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
-                    <label class="floating-label">Khasra No</label>
+                    <label class="floating-label">Khasra No <span style="color:red">*</span></label>
 
                 </div>
 
@@ -58,7 +58,7 @@
                     <input asp-for="Part" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" limit="200">
 
                     <span asp-validation-for="Part" class="text-danger"></span>
-                    <label class="floating-label" asp-for="Part">Part</label>
+                    <label class="floating-label" asp-for="Part">Part <span style="color:red">*</span></label>
 
 
                 </div>
@@ -144,7 +144,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span></label>
                 </div>
 
             </div>

@@ -3,7 +3,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
 
 <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Add Details</h3>
+    <h3 class="mb-3 d-flex">Add Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -49,7 +49,7 @@
     <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="text" asp-for="ApproxPropertyArea" class="floating-label-field floating-label-field--s3 numbers"  onpaste="return false;" />
+                <input type="text" asp-for="ApproxPropertyArea" class="floating-label-field floating-label-field--s3 numbers" onpaste="return false;" />
                 <span asp-validation-for="ApproxPropertyArea" class="text-danger"></span>
                 <label class="floating-label">Approx Area of the Property<span style="color:red">*</span></label>
             </div>
@@ -57,7 +57,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" asp-for="NumberOfFloors" class="floating-label-field floating-label-field--s3 onlynumbers"  onpaste="return false;"  />
+                <input type="text" asp-for="NumberOfFloors" class="floating-label-field floating-label-field--s3 onlynumbers" onpaste="return false;" />
                 <span asp-validation-for="NumberOfFloors" class="text-danger"></span>
                 <label class="floating-label">Number of Floors<span style="color:red">*</span></label>
             </div>
@@ -134,7 +134,7 @@
     <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" multiple accept="image/jpeg"/>
+                <input type="file" asp-for="DocumentPhoto" class="floating-label-field floating-label-field--s3" multiple accept="image/jpeg" />
                 <span asp-validation-for="OccupantIdentityPrrofFilePath" class="text-danger"></span>
                 <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport</label>
             </div>
@@ -153,7 +153,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3"  multiple accept="image/jpeg"/>
+                <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" multiple accept="image/jpeg" />
                 <span asp-validation-for="PropertyPhoto" class="text-danger"></span>
                 <label class="floating-label">Document of Property, if any</label>
             </div>

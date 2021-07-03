@@ -4,7 +4,10 @@
 <div class="pt-3">
 
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <h3 class="mb-3 d-flex">
+            Add Details
+            <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+        </h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class=" col-md-6">
@@ -14,7 +17,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="ProposaldetailsId" class="text-danger"></span>
-                    <label asp-for="ProposaldetailsId" class="floating-label">Proposal Name </label>
+                    <label asp-for="ProposaldetailsId" class="floating-label">Proposal Name <span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -26,7 +29,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
-                    <label asp-for="AcquiredlandvillageId" class="floating-label">Village Name </label>
+                    <label asp-for="AcquiredlandvillageId" class="floating-label">Village Name<span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -39,7 +42,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
-                    <label asp-for="KhasraId" class="floating-label">Khasra No </label>
+                    <label asp-for="KhasraId" class="floating-label">Khasra No <span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -50,7 +53,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status<span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -64,7 +67,7 @@
                         <input asp-for="Bigha" placeholder="Name" type="text"
                               value="" class="floating-label-field floating-label-field--s3 onlynumbers" limit="4"/>
                         <span asp-validation-for="Bigha" class="text-danger"></span>
-                        <label class="floating-label">Bigha    </label>
+                        <label class="floating-label">Bigha  <span style="color:red">*</span>  </label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -73,7 +76,7 @@
                         <input asp-for="Biswa" placeholder="Name" type="text"
                              value=""  class="floating-label-field floating-label-field--s3 onlynumbers"limit="2" />
                         <span asp-validation-for="Biswa" class="text-danger"></span>
-                        <label class="floating-label">Biswa  </label>
+                        <label class="floating-label">Biswa <span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -82,7 +85,7 @@
                         <input asp-for="Biswanshi" placeholder="Name" type="text"
                               value="" class="floating-label-field floating-label-field--s3 onlynumbers" limit="2" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
-                        <label class="floating-label">Biswanshi </label>
+                        <label class="floating-label">Biswanshi <span style="color:red">*</span> </label>
                     </div>
                 </div>
             </div>

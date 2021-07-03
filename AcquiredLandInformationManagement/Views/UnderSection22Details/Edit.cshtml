@@ -3,7 +3,7 @@
 
 <div class="pt-3">
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-        <h3 class="mb-3 d-flex">Edit Details</h3>
+        <h3 class="mb-3 d-flex">Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
 
@@ -13,7 +13,7 @@
                     <input asp-for="NotificationNo" placeholder="Notification" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="NotificationNo" class="text-danger"></span>
-                    <label class="floating-label">Notification No.    </label>
+                    <label class="floating-label">Notification No.  <span style="color:red">*</span>  </label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -21,7 +21,7 @@
                     <input asp-for="NotificationDate" placeholder="Name" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="NotificationDate" class="text-danger"></span>
-                    <label class="floating-label">Notification Date </label>
+                    <label class="floating-label">Notification Date <span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>

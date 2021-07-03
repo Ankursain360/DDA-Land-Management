@@ -4,32 +4,32 @@
 
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Details</h3>
+        <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
-                    <select  class="floating-label-field floating-label-field--s3" asp-for="PresentUseId"
+                    <select class="floating-label-field floating-label-field--s3" asp-for="PresentUseId"
                             asp-items="@(new SelectList(Model.PresentuseList, "Id","Name"))">
                         <option value="0">All</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="PresentUseId"></span>
-                    <label asp-for="PresentUseId" class="floating-label">Present use </label>
+                    <label asp-for="PresentUseId" class="floating-label">Present use <span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value=""/>
+                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
-                    <label class="floating-label">From Date</label>
+                    <label class="floating-label">From Date<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3"value="" />
+                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
-                    <label class="floating-label">To Date</label>
+                    <label class="floating-label">To Date<span style="color:red">*</span></label>
                 </div>
 
             </div>

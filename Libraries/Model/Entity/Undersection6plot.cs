@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Notification6 is mandatory", AllowEmptyStrings = false)]
         public int? UnderSection6Id { get; set; }
-        [Required(ErrorMessage = "Village is required mandatory", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Village is mandatory", AllowEmptyStrings = false)]
         public int? VillageId { get; set; }
         [Required(ErrorMessage = "Khasra No field is mandatory", AllowEmptyStrings = false)]
         public int? KhasraId { get; set; }

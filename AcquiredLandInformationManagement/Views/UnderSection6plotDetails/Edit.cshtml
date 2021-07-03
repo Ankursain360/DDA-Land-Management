@@ -12,7 +12,7 @@
 
 
 
-        <h3 class="mb-3 d-flex">Edit Details</h3>
+        <h3 class="mb-3 d-flex">Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
 
         <div class="row">
             <div class=" col-md-6">
@@ -22,7 +22,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="UnderSection6Id" class="text-danger"></span>
-                    <label class="floating-label">Notification No(U/S-6)</label>
+                    <label class="floating-label">Notification No(U/S-6)<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                         <option  disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
-                    <label asp-for="VillageId" class="floating-label">Village Name</label>
+                    <label asp-for="VillageId" class="floating-label">Village Name<span style="color:red">*</span></label>
                 </div>
             </div>
 
@@ -51,7 +51,7 @@
                         <option  disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
-                    <label class="floating-label">Khasra No</label>
+                    <label class="floating-label">Khasra No<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
 
                     <input limit="4" type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Bigha" />
                     <span asp-validation-for="Bigha" class="text-danger"></span>
-                    <label class="floating-label">Bigha</label>
+                    <label class="floating-label">Bigha<span style="color:red">*</span></label>
 
                 </div>
             </div>
@@ -124,7 +124,7 @@
 
                     <input limit="2" type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" />
                     <span asp-validation-for="Biswa" class="text-danger"></span>
-                    <label class="floating-label">Biswa</label>
+                    <label class="floating-label">Biswa<span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -133,7 +133,7 @@
 
                     <input limit="2" type="text" asp-for="Biswanshi" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswanshi" />
                     <span asp-validation-for="Biswanshi" class="text-danger"></span>
-                    <label class="floating-label">Biswanshi</label>
+                    <label class="floating-label">Biswanshi<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -146,7 +146,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status<span style="color:red">*</span> </label>
                 </div>
             </div>
 

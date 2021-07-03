@@ -4,7 +4,9 @@
 <div class="pt-3">
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
-        <h3 class="mb-3 d-flex">Add Details</h3>
+       
+        <h3 class="mb-3 d-flex">Add Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
 
 
 
@@ -39,7 +41,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input id="fileupload" asp-for="NewlandNotificationFile"  class="floating-label-field floating-label-field--s3" type="file" multiple />
+                    <input id="fileupload" asp-for="NewlandNotificationFile" class="floating-label-field floating-label-field--s3" type="file" multiple />
                     <span asp-validation-for="NewlandNotificationFile" class="text-danger"></span>
                     <label class="floating-label" asp-for="NewlandNotificationFile"> Upload Gazette Notification</label>
                 </div>

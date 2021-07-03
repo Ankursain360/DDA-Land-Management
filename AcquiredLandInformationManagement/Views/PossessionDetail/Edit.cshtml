@@ -7,7 +7,7 @@
         <div class="panel-body">
             <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h3 class="mb-3 d-flex">Edit Details</h3>
+                <h3 class="mb-3 d-flex">Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
 
                 <div class="row mt-md-3">
                     <div class="col-md-6">
@@ -17,7 +17,7 @@
                                 <option disabled="disabled" value="">Select</option>
                             </select>
                             <span asp-validation-for="VillageId" class="text-danger"></span>
-                            <label asp-for="VillageId" class="floating-label">Village Name</label>
+                            <label asp-for="VillageId" class="floating-label">Village Name<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -29,7 +29,7 @@
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="KhasraId" class="text-danger"></span>
-                            <label class="floating-label">Khasra No</label>
+                            <label class="floating-label">Khasra No<span style="color:red">*</span></label>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="pt-3">
-                    <h3 class="mb-3 d-flex">Type of possession</h3>
+                    <h3 class="mb-3 d-flex">Type of possession<span style="color:red">*</span></h3>
                     <div class="row">
                         <div class="col-md-3">
                             <input type="hidden" asp-for="PossType" />
@@ -140,7 +140,7 @@
                                 <textarea asp-for="Reason" placeholder="Reason" class="floating-label-field floating-label-field--s3"></textarea>
 
                                 <span asp-validation-for="Reason" class="text-danger"></span>
-                                <label class="floating-label">Reason </label>
+                                <label class="floating-label">Reason<span style="color:red">*</span> </label>
                             </div>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
 
                             <input type="Date" asp-for="PossDate" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="PossDate" class="text-danger"></span>
-                            <label class="floating-label"> Date</label>
+                            <label class="floating-label"> Date<span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -197,7 +197,7 @@
 
                                 <input limit="4" type="text" asp-for="Bigha" class="floating-label-field floating-label-field--s3 onlynumbers" />
                                 <span asp-validation-for="Bigha" class="text-danger"></span>
-                                <label class="floating-label">Bigha</label>
+                                <label class="floating-label">Bigha<span style="color:red">*</span></label>
 
                             </div>
                         </div>
@@ -209,7 +209,7 @@
 
                                 <input limit="2" type="text" asp-for="Biswa" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Biswa" />
                                 <span asp-validation-for="Biswa" class="text-danger"></span>
-                                <label class="floating-label">Biswa</label>
+                                <label class="floating-label">Biswa<span style="color:red">*</span></label>
                             </div>
                         </div>
 

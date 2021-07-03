@@ -4,7 +4,7 @@
 
 <div class="pt-3">
     <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">View Details</h3>
+        <h3 class="mb-3 d-flex">View Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
         <div class="row mt-md-3">
@@ -17,7 +17,7 @@
                         <option disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
-                    <label asp-for="VillageId" class="floating-label">Village Name </label>
+                    <label asp-for="VillageId" class="floating-label">Village Name  <span style="color:red">*</span></label>
                 </div>
             </div>
           
@@ -211,7 +211,7 @@
                         <option disabled="disabled">Select</option>
                     </select>
                     <span asp-validation-for="KhasraId" class="text-danger"></span>
-                    <label asp-for="KhasraId" class="floating-label">Khasra No </label>
+                    <label asp-for="KhasraId" class="floating-label">Khasra No <span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -255,7 +255,7 @@
                     <input disabled asp-for="RenewalDate" placeholder="RenewalDate" type="date"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="RenewalDate" class="text-danger"></span>
-                    <label class="floating-label">Renewal Date    </label>
+                    <label class="floating-label">Renewal Date <span style="color:red">*</span>   </label>
                 </div>
             </div>
         </div>
@@ -293,7 +293,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label class="floating-label">Status </label>
+                    <label class="floating-label">Status <span style="color:red">*</span></label>
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@
 
 <div class="pt-3">
     <form asp-action="Edit" id="create_user" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="row">
@@ -19,7 +20,7 @@
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
-                    <label class="floating-label">Village Name</label>
+                    <label class="floating-label">Village Name <span style="color:red">*</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -34,70 +35,70 @@
         </div>
 
         @*<div class="row pt-3">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>
-                                Jarai/Sakni:
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Jarai/Sakni:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+
+
+                        <div class="form-check theme">
+
+                            <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Jarai" checked>
+                            <label class="form-check-label" for="radio">
+                                Jarai
                             </label>
                         </div>
-                        <div class="col-md-3">
-
-
-                            <div class="form-check theme">
-
-                                <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Jarai" checked>
-                                <label class="form-check-label" for="radio">
-                                    Jarai
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-                                <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Sakni">
-                                <label class="form-check-label" for="radio">
-                                    Sakni
-                                </label>
-                            </div>
-                        </div>
-
-
                     </div>
-                    <span asp-validation-for="JaraiSakani" class="text-danger"></span>
-                </div>
-
-
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>
-                                Language:
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Sakni">
+                            <label class="form-check-label" for="radio">
+                                Sakni
                             </label>
                         </div>
-                        <div class="col-md-3">
-
-
-                            <div class="form-check theme">
-                                <input asp-for="Language" class="form-check-input" type="radio" value="Hindi">
-                                <label class="form-check-label" for="radio">
-                                    Hindi
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-                                <input asp-for="Language" class="form-check-input" type="radio" value="Urdu">
-                                <label class="form-check-label" for="radio">
-                                    Urdu
-                                </label>
-                            </div>
-                        </div>
-
-
                     </div>
-                    <span asp-validation-for="Language" class="text-danger"></span>
+
+
                 </div>
-            </div>*@
+                <span asp-validation-for="JaraiSakani" class="text-danger"></span>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Language:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+
+
+                        <div class="form-check theme">
+                            <input asp-for="Language" class="form-check-input" type="radio" value="Hindi">
+                            <label class="form-check-label" for="radio">
+                                Hindi
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input asp-for="Language" class="form-check-input" type="radio" value="Urdu">
+                            <label class="form-check-label" for="radio">
+                                Urdu
+                            </label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <span asp-validation-for="Language" class="text-danger"></span>
+            </div>
+        </div>*@
 
 
 
@@ -188,7 +189,7 @@
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
+                    <label asp-for="IsActive" class="floating-label">Status <span style="color:red">*</span> </label>
                 </div>
             </div>
         </div>

@@ -8,7 +8,8 @@
 
 
     <form asp-action="Edit" autocomplete="off" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex"> Edit Details</h3>
+       
+        <h3 class="mb-3 d-flex">Edit Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div id="Divclsification" class="mt-md-3">
@@ -20,7 +21,7 @@
                     <input type="hidden" asp-for="IsFileDocument" id="Type" value="0" />
 
                     <div class="form-check theme">
-                        <input class="form-check-input"  type="radio" asp-for="IsFileDocument" name="A" id="rFile" value="0" checked>
+                        <input class="form-check-input" type="radio" asp-for="IsFileDocument" name="A" id="rFile" value="0" checked>
                         <label class="form-check-label" for="radio">
                             File
                         </label>
@@ -311,16 +312,16 @@
 
             </div>
 
-            </div>
-            </br>
-            </br>
+        </div>
+        </br>
+        </br>
 
 
-            <div class="col-md-12">
-                <input type="submit" value="Update" class="btn btn-theme" />
+        <div class="col-md-12">
+            <input type="submit" value="Update" class="btn btn-theme" />
 
-                @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-theme" })
-            </div>
+            @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-theme" })
+        </div>
     </form>
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
