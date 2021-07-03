@@ -23,6 +23,7 @@ namespace LandInventory.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<INazullandRepository, NazullandRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
+            services.AddScoped<IStatusofVacantLandRepository, StatusofVacantLandRepository>();
             /*Land transfer */
             services.AddScoped<INazullandRepository, NazullandRepository>();
             services.AddScoped<ILandTransferRepository, LandtransferRepository>();
@@ -39,6 +40,7 @@ namespace LandInventory.Infrastructure.Extensions
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
+            services.AddScoped<IStatusofVacantLandService, StatusofVacantLandService>();
             /* Land transfer Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<ILandTransferService, LandTransferService>();
