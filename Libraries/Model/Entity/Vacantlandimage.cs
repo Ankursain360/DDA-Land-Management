@@ -56,16 +56,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Division> DivisionList { get; set; }
 
-        //[NotMapped]
-        //public List<Userprofile> RoleList { get; set; }
 
-
-        //public ICollection<Userprofile> Userprofile { get; set; }
-
-
-
-        [NotMapped]
-        public Propertyregistration Propertyregistration { get; set; }
 
 
       
