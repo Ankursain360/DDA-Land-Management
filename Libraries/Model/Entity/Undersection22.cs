@@ -15,7 +15,7 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "Notification  is mandatory")]
         public string NotificationNo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Notification Date  is mandatory")]
         public DateTime? NotificationDate { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }

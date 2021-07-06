@@ -16,9 +16,9 @@ namespace Dto.Search
         public string LBRefDate { get; set; }
         public string un22Date { get; set; }
 
-        public decimal Bigha { get; set; }
-        public decimal Biswa { get; set; }
-        public decimal Biswanshi { get; set; }
+        public Int32 Bigha { get; set; }
+        public Int32 Biswa { get; set; }
+        public Int32 Biswanshi { get; set; }
 
         public string un4Number { get; set; }
         public string un6Number { get; set; }
