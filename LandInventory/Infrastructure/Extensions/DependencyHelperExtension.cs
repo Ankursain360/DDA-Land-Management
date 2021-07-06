@@ -35,6 +35,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IUserWiseLandStatusReportRepository, UserWiseLandStatusReportRepository>();
 
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
@@ -51,6 +52,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IModuleService, ModuleService>();
+            services.AddScoped<IUserWiseLandStatusReportService, UserWiseLandStatusReportService>();
         }
     }
 }

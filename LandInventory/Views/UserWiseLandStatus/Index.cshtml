@@ -1,224 +1,119 @@
-﻿@await Component.InvokeAsync("PageHeader", new { pageName = "User Wise Land Status" })
+﻿@model Libraries.Model.Entity.Vacantlandimage
+@await Component.InvokeAsync("PageHeader", new { pageName = "User Wise Land Status Report" })
 
+<br />
 
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">
+        User Wise Land Status Report <span style="margin-left:400px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+    </h3>
 
-
-<div class="pt-3">
-
-   
-    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <h3 class="mb-3 d-flex">User Wise Land Status Report</h3>
-
-        <div class="row ">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                        <option value="dept1">All</option>
-                        <option value="dept2">Patwari </option>
-                        <option value="dept3">Section Officer</option>
-                        <option value="dept3">Feild Investigator</option>
-                        <option value="dept3">Assistant Engineer</option>
-                        <option value="dept3"> Junior Engineer</option>
-                        <option value="dept2">Executive Engineer </option>
-                        <option value="dept2">Assistant Director </option>
-                        <option value="dept2">  Deputy Director   </option>
-                        <option value="dept2">Surveyor </option>
-                        <option value="dept2">Director </option>
-                        <option value="dept2">Tehsildar </option>
-                        <option value="dept2">Naib Tehsildar </option>
-                        <option value="dept2">Kanoongo </option>
-                    </select>
-                    <label class="floating-label">Select Designation </label>
-
-                </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <div class="floating-label-wrap">
+                <select id="DepartmentId" class="floating-label-field floating-label-field--s3"
+                        asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))"
+                        onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                    <option value="0">All</option>
+                </select>
+                <label class="floating-label">Department<span style="color:red">*</span>  </label>
             </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="floating-label-wrap">
+                <select id="ZoneId" class="floating-label-field floating-label-field--s3"
+                        asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))"
+                        onchange="return onChangeZone(this.options[this.selectedIndex].value)">
+                    <option value="0">All</option>
+                </select>
+                <label class="floating-label">Zone<span style="color:red">*</span>  </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <div class="floating-label-wrap">
+                <select id="DivisionId" class="floating-label-field floating-label-field--s3"
+                        asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))"
+                        onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
+                    <option value="0">All</option>
+                </select>
+                <label class="floating-label">Division<span style="color:red">*</span>  </label>
+            </div>
+        </div>
+    
+    </div>
 
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
+    @*<div class="row">
+        <div class="form-group col-md-6">
+            <div class="floating-label-wrap">
+                <select id="RoleId" class="floating-label-field floating-label-field--s3"
+                        asp-items="@(new SelectList(Model.RoleList,"Id","Role"))">
+                    <option value="">Select</option>
+                </select>
+                <label class="floating-label">Designation </label>
+            </div>
+        </div>
+    </div>*@
 
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                        <option value="dept1">Engineering</option>
-                        <option value="dept2">Land Management</option>
-                        <option value="dept3">MOR</option>
-                        <option value="dept3">Horticulture</option>
-                        <option value="dept3">Pre-Monsoon</option>
-                        <option value="dept3">  Yamuna Flood Plain </option>
-                    </select>
-                    <label class="floating-label">Select Department </label>
-
+    <div class="row mt-md-3">
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+                    <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                        <i class="ri-refresh-line mr-2"></i>Reset
+                    </button>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <button class="btn btn-theme btn-block" type="button" id="btnGenerate">Generate</button>
                 </div>
             </div>
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6 ">
-                <div class="floating-label-wrap">
+    </div>
+</div>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                    <option selected="selected" value="department">Department</option>
+                    <option value="zone">Zone</option>
+                    <option value="division">Division</option>
 
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                        <option value="dept1">Zone 1</option>
-                        <option value="dept2">Zone 2</option>
-                        <option value="dept3">Zone 3</option>SelectZone
-                    </select>
-                    <label class="floating-label">Select Zone </label>
-
-                </div>
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
             </div>
-
-
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                        <option value="dept1">Division 1</option>
-                        <option value="dept2">Division 2</option>
-                        <option value="dept3">Division 3</option>
-                    </select>
-                    <label class="floating-label">Select Division </label>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                        <option value="dept1">Location 1</option>
-                        <option value="dept2">Location 2</option>
-                        <option value="dept3">Location 3</option>
-                    </select>
-                    <label class="floating-label">Select Location (Village) </label>
-
-                </div>
+            <div class="short-btn d-flex align-items-center">
+                <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
             </div>
         </div>
 
 
-        @*</form>*@
-        <div class="row pt-3">
-            <div class=" col-md-12">
-                <input type="submit" class="btn btn-theme " value="Retrieve Report" />
-            </div>
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+            <a href="Userwiselandstatus" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive px-2">
+        <div id="LoadReportView">
 
         </div>
     </div>
-    <div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end mr-auto">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Department</option>
-                        <option>Zone</option>
-                        <option>Division</option>
-                        <option>User Name</option>
-                        <option>User Id</option>
-                        <option>Designation</option>
-                    </select>
-                    <label for="field-1" class="floating-label">Sort by</label>
-                </div>
-                <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
-                </div>
-            </div>
-
-            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-
-                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
-                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                    <small>Download</small>
-                </a>
-            </div>
-        </div>
-       
-
-      
-            <table class="table table-sm table-bordered mb-0 table-striped">
-                <thead class="text-nowrap">
-                    <tr>
-                        
-
-                        <th>ZONE </th>
-                        <th> DIVISION </th>
-                        <th> LOCALITY (Village)</th>
-                        <th> USER ID</th>
-                        <th> USER NAME </th>
-                        <th> DESIGNATION </th>
-                        <th> PHOTOS </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                       
-                        <td>LM/NORTH</td>
-                        <td>    LM NZ</td>
-                        <td>LM NZ 006</td>
-                        <td> JPSH</td>
-                        <td>JAG PAL SINGH</td>
-                        <td>    PTW</td>
-                        <td>10</td>
-
-                    </tr>
-                    <tr>
-                       
-                        <td>LM/NORTH</td>
-                        <td>    LM NZ</td>
-                        <td>LM NZ 006</td>
-                        <td> SHCH</td>
-                        <td>SHRI CHAND</td>
-                        <td>    PTW</td>
-                        <td>10</td>
 
 
-                    </tr>
+</div>
 
 
-                    <tr>
-                       
-                        <td>LM/NORTH</td>
-                        <td>    LM NZ</td>
-                        <td>LM NZ 006</td>
-                        <td> JPSH</td>
-                        <td>JAG PAL SINGH</td>
-                        <td>    PTW</td>
-                        <td>10</td>
 
 
-                    </tr>
-
-
-                    <tr>
-                       
-                        <td>LM/NORTH</td>
-                        <td>    LM NZ</td>
-                        <td>LM NZ 006</td>
-                        <td> JPya</td>
-                        <td>JAG PAL yadav</td>
-                        <td>    PTW</td>
-                        <td>10</td>
-
-
-                    </tr>
-
-                </tbody>
-            </table>
-
-        </div>
-       
-
-
-    </div>
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/userwiselandstatusindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/userwiselandstatusindex.min.js" asp-append-version="true"></script>
+</environment>

@@ -1,7 +1,11 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
+using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 
 namespace Libraries.Model.Entity
 {
@@ -40,6 +44,31 @@ namespace Libraries.Model.Entity
         public Division DivisionNavigation { get; set; }
         public Propertyregistration PrimaryListNavigation { get; set; }
         public Zone ZoneNavigation { get; set; }
+
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+
+
+
+        [NotMapped]
+        public List<Division> DivisionList { get; set; }
+
+        //[NotMapped]
+        //public List<Userprofile> RoleList { get; set; }
+
+
+        //public ICollection<Userprofile> Userprofile { get; set; }
+
+
+
+        [NotMapped]
+        public Propertyregistration Propertyregistration { get; set; }
+
+
+      
 
     }
 }
