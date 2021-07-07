@@ -1,0 +1,482 @@
+﻿
+@await Component.InvokeAsync("PageHeader", new { pageName = "Gram Sabha Land " })
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+
+        <div class="panel-body">
+            <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h3 class="mb-3 d-flex">Add Details</h3>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3">
+                                <option selected value="">Select</option>
+                                <option selected value="">NorthWest</option>
+                            </select>
+                            <span class="text-danger"></span>
+                            <label class="floating-label">Zone</label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3">
+                                <option value="">Select</option>
+                                <option value="">Dwarika</option>
+                            </select>
+                            <span class="text-danger"></span>
+                            <label class="floating-label">Village</label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="pt-3">
+                    <h3 class="mb-3 d-flex">Khasra Details</h3>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Khasra No</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="row mt-md-3">
+
+
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Total Area</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Bigha</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Biswa</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Biswanshi</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-md-3">
+
+
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Built-Up Area</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Bigha</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Biswa</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Biswanshi</label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-md-3">
+
+
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Encroached Area</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Bigha</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Biswa</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <label class="floating-label">Biswanshi</label>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="pt-3">
+
+                    <h3 class="mb-3 d-flex">U/S 507</h3>
+
+
+                    <div class="row mt-md-3">
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Notification No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Date</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row mt-md-3">
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Gazzette Notification of DMC Act 1957</label>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="pt-3">
+
+                    <h3 class="mb-3 d-flex">U/S 22(1)</h3>
+
+
+                    <div class="row mt-md-3">
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Notification No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Date</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row mt-md-3">
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Notification Document</label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Other Notification</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                @*<div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="Date" value="" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label"> Date</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="text" placeholder="Plot No" class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Plot No</label>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="pt-3">
+
+            <h3 class="mb-3 d-flex">Area</h3>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input type="text" class="floating-label-field floating-label-field--s3 number" />
+                        <label class="floating-label">Bigha</label>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input type="text" class="floating-label-field floating-label-field--s3 number" placeholder="Biswa" />
+                        <label class="floating-label">Biswa</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+        <div class="form-row">
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+
+
+
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Status </label>
+                </div>
+            </div>
+
+
+
+        </div>*@  <div class="pt-3">
+                    <h3 class="mb-3 d-flex">Details</h3></div>
+                    <div class="row mt-md-3">
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+
+                                <label class="floating-label">Details/Type of Structure on Gram Sabha Land</label>
+                            </div>
+                        </div>
+
+
+                        <div class=" col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Whether TSS Survey Done </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-md-3">
+
+                        <div class=" col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Boundary Wall Done </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Kabza Proceeding</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="row mt-md-3">
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Taken From</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Date of Taken over</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row mt-md-3">
+
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Handed Over to</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <label class="floating-label">Handed Over Date</label>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row mt-md-3">
+
+
+                        <div class=" col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Whether Land Record pertaining to GS Land received from GNCTD </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                                <label class="floating-label">Remarks</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="row mt-md-3">
+                        <div class=" col-md-12">
+                            <button class="btn btn-theme " type="submit">Submit</button>
+                            @Html.ActionLink("Back", "Index", "PossessionDetail", null, new { @class = "btn btn-theme " })
+                        </div>
+                    </div>
+
+
+
+            </form>
+    </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
