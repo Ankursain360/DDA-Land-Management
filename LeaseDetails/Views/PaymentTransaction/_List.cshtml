@@ -1,0 +1,53 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Payment>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+
+    <thead class="text-nowrap">
+        <tr>
+            <th>Application RefNo</th>
+            <th>Allotee Name</th>
+            <th>Alloted Area(.Sq Mt)</th>
+            <th>Receipt No</th>
+            <th>Amount</th>
+            <th>Payment Type</th>
+            <th>Payment Mode</th>
+            <th>Payment TransactionNo</th>
+            <th>Transaction Date</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+        <tr>
+            <td>@item.Allotment.Application.RefNo</td>
+            <td>@item.Allotment.Application.Name</td>
+            <td>@item.Allotment.TotalArea</td>
+            <td>@item.RecieptNo</td>
+            <td>@item.Amount</td>
+            <td>@item.LeasePaymentType.Name</td>
+            <td>@item.PaymentMode</td>
+            <td>
+                @item.PaymentTransactionNo
+            </td>
+            <td>
+                @item.TransactionDate
+            </td>
+
+
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
