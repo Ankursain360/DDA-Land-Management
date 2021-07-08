@@ -14,6 +14,8 @@ function GetReport(pageNumber, pageSize, sortOrder) {
         $('#LoadReportView').html(response);
     });
 }
+
+
 $("#btnGenerate").click(function () {
     GetReport(currentPageNumber, currentPageSize, sortOrder);
 });

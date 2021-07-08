@@ -8,10 +8,10 @@ namespace Dto.Search
     {
         public int Id { get; set; }
         public string DepartmentName { get; set; }
-        public int TotalNoPlots { get; set; }
-        public int NoPlotsPhotosUploaded { get; set; }
-        public int NoPlotsPhotosNotUploaded { get; set; }
-        public int NoOfPhotosUploaded { get; set; }
+        public long TotalNoPlots { get; set; }
+        public long NoPlotsPhotosUploaded { get; set; }
+        public long NoPlotsPhotosNotUploaded { get; set; }
+        public long NoOfPhotosUploaded { get; set; }
         
 
 
