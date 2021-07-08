@@ -63,7 +63,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
             services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
 
-
+            services.AddScoped<IpaymentTransactionRepository, PaymentTransactionRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -111,6 +111,8 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IExtensionApprovalService, ExtensionApprovalService>();
             services.AddScoped<IExtensionService, ExtensionService>();
             services.AddScoped<IUserNotificationService, UserNotificationService>();
+            services.AddScoped<IPaymentTransactionService, PaymentTransactionService>();
+
         }
     }
 }

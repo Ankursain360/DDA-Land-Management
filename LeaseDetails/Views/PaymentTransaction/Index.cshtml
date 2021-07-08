@@ -1,0 +1,84 @@
+﻿@model Dto.Search.PaymentTranscationReportDto
+@await Component.InvokeAsync("PageHeader", new { pageName = "Payment Report" })
+
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
+
+
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <input asp-for="FromDate" type="date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="FromDate" class="text-danger" style="display:none;">Mandatory</span>
+                <label class="floating-label">From Date  <span style="color:red">*</span></label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <input asp-for="ToDate" type="date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="ToDate" class="text-danger" style="display:none;">Mandatory</span>
+                <label class="floating-label">To Date  <span style="color:red">*</span></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-md-3">
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+
+
+                    <a class="btn btn-link btn-block d-flex align-items-center justify-content-center" href="/Demandsletterreport/Index"> <i class="ri-refresh-line mr-2"></i>Reset</a>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+</div>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                    <option selected value="RECEIPTNO">ReceiptNo</option>
+                    <option value="AMOUNT">Amount</option>
+                    <option value="TRANSACTIONDATE">TransactionDate</option>
+
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
+                <input type="hidden" name="sortdesc" id="sortdesc" value="1">
+            </div>
+            <div class="short-btn d-flex align-items-center">
+                <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+            </div>
+        </div>
+
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+
+            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive px-2" id="LoadReportView">
+
+    </div>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+
+    <script src="~/js/PaymentTransactionReport.js"></script>
+
+</environment>
+@*<environment exclude="Development">
+        <script src="~/js/demandletterindex.min.js" asp-append-version="true"></script>
+    </environment>*@
+
+

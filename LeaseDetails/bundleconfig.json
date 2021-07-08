@@ -454,5 +454,11 @@
     "inputFiles": [
       "wwwroot/js/DemandletterReport.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/PaymentTransactionReport.min.js",
+    "inputFiles": [
+      "wwwroot/js/PaymentTransactionReport.js"
+    ]
   }
 ]
