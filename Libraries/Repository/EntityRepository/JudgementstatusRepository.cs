@@ -34,7 +34,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("Status"):
+                    case ("JUDGEMENTSTATUS"):
                         data = null;
                         data = await _dbContext.Judgementstatus
                                                    .Where(x => (string.IsNullOrEmpty(model.status) || x.Status.Contains(model.status)))
@@ -56,7 +56,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("Status"):
+                    case ("JUDGEMENTSTATUS"):
                         data = null;
                         data = await _dbContext.Judgementstatus
                                                    .Where(x => (string.IsNullOrEmpty(model.status) || x.Status.Contains(model.status)))

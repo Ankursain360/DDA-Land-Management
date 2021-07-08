@@ -22,7 +22,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Status Code is mandatory")]
         public int StatusCode { get; set; }
 
-        [Required(ErrorMessage = "Name is mandatory")]
+        [Required(ErrorMessage = "Property Type is mandatory")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }

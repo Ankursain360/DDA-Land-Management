@@ -34,10 +34,10 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
-        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid,string identityDocumentPath,string propertyDocumentPath)
+        public async Task<List<ApiSaveDoor2DoorSurveyDto>> GetAllSurveyDetails(ApiGetAllDoor2DoorSurveyParamsDto dto, int adminroleid, string identityDocumentPath, string propertyDocumentPath)
         {
             List<ApiSaveDoor2DoorSurveyDto> listData = new List<ApiSaveDoor2DoorSurveyDto>();
-          
+
 
             var Data = await _dbContext.Doortodoorsurvey
                                   .Include(a => a.PresentUseNavigation)
@@ -46,8 +46,8 @@ namespace Libraries.Repository.EntityRepository
                                   && (a.OccupantName.ToUpper().Trim().Contains(dto.OccupantName == "" || dto.OccupantName == null ? a.OccupantName.ToUpper().Trim() : dto.OccupantName.ToUpper().Trim()))
                                   && (a.MobileNo.ToUpper().Trim().Contains(dto.OccupantContactNo == "" || dto.OccupantContactNo == null ? a.MobileNo.ToUpper().Trim() : dto.OccupantContactNo.ToUpper().Trim()))
                                   && (a.PropertyAddress.ToUpper().Trim().Contains(dto.PropertyAddress == "" || dto.PropertyAddress == null ? a.PropertyAddress.ToUpper().Trim() : dto.PropertyAddress.ToUpper().Trim()))
-                                  &&( a.CreatedDate >= ((dto.FromDate != null || dto.FromDate != "") ? Convert.ToDateTime(dto.FromDate) : a.CreatedDate))
-                                  && (a.CreatedDate <= ((dto.ToDate != null || dto.ToDate != "") ? Convert.ToDateTime(dto.ToDate) : a.CreatedDate))
+                                  && (a.CreatedDate.Date >= ((dto.FromDate != null || dto.FromDate != "") ? Convert.ToDateTime(dto.FromDate).Date : a.CreatedDate.Date))
+                                  && (a.CreatedDate.Date <= ((dto.ToDate != null || dto.ToDate != "") ? Convert.ToDateTime(dto.ToDate).Date : a.CreatedDate.Date))
                                   )
                                   .OrderByDescending(a => a.Id)
                                   .ToListAsync();
@@ -180,6 +180,7 @@ namespace Libraries.Repository.EntityRepository
                         GeoReferencingLattitude = Data[i].GeoReferencingLattitude,
                         Longitude = Data[i].Longitude,
                         PresentUseId = Data[i].PresentUseId,
+                        PresentUseName = Data[i].PresentUseNavigation.Name,
                         ApproxPropertyArea = Data[i].ApproxPropertyArea,
                         NumberOfFloors = Data[i].NumberOfFloors,
                         CaelectricityNo = Data[i].CaelectricityNo,

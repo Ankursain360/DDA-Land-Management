@@ -35,16 +35,7 @@
             </div>
 
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="GroundRate" placeholder="Name" type="text"limit="18"
-                           class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="GroundRate" class="text-danger"></span>
-                    <label class="floating-label">Ground Rate <span style="color:red">*</span>  </label>
-                </div>
-            </div>
-        </div>
+     
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -65,6 +56,17 @@
             </div>
         </div>
         <div class="row mt-md-3">
+            
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="GroundRate" placeholder="Name" type="text" limit="18"
+                               class="floating-label-field floating-label-field--s3 numbers" />
+                        <span asp-validation-for="GroundRate" class="text-danger"></span>
+                        <label class="floating-label">Ground Rent <span style="color:red">*</span>  </label>
+                    </div>
+                </div>
+           
+
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">

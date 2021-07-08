@@ -10,8 +10,10 @@ namespace Libraries.Model.Entity
 {
     public class Licencefees : AuditableEntity<int>
     {
-        [Required(ErrorMessage = " Property Type is mandatory", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = " Purpose is mandatory", AllowEmptyStrings = false)]
         public int LeasePurposesTypeId { get; set; }
+
+        [Required(ErrorMessage = " Sub Purpose is mandatory")]
         public int LeaseSubPurposeId { get; set; }
         [Required(ErrorMessage = " Licence Fee is mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
