@@ -92,5 +92,6 @@ namespace Libraries.Model.Entity
         public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
         public ICollection<Courtcasesmapping> Courtcasesmapping { get; set; }
 
+        public ICollection<Gramsabhaland> Gramsabhaland { get; set; }
     }
 }

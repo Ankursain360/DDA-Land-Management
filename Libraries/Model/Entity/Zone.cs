@@ -79,5 +79,7 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandvillage> Newlandvillage { get; set; }
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
         public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
-    }
+        public ICollection<Gramsabhaland> Gramsabhaland { get; set; }
+    
+}
 }

@@ -38,6 +38,7 @@ namespace Libraries.Model
         public virtual DbSet<Villagetype> Villagetype { get; set; }
         public virtual DbSet<Surveyuserdetail> Surveyuserdetail { get; set; }
         public virtual DbSet<Surveyuserrole> Surveyuserrole { get; set; }
+        public virtual DbSet<Gramsabhaland> Gramsabhaland { get; set; }
 
         public virtual DbSet<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public virtual DbSet<Classificationofland> Classificationofland { get; set; }
@@ -373,6 +374,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new GramsabhalandConfiguration());
 
             modelBuilder.ApplyConfiguration(new SaknidetailsConfiguration());
             modelBuilder.ApplyConfiguration(new SaknikhasraConfiguration());
