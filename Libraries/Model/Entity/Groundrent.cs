@@ -8,10 +8,11 @@ namespace Libraries.Model.Entity
 {
     public class Groundrent : AuditableEntity<int>
     {
-        [Required(ErrorMessage = " Property Type is mandatory", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = " Purpose is mandatory", AllowEmptyStrings = false)]
         public int LeasePurposesTypeId { get; set; }
+        [Required(ErrorMessage = " Sub Purpose is mandatory")]
         public int LeaseSubPurposeId { get; set; }
-        [Required(ErrorMessage = " Ground Rate is mandatory")]
+        [Required(ErrorMessage = " Ground Rent is mandatory")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Premium Rate; Max 18 digits")]
 

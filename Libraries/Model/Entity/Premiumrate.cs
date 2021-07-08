@@ -8,8 +8,10 @@ namespace Libraries.Model.Entity
 {
     public  class Premiumrate : AuditableEntity<int>
     {
-        [Required(ErrorMessage = " Property Type is mandatory", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = " Purpose is mandatory", AllowEmptyStrings = false)]
         public int LeasePurposesTypeId { get; set; }
+
+        [Required(ErrorMessage = " Sub Purpose is mandatory")]
         public int LeaseSubPurposeId { get; set; }
 
         [Required(ErrorMessage = " Premium Rate is mandatory")]

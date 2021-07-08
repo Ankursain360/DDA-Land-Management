@@ -24,7 +24,10 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Licencefees.Include(x => x.LeasePurposesType)
                        .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub))) 
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                             .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -37,7 +40,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                                 .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderBy(x => x.LeasePurposesType.PurposeUse)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -46,7 +52,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                                .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                 .OrderBy(x => x.LicenceFees)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -55,7 +64,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                                .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderBy(x => x.FromDate)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -64,7 +76,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                               .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                 .OrderBy(x => x.ToDate)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -73,7 +88,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                                .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderByDescending(x => x.IsActive)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -90,7 +108,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                               .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderByDescending(x => x.LeasePurposesType.PurposeUse)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -99,7 +120,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                               .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderByDescending(x => x.LicenceFees)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -108,7 +132,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                               .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                 .OrderByDescending(x => x.FromDate)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -117,7 +144,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                                .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderByDescending(x => x.ToDate)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
@@ -126,7 +156,10 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Licencefees
                                                .Include(x => x.LeaseSubPurpose)
                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LeasePurposesType.PurposeUse.Contains(model.name))
-                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)))
+                   && (string.IsNullOrEmpty(model.sub) || x.LeaseSubPurpose.SubPurposeUse.Contains(model.sub)) &&
+
+                  x.FromDate >= (model.FromDate == "" ? x.FromDate : Convert.ToDateTime(model.FromDate))
+                                    && x.ToDate <= (model.ToDate == "" ? x.ToDate : Convert.ToDateTime(model.ToDate)))
                                                .OrderBy(x => x.IsActive)
                                                .GetPaged<Licencefees>(model.PageNumber, model.PageSize);
                         break;
