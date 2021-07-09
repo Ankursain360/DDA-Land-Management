@@ -50,156 +50,127 @@ namespace Libraries.Repository.EntityRepository
                                 
                                    .Include(x => x.Zone)
                                    .Include(x => x.Village)
-                                   //.Where(x => (string.IsNullOrEmpty(model.Zone) || x.Name.Contains(model.name))
-                                   // && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-                                   // && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
                                    .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
 
-            //int SortOrder = (int)model.SortOrder;
-            //if (SortOrder == 1)
-            //{
-            //    switch (model.SortBy.ToUpper())
-            //    {
-            //        case ("CODE"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderBy(a => a.Code)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("NAME"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderBy(a => a.Name)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
 
-            //        case ("TEHSIL"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderBy(a => a.Tehsil.Name)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("DISTRICT"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderBy(a => a.District.Name)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
+                                   .Include(x => x.Zone)
+                                   .Include(x => x.Village)
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                   .OrderBy(a => a.Zone)
+                                   .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
+                                  .Include(x => x.Zone)
+                                   .Include(x => x.Village)
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                   .OrderBy(a => a.Village)
+                                   .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
+                                 .Include(x => x.Zone)
+                                  .Include(x => x.Village)
+                                  .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                   && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                   && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                  .OrderBy(a => a.KhasraNo)
+                                  .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
+                  
 
 
-            //        case ("STATUS"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderByDescending(a => a.IsActive)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
+                                  .Include(x => x.Zone)
+                                   .Include(x => x.Village)
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.IsActive)
+                                   .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
 
 
-            //    }
-            //}
-            //else if (SortOrder == 2)
-            //{
-            //    switch (model.SortBy.ToUpper())
-            //    {
-            //        case ("CODE"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderByDescending(a => a.Code)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("NAME"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderByDescending(a => a.Name)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
 
-            //        case ("TEHSIL"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderByDescending(a => a.Tehsil.Name)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("DISTRICT"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderByDescending(a => a.District.Name)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
+                                   .Include(x => x.Zone)
+                                   .Include(x => x.Village)
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                   .OrderByDescending(a => a.Zone)
+                                   .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
+                                  .Include(x => x.Zone)
+                                   .Include(x => x.Village)
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                   .OrderByDescending(a => a.Village)
+                                   .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
+                                 .Include(x => x.Zone)
+                                  .Include(x => x.Village)
+                                  .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                   && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                   && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                  .OrderByDescending(a => a.KhasraNo)
+                                  .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
+                 
 
 
-            //        case ("STATUS"):
-            //            data = null;
-            //            data = await _dbContext.Acquiredlandvillage
-            //                       .Include(x => x.District)
-            //                       .Include(x => x.Tehsil)
-            //                       .Include(x => x.Zone)
-            //                       .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                        && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
-            //                        && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
-            //                       .OrderBy(a => a.IsActive)
-            //                       .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
-            //            break;
-            //    }
-            //}
-           
-            
-            
-            
+                      case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Gramsabhaland
+                                  .Include(x => x.Zone)
+                                   .Include(x => x.Village)
+                                   .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                    && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
+                                    && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
+                                    .OrderBy(a => a.IsActive)
+                                   .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+
+
+
+
             return data;
         }
 
