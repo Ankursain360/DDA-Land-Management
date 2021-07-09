@@ -1,24 +1,24 @@
-﻿$(function () {
-    $("input[name='grpLand']").click(function () {
+﻿////$(function () {
+////    //$("input[name='grpLand']").click(function () {
        
-        if ($("#A").is(":checked")) {
-            $('#StatusOfLand').val('Alloted');
-        }
-       else if ($("#V").is(":checked")) {
-            $('#StatusOfLand').val('Vacant');
+////        if ($("#A").is(":checked")) {
+////            $('#StatusOfLand').val('Alloted');
+////        }
+////       else if ($("#V").is(":checked")) {
+////            $('#StatusOfLand').val('Vacant');
 
-        } else if ($("#E").is(":checked")) {
-            $('#StatusOfLand').val('Buildup/Encroached');
-        } 
-        else if ($("#G").is(":checked")) {
-            $('#StatusOfLand').val('Green');
-        } 
+////        } else if ($("#E").is(":checked")) {
+////            $('#StatusOfLand').val('Buildup/Encroached');
+////        } 
+////        else if ($("#G").is(":checked")) {
+////            $('#StatusOfLand').val('Green');
+////        } 
             
-        else {
-            $('#StatusOfLand').val('Green');
-        }
-    });
-});
+////        else {
+////            $('#StatusOfLand').val('Green');
+////        }
+////    //});
+////});
 function onChange(id) {
  
     HttpGet(`/bookTransferLand/GetKhasraList/?LocalityId=${id}`, 'json', function (response) {

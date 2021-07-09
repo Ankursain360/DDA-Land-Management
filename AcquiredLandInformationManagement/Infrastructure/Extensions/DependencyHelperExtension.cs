@@ -24,6 +24,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IJointsurveyRepository, JointsurveyRepository>();
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
+            services.AddScoped<IGramsabhalandRepository, GramsabhalandRepository>();
           
             services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
 
@@ -83,6 +84,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IJointsurveyService, JointsurveyService>();
+            services.AddScoped<IGramsabhalandService, GramsabhalandService>();
 
 
             services.AddScoped<IProposaldetailsService, ProposaldetailsService>();

@@ -8,11 +8,12 @@
             <th>Allotee Name</th>
             <th>Alloted Area(.Sq Mt)</th>
             <th>Receipt No</th>
+            <th>Transaction Date</th>
             <th>Amount</th>
             <th>Payment Type</th>
             <th>Payment Mode</th>
             <th>Payment TransactionNo</th>
-            <th>Transaction Date</th>
+
         </tr>
 
     </thead>
@@ -25,16 +26,15 @@
             <td>@item.Allotment.Application.RefNo</td>
             <td>@item.Allotment.Application.Name</td>
             <td>@item.Allotment.TotalArea</td>
-            <td>@item.RecieptNo</td>
+            <td>@item.RecieptNo</td>           
+            <td>@(Convert.ToDateTime(item.TransactionDate).ToString("dd-MMM-yyyy"))</td>
             <td>@item.Amount</td>
             <td>@item.LeasePaymentType.Name</td>
             <td>@item.PaymentMode</td>
             <td>
                 @item.PaymentTransactionNo
             </td>
-            <td>
-                @item.TransactionDate
-            </td>
+
 
 
         </tr>

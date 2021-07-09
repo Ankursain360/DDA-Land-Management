@@ -29,6 +29,9 @@ namespace LeaseDetails.Controllers
             return View();
         }
 
+
+
+
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] PaymentTranscationReportDto model)
         {

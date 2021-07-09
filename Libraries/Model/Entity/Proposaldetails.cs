@@ -18,15 +18,18 @@ namespace Libraries.Model.Entity
             Newlandawardmasterdetail = new HashSet<Newlandawardmasterdetail>();
         }
 
-        [Required]
+        [Required(ErrorMessage = "Name is mandatory")]
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "ProposalDetails", AdditionalFields = "Id")]
+
+        
         public string Name { get; set; }
         [Required (ErrorMessage ="Scheme is mandatory")]
         public int? SchemeId { get; set; }
-        [Required(ErrorMessage = "Required Agency is mandatory")]
+        [Required(ErrorMessage = "Scheme is mandatory")]
         public string RequiredAgency { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Proposal File No is mandatory")]
         public string ProposalFileNo { get; set; }
         //[RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         //[Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Bigha; Max 18 digits")]

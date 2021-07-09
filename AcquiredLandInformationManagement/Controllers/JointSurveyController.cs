@@ -29,8 +29,6 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
-
-
         {
 
             return View();
@@ -241,10 +239,10 @@ namespace AcquiredLandInformationManagement.Controllers
         {
 
             Jointsurvey jointsurvey = new Jointsurvey();
-            var Data = await _jointsurveyService.FetchSingleResult(id);
+            jointsurvey = await _jointsurveyService.FetchSingleResult(id);
 
-            Data.KhasraList = await _jointsurveyService.BindKhasra();
-            Data.VillageList = await _jointsurveyService.GetAllVillage();
+            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
+            jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
             if (jointsurvey.SitePosition != "")
             {
                 string[] multiTo = jointsurvey.SitePosition.Split('|');
@@ -260,11 +258,11 @@ namespace AcquiredLandInformationManagement.Controllers
                         jointsurvey.IsBoundary = true;
                 }
             }
-            if (Data == null)
+            if (jointsurvey == null)
             {
                 return NotFound();
             }
-            return View(Data);
+            return View(jointsurvey);
         }
 
 
