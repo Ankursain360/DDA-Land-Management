@@ -88,7 +88,7 @@ function GetDetails(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
-    var presentuse = $('#PresentUseId option:selected').val();
+  
     var fromDate = $('#txtFromDate').val();
     var toDate = $('#txtToDate').val();
     var model = {
@@ -96,8 +96,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber),
-        Presentuse: parseInt(presentuse),
+        pageNumber: parseInt(pageNumber),       
         FromDate: fromDate,
         ToDate: toDate
     }

@@ -104,7 +104,7 @@ function initialize() {
         zoom: 10,
         disableDefaultUI: true,
         mapTypeId: 'coordinate',
-        scaleControl: false,
+        scaleControl: true,
         disableDefaultUI: true,
         zoomControl: false,
         rotateControl: true,

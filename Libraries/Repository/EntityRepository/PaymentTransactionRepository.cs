@@ -45,10 +45,10 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.LeasePaymentType)
                                      .Include(x => x.Allotment)
                                        .Include(x => x.Allotment.Application)
-                                      .Where(x => (x.IsActive == 1)
+                                      .Where(x => (x.IsActive == 1)                                      
                                        && (x.TransactionDate >= model.FromDate && x.TransactionDate <= model.ToDate)
                                     )
-                                    .OrderBy(x => x.Id)
+                                    .OrderBy(x => x.RecieptNo)
                                 .GetPaged<Payment>(model.PageNumber, model.PageSize);
                         break;
                     case ("AMOUNT"):
@@ -60,7 +60,7 @@ namespace Libraries.Repository.EntityRepository
                                       .Where(x => (x.IsActive == 1)
                                        && (x.TransactionDate >= model.FromDate && x.TransactionDate <= model.ToDate)
                                     )
-                                    .OrderBy(x => x.Id)
+                                    .OrderBy(x => x.TotalAmount)
                                 .GetPaged<Payment>(model.PageNumber, model.PageSize);
 
                         break;
@@ -73,7 +73,7 @@ namespace Libraries.Repository.EntityRepository
                                       .Where(x => (x.IsActive == 1)
                                        && (x.TransactionDate >= model.FromDate && x.TransactionDate <= model.ToDate)
                                     )
-                                    .OrderBy(x => x.Id)
+                                    .OrderBy(x => x.TransactionDate)
                                 .GetPaged<Payment>(model.PageNumber, model.PageSize);
                         break;
 
@@ -89,10 +89,10 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.LeasePaymentType)
                                      .Include(x => x.Allotment)
                                        .Include(x => x.Allotment.Application)
-                                      .Where(x => (x.IsActive == 1)
+                                      .Where(x => (x.IsActive == 1)                                      
                                        && (x.TransactionDate >= model.FromDate && x.TransactionDate <= model.ToDate)
                                     )
-                                    .OrderByDescending(x => x.Id)
+                                    .OrderByDescending(x => x.RecieptNo)
                                 .GetPaged<Payment>(model.PageNumber, model.PageSize);
                         break;
                     case ("AMOUNT"):
@@ -104,7 +104,7 @@ namespace Libraries.Repository.EntityRepository
                                       .Where(x => (x.IsActive == 1)
                                        && (x.TransactionDate >= model.FromDate && x.TransactionDate <= model.ToDate)
                                     )
-                                    .OrderByDescending(x => x.Id)
+                                    .OrderByDescending(x => x.Amount)
                                 .GetPaged<Payment>(model.PageNumber, model.PageSize);
 
                         break;
@@ -117,7 +117,7 @@ namespace Libraries.Repository.EntityRepository
                                       .Where(x => (x.IsActive == 1)
                                        && (x.TransactionDate >= model.FromDate && x.TransactionDate <= model.ToDate)
                                     )
-                                    .OrderByDescending(x => x.Id)
+                                    .OrderByDescending(x => x.TransactionDate)
                                 .GetPaged<Payment>(model.PageNumber, model.PageSize);
                         break;
 

@@ -19,10 +19,6 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-
-
-
-
         public async Task<List<Jointsurvey>> GetAllJointSurvey()
         {
             return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
@@ -50,7 +46,8 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                         .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
-                                        && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
+                                         && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
+
                                         ).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
