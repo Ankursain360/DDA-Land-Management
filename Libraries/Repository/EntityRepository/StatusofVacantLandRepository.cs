@@ -70,12 +70,12 @@ namespace Libraries.Repository.EntityRepository
 
         {
 
-            //int SortOrder = (int)model.SortOrder;
+            int SortOrder = (int)model.SortOrder;
             var data = await _dbContext.LoadStoredProcedure("StatusOfVacantLand")
                                         .WithSqlParams()
                                         .ExecuteStoredProcedureAsync<StatusOfVacantLandListDataDto>();
 
-            int SortOrder = (int)model.SortOrder;
+           
            
             return data.ToList();
 
