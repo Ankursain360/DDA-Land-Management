@@ -214,9 +214,9 @@ namespace Libraries.Repository.EntityRepository
                                    && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                     && (string.IsNullOrEmpty(model.FileNo) || x.FileNo.Contains(model.FileNo))
                                    
-                                    && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
+                                    && (x.CreatedDate >= model.FromDate && x.CreatedDate <= model.ToDate)
                                    )
-                                   .OrderByDescending(x => x.Id)
+                                   
                                .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
 
 
