@@ -1,13 +1,14 @@
-﻿@model Libraries.Model.Entity.Gramsabhaland
+﻿
+@model Libraries.Model.Entity.Gramsabhaland
 @await Component.InvokeAsync("PageHeader", new { pageName = "Gram Sabha Land " })
 
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
 
         <div class="panel-body">
-            <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+            <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h3 class="mb-3 d-flex">Add Details</h3>
+                <h3 class="mb-3 d-flex">Edit Details</h3>
 
                 <div class="row mt-md-3">
                     <div class=" col-md-6">
@@ -45,7 +46,6 @@
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
                                 <input type="text" asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                                <span asp-validation-for="KhasraNo" class="text-danger"></span>
                                 <label class="floating-label">Khasra No</label>
                             </div>
                         </div>
@@ -200,13 +200,26 @@
                     <div class="row mt-md-3">
 
 
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="file" asp-for="GNus507Document1" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="hidden" asp-for="GazzetteNotificationUs507document" />
+                                @{
+                                    @if (Model.GazzetteNotificationUs507document != null)
+                                    {
+                                        <input type="file" asp-for="GNus507Document1" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument1" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="GNus507Document1" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
                                 <label class="floating-label">Gazzette Notification U/S 507 of DMC Act 1957</label>
                             </div>
                         </div>
+
 
 
 
@@ -230,20 +243,47 @@
                         </div>
                     </div>
                     <div class="row mt-md-3">
-                        <div class="col-md-6">
+
+                        <div class="form-group col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="file" asp-for="Us22Document2" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input type="hidden" asp-for="Us22notificationDocument" />
+                                @{
+                                    @if (Model.Us22notificationDocument != null)
+                                    {
+                                        <input type="file" asp-for="Us22Document2" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument2" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="Us22Document2" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
                                 <label class="floating-label">U/S 22(1)Notification Document</label>
                             </div>
                         </div>
 
 
-                        <div class="col-md-6">
+                        <div class="form-group col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="file" asp-for="Us22OtherDocument3" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input type="hidden" asp-for="Us22otherNotificationDocument" />
+                                @{
+                                    @if (Model.Us22otherNotificationDocument != null)
+                                    {
+                                        <input type="file" asp-for="Us22OtherDocument3" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument3" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="Us22OtherDocument3" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
                                 <label class="floating-label">Other Notification</label>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
 
@@ -360,15 +400,26 @@
                 </div>
 
                 <div class="row mt-md-3" id="tss_div" style="display:none">
-
-
-                    <div class="col-md-6">
+                    <div class="form-group col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="hidden" asp-for="UploadTssSurveyReport" />
+                            @{
+                                @if (Model.UploadTssSurveyReport != null)
+                                {
+                                    <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                }
+                                else
+                                {
+                                    <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                }
+                            }
 
-                            <input asp-for="TssSurveyDocument4" type="file" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Upload TSS Survey Report</label>
                         </div>
                     </div>
+
+
 
 
                 </div>
@@ -386,13 +437,29 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="form-group col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="hidden" asp-for="KabzaProceeding" />
+                            @{
+                                @if (Model.KabzaProceeding != null)
+                                {
+                                    <input type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    <a class="badge badge-primary px-2" asp-action="ViewfDocument5" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                }
+                                else
+                                {
+                                    <input type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                }
+                            }
 
-                            <input type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Kabza Proceeding</label>
                         </div>
                     </div>
+
+
+
+
+
 
                 </div>
 
@@ -463,7 +530,11 @@
                         </div>
                     </div>
 
+
+
                 </div>
+
+
                 <div class="row mt-md-3">
 
                     <div class=" col-md-6">
@@ -483,14 +554,12 @@
 
                 </div>
 
-
-
-                    <div class="row mt-md-3">
-                        <div class=" col-md-12">
-                            <button class="btn btn-theme " type="submit">Submit</button>
-                            @Html.ActionLink("Back", "Index", "GramSabhaLand", null, new { @class = "btn btn-theme " })
-                        </div>
+                <div class="row mt-md-3">
+                    <div class=" col-md-12">
+                        <button class="btn btn-theme " type="submit">Submit</button>
+                        @Html.ActionLink("Back", "Index", "GramSabhaLand", null, new { @class = "btn btn-theme " })
                     </div>
+                </div>
 
 
 
@@ -510,6 +579,8 @@
 <environment exclude="Development">
     <script src="~/js/gramsabhalandcreate.min.js" asp-append-version="true"></script>
 </environment>
+
+
 
 
 

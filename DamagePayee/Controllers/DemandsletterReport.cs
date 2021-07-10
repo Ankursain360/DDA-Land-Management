@@ -33,6 +33,8 @@ namespace DamagePayee.Controllers
             DemandletterReportDto demandletter = new DemandletterReportDto();
             ViewBag.PropertyNoList = await _demandLetterService.BindPropertyNoList();
             ViewBag.LocalityList = await _demandLetterService.BindLoclityList();
+            demandletter.FromDate = DateTime.Now.AddDays(-30);
+            demandletter.ToDate = DateTime.Now;
             return View(demandletter);
         }
 

@@ -12,9 +12,12 @@ namespace Libraries.Model.Entity
 {
     public  class Gramsabhaland : AuditableEntity<int>
     {
-      
+
+        [Required(ErrorMessage = "Village is mandatory")]
         public int VillageId { get; set; }
+        [Required(ErrorMessage = "Zone is mandatory")]
         public int ZoneId { get; set; }
+        [Required(ErrorMessage = "Khasra No is mandatory")]
         public string KhasraNo { get; set; }
         public int TotalAreaBigha { get; set; }
         public int? TotalAreaBiswa { get; set; }

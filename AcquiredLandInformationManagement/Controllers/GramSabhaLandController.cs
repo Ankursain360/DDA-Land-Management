@@ -42,12 +42,13 @@ namespace AcquiredLandInformationManagement.Controllers
 
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
 
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Gramsabhaland gramsabhaland = new Gramsabhaland();
@@ -60,6 +61,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Gramsabhaland gramsabhaland)
         {
             try
@@ -110,7 +112,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _gramsabhalandService.GetAllGramsabhaland();
-                        return View("Create", gramsabhaland);
+                        return View("Index");
                     }
                     else
                     {
@@ -136,6 +138,198 @@ namespace AcquiredLandInformationManagement.Controllers
             zoneid = zoneid ?? 0;
             return Json(await _gramsabhalandService.GetAllVillage(Convert.ToInt32(zoneid)));
         }
+
+
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] GramsabhalandSearchDto model)
+        {
+            var result = await _gramsabhalandService.GetPagedGramsabhaland(model);
+            
+            return PartialView("_List", result);
+        }
+
+
+
+
+        [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _gramsabhalandService.FetchSingleResult(id);
+            Data.ZoneList = await _gramsabhalandService.GetAllZone();
+            Data.VillageList = await _gramsabhalandService.GetAllVillage(Data.ZoneId);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Gramsabhaland gramsabhaland)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+
+
+
+
+                FileHelper file = new FileHelper();
+                if (gramsabhaland.GNus507Document1 != null)
+                {
+                    gramsabhaland.GazzetteNotificationUs507document = file.SaveFile1(GztNoUs507documentlayout, gramsabhaland.GNus507Document1);
+
+                }
+                if (gramsabhaland.Us22Document2 != null)
+                {
+                    gramsabhaland.Us22notificationDocument = file.SaveFile1(Us22NoDocumentlayout, gramsabhaland.Us22Document2);
+
+                }
+                if (gramsabhaland.Us22OtherDocument3 != null)
+                {
+                    gramsabhaland.Us22otherNotificationDocument = file.SaveFile1(Us22otherNoDocumentlayout, gramsabhaland.Us22OtherDocument3);
+
+                }
+                if (gramsabhaland.TssSurveyDocument4 != null)
+                {
+                    gramsabhaland.UploadTssSurveyReport = file.SaveFile1(UpTssSurveyReportlayout, gramsabhaland.TssSurveyDocument4);
+
+                }
+                if (gramsabhaland.KabzaDocument5 != null)
+                {
+                    gramsabhaland.KabzaProceeding = file.SaveFile1(KabzaProceedingDocumentlayout, gramsabhaland.KabzaDocument5);
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                try
+                {
+
+                    gramsabhaland.ModifiedBy = SiteContext.UserId;
+                    var result = await _gramsabhalandService.Update(id, gramsabhaland);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+                        return View("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(gramsabhaland);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(gramsabhaland);
+                }
+            }
+            return View(gramsabhaland);
+        }
+
+
+
+
+
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _gramsabhalandService.FetchSingleResult(id);
+            Data.ZoneList = await _gramsabhalandService.GetAllZone();
+            Data.VillageList = await _gramsabhalandService.GetAllVillage(Data.ZoneId);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality 
+        {
+            var result = await _gramsabhalandService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+
+            return View("Index");
+
+        }
+
+
+        public async Task<IActionResult> ViewfDocument1(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Gramsabhaland Data = await _gramsabhalandService.FetchSingleResult(Id);
+            string filename = GztNoUs507documentlayout + Data.GazzetteNotificationUs507document;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+
+
+        public async Task<IActionResult> ViewfDocument2(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Gramsabhaland Data = await _gramsabhalandService.FetchSingleResult(Id);
+            string filename = Us22NoDocumentlayout + Data.Us22notificationDocument;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+
+        public async Task<IActionResult> ViewfDocument3(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Gramsabhaland Data = await _gramsabhalandService.FetchSingleResult(Id);
+            string filename = Us22otherNoDocumentlayout + Data.Us22otherNotificationDocument;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+
+
+        public async Task<IActionResult> ViewfDocument4(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Gramsabhaland Data = await _gramsabhalandService.FetchSingleResult(Id);
+            string filename = UpTssSurveyReportlayout + Data.UploadTssSurveyReport;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+
+        public async Task<IActionResult> ViewfDocument5(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Gramsabhaland Data = await _gramsabhalandService.FetchSingleResult(Id);
+            string filename = KabzaProceedingDocumentlayout + Data.KabzaProceeding;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+
 
     }
 }

@@ -13,10 +13,10 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" style="width:100%;" asp-for="LocalityId"
                             asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
-                        <option value="0">---Select---</option>
+                        <option value=" ">---Select---</option>
                     </select>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId"></span>
-                    <label class="floating-label">Locality (Village) Name </label>
+                    <label class="floating-label">Locality (Village) Name<span style="color:red">*</span> </label>
                 </div>
             </div>
 

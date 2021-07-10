@@ -1,18 +1,19 @@
-﻿@model Libraries.Model.Entity.Gramsabhaland
+﻿
+@model Libraries.Model.Entity.Gramsabhaland
 @await Component.InvokeAsync("PageHeader", new { pageName = "Gram Sabha Land " })
 
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
 
         <div class="panel-body">
-            <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+            <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h3 class="mb-3 d-flex">Add Details</h3>
+                <h3 class="mb-3 d-flex">View Details</h3>
 
                 <div class="row mt-md-3">
                     <div class=" col-md-6">
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId"
+                            <select disabled class="floating-label-field floating-label-field--s3" asp-for="ZoneId"
                                     asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
                                     onchange="return">
                                 <option selected="selected" disabled="disabled" value="">--Select-- </option>
@@ -24,7 +25,7 @@
                     </div>
                     <div class=" col-md-6">
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="VillageId"
+                            <select disabled class="floating-label-field floating-label-field--s3" asp-for="VillageId"
                                     asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
                                 <option selected="selected" disabled="disabled" value="">--Select-- </option>
                             </select>
@@ -44,8 +45,7 @@
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                                <span asp-validation-for="KhasraNo" class="text-danger"></span>
+                                <input disabled type="text" asp-for="KhasraNo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Khasra No</label>
                             </div>
                         </div>
@@ -58,20 +58,20 @@
 
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" asp-for="TotalAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="TotalAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Bigha</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="TotalAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="TotalAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswa</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" asp-for="TotalAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="TotalAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswanshi</label>
                             </div>
                         </div>
@@ -85,21 +85,21 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="VacantAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="VacantAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Bigha</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="VacantAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="VacantAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswa</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="VacantAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="VacantAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswanshi</label>
                             </div>
                         </div>
@@ -118,21 +118,21 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="BuiltupAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="BuiltupAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Bigha</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="BuiltupAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="BuiltupAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswa</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="BuiltupAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="BuiltupAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswanshi</label>
                             </div>
                         </div>
@@ -153,21 +153,21 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="EncroachedAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="EncroachedAreaBigha" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Bigha</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="EncroachedAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="EncroachedAreaBiswa" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswa</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" asp-for="EncroachedAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="EncroachedAreaBiswanshi" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Biswanshi</label>
                             </div>
                         </div>
@@ -182,14 +182,14 @@
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" asp-for="Us507notificationNo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="Us507notificationNo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">(U/S 507) Notification No</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="date" asp-for="Us507notificationDate" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="date" asp-for="Us507notificationDate" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Date</label>
                             </div>
                         </div>
@@ -200,13 +200,26 @@
                     <div class="row mt-md-3">
 
 
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="file" asp-for="GNus507Document1" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input disabled type="hidden" asp-for="GazzetteNotificationUs507document" />
+                                @{
+                                    @if (Model.GazzetteNotificationUs507document != null)
+                                    {
+                                        <input disabled type="file" asp-for="GNus507Document1" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument1" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input disabled type="file" asp-for="GNus507Document1" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
                                 <label class="floating-label">Gazzette Notification U/S 507 of DMC Act 1957</label>
                             </div>
                         </div>
+
 
 
 
@@ -218,120 +231,147 @@
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" asp-for="Us22notificationNo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="text" asp-for="Us22notificationNo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">U/S 22(1) Notification No</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="date" asp-for="Us22notificationDate" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input disabled type="date" asp-for="Us22notificationDate" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                                 <label class="floating-label">Date</label>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-md-3">
-                        <div class="col-md-6">
+
+                        <div class="form-group col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="file" asp-for="Us22Document2" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input  type="hidden" asp-for="Us22notificationDocument" />
+                                @{
+                                    @if (Model.Us22notificationDocument != null)
+                                    {
+                                        <input disabled type="file" asp-for="Us22Document2" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument2" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input disabled type="file" asp-for="Us22Document2" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
                                 <label class="floating-label">U/S 22(1)Notification Document</label>
                             </div>
                         </div>
 
 
-                        <div class="col-md-6">
+                        <div class="form-group col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="file" asp-for="Us22OtherDocument3" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                                <input type="hidden" asp-for="Us22otherNotificationDocument" />
+                                @{
+                                    @if (Model.Us22otherNotificationDocument != null)
+                                    {
+                                        <input disabled type="file" asp-for="Us22OtherDocument3" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument3" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input disabled type="file" asp-for="Us22OtherDocument3" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
                                 <label class="floating-label">Other Notification</label>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
 
                 @*<div class="row mt-md-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="Date" value="" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
-                    <label class="floating-label"> Date</label>
-                </div>
-            </div>
+                                <input type="Date" value="" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label"> Date</label>
+                            </div>
+                        </div>
 
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="text" placeholder="Plot No" class="floating-label-field floating-label-field--s3" />
-                    <span class="text-danger"></span>
-                    <label class="floating-label">Plot No</label>
-                </div>
-            </div>
+                                <input type="text" placeholder="Plot No" class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Plot No</label>
+                            </div>
+                        </div>
 
-
-        </div>
-
-
-
-        <div class="pt-3">
-
-            <h3 class="mb-3 d-flex">Area</h3>
-
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                        <input type="text" class="floating-label-field floating-label-field--s3 number" />
-                        <label class="floating-label">Bigha</label>
 
                     </div>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
 
 
 
-                        <input type="text" class="floating-label-field floating-label-field--s3 number" placeholder="Biswa" />
-                        <label class="floating-label">Biswa</label>
+                    <div class="pt-3">
+
+                        <h3 class="mb-3 d-flex">Area</h3>
+
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                                    <input type="text" class="floating-label-field floating-label-field--s3 number" />
+                                    <label class="floating-label">Bigha</label>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                                    <input type="text" class="floating-label-field floating-label-field--s3 number" placeholder="Biswa" />
+                                    <label class="floating-label">Biswa</label>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-
-            </div>
-        </div>
 
 
 
 
-        <div class="form-row">
+                    <div class="form-row">
 
 
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
-                    <label class="floating-label">Remarks</label>
-                </div>
-            </div>
-
-
-
-
-            <div class=" col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span class="text-danger"></span>
-                    <label class="floating-label">Status </label>
-                </div>
-            </div>
+                                <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                                <label class="floating-label">Remarks</label>
+                            </div>
+                        </div>
 
 
 
-        </div>*@
+
+                        <div class=" col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3">
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Status </label>
+                            </div>
+                        </div>
+
+
+
+                    </div>*@
                 <div class="pt-3">
                     <h3 class="mb-3 d-flex">Other Details</h3>
                 </div>
@@ -339,7 +379,7 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <textarea type="text" asp-for="TypeOfStructureOnGramLand" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                            <textarea disabled type="text" asp-for="TypeOfStructureOnGramLand" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
 
                             <label class="floating-label">Details/Type of Structure on Gram Sabha Land</label>
                         </div>
@@ -348,7 +388,7 @@
 
                     <div class=" col-md-6">
                         <div class="floating-label-wrap">
-                            <select asp-for="WhetherTssSurveyDone" class="floating-label-field floating-label-field--s3" id="survey_done">
+                            <select disabled asp-for="WhetherTssSurveyDone" class="floating-label-field floating-label-field--s3" id="survey_done">
                                 <option value="1">Yes</option>
                                 <option value="0" selected>No</option>
                             </select>
@@ -360,15 +400,26 @@
                 </div>
 
                 <div class="row mt-md-3" id="tss_div" style="display:none">
-
-
-                    <div class="col-md-6">
+                    <div class="form-group col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="hidden" asp-for="UploadTssSurveyReport" />
+                            @{
+                                @if (Model.UploadTssSurveyReport != null)
+                                {
+                                    <input disabled type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                }
+                                else
+                                {
+                                    <input disabled type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                }
+                            }
 
-                            <input asp-for="TssSurveyDocument4" type="file" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Upload TSS Survey Report</label>
                         </div>
                     </div>
+
+
 
 
                 </div>
@@ -377,7 +428,7 @@
 
                     <div class=" col-md-6">
                         <div class="floating-label-wrap">
-                            <select asp-for="BoundaryWallDone" class="floating-label-field floating-label-field--s3">
+                            <select disabled asp-for="BoundaryWallDone" class="floating-label-field floating-label-field--s3">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
@@ -386,13 +437,29 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="form-group col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input  type="hidden" asp-for="KabzaProceeding" />
+                            @{
+                                @if (Model.KabzaProceeding != null)
+                                {
+                                    <input disabled type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    <a class="badge badge-primary px-2" asp-action="ViewfDocument5" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                }
+                                else
+                                {
+                                    <input disabled  type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                }
+                            }
 
-                            <input type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Kabza Proceeding</label>
                         </div>
                     </div>
+
+
+
+
+
 
                 </div>
 
@@ -404,14 +471,14 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="TakenFrom" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <input disabled type="text" asp-for="TakenFrom" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Taken From</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="date" asp-for="DateofTakenOver" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <input disabled type="date" asp-for="DateofTakenOver" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Date of Taken over</label>
                         </div>
                     </div>
@@ -426,14 +493,14 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="text" asp-for="HandedOverTo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <input disabled type="text" asp-for="HandedOverTo" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Handed Over to</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input type="date" asp-for="HandedOverDate" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                            <input disabled type="date" asp-for="HandedOverDate" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                             <label class="floating-label">Handed Over Date</label>
                         </div>
                     </div>
@@ -446,7 +513,7 @@
 
                     <div class=" col-md-6">
                         <div class="floating-label-wrap">
-                            <select asp-for="LandRecordReceivedGnctd" class="floating-label-field floating-label-field--s3">
+                            <select disabled asp-for="LandRecordReceivedGnctd" class="floating-label-field floating-label-field--s3">
                                 <option value="1">Yes</option>
                                 <option value="0">No</option>
                             </select>
@@ -458,18 +525,22 @@
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                            <textarea disabled asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
                             <label class="floating-label">Remarks</label>
                         </div>
                     </div>
 
+
+
                 </div>
+
+
                 <div class="row mt-md-3">
 
                     <div class=" col-md-6">
 
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                            <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
 
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
@@ -483,14 +554,12 @@
 
                 </div>
 
-
-
-                    <div class="row mt-md-3">
-                        <div class=" col-md-12">
-                            <button class="btn btn-theme " type="submit">Submit</button>
-                            @Html.ActionLink("Back", "Index", "GramSabhaLand", null, new { @class = "btn btn-theme " })
-                        </div>
+                <div class="row mt-md-3">
+                    <div class=" col-md-12">
+                       
+                        @Html.ActionLink("Back", "Index", "GramSabhaLand", null, new { @class = "btn btn-theme " })
                     </div>
+                </div>
 
 
 
@@ -510,6 +579,8 @@
 <environment exclude="Development">
     <script src="~/js/gramsabhalandcreate.min.js" asp-append-version="true"></script>
 </environment>
+
+
 
 
 

@@ -1,7 +1,6 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
 $(document).ready(function () {
-
     $("#btnGenerate").click(function () {
         debugger;
         var param = GetSearchParam(currentPageNumber, currentPageSize);
