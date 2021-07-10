@@ -246,7 +246,7 @@
 
                         <div class="form-group col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input  type="hidden" asp-for="Us22notificationDocument" />
+                                <input type="hidden" asp-for="Us22notificationDocument" />
                                 @{
                                     @if (Model.Us22notificationDocument != null)
                                     {
@@ -288,90 +288,90 @@
                 </div>
 
                 @*<div class="row mt-md-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="Date" value="" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
-                                <span class="text-danger"></span>
-                                <label class="floating-label"> Date</label>
-                            </div>
-                        </div>
+                    <input type="Date" value="" placeholder="poss Date" class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label"> Date</label>
+                </div>
+            </div>
 
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" placeholder="Plot No" class="floating-label-field floating-label-field--s3" />
-                                <span class="text-danger"></span>
-                                <label class="floating-label">Plot No</label>
-                            </div>
-                        </div>
+                    <input type="text" placeholder="Plot No" class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Plot No</label>
+                </div>
+            </div>
 
+
+        </div>
+
+
+
+        <div class="pt-3">
+
+            <h3 class="mb-3 d-flex">Area</h3>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                        <input type="text" class="floating-label-field floating-label-field--s3 number" />
+                        <label class="floating-label">Bigha</label>
 
                     </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
 
 
-                    <div class="pt-3">
-
-                        <h3 class="mb-3 d-flex">Area</h3>
-
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                                    <input type="text" class="floating-label-field floating-label-field--s3 number" />
-                                    <label class="floating-label">Bigha</label>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group col-md-4">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-                                    <input type="text" class="floating-label-field floating-label-field--s3 number" placeholder="Biswa" />
-                                    <label class="floating-label">Biswa</label>
-                                </div>
-                            </div>
-
-                        </div>
+                        <input type="text" class="floating-label-field floating-label-field--s3 number" placeholder="Biswa" />
+                        <label class="floating-label">Biswa</label>
                     </div>
+                </div>
+
+            </div>
+        </div>
 
 
 
 
-                    <div class="form-row">
+        <div class="form-row">
 
 
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
-                                <label class="floating-label">Remarks</label>
-                            </div>
-                        </div>
-
-
-
-
-                        <div class=" col-md-6">
-                            <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3">
-                                    <option value="1">Active</option>
-                                    <option value="0">Inactive</option>
-                                </select>
-                                <span class="text-danger"></span>
-                                <label class="floating-label">Status </label>
-                            </div>
-                        </div>
+                    <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks"></textarea>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
 
 
 
-                    </div>*@
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Status </label>
+                </div>
+            </div>
+
+
+
+        </div>*@
                 <div class="pt-3">
                     <h3 class="mb-3 d-flex">Other Details</h3>
                 </div>
@@ -386,11 +386,12 @@
                     </div>
 
 
+
                     <div class=" col-md-6">
                         <div class="floating-label-wrap">
-                            <select disabled asp-for="WhetherTssSurveyDone" class="floating-label-field floating-label-field--s3" id="survey_done">
+                            <select asp-for="WhetherTssSurveyDone" class="floating-label-field floating-label-field--s3" id="survey_done">
                                 <option value="1">Yes</option>
-                                <option value="0" selected>No</option>
+                                <option value="0">No</option>
                             </select>
                             <span class="text-danger"></span>
                             <label class="floating-label">Whether TSS Survey Done </label>
@@ -399,30 +400,60 @@
 
                 </div>
 
-                <div class="row mt-md-3" id="tss_div" style="display:none">
-                    <div class="form-group col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="hidden" asp-for="UploadTssSurveyReport" />
-                            @{
-                                @if (Model.UploadTssSurveyReport != null)
-                                {
-                                    <input disabled type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                    <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
-                                }
-                                else
-                                {
-                                    <input disabled type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                }
-                            }
+                @if (Model.WhetherTssSurveyDone == "1")
+                {
 
-                            <label class="floating-label">Upload TSS Survey Report</label>
+                    <div class="row mt-md-3" id="tss_div">
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="hidden" asp-for="UploadTssSurveyReport" />
+                                @{
+                                    @if (Model.UploadTssSurveyReport != null)
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
+                                <label class="floating-label">Upload TSS Survey Report</label>
+                            </div>
                         </div>
+
+
+                    </div>
+                }
+                else
+                {
+
+                    <div class="row mt-md-3" id="tss_div" style="display:none">
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="hidden" asp-for="UploadTssSurveyReport" />
+                                @{
+                                    @if (Model.UploadTssSurveyReport != null)
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
+                                <label class="floating-label">Upload TSS Survey Report</label>
+                            </div>
+                        </div>
+
+
                     </div>
 
+                }
 
-
-
-                </div>
 
                 <div class="row mt-md-3">
 
@@ -439,7 +470,7 @@
 
                     <div class="form-group col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input  type="hidden" asp-for="KabzaProceeding" />
+                            <input type="hidden" asp-for="KabzaProceeding" />
                             @{
                                 @if (Model.KabzaProceeding != null)
                                 {
@@ -448,7 +479,7 @@
                                 }
                                 else
                                 {
-                                    <input disabled  type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    <input disabled type="file" asp-for="KabzaDocument5" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
                                 }
                             }
 
@@ -556,7 +587,7 @@
 
                 <div class="row mt-md-3">
                     <div class=" col-md-12">
-                       
+
                         @Html.ActionLink("Back", "Index", "GramSabhaLand", null, new { @class = "btn btn-theme " })
                     </div>
                 </div>

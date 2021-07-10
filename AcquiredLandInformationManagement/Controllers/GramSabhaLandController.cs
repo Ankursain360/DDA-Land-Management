@@ -331,5 +331,36 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> GramSabhaLanddetailsList()
+        {
+            var result = await _gramsabhalandService.GetAllGramsabhaland();
+            List<GramSabhaLandListDto> data = new List<GramSabhaLandListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new GramSabhaLandListDto()
+                    {
+                        Id = result[i].Id,
+                       
+                        Village = result[i].Village == null ? "" : result[i].Village.Name,
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name,
+                        KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo,
+                        US507NotificationNo = result[i].Us507notificationNo == null ? "" : result[i].Us507notificationNo,
+
+                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive"
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+
+
     }
 }
