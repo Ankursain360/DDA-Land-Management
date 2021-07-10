@@ -69,7 +69,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
                                     && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
                                     && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
-                                   .OrderBy(a => a.Zone)
+                                   .OrderBy(a => a.Zone.Name)
                                    .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
                         break;
                     case ("VILLAGE"):
@@ -80,7 +80,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
                                     && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
                                     && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
-                                   .OrderBy(a => a.Village)
+                                   .OrderBy(a => a.Village.Name)
                                    .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
                         break;
 
@@ -126,7 +126,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
                                     && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
                                     && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
-                                   .OrderByDescending(a => a.Zone)
+                                   .OrderByDescending(a => a.Zone.Name)
                                    .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
                         break;
                     case ("VILLAGE"):
@@ -137,7 +137,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
                                     && (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
                                     && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra)))
-                                   .OrderByDescending(a => a.Village)
+                                   .OrderByDescending(a => a.Village.Name)
                                    .GetPaged<Gramsabhaland>(model.PageNumber, model.PageSize);
                         break;
                     case ("KHASRA"):

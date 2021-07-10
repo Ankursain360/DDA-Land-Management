@@ -390,7 +390,7 @@
                         <div class="floating-label-wrap">
                             <select asp-for="WhetherTssSurveyDone" class="floating-label-field floating-label-field--s3" id="survey_done">
                                 <option value="1">Yes</option>
-                                <option value="0" selected>No</option>
+                                <option value="0">No</option>
                             </select>
                             <span class="text-danger"></span>
                             <label class="floating-label">Whether TSS Survey Done </label>
@@ -399,30 +399,59 @@
 
                 </div>
 
-                <div class="row mt-md-3" id="tss_div" style="display:none">
-                    <div class="form-group col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="hidden" asp-for="UploadTssSurveyReport" />
-                            @{
-                                @if (Model.UploadTssSurveyReport != null)
-                                {
-                                    <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                    <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
-                                }
-                                else
-                                {
-                                    <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                }
-                            }
+                @if (Model.WhetherTssSurveyDone == "1")
+                {
 
-                            <label class="floating-label">Upload TSS Survey Report</label>
+                    <div class="row mt-md-3" id="tss_div" >
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="hidden" asp-for="UploadTssSurveyReport" />
+                                @{
+                                    @if (Model.UploadTssSurveyReport != null)
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
+                                <label class="floating-label">Upload TSS Survey Report</label>
+                            </div>
                         </div>
+
+
+                    </div>
+                }
+                else
+                {
+
+                    <div class="row mt-md-3" id="tss_div" style="display:none">
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="hidden" asp-for="UploadTssSurveyReport" />
+                                @{
+                                    @if (Model.UploadTssSurveyReport != null)
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewfDocument4" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    }
+                                    else
+                                    {
+                                        <input type="file" asp-for="TssSurveyDocument4" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                    }
+                                }
+
+                                <label class="floating-label">Upload TSS Survey Report</label>
+                            </div>
+                        </div>
+
+
                     </div>
 
-
-
-
-                </div>
+                }
 
                 <div class="row mt-md-3">
 
@@ -556,7 +585,7 @@
 
                 <div class="row mt-md-3">
                     <div class=" col-md-12">
-                        <button class="btn btn-theme " type="submit">Submit</button>
+                        <button class="btn btn-theme " type="submit">Update</button>
                         @Html.ActionLink("Back", "Index", "GramSabhaLand", null, new { @class = "btn btn-theme " })
                     </div>
                 </div>
