@@ -5,19 +5,22 @@
     <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Landing Page</title>
+    <title>Modules | Home</title>
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
 
     <!--icon css-->
     <link rel="stylesheet" href="~/font/icon/remixicon.css" />
 
-
+    <!--bootstrap css-->
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!--custome css-->
     <link href="~/css/style.css" rel="stylesheet" />
+    <!--notification toaster css-->
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <!--jquery js-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-
+    <!--icon css-->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -32,7 +35,10 @@
         <header>
             <div class="container-fluid">
                 <div class="d-flex align-items-center">
-
+                    <div class="menu mr-3 p-2 text-white order-md-2 mr-md-auto open" id="mobileMenu" style="visibility:hidden">
+                        <i class="ri-menu-fold-line"></i>
+                        <i class="ri-menu-unfold-line"></i>
+                    </div>
                     <div class="logo py-1 mr-auto mr-md-4 order-md-1">
                         <a href="/" class="d-block">
                             <figure class="m-0">
@@ -40,40 +46,7 @@
                             </figure>
                         </a>
                     </div>
-                    @*<div class="dropdown noti text-white my-2  mr-3 order-md-3 ml-auto">
-                        <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
-                            <i class="ri-notification-2-line"></i>
-                            <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
-                            <ul class="list-unstyled m-0 p-0">
-                                <li class="px-3">
-                                    <a href="#" class="d-flex align-items-center py-2 border-bottom">
-                                        <div class="noti-time text-center pr-2">
-                                            <i class="ri-discuss-line"></i>
-                                            <small class="d-block w-100">12:00</small>
-                                        </div>
-                                        <p class="m-0 text-truncate text-left">
-                                            Some notification message new message
-                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li class="px-3">
-                                    <a href="#" class="d-flex align-items-center py-2 border-bottom read">
-                                        <div class="noti-time text-center pr-2">
-                                            <i class="ri-discuss-line"></i>
-                                            <small class="d-block w-100">2 Days</small>
-                                        </div>
-                                        <p class="m-0 text-truncate text-left">
-                                            Some notification message new message
-                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>*@
+
 
                     @await Component.InvokeAsync("UserNotificationAlert")
 
