@@ -22,10 +22,11 @@ namespace Libraries.Repository.EntityRepository
 
         }
         public async Task<PagedResult<Servicetype>> GetPagedServicetype(ServiceSearchDto model)
-      
+
         {
             var data = await _dbContext.Servicetype
                                        .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                       .Where(x => x.IsActive == 1)
                                        .GetPaged<Servicetype>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -37,18 +38,20 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Servicetype
                                         .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                          .Where(x => x.IsActive == 1)
                                         .OrderBy(x => x.Name)
                                         .GetPaged<Servicetype>(model.PageNumber, model.PageSize);
-                                           
-                                              
+
+
                         break;
-                   
-                   
-                   
+
+
+
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Servicetype
                                         .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                          .Where(x => x.IsActive == 1)
                                         .OrderByDescending(x => x.IsActive)
                                         .GetPaged<Servicetype>(model.PageNumber, model.PageSize);
 
@@ -65,6 +68,7 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Servicetype
                                         .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                          .Where(x => x.IsActive == 1)
                                         .OrderByDescending(x => x.Name)
                                         .GetPaged<Servicetype>(model.PageNumber, model.PageSize);
 
@@ -77,6 +81,8 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Servicetype
                                         .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                          .Where(x => x.IsActive == 1)
+                                          .Where(x => x.IsActive == 1)
                                         .OrderBy(x => x.IsActive)
                                         .GetPaged<Servicetype>(model.PageNumber, model.PageSize);
 
@@ -88,7 +94,7 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-      
+
 
     }
 }
