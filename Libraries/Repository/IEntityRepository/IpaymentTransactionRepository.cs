@@ -10,5 +10,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IpaymentTransactionRepository : IGenericRepository<Payment>
     {
         Task<PagedResult<Payment>> GetPagedPaymentTransactionReport(PaymentTranscationReportDto model);
+        Task<List<Allotmententry>> GetAllAllotmententry();
+        Task<PagedResult<Payment>> GetPagedPaymentLedgerReport(PaymentLedgerSearchDto model);
     }
 }

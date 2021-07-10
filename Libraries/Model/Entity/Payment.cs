@@ -56,5 +56,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string PaymentTypeName { get; set; }
+        [NotMapped]
+        public List<Allotmententry> ApplicationNoList { get; set; }
     }
 }

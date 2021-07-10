@@ -460,5 +460,11 @@
     "inputFiles": [
       "wwwroot/js/PaymentTransactionReport.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentledgerindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentledgerindex.js"
+    ]
   }
 ]

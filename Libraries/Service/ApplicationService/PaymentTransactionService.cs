@@ -29,6 +29,14 @@ namespace Service.ApplicationService
             return await _paymentTransactionRepository.GetPagedPaymentTransactionReport(model);
         }
 
+        public async Task<List<Allotmententry>> GetAllAllotmententry()
+        {
 
+            return await _paymentTransactionRepository.GetAllAllotmententry();
+        }
+        public async Task<PagedResult<Payment>> GetPagedPaymentLedgerReport(PaymentLedgerSearchDto model)//added by ishu
+        {
+            return await _paymentTransactionRepository.GetPagedPaymentLedgerReport(model);
+        }
     }
 }

@@ -11,5 +11,8 @@ namespace Libraries.Service.IApplicationService
      public interface IPaymentTransactionService : IEntityService<Payment>
      {
         Task<PagedResult<Payment>> GetPagedPaymentTransactionReport(PaymentTranscationReportDto model);
+
+        Task<List<Allotmententry>> GetAllAllotmententry();
+        Task<PagedResult<Payment>> GetPagedPaymentLedgerReport(PaymentLedgerSearchDto model);
     }
 }
