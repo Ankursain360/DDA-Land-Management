@@ -46,5 +46,11 @@
     "inputFiles": [
       "wwwroot/js/kycform.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentofpropertiescreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentofpropertiescreate.js"
+    ]
   }
 ]
