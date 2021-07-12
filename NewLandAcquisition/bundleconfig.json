@@ -316,5 +316,23 @@
     "inputFiles": [
       "wwwroot/js/newlandacquiredvillagereportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlanddemandlistdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlanddemandlistdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlanddemandlistdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlanddemandlistdetailsedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/newlanddemandlistdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/newlanddemandlistdetailsindex.js"
+    ]
   }
 ]
