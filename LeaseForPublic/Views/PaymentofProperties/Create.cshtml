@@ -24,7 +24,7 @@
                         <option value="Lease">Lease Property</option>
                         <option value="License">License Property</option>
                     </select>
-                    <label for="field-1" class="floating-label">Choose Property <span style="color:red">*</span></label>
+                    <label for="field-1" class="floating-label"> Property <span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -232,7 +232,7 @@
 
 
 
-        <h3 class="my-3 sub-heading">Details</h3>
+        <h3 class="my-3 sub-heading">Dues Payable</h3>
         <div class="row mt-md-3">
 
             <div class=" col-md-6">
@@ -258,14 +258,14 @@
                                 <th>Sr.No</th>
                                 <th style="min-width:150px;">Payment Type <span style="color:red">*</span></th>
                                 <th>Period From –To  <span style="color:red">*</span></th>
-                                <th style="min-width:120px;">Amount <span style="color:red">*</span></th>
+                                <th style="min-width:120px;">Amount(Rs) <span style="color:red">*</span></th>
                                 <th style="min-width:200px;">Due Date (No due date is taken beyond expiry of lease/license) <span style="color:red">*</span></th>
                                 <th style="min-width:130px;">Upto Date Interest <span style="color:red">*</span></th>
                                 <th style="min-width:200px;">Total Outstanding as on Date <span style="color:red">*</span></th>
                                 <th style="min-width:210px;">Demand Notices Issued- No,  Date, (Email sent PDF)<span style="color:red">*</span></th>
 
 
-                                <th>Operation</th>
+                                @*<th>Operation</th>*@
                             </tr>
                         </thead>
                         <tbody id="tbl_posts_body">
@@ -291,7 +291,7 @@
                                 <td>
 
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input type="text" class="floating-label-field floating-label-field--s3" id="Type" name="Type" value="">
+                                        <input type="date" class="floating-label-field floating-label-field--s3" id="Type" name="Type" value="">
                                     </div>
                                 </td>
                                 <td>
@@ -309,13 +309,13 @@
                                         <input type="text" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
                                     </div>
                                 </td>
-                                <td>
+                                @*<td>
                                     <div class="action-btns">
                                         <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
                                         <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                     </div>
 
-                                </td>
+                                </td>*@
 
 
                             </tr>
@@ -348,7 +348,7 @@
                                 <th style="min-width:150px;">Demand Notices Issued- No,  Date, (Email sent PDF) <span style="color:red">*</span></th>
                                 <th>Payment Type<span style="color:red">*</span></th>
                                 <th style="min-width:120px;">Period From –To  <span style="color:red">*</span></th>
-                                <th style="min-width:200px;">Amount <span style="color:red">*</span></th>
+                                <th style="min-width:200px;">Amount(Rs.) <span style="color:red">*</span></th>
                                 <th style="min-width:130px;">Date of Payment by the allottee <span style="color:red">*</span></th>
                                 <th style="min-width:200px;">Proof of Payment in PDF<span style="color:red">*</span></th>
                                 <th style="min-width:210px;">Bank in which credited<span style="color:red">*</span></th>
@@ -384,12 +384,12 @@
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input type="text" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
+                                        <input type="date" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input class="floating-label-field floating-label-field--s3 onlynumbers" type="text" name="document" value="">
+                                        <input class="floating-label-field floating-label-field--s3 onlynumbers" type="file" name="document" value="">
                                     </div>
                                 </td>
                                 <td>
@@ -420,7 +420,7 @@
      
 
 
-        <h3 class="my-3 sub-heading">Payment Details(Payment Entry for payment gateway)</h3>
+        <h3 class="my-3 sub-heading">Payment Details</h3>
         <div id="divLeaseproperty">
             <h3 class="my-3 sub-heading">Lease Property</h3>
             <h3 class="my-3 sub-heading">Ground Rent Details</h3>
@@ -441,7 +441,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                        <label class="floating-label">Annual Ground Rent</label>
+                        <label class="floating-label">Annual Ground Rent(Rs.)</label>
                     </div>
                 </div>
 
@@ -484,6 +484,14 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Arrear Amount(Rs)</label>
+                    </div>
+                </div>
+            </div>
             <h3 class="my-3 sub-heading">Interest Details</h3>
             <div class="row mt-md-3">
 
@@ -501,13 +509,21 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Interest Amount(Rs)</label>
+                    </div>
+                </div>
+            </div>
             <h3 class="my-3 sub-heading">Damage Charges</h3>
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input type="text" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                        <label class="floating-label">Damage Charge </label>
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Damage Charge (Rs)</label>
                     </div>
                 </div>
             </div>
@@ -516,8 +532,8 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                        <label class="floating-label">Miscellaneous Charge </label>
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Miscellaneous Charge(Rs) </label>
                     </div>
                 </div>
             </div>
@@ -599,6 +615,15 @@
                         <label class="floating-label">Arrears Period(To Date)</label>
                     </div>
                 </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Arrear Amount(Rs)</label>
+                    </div>
+                </div>
             </div>
 
             <h3 class="my-3 sub-heading">Interest Details</h3>
@@ -616,20 +641,27 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Interest Amount(Rs)</label>
+                    </div>
+                </div>
+            </div>
 
             <h3 class="my-3 sub-heading">Damage Charges</h3>
 
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="number" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
                         <label class="floating-label">Damage Charge (Rs)</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="number" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
                         <label class="floating-label">Damage Demand No</label>
                     </div>
                 </div>
@@ -638,7 +670,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="number" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
                         <label class="floating-label">Damage Demand Date</label>
                     </div>
                 </div>
@@ -654,12 +686,11 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                        <label class="floating-label">Miscellaneous Charge </label>
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Miscellaneous Charge(Rs) </label>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="row mt-md-3">
