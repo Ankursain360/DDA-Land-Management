@@ -40,5 +40,11 @@
     "inputFiles": [
       "wwwroot/js/viewpaymenthistoryindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycform.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycform.js"
+    ]
   }
 ]
