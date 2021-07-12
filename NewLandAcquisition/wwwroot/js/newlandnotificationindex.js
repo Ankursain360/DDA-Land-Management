@@ -4,6 +4,7 @@ var sortby = 1;//default Ascending
 
 $(document).ready(function () {
     GetDemolitionstructuredetails(currentPageNumber, currentPageSize, sortby);
+    
 });
 
 
@@ -53,11 +54,11 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 function onPaging(pageNo) {
-    GetAward(parseInt(pageNo), parseInt(currentPageSize), sortby);
+    GetDemolitionstructuredetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetAward(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+    GetDemolitionstructuredetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }
