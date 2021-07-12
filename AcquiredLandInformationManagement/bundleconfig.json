@@ -526,5 +526,17 @@
     "inputFiles": [
       "wwwroot/js/undersection17detailscreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/gramsabhalandcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/gramsabhalandcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/gramsabhalandindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/gramsabhalandindex.js"
+    ]
   }
 ]
