@@ -1,26 +1,72 @@
-﻿$("#payble1").change(function () {
-    var id = $(this).val();
+﻿
+$(function () {
+    var value = $('#ddproperty option:selected').val();
+    if (value == "Lease") {
+        $('#divLeaseproperty').show();
+        $('#divLicenseproperty').hide();
+    }
+    else {
+        $('#divLeaseproperty').hide();
+        $('#divLicenseproperty').show();
+    }
 
-    if (id == 1) {
-        $("#showyes").show();
-        $("#shoshow").show();
-        $("#payble2").select2();
-        $("#tbl_posts").hide();
-    } else {
-        $("#tbl_posts").hide();
-        $("#shoshow").hide();
-        $("#showyes").hide();
+    var value1 = $('#Dues option:selected').val();
+    if (value1 == 1) {
+        $('#divpayment1').show();
+        
+    }
+    else {
+        $('#divpayment1').hide();
+       
+    }
+
+    var value2 = $('#agree option:selected').val();
+    if (value2 == 0) {
+        $('#payment2').show();
+
+    }
+    else {
+        $('#payment2').hide();
+
+    }
+
+});
+$('#ddproperty').change(function () {
+    var value = $('#ddproperty option:selected').val();
+    if (value == "Lease") {
+        $('#divLeaseproperty').show();
+        $('#divLicenseproperty').hide();
+    }
+    else {
+        $('#divLeaseproperty').hide();
+        $('#divLicenseproperty').show();
     }
 });
 
-$("#payble2").change(function () {
-    var id = $(this).val();
+$('#Dues').change(function () {
+    var value = $('#Dues option:selected').val();
+    if (value == 1) {
+        $('#divpayment1').show();
 
-    if (id == 1) {
-
-        $("#tbl_posts").hide();
-    } else {
-        $("#tbl_posts").show();
+    }
+    else {
+        $('#divpayment1').hide();
 
     }
 });
+
+
+$('#agree').change(function () {
+    var value = $('#agree option:selected').val();
+    if (value == 0) {
+        $('#payment2').show();
+
+    }
+    else {
+        $('#payment2').hide();
+
+    }
+});
+
+
+
