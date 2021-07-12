@@ -41,11 +41,11 @@
             @{
                 if (string.IsNullOrEmpty(menu.Url))
                 {
-                    <a href="javascript:void(0)" class="d-block">@menu.Name </a>
+                    <a href="javascript:void(0)" class="d-block no-dec d-flex align-items-center collapsed"><span class="mr-auto" style="font-size:0.8rem">@menu.Name</span></a>
                 }
                 else
                 {
-                    <a href="@menu.Url" class="d-block">@menu.Name</a>
+                    <a href="@menu.Url" class="d-block no-dec d-flex align-items-center collapsed"><span class="mr-auto" style="font-size:0.8rem">@menu.Name</span></a>
                 }
             }
         </li>
