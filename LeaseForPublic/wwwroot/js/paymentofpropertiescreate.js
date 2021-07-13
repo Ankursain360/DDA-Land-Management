@@ -70,3 +70,9 @@ $('#agree').change(function () {
 
 
 
+
+function pageRedirect() {
+    alert("Dear applicant, you have not filled the KYC form.You are requested to fill the KYC form first and then only make payments.");
+   
+    window.location.href = '/kycform/Create';
+}      
