@@ -442,7 +442,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <select class="floating-label-field floating-label-field--s3"style="width:100%;">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;">
                             <option selected value="">--Select--</option>
                             <option value="Lease">Commercial Estate</option>
                             <option value="License">Commercial Land</option>
@@ -459,15 +459,15 @@
                     </div>
                 </div>
                 @*<div class="col-md-3">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <select class="floating-label-field floating-label-field--s3">
-                                <option selected value="">--Select--</option>
-                                <option value="Lease">Perpetual</option>
-                                <option value="License">Tenure </option>
-                            </select>
-                            <label for="field-1" class="floating-label">Lease Type <span style="color:red">*</span></label>
-                        </div>
-                    </div>*@
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected value="">--Select--</option>
+                        <option value="Lease">Perpetual</option>
+                        <option value="License">Tenure </option>
+                    </select>
+                    <label for="field-1" class="floating-label">Lease Type <span style="color:red">*</span></label>
+                </div>
+            </div>*@
 
             </div>
 
@@ -486,10 +486,10 @@
                             <label for="field-1" class="floating-label">License Period To <span style="color:red">*</span></label>
                         </div>
                     </div>
-                  
+
 
                 </div>
-              
+
             </div>
             <div id="divPlotDetails">
                 <h3 class="my-3 sub-heading">Plot Details </h3>
@@ -512,7 +512,7 @@
                             <label for="field-1" class="floating-label">Pocket<span style="color:red">*</span></label>
                         </div>
                     </div>
-                   
+
 
                 </div>
                 <div class="row mt-md-3">
@@ -538,7 +538,7 @@
                             <label for="field-1" class="floating-label">Locality <span style="color:red">*</span></label>
                         </div>
                     </div>
-                  
+
 
                 </div>
                 <div class="row mt-md-3">
@@ -564,7 +564,7 @@
                             <label for="field-1" class="floating-label">Date of Allotment Letter<span style="color:red">*</span></label>
                         </div>
                     </div>
-                  
+
                 </div>
                 <div class="row mt-md-3">
                     <div class="col-md-4">
@@ -585,7 +585,7 @@
                             <label for="field-1" class="floating-label">Date of Possession <span style="color:red">*</span></label>
                         </div>
                     </div>
-                   
+
                 </div>
                 <div class="row mt-md-3">
                     <div class="col-md-4">
@@ -610,7 +610,133 @@
                 </div>
             </div>
 
-           
+            <!-- Lessee details -->
+            <div id="divLesseeDetails">
+                <h3 class="my-3 sub-heading">Details of the License/Lessee as per Allotment Letter/Lease</h3>
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="First Name">
+                            <label for="field-1" class="floating-label">First Name of the  Allottee/ Lessee  <span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
+                            <label for="field-1" class="floating-label">Middle Name of the  Allottee/ Lessee</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
+                            <label for="field-1" class="floating-label">Last Name of the  Allottee/ Lessee</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Address"></textarea>
+                            <label for="field-1" class="floating-label">Address<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="number" class="floating-label-field floating-label-field--s3" placeholder="Pin Code">
+                            <label for="field-1" class="floating-label">Pin Code</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="number" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
+                            <label for="field-1" class="floating-label">Phone Number(without +91)<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="Email" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
+                            <label for="field-1" class="floating-label">Email ID<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End of Lessee Details -->
+            <!-- Payee details -->
+            <div id="divPayeeDetails">
+                <h3 class="my-3 sub-heading">Payee Details </h3>
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <label for="field-1" class="floating-label">Payee Name <span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <select class="floating-label-field floating-label-field--s3" style="width:100%;">
+                                <option selected value="">--Select--</option>
+                                <option value="Lessee">Lessee</option>
+                                <option value="POA">POA </option>
+                                <option value="Others">Others </option>
+                            </select>
+                            <label for="field-1" class="floating-label">Whether Payee <span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Depositor Name">
+                            <label for="field-1" class="floating-label">Depositor Name <span style="color:red">*</span></label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea type="text" class="floating-label-field floating-label-field--s3" placeholder="Address"></textarea>
+                            <label for="field-1" class="floating-label">Address <span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="email" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
+                            <label for="field-1" class="floating-label">Email ID</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="number" class="floating-label-field floating-label-field--s3" placeholder="PIN Code">
+                            <label for="field-1" class="floating-label">PIN Code<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="number" class="floating-label-field floating-label-field--s3" placeholder="Address">
+                            <label for="field-1" class="floating-label">Aadhaar No.<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
+                            <label for="field-1" class="floating-label">PAN No.</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="number" class="floating-label-field floating-label-field--s3" placeholder="PIN Code">
+                            <label for="field-1" class="floating-label">Mobile No.[Not add +91]<span style="color:red">*</span></label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Of Payee Details -->
             <div id="divpayment">
                 <h3 class="my-3 sub-heading">Details of Past Payment Already Made</h3>
                 <div class="table-section bg-white border shadow rounded">
@@ -674,9 +800,9 @@
                                             <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                         </div>
                                         @*<div class="floating-label-wrap mb-3 mb-md-0">
-                <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-            </div>*@
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                    </div>*@
                                     </td>
 
 
