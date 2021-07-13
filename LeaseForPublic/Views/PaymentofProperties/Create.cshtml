@@ -1,675 +1,708 @@
 ﻿
-@await Component.InvokeAsync("PageHeader", new { pageName = "Payment of Properties " })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Payments of Properties " })
 
 
 
 
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-body">
-            <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-                <h3 class="mb-3 d-flex">Add Details</h3>
-                <div class="row mt-md-3">
 
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">File No</label>
-                        </div>
-                    </div>
+<div class="pt-3">
 
+    <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                    <label class="floating-label">File No</label>
                 </div>
-                <div class="pt-3">
-                    <h3 class="mb-3 d-flex">Plot Details</h3>
-
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <select class="floating-label-field floating-label-field--s3" id="ddproperty">
+                        @*<option selected value="">--Select--</option>*@
+                        <option value="Lease">Lease Property</option>
+                        <option value="License">License Property</option>
+                    </select>
+                    <label for="field-1" class="floating-label"> Property <span style="color:red">*</span></label>
                 </div>
-
-                <div class="row mt-md-3">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Period to">
-                            <label for="field-1" class="floating-label">Plot No/ Khasra No <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="FAR Permissible">
-                            <label for="field-1" class="floating-label">FAR Permissible <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Block">
-                            <label for="field-1" class="floating-label">Block <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-3">
-
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Pocket">
-                            <label for="field-1" class="floating-label">Pocket<span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Sector">
-                            <label for="field-1" class="floating-label">Sector <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Phase">
-                            <label for="field-1" class="floating-label">Phase<span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <select disabled class="floating-label-field floating-label-field--s3">
-                                <option selected value="">--Select--</option>
-                                <option value="Lease">Bakoli</option>
-                                <option value="License">Locality 1 </option>
-                            </select>
-                            <label for="field-1" class="floating-label">Locality <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <select disabled class="floating-label-field floating-label-field--s3">
-                                <option selected value="">--Select--</option>
-                                <option value="Lease">North Zone</option>
-                                <option value="License">West Zone </option>
-                            </select>
-                            <label for="field-1" class="floating-label">Zone <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="number" disabled class="floating-label-field floating-label-field--s3" placeholder="Period From">
-                            <label for="field-1" class="floating-label">Area in SQMT <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-3">
-
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="Period to">
-                            <label for="field-1" class="floating-label">Date of Allotment Letter<span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="Period to">
-                            <label for="field-1" class="floating-label">Date of Possession <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="FAR Permissible">
-                            <label for="field-1" class="floating-label">Date of Lease Execution<span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-3">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="Ground Rent Payable from">
-                            <label for="field-1" class="floating-label">Ground Rent Payable from <span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="number" class="floating-label-field floating-label-field--s3" value="0" placeholder="Land Premium Paid at the time of Allotment Rs">
-                            <label for="field-1" class="floating-label">Land Premium Paid at the time of Allotment Rs<span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input disabled type="number" class="floating-label-field floating-label-field--s3" value="0" placeholder="Period to">
-                            <label for="field-1" class="floating-label">Ground Rent payable as on date Rs.<span style="color:red">*</span></label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div id="divLesseeDetails">
-
-                    <div class="pt-3">
-                        <h3 class="mb-3 d-flex">Allottee Details</h3>
-
-                    </div>
-
-
-
-                    <div class="row mt-md-3">
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="First Name">
-                                <label for="field-1" class="floating-label">First Name of the  Allottee/ Lessee  <span style="color:red">*</span></label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
-                                <label for="field-1" class="floating-label">Middle Name of the  Allottee/ Lessee</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
-                                <label for="field-1" class="floating-label">Last Name of the  Allottee/ Lessee</label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row mt-md-3">
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <textarea disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Address"></textarea>
-                                <label for="field-1" class="floating-label">Address<span style="color:red">*</span></label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input disabled type="number" class="floating-label-field floating-label-field--s3" placeholder="Pin Code">
-                                <label for="field-1" class="floating-label">Pin Code</label>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input disabled type="number" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
-                                <label for="field-1" class="floating-label">Phone Number(without +91)<span style="color:red">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-md-3">
-                        <div class="col-md-4">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input disabled type="Email" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
-                                <label for="field-1" class="floating-label">Email ID<span style="color:red">*</span></label>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-                <div class="pt-3">
-                    <h3 class="mb-3 d-flex">Details</h3>
-                    <div class="row mt-md-3">
-
-                        <div class=" col-md-6">
-
-                            <div class="floating-label-wrap">
-                                <select id="payble1" class="floating-label-field floating-label-field--s3">
-
-                                    <option value="1">Yes</option>
-                                    <option value="0" selected>No</option>
-                                </select>
-                                <span class="text-danger"></span>
-                                <label class="floating-label">Any dues Payable</label>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <h3 class="my-3 d-flex sub-heading"></h3>
-
-                <div class="table-section bg-white border shadow rounded" style="display:none" id="showyes">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered mb-0 table-striped" id="">
-                            <thead class="text-nowrap">
-
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th style="min-width:150px;">Payment Type <span style="color:red">*</span></th>
-                                    <th>Period From –To  <span style="color:red">*</span></th>
-                                    <th style="min-width:120px;">Amount <span style="color:red">*</span></th>
-                                    <th style="min-width:200px;">Due Date (No due date is taken beyond expiry of lease/license) <span style="color:red">*</span></th>
-                                    <th style="min-width:130px;">Upto Date Interest <span style="color:red">*</span></th>
-                                    <th style="min-width:200px;">Total Outstanding as on Date <span style="color:red">*</span></th>
-                                    <th style="min-width:210px;">Demand Notices Issued- No,  Date, (Email sent PDF)<span style="color:red">*</span></th>
-
-                                    @*<th style="min-width:250px;">Upload Other Document</th>*@
-                                    <th>Operation</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl_posts_body">
-                            </tbody>
-                            <tbody class="tbody" id="add">
-                                <tr id="">
-                                    <td style="text-align:center;"><span class="sn">1</span></td>
-                                    <td>
-                                        <input maxlength="45" type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
-                                        <span class="d-block text-danger field-validation-valid msg"></span>
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                        <span class="d-block text-danger field-validation-valid"></span>
-
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-
-
-
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                            <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i>+</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                </div>
-                <div class="row mt-md-3" style="display:none;" id="shoshow">
-                    <div class=" col-md-6">
-                        <div class="floating-label-wrap">
-                            <select id="payble2" class="floating-label-field floating-label-field--s3" >
-
-                                <option value="1" selected>Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Do you agree with outstanding dues statement shown above</label>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-                @*//////////////////////////*@
-
-
-                <div class="table-section bg-white border shadow rounded">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts" style="display:none">
-                            <thead class="text-nowrap">
-
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th style="min-width:150px;">Demand Notices Issued- No,  Date, (Email sent PDF) <span style="color:red">*</span></th>
-                                    <th>Payment Type<span style="color:red">*</span></th>
-                                    <th style="min-width:120px;">Period From –To  <span style="color:red">*</span></th>
-                                    <th style="min-width:200px;">Amount <span style="color:red">*</span></th>
-                                    <th style="min-width:130px;">Date of Payment by the allottee <span style="color:red">*</span></th>
-                                    <th style="min-width:200px;">Proof of Payment in PDF<span style="color:red">*</span></th>
-                                    <th style="min-width:210px;">Demand Notices Issued- No,  Date, (Email sent PDF)<span style="color:red">*</span></th>
-
-                                    @*<th style="min-width:250px;">Upload Other Document</th>*@
-                                    <th>Operation</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl_posts_body">
-                            </tbody>
-                            <tbody class="tbody" id="add">
-                                <tr id="">
-                                    <td style="text-align:center;"><span class="sn">1</span></td>
-                                    <td>
-                                        <input maxlength="45" type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
-                                        <span class="d-block text-danger field-validation-valid msg"></span>
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                        <span class="d-block text-danger field-validation-valid"></span>
-
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-                                    <td>
-                                        <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
-                                    </td>
-
-
-
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                            <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i>+</a>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                </div>
-
-
-
-
-
-
-                <div class="pt-3">
-                    <h3 class="mb-3 d-flex">Payment Details(Payment Entry for payment gateway)</h3>
-                    <h3 class="mb-3 d-flex">Lease Property</h3>
-                    <div class="row mt-md-3">
-
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                                <label class="floating-label">Annual Ground Rent</label>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="row mt-md-3">
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label"> (Ground Rent Period)From Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label"> (Ground Rent Period)To Date</label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row mt-md-3">
-
-
-                    <div class=" col-md-6">
-
-                        <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3">
-
-                                <option value="11">2018-2019</option>
-                                <option value="10" selected>2020-2021</option>
-                            </select>
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Financial Year </label>
-                        </div>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Period(Arrears period)From Date</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-md-3">
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Period(Arrears period)To Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Period (Interest period) From Date</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-md-3">
-
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Period (Interest period)To Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="text" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Damage Charge </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-md-3">
-
-
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="text" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Misc </label>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="pt-3">
-
-                    <h3 class="mb-3 d-flex">License Property</h3>
-                    <div class="row mt-md-3">
-
-                        <div class=" col-md-6">
-
-                            <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3">
-                                    <option value="5">Select</option>
-                                    <option value="6">Annual</option>
-                                    <option value="7">Monthly</option>
-                                </select>
-                                <span class="text-danger"></span>
-                                <label class="floating-label">Period Type</label>
-                            </div>
-
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                                <label class="floating-label">Annual/Monthly License</label>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row mt-md-3">
-
-
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                                <label class="floating-label">Period(From Date)</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                                <label class="floating-label">Period( To Date)</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-md-3">
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">(Financial Year/Month Period) From Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">(Financial Year/Month Period) To Date</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-md-3">
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">(Arrears Period)From Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">(Arrears Period)To Date</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-md-3">
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">(Interest Period)From Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">(Interest Period)To Date</label>
-                        </div>
-                    </div>
-                </div>
-
-
-                @*////////////////////*@
-
-
-                <div class="row mt-md-3">
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="number" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Damage Charge Rs</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="number" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
-                            <label class="floating-label">Damage Demand No</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-md-3">
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="number" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Damage Demand Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="File" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Upload Damage Demand Letter Issue by DDA</label>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-                <div class="row mt-md-3">
-
-
-
-
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="text" value="0" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
-                            <label class="floating-label">Misc </label>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="row mt-md-3">
-                    <div class=" col-md-12">
-                        <button class="btn btn-theme " type="submit">Submit</button>
-                        @Html.ActionLink("Back", "Index", "PaymentofProperties", null, new { @class = "btn btn-theme " })
-                    </div>
-                </div>
-
-            </form>
+            </div>
         </div>
+
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
+            <div class="card">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval1" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto">Plot Details  </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval1">
+
+                    <div id="Plot">
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                                    <label for="field-1" class="floating-label">Plot No/ Khasra No <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="FAR Permissible">
+                                    <label for="field-1" class="floating-label">FAR Permissible <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Block">
+                                    <label for="field-1" class="floating-label">Block <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Pocket">
+                                    <label for="field-1" class="floating-label">Pocket<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Sector">
+                                    <label for="field-1" class="floating-label">Sector <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Phase">
+                                    <label for="field-1" class="floating-label">Phase<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <select disabled class="floating-label-field floating-label-field--s3" style="width:100%;">
+                                        <option selected value="">--Select--</option>
+                                        <option value="Lease">Bakoli</option>
+                                        <option value="License">Locality 1 </option>
+                                    </select>
+                                    <label for="field-1" class="floating-label">Locality <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <select disabled class="floating-label-field floating-label-field--s3" style="width:100%;">
+                                        <option selected value="">--Select--</option>
+                                        <option value="Lease">North Zone</option>
+                                        <option value="License">West Zone </option>
+                                    </select>
+                                    <label for="field-1" class="floating-label">Zone <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="number" disabled class="floating-label-field floating-label-field--s3" placeholder="Period From">
+                                    <label for="field-1" class="floating-label">Area in SQMT <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                                    <label for="field-1" class="floating-label">Date of Allotment Letter<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                                    <label for="field-1" class="floating-label">Date of Possession <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="FAR Permissible">
+                                    <label for="field-1" class="floating-label">Date of Lease Execution<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="date" class="floating-label-field floating-label-field--s3" placeholder="Ground Rent Payable from">
+                                    <label for="field-1" class="floating-label">Ground Rent Payable from <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="number" class="floating-label-field floating-label-field--s3" value="0" placeholder="Land Premium Paid at the time of Allotment Rs">
+                                    <label for="field-1" class="floating-label">Land Premium Paid at the time of Allotment Rs<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="number" class="floating-label-field floating-label-field--s3" value="0" placeholder="Period to">
+                                    <label for="field-1" class="floating-label">Ground Rent payable as on date Rs.<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="permission mt-2 accordion list-unstyled m-0 ">
+            <div class="card">
+                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval2" role="button" aria-expanded="true"
+                   aria-controls="collapseApprroval">
+                    <i class="ri-arrow-right-s-fill"></i>
+                    <span class="text ml-1 mr-auto"> Allottee Details </span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval2">
+                    <div id="Allottee">
+
+
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="First Name">
+                                    <label for="field-1" class="floating-label">First Name of the  Allottee/ Lessee  <span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
+                                    <label for="field-1" class="floating-label">Middle Name of the  Allottee/ Lessee</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
+                                    <label for="field-1" class="floating-label">Last Name of the  Allottee/ Lessee</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <textarea disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Address"></textarea>
+                                    <label for="field-1" class="floating-label">Address<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="number" class="floating-label-field floating-label-field--s3" placeholder="Pin Code">
+                                    <label for="field-1" class="floating-label">Pin Code</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="number" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
+                                    <label for="field-1" class="floating-label">Phone Number(without +91)<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input disabled type="Email" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
+                                    <label for="field-1" class="floating-label">Email ID<span style="color:red">*</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <h3 class="my-3 sub-heading">Dues Payable</h3>
+        <div class="row mt-md-3">
+
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select id="Dues" class="floating-label-field floating-label-field--s3">
+
+                        <option value="1">Yes</option>
+                        <option value="0" selected>No</option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Any dues Payable</label>
+                </div>
+            </div>
+
+        </div>
+        <div id="divpayment1" class="pt-3">
+
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive ">
+                    <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th style="min-width:150px;">Payment Type <span style="color:red">*</span></th>
+                                <th>Period From –To  <span style="color:red">*</span></th>
+                                <th style="min-width:120px;">Amount(Rs) <span style="color:red">*</span></th>
+                                <th style="min-width:200px;">Due Date (No due date is taken beyond expiry of lease/license) <span style="color:red">*</span></th>
+                                <th style="min-width:130px;">Upto Date Interest <span style="color:red">*</span></th>
+                                <th style="min-width:200px;">Total Outstanding as on Date <span style="color:red">*</span></th>
+                                <th style="min-width:210px;">Demand Notices Issued- No,  Date, (Email sent PDF)<span style="color:red">*</span></th>
+
+
+                                @*<th>Operation</th>*@
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                        </tbody>
+                        <tbody id="add">
+                            <tr id="">
+                                <td style="text-align:center;"><span class="sn">1</span></td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="date" class="floating-label-field floating-label-field--s3" id="Challandate" name="Challandate" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="Amount(Rs)" class="floating-label-field floating-label-field--s3 numbers" id="Amount" name="Amount" value="">
+                                    </div>
+                                </td>
+                                <td>
+
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="date" class="floating-label-field floating-label-field--s3" id="Type" name="Type" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input class="floating-label-field floating-label-field--s3 onlynumbers" type="text" name="document" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
+                                    </div>
+                                </td>
+                                @*<td>
+                                    <div class="action-btns">
+                                        <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    </div>
+
+                                </td>*@
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br />
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;" id="agree">
+                            <option value="1" selected>Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                        <label for="field-1" class="floating-label">Do you agree with outstanding dues statement shown above</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="payment2" class="pt-3">
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts1">
+                        <thead class="text-nowrap">
+
+                            <tr>
+                                <th>Sr.No</th>
+                                <th style="min-width:150px;">Demand Notices Issued- No,  Date, (Email sent PDF) <span style="color:red">*</span></th>
+                                <th>Payment Type<span style="color:red">*</span></th>
+                                <th style="min-width:120px;">Period From –To  <span style="color:red">*</span></th>
+                                <th style="min-width:200px;">Amount(Rs.) <span style="color:red">*</span></th>
+                                <th style="min-width:130px;">Date of Payment by the allottee <span style="color:red">*</span></th>
+                                <th style="min-width:200px;">Proof of Payment in PDF<span style="color:red">*</span></th>
+                                <th style="min-width:210px;">Bank in which credited<span style="color:red">*</span></th>
+
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts1_body">
+                        </tbody>
+                        <tbody class="tbody" id="add1">
+                            <tr id="">
+                                <td style="text-align:center;"><span class="sn1">1</span></td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="date" class="floating-label-field floating-label-field--s3" id="Challandate" name="Challandate" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="Amount(Rs)" class="floating-label-field floating-label-field--s3 numbers" id="Amount" name="Amount" value="">
+                                    </div>
+                                </td>
+                                <td>
+
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" class="floating-label-field floating-label-field--s3" id="Type" name="Type" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="date" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input class="floating-label-field floating-label-field--s3 onlynumbers" type="file" name="document" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" placeholder="Challan No./Transaction No./UTR No." class="floating-label-field floating-label-field--s3" id="challano" name="challano" value="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="action-btns">
+                                        <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+     
+
+
+        <h3 class="my-3 sub-heading">Payment Details</h3>
+        <div id="divLeaseproperty">
+            <h3 class="my-3 sub-heading">Lease Property</h3>
+            <h3 class="my-3 sub-heading">Ground Rent Details</h3>
+            <div class="row mt-md-3">
+                <div class=" col-md-6">
+
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3">
+
+                            <option value="11">2018-2019</option>
+                            <option value="10" selected>2020-2021</option>
+                        </select>
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Financial Year </label>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Annual Ground Rent(Rs.)</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row mt-md-3">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label"> Ground Rent Period(From Date)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label"> Ground Rent Period(To Date)</label>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="my-3 sub-heading">Arrears Details</h3>
+            <div class="row mt-md-3">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Arrears period(From Date)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Arrears period(To Date)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Arrear Amount(Rs)</label>
+                    </div>
+                </div>
+            </div>
+            <h3 class="my-3 sub-heading">Interest Details</h3>
+            <div class="row mt-md-3">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label"> Interest period (From Date)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label"> Interest period (To Date)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Interest Amount(Rs)</label>
+                    </div>
+                </div>
+            </div>
+            <h3 class="my-3 sub-heading">Damage Charges</h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Damage Charge (Rs)</label>
+                    </div>
+                </div>
+            </div>
+            <h3 class="my-3 sub-heading">Miscellaneous Charges</h3>
+            <div class="row mt-md-3">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Miscellaneous Charge(Rs) </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="divLicenseproperty">
+
+            <h3 class="my-3 sub-heading">License Property</h3>
+            <div class="row mt-md-3">
+
+                <div class=" col-md-6">
+
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;">
+                            <option value="5">Select</option>
+                            <option value="6">Annual</option>
+                            <option value="7">Monthly</option>
+                        </select>
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Period Type</label>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Annual/Monthly License</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-md-3">
+
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Period(From Date)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Period( To Date)</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;">
+
+                            <option value="11">2018-2019</option>
+                            <option value="10" selected>2020-2021</option>
+                        </select>
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Financial Year </label>
+                    </div>
+                </div>
+            </div>
+            <h3 class="my-3 sub-heading">Arrears Details</h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Arrears Period(From Date)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Arrears Period(To Date)</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Arrear Amount(Rs)</label>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="my-3 sub-heading">Interest Details</h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Interest Period(From Date)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Interest Period(To Date)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Interest Amount(Rs)</label>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="my-3 sub-heading">Damage Charges</h3>
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Damage Charge (Rs)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 " placeholder="Remarks" />
+                        <label class="floating-label">Damage Demand No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Damage Demand Date</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="File" class="floating-label-field floating-label-field--s3" placeholder="Remarks" />
+                        <label class="floating-label">Upload Damage Demand Letter Issued by DDA</label>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="my-3 sub-heading">Miscellaneous Charges</h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" value="0" class="floating-label-field floating-label-field--s3 numbers" placeholder="Remarks" />
+                        <label class="floating-label">Miscellaneous Charge(Rs) </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Make Payment</button>
+                @Html.ActionLink("Back", "Index", "PaymentofProperties", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+
+    </form>
+
     </div>
-</div>
 
 
 
