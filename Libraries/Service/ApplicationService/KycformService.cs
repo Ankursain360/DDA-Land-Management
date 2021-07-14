@@ -26,5 +26,56 @@ namespace Service.ApplicationService
             
         }
 
+        public async Task<List<Leasetype>> GetAllLeasetypeList()
+        {
+            List<Leasetype> List = await _kycformRepository.GetAllLeasetypeList();
+            return List;
+        }
+        public async Task<List<Branch>> GetAllBranchList()
+        {
+            List<Branch> List = await _kycformRepository.GetAllBranchList();
+            return List;
+        }
+        public async Task<List<PropertyType>> GetAllPropertyTypeList()
+        {
+            List<PropertyType> List = await _kycformRepository.GetAllPropertyTypeList();
+            return List;
+        }
+        public async Task<List<Zone>> GetAllZoneList()
+        {
+            List<Zone> List = await _kycformRepository.GetAllZoneList();
+            return List;
+        }
+        public async Task<List<Locality>> GetLocalityList()
+        {
+            List<Locality> List = await _kycformRepository.GetLocalityList();
+            return List;
+        }
+        public async Task<bool> Create(Kycform kyc)
+        {
+            kyc.IsActive = 1;
+            kyc.CreatedDate = DateTime.Now;
+            _kycformRepository.Add(kyc);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        //********* rpt ! Kycleasepaymentrpt Details **********
+
+        
+       
+        public async Task<bool> Saveleasepayment(Kycleasepaymentrpt payment)
+        {
+            payment.CreatedBy = payment.CreatedBy;
+            payment.CreatedDate = DateTime.Now;
+            payment.IsActive = 1;
+            return await _kycformRepository.Saveleasepayment(payment);
+        }
+        //********* rpt ! Kyclicensepaymentrpt Details **********
+        public async Task<bool> Savelicensepayment(Kyclicensepaymentrpt payment)
+        {
+            payment.CreatedBy = payment.CreatedBy;
+            payment.CreatedDate = DateTime.Now;
+            payment.IsActive = 1;
+            return await _kycformRepository.Savelicensepayment(payment);
+        }
     }
 }
