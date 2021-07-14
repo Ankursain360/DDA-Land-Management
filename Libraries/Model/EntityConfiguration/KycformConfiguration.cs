@@ -1,4 +1,5 @@
 ﻿
+
 using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -15,8 +16,17 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.ToTable("kycform", "lms");
 
+            builder.HasIndex(e => e.BranchId)
+                .HasName("fkbranchkyc_idx");
+
+            builder.HasIndex(e => e.LeaseTypeId)
+                .HasName("fkLeasetype_idx");
+
             builder.HasIndex(e => e.LocalityId)
                 .HasName("fklocalitykyc_idx");
+
+            builder.HasIndex(e => e.PropertyTypeId)
+                .HasName("fkpropertnature_idx");
 
             builder.HasIndex(e => e.ZoneId)
                 .HasName("fkzonekyc_idx");
@@ -42,10 +52,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.AreaSqmt).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.Block)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-
-            builder.Property(e => e.Branch)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
@@ -77,10 +83,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.LandPremiumPaid).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.LeaseExecutionDate).HasColumnType("date");
-
-            builder.Property(e => e.LeaseType)
-                .HasMaxLength(50)
-                .IsUnicode(false);
 
             builder.Property(e => e.LicenseExecutionDate).HasColumnType("date");
 
@@ -152,10 +154,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.PropertyNature)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
             builder.Property(e => e.Sector)
                 .HasMaxLength(45)
                 .IsUnicode(false);
@@ -168,16 +166,30 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.UpfrontLicenseFeePaid).HasColumnType("decimal(18,3)");
 
+            builder.HasOne(d => d.Branch)
+                .WithMany(p => p.Kycform)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("fkbranchkyc");
+
+            builder.HasOne(d => d.LeaseType)
+                .WithMany(p => p.Kycform)
+                .HasForeignKey(d => d.LeaseTypeId)
+                .HasConstraintName("fkLeasetype");
+
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Kycform)
                 .HasForeignKey(d => d.LocalityId)
                 .HasConstraintName("fklocalitykyc");
 
+            builder.HasOne(d => d.PropertyType)
+                .WithMany(p => p.Kycform)
+                .HasForeignKey(d => d.PropertyTypeId)
+                .HasConstraintName("fkpropertnature");
+
             builder.HasOne(d => d.Zone)
                 .WithMany(p => p.Kycform)
                 .HasForeignKey(d => d.ZoneId)
                 .HasConstraintName("fkzonekyc");
-
 
         }
     }
