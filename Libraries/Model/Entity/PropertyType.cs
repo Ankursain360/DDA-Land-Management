@@ -18,6 +18,7 @@ namespace Libraries.Model.Entity
             //Groundrate = new HashSet<Groundrent>();
             Intersetrate = new HashSet<Interestrate>();
             //Licencefees = new HashSet<Licencefees>();
+            Kycform = new HashSet<Kycform>();
         }
         [Required(ErrorMessage = "Status Code is mandatory")]
         public int StatusCode { get; set; }
@@ -34,5 +35,6 @@ namespace Libraries.Model.Entity
         public ICollection<Interestrate> Intersetrate { get; set; }
         //public ICollection<Documentcharges> Documentcharges { get; set; }
         ////public ICollection<Licencefees> Licencefees { get; set; }
+        public ICollection<Kycform> Kycform { get; set; }
     }
 }

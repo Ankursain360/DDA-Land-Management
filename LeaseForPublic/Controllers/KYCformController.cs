@@ -5,10 +5,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Core.Enum;
 using LeaseForPublic.Filters;
+using Libraries.Service.IApplicationService;
+
 namespace LeaseForPublic.Controllers
 {
-    public class KYCformController : Controller
+    public class KYCformController : BaseController
     {
+        private readonly IKycformService _kycformService;
+       
+        public KYCformController(IKycformService KycformService)
+          
+        {
+
+            _kycformService = KycformService;
+           
+        }
         public IActionResult Index()
         {
             return View();
