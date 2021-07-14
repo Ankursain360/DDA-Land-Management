@@ -30,7 +30,8 @@ namespace DamagePayee.Controllers
             PaymentTransactionReportDtoProfile paymentverification = new PaymentTransactionReportDtoProfile();
             ViewBag.FileNoList = await _paymentverificationService.BindFileNoList();
             ViewBag.LocalityList = await _paymentverificationService.BindLoclityList();
-            
+            paymentverification.FromDate = DateTime.Now.AddDays(-30);
+            paymentverification.ToDate = DateTime.Now;
             return View(paymentverification);
         }
 

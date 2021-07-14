@@ -100,27 +100,33 @@
                 @{
                     if (Model.Watchandwardphotofiledetails != null && Model.Watchandwardphotofiledetails.Count > 0)
                     {
-                       
+
+
                         foreach (var item in Model.Watchandwardphotofiledetails)
                         {
-                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id"  target="_blank"> (View Photo @(Photo += 1 ))</a>
+                            <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="image/png, image/jpeg, image/gif" multiple />
+                            <span asp-validation-for="Photo" class="text-danger"></span>
+                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id" target="_blank"> (View Photo @(Photo += 1 ))</a>
 
                             if (item.LattLongUrl != null)
                             {
                                 <a target="_blank" class="badge badge-primary px-2" href="@item.LattLongUrl">View Location on Map</a>
                             }
-                           <br/>
+                            <br />
                         }
-                        <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="image/png, image/jpeg, image/gif" multiple />
-                        <span asp-validation-for="Photo" class="text-danger"></span>
+
+
+
+
                     }
                     else
                     {
                         <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="Photo" class="text-danger"></span>
-                        <label class="floating-label">Photo</label>
+                       
                     }
                 }
+                <label class="floating-label">Photo</label>
             </div>
         </div>
         <div class="col-md-6" style="display:none;">

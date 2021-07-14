@@ -22,6 +22,7 @@ namespace Libraries.Model.Entity
             Planning = new HashSet<Planning>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Locality = new HashSet<Locality>();
+            Kycform = new HashSet<Kycform>();
             MonthlyRoaster = new HashSet<MonthlyRoaster>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             Mutationdetails = new HashSet<Mutationdetails>();
@@ -80,6 +81,6 @@ namespace Libraries.Model.Entity
         public ICollection<Newlandjointsurvey> Newlandjointsurvey { get; set; }
         public ICollection<Vacantlandimage> Vacantlandimage { get; set; }
         public ICollection<Gramsabhaland> Gramsabhaland { get; set; }
-    
-}
+        public ICollection<Kycform> Kycform { get; set; }
+    }
 }

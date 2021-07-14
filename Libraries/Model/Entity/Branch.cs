@@ -15,6 +15,7 @@ namespace Libraries.Model.Entity
             Datastoragedetails = new HashSet<Datastoragedetails>();
             Issuereturnfile = new HashSet<Issuereturnfile>();
             Userprofile = new HashSet<Userprofile>();
+            Kycform = new HashSet<Kycform>();
         }
 
         [Required(ErrorMessage = "Branch Name is mandatory")]
@@ -35,5 +36,6 @@ namespace Libraries.Model.Entity
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public ICollection<Kycform> Kycform { get; set; }
     }
 }
