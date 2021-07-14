@@ -19,7 +19,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AmountPaid).HasColumnType("decimal(18,3)");
-
+            builder.Property(e => e.DemandListId).HasColumnType("int(11)");
             builder.Property(e => e.BankName)
                         .HasMaxLength(100)
                         .IsUnicode(false);
@@ -56,6 +56,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.VoucherNo)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            builder.HasOne(d => d.DemandList)
+            .WithMany(p => p.Paymentdetail)
+            .HasForeignKey(d => d.DemandListId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("fk_DemandListIdPaymentDetails");
         }
     }
 }

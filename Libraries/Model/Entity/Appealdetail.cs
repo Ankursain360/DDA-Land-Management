@@ -20,12 +20,14 @@ namespace Libraries.Model.Entity
         public string AppealByDept { get; set; }
 
         public string Department { get; set; }
-        
+        public int? DemandListId { get; set; }
         public DateTime? DateOfAppeal { get; set; }
         
         public string PanelLawer { get; set; }
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
-       
+        public Demandlistdetails DemandList { get; set; }
+
+
     }
 }

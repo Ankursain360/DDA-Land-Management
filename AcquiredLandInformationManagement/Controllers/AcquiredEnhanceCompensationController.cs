@@ -23,13 +23,13 @@ using System.Text;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class DemandListDetailsController : BaseController
+    public class AcquiredEnhanceCompensationController : BaseController
     {
         private readonly IDemandListDetailsService _demandListDetailsService;
         public IConfiguration _Configuration;
         string ENMDocumentFilePath = "";
 
-        public DemandListDetailsController(IDemandListDetailsService demandListDetailsService, IConfiguration configuration)
+        public AcquiredEnhanceCompensationController(IDemandListDetailsService demandListDetailsService, IConfiguration configuration)
         {
             _demandListDetailsService = demandListDetailsService;
             _Configuration = configuration;
@@ -80,25 +80,6 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (result == true)
                 {
-                    //************ Save Appeal  ************  
-
-                    if (
-                        demandlistdetails.ENM != null &&
-                        demandlistdetails.Demand != null
-                      
-                        )
-                    {
-                        Appealdetail appealdetail = new Appealdetail();
-
-                      
-                        appealdetail.DemandListNo = demandlistdetails.ENM;
-                        appealdetail.DemandListNo = demandlistdetails.Demand;
-                       
-                        appealdetail.DemandListId = demandlistdetails.Id;
-                        appealdetail.CreatedBy = SiteContext.UserId;
-                        result = await _demandListDetailsService.SaveAppeal(appealdetail);
-                    }
-
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
                     return View("Index");
@@ -216,14 +197,14 @@ namespace AcquiredLandInformationManagement.Controllers
                 {
                     data.Add(new DemanddetailsListDto()
                     {
-          
+
                         Id = result[i].Id,
                         DemandListNo = result[i].DemandListNo,
                         Village = result[i].Village == null ? "" : result[i].Village.Name,
                         KhasraNo = result[i].KhasraNo == null ? "" : result[i].KhasraNo.Name,
                         ENMSrNo = result[i].Enmsno.ToString(),
                         TotalAmount = result[i].TotalAmount.ToString(),
-                       
+
                         Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
                     }); ;
                 }
@@ -245,3 +226,4 @@ namespace AcquiredLandInformationManagement.Controllers
     }
 
 }
+

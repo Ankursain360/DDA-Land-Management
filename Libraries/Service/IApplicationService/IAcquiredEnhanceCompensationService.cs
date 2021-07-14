@@ -9,19 +9,18 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface IDemandListDetailsService : IEntityService<Demandlistdetails>
+    public interface IAcquiredEnhanceCompensationService : IEntityService<Acquiredenhancecompensation>
     {
+        Task<bool> Update(int id, Acquiredenhancecompensation acquiredenhancecompensation);
+        Task<bool> Create(Acquiredenhancecompensation acquiredenhancecompensation);
+        Task<Acquiredenhancecompensation> FetchSingleResult(int id);
+        Task<bool> Delete(int id);
+        Task<PagedResult<Acquiredenhancecompensation>> GetPagedAcquiredEnhance(SakaniDetailsSearchDto model);
+        Task<List<Acquiredenhancecompensation>> GetAllAcquiredEnhance();
         Task<List<Acquiredlandvillage>> GetVillageList();
         Task<List<Khasra>> GetKhasraList(int id);
-        Task<PagedResult<Demandlistdetails>> GetPagedDMSFileUploadList(DemandListDetailsSearchDto model);
-        Task<bool> Create(Demandlistdetails demandlistdetails);
-        Task<Demandlistdetails> FetchSingleResult(int id);
-        Task<bool> Update(int id, Demandlistdetails demandlistdetails);
-        Task<bool> Delete(int id, int userId);
-        int GetLocalityByName(string name);
-        int GetKhasraByName(string name);
-        Task<bool> CheckUniqueName(int id, string fileNo);
-        Task<List<Demandlistdetails>> GetAllDemandlistdetails();
+
+       
         //*********  Appeali Khasra Details **********
 
         Task<bool> SaveAppeal(Appealdetail appealdetail);
@@ -39,6 +38,13 @@ namespace Libraries.Service.IApplicationService
         Task<Paymentdetail> FetchSinglePayment(int id);
 
         Task<bool> UpdatePayment(int id, Paymentdetail paymentdetail);
-       
+        //********* demand Details **********
+
+        Task<bool> SaveDemand(Demandlistdetails demandlistdetails);
+        Task<List<Demandlistdetails>> GetAllDemand(int id);
+        Task<bool> DeleteDemand(int Id);
+        Task<Demandlistdetails> FetchSingleDemand(int id);
+
+        Task<bool> UpdateDemand(int id, Demandlistdetails demandlistdetails);
     }
 }
