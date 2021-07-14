@@ -8,12 +8,20 @@ namespace Libraries.Model.Entity
 {
     public class Kycform : AuditableEntity<int>
     {
-       
+
+        public Kycform()
+        {
+            Kycleasepaymentrpt = new HashSet<Kycleasepaymentrpt>();
+            Kyclicensepaymentrpt = new HashSet<Kyclicensepaymentrpt>();
+
+        }
+
+        
         public string Property { get; set; }
-        public string PropertyNature { get; set; }
+        public int? PropertyTypeId { get; set; }
         public string FileNo { get; set; }
-        public string Branch { get; set; }
-        public string LeaseType { get; set; }
+        public int? BranchId { get; set; }
+        public int? LeaseTypeId { get; set; }
         public DateTime? TenureFrom { get; set; }
         public DateTime? TenureTo { get; set; }
         public DateTime? LicenseFrom { get; set; }
@@ -55,9 +63,14 @@ namespace Libraries.Model.Entity
         public DateTime? LicenseFeepayableFrom { get; set; }
         public decimal? LicenseFeepayableAsOnDate { get; set; }
         public byte IsActive { get; set; }
-       
+        
 
+        public Branch Branch { get; set; }
+        public Leasetype LeaseType { get; set; }
         public Locality Locality { get; set; }
+        public PropertyType PropertyType { get; set; }
         public Zone Zone { get; set; }
+        public ICollection<Kycleasepaymentrpt> Kycleasepaymentrpt { get; set; }
+        public ICollection<Kyclicensepaymentrpt> Kyclicensepaymentrpt { get; set; }
     }
 }
