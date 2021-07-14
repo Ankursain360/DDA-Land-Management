@@ -15,10 +15,10 @@ namespace Dto.Master
         public int LocalityId { get; set; }
 
         [Required(ErrorMessage = "From Date is required")]
-        public decimal FromDate { get; set; }
+        public DateTime FromDate { get; set; }
 
         [Required(ErrorMessage = "To Date is required")]
-        public decimal ToDate { get; set; }
+        public DateTime ToDate { get; set; }
        
     }
 }

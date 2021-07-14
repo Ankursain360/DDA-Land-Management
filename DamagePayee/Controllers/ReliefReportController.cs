@@ -26,6 +26,8 @@ namespace DamagePayee.Controllers
             ReliefReportDtoProfile demandletter = new ReliefReportDtoProfile();
             ViewBag.FileNoList = await _demandLetterService.BindFileNoList();
             ViewBag.LocalityList = await _demandLetterService.BindLoclityList();
+            demandletter.FromDate = DateTime.Now.AddDays(-30);
+            demandletter.ToDate = DateTime.Now;
             return View(demandletter);
         }
 

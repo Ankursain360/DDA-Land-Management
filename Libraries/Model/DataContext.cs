@@ -318,7 +318,7 @@ namespace Libraries.Model
         public virtual DbSet<Cancellationentry> Cancellationentry { get; set; }
         public virtual DbSet<Judgementstatus> Judgementstatus { get; set; }
         public virtual DbSet<Timeextension> Timeextension { get; set; }
-
+        public virtual DbSet<Kycform> Kycform { get; set; }
 
         public virtual DbSet<Actiontakenbydda> Actiontakenbydda { get; set; }
         public virtual DbSet<Extension> Extension { get; set; }
@@ -590,7 +590,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ApprovalUrlTemplateMappingConfiguration());
             modelBuilder.ApplyConfiguration(new VacantLandImageConfiguration());
             modelBuilder.ApplyConfiguration(new UserNotificationConfiguration());
-
+            modelBuilder.ApplyConfiguration(new KycformConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
