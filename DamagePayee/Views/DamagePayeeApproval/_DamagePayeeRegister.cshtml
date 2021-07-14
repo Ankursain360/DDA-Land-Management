@@ -318,18 +318,20 @@
                                         @{
                                             if (Model.PropertyPhotoPath != null)
                                             {
-                                                <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
 
                                                 <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" disabled asp-for="PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                                 <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
+                                                <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+
                                             }
                                             else
                                             {
                                                 <input type="file" disabled asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" placeholder="Property Photo">
                                                 <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
-                                                <label for="field-1" class="floating-label">Upload Photograph of Property </label>
+
                                             }
                                         }
+                                        <label for="field-1" class="floating-label">Upload Photograph of Property </label>
                                     </div>
                                 </div>
                             </div>
@@ -531,17 +533,19 @@
                                     @{
                                         if (Model.ShowCauseNoticePath != null)
                                         {
-                                            <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                             <input type="file" disabled asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="ShowCauseNotice">
                                             <span asp-validation-for="ShowCauseNotice" class="d-block text-danger field-validation-valid"></span>
+                                            <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+
                                         }
                                         else
                                         {
                                             <input type="file" disabled asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="ShowCauseNotice">
                                             <span asp-validation-for="ShowCauseNotice" class="d-block text-danger field-validation-valid"></span>
-                                            <label for="field-1" class="floating-label"> Show Cause Notice(if issued) </label>
+
                                         }
                                     }
+                                    <label for="field-1" class="floating-label"> Show Cause Notice(if issued) </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -550,17 +554,19 @@
                                     @{
                                         if (Model.FgformPath != null)
                                         {
-                                            <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                             <input type="file" disabled asp-for="Fgform" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                             <span asp-validation-for="Fgform" class="d-block text-danger field-validation-valid"></span>
+                                            <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+
                                         }
                                         else
                                         {
                                             <input type="file" disabled asp-for="Fgform" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                             <span asp-validation-for="Fgform" class="d-block text-danger field-validation-valid"></span>
-                                            <label for="field-1" class="floating-label"> F /G Form </label>
+
                                         }
                                     }
+                                    <label for="field-1" class="floating-label"> F /G Form </label>
                                 </div>
                             </div>
                         </div>
@@ -608,17 +614,19 @@
                                     @{
                                         if (Model.DocumentForFilePath != null)
                                         {
-                                            <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                             <input type="file" disabled asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                             <span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>
+                                            <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+
                                         }
                                         else
                                         {
                                             <input type="file" disabled asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                             <span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>
-                                            <label for="field-1" class="floating-label"> Upload copy of the document selected </label>
+
                                         }
                                     }
+                                    <label for="field-1" class="floating-label"> Upload copy of the document selected </label>
                                 </div>
                             </div>
                         </div>
