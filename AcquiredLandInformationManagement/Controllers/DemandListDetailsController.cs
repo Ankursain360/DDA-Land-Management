@@ -34,6 +34,7 @@ namespace AcquiredLandInformationManagement.Controllers
             _demandListDetailsService = demandListDetailsService;
             _Configuration = configuration;
             ENMDocumentFilePath = _Configuration.GetSection("FilePaths:DemandListDetails:DocumentFIlePath").Value.ToString();
+            //PaymentProofDocumentFilePath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -70,6 +71,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             await BindDropDown(demandlistdetails);
             demandlistdetails.VillageList = await _demandListDetailsService.GetVillageList();
+            demandlistdetails.KhasraNoList = await _demandListDetailsService.GetKhasraList(demandlistdetails.VillageId);
 
             if (ModelState.IsValid)
             {
@@ -83,25 +85,64 @@ namespace AcquiredLandInformationManagement.Controllers
                     //************ Save Appeal  ************  
 
                     if (
-                        demandlistdetails.ENM != null &&
-                        demandlistdetails.Demand != null
-                      
+                        demandlistdetails.AppealNo != null &&
+                        demandlistdetails.AppealByDept != null &&
+                        //demandlistdetails.Department != null &&
+                         demandlistdetails.DateOfAppeal != null &&
+                        demandlistdetails.PanelLawer != null
+
                         )
                     {
                         Appealdetail appealdetail = new Appealdetail();
 
                       
-                        appealdetail.DemandListNo = demandlistdetails.ENM;
-                        appealdetail.DemandListNo = demandlistdetails.Demand;
-                       
+                        appealdetail.AppealNo = demandlistdetails.AppealNo;
+                        appealdetail.AppealByDept = demandlistdetails.AppealByDept;
+
+                        //appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
+                        appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+
                         appealdetail.DemandListId = demandlistdetails.Id;
                         appealdetail.CreatedBy = SiteContext.UserId;
                         result = await _demandListDetailsService.SaveAppeal(appealdetail);
                     }
+                    //************ Save Payment  ************  
 
+                    if (
+                        demandlistdetails.AmountPaid != null &&
+                        demandlistdetails.ChequeDate != null &&
+                        demandlistdetails.ChequeNo != null &&
+                         demandlistdetails.BankName != null &&
+                        demandlistdetails.VoucherNo != null &&
+                          demandlistdetails.PaymentProofDocumentIFormFile != null &&
+                        demandlistdetails.PercentPaid != null
+
+                        )
+                    {
+                        Paymentdetail paymentdetail = new Paymentdetail();
+
+
+                        paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
+                        paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
+                        paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
+                        paymentdetail.BankName = demandlistdetails.BankName;
+                        paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                        paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+
+                        paymentdetail.DemandListId = demandlistdetails.Id;
+                        paymentdetail.CreatedBy = SiteContext.UserId;
+                        result = await _demandListDetailsService.SavePayment(paymentdetail);
+                    }
+                    //ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    //ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
+                    //return View("Index");
+                    //ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    //var list = await _demandListDetailsService.GetAllDemandlistdetails();
+                    //return View("Index", list);
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
-                    return View("Index");
+                    var list = await _demandListDetailsService.GetAllDemandlistdetails();
+                    return View("Index", list);
                 }
                 else
                 {
@@ -117,7 +158,22 @@ namespace AcquiredLandInformationManagement.Controllers
             }
 
         }
+        public async Task<JsonResult> GetAppeal(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _demandListDetailsService.FetchSingleAppeal(Convert.ToInt32(Id));
 
+            return Json(data);
+
+        }
+        public async Task<JsonResult> GetPayment(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _demandListDetailsService.FetchSinglePayment(Convert.ToInt32(Id));
+
+            return Json(data);
+
+        }
 
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
@@ -151,9 +207,91 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (result == true)
                 {
+                    //************ Save Appeal  ************  
+                    var data = await _demandListDetailsService.FetchSingleAppeal(id);
+
+                    if (data != null)
+
+                    {
+
+                        Appealdetail appealdetail = new Appealdetail();
+
+                      
+                        appealdetail.AppealNo = demandlistdetails.AppealNo;
+                        appealdetail.AppealByDept = demandlistdetails.AppealByDept;
+
+                        appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
+                        appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+
+                        appealdetail.DemandListId = demandlistdetails.Id;
+                        appealdetail.CreatedBy = SiteContext.UserId;
+                        appealdetail.IsActive = 1;
+                        result = await _demandListDetailsService.UpdateAppeal(id, appealdetail);
+                    }
+                    else
+                    {
+
+                        Appealdetail appealdetail = new Appealdetail();
+
+                        appealdetail.AppealNo = demandlistdetails.AppealNo;
+                        appealdetail.AppealByDept = demandlistdetails.AppealByDept;
+
+                        appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
+                        appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+
+                        appealdetail.DemandListId = demandlistdetails.Id;
+                        appealdetail.CreatedBy = SiteContext.UserId;
+                        appealdetail.IsActive = 1;
+                        result = await _demandListDetailsService.SaveAppeal(appealdetail);
+
+                    }
+                    //************ Save Payment  ************  
+                    var dataa = await _demandListDetailsService.FetchSinglePayment(id);
+
+                    if (data != null)
+
+                    {
+
+                        Paymentdetail paymentdetail = new Paymentdetail();
+
+
+                        paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
+                        paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
+                        paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
+                        paymentdetail.BankName = demandlistdetails.BankName;
+                        paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                        paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentName;
+
+                        paymentdetail.DemandListId = demandlistdetails.Id;
+                        paymentdetail.IsActive = 1;
+                        result = await _demandListDetailsService.UpdatePayment(id, paymentdetail);
+                    }
+                    else
+                    {
+
+                        Appealdetail appealdetail = new Appealdetail();
+
+                        appealdetail.AppealNo = demandlistdetails.AppealNo;
+                        appealdetail.AppealByDept = demandlistdetails.AppealByDept;
+
+                        appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
+                        appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+
+                        appealdetail.DemandListId = demandlistdetails.Id;
+                        appealdetail.CreatedBy = SiteContext.UserId;
+                        appealdetail.IsActive = 1;
+                        result = await _demandListDetailsService.SaveAppeal(appealdetail);
+
+                    }
+                    //ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    //ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
+                    //return View("Index");
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
-                    return View("Index");
+                    var list = await _demandListDetailsService.GetAllDemandlistdetails();
+                    return View("Index", list);
                 }
                 else
                 {
