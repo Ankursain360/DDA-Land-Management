@@ -720,12 +720,13 @@
             <div class="form-group col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.CopyofOrderDocPath)">@(Model.CopyofOrderDocPath == "" || Model.CopyofOrderDocPath == string.Empty || Model.CopyofOrderDocPath == null ? "": "View Document")</a>
+
 
                     <input type="file" asp-for="CopyofOrder" placeholder="Copy of Order" class="floating-label-field floating-label-field--s3 "
                            accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                     <span asp-validation-for="CopyofOrder" class="text-danger lb-sm"></span>
                     <label class="floating-label">Copy of Order</label>
+                    <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.CopyofOrderDocPath)">@(Model.CopyofOrderDocPath == "" || Model.CopyofOrderDocPath == string.Empty || Model.CopyofOrderDocPath == null ? "": "View Document")</a>
                 </div>
             </div>
             <div class="form-group col-md-4">
@@ -738,13 +739,15 @@
             <div class="form-group col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.HandedOverFile)">@(Model.HandedOverFile == "" || Model.HandedOverFile == string.Empty || Model.HandedOverFile == null ? "": "View Document")</a>
+
 
                     <input type="file" asp-for="HandedOverFiles" placeholder="Document" class="floating-label-field floating-label-field--s3 "
                            accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                     <span asp-validation-for="HandedOverFiles" class="text-danger lb-sm"></span>
                     <label class="floating-label" asp-for="HandedOverFiles">Handover/Other Document </label>
+
+                    <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.HandedOverFile)">@(Model.HandedOverFile == "" || Model.HandedOverFile == string.Empty || Model.HandedOverFile == null ? "": "View Document")</a>
                 </div>
             </div>
         </div>
@@ -838,13 +841,14 @@
             </div>
             <div class="form-group col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.TakenOverDocument)">@(Model.TakenOverDocument == "" || Model.TakenOverDocument == string.Empty || Model.TakenOverDocument == null ? "": "View Document")</a>
+
 
                     <input type="file" asp-for="TakenOverFile" placeholder="Document" class="floating-label-field floating-label-field--s3 "
                            accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                     <span asp-validation-for="TakenOverFile" class="text-danger lb-sm"></span>
                     <label class="floating-label" asp-for="TakenOverFile">Takenover/Other Document </label>
+                    <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.TakenOverDocument)">@(Model.TakenOverDocument == "" || Model.TakenOverDocument == string.Empty || Model.TakenOverDocument == null ? "": "View Document")</a>
                 </div>
             </div>
         </div>
@@ -926,11 +930,12 @@
                 </div>
                 <div class="form-group col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.ActionTakenReportPath)">@(Model.ActionTakenReportPath == "" || Model.ActionTakenReportPath == string.Empty || Model.ActionTakenReportPath == null ? "": "View Document")</a>
+
                         <input type="file" placeholder="Action Taken Report(ATR)" class="floating-label-field floating-label-field--s3 "
                                asp-for="ActionTakenReport" />
                         <span asp-validation-for="ActionTakenReport" class="text-danger lb-sm"></span>
                         <label class="floating-label">Upload Action Taken Report(ATR)</label>
+                        <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.ActionTakenReportPath)">@(Model.ActionTakenReportPath == "" || Model.ActionTakenReportPath == string.Empty || Model.ActionTakenReportPath == null ? "": "View Document")</a>
                     </div>
                 </div>
             </div>
