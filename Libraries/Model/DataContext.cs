@@ -133,7 +133,7 @@ namespace Libraries.Model
         public virtual DbSet<Undersection6plot> Undersection6plot { get; set; }
         public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
 
-        public virtual DbSet<Acquiredenhancecompensation> Acquiredenhancecompensation { get; set; }
+      
         public virtual DbSet<Areareclaimedrpt> Areareclaimedrpt { get; set; }
         public virtual DbSet<Demolishedstructurerpt> Demolishedstructurerpt { get; set; }
 
