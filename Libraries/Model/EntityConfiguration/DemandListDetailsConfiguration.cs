@@ -22,7 +22,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.ApealableAmt).HasColumnType("decimal(18,3)");
-
+          
             builder.Property(e => e.AwardNo)
                 .HasMaxLength(45)
                 .IsUnicode(false);
@@ -122,6 +122,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.VillageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_VillageIdDemandListDetails");
+           
         }
     }
 }

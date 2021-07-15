@@ -89,18 +89,19 @@
                         @{
                             if (Model.FilePath != null)
                             {
-                                <label class="badge badge-primary px-2">(View File)</label>
+
                                 <input type="file" asp-for="FileUpload" disabled class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
+                                <label class="badge badge-primary px-2">(View File)</label>
                             }
                             else
                             {
                                 <input type="file" asp-for="FileUpload" disabled class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
-                                <label for="field-1" class="floating-label">Upload File<span style="color:red">*</span></label>
+
                             }
                         }
-
+                        <label for="field-1" class="floating-label">Upload File<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class=" col-md-6">

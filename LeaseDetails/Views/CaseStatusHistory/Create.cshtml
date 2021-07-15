@@ -172,17 +172,18 @@
 
                                 @{ if (Model.FilePath != null)
                                     {
-                                        <a class="badge badge-primary px-2" asp-action="DownloadJudgementFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
+
                                         <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                         <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
+                                        <a class="badge badge-primary px-2" asp-action="DownloadJudgementFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
                                     }
                                     else
                                     {
                                         <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                         <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
-                                        <label for="field-1" class="floating-label"> Upload copy of the document selected </label> } }
+                                    } }
 
-
+                                <label for="field-1" class="floating-label"> Upload copy of the document selected </label>
                             </div>
 
 

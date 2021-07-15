@@ -19,6 +19,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "ChequeDate  is Mandatory")]
         public DateTime? ChequeDate { get; set; }
         [Required(ErrorMessage = "ChequeNo  is Mandatory")]
+        public int DemandListId { get; set; }
         public string ChequeNo { get; set; }
         [Required(ErrorMessage = "BankName is Mandatory")]
         public string BankName { get; set; }
@@ -33,6 +34,6 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile PaymentProofDocumentIFormFile { get; set; }
-
+        public Demandlistdetails DemandList { get; set; }
     }
 }

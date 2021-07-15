@@ -15,13 +15,14 @@ namespace Libraries.Model.Entity
         public Leasetype()
         {
             Allotmententry = new HashSet<Allotmententry>();
+            Kycform = new HashSet<Kycform>();
         }
 
        
         public string Type { get; set; }
         public byte? IsActive { get; set; }
-       
 
+        public ICollection<Kycform> Kycform { get; set; }
         public ICollection<Allotmententry> Allotmententry { get; set; }
     }
 }

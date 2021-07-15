@@ -126,5 +126,59 @@ namespace Service.ApplicationService
         {
             return await _demandListDetailsRepository.GetAllDemandlistdetails();
         }
+        //*********  appeal Details **********
+
+        public async Task<bool> SaveAppeal(Appealdetail appealdetail)
+        {
+            appealdetail.CreatedBy = appealdetail.CreatedBy;
+            appealdetail.CreatedDate = DateTime.Now;
+            appealdetail.IsActive = 1;
+            return await _demandListDetailsRepository.SaveAppeal(appealdetail);
+        }
+        public async Task<List<Appealdetail>> GetAllAppeal(int id)
+        {
+            return await _demandListDetailsRepository.GetAllAppeal(id);
+        }
+        public async Task<bool> DeleteAppeal(int Id)
+        {
+            return await _demandListDetailsRepository.DeleteAppeal(Id);
+        }
+
+        public async Task<Appealdetail> FetchSingleAppeal(int id)
+        {
+            return await _demandListDetailsRepository.FetchSingleAppeal(id);
+        }
+        public async Task<bool> UpdateAppeal(int id, Appealdetail appealdetail)
+        {
+
+            return await _demandListDetailsRepository.UpdateAppeal(id, appealdetail);
+        }
+        //*********  Payment Details **********
+
+        public async Task<bool> SavePayment(Paymentdetail paymentdetail)
+        {
+            paymentdetail.CreatedBy = paymentdetail.CreatedBy;
+            paymentdetail.CreatedDate = DateTime.Now;
+            paymentdetail.IsActive = 1;
+            return await _demandListDetailsRepository.SavePayment(paymentdetail);
+        }
+        public async Task<List<Paymentdetail>> GetAllPayment(int id)
+        {
+            return await _demandListDetailsRepository.GetAllPayment(id);
+        }
+        public async Task<bool> Deletepayment(int Id)
+        {
+            return await _demandListDetailsRepository.Deletepayment(Id);
+        }
+
+        public async Task<Paymentdetail> FetchSinglePayment(int id)
+        {
+            return await _demandListDetailsRepository.FetchSinglePayment(id);
+        }
+        public async Task<bool> UpdatePayment(int id, Paymentdetail paymentdetail)
+        {
+
+            return await _demandListDetailsRepository.UpdatePayment(id, paymentdetail);
+        }
     }
 }

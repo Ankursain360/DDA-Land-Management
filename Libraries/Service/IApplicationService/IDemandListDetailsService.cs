@@ -22,5 +22,23 @@ namespace Libraries.Service.IApplicationService
         int GetKhasraByName(string name);
         Task<bool> CheckUniqueName(int id, string fileNo);
         Task<List<Demandlistdetails>> GetAllDemandlistdetails();
+        //*********  Appeali Khasra Details **********
+
+        Task<bool> SaveAppeal(Appealdetail appealdetail);
+        Task<List<Appealdetail>> GetAllAppeal(int id);
+        Task<bool> DeleteAppeal(int Id);
+        Task<Appealdetail> FetchSingleAppeal(int id);
+
+        Task<bool> UpdateAppeal(int id, Appealdetail appealdetail);
+
+        //*********  payment Details **********
+
+        Task<bool> SavePayment(Paymentdetail paymentdetail);
+        Task<List<Paymentdetail>> GetAllPayment(int id);
+        Task<bool> Deletepayment(int Id);
+        Task<Paymentdetail> FetchSinglePayment(int id);
+
+        Task<bool> UpdatePayment(int id, Paymentdetail paymentdetail);
+       
     }
 }

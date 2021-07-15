@@ -25,6 +25,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.AppealNo)
                     .HasMaxLength(200)
                     .IsUnicode(false);
+            builder.Property(e => e.DemandListId).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 

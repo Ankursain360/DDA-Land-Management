@@ -120,17 +120,18 @@
                         @{
                             if (Model.FilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" id="FilePathMsg" class="text-danger" style="display:none;">Upload File is Mandatory Field</span>
+                                <a class="badge badge-primary px-2" asp-action="ViewFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+
                             }
                             else
                             {
                                 <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" id="FilePathMsg" class="text-danger" style="display:none;">Upload File is Mandatory Field</span>
-                                <label for="field-1" class="floating-label">Upload File <span style="color:red">*</span></label>
                             }
                         }
+                        <label for="field-1" class="floating-label">Upload File <span style="color:red">*</span></label>
 
                     </div>
                 </div>
