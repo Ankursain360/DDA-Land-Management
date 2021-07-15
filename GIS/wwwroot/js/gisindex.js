@@ -46,7 +46,7 @@ var LINE_LAYER = [];
 
 $(document).ready(function () {
 
-    $(document).ajaxStart(function () {
+     $(document).ajaxStart(function () {
         var styleValue = "block";
         $("#loader-wrapper").css("display", styleValue);
     });
@@ -55,7 +55,7 @@ $(document).ready(function () {
         var styleValue = "none";
         $("#loader-wrapper").css("display", styleValue);
     });
-
+     
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
         var html = '';
         for (var i = 0; i < response.length; i++) {
@@ -104,6 +104,7 @@ function initialize() {
         zoom: 10,
         disableDefaultUI: true,
         mapTypeId: 'coordinate',
+        //mapTypeId: 'OSM',
         scaleControl: true,
         disableDefaultUI: true,
         zoomControl: false,
@@ -116,7 +117,7 @@ function initialize() {
             'featureType': 'all',
             'elementType': 'labels',
             'stylers': [{
-                'visibility': 'on'
+                'visibility': 'off'
             }]
         }],
 
@@ -126,6 +127,26 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     map.mapTypes.set('coordinate', coordinateMapType);
+    ////OSM Map Start
+    ////Define OSM map type pointing at the OpenStreetMap tile server
+    //map.mapTypes.set("OSM", new google.maps.ImageMapType({
+    //    getTileUrl: function (coord, zoom) {
+    //        // "Wrap" x (longitude) at 180th meridian properly
+    //        // NB: Don't touch coord.x: because coord param is by reference, and changing its x property breaks something in Google's lib
+    //        var tilesPerGlobe = 1 << zoom;
+    //        var x = coord.x % tilesPerGlobe;
+    //        if (x < 0) {
+    //            x = tilesPerGlobe + x;
+    //        }
+    //        // Wrap y (latitude) in a like manner if you want to enable vertical infinite scrolling
+
+    //        return "https://tile.openstreetmap.org/" + zoom + "/" + x + "/" + coord.y + ".png";
+    //    },
+    //    tileSize: new google.maps.Size(256, 256),
+    //    name: "OpenStreetMap",
+    //    maxZoom: 18
+    //}));
+    ////end of OSM Map
     map.addListener('zoom_changed', function () {
         Zoom_change(map);
     });
@@ -206,6 +227,7 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
 function showVillage(maxima) {
     var villageid = maxima.replace('V', '');
     HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
+        //Show Village Name
         $('#spanVillageName').empty().append(response[0].name);
         $('#spanVillage').empty().append('Village : ' + response[0].name)
         $('#aVillageName').show();
@@ -234,6 +256,7 @@ function showvillagelayers(villageid) {
         //sessionStorage.clear();
        // localStorage.setItem('alldata', JSON.stringify(response)); //data added to local storage
        // sessionStorage.setItem('alldata', JSON.stringify(response)); //data added to session storage
+        DisplayLoader(true);
         alljsondata = [];
         alljsondata = JSON.stringify(response);
         var Abadi = response.filter((x) => x.gisLayerId === 1);    //abadi
@@ -374,6 +397,7 @@ function showvillagelayers(villageid) {
     });
     VILLAGEID_UNIVERSAL = [];
     VILLAGEID_UNIVERSAL.push(villageid);
+    DisplayLoader(false);
 }
 
 function showVillageBoundaries(response) {
@@ -696,16 +720,31 @@ function showDisBoundariesVillageText(response) {
 function showDisBoundariesKhasraNo(response) {
     var khasrano = $.map(response, function (el) { return el; })
     for (aj = 0; aj < khasrano.length; aj++) {
-        var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
-        var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 22, visible: true, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: khasrano[aj].label, color: khasrano[aj].fillColor, clickable: !0 });
-        _label.khasrano = khasrano[aj].label;
-        _label.villageid = VILLAGEID_UNIVERSAL[0];
-        google.maps.event.addListener(_label, 'click', function () {
+        //var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
+        //var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 22, visible: true, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: khasrano[aj].label, color: khasrano[aj].fillColor, clickable: !0 });
+        //_label.khasrano = khasrano[aj].label;
+        //_label.villageid = VILLAGEID_UNIVERSAL[0];
+
+        var mapLabel = new MapLabel({
+            text: khasrano[aj].label,
+            position: new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)),
+            map: map,
+            fontSize: 10,
+            align: 'center',
+            color: 'red',
+            minZoom: 17,
+            maxZoom:22
+        });
+        mapLabel.set('position', new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)));
+
+       // google.maps.event.addListener(_label, 'click', function () {
+        google.maps.event.addListener(mapLabel, 'click', function () {
             getInfo(this.villageid, this.khasrano);
         });
-        KHASRANO_LAYER.push(_label);
-
-        Polys.push(_label);
+       // KHASRANO_LAYER.push(_label);
+        KHASRANO_LAYER.push(mapLabel);
+        Polys.push(mapLabel);
+       // Polys.push(_label);
     }
 }
 function showDisBoundariesRectWithKhasraNo(response) {

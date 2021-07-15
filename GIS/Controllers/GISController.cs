@@ -230,5 +230,12 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetKhasraNoPolygon(gisDataId ?? 0));
         }
+
+        //Testing With Open Street map
+        public async Task<IActionResult> OSM()
+        {             
+            return View();
+        }
+        //
     }
 }

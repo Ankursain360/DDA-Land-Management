@@ -3,9 +3,9 @@
 function Zoom_change(map) {
     var mapzoom = map.getZoom();
     if (mapzoom <= 8) {
-        for (var pp = 0; pp < zoomZone.length; pp++) {
-            zoomZone[pp].setMap(null);
-        }
+        //for (var pp = 0; pp < zoomZone.length; pp++) {
+        //    zoomZone[pp].setMap(null);
+        //}
     }
 }
 function createPolygon(_path) {
