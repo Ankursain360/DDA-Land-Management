@@ -20,14 +20,18 @@ namespace NewLandAcquisition.Controllers
     {
         public IConfiguration _configuration;
         public readonly INewlandnotificationService _newlandnotificationService;
+        string NewlandNotificationFilePath = string.Empty;
 
 
         public NewlandNotificationController(INewlandnotificationService newlandnotificationService, IConfiguration configuration)
         {
             _newlandnotificationService = newlandnotificationService;
             _configuration = configuration;
+             NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+
+
         }
-       // [AuthorizeContext(ViewAction.View)]
+        // [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -56,37 +60,48 @@ namespace NewLandAcquisition.Controllers
             try
             {
                 newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
-                string NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+                string NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles1:NewlandNotificationFilePath1").Value.ToString();
 
                 if (ModelState.IsValid)
                 {
-                   newlandnotification.CreatedBy = SiteContext.UserId;
+
+                    FileHelper fileHelper = new FileHelper();
+
+                    if (newlandnotification.NewlandNotificationFile != null)
+                    {
+                        newlandnotification.GazetteNotificationFilePath = fileHelper.SaveFile1(NewlandNotificationFilePath, newlandnotification.NewlandNotificationFile);
+
+                    }
+
+
+
+
+                    newlandnotification.CreatedBy = SiteContext.UserId;
                     var result = await _newlandnotificationService.Create(newlandnotification);
 
                     if (result)
                     {
-                        FileHelper fileHelper = new FileHelper();
-
+                       
                         ///for notification file:
 
 
-                        if (newlandnotification.NewlandNotificationFile != null && newlandnotification.NewlandNotificationFile.Count > 0)
-                        {
-                            List<Newlandnotificationfilepath> newlandnotificationfilepath = new List<Newlandnotificationfilepath>();
-                            for (int i = 0; i < newlandnotification.NewlandNotificationFile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile(NewlandNotificationFilePath, newlandnotification.NewlandNotificationFile[i]);
-                                newlandnotificationfilepath.Add(new Newlandnotificationfilepath
-                                {
-                                    NewlandNotificationId = newlandnotification.Id,
-                                    FilePath = FilePath
-                                });
-                            }
-                            foreach (var item in newlandnotificationfilepath)
-                            {
-                                result = await _newlandnotificationService.Savefiledetails(item);
-                            }
-                        }
+                        //if (newlandnotification.NewlandNotificationFile != null && newlandnotification.NewlandNotificationFile.Count > 0)
+                        //{
+                        //    List<Newlandnotificationfilepath> newlandnotificationfilepath = new List<Newlandnotificationfilepath>();
+                        //    for (int i = 0; i < newlandnotification.NewlandNotificationFile.Count; i++)
+                        //    {
+                        //        string FilePath = fileHelper.SaveFile(NewlandNotificationFilePath, newlandnotification.NewlandNotificationFile[i]);
+                        //        newlandnotificationfilepath.Add(new Newlandnotificationfilepath
+                        //        {
+                        //            NewlandNotificationId = newlandnotification.Id,
+                        //            FilePath = FilePath
+                        //        });
+                        //    }
+                        //    foreach (var item in newlandnotificationfilepath)
+                        //    {
+                        //        result = await _newlandnotificationService.Savefiledetails(item);
+                        //    }
+                        //}
                     }
 
                         if (result)
@@ -170,7 +185,25 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
+        //public async Task<IActionResult> ViewPaymentProofDocument(int Id)
+        //{
+        //    FileHelper file = new FileHelper();
+        //    Newlandpaymentdetail Data = await _newlandnotificationService.FetchSingleResult(Id);
+        //    string filename = PaymentProofDocumentFilePath + Data.PaymentProofDocumentName;
+        //    byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+        //    return File(FileBytes, file.GetContentType(filename));
+        //}
 
 
+
+        public async Task<IActionResult> ViewDocumenbtsdG(int Id)
+        {
+            FileHelper fileHelper = new FileHelper();
+            Newlandnotification Data = await _newlandnotificationService.FetchSingleResult1(Id);
+        
+            string filename = NewlandNotificationFilePath + Data.GazetteNotificationFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, fileHelper.GetContentType(filename));
+        }
     }
 }
