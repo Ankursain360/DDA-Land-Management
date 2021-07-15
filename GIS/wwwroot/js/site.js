@@ -61,9 +61,9 @@ function HttpGet(url, dataType, callback) {
         contentType: "application/json; charset=utf-8",
         dataType: dataType,
         url: url
-    }).done(function (response) {
-        DisplayLoader(false);
+    }).done(function (response) {       
         callback(response);
+        DisplayLoader(false);
     }).fail(function (jqXHR, textStatus, errorThrown) {
         DisplayLoader(false);
         DisplayErrorMessages(jqXHR);
@@ -124,7 +124,4 @@ function HttpDelete(url, dataType, callback) {
     });
 }
 
-function DisplayLoader(show) {
-    var styleValue = show === true ? "block" : "none";
-    $(".body-loading").css("display", styleValue);
-}
+ 

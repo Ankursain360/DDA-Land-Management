@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ using Model.Entity;
 using Service.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Linq;
 
 namespace GIS
 {
@@ -55,7 +57,7 @@ namespace GIS
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-            services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value,y=> y.CommandTimeout(1000)));
+            services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value, y => y.CommandTimeout(1000)));
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
@@ -67,7 +69,15 @@ namespace GIS
 
             services.RegisterDependency();
             services.AddAutoMapperSetup();
-
+            //Response Compression
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            options.Level = System.IO.Compression.CompressionLevel.Optimal);
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+            //end of  Response Compression
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
         }
 
@@ -85,6 +95,9 @@ namespace GIS
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            //Response Compression
+            app.UseResponseCompression();
+            //
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -97,6 +110,7 @@ namespace GIS
                     name: "default",
                     pattern: "{controller=GIS}/{action=Index}/{id?}");
             });
+            
         }
     }
 }
