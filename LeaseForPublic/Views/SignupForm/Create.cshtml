@@ -1,4 +1,4 @@
-﻿
+﻿@model Libraries.Model.Entity.Leasesignup
 <!doctype html>
 <html lang="en">
 
@@ -47,25 +47,29 @@
                             <div class="mb-3 form-icons">
                                 <i class="ri-user-line"></i>
 
-                                <input type="text" class="form-control" id="name" placeholder="Name *">
+                                <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Name *">
+
                             </div>
+                            <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Name</label>
                         </div>
 
                         <div class="row">
                             <div class="mb-3 form-icons">
                                 <i class="ri-smartphone-line"></i>
-                                <input type="text" class="form-control numbers" id="mobile" placeholder="Mobile Number *">
-                                <label style="color:red;display:none;" id="err-mob">Please Enter 10 Digit Mobile</label>
+                                <input type="text" asp-for="MobileNo" class="form-control numbers" id="mobile" placeholder="Mobile Number *">
+
                             </div>
+                            <label style="color:red;display:none; font-size:13px" id="err-mob">Please Enter 10 Digit Mobile</label>
                         </div>
 
                         <div class="row">
 
                             <div class="mb-3 form-icons">
                                 <i class="ri-mail-line"></i>
-                                <input type="email" id="email" class="form-control" placeholder="Email  *">
-                                <label style="color:red;display:none;" id="err-email">Please Enter Valid Email</label>
+                                <input type="text" asp-for="EmailId" id="email" class="form-control" placeholder="Email  *">
+
                             </div>
+                            <label style="color:red;display:none; font-size:13px" id="err-email">Please Enter Valid Email</label>
                         </div>
 
 
@@ -78,20 +82,23 @@
                             <div>
                                 <div class="d-flex align-items-center">
 
-                                    <button id="signup2" class="btn ms-auto me-3 mr-2" type="button">Register</button>
+                                    @*<button id="signup2" class="btn ms-auto me-3 mr-2" type="submit">Register</button>*@
+
+                                    <input id="signup2" type="submit" value="Submit" class="btn btn-theme " />
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="row  mt-md-3" id="sotp" style="display:none;">
 
-                            
+
                             <div>
                                 <div class="d-flex align-items-center">
                                     <input type="text" class="form-control" placeholder="Otp *">
                                 </div>
                             </div>
-                            <div class="mt-md-3" >
+                            <div class="mt-md-3">
                                 <div class="d-flex align-items-center">
                                     <button class="btn ms-auto me-3 mr-2" type="submit">Otp Submit</button>
                                 </div>
@@ -99,7 +106,7 @@
 
                         </div>
 
-                      
+
 
 
 
@@ -122,7 +129,13 @@
     <script src="/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
+    <environment include="Development">
+        <script src="~/js/signupregister.js"></script>
 
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/signupregister.min.js" asp-append-version="true"></script>
+    </environment>
 
 
 
@@ -131,43 +144,3 @@
     <script src="/lib/toaster/toastr.min.js"></script>
 </body>
 </html>
-<script>
-    $('#mobile').keyup(function () {
-        var mob = $('#mobile').val();
-        if (!mob.match('[0-9]{10}') || mob.length > 10) {
-            $("#err-mob").show();
-            return;
-        } else {
-            $("#err-mob").hide();
-        }
-
-    });
-    $('#email').keyup(function () {
-        var email = $('#email').val();
-       var testEmail = '';
-        if( !emailReg.test( email ) ) {
-            $("#err-email").show();
-            return;
-        } else {
-            $("#err-email").hide();
-        }
-
-    });
-    $('#name').keydown(function (e) {
-        if (e.ctrlKey || e.altKey) {
-            e.preventDefault();
-        } else {
-            var key = e.keyCode;
-            if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
-                e.preventDefault();
-            }
-        }
-    });
-    $("#signup2").click(function () {
-
-
-
-            $("#sotp").show();
-
-    });
-</script>

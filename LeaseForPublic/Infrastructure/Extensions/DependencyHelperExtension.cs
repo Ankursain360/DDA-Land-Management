@@ -55,6 +55,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IExtensionRepository, ExtensionRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IKycformRepository, KycformRepository>();
+            services.AddScoped<ILeasesignupRepository, LeasesignupRepository>();
 
             /* Application Services */
             services.AddScoped<INotificationService, NotificationService>();
@@ -93,6 +94,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IExtensionService, ExtensionService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IKycformService, KycformService>();
+            services.AddScoped<ILeasesignupService, LeasesignupService>();
         }
     }
 }
