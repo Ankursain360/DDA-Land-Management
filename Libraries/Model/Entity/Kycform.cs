@@ -17,7 +17,7 @@ namespace Libraries.Model.Entity
 
         }
 
-       
+
         [Required(ErrorMessage = " Property field is mandatory")]
         public string Property { get; set; }
         [Required(ErrorMessage = " Nature of Property is mandatory")]
@@ -26,6 +26,8 @@ namespace Libraries.Model.Entity
         public string FileNo { get; set; }
         [Required(ErrorMessage = " Branch is mandatory")]
         public int? BranchId { get; set; }
+        public string LeaseGroundRentDepositFrequency { get; set; }
+        public string LicenseFrequency { get; set; }
         public int? LeaseTypeId { get; set; }
         public DateTime? TenureFrom { get; set; }
         public DateTime? TenureTo { get; set; }
@@ -34,6 +36,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Plot No is mandatory")]
         public string PlotNo { get; set; }
         public string PlotDescription { get; set; }
+
         [Required(ErrorMessage = " Zone is mandatory")]
         public int? ZoneId { get; set; }
         [Required(ErrorMessage = " Locality is mandatory")]
@@ -56,13 +59,17 @@ namespace Libraries.Model.Entity
         public string AllotteeLicenseeMobileNo { get; set; }
         public string AllotteeLicenseeEmailId { get; set; }
         public decimal? Area { get; set; }
+        public string AreaUnit { get; set; }
         public DateTime? AllotmentLetterDate { get; set; }
         public DateTime? PossessionDate { get; set; }
         public DateTime? LeaseLicenseExecutionDate { get; set; }
+        public decimal? LandPremiumAmount { get; set; }
+        public decimal? GroundRentAmount { get; set; }
+        public decimal? LicenseFeePayable { get; set; }
         public string AadhaarNoPath { get; set; }
         public string LetterPath { get; set; }
+        public string AadhaarPanapplicantPath { get; set; }
         public byte IsActive { get; set; }
-       
 
 
         [NotMapped]
@@ -107,6 +114,8 @@ namespace Libraries.Model.Entity
         public IFormFile Aadhar { get; set; }
         [NotMapped]
         public IFormFile Letter { get; set; }
+        [NotMapped]
+        public IFormFile ApplicantPan { get; set; }
         public Branch Branch { get; set; }
         public Leasetype LeaseType { get; set; }
         public Locality Locality { get; set; }
