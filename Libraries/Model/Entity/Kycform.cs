@@ -123,5 +123,6 @@ namespace Libraries.Model.Entity
         public Zone Zone { get; set; }
         public ICollection<Kycleasepaymentrpt> Kycleasepaymentrpt { get; set; }
         public ICollection<Kyclicensepaymentrpt> Kyclicensepaymentrpt { get; set; }
+        public ICollection<Leasesignup> Leasesignup { get; set; }
     }
 }
