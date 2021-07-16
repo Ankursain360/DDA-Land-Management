@@ -68,15 +68,52 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public Acquiredlandvillage Village { get; set; }
+
+        //******Appeal****//
+        [NotMapped]
+        public string AppealNo { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "AppealByDept name is Mandatory")]
+        public string AppealByDept { get; set; }
+        [NotMapped]
+
+        public string Department { get; set; }
+        //public int? DemandListId { get; set; }
+        [NotMapped]
+        public DateTime? DateOfAppeal { get; set; }
+        [NotMapped]
+
+        public string PanelLawer { get; set; }
+        //****Payment******//
+        [NotMapped]
+        public decimal? AmountPaid { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "ChequeDate  is Mandatory")]
+
+        public DateTime? ChequeDate { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "ChequeNo  is Mandatory")]
+       
+        public string ChequeNo { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "BankName is Mandatory")]
+        public string BankName { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "VoucherNo is Mandatory")]
+        public string VoucherNo { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Percent Paid is Mandatory")]
+        public decimal? PercentPaid { get; set; }
+        [NotMapped]
+        public string PaymentProofDocumentName { get; set; }
+      
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
-        [NotMapped]
-        public string Demand { get; set; }
-        [NotMapped]
-        public string ENM { get; set; }
+     
         [NotMapped]
         public List<Khasra> KhasraNoList { get; set; }
-
+        [NotMapped]
+        public IFormFile PaymentProofDocumentIFormFile { get; set; }
         [NotMapped]
         public IFormFile ENMDocumentIFormFile { get; set; }
         public ICollection<Paymentdetail> Paymentdetail { get; set; }
