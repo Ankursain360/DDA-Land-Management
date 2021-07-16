@@ -45,7 +45,7 @@ namespace LeaseForPublic.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Kycform kyc)
         {
             kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
@@ -53,83 +53,99 @@ namespace LeaseForPublic.Controllers
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             kyc.ZoneList = await _kycformService.GetAllZoneList();
             kyc.LocalityList = await _kycformService.GetLocalityList();
-            string Document = _configuration.GetSection("FilePaths:KycFiles:PaymentProofDocument").Value.ToString();
-
+            string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+            string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
+           
 
             if (ModelState.IsValid)
                 {
                 FileHelper fileHelper = new FileHelper();
 
+                if (kyc.Aadhar != null)
+                {
+                    kyc.AadhaarNoPath = fileHelper.SaveFile(AadharDoc, kyc.Aadhar);
+                }
+                if (kyc.Letter != null)
+                {
+                    kyc.LetterPath = fileHelper.SaveFile(LetterDoc, kyc.Letter);
+                }
                 var result = await _kycformService.Create(kyc);
                 if (result == true)
                 {
-                    //************ Save Kycleasepaymentrpt  ************  
-                    if (kyc.ChallanNo != null &&
-                        kyc.PaymentDate != null)
+                    //if (kyc.Property == "Lease")
+                    //{
+                    //    //************ Save Kycleasepaymentrpt  ************  
+                    //    if (kyc.ChallanNo != null &&
+                    //        kyc.PaymentDate != null)
 
-                    {
-                        if (kyc.ChallanNo.Count > 0 )
-                           
-                        {
-                            List<Kycleasepaymentrpt> payment = new List<Kycleasepaymentrpt>();
-                            for (int i = 0; i < kyc.ChallanNo.Count; i++)
-                            {
-                                payment.Add(new Kycleasepaymentrpt
-                                {
-                                    ChallanNo = kyc.ChallanNo.Count <= i ? string.Empty : kyc.ChallanNo[i],
-                                    PaymentDate = kyc.PaymentDate[i],
-                                    PaymentAmount =  kyc.PaymentAmount[i],
-                                    BankName = kyc.BankName.Count <= i ? string.Empty : kyc.BankName[i],
-                                    Purpose = kyc.Purpose.Count <= i ? string.Empty : kyc.Purpose[i],
-                                    PaymentDocPath = kyc.PaymentDocument != null ?
-                                                                    kyc.PaymentDocument.Count <= i ? string.Empty :
-                                                                    fileHelper.SaveFile(Document, kyc.PaymentDocument[i]) :
-                                                                    kyc.PaymentDocPath[i] != null || kyc.PaymentDocPath[i] != "" ?
-                                                                    kyc.PaymentDocPath[i] : string.Empty,
-                                    KycformId = kyc.Id,
-                                    CreatedBy = SiteContext.UserId
-                                });
-                            }
-                            foreach (var item in payment)
-                            {
-                                result = await _kycformService.Saveleasepayment(item);
-                            }
-                        }
-                    }
-                    //************ Save Kycleasepaymentrpt  ************  
-                    if (kyc.ChallanNo != null &&
-                        kyc.PaymentDate != null)
+                    //    {
+                    //        if (kyc.ChallanNo.Count > 0)
 
-                    {
-                        if (kyc.ChallanNo.Count > 0)
+                    //        {
+                    //            List<Kycleasepaymentrpt> payment = new List<Kycleasepaymentrpt>();
+                    //            for (int i = 0; i < kyc.ChallanNo.Count; i++)
+                    //            {
+                    //                payment.Add(new Kycleasepaymentrpt
+                    //                {
+                    //                    ChallanNo = kyc.ChallanNo.Count <= i ? string.Empty : kyc.ChallanNo[i],
+                    //                    PaymentDate = kyc.PaymentDate[i],
+                    //                    PaymentAmount = kyc.PaymentAmount[i],
+                    //                    BankName = kyc.BankName.Count <= i ? string.Empty : kyc.BankName[i],
+                    //                    Purpose = kyc.Purpose.Count <= i ? string.Empty : kyc.Purpose[i],
+                    //                    PaymentDocPath = kyc.PaymentDocument != null ?
+                    //                                                    kyc.PaymentDocument.Count <= i ? string.Empty :
+                    //                                                    fileHelper.SaveFile(Document, kyc.PaymentDocument[i]) :
+                    //                                                    kyc.PaymentDocPath[i] != null || kyc.PaymentDocPath[i] != "" ?
+                    //                                                    kyc.PaymentDocPath[i] : string.Empty,
+                    //                    KycformId = kyc.Id,
+                    //                    CreatedBy = SiteContext.UserId
+                    //                });
+                    //            }
+                    //            foreach (var item in payment)
+                    //            {
+                    //                result = await _kycformService.Saveleasepayment(item);
+                    //            }
+                    //        }
+                    //    }
 
-                        {
-                            List<Kyclicensepaymentrpt> payment = new List<Kyclicensepaymentrpt>();
-                            for (int i = 0; i < kyc.ChallanNo.Count; i++)
-                            {
-                                payment.Add(new Kyclicensepaymentrpt
-                                {
-                                    ChallanNo = kyc.ChallanNo.Count <= i ? string.Empty : kyc.ChallanNo[i],
-                                    PaymentDate = kyc.PaymentDate[i],
-                                    PaymentAmount = kyc.PaymentAmount[i],
-                                    PaymentPeriod = kyc.PaymentPeriod.Count <= i ? string.Empty : kyc.PaymentPeriod[i],
-                                    Purpose = kyc.Purpose.Count <= i ? string.Empty : kyc.Purpose[i],
-                                    PaymentDocPath = kyc.PaymentDocument != null ?
-                                                                    kyc.PaymentDocument.Count <= i ? string.Empty :
-                                                                    fileHelper.SaveFile(Document, kyc.PaymentDocument[i]) :
-                                                                    kyc.PaymentDocPath[i] != null || kyc.PaymentDocPath[i] != "" ?
-                                                                    kyc.PaymentDocPath[i] : string.Empty,
-                                    
-                                    KycformId = kyc.Id,
-                                    CreatedBy = SiteContext.UserId
-                                });
-                            }
-                            foreach (var item in payment)
-                            {
-                                result = await _kycformService.Savelicensepayment(item);
-                            }
-                        }
-                    }
+                    //}
+                    //else if (kyc.Property == "License") { 
+                    //    //************ Save Kycleasepaymentrpt  ************  
+                    //    if (kyc.ChallanNo != null &&
+                    //    kyc.PaymentDate != null)
+
+                    //    {
+                    //        if (kyc.ChallanNo.Count > 0)
+
+                    //        {
+                    //            List<Kyclicensepaymentrpt> payment = new List<Kyclicensepaymentrpt>();
+                    //            for (int i = 0; i < kyc.ChallanNo.Count; i++)
+                    //            {
+                    //                payment.Add(new Kyclicensepaymentrpt
+                    //                {
+                    //                    ChallanNo = kyc.ChallanNo.Count <= i ? string.Empty : kyc.ChallanNo[i],
+                    //                    PaymentDate = kyc.PaymentDate[i],
+                    //                    PaymentAmount = kyc.PaymentAmount[i],
+                    //                    PaymentPeriod = kyc.PaymentPeriod.Count <= i ? string.Empty : kyc.PaymentPeriod[i],
+                    //                    Purpose = kyc.Purpose.Count <= i ? string.Empty : kyc.Purpose[i],
+                    //                    PaymentDocPath = kyc.PaymentDocument != null ?
+                    //                                                    kyc.PaymentDocument.Count <= i ? string.Empty :
+                    //                                                    fileHelper.SaveFile(Document, kyc.PaymentDocument[i]) :
+                    //                                                    kyc.PaymentDocPath[i] != null || kyc.PaymentDocPath[i] != "" ?
+                    //                                                    kyc.PaymentDocPath[i] : string.Empty,
+
+                    //                    KycformId = kyc.Id,
+                    //                    CreatedBy = SiteContext.UserId
+                    //                });
+                    //            }
+                    //            foreach (var item in payment)
+                    //            {
+                    //                result = await _kycformService.Savelicensepayment(item);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //else { }
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         return View(kyc);
                         //var list = await _structureService.GetAllStructure();
@@ -147,6 +163,11 @@ namespace LeaseForPublic.Controllers
                     return View(kyc);
                 }
             
+        }
+
+        public IActionResult Edit()
+        {
+            return View();
         }
     }
 }
