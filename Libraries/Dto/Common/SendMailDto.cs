@@ -26,6 +26,18 @@ namespace Dto.Common
 
         }
 
+        public void GenerateMailFormatForComplaint1(string DisplayName, String EmailID, string Action)
+        {
+
+
+            string body = Action;
+            string Sub = "Your otp";
+            string link = "";
+
+            this.sendMail(EmailID, Sub, body, link);
+
+        }
+
 
 
 

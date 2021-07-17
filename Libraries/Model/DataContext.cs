@@ -328,6 +328,7 @@ namespace Libraries.Model
         public virtual DbSet<Approvalurltemplatemapping> Approvalurltemplatemapping { get; set; }
         public virtual DbSet<Vacantlandimage> Vacantlandimage { get; set; }
         public virtual DbSet<Usernotification> Usernotification { get; set; }
+        public virtual DbSet<Leasesignup> Leasesignup { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -594,6 +595,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new KycformConfiguration());
             modelBuilder.ApplyConfiguration(new KycleasepaymentrptConfiguration());
             modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
+            modelBuilder.ApplyConfiguration(new LeasesignupConfigurations());
+            //modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
