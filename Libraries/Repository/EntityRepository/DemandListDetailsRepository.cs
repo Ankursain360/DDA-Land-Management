@@ -137,7 +137,7 @@ namespace Libraries.Repository.EntityRepository
             model.AppealByDept = appealdetail.AppealByDept;
             model.DateOfAppeal = appealdetail.DateOfAppeal;
             model.PanelLawer = appealdetail.PanelLawer;
-            model.Department = appealdetail.Department;
+            //model.Department = appealdetail.Department;
 
             model.IsActive = appealdetail.IsActive;
             model.ModifiedDate = DateTime.Now;

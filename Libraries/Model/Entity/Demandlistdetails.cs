@@ -13,8 +13,8 @@ namespace Libraries.Model.Entity
     {
         public Demandlistdetails()
         {
+            Appealdetail = new HashSet<Appealdetail>();
             Paymentdetail = new HashSet<Paymentdetail>();
-            Appealdetail= new HashSet<Appealdetail>();
         }
         [Required(ErrorMessage = "Demand List No. is Mandatory ")]
         public string DemandListNo { get; set; }
@@ -33,7 +33,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Village is Mandatory", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
-        public int DemandListId { get; set; }
+   
 
         [Required(ErrorMessage = "Khasra is Mandatory", AllowEmptyStrings = false)]
         public int? KhasraNoId { get; set; }
@@ -116,7 +116,10 @@ namespace Libraries.Model.Entity
         public IFormFile PaymentProofDocumentIFormFile { get; set; }
         [NotMapped]
         public IFormFile ENMDocumentIFormFile { get; set; }
-        public ICollection<Paymentdetail> Paymentdetail { get; set; }
+       
+
+       
         public ICollection<Appealdetail> Appealdetail { get; set; }
+        public ICollection<Paymentdetail> Paymentdetail { get; set; }
     }
 }
