@@ -16,6 +16,12 @@ $(document).ready(function () {
             $('#LeaseAmount').show();
             $('#LicenseAmount').hide();
             $('#divApplicantDoc').show();
+            $('#licenseheading').text();
+            $('#labellease').text("Date of Lease Execution");
+
+            $('#aadharlb').text("Aadhaar No. of Allottee/Lessee");
+            $('#letterlb').text("Possession Letter /Allotment Letter /Executed Lease deed (Any One )");
+
         }
         else {
        // $('#divLeaseproperty').hide();
@@ -28,6 +34,14 @@ $(document).ready(function () {
             $('#LeaseAmount').hide();
             $('#LicenseAmount').show();
             $('#divApplicantDoc').hide();
+            $('#licenseheading').text("Details of Licensee as per License Agreement");
+            $('#labellease').text(" Date of License Execution");
+            $('#chk1').text(" If the License Details are same as Applicant Details then  tick the checkbox");
+
+            $('#aadharlb').text("Aadhaar No. of Licensee");
+            $('#letterlb').text("Possession Letter /Allotment Letter /Executed License agreement (Any One )");
+
+           
         }
         
         var value2 = $('#LeaseTypeId option:selected').val();
@@ -55,7 +69,13 @@ $('#Property').change(function () {
             $('#LeaseAmount').show();
             $('#LicenseAmount').hide();
             $('#divApplicantDoc').show();
-        }
+            $('#licenseheading').text("Details of Lessee as per Allotment Letter/Lease deed");
+            $('#labellease').text("Date of Lease Execution");
+              
+
+            $('#aadharlb').text("Aadhaar No. of Allottee/Lessee");
+            $('#letterlb').text("Possession Letter /Allotment Letter /Executed Lease deed (Any One )");
+  }
         else {
             $('#LeaseType').hide();
             $('#divLicense').show();
@@ -65,6 +85,14 @@ $('#Property').change(function () {
             $('#LeaseAmount').hide();
             $('#LicenseAmount').show();
             $('#divApplicantDoc').hide();
+            $('#chk1').text(" If the License Details are same as Applicant Details then  tick the checkbox");
+            $('#licenseheading').text("Details of Licensee as per License Agreement");
+            $('#labellease').text(" Date of License Execution");
+
+            $('#aadharlb').text("Aadhaar No. of Licensee");
+            $('#letterlb').text("Possession Letter /Allotment Letter /Executed License agreement (Any One )");
+
+
         //$('#divLeaseproperty').hide();
           // $('#divLicenseproperty').show();
         }

@@ -58,10 +58,96 @@ namespace Service.ApplicationService
             _kycformRepository.Add(kyc);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<Kycform>> GetAllKycform()
+        {
+            return await _kycformRepository.GetAllKycform();
+        }
+
+        public async Task<Kycform> FetchSingleResult(int id)
+        {
+            var result = await _kycformRepository.FindBy(a => a.Id == id);
+            Kycform model = result.FirstOrDefault();
+            return model;
+        }
+
+        public async Task<bool> Update(int id, Kycform kyc)
+        {
+            var result = await _kycformRepository.FindBy(a => a.Id == id);
+            Kycform model = result.FirstOrDefault();
+            model.Property = kyc.Property;
+            model.PropertyTypeId = kyc.PropertyTypeId;
+            model.FileNo = kyc.FileNo;
+            model.BranchId = kyc.BranchId;
+            model.LeaseTypeId = kyc.LeaseTypeId;
+            model.LeaseGroundRentDepositFrequency = kyc.LeaseGroundRentDepositFrequency;
+            model.LicenseFrequency = kyc.LicenseFrequency;
+            model.TenureFrom = kyc.TenureFrom;
+            model.TenureTo = kyc.TenureTo;
+            model.LicenseFrom = kyc.LicenseFrom;
+            model.LicenseTo = kyc.LicenseTo;
+            model.PlotNo = kyc.PlotNo;
+            model.PlotDescription = kyc.PlotDescription;
+            model.ZoneId = kyc.ZoneId;
+            model.LocalityId = kyc.LocalityId;
+            model.Phase = kyc.Phase;
+            model.Sector = kyc.Sector;
+            model.Block = kyc.Block;
+            model.Pocket = kyc.Pocket;
+            model.Name = kyc.Name;
+            model.FatherName = kyc.FatherName;
+            model.Gender = kyc.Gender;
+            model.EmailId = kyc.EmailId;
+            model.MobileNo = kyc.MobileNo;
+            model.Address = kyc.Address;
+            model.AadhaarNo = kyc.AadhaarNo;
+            model.Relationship = kyc.Relationship;
+            model.AllotteeApplicantDetailsSame = kyc.AllotteeApplicantDetailsSame;
+            model.AllotteeLicenseeName = kyc.AllotteeLicenseeName;
+            model.AllotteeLicenseeAddress = kyc.AllotteeLicenseeAddress;
+            model.AllotteeLicenseeMobileNo = kyc.AllotteeLicenseeMobileNo;
+            model.AllotteeLicenseeEmailId = kyc.AllotteeLicenseeEmailId;
+            model.Area = kyc.Area;
+            model.AreaUnit = kyc.AreaUnit;
+            model.AllotmentLetterDate = kyc.AllotmentLetterDate;
+            model.PossessionDate = kyc.PossessionDate;
+            model.LeaseLicenseExecutionDate = kyc.LeaseLicenseExecutionDate;
+            model.LandPremiumAmount = kyc.LandPremiumAmount;
+            model.GroundRentAmount = kyc.GroundRentAmount;
+            model.LicenseFeePayable = kyc.LicenseFeePayable;
+            model.AadhaarNoPath = kyc.AadhaarNoPath;
+            model.LetterPath = kyc.LetterPath;
+            model.AadhaarPanapplicantPath = kyc.AadhaarPanapplicantPath;
+
+            model.IsActive = kyc.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = kyc.ModifiedBy;
+            _kycformRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model)
+        {
+
+            return await _kycformRepository.GetPagedKycform(model);
+           
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _kycformRepository.FindBy(a => a.Id == id);
+            Kycform model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _kycformRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+
+
         //********* rpt ! Kycleasepaymentrpt Details **********
 
-        
-       
+
+
         public async Task<bool> Saveleasepayment(Kycleasepaymentrpt payment)
         {
             payment.CreatedBy = payment.CreatedBy;
