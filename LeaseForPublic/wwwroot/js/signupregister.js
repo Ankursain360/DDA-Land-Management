@@ -1,0 +1,55 @@
+﻿$('#email').keyup(function () {
+    $("#err-email").hide();
+    var email = $('#email').val();
+
+    var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!testEmail.test(email)) {
+        $("#err-email").show();
+        return;
+    } else {
+        $("#err-email").hide();
+    }
+
+});
+
+
+$('#mobile').keyup(function () {
+
+    var mob = $('#mobile').val();
+    if (!mob.match('[0-9]{10}') || mob.length > 10) {
+        $("#err-mob").show();
+        return;
+    } else {
+        $("#err-mob").hide();
+    }
+
+});
+
+$('#name').keydown(function (e) {
+    $("#err-name").hide();
+    if (e.ctrlKey || e.altKey) {
+        e.preventDefault();
+    } else {
+        var key = e.keyCode;
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+            e.preventDefault();
+        }
+    }
+});
+$("#signup2").click(function () {
+    var name = $("#name").val();
+    var mobile = $("#mobile").val();
+    var email = $("#email").val();
+    if (name == "") {
+        $("#err-name").show();
+    }
+    if (mobile == "") {
+        $("#err-mob").show();
+    }
+    if (email == "") {
+        $("#err-email").show();
+    }
+
+    $("#sotp").show();
+
+});

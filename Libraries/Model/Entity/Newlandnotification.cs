@@ -35,7 +35,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<NewlandNotificationtype> notificationtypeList { get; set; }
         [NotMapped]
-        public List<IFormFile> NewlandNotificationFile { get; set; }
+        public IFormFile NewlandNotificationFile { get; set; }
 
        
     }
