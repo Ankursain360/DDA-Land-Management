@@ -66,7 +66,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Paymentverification>> GetPagedPaymentListVerified(PaymentverificationSearchDto model)
         {
             var data = await _dbContext.Paymentverification
-                           // .Where(a => a.IsVerified == 0)
+                           
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
 
                             .OrderByDescending(s => s.IsActive)

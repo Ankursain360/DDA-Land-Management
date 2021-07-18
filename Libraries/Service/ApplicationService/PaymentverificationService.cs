@@ -81,7 +81,20 @@ namespace Service.ApplicationService
             _paymentverificationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> Unverify(int id, int userid)
+        {
+            var result = await _paymentverificationRepository.FindBy(a => a.Id == id);
+            Paymentverification model = result.FirstOrDefault();
+            model.IsVerified = 0;
 
+            //model.VerifiedOn = DateTime.Now;
+            model.ModifiedBy = userid;
+            model.ModifiedDate = DateTime.Now;
+            //model.VerifiedBy = userid;
+            _paymentverificationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        
         public Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto)
         {
             throw new NotImplementedException();
