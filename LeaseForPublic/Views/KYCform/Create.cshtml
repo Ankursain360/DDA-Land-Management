@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name">
+                        <input  type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name">
                         <span asp-validation-for="FileNo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">File No.<span style="color:red">*</span></label>
                     </div>
@@ -101,7 +101,7 @@
             </div>
 
           
-            <div id="LicenseFrequency">
+            <div id="LicenseFrequency1">
                 <div class="row mt-md-3">
                     <div class="col-md-4">
 
@@ -309,7 +309,6 @@
                 </div>
                 <div class="row mt-md-3">
 
-
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input type="text" asp-for="AadhaarNo" class="floating-label-field floating-label-field--s3" placeholder="AadharNo">
@@ -331,7 +330,6 @@
                             <span asp-validation-for="Relationship" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Relationship with Allottee <span style="color:red">*</span></label>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -341,8 +339,8 @@
 
                 <input type="hidden" asp-for="AllotteeApplicantDetailsSame" />
                 <div class="form-check theme">
-                    <input class="form-check-input" name="chksame" type="checkbox" id="chk1">
-                    <label class="form-check-label" for="chk1">
+                    <input class="form-check-input" name="chksame"  type="checkbox" id="chk1">
+                    <label class="form-check-label" id="chk2">
                         If the Allottee Details are same as Applicant Details then tick the checkbox
                     </label>
                 </div>
