@@ -75,10 +75,12 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Demandlistdetails> FetchSingleResult(int id)
         {
             return await _dbContext.Demandlistdetails
-                                        .Include(x => x.Village)
-                                        .Include(x => x.KhasraNo)
-                                        .Where(x => x.Id == id)
-                                        .FirstOrDefaultAsync();
+                                   .Include(x => x.Appealdetail)
+                                   .Include(x => x.Paymentdetail)
+                                   .Include(x => x.Village)
+                                   .Include(x => x.KhasraNo)
+                                   .Where(x => x.Id == id)
+                                   .FirstOrDefaultAsync();
 
 
         }
@@ -137,7 +139,7 @@ namespace Libraries.Repository.EntityRepository
             model.AppealByDept = appealdetail.AppealByDept;
             model.DateOfAppeal = appealdetail.DateOfAppeal;
             model.PanelLawer = appealdetail.PanelLawer;
-            //model.Department = appealdetail.Department;
+            model.Department = appealdetail.Department;
 
             model.IsActive = appealdetail.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -163,7 +165,7 @@ namespace Libraries.Repository.EntityRepository
                                    .OrderByDescending(s => s.Id)
                                    .FirstOrDefaultAsync();
         }
-       
+
         /////*****payment*****/////
         public async Task<bool> SavePayment(Paymentdetail paymentdetail)
         {

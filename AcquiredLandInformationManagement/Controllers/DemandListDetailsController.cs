@@ -77,6 +77,7 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 FileHelper fileHelper = new FileHelper();
                 demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
+
                 demandlistdetails.CreatedBy = SiteContext.UserId;
                 var result = await _demandListDetailsService.Create(demandlistdetails);
 
@@ -87,7 +88,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     if (
                         demandlistdetails.AppealNo != null &&
                         demandlistdetails.AppealByDept != null &&
-                        //demandlistdetails.Department != null &&
+                        demandlistdetails.Department != null &&
                          demandlistdetails.DateOfAppeal != null &&
                         demandlistdetails.PanelLawer != null
 
@@ -100,7 +101,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         appealdetail.AppealByDept = demandlistdetails.AppealByDept;
                         appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
                         appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
-                        //appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.Department = demandlistdetails.Department;
                         appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
                         appealdetail.PanelLawer = demandlistdetails.PanelLawer;
                         appealdetail.IsActive = 1;
@@ -117,6 +118,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         demandlistdetails.ChequeNo != null &&
                          demandlistdetails.BankName != null &&
                         demandlistdetails.VoucherNo != null &&
+                          demandlistdetails.PercentPaid != null &&
                           demandlistdetails.PaymentProofDocumentIFormFile != null &&
                         demandlistdetails.PercentPaid != null
 
@@ -132,6 +134,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
                         paymentdetail.BankName = demandlistdetails.BankName;
                         paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                        paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
                         paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
 
                         paymentdetail.DemandListId = demandlistdetails.Id;
@@ -184,6 +187,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _demandListDetailsService.FetchSingleResult(id);
             await BindDropDown(Data);
+
             Data.KhasraNoList = await _demandListDetailsService.GetKhasraList(Data.VillageId);
             if (Data == null)
             {
@@ -223,8 +227,9 @@ namespace AcquiredLandInformationManagement.Controllers
                       
                         appealdetail.AppealNo = demandlistdetails.AppealNo;
                         appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-
-                        //appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                        appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.Department = demandlistdetails.Department;
                         appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
                         appealdetail.PanelLawer = demandlistdetails.PanelLawer;
 
@@ -240,8 +245,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
                         appealdetail.AppealNo = demandlistdetails.AppealNo;
                         appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-
-                        //appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                        appealdetail.Department = demandlistdetails.Department;
                         appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
                         appealdetail.PanelLawer = demandlistdetails.PanelLawer;
 
@@ -266,8 +272,10 @@ namespace AcquiredLandInformationManagement.Controllers
                         paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
                         paymentdetail.BankName = demandlistdetails.BankName;
                         paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                        paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
                         paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentName;
-
+                        paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
                         paymentdetail.DemandListId = demandlistdetails.Id;
                         paymentdetail.IsActive = 1;
                         result = await _demandListDetailsService.UpdatePayment(id, paymentdetail);
@@ -280,8 +288,10 @@ namespace AcquiredLandInformationManagement.Controllers
                         paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
                         paymentdetail.BankName = demandlistdetails.BankName;
                         paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                        paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
                         paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
-
+                        paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
                         paymentdetail.DemandListId = demandlistdetails.Id;
                         paymentdetail.CreatedBy = SiteContext.UserId;
                         paymentdetail.IsActive = 1;
