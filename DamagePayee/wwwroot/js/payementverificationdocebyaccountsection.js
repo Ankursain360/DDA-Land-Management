@@ -94,6 +94,35 @@ function onChangePageSize(pageSize) {
     currentPageSize = parseInt(pageSize);;
 }
 
+function ValidCheck() {
+    var checkresult = false;
+    var FromDate = $('#FromDate').val();
+    if (FromDate == "") {
+        checkresult = false;
+        $("#FromDateMsg").show();
+    } else {
+        $("#FromDateMsg").hide();
+        checkresult = true;
+    }
+
+    var ToDate = $('#ToDate').val();
+    if (ToDate == "") {
+        checkresult = false;
+        $("#ToDateMsg").show();
+    } else {
+        checkresult = true;
+        $("#ToDateMsg").hide();
+    }
+
+    if (FromDate == "" || ToDate == "") {
+        checkresult = false;
+    }
+    else {
+        checkresult = true;
+    }
+    return checkresult;
+}
+
 
 $("#Sortbyd").change(function () {
 
@@ -114,3 +143,8 @@ $("#descId").click(function () {
     $("#sortdesc").val(1);
     GetPaymentVerification(currentPageNumber, currentPageSize);
 });
+
+
+
+
+
