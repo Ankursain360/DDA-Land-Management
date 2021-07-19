@@ -11,8 +11,12 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Paymentverification> builder)
         {
+           
+
             builder.ToTable("paymentverification", "lms");
 
+            builder.HasIndex(e => e.VerifiedBy)
+                .HasName("fkaspnetuserid_idx");
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AmountPaid).HasColumnType("decimal(18,3)");
@@ -24,9 +28,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.BankTransactionId)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
-
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.FileNo)
@@ -35,14 +37,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.InterestPaid).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.IsActive)
-                .HasColumnType("tinyint(4)")
-                .HasDefaultValueSql("1");
+            builder.Property(e => e.IsActive).HasDefaultValueSql("1");
 
-            builder.Property(e => e.IsVerified)
-                .HasColumnType("tinyint(4)")
-                .HasDefaultValueSql("0");
-
+            builder.Property(e => e.IsVerified).HasDefaultValueSql("0");
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.PayeeName)
@@ -63,7 +60,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.VerifiedBy).HasColumnType("int(11)");
+            builder.HasOne(d => d.User)
+                .WithMany(p => p.Paymentverification)
+                .HasForeignKey(d => d.VerifiedBy)
+                .HasConstraintName("fkaspnetuserid");
 
         }
     }

@@ -29,5 +29,7 @@ namespace Libraries.Model.Entity
         public List<Locality> LocalityList { get; set; }
         [NotMapped]
         public List<Demandletters> FileNoList { get; set; }
+
+        public ApplicationUser User { get; set; }
     }
 }

@@ -55,14 +55,15 @@
             </td>
             @if (ViewBag.verificationststus == 1)
             {
-                <td>@item.VerifiedBy </td>
+                @*<td>@item.VerifiedBy </td>*@
+                <td>@item.User.UserName </td>
                 <td>@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
             }
             else
             { }
 
 
-            </tr>
+        </tr>
             }
         }
         else
