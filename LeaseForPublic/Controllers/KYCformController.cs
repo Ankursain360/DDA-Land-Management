@@ -12,6 +12,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
+using Dto.Search;
 
 namespace LeaseForPublic.Controllers
 {
@@ -30,7 +31,15 @@ namespace LeaseForPublic.Controllers
         {
             return View();
         }
-       // [AuthorizeContext(ViewAction.Add)]
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
+        {
+            var result = await _kycformService.GetPagedKycform(model);
+            return PartialView("_List", result);
+        }
+
+        // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Kycform kyc = new Kycform();
@@ -55,7 +64,8 @@ namespace LeaseForPublic.Controllers
             kyc.LocalityList = await _kycformService.GetLocalityList();
             string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
             string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
-           
+            string ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
+
 
             if (ModelState.IsValid)
                 {
@@ -69,88 +79,22 @@ namespace LeaseForPublic.Controllers
                 {
                     kyc.LetterPath = fileHelper.SaveFile(LetterDoc, kyc.Letter);
                 }
+                if (kyc.ApplicantPan != null)
+                {
+                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile(ApplicantDoc, kyc.ApplicantPan);
+                }
+
+                kyc.CreatedBy = SiteContext.UserId;
+                kyc.IsActive = 1;
                 var result = await _kycformService.Create(kyc);
                 if (result == true)
                 {
-                    //if (kyc.Property == "Lease")
-                    //{
-                    //    //************ Save Kycleasepaymentrpt  ************  
-                    //    if (kyc.ChallanNo != null &&
-                    //        kyc.PaymentDate != null)
-
-                    //    {
-                    //        if (kyc.ChallanNo.Count > 0)
-
-                    //        {
-                    //            List<Kycleasepaymentrpt> payment = new List<Kycleasepaymentrpt>();
-                    //            for (int i = 0; i < kyc.ChallanNo.Count; i++)
-                    //            {
-                    //                payment.Add(new Kycleasepaymentrpt
-                    //                {
-                    //                    ChallanNo = kyc.ChallanNo.Count <= i ? string.Empty : kyc.ChallanNo[i],
-                    //                    PaymentDate = kyc.PaymentDate[i],
-                    //                    PaymentAmount = kyc.PaymentAmount[i],
-                    //                    BankName = kyc.BankName.Count <= i ? string.Empty : kyc.BankName[i],
-                    //                    Purpose = kyc.Purpose.Count <= i ? string.Empty : kyc.Purpose[i],
-                    //                    PaymentDocPath = kyc.PaymentDocument != null ?
-                    //                                                    kyc.PaymentDocument.Count <= i ? string.Empty :
-                    //                                                    fileHelper.SaveFile(Document, kyc.PaymentDocument[i]) :
-                    //                                                    kyc.PaymentDocPath[i] != null || kyc.PaymentDocPath[i] != "" ?
-                    //                                                    kyc.PaymentDocPath[i] : string.Empty,
-                    //                    KycformId = kyc.Id,
-                    //                    CreatedBy = SiteContext.UserId
-                    //                });
-                    //            }
-                    //            foreach (var item in payment)
-                    //            {
-                    //                result = await _kycformService.Saveleasepayment(item);
-                    //            }
-                    //        }
-                    //    }
-
-                    //}
-                    //else if (kyc.Property == "License") { 
-                    //    //************ Save Kycleasepaymentrpt  ************  
-                    //    if (kyc.ChallanNo != null &&
-                    //    kyc.PaymentDate != null)
-
-                    //    {
-                    //        if (kyc.ChallanNo.Count > 0)
-
-                    //        {
-                    //            List<Kyclicensepaymentrpt> payment = new List<Kyclicensepaymentrpt>();
-                    //            for (int i = 0; i < kyc.ChallanNo.Count; i++)
-                    //            {
-                    //                payment.Add(new Kyclicensepaymentrpt
-                    //                {
-                    //                    ChallanNo = kyc.ChallanNo.Count <= i ? string.Empty : kyc.ChallanNo[i],
-                    //                    PaymentDate = kyc.PaymentDate[i],
-                    //                    PaymentAmount = kyc.PaymentAmount[i],
-                    //                    PaymentPeriod = kyc.PaymentPeriod.Count <= i ? string.Empty : kyc.PaymentPeriod[i],
-                    //                    Purpose = kyc.Purpose.Count <= i ? string.Empty : kyc.Purpose[i],
-                    //                    PaymentDocPath = kyc.PaymentDocument != null ?
-                    //                                                    kyc.PaymentDocument.Count <= i ? string.Empty :
-                    //                                                    fileHelper.SaveFile(Document, kyc.PaymentDocument[i]) :
-                    //                                                    kyc.PaymentDocPath[i] != null || kyc.PaymentDocPath[i] != "" ?
-                    //                                                    kyc.PaymentDocPath[i] : string.Empty,
-
-                    //                    KycformId = kyc.Id,
-                    //                    CreatedBy = SiteContext.UserId
-                    //                });
-                    //            }
-                    //            foreach (var item in payment)
-                    //            {
-                    //                result = await _kycformService.Savelicensepayment(item);
-                    //            }
-                    //        }
-                    //    }
-                    //}
-                    //else { }
+                   
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View(kyc);
-                        //var list = await _structureService.GetAllStructure();
-                        // return View("Index", list);
-                    }
+                     
+                    var list = await _kycformService.GetAllKycform();
+                    return View("Index", list);
+                }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
@@ -165,9 +109,106 @@ namespace LeaseForPublic.Controllers
             
         }
 
-        public IActionResult Edit()
+       
+        //[AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var Data = await _kycformService.FetchSingleResult(id);
+            Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            Data.BranchList = await _kycformService.GetAllBranchList();
+            Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            Data.ZoneList = await _kycformService.GetAllZoneList();
+            Data.LocalityList = await _kycformService.GetLocalityList();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id, Kycform kyc)
+        {
+            kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            kyc.BranchList = await _kycformService.GetAllBranchList();
+            kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            kyc.ZoneList = await _kycformService.GetAllZoneList();
+            kyc.LocalityList = await _kycformService.GetLocalityList();
+            string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+            string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
+            string ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
+
+
+            if (ModelState.IsValid)
+            {
+                FileHelper fileHelper = new FileHelper();
+
+                if (kyc.Aadhar != null)
+                {
+                    kyc.AadhaarNoPath = fileHelper.SaveFile(AadharDoc, kyc.Aadhar);
+                }
+                if (kyc.Letter != null)
+                {
+                    kyc.LetterPath = fileHelper.SaveFile(LetterDoc, kyc.Letter);
+                }
+                if (kyc.ApplicantPan != null)
+                {
+                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile(ApplicantDoc, kyc.ApplicantPan);
+                }
+                kyc.ModifiedBy = SiteContext.UserId;
+                var result = await _kycformService.Update(id, kyc);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+                        var list = await _kycformService.GetAllKycform();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(kyc);
+
+                    }
+               
+            }
+            return View(kyc);
+        }
+
+        //[AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _kycformService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _kycformService.GetAllKycform();
+                return View("Index", result1);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _kycformService.GetAllKycform();
+                return View("Index", result1);
+            }
+        }
+
+        //[AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _kycformService.FetchSingleResult(id);
+            Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            Data.BranchList = await _kycformService.GetAllBranchList();
+            Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            Data.ZoneList = await _kycformService.GetAllZoneList();
+            Data.LocalityList = await _kycformService.GetLocalityList();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
         }
     }
 }

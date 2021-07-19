@@ -17,7 +17,7 @@
             <th> Is Verified</th>
             <th> Verified By</th>
             <th> Verified On</th>
-            <th> Status</th>
+            <th> Operation</th>
             
 
         </tr>
@@ -27,41 +27,39 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
+        <tr>
 
-                    <td>@item.FileNo </td>
-                    <td>@item.PayeeName  </td>
-                    <td>@item.PropertyNo </td>
-                    <td>@item.AmountPaid </td>
-                    <td>@item.InterestPaid </td>
-                    <td>@item.TotalAmount </td>
-                    <td>@item.TransactionId </td>
-                    <td>@item.BankTransactionId </td>
-                    <td>@item.PaymentMode </td>
-                    <td>@item.BankName </td>
-
-
-                    <td>
-                        @if (item.IsVerified == 1)
-                        {
-                            <span class="badge badge-primary px-2 py-1">yes</span> }
-                        else
-                        {
-                            <span class="badge badge-danger px-2 py-1">no</span>}
-                    </td>
-                    <td>@item.VerifiedBy </td>
-                    <td>@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
-                    <td>
-                        @if (item.IsActive == 1)
-                        {
-                            <span class="badge badge-primary px-2 py-1">Active</span> }
-                        else
-                        {
-                            <span class="badge badge-danger px-2 py-1">Inactive</span>}
-                    </td>
+            <td>@item.FileNo </td>
+            <td>@item.PayeeName  </td>
+            <td>@item.PropertyNo </td>
+            <td>@item.AmountPaid </td>
+            <td>@item.InterestPaid </td>
+            <td>@item.TotalAmount </td>
+            <td>@item.TransactionId </td>
+            <td>@item.BankTransactionId </td>
+            <td>@item.PaymentMode </td>
+            <td>@item.BankName </td>
 
 
-                </tr>
+            <td>
+                @if (item.IsVerified == 1)
+                {
+                    <span class="badge badge-success px-2 py-1 ">Yes</span> }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">No</span>}
+            </td>
+            @*<td>@item.VerifiedBy </td>*@
+            <td>@item.User.UserName </td>
+
+            <td>@(Convert.ToDateTime(item.VerifiedOn).ToString("dd MMM yyyy")) </td>
+            <td>
+                <a asp-action="Unverify" asp-route-id="@item.Id" title="Unverify" class="edit" onclick="return confirm('Are you sure, You want to move this verified record to unverified record?')"> <i class="ri-edit-line"></i> </a>
+
+            </td>
+
+
+        </tr>
             }
         }
         else

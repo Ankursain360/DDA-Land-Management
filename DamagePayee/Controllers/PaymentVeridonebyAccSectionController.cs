@@ -37,6 +37,7 @@ namespace DamagePayee.Controllers
         {
 
             var result = await _paymentverificationService.GetPagedPaymentVerificationDoneByAcc(model);
+            ViewBag.verificationststus = model.IsVerified;
             return PartialView("_ListallData", result);
 
         }

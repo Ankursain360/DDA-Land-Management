@@ -63,6 +63,20 @@ namespace DamagePayee.Controllers
                return View("Index");
            
         }
+        public async Task<IActionResult> Unverify(int id)
+        {
+            var result = await _paymentverificationService.Unverify(id, SiteContext.UserId);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.UnVerifysuccesfuly, "", AlertType.Success);
+
+                return View("Index");
+            }
+            else
+                return View("Index");
+
+        }
+        
 
 
     }

@@ -17,6 +17,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<PropertyType>> GetAllPropertyTypeList();
         Task<List<Zone>> GetAllZoneList();
         Task<List<Locality>> GetLocalityList();
+        Task<List<Kycform>> GetAllKycform();
+        Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model);
         Task<bool> Saveleasepayment(Kycleasepaymentrpt payment);
         Task<bool> Savelicensepayment(Kyclicensepaymentrpt payment);
 

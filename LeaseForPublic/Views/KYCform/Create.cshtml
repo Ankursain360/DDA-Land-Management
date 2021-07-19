@@ -337,12 +337,12 @@
             </div>
             <!-- Lessee details -->
             <div id="divLesseeDetails">
-                <h3 class="my-3 sub-heading">Details of Lessee as per Allotment Letter/Lease deed</h3>
+                <h3 id="licenseheading" class="my-3 sub-heading">Details of Lessee as per Allotment Letter/Lease deed</h3>
 
                 <input type="hidden" asp-for="AllotteeApplicantDetailsSame" />
                 <div class="form-check theme">
                     <input class="form-check-input" name="chksame" type="checkbox" id="chk1">
-                    <label class="form-check-label" for="checkbox">
+                    <label class="form-check-label" for="chk1">
                         If the Allottee Details are same as Applicant Details then tick the checkbox
                     </label>
                 </div>
@@ -426,7 +426,7 @@
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input type="date" asp-for="LeaseLicenseExecutionDate" class="floating-label-field floating-label-field--s3" placeholder="Address">
                             <span asp-validation-for="LeaseLicenseExecutionDate" class="text-danger"></span>
-                            <label for="field-1" class="floating-label">Date of Lease Execution <span style="color:red">*</span></label>
+                            <label id="labellease" for="field-1" class="floating-label">Date of Lease Execution <span style="color:red">*</span></label>
                         </div>
                     </div>
 
@@ -479,14 +479,14 @@
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input type="file" asp-for="Aadhar" class="floating-label-field floating-label-field--s3" placeholder="file">
                             <span asp-validation-for="Aadhar" class="text-danger"></span>
-                            <label for="field-1" class="floating-label">Aadhaar No. of Allottee/Lessee</label>
+                            <label id="aadharlb" for="field-1" class="floating-label">Aadhaar No. of Allottee/Lessee</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input type="file" asp-for="Letter" class="floating-label-field floating-label-field--s3" placeholder="file">
                             <span asp-validation-for="Letter" class="text-danger"></span>
-                            <label for="field-1" class="floating-label">Possession Letter /Allotment Letter /Executed Lease deed (Any One )</label>
+                            <label id="letterlb" for="field-1" class="floating-label">Possession Letter /Allotment Letter /Executed Lease deed (Any One )</label>
                         </div>
                     </div>
                 </div>

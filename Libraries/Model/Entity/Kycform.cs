@@ -116,6 +116,7 @@ namespace Libraries.Model.Entity
         public IFormFile Letter { get; set; }
         [NotMapped]
         public IFormFile ApplicantPan { get; set; }
+
         public Branch Branch { get; set; }
         public Leasetype LeaseType { get; set; }
         public Locality Locality { get; set; }
