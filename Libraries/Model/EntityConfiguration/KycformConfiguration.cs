@@ -15,6 +15,7 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("kycform", "lms");
 
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int");
             builder.HasIndex(e => e.BranchId)
                 .HasName("fkbranchkyc_idx");
 
@@ -35,6 +36,10 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.AadhaarNoPath).HasColumnType("longtext");
+
+            builder.Property(e => e.AadhaarPanapplicantPath)
+                .HasColumnName("AadhaarPANApplicantPath")
+                .HasColumnType("longtext");
 
             builder.Property(e => e.Address)
                 .HasMaxLength(500)
@@ -65,6 +70,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Area).HasColumnType("decimal(18,3)");
 
+            builder.Property(e => e.AreaUnit)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
             builder.Property(e => e.Block)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -87,11 +96,28 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
+            builder.Property(e => e.GroundRentAmount).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.LicenseFeePayable).HasColumnType("decimal(18,3)");
+
             builder.Property(e => e.IsActive).HasDefaultValueSql("1");
+
+            builder.Property(e => e.KycStatus)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+            builder.Property(e => e.LandPremiumAmount).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.LeaseGroundRentDepositFrequency)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.LeaseLicenseExecutionDate).HasColumnType("date");
 
             builder.Property(e => e.LetterPath).HasColumnType("longtext");
+
+            builder.Property(e => e.LicenseFrequency)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.LicenseFrom).HasColumnType("date");
 
@@ -104,6 +130,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.Property(e => e.PendingAt)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
             builder.Property(e => e.Phase)
                 .HasMaxLength(45)
@@ -164,9 +194,6 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Kycform)
                 .HasForeignKey(d => d.ZoneId)
                 .HasConstraintName("fkzonekyc");
-
-
-
 
         }
     }

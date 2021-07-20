@@ -46,6 +46,96 @@ namespace Libraries.Repository.EntityRepository
             List<Locality> List = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return List;
         }
+
+        public async Task<List<Kycform>> GetAllKycform()
+        {
+            return await _dbContext.Kycform
+                                   .Include(x =>x.Branch)
+                                   .Include(x => x.LeaseType)
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.PropertyType)
+                                   .Include(x => x.Zone)
+                                   .Where(x => x.IsActive == 1)
+                                   .ToListAsync();
+        }
+
+        public async Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model)
+        {
+            var data = await _dbContext.Kycform
+                                       .Include(x => x.Branch)
+                                       .Include(x => x.LeaseType)
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.PropertyType)
+                                       .Include(x => x.Zone)
+                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
+                                       .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Kycform
+                                               .Include(x => x.Branch)
+                                               .Include(x => x.LeaseType)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.PropertyType)
+                                               .Include(x => x.Zone)
+                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
+                                               .OrderBy(x => x.Property)
+                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Kycform
+                                               .Include(x => x.Branch)
+                                               .Include(x => x.LeaseType)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.PropertyType)
+                                               .Include(x => x.Zone)
+                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
+                                               .OrderByDescending(x => x.IsActive)
+                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Kycform
+                                               .Include(x => x.Branch)
+                                               .Include(x => x.LeaseType)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.PropertyType)
+                                               .Include(x => x.Zone)
+                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
+                                               .OrderByDescending(x => x.Property)
+                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Kycform
+                                               .Include(x => x.Branch)
+                                               .Include(x => x.LeaseType)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.PropertyType)
+                                               .Include(x => x.Zone)
+                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
+                                               .OrderBy(x => x.IsActive)
+                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            return data;
+            // return await _dbContext.Structure.GetPaged<Structure>(model.PageNumber, model.PageSize);
+        }
+
         //********* rpt ! Kycleasepaymentrpt Details **********
         public async Task<bool> Saveleasepayment(Kycleasepaymentrpt payment)
         {
@@ -57,6 +147,26 @@ namespace Libraries.Repository.EntityRepository
         public async Task<bool> Savelicensepayment(Kyclicensepaymentrpt payment)
         {
             _dbContext.Kyclicensepaymentrpt.Add(payment);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        //KYC Approval process methods : Added by ishu 20/7/2021
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid)
+       
+        {
+            return await _dbContext.Kycworkflowtemplate
+                                    .Where(x => x.ProcessGuid == processguid && x.EffectiveDate <= DateTime.Now
+                                    && x.IsActive == 1
+                                    )
+                                    .OrderByDescending(x => x.Id)
+                                    .Take(1)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval)
+        {
+            _dbContext.Kycapprovalproccess.Add(kycapproval);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }

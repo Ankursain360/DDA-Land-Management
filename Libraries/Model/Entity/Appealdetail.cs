@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
         public string AppealByDept { get; set; }
 
         public string Department { get; set; }
-        public int? DemandListId { get; set; }
+        public int DemandListId { get; set; }
         public DateTime? DateOfAppeal { get; set; }
         
         public string PanelLawer { get; set; }

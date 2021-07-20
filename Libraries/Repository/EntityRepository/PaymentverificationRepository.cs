@@ -66,7 +66,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Paymentverification>> GetPagedPaymentListVerified(PaymentverificationSearchDto model)
         {
             var data = await _dbContext.Paymentverification
-                           // .Where(a => a.IsVerified == 0)
+                           .Include(x => x.User)
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
 
                             .OrderByDescending(s => s.IsActive)
@@ -159,7 +159,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Paymentverification
 
 
-
+                 .Include(x => x.User)
                            // .Where(a => a.IsVerified == 0)
                            .Where(x =>
                           (model.IsVerified==1 ? (x.VerifiedOn >= model.fromdate && x.VerifiedOn <= model.todate): (x.CreatedDate >= model.fromdate && x.VerifiedOn <= model.todate)) &&

@@ -27,6 +27,10 @@ namespace Libraries.Model.Entity
             Demandlistdetails = new HashSet<Demandlistdetails>();
             Mutation = new HashSet<Mutation>();
             Courtcasesmapping = new HashSet<Courtcasesmapping>();
+          
+                //Acquiredenhancecompensation = new HashSet<Acquiredenhancecompensation>();
+             Demandlistdetails = new HashSet<Demandlistdetails>();
+            
         }
         [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }

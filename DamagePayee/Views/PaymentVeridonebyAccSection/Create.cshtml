@@ -37,14 +37,14 @@
     <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap">
-                <input type="date" id="FromDateMsg" class="floating-label-field floating-label-field--s3" />
+                <input type="date" asp-for="FromDateMsg" class="floating-label-field floating-label-field--s3" />
                 <span id="FromDateMsg" class="text-danger" style="display:none;">Mandatory</span>
                 <label class="floating-label">From Date  <span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="floating-label-wrap">
-                <input type="date" id="ToDateMsg" class="floating-label-field floating-label-field--s3" />
+                <input type="date" asp-for="ToDateMsg" class="floating-label-field floating-label-field--s3" />
                 <span id="ToDateMsg" class="text-danger" style="display:none;">Mandatory</span>
                 <label class="floating-label">To Date  <span style="color:red">*</span></label>
             </div>
@@ -94,7 +94,7 @@
 
         <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
 
-            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+            <a href="/PaymentVeridonebyAccSection/PaymentVerificationdetailsList" class="d-flex align-items-center btn btn-success">
                 <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                 <small>Download</small>
             </a>

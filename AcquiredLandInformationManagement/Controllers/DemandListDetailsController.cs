@@ -26,15 +26,17 @@ namespace AcquiredLandInformationManagement.Controllers
     public class DemandListDetailsController : BaseController
     {
         private readonly IDemandListDetailsService _demandListDetailsService;
+       
         public IConfiguration _Configuration;
         string ENMDocumentFilePath = "";
+        string PaymentProofDocumentFilePath = "";
 
         public DemandListDetailsController(IDemandListDetailsService demandListDetailsService, IConfiguration configuration)
         {
             _demandListDetailsService = demandListDetailsService;
             _Configuration = configuration;
             ENMDocumentFilePath = _Configuration.GetSection("FilePaths:DemandListDetails:DocumentFIlePath").Value.ToString();
-            //PaymentProofDocumentFilePath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+           
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -72,11 +74,12 @@ namespace AcquiredLandInformationManagement.Controllers
             await BindDropDown(demandlistdetails);
             demandlistdetails.VillageList = await _demandListDetailsService.GetVillageList();
             demandlistdetails.KhasraNoList = await _demandListDetailsService.GetKhasraList(demandlistdetails.VillageId);
-
+            //PaymentProofDocumentFilePath = _Configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
             if (ModelState.IsValid)
             {
                 FileHelper fileHelper = new FileHelper();
                 demandlistdetails.ENMDocumentName = demandlistdetails.ENMDocumentIFormFile == null ? demandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, demandlistdetails.ENMDocumentIFormFile);
+
                 demandlistdetails.CreatedBy = SiteContext.UserId;
                 var result = await _demandListDetailsService.Create(demandlistdetails);
 
@@ -85,23 +88,27 @@ namespace AcquiredLandInformationManagement.Controllers
                     //************ Save Appeal  ************  
 
                     if (
-                        demandlistdetails.AppealNo != null &&
-                        demandlistdetails.AppealByDept != null &&
+                        demandlistdetails.AppealNo != null 
+
+                        //demandlistdetails.AppealByDept != null &&
                         //demandlistdetails.Department != null &&
-                         demandlistdetails.DateOfAppeal != null &&
-                        demandlistdetails.PanelLawer != null
+                        // demandlistdetails.DateOfAppeal != null &&
+                        //demandlistdetails.PanelLawer != null
 
                         )
                     {
                         Appealdetail appealdetail = new Appealdetail();
 
-                      
+                        //item.PropertyType == null ? "" : item.PropertyType.Name
+                        //appealdetail.AppealNo = demandlistdetails.AppealNo == null ? "0" : demandlistdetails.AppealNo;
                         appealdetail.AppealNo = demandlistdetails.AppealNo;
                         appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-
-                        //appealdetail.Department = demandlistdetails.Department;
+                        appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                        appealdetail.Department = demandlistdetails.Department;
                         appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
                         appealdetail.PanelLawer = demandlistdetails.PanelLawer;
+                        appealdetail.IsActive = 1;
 
                         appealdetail.DemandListId = demandlistdetails.Id;
                         appealdetail.CreatedBy = SiteContext.UserId;
@@ -110,39 +117,45 @@ namespace AcquiredLandInformationManagement.Controllers
                     //************ Save Payment  ************  
 
                     if (
-                        demandlistdetails.AmountPaid != null &&
-                        demandlistdetails.ChequeDate != null &&
-                        demandlistdetails.ChequeNo != null &&
-                         demandlistdetails.BankName != null &&
-                        demandlistdetails.VoucherNo != null &&
-                          demandlistdetails.PaymentProofDocumentIFormFile != null &&
-                        demandlistdetails.PercentPaid != null
+                        //demandlistdetails.AmountPaid != null &&
+                        //demandlistdetails.ChequeDate != null &&
+                        //demandlistdetails.ChequeNo != null &&
+                        // demandlistdetails.BankName != null &&
+                        demandlistdetails.VoucherNo != null 
+                        //  demandlistdetails.PercentPaid != null &&
+                        //  //demandlistdetails.PaymentProofDocumentIFormFile != null &&
+                        //demandlistdetails.PercentPaid != null
 
                         )
                     {
                         Paymentdetail paymentdetail = new Paymentdetail();
-
+                      //  paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
+                      //paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                      //paymentdetail.PaymentProofDocumentIFormFile);
 
                         paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
+                        paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
                         paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
                         paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
                         paymentdetail.BankName = demandlistdetails.BankName;
                         paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
-                        paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+                        paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
+                        //paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
 
                         paymentdetail.DemandListId = demandlistdetails.Id;
                         paymentdetail.CreatedBy = SiteContext.UserId;
                         result = await _demandListDetailsService.SavePayment(paymentdetail);
                     }
-                    //ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    //ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
-                    //return View("Index");
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
+                    return View("Index");
                     //ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                     //var list = await _demandListDetailsService.GetAllDemandlistdetails();
                     //return View("Index", list);
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var list = await _demandListDetailsService.GetAllDemandlistdetails();
-                    return View("Index", list);
+                    //ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    //var list = await _demandListDetailsService.GetAllDemandlistdetails();
+                    //return View("Index", list);
                 }
                 else
                 {
@@ -180,6 +193,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _demandListDetailsService.FetchSingleResult(id);
             await BindDropDown(Data);
+
             Data.KhasraNoList = await _demandListDetailsService.GetKhasraList(Data.VillageId);
             if (Data == null)
             {
@@ -197,7 +211,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             await BindDropDown(demandlistdetails);
             demandlistdetails.VillageList = await _demandListDetailsService.GetVillageList();
-
+            demandlistdetails.KhasraNoList = await _demandListDetailsService.GetKhasraList(demandlistdetails.VillageId);
             if (ModelState.IsValid)
             {
                 FileHelper fileHelper = new FileHelper();
@@ -213,13 +227,15 @@ namespace AcquiredLandInformationManagement.Controllers
                     if (data != null)
 
                     {
+                       
 
                         Appealdetail appealdetail = new Appealdetail();
 
                       
                         appealdetail.AppealNo = demandlistdetails.AppealNo;
                         appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-
+                        appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                        appealdetail.Department = demandlistdetails.Department;
                         appealdetail.Department = demandlistdetails.Department;
                         appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
                         appealdetail.PanelLawer = demandlistdetails.PanelLawer;
@@ -236,7 +252,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
                         appealdetail.AppealNo = demandlistdetails.AppealNo;
                         appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-
+                        appealdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        appealdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
                         appealdetail.Department = demandlistdetails.Department;
                         appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
                         appealdetail.PanelLawer = demandlistdetails.PanelLawer;
@@ -250,48 +267,52 @@ namespace AcquiredLandInformationManagement.Controllers
                     //************ Save Payment  ************  
                     var dataa = await _demandListDetailsService.FetchSinglePayment(id);
 
-                    if (data != null)
+                    if (dataa != null)
 
                     {
 
                         Paymentdetail paymentdetail = new Paymentdetail();
-
+                       // paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
+                       //paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                       //paymentdetail.PaymentProofDocumentIFormFile);
 
                         paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
                         paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
                         paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
                         paymentdetail.BankName = demandlistdetails.BankName;
                         paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
-                        paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentName;
-
+                        paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
+                        //paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentName;
+                        paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
                         paymentdetail.DemandListId = demandlistdetails.Id;
                         paymentdetail.IsActive = 1;
                         result = await _demandListDetailsService.UpdatePayment(id, paymentdetail);
                     }
                     else
                     {
-
-                        Appealdetail appealdetail = new Appealdetail();
-
-                        appealdetail.AppealNo = demandlistdetails.AppealNo;
-                        appealdetail.AppealByDept = demandlistdetails.AppealByDept;
-
-                        appealdetail.Department = demandlistdetails.Department;
-                        appealdetail.DateOfAppeal = demandlistdetails.DateOfAppeal;
-                        appealdetail.PanelLawer = demandlistdetails.PanelLawer;
-
-                        appealdetail.DemandListId = demandlistdetails.Id;
-                        appealdetail.CreatedBy = SiteContext.UserId;
-                        appealdetail.IsActive = 1;
-                        result = await _demandListDetailsService.SaveAppeal(appealdetail);
+                        Paymentdetail paymentdetail = new Paymentdetail();
+                        paymentdetail.AmountPaid = (decimal)demandlistdetails.AmountPaid;
+                        paymentdetail.ChequeDate = demandlistdetails.ChequeDate;
+                        paymentdetail.ChequeNo = demandlistdetails.ChequeNo;
+                        paymentdetail.BankName = demandlistdetails.BankName;
+                        paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
+                        paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
+                        //paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+                        paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
+                        paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
+                        paymentdetail.DemandListId = demandlistdetails.Id;
+                        paymentdetail.CreatedBy = SiteContext.UserId;
+                        paymentdetail.IsActive = 1;
+                        result = await _demandListDetailsService.SavePayment(paymentdetail);
 
                     }
-                    //ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    //ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
-                    //return View("Index");
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var list = await _demandListDetailsService.GetAllDemandlistdetails();
-                    return View("Index", list);
+                    ViewBag.VillageList = await _demandListDetailsService.GetVillageList();
+                    return View("Index");
+                    //ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    //var list = await _demandListDetailsService.GetAllDemandlistdetails();
+                    //return View("Index", list);
                 }
                 else
                 {
@@ -380,6 +401,14 @@ namespace AcquiredLandInformationManagement.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, file.GetContentType(filename));
         }
+        //public async Task<IActionResult> ViewPaymentProofDocument(int Id)
+        //{
+        //    FileHelper file = new FileHelper();
+        //    Paymentdetail Data = await _paymentdetailService.FetchSingleResult(Id);
+        //    string filename = PaymentProofDocumentFilePath + Data.PaymentProofDocumentName;
+        //    byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+        //    return File(FileBytes, file.GetContentType(filename));
+        //}
     }
 
 }

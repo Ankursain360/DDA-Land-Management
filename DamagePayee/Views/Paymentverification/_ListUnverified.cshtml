@@ -42,10 +42,10 @@
                     <td>
                         @if (item.IsVerified == 0)
                         {
-                            <span class="badge badge-danger px-2 py-1">no</span> }
+                            <span class="badge badge-danger px-2 py-1">No</span> }
                         else
                         {
-                            <span class="badge badge-primary px-2 py-1">yes</span>}
+                            <span class="badge badge-primary px-2 py-1">Yes</span>}
                     </td>
 
                     <td>
@@ -59,7 +59,7 @@
                     <td style="min-width:100px;">
                         <div class="form-check">
 
-                            <a asp-action="Verify" asp-route-id="@item.Id"><input id="btnverify" value="Verify" type="submit" class="btn btn-theme" /></a>
+                            <a asp-action="Verify" asp-route-id="@item.Id" onclick="return confirm('Are you sure, you want to verify this record?')"><input id="btnverify" value="Verify" type="submit" class="btn btn-theme" /></a>
 
                         </div>
                     </td>

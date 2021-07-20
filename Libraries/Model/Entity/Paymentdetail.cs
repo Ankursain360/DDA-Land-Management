@@ -18,8 +18,10 @@ namespace Libraries.Model.Entity
         public decimal AmountPaid { get; set; }
         [Required(ErrorMessage = "ChequeDate  is Mandatory")]
         public DateTime? ChequeDate { get; set; }
-        [Required(ErrorMessage = "ChequeNo  is Mandatory")]
+        //[Required(ErrorMessage = "ChequeNo  is Mandatory")]
+        ////public int DemandListId { get; set; }
         public int DemandListId { get; set; }
+        [Required(ErrorMessage = "ChequeNo  is Mandatory")]
         public string ChequeNo { get; set; }
         [Required(ErrorMessage = "BankName is Mandatory")]
         public string BankName { get; set; }

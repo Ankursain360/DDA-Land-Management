@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
             Onlinecomplaint = new HashSet<Onlinecomplaint>();
             Request = new HashSet<Request>();
             Watchandward = new HashSet<Watchandward>();
+            Kycapprovalproccess = new HashSet<Kycapprovalproccess>();
         }
         [Required(ErrorMessage = "Status Code is mandatory")]
         public int StatusCode { get; set; }
@@ -41,7 +42,7 @@ namespace Libraries.Model.Entity
         public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Request> Request { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
-
+        public ICollection<Kycapprovalproccess> Kycapprovalproccess { get; set; }
         [NotMapped]
         public string idcode { get; set; }
     }
