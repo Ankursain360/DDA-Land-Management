@@ -32,16 +32,13 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="hidden" asp-for="ENMDocumentName" />
                     @{
-                        @if (Model.ENMDocumentName != null)
-                        {
-                            <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <a class="badge badge-primary px-2" asp-action="ViewENMDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
-                        }
-                        else
-                        {
-                            <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                        }
-                    }
+                                    @if (Model.ENMDocumentName != null)
+                                    {
+                        <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewENMDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a> }
+                                                    else
+                                                    {
+                                        <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ENMDocumentName"></span>
                     <label class="floating-label">Upload ENM Document</label>
                 </div>
@@ -273,186 +270,182 @@
             Appeal Details
 
         </h3>
-        @foreach (var item in Model.Appealdetail)
-        { 
-            <div class="row mt-md-3">
-                <div class="col-md-6 ">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="@item.AppealNo" placeholder="Appeal No" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="200" />
+        @*foreach (var item in Model.Appealdetail)
+            {*@
+        <div class="row mt-md-3">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="@Model.Appealdetail.FirstOrDefault().AppealNo" placeholder="Appeal No" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="200" />
 
-                        <span asp-validation-for="@item.AppealNo" class="text-danger"></span>
+                    <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().AppealNo" class="text-danger"></span>
 
-                        <label class="floating-label">Appeal No<span style="color:red">*</span> </label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>
-                                Appeal By Department:<span style="color:red">*</span>
-                            </label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="hidden" asp-for="AppealByDept" />
-
-                            <div class="form-check theme">
-                                <input class="form-check-input" type="radio" asp-for="@item.AppealByDept" name="villageradio" id="rUOI" value="UOI" checked="checked">
-                                <label class="form-check-label" for="radio">
-                                    UOI
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-                                <input class="form-check-input" type="radio" asp-for="@item.AppealByDept" name="villageradio" id="rDDA" value="DDA">
-                                <label class="form-check-label" for="radio">
-                                    DDA
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="form-check theme">
-                                <input class="form-check-input" asp-for="@item.AppealByDept" type="radio" name="villageradio" id="OtherDDA" value="Department">
-                                <label class="form-check-label" for="radio">
-                                    Other
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
+                    <label class="floating-label">Appeal No<span style="color:red">*</span> </label>
                 </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Appeal By Department:<span style="color:red">*</span>
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="hidden" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" />
+
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" name="villageradio" id="rUOI" value="UOI" checked="checked">
+                            <label class="form-check-label" for="radio">
+                                UOI
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" name="villageradio" id="rDDA" value="DDA">
+                            <label class="form-check-label" for="radio">
+                                DDA
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input class="form-check-input" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" type="radio" name="villageradio" id="OtherDDA" value="Department">
+                            <label class="form-check-label" for="radio">
+                                Other
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class="row mt-md-3" id="Departmentdiv" style="display:none">
             <div class="col-md-6 ">
-                <input asp-for="@item.Department" placeholder="Department" type="text"
+                <input asp-for="@Model.Appealdetail.FirstOrDefault().Department" placeholder="Department" type="text"
                        class="floating-label-field floating-label-field--s3" />
 
-                <span asp-validation-for="@item.Department" class="text-danger"></span>
+                <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().Department" class="text-danger"></span>
 
-                <label class="floating-label"> @item.Department </label>
+                <label class="floating-label"> Department</label>
             </div>
         </div>
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@item.DateOfAppeal" placeholder="Date Of Appeal" type="Date"
+                    <input asp-for="@Model.Appealdetail.FirstOrDefault().DateOfAppeal" placeholder="Date Of Appeal" type="Date"
                            class="floating-label-field floating-label-field--s3" />
 
-                    <span asp-validation-for="@item.DateOfAppeal" class="text-danger"></span>
+                    <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().DateOfAppeal" class="text-danger"></span>
 
                     <label class="floating-label">Date Of Appeal </label>
                 </div>
             </div>
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="PanelLawer" placeholder="Panel Lawyer" type="text"
+                    <input asp-for="@Model.Appealdetail.FirstOrDefault().PanelLawer" placeholder="Panel Lawyer" type="text"
                            class="floating-label-field floating-label-field--s3" limit="500" />
-
-                    <span asp-validation-for="PanelLawer" class="text-danger"></span>
+                    <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().PanelLawer" class="text-danger"></span>
 
                     <label class="floating-label">Panel Lawyer </label>
                 </div>
             </div>
-        </div>}
+        </div>
+        @*}*@
         <h3 class="mb-3 d-flex">
             Payment Details
 
         </h3>
-        @foreach (var item in Model.Paymentdetail)
-        {
-            <div class="row mt-md-3">
-                <div class="col-md-6 ">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="@item.AmountPaid" placeholder="Amount Paid" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="18" />
 
-                        <span asp-validation-for="@item.AmountPaid" class="text-danger"></span>
+        <div class="row mt-md-3">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().AmountPaid" placeholder="Amount Paid" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="18" />
 
-                        <label class="floating-label">Amount Paid(Rs.) <span style="color:red">*</span></label>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="@item.ChequeDate" placeholder="Date Of Appeal" type="Date"
-                               class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().AmountPaid" class="text-danger"></span>
 
-                        <span asp-validation-for="@item.ChequeDate" class="text-danger"></span>
-
-                        <label class="floating-label">Cheque Date <span style="color:red">*</span></label>
-                    </div>
+                    <label class="floating-label">Amount Paid(Rs.) <span style="color:red">*</span></label>
                 </div>
             </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6 ">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="@item.ChequeNo" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="50" />
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().ChequeDate" placeholder="Date Of Appeal" type="Date"
+                           class="floating-label-field floating-label-field--s3" />
 
-                        <span asp-validation-for="@item.ChequeNo" class="text-danger"></span>
+                    <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().ChequeDate" class="text-danger"></span>
 
-                        <label class="floating-label">Cheque/RTGS/NEFT/IMPS No<span style="color:red">*</span></label>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="@item.BankName" placeholder="Bank Name" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="100" />
-
-                        <span asp-validation-for="@item.BankName" class="text-danger"></span>
-
-                        <label class="floating-label">Bank Name <span style="color:red">*</span></label>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6 ">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="@item.VoucherNo" placeholder="Cheque No" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="100" />
-
-                        <span asp-validation-for="@item.VoucherNo" class="text-danger"></span>
-
-                        <label class="floating-label">Voucher No<span style="color:red">*</span> </label>
-                    </div>
-                </div>
-
-                <div class="col-md-6 ">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PercentPaid" placeholder="Panel Lawyer" type="text"
-                               class="floating-label-field floating-label-field--s3" limit="18" />
-
-                        <span asp-validation-for="PercentPaid" class="text-danger"></span>
-
-                        <label class="floating-label">Percent Paid<span style="color:red">*</span> </label>
-                    </div>
+                    <label class="floating-label">Cheque Date <span style="color:red">*</span></label>
                 </div>
             </div>
-            <div class="row mt-md-3">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="hidden" asp-for="@item.PaymentProofDocumentName" />
-                        @{
-                            @if (@item.PaymentProofDocumentName != null)
-                            {
-                                <input type="file" asp-for="@item.PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                <a class="badge badge-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@item.Id" target="_blank"> (View File)</a>
-                            }
-                            else
-                            {
-                                <input type="file" asp-for="@item.PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            }
-                        }
-                        <span class="d-block text-danger field-validation-valid" asp-validation-for="@item.PaymentProofDocumentName"></span>
-                        <label class="floating-label">Upload Copy of Payment Proof</label>
-                    </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().ChequeNo" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="50" />
+
+                    <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().ChequeNo" class="text-danger"></span>
+
+                    <label class="floating-label">Cheque/RTGS/NEFT/IMPS No<span style="color:red">*</span></label>
                 </div>
             </div>
-        }
-      
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().BankName" placeholder="Bank Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+
+                    <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().BankName" class="text-danger"></span>
+
+                    <label class="floating-label">Bank Name <span style="color:red">*</span></label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().VoucherNo" placeholder="Cheque No" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+
+                    <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().VoucherNo" class="text-danger"></span>
+
+                    <label class="floating-label">Voucher No<span style="color:red">*</span> </label>
+                </div>
+            </div>
+
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().PercentPaid" placeholder="Panel Lawyer" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="18" />
+
+                    <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().PercentPaid" class="text-danger"></span>
+
+                    <label class="floating-label">Percent Paid<span style="color:red">*</span> </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="hidden" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName" />
+                    @{
+                                    @if (Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName != null)
+                                    {
+                        <input type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge badge-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Paymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
+                                                    else
+                                                    {
+                                        <input type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName"></span>
+                    <label class="floating-label">Upload Copy of Payment Proof</label>
+                </div>
+            </div>
+        </div>
+
+
 
         <div class="row mt-md-3">
             <div class=" col-md-6">
@@ -476,13 +469,13 @@
             </div>
         </div>
     </div>
-        <div class="row mt-md-3">
-            <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Update</button>
-                @Html.ActionLink("Back", "Index", "DemandListDetails", null, new { @class = "btn btn-theme " })
+    <div class="row mt-md-3">
+        <div class=" col-md-12">
+            <button class="btn btn-theme " type="submit">Update</button>
+            @Html.ActionLink("Back", "Index", "DemandListDetails", null, new { @class = "btn btn-theme " })
 
-            </div>
         </div>
+    </div>
 
 </form>
 
@@ -496,4 +489,3 @@
 <environment exclude="Development">
     <script src="~/js/demandlistdetailsedit.min.js" asp-append-version="true"></script>
 </environment>
-

@@ -186,7 +186,7 @@ namespace Libraries.Repository.EntityRepository
             model.BankName = paymentdetail.BankName;
             model.VoucherNo = paymentdetail.VoucherNo;
             model.PercentPaid = paymentdetail.PercentPaid;
-            model.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentName;
+            //model.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentName;
 
             model.IsActive = paymentdetail.IsActive;
             model.ModifiedDate = DateTime.Now;

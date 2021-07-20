@@ -13,6 +13,7 @@ using Notification.OptionEnums;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Dto.Search;
+using System.IO;
 
 namespace LeaseForPublic.Controllers
 {
@@ -20,12 +21,20 @@ namespace LeaseForPublic.Controllers
     {
         private readonly IKycformService _kycformService;
         public IConfiguration _configuration;
+        string AadharDoc = "";
+        string LetterDoc = "";
+        string ApplicantDoc = "";
+       
         public KYCformController(IConfiguration configuration, IKycformService KycformService)
           
         {
             _configuration = configuration;
             _kycformService = KycformService;
-           
+             AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+             LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
+             ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
+
+
         }
         public IActionResult Index()
         {
@@ -73,15 +82,15 @@ namespace LeaseForPublic.Controllers
 
                 if (kyc.Aadhar != null)
                 {
-                    kyc.AadhaarNoPath = fileHelper.SaveFile(AadharDoc, kyc.Aadhar);
+                    kyc.AadhaarNoPath = fileHelper.SaveFile1(AadharDoc, kyc.Aadhar);
                 }
                 if (kyc.Letter != null)
                 {
-                    kyc.LetterPath = fileHelper.SaveFile(LetterDoc, kyc.Letter);
+                    kyc.LetterPath = fileHelper.SaveFile1(LetterDoc, kyc.Letter);
                 }
                 if (kyc.ApplicantPan != null)
                 {
-                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile(ApplicantDoc, kyc.ApplicantPan);
+                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
                 }
 
                 kyc.CreatedBy = SiteContext.UserId;
@@ -131,6 +140,7 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Kycform kyc)
         {
+            var Data = await _kycformService.FetchSingleResult(id);
             kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
             kyc.BranchList = await _kycformService.GetAllBranchList();
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
@@ -147,16 +157,31 @@ namespace LeaseForPublic.Controllers
 
                 if (kyc.Aadhar != null)
                 {
-                    kyc.AadhaarNoPath = fileHelper.SaveFile(AadharDoc, kyc.Aadhar);
+                    kyc.AadhaarNoPath = fileHelper.SaveFile1(AadharDoc, kyc.Aadhar);
                 }
+                else
+                {
+                    kyc.AadhaarNoPath = Data.AadhaarNoPath;
+                }
+
                 if (kyc.Letter != null)
                 {
-                    kyc.LetterPath = fileHelper.SaveFile(LetterDoc, kyc.Letter);
+                    kyc.LetterPath = fileHelper.SaveFile1(LetterDoc, kyc.Letter);
+                }
+                else
+                {
+                    kyc.LetterPath = Data.LetterPath;
                 }
                 if (kyc.ApplicantPan != null)
                 {
-                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile(ApplicantDoc, kyc.ApplicantPan);
+                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
                 }
+                else
+                {
+                    kyc.AadhaarPanapplicantPath = Data.AadhaarPanapplicantPath;
+                }
+
+
                 kyc.ModifiedBy = SiteContext.UserId;
                 var result = await _kycformService.Update(id, kyc);
                     if (result == true)
@@ -209,6 +234,30 @@ namespace LeaseForPublic.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        //***************** Download Files  ********************
+       
+        public async Task<IActionResult> DownloadAadharNo(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = AadharDoc + Data.AadhaarNoPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadLetter(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = LetterDoc + Data.LetterPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadPANofApplicant(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = ApplicantDoc + Data.AadhaarPanapplicantPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
     }
 }

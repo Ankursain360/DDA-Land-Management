@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
         //[Required(ErrorMessage = "ChequeNo  is Mandatory")]
         ////public int DemandListId { get; set; }
         public int DemandListId { get; set; }
+        [Required(ErrorMessage = "ChequeNo  is Mandatory")]
         public string ChequeNo { get; set; }
         [Required(ErrorMessage = "BankName is Mandatory")]
         public string BankName { get; set; }

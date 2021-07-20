@@ -139,8 +139,8 @@ function FillPaymentAtEdit() {
         debugger
 
         $("#AmountPaid").val(data.amountPaid);
-
-        $("#ChequeDate").val(data.chequeDate);
+        $("#ChequeDate").val(data.chequeDate.split('T')[0]);
+        //$("#ChequeDate").val(data.chequeDate);
         $("#ChequeNo").val(data.chequeNo);
         $("#BankName").val(data.bankName);
 
