@@ -114,6 +114,7 @@ namespace Libraries.Model.Entity
         public List<Khasra> KhasraNoList { get; set; }
         [NotMapped]
         public IFormFile PaymentProofDocumentIFormFile { get; set; }
+      
         [NotMapped]
         public IFormFile ENMDocumentIFormFile { get; set; }
        
