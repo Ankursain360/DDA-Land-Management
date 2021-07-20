@@ -16,6 +16,7 @@ namespace Libraries.Model.Entity
             Menu = new HashSet<Menu>();
             Menuactionrolemap = new HashSet<Menuactionrolemap>();
             WorkflowTemplate = new HashSet<WorkflowTemplate>();
+            Kycworkflowtemplate = new HashSet<Kycworkflowtemplate>();
         }
 
         [Required(ErrorMessage = " Module name is mandatory")]
@@ -39,6 +40,8 @@ namespace Libraries.Model.Entity
         public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public virtual ICollection<Menu> Menu { get; set; }
         public virtual ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
+
+        public ICollection<Kycworkflowtemplate> Kycworkflowtemplate { get; set; }
 
         [NotMapped]
         public List<ModuleCategory> ModuleCategoryList { get; set; }

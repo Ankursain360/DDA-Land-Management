@@ -69,6 +69,9 @@ namespace Libraries.Model.Entity
         public string AadhaarNoPath { get; set; }
         public string LetterPath { get; set; }
         public string AadhaarPanapplicantPath { get; set; }
+        public int? ApprovedStatus { get; set; }
+        public string PendingAt { get; set; }
+        public string KycStatus { get; set; }
         public byte IsActive { get; set; }
 
 
