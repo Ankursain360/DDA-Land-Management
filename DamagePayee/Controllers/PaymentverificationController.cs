@@ -80,7 +80,7 @@ namespace DamagePayee.Controllers
 
 
 
-//*******************************for verified *************************************************
+
 
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> PaymentVerificationdetailsList()
@@ -124,43 +124,8 @@ namespace DamagePayee.Controllers
         }
 
 
-        //*******************************for Unverified *************************************************
-        [AuthorizeContext(ViewAction.Download)]
-        public async Task<IActionResult> PaymentUnVerificationdetailsList()
-        {
-            var result = await _paymentverificationService.GetAllPaymentList();
-            List<PaymentverificationandReconciliationDto> data = new List<PaymentverificationandReconciliationDto>();
-            if (result != null)
-            {
-                for (int i = 0; i < result.Count; i++)
-                {
-                    data.Add(new PaymentverificationandReconciliationDto()
-                    {
-                        Id = result[i].Id,
-
-                        FileNo = result[i].FileNo,
-                        PayeeName = result[i].PayeeName,
-                        PropertyNo = result[i].PropertyNo,
-                        AmountPaid = result[i].AmountPaid,
-                        InterestPaid = result[i].InterestPaid,
-                        TotalAmount = result[i].TotalAmount,
-                        TransactionId = result[i].TransactionId,
-                        BankTransactionId = result[i].BankTransactionId,
-                        PaymentMode = result[i].PaymentMode,
-                        BankName = result[i].BankName,
-
-                        Status = result[i].IsActive.ToString() == "1" ? "Active" : "Inactive",
-                        verified = result[i].IsVerified.ToString() == "1" ? "Verified" : "Unverified"
-
-
-                    }); ;
-                }
-            }
-
-            var memory = ExcelHelper.CreateExcel(data);
-            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-
-        }
+       
+      
 
 
     }
