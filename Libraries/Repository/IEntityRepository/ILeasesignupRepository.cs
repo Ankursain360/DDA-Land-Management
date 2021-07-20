@@ -12,5 +12,6 @@ namespace Libraries.Repository.IEntityRepository
     {
         //Task<List<Leasesignup>> GetAllLeasesignup();
         //Task<PagedResult<Leasesignup>> GetPagedLeasesignup(LeasesignupSearchDto model);
+        Task<bool> ValidateMobileEmail(string mobile, string email);
     }
 }

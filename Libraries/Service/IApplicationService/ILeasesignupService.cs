@@ -12,5 +12,6 @@ namespace Libraries.Service.IApplicationService
    public interface ILeasesignupService : IEntityService<Leasesignup>
     {
         Task<bool> Create(Leasesignup leasesignup);
+        Task<bool> ValidateMobileEmail(string mobile, string email);
     }
 }
