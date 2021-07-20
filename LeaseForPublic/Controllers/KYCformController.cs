@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Dto.Search;
 using System.IO;
+using Dto.Master;
+using Service.IApplicationService;
+using System.Text;
 
 namespace LeaseForPublic.Controllers
 {
@@ -21,11 +24,16 @@ namespace LeaseForPublic.Controllers
     {
         private readonly IKycformService _kycformService;
         public IConfiguration _configuration;
+        private readonly IUserProfileService _userProfileService;
+        private readonly IApprovalProccessService _approvalproccessService;
+
         string AadharDoc = "";
         string LetterDoc = "";
         string ApplicantDoc = "";
-       
-        public KYCformController(IConfiguration configuration, IKycformService KycformService)
+        public KYCformController(IConfiguration configuration,
+            IKycformService KycformService,
+            IUserProfileService userProfileService,
+             IApprovalProccessService approvalproccessService )
           
         {
             _configuration = configuration;
@@ -33,8 +41,8 @@ namespace LeaseForPublic.Controllers
              AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
              LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
              ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
-
-
+            _userProfileService = userProfileService;
+            _approvalproccessService = approvalproccessService;
         }
         public IActionResult Index()
         {
@@ -78,6 +86,81 @@ namespace LeaseForPublic.Controllers
 
             if (ModelState.IsValid)
                 {
+                #region Approval Proccess At 1st level Check Initial Before Creating Record
+
+                Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
+                var DataFlow = await dataAsync();
+                for (int i = 0; i < DataFlow.Count; i++)
+                {
+                    if (!DataFlow[i].parameterSkip)
+                    {
+                        if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                        {
+                            if (kyc.BranchId == null)
+                            {
+                                ViewBag.Message = Alert.Show("Your Branch is not available , Without branch application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                return View(kyc);
+                            }
+
+                           // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                        }
+                        if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                        {
+                            for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                            {
+                                List<UserProfileDto> UserListRoleBasis = null;
+                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                    UserListRoleBasis = await _userProfileService.GetUserOnRoleBranchBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), kyc.BranchId ?? 0);
+                                else
+                                    UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
+
+                                StringBuilder multouserszonewise = new StringBuilder();
+                                int col = 0;
+                                if (UserListRoleBasis != null)
+                                {
+                                    for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                    {
+                                        if (col > 0)
+                                            multouserszonewise.Append(",");
+                                        multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                        col++;
+                                    }
+                                    approvalproccess.SendTo = multouserszonewise.ToString();
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
+                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                            {
+                                StringBuilder multousersbranchwise = new StringBuilder();
+                                int col = 0;
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multousersbranchwise.Append(",");
+                                        var UserProfile = await _userProfileService.GetUserByIdBranch(Convert.ToInt32(MultiUserId), kyc.BranchId ?? 0);
+                                        multousersbranchwise.Append(UserProfile.UserId);
+                                        col++;
+                                    }
+                                    approvalproccess.SendTo = multousersbranchwise.ToString();
+                                }
+                            }
+                        }
+
+
+                        break;
+                    }
+                }
+                #endregion
+
+
+
                 FileHelper fileHelper = new FileHelper();
 
                 if (kyc.Aadhar != null)
@@ -98,7 +181,75 @@ namespace LeaseForPublic.Controllers
                 var result = await _kycformService.Create(kyc);
                 if (result == true)
                 {
-                   
+
+                    #region Approval Proccess At 1st level start Added by ishu  20 july 2021
+                    var workflowtemplatedata = await _kycformService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProccessGuidKYCForm").Value));
+
+                   var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+
+                    for (int i = 0; i < DataFlow.Count; i++)
+                    {
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            kyc.ApprovedStatus = ApprovalStatus.Id;
+                            kyc.PendingAt = approvalproccess.SendTo;
+                            result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
+                            if (result)
+                            {
+                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
+                                approvalproccess.ServiceId = kyc.Id;
+                                approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                              
+                                #region set sendto and sendtoprofileid 
+                                StringBuilder multouserprofileid = new StringBuilder();
+                                int col = 0;
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multouserprofileid.Append(",");
+                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                        multouserprofileid.Append(UserProfile.Id);
+                                        col++;
+                                    }
+                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                }
+                                #endregion
+                                approvalproccess.PendingStatus = 1;   //1
+                                approvalproccess.Status = ApprovalStatus.Id;   //1
+                                approvalproccess.Level = i + 1;
+                                approvalproccess.Version = workflowtemplatedata.Version;
+                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                                //#region Insert Into usernotification table Added By Renu 18 June 2021
+                                //if (result)
+                                //{
+                                //    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
+                                //    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                //    Usernotification usernotification = new Usernotification();
+                                //    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                //    usernotification.Message = replacement;
+                                //    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
+                                //    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                //    usernotification.ServiceId = approvalproccess.ServiceId;
+                                //    usernotification.SendFrom = approvalproccess.SendFrom;
+                                //    usernotification.SendTo = approvalproccess.SendTo;
+                                //    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                //}
+                                //#endregion
+                            }
+
+                            break;
+                        }
+                    }
+
+                    #endregion
+
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                      
                     var list = await _kycformService.GetAllKycform();
@@ -259,5 +410,17 @@ namespace LeaseForPublic.Controllers
             string filename = ApplicantDoc + Data.AadhaarPanapplicantPath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+
+
+        //get kycworkflowtemplate table data
+        #region Fetch workflow data for approval prrocess Added by Renu 16 March 2021
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _kycformService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProccessGuidKYCForm").Value));
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+        #endregion
     }
 }

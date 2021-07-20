@@ -22,5 +22,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> Saveleasepayment(Kycleasepaymentrpt payment);
         Task<bool> Savelicensepayment(Kyclicensepaymentrpt payment);
 
+        //KYC Approval process methods : Added by ishu 20/7/2021
+        Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
+        Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval);
     }
 }
