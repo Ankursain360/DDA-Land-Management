@@ -1,0 +1,64 @@
+﻿@model Dto.Master.ApiResponseCompactorZoneWise
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Zone Wise Compactor Details" })
+<div class="pt-3">
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="table-responsive ">
+            @*<div id="divStructureTable"></div>*@
+            <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
+
+                        <th>Str</th>
+                        <th>Department Name</th>
+                        <th>BsNo</th>
+                        <th>Branch Name</th>
+                        <th>Total</th>
+                        <th>Issued</th>
+                        <th>Unissued</th>                    
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model.cargo)
+                        {
+
+                    <tr>
+
+                        <td>@item.SNO</td>
+                        <td>@item.DEPT_NAME</td>
+                        <td>@item.BSNO</td>                       
+                        <td>@item.BRANCH_NAME</td>
+                        <td>@item.TOTAL</td>
+                        <td>@item.ISSUED</td>
+                        <td>@item.UNISSUED</td>
+
+                    </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="13" style="text-align:center"> No Record Available! </th>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+
+</div>
+
+@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/structureindex.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/structureindex.min.js" asp-append-version="true"></script>
+    </environment>*@
