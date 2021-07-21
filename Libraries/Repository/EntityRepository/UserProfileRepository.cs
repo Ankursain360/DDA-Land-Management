@@ -450,7 +450,19 @@ namespace Repository.EntityRepository
                                   .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.ZoneId == zoneId)
                                   .ToListAsync();
         }
-
+        public async Task<List<Userprofile>> GetUserOnRoleBranchBasis(int roleId, int branchId)
+        {
+            return await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Zone)
+                                  .Include(a => a.District)
+                                  .Include(a => a.Branch)
+                                  .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.BranchId == branchId)
+                                  .ToListAsync();
+        }
+        
         public async Task<List<Userprofile>> GetUserByIdZone(int userid, int zoneId)
         {
             return await _dbContext.Userprofile
@@ -462,7 +474,19 @@ namespace Repository.EntityRepository
                                 .Where(a => a.IsActive == 1 && a.UserId == userid && a.ZoneId == zoneId)
                                 .ToListAsync();
         }
-
+        public async Task<List<Userprofile>> GetUserByIdBranch(int userid, int branchId)
+        {
+            return await _dbContext.Userprofile
+                                .Include(a => a.User)
+                                .Include(a => a.Role)
+                                .Include(a => a.Department)
+                                .Include(a => a.Zone)
+                                .Include(a => a.District)
+                                .Include(a => a.Branch)
+                                .Where(a => a.IsActive == 1 && a.UserId == userid && a.ZoneId == branchId)
+                                .ToListAsync();
+        }
+        
         public async Task<List<Userprofile>> UserListSkippingmultiusers(int[] nums)
         {
             return await _dbContext.Userprofile

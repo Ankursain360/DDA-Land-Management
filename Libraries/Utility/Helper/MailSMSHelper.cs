@@ -161,8 +161,32 @@ namespace Utility.Helper
             body = body.Replace("{ReferenceNo}", element.ReferenceNo);
             return body;
         }
-       
+
         #endregion
+
+
+
+        public string GenerateMailFormatForLeaseSignUp(LeaseSignupMailDto element)
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            
+        
+            body = body.Replace("{Otp}", element.Otp);
+            return body;
+        }
+
+
+
+
+
+
+
+
+
 
         #region SMS
         public void SendSMS(string Message, string Mobile)

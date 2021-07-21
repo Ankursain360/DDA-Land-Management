@@ -33,5 +33,8 @@ namespace Repository.IEntityRepository
         Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums);
         Task<bool> ValidateUniqueEmail(int id, string email);
         Task<bool> ValidateUniquePhone(int id, string phonenumber);
+        //added by ishu 20/7/2021
+        Task<List<Userprofile>> GetUserOnRoleBranchBasis(int roleId, int branchId);
+        Task<List<Userprofile>> GetUserByIdBranch(int userid, int branchId);
     }
 }

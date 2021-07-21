@@ -47,10 +47,10 @@
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
                 @*<a href="/Paymentverification/Index" class="d-flex align-items-center btn btn-primary mr-2">
-                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                    <small>Add More</small>
-                </a>*@
-                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                        <small>Add More</small>
+                    </a>*@
+                <a href="/Paymentverification/PaymentVerificationdetailsList" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
                 </a>
@@ -64,17 +64,17 @@
 
         <br /><br />
 
-        <h3 class="my-3 d-flex sub-heading px-2">Verified Records</h3>
-        <div class="table-responsive px-2">
-            <div id="divPaymentTableVerified"></div>
-        </div>
+            
+            <h3 class="my-3 d-flex sub-heading px-2">Verified Records</h3>
+            <div class="table-responsive px-2">
+                <div id="divPaymentTableVerified"></div>
+            </div>
 
 
 
+        
     </div>
-
 </div>
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/paymentverificationindex.js"></script>

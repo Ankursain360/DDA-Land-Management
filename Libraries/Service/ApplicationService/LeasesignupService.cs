@@ -35,7 +35,17 @@ namespace Libraries.Service.ApplicationService
             _leasesignupRepository.Add(leasesignup);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<Leasesignup> FetchSingleResult(int id)
+        {
+            var result = await _leasesignupRepository.FindBy(a => a.Id == id);
+            Leasesignup model = result.FirstOrDefault();
+            return model;
+        }
 
+        public async Task<bool> ValidateMobileEmail(string mobile, string email)
+        {
+            return await _leasesignupRepository.ValidateMobileEmail( mobile,  email);
+        }
 
     }
 }

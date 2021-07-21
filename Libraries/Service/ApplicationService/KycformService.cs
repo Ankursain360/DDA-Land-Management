@@ -163,5 +163,32 @@ namespace Service.ApplicationService
             payment.IsActive = 1;
             return await _kycformRepository.Savelicensepayment(payment);
         }
+
+        //KYC Approval process methods : Added by ishu 20/7/2021
+
+
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid)
+        {
+            return await _kycformRepository.FetchSingleResultOnProcessGuid(processguid);
+        }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Kycform kyc)
+        {
+            var result = await _kycformRepository.FindBy(a => a.Id == id);
+            Kycform model = result.FirstOrDefault();
+
+            model.ApprovedStatus = kyc.ApprovedStatus;
+            model.PendingAt = kyc.PendingAt;
+            _kycformRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        public async Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval, int userId)
+        {
+
+            kycapproval.CreatedBy = userId;
+            kycapproval.CreatedDate = DateTime.Now;
+            _kycformRepository.CreatekycApproval(kycapproval);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }
