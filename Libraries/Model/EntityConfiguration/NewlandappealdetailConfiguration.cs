@@ -34,7 +34,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.DemandListNo)
                     .HasMaxLength(30)
                     .IsUnicode(false);
-
+            builder.HasIndex(e => e.DemandListId)
+                   .HasName("fk_DemandListIdNewAppeal_idx");
+            builder.Property(e => e.DemandListId).HasColumnType("int(11)");
             builder.Property(e => e.EnmSno)
                     .HasColumnName("EnmSNo")
                     .HasMaxLength(30)

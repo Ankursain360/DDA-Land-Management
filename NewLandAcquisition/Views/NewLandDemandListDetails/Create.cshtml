@@ -266,6 +266,172 @@
                     <label class="floating-label">Reason of Non Payment</label>
                 </div>
             </div>
+            <h3 class="mb-3 d-flex">
+                Appeal Details
+
+            </h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="AppealNo" placeholder="Appeal No" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="200" />
+
+                        <span asp-validation-for="AppealNo" class="text-danger"></span>
+
+                        <label class="floating-label">Appeal No <span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>
+                                Appeal By Department:<span style="color:red">*</span>
+                            </label>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="hidden" value="UOI" asp-for="AppealByDept" />
+
+                            <div class="form-check theme">
+                                <input class="form-check-input" type="radio" name="villageradio" id="rUOI" value="UOI" checked="checked">
+                                <label class="form-check-label" for="radio">
+                                    UOI
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check theme">
+                                <input class="form-check-input" type="radio" name="villageradio" id="rDDA" value="DDA">
+                                <label class="form-check-label" for="radio">
+                                    DDA
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-check theme">
+                                <input class="form-check-input" type="radio" name="villageradio" id="OtherDDA" value="Department">
+                                <label class="form-check-label" for="radio">
+                                    Other
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <span asp-validation-for="AppealByDept" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mt-md-3" id="Departmentdiv" style="display:none">
+                <div class="col-md-6 ">
+                    <input asp-for="Department" placeholder="Department" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+
+                    <span asp-validation-for="Department" class="text-danger"></span>
+
+                    <label class="floating-label"> Department </label>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="DateOfAppeal" placeholder="Date Of Appeal" type="Date"
+                               class="floating-label-field floating-label-field--s3" />
+
+                        <span asp-validation-for="DateOfAppeal" class="text-danger"></span>
+
+                        <label class="floating-label">Date Of Appeal </label>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PanelLawer" placeholder="Panel Lawyer" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="500" />
+
+                        <span asp-validation-for="PanelLawer" class="text-danger"></span>
+
+                        <label class="floating-label">Panel Lawyer </label>
+                    </div>
+                </div>
+            </div>
+            <h3 class="mb-3 d-flex">
+                Payment Details
+
+            </h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="AmountPaid" placeholder="Amount Paid" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="18" />
+
+                        <span asp-validation-for="AmountPaid" class="text-danger"></span>
+
+                        <label class="floating-label">Amount Paid (Rs.)<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="ChequeDate" placeholder="Date Of Appeal" type="Date"
+                               class="floating-label-field floating-label-field--s3" />
+
+                        <span asp-validation-for="ChequeDate" class="text-danger"></span>
+
+                        <label class="floating-label">Cheque Date<span style="color:red">*</span> </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="ChequeNo" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="50" />
+
+                        <span asp-validation-for="ChequeNo" class="text-danger"></span>
+
+                        <label class="floating-label">Cheque/RTGS/NEFT/IMPS No<span style="color:red">*</span></label>
+                    </div>
+                </div>
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="BankName" placeholder="Bank Name" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="100" />
+
+                        <span asp-validation-for="BankName" class="text-danger"></span>
+
+                        <label class="floating-label">Bank Name <span style="color:red">*</span></label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="VoucherNo" placeholder="Cheque No" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="100" />
+
+                        <span asp-validation-for="VoucherNo" class="text-danger"></span>
+
+                        <label class="floating-label">Voucher No<span style="color:red">*</span> </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 ">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PercentPaid" placeholder="Panel Lawyer" type="text"
+                               class="floating-label-field floating-label-field--s3" limit="18" />
+
+                        <span asp-validation-for="PercentPaid" class="text-danger"></span>
+
+                        <label class="floating-label">Percent Paid<span style="color:red">*</span> </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" asp-for="PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                        <span class="d-block text-danger field-validation-valid" asp-validation-for="PaymentProofDocumentIFormFile"></span>
+                        <label class="floating-label">Upload Copy of Payment Proof</label>
+                    </div>
+                </div>
+            </div>
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
