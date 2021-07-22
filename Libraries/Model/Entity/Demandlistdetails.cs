@@ -18,6 +18,7 @@ namespace Libraries.Model.Entity
         }
         [Required(ErrorMessage = "Demand List No. is Mandatory ")]
         public string DemandListNo { get; set; }
+        [Required(ErrorMessage = "EnmSno. is Mandatory ")]
         public int? Enmsno { get; set; }
         public string LacfileNo { get; set; }
         public DateTime? LbrefDate { get; set; }

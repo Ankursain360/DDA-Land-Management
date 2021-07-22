@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
 
         public string Department { get; set; }
         public int DemandListId { get; set; }
+        [Required(ErrorMessage = "Date Of Appeal is Mandatory")]
         public DateTime? DateOfAppeal { get; set; }
         
         public string PanelLawer { get; set; }

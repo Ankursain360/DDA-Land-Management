@@ -75,10 +75,12 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Newlanddemandlistdetails> FetchSingleResult(int id)
         {
             return await _dbContext.Newlanddemandlistdetails
-                                        .Include(x => x.Village)
-                                        .Include(x => x.KhasraNo)
-                                        .Where(x => x.Id == id)
-                                        .FirstOrDefaultAsync();
+                                       .Include(x => x.Newlandappealdetail)
+                                   .Include(x => x.Newlandpaymentdetail)
+                                   .Include(x => x.Village)
+                                   .Include(x => x.KhasraNo)
+                                   .Where(x => x.Id == id)
+                                   .FirstOrDefaultAsync();
 
 
         }
@@ -208,6 +210,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Newlandpaymentdetail.Where(x => x.DemandListId == id)
                                    .OrderByDescending(s => s.Id)
                                    .FirstOrDefaultAsync();
+        }
+        public async Task<Newlandpaymentdetail> GetPaymentProofDocument(int Id)
+        {
+            return await _dbContext.Newlandpaymentdetail.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
     }
 }
