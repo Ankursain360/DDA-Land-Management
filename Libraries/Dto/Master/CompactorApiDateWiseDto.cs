@@ -11,11 +11,11 @@ namespace Dto.Master
     {
         public int SNO { get; set; }
         public string DEPT_NAME { get; set; }
-        public int BSNO { get; set; }
-        public string BRANCH_NAME { get; set; }
+        
+        public int FINALLY { get; set; }
         public int TOTAL { get; set; }
-        public int ISSUED { get; set; }
-        public int UNISSUED { get; set; }
+        public int WEEKLY { get; set; }
+        public int TOTAL_WEEKLY { get; set; }
 
 
     }

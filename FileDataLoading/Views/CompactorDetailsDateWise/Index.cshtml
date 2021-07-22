@@ -1,7 +1,7 @@
 ﻿@model Dto.Master.ApiResponseCompactorDateWise
 @{int rowNo = 0; }
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Date Wise Compactor Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Date Wise Weekly Compactor Details" })
 <form asp-action="Index" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
 
     <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
@@ -57,10 +57,10 @@
 
                         <th>Sr.No</th>
                         <th>Department Name</th>
-                        <th>Branch Name</th>
-                        <th>Issued</th>
-                        <th>Unissued</th>
-                        <th>Total</th>
+                        <th>Total Files to be done</th>
+                        <th>Total Files done</th>
+                        <th>Weekly Files to be done</th>
+                        <th>Weekly Files done @Convert.ToDateTime(Model.FromDate).ToString("dd-MM-yyyy") to @Convert.ToDateTime(Model.Todate).ToString("dd-MM-yyyy")</th>
 
                     </tr>
                 </thead>
@@ -74,11 +74,10 @@
                                 <td>@(rowNo += 1)</td>
                                 <td>@item.DEPT_NAME.ToUpper()</td>
 
-                                <td>@item.BRANCH_NAME.ToUpper()</td>
-                                <td>@item.ISSUED</td>
-                                <td>@item.UNISSUED</td>
-                                <td>@item.TOTAL</td>
-
+                                <td align="right">@item.FINALLY</td>
+                                <td align="right">@item.TOTAL</td>
+                                <td align="right">@item.WEEKLY</td>
+                                <td align="right">@item.TOTAL_WEEKLY</td>
                             </tr>
                         }
                     }
@@ -92,21 +91,23 @@
                 <tfoot>
                     @if (Model != null)
                     {
-                        <tr>
-                            <td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
-                            <td style="font-weight:bolder">@Model.cargo.Sum(x => x.ISSUED)</td>
-                            <td style="font-weight:bolder">@Model.cargo.Sum(x => x.UNISSUED)</td>
-                            <td style="font-weight:bolder">@Model.cargo.Sum(x => x.TOTAL)</td>
-                        </tr>
+                    <tr>
+                        <td colspan="2" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.FINALLY)</td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL)</td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.WEEKLY)</td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL_WEEKLY)</td>
+                    </tr>
                     }
                     else
                     {
-                        <tr>
-                            <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
-                            <td style="font-weight:bolder">0</td>
-                            <td style="font-weight:bolder">0</td>
-                            <td style="font-weight:bolder">0</td>
-                        </tr>
+                <tr>
+                    <td colspan="2" align="right" style="font-weight:bolder"><b>Total</b></td>
+                    <td style="font-weight:bolder">0</td>
+                    <td style="font-weight:bolder">0</td>
+                    <td style="font-weight:bolder">0</td>
+                    <td style="font-weight:bolder">0</td>
+                </tr>
                     }
                 </tfoot>
 

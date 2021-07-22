@@ -22,7 +22,7 @@ namespace FileDataLoading.Controllers
         {
             ApiResponseCompactorDateWise data = new ApiResponseCompactorDateWise();
             List<CompactorApiDateWiseDto> cargo = new List<CompactorApiDateWiseDto>();
-            data.FromDate = DateTime.Now.AddDays(-30);
+            data.FromDate = DateTime.Now.AddDays(-7);
             data.Todate = DateTime.Now;
             data.cargo = cargo;
             return View(data);
