@@ -1,0 +1,45 @@
+﻿@*@model Dto.Master.ApiResponseCompactorDateWise*@
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Date Wise Compactor Details" })
+
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
+
+
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <input type="date" id="FromDateMsg" class="floating-label-field floating-label-field--s3" />
+                <span id="FromDateMsg" class="text-danger" style="display:none;">Mandatory</span>
+                <label class="floating-label">From Date  <span style="color:red">*</span></label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <input type="date" id="ToDateMsg" class="floating-label-field floating-label-field--s3" />
+                <span id="ToDateMsg" class="text-danger" style="display:none;">Mandatory</span>
+                <label class="floating-label">To Date  <span style="color:red">*</span></label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-md-3">
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+
+
+                    <a class="btn btn-link btn-block d-flex align-items-center justify-content-center" href="/PaymentVeridonebyAccSection/Create"> <i class="ri-refresh-line mr-2"></i>Reset</a>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
