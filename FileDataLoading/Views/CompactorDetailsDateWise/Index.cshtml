@@ -1,7 +1,51 @@
 ﻿@model Dto.Master.ApiResponseCompactorDateWise
 @{int rowNo = 0; }
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Zone Wise Compactor Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Date Wise Compactor Details" })
+<form asp-action="Index" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+
+    <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input asp-for="FromDate" placeholder="Date" type="date" required"
+                       class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="FromDate" class="text-danger "></span>
+                <label class="floating-label">From Date  <span style="color:red">*</span> </label>
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input asp-for="Todate" placeholder="Date" type="date" required"
+                       class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="Todate" class="text-danger "></span>
+                <label class="floating-label">From Date <span style="color:red">*</span> </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-md-3">
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+
+                    <a class="btn btn-link btn-block d-flex align-items-center justify-content-center" href="#"> <i class="ri-refresh-line mr-2"></i>Reset</a>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
 <div class="pt-3">
 
     <div class="table-section bg-white border shadow rounded">
@@ -27,7 +71,6 @@
                         {
 
                             <tr>
-                                @*<td>@item.SNO</td>.*@
                                 <td>@(rowNo += 1)</td>
                                 <td>@item.DEPT_NAME.ToUpper()</td>
 
@@ -42,10 +85,30 @@
                     else
                     {
                         <tr>
-                            <th colspan="13" style="text-align:center"> No Record Available! </th>
+                            <th colspan="6" style="text-align:center"> No Record Available! </th>
                         </tr>
                     }
                 </tbody>
+                <tfoot>
+                    @if (Model != null)
+                    {
+                        <tr>
+                            <td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                            <td style="font-weight:bolder">@Model.cargo.Sum(x => x.ISSUED)</td>
+                            <td style="font-weight:bolder">@Model.cargo.Sum(x => x.UNISSUED)</td>
+                            <td style="font-weight:bolder">@Model.cargo.Sum(x => x.TOTAL)</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
+                            <td style="font-weight:bolder">0</td>
+                            <td style="font-weight:bolder">0</td>
+                            <td style="font-weight:bolder">0</td>
+                        </tr>
+                    }
+                </tfoot>
 
             </table>
         </div>
@@ -55,10 +118,3 @@
 
 </div>
 
-@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/structureindex.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/structureindex.min.js" asp-append-version="true"></script>
-    </environment>*@

@@ -64,7 +64,8 @@ $(document).ready(function () {
             if (response[i].village.length > 0) {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
-                        html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
+                        //html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
+                        html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input" type="checkbox" id="V' + response[i].village[j].id + '" onclick="showVillage(this.id)"><label class="form-check-label" for="chkAbadi">'+ response[i].village[j].name  + '</label > </div >';
                         check++;
                     }
                 }
@@ -225,14 +226,19 @@ function showDisBoundaries(polygon, xaixis, yaixis) {
 
 /*Village Boundary Start*/
 function showVillage(maxima) {
-    var villageid = maxima.replace('V', '');
-    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
-        //Show Village Name
-        $('#spanVillageName').empty().append(response[0].name);
-        $('#spanVillage').empty().append('Village : ' + response[0].name)
-        $('#aVillageName').show();
-        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
-    });
+    if ($('#' + maxima+'').is(":checked")) {
+        var villageid = maxima.replace('V', '');
+        HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
+            //Show Village Name
+            $('#spanVillageName').empty().append(response[0].name);
+            $('#spanVillage').empty().append('Village : ' + response[0].name)
+            $('#aVillageName').show();
+            showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
+        });
+    }
+    else {
+        alert('Unchecked');
+    }
 }
 function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
 
@@ -793,30 +799,8 @@ function showKhasraBasisOtherDetails(resp) {
             if (itm != null && itm != "")
                 tbl.append('<tr><td> <p class="m-0">' + itm.split(",")[0] + ' : <strong id="' + indx + '">' + itm.split(",")[1] + '</strong></p></td> </tr>');
 
-        });
-
-        //$('#tagVillageName').empty().append(resp[0].villageName);
-        //$('#tagKhasra').empty().append(resp[0].khasraNo);
-        //$('#tagArea').empty().append(resp[0].area);
-        //$('#tagUs4').empty().append(resp[0].us4);
-        //$('#tagUs6').empty().append(resp[0].us6);
-        //$('#tagUs17').empty().append(resp[0].us17);
-        //$('#tagUs22').empty().append(resp[0].us22);
-        //$('#tagAward').empty().append(resp[0].award);
-        //$('#tagPossessionDate').empty().append(resp[0].possessionDate);
-        //$('#tagAllotmentDate').empty().append(resp[0].allotmentDate);
-        //$('#tagTransferDepartment').empty().append(resp[0].transferDepartment);
-        //$('#tagSchemeTransfer').empty().append(resp[0].schemeTransfer);
-        //$('#tagRemarks').empty().append(resp[0].remarks);
-        //$('#tagPartyName').empty().append(resp[0].partyName);
-        //$('#tagDemandListNo').empty().append(resp[0].demandListNo);
-        //$('#tagLBDate').empty().append(resp[0].lBNo);
-        //$('#tagLACNo').empty().append(resp[0].lACNo);
-        //$('#tagRFANo').empty().append(resp[0].rFANo);
-        //$('#tagSLANo').empty().append(resp[0].sLPNo);
-        //$('#tagCourt').empty().append(resp[0].court);
-        //$('#tagPayableAmt').empty().append(resp[0].payableAmt);
-        //$('#tagAppealableAmt').empty().append(resp[0].appealableAmt);
+        }); 
+        
         $('#RouteDetailShow').show();
     }
     else {

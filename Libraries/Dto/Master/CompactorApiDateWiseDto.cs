@@ -24,12 +24,12 @@ namespace Dto.Master
         public List<CompactorApiDateWiseDto> cargo { get; set; }
 
         [NotMapped]
-        [DisplayFormat(DataFormatString = "{mm-dd-yyyy}", ApplyFormatInEditMode = true)]
+      
         [Required(ErrorMessage = "From Date is Mandatiory")]
         public DateTime FromDate { get; set; }
         [NotMapped]
         [Required(ErrorMessage = "To Date is Mandatiory")]
-        [DisplayFormat(DataFormatString = "{mm-dd-yyyy}", ApplyFormatInEditMode = true)]
+        
         public DateTime Todate { get; set; }
 
     }
