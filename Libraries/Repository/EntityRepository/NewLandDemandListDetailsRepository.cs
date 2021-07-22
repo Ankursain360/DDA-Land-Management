@@ -118,5 +118,96 @@ namespace Libraries.Repository.EntityRepository
                                      .Where(x => x.IsActive == 1 && x.NewLandvillageId == id)
                                      .ToListAsync();
         }
+        ///******Appeal*****//////
+        public async Task<bool> SaveAppeal(Newlandappealdetail newlandappealdetail)
+        {
+            _dbContext.Newlandappealdetail.Add(newlandappealdetail);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> UpdateAppeal(int id, Newlandappealdetail newlandappealdetail)
+        {
+            var result = await FetchSingleAppeal(id);
+            Newlandappealdetail model = result;
+            model.DemandListNo = newlandappealdetail.DemandListNo;
+            model.EnmSno = newlandappealdetail.EnmSno;
+            model.AppealNo = newlandappealdetail.AppealNo;
+            model.AppealByDept = newlandappealdetail.AppealByDept;
+            model.DateOfAppeal = newlandappealdetail.DateOfAppeal;
+            model.PanelLawer = newlandappealdetail.PanelLawer;
+            model.Department = newlandappealdetail.Department;
+
+            model.IsActive = newlandappealdetail.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = newlandappealdetail.ModifiedBy;
+
+            _dbContext.Newlandappealdetail.Update(model);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+        public async Task<List<Newlandappealdetail>> GetAllAppeal(int id)
+        {
+            return await _dbContext.Newlandappealdetail.Where(x => x.DemandListId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> DeleteAppeal(int Id)
+        {
+            _dbContext.Remove(_dbContext.Newlandappealdetail.Where(x => x.DemandListId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<Newlandappealdetail> FetchSingleAppeal(int id)
+        {
+            return await _dbContext.Newlandappealdetail.Where(x => x.DemandListId == id)
+                                   .OrderByDescending(s => s.Id)
+                                   .FirstOrDefaultAsync();
+        }
+
+        /////*****payment*****/////
+        public async Task<bool> SavePayment(Newlandpaymentdetail newlandpaymentdetail)
+        {
+            _dbContext.Newlandpaymentdetail.Add(newlandpaymentdetail);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> UpdatePayment(int id, Newlandpaymentdetail  newlandpaymentdetail)
+        {
+            var result = await FetchSinglePayment(id);
+            Newlandpaymentdetail model = result;
+            model.DemandListNo = newlandpaymentdetail.DemandListNo;
+            model.EnmSno = newlandpaymentdetail.EnmSno;
+            model.AmountPaid = newlandpaymentdetail.AmountPaid;
+            model.ChequeDate = newlandpaymentdetail.ChequeDate;
+            model.ChequeNo = newlandpaymentdetail.ChequeNo;
+            model.BankName = newlandpaymentdetail.BankName;
+            model.VoucherNo = newlandpaymentdetail.VoucherNo;
+            model.PercentPaid = newlandpaymentdetail.PercentPaid;
+            //model.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentName;
+
+            model.IsActive = newlandpaymentdetail.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = newlandpaymentdetail.ModifiedBy;
+
+            _dbContext.Newlandpaymentdetail.Update(model);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+        public async Task<List<Newlandpaymentdetail>> GetAllPayment(int id)
+        {
+            return await _dbContext.Newlandpaymentdetail.Where(x => x.DemandListId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> Deletepayment(int Id)
+        {
+            _dbContext.Remove(_dbContext.Newlandpaymentdetail.Where(x => x.DemandListId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<Newlandpaymentdetail> FetchSinglePayment(int id)
+        {
+            return await _dbContext.Newlandpaymentdetail.Where(x => x.DemandListId == id)
+                                   .OrderByDescending(s => s.Id)
+                                   .FirstOrDefaultAsync();
+        }
     }
 }

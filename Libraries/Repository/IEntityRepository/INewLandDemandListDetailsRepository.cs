@@ -19,5 +19,21 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Newlandvillage>> GetVillageList();
         Task<List<Newlandkhasra>> GetKhasraList(int id);
         Task<List<Newlanddemandlistdetails>> GetAllDemandlistdetails();
+        //*********  Appeal Details **********
+
+        Task<bool> SaveAppeal(Newlandappealdetail newlandappealdetail);
+        ////Task<List<Acquiredenhancecompensation>> GetAllAcquiredEnhance(int id);
+        Task<bool> DeleteAppeal(int Id);
+        Task<Newlandappealdetail> FetchSingleAppeal(int id);
+        Task<List<Newlandappealdetail>> GetAllAppeal(int id);
+        Task<bool> UpdateAppeal(int id, Newlandappealdetail newlandappealdetail);
+
+        //*********  payment Details **********
+        Task<bool> SavePayment(Newlandpaymentdetail newlandpaymentdetail);
+        Task<List<Newlandpaymentdetail>> GetAllPayment(int id);
+        Task<bool> Deletepayment(int Id);
+        Task<Newlandpaymentdetail> FetchSinglePayment(int id);
+
+        Task<bool> UpdatePayment(int id, Newlandpaymentdetail newlandpaymentdetail);
     }
 }

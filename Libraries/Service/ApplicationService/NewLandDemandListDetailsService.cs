@@ -126,5 +126,59 @@ namespace Service.ApplicationService
         {
             return await _newLandDemandListDetailsRepository.GetAllDemandlistdetails();
         }
+        //*********  appeal Details **********
+
+        public async Task<bool> SaveAppeal(Newlandappealdetail newlandappealdetail)
+        {
+            newlandappealdetail.CreatedBy = newlandappealdetail.CreatedBy;
+            newlandappealdetail.CreatedDate = DateTime.Now;
+            newlandappealdetail.IsActive = 1;
+            return await _newLandDemandListDetailsRepository.SaveAppeal(newlandappealdetail);
+        }
+        public async Task<List<Newlandappealdetail>> GetAllAppeal(int id)
+        {
+            return await _newLandDemandListDetailsRepository.GetAllAppeal(id);
+        }
+        public async Task<bool> DeleteAppeal(int Id)
+        {
+            return await _newLandDemandListDetailsRepository.DeleteAppeal(Id);
+        }
+
+        public async Task<Newlandappealdetail> FetchSingleAppeal(int id)
+        {
+            return await _newLandDemandListDetailsRepository.FetchSingleAppeal(id);
+        }
+        public async Task<bool> UpdateAppeal(int id, Newlandappealdetail newlandappealdetail)
+        {
+
+            return await _newLandDemandListDetailsRepository.UpdateAppeal(id, newlandappealdetail);
+        }
+        //*********  Payment Details **********
+
+        public async Task<bool> SavePayment(Newlandpaymentdetail newlandpaymentdetail)
+        {
+            newlandpaymentdetail.CreatedBy = newlandpaymentdetail.CreatedBy;
+            newlandpaymentdetail.CreatedDate = DateTime.Now;
+            newlandpaymentdetail.IsActive = 1;
+            return await _newLandDemandListDetailsRepository.SavePayment(newlandpaymentdetail);
+        }
+        public async Task<List<Newlandpaymentdetail>> GetAllPayment(int id)
+        {
+            return await _newLandDemandListDetailsRepository.GetAllPayment(id);
+        }
+        public async Task<bool> Deletepayment(int Id)
+        {
+            return await _newLandDemandListDetailsRepository.Deletepayment(Id);
+        }
+
+        public async Task<Newlandpaymentdetail> FetchSinglePayment(int id)
+        {
+            return await _newLandDemandListDetailsRepository.FetchSinglePayment(id);
+        }
+        public async Task<bool> UpdatePayment(int id, Newlandpaymentdetail newlandpaymentdetail)
+        {
+
+            return await _newLandDemandListDetailsRepository.UpdatePayment(id, newlandpaymentdetail);
+        }
     }
 }

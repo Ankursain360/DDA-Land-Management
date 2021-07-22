@@ -50,3 +50,60 @@ function fileValidation(filePath, fileInput, size) {
     }
 
 }
+$('#PaymentProofDocumentIFormFile').change(function () {
+    var fileInput = document.getElementById('PaymentProofDocumentIFormFile');
+    var filePath = fileInput.value;
+    const size = (PaymentProofDocumentIFormFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}
+$(document).ready(function () {
+    if ($("#AppealByDept").val() == "Department") {
+        $("#Departmentdiv").show();
+    } else {
+        $("#Departmentdiv").hide();
+    }
+});
+
+
+$("input[name='villageradio']").click(function () {
+    var selected = $("input[type='radio'][name='villageradio']:checked");
+    $("#AppealByDept").val(selected.val());
+
+});
+
+
+$(document).ready(function () {
+
+    $("input[name='villageradio']").click(function () {
+
+        debugger;
+        if ($(this).val() == "Department") {
+            if ($('#OtherDDA').is(':checked')) {
+                $('#Departmentdiv').css('display', 'block');
+            } else {
+                $('#Departmentdiv').css('display', 'none');
+            }
+        } else {
+            $('#Departmentdiv').css('display', 'none');
+        }
+        // if ($('#radio_button').is(':checked')) { alert("it's checked"); }
+
+    });
+
+});

@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
     {
         [Required(ErrorMessage = "Demand List No is mandatory")]
         public string DemandListNo { get; set; }
+        public int DemandListId { get; set; }
         [Required(ErrorMessage = "Enm  SNo is mandatory")]
         public string EnmSno { get; set; }
         [Required(ErrorMessage = "Amound Paid is mandatory")]
@@ -31,6 +32,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile PaymentProofDocumentIFormFile { get; set; }
+        public Newlanddemandlistdetails DemandList { get; set; }
 
     }
 }

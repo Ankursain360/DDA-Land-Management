@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "DemandListNo is Mandatory")]
         public string DemandListNo { get; set; }
         [Required(ErrorMessage = "EnmSno is Mandatory")]
-
+        public int DemandListId { get; set; }
         public string EnmSno { get; set; }
         [Required(ErrorMessage = "AppealNo is Mandatory")]
         public string AppealNo { get; set; }
@@ -28,6 +28,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
+        public Newlanddemandlistdetails DemandList { get; set; }
 
     }
 }
