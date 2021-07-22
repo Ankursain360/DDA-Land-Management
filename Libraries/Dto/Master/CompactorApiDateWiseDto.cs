@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dto.Search
+namespace Dto.Master
 {
    public class CompactorApiDateWiseDto 
 
@@ -23,6 +23,14 @@ namespace Dto.Search
     {
         public List<CompactorApiDateWiseDto> cargo { get; set; }
 
+        [NotMapped]
+        [DisplayFormat(DataFormatString = "{mm-dd-yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "From Date is Mandatiory")]
+        public DateTime FromDate { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "To Date is Mandatiory")]
+        [DisplayFormat(DataFormatString = "{mm-dd-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Todate { get; set; }
 
     }
 }
