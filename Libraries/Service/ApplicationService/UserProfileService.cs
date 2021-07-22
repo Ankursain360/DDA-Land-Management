@@ -246,6 +246,13 @@ namespace Service.ApplicationService
             return result;
         }
 
+        public async Task<List<UserProfileDto>>  GetUserOnRoleBranchBasis(int roleId, int branchId)
+        {
+            var user = await _userProfileRepository.GetUserOnRoleBranchBasis(roleId, branchId);
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            return result;
+        }
+
         public async Task<UserProfileDto> GetUserByIdZone(int userid, int zoneId)
         {
             var user = await _userProfileRepository.GetUserByIdZone(userid, zoneId);
@@ -255,7 +262,15 @@ namespace Service.ApplicationService
             else
                 return result[0];
         }
-
+        public async Task<UserProfileDto> GetUserByIdBranch(int userid, int branchId)
+        {
+            var user = await _userProfileRepository.GetUserByIdBranch(userid, branchId);
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            if (result.Count == 0)
+                return null;
+            else
+                return result[0];
+        }
         public async Task<List<UserProfileDto>> UserListSkippingmultiusers(int[] nums)
         {
             var user = await _userProfileRepository.UserListSkippingmultiusers(nums);
@@ -267,7 +282,7 @@ namespace Service.ApplicationService
         {
             return await _userProfileRepository.GetUserOnRoleZoneBasisConcatedName(roleId , zoneId);
         }
-
+       
         public async Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId)
         {
             return await _userProfileRepository.GetUserOnRoleBasisConcatedName(roleId);

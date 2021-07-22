@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+    FillAppealAtEdit();
+    FillPaymentAtEdit();
     debugger;
     var selected = $("input[type='radio'][name='grpCourtInvolves']:checked");
     $("#CourtInvolves").val(selected.val());
@@ -54,4 +56,103 @@ function fileValidation(filePath, fileInput, size) {
         return false;
     }
 
+}
+$('#PaymentProofDocumentIFormFile').change(function () {
+    var fileInput = document.getElementById('PaymentProofDocumentIFormFile');
+    var filePath = fileInput.value;
+    const size = (PaymentProofDocumentIFormFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}
+$(document).ready(function () {
+    if ($("#AppealByDept").val() == "Department") {
+        $("#Departmentdiv").show();
+    } else {
+        $("#Departmentdiv").hide();
+    }
+});
+
+
+$("input[name='villageradio']").click(function () {
+    var selected = $("input[type='radio'][name='villageradio']:checked");
+    $("#AppealByDept").val(selected.val());
+
+});
+
+
+$(document).ready(function () {
+
+    $("input[name='villageradio']").click(function () {
+
+        debugger;
+        if ($(this).val() == "Department") {
+            if ($('#OtherDDA').is(':checked')) {
+                $('#Departmentdiv').css('display', 'block');
+            } else {
+                $('#Departmentdiv').css('display', 'none');
+            }
+        } else {
+            $('#Departmentdiv').css('display', 'none');
+        }
+        // if ($('#radio_button').is(':checked')) { alert("it's checked"); }
+
+    });
+
+});
+// fill Appeal
+
+
+function FillAppealAtEdit() {
+
+
+    HttpGet(`/DemandListDetails/GetAppeal/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+
+        $("#AppealNo").val(data.appealNo);
+        $("#AppealByDept").val(data.appealByDept);
+        $("#PanelLawer").val(data.panelLawer);
+
+        $("#DateOfAppeal").val(data.dateOfAppeal.split('T')[0]);
+    });
+}
+// fill Payment
+
+
+function FillPaymentAtEdit() {
+
+
+    HttpGet(`/DemandListDetails/GetPayment/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+
+        $("#AmountPaid").val(data.amountPaid);
+        $("#ChequeDate").val(data.chequeDate.split('T')[0]);
+        //$("#ChequeDate").val(data.chequeDate);
+        $("#ChequeNo").val(data.chequeNo);
+        $("#BankName").val(data.bankName);
+
+        $("#VoucherNo").val(data.voucherNo);
+        $("#PercentPaid").val(data.percentPaid);
+
+
+
+
+        $("#PaymentProofDocumentIFormFile").val(data.paymentProofDocumentIFormFile);
+
+
+    });
 }

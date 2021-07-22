@@ -37,19 +37,66 @@ $('#name').keydown(function (e) {
     }
 });
 $("#signup2").click(function () {
+    $("#err-comm").hide();
     var name = $("#name").val();
     var mobile = $("#mobile").val();
     var email = $("#email").val();
     if (name == "") {
         $("#err-name").show();
+        return;
     }
     if (mobile == "") {
         $("#err-mob").show();
+        return;
     }
     if (email == "") {
         $("#err-email").show();
+        return;
+    }
+   
+    if (!mobile.match('[0-9]{10}') || mob.length > 10) {
+        $("#err-mob").show();
+        return;
+    } else {
+        $("#err-mob").hide();
+    }
+    var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!testEmail.test(email)) {
+        $("#err-email").show();
+        return;
+    } else {
+        $("#err-email").hide();
+    }
+    var model = {
+        MobileNo: mobile,
+        EmailId: email
+    }
+   
+    if (name != "" && mobile != "" && email != "") {
+        HttpPost(`/SignupForm/sendotp`, 'json', model, function (response) {
+            alert(response);
+            if (response[0] == "true") {
+                localStorage.setItem("otp", response[2]);
+                $("#sotp").show();
+                $("#sotp").val(response.otp);
+            } else {
+                $("#err-comm").show();
+            }
+        });
+
     }
 
-    $("#sotp").show();
 
+});
+$("#otp-button").click(function () {
+    $("#suc-comm").hide();
+    $("#err-otp").hide();
+    var otp = $("#otp").val();
+    var rotp = localStorage.getItem("otp");
+    if (otp == rotp) {
+        $("#suc-comm").show();
+        $("#form").submit();
+    } else {
+        $("#err-otp").show();
+    }
 });

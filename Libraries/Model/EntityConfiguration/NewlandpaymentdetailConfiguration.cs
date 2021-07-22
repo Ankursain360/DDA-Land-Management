@@ -29,6 +29,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ChequeNo)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+            builder.HasIndex(e => e.DemandListId)
+                  .HasName("fk_DemandListIdNewPayment_idx");
+            builder.Property(e => e.DemandListId).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 

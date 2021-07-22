@@ -23,6 +23,20 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        //public async Task<Leasesignup> Sendotpf(int? khasraId)
+        //{
+        //    return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        //}
+
+
+        public async Task<bool> ValidateMobileEmail(string mobile, string email)
+        {
+            return await _dbContext.Leasesignup.AnyAsync(t => t.MobileNo == mobile || t.EmailId.ToLower() == email.ToLower());
+        }
+
+
+
+
 
 
     }

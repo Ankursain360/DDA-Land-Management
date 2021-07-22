@@ -14,9 +14,13 @@ namespace Libraries.Model.Entity
     public class Newlanddemandlistdetails : AuditableEntity<int>
     {
 
-        
+        public Newlanddemandlistdetails()
+        {
+            Newlandappealdetail = new HashSet<Newlandappealdetail>();
+            Newlandpaymentdetail = new HashSet<Newlandpaymentdetail>();
+        }
 
-        
+
         [Required(ErrorMessage = "Demand List No. is Mandatory ")]
         public string DemandListNo { get; set; }
         public int? Enmsno { get; set; }
@@ -75,8 +79,49 @@ namespace Libraries.Model.Entity
         public List<Newlandvillage> VillageList { get; set; }
         [NotMapped]
         public List<Newlandkhasra> KhasraNoList { get; set; }
+        
+        //******Appeal****//
+        [NotMapped]
+        public string AppealNo { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "AppealByDept name is Mandatory")]
+        public string AppealByDept { get; set; }
+        [NotMapped]
 
+        public string Department { get; set; }
+        //public int? DemandListId { get; set; }
+        [NotMapped]
+        public DateTime? DateOfAppeal { get; set; }
+        [NotMapped]
+
+        public string PanelLawer { get; set; }
+        //****Payment******//
+        [NotMapped]
+        public decimal? AmountPaid { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "ChequeDate  is Mandatory")]
+
+        public DateTime? ChequeDate { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "ChequeNo  is Mandatory")]
+       
+        public string ChequeNo { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "BankName is Mandatory")]
+        public string BankName { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "VoucherNo is Mandatory")]
+        public string VoucherNo { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Percent Paid is Mandatory")]
+        public decimal? PercentPaid { get; set; }
+        [NotMapped]
+        public string PaymentProofDocumentName { get; set; }
+        [NotMapped]
+        public IFormFile PaymentProofDocumentIFormFile { get; set; }
         [NotMapped]
         public IFormFile ENMDocumentIFormFile { get; set; }
+        public ICollection<Newlandappealdetail> Newlandappealdetail { get; set; }
+        public ICollection<Newlandpaymentdetail> Newlandpaymentdetail { get; set; }
     }
 }

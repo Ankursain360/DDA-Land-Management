@@ -1,4 +1,6 @@
-﻿using Dto.Search;
+﻿
+
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
@@ -9,9 +11,16 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-   public interface ILeasesignupService : IEntityService<Leasesignup>
+
+    public interface IKycformApprovalService : IEntityService<Kycform>
     {
-        Task<bool> Create(Leasesignup leasesignup);
-        Task<bool> ValidateMobileEmail(string mobile, string email);
+
+       
+       // Task<List<Branch>> GetAllBranchList();
+       
+
+      //  Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model);
+
+      
     }
 }
