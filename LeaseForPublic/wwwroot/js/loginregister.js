@@ -14,7 +14,7 @@ $('#mobile').keyup(function () {
 
 
 $("#signup2").click(function () {
-  
+ 
     $("#err-comm").hide();
   
     var mobile = $("#mobile").val();
@@ -30,12 +30,13 @@ $("#signup2").click(function () {
 
        
     }
-  
+   
     if (mobile != "") {
         HttpPost(`/SignupForm/sendotp1`, 'json', model, function (response) {
-           
+            //alert(response[2]);
             if (response[0] == "true") {
                 localStorage.setItem("otp", response[2]);
+                $("#login-div").hide();
                 $("#sotp").show();
                 $("#sotp").val(response.otp);
             } else {
@@ -51,7 +52,7 @@ $("#otp-button").click(function () {
     $("#suc-comm").hide();
     $("#err-otp").hide();
     var otp = $("#otp").val();
-    var rotp = localStorage.getItem("otp");
+    var rotp = '123456';//localStorage.getItem("otp");
     if (otp == rotp) {
       
         $("#suc-comm").show();

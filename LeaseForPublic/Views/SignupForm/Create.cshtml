@@ -44,6 +44,9 @@
 
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="row">
+                              <label style="color:red; font-size:13px" id="err-otp">Already Registered User? <a class="" asp-action="CreateLogin" asp-controller="SignupForm">Click here to login</a></label>
+
+
                             <label style="color:red;display:none; font-size:13px" id="err-comm">You are already registered with this emaild or mobile number.</label>
                             <label style="color:green;display:none; font-size:13px" id="suc-comm">Otp Match</label>
                             <div class="mb-3 form-icons">
@@ -84,9 +87,8 @@
                             <div>
                                 <div class="d-flex align-items-center">
 
-                                    <button id="signup2" class="btn ms-auto me-3 mr-2" type="button">Register</button>
-                                    <label style="color:red; font-size:13px" id="err-otp">Already Registered User? Click here to login</label>
-                                    <a class="btn btn-theme text-white d-flex align-items-center" asp-action="CreateLogin" asp-controller="SignupForm">Go To Login <i class="ri-arrow-right-line ms-3"></i></a>
+                                    <button id="signup2" class="btn btn-theme text-white d-flex align-items-center" type="button">Register</button>
+                                    @*<a class="btn btn-theme text-white d-flex align-items-center" asp-action="CreateLogin" asp-controller="SignupForm">Go To Login <i class="ri-arrow-right-line ms-3"></i></a>*@
 
 
                                     @*<input id="signup2" type="submit" value="Submit" class="btn btn-theme " />*@
@@ -100,14 +102,14 @@
 
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <input type="number" name="otp" id="otp" class="form-control" placeholder="Otp *">
+                                    <input type="number" name="otp" id="otp" class="form-control" placeholder="OTP *">
 
                                 </div>
                                 <label style="color:red;display:none; font-size:13px" id="err-otp">InValid Otp</label>
                             </div>
                             <div class="mt-md-3">
                                 <div class="d-flex align-items-center">
-                                    <button class="btn ms-auto me-3 mr-2" id="otp-button" type="button">Otp Submit</button>
+                                    <button class="btn btn-theme text-white d-flex align-items-center" id="otp-button" type="button">Otp Submit</button>
                                  
                                 </div>
                             </div>

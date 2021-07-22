@@ -1,4 +1,5 @@
 ﻿@model Dto.Master.ApiResponseCompactorZoneWise
+@{int rowNo = 0; }
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Zone Wise Compactor Details" })
 <div class="pt-3">
@@ -10,13 +11,12 @@
                 <thead class="text-nowrap">
                     <tr>
 
-                        <th>Str</th>
+                        <th>Sr.No</th>
                         <th>Department Name</th>
-                        <th>BsNo</th>
                         <th>Branch Name</th>
-                        <th>Total</th>
                         <th>Issued</th>
-                        <th>Unissued</th>                    
+                        <th>Unissued</th>
+                        <th>Total</th>
 
                     </tr>
                 </thead>
@@ -26,17 +26,17 @@
                         @foreach (var item in Model.cargo)
                         {
 
-                    <tr>
+                            <tr>
+                                @*<td>@item.SNO</td>.*@
+                                <td>@(rowNo += 1)</td>
+                                <td>@item.DEPT_NAME.ToUpper()</td>
 
-                        <td>@item.SNO</td>
-                        <td>@item.DEPT_NAME</td>
-                        <td>@item.BSNO</td>                       
-                        <td>@item.BRANCH_NAME</td>
-                        <td>@item.TOTAL</td>
-                        <td>@item.ISSUED</td>
-                        <td>@item.UNISSUED</td>
+                                <td>@item.BRANCH_NAME.ToUpper()</td>
+                                <td>@item.ISSUED</td>
+                                <td>@item.UNISSUED</td>
+                                <td>@item.TOTAL</td>
 
-                    </tr>
+                            </tr>
                         }
                     }
                     else

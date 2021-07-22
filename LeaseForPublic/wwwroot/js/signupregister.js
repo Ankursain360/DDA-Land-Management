@@ -53,13 +53,14 @@ $("#signup2").click(function () {
         $("#err-email").show();
         return;
     }
-   
-    if (!mobile.match('[0-9]{10}') || mob.length > 10) {
+ 
+    if (!mobile.match('[0-9]{10}') || mobile.length > 10) {
         $("#err-mob").show();
         return;
     } else {
         $("#err-mob").hide();
     }
+    //alert("r");
     var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!testEmail.test(email)) {
         $("#err-email").show();
@@ -74,7 +75,7 @@ $("#signup2").click(function () {
    
     if (name != "" && mobile != "" && email != "") {
         HttpPost(`/SignupForm/sendotp`, 'json', model, function (response) {
-            alert(response);
+            //alert(response);
             if (response[0] == "true") {
                 localStorage.setItem("otp", response[2]);
                 $("#sotp").show();
