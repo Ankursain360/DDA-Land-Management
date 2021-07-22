@@ -2,76 +2,84 @@
 @{int rowNo = 0; }
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Zone Wise Compactor Details" })
-<div class="pt-3">
+<form asp-action="Index" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Details </h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
-        <div class="col-md-10"></div>
+        <div class="col-md-12">
 
-        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive ">
 
-            <a href="/CompactorDetailsZoneWise/ZoneWiseCompactordetailsList" class="d-flex align-items-center btn btn-success">
-                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                <small>Download</small>
-            </a>
-        </div>
-    </div>
-
-  <br>
-
-    <div class="table-section bg-white border shadow rounded">
-        <div class="table-responsive ">
-            @*<div id="divStructureTable"></div>*@
-            <table class="table table-sm table-bordered mb-0 table-striped">
-                <thead class="text-nowrap">
-                    <tr>
-
-                        <th>Sr.No</th>
-                        <th>Department Name</th>
-                        <th>Branch Name</th>
-                        <th>Issued</th>
-                        <th>Unissued</th>
-                        <th>Total</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null)
-                    {
-                        @foreach (var item in Model.cargo)
-                        {
-
+                    <table class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
                             <tr>
-                                @*<td>@item.SNO</td>.*@
-                                <td>@(rowNo += 1)</td>
-                                <td>@item.DEPT_NAME.ToUpper()</td>
 
-                                <td>@item.BRANCH_NAME.ToUpper()</td>
-                                <td>@item.ISSUED</td>
-                                <td>@item.UNISSUED</td>
-                                <td>@item.TOTAL</td>
+                                <th>Sr.No</th>
+                                <th>Department Name</th>
+                                <th>Branch Name</th>
+                                <th>Issued</th>
+                                <th>Unissued</th>
+                                <th>Total</th>
 
                             </tr>
-                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <th colspan="13" style="text-align:center"> No Record Available! </th>
-                        </tr>
-                    }
-                </tbody>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                @foreach (var item in Model.cargo)
+                {
 
-            </table>
+<tr>
+
+    <td>@(rowNo += 1)</td>
+    <td>@item.DEPT_NAME.ToUpper()</td>
+    <td>@item.BRANCH_NAME.ToUpper()</td>
+    <td>@item.ISSUED</td>
+    <td>@item.UNISSUED</td>
+    <td>@item.TOTAL</td>
+
+</tr>} }
+            else
+            {
+<tr>
+    <th colspan="6" style="text-align:center"> No Record Available! </th>
+</tr>}
+                        </tbody>
+                        <tfoot>
+                            @if (Model != null)
+                            {
+                <tr>
+                    <td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                    <td style="font-weight:bolder">@Model.cargo.Sum(x => x.ISSUED)</td>
+                    <td style="font-weight:bolder">@Model.cargo.Sum(x => x.UNISSUED)</td>
+                    <td style="font-weight:bolder">@Model.cargo.Sum(x => x.TOTAL)</td>
+                </tr>
+ }
+            else
+            {
+<tr>
+    <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
+    <td style="font-weight:bolder">0</td>
+    <td style="font-weight:bolder">0</td>
+    <td style="font-weight:bolder">0</td>
+</tr>
+}
+                        </tfoot>
+
+                    </table>
+                </div>
+
+
+            </div>
+
+            </div>  
         </div>
-
-
-    </div>
-
-</div>
-
-@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/structureindex.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/structureindex.min.js" asp-append-version="true"></script>
-    </environment>*@
+</form>
+    @*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+        <environment include="Development">
+            <script src="~/js/structureindex.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="~/js/structureindex.min.js" asp-append-version="true"></script>
+        </environment>*@

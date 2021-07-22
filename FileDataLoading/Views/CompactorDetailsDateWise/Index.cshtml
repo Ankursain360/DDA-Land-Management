@@ -1,25 +1,32 @@
-﻿@*@model Dto.Master.ApiResponseCompactorDateWise*@
+﻿@model Dto.Master.ApiResponseCompactorDateWise
+@{int rowNo = 0; }
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Date Wise Compactor Details" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Date Wise Weekly Compactor Details" })
+<form asp-action="Index" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
 
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
-
-
-    <div class="row pt-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
         <div class="col-md-6">
-            <div class="floating-label-wrap">
-                <input type="date" id="FromDateMsg" class="floating-label-field floating-label-field--s3" />
-                <span id="FromDateMsg" class="text-danger" style="display:none;">Mandatory</span>
-                <label class="floating-label">From Date  <span style="color:red">*</span></label>
+
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input asp-for="FromDate" placeholder="Date" type="date" required"
+                       class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="FromDate" class="text-danger "></span>
+                <label class="floating-label">From Date  <span style="color:red">*</span> </label>
             </div>
+
+
         </div>
         <div class="col-md-6">
-            <div class="floating-label-wrap">
-                <input type="date" id="ToDateMsg" class="floating-label-field floating-label-field--s3" />
-                <span id="ToDateMsg" class="text-danger" style="display:none;">Mandatory</span>
-                <label class="floating-label">To Date  <span style="color:red">*</span></label>
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input asp-for="Todate" placeholder="Date" type="date" required"
+                       class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="Todate" class="text-danger "></span>
+                <label class="floating-label">To Date <span style="color:red">*</span> </label>
             </div>
         </div>
     </div>
@@ -29,8 +36,7 @@
             <div class="row">
                 <div class="col-6 col-md-5 col-xl-6">
 
-
-                    <a class="btn btn-link btn-block d-flex align-items-center justify-content-center" href="/PaymentVeridonebyAccSection/Create"> <i class="ri-refresh-line mr-2"></i>Reset</a>
+                    <a class="btn btn-link btn-block d-flex align-items-center justify-content-center" href="/CompactorDetailsDateWise/Index"> <i class="ri-refresh-line mr-2"></i>Reset</a>
                 </div>
                 <div class="col-6 col-md-7 col-xl-6">
                     <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
@@ -39,7 +45,77 @@
         </div>
     </div>
 
+</form>
+<div class="pt-3">
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="table-responsive ">
+            @*<div id="divStructureTable"></div>*@
+            <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
+
+                        <th>Sr.No</th>
+                        <th>Department Name</th>
+                        <th>Total Files to be done</th>
+                        <th>Total Files done</th>
+                        <th>Weekly Files to be done</th>
+                        <th>Weekly Files done @Convert.ToDateTime(Model.FromDate).ToString("dd-MM-yyyy") to @Convert.ToDateTime(Model.Todate).ToString("dd-MM-yyyy")</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model.cargo)
+                        {
+
+                            <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>@item.DEPT_NAME.ToUpper()</td>
+
+                                <td align="right">@item.FINALLY</td>
+                                <td align="right">@item.TOTAL</td>
+                                <td align="right">@item.WEEKLY</td>
+                                <td align="right">@item.TOTAL_WEEKLY</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="6" style="text-align:center"> No Record Available! </th>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    @if (Model != null)
+                    {
+                    <tr>
+                        <td colspan="2" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.FINALLY)</td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL)</td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.WEEKLY)</td>
+                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL_WEEKLY)</td>
+                    </tr>
+                    }
+                    else
+                    {
+                <tr>
+                    <td colspan="2" align="right" style="font-weight:bolder"><b>Total</b></td>
+                    <td style="font-weight:bolder">0</td>
+                    <td style="font-weight:bolder">0</td>
+                    <td style="font-weight:bolder">0</td>
+                    <td style="font-weight:bolder">0</td>
+                </tr>
+                    }
+                </tfoot>
+
+            </table>
+        </div>
+
+
+    </div>
 
 </div>
-
 
