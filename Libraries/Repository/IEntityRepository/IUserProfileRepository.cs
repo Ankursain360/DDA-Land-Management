@@ -28,6 +28,7 @@ namespace Repository.IEntityRepository
         Task<List<Userprofile>> GetUserByIdZone(int userid, int zoneId);
         Task<List<Userprofile>> UserListSkippingmultiusers(int[] nums);
         Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleZoneBasisConcatedName(int roleId, int zoneId);
+
         Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId);
         Task<List<UserProfileInfoDetailsDto>> GetUserByIdZoneConcatedName(int userid, int zoneId);
         Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums);
@@ -36,5 +37,10 @@ namespace Repository.IEntityRepository
         //added by ishu 20/7/2021
         Task<List<Userprofile>> GetUserOnRoleBranchBasis(int roleId, int branchId);
         Task<List<Userprofile>> GetUserByIdBranch(int userid, int branchId);
+        Task<List<kycUserProfileInfoDetailsDto>> kycUserListSkippingmultiusersConcatedName(int[] nums);//added by ishu 23/7/2021
+        Task<List<kycUserProfileInfoDetailsDto>> GetUserByIdBranchConcatedName(int userid, int branchId);//added by ishu 23/7/2021
+        Task<List<kycUserProfileInfoDetailsDto>> GetkycUserOnRoleBasisConcatedName(int roleId);//added by ishu 23/7/2021
+        Task<List<kycUserProfileInfoDetailsDto>> kycGetUserOnRoleZoneBasisConcatedName(int roleId, int branchId);//added by ishu 23/7/2021
+        Task<List<kycUserProfileInfoDetailsDto>> GetkycUserSkippingItsOwnConcatedName(int roleId, int userid);//added by ishu 23/7/2021
     }
 }

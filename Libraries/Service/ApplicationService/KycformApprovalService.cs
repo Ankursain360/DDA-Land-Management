@@ -28,29 +28,24 @@ namespace Service.ApplicationService
 
         }
 
-       
-        //public async Task<List<Zone>> GetAllZoneList()
-        //{
-        //    List<Zone> List = await _kycformRepository.GetAllZoneList();
-        //    return List;
-        //}
-       
-       
+        public async Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId)
+        {
+            var data = await _kycformApprovalRepository.GetPagedKycFormDetails(model, userId);
+            return data;
+        }
 
-       
+        public async Task<Kycform> FetchSingleResult(int id)
+        {
+            return await _kycformApprovalRepository.FetchSingleResult(id);
+        }
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version)
+        {
+            return await _kycformApprovalRepository.FetchSingleResultOnProcessGuidWithVersion(processguid, version);
+        }
 
-       
-
-       
-        //public async Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model)
-        //{
-
-        //    return await _kycformRepository.GetPagedKycform(model);
-
-        //}
-
-       
-
-
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _kycformApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
+        }
     }
 }

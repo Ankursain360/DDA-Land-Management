@@ -33,6 +33,7 @@ namespace Libraries.Service.IApplicationService
 
         //KYC Approval process methods : Added by ishu 20/7/2021
         Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
+        Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
         Task<bool> UpdateBeforeApproval(int id, Kycform kyc);
         Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval, int userId);
     }
