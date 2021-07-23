@@ -21,104 +21,132 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId)
+        {
+            var AllDataList = await _dbContext.Kycform.ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
+            List<int> myIdList = new List<int>();
+            foreach (Kycform myLine in UserWiseDataList)
+                myIdList.Add(myLine.Id);
+            int[] myIdArray = myIdList.ToArray();
 
-      
-        //public async Task<List<Branch>> GetAllBranchList()
-        //{
-        //    List<Branch> List = await _dbContext.Branch.Where(x => x.IsActive == 1 && x.DepartmentId == 50).ToListAsync();
-        //    return List;
-        //}
-       
+            var data = await _dbContext.Kycform
+                                        .Include(x => x.ApprovedStatusNavigation)
+                                        .Include(x => x.Branch)
+                                        .Include(x => x.LeaseType)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.PropertyType)
+                                        .Include(x => x.Zone)
+                                        .Where(x => x.IsActive == 1
+                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                        && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                        )
+                                        .GetPaged<Kycform>(model.PageNumber, model.PageSize);
 
-        //public async Task<List<Kycform>> GetAllKycform()
-        //{
-        //    return await _dbContext.Kycform
-        //                           .Include(x => x.Branch)
-        //                           .Include(x => x.LeaseType)
-        //                           .Include(x => x.Locality)
-        //                           .Include(x => x.PropertyType)
-        //                           .Include(x => x.Zone)
-        //                           .Where(x => x.IsActive == 1)
-        //                           .ToListAsync();
-        //}
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Kycform
+                                                .Include(x => x.ApprovedStatusNavigation)
+                                                .Include(x => x.Branch)
+                                                .Include(x => x.LeaseType)
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.PropertyType)
+                                                .Include(x => x.Zone)
+                                                .Where(x => x.IsActive == 1
+                                                && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                                && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                                && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                                )
+                                                .OrderBy(a => a.Property)
+                                                //   .OrderBy(s =>
+                                                //(model.SortBy.ToUpper() == "REFNO" ? s.RefNo
+                                                //: model.SortBy.ToUpper() == "REGISTRATIONNO" ? s.RegistrationNo
+                                                //: s.RefNo)
+                                                //)
+                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
 
-        //public async Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model)
-        //{
-        //    var data = await _dbContext.Kycform
-        //                               .Include(x => x.Branch)
-        //                               .Include(x => x.LeaseType)
-        //                               .Include(x => x.Locality)
-        //                               .Include(x => x.PropertyType)
-        //                               .Include(x => x.Zone)
-        //                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-        //                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
 
-        //    int SortOrder = (int)model.SortOrder;
-        //    if (SortOrder == 1)
-        //    {
-        //        switch (model.SortBy.ToUpper())
-        //        {
-        //            case ("NAME"):
-        //                data = null;
-        //                data = await _dbContext.Kycform
-        //                                       .Include(x => x.Branch)
-        //                                       .Include(x => x.LeaseType)
-        //                                       .Include(x => x.Locality)
-        //                                       .Include(x => x.PropertyType)
-        //                                       .Include(x => x.Zone)
-        //                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-        //                                       .OrderBy(x => x.Property)
-        //                                       .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-        //                break;
-        //            case ("STATUS"):
-        //                data = null;
-        //                data = await _dbContext.Kycform
-        //                                       .Include(x => x.Branch)
-        //                                       .Include(x => x.LeaseType)
-        //                                       .Include(x => x.Locality)
-        //                                       .Include(x => x.PropertyType)
-        //                                       .Include(x => x.Zone)
-        //                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-        //                                       .OrderByDescending(x => x.IsActive)
-        //                                       .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-        //                break;
 
-        //        }
-        //    }
-        //    else if (SortOrder == 2)
-        //    {
-        //        switch (model.SortBy.ToUpper())
-        //        {
-        //            case ("NAME"):
-        //                data = null;
-        //                data = await _dbContext.Kycform
-        //                                       .Include(x => x.Branch)
-        //                                       .Include(x => x.LeaseType)
-        //                                       .Include(x => x.Locality)
-        //                                       .Include(x => x.PropertyType)
-        //                                       .Include(x => x.Zone)
-        //                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-        //                                       .OrderByDescending(x => x.Property)
-        //                                       .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-        //                break;
-        //            case ("STATUS"):
-        //                data = null;
-        //                data = await _dbContext.Kycform
-        //                                       .Include(x => x.Branch)
-        //                                       .Include(x => x.LeaseType)
-        //                                       .Include(x => x.Locality)
-        //                                       .Include(x => x.PropertyType)
-        //                                       .Include(x => x.Zone)
-        //                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-        //                                       .OrderBy(x => x.IsActive)
-        //                                       .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-        //                break;
-        //        }
-        //    }
-        //    return data;
-        //    // return await _dbContext.Structure.GetPaged<Structure>(model.PageNumber, model.PageSize);
-        //}
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
 
-        
+                        data = null;
+                        data = await _dbContext.Kycform
+                                                .Include(x => x.ApprovedStatusNavigation)
+                                                .Include(x => x.Branch)
+                                                .Include(x => x.LeaseType)
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.PropertyType)
+                                                .Include(x => x.Zone)
+                                                .Where(x => x.IsActive == 1
+                                                && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                                && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                                && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                                )
+                                                .OrderByDescending(x => x.Property)
+                                               //   .OrderByDescending(s =>
+                                               //(model.SortBy.ToUpper() == "REFNO" ? s.RefNo
+                                               //: model.SortBy.ToUpper() == "REGISTRATIONNO" ? s.RegistrationNo
+                                               //: s.RefNo)
+                                               //)
+                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+
+                return data;
+            }
+
+        public async Task<Kycform> FetchSingleResult(int id)
+        {
+              return await _dbContext.Kycform
+                                     .Include(x => x.ApprovedStatusNavigation)
+                                     .Include(x => x.Branch)
+                                     .Include(x => x.LeaseType)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.PropertyType)
+                                     .Include(x => x.Zone)
+                                     .Where(x => x.Id == id)
+                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version)
+        {
+            return await _dbContext.Kycworkflowtemplate
+                                   .Where(x => x.ProcessGuid == processguid
+                                   && x.Version == version
+                                   && x.IsActive == 1
+                                   )
+                                   .OrderByDescending(x => x.Id)
+                                   .Take(1)
+                                   .FirstOrDefaultAsync();
+        }
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            var result = false;
+            var AllDataList = await _dbContext.Kycform
+                                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                                .ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString())).ToList();
+
+            if (UserWiseDataList.Count == 0)
+                result = false;
+            else
+                result = true;
+
+            return result;
+        }
     }
 }

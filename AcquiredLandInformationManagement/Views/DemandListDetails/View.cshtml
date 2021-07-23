@@ -23,7 +23,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Enmsno" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers">
                     <span asp-validation-for="Enmsno" class="text-danger"></span>
-                    <label class="floating-label">ENM Sno.</label>
+                    <label class="floating-label">ENM Sr No.<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
                     <input type="hidden" asp-for="PayableAppealable" value="Payable" />
                     <div class="col-md-4">
                         <div class="form-check theme">
-                            <input class="form-check-input" type="radio" disabled asp-for="PayableAppealable" name="grpPayableApealable" value="Payable" checked>
+                            <input  class="form-check-input" type="radio" disabled asp-for="PayableAppealable" name="grpPayableApealable" value="Payable" checked>
                             <label class="form-check-label">Payable </label>
 
                         </div>
@@ -278,6 +278,7 @@
                 </div>
             </div>
         </div>
+        <br/>
         <h3 class="mb-3 d-flex">
             Appeal Details
 
@@ -352,7 +353,7 @@
 
                     <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().DateOfAppeal" class="text-danger"></span>
 
-                    <label class="floating-label">Date Of Appeal </label>
+                    <label class="floating-label">Date Of Appeal<span style="color:red">*</span>  </label>
                 </div>
             </div>
             <div class="col-md-6 ">
@@ -374,7 +375,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().AmountPaid" placeholder="Amount Paid" type="text"
+                    <input disabled asp-for="@Model.Paymentdetail.FirstOrDefault().AmountPaid" placeholder="Amount Paid" type="text"
                            class="floating-label-field floating-label-field--s3" limit="18" />
 
                     <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().AmountPaid" class="text-danger"></span>
@@ -384,7 +385,7 @@
             </div>
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().ChequeDate" placeholder="Date Of Appeal" type="Date"
+                    <input disabled asp-for="@Model.Paymentdetail.FirstOrDefault().ChequeDate" placeholder="Date Of Appeal" type="Date"
                            class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().ChequeDate" class="text-danger"></span>
@@ -396,7 +397,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().ChequeNo" type="text"
+                    <input disabled asp-for="@Model.Paymentdetail.FirstOrDefault().ChequeNo" type="text"
                            class="floating-label-field floating-label-field--s3" limit="50" />
 
                     <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().ChequeNo" class="text-danger"></span>
@@ -406,7 +407,7 @@
             </div>
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().BankName" placeholder="Bank Name" type="text"
+                    <input disabled asp-for="@Model.Paymentdetail.FirstOrDefault().BankName" placeholder="Bank Name" type="text"
                            class="floating-label-field floating-label-field--s3" limit="100" />
 
                     <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().BankName" class="text-danger"></span>
@@ -419,7 +420,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().VoucherNo" placeholder="Cheque No" type="text"
+                    <input disabled asp-for="@Model.Paymentdetail.FirstOrDefault().VoucherNo" placeholder="Cheque No" type="text"
                            class="floating-label-field floating-label-field--s3" limit="100" />
 
                     <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().VoucherNo" class="text-danger"></span>
@@ -430,7 +431,7 @@
 
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Paymentdetail.FirstOrDefault().PercentPaid" placeholder="Panel Lawyer" type="text"
+                    <input disabled asp-for="@Model.Paymentdetail.FirstOrDefault().PercentPaid" placeholder="Panel Lawyer" type="text"
                            class="floating-label-field floating-label-field--s3" limit="18" />
 
                     <span asp-validation-for="@Model.Paymentdetail.FirstOrDefault().PercentPaid" class="text-danger"></span>
@@ -442,7 +443,7 @@
         <div class="row mt-md-3">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="hidden" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName" />
+                    <input disabled type="hidden" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName" />
                     @{
                         @if (Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName != null)
                         {

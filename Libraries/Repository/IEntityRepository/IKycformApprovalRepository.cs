@@ -13,12 +13,10 @@ namespace Libraries.Repository.IEntityRepository
 
     public interface IKycformApprovalRepository : IGenericRepository<Kycform>
     {
-        
-      //  Task<List<Branch>> GetAllBranchList();
-       
-        //Task<List<Kycform>> GetAllKycform();
-        //Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model);
-      
+        Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version);
+        Task<Kycform> FetchSingleResult(int id);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
+        Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId);
 
     }
 }

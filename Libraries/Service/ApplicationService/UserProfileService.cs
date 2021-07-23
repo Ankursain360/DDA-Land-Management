@@ -233,7 +233,11 @@ namespace Service.ApplicationService
             var user = await _userProfileRepository.GetUserSkippingItsOwnConcatedName(roleId, userid);
             return user;
         }
-
+        public async Task<List<kycUserProfileInfoDetailsDto>> GetkycUserSkippingItsOwnConcatedName(int roleId, int userid)//added by ishu 23/7/2021
+        {
+            var user = await _userProfileRepository.GetkycUserSkippingItsOwnConcatedName(roleId, userid);
+            return user;
+        }
         public async Task<List<UserWithRoleDto>> GetUserWithRole()
         {
             return await _userProfileRepository.GetUserWithRole();
@@ -282,10 +286,18 @@ namespace Service.ApplicationService
         {
             return await _userProfileRepository.GetUserOnRoleZoneBasisConcatedName(roleId , zoneId);
         }
-       
+        public async Task<List<kycUserProfileInfoDetailsDto>> kycGetUserOnRoleZoneBasisConcatedName(int roleId, int branchId)// added by ishu 23/7/2021
+        {
+            return await _userProfileRepository.kycGetUserOnRoleZoneBasisConcatedName(roleId, branchId);
+        }
+
         public async Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId)
         {
             return await _userProfileRepository.GetUserOnRoleBasisConcatedName(roleId);
+        }
+        public async Task<List<kycUserProfileInfoDetailsDto>> GetkycUserOnRoleBasisConcatedName(int roleId)// added by ishu 23/7/2021
+        {
+            return await _userProfileRepository.GetkycUserOnRoleBasisConcatedName(roleId);
         }
 
         public async Task<UserProfileInfoDetailsDto> GetUserByIdZoneConcatedName(int userid, int zoneId)
@@ -296,10 +308,22 @@ namespace Service.ApplicationService
             else
                 return user[0];
         }
+        public async Task<kycUserProfileInfoDetailsDto> GetUserByIdBranchConcatedName(int userid, int branchId)//added by ishu 23/7/2021
+        {
+            var user = await _userProfileRepository.GetUserByIdBranchConcatedName(userid, branchId);
+            if (user.Count == 0)
+                return null;
+            else
+                return user[0];
+        }
 
         public async Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums)
         {
             return await _userProfileRepository.UserListSkippingmultiusersConcatedName(nums);
+        }
+        public async Task<List<kycUserProfileInfoDetailsDto>> kycUserListSkippingmultiusersConcatedName(int[] nums)//added by ishu 23/7/2021
+        {
+            return await _userProfileRepository.kycUserListSkippingmultiusersConcatedName(nums);
         }
 
         public async Task<bool> ValidateUniqueEmail(int id, string email)

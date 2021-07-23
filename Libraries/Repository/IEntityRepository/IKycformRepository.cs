@@ -25,5 +25,6 @@ namespace Libraries.Repository.IEntityRepository
         //KYC Approval process methods : Added by ishu 20/7/2021
         Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
         Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval);
+        Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
     }
 }

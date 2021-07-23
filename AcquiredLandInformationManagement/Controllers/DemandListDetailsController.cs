@@ -270,7 +270,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         paymentdetail.BankName = demandlistdetails.BankName;
                         paymentdetail.VoucherNo = demandlistdetails.VoucherNo;
                         paymentdetail.PercentPaid = (decimal)demandlistdetails.PercentPaid;
-                        paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentName;
+                        paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
                         paymentdetail.EnmSno = demandlistdetails.Enmsno.ToString();
                         paymentdetail.DemandListNo = demandlistdetails.DemandListNo.ToString();
                         paymentdetail.DemandListId = demandlistdetails.Id;

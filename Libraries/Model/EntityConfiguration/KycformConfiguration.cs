@@ -15,6 +15,9 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("kycform", "lms");
 
+            builder.HasIndex(e => e.ApprovedStatus)
+                   .HasName("fk_approvalstatus_idx");
+
             builder.Property(e => e.ApprovedStatus).HasColumnType("int");
             builder.HasIndex(e => e.BranchId)
                 .HasName("fkbranchkyc_idx");
@@ -194,6 +197,11 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Kycform)
                 .HasForeignKey(d => d.ZoneId)
                 .HasConstraintName("fkzonekyc");
+
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                   .WithMany(p => p.Kycform)
+                   .HasForeignKey(d => d.ApprovedStatus)
+                   .HasConstraintName("fk_approvalstatus");
 
         }
     }
