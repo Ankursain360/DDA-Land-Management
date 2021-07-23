@@ -67,6 +67,11 @@ namespace LeaseForPublic
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
             });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+            });
 
             services.RegisterDependency();
             services.AddAutoMapperSetup();
@@ -118,6 +123,7 @@ namespace LeaseForPublic
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

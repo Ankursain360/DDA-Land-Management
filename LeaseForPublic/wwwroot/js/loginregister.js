@@ -56,7 +56,7 @@ $("#otp-button").click(function () {
     if (otp == rotp) {
       
         $("#suc-comm").show();
-       window.location = "/SignupForm/Index";
+       window.location = "/KYCform/Index";
     } else {
         $("#err-otp").show();
     }
