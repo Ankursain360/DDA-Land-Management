@@ -180,5 +180,9 @@ namespace Service.ApplicationService
 
             return await _newLandDemandListDetailsRepository.UpdatePayment(id, newlandpaymentdetail);
         }
+        public async Task<Newlandpaymentdetail> GetPaymentProofDocument(int Id)
+        {
+            return await _newLandDemandListDetailsRepository.GetPaymentProofDocument(Id);
+        }
     }
 }

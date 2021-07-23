@@ -186,7 +186,7 @@ namespace Libraries.Repository.EntityRepository
             model.BankName = paymentdetail.BankName;
             model.VoucherNo = paymentdetail.VoucherNo;
             model.PercentPaid = paymentdetail.PercentPaid;
-            //model.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentName;
+            model.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentName;
 
             model.IsActive = paymentdetail.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -211,6 +211,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Paymentdetail.Where(x => x.DemandListId == id)
                                    .OrderByDescending(s => s.Id)
                                    .FirstOrDefaultAsync();
+        }
+        public async Task<Paymentdetail> GetPaymentProofDocument(int Id)
+        {
+            return await _dbContext.Paymentdetail.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
     }
 }

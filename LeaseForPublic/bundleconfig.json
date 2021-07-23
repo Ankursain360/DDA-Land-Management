@@ -52,5 +52,23 @@
     "inputFiles": [
       "wwwroot/js/paymentofpropertiescreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/signupregister.min.js",
+    "inputFiles": [
+      "wwwroot/js/signupregister.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/loginregister.min.js",
+    "inputFiles": [
+      "wwwroot/js/loginregister.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycformindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycformindex.js"
+    ]
   }
 ]

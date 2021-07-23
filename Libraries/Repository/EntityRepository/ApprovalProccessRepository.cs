@@ -11,17 +11,6 @@ using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using Repository.Common;
 
-using Dto.Search;
-using Libraries.Model;
-using Libraries.Model.Entity;
-using Libraries.Repository.Common;
-using Libraries.Repository.IEntityRepository;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -59,6 +48,36 @@ namespace Libraries.Repository.EntityRepository
 
             return Id;
         }
+        public int GetPreviouskycApprovalId(string proccessguid, int serviceid) //added by ishu 22/7/2021
+        {
+            var Id = (from f in _dbContext.Kycapprovalproccess
+                      where f.ProcessGuid == proccessguid && f.ServiceId == serviceid
+                      orderby f.Id descending
+                      select f.Id).First();
+
+            return Id;
+        }
+
+        
+        public async Task<Kycapprovalproccess> kycFindBy(int previousApprovalId) //added by ishu 22 jul 2021
+        {
+            return await _dbContext.Kycapprovalproccess
+                                    .Where(a => a.Id == previousApprovalId)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> UpdatePreviouskycApprovalProccess(int previousApprovalId, Kycapprovalproccess approvalproccess, int userId)//added by ishu 22 jul 2021
+        {
+            var result = await kycFindBy(previousApprovalId);
+            Kycapprovalproccess model = result;
+            model.PendingStatus = approvalproccess.PendingStatus;
+            model.ModifiedBy = userId;
+            model.ModifiedDate = DateTime.Now;
+
+            _dbContext.Kycapprovalproccess.Update(model);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+
         public int CheckIsApprovalStart(string proccessguid, int serviceid)
         {
             var File = (from f in _dbContext.Approvalproccess
@@ -75,7 +94,13 @@ namespace Libraries.Repository.EntityRepository
                                     .Where(x => x.Id == id)
                                     .FirstOrDefaultAsync();
         }
-
+        public async Task<Kycapprovalproccess> FetchKYCApprovalProcessDocumentDetails(int id)//added by ishu 22/7//2021
+        {
+            return await _dbContext.Kycapprovalproccess
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
+        
         public async Task<List<Approvalstatus>> BindDropdownApprovalStatus(int[] actions)
         {
             return await _dbContext.Approvalstatus
@@ -104,6 +129,13 @@ namespace Libraries.Repository.EntityRepository
                                      .OrderBy(x => x.Id)
                                      .FirstOrDefaultAsync();
         }
+        public async Task<Kycapprovalproccess> FirstkycApprovalProcessData(string processguid, int serviceid) //added by ishu 22/7/2021
+        {
+            return await _dbContext.Kycapprovalproccess
+                                    .Where(x => x.ProcessGuid == processguid && x.ServiceId == serviceid)
+                                    .OrderBy(x => x.Id)
+                                    .FirstOrDefaultAsync();
+        }
 
         public async Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level)
         {
@@ -115,7 +147,16 @@ namespace Libraries.Repository.EntityRepository
                                      .Take(1)
                                      .FirstOrDefaultAsync();
         }
-
+        public async Task<Kycapprovalproccess> CheckLastKycUserForRevert(string processguid, int serviceid, int level)//added by ishu 23/7/2021
+        {
+            return await _dbContext.Kycapprovalproccess
+                                      .Where(x => x.ProcessGuid == processguid && x.ServiceId == serviceid
+                                      && x.Level == level
+                                      )
+                                      .OrderBy(x => x.Id)
+                                      .Take(1)
+                                      .FirstOrDefaultAsync();
+        }
         public async Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid)
         {
             return await _dbContext.ApplicationNotificationTemplate

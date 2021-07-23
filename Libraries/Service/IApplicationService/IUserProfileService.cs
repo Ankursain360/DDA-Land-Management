@@ -46,5 +46,11 @@ namespace Service.IApplicationService
         //added by ishu 20/7/2021
         Task<List<UserProfileDto>> GetUserOnRoleBranchBasis(int roleId, int branchId);
         Task<UserProfileDto> GetUserByIdBranch(int userid, int branchId);
+        Task<List<kycUserProfileInfoDetailsDto>> kycUserListSkippingmultiusersConcatedName(int[] nums);//added by ishu 23/7/2021
+        Task<List<kycUserProfileInfoDetailsDto>> kycGetUserOnRoleZoneBasisConcatedName(int roleId, int branchId);//added by ishu 23/7/2021
+        Task<List<kycUserProfileInfoDetailsDto>> GetkycUserOnRoleBasisConcatedName(int roleId);//added by ishu 23/7/2021
+       // Task<List<kycUserProfileInfoDetailsDto>> GetUserByIdBranchConcatedName(int userid, int branchId);//added by ishu 23/7/2021
+        Task<List<kycUserProfileInfoDetailsDto>> GetkycUserSkippingItsOwnConcatedName(int roleId, int userid);//added by ishu 23/7/2021
+        Task<kycUserProfileInfoDetailsDto> GetUserByIdBranchConcatedName(int userid, int branchId);//added by ishu 23/7/2021
     }
 }

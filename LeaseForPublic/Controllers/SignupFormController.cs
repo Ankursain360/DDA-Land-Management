@@ -20,12 +20,14 @@ using Dto.Common;
 
 
 
+using Service.IApplicationService;
+using System.Text;
 
 
 
 using Microsoft.AspNetCore.Http;
 
-
+using Dto.Search;
 
 
 
@@ -33,22 +35,58 @@ using Microsoft.AspNetCore.Http;
 
 namespace LeaseForPublic.Controllers
 {
-    public class SignupFormController : Controller
+    public class SignupFormController : BaseController
     {
         private readonly ILeasesignupService _leasesignupService;
         public IConfiguration _configuration;
         private readonly IHostingEnvironment _hostingEnvironment;
-        public SignupFormController(IConfiguration configuration, ILeasesignupService leasesignupService, IHostingEnvironment hostingEnvironment)
+
+        private readonly IKycformService _kycformService;
+        private readonly IUserProfileService _userProfileService;
+        private readonly IApprovalProccessService _approvalproccessService;
+        string AadharDoc = "";
+        string LetterDoc = "";
+        string ApplicantDoc = "";
+
+
+        public SignupFormController(IConfiguration configuration, ILeasesignupService leasesignupService, IHostingEnvironment hostingEnvironment,
+            IKycformService KycformService,
+            IUserProfileService userProfileService,
+             IApprovalProccessService approvalproccessService)
 
         {
             _configuration = configuration;
             _leasesignupService = leasesignupService;
             _hostingEnvironment = hostingEnvironment;
+            _kycformService = KycformService;
+            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+            LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
+            ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
+            _userProfileService = userProfileService;
+            _approvalproccessService = approvalproccessService;
 
         }
         public IActionResult Index()
         {
+
+           // string str;
+           // str = TempData["data1"].ToString();
+          //  ViewBag.Message = TempData["data1"] as string;
+           // ViewBag.Message = TempData["Message"] as string;
+            //var Id = HttpContext.Session.GetString("Id");
+            var mobile = HttpContext.Session.GetString("Mobile");
             return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
+        {
+
+            var mobile = HttpContext.Session.GetString("Mobile");
+            
+
+            var result = await _kycformService.GetPagedKycform(model);
+            return PartialView("_List", result);
         }
 
         public async Task<IActionResult> CreateLogin()
@@ -159,7 +197,7 @@ namespace LeaseForPublic.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-
+                        HttpContext.Session.SetString("Mobile", leasesignup.MobileNo);
                         return View("Index");
                     }
                     else
@@ -196,6 +234,7 @@ namespace LeaseForPublic.Controllers
                     var result = await _leasesignupService.Create(leasesignup);
                     if (result == true)
                     {
+                        
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
 
                         return View("Index");
@@ -285,6 +324,15 @@ namespace LeaseForPublic.Controllers
             SendSMSDto SMS = new SendSMSDto();
             SMS.GenerateSendSMS(Action, Mobile);
 
+            //TempData["data1"] = model.MobileNo;
+          //  TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + model.MobileNo, "", AlertType.Success);
+
+
+            // return str;
+            // return RedirectToAction("Read");
+
+            HttpContext.Session.SetString("Mobile", model.MobileNo);
+            //  var mobile = HttpContext.Session.GetString("Mobile");
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
             JsonMsg.Add(otp.ToString());

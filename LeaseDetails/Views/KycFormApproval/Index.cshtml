@@ -43,12 +43,12 @@
     <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap">
-                <select></select>
-                @*<select class="floating-label-field floating-label-field--s3"
+                
+                <select class="floating-label-field floating-label-field--s3" 
                 asp-for="ApprovalStatus" asp-items="@(new SelectList(Model.ApprovalStatusList, "Id","Name"))">
             <option value="0">All</option>
         </select>
-        <label class="floating-label" asp-for="ApprovalStatus">Status</label>*@
+        <label class="floating-label" asp-for="ApprovalStatus">Status</label>
             </div>
         </div>
     </div>
@@ -59,8 +59,7 @@
         <div class="p-3 d-flex align-items-end mr-auto">
             <div class="floating-label-wrap">
                 <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                    <option value="refno">Reference No.</option>
-                    <option value="registerationno">Registeration No.</option>
+                    <option value="Name">Property </option>
                 </select>
                 <label for="field-1" class="floating-label">Sort by</label>
             </div>
@@ -86,10 +85,10 @@
 <br />
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/leaseapplicationformapprovalindex.js"></script>
+    <script src="~/js/kycformapprovalindex.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/leaseapplicationformapprovalindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/kycformapprovalindex.min.js" asp-append-version="true"></script>
 </environment>
 
 

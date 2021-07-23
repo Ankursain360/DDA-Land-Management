@@ -35,5 +35,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Paymentdetail> FetchSinglePayment(int id);
 
         Task<bool> UpdatePayment(int id, Paymentdetail paymentdetail);
+        Task<Paymentdetail> GetPaymentProofDocument(int Id);
     }
 }

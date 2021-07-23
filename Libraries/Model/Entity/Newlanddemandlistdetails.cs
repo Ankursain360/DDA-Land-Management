@@ -22,7 +22,9 @@ namespace Libraries.Model.Entity
 
 
         [Required(ErrorMessage = "Demand List No. is Mandatory ")]
+
         public string DemandListNo { get; set; }
+        [Required(ErrorMessage = "EnmSr No. is Mandatory ")]
         public int? Enmsno { get; set; }
         public string LacfileNo { get; set; }
         public DateTime? LbrefDate { get; set; }
@@ -82,6 +84,7 @@ namespace Libraries.Model.Entity
         
         //******Appeal****//
         [NotMapped]
+        [Required(ErrorMessage = "AppealNo is Mandatory")]
         public string AppealNo { get; set; }
         [NotMapped]
         [Required(ErrorMessage = "AppealByDept name is Mandatory")]
@@ -90,13 +93,16 @@ namespace Libraries.Model.Entity
 
         public string Department { get; set; }
         //public int? DemandListId { get; set; }
+       
         [NotMapped]
+        [Required(ErrorMessage = "Date Of Appeal is Mandatory")]
         public DateTime? DateOfAppeal { get; set; }
         [NotMapped]
 
         public string PanelLawer { get; set; }
         //****Payment******//
         [NotMapped]
+        [Required(ErrorMessage = "AmountPaid is Mandatory")]
         public decimal? AmountPaid { get; set; }
         [NotMapped]
         [Required(ErrorMessage = "ChequeDate  is Mandatory")]

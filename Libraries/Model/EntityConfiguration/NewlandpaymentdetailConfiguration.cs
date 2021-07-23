@@ -59,6 +59,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.VoucherNo)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+            builder.HasOne(d => d.DemandList)
+                   .WithMany(p => p.Newlandpaymentdetail)
+                   .HasForeignKey(d => d.DemandListId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("fk_DemandListIdNewPayment");
         }
     }
 }

@@ -120,7 +120,7 @@ $(document).ready(function () {
 function FillAppealAtEdit() {
 
 
-    HttpGet(`/DemandListDetails/GetAppeal/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/NewLandDemandListDetails/GetAppeal/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
 
         $("#AppealNo").val(data.appealNo);
@@ -136,7 +136,7 @@ function FillAppealAtEdit() {
 function FillPaymentAtEdit() {
 
 
-    HttpGet(`/DemandListDetails/GetPayment/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/NewLandDemandListDetails/GetPayment/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
 
         $("#AmountPaid").val(data.amountPaid);

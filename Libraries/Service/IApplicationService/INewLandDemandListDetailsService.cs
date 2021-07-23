@@ -41,6 +41,7 @@ namespace Libraries.Service.IApplicationService
         Task<Newlandpaymentdetail> FetchSinglePayment(int id);
 
         Task<bool> UpdatePayment(int id, Newlandpaymentdetail newlandpaymentdetail);
+        Task<Newlandpaymentdetail> GetPaymentProofDocument(int Id);
 
     }
 }

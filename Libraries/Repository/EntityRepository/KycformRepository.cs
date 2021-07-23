@@ -163,7 +163,15 @@ namespace Libraries.Repository.EntityRepository
                                     .Take(1)
                                     .FirstOrDefaultAsync();
         }
-
+        public async Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid)
+        {
+            return await _dbContext.Kycworkflowtemplate
+                                     .Where(x => x.ProcessGuid == processguid
+                                     && x.IsActive == 1
+                                     )
+                                     .OrderByDescending(x => x.Id)
+                                     .ToListAsync();
+        }
         public async Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval)
         {
             _dbContext.Kycapprovalproccess.Add(kycapproval);

@@ -28,12 +28,14 @@ namespace NewLandAcquisition.Controllers
         private readonly INewLandDemandListDetailsService _newLandDemandListDetailsService;
         public IConfiguration _Configuration;
         string ENMDocumentFilePath = "";
+        string PaymentProofDocumentFilePath = "";
 
         public NewLandDemandListDetailsController(INewLandDemandListDetailsService newLandDemandListDetailsService, IConfiguration configuration)
         {
             _newLandDemandListDetailsService = newLandDemandListDetailsService;
             _Configuration = configuration;
             ENMDocumentFilePath = _Configuration.GetSection("FilePaths:NewLandDemandListDetails:DocumentFIlePath").Value.ToString();
+            PaymentProofDocumentFilePath = _Configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
         }
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -124,9 +126,9 @@ namespace NewLandAcquisition.Controllers
                         )
                     {
                         Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
-                        //  paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
-                        //paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                        //paymentdetail.PaymentProofDocumentIFormFile);
+                        newlandpaymentdetail.PaymentProofDocumentName = newlanddemandlistdetails.PaymentProofDocumentIFormFile == null ?
+                       newlanddemandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                       newlanddemandlistdetails.PaymentProofDocumentIFormFile);
 
                         newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
                         newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
@@ -136,7 +138,7 @@ namespace NewLandAcquisition.Controllers
                         newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
                         newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
                         newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        //paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
 
                         newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
                         newlandpaymentdetail.CreatedBy = SiteContext.UserId;
@@ -260,9 +262,9 @@ namespace NewLandAcquisition.Controllers
                     {
 
                         Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
-                        // paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
-                        //paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                        //paymentdetail.PaymentProofDocumentIFormFile);
+                        newlandpaymentdetail.PaymentProofDocumentName = newlanddemandlistdetails.PaymentProofDocumentIFormFile == null ?
+                       newlanddemandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                       newlanddemandlistdetails.PaymentProofDocumentIFormFile);
 
                         newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
                         newlandpaymentdetail.ChequeDate = newlanddemandlistdetails.ChequeDate;
@@ -270,7 +272,7 @@ namespace NewLandAcquisition.Controllers
                         newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
                         newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
                         newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        //paymentdetail.PaymentProofDocumentName = demandlistdetails.PaymentProofDocumentName;
+                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
                         newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
                         newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
                         newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
@@ -286,7 +288,7 @@ namespace NewLandAcquisition.Controllers
                         newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
                         newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
                         newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        //paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
                         newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
                         newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
                         newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
@@ -384,6 +386,14 @@ namespace NewLandAcquisition.Controllers
             FileHelper file = new FileHelper();
             Newlanddemandlistdetails Data = await _newLandDemandListDetailsService.FetchSingleResult(Id);
             string filename = ENMDocumentFilePath + Data.ENMDocumentName;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
+        }
+        public async Task<IActionResult> ViewPaymentProofDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Newlandpaymentdetail Data = await _newLandDemandListDetailsService.GetPaymentProofDocument(Id);
+            string filename = PaymentProofDocumentFilePath + Data.PaymentProofDocumentName;
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, file.GetContentType(filename));
         }

@@ -49,14 +49,15 @@ $("#signup2").click(function () {
 
 });
 $("#otp-button").click(function () {
+   
     $("#suc-comm").hide();
     $("#err-otp").hide();
     var otp = $("#otp").val();
     var rotp = '123456';//localStorage.getItem("otp");
     if (otp == rotp) {
-      
+        alert("ff");
         $("#suc-comm").show();
-       window.location = "/SignupForm/Index";
+       window.location = "/KYCform/Index";
     } else {
         $("#err-otp").show();
     }

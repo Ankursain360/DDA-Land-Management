@@ -55,6 +55,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Department)
                     .HasMaxLength(500)
                     .IsUnicode(false);
+            builder.HasOne(d => d.DemandList)
+                   .WithMany(p => p.Newlandappealdetail)
+                   .HasForeignKey(d => d.DemandListId)
+                   .OnDelete(DeleteBehavior.ClientSetNull)
+                   .HasConstraintName("fk_DemandListIdNewLandAppeal");
         }
     }
 }
