@@ -27,12 +27,17 @@ namespace LeaseDetails.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IKycformApprovalService _kycformApprovalService;
+        private readonly IUserNotificationService _userNotificationService;
+        private readonly IHostingEnvironment _hostingEnvironment;
+
         string ApprovalDocumentPath = "";
         public KycFormApprovalController(IConfiguration configuration,
             IKycformService KycformService,
+             IUserNotificationService userNotificationService,
             IUserProfileService userProfileService,
              IApprovalProccessService approvalproccessService,
-             IKycformApprovalService kycformApprovalService)
+             IKycformApprovalService kycformApprovalService,
+             IHostingEnvironment hostingEnvironment)
 
         {
             _configuration = configuration;
@@ -41,8 +46,8 @@ namespace LeaseDetails.Controllers
             _approvalproccessService = approvalproccessService;
             _kycformApprovalService = kycformApprovalService;
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:KYCApplicationForm:ApprovalDocumentPath").Value.ToString();
-
-
+            _userNotificationService = userNotificationService;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public async Task<IActionResult> Index()
@@ -279,56 +284,58 @@ namespace LeaseDetails.Controllers
 
                                         result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
 
-                                        //#region Insert Into usernotification table Added By Renu 18 June 2021
-                                        //if (result)
-                                        //{
-                                        //    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
-                                        //    var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                        //    Usernotification usernotification = new Usernotification();
-                                        //    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
-                                        //    usernotification.Message = replacement;
-                                        //    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
-                                        //    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                        //    usernotification.ServiceId = approvalproccess.ServiceId;
-                                        //    usernotification.SendFrom = approvalproccess.SendFrom;
-                                        //    usernotification.SendTo = approvalproccess.SendTo;
-                                        //    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                                        //}
-                                        //#endregion
+                                        #region Insert Into usernotification table Added By Renu 18 June 2021
+                                        if (result)
+                                        {
+                                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                            Usernotification usernotification = new Usernotification();
+                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                            usernotification.Message = replacement;
+                                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                            usernotification.ServiceId = approvalproccess.ServiceId;
+                                            usernotification.SendFrom = approvalproccess.SendFrom;
+                                            usernotification.SendTo = approvalproccess.SendTo;
+                                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                        }
+                                        #endregion
 
 
-                                        //if (result)
-                                        //{
-                                        //    if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
-                                        //    {
-                                        //        kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
-                                        //        kyc.PendingAt = approvalproccess.SendTo;
-                                        //    }
-                                        //    else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
-                                        //    {
-                                        //        kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
-                                        //        kyc.PendingAt = approvalproccess.SendTo;
-                                        //    }
-                                        //    else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
-                                        //    {
-                                        //        kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
-                                        //        kyc.PendingAt = "0";
-                                        //    }
-                                        //    else
-                                        //    {
-                                        //        if (i == DataFlow.Count - 1)
-                                        //        {
-                                        //            kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
-                                        //            kyc.PendingAt = "0";
-                                        //        }
-                                        //        else
-                                        //        {
-                                        //            kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
-                                        //            kyc.PendingAt = approvalproccess.SendTo;
-                                        //        }
-                                        //    }
-                                        //           result = await _leaseApplicationFormService.UpdateBeforeApproval(leaseapplication.Id, leaseapplication);  //Update Table details 
-                                        //}
+                                        if (result)
+                                        {
+                                            if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.QueryForward))
+                                            {
+                                                kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
+                                                kyc.PendingAt = approvalproccess.SendTo;
+                                               
+                                            }
+                                            else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
+                                            {
+                                                kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
+                                                kyc.PendingAt = approvalproccess.SendTo;
+                                            }
+                                            else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
+                                            {
+                                                kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
+                                                kyc.PendingAt = "0";
+                                            }
+                                            else
+                                            {
+                                                if (i == DataFlow.Count - 1)
+                                                {
+                                                    kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
+                                                    kyc.PendingAt = "0";
+                                                    kyc.KycStatus = "T";
+                                                }
+                                                else
+                                                {
+                                                    kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
+                                                    kyc.PendingAt = approvalproccess.SendTo;
+                                                }
+                                            }
+                                            result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
+                                        }
                                     }
                                     break;
 
@@ -344,67 +351,67 @@ namespace LeaseDetails.Controllers
 
                     if (approvalproccess.SendTo != null)
                     {
-                        //#region Mail Generate
-                        ////At successfull completion send mail and sms
-                        //Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
-                        //string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                        //string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                        //string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
+                        #region Mail Generate
+                        //At successfull completion send mail and sms
+                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
+                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
 
-                        //var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
-                        //StringBuilder multousermailId = new StringBuilder();
-                        //if (approvalproccess.SendTo != null)
-                        //{
-                        //    int col = 0;
-                        //    string[] multiTo = approvalproccess.SendTo.Split(',');
-                        //    foreach (string MultiUserId in multiTo)
-                        //    {
-                        //        if (col > 0)
-                        //            multousermailId.Append(",");
-                        //        var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                        //        multousermailId.Append(RecevierUsers.User.Email);
-                        //        col++;
-                        //    }
-                        //}
+                        var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                        StringBuilder multousermailId = new StringBuilder();
+                        if (approvalproccess.SendTo != null)
+                        {
+                            int col = 0;
+                            string[] multiTo = approvalproccess.SendTo.Split(',');
+                            foreach (string MultiUserId in multiTo)
+                            {
+                                if (col > 0)
+                                    multousermailId.Append(",");
+                                var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                multousermailId.Append(RecevierUsers.User.Email);
+                                col++;
+                            }
+                        }
 
-                        //#region Mail Generation Added By Renu
+                        #region Mail Generation Added By Renu
 
-                        //MailSMSHelper mailG = new MailSMSHelper();
+                        MailSMSHelper mailG = new MailSMSHelper();
 
-                        //#region HTML Body Generation
-                        //ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                        //bodyDTO.ApplicationName = "Lease Application";
-                        //bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
-                        //bodyDTO.SenderName = senderUser.User.Name;
-                        //bodyDTO.Link = linkhref;
-                        //bodyDTO.AppRefNo = leaseapplication.RefNo;
-                        //bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
-                        //bodyDTO.Remarks = leaseapplication.ApprovalRemarks;
-                        //bodyDTO.path = path;
-                        //string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
-                        //#endregion
+                        #region HTML Body Generation
+                        ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                        bodyDTO.ApplicationName = "KYC Form Application";
+                        bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                        bodyDTO.SenderName = senderUser.User.Name;
+                        bodyDTO.Link = linkhref;
+                        bodyDTO.AppRefNo = kyc.Id.ToString();
+                        bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                        bodyDTO.Remarks = kyc.ApprovalRemarks;
+                        bodyDTO.path = path;
+                        string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                        #endregion
 
-                        ////string strMailSubject = "Pending Lease Application Approval Request Details ";
-                        ////string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                        ////sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
-                        //#region Common Mail Genration
-                        //SentMailGenerationDto maildto = new SentMailGenerationDto();
-                        //maildto.strMailSubject = "Pending Lease Application Approval Request Details ";
-                        //maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                        //maildto.strBodyMsg = strBodyMsg;
-                        //maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                        //maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                        //maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                        //maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                        //maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+                        //string strMailSubject = "Pending Lease Application Approval Request Details ";
+                        //string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                        //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                        #region Common Mail Genration
+                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                        maildto.strMailSubject = "Pending KYC Form Application Approval Request Details ";
+                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                        maildto.strBodyMsg = strBodyMsg;
+                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
 
-                        //maildto.strMailTo = multousermailId.ToString();
-                        //sendMailResult = mailG.SendMailWithAttachment(maildto);
-                        //#endregion
-                        //#endregion
+                        maildto.strMailTo = multousermailId.ToString();
+                        sendMailResult = mailG.SendMailWithAttachment(maildto);
+                        #endregion
+                        #endregion
 
 
-                        //#endregion
+                        #endregion
                     }
                     if (result)
                     {
@@ -415,7 +422,7 @@ namespace LeaseDetails.Controllers
                         else
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
 
-                        Leaseapplication data = new Leaseapplication();
+                        Kycform data = new Kycform();
                         var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
                         int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
                         data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());

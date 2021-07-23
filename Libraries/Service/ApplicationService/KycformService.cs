@@ -192,8 +192,8 @@ namespace Service.ApplicationService
 
             kycapproval.CreatedBy = userId;
             kycapproval.CreatedDate = DateTime.Now;
-            await _kycformRepository.CreatekycApproval(kycapproval);
-            return await _unitOfWork.CommitAsync() > 0;
+            return  await _kycformRepository.CreatekycApproval(kycapproval);
+           //await _unitOfWork.CommitAsync() > 0;
         }
     }
 }
