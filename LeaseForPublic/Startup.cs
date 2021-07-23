@@ -49,7 +49,7 @@ namespace LeaseForPublic
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -62,6 +62,8 @@ namespace LeaseForPublic
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                .AddEntityFrameworkStores<DataContext>()
                .AddDefaultTokenProviders();
+            services.RegisterDependency();
+            services.AddAutoMapperSetup();
 
             services.AddMvc(option =>
             {
@@ -73,8 +75,7 @@ namespace LeaseForPublic
                 options.Cookie.HttpOnly = true;
             });
 
-            services.RegisterDependency();
-            services.AddAutoMapperSetup();
+            
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
