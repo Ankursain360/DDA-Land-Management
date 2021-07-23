@@ -212,5 +212,9 @@ namespace Libraries.Repository.EntityRepository
                                    .OrderByDescending(s => s.Id)
                                    .FirstOrDefaultAsync();
         }
+        public async Task<Paymentdetail> GetPaymentProofDocument(int Id)
+        {
+            return await _dbContext.Paymentdetail.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
     }
 }
