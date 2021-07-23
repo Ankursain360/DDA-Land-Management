@@ -49,6 +49,10 @@ namespace Libraries.Service.ApplicationService
         {
             return _approvalproccessRepository.GetPreviousApprovalId(proccessguid, serviceid);
         }
+        public int GetPreviouskycApprovalId(string proccessguid, int serviceid)//added by ishu 22/7/2021
+        {
+            return _approvalproccessRepository.GetPreviouskycApprovalId(proccessguid, serviceid);
+        }
 
         public async Task<bool> UpdatePreviousApprovalProccess(int previousApprovalId, Approvalproccess approvalproccess, int userId)
         {
@@ -60,6 +64,12 @@ namespace Libraries.Service.ApplicationService
             _approvalproccessRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<bool> UpdatePreviouskycApprovalProccess(int previousApprovalId, Kycapprovalproccess approvalproccess, int userId) //23 july 2021  ishu
+        {
+           return await _approvalproccessRepository.UpdatePreviouskycApprovalProccess(previousApprovalId, approvalproccess, userId);
+        }
+
 
         public async Task<List<ApprovalHistoryListDataDto>> GetHistoryDetails(string proccessguid, int id)
         {
@@ -75,6 +85,11 @@ namespace Libraries.Service.ApplicationService
             return await _approvalproccessRepository.FetchApprovalProcessDocumentDetails(id);
         }
 
+        public async Task<Kycapprovalproccess> FetchKYCApprovalProcessDocumentDetails(int id)//added by ishu 22/7/2021
+        {
+            return await _approvalproccessRepository.FetchKYCApprovalProcessDocumentDetails(id);
+        }
+
         public async Task<List<Approvalstatus>> BindDropdownApprovalStatus(int[] actions)
         {
             return await _approvalproccessRepository.BindDropdownApprovalStatus(actions);
@@ -84,6 +99,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _approvalproccessRepository.FetchSingleApprovalStatus(id);
         }
+       
 
         public async Task<Approvalstatus> GetStatusIdFromStatusCode(int statuscode)
         {
@@ -108,12 +124,19 @@ namespace Libraries.Service.ApplicationService
         {
             return await _approvalproccessRepository.FirstApprovalProcessData(processguid, serviceid);
         }
+        public async Task<Kycapprovalproccess> FirstkycApprovalProcessData(string processguid, int serviceid)//added by ishu 22/7/2021
+        {
+            return await _approvalproccessRepository.FirstkycApprovalProcessData(processguid, serviceid);
+        }
 
         public async Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level)
         {
             return await _approvalproccessRepository.CheckLastUserForRevert( processguid,  serviceid,  level);
         }
-
+        public async Task<Kycapprovalproccess> CheckLastKycUserForRevert(string processguid, int serviceid, int level)//added by ishu 23/7/2021
+        {
+            return await _approvalproccessRepository.CheckLastKycUserForRevert(processguid, serviceid, level);
+        }
         public async Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid)
         {
             return await _approvalproccessRepository.FetchSingleNotificationTemplate(guid);

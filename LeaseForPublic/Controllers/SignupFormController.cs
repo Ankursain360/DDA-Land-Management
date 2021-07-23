@@ -196,6 +196,7 @@ namespace LeaseForPublic.Controllers
                     var result = await _leasesignupService.Create(leasesignup);
                     if (result == true)
                     {
+                        
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
 
                         return View("Index");
@@ -284,7 +285,8 @@ namespace LeaseForPublic.Controllers
 
             SendSMSDto SMS = new SendSMSDto();
             SMS.GenerateSendSMS(Action, Mobile);
-
+            HttpContext.Session.SetString("Mobile", model.MobileNo);
+            var mobile = HttpContext.Session.GetString("Mobile");
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
             JsonMsg.Add(otp.ToString());

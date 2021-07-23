@@ -74,7 +74,30 @@ namespace Libraries.Model.Entity
         public string KycStatus { get; set; }
         public byte IsActive { get; set; }
 
+        #region Approval Related Fields
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
 
+        [NotMapped]
+        public int ApprovalStatusCode { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+
+        [NotMapped]
+        public IFormFile ApprovalDocument { get; set; }
+
+        [NotMapped]
+        public List<Approvalstatus> ApprovalStatusList { get; set; }
+
+        [NotMapped]
+        public int ApprovalUserId { get; set; }
+
+        [NotMapped]
+        public int ApprovalRoleId { get; set; }
+
+        #endregion
+       
         [NotMapped]
         public List<Leasetype> LeasetypeList { get; set; }
 
@@ -119,7 +142,7 @@ namespace Libraries.Model.Entity
         public IFormFile Letter { get; set; }
         [NotMapped]
         public IFormFile ApplicantPan { get; set; }
-
+        public Approvalstatus ApprovedStatusNavigation { get; set; }
         public Branch Branch { get; set; }
         public Leasetype LeaseType { get; set; }
         public Locality Locality { get; set; }

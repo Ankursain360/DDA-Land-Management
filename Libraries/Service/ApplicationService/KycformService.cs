@@ -171,6 +171,11 @@ namespace Service.ApplicationService
         {
             return await _kycformRepository.FetchSingleResultOnProcessGuid(processguid);
         }
+       
+        public async Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid)
+        {
+            return await _kycformRepository.GetWorkFlowDataOnGuid(processguid);
+        }
 
         public async Task<bool> UpdateBeforeApproval(int id, Kycform kyc)
         {
@@ -187,7 +192,7 @@ namespace Service.ApplicationService
 
             kycapproval.CreatedBy = userId;
             kycapproval.CreatedDate = DateTime.Now;
-            _kycformRepository.CreatekycApproval(kycapproval);
+            await _kycformRepository.CreatekycApproval(kycapproval);
             return await _unitOfWork.CommitAsync() > 0;
         }
     }

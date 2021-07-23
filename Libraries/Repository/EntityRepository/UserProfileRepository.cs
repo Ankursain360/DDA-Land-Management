@@ -429,6 +429,42 @@ namespace Repository.EntityRepository
 
             return listData;
         }
+        
+        
+        
+        public async Task<List<kycUserProfileInfoDetailsDto>> GetkycUserSkippingItsOwnConcatedName(int roleId, int userid)//added by ishu 23/7/2021
+        {
+            List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                   .Include(a => a.User)
+                                   .Include(a => a.Role)
+                                   .Include(a => a.Department)
+                                   .Include(a => a.Branch)
+                                   .Include(a => a.District)
+                                   .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.User.Id != userid)
+                                   .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new kycUserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        BranchId = Data[i].BranchId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        BranchName = Data[i].Zone == null ? "" : Data[i].Branch.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Branch == null ? "NA" : Data[i].Branch.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
+        }
 
         public async Task<List<UserWithRoleDto>> GetUserWithRole()
         {
@@ -532,6 +568,40 @@ namespace Repository.EntityRepository
 
             return listData;
         }
+        
+        public async Task<List<kycUserProfileInfoDetailsDto>> kycGetUserOnRoleZoneBasisConcatedName(int roleId, int branchId)//added by ishu 23/7/2021
+        {
+            List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Branch)
+                                  .Include(a => a.District)
+                                  .Where(a => a.IsActive == 1 && a.RoleId == roleId && a.BranchId == branchId)
+                                  .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new kycUserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        BranchId = Data[i].BranchId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        BranchName = Data[i].Branch == null ? "" : Data[i].Branch.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Branch == null ? "NA" : Data[i].Branch.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
+        }
 
         public async Task<List<UserProfileInfoDetailsDto>> GetUserOnRoleBasisConcatedName(int roleId)
         {
@@ -567,6 +637,42 @@ namespace Repository.EntityRepository
             return listData;
         }
 
+        
+        public async Task<List<kycUserProfileInfoDetailsDto>> GetkycUserOnRoleBasisConcatedName(int roleId)//added by ishu 23/7/2021
+        {
+            List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                   .Include(a => a.User)
+                                   .Include(a => a.Role)
+                                   .Include(a => a.Department)
+                                   .Include(a => a.Branch)
+                                   .Include(a => a.District)
+                                   .Where(a => a.IsActive == 1 && a.RoleId == roleId)
+                                   .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new kycUserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        BranchId = Data[i].BranchId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        BranchName = Data[i].Branch == null ? "" : Data[i].Branch.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Branch == null ? "NA" : Data[i].Branch.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
+        }
+
+
         public async Task<List<UserProfileInfoDetailsDto>> GetUserByIdZoneConcatedName(int userid, int zoneId)
         {
             List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
@@ -601,6 +707,41 @@ namespace Repository.EntityRepository
             return listData;
         }
 
+        public async Task<List<kycUserProfileInfoDetailsDto>> GetUserByIdBranchConcatedName(int userid, int branchId)//added by ishu 23/7/2021
+        {
+            List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                .Include(a => a.User)
+                                .Include(a => a.Role)
+                                .Include(a => a.Department)
+                                .Include(a => a.Branch)
+                                .Include(a => a.District)
+                                .Where(a => a.IsActive == 1 && a.UserId == userid && a.BranchId == branchId)
+                                .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new kycUserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        BranchId = Data[i].BranchId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        BranchName = Data[i].Branch == null ? "" : Data[i].Branch.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Branch == null ? "NA" : Data[i].Branch.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
+        }
+
+        
         public async Task<List<UserProfileInfoDetailsDto>> UserListSkippingmultiusersConcatedName(int[] nums)
         {
             List<UserProfileInfoDetailsDto> listData = new List<UserProfileInfoDetailsDto>();
@@ -628,6 +769,41 @@ namespace Repository.EntityRepository
                         RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
                         ZoneName = Data[i].Zone == null ? "" : Data[i].Zone.Name,
                         Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Zone == null ? "NA" : Data[i].Zone.Name.ToUpper())
+                    });
+                }
+            }
+
+            return listData;
+        }
+        
+
+        public async Task<List<kycUserProfileInfoDetailsDto>> kycUserListSkippingmultiusersConcatedName(int[] nums)//added by ishu 23/7/2021
+        {
+            List<kycUserProfileInfoDetailsDto> listData = new List<kycUserProfileInfoDetailsDto>();
+
+            var Data = await _dbContext.Userprofile
+                                  .Include(a => a.User)
+                                  .Include(a => a.Role)
+                                  .Include(a => a.Department)
+                                  .Include(a => a.Branch)
+                                  .Include(a => a.District)
+                                  .Where(a => a.IsActive == 1 && nums.Contains(a.UserId))
+                                  .ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+                {
+                    listData.Add(new kycUserProfileInfoDetailsDto()
+                    {
+                        Id = Data[i].Id,
+                        UserId = Data[i].UserId,
+                        BranchId = Data[i].BranchId ?? 0,
+                        RoleId = Data[i].RoleId ?? 0,
+                        UserName = Data[i].User == null ? "" : Data[i].User.Name,
+                        RoleName = Data[i].Role == null ? "" : Data[i].Role.Name,
+                        BranchName = Data[i].Branch == null ? "" : Data[i].Branch.Name,
+                        Name = string.Format("{0}|{1}|{2}", Data[i].User == null ? "NA" : Data[i].User.Name.ToUpper(), Data[i].Role == null ? "NA" : Data[i].Role.Name.ToUpper(), Data[i].Branch == null ? "NA" : Data[i].Branch.Name.ToUpper())
                     });
                 }
             }
