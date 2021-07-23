@@ -272,7 +272,7 @@ namespace NewLandAcquisition.Controllers
                         newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
                         newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
                         newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        newlandpaymentdetail.PaymentProofDocumentName = newlanddemandlistdetails.PaymentProofDocumentName;
+                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
                         newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
                         newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
                         newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
@@ -288,7 +288,7 @@ namespace NewLandAcquisition.Controllers
                         newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
                         newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
                         newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        //paymentdetail.PaymentProofDocumentIFormFile = demandlistdetails.PaymentProofDocumentIFormFile;
+                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
                         newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
                         newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
                         newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
