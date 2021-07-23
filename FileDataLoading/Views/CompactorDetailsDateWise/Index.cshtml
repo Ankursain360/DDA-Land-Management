@@ -48,6 +48,20 @@
 </form>
 <div class="pt-3">
 
+    <div class="row">
+        <div class="col-md-10"></div>
+
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+
+            <a href="/CompactorDetailsDateWise/DateWiseCompactordetailsList" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+
+    <br>
+
     <div class="table-section bg-white border shadow rounded">
         <div class="table-responsive ">
             @*<div id="divStructureTable"></div>*@
@@ -91,23 +105,23 @@
                 <tfoot>
                     @if (Model != null)
                     {
-                    <tr>
-                        <td colspan="2" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
-                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.FINALLY)</td>
-                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL)</td>
-                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.WEEKLY)</td>
-                        <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL_WEEKLY)</td>
-                    </tr>
+                        <tr>
+                            <td colspan="2" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                            <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.FINALLY)</td>
+                            <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL)</td>
+                            <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.WEEKLY)</td>
+                            <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.TOTAL_WEEKLY)</td>
+                        </tr>
                     }
                     else
                     {
-                <tr>
-                    <td colspan="2" align="right" style="font-weight:bolder"><b>Total</b></td>
-                    <td style="font-weight:bolder">0</td>
-                    <td style="font-weight:bolder">0</td>
-                    <td style="font-weight:bolder">0</td>
-                    <td style="font-weight:bolder">0</td>
-                </tr>
+                        <tr>
+                            <td colspan="2" align="right" style="font-weight:bolder"><b>Total</b></td>
+                            <td style="font-weight:bolder">0</td>
+                            <td style="font-weight:bolder">0</td>
+                            <td style="font-weight:bolder">0</td>
+                            <td style="font-weight:bolder">0</td>
+                        </tr>
                     }
                 </tfoot>
 

@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 using Dto.Master;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Utility.Helper;
+using Dto.Search;
+using FileDataLoading.Filters;
+using Core.Enum;
+
 
 namespace FileDataLoading.Controllers
 {
@@ -60,6 +65,48 @@ namespace FileDataLoading.Controllers
                 }
             }
 
+
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> DateWiseCompactordetailsList(DateTime fromdate,  DateTime todate)
+
+        {
+            List<DateWiseCompactorListDto> data = new List<DateWiseCompactorListDto>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(_configuration.GetSection("compactorDateWiseApi").Value + "fromdate_mm_dd_yyyy=" + Convert.ToDateTime(fromdate).ToString("MM-dd-yyyy") + "&todate_mm_dd_yyyy=" + Convert.ToDateTime(todate).ToString("MM-dd-yyyy")))
+              
+
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+
+                    var result = JsonSerializer.Deserialize<ApiResponseCompactorDateWise>(apiResponse);
+
+                    if (result != null)
+                    {
+                        for (int i = 0; i < result.cargo.Count(); i++)
+                        {
+                            data.Add(new DateWiseCompactorListDto()
+                            {
+                                SNO = result.cargo[i].SNO,
+                                DEPT_NAME = result.cargo[i].DEPT_NAME,
+                                FINALLY = result.cargo[i].FINALLY,
+                                TOTAL = result.cargo[i].TOTAL,
+                                WEEKLY = result.cargo[i].WEEKLY,
+                                TOTAL_WEEKLY = result.cargo[i].TOTAL_WEEKLY
+
+
+                            }); ;
+                        }
+                    }
+                }
+            }
+
+
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
     }
