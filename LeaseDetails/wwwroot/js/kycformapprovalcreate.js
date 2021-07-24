@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
 
     var id = parseInt($('#Id').val());
-    //GetOtherDetails(id);
-    //GetHistoryDetails(id);
+    GetKYCDetails(id);
+    GetHistoryDetails(id);
 
     $("#ApprovalStatus").val('0').trigger('change');
     //HttpGet(`/LeaseApplicationFormApproval/GetApprovalDropdownList`, 'html', function (response) {
@@ -15,19 +15,20 @@
 
 });
 
-//function GetOtherDetails(id) {
-//    HttpGet(`/LeaseApplicationFormApproval/LeaseApplicationFormView/?Id=${id}`, 'html', function (response) {
-//        $('#LeaseApplicationFormDetailsDiv').html("");
-//        $('#LeaseApplicationFormDetailsDiv').html(response);
-//    });
-//};
+function GetKYCDetails(id) {
+    HttpGet(`/KycFormApproval/KYCFormView/?Id=${id}`, 'html', function (response) {
+        $('#KYCFormDetailsDiv').html("");
+        $('#KYCFormDetailsDiv').html(response);
+    });
+};
 
-//function GetHistoryDetails(id) {
-//    HttpGet(`/LeaseApplicationFormApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
-//        $('#divHistoryDetails').html("");
-//        $('#divHistoryDetails').html(response);
-//    });
-//};
+// approval process history
+function GetHistoryDetails(id) {
+    HttpGet(`/KycFormApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
+        $('#divHistoryDetails').html("");
+        $('#divHistoryDetails').html(response);
+    });
+};
 
 function callSelect2() {
     $("select").select2({
@@ -249,3 +250,4 @@ $("#btnCreate").click(function () {
     return checkresult
 
 });
+

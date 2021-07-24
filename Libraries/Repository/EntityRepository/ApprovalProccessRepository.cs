@@ -39,6 +39,23 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<List<ApprovalHistoryListDataDto>> GetKYCHistoryDetails(string proccessguid, int id)
+        {
+            try
+            {
+                var data = await _dbContext.LoadStoredProcedure("KycApprovalHistoryDetails")
+                                            .WithSqlParams(("P_ProccessGuid", proccessguid), ("P_ServiceId", id)
+                                            )
+                                            .ExecuteStoredProcedureAsync<ApprovalHistoryListDataDto>();
+
+                return (List<ApprovalHistoryListDataDto>)data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public int GetPreviousApprovalId(string proccessguid, int serviceid)
         {
             var Id = (from f in _dbContext.Approvalproccess

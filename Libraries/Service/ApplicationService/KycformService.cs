@@ -71,6 +71,13 @@ namespace Service.ApplicationService
             return model;
         }
 
+        public async Task<Kycform> FetchKYCSingleResult(int id)
+        {
+            var result = await _kycformRepository.FetchKYCSingleResult(id);
+            //Kycform model = result.FirstOrDefault();
+            return result;
+        }
+
         public async Task<bool> Update(int id, Kycform kyc)
         {
             var result = await _kycformRepository.FindBy(a => a.Id == id);

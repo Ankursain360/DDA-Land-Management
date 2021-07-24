@@ -31,6 +31,9 @@ namespace LeaseDetails.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
 
         string ApprovalDocumentPath = "";
+        string AadharDoc = "";
+        string LetterDoc = "";
+        string ApplicantDoc = "";
         public KycFormApprovalController(IConfiguration configuration,
             IKycformService KycformService,
              IUserNotificationService userNotificationService,
@@ -48,6 +51,9 @@ namespace LeaseDetails.Controllers
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:KYCApplicationForm:ApprovalDocumentPath").Value.ToString();
             _userNotificationService = userNotificationService;
             _hostingEnvironment = hostingEnvironment;
+            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+            LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
+            ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
         }
 
         public async Task<IActionResult> Index()
@@ -335,11 +341,15 @@ namespace LeaseDetails.Controllers
                                                 }
                                             }
                                             result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
+                                            if (result && kyc.KycStatus == "T")
+                                            {
+                                                MailSMSHelper mailSMSHelper = new MailSMSHelper();
+                                                string content = "Dear " + kyc.AllotteeLicenseeName + ",<br/>Your KYC details are verified. Now you are requested to login into the portal Link for Payment <a href='https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create'>Click Here</a> and pay the Outstanding Dues if any.";
+                                                mailSMSHelper.SendMail(kyc.EmailId, string.Empty, string.Empty, "KYC Payment Link", content);
+                                            }
                                         }
                                     }
                                     break;
-
-
                                 }
                             }
                         }
@@ -725,5 +735,71 @@ namespace LeaseDetails.Controllers
         //    return View(Data);
         //}
         #endregion
+
+
+        #region KYCApplicationForm Details 
+        //show kyc form data in accordian
+        public async Task<PartialViewResult> KYCFormView(int id)
+        {
+            var Data = await _kycformService.FetchKYCSingleResult(id);
+            Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            Data.BranchList = await _kycformService.GetAllBranchList();
+            Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            Data.ZoneList = await _kycformService.GetAllZoneList();
+            Data.LocalityList = await _kycformService.GetLocalityList();
+            // Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
+            return PartialView("_KYCFormView", Data);
+        }
+
+        //***************** Download kyc form accordian Files  ********************
+
+        public async Task<IActionResult> DownloadAadharNo(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = AadharDoc + Data.AadhaarNoPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadLetter(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = LetterDoc + Data.LetterPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadPANofApplicant(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = ApplicantDoc + Data.AadhaarPanapplicantPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        #endregion
+
+
+
+        #region History Details Only For Approval Page Added by ishu 16 march 2021
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetKYCHistoryDetails((_configuration.GetSection("workflowProccessGuidKYCForm").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
+        }
+        #endregion
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _kycformService.FetchSingleResult(id);
+            Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            Data.BranchList = await _kycformService.GetAllBranchList();
+            Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            Data.ZoneList = await _kycformService.GetAllZoneList();
+            Data.LocalityList = await _kycformService.GetLocalityList();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
     }
 }
