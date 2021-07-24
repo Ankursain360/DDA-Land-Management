@@ -13,5 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<bool> Create(Leasesignup leasesignup);
         Task<bool> ValidateMobileEmail(string mobile, string email);
+        Task<List<Kycform>> GetAllKycformList(string Mobileno);
+        Task<PagedResult<Kycform>> AllKycformList(Leasesignuplist model);
     }
 }

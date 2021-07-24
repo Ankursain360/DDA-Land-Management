@@ -78,14 +78,27 @@ namespace LeaseForPublic.Controllers
             return View();
         }
 
+        //[HttpPost]
+        //public async Task<PartialViewResult> KycList(string Mobileno)
+        //{
+
+
+        //    var mobile = HttpContext.Session.GetString("Mobile");
+        //    Mobileno = mobile;
+        //    var result = await _leasesignupService.GetAllKycformList(Mobileno);
+        //    return PartialView("_List", result);
+        //}
+
+
+
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] Leasesignuplist model)
         {
 
-            var mobile = HttpContext.Session.GetString("Mobile");
-            
 
-            var result = await _kycformService.GetPagedKycform(model);
+            var mobile = HttpContext.Session.GetString("Mobile");
+            model.Mobileno = mobile;
+            var result = await _leasesignupService.AllKycformList(model);
             return PartialView("_List", result);
         }
 
@@ -175,7 +188,7 @@ namespace LeaseForPublic.Controllers
 
             SendSMSDto SMS = new SendSMSDto();
             SMS.GenerateSendSMS(Action, Mobile);
-
+            HttpContext.Session.SetString("Mobile", model.MobileNo);
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
             JsonMsg.Add(otp.ToString());
@@ -190,14 +203,15 @@ namespace LeaseForPublic.Controllers
         {
             try
             {
+                var mobile = HttpContext.Session.GetString("Mobile");
 
                 if (ModelState.IsValid)
                 {
                     var result = await _leasesignupService.Create(leasesignup);
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        HttpContext.Session.SetString("Mobile", leasesignup.MobileNo);
+                        ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);
+                       
                         return View("Index");
                     }
                     else

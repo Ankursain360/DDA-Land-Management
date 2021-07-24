@@ -11,7 +11,8 @@ namespace Libraries.Repository.IEntityRepository
   public  interface ILeasesignupRepository : IGenericRepository<Leasesignup>
     {
         //Task<List<Leasesignup>> GetAllLeasesignup();
-        //Task<PagedResult<Leasesignup>> GetPagedLeasesignup(LeasesignupSearchDto model);
+        Task<PagedResult<Kycform>> AllKycformList(Leasesignuplist model);
         Task<bool> ValidateMobileEmail(string mobile, string email);
+        Task<List<Kycform>> GetAllKycformList(string Mobileno);
     }
 }

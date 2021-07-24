@@ -43,43 +43,46 @@
                     <form asp-action="Create" method="post" class="d-block px-2" id="form">
 
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="row">
-                              <label style="color:red; font-size:13px" id="err-otp">Already Registered User? <a class="" asp-action="CreateLogin" asp-controller="SignupForm">Click here to login</a></label>
+                        <label style="color:red; font-size:13px" id="err-otp">Already Registered User? <a class="" asp-action="CreateLogin" asp-controller="SignupForm">Click here to login</a></label>
 
+                        <label style="color:green; display:none; font-size:13px" id="shomsgsuccess">OTP Sent successfully</label>
 
-                            <label style="color:red;display:none; font-size:13px" id="err-comm">You are already registered with this emaild or mobile number.</label>
-                            <label style="color:green;display:none; font-size:13px" id="suc-comm">Otp Match</label>
-                            <div class="mb-3 form-icons">
-                                <i class="ri-user-line"></i>
+                        <label style="color:red;display:none; font-size:13px" id="err-comm">You are already registered with this emaild or mobile number.</label>
+                        <label style="color:green;display:none; font-size:13px" id="suc-comm">Otp Match</label>
+                        <div id="sinupshow">
 
-                                <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Name *">
+                            <div class="row">
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-user-line"></i>
 
+                                    <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Name *">
+
+                                </div>
+                                <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Name</label>
                             </div>
-                            <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Name</label>
-                        </div>
 
-                        <div class="row">
-                            <div class="mb-3 form-icons">
-                                <i class="ri-smartphone-line"></i>
-                                <input type="text" asp-for="MobileNo" class="form-control numbers" id="mobile" placeholder="Mobile Number *">
+                            <div class="row">
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-smartphone-line"></i>
+                                    <input type="text" asp-for="MobileNo" class="form-control numbers" id="mobile" placeholder="Mobile Number *">
 
+                                </div>
+                                <label style="color:red;display:none; font-size:13px" id="err-mob">Please Enter 10 Digit Mobile</label>
                             </div>
-                            <label style="color:red;display:none; font-size:13px" id="err-mob">Please Enter 10 Digit Mobile</label>
-                        </div>
 
-                        <div class="row">
+                            <div class="row">
 
-                            <div class="mb-3 form-icons">
-                                <i class="ri-mail-line"></i>
-                                <input type="text" asp-for="EmailId" id="email" class="form-control" placeholder="Email  *">
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-mail-line"></i>
+                                    <input type="text" asp-for="EmailId" id="email" class="form-control" placeholder="Email  *">
 
+                                </div>
+                                <label style="color:red;display:none; font-size:13px" id="err-email">Please Enter Valid Email</label>
                             </div>
-                            <label style="color:red;display:none; font-size:13px" id="err-email">Please Enter Valid Email</label>
-                        </div>
 
 
 
-
+                       
 
 
 
@@ -96,6 +99,7 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
 
                         <div class="row  mt-md-3" id="sotp" style="display:none;">
 
@@ -110,7 +114,7 @@
                             <div class="mt-md-3">
                                 <div class="d-flex align-items-center">
                                     <button class="btn btn-theme text-white d-flex align-items-center" id="otp-button" type="button">OTP Submit</button>
-                                 
+
                                 </div>
                             </div>
 
