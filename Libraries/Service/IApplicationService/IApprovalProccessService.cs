@@ -19,6 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<Kycapprovalproccess> FirstkycApprovalProcessData(string processguid, int serviceid); //added by ishu 22/7/2021
         Task<bool> UpdatePreviouskycApprovalProccess(int previousApprovalId, Kycapprovalproccess approvalproccess, int userId); // added by ishu 22/27/2021
         Task<Kycapprovalproccess> CheckLastKycUserForRevert(string processguid, int serviceid, int level);//added by ishu 23/7/2021
+        Task<Kycapprovalproccess> KycUserDeficiencyForRevert(string processguid, int serviceid, int level);//added by ishu 23/7/2021
         Task<bool> UpdatePreviousApprovalProccess(int previousApprovalId, Approvalproccess approvalproccess, int userId);
         Task<List<ApprovalHistoryListDataDto>> GetHistoryDetails(string proccessguid, int id);
         int CheckIsApprovalStart(string proccessguid, int serviceid);

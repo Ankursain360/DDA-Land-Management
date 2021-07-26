@@ -26,11 +26,12 @@ namespace LeaseForPublic.Controllers
         public IConfiguration _configuration;
         private readonly IUserProfileService _userProfileService;
         private readonly IApprovalProccessService _approvalproccessService;
-
+        private readonly IUserNotificationService _userNotificationService;
         string AadharDoc = "";
         string LetterDoc = "";
         string ApplicantDoc = "";
         public KYCformController(IConfiguration configuration,
+             IUserNotificationService userNotificationService,
             IKycformService KycformService,
             IUserProfileService userProfileService,
              IApprovalProccessService approvalproccessService )
@@ -38,7 +39,8 @@ namespace LeaseForPublic.Controllers
         {
             _configuration = configuration;
             _kycformService = KycformService;
-             AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+            _userNotificationService = userNotificationService;
+            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
              LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
              ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
             _userProfileService = userProfileService;
@@ -226,22 +228,22 @@ namespace LeaseForPublic.Controllers
                                 approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                 result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
-                                //#region Insert Into usernotification table Added By Renu 18 June 2021
-                                //if (result)
-                                //{
-                                //    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
-                                //    var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                //    Usernotification usernotification = new Usernotification();
-                                //    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
-                                //    usernotification.Message = replacement;
-                                //    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidLeaseApplicationForm").Value);
-                                //    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                //    usernotification.ServiceId = approvalproccess.ServiceId;
-                                //    usernotification.SendFrom = approvalproccess.SendFrom;
-                                //    usernotification.SendTo = approvalproccess.SendTo;
-                                //    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                                //}
-                                //#endregion
+                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                if (result)
+                                {
+                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                    Usernotification usernotification = new Usernotification();
+                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                    usernotification.Message = replacement;
+                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                    usernotification.SendTo = approvalproccess.SendTo;
+                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                }
+                                #endregion
                             }
 
                             break;

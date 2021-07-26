@@ -110,7 +110,7 @@ namespace LeaseDetails.Controllers
 
                 Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
 
-                /*Check if zonewise then aprovee user must have zoneid*/
+                /*Check if branchwise then aprovee user must have branchid*/
                 if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Forward) && checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
                 {
                     for (int i = 0; i < DataFlow.Count; i++)
@@ -217,16 +217,17 @@ namespace LeaseDetails.Controllers
                                             approvalproccess.Level = ApprovalProcessBackData.Level;
                                             approvalproccess.SendTo = kyc.ApprovalUserId.ToString();
                                         }
-                                        else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
+                                        else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))//deficiency --sent back to applicant to resubmit
                                         {
                                             /*Check previous level for revert */
                                             for (int d = i - 1; d >= 0; d--)
                                             {
                                                 if (!DataFlow[d].parameterSkip)
                                                 {
-                                                    var CheckLastUserForRevert = await _approvalproccessService.CheckLastKycUserForRevert((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
+                                                    var CheckLastUserForRevert = await _approvalproccessService.KycUserDeficiencyForRevert((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
                                                     approvalproccess.SendTo = CheckLastUserForRevert.SendFrom;
-                                                    approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                                    // approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                                    approvalproccess.Level = 1;
                                                     break;
                                                 }
                                             }
@@ -316,10 +317,12 @@ namespace LeaseDetails.Controllers
                                                 kyc.PendingAt = approvalproccess.SendTo;
                                                
                                             }
-                                            else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))
+                                            else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Revert))//deficiency --sent to applicant
                                             {
                                                 kyc.ApprovedStatus = Convert.ToInt32(kyc.ApprovalStatus);
-                                                kyc.PendingAt = approvalproccess.SendTo;
+                                                // kyc.PendingAt = approvalproccess.SendTo;
+                                                kyc.PendingAt = "0";
+
                                             }
                                             else if (kyc.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
                                             {
@@ -341,11 +344,99 @@ namespace LeaseDetails.Controllers
                                                 }
                                             }
                                             result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
-                                            if (result && kyc.KycStatus == "T")
+                                           //if(result && kyc.ApprovedStatusNavigation.SentStatusName == "Deficiency")
+                                            if (result && kyc.ApprovedStatus == 18)
+                                               
                                             {
-                                                MailSMSHelper mailSMSHelper = new MailSMSHelper();
-                                                string content = "Dear " + kyc.AllotteeLicenseeName + ",<br/>Your KYC details are verified. Now you are requested to login into the portal Link for Payment <a href='https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create'>Click Here</a> and pay the Outstanding Dues if any.";
-                                                mailSMSHelper.SendMail(kyc.EmailId, string.Empty, string.Empty, "KYC Payment Link", content);
+                                                var sendMailResult1 = false;
+                                                #region Mail Generate
+                                                //At successfull completion send mail and sms
+                                                Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
+                                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApplicantKycMailDetailsContent.html");
+                                                string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                                // string linkhref = "https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create";
+                                                string linkhref = _configuration.GetSection("KycPaymentLink").Value;
+                                                var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+
+
+                                                #region Mail Generation Added By ishu
+
+                                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                                #region HTML Body Generation
+                                                KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
+                                                bodyDTO.ApplicantName = Data.Name;
+                                                bodyDTO.Remarks = " Your KYC details are not complete. Now you are requested to login into the portal and fill the missing details and resubmit the application.";
+                                                bodyDTO.Link = linkhref;
+                                                bodyDTO.path = path;
+                                                string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
+                                                #endregion
+
+                                                #region Common Mail Genration
+                                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                                maildto.strMailSubject = "KYC Form Application Approval Request Deficiency ";
+                                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                                maildto.strBodyMsg = strBodyMsg;
+                                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                                maildto.strMailTo = Data.EmailId; /*multousermailId.ToString();*/
+                                                sendMailResult1 = mailG.SendMailWithAttachment(maildto);
+                                                #endregion
+                                                #endregion
+
+
+                                                #endregion
+                                            }
+                                            else { }
+                                            if (result && kyc.KycStatus == "T") //send mail to kyc 
+                                            {
+                                                
+                                                var sendMailResult1 = false;
+                                                #region Mail Generate
+                                                //At successfull completion send mail and sms
+                                                Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
+                                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApplicantKycMailDetailsContent.html");
+                                                string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                               // string linkhref = "https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create";
+                                                string linkhref = _configuration.GetSection("KycPaymentLink").Value;
+                                                var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                               
+
+                                                #region Mail Generation Added By ishu
+
+                                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                                #region HTML Body Generation
+                                                KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
+                                                bodyDTO.ApplicantName = Data.Name;
+                                                bodyDTO.Remarks = "Your KYC details are verified. Now you are requested to login into the portal and pay the Outstanding Dues if any.";
+                                                bodyDTO.Link = linkhref;
+                                                bodyDTO.path = path;
+                                                string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
+                                                #endregion
+
+                                               #region Common Mail Genration
+                                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                                maildto.strMailSubject = "KYC Form Application Approval Request Approved ";
+                                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                                maildto.strBodyMsg = strBodyMsg;
+                                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                                maildto.strMailTo = Data.EmailId; /*multousermailId.ToString();*/
+                                                sendMailResult1 = mailG.SendMailWithAttachment(maildto);
+                                                #endregion
+                                                #endregion
+
+
+                                                #endregion
                                             }
                                         }
                                     }

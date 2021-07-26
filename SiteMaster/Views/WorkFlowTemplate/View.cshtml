@@ -17,99 +17,128 @@
     }
 </style>
 
+<br />
+<br />
+
 
 <div class="pt-3">
 
-    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3" id="myForm" method="post" disabled="disabled">
+    <div id="frmTemplate" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">View Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" id="RevertCode" value="@ViewBag.RevertCodeValue" />
+        <input type="hidden" id="ApprovedCode" value="@ViewBag.ApprovedCodeValue" />
+        <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
 
         <div class="row">
             <div class=" col-md-4">
 
                 <br />
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3 " asp-for="ModuleId" disabled
+                    <select class="floating-label-field floating-label-field--s3 " asp-for="ModuleId" disabled="disabled" 
                             asp-items="@(new SelectList(Model.ModuleList, "Id","Name"))">
 
                         <option selected="selected" disabled="disabled" value="">Select </option>
                     </select>
-                    <span asp-validation-for="ModuleId" class="text-danger"></span>
+                    <span asp-validation-for="ModuleId" class="text-danger" style="display:none;" id="ModuleIdMessage">Module Name Is Mandatory</span>
                     <label asp-for="ModuleId" class="floating-label">Module<span style="color:red">*</span> </label>
                 </div>
-
             </div>
             <div class=" col-md-4">
                 <br />
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input disabled asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input asp-for="Name" placeholder="Name" type="text" maxlength="4000"
+                           class="floating-label-field floating-label-field--s3" disabled="disabled" />
+                    <span asp-validation-for="Name" class="text-danger" style="display:none;" id="NameMessage">Process Name Is Mandatory</span>
                     <label asp-for="Name" class="floating-label">Proccess Name <span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class=" col-md-4">
                 <br />
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea disabled asp-for="Description" placeholder="Proccess Description" type="text"
-                              class="floating-label-field floating-label-field--s3 "></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <textarea asp-for="Description" placeholder="Proccess Description" type="text" maxlength="4000"
+                              class="floating-label-field floating-label-field--s3 " disabled="disabled" ></textarea>
+                    <span asp-validation-for="Description" class="text-danger" style="display:none;" id="DescriptionMessage">Proccess Description Is Mandatory</span>
                     <label asp-for="Description" class="floating-label">Proccess Description <span style="color:red">*</span> </label>
                 </div>
             </div>
 
         </div>
-        <br />
+
         <div class="row mt-md-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input disabled asp-for="Slatime" type="text"
-                           class="floating-label-field floating-label-field--s3 onlynumbers" />
+                    <input asp-for="Slatime" type="text" maxlength="3"
+                           class="floating-label-field floating-label-field--s3 onlynumbers" disabled="disabled"  />
                     <span asp-validation-for="Slatime" class="text-danger" style="display:none;" id="SlatimeMessage">SLA Time Is Mandatory</span>
-                    <label asp-for="Slatime" class="floating-label">SLA Time(in days)<span style="color:red">*</span>   </label>
+                    <label asp-for="Slatime" class="floating-label">SLA Time(in days)  <span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input disabled asp-for="EffectiveDate" type="date"
-                           class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="EffectiveDate" type="date"
+                           class="floating-label-field floating-label-field--s3" onkeypress="return false;" disabled="disabled"  />
                     <span asp-validation-for="EffectiveDate" class="text-danger" style="display:none;" id="EffectiveDateMessage">Effective Date  Is Mandatory</span>
                     <label asp-for="EffectiveDate" class="floating-label">Effective Date <span style="color:red">*</span> </label>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Version" type="text" class="floating-label-field floating-label-field--s3" disabled />
+                    <input asp-for="Version" type="text" class="floating-label-field floating-label-field--s3" readonly  disabled="disabled" />
                     <label asp-for="Version" class="floating-label">Version </label>
                 </div>
             </div>
             <div class="col-md-2">
-                <label class="control-label lb-sm">IsActive</label>
-                <input type="checkbox" asp-for="IsActiveData" checked disabled />
+               
+                <label class="control-label lb-sm" disabled="disabled" >IsActive</label>
+                <input type="checkbox" asp-for="IsActiveData" checked />
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-10"></div>
+            <div class=" col-md-2">
+               
+                <a class="btn btn-theme add-record " style="color:white;" data-added="0" disabled="disabled" >  Add Level</a>
             </div>
         </div>
 
+        <br />
         <div id="LoadReportView">
 
         </div>
 
+        <div class="row mt-md-3">
+            <div class=" col-md-10"></div>
+            <div class=" col-md-2">
+                <a class="btn btn-theme add-record " style="color:white;" data-added="0"disabled="disabled" >  Add Level</a>
+            </div>
+        </div>
+
+     
         <div class="row mx-1">
             <div class="col-md-12">
                 @Html.ActionLink("Back", "Index", "WorkFlowTemplate", null, new { @class = "btn btn-theme" })
             </div>
         </div>
 
-    </form>
+    </div>
 
 </div>
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/workflowview.js"></script>
+    <script src="~/js/workflowedit.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/workflowview.min.js" asp-append-version="true"></script>
+    <script src="~/js/workflowedit.min.js" asp-append-version="true"></script>
 </environment>
+<environment include="Development">
+    <script src="~/js/common.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/common.min.js" asp-append-version="true"></script>
+</environment>
+

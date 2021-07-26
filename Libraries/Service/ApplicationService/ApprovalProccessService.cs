@@ -141,6 +141,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _approvalproccessRepository.CheckLastKycUserForRevert(processguid, serviceid, level);
         }
+
+        public async Task<Kycapprovalproccess> KycUserDeficiencyForRevert(string processguid, int serviceid, int level)//added by ishu 23/7/2021
+        {
+            return await _approvalproccessRepository.KycUserDeficiencyForRevert(processguid, serviceid, level);
+        }
         public async Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid)
         {
             return await _approvalproccessRepository.FetchSingleNotificationTemplate(guid);

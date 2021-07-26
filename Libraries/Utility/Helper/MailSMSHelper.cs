@@ -148,7 +148,18 @@ namespace Utility.Helper
 
             return body;
         }
-
+        public string PopulateBodyApplicantMailDetails(KycApplicantMailBodyDto element)//KYC Applicant mail
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+            body = body.Replace("{Remarks}", element.Remarks);
+            body = body.Replace("{UserName}", element.ApplicantName);
+            body = body.Replace("{Link}", element.Link);
+            return body;
+        }
         public string GenerateMailFormatForComplaint(ComplaintRegisteredMailBodyDto element)
         {
             string body = string.Empty;
@@ -219,7 +230,6 @@ namespace Utility.Helper
             {
                 body = reader.ReadToEnd();
             }
-            
         
             body = body.Replace("{Otp}", element.Otp);
             return body;
