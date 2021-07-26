@@ -58,7 +58,18 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => x.IsActive == 1)
                                    .ToListAsync();
         }
-
+        public async Task<Kycform> FetchKYCSingleResult(int id)
+        {
+            var data = await _dbContext.Kycform
+                                       .Include(x => x.Branch)
+                                       .Include(x => x.LeaseType)
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.PropertyType)
+                                       .Include(x => x.Zone)
+                                       .Where(x => x.Id == id)
+                                       .FirstOrDefaultAsync();
+            return data;
+        }
         public async Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model)
         {
             var data = await _dbContext.Kycform

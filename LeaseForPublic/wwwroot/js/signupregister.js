@@ -78,6 +78,9 @@ $("#signup2").click(function () {
             //alert(response);
             if (response[0] == "true") {
                 localStorage.setItem("otp", response[2]);
+
+                $("#sinupshow").hide();
+                $("#shomsgsuccess").show();
                 $("#sotp").show();
                 $("#sotp").val(response.otp);
             } else {

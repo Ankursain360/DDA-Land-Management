@@ -1,0 +1,51 @@
+﻿@model Libraries.Model.Entity.Kycform
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutApproval.cshtml";
+}
+
+<div class="row mt-md-3">
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <h6 class="pull-left" style="color:#007bff;margin-top:5px;">KYC Application Form Approval</h6>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<form id="myForm" asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <h3 class="mb-3 d-flex">
+        Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+    </h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    @*<input type="hidden" asp-for="RefNo" />*@
+    <input type="hidden" id="RevertCode" value="@ViewBag.RevertCodeValue" />
+    <input type="hidden" id="ApprovedCode" value="@ViewBag.ApprovedCodeValue" />
+    <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
+    <input type="hidden" id="QueryForwardCode" value="@ViewBag.QueryForwardCodeValue" />
+    <input type="hidden" asp-for="ApprovalStatusCode" value="0" />
+    <div id="KYCFormDetailsDiv">
+
+    </div>
+
+    <div id="divHistoryDetails">
+
+    </div>
+   
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+           
+            @Html.ActionLink("Back", "Index", "KycFormApproval", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
+</form>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/kycformapprovalcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/kycformapprovalcreate.min.js" asp-append-version="true"></script>
+</environment>

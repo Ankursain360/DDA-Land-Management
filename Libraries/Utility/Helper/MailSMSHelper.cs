@@ -163,7 +163,53 @@ namespace Utility.Helper
         }
 
         #endregion
+        public bool SendMail(string toEmailId, string toCCEmailId, string toBCCEmailId, string mailSubject, string mailContent)
+        {
+            MailMessage message = new MailMessage();
+            SmtpClient smtp = new SmtpClient();
 
+            smtp.Host = AppConstantsHelper.mailHost;
+            smtp.Port = AppConstantsHelper.port;
+            smtp.Credentials = new NetworkCredential(AppConstantsHelper.fromMail, AppConstantsHelper.fromMailPwd);
+
+            message = new MailMessage();
+           
+            string[] multi = toEmailId.Split(',');
+            if (!string.IsNullOrEmpty(toEmailId))
+            {
+                foreach (string emailID in multi)
+                {
+                    message.To.Add(new MailAddress(emailID));
+                }
+            }
+
+            if (!string.IsNullOrEmpty(toCCEmailId))
+            {
+                multi = toCCEmailId.Split(',');
+                foreach (string emailID in multi)
+                {
+                    message.CC.Add(new MailAddress(emailID));
+                }
+            }
+
+            if (!string.IsNullOrEmpty(toBCCEmailId))
+            {
+                multi = toBCCEmailId.Split(',');
+                foreach (string emailID in multi)
+                {
+                    message.Bcc.Add(new MailAddress(emailID));
+                }
+            }
+            
+            message.Subject = mailSubject;
+            message.From = new MailAddress(AppConstantsHelper.fromMail);
+            message.IsBodyHtml = true;
+            message.Body = mailContent;
+            smtp.EnableSsl = true;
+            smtp.Send(message);
+            return true;
+
+        }
 
 
         public string GenerateMailFormatForLeaseSignUp(LeaseSignupMailDto element)

@@ -55,9 +55,9 @@ $("#otp-button").click(function () {
     var otp = $("#otp").val();
     var rotp = '123456';//localStorage.getItem("otp");
     if (otp == rotp) {
-        alert("ff");
+     
         $("#suc-comm").show();
-       window.location = "/KYCform/Index";
+       window.location = "/SignupForm/Index";
     } else {
         $("#err-otp").show();
     }

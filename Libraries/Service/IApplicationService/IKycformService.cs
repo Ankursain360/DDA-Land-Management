@@ -23,6 +23,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Kycform>> GetAllKycform();
         Task<Kycform> FetchSingleResult(int id);
+        Task<Kycform> FetchKYCSingleResult(int id);
         Task<bool> Update(int id, Kycform kyc);
 
         Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model);
