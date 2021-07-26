@@ -341,11 +341,51 @@ namespace LeaseDetails.Controllers
                                                 }
                                             }
                                             result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
-                                            if (result && kyc.KycStatus == "T")
+                                           
+                                            if (result && kyc.KycStatus == "T") //send mail to kyc 
                                             {
-                                                MailSMSHelper mailSMSHelper = new MailSMSHelper();
-                                                string content = "Dear " + kyc.AllotteeLicenseeName + ",<br/>Your KYC details are verified. Now you are requested to login into the portal Link for Payment <a href='https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create'>Click Here</a> and pay the Outstanding Dues if any.";
-                                                mailSMSHelper.SendMail(kyc.EmailId, string.Empty, string.Empty, "KYC Payment Link", content);
+                                                
+                                                var sendMailResult1 = false;
+                                                #region Mail Generate
+                                                //At successfull completion send mail and sms
+                                                Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
+                                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApplicantKycMailDetailsContent.html");
+                                                string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                               // string linkhref = "https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create";
+                                                string linkhref = _configuration.GetSection("KycPaymentLink").Value;
+                                                var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                               
+
+                                                #region Mail Generation Added By Renu
+
+                                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                                #region HTML Body Generation
+                                                KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
+                                                bodyDTO.ApplicantName = kyc.Name;
+                                                bodyDTO.Link = linkhref;
+                                                bodyDTO.path = path;
+                                                string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
+                                                #endregion
+
+                                               #region Common Mail Genration
+                                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                                maildto.strMailSubject = "KYC Form Application Approval Request Approved ";
+                                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                                maildto.strBodyMsg = strBodyMsg;
+                                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                                maildto.strMailTo = kyc.EmailId; /*multousermailId.ToString();*/
+                                                sendMailResult1 = mailG.SendMailWithAttachment(maildto);
+                                                #endregion
+                                                #endregion
+
+
+                                                #endregion
                                             }
                                         }
                                     }
