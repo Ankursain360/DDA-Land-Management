@@ -14,5 +14,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Kycform>> AllKycformList(Leasesignuplist model);
         Task<bool> ValidateMobileEmail(string mobile, string email);
         Task<List<Kycform>> GetAllKycformList(string Mobileno);
+        Task<List<Leasesignup>> GetEmailAndMobile(string mobile, string email);
     }
 }

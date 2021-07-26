@@ -56,6 +56,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _leasesignupRepository.AllKycformList(model);
         }
-
+        public async Task<List<Leasesignup>> GetEmailAndMobile(string mobile, string email)
+        {
+            return await _leasesignupRepository.GetEmailAndMobile(mobile, email);
+        }
     }
 }

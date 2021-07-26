@@ -156,7 +156,23 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+        public async Task<List<Leasesignup>> GetEmailAndMobile(string mobile, string email)
 
+        {
+            try
+            {
+                var data = await _dbContext.Leasesignup
+                                 
+                                       .Where(x =>x.MobileNo == mobile)
+                                       .ToListAsync();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+        }
 
 
 
