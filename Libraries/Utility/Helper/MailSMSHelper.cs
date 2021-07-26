@@ -155,6 +155,7 @@ namespace Utility.Helper
             {
                 body = reader.ReadToEnd();
             }
+            body = body.Replace("{Remarks}", element.Remarks);
             body = body.Replace("{UserName}", element.ApplicantName);
             body = body.Replace("{Link}", element.Link);
             return body;

@@ -174,6 +174,16 @@ namespace Libraries.Repository.EntityRepository
                                       .Take(1)
                                       .FirstOrDefaultAsync();
         }
+        public async Task<Kycapprovalproccess> KycUserDeficiencyForRevert(string processguid, int serviceid, int level)//added by ishu 23/7/2021
+        {
+            return await _dbContext.Kycapprovalproccess
+                                      .Where(x => x.ProcessGuid == processguid && x.ServiceId == serviceid
+                                      && x.Level == 1
+                                      )
+                                      .OrderBy(x => x.Id)
+                                      .Take(1)
+                                      .FirstOrDefaultAsync();
+        }
         public async Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid)
         {
             return await _dbContext.ApplicationNotificationTemplate

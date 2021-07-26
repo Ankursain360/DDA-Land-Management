@@ -26,6 +26,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<Kycapprovalproccess> kycFindBy(int previousApprovalId); //added by ishu 22/7//2021
         Task<bool> UpdatePreviouskycApprovalProccess(int previousApprovalId, Kycapprovalproccess approvalproccess, int userId); // added by ishu 22/27/2021
         Task<Kycapprovalproccess> CheckLastKycUserForRevert(string processguid, int serviceid, int level);//added by ishu 23/7/2021
+        Task<Kycapprovalproccess> KycUserDeficiencyForRevert(string processguid, int serviceid, int level);//added by ishu 23/7/2021
+
+
         Task<List<ApprovalHistoryListDataDto>> GetKYCHistoryDetails(string proccessguid, int id);///for kycapproval history
     }
 }
