@@ -428,7 +428,7 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Create(Leasesignup leasesignup)
         {
-            try
+           try
             {
                 var mobile = HttpContext.Session.GetString("Mobile");
                 var email = HttpContext.Session.GetString("Email");
