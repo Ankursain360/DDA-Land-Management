@@ -37,6 +37,7 @@ $("#signup2").click(function () {
             if (response[0] == "true") {
                 localStorage.setItem("otp", response[2]);
                 $("#login-div").hide();
+                $("#shomsgsuccess").show();
                 $("#sotp").show();
                 $("#sotp").val(response.otp);
             } else {
@@ -57,7 +58,7 @@ $("#otp-button").click(function () {
     if (otp == rotp) {
      
         $("#suc-comm").show();
-       window.location = "/SignupForm/Index";
+       window.location = "/KYCform/Index";
     } else {
         $("#err-otp").show();
     }

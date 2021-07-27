@@ -45,7 +45,7 @@ function Getkyc(pageNumber, pageSize, order) {
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-
+        Mobileno: (''),
         property: $('#txtName').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),

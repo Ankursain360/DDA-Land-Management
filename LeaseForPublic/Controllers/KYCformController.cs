@@ -18,6 +18,12 @@ using Dto.Master;
 using Service.IApplicationService;
 using System.Text;
 
+using Microsoft.AspNetCore.Http;
+
+
+
+
+
 namespace LeaseForPublic.Controllers
 {
     public class KYCformController : BaseController
@@ -54,6 +60,8 @@ namespace LeaseForPublic.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
         {
+            var mobile = HttpContext.Session.GetString("Mobile");
+            model.Mobileno = mobile;
             var result = await _kycformService.GetPagedKycform(model);
             return PartialView("_List", result);
         }
@@ -61,8 +69,11 @@ namespace LeaseForPublic.Controllers
         // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
+            var mobile = HttpContext.Session.GetString("Mobile");
+            var email = HttpContext.Session.GetString("Email");
             Kycform kyc = new Kycform();
-          
+            kyc.MobileNo = mobile;
+            kyc.EmailId = email;
             kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
             kyc.BranchList = await _kycformService.GetAllBranchList();
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();

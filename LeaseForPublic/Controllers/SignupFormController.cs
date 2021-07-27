@@ -428,7 +428,7 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Create(Leasesignup leasesignup)
         {
-            try
+           try
             {
                 var mobile = HttpContext.Session.GetString("Mobile");
                 var email = HttpContext.Session.GetString("Email");
@@ -439,8 +439,8 @@ namespace LeaseForPublic.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);
-                       
-                        return View("Index");
+                        return RedirectToAction("Index", "KYCform");
+                        //return View("Index");
                     }
                     else
                     {
