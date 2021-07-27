@@ -78,6 +78,7 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.Locality)
                                        .Include(x => x.PropertyType)
                                        .Include(x => x.Zone)
+                                       .Include(x => x.ApprovedStatusNavigation)
                                        .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
                                        .GetPaged<Kycform>(model.PageNumber, model.PageSize);
 
@@ -94,6 +95,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
+                                               .Include(x => x.ApprovedStatusNavigation)
                                                .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
                                                .OrderBy(x => x.Property)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
@@ -106,6 +108,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
+                                               .Include(x => x.ApprovedStatusNavigation)
                                                .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
                                                .OrderByDescending(x => x.IsActive)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
@@ -125,6 +128,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
+                                               .Include(x => x.ApprovedStatusNavigation)
                                                .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
                                                .OrderByDescending(x => x.Property)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
@@ -137,6 +141,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
+                                               .Include(x => x.ApprovedStatusNavigation)
                                                .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
                                                .OrderBy(x => x.IsActive)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);

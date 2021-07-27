@@ -201,9 +201,10 @@ namespace LeaseForPublic.Controllers
                                 approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
                                 approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
                                 approvalproccess.ServiceId = kyc.Id;
-                                approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                                approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
-                              
+                                //approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                //approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                approvalproccess.SendFrom = kyc.Id.ToString();
+                                approvalproccess.SendFromProfileId = "0";
                                 #region set sendto and sendtoprofileid 
                                 StringBuilder multouserprofileid = new StringBuilder();
                                 int col = 0;
@@ -226,7 +227,8 @@ namespace LeaseForPublic.Controllers
                                 approvalproccess.Level = i + 1;
                                 approvalproccess.Version = workflowtemplatedata.Version;
                                 approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in approvalproccess Table
 
                                 #region Insert Into usernotification table Added By Renu 18 June 2021
                                 if (result)
@@ -234,14 +236,15 @@ namespace LeaseForPublic.Controllers
                                     var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
                                     var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                     Usernotification usernotification = new Usernotification();
-                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
                                     usernotification.Message = replacement;
                                     usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
                                     usernotification.ProcessGuid = approvalproccess.ProcessGuid;
                                     usernotification.ServiceId = approvalproccess.ServiceId;
                                     usernotification.SendFrom = approvalproccess.SendFrom;
                                     usernotification.SendTo = approvalproccess.SendTo;
-                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                    //result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                    result = await _userNotificationService.Create(usernotification, kyc.Id);
                                 }
                                 #endregion
                             }
