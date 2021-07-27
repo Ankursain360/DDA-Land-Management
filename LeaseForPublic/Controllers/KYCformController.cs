@@ -342,7 +342,89 @@ namespace LeaseForPublic.Controllers
                 var result = await _kycformService.Update(id, kyc);
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+                    Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
+                    var DataFlow = await dataAsync();
+
+                    #region Resubmitting form Approval Proccess At last level start Added by ishu  27 july 2021
+                   
+                    var workflowtemplatedata = await _kycformService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProccessGuidKYCForm").Value));
+
+                    var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+
+                    for (int i = 0; i < DataFlow.Count; i++)
+                    {
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            
+                                    var CheckLastUserForRevert = await _approvalproccessService.KycUserResubmitForApproval((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
+                                    approvalproccess.SendTo = CheckLastUserForRevert.SendTo;
+                                    // approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                    approvalproccess.Level = 3;
+                          
+
+                            kyc.ApprovedStatus = ApprovalStatus.Id;
+                            kyc.PendingAt = approvalproccess.SendTo;
+                            result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
+                            if (result)
+                            {
+                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
+                                approvalproccess.ServiceId = kyc.Id;
+                               
+                                approvalproccess.SendFrom = kyc.Id.ToString();
+                                approvalproccess.SendFromProfileId = "0";
+                                #region set sendto and sendtoprofileid 
+                                StringBuilder multouserprofileid = new StringBuilder();
+                                int col = 0;
+                                if (approvalproccess.SendTo != null)
+                                {
+                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                    foreach (string MultiUserId in multiTo)
+                                    {
+                                        if (col > 0)
+                                            multouserprofileid.Append(",");
+                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                        multouserprofileid.Append(UserProfile.Id);
+                                        col++;
+                                    }
+                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                }
+                                #endregion
+                                approvalproccess.PendingStatus = 1;   //1
+                                approvalproccess.Status = ApprovalStatus.Id;   //1
+                                //approvalproccess.Level = i + 1;
+                                approvalproccess.Version = workflowtemplatedata.Version;
+                                approvalproccess.Remarks = "Record Resubmitted and Send for Approval";///May be Uncomment
+                                //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in approvalproccess Table
+
+                                #region Insert Into usernotification table Added By ishu 18 June 2021
+                                if (result)
+                                {
+                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                    Usernotification usernotification = new Usernotification();
+                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
+                                    usernotification.Message = replacement;
+                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                    usernotification.SendTo = approvalproccess.SendTo;
+                                    //result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                    result = await _userNotificationService.Create(usernotification, kyc.Id);
+                                }
+                                #endregion
+                            }
+
+                            break;
+                        }
+                    }
+
+                    #endregion
+
+                    ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
 
                         var list = await _kycformService.GetAllKycform();
                         return View("Index", list);
