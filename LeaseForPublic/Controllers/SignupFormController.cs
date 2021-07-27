@@ -439,8 +439,8 @@ namespace LeaseForPublic.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);
-                       
-                        return View("Index");
+                        return RedirectToAction("Index", "KYCform");
+                        //return View("Index");
                     }
                     else
                     {

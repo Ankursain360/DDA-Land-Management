@@ -72,79 +72,107 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model)
         {
-            var data = await _dbContext.Kycform
+
+            try
+            {
+                var data = await _dbContext.Kycform
                                        .Include(x => x.Branch)
                                        .Include(x => x.LeaseType)
                                        .Include(x => x.Locality)
                                        .Include(x => x.PropertyType)
                                        .Include(x => x.Zone)
-                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
+                                       .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+
+                                       )
                                        .GetPaged<Kycform>(model.PageNumber, model.PageSize);
 
-            int SortOrder = (int)model.SortOrder;
-            if (SortOrder == 1)
-            {
-                switch (model.SortBy.ToUpper())
-                {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Kycform
-                                               .Include(x => x.Branch)
-                                               .Include(x => x.LeaseType)
-                                               .Include(x => x.Locality)
-                                               .Include(x => x.PropertyType)
-                                               .Include(x => x.Zone)
-                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-                                               .OrderBy(x => x.Property)
-                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Kycform
-                                               .Include(x => x.Branch)
-                                               .Include(x => x.LeaseType)
-                                               .Include(x => x.Locality)
-                                               .Include(x => x.PropertyType)
-                                               .Include(x => x.Zone)
-                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-                                               .OrderByDescending(x => x.IsActive)
-                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-                        break;
 
-                }
-            }
-            else if (SortOrder == 2)
-            {
-                switch (model.SortBy.ToUpper())
+
+
+                int SortOrder = (int)model.SortOrder;
+                if (SortOrder == 1)
                 {
-                    case ("NAME"):
-                        data = null;
-                        data = await _dbContext.Kycform
-                                               .Include(x => x.Branch)
-                                               .Include(x => x.LeaseType)
-                                               .Include(x => x.Locality)
-                                               .Include(x => x.PropertyType)
-                                               .Include(x => x.Zone)
-                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-                                               .OrderByDescending(x => x.Property)
-                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-                        break;
-                    case ("STATUS"):
-                        data = null;
-                        data = await _dbContext.Kycform
-                                               .Include(x => x.Branch)
-                                               .Include(x => x.LeaseType)
-                                               .Include(x => x.Locality)
-                                               .Include(x => x.PropertyType)
-                                               .Include(x => x.Zone)
-                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)))
-                                               .OrderBy(x => x.IsActive)
-                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
-                        break;
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("NAME"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                   .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+
+                                       ).OrderBy(x => x.Property)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+                        case ("STATUS"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                 .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+
+                                       ).OrderByDescending(x => x.IsActive)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+
+                    }
                 }
+                else if (SortOrder == 2)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("NAME"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                   .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+
+                                       ).OrderByDescending(x => x.Property)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+                        case ("STATUS"):
+                            data = null;
+                            data = await _dbContext.Kycform
+                                                   .Include(x => x.Branch)
+                                                   .Include(x => x.LeaseType)
+                                                   .Include(x => x.Locality)
+                                                   .Include(x => x.PropertyType)
+                                                   .Include(x => x.Zone)
+                                                 .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+
+                                       ).OrderBy(x => x.IsActive)
+                                                   .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                            break;
+                    }
+                }
+                return data;
+
+
+
+
+
             }
-            return data;
-            // return await _dbContext.Structure.GetPaged<Structure>(model.PageNumber, model.PageSize);
+            catch (Exception ex)
+            {
+                throw;
+
+            }
+
         }
 
         //********* rpt ! Kycleasepaymentrpt Details **********
