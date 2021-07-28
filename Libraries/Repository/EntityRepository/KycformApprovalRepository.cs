@@ -27,7 +27,12 @@ namespace Libraries.Repository.EntityRepository
             var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
             List<int> myIdList = new List<int>();
             foreach (Kycform myLine in UserWiseDataList)
-                myIdList.Add(myLine.Id);
+            {
+                if (myLine != null)
+                {
+                    myIdList.Add(myLine.Id);
+                }
+            }
             int[] myIdArray = myIdList.ToArray();
 
             var data = await _dbContext.Kycform

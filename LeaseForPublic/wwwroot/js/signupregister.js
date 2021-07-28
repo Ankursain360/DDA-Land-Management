@@ -101,8 +101,8 @@ $("#otp-button").click(function () {
         $("#suc-comm").show();
         $("#form").submit();
     } else {
-        
+        $("#otp").val('');
         $("#err-otp").show();
-        alert("Wrong Otp");
+        alert("Wrong OTP");
     }
 });
