@@ -64,11 +64,7 @@ namespace Libraries.Repository.EntityRepository
                                                 && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                                 )
                                                 .OrderBy(a => a.Property)
-                                                //   .OrderBy(s =>
-                                                //(model.SortBy.ToUpper() == "REFNO" ? s.RefNo
-                                                //: model.SortBy.ToUpper() == "REGISTRATIONNO" ? s.RegistrationNo
-                                                //: s.RefNo)
-                                                //)
+                                              
                                                 .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                         break;
 
@@ -96,11 +92,7 @@ namespace Libraries.Repository.EntityRepository
                                                 && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                                 )
                                                 .OrderByDescending(x => x.Property)
-                                               //   .OrderByDescending(s =>
-                                               //(model.SortBy.ToUpper() == "REFNO" ? s.RefNo
-                                               //: model.SortBy.ToUpper() == "REGISTRATIONNO" ? s.RegistrationNo
-                                               //: s.RefNo)
-                                               //)
+                                             
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                         break;
                 }

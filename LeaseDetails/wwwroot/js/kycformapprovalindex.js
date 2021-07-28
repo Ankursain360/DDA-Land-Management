@@ -112,11 +112,11 @@ $("input[name='radioStatus']").click(function () {
 $('#ApprovalStatus').change(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-        GetDetails(currentPageNumber, currentPageSize, StatusId, sortOrder);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
 
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-        GetDetails(currentPageNumber, currentPageSize, StatusId, sortOrder);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
     }
 });
