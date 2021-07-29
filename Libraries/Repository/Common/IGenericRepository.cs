@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Libraries.Model.Common;
+using Dto.Master;
 
 namespace Libraries.Repository.Common
 {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Libraries.Model;
 using Libraries.Model.Common;
 using Microsoft.EntityFrameworkCore;
+using Dto.Master;
 
 namespace Libraries.Repository.Common
 {

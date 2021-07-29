@@ -331,6 +331,8 @@ namespace Libraries.Model
         public virtual DbSet<Leasesignup> Leasesignup { get; set; }
         public virtual DbSet<Kycapprovalproccess> Kycapprovalproccess { get; set; }
         public virtual DbSet<Kycworkflowtemplate> Kycworkflowtemplate { get; set; }
+
+        public virtual DbSet<Kycdemandpaymentdetails> Kycdemandpaymentdetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -600,6 +602,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LeasesignupConfigurations());
             modelBuilder.ApplyConfiguration(new KycapprovalproccessConfiguration());
             modelBuilder.ApplyConfiguration(new KycworkflowtemplateConfiguration());
+            modelBuilder.ApplyConfiguration(new KycdemandpaymentdetailsConfiguration());
             //modelBuilder.ApplyConfiguration(new KyclicensepaymentrptConfiguration());
             base.OnModelCreating(modelBuilder);
         }

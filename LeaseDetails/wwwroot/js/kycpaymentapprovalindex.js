@@ -52,7 +52,7 @@ $('#ddlSort').change(function () {
 
 function GetDetails(pageNumber, pageSize, sortOrder, StatusId) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder, StatusId);
-    HttpPost(`/KycFormApproval/List`, 'html', param, function (response) {
+    HttpPost(`/KycPaymentApproval/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });

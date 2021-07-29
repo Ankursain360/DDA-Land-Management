@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Service.Common;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Libraries.Service.IApplicationService
+{
+
+    public interface IKycPaymentApprovalService : IEntityService<Kycdemandpaymentdetails>
+    {
+        Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
+        Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId);
+
+    }
+}

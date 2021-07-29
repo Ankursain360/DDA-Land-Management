@@ -367,7 +367,7 @@ namespace LeaseForPublic.Controllers
                     kyc.AadhaarPanapplicantPath = Data.AadhaarPanapplicantPath;
                 }
 
-
+                kyc.IsActive = 1;
                 kyc.ModifiedBy = SiteContext.UserId;
                 var result = await _kycformService.Update(id, kyc);
                     if (result == true)
@@ -398,6 +398,15 @@ namespace LeaseForPublic.Controllers
                             result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
                             if (result)
                             {
+
+
+                                /* Update last record pending status in Approval Process Table*/
+                                var ApprovalProccessBackId = _approvalproccessService.GetPreviouskycApprovalId((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id);                                
+                                approvalproccess.PendingStatus = 0;
+                                result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, kyc.Id);
+                                /*end of Code*/
+
+
                                 approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
                                 approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
                                 approvalproccess.ServiceId = kyc.Id;
@@ -425,7 +434,7 @@ namespace LeaseForPublic.Controllers
                                 approvalproccess.Status = ApprovalStatus.Id;   //1
                                 //approvalproccess.Level = i + 1;
                                 approvalproccess.Version = workflowtemplatedata.Version;
-                                approvalproccess.Remarks = "Record Resubmitted and Send for Approval";///May be Uncomment
+                                approvalproccess.Remarks = "Record Resubmitted by "+kyc.Name;///May be Uncomment
                                 //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
                                 result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in approvalproccess Table
 

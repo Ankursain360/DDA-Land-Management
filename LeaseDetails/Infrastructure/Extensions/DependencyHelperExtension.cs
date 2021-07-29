@@ -67,6 +67,7 @@ namespace LeaseDetails.Infrastructure.Extensions
 
             services.AddScoped<IKycformApprovalRepository, KycformApprovalRepository>();
             services.AddScoped<IKycformRepository, KycformRepository>();
+            services.AddScoped<IKycPaymentApprovalRepository, KycPaymentApprovalRepository>();
 
             /* Application Services */
 
@@ -120,6 +121,7 @@ namespace LeaseDetails.Infrastructure.Extensions
 
             services.AddScoped<IKycformService, KycformService>();
             services.AddScoped<IKycformApprovalService, KycformApprovalService>();
+            services.AddScoped<IKycPaymentApprovalService, KycPaymentApprovalService>();
 
         }
     }

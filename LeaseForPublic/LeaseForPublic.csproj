@@ -11,6 +11,11 @@
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <None Include="Views\DemandDetails\Create.cshtml" />
+    <None Include="Views\DemandDetails\Index.cshtml" />
+    <None Include="Views\DemandDetails\_List.cshtml" />
+    <None Include="Views\DemandDetails\_PaymentDetails.cshtml" />
+    <None Include="Views\DemandDetails\_PaymentFromBhoomi.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

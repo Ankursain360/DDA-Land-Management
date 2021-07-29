@@ -1,0 +1,65 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Kycdemandpaymentdetails>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+                
+            @*<th> Property </th>
+        <th>Nature of Property </th>
+        <th> File No </th>
+        <th> Branch </th>*@
+            <th> Is Payment Agreed </th>
+            <th> Total Payable </th>
+            <th> Total Payable Interest </th>
+            <th> Total Dues </th>
+            <th> Status</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+        <tr>
+            @*<td>@item.Property</td>
+
+        <td> @(item.PropertyType == null?"": item.PropertyType.Name) </td>
+        <td>@item.FileNo</td>
+        <td> @(item.Branch == null?"": item.Branch.Name)  </td>*@
+
+            <td>@item.IsPaymentAgreed</td>
+            <td>@item.TotalPayable</td>
+            <td>@item.TotalPayableInterest</td>
+            <td>@item.TotalDues</td>
+           
+            <td>
+                @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+            </td>
+            @if (ViewBag.IsApproved == 0)
+            {
+                <td>
+                    <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-line"></i> </a>
+                </td>
+            }
+
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
