@@ -41,10 +41,11 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Create(int Id)
         {
-            
-            var data= await _demandDetailsService.FetchSingleResult(Convert.ToInt32(Id));         
-           
-            return View(data);
+            LeasePublicDemandPaymentDetailsDto dto = new LeasePublicDemandPaymentDetailsDto();
+            var data= await _demandDetailsService.FetchSingleResult(Convert.ToInt32(Id));
+            dto.KycId = data.Id;
+            dto.FileNo = data.FileNo;           
+            return View(dto);
 
         }   
 

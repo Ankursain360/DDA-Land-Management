@@ -17,7 +17,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int FileNo);
 
 
-        //Task <Kycform> GetKycdata(int FileNo);
 
     }
 }

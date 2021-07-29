@@ -44,10 +44,8 @@ namespace Libraries.Service.ApplicationService
         
         public async Task<Kycform> FetchSingleResult(int Id)
         {
-
-            var result = await _demandDetailsRepository.FindBy(a => a.Id == Id);
-            Kycform model = result.FirstOrDefault();
-            return model;
+            var result = await _demandDetailsRepository.FindBy(a => a.Id == Id);            
+            return result.FirstOrDefault();
         }
       
 
