@@ -12,6 +12,8 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Kycdemandpaymentdetails> builder)
         {
             builder.ToTable("kycdemandpaymentdetails", "lms");
+            builder.HasIndex(e => e.ApprovedStatus)
+               .HasName("fk_ApprovedStatus_idx");
 
             builder.HasIndex(e => e.KycId)
                 .HasName("fk_Kyc_idx");
@@ -57,6 +59,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.KycId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_Kyc");
+
+            builder.HasOne(d => d.ApprovedStatusNavigation)
+                .WithMany(p => p.Kycdemandpaymentdetails)
+                .HasForeignKey(d => d.ApprovedStatus)
+                .HasConstraintName("fk_ApprovedStatus");
+
+           
         }
     }
 }
