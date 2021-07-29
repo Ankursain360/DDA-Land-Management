@@ -9,10 +9,11 @@ namespace Dto.Master
     public class BhoomiApiFileNowiseDto
     {
        
-        public int CHLLN_NMBR { get; set; }
-        public decimal CHLLN_AMNT { get; set; }
+        public string CHLLN_NMBR { get; set; }
+        public int CHLLN_AMNT { get; set; }
         public string DPST_DT { get; set; }
-        public List<BhoomiApiFileNowiseDto> A { get; set; }
+        public string FL_ID { get; set; }
+    public List<BhoomiApiFileNowiseDto> A { get; set; }
     }
     public class ApiResponseBhoomiApiFileWise
     {

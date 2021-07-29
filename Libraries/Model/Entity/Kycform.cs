@@ -14,6 +14,10 @@ namespace Libraries.Model.Entity
         {
             Kycleasepaymentrpt = new HashSet<Kycleasepaymentrpt>();
             Kyclicensepaymentrpt = new HashSet<Kyclicensepaymentrpt>();
+            Kycdemandpaymentdetails = new HashSet<Kycdemandpaymentdetails>();
+            Kycdemandpaymentdetailstablea = new HashSet<Kycdemandpaymentdetailstablea>();
+            Kycdemandpaymentdetailstableb = new HashSet<Kycdemandpaymentdetailstableb>();
+            Kycdemandpaymentdetailstablec = new HashSet<Kycdemandpaymentdetailstablec>();
 
         }
 
@@ -151,5 +155,9 @@ namespace Libraries.Model.Entity
         public ICollection<Kycleasepaymentrpt> Kycleasepaymentrpt { get; set; }
         public ICollection<Kyclicensepaymentrpt> Kyclicensepaymentrpt { get; set; }
         public ICollection<Leasesignup> Leasesignup { get; set; }
+        public ICollection<Kycdemandpaymentdetails> Kycdemandpaymentdetails { get; set; }
+        public ICollection<Kycdemandpaymentdetailstablea> Kycdemandpaymentdetailstablea { get; set; }
+        public ICollection<Kycdemandpaymentdetailstableb> Kycdemandpaymentdetailstableb { get; set; }
+        public ICollection<Kycdemandpaymentdetailstablec> Kycdemandpaymentdetailstablec { get; set; }
     }
 }
