@@ -60,6 +60,8 @@ $("#otp-button").click(function () {
         $("#suc-comm").show();
        window.location = "/KYCform/Index";
     } else {
-        $("#err-otp").show();
+         $("#otp").val('');
+       // $("#err-otp").show();
+        alert("Wrong OTP");
     }
 });
