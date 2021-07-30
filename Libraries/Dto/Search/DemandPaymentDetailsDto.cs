@@ -7,13 +7,14 @@ namespace Dto.Search
     {
         public string DemandPeriod { get; set; }
        
-        public string GroundRentLeaseRent { get; set; }
+        public  decimal? GroundRentLeaseRent { get; set; }
        
-        public string InterestAmount { get; set; }
+        public  decimal? InterestAmount { get; set; }
       
-        public string TotalDues { get; set; }
-     
-        public string FileNo { get; set; }
+        public  decimal? TotalDues { get; set; }
+
+        public int KycId { get; set; }
+
 
     }
 }

@@ -1,35 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Dto.Master;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Dto.Search;
-using LeaseForPublic.Filters;
-using Core.Enum;
-using Dto.Master;
-using Utility.Helper;
-using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace LeaseForPublic.Controllers
 {
     public class DemandDetailsController : BaseController
     {
         private readonly IDemandDetailsService _demandDetailsService;
+        private readonly IKycformService _kycformService;
+        private readonly IKycdemandpaymentdetailstableaService __kycdemandpaymentdetailstableaService;
+        private readonly IKycdemandpaymentdetailstablebService _kycdemandpaymentdetailstablebService;
+        private readonly IKycdemandpaymentdetailstablecService _kycdemandpaymentdetailstablecService;
         public IConfiguration _configuration;
-        public DemandDetailsController(IConfiguration configuration, IDemandDetailsService demandDetailsService)
+        public DemandDetailsController(IConfiguration configuration, IDemandDetailsService demandDetailsService,IKycformService kycform,IKycdemandpaymentdetailstableaService kycdemandpaymentdetailstableaService,IKycdemandpaymentdetailstablebService kycdemandpaymentdetailstablebService,IKycdemandpaymentdetailstablecService kycdemandpaymentdetailstablecService)
         {
             _configuration = configuration;
             _demandDetailsService = demandDetailsService;
+            _kycformService = kycform;
+            __kycdemandpaymentdetailstableaService = kycdemandpaymentdetailstableaService;
+            _kycdemandpaymentdetailstablebService = kycdemandpaymentdetailstablebService;
+            _kycdemandpaymentdetailstablecService=kycdemandpaymentdetailstablecService;
         }
 
         public IActionResult Index()
@@ -42,17 +44,165 @@ namespace LeaseForPublic.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             LeasePublicDemandPaymentDetailsDto dto = new LeasePublicDemandPaymentDetailsDto();
-            var data= await _demandDetailsService.FetchSingleResult(Convert.ToInt32(Id));
+            var data= await _kycformService.FetchSingleResult(Id);
             dto.KycId = data.Id;
             dto.FileNo = data.FileNo;           
             return View(dto);
 
-        }   
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(LeasePublicDemandPaymentDetailsDto dto)
+        {
+            Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    oKycdemandpaymentdetails.KycId = dto.KycId;
+                    oKycdemandpaymentdetails.PendingAt = dto.PendingAt;
+                    oKycdemandpaymentdetails.TotalPayable = dto.TotalPayable;
+                    oKycdemandpaymentdetails.TotalDues=dto.TotalDues;
+                    oKycdemandpaymentdetails.IsPaymentAgreed = dto.IsPaymentAgreed;
+                    oKycdemandpaymentdetails.CreatedBy = SiteContext.UserId;
+                    oKycdemandpaymentdetails.IsActive = 1;
+                    oKycdemandpaymentdetails.CreatedDate = DateTime.Now;
+                    var result = await _demandDetailsService.Create(oKycdemandpaymentdetails);
+
+                    if (result == true)
+                    {
+                        var result1 = await _demandDetailsService.GetPaymentDetails(Convert.ToInt32(dto.KycId));
+                        List<Kycdemandpaymentdetailstablea> data = new List<Kycdemandpaymentdetailstablea>();
+
+                        //*********************************************** Save Payment Deatails  ****************************  
+                        if (result1 != null)
+                        {
+                            for (int i = 0; i < result1.Count; i++)
+                            {
+                                data.Add(new Kycdemandpaymentdetailstablea()
+                                {
+                                    DemandPeriod = result1[i].DemandPeriod,
+                                    GroundRent = result1[i].GroundRentLeaseRent,
+                                    InterestRate = result1[i].InterestAmount,
+                                    TotdalDues = result1[i].TotalDues,                                
+                                    KycId= oKycdemandpaymentdetails.KycId,
+                                    DemandPaymentId = oKycdemandpaymentdetails.Id,
+                                    IsActive = 1,
+                                    CreatedBy =SiteContext.UserId,
+                                    CreatedDate= DateTime.Now,
+                            });
+                            }
+
+                            foreach (var item in data)
+                            {
+                                result = await __kycdemandpaymentdetailstableaService.SaveDemandPaymentDetails(item);
+                            }
+                        }
+
+                        //*********************************************** Save Payment API Details  ********************************  
+                        using (var httpClient = new HttpClient())
+                        {
+                            using (var response = await httpClient.GetAsync(_configuration.GetSection("BhoomiApi").Value + dto.FileNo))
+                            {
+                                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                                {
+                                    string apiResponse = await response.Content.ReadAsStringAsync();
+                                    var result2 = JsonSerializer.Deserialize<ApiResponseBhoomiApiFileWise>(apiResponse);
+
+                                    List<Kycdemandpaymentdetailstableb> datac = new List<Kycdemandpaymentdetailstableb>();
+                                    if (result2 != null)
+                                    {
+                                        for (int i = 0; i < result2.cargo.Count(); i++)
+                                        {
+                                            datac.Add(new Kycdemandpaymentdetailstableb()
+                                            {
+                                                ChallanNo = result2.cargo[i].CHLLN_NMBR,
+                                                ChallanAmount = result2.cargo[i].CHLLN_AMNT.ToString(),
+                                                DepositeDate =Convert.ToDateTime(result2.cargo[i].DPST_DT),
+                                                KycId = oKycdemandpaymentdetails.KycId,
+                                                DemandPaymentId = oKycdemandpaymentdetails.Id,
+                                                CreatedBy=SiteContext.UserId,
+                                                CreatedDate=DateTime.Now,
+                                                IsActive=1,
+                                            });
+                                        }
+
+                                        foreach (var item in datac)
+                                        {
+                                            var result3 = await _kycdemandpaymentdetailstablebService.SaveDemandPaymentAPIDetails(item);
+                                        }
+                                    }
+
+
+                                }
+                            }
+                        }
+
+                        //********************************** Save Payment Challan Details  ********************************************  
+
+                        if (oKycdemandpaymentdetails.IsPaymentAgreed == "N")
+                        {
+                            
+                          
+                                List<Kycdemandpaymentdetailstablec> okycdemandpaymentdetailstablec = new List<Kycdemandpaymentdetailstablec>();
+                                for (int i = 0; i < dto.PaymentType.Count; i++)
+                                {
+                                    okycdemandpaymentdetailstablec.Add(new Kycdemandpaymentdetailstablec
+                                    {
+                                        PaymentType = dto.PaymentType[i],
+                                        Period = dto.Period[i],
+                                        ChallanNo = dto.ChallanNoForPayment[i],   
+                                        Amount = dto.Amount[i],
+                                        Proofinpdf = dto.Proofinpdf[i],
+                                        DateofPaymentByAllottee = dto.DateofPaymentByAllottee[i],
+                                        Ddabankcredit = dto.Ddabankcredit[i],
+                                        CreatedBy=SiteContext.UserId,
+                                         IsActive=1,
+                                         CreatedDate=DateTime.Now,
+                                         KycId=oKycdemandpaymentdetails.KycId,
+                                    });
+                                }
+                                foreach (var item in okycdemandpaymentdetailstablec)
+                                {
+                                    var result4 = await _kycdemandpaymentdetailstablecService.SaveKycChallanDetails(item);
+                                }
+
+                            }
+                        
+
+
+
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(dto);
+
+                    }
+                }
+                else
+                {
+                    return View(dto);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(dto);
+            }
+            return View(dto);
+        }
+
+    
+
+
+
+
 
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
           
-            var result = await _demandDetailsService.GetPaymentDetails(Convert.ToInt32(Id));
+            var result = await _demandDetailsService.GetPaymentDetails(Id);
 
             return PartialView("_PaymentDetails", result);
         }

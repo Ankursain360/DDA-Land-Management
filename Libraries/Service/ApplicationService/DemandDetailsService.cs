@@ -15,7 +15,7 @@ using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
-   public  class DemandDetailsService : EntityService<Kycform>, IDemandDetailsService
+   public  class DemandDetailsService : EntityService<Kycdemandpaymentdetails>, IDemandDetailsService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDemandDetailsRepository _demandDetailsRepository;
@@ -35,19 +35,25 @@ namespace Libraries.Service.ApplicationService
             return await _demandDetailsRepository.GetPagedDemandDetails(model,MobileNo);
         }
 
-        public async Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int FileNo)
+        public async Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id)
         {
-            return await _demandDetailsRepository.GetPaymentDetails(FileNo);
+            return await _demandDetailsRepository.GetPaymentDetails(Id);
         }
 
 
         
-        public async Task<Kycform> FetchSingleResult(int Id)
+    
+        public async Task<bool> Create(Kycdemandpaymentdetails kycdemandpaymentdetails)
         {
-            var result = await _demandDetailsRepository.FindBy(a => a.Id == Id);            
-            return result.FirstOrDefault();
+
+         
+            _demandDetailsRepository.Add(kycdemandpaymentdetails);
+            return await _unitOfWork.CommitAsync() > 0;
         }
-      
+
+       
+
+        
 
 
     }

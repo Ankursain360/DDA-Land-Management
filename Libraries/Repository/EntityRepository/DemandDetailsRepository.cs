@@ -15,7 +15,7 @@ using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class DemandDetailsRepository :  GenericRepository<Kycform>, IDemandDetailsRepository
+    public class DemandDetailsRepository :  GenericRepository<Kycdemandpaymentdetails>, IDemandDetailsRepository
     {
         public DemandDetailsRepository(DataContext dbContext) : base(dbContext)
         {
@@ -100,14 +100,14 @@ namespace Libraries.Repository.EntityRepository
          
         }
 
-        public async Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int FileNo)
+        public async Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id)
         {
             try
             {
 
 
                 var data = await _dbContext.LoadStoredProcedure("GetPaymentDetails")
-                                            .WithSqlParams(("P_FileNo", FileNo))
+                                            .WithSqlParams(("P_Id", Id))
                                             .ExecuteStoredProcedureAsync<DemandPaymentDetailsDto>();
 
                 return (List<DemandPaymentDetailsDto>)data;

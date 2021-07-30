@@ -36,7 +36,7 @@
                 <input type="hidden" id="TypeOfDamageAssessee" value="Original" />
 
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="IsPaymentAgreed" id="rOriginal" value="Original" checked="checked">
+                    <input class="form-check-input" type="radio" name="IsPaymentAgreed" id="rOriginal" value="Y" checked="checked">
                     <label class="form-check-label" for="radio">
                         Yes
                     </label>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="IsPaymentAgreed" id="rSubsequent" value="Subsequent">
+                    <input class="form-check-input" type="radio" name="IsPaymentAgreed" id="rSubsequent" value="N">
                     <label class="form-check-label" for="radio">
                         No
                     </label>
@@ -93,8 +93,8 @@
 
                             </td>
                             <td>
-                                <input asp-for="ChallanNoR" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="ChallanNoR" class="d-block text-danger field-validation-valid"></span>
+                                <input asp-for="ChallanNoForPayment" type="text" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="ChallanNoForPayment" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
@@ -103,15 +103,16 @@
 
                             </td>
                             <td>
+                                <input asp-for="DateofPaymentByAllottee" type="Date" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DateofPaymentByAllottee" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
                                 <input asp-for="Proofinpdf" type="text" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="Proofinpdf" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
-                            <td>
-                                <input asp-for="PaymentType" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="PaymentType" class="d-block text-danger field-validation-valid"></span>
 
-                            </td>
                             <td>
                                 <input asp-for="Ddabankcredit" type="text" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="Ddabankcredit" class="d-block text-danger field-validation-valid"></span>

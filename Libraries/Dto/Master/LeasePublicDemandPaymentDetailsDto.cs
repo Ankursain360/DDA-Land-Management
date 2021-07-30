@@ -1,5 +1,7 @@
 ﻿using Dto.Common;
-
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace Dto.Master
 {
    public class LeasePublicDemandPaymentDetailsDto
@@ -25,13 +27,29 @@ namespace Dto.Master
         public string ChallanNoR { get; set; }
         public string ChallanAmount { get; set; }
 
-        public string PaymentType { get; set; }
-        public string Period { get; set; }
+        [NotMapped]
+        public List<string> PaymentType { get; set; }
 
-        public decimal? Amount { get; set; }
+        [NotMapped]
+        public List<string> Period { get; set; }
 
-        public string Proofinpdf { get; set; }
-        public string Ddabankcredit { get; set; }
+        [NotMapped]
+        public List<string> ChallanNoForPayment { get; set; }
+        [NotMapped]
+
+        public List<Decimal> Amount { get; set; }
+        [NotMapped]
+
+        public List<DateTime> DateofPaymentByAllottee { get; set; }
+        [NotMapped]
+        public List<string> Proofinpdf { get; set; }
+        [NotMapped]
+        public List<string> Ddabankcredit { get; set; }
+
+
+
+
+
 
     }
 }

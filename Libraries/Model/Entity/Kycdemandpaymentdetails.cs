@@ -55,5 +55,26 @@ namespace Libraries.Model.Entity
         public ICollection<Kycdemandpaymentdetailstableb> kycdemandpaymentdetailstableb { get; set; }
         public ICollection<Kycdemandpaymentdetailstablec> kycdemandpaymentdetailstablec { get; set; }
 
+
+
+        [NotMapped]
+        public List<string> PaymentType { get; set; }
+
+        [NotMapped]
+        public List<string> Period { get; set; }
+
+        [NotMapped]
+        public List<string> ChallanNoR { get; set; }
+        [NotMapped]
+
+        public List<Decimal> Amount { get; set; }
+        [NotMapped]
+
+        public List<DateTime> DateofPaymentByAllottee { get; set; }
+        [NotMapped]
+        public List<string> Proofinpdf { get; set; }
+        [NotMapped]
+        public List<string> Ddabankcredit { get; set; }
+       
     }
 }

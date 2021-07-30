@@ -57,6 +57,9 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IKycformRepository, KycformRepository>();
             services.AddScoped<ILeasesignupRepository, LeasesignupRepository>();
             services.AddScoped<IDemandDetailsRepository, DemandDetailsRepository>();
+            services.AddScoped<IKycdemandpaymentdetailstableaRespository , KycdemandpaymentdetailstableaRepository>();
+            services.AddScoped<IKycdemandpaymentdetailstablebRepository, KycdemandpaymentdetailstablebRepository>();
+            services.AddScoped<IKycdemandpaymentdetailstablecRepository, KycdemandpaymentdetailstablecRepository>();
             /* Application Services */
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IMenuService, MenuService>();
@@ -96,6 +99,9 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IKycformService, KycformService>();
             services.AddScoped<ILeasesignupService, LeasesignupService>();
             services.AddScoped<IDemandDetailsService, DemandDetailsService>();
+            services.AddScoped<IKycdemandpaymentdetailstableaService, KycdemandpaymentdetailstableaService>();
+            services.AddScoped<IKycdemandpaymentdetailstablebService, KycdemandpaymentdetailstablebService>();
+            services.AddScoped<IKycdemandpaymentdetailstablecService, KycdemandpaymentdetailstablecService>();
         }
     }
 }

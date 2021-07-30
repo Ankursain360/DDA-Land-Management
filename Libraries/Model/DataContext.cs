@@ -333,6 +333,9 @@ namespace Libraries.Model
         public virtual DbSet<Kycworkflowtemplate> Kycworkflowtemplate { get; set; }
 
         public virtual DbSet<Kycdemandpaymentdetails> Kycdemandpaymentdetails { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());

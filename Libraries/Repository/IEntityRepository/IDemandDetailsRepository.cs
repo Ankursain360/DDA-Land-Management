@@ -9,14 +9,12 @@ using Dto.Master;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IDemandDetailsRepository : IGenericRepository<Kycform>
+    public interface IDemandDetailsRepository : IGenericRepository<Kycdemandpaymentdetails>
     {
         Task<PagedResult<Kycform>> GetPagedDemandDetails(DemandDetailsSearchDto model, string MobileNo);
 
 
-        Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int FileNo);
-
-
-
+        Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id);
+      
     }
 }

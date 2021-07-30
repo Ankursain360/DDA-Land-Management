@@ -15,9 +15,11 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Kycform>> GetPagedDemandDetails(DemandDetailsSearchDto model, string MobileNo);
 
          Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id);
-        Task<Kycform> FetchSingleResult(int Id);
+      
 
+        Task<bool> Create(Kycdemandpaymentdetails kycDemandPayment);
 
-        
+      
+
     }
 }
