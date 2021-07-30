@@ -70,5 +70,17 @@
     "inputFiles": [
       "wwwroot/js/kycformindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemandDetailsCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemandDetailsCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemandDetailsIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemandDetailsIndex.js"
+    ]
   }
 ]
