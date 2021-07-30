@@ -106,19 +106,31 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        //public async Task<Kycform> FetchSingleResult(int id)
-        //{
-        //    return await _dbContext.Kycform
-        //                           .Include(x => x.ApprovedStatusNavigation)
-        //                           .Include(x => x.Branch)
-        //                           .Include(x => x.LeaseType)
-        //                           .Include(x => x.Locality)
-        //                           .Include(x => x.PropertyType)
-        //                           .Include(x => x.Zone)
-        //                           .Where(x => x.Id == id)
-        //                           .FirstOrDefaultAsync();
-        //}
+       
 
+        public async Task<Kycdemandpaymentdetails> FetchSingleResult(int id)
+        {
+            return await _dbContext.Kycdemandpaymentdetails
+                                   .Include(x => x.ApprovedStatusNavigation)
+                                   .Include(x => x.Kyc)
+                                   .Where(x => x.Id == id)
+                                   .FirstOrDefaultAsync();
+        }
 
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            var result = false;
+            var AllDataList = await _dbContext.Kycdemandpaymentdetails
+                                                .Where(x => x.IsActive == 1 && x.Id == id)
+                                                .ToListAsync();
+            var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString())).ToList();
+
+            if (UserWiseDataList.Count == 0)
+                result = false;
+            else
+                result = true;
+
+            return result;
+        }
     }
 }
