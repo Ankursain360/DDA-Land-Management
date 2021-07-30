@@ -23,8 +23,8 @@ namespace LeaseForPublic.Controllers
         public async Task<IActionResult> Index()
         {
             //UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
-            var Data = await _userProfileService.GetAllotteeDetails(_siteContext.UserId);
-            return View(Data);
+            // var Data = await _userProfileService.GetAllotteeDetails(_siteContext.UserId);
+            return RedirectToAction("Create", "SignupForm");
         }
 
         public IActionResult Privacy()

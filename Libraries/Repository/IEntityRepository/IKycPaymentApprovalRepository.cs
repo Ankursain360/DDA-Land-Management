@@ -17,7 +17,8 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
         Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId);
-        //Task<Kycform> FetchSingleResult(int id);
+        Task<Kycdemandpaymentdetails> FetchSingleResult(int id);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
 
     }
 }

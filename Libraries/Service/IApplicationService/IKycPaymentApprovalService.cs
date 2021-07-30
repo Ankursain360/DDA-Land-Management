@@ -18,7 +18,10 @@ namespace Libraries.Service.IApplicationService
     public interface IKycPaymentApprovalService : IEntityService<Kycdemandpaymentdetails>
     {
         Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
+        Task<Kycdemandpaymentdetails> FetchSingleResult(int id);
         Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId);
+        Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
+        Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails payment);
 
     }
 }

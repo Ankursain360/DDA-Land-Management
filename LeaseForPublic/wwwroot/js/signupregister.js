@@ -26,12 +26,14 @@ $('#mobile').keyup(function () {
 });
 
 $('#name').keydown(function (e) {
+    
     $("#err-name").hide();
     if (e.ctrlKey || e.altKey) {
         e.preventDefault();
     } else {
         var key = e.keyCode;
-        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+      
+        if(!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
             e.preventDefault();
         }
     }
@@ -41,19 +43,22 @@ $("#signup2").click(function () {
     var name = $("#name").val();
     var mobile = $("#mobile").val();
     var email = $("#email").val();
+    var status = 1; 
     if (name == "") {
         $("#err-name").show();
-        return;
+        status = 2;
     }
     if (mobile == "") {
         $("#err-mob").show();
-        return;
+        status = 2;
     }
     if (email == "") {
         $("#err-email").show();
-        return;
+        status = 2;
     }
- 
+    if (status == 2) {
+        return false;
+    }
     if (!mobile.match('[0-9]{10}') || mobile.length > 10) {
         $("#err-mob").show();
         return;
@@ -103,6 +108,6 @@ $("#otp-button").click(function () {
     } else {
         $("#otp").val('');
         $("#err-otp").show();
-        alert("Wrong OTP");
+        alert("Please Enter Correct OTP");
     }
 });

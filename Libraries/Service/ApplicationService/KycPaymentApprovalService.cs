@@ -32,9 +32,25 @@ namespace Service.ApplicationService
             return await _kycPaymentApprovalRepository.GetWorkFlowDataOnGuid(processguid);
         }
 
+        public async Task<Kycdemandpaymentdetails> FetchSingleResult(int id)
+        {
+            return await _kycPaymentApprovalRepository.FetchSingleResult(id);
+        }
+        public async Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails payment)
+        {
+            var result = await _kycPaymentApprovalRepository.FindBy(a => a.Id == id);
+            Kycdemandpaymentdetails model = result.FirstOrDefault();
 
+            model.ApprovedStatus = payment.ApprovedStatus;
+            model.PendingAt = payment.PendingAt;
+            _kycPaymentApprovalRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
-
+        public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
+        {
+            return await _kycPaymentApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
+        }
         public async Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId)
         {
             var data = await _kycPaymentApprovalRepository.GetPagedKycPaymentDetails(model, userId);
