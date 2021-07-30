@@ -62,6 +62,6 @@ $("#otp-button").click(function () {
     } else {
          $("#otp").val('');
        // $("#err-otp").show();
-        alert("Wrong OTP");
+        alert("Please Enter Correct OTP");
     }
 });

@@ -26,12 +26,14 @@ $('#mobile').keyup(function () {
 });
 
 $('#name').keydown(function (e) {
+    
     $("#err-name").hide();
     if (e.ctrlKey || e.altKey) {
         e.preventDefault();
     } else {
         var key = e.keyCode;
-        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+      
+        if(!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
             e.preventDefault();
         }
     }
@@ -106,6 +108,6 @@ $("#otp-button").click(function () {
     } else {
         $("#otp").val('');
         $("#err-otp").show();
-        alert("Wrong OTP");
+        alert("Please Enter Correct OTP");
     }
 });

@@ -1,134 +1,100 @@
 ﻿
-@*@{
-    Layout = null;
-}*@
-
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <link href="~images/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
-    <link rel="icon" href="~images/favicon.png" type="image/png" sizes="16x16" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!--Site Title-->
-    <title>Lease SignUp</title>
-
-    <!--    icon css-->
-    <link rel="stylesheet" href="/font/icon/remixicon.css" />
-    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="/css/style.css" rel="stylesheet" />
-    <link href="/lib/toaster/toastr.min.css" rel="stylesheet" />
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link href="/css/styleregistration.css" rel="stylesheet" />
-
-</head>
-<body>
+@{
+    ViewData["Title"] = "CreateLogin";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
 
 
 
-    <div class="container d-flex">
-        <div class="fromBg m-auto shadow-lg">
-            <div class="row align-items-center">
-                <div class="col-md-6 col-lg-5">
-                    <div class="logo d-flex align-items-center mb-4">
-                        <img src="~/images/logo.png" alt="DDA" class="d-block me-3">
-                        <strong>
-                            Delhi Development Authority<br>
-                            Government of India
-                        </strong>
-                    </div>
-                    <form asp-action="CreateLogin" method="post" class="d-block px-2" id="form">
 
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <label style="color:red; font-size:13px">If you are not Registered ? <a class="" asp-action="Create" asp-controller="SignupForm">Click here to SignUp</a></label>
 
-                        <label style="color:red;display:none; font-size:13px" id="err-comm">This Mobile Number is not Registered. <a class="" asp-action="Create" asp-controller="SignupForm">Please Signup</a></label>
-                        <label style="color:green; display:none; font-size:13px" id="shomsgsuccess">OTP Sent successfully, Please enter OTP</label>
+<div class="container d-flex">
+    <div class="fromBg m-auto shadow-lg">
+        <div class="row align-items-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="logo d-flex align-items-center mb-4">
+                    <img src="~/images/logo.png" alt="DDA" class="d-block me-3">
+                    <strong>
+                        Delhi Development Authority<br>
+                        Government of India
+                    </strong>
+                </div>
+                <form asp-action="CreateLogin" method="post" class="d-block px-2" id="form">
 
-                        <label style="color:green;display:none; font-size:13px" id="suc-comm">OTP Match</label>
-                        <div id="login-div">
-                            <div class="row">
-                                <div class="mb-3 form-icons">
-                                    <i class="ri-smartphone-line"></i>
-                                    <input type="text" class="form-control numbers" id="mobile" placeholder="Mobile Number *">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <label style="color:red; font-size:13px">If you are not Registered ? <a class="" asp-action="Create" asp-controller="SignupForm">Click here to SignUp</a></label>
 
-                                </div>
-                                <label style="color:red;display:none; font-size:13px" id="err-mob">Please Enter 10 Digit Mobile</label>
+                    <label style="color:red;display:none; font-size:13px" id="err-comm">This Mobile Number is not Registered. <a class="" asp-action="Create" asp-controller="SignupForm">Please Signup</a></label>
+                    <label style="color:green; display:none; font-size:13px" id="shomsgsuccess">OTP Sent successfully, Please enter OTP</label>
+
+                    <label style="color:green;display:none; font-size:13px" id="suc-comm">OTP Match</label>
+                    <div id="login-div">
+                        <div class="row">
+                            <div class="mb-3 form-icons">
+                                <i class="ri-smartphone-line"></i>
+                                <input type="text" class="form-control numbers" id="mobile" placeholder="Mobile Number *">
+
                             </div>
-
-
-                            <div class="row  mt-md-3">
-                                <div>
-                                    <div class="d-flex align-items-center">
-
-                                        <button id="signup2" class="btn btn-theme text-white d-flex align-items-center" type="button">Login</button>
-
-
-                                    </div>
-                                </div>
-                            </div>
+                            <label style="color:red;display:none; font-size:13px" id="err-mob">Please Enter 10 Digit Mobile No</label>
                         </div>
 
-                        <div class="row  mt-md-3" id="sotp" style="display:none;">
 
-
+                        <div class="row  mt-md-3">
                             <div>
                                 <div class="d-flex align-items-center">
-                                    <input type="password" name="otp" id="otp" class="form-control numbers" placeholder="OTP *">
 
-                                </div>
-                                <label style="color:red;display:none; font-size:13px" id="err-otp">InValid OTP</label>
-                            </div>
-                            <div class="mt-md-3">
-                                <div class="d-flex align-items-center">
-                                    <button class="btn btn-theme text-white d-flex align-items-center" id="otp-button" type="button">OTP Submit</button>
+                                    <button id="signup2" class="btn btn-theme text-white d-flex align-items-center" type="button">Login</button>
+
 
                                 </div>
                             </div>
+                        </div>
+                    </div>
 
+                    <div class="row  mt-md-3" id="sotp" style="display:none;">
+
+
+                        <div>
+                            <div class="d-flex align-items-center">
+                                <input type="password" name="otp" id="otp" class="form-control numbers" placeholder="OTP *">
+
+                            </div>
+                            <label style="color:red;display:none; font-size:13px" id="err-otp">InValid OTP</label>
+                        </div>
+                        <div class="mt-md-3">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-theme text-white d-flex align-items-center" id="otp-button" type="button">OTP Submit</button>
+
+                            </div>
                         </div>
 
+                    </div>
 
 
 
 
 
 
-                    </form>
 
-                </div>
-                <div class="col-md-6 col-lg-7">
-                    <img src="~/images/img.png" alt="DDA" class="d-none d-md-block image-right" width="450">
-                    <img src="~/images/formBg.png" alt="DDA" class="d-block formBg">
+                </form>
 
-                </div>
+            </div>
+            <div class="col-md-6 col-lg-7">
+                <img src="~/images/img.png" alt="DDA" class="d-none d-md-block image-right" width="450">
+                <img src="~/images/formBg.png" alt="DDA" class="d-block formBg">
+
             </div>
         </div>
     </div>
+</div>
 
 
 
-    <script src="/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <environment include="Development">
-        <script src="~/js/loginregister.js"></script>
 
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/loginregister.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/loginregister.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/loginregister.min.js" asp-append-version="true"></script>
+</environment>
 
-    @*<script src="~/js/loginregister.js"></script>*@
-
-
-
-    <script src="/lib/chart.js/dist/Chart.min.js"></script>
-    <script src="/lib/toaster/toastr.min.js"></script>
-</body>
-</html>
