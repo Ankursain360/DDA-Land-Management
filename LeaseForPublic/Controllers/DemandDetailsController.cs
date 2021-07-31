@@ -51,6 +51,19 @@ namespace LeaseForPublic.Controllers
 
         }
 
+
+        public async Task<PartialViewResult> KYCFormView(int id)
+        {
+            var Data = await _kycformService.FetchKYCSingleResult(id);
+            Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            Data.BranchList = await _kycformService.GetAllBranchList();
+            Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            Data.ZoneList = await _kycformService.GetAllZoneList();
+            Data.LocalityList = await _kycformService.GetLocalityList();
+            
+            return PartialView("_KYCFormView", Data);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(LeasePublicDemandPaymentDetailsDto dto)
         {
@@ -160,6 +173,7 @@ namespace LeaseForPublic.Controllers
                                          IsActive=1,
                                          CreatedDate=DateTime.Now,
                                          KycId=oKycdemandpaymentdetails.KycId,
+                                        DemandPaymentId = oKycdemandpaymentdetails.Id,
                                     });
                                 }
                                 foreach (var item in okycdemandpaymentdetailstablec)
@@ -168,10 +182,9 @@ namespace LeaseForPublic.Controllers
                                 }
 
                             }
-                        
 
-
-
+                    
+                       
                     }
                     else
                     {

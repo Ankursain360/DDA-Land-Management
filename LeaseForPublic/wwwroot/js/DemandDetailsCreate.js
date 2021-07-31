@@ -11,6 +11,7 @@
 $(document).ready(function () {
     GetPayment();
     GetPaymentFromBhoomi();
+    GetKYCDetails();
     $('#AAttendance').removeAttr('multiple');
 });
 
@@ -36,6 +37,13 @@ function GetPaymentFromBhoomi() {
     });
 
 }
+
+function GetKYCDetails(id) {
+    HttpGet(`/DemandDetails/KYCFormView/?Id=${$("#KycId").val()}`, 'html', function (response) {
+        $('#KYCFormDetailsDiv').html("");
+        $('#KYCFormDetailsDiv').html(response);
+    });
+};
 
 
 //****************** code for Challan Payment ************************

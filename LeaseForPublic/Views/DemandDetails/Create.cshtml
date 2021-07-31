@@ -17,6 +17,10 @@
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="FileNo" />
     <div class="row d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div id="KYCFormDetailsDiv">
+
+        </div>
+
         <div class="table-responsive px-2">
             <div id="divPayment"></div>
         </div>
@@ -84,38 +88,38 @@
                             <td style="text-align:center;"><span class="sn2">1</span></td>
                             <td>
                                 <input asp-for="PaymentType" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="PaymentType" class="d-block text-danger field-validation-valid"></span>
+                             
 
                             </td>
                             <td>
                                 <input asp-for="Period" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="Period" class="d-block text-danger field-validation-valid"></span>
+                            
 
                             </td>
                             <td>
                                 <input asp-for="ChallanNoForPayment" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="ChallanNoForPayment" class="d-block text-danger field-validation-valid"></span>
+                              
 
                             </td>
                             <td>
                                 <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="Amount" class="d-block text-danger field-validation-valid"></span>
+                            
 
                             </td>
                             <td>
                                 <input asp-for="DateofPaymentByAllottee" type="Date" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="DateofPaymentByAllottee" class="d-block text-danger field-validation-valid"></span>
+                            
 
                             </td>
                             <td>
                                 <input asp-for="Proofinpdf" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="Proofinpdf" class="d-block text-danger field-validation-valid"></span>
+                               
 
                             </td>
 
                             <td>
                                 <input asp-for="Ddabankcredit" type="text" class="floating-label-field floating-label-field--s3" />
-                                <span asp-validation-for="Ddabankcredit" class="d-block text-danger field-validation-valid"></span>
+                               
                             </td>
 
                             <td>
@@ -141,7 +145,7 @@
         <div class=" col-md-6">
             <div class="floating-label-wrap">
                 <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-                    <option value="1">Active</option>
+                    <option selected value="1">Active</option>
                     <option value="0">Inactive</option>
                 </select>
                 <span asp-validation-for="IsActive" class="text-danger"></span>
