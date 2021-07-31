@@ -70,6 +70,9 @@ namespace LeaseForPublic.Controllers
             Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
             try
             {
+                ModelState.Remove("Amount");
+                ModelState.Remove("DateofPaymentByAllottee");
+
                 if (ModelState.IsValid)
                 {
                     oKycdemandpaymentdetails.KycId = dto.KycId;
@@ -183,8 +186,8 @@ namespace LeaseForPublic.Controllers
 
                             }
 
-                    
-                       
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+
                     }
                     else
                     {

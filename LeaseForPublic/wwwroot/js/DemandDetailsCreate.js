@@ -51,26 +51,25 @@ function GetKYCDetails(id) {
 $(document).delegate('a.add-record2', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts2 #add2 #AName").val() != ''
-        && $("#tbl_posts2 #add2 #ADesignation").val() != ''
-        && $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val() != ''
-        && $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val() != undefined
+    if ($("#tbl_posts2 #add2 #PaymentType").val() != ''
+        && $("#tbl_posts2 #add2 #Period").val() != ''
+        && $("#tbl_posts2 #add2 #ChallanNoForPayment").val() != ''
+        && $("#tbl_posts2 #add2 #Amount").val() != ''
+        && $("#tbl_posts2 #add2 #DateofPaymentByAllottee").val() != ''
+        && $("#tbl_posts2 #add2 #Proofinpdf").val() != ''
+      
     ) {
-        var Gender = $("#tbl_posts2 #add2 #AAttendance").children("option:selected").val();
-        e.preventDefault();
+       
         var content = jQuery('#tbl_posts2 #add2 tr'),
             size = jQuery('#tbl_posts2 >tbody >tr').length,
             element = null,
             element = content.clone();
         element.attr('id', 'rec-' + size);
         element.find('.delete-record2').attr('data-id', size);
-        element.appendTo('#tbl_posts2_body');
-
-        $('#tbl_posts2_body #rec-' + size + ' #AAttendance').val(Gender);
+        element.appendTo('#tbl_posts2_body');     
         element.find('.sn2').html(size);
         $("#tbl_posts2 #add2 .sn2").text($('#tbl_posts2 >tbody >tr').length);
-        $("#tbl_posts2 #add2 .add").remove();
-        $("#tbl_posts2 #add2 #AAttendance").select2('val', '');
+        $("#tbl_posts2 #add2 .add").remove();    
         $("#tbl_posts2 #tbl_posts2_body .floating-label-field").attr("readonly", true);
         element.find(".add-record2").hide();
         element.find(".delete-record2").show();
