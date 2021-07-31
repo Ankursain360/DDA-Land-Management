@@ -58,5 +58,22 @@ namespace Service.ApplicationService
         }
 
 
+        //********* rpt ! Allottee challan  Details  repeter**********
+
+        public async Task<bool> SaveChallan(Kycdemandpaymentdetailstablec challan)
+        {
+            challan.CreatedBy = challan.CreatedBy;
+            challan.CreatedDate = DateTime.Now;
+            challan.IsActive = 1;
+            return await _kycPaymentApprovalRepository.SaveChallan(challan);
+        }
+        public async Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id)
+        {
+            return await _kycPaymentApprovalRepository.GetAllChallan(id);
+        }
+        public async Task<bool> DeleteChallan(int Id)
+        {
+            return await _kycPaymentApprovalRepository.DeleteChallan(Id);
+        }
     }
 }
