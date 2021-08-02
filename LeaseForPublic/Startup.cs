@@ -62,45 +62,35 @@ namespace LeaseForPublic
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                .AddEntityFrameworkStores<DataContext>()
                .AddDefaultTokenProviders();
-            services.RegisterDependency();
-            services.AddAutoMapperSetup();
 
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
             });
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.HttpOnly = true;
             });
 
-            
+            services.RegisterDependency();
+            services.AddAutoMapperSetup();
 
-            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = "Cookies";
-                options.DefaultChallengeScheme = "oidc";
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddCookie("Cookies")
-            .AddOpenIdConnect("oidc", options =>
-            {
-                options.SignInScheme = "Cookies";
-                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
-                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
-                options.ClientId = "mvc";
-                options.ClientSecret = "secret";
-                options.ResponseType = "code";
-                options.Scope.Add("api1");
-                options.SaveTokens = true;
 
-            });
-            services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);//You can set Time   
-            });
+            //#if DEBUG
+            //            if (HostEnvironment.IsDevelopment())
+            //            {
+            //                services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            //            }
+            //            else
+            //            {
+            //                services.AddControllersWithViews();
+            //            }
+            //#endif
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,16 +109,26 @@ namespace LeaseForPublic
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseSession();
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapDefaultControllerRoute().RequireAuthorization();
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute().RequireAuthorization();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+
+
+
+
     }
 }

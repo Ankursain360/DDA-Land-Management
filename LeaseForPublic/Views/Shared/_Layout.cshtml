@@ -75,14 +75,36 @@
                             </ul>
                         </div>
                     </div>
-                    @await Component.InvokeAsync("SignInProfile")
+                    @*@await Component.InvokeAsync("SignInProfile")*@
                 </div>
             </div>
         </header>
     </div>
     <aside class="left-menu small slow" id="leftMenu">
         <ul class="accordion list-unstyled mb-0">
-            @await Component.InvokeAsync("SideNav")
+            <ul class="accordion list-unstyled mb-0" id="leftMenueList">
+                <li>
+                    <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
+                        <i class="main-icon ri-dashboard-line"></i>
+                        <span class="text mr-auto">Lease /License Details</span>
+                        <i class="arrow ri-arrow-drop-down-line slow"></i>
+                    </a>
+
+                    <ul id="collapseOne" class="collapse sub-menu list-unstyled m-0 p-0" data-parent="#leftMenueList">
+                        <li class="nav-item">
+                            <a href="https://leaseallottee.managemybusinessess.com/KYCform/Index" class="d-block">Lease/License KYC Details</a>
+                        </li>
+                        @*<li class="nav-item">
+                            <a href="https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create" class="d-block">Pay Dues</a>
+                        </li>*@
+
+
+
+                    </ul>
+                </li>
+
+
+            </ul>
         </ul>
     </aside>
 
