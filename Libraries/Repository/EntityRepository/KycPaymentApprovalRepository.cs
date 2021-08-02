@@ -48,6 +48,10 @@ namespace Libraries.Repository.EntityRepository
 
             var data = await _dbContext.Kycdemandpaymentdetails
                                         .Include(x => x.Kyc)
+                                        .Include(x => x.Kyc.PropertyType)
+                                        .Include(x => x.Kyc.Branch)
+                                        .Include(x => x.Kyc.Zone)
+                                        .Include(x => x.Kyc.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
@@ -65,6 +69,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Kycdemandpaymentdetails
                                         .Include(x => x.Kyc)
+                                        .Include(x => x.Kyc.PropertyType)
+                                        .Include(x => x.Kyc.Branch)
+                                        .Include(x => x.Kyc.Zone)
+                                        .Include(x => x.Kyc.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
                                         .Where(x => x.IsActive == 1
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
@@ -90,6 +98,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Kycdemandpaymentdetails
                                        .Include(x => x.Kyc)
+                                       .Include(x => x.Kyc.PropertyType)
+                                        .Include(x => x.Kyc.Branch)
+                                        .Include(x => x.Kyc.Zone)
+                                        .Include(x => x.Kyc.Locality)
                                        .Include(x => x.ApprovedStatusNavigation)
                                        .Where(x => x.IsActive == 1
                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
@@ -131,6 +143,26 @@ namespace Libraries.Repository.EntityRepository
                 result = true;
 
             return result;
+        }
+
+        //********* rpt ! Allottee challan  Details  repeter**********
+
+        public async Task<bool> SaveChallan(Kycdemandpaymentdetailstablec challan)
+        {
+            _dbContext.Kycdemandpaymentdetailstablec.Add(challan);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id)
+        {
+            return await _dbContext.Kycdemandpaymentdetailstablec.Where(x => x.DemandPaymentId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> DeleteChallan(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Kycdemandpaymentdetailstablec.Where(x => x.DemandPaymentId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
     }
 }

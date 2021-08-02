@@ -20,5 +20,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<Kycdemandpaymentdetails> FetchSingleResult(int id);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
 
+        //********* rpt ! Allottee challan  Details  repeter**********
+        Task<bool> SaveChallan(Kycdemandpaymentdetailstablec challan);
+        Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id);
+        Task<bool> DeleteChallan(int Id);
+
     }
 }

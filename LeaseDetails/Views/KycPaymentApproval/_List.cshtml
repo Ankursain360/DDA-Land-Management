@@ -3,15 +3,15 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-                
-            @*<th> Property </th>
-        <th>Nature of Property </th>
-        <th> File No </th>
-        <th> Branch </th>*@
-            <th> Is Payment Agreed </th>
-            <th> Total Payable </th>
-            <th> Total Payable Interest </th>
-            <th> Total Dues </th>
+
+            <th> Property </th>
+            <th>Nature of Property </th>
+            <th> File No </th>
+            <th> Branch </th>
+            <th> Zone </th>
+            <th> Locality </th>
+            <th> Date Of Allotment letter </th>
+            <th> Date Of Possession </th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -22,17 +22,17 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-            @*<td>@item.Property</td>
+            <td>@item.Kyc.Property</td>
 
-        <td> @(item.PropertyType == null?"": item.PropertyType.Name) </td>
-        <td>@item.FileNo</td>
-        <td> @(item.Branch == null?"": item.Branch.Name)  </td>*@
+            <td> @(item.Kyc.PropertyType == null?"": item.Kyc.PropertyType.Name) </td>
+            <td>@item.Kyc.FileNo</td>
+            <td> @(item.Kyc.Branch == null?"": item.Kyc.Branch.Name)  </td>
+            <td> @(item.Kyc.Zone == null?"": item.Kyc.Zone.Name) </td>
+            <td> @(item.Kyc.Locality == null?"": item.Kyc.Locality.Name) </td>
+            <td>@(item.Kyc.AllotmentLetterDate == null ? "" : (Convert.ToDateTime(item.Kyc.AllotmentLetterDate)).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.Kyc.PossessionDate == null ? "" : (Convert.ToDateTime(item.Kyc.PossessionDate)).ToString("dd-MMM-yyyy"))</td>
 
-            <td>@item.IsPaymentAgreed</td>
-            <td>@item.TotalPayable</td>
-            <td>@item.TotalPayableInterest</td>
-            <td>@item.TotalDues</td>
-           
+
             <td>
                 @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
             </td>

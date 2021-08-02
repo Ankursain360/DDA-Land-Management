@@ -1,0 +1,61 @@
+﻿@model Dto.Master.ApiResponseBhoomiApiFileWise
+
+<div class="permission mt-2 accordion list-unstyled m-0 ">
+    <div class="card">
+        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
+           aria-controls="collapseApprroval">
+            <i class="ri-arrow-right-s-fill"></i>
+            <span class="text ml-1 mr-auto">View Payment Details Form Bhoomi App</span>
+            <i class="arrow ri-arrow-drop-down-line slow"></i>
+        </a>
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">
+          
+            <div id="details">
+                <div class="table-section bg-white border shadow rounded">
+                    @{int rowNo = 0; }
+                    <table class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+
+
+                                <th>Sr.No</th>
+                                <th>Challan No</th>
+                                <th>Challan Amount</th>
+                                <th>Deposite Date</th>
+                                <th>File Id</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model.cargo)
+                                {
+
+                                    <tr>
+                                        <td>@(rowNo += 1)</td>
+                                        <td>@item.CHLLN_NMBR</td>
+                                        <td align="right">@item.CHLLN_AMNT</td>
+                                        <td align="right">@item.DPST_DT</td>
+                                        <td align="right">@item.FL_ID</td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th colspan="6" style="text-align:center"> No Record Available! </th>
+                                </tr>
+                            }
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+            <br />
+
+            </div>
+    </div>
+</div>

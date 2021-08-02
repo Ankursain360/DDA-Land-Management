@@ -46,6 +46,10 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public int ApprovalRoleId { get; set; }
+        [NotMapped]
+        public string FileNo { get; set; }
+
+        
 
         #endregion
 

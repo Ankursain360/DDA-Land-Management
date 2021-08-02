@@ -18,6 +18,9 @@ using Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
 using Dto.Master;
 using System.Text;
+using System.Net.Http;
+using System.Text.Json;
+
 namespace LeaseDetails.Controllers
 {
     public class KycPaymentApprovalController : BaseController
@@ -30,6 +33,7 @@ namespace LeaseDetails.Controllers
         private readonly IUserNotificationService _userNotificationService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IKycformService _kycformService;
+        private readonly IDemandDetailsService _demandDetailsService;
 
         string ApprovalDocumentPath = "";
         string AadharDoc = "";
@@ -42,7 +46,8 @@ namespace LeaseDetails.Controllers
             IUserProfileService userProfileService,
              IApprovalProccessService approvalproccessService,
              IKycformApprovalService kycformApprovalService,
-             IHostingEnvironment hostingEnvironment)
+             IHostingEnvironment hostingEnvironment,
+             IDemandDetailsService demandDetailsService)
 
         {
             _configuration = configuration;
@@ -54,6 +59,8 @@ namespace LeaseDetails.Controllers
             ApprovalDocumentPath = _configuration.GetSection("FilePaths:KYCApplicationForm:ApprovalDocumentPath").Value.ToString();
             _userNotificationService = userNotificationService;
             _hostingEnvironment = hostingEnvironment;
+            _demandDetailsService = demandDetailsService;
+
             AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
             LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
             ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
@@ -74,10 +81,75 @@ namespace LeaseDetails.Controllers
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }
-       // [AuthorizeContext(ViewAction.Add)]
+        public async Task<JsonResult> GetChallanDetails(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _kycPaymentApprovalService.GetAllChallan(Convert.ToInt32(Id));
+            return Json(data.Select(x => new
+            {
+                x.Id,
+                x.KycId,
+                x.DemandPaymentId,
+                x.PaymentType,
+                x.Period,
+                x.ChallanNo,
+                x.Amount,
+                x.DateofPaymentByAllottee,
+                x.Proofinpdf,
+                x.Ddabankcredit
+                
+            }));
+        }
+        public async Task<PartialViewResult> PaymentDetails(int Id)
+        {
+
+            var result = await _demandDetailsService.GetPaymentDetails(Id);
+
+            return PartialView("_PaymentDetails", result);
+        }
+        public async Task<PartialViewResult> PaymentFromBhoomi(string FileNo)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(_configuration.GetSection("BhoomiApi").Value + FileNo))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        var data1 = JsonSerializer.Deserialize<ApiResponseBhoomiApiFileWise>(apiResponse);
+                        return PartialView("_PaymentFromBhoomi", data1);
+
+                    }
+                    else
+                    {
+                        ApiResponseBhoomiApiFileWise data1 = new ApiResponseBhoomiApiFileWise();
+                        List<BhoomiApiFileNowiseDto> cargo = new List<BhoomiApiFileNowiseDto>();
+                        data1.cargo = cargo;
+                        return PartialView("_PaymentFromBhoomi", data1);
+                    }
+
+                }
+            }
+
+        }
+
+        public  PartialViewResult ApplicantChallanDetails(int Id)
+        {
+
+            // var result = await _demandDetailsService.GetPaymentDetails(Id);
+
+            // return PartialView("_PaymentDetails", result);
+            return PartialView("_AllotteeChallanDetails");
+        }
+        
+
+        // [AuthorizeContext(ViewAction.Add)]
+
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _kycPaymentApprovalService.FetchSingleResult(id);
+            var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
+            Data.FileNo = Data2.FileNo;
             ViewBag.Items = await _userProfileService.GetRole();
             await BindApprovalStatusDropdown(Data);
             if (Data == null)
@@ -592,5 +664,13 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
+        #region History Details Only For Approval Page Added by ishu 16 march 2021
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetKYCHistoryDetails((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
+        }
+        #endregion
     }
 }
