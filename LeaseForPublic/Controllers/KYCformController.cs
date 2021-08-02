@@ -258,7 +258,7 @@ namespace LeaseForPublic.Controllers
                                 approvalproccess.Version = workflowtemplatedata.Version;
                                 approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                 //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in approvalproccess Table
+                                result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in kycapprovalproccess Table
 
                                 #region Insert Into usernotification table Added By Renu 18 June 2021
                                 if (result)

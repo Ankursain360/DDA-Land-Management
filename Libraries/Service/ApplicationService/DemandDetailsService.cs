@@ -51,9 +51,18 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-       
+        public async Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails kycdemandpaymentdetails)
+        {
+            var result = await _demandDetailsRepository.FindBy(a => a.Id == id);
+            Kycdemandpaymentdetails model = result.FirstOrDefault();
 
-        
+            model.ApprovedStatus = kycdemandpaymentdetails.ApprovedStatus;
+            model.PendingAt = kycdemandpaymentdetails.PendingAt;
+            _demandDetailsRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+
 
 
     }

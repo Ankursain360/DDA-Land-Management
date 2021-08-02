@@ -19,6 +19,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version);
         Task<Kycform> FetchSingleResult(int id);
-       
+
+        Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
+
+
     }
 }

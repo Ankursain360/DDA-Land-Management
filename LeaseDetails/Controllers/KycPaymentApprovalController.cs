@@ -94,7 +94,8 @@ namespace LeaseDetails.Controllers
                 x.Period,
                 x.ChallanNo,
                 x.Amount,
-                x.DateofPaymentByAllottee,
+                Date = Convert.ToDateTime(x.DateofPaymentByAllottee).ToString("yyyy-MM-dd"),
+               // x.DateofPaymentByAllottee,
                 x.Proofinpdf,
                 x.Ddabankcredit
                 
@@ -670,6 +671,46 @@ namespace LeaseDetails.Controllers
             var Data = await _approvalproccessService.GetKYCHistoryDetails((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), id);
 
             return PartialView("_HistoryDetails", Data);
+        }
+        #endregion
+
+
+        #region KYCApplicationForm Details 
+        //show kyc form data in accordian
+        public async Task<PartialViewResult> KYCFormView(int id)
+        {
+            var Data = await _kycformService.FetchKYCSingleResult(id);
+            Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            Data.BranchList = await _kycformService.GetAllBranchList();
+            Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            Data.ZoneList = await _kycformService.GetAllZoneList();
+            Data.LocalityList = await _kycformService.GetLocalityList();
+            // Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
+            return PartialView("_KYCFormView", Data);
+        }
+
+        //***************** Download kyc form accordian Files  ********************
+
+        public async Task<IActionResult> DownloadAadharNo(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = AadharDoc + Data.AadhaarNoPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadLetter(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = LetterDoc + Data.LetterPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadPANofApplicant(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycform Data = await _kycformService.FetchSingleResult(Id);
+            string filename = ApplicantDoc + Data.AadhaarPanapplicantPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         #endregion
     }

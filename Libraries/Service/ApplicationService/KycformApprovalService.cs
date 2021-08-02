@@ -43,6 +43,12 @@ namespace Service.ApplicationService
             return await _kycformApprovalRepository.FetchSingleResultOnProcessGuidWithVersion(processguid, version);
         }
 
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid)
+        {
+            return await _kycformApprovalRepository.FetchSingleResultOnProcessGuid(processguid);
+        }
+
+
         public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
         {
             return await _kycformApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);

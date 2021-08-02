@@ -75,5 +75,12 @@ namespace Service.ApplicationService
         {
             return await _kycPaymentApprovalRepository.DeleteChallan(Id);
         }
+
+        // approval related
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid)
+        {
+            return await _kycPaymentApprovalRepository.FetchSingleResultOnProcessGuid(processguid);
+        }
+
     }
 }

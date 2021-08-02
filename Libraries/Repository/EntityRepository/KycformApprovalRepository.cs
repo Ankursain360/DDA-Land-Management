@@ -130,6 +130,17 @@ namespace Libraries.Repository.EntityRepository
                                    .Take(1)
                                    .FirstOrDefaultAsync();
         }
+
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid)
+        {
+            return await _dbContext.Kycworkflowtemplate
+                                    .Where(x => x.ProcessGuid == processguid && x.EffectiveDate <= DateTime.Now
+                                    && x.IsActive == 1
+                                    )
+                                    .OrderByDescending(x => x.Id)
+                                    .Take(1)
+                                    .FirstOrDefaultAsync();
+        }
         public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
         {
             var result = false;

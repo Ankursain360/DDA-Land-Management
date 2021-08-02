@@ -18,5 +18,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId);
 
+        Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
+
     }
 }

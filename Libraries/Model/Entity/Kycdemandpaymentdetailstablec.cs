@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
      
         public int KycId { get; set; }
         public int DemandPaymentId { get; set; }
+        public string IsVerified { get; set; }
         public string PaymentType { get; set; }
         public string Period { get; set; }
         public string ChallanNo { get; set; }

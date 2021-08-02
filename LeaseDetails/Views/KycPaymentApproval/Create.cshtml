@@ -20,12 +20,17 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="KycId" />
+    <input type="hidden" asp-for="IsPaymentAgreed" />
     <input type="hidden" asp-for="FileNo" />
     <input type="hidden" id="RevertCode" value="@ViewBag.RevertCodeValue" />
     <input type="hidden" id="ApprovedCode" value="@ViewBag.ApprovedCodeValue" />
     <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
     <input type="hidden" id="QueryForwardCode" value="@ViewBag.QueryForwardCodeValue" />
     <input type="hidden" asp-for="ApprovalStatusCode" value="0" />
+
+    <div id="KYCFormDetailsDiv">
+
+    </div>
 
     <div id="divPayment">
 
@@ -36,11 +41,18 @@
 
     </div>
 
-    <div id="divChallan">
+    @if (Model.IsPaymentAgreed == "Y")
+    {
 
-    </div>
+    }
+    else
+    {
+        <div id="divChallan">
 
-    
+        </div>
+    }
+
+
 
     <div id="divHistoryDetails">
 

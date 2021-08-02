@@ -478,5 +478,17 @@
     "inputFiles": [
       "wwwroot/js/kycformapprovalindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycpaymentapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycpaymentapprovalcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycpaymentapprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycpaymentapprovalindex.js"
+    ]
   }
 ]

@@ -1,18 +1,26 @@
 ﻿$(document).ready(function () {
 
     var id = parseInt($('#Id').val());
+    
     GetKYCDetails(id);
     GetHistoryDetails(id);
     GetPayment();
     GetPaymentFromBhoomi();
+
     GetApplicantChallan();
-    $("#ApprovalStatus").val('0').trigger('change');
    
+
+    $("#ApprovalStatus").val('0').trigger('change');
+
+    
+
 
 });
 
+
+
 function GetKYCDetails(id) {
-    HttpGet(`/KycFormApproval/KYCFormView/?Id=${id}`, 'html', function (response) {
+    HttpGet(`/KycPaymentApproval/KYCFormView/?Id=${$("#KycId").val()}`, 'html', function (response) {
         $('#KYCFormDetailsDiv').html("");
         $('#KYCFormDetailsDiv').html(response);
     });
@@ -67,6 +75,15 @@ function callSelect2() {
 }
 
 
+
+$("#collapse").click(function () {
+    $('#collapsekycform').collapse("toggle").promise().done(function () {
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
 
 
 $("#collapse").click(function () {
@@ -301,4 +318,7 @@ $("#btnCreate").click(function () {
     return checkresult
 
 });
+
+
+
 
