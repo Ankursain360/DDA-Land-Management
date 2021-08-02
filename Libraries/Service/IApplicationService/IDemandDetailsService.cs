@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Create(Kycdemandpaymentdetails kycDemandPayment);
 
-      
+        Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails kycdemandpaymentdetails);
 
     }
 }

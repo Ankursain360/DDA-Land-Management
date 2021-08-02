@@ -1,4 +1,21 @@
 ﻿$(function () {
+    
+    $('#AAttendance').removeAttr('multiple');
+    debugger    
+    if ($("#IsPaymentAgreed").val() == "Y") {
+        $("#rOriginal").attr("checked", true);
+        $("#rSubsequent").attr("checked", false);
+        $("#DivForSubsequentPurchaser").hide();
+    } else {
+        $("#rSubsequent").attr("checked", true);
+        $("#rOriginal").attr("checked", false);
+        FillChallanAtEdit();
+        $("#DivForSubsequentPurchaser").show();
+    }
+});
+
+$(document).ready(function () {
+
     $("input[name='IsPaymentAgreed']").click(function () {
         if ($("#rSubsequent").is(":checked")) {
             $("#DivForSubsequentPurchaser").show();
@@ -6,11 +23,6 @@
             $("#DivForSubsequentPurchaser").hide();
         }
     });
-});
-
-$(document).ready(function () {
-    FillChallanAtEdit();
-    $('#AAttendance').removeAttr('multiple');
 });
 
 
@@ -26,12 +38,12 @@ function FillChallanAtEdit() {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts2 #add2 #PaymentType").val(data[i].paymentType);
-            $("#tbl_posts2 #add2 #Period").val(data[i].Period);
-            $("#tbl_posts2 #add2 #ChallanNoR").val(data[i].ChallanNo);
-            $("#tbl_posts2 #add2 #Amount").val(data[i].Amount);
-            $("#tbl_posts2 #add2 #DateofPaymentByAllottee").val(data[i].DateofPaymentByAllottee);
-            $("#tbl_posts2 #add2 #Proofinpdf").val(data[i].Proofinpdf); 
-            $("#tbl_posts2 #add2 #Ddabankcredit").val(data[i].Ddabankcredit); 
+            $("#tbl_posts2 #add2 #Period").val(data[i].period);
+            $("#tbl_posts2 #add2 #ChallanNoR").val(data[i].challanNo);
+            $("#tbl_posts2 #add2 #Amount").val(data[i].amount);
+            $("#tbl_posts2 #add2 #DateofPaymentByAllottee").val(data[i].date);
+            $("#tbl_posts2 #add2 #Proofinpdf").val(data[i].proofinpdf); 
+            $("#tbl_posts2 #add2 #Ddabankcredit").val(data[i].ddabankcredit); 
 
             if (i < data.length - 1) {
                 var content = jQuery('#tbl_posts2 #add2 tr'),

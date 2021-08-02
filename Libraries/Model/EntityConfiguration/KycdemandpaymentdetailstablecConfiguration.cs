@@ -53,6 +53,10 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.IsVerified)
+               .HasMaxLength(10)
+               .IsUnicode(false);
+
             builder.Property(e => e.PaymentType)
                 .HasMaxLength(100)
                 .IsUnicode(false);

@@ -59,8 +59,8 @@ namespace Libraries.Model.Entity
         public ICollection<Kycdemandpaymentdetailstableb> kycdemandpaymentdetailstableb { get; set; }
         public ICollection<Kycdemandpaymentdetailstablec> kycdemandpaymentdetailstablec { get; set; }
 
-
-
+        [NotMapped]
+        public string IsVerified { get; set; }
         [NotMapped]
         public List<string> PaymentType { get; set; }
 
@@ -79,6 +79,7 @@ namespace Libraries.Model.Entity
         public List<string> Proofinpdf { get; set; }
         [NotMapped]
         public List<string> Ddabankcredit { get; set; }
+
        
     }
 }

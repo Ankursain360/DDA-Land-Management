@@ -164,5 +164,17 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        // approval related 
+        public async Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid)
+        {
+            return await _dbContext.Kycworkflowtemplate
+                                    .Where(x => x.ProcessGuid == processguid && x.EffectiveDate <= DateTime.Now
+                                    && x.IsActive == 1
+                                    )
+                                    .OrderByDescending(x => x.Id)
+                                    .Take(1)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

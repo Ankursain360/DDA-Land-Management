@@ -28,5 +28,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id);
         Task<bool> DeleteChallan(int Id);
 
+        // approval related
+        Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
     }
 }
