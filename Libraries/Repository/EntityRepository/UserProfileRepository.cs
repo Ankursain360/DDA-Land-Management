@@ -519,7 +519,7 @@ namespace Repository.EntityRepository
                                 .Include(a => a.Zone)
                                 .Include(a => a.District)
                                 .Include(a => a.Branch)
-                                .Where(a => a.IsActive == 1 && a.UserId == userid && a.ZoneId == branchId)
+                                .Where(a => a.IsActive == 1 && a.UserId == userid && a.BranchId == branchId)
                                 .ToListAsync();
         }
         

@@ -34,6 +34,7 @@ namespace LeaseDetails.Controllers
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IKycformService _kycformService;
         private readonly IDemandDetailsService _demandDetailsService;
+        private readonly IKycdemandpaymentdetailstableaService _kycdemandpaymentdetailstableaService;
 
         string ApprovalDocumentPath = "";
         string AadharDoc = "";
@@ -47,6 +48,7 @@ namespace LeaseDetails.Controllers
              IApprovalProccessService approvalproccessService,
              IKycformApprovalService kycformApprovalService,
              IHostingEnvironment hostingEnvironment,
+              IKycdemandpaymentdetailstableaService kycdemandpaymentdetailstableaService,
              IDemandDetailsService demandDetailsService)
 
         {
@@ -60,6 +62,7 @@ namespace LeaseDetails.Controllers
             _userNotificationService = userNotificationService;
             _hostingEnvironment = hostingEnvironment;
             _demandDetailsService = demandDetailsService;
+            _kycdemandpaymentdetailstableaService = kycdemandpaymentdetailstableaService;
 
             AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
             LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
@@ -103,9 +106,9 @@ namespace LeaseDetails.Controllers
         }
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
-
-            var result = await _demandDetailsService.GetPaymentDetails(Id);
-
+            var result = await _kycdemandpaymentdetailstableaService.FetchSingleResultOnDemandId(Id);
+            //var result = await _demandDetailsService.GetPaymentDetails(Id);
+            //ViewBag.id = Id;
             return PartialView("_PaymentDetails", result);
         }
         public async Task<PartialViewResult> PaymentFromBhoomi(string FileNo)
@@ -202,13 +205,13 @@ namespace LeaseDetails.Controllers
                                 {
                                     if (!DataFlow[d].parameterSkip)
                                     {
-                                        if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                        if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
                                         {
-                                            if (SiteContext.ZoneId == null)
+                                            if (SiteContext.BranchId == null)
                                             {
                                                 ViewBag.Items = await _userProfileService.GetRole();
                                                 await BindApprovalStatusDropdown(payment);
-                                                ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                                ViewBag.Message = Alert.Show("Your branch is not available , Without branch application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
                                                 return View(payment);
                                             }
 
@@ -713,5 +716,169 @@ namespace LeaseDetails.Controllers
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         #endregion
+
+
+        #region Approval Related changes Added By Renu 26 April  2021
+        [HttpPost]
+        public async Task<IActionResult> Back()
+        {
+            return Redirect(_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value.ToString());
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetApprvoalStatus(string value)
+        {
+            int Id = Convert.ToInt32(value);
+            var data = await _approvalproccessService.FetchSingleApprovalStatus(Id);
+            return Json(data);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetUserList(string value)
+        {
+            int RoleId = Convert.ToInt32(value);
+            var data = await _userProfileService.GetkycUserSkippingItsOwnConcatedName(RoleId, SiteContext.UserId);
+            return Json(data);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetForwardedUserList(string value)
+        {
+            int serviceid = Convert.ToInt32(value);
+            List<string> dropdown = null;
+            var ApprovalProccessBackId = _approvalproccessService.GetPreviouskycApprovalId((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), serviceid);
+            var ApprovalProcessBackData = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId);
+            var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
+
+            var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
+
+            List<string> JsonMsg = new List<string>();
+            if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
+            {
+                for (int i = 0; i < DataFlow.Count; i++)
+                {
+                    if (!DataFlow[i].parameterSkip)
+                    {
+                        if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
+                        {
+                            for (int d = i + 1; d < DataFlow.Count; d++)
+                            {
+                                if (!DataFlow[d].parameterSkip)
+                                {
+                                    if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                    {
+                                        if (SiteContext.BranchId == null)
+                                        {
+                                            JsonMsg.Add("false");
+                                            JsonMsg.Add("Branch Id not available for next level, untill then Submittion is not possible");
+                                            return Json(JsonMsg);
+                                        }
+
+                                    }
+                                    if (DataFlow[d].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                                    {
+                                        for (int b = 0; b < DataFlow[d].parameterName.Count; b++)
+                                        {
+                                            List<kycUserProfileInfoDetailsDto> UserListRoleBasis = null;
+                                            if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                                UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]), SiteContext.BranchId ?? 0);
+                                            else
+                                                UserListRoleBasis = await _userProfileService.GetkycUserOnRoleBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]));
+
+                                            if (UserListRoleBasis.Count == 0)
+                                            {
+                                                JsonMsg.Add("false");
+                                                JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
+                                                return Json(JsonMsg);
+                                            }
+                                            else
+                                            {
+                                                return Json(UserListRoleBasis);
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        string SendTo = String.Join(",", (DataFlow[d].parameterName));
+                                        if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                        {
+                                            StringBuilder multouserszonewise = new StringBuilder();
+                                            int col = 0;
+                                            if (SendTo != null)
+                                            {
+                                                string[] multiTo = SendTo.Split(',');
+                                                foreach (string MultiUserId in multiTo)
+                                                {
+                                                    var UserProfile = await _userProfileService.GetUserByIdBranchConcatedName(Convert.ToInt32(MultiUserId), SiteContext.BranchId ?? 0);
+                                                    if (UserProfile != null)
+                                                    {
+                                                        if (col > 0)
+                                                            multouserszonewise.Append(",");
+                                                        multouserszonewise.Append(UserProfile.UserId);
+                                                    }
+                                                    col++;
+                                                }
+                                                SendTo = multouserszonewise.ToString();
+                                            }
+                                        }
+
+                                        if (SendTo != "")
+                                        {
+                                            int[] nums = Array.ConvertAll(SendTo.Split(','), int.Parse);
+                                            var data = await _userProfileService.UserListSkippingmultiusersConcatedName(nums);
+                                            return Json(data);
+                                        }
+                                        else
+                                        {
+                                            JsonMsg.Add("false");
+                                            JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
+                                            return Json(JsonMsg);
+                                        }
+                                    }
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                int[] nums = Array.ConvertAll(ApprovalProcessBackData.SendFrom.Split(','), int.Parse);
+                var data = await _userProfileService.kycUserListSkippingmultiusersConcatedName(nums);
+                return Json(data);
+            }
+            return Json(dropdown);
+        }
+
+
+        #endregion
+
+
+        //[HttpPost]
+        public async Task<IActionResult> UpdatePayment(int id, Kycdemandpaymentdetailstablea model)
+        {
+           
+                var result = await _kycdemandpaymentdetailstableaService.Update(id, model);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+                   // var list = await _structureService.GetAllStructure();
+                   // return View("Create");
+                    return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
+
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
+
+
+                }
+           
+        }
     }
 }

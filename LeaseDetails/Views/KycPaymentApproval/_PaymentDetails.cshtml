@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Dto.Search.DemandPaymentDetailsDto>
+﻿@*@model IEnumerable<Dto.Search.DemandPaymentDetailsDto>*@
+@*@model Dto.Search.DemandPaymentDetailsDto*@
+@model Libraries.Model.Entity.Kycdemandpaymentdetailstablea
 
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
@@ -10,56 +12,77 @@
         </a>
         <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePayment">
 
-            <div id="details">
-                <div class="table-section bg-white border shadow rounded">
-                 
-                    <table class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
+            @*<form asp-action="UpdatePayment" method="post">*@
+            <form>
+                @*<input type="hidden" asp-for="Id" />*@
+                <div id="details">
+                    <div class="table-section bg-white border shadow rounded">
 
-                            <tr>
+                        <table class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
 
-                                <th>Demand Period</th>
-                                <th>Ground Rent </th>
-                                <th>Interest Rate </th>
-                                <th>Total Dues </th>
+                                <tr>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null && Model.Count() > 0)
-                            {
-                                @foreach (var item in Model)
+                                    <th>Demand Period</th>
+                                    <th>Ground Rent </th>
+                                    <th>Interest Rate </th>
+                                    <th>Total Dues </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
                                 {
+
                                     <tr>
 
+                                        <td>
+                                            <input asp-for="DemandPeriod" type="text" class="floating-label-field floating-label-field--s3" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="GroundRent" type="text" class="floating-label-field floating-label-field--s3" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="InterestRate" type="text" class="floating-label-field floating-label-field--s3" />
+                                        </td>
+                                        <td>
+                                            <input asp-for="TotdalDues" type="text" class="floating-label-field floating-label-field--s3" />
+                                        </td>
 
-
-                                        <td>@item.DemandPeriod</td>
-
-                                        <td>@item.GroundRentLeaseRent</td>
-
-                                        <td>@item.InterestAmount</td>
-                                        <td>@item.TotalDues</td>
 
 
                                     </tr>
+
                                 }
-                            }
-                            else
-                            {
-                                <tr>
-                                    <th colspan="13" style="text-align:center"> Data Not Available </th>
-                                </tr>
-                            }
+                                else
+                                {
+                                    <tr>
+                                        <th colspan="13" style="text-align:center"> Data Not Available </th>
+                                    </tr>
+                                }
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <br />
+                <br />
+             
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        @*<button class="btn btn-theme" type="button" id="btnUpdate">Update Payment Details</button>*@
 
+                        <a asp-action="UpdatePayment" asp-route-id="@Model.DemandPaymentId">
+            <input class="btn btn-theme " value="Update Payment Details" />
+        </a>
+                        <a href="/KycPaymentApproval/UpdatePayment/@Model.DemandPaymentId?&DemandPeriod= @Model.DemandPeriod + &GroundRent=+ @Model.GroundRent + &InterestRate=+ @Model.InterestRate + &TotdalDues=+ @Model.TotdalDues">
+            <input class="btn btn-theme" value="Update Payment Details" />
+        </a>
+
+                    </div>
+                </div>
+                <br />
+            </form>
         </div>
     </div>
 </div>
-

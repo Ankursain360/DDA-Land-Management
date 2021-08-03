@@ -290,6 +290,8 @@ namespace Libraries.Model
         public virtual DbSet<Interestrate> Interestrate { get; set; }
         public virtual DbSet<Kycdemandpaymentdetailstablec> Kycdemandpaymentdetailstablec { get; set; }
 
+        public virtual DbSet<Kycdemandpaymentdetailstablea> Kycdemandpaymentdetailstablea { get; set; }
+
 
         public virtual DbSet<Licencefees> Licencefees { get; set; }
         public virtual DbSet<Documentchecklist> Documentchecklist { get; set; }

@@ -71,7 +71,8 @@ namespace LeaseDetails.Infrastructure.Extensions
 
 
             services.AddScoped<IDemandDetailsRepository, DemandDetailsRepository>();
-           
+            services.AddScoped<IKycdemandpaymentdetailstableaRespository, KycdemandpaymentdetailstableaRepository>();
+
 
             /* Application Services */
 
@@ -127,6 +128,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IKycformApprovalService, KycformApprovalService>();
             services.AddScoped<IKycPaymentApprovalService, KycPaymentApprovalService>();
             services.AddScoped<IDemandDetailsService, DemandDetailsService>();
+            services.AddScoped<IKycdemandpaymentdetailstableaService, KycdemandpaymentdetailstableaService>();
 
 
         }

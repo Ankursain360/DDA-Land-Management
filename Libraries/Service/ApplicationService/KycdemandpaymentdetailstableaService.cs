@@ -31,7 +31,32 @@ namespace Libraries.Service.ApplicationService
             _kycdemandpaymentdetailstableaRespository.Add(kycdemandpaymentdetailstablea);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
+        public async Task<Kycdemandpaymentdetailstablea> FetchSingleResult(int id)
+        {
+            var result = await _kycdemandpaymentdetailstableaRespository.FindBy(a => a.Id == id);
+            Kycdemandpaymentdetailstablea model = result.FirstOrDefault();
+            return model;
+        }
+        public async Task<Kycdemandpaymentdetailstablea> FetchSingleResultOnDemandId(int id)
+        {
+            var result = await _kycdemandpaymentdetailstableaRespository.FetchSingleResult(id);
+            
+            return result;
+        }
+        public async Task<bool> Update(int id, Kycdemandpaymentdetailstablea payment)
+        {
+            var result = await _kycdemandpaymentdetailstableaRespository.FetchSingleResult(id);
+            Kycdemandpaymentdetailstablea model = new Kycdemandpaymentdetailstablea();
+            model.DemandPeriod = payment.DemandPeriod;
+            model.GroundRent = payment.GroundRent;
+            model.InterestRate = payment.InterestRate;
+            model.TotdalDues = payment.TotdalDues;
+            model.IsActive = 1;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _kycdemandpaymentdetailstableaRespository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
     }
 }
