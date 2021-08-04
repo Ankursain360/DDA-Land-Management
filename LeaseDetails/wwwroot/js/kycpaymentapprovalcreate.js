@@ -29,7 +29,7 @@ function GetKYCDetails(id) {
 
 function GetPayment() {
 
-    HttpGet(`/KycPaymentApproval/PaymentDetails/?Id=${$("#KycId").val()}`, 'html', function (response) {
+    HttpGet(`/KycPaymentApproval/PaymentDetails/?Id=${$("#Id").val()}`, 'html', function (response) {
         debugger;
         $('#divPayment').html("");
         $('#divPayment').html(response);
@@ -205,7 +205,7 @@ function fileValidation(filePath, fileInput, size) {
 
 function GetApprvoalStatus(id) {
     debugger;
-    HttpGet(`/KycFormApproval/GetApprvoalStatus/?value=${id}`, 'json', function (response) {
+    HttpGet(`/KycPaymentApproval/GetApprvoalStatus/?value=${id}`, 'json', function (response) {
         if (response != null) {
             $("#ApprovalStatusCode").val(response.statusCode);
             if (response.statusCode == $("#QueryForwardCode").val()) {
@@ -234,7 +234,7 @@ function GetApprvoalStatus(id) {
 
 function GetUserList(id) {
     debugger;
-    HttpGet(`/KycFormApproval/GetUserList/?value=${id}`, 'json', function (response) {
+    HttpGet(`/KycPaymentApproval/GetUserList/?value=${id}`, 'json', function (response) {
         var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
@@ -246,7 +246,7 @@ function GetUserList(id) {
 
 function GetForwardedUserList() {
     debugger;
-    HttpGet(`/KycFormApproval/GetForwardedUserList/?value=${parseInt($("#Id").val())}`, 'json', function (response) {
+    HttpGet(`/KycPaymentApproval/GetForwardedUserList/?value=${parseInt($("#Id").val())}`, 'json', function (response) {
         if (response != null) {
             if (response[0] == "false") {
                 WarningMessage(response[1]);
@@ -320,5 +320,23 @@ $("#btnCreate").click(function () {
 });
 
 
+//$("#btnUpdate").click(function () {
+//    var param = GetSearchParam();
+//    HttpGet(`/KycPaymentApproval/UpdatePayment/?Id=${$("#Id").val()}`, 'html', param, function (response) {
+       
+       
+//    });
+//});
 
+
+//function GetSearchParam() {
+//    var model = {
+//        DemandPeriod: $('#DemandPeriod').val(),
+//        GroundRent: parseFloat($('#DemandPeriod').val()),
+//        GroundRent: parseFloat($('#InterestRate').val()),
+//        GroundRent: parseFloat($('#TotdalDues').val()),
+      
+//    }
+//    return model;
+//}
 

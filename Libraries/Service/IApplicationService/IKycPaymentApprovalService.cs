@@ -19,6 +19,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
         Task<Kycdemandpaymentdetails> FetchSingleResult(int id);
+        Task<bool> UpdatePaymentDetails(int id, DemandPaymentDetailsDto dto);
         Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails payment);

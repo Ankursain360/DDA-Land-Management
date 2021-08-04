@@ -17,5 +17,14 @@ namespace Libraries.Repository.EntityRepository
     {
         public KycdemandpaymentdetailstableaRepository(DataContext dbcontext) : base(dbcontext)
         { }
+
+        public async Task<Kycdemandpaymentdetailstablea> FetchSingleResult(int id)
+        {
+            return await _dbContext.Kycdemandpaymentdetailstablea
+                                     .Include(x => x.Kyc)
+                                     .Include(x => x.DemandPayment)
+                                     .Where(x => x.DemandPaymentId == id)
+                                     .FirstOrDefaultAsync();
+        }
     }
 }
