@@ -83,7 +83,7 @@ $('#Property').change(function () {
             $('#labellease').text("Date of Lease Execution");
             $('#chk2').text(" If the Allottee Details are same as Applicant Details then tick the checkbox");
 
-            $('#aadharlb').text("Aadhaar No. of Allottee/Lessee");
+            $('#aadharlb').text("Aadhaar No./PAN of Allottee/Lessee ");
             $('#letterlb').text("Possession Letter /Allotment Letter /Executed Lease deed (Any One )");
 
             $('#LicenseFrequency').val("");

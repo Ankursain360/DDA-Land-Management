@@ -18,7 +18,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Branch>> GetAllBranchList();
         Task<List<PropertyType>> GetAllPropertyTypeList();
         Task<List<Zone>> GetAllZoneList();
-        Task<List<Locality>> GetLocalityList();
+        Task<List<Locality>> GetLocalityList(int? zoneid);
         Task<bool> Create(Kycform kyc);
 
         Task<List<Kycform>> GetAllKycform();

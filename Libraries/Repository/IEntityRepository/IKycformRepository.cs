@@ -16,7 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Branch>> GetAllBranchList();
         Task<List<PropertyType>> GetAllPropertyTypeList();
         Task<List<Zone>> GetAllZoneList();
-        Task<List<Locality>> GetLocalityList();
+        Task<List<Locality>> GetLocalityList(int? zoneid);
         Task<List<Kycform>> GetAllKycform();
         Task<Kycform> FetchKYCSingleResult(int id);
         Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model);
