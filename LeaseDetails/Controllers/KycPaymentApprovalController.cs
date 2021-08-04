@@ -21,6 +21,7 @@ using System.Text;
 using System.Net.Http;
 using System.Text.Json;
 
+
 namespace LeaseDetails.Controllers
 {
     public class KycPaymentApprovalController : BaseController
@@ -858,16 +859,20 @@ namespace LeaseDetails.Controllers
 
 
         //[HttpPost]
-        public async Task<IActionResult> UpdatePayment(int id, Kycdemandpaymentdetailstablea model)
+        public async Task<IActionResult> UpdatePayment([FromBody] PaymentListData jsondata)
         {
-           
-                var result = await _kycdemandpaymentdetailstableaService.Update(id, model);
+            int id = 0;
+            if (jsondata != null)
+            {
+               // var data = JsonSerializer.Deserialize<List<PaymentListData>>(model.jsondata);
+
+                var result = await _kycdemandpaymentdetailstableaService.Update(id, null);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                   // var list = await _structureService.GetAllStructure();
-                   // return View("Create");
+                    // var list = await _structureService.GetAllStructure();
+                    // return View("Create");
                     return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
 
                 }
@@ -878,7 +883,8 @@ namespace LeaseDetails.Controllers
 
 
                 }
-           
+            }
+            return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
         }
     }
 }
