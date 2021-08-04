@@ -1,6 +1,6 @@
 ﻿@*@model IEnumerable<Dto.Search.DemandPaymentDetailsDto>*@
 @*@model Dto.Search.DemandPaymentDetailsDto*@
-@model Libraries.Model.Entity.Kycdemandpaymentdetailstablea
+@model  IEnumerable<Libraries.Model.Entity.Kycdemandpaymentdetailstablea>
 
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
@@ -11,10 +11,10 @@
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
         <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePayment">
-
             @*<form asp-action="UpdatePayment" method="post">*@
             <form>
-                @*<input type="hidden" asp-for="Id" />*@
+                @*<input type="hidden" asp-for="DemandPaymentId" />
+                <input type="hidden" asp-for="Id" />*@
                 <div id="details">
                     <div class="table-section bg-white border shadow rounded">
 
@@ -31,29 +31,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model != null)
+                                @if (Model != null && Model.Count() > 0)
                                 {
+                                    @foreach (var item in Model)
+                                    {
 
-                                    <tr>
+                                        <tr>
 
-                                        <td>
-                                            <input asp-for="DemandPeriod" type="text" class="floating-label-field floating-label-field--s3" />
-                                        </td>
-                                        <td>
-                                            <input asp-for="GroundRent" type="text" class="floating-label-field floating-label-field--s3" />
-                                        </td>
-                                        <td>
-                                            <input asp-for="InterestRate" type="text" class="floating-label-field floating-label-field--s3" />
-                                        </td>
-                                        <td>
-                                            <input asp-for="TotdalDues" type="text" class="floating-label-field floating-label-field--s3" />
-                                        </td>
+                                            <td>
+                                                <input asp-for="@item.DemandPeriod" id="DemandPeriod" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@item.GroundRent" id="GroundRent" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@item.InterestRate" id="InterestRate" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@item.TotdalDues" id="TotdalDues" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
 
 
-
-                                    </tr>
-
-                                }
+                                        </tr>
+                                     }
+                                 }
                                 else
                                 {
                                     <tr>
@@ -67,18 +68,14 @@
                     </div>
                 </div>
                 <br />
-             
+
                 <div class="row pt-3">
                     <div class="col-md-12">
-                        @*<button class="btn btn-theme" type="button" id="btnUpdate">Update Payment Details</button>*@
+                        <input class="btn btn-theme" type="button" id="btnUpdatePaymentDetails" value="Update Payment Details" onclick="UpdatePaymentDetails();"/>
 
-                        <a asp-action="UpdatePayment" asp-route-id="@Model.DemandPaymentId">
-            <input class="btn btn-theme " value="Update Payment Details" />
-        </a>
-                        <a href="/KycPaymentApproval/UpdatePayment/@Model.DemandPaymentId?&DemandPeriod= @Model.DemandPeriod + &GroundRent=+ @Model.GroundRent + &InterestRate=+ @Model.InterestRate + &TotdalDues=+ @Model.TotdalDues">
-            <input class="btn btn-theme" value="Update Payment Details" />
-        </a>
-
+                        @*<a asp-action="UpdatePayment" asp-route-id="@Model.DemandPaymentId">
+                            <input class="btn btn-theme " value="Update Payment Details" />
+                        </a>*@
                     </div>
                 </div>
                 <br />

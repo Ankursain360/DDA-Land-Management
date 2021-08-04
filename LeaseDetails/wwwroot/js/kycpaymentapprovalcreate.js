@@ -320,23 +320,21 @@ $("#btnCreate").click(function () {
 });
 
 
-//$("#btnUpdate").click(function () {
-//    var param = GetSearchParam();
-//    HttpGet(`/KycPaymentApproval/UpdatePayment/?Id=${$("#Id").val()}`, 'html', param, function (response) {
-       
-       
-//    });
-//});
+function UpdatePaymentDetails() {
+    var param = GetUpdatedPaymentParam();
+    HttpGet(`/KycPaymentApproval/UpdatePayment/?Id=${$("#Id").val()}`, 'html', param, function (response) {
+        debugger
+    });
+};
 
 
-//function GetSearchParam() {
-//    var model = {
-//        DemandPeriod: $('#DemandPeriod').val(),
-//        GroundRent: parseFloat($('#DemandPeriod').val()),
-//        GroundRent: parseFloat($('#InterestRate').val()),
-//        GroundRent: parseFloat($('#TotdalDues').val()),
-      
-//    }
-//    return model;
-//}
-
+function GetUpdatedPaymentParam() {
+    var model = {
+        DemandPaymentId: $('DemandPaymentId').val(),
+        DemandPeriod: $('#DemandPeriod').val(),
+        GroundRent: parseFloat($('#GroundRent').val()),
+        InterestRate: parseFloat($('#InterestRate').val()),
+        TotdalDues: parseFloat($('#TotdalDues').val()),
+   }
+    return model;
+}

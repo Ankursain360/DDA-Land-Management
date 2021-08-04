@@ -7,6 +7,6 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface  IKycdemandpaymentdetailstableaRespository : IGenericRepository<Kycdemandpaymentdetailstablea>
     {
-        Task<Kycdemandpaymentdetailstablea> FetchSingleResult(int id);
+        Task<List<Kycdemandpaymentdetailstablea>> FetchResult(int id);
     }
 }

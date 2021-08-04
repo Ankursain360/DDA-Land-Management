@@ -106,7 +106,7 @@ namespace LeaseDetails.Controllers
         }
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
-            var result = await _kycdemandpaymentdetailstableaService.FetchSingleResultOnDemandId(Id);
+            var result = await _kycdemandpaymentdetailstableaService.FetchResultOnDemandId(Id);
             //var result = await _demandDetailsService.GetPaymentDetails(Id);
             //ViewBag.id = Id;
             return PartialView("_PaymentDetails", result);
@@ -671,7 +671,7 @@ namespace LeaseDetails.Controllers
         #region History Details Only For Approval Page Added by ishu 16 march 2021
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetKYCHistoryDetails((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), id);
+            var Data = await _approvalproccessService.GetKYCPaymentHistoryDetails((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
