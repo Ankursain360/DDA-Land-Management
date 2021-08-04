@@ -461,10 +461,6 @@ namespace LeaseForPublic.Controllers
 
     
 
-
-
-
-
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
           

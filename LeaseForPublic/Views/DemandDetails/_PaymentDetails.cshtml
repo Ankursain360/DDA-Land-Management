@@ -7,9 +7,8 @@
         <tr>
 
             <th>Demand Period</th>
-            <th>Ground Rent </th>
-            <th>Interest Rate </th>
-            <th>Total Dues </th>
+            <th>Ground Rent /License Fee </th>
+            <th>Days </th>         
 
         </tr>
     </thead>
@@ -18,19 +17,14 @@
         {
             @foreach (var item in Model)
             {
-                <tr>
+        <tr>
+            <td>@(Convert.ToDateTime(item.fromdate).ToString("dd/MMM/yyyy"))--@(Convert.ToDateTime(item.todate).ToString("dd/MMM/yyyy"))</td>
 
+            <td>@item.amount</td>
 
+            <td>@item.days</td>
 
-                    <td>@item.DemandPeriod</td>
-
-                    <td>@item.GroundRentLeaseRent</td>
-
-                    <td>@item.InterestAmount</td>
-                    <td>@item.TotalDues</td>
-
-
-                </tr>
+        </tr>
             }
         }
         else

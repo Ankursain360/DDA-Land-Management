@@ -1,11 +1,11 @@
 ﻿using Dto.Common;
-
+using System;
 
 namespace Dto.Search
 {
     public class DemandPaymentDetailsDto : BaseSearchDto
     {
-        public string DemandPeriod { get; set; }
+      
        
         public  decimal? GroundRentLeaseRent { get; set; }
        
@@ -15,6 +15,13 @@ namespace Dto.Search
 
         public int KycId { get; set; }
 
+        public DateTime fromdate { get; set; }
+        public DateTime todate { get; set; }
 
+        public decimal? amount { get; set; }
+        
+        public int days { get; set; }
+               
+ 
     }
 }
