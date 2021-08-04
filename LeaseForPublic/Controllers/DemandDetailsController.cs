@@ -97,8 +97,15 @@ namespace LeaseForPublic.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(LeasePublicDemandPaymentDetailsDto dto)
+        public async Task<IActionResult> Create(int id,LeasePublicDemandPaymentDetailsDto dto)
         {
+            var Data = await _kycformService.FetchKYCSingleResult(id);
+            Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
+            Data.BranchList = await _kycformService.GetAllBranchList();
+            Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            Data.ZoneList = await _kycformService.GetAllZoneList();
+            Data.LocalityList = await _kycformService.GetLocalityList();
+
             Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
             try
             {
@@ -115,11 +122,11 @@ namespace LeaseForPublic.Controllers
                     {
                         if (!DataFlow[i].parameterSkip)
                         {
-                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
                             {
-                                if (SiteContext.ZoneId == null)
+                                if (Data.BranchId == null)
                                 {
-                                    ViewBag.Message = Alert.Show("Your Zone is not available , Without zone application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                    ViewBag.Message = Alert.Show("Your Branch is not available , Without Branch application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
                                     return View(dto);
                                 }
 
@@ -130,8 +137,8 @@ namespace LeaseForPublic.Controllers
                                 for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
                                 {
                                     List<UserProfileDto> UserListRoleBasis = null;
-                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
+                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleBranchBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), Data.BranchId ?? 0);
                                     else
                                         UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
 
@@ -154,9 +161,9 @@ namespace LeaseForPublic.Controllers
                             else
                             {
                                 approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
-                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
                                 {
-                                    StringBuilder multouserszonewise = new StringBuilder();
+                                    StringBuilder multousersbranchwise = new StringBuilder();
                                     int col = 0;
                                     if (approvalproccess.SendTo != null)
                                     {
@@ -164,12 +171,12 @@ namespace LeaseForPublic.Controllers
                                         foreach (string MultiUserId in multiTo)
                                         {
                                             if (col > 0)
-                                                multouserszonewise.Append(",");
-                                            var UserProfile = await _userProfileService.GetUserByIdZone(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
-                                            multouserszonewise.Append(UserProfile.UserId);
+                                                multousersbranchwise.Append(",");
+                                            var UserProfile = await _userProfileService.GetUserByIdBranch(Convert.ToInt32(MultiUserId), Data.BranchId ?? 0);
+                                            multousersbranchwise.Append(UserProfile.UserId);
                                             col++;
                                         }
-                                        approvalproccess.SendTo = multouserszonewise.ToString();
+                                        approvalproccess.SendTo = multousersbranchwise.ToString();
                                     }
                                 }
                             }
@@ -186,7 +193,7 @@ namespace LeaseForPublic.Controllers
                     oKycdemandpaymentdetails.TotalPayable = dto.TotalPayable;
                     oKycdemandpaymentdetails.TotalDues=dto.TotalDues;
                     oKycdemandpaymentdetails.IsPaymentAgreed = dto.IsPaymentAgreed;
-                    oKycdemandpaymentdetails.CreatedBy = SiteContext.UserId;
+                    oKycdemandpaymentdetails.CreatedBy = dto.Id;
                     oKycdemandpaymentdetails.IsActive = 1;
                     oKycdemandpaymentdetails.CreatedDate = DateTime.Now;
 
@@ -204,14 +211,14 @@ namespace LeaseForPublic.Controllers
                             {
                                 data.Add(new Kycdemandpaymentdetailstablea()
                                 {
-                                    DemandPeriod = result1[i].DemandPeriod,
+                                   // DemandPeriod = result1[i].DemandPeriod,
                                     GroundRent = result1[i].GroundRentLeaseRent,
                                     InterestRate = result1[i].InterestAmount,
                                     TotdalDues = result1[i].TotalDues,                                
                                     KycId= oKycdemandpaymentdetails.KycId,
                                     DemandPaymentId = oKycdemandpaymentdetails.Id,
                                     IsActive = 1,
-                                    CreatedBy =SiteContext.UserId,
+                                    CreatedBy =dto.Id,
                                     CreatedDate= DateTime.Now,
                             });
                             }
@@ -244,7 +251,7 @@ namespace LeaseForPublic.Controllers
                                                 DepositeDate =Convert.ToDateTime(result2.cargo[i].DPST_DT),
                                                 KycId = oKycdemandpaymentdetails.KycId,
                                                 DemandPaymentId = oKycdemandpaymentdetails.Id,
-                                                CreatedBy=SiteContext.UserId,
+                                                CreatedBy=dto.Id,
                                                 CreatedDate=DateTime.Now,
                                                 IsActive=1,
                                             });
@@ -279,7 +286,7 @@ namespace LeaseForPublic.Controllers
                                         Proofinpdf = dto.Proofinpdf[i],
                                         DateofPaymentByAllottee = dto.DateofPaymentByAllottee[i],
                                         Ddabankcredit = dto.Ddabankcredit[i],
-                                        CreatedBy=SiteContext.UserId,
+                                        CreatedBy=dto.Id,
                                          IsActive=1,
                                          CreatedDate=DateTime.Now,
                                          KycId=oKycdemandpaymentdetails.KycId,
@@ -314,11 +321,13 @@ namespace LeaseForPublic.Controllers
                                     approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
                                     approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment").Value);
                                     approvalproccess.ServiceId = oKycdemandpaymentdetails.Id;
-                                    approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                                    approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                    approvalproccess.SendFrom = oKycdemandpaymentdetails.Id.ToString();
+                                    approvalproccess.SendFromProfileId = "0";
+                                    //approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                    //approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
 
                                     #region set sendto and sendtoprofileid
-                                    
+
                                     StringBuilder multouserprofileid = new StringBuilder();
                                     int col = 0;
                                     if (approvalproccess.SendTo != null)
@@ -340,22 +349,22 @@ namespace LeaseForPublic.Controllers
                                     approvalproccess.Level = i + 1;
                                     approvalproccess.Version = workflowtemplatedata.Version;
                                     approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                    result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
+                                    result = await _kycformService.CreatekycApproval(approvalproccess, oKycdemandpaymentdetails.Id); //Create a row in kycapprovalproccess Table
 
                                     #region Insert Into usernotification table Added By Renu 18 June 2021
                                     if (result)
                                     {
                                         var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKycPayment").Value);
-                                        var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                       // var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                         Usernotification usernotification = new Usernotification();
-                                        var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                        var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", Data.Name).Replace("{datetime}", DateTime.Now.ToString());
                                         usernotification.Message = replacement;
                                         usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKycPayment").Value);
                                         usernotification.ProcessGuid = approvalproccess.ProcessGuid;
                                         usernotification.ServiceId = approvalproccess.ServiceId;
                                         usernotification.SendFrom = approvalproccess.SendFrom;
                                         usernotification.SendTo = approvalproccess.SendTo;
-                                        result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                        result = await _userNotificationService.Create(usernotification, oKycdemandpaymentdetails.Id);
                                     }
                                     #endregion
                                 }
@@ -378,7 +387,7 @@ namespace LeaseForPublic.Controllers
                             string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
                             string linkhref = (_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value).ToString();
 
-                            var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                          //  var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                             StringBuilder multousermailId = new StringBuilder();
                             if (approvalproccess.SendTo != null)
                             {
@@ -402,7 +411,8 @@ namespace LeaseForPublic.Controllers
                             ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
                             bodyDTO.ApplicationName = "KYC Payment Approval";
                             bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
-                            bodyDTO.SenderName = senderUser.User.Name;
+                            bodyDTO.SenderName = Data.Name;
+                            // bodyDTO.SenderName = senderUser.User.Name;
                             bodyDTO.Link = linkhref;
                             bodyDTO.AppRefNo = oKycdemandpaymentdetails.Id.ToString();
                             bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
@@ -460,10 +470,6 @@ namespace LeaseForPublic.Controllers
         }
 
     
-
-
-
-
 
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {

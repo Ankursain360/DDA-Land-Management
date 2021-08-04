@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Dto.Search.DemandPaymentDetailsDto>
+﻿@*@model IEnumerable<Dto.Search.DemandPaymentDetailsDto>*@
+@*@model Dto.Search.DemandPaymentDetailsDto*@
+@model  IEnumerable<Libraries.Model.Entity.Kycdemandpaymentdetailstablea>
 
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
@@ -9,57 +11,68 @@
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
         <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePayment">
+                <div id="details">
+                    <div class="table-section bg-white border shadow rounded">
 
-            <div id="details">
-                <div class="table-section bg-white border shadow rounded">
-                 
-                    <table class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
+                        <table class="table table-sm table-bordered mb-0 table-striped" id="pay1">
+                            <thead class="text-nowrap">
 
-                            <tr>
+                                <tr>
 
-                                <th>Demand Period</th>
-                                <th>Ground Rent </th>
-                                <th>Interest Rate </th>
-                                <th>Total Dues </th>
+                                    <th>Demand Period</th>
+                                    <th>Ground Rent </th>
+                                    <th>Interest Rate </th>
+                                    <th>Total Dues </th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model != null && Model.Count() > 0)
-                            {
-                                @foreach (var item in Model)
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Count() > 0)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+
+                                            <td>
+                                                <input asp-for="@item.KycId" type="hidden" />
+                                                <input asp-for="@item.DemandPaymentId" type="hidden" />
+                                                <input asp-for="@item.DemandPeriod" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@item.GroundRent" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@item.InterestRate" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
+                                            <td>
+                                                <input asp-for="@item.TotdalDues" type="text" class="floating-label-field floating-label-field--s3" />
+                                            </td>
+
+
+                                        </tr>
+                                     }
+                                 }
+                                else
                                 {
                                     <tr>
-
-
-
-                                        <td>@item.DemandPeriod</td>
-
-                                        <td>@item.GroundRentLeaseRent</td>
-
-                                        <td>@item.InterestAmount</td>
-                                        <td>@item.TotalDues</td>
-
-
+                                        <th colspan="13" style="text-align:center"> Data Not Available </th>
                                     </tr>
                                 }
-                            }
-                            else
-                            {
-                                <tr>
-                                    <th colspan="13" style="text-align:center"> Data Not Available </th>
-                                </tr>
-                            }
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <br />
+                <br />
 
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <input class="btn btn-theme" type="button" id="btnUpdatePaymentDetails" value="Update Payment Details" onclick="UpdatePaymentDetails();"/>
+                    </div>
+                </div>
+                <br />
         </div>
     </div>
 </div>
-

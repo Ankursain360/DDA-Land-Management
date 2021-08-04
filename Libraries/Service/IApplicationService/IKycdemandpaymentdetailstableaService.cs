@@ -9,7 +9,10 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IKycdemandpaymentdetailstableaService
     {
+        Task<Kycdemandpaymentdetailstablea> FetchSingleResult(int id);
 
+        Task<bool> Update(int id, Kycdemandpaymentdetailstablea payment);
+        Task<List<Kycdemandpaymentdetailstablea>> FetchResultOnDemandId(int id);
         Task<bool> SaveDemandPaymentDetails(Kycdemandpaymentdetailstablea kycDemandPayment);
     }
 }

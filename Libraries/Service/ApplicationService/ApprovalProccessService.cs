@@ -79,6 +79,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _approvalproccessRepository.GetKYCHistoryDetails(proccessguid, id);
         }
+        public async Task<List<ApprovalHistoryListDataDto>> GetKYCPaymentHistoryDetails(string proccessguid, int id)//for kycapproval history
+        {
+            return await _approvalproccessRepository.GetKYCPaymentHistoryDetails(proccessguid, id);
+        }
+
         public int CheckIsApprovalStart(string proccessguid, int serviceid)
         {
             return _approvalproccessRepository.CheckIsApprovalStart(proccessguid, serviceid);

@@ -1,18 +1,18 @@
 ﻿$(document).ready(function () {
 
     var id = parseInt($('#Id').val());
-    
+
     GetKYCDetails(id);
     GetHistoryDetails(id);
     GetPayment();
     GetPaymentFromBhoomi();
 
     GetApplicantChallan();
-   
+
 
     $("#ApprovalStatus").val('0').trigger('change');
 
-    
+
 
 
 });
@@ -29,7 +29,7 @@ function GetKYCDetails(id) {
 
 function GetPayment() {
 
-    HttpGet(`/KycPaymentApproval/PaymentDetails/?Id=${$("#KycId").val()}`, 'html', function (response) {
+    HttpGet(`/KycPaymentApproval/PaymentDetails/?Id=${$("#Id").val()}`, 'html', function (response) {
         debugger;
         $('#divPayment').html("");
         $('#divPayment').html(response);
@@ -205,7 +205,7 @@ function fileValidation(filePath, fileInput, size) {
 
 function GetApprvoalStatus(id) {
     debugger;
-    HttpGet(`/KycFormApproval/GetApprvoalStatus/?value=${id}`, 'json', function (response) {
+    HttpGet(`/KycPaymentApproval/GetApprvoalStatus/?value=${id}`, 'json', function (response) {
         if (response != null) {
             $("#ApprovalStatusCode").val(response.statusCode);
             if (response.statusCode == $("#QueryForwardCode").val()) {
@@ -234,7 +234,7 @@ function GetApprvoalStatus(id) {
 
 function GetUserList(id) {
     debugger;
-    HttpGet(`/KycFormApproval/GetUserList/?value=${id}`, 'json', function (response) {
+    HttpGet(`/KycPaymentApproval/GetUserList/?value=${id}`, 'json', function (response) {
         var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
@@ -246,7 +246,7 @@ function GetUserList(id) {
 
 function GetForwardedUserList() {
     debugger;
-    HttpGet(`/KycFormApproval/GetForwardedUserList/?value=${parseInt($("#Id").val())}`, 'json', function (response) {
+    HttpGet(`/KycPaymentApproval/GetForwardedUserList/?value=${parseInt($("#Id").val())}`, 'json', function (response) {
         if (response != null) {
             if (response[0] == "false") {
                 WarningMessage(response[1]);
@@ -320,5 +320,33 @@ $("#btnCreate").click(function () {
 });
 
 
+function UpdatePaymentDetails() {
+  
+    var param = GetUpdatedPaymentParam();
+    HttpPostAsync(`/KycPaymentApproval/UpdatePayment/`, 'json', param, function (response) {
+        window.location.href = '/KycPaymentApproval/Index';
+    });
+};
 
 
+function GetUpdatedPaymentParam() {
+    var model = null;
+    var list = [];
+    $('#pay1').find('tbody').find('tr').each(function (i) {
+        model = {
+            KycId: parseInt($(this).find('#item_KycId').val()),
+            DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
+            DemandPeriod: $(this).find('#item_DemandPeriod').val(),
+            GroundRent: String($(this).find('#item_GroundRent').val()),
+            InterestRate: String($(this).find('#item_InterestRate').val()),
+            TotdalDues: String($(this).find('#item_TotdalDues').val()),
+        }
+        list.push(model);
+    });
+    model = null;
+    model = {        
+        jsondata: JSON.stringify(list)
+    };
+    console.log(list);
+    return (model);
+}
