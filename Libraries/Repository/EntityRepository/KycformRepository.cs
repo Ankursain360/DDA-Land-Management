@@ -41,12 +41,13 @@ namespace Libraries.Repository.EntityRepository
             List<Zone> List = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
             return List;
         }
-        public async Task<List<Locality>> GetLocalityList()
+        public async Task<List<Locality>> GetLocalityList(int? zoneid)
         {
-            List<Locality> List = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            List<Locality> List = await _dbContext.Locality.Where(x => x.ZoneId == zoneid && x.IsActive == 1).ToListAsync();
             return List;
         }
 
+      
         public async Task<List<Kycform>> GetAllKycform()
         {
             return await _dbContext.Kycform

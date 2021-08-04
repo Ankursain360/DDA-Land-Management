@@ -837,7 +837,7 @@ namespace LeaseDetails.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-            Data.LocalityList = await _kycformService.GetLocalityList();
+            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             // Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
             return PartialView("_KYCFormView", Data);
         }
@@ -885,7 +885,7 @@ namespace LeaseDetails.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-            Data.LocalityList = await _kycformService.GetLocalityList();
+            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             if (Data == null)
             {
                 return NotFound();

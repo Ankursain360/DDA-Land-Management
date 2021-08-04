@@ -288,7 +288,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Appealdetail.FirstOrDefault().AppealNo" placeholder="Appeal No" type="text"
+                    <input disabled asp-for="@Model.Appealdetail.FirstOrDefault().AppealNo" placeholder="Appeal No" type="text"
                            class="floating-label-field floating-label-field--s3" limit="200" />
 
                     <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().AppealNo" class="text-danger"></span>
@@ -305,10 +305,10 @@
                         </label>
                     </div>
                     <div class="col-md-3">
-                        <input type="hidden" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" />
+                        <input disabled type="hidden" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" />
 
                         <div class="form-check theme">
-                            <input class="form-check-input" type="radio" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" name="villageradio" id="rUOI" value="UOI" checked="checked">
+                            <input disabled class="form-check-input" type="radio" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" name="villageradio" id="rUOI" value="UOI" checked="checked">
                             <label class="form-check-label" for="radio">
                                 UOI
                             </label>
@@ -316,7 +316,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-check theme">
-                            <input class="form-check-input" type="radio" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" name="villageradio" id="rDDA" value="DDA">
+                            <input disabled class="form-check-input" type="radio" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" name="villageradio" id="rDDA" value="DDA">
                             <label class="form-check-label" for="radio">
                                 DDA
                             </label>
@@ -325,7 +325,7 @@
 
                     <div class="col-md-3">
                         <div class="form-check theme">
-                            <input class="form-check-input" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" type="radio" name="villageradio" id="OtherDDA" value="Department">
+                            <input disabled class="form-check-input" asp-for="@Model.Appealdetail.FirstOrDefault().AppealByDept" type="radio" name="villageradio" id="OtherDDA" value="Department">
                             <label class="form-check-label" for="radio">
                                 Other
                             </label>
@@ -337,7 +337,7 @@
         </div>
         <div class="row mt-md-3" id="Departmentdiv" style="display:none">
             <div class="col-md-6 ">
-                <input asp-for="@Model.Appealdetail.FirstOrDefault().Department" placeholder="Department" type="text"
+                <input disabled asp-for="@Model.Appealdetail.FirstOrDefault().Department" placeholder="Department" type="text"
                        class="floating-label-field floating-label-field--s3" />
 
                 <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().Department" class="text-danger"></span>
@@ -348,7 +348,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Appealdetail.FirstOrDefault().DateOfAppeal" placeholder="Date Of Appeal" type="Date"
+                    <input disabled asp-for="@Model.Appealdetail.FirstOrDefault().DateOfAppeal" placeholder="Date Of Appeal" type="Date"
                            class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().DateOfAppeal" class="text-danger"></span>
@@ -358,7 +358,7 @@
             </div>
             <div class="col-md-6 ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="@Model.Appealdetail.FirstOrDefault().PanelLawer" placeholder="Panel Lawyer" type="text"
+                    <input disabled asp-for="@Model.Appealdetail.FirstOrDefault().PanelLawer" placeholder="Panel Lawyer" type="text"
                            class="floating-label-field floating-label-field--s3" limit="500" />
                     <span asp-validation-for="@Model.Appealdetail.FirstOrDefault().PanelLawer" class="text-danger"></span>
 
@@ -447,11 +447,11 @@
                     @{
                         @if (Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName != null)
                         {
-                            <input type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input disabled type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
                             <a class="badge badge-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Paymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
                         else
                         {
-                            <input type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }
+                            <input disabled type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName"></span>
                     <label class="floating-label">Upload Copy of Payment Proof</label>
                 </div>

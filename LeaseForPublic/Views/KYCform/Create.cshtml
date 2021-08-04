@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name">
+                    <input type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name" limit="100">
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label for="field-1" class="floating-label">File No.<span style="color:red">*</span></label>
                 </div>
@@ -150,16 +150,18 @@
             <div class="row mt-md-3">
                 <div class=" col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="date" asp-for="LicenseFrom" class="floating-label-field floating-label-field--s3" placeholder="Period From">
+                        <input id="fromlicense" type="date" asp-for="LicenseFrom" class="floating-label-field floating-label-field--s3" placeholder="Period From">
                         <span asp-validation-for="LicenseFrom" class="text-danger"></span>
                         <label for="field-1" class="floating-label">License Period From <span style="color:red">*</span></label>
+                        <span id="tolicense1-error" style="color:red" class=""></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="date" asp-for="LicenseTo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                        <input id="tolicense" type="date" asp-for="LicenseTo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
                         <span asp-validation-for="LicenseTo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">License Period To <span style="color:red">*</span></label>
+                        <span id="fromlicense1-error"  style="color:red" class=""></span>
                     </div>
                 </div>
 
@@ -172,14 +174,14 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="PlotNo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                        <input type="text" asp-for="PlotNo" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Period to">
                         <span asp-validation-for="PlotNo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Plot No/ Khasra No <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea type="text" asp-for="PlotDescription" class="floating-label-field floating-label-field--s3" placeholder="PlotDescription"></textarea>
+                        <textarea type="text" asp-for="PlotDescription" limit="500" class="floating-label-field floating-label-field--s3" placeholder="PlotDescription"></textarea>
                         <span asp-validation-for="PlotDescription" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Plot Description <span style="color:red">*</span></label>
                     </div>
@@ -187,7 +189,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId"
-                                asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                                asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="return">
                             <option disabled="disabled" selected value="">Select</option>
 
                         </select>
@@ -198,27 +200,27 @@
 
             </div>
             <div class="row mt-md-3">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
-                                asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
-                            <option disabled="disabled" selected value="">Select</option>
+                <div class="col-md-3">
+                    <div class="floating-label-wrap">
+                        <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                            <option value="">---Select---</option>
 
                         </select>
-                        <span asp-validation-for="LocalityId" class="text-danger"></span>
-                        <label for="field-1" class="floating-label">Locality <span style="color:red">*</span></label>
+                        <span asp-validation-for="LocalityId" class="text-danger "></span>
+                        <label class="floating-label">Locality<span style="color:red">*</span> </label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="Phase" class="floating-label-field floating-label-field--s3" placeholder="Phase">
+                        <input type="text" asp-for="Phase" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Phase">
                         <span asp-validation-for="Phase" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Phase<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="Sector" class="floating-label-field floating-label-field--s3" placeholder="Sector">
+                        <input type="text" asp-for="Sector" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Sector">
                         <span asp-validation-for="Sector" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Sector <span style="color:red">*</span></label>
                     </div>
@@ -230,14 +232,14 @@
 
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="Block" class="floating-label-field floating-label-field--s3" placeholder="Block">
+                        <input type="text" asp-for="Block" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Block">
                         <span asp-validation-for="Block" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Block <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="Pocket" class="floating-label-field floating-label-field--s3" placeholder="Pocket">
+                        <input type="text" asp-for="Pocket" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Pocket">
                         <span asp-validation-for="Pocket" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Pocket<span style="color:red">*</span></label>
                     </div>
@@ -256,14 +258,15 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="Name" class="floating-label-field floating-label-field--s3" placeholder="First Name">
+                        <input type="text" id="name1" asp-for="Name" limit="100" class="floating-label-field floating-label-field--s3" placeholder="First Name">
                         <span asp-validation-for="Name" class="text-danger"></span>
                         <label for="field-1" class="floating-label"> Name   <span style="color:red">*</span></label>
+                        <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Valid Name</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="FatherName" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
+                        <input type="text" id="FatherName" asp-for="FatherName" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
                         <span asp-validation-for="FatherName" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Father Name</label>
                     </div>
@@ -287,21 +290,21 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="Email" asp-for="EmailId" value="@Model.EmailId" class="floating-label-field floating-label-field--s3" placeholder="Last Name" readonly>
+                        <input type="Email" asp-for="EmailId" limit="50" value="@Model.EmailId" class="floating-label-field floating-label-field--s3" placeholder="Last Name" readonly>
                         <span asp-validation-for="EmailId" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Email ID<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="MobileNo" type="text" value="@Model.MobileNo" class="floating-label-field floating-label-field--s3 numbers" placeholder="mobileno" readonly>
+                        <input asp-for="MobileNo" type="text" limit="10" value="@Model.MobileNo" class="floating-label-field floating-label-field--s3 numbers" placeholder="mobileno" readonly>
                         <span asp-validation-for="MobileNo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Mobile No.[Not add +91]<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea type="text" asp-for="Address" class="floating-label-field floating-label-field--s3" placeholder="address"></textarea>
+                        <textarea type="text" asp-for="Address" limit="500" class="floating-label-field floating-label-field--s3" placeholder="address"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Correspondence Address</label>
                     </div>
@@ -311,7 +314,7 @@
 
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="AadhaarNo" class="floating-label-field floating-label-field--s3" placeholder="AadharNo">
+                        <input type="text" asp-for="AadhaarNo" limit="12" class="floating-label-field floating-label-field--s3 numbers" placeholder="AadharNo">
                         <span asp-validation-for="AadhaarNo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Aadhaar No.<span style="color:red">*</span></label>
                     </div>
@@ -348,28 +351,28 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="AllotteeLicenseeName" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <input type="text" limit="100" asp-for="AllotteeLicenseeName" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span asp-validation-for="AllotteeLicenseeName" class="text-danger"></span>
-                        <label for="field-1" class="floating-label">Name of the Allottee/Lessee <span style="color:red">*</span></label>
+                        <label for="field-1" class="floating-label">Name of the License <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea class="floating-label-field floating-label-field--s3" asp-for="AllotteeLicenseeAddress" placeholder="Address"> </textarea>
+                        <textarea limit="500" class="floating-label-field floating-label-field--s3" asp-for="AllotteeLicenseeAddress" placeholder="Address"> </textarea>
                         <span asp-validation-for="AllotteeLicenseeAddress" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Correspondence Address <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="AllotteeLicenseeMobileNo" class="floating-label-field floating-label-field--s3 numbers" placeholder="PIN Code">
+                        <input type="text" limit="10" asp-for="AllotteeLicenseeMobileNo" class="floating-label-field floating-label-field--s3 numbers" placeholder="PIN Code">
                         <span asp-validation-for="AllotteeLicenseeMobileNo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Mobile No.[Not add +91]<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="email" asp-for="AllotteeLicenseeEmailId" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
+                        <input type="email" limit="50" asp-for="AllotteeLicenseeEmailId" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
                         <span asp-validation-for="AllotteeLicenseeEmailId" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Email ID</label>
                     </div>
@@ -478,7 +481,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="Aadhar" class="floating-label-field floating-label-field--s3" placeholder="file">
                         <span asp-validation-for="Aadhar" class="text-danger"></span>
-                        <label id="aadharlb" for="field-1" class="floating-label">Aadhaar No. of Allottee/Lessee</label>
+                        <label id="aadharlb" for="field-1" class="floating-label">Aadhaar No. /Pan of Allottee/Lessee</label>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -497,7 +500,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="file" asp-for="ApplicantPan" class="floating-label-field floating-label-field--s3" placeholder="file">
                         <span asp-validation-for="ApplicantPan" class="text-danger"></span>
-                        <label for="field-1" class="floating-label">Aadhaar No./PAN of Applicant</label>
+                        <label for="field-1" class="floating-label">Aadhaar No. /Pan of Allottee/Lessee</label>
                     </div>
                 </div>
             </div>
@@ -529,3 +532,104 @@
 <environment exclude="Development">
     <script src="~/js/kycform.min.js" asp-append-version="true"></script>
 </environment>
+
+<script>
+    $("#tolicense").change(function () {
+        $("#fromlicense1-error").html("");
+       
+        var tolicense = $("#tolicense").val();
+        var fromlicense = $("#fromlicense").val();
+      
+        if (fromlicense) {
+            if (tolicense) {
+                if (fromlicense > tolicense) {
+                    $("#fromlicense1-error").html("to date should be greater and equal from date");
+                }
+            } else {
+                $("#fromlicense1-error").html("Please Select To Date1");
+            }
+        } else {
+            
+            $("#fromlicense1-error").html("Please Select From Date");
+        }
+       // alert(tolicense);
+        //alert(fromlicense);
+        //tolicense-error
+    });
+    $("#fromlicense").change(function () {
+        $("#fromlicense1-error").html("");
+
+        var tolicense = $("#tolicense").val();
+        var fromlicense = $("#fromlicense").val();
+       
+        if (fromlicense) {
+            if (tolicense) {
+                if (fromlicense > tolicense) {
+                    $("#fromlicense1-error").html("to date should be greater and equal from date");
+                }
+            } else {
+                $("#fromlicense1-error").html("Please Select To Date");
+            }
+        } else {
+
+            $("#fromlicense1-error").html("Please Select From Date");
+        }
+        // alert(tolicense);
+        //alert(fromlicense);
+        //tolicense-error
+    });
+
+
+
+
+
+
+    $("#ZoneId").change(function () {
+        // alert(ZoneId);
+        var ids = $(this).val();
+        if (ids) {
+            HttpGet(`/KYCform/GetLocalityList/?zoneid=${ids}`, 'json', function (response) {
+                var html = '<option value="">Select</option>';
+                for (var i = 0; i < response.length; i++) {
+                    html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+                }
+                $("#LocalityId").select2('val', '')
+                $("#LocalityId").html(html);
+
+                //  alert(JSON.stringify(response));
+            });
+
+        }
+    });
+    //FatherName
+
+    $('#name1').keydown(function (e) {
+
+        $("#err-name").hide();
+        if (e.ctrlKey || e.altKey) {
+            e.preventDefault();
+        } else {
+            var key = e.keyCode;
+
+            if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+        }
+    });
+
+    $('#FatherName').keydown(function (e) {
+
+        $("#err-name1").hide();
+        if (e.ctrlKey || e.altKey) {
+            e.preventDefault();
+        } else {
+            var key = e.keyCode;
+
+            if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+        }
+    });
+
+
+    </script>
