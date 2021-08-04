@@ -320,10 +320,10 @@ $("#btnCreate").click(function () {
 });
 
 
-function UpdatePaymentDetails() {
-  
+function UpdatePaymentDetails() {  
     var param = GetUpdatedPaymentParam();
     HttpPostAsync(`/KycPaymentApproval/UpdatePayment/`, 'json', param, function (response) {
+         //check status here and show message based on that
         window.location.href = '/KycPaymentApproval/Index';
     });
 };
@@ -337,16 +337,13 @@ function GetUpdatedPaymentParam() {
             KycId: parseInt($(this).find('#item_KycId').val()),
             DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
             DemandPeriod: $(this).find('#item_DemandPeriod').val(),
-            GroundRent: String($(this).find('#item_GroundRent').val()),
-            InterestRate: String($(this).find('#item_InterestRate').val()),
-            TotdalDues: String($(this).find('#item_TotdalDues').val()),
+            GroundRent: parseFloat($(this).find('#item_GroundRent').val()),
+            InterestRate: parseFloat($(this).find('#item_InterestRate').val()),
+            TotdalDues: parseFloat($(this).find('#item_TotdalDues').val()),
         }
         list.push(model);
     });
-    model = null;
-    model = {        
-        jsondata: JSON.stringify(list)
-    };
+    
     console.log(list);
-    return (model);
+    return (list);
 }

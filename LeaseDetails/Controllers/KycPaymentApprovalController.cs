@@ -99,10 +99,10 @@ namespace LeaseDetails.Controllers
                 x.ChallanNo,
                 x.Amount,
                 Date = Convert.ToDateTime(x.DateofPaymentByAllottee).ToString("yyyy-MM-dd"),
-               // x.DateofPaymentByAllottee,
+                // x.DateofPaymentByAllottee,
                 x.Proofinpdf,
                 x.Ddabankcredit
-                
+
             }));
         }
         public async Task<PartialViewResult> PaymentDetails(int Id)
@@ -138,7 +138,7 @@ namespace LeaseDetails.Controllers
 
         }
 
-        public  PartialViewResult ApplicantChallanDetails(int Id)
+        public PartialViewResult ApplicantChallanDetails(int Id)
         {
 
             // var result = await _demandDetailsService.GetPaymentDetails(Id);
@@ -146,7 +146,7 @@ namespace LeaseDetails.Controllers
             // return PartialView("_PaymentDetails", result);
             return PartialView("_AllotteeChallanDetails");
         }
-        
+
 
         // [AuthorizeContext(ViewAction.Add)]
 
@@ -164,11 +164,11 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-       
-       
+
+
 
         [HttpPost]
-       // [AuthorizeContext(ViewAction.Add)]
+        // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Kycdemandpaymentdetails payment)
         {
             var result = false;
@@ -216,7 +216,7 @@ namespace LeaseDetails.Controllers
                                                 return View(payment);
                                             }
 
-                                           // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                                            // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
                                         }
                                         break;
                                     }
@@ -239,7 +239,7 @@ namespace LeaseDetails.Controllers
                     /* Update last record pending status in kycApprovalProcess Table*/
                     result = true;
                     approvalproccess.PendingStatus = 0;
-                  
+
                     result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
 
                     /*Now New row added in kycApprovalprocess table*/
@@ -279,7 +279,7 @@ namespace LeaseDetails.Controllers
                         #endregion
                         result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
 
-                       
+
                         if (result)
                         {
                             payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
@@ -374,7 +374,7 @@ namespace LeaseDetails.Controllers
                                         }
                                         #endregion
 
-                                         result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
+                                        result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
 
                                         #region Insert Into usernotification table Added By Renu 18 June 2021
                                         if (result)
@@ -858,13 +858,13 @@ namespace LeaseDetails.Controllers
         #endregion
 
 
-        //[HttpPost]
-        public async Task<IActionResult> UpdatePayment([FromBody] PaymentListData jsondata)
+        [HttpPost]
+        public async Task<IActionResult> UpdatePayment([FromBody]List<KycPaymentApprovalUpdateDto> jsondata)
         {
             int id = 0;
             if (jsondata != null)
             {
-               // var data = JsonSerializer.Deserialize<List<PaymentListData>>(model.jsondata);
+                // var data = JsonSerializer.Deserialize<List<PaymentListData>>(model.jsondata);
 
                 var result = await _kycdemandpaymentdetailstableaService.Update(id, null);
                 if (result == true)
@@ -884,7 +884,13 @@ namespace LeaseDetails.Controllers
 
                 }
             }
-            return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
+            else
+            {
+                //Replace with actual Code
+                // show error message
+                return new JsonResult("{'Status':false}");
+            }
+            
         }
     }
 }
