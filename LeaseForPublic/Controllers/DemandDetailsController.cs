@@ -104,7 +104,7 @@ namespace LeaseForPublic.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-            Data.LocalityList = await _kycformService.GetLocalityList();
+            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
 
             Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
             try

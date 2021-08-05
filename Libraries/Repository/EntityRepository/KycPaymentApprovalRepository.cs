@@ -147,15 +147,18 @@ namespace Libraries.Repository.EntityRepository
 
         //********* rpt ! Allottee challan  Details  repeter**********
 
-        public async Task<bool> SaveChallan(Kycdemandpaymentdetailstablec challan)
+        public async Task<bool> SaveChallan(List<Kycdemandpaymentdetailstablec> challan)
         {
-            _dbContext.Kycdemandpaymentdetailstablec.Add(challan);
+            await _dbContext.Kycdemandpaymentdetailstablec.AddRangeAsync(challan);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
         public async Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id)
         {
-            return await _dbContext.Kycdemandpaymentdetailstablec.Where(x => x.DemandPaymentId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Kycdemandpaymentdetailstablec
+                                   .Include(x => x.Kyc)
+                                   .Include(x => x.DemandPayment)
+                                   .Where(x => x.DemandPaymentId == id).ToListAsync();
         }
 
         public async Task<bool> DeleteChallan(int Id)
@@ -175,6 +178,28 @@ namespace Libraries.Repository.EntityRepository
                                     .OrderByDescending(x => x.Id)
                                     .Take(1)
                                     .FirstOrDefaultAsync();
+        }
+
+        //payment rpt
+       
+        public async Task<List<Kycdemandpaymentdetailstablea>> GetAllPayment(int id)
+        {
+            return await _dbContext.Kycdemandpaymentdetailstablea
+                                   .Where(x => x.DemandPaymentId == id)
+                                   .ToListAsync();
+        }
+        public async Task<bool> DeletePayment(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Kycdemandpaymentdetailstablea
+                .Where(x => x.DemandPaymentId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<bool> SavePayment(List<Kycdemandpaymentdetailstablea> Payment)
+        {
+            await _dbContext.Kycdemandpaymentdetailstablea.AddRangeAsync(Payment);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
     }
 }
