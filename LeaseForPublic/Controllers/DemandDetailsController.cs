@@ -211,7 +211,7 @@ namespace LeaseForPublic.Controllers
                             {
                                 data.Add(new Kycdemandpaymentdetailstablea()
                                 {
-                                   // DemandPeriod = result1[i].DemandPeriod,
+                                    DemandPeriod = result1[i].DemandPeriod,
                                     GroundRent = result1[i].GroundRentLeaseRent,
                                     InterestRate = result1[i].InterestAmount,
                                     TotdalDues = result1[i].TotalDues,                                
