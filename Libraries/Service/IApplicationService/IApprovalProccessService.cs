@@ -23,6 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<Kycapprovalproccess> KycUserResubmitForApproval(string processguid, int serviceid, int level);//added by ishu 27/7/2021
         Task<bool> UpdatePreviousApprovalProccess(int previousApprovalId, Approvalproccess approvalproccess, int userId);
         Task<List<ApprovalHistoryListDataDto>> GetHistoryDetails(string proccessguid, int id);
+        Task<List<ApprovalHistoryListDataDto>> GetKYCPaymentHistoryDetails(string proccessguid, int id);//for kycapproval history
         int CheckIsApprovalStart(string proccessguid, int serviceid);
         Task<Approvalproccess> FetchApprovalProcessDocumentDetails(int id);
         Task<List<Approvalstatus>> BindDropdownApprovalStatus(int[] actions);

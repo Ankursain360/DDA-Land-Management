@@ -37,15 +37,15 @@ namespace Libraries.Service.ApplicationService
             Kycdemandpaymentdetailstablea model = result.FirstOrDefault();
             return model;
         }
-        public async Task<Kycdemandpaymentdetailstablea> FetchSingleResultOnDemandId(int id)
+        public async Task<List<Kycdemandpaymentdetailstablea>> FetchResultOnDemandId(int id)
         {
-            var result = await _kycdemandpaymentdetailstableaRespository.FetchSingleResult(id);
+            var result = await _kycdemandpaymentdetailstableaRespository.FetchResult(id);
             
             return result;
         }
         public async Task<bool> Update(int id, Kycdemandpaymentdetailstablea payment)
         {
-            var result = await _kycdemandpaymentdetailstableaRespository.FetchSingleResult(id);
+           // var result = await _kycdemandpaymentdetailstableaRespository.FetchSingleResult(id);
             Kycdemandpaymentdetailstablea model = new Kycdemandpaymentdetailstablea();
             model.DemandPeriod = payment.DemandPeriod;
             model.GroundRent = payment.GroundRent;

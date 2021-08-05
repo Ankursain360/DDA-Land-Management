@@ -1,18 +1,18 @@
 ﻿$(document).ready(function () {
 
     var id = parseInt($('#Id').val());
-    
+
     GetKYCDetails(id);
     GetHistoryDetails(id);
     GetPayment();
     GetPaymentFromBhoomi();
 
     GetApplicantChallan();
-   
+
 
     $("#ApprovalStatus").val('0').trigger('change');
 
-    
+
 
 
 });
@@ -320,23 +320,30 @@ $("#btnCreate").click(function () {
 });
 
 
-//$("#btnUpdate").click(function () {
-//    var param = GetSearchParam();
-//    HttpGet(`/KycPaymentApproval/UpdatePayment/?Id=${$("#Id").val()}`, 'html', param, function (response) {
-       
-       
-//    });
-//});
+function UpdatePaymentDetails() {  
+    var param = GetUpdatedPaymentParam();
+    HttpPostAsync(`/KycPaymentApproval/UpdatePayment/`, 'json', param, function (response) {
+         //check status here and show message based on that
+        window.location.href = '/KycPaymentApproval/Index';
+    });
+};
 
 
-//function GetSearchParam() {
-//    var model = {
-//        DemandPeriod: $('#DemandPeriod').val(),
-//        GroundRent: parseFloat($('#DemandPeriod').val()),
-//        GroundRent: parseFloat($('#InterestRate').val()),
-//        GroundRent: parseFloat($('#TotdalDues').val()),
-      
-//    }
-//    return model;
-//}
-
+function GetUpdatedPaymentParam() {
+    var model = null;
+    var list = [];
+    $('#pay1').find('tbody').find('tr').each(function (i) {
+        model = {
+            KycId: parseInt($(this).find('#item_KycId').val()),
+            DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
+            DemandPeriod: $(this).find('#item_DemandPeriod').val(),
+            GroundRent: parseFloat($(this).find('#item_GroundRent').val()),
+            InterestRate: parseFloat($(this).find('#item_InterestRate').val()),
+            TotdalDues: parseFloat($(this).find('#item_TotdalDues').val()),
+        }
+        list.push(model);
+    });
+    
+    console.log(list);
+    return (list);
+}

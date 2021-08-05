@@ -46,9 +46,9 @@ namespace Service.ApplicationService
             List<Zone> List = await _kycformRepository.GetAllZoneList();
             return List;
         }
-        public async Task<List<Locality>> GetLocalityList()
+        public async Task<List<Locality>> GetLocalityList(int? zoneid)
         {
-            List<Locality> List = await _kycformRepository.GetLocalityList();
+            List<Locality> List = await _kycformRepository.GetLocalityList(zoneid);
             return List;
         }
         public async Task<bool> Create(Kycform kyc)

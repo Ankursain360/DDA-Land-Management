@@ -91,7 +91,7 @@ namespace LeaseForPublic.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-            Data.LocalityList = await _kycformService.GetLocalityList();
+            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             
             return PartialView("_KYCFormView", Data);
         }
@@ -211,7 +211,7 @@ namespace LeaseForPublic.Controllers
                             {
                                 data.Add(new Kycdemandpaymentdetailstablea()
                                 {
-                                    DemandPeriod = result1[i].DemandPeriod,
+                                   // DemandPeriod = result1[i].DemandPeriod,
                                     GroundRent = result1[i].GroundRentLeaseRent,
                                     InterestRate = result1[i].InterestAmount,
                                     TotdalDues = result1[i].TotalDues,                                

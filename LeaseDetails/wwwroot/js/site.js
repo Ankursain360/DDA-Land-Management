@@ -334,3 +334,21 @@ eval(
 
 
 
+function HttpPostAsync(url, dataType, payload, callback) {
+	DisplayLoader(true);
+	$.ajax({
+		cache: false,
+		type: 'POST',
+		async: false,
+		data: JSON.stringify(payload),
+		contentType: "application/json; charset=utf-8",
+		dataType: dataType,
+		url: url
+	}).done(function (response) {
+		DisplayLoader(false);
+		callback(response);
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		DisplayLoader(false);
+		DisplayErrorMessages(jqXHR);
+	});
+}

@@ -21,6 +21,7 @@ using System.Text;
 using System.Net.Http;
 using System.Text.Json;
 
+
 namespace LeaseDetails.Controllers
 {
     public class KycPaymentApprovalController : BaseController
@@ -98,15 +99,15 @@ namespace LeaseDetails.Controllers
                 x.ChallanNo,
                 x.Amount,
                 Date = Convert.ToDateTime(x.DateofPaymentByAllottee).ToString("yyyy-MM-dd"),
-               // x.DateofPaymentByAllottee,
+                // x.DateofPaymentByAllottee,
                 x.Proofinpdf,
                 x.Ddabankcredit
-                
+
             }));
         }
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
-            var result = await _kycdemandpaymentdetailstableaService.FetchSingleResultOnDemandId(Id);
+            var result = await _kycdemandpaymentdetailstableaService.FetchResultOnDemandId(Id);
             //var result = await _demandDetailsService.GetPaymentDetails(Id);
             //ViewBag.id = Id;
             return PartialView("_PaymentDetails", result);
@@ -137,7 +138,7 @@ namespace LeaseDetails.Controllers
 
         }
 
-        public  PartialViewResult ApplicantChallanDetails(int Id)
+        public PartialViewResult ApplicantChallanDetails(int Id)
         {
 
             // var result = await _demandDetailsService.GetPaymentDetails(Id);
@@ -145,7 +146,7 @@ namespace LeaseDetails.Controllers
             // return PartialView("_PaymentDetails", result);
             return PartialView("_AllotteeChallanDetails");
         }
-        
+
 
         // [AuthorizeContext(ViewAction.Add)]
 
@@ -163,11 +164,11 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-       
-       
+
+
 
         [HttpPost]
-       // [AuthorizeContext(ViewAction.Add)]
+        // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Kycdemandpaymentdetails payment)
         {
             var result = false;
@@ -215,7 +216,7 @@ namespace LeaseDetails.Controllers
                                                 return View(payment);
                                             }
 
-                                           // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                                            // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
                                         }
                                         break;
                                     }
@@ -238,7 +239,7 @@ namespace LeaseDetails.Controllers
                     /* Update last record pending status in kycApprovalProcess Table*/
                     result = true;
                     approvalproccess.PendingStatus = 0;
-                  
+
                     result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
 
                     /*Now New row added in kycApprovalprocess table*/
@@ -278,7 +279,7 @@ namespace LeaseDetails.Controllers
                         #endregion
                         result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
 
-                       
+
                         if (result)
                         {
                             payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
@@ -373,7 +374,7 @@ namespace LeaseDetails.Controllers
                                         }
                                         #endregion
 
-                                         result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
+                                        result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
 
                                         #region Insert Into usernotification table Added By Renu 18 June 2021
                                         if (result)
@@ -671,7 +672,7 @@ namespace LeaseDetails.Controllers
         #region History Details Only For Approval Page Added by ishu 16 march 2021
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetKYCHistoryDetails((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), id);
+            var Data = await _approvalproccessService.GetKYCPaymentHistoryDetails((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
@@ -687,7 +688,7 @@ namespace LeaseDetails.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-            Data.LocalityList = await _kycformService.GetLocalityList();
+           Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             // Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
             return PartialView("_KYCFormView", Data);
         }
@@ -857,17 +858,21 @@ namespace LeaseDetails.Controllers
         #endregion
 
 
-        //[HttpPost]
-        public async Task<IActionResult> UpdatePayment(int id, Kycdemandpaymentdetailstablea model)
+        [HttpPost]
+        public async Task<IActionResult> UpdatePayment([FromBody]List<KycPaymentApprovalUpdateDto> jsondata)
         {
-           
-                var result = await _kycdemandpaymentdetailstableaService.Update(id, model);
+            int id = 0;
+            if (jsondata != null)
+            {
+                // var data = JsonSerializer.Deserialize<List<PaymentListData>>(model.jsondata);
+
+                var result = await _kycdemandpaymentdetailstableaService.Update(id, null);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                   // var list = await _structureService.GetAllStructure();
-                   // return View("Create");
+                    // var list = await _structureService.GetAllStructure();
+                    // return View("Create");
                     return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
 
                 }
@@ -878,7 +883,14 @@ namespace LeaseDetails.Controllers
 
 
                 }
-           
+            }
+            else
+            {
+                //Replace with actual Code
+                // show error message
+                return new JsonResult("{'Status':false}");
+            }
+            
         }
     }
 }
