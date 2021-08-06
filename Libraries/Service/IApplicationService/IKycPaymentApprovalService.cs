@@ -25,11 +25,16 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails payment);
 
         //********* rpt ! Allottee challan  Details  repeter**********
-        Task<bool> SaveChallan(Kycdemandpaymentdetailstablec challan);
+        Task<bool> SaveChallan(List<Kycdemandpaymentdetailstablec> challan);
         Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id);
         Task<bool> DeleteChallan(int Id);
 
         // approval related
         Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
+
+        //payment rpt 
+        Task<List<Kycdemandpaymentdetailstablea>> GetAllPayment(int id);
+        Task<bool> DeletePayment(int Id);
+        Task<bool> SavePayment(List<Kycdemandpaymentdetailstablea> Payment);
     }
 }
