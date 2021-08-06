@@ -70,9 +70,10 @@ namespace LeaseForPublic.Controllers
         public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
         {
             var mobile = HttpContext.Session.GetString("Mobile");
-          ////  if (mobile!=null)
-           // {
-                model.Mobileno = mobile.ToString();
+           
+            ////  if (mobile!=null)
+            // {
+            model.Mobileno = mobile.ToString();
                 var result = await _kycformService.GetPagedKycform(model);
                 return PartialView("_List", result);
           //  }
@@ -111,6 +112,7 @@ namespace LeaseForPublic.Controllers
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             kyc.ZoneList = await _kycformService.GetAllZoneList();
             kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
+            var id = HttpContext.Session.GetString("ID");
             string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
             string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
             string ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
@@ -215,7 +217,7 @@ namespace LeaseForPublic.Controllers
                     kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
                 }
 
-                kyc.CreatedBy = SiteContext.UserId;
+                kyc.CreatedBy = Convert.ToInt32( id);
                 kyc.IsActive = 1;
                 var result = await _kycformService.Create(kyc);
                 if (result == true)
@@ -271,7 +273,7 @@ namespace LeaseForPublic.Controllers
                                 if (result)
                                 {
                                     var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
-                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                 //   var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                     Usernotification usernotification = new Usernotification();
                                     var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
                                     usernotification.Message = replacement;

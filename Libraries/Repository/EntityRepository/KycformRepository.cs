@@ -56,6 +56,7 @@ namespace Libraries.Repository.EntityRepository
                                    .Include(x => x.Locality)
                                    .Include(x => x.PropertyType)
                                    .Include(x => x.Zone)
+                                   .Include(x => x.ApprovedStatusNavigation)
                                    .Where(x => x.IsActive == 1)
                                    .ToListAsync();
         }
@@ -82,6 +83,7 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.Locality)
                                        .Include(x => x.PropertyType)
                                        .Include(x => x.Zone)
+                                       .Include(x => x.ApprovedStatusNavigation)
                                        .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
 
@@ -104,6 +106,7 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.Locality)
                                                    .Include(x => x.PropertyType)
                                                    .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
                                                    .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
 
@@ -118,6 +121,7 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.Locality)
                                                    .Include(x => x.PropertyType)
                                                    .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
                                                  .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
 
@@ -139,6 +143,7 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.Locality)
                                                    .Include(x => x.PropertyType)
                                                    .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
                                                    .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
 
@@ -153,6 +158,7 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.Locality)
                                                    .Include(x => x.PropertyType)
                                                    .Include(x => x.Zone)
+                                                   .Include(x => x.ApprovedStatusNavigation)
                                                  .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
 
