@@ -7,8 +7,8 @@
         <tr>
 
             <th>Demand Period</th>
-            <th>Ground Rent /License Fee </th>
-            <th>Days </th>         
+            <th>Ground Rent /License Fee </th>           
+            <th>Total Dues </th>
 
         </tr>
     </thead>
@@ -17,14 +17,12 @@
         {
             @foreach (var item in Model)
             {
-        <tr>
-            <td>@(Convert.ToDateTime(item.fromdate).ToString("dd/MMM/yyyy"))--@(Convert.ToDateTime(item.todate).ToString("dd/MMM/yyyy"))</td>
+                <tr>
+                    <td>@item.DemandPeriod</td>
+                    <td>@item.GroundRentLeaseRent</td>
+                    <td>@item.TotalDues</td>
 
-            <td>@item.amount</td>
-
-            <td>@item.days</td>
-
-        </tr>
+                </tr>
             }
         }
         else
@@ -33,8 +31,25 @@
                 <th colspan="13" style="text-align:center"> Data Not Available </th>
             </tr>
         }
-
     </tbody>
+    <tfoot>
+        @if (Model != null)
+        {
+            <tr>
+                <td colspan="2" align="right" style="font-weight:bolder"><b>Total Dues Total</b></td>
+                <td style="font-weight:bolder" align="right" id="tdtotalDemandAmount">@Model.Sum(x => x.TotalDues)</td>               
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td colspan="2" align="right" style="font-weight:bolder"><b>Total</b></td>
+                <td style="font-weight:bolder">0</td>
+                
+            </tr>
+        }
+    </tfoot>
+   
 
 </table>
 

@@ -5,8 +5,9 @@ namespace Dto.Search
 {
     public class DemandPaymentDetailsDto : BaseSearchDto
     {
-      
-       
+
+        
+            public string DemandPeriod { get; set; }
         public  decimal GroundRentLeaseRent { get; set; }
        
         public  decimal InterestAmount { get; set; }

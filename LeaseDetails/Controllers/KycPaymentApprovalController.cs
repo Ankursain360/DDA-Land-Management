@@ -85,31 +85,16 @@ namespace LeaseDetails.Controllers
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }
-        public async Task<JsonResult> GetChallanDetails(int? Id)
+        public async Task<PartialViewResult> GetChallanDetails(int Id)
         {
-            Id = Id ?? 0;
-            var data = await _kycPaymentApprovalService.GetAllChallan(Convert.ToInt32(Id));
-            return Json(data.Select(x => new
-            {
-                x.Id,
-                x.KycId,
-                x.DemandPaymentId,
-                x.PaymentType,
-                x.Period,
-                x.ChallanNo,
-                x.Amount,
-                Date = Convert.ToDateTime(x.DateofPaymentByAllottee).ToString("yyyy-MM-dd"),
-               // x.DateofPaymentByAllottee,
-                x.Proofinpdf,
-                x.Ddabankcredit
-                
-            }));
+            var result = await _kycPaymentApprovalService.GetAllChallan(Id);
+
+            return PartialView("_AllotteeChallanDetails", result);
         }
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
             var result = await _kycdemandpaymentdetailstableaService.FetchResultOnDemandId(Id);
-            //var result = await _demandDetailsService.GetPaymentDetails(Id);
-            //ViewBag.id = Id;
+           
             return PartialView("_PaymentDetails", result);
         }
         public async Task<PartialViewResult> PaymentFromBhoomi(string FileNo)
@@ -138,7 +123,7 @@ namespace LeaseDetails.Controllers
 
         }
 
-        public  PartialViewResult ApplicantChallanDetails(int Id)
+        public PartialViewResult ApplicantChallanDetails(int Id)
         {
 
             // var result = await _demandDetailsService.GetPaymentDetails(Id);
@@ -146,7 +131,7 @@ namespace LeaseDetails.Controllers
             // return PartialView("_PaymentDetails", result);
             return PartialView("_AllotteeChallanDetails");
         }
-        
+
 
         // [AuthorizeContext(ViewAction.Add)]
 
@@ -164,11 +149,11 @@ namespace LeaseDetails.Controllers
             return View(Data);
         }
 
-       
-       
+
+
 
         [HttpPost]
-       // [AuthorizeContext(ViewAction.Add)]
+        // [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Kycdemandpaymentdetails payment)
         {
             var result = false;
@@ -216,7 +201,7 @@ namespace LeaseDetails.Controllers
                                                 return View(payment);
                                             }
 
-                                           // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                                            // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
                                         }
                                         break;
                                     }
@@ -239,7 +224,7 @@ namespace LeaseDetails.Controllers
                     /* Update last record pending status in kycApprovalProcess Table*/
                     result = true;
                     approvalproccess.PendingStatus = 0;
-                  
+
                     result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
 
                     /*Now New row added in kycApprovalprocess table*/
@@ -279,7 +264,7 @@ namespace LeaseDetails.Controllers
                         #endregion
                         result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
 
-                       
+
                         if (result)
                         {
                             payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
@@ -374,7 +359,7 @@ namespace LeaseDetails.Controllers
                                         }
                                         #endregion
 
-                                         result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
+                                        result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in kycapprovalproccess Table
 
                                         #region Insert Into usernotification table Added By Renu 18 June 2021
                                         if (result)
@@ -858,33 +843,117 @@ namespace LeaseDetails.Controllers
         #endregion
 
 
-        //[HttpPost]
-        public async Task<IActionResult> UpdatePayment([FromBody] PaymentListData jsondata)
+        [HttpPost]
+        public async Task<IActionResult> UpdatePayment([FromBody]List<KycPaymentApprovalUpdateDto> jsondata)
         {
-            int id = 0;
+            
             if (jsondata != null)
             {
-               // var data = JsonSerializer.Deserialize<List<PaymentListData>>(model.jsondata);
 
-                var result = await _kycdemandpaymentdetailstableaService.Update(id, null);
-                if (result == true)
+                List<Kycdemandpaymentdetailstablea> payment = new List<Kycdemandpaymentdetailstablea>();
+              var  result = await _kycPaymentApprovalService.DeletePayment(jsondata[0].DemandPaymentId);
+                for (int i = 0; i < jsondata.Count; i++)
+                {
+                    payment.Add(new Kycdemandpaymentdetailstablea
+                    {
+
+                         KycId = jsondata[i].KycId,
+                         DemandPaymentId = jsondata[i].DemandPaymentId,
+                         DemandPeriod = jsondata[i].DemandPeriod,
+                         GroundRent = jsondata[i].GroundRent,
+                         InterestRate = jsondata[i].InterestRate,
+                         TotdalDues = jsondata[i].TotdalDues,
+                      
+
+                    });
+                }
+
+              var  result1 = await _kycPaymentApprovalService.SavePayment(payment);
+
+                
+                if (result1 == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                    // var list = await _structureService.GetAllStructure();
-                    // return View("Create");
-                    return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
+                    
+                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
 
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
+                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
 
 
                 }
             }
-            return RedirectToAction("Create", "KycPaymentApproval", new { id = id });
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
+
+
+            }
+
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateChallan([FromBody] List<KycChallanApprovalUpdateDto> jsondata)
+        {
+
+            if (jsondata != null)
+            {
+
+                List<Kycdemandpaymentdetailstablec> challan = new List<Kycdemandpaymentdetailstablec>();
+                var result = await _kycPaymentApprovalService.DeleteChallan(jsondata[0].DemandPaymentId);
+                for (int i = 0; i < jsondata.Count; i++)
+                {
+                    challan.Add(new Kycdemandpaymentdetailstablec
+                    {
+
+                        KycId = jsondata[i].KycId,
+                        DemandPaymentId = jsondata[i].DemandPaymentId,
+                        IsVerified = jsondata[i].IsVerified,
+                        PaymentType = jsondata[i].PaymentType,
+                        Period = jsondata[i].Period,
+                        ChallanNo = jsondata[i].ChallanNo,
+                        Amount = jsondata[i].Amount,
+                        DateofPaymentByAllottee = jsondata[i].DateofPaymentByAllottee,
+                        Proofinpdf = jsondata[i].Proofinpdf,
+                        Ddabankcredit = jsondata[i].Ddabankcredit,
+
+
+                    });
+                }
+
+                var result1 = await _kycPaymentApprovalService.SaveChallan(challan);
+
+
+                if (result1 == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+
+                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
+
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
+
+
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
+
+
+            }
+
+        }
+
     }
 }

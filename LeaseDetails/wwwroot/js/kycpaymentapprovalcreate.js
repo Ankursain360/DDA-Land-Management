@@ -12,9 +12,11 @@
 
     $("#ApprovalStatus").val('0').trigger('change');
 
+    //if ($('#item.IsVerified').val() == "T") {
+    //    $('input[name="Verifychk"]').attr("checked", "checked");
+    //} $('input[name="Verifychk"]').removeAttr("checked");
 
-
-
+   
 });
 
 
@@ -50,11 +52,23 @@ function GetPaymentFromBhoomi() {
 
 
 function GetApplicantChallan() {
-
-    HttpGet(`/KycPaymentApproval/ApplicantChallanDetails/?Id=${$("#Id").val()}`, 'html', function (response) {
+   
+    HttpGet(`/KycPaymentApproval/GetChallanDetails/?Id=${$("#Id").val()}`, 'html', function (response) {
         debugger;
         $('#divChallan').html("");
         $('#divChallan').html(response);
+
+        $('#Challan1').find('tbody').find('tr').each(function (i) {
+            debugger;
+            if ($(this).find('#item_IsVerified').val() == "T") {
+
+                $(this).find('input[name="Verifychk"]').prop('checked', true);
+            } else {
+
+                $(this).find('input[name="Verifychk"]').prop('checked', false);
+            }
+        });
+      
     });
 }
 
@@ -320,10 +334,10 @@ $("#btnCreate").click(function () {
 });
 
 
-function UpdatePaymentDetails() {
-  
+function UpdatePaymentDetails() {  
     var param = GetUpdatedPaymentParam();
     HttpPostAsync(`/KycPaymentApproval/UpdatePayment/`, 'json', param, function (response) {
+         //check status here and show message based on that
         window.location.href = '/KycPaymentApproval/Index';
     });
 };
@@ -337,16 +351,61 @@ function GetUpdatedPaymentParam() {
             KycId: parseInt($(this).find('#item_KycId').val()),
             DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
             DemandPeriod: $(this).find('#item_DemandPeriod').val(),
-            GroundRent: String($(this).find('#item_GroundRent').val()),
-            InterestRate: String($(this).find('#item_InterestRate').val()),
-            TotdalDues: String($(this).find('#item_TotdalDues').val()),
+            GroundRent: parseFloat($(this).find('#item_GroundRent').val()),
+            InterestRate: parseFloat($(this).find('#item_InterestRate').val()),
+            TotdalDues: parseFloat($(this).find('#item_TotdalDues').val()),
         }
         list.push(model);
     });
-    model = null;
-    model = {        
-        jsondata: JSON.stringify(list)
-    };
+    
     console.log(list);
-    return (model);
+    return (list);
+}
+
+
+function UpdateChallanDetails() {
+    var param = GetUpdatedChallanParam();
+    HttpPostAsync(`/KycPaymentApproval/UpdateChallan/`, 'json', param, function (response) {
+        debugger;
+        //check status here and show message based on that
+        window.location.href = '/KycPaymentApproval/Index';
+    });
+};
+
+function GetUpdatedChallanParam() {
+    var model = null;
+    var list = [];
+    $('#Challan1').find('tbody').find('tr').each(function (i) {
+        model = {
+            
+            KycId: parseInt($(this).find('#item_KycId').val()),
+            DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
+           
+            IsVerified: $(this).find('#Verifychk1').is(':checked') == true?'T':'F',
+            PaymentType: $(this).find('#item_PaymentType').val(),
+            Period: $(this).find('#item_Period').val(),
+            ChallanNo: $(this).find('#item_ChallanNo').val(),
+            Amount: parseFloat($(this).find('#item_Amount').val()),
+            DateofPaymentByAllottee: $(this).find('#item_DateofPaymentByAllottee').val(),
+            Proofinpdf: $(this).find('#item_Proofinpdf').val(),
+            Ddabankcredit: $(this).find('#item_Ddabankcredit').val(),
+
+        }
+        list.push(model);
+    });
+
+    console.log(list);
+    return (list);
+}
+
+
+function chkmsg(input)
+{
+    if ($(input).is(":checked"))
+    {
+        return confirm("Are you sure you want to mark this records as verified? it means this record will be saved in Bhoomi application as verified payment record.");
+    }
+    
+    return confirm("Are you sure you want to mark this records as unverified?");
+   
 }

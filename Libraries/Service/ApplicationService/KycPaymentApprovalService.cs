@@ -75,11 +75,11 @@ namespace Service.ApplicationService
 
         //********* rpt ! Allottee challan  Details  repeter**********
 
-        public async Task<bool> SaveChallan(Kycdemandpaymentdetailstablec challan)
+        public async Task<bool> SaveChallan(List<Kycdemandpaymentdetailstablec> challan)
         {
-            challan.CreatedBy = challan.CreatedBy;
-            challan.CreatedDate = DateTime.Now;
-            challan.IsActive = 1;
+            challan.ForEach(x => x.CreatedBy = 1);
+            challan.ForEach(x => x.CreatedDate = DateTime.Now);
+            challan.ForEach(x => x.IsActive = 1);
             return await _kycPaymentApprovalRepository.SaveChallan(challan);
         }
         public async Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id)
@@ -97,5 +97,27 @@ namespace Service.ApplicationService
             return await _kycPaymentApprovalRepository.FetchSingleResultOnProcessGuid(processguid);
         }
 
+
+        //Payment rpt 
+
+        public async Task<bool> SavePayment(List<Kycdemandpaymentdetailstablea> Payment)
+        {
+
+            Payment.ForEach(x => x.CreatedBy = 1);
+            Payment.ForEach(x => x.CreatedDate = DateTime.Now);
+            Payment.ForEach(x => x.IsActive = 1);
+           
+            return await _kycPaymentApprovalRepository.SavePayment(Payment);
+        }
+        public async Task<List<Kycdemandpaymentdetailstablea>> GetAllPayment(int id)
+        {
+            return await _kycPaymentApprovalRepository.GetAllPayment(id);
+        }
+        public async Task<bool> DeletePayment(int Id)
+        {
+            return await _kycPaymentApprovalRepository.DeletePayment(Id);
+        }
+
     }
 }
+//Kycdemandpaymentdetailstablea

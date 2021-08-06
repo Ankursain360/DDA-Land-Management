@@ -11,19 +11,9 @@ namespace Dto.Search
         public int KycId { get; set; }
         public int DemandPaymentId { get; set; }
         public string DemandPeriod { get; set; }
-        public string GroundRent { get; set; }
-        public string InterestRate { get; set; }
-        public string TotdalDues { get; set; }
+        public decimal? GroundRent { get; set; }
+        public decimal? InterestRate { get; set; }
+        public decimal? TotdalDues { get; set; }
 
-    }
-    public class PaymentListData
-    {        
-        public List<KycPaymentApprovalUpdateDto> jsondata { get; set; }
-    }
-    public class PaymentdataDTO
-    {
-        public int KycId { get; set; }
-        public string jsondata { get; set; }
-        //public List<KycPaymentApprovalUpdateDto> dto { get; set; }
-    }
+    } 
 }

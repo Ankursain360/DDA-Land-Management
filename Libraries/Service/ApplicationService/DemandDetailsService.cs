@@ -34,15 +34,23 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demandDetailsRepository.GetPagedDemandDetails(model,MobileNo);
         }
+        public async Task<PagedResult<Kycform>> GetDemandPaymentDetails(DemandDetailsSearchDto model, string MobileNo)
+        {
+            return await _demandDetailsRepository.GetDemandPaymentDetails(model, MobileNo);
+        }
+        
 
         public async Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id)
         {
             return await _demandDetailsRepository.GetPaymentDetails(Id);
         }
 
+        public async Task<List<LeasePaymentDemandLetterDetailsSearchDto>> GetPaymentDemandLetter(int Id)
+        {
+            return await _demandDetailsRepository.GetPaymentDemandLetter(Id);
+        }
 
-        
-    
+
         public async Task<bool> Create(Kycdemandpaymentdetails kycdemandpaymentdetails)
         {
 

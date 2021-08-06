@@ -147,8 +147,14 @@ namespace LeaseForPublic.Controllers
                                     UserListRoleBasis = await _userProfileService.GetUserOnRoleBranchBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), kyc.BranchId ?? 0);
                                 else
                                     UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
-
-                                StringBuilder multouserszonewise = new StringBuilder();
+                                if (UserListRoleBasis.Count == 0)
+                                {
+                                    ViewBag.Message = Alert.Show("No User is available for selected Branch , Without User application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                    return View(kyc);
+                                }
+                                else
+                                {
+                                    StringBuilder multouserszonewise = new StringBuilder();
                                 int col = 0;
                                 if (UserListRoleBasis != null)
                                 {
@@ -161,6 +167,7 @@ namespace LeaseForPublic.Controllers
                                     }
                                     approvalproccess.SendTo = multouserszonewise.ToString();
                                 }
+                            }
 
                             }
                         }
