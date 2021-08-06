@@ -46,7 +46,9 @@ namespace Dto.Master
         [NotMapped]
         public List<string> Ddabankcredit { get; set; }
 
+        [NotMapped]
 
+        public List<string> UploadFilePath { get; set; }
 
 
 

@@ -16,14 +16,18 @@ $(document).ready(function () {
 
 });
 
+// Demand Calculation Details
 
 function GetCalculation() {
     debugger;
     var TotalChallanAmount = Number($('#tdtotalChallanAmount').text());
     var TotalDemandAmount = Number($('#tdtotalDemandAmount').text());
     var TotalPayableInterest = Number($('#TotalPayableInterest').text());
-    var amount = Number($('#Amount').text());
+    var amount =0;
 
+    $('.calculation').find('tbody').find('tr').each(function (i) {
+        amount = amount + Number($(this).find('#Amount').val());
+    });
 
     if (TotalChallanAmount == '') {
         TotalChallanAmount = 0;
@@ -40,15 +44,17 @@ function GetCalculation() {
     {
         amount = 0;
     }
-
     document.getElementById("TotalPayable").value = TotalChallanAmount + TotalDemandAmount;
-
    // Here Table A-Table B -Table C
     document.getElementById("TotalDues").value = TotalDemandAmount- TotalChallanAmount-amount;
 }
-  
 
 
+$('#Amount').change(function () {
+    debugger;
+        GetCalculation(); 
+
+});
 
 function GetPayment() {    
 
