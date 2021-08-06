@@ -202,6 +202,9 @@ namespace LeaseForPublic.Controllers
                     oKycdemandpaymentdetails.CreatedBy = dto.Id;
                     oKycdemandpaymentdetails.IsActive = 1;
                     oKycdemandpaymentdetails.CreatedDate = DateTime.Now;
+                    oKycdemandpaymentdetails.TotalPayable = dto.TotalPayable;
+                    oKycdemandpaymentdetails.TotalPayableInterest = dto.TotalPayableInterest;
+                    oKycdemandpaymentdetails.TotalDues = dto.TotalDues;
 
                     var result = await _demandDetailsService.Create(oKycdemandpaymentdetails);
 
@@ -277,10 +280,7 @@ namespace LeaseForPublic.Controllers
                         //********************************** Save Payment Challan Details  ********************************************  
 
                         if (oKycdemandpaymentdetails.IsPaymentAgreed == "N")
-                        {
-                            
-                          
-                                List<Kycdemandpaymentdetailstablec> okycdemandpaymentdetailstablec = new List<Kycdemandpaymentdetailstablec>();
+                        { List<Kycdemandpaymentdetailstablec> okycdemandpaymentdetailstablec = new List<Kycdemandpaymentdetailstablec>();
                                 for (int i = 0; i < dto.PaymentType.Count; i++)
                                 {
                                     okycdemandpaymentdetailstablec.Add(new Kycdemandpaymentdetailstablec

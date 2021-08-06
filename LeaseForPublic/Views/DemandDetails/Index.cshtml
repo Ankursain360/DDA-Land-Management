@@ -1,6 +1,7 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Kycform>
-@await Component.InvokeAsync("PageHeader", new { pageName = "Demand Details" })
-<div class="pt-3">
+﻿<div class="pt-3">
+    @model IEnumerable<Libraries.Model.Entity.Kycform>
+    @await Component.InvokeAsync("PageHeader", new { pageName = "Demand Details" })
+
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
