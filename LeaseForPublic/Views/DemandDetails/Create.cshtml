@@ -10,13 +10,14 @@
     </div>
 
     <br>
-
+   
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-     
+
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="KycId" />
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="FileNo" />
+        <h3 class="mb-3 d-flex">Demand Details </h3>
         <div class="row d-block rounded border p-3 bg-white search-filer shadow mb-3">
             <div id="KYCFormDetailsDiv">
 
@@ -145,7 +146,7 @@
                                     <input type="hidden" asp-for="UploadFilePath" />
 
                                     <input asp-for="Proofinpdf" type="file" class="floating-label-field floating-label-field--s3 " />
-                                  
+
 
                                 </td>
 
@@ -181,7 +182,7 @@
             </div>
         </div>
     </form>
-    </div>
+</div>
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
         <script src="~/js/DemandDetailsCreate.js"></script>
