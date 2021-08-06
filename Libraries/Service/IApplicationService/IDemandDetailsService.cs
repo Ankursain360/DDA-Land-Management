@@ -14,12 +14,17 @@ namespace Libraries.Service.IApplicationService
     {
         Task<PagedResult<Kycform>> GetPagedDemandDetails(DemandDetailsSearchDto model, string MobileNo);
 
-         Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id);
+        Task<PagedResult<Kycform>> GetDemandPaymentDetails(DemandDetailsSearchDto model, string MobileNo);
+
+        Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id);
       
 
         Task<bool> Create(Kycdemandpaymentdetails kycDemandPayment);
 
         Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails kycdemandpaymentdetails);
+
+
+        Task<List<LeasePaymentDemandLetterDetailsSearchDto>> GetPaymentDemandLetter(int Id);
 
     }
 }

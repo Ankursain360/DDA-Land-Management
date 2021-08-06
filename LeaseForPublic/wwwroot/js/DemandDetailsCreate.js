@@ -59,7 +59,7 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         && $("#tbl_posts2 #add2 #Proofinpdf").val() != ''
       
     ) {
-       
+        e.preventDefault();
         var content = jQuery('#tbl_posts2 #add2 tr'),
             size = jQuery('#tbl_posts2 >tbody >tr').length,
             element = null,

@@ -14,7 +14,11 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Kycform>> GetPagedDemandDetails(DemandDetailsSearchDto model, string MobileNo);
 
 
+        Task<PagedResult<Kycform>> GetDemandPaymentDetails(DemandDetailsSearchDto model, string MobileNo);
+
+
         Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id);
-      
+        Task<List<LeasePaymentDemandLetterDetailsSearchDto>> GetPaymentDemandLetter(int Id);
+
     }
 }
