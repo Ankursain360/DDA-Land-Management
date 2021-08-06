@@ -22,74 +22,74 @@ namespace Libraries.Model.Entity
         }
 
 
-        [Required(ErrorMessage = " Property field is mandatory")]
+      ///  [Required(ErrorMessage = " Property field is mandatory")]
         public string Property { get; set; }
-        [Required(ErrorMessage = " Nature of Property is mandatory")]
+       // [Required(ErrorMessage = " Nature of Property is mandatory")]
         public int? PropertyTypeId { get; set; }
-        [Required(ErrorMessage = " File No is mandatory")]
+      //  [Required(ErrorMessage = " File No is mandatory")]
         public string FileNo { get; set; }
-        [Required(ErrorMessage = " Branch is mandatory")]
+     //   [Required(ErrorMessage = " Branch is mandatory")]
         public int? BranchId { get; set; }
-        [Required(ErrorMessage = "Lease Ground Rent is mandatory")]
+     //   [Required(ErrorMessage = "Lease Ground Rent is mandatory")]
         public string LeaseGroundRentDepositFrequency { get; set; }
-        [Required(ErrorMessage = " License Frequency is mandatory")]
+       // [Required(ErrorMessage = " License Frequency is mandatory")]
         public string LicenseFrequency { get; set; }
-        [Required(ErrorMessage = " Lease Type is mandatory")]
+       // [Required(ErrorMessage = " Lease Type is mandatory")]
         public int? LeaseTypeId { get; set; }
         public DateTime? TenureFrom { get; set; }
         public DateTime? TenureTo { get; set; }
-        [Required(ErrorMessage = " License Period From is mandatory")]
+     //   [Required(ErrorMessage = " License Period From is mandatory")]
         public DateTime? LicenseFrom { get; set; }
-        [Required(ErrorMessage = " License Period To is mandatory")]
+      //  [Required(ErrorMessage = " License Period To is mandatory")]
         public DateTime? LicenseTo { get; set; }
-        [Required(ErrorMessage = " Plot No is mandatory")]
+      //  [Required(ErrorMessage = " Plot No is mandatory")]
         public string PlotNo { get; set; }
-        [Required(ErrorMessage = " Plot Description is mandatory")]
+       // [Required(ErrorMessage = " Plot Description is mandatory")]
         public string PlotDescription { get; set; }
 
-        [Required(ErrorMessage = " Zone is mandatory")]
+       // [Required(ErrorMessage = " Zone is mandatory")]
         public int? ZoneId { get; set; }
-        [Required(ErrorMessage = " Locality is mandatory")]
+      //  [Required(ErrorMessage = " Locality is mandatory")]
         public int? LocalityId { get; set; }
-        [Required(ErrorMessage = " Phase is mandatory")]
+      //  [Required(ErrorMessage = " Phase is mandatory")]
         public string Phase { get; set; }
-        [Required(ErrorMessage = " Sector is mandatory")]
+     //   [Required(ErrorMessage = " Sector is mandatory")]
         public string Sector { get; set; }
-        [Required(ErrorMessage = " Block is mandatory")]
+      //  [Required(ErrorMessage = " Block is mandatory")]
         public string Block { get; set; }
-        [Required(ErrorMessage = " Pocket is mandatory")]
+     //   [Required(ErrorMessage = " Pocket is mandatory")]
         public string Pocket { get; set; }
-        [Required(ErrorMessage = " Name is mandatory")]
+     //   [Required(ErrorMessage = " Name is mandatory")]
         public string Name { get; set; }
         public string FatherName { get; set; }
-        [Required(ErrorMessage = " Gender is mandatory")]
+      //  [Required(ErrorMessage = " Gender is mandatory")]
         public string Gender { get; set; }
         public string EmailId { get; set; }
         public string MobileNo { get; set; }
         public string Address { get; set; }
-        [Required(ErrorMessage = " Aadhaar No is mandatory")]
+     //   [Required(ErrorMessage = " Aadhaar No is mandatory")]
         public string AadhaarNo { get; set; }
-        [Required(ErrorMessage = " Relationship with Allottee is mandatory")]
+     //   [Required(ErrorMessage = " Relationship with Allottee is mandatory")]
         public string Relationship { get; set; }
         public string AllotteeApplicantDetailsSame { get; set; }
-        [Required(ErrorMessage = "Name of the Allottee is mandatory")]
+      //  [Required(ErrorMessage = "Name of the Allottee is mandatory")]
         public string AllotteeLicenseeName { get; set; }
-        [Required(ErrorMessage = " Correspondence Address is mandatory")]
+      //  [Required(ErrorMessage = " Correspondence Address is mandatory")]
         public string AllotteeLicenseeAddress { get; set; }
-        [Required(ErrorMessage = " Mobile No  is mandatory")]
+     //   [Required(ErrorMessage = " Mobile No  is mandatory")]
         public string AllotteeLicenseeMobileNo { get; set; }
         public string AllotteeLicenseeEmailId { get; set; }
-        [Required(ErrorMessage = "Area  is mandatory")]
+     //   [Required(ErrorMessage = "Area  is mandatory")]
         public decimal? Area { get; set; }
-        [Required(ErrorMessage = "Area Unit  is mandatory")]
+      //  [Required(ErrorMessage = "Area Unit  is mandatory")]
         public string AreaUnit { get; set; }
         public DateTime? AllotmentLetterDate { get; set; }
-        [Required(ErrorMessage = "Date of Possession is mandatory")]
+      //  [Required(ErrorMessage = "Date of Possession is mandatory")]
         public DateTime? PossessionDate { get; set; }
         public DateTime? LeaseLicenseExecutionDate { get; set; }
         public decimal? LandPremiumAmount { get; set; }
         public decimal? GroundRentAmount { get; set; }
-        [Required(ErrorMessage = "License Fee is mandatory")]
+      //  [Required(ErrorMessage = "License Fee is mandatory")]
         public decimal? LicenseFeePayable { get; set; }
         public string AadhaarNoPath { get; set; }
         public string LetterPath { get; set; }
