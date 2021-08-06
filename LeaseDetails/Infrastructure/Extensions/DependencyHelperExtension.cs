@@ -72,7 +72,7 @@ namespace LeaseDetails.Infrastructure.Extensions
 
             services.AddScoped<IDemandDetailsRepository, DemandDetailsRepository>();
             services.AddScoped<IKycdemandpaymentdetailstableaRespository, KycdemandpaymentdetailstableaRepository>();
-
+            services.AddScoped<IKycdemandpaymentdetailstablecRepository, KycdemandpaymentdetailstablecRepository>();
 
             /* Application Services */
 
@@ -129,7 +129,7 @@ namespace LeaseDetails.Infrastructure.Extensions
             services.AddScoped<IKycPaymentApprovalService, KycPaymentApprovalService>();
             services.AddScoped<IDemandDetailsService, DemandDetailsService>();
             services.AddScoped<IKycdemandpaymentdetailstableaService, KycdemandpaymentdetailstableaService>();
-
+            services.AddScoped<IKycdemandpaymentdetailstablecService, KycdemandpaymentdetailstablecService>();
 
         }
     }

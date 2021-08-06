@@ -10,6 +10,6 @@ namespace Libraries.Service.IApplicationService
     public interface IKycdemandpaymentdetailstablecService
     {
         Task<bool> SaveKycChallanDetails(Kycdemandpaymentdetailstablec kycDemandPayment);
-
+        Task<Kycdemandpaymentdetailstablec> FetchSingleResult(int id);
     }
 }

@@ -32,5 +32,11 @@ namespace Libraries.Service.ApplicationService
             _kycdemandpaymentdetailstablecRepository.Add(kycdemandpaymentdetailstablec);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<Kycdemandpaymentdetailstablec> FetchSingleResult(int id)
+        {
+            var result = await _kycdemandpaymentdetailstablecRepository.FindBy(a => a.Id == id);
+            Kycdemandpaymentdetailstablec model = result.FirstOrDefault();
+            return model;
+        }
     }
 }

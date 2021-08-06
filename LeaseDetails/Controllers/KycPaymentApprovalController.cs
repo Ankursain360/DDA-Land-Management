@@ -36,11 +36,12 @@ namespace LeaseDetails.Controllers
         private readonly IKycformService _kycformService;
         private readonly IDemandDetailsService _demandDetailsService;
         private readonly IKycdemandpaymentdetailstableaService _kycdemandpaymentdetailstableaService;
-
+        private readonly IKycdemandpaymentdetailstablecService _kycdemandpaymentdetailstablecService;
         string ApprovalDocumentPath = "";
         string AadharDoc = "";
         string LetterDoc = "";
         string ApplicantDoc = "";
+        string ChallanProof = "";
         public KycPaymentApprovalController(IConfiguration configuration,
             IKycPaymentApprovalService kycPaymentApprovalService,
              IUserNotificationService userNotificationService,
@@ -50,6 +51,7 @@ namespace LeaseDetails.Controllers
              IKycformApprovalService kycformApprovalService,
              IHostingEnvironment hostingEnvironment,
               IKycdemandpaymentdetailstableaService kycdemandpaymentdetailstableaService,
+              IKycdemandpaymentdetailstablecService kycdemandpaymentdetailstablecService,
              IDemandDetailsService demandDetailsService)
 
         {
@@ -64,10 +66,11 @@ namespace LeaseDetails.Controllers
             _hostingEnvironment = hostingEnvironment;
             _demandDetailsService = demandDetailsService;
             _kycdemandpaymentdetailstableaService = kycdemandpaymentdetailstableaService;
-
+            _kycdemandpaymentdetailstablecService = kycdemandpaymentdetailstablecService;
             AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
             LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
             ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
+            ChallanProof = _configuration.GetSection("FilePaths:KycFiles:ChallanProofDocument").Value.ToString();
         }
         public async Task<IActionResult> Index()
         {
@@ -701,6 +704,14 @@ namespace LeaseDetails.Controllers
             string filename = ApplicantDoc + Data.AadhaarPanapplicantPath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+        public async Task<IActionResult> DownloadChallanProof(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycdemandpaymentdetailstablec Data = await _kycdemandpaymentdetailstablecService.FetchSingleResult(Id);
+            string filename = ChallanProof + Data.Proofinpdf;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+
         #endregion
 
 
