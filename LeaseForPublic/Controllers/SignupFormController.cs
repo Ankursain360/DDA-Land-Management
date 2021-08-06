@@ -113,7 +113,7 @@ namespace LeaseForPublic.Controllers
       
      
 
-
+        // SingnUp Otp
         [HttpPost]
         public async Task<IActionResult> sendotp([FromBody] Leasesignup model)
         {

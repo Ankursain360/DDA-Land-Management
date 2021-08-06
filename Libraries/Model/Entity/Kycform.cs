@@ -22,13 +22,13 @@ namespace Libraries.Model.Entity
         }
 
 
-      ///  [Required(ErrorMessage = " Property field is mandatory")]
+       [Required(ErrorMessage = " Property field is mandatory")]
         public string Property { get; set; }
        // [Required(ErrorMessage = " Nature of Property is mandatory")]
         public int? PropertyTypeId { get; set; }
       //  [Required(ErrorMessage = " File No is mandatory")]
         public string FileNo { get; set; }
-     //   [Required(ErrorMessage = " Branch is mandatory")]
+        [Required(ErrorMessage = " Branch is mandatory")]
         public int? BranchId { get; set; }
      //   [Required(ErrorMessage = "Lease Ground Rent is mandatory")]
         public string LeaseGroundRentDepositFrequency { get; set; }
