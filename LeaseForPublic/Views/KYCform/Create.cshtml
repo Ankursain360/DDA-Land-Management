@@ -3,7 +3,7 @@
     @model Libraries.Model.Entity.Kycform
     @await Component.InvokeAsync("PageHeader", new { pageName = "Lessee/License KYC Details" })
 
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <form onsubmit="return validateForm()" id="kyc-form" asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
         <h3 class="mb-3 d-flex">KYC (Know your Customer) Form<span style="margin-left:600px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -40,6 +40,7 @@
                     </select>
                     <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
                     <label for="field-1" class="floating-label">Nature of Property <span style="color:red">*</span></label>
+                    <label id="propertytype-error" style="color:red;display:none;"> Nature of Property required</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -47,6 +48,7 @@
                     <input type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name" limit="100">
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label for="field-1" class="floating-label">File No.<span style="color:red">*</span></label>
+                    <label id="file-error" style="color:red;display:none;"> File no required</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -78,6 +80,7 @@
                         </select>
                         <span asp-validation-for="LeaseTypeId" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Lease Type <span style="color:red">*</span></label>
+                        <label id="LeaseType-error" style="color:red;display:none;"> Lease Type required</label>
                     </div>
 
                 </div>
@@ -94,6 +97,8 @@
                         </select>
                         <span asp-validation-for="LeaseGroundRentDepositFrequency" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Lease Ground Rent Deposit Frequency <span style="color:red">*</span></label>
+                        <label id="LeaseGroundRent-error" style="color:red;display:none;"> Lease Ground Rent Deposit required</label>
+
                     </div>
 
                 </div>
@@ -118,6 +123,7 @@
                         </select>
                         <span asp-validation-for="LicenseFrequency" class="text-danger"></span>
                         <label for="field-1" class="floating-label">License Frequency <span style="color:red">*</span></label>
+                        <label id="LicenseFrequency-error" style="color:red;display:none;"> License Frequency no required</label>
                     </div>
 
                 </div>
@@ -422,6 +428,7 @@
                         <input type="date" asp-for="PossessionDate" class="floating-label-field floating-label-field--s3" placeholder="PIN Code">
                         <span asp-validation-for="PossessionDate" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Date of Possession <span style="color:red">*</span></label>
+                        <label id="PossessionDate-error" style="color:red;display:none;"> Possession required</label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -511,7 +518,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme" type="submit"
-                        onclick="return confirm('Are you sure? You wants to submit the form, Once form is submitted it will go for approval and that time you can not change the form values. Kindly Re-verify the existing form values before submission.')">
+                     onclick="return confirm('Are you sure? You wants to submit the form, Once form is submitted it will go for approval and that time you can not change the form values. Kindly Re-verify the existing form values before submission.')" >
                     Submit
                 </button>
                 @Html.ActionLink("Back", "Index", "KYCform", null, new { @class = "btn btn-theme " })
@@ -631,7 +638,53 @@
         }
     });
 
+    function validateForm() {
+      
+        let FileNo = document.forms["kyc-form"]["FileNo"].value;
+        let PropertyTypeId = document.forms["kyc-form"]["PropertyTypeId"].value;
+        let LeaseTypeId = document.forms["kyc-form"]["LeaseTypeId"].value;
+        let LicenseFrequency = document.forms["kyc-form"]["LicenseFrequency"].value;
+        let LeaseGroundRentDepositFrequency = document.forms["kyc-form"]["LeaseGroundRentDepositFrequency"].value;
+        let PossessionDate = document.forms["kyc-form"]["PossessionDate"].value;
+      
+        if (FileNo == "") {
+            $("#file-error").show();
+           // return false;
+        }
 
+        if (PropertyTypeId == "") {
+            $("#propertytype-error").show();
+           // return false;
+        }
+
+        if (LeaseTypeId == "") {
+            $("#LeaseType-error").show();
+            //return false;
+        }
+
+        if (LicenseFrequency == "") {
+            $("#LicenseFrequency-error").show();
+           // return false;
+        }
+
+        if (LeaseGroundRentDepositFrequency == "") {
+            $("#LeaseGroundRent-error").show();
+            // return false;
+        }
+
+
+        if (PossessionDate == "") {
+            $("#PossessionDate-error").show();
+            return false;
+        }
+
+      
+
+
+
+
+      
+    }
 
     </script>
 
