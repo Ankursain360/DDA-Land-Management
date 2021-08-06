@@ -12,8 +12,42 @@ $(document).ready(function () {
     GetPayment();
     GetPaymentFromBhoomi();
     GetKYCDetails();
-    $('#AAttendance').removeAttr('multiple');
+   
+
 });
+
+
+function GetCalculation() {
+    debugger;
+    var TotalChallanAmount = Number($('#tdtotalChallanAmount').text());
+    var TotalDemandAmount = Number($('#tdtotalDemandAmount').text());
+    var TotalPayableInterest = Number($('#TotalPayableInterest').text());
+    var amount = Number($('#Amount').text());
+
+
+    if (TotalChallanAmount == '') {
+        TotalChallanAmount = 0;
+    }
+    if (TotalDemandAmount == '') {
+        TotalDemandAmount = 0;
+    }
+
+    if (TotalPayableInterest == '') {
+        TotalPayableInterest = 0;
+    }
+
+    if (amount == '')
+    {
+        amount = 0;
+    }
+
+    document.getElementById("TotalPayable").value = TotalChallanAmount + TotalDemandAmount;
+
+   // Here Table A-Table B -Table C
+    document.getElementById("TotalDues").value = TotalDemandAmount- TotalChallanAmount-amount;
+}
+  
+
 
 
 function GetPayment() {    
@@ -34,6 +68,7 @@ function GetPaymentFromBhoomi() {
 
         $('#divPaymentFromBhoomi').html("");
         $('#divPaymentFromBhoomi').html(response);
+        GetCalculation();
     });
 
 }
@@ -80,6 +115,7 @@ $(document).delegate('a.add-record2', 'click', function (e) {
     else {
         alert('Please fill record before add new record ');
     }
+   
 });
 $(document).delegate('a.delete-record2', 'click', function (e) {
     e.preventDefault();
@@ -99,3 +135,6 @@ $(document).delegate('a.delete-record2', 'click', function (e) {
         return false;
     }
 });
+
+
+

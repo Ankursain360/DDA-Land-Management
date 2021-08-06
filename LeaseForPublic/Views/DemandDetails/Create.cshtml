@@ -20,7 +20,7 @@
         <div id="KYCFormDetailsDiv">
 
         </div>
-
+        <h3 class="mb-3 d-flex">Demand Details as per DDA Record </h3>
         <div class="table-responsive px-2">
             <div id="divPayment"></div>
         </div>
@@ -36,29 +36,29 @@
         <div class=" col-md-4">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input asp-for="TotalPayable" placeholder="Total payable" type="text"
+                <input asp-for="TotalPayable" placeholder="Total payable" type="text" disabled
                        class="floating-label-field floating-label-field--s3" />
                 <span class="text-danger"></span>
-                <label class="floating-label">Total payable  <span style="color:red">*</span>  </label>
+                <label class="floating-label">Total payable (Provisional)Rs. <span style="color:red">*</span>  </label>
             </div>
         </div>
 
         <div class=" col-md-4">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text"
+                <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text" disabled
                        class="floating-label-field floating-label-field--s3" />
                 <span class="text-danger"></span>
-                <label class="floating-label">Total interest <span style="color:red">*</span>  </label>
+                <label class="floating-label">Total Payable interest (Provisional)Rs.<span style="color:red">*</span>  </label>
             </div>
         </div>
         <div class=" col-md-4">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input asp-for="TotalPayable" placeholder="Total dues" type="text"
+                <input asp-for="TotalDues" placeholder="Total dues" type="text" disabled
                        class="floating-label-field floating-label-field--s3"/>
                 <span class="text-danger"></span>
-                <label class="floating-label">Total dues <span style="color:red">*</span>  </label>
+                <label class="floating-label">Total dues (Provisional)Rs. <span style="color:red">*</span>  </label>
             </div>
         </div>
     </div>
@@ -101,15 +101,13 @@
                                 <tr>
                                     <th>Sr.No</th>
                                     <th>Payment Type (Ground Rent/License Fee/Interest etc.)</th>
-                                    <th>Period From –To (Optional)</th>
+                                    <th>Period From –To Ex-(dd-mm-yyyy)-(dd-mm-yyyy)</th>
                                     <th>Challan No./Transaction No./UTR No.</th>
                                     <th>Amount</th>
                                     <th>Date of Payment by the allottee</th>
                                     <th>Proof of Payment in pdf</th>
                                     <th>
-                                        DDA Bank in which credited
-                                        DDA Bank in which credited
-                                        (Optional)
+                                        DDA Bank in which credited                                                                       
                                     </th>
                                 </tr>
                             </thead>
@@ -133,7 +131,7 @@
 
                                     </td>
                                     <td>
-                                        <input asp-for="Amount" type="number" class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="Amount"  type="number" class="floating-label-field floating-label-field--s3" />
 
 
                                     </td>
