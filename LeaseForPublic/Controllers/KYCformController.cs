@@ -322,7 +322,7 @@ namespace LeaseForPublic.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-          //  Data.LocalityList = await _kycformService.GetLocalityList();
+            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             if (Data == null)
             {
                 return NotFound();
@@ -340,7 +340,7 @@ namespace LeaseForPublic.Controllers
             kyc.BranchList = await _kycformService.GetAllBranchList();
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             kyc.ZoneList = await _kycformService.GetAllZoneList();
-          //  kyc.LocalityList = await _kycformService.GetLocalityList();
+            kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
             string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
             string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
             string ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
