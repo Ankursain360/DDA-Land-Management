@@ -1,62 +1,63 @@
 ﻿@model Dto.Master.ApiResponseBhoomiApiFileWise
 @{int rowNo = 0; }
-<table class="table table-sm table-bordered mb-0 table-striped">
-    <thead class="text-nowrap">
-        <tr>
+<div class="table-section bg-white border shadow rounded">
+    <table class="table table-sm table-bordered mb-0 table-striped">
+        <thead class="text-nowrap">
+            <tr>
 
 
-            <th>Sr.No</th>
-            <th>Challan No</th>
-            
-            <th>Deposite Date</th>   
-            <th>Challan Amount</th>
+                <th>Sr.No</th>
+                <th>Challan No</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model != null)
-        {
-            @foreach (var item in Model.cargo)
+                <th>Deposite Date</th>
+                <th>Challan Amount</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
             {
+                @foreach (var item in Model.cargo)
+                {
 
-        <tr>
-            <td>@(rowNo += 1)</td>
-            <td>@item.CHLLN_NMBR</td>
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>@item.CHLLN_NMBR</td>
 
-            <td align="right">@item.DPST_DT</td>
-            <td align="right">@item.CHLLN_AMNT</td>
+                        <td align="right">@item.DPST_DT</td>
+                        <td align="right">@item.CHLLN_AMNT</td>
 
 
-        </tr>
+                    </tr>
+                }
             }
-        }
-        else
-        {
-            <tr>
-                <th colspan="6" style="text-align:center"> No Record Available! </th>
-            </tr>
-        }
-    </tbody>
-   
-    <tfoot>
-        @if (Model != null)
-        {
-            <tr>
-                <td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
-                <td style="font-weight:bolder" align="right" id="tdtotalChallanAmount">@Model.cargo.Sum(x => x.CHLLN_AMNT)</td>
-              
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
-                <td style="font-weight:bolder">0</td>
-             
-            </tr>
-        }
-    </tfoot>
+            else
+            {
+                <tr>
+                    <th colspan="6" style="text-align:center"> No Record Available! </th>
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            @if (Model != null)
+            {
+                <tr>
+                    <td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                    <td style="font-weight:bolder" align="right" id="tdtotalChallanAmount">@Model.cargo.Sum(x => x.CHLLN_AMNT)</td>
+
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
+                    <td style="font-weight:bolder">0</td>
+
+                </tr>
+            }
+        </tfoot>
 
 
-</table>
-
+    </table>
+    </div>
