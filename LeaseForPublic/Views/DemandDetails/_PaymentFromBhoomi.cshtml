@@ -7,9 +7,9 @@
 
             <th>Sr.No</th>
             <th>Challan No</th>
-            <th>Deposite Date</th>
+            
+            <th>Deposite Date</th>   
             <th>Challan Amount</th>
-
 
         </tr>
     </thead>
@@ -22,8 +22,11 @@
         <tr>
             <td>@(rowNo += 1)</td>
             <td>@item.CHLLN_NMBR</td>
+
             <td align="right">@item.DPST_DT</td>
             <td align="right">@item.CHLLN_AMNT</td>
+
+
         </tr>
             }
         }
@@ -34,20 +37,24 @@
             </tr>
         }
     </tbody>
+   
     <tfoot>
         @if (Model != null)
         {
-        <tr>
-            <td colspan="3" align="right" style="font-weight:bolder"><b>Total Dues Total</b></td>
-            <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.CHLLN_AMNT)</td>
-        </tr>
+            <tr>
+                <td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                <td style="font-weight:bolder" align="right">@Model.cargo.Sum(x => x.CHLLN_AMNT)</td>
+              
+            </tr>
         }
         else
         {
             <tr>
-                <td colspan="3" align="right" style="font-weight:bolder"><b>Total Dues Total</b></td>
+                <td colspan="2" align="right" style="font-weight:bolder"><b>Total</b></td>
                 <td style="font-weight:bolder">0</td>
-             
+                <td style="font-weight:bolder">0</td>
+                <td style="font-weight:bolder">0</td>
+                <td style="font-weight:bolder">0</td>
             </tr>
         }
     </tfoot>
