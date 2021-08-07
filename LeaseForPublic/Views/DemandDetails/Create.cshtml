@@ -120,8 +120,18 @@
                             <tr>
                                 <td style="text-align:center;"><span class="sn2">1</span></td>
                                 <td>
-                                    <input asp-for="PaymentType" required type="text" class="floating-label-field floating-label-field--s3" />
+                                   
+
+                                    <select asp-for="PaymentType" required class="floating-label-field floating-label-field--s3">
+                                        <option value="">---Select---</option>
+                                        <option value="Ground Rent">Ground Rent</option>
+                                        <option value="License fee">License fee</option>
+
+                                    </select>
                                     <span asp-validation-for="PaymentType" class="d-block text-danger field-validation-valid msg"></span>
+
+
+
                                 </td>
                                 <td>
                                     <input asp-for="Period" type="text" class="floating-label-field floating-label-field--s3" />
@@ -191,4 +201,7 @@
     <environment include="Development">
         <script src="~/js/DemandDetailsCreate.js"></script>
     </environment>
+<script>
+    $('#PaymentType').removeAttr('multiple');
 
+</script>
