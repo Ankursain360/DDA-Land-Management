@@ -90,7 +90,7 @@ function GetKYCDetails(id) {
 //****************** code for Challan Payment ************************
 
 $(document).delegate('a.add-record2', 'click', function (e) {
-    debugger
+    debugger;
 
     if ($("#tbl_posts2 #add2 #PaymentType").val() != ''
         && $("#tbl_posts2 #add2 #Period").val() != ''
@@ -114,7 +114,7 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         $("#tbl_posts2 #tbl_posts2_body .floating-label-field").attr("readonly", true);
         element.find(".add-record2").hide();
         element.find(".delete-record2").show();
-        debugger
+        debugger;
 
         $("#tbl_posts2 #add2 .floating-label-field").val('');
     }
