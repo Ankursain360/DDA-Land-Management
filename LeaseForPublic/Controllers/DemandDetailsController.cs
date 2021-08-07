@@ -39,7 +39,7 @@ namespace LeaseForPublic.Controllers
         private readonly IUserNotificationService _userNotificationService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IKycPaymentApprovalService _kycPaymentApprovalService;
-
+        string ChallanProof = "";
         public IConfiguration _configuration;
         public DemandDetailsController(IConfiguration configuration,
             IDemandDetailsService demandDetailsService,
@@ -67,6 +67,7 @@ namespace LeaseForPublic.Controllers
             _kycformApprovalService = kycformApprovalService;
            _userNotificationService = userNotificationService;
             _hostingEnvironment = hostingEnvironment;
+            ChallanProof = _configuration.GetSection("FilePaths:KycFiles:ChallanProofDocument").Value.ToString();
         }
 
         public IActionResult Index()
@@ -108,8 +109,7 @@ namespace LeaseForPublic.Controllers
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
-            string PaymentProof = _configuration.GetSection("FilePaths:DemandDetailsProof:PaymentProofpdf").Value.ToString();
-
+           
             Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
             try
             {
@@ -302,11 +302,12 @@ namespace LeaseForPublic.Controllers
                                          KycId=oKycdemandpaymentdetails.KycId,
                                         DemandPaymentId = oKycdemandpaymentdetails.Id,
 
-                                        UploadFilePath = dto.Proofinpdf != null ?
+                                        Proofinpdf = dto.Proofinpdf != null ?
                                                                     dto.Proofinpdf.Count <= i ? string.Empty :
-                                                                    fileHelper.SaveFile(PaymentProof, dto.Proofinpdf[i]) :
+                                                                    fileHelper.SaveFile(ChallanProof, dto.Proofinpdf[i]) :
                                                                     dto.UploadFilePath[i] != null || dto.UploadFilePath[i] != "" ?
                                                                     dto.UploadFilePath[i] : string.Empty,
+                                       
                                     });
                                 }
                                 foreach (var item in okycdemandpaymentdetailstablec)

@@ -228,6 +228,7 @@ namespace LeaseDetails.Controllers
                                                     approvalproccess.SendTo = CheckLastUserForRevert.SendFrom;
                                                     // approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
                                                     approvalproccess.Level = 1;
+                                                   
                                                     break;
                                                 }
                                             }
@@ -265,27 +266,34 @@ namespace LeaseDetails.Controllers
 
 
                                         #region set sendto and sendtoprofileid 
-                                        StringBuilder multouserprofileid = new StringBuilder();
-                                        int col = 0;
-                                        if (approvalproccess.SendTo != null)
+                                        if (kyc.ApprovalStatusCode != ((int)ApprovalActionStatus.Revert))
                                         {
-                                            string[] multiTo = approvalproccess.SendTo.Split(',');
-                                            foreach (string MultiUserId in multiTo)
+                                            StringBuilder multouserprofileid = new StringBuilder();
+                                            int col = 0;
+                                            if (approvalproccess.SendTo != null)
                                             {
-                                                if (col > 0)
-                                                    multouserprofileid.Append(",");
-                                                var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                                multouserprofileid.Append(UserProfile.Id);
-                                                col++;
+                                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                foreach (string MultiUserId in multiTo)
+                                                {
+                                                    if (col > 0)
+                                                        multouserprofileid.Append(",");
+                                                    var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                    multouserprofileid.Append(UserProfile.Id);
+                                                    col++;
+                                                }
+                                                approvalproccess.SendToProfileId = multouserprofileid.ToString();
                                             }
-                                            approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                            else if (approvalproccess.SendTo == null && (kyc.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && kyc.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
+                                            {
+                                                ViewBag.Items = await _userProfileService.GetRole();
+                                                await BindApprovalStatusDropdown(kyc);
+                                                ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
+                                                return View(kyc);
+                                            }
                                         }
-                                        else if (approvalproccess.SendTo == null && (kyc.ApprovalStatusCode != ((int)ApprovalActionStatus.Rejected) && kyc.ApprovalStatusCode != ((int)ApprovalActionStatus.Approved)))
+                                        else
                                         {
-                                            ViewBag.Items = await _userProfileService.GetRole();
-                                            await BindApprovalStatusDropdown(kyc);
-                                            ViewBag.Message = Alert.Show("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.", "", AlertType.Warning);
-                                            return View(kyc);
+                                            approvalproccess.SendToProfileId = "0";
                                         }
                                         #endregion
 
@@ -446,99 +454,102 @@ namespace LeaseDetails.Controllers
                         }
 
                     }
-                    var sendMailResult = false;
+                    //if ((result && kyc.ApprovedStatus != 18) || (result && kyc.KycStatus != "T"))
+                    //{
+                        var sendMailResult = false;
 
-                    var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(kyc.ApprovalStatus));
+                        var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(kyc.ApprovalStatus));
 
-                    if (approvalproccess.SendTo != null)
-                    {
-                        #region Mail Generate
-                        //At successfull completion send mail and sms
-                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
-                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
-
-                        var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
-                        StringBuilder multousermailId = new StringBuilder();
                         if (approvalproccess.SendTo != null)
                         {
-                            int col = 0;
-                            string[] multiTo = approvalproccess.SendTo.Split(',');
-                            foreach (string MultiUserId in multiTo)
+                            #region Mail Generate
+                            //At successfull completion send mail and sms
+                            Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                            string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                            string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
+
+                            var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                            StringBuilder multousermailId = new StringBuilder();
+                            if (approvalproccess.SendTo != null)
                             {
-                                if (col > 0)
-                                    multousermailId.Append(",");
-                                var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                multousermailId.Append(RecevierUsers.User.Email);
-                                col++;
+                                int col = 0;
+                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                foreach (string MultiUserId in multiTo)
+                                {
+                                    if (col > 0)
+                                        multousermailId.Append(",");
+                                    var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                    multousermailId.Append(RecevierUsers.User.Email);
+                                    col++;
+                                }
                             }
+
+                            #region Mail Generation Added By Renu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                            bodyDTO.ApplicationName = "KYC Form Application";
+                            bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                            bodyDTO.SenderName = senderUser.User.Name;
+                            bodyDTO.Link = linkhref;
+                            bodyDTO.AppRefNo = kyc.Id.ToString();
+                            bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                            bodyDTO.Remarks = kyc.ApprovalRemarks;
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                            #endregion
+
+                            //string strMailSubject = "Pending Lease Application Approval Request Details ";
+                            //string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                            #region Common Mail Genration
+                            SentMailGenerationDto maildto = new SentMailGenerationDto();
+                            maildto.strMailSubject = "Pending KYC Form Application Approval Request Details ";
+                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                            maildto.strBodyMsg = strBodyMsg;
+                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                            maildto.strMailTo = multousermailId.ToString();
+                            sendMailResult = mailG.SendMailWithAttachment(maildto);
+                            #endregion
+                            #endregion
+
+
+                            #endregion
+                        }
+                        if (result)
+                        {
+                            if (sendMailResult)
+                                ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  and Information Sent on emailid and Mobile No", "", AlertType.Success);
+                            else if (approvalproccess.PendingStatus == 0)
+                                ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully", "", AlertType.Success);
+                            else
+                                ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
+
+                            Kycform data = new Kycform();
+                            var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
+                            int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
+                            data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
+
+                            return View("Index", data);
+                        }
+                        else
+                        {
+                            ViewBag.Items = await _userProfileService.GetRole();
+                            await BindApprovalStatusDropdown(kyc);
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(kyc);
                         }
 
-                        #region Mail Generation Added By Renu
-
-                        MailSMSHelper mailG = new MailSMSHelper();
-
-                        #region HTML Body Generation
-                        ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                        bodyDTO.ApplicationName = "KYC Form Application";
-                        bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
-                        bodyDTO.SenderName = senderUser.User.Name;
-                        bodyDTO.Link = linkhref;
-                        bodyDTO.AppRefNo = kyc.Id.ToString();
-                        bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
-                        bodyDTO.Remarks = kyc.ApprovalRemarks;
-                        bodyDTO.path = path;
-                        string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
-                        #endregion
-
-                        //string strMailSubject = "Pending Lease Application Approval Request Details ";
-                        //string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                        //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
-                        #region Common Mail Genration
-                        SentMailGenerationDto maildto = new SentMailGenerationDto();
-                        maildto.strMailSubject = "Pending KYC Form Application Approval Request Details ";
-                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                        maildto.strBodyMsg = strBodyMsg;
-                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
-
-                        maildto.strMailTo = multousermailId.ToString();
-                        sendMailResult = mailG.SendMailWithAttachment(maildto);
-                        #endregion
-                        #endregion
-
-
-                        #endregion
-                    }
-                    if (result)
-                    {
-                        if (sendMailResult)
-                            ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  and Information Sent on emailid and Mobile No", "", AlertType.Success);
-                        else if (approvalproccess.PendingStatus == 0)
-                            ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully", "", AlertType.Success);
-                        else
-                            ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
-
-                        Kycform data = new Kycform();
-                        var dropdownValue = await GetApprovalStatusDropdownListAtIndex();
-                        int[] actions = Array.ConvertAll(dropdownValue, int.Parse);
-                        data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(actions.Distinct().ToArray());
-
-                        return View("Index", data);
-                    }
-                    else
-                    {
-                        ViewBag.Items = await _userProfileService.GetRole();
-                        await BindApprovalStatusDropdown(kyc);
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(kyc);
-                    }
-
-
+                    //}
+                    //else { }
                 }
                 #endregion
 

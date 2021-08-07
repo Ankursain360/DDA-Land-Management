@@ -67,7 +67,7 @@ function FillChallanAtEdit() {
 
 
 $(document).delegate('a.add-record2', 'click', function (e) {
-    debugger
+    debugger;
 
     if ($("#tbl_posts2 #add2 #AName").val() != ''
         && $("#tbl_posts2 #add2 #ADesignation").val() != ''

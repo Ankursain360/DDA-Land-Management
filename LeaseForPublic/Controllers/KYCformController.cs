@@ -341,9 +341,6 @@ namespace LeaseForPublic.Controllers
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             kyc.ZoneList = await _kycformService.GetAllZoneList();
             kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
-
-            var Id = HttpContext.Session.GetString("ID");
-
             string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
             string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
             string ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
@@ -380,11 +377,10 @@ namespace LeaseForPublic.Controllers
                 }
 
                 kyc.IsActive = 1;
-                kyc.ModifiedBy = Convert.ToInt32( Id);
+                kyc.ModifiedBy = kyc.Id;
                 var result = await _kycformService.Update(id, kyc);
                     if (result == true)
                     {
-
                     Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
                     var DataFlow = await dataAsync();
 
