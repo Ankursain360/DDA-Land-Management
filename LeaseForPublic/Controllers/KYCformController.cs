@@ -377,11 +377,10 @@ namespace LeaseForPublic.Controllers
                 }
 
                 kyc.IsActive = 1;
-                kyc.ModifiedBy = SiteContext.UserId;
+                kyc.ModifiedBy = kyc.Id;
                 var result = await _kycformService.Update(id, kyc);
                     if (result == true)
                     {
-
                     Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
                     var DataFlow = await dataAsync();
 
