@@ -174,3 +174,147 @@ $('#LandPremiumAmount').change(function () {
    
 });
 
+$("#tolicense").change(function () {
+    $("#fromlicense1-error").html("");
+
+    var tolicense = $("#tolicense").val();
+    var fromlicense = $("#fromlicense").val();
+
+    if (fromlicense) {
+        if (tolicense) {
+            if (fromlicense > tolicense) {
+                $("#fromlicense1-error").html("to date should be greater and equal from date");
+            }
+        } else {
+            $("#fromlicense1-error").html("Please Select To Date1");
+        }
+    } else {
+
+        $("#fromlicense1-error").html("Please Select From Date");
+    }
+    // alert(tolicense);
+    //alert(fromlicense);
+    //tolicense-error
+});
+$("#fromlicense").change(function () {
+    $("#fromlicense1-error").html("");
+
+    var tolicense = $("#tolicense").val();
+    var fromlicense = $("#fromlicense").val();
+
+    if (fromlicense) {
+        if (tolicense) {
+            if (fromlicense > tolicense) {
+                $("#fromlicense1-error").html("to date should be greater and equal from date");
+            }
+        } else {
+            $("#fromlicense1-error").html("Please Select To Date");
+        }
+    } else {
+
+        $("#fromlicense1-error").html("Please Select From Date");
+    }
+    // alert(tolicense);
+    //alert(fromlicense);
+    //tolicense-error
+});
+
+
+
+
+
+
+$("#ZoneId").change(function () {
+    // alert(ZoneId);
+    var ids = $(this).val();
+    if (ids) {
+        HttpGet(`/KYCform/GetLocalityList/?zoneid=${ids}`, 'json', function (response) {
+            var html = '<option value="">Select</option>';
+            for (var i = 0; i < response.length; i++) {
+                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+            }
+            $("#LocalityId").select2('val', '')
+            $("#LocalityId").html(html);
+
+            //  alert(JSON.stringify(response));
+        });
+
+    }
+});
+//FatherName
+
+$('#name1').keydown(function (e) {
+
+    $("#err-name").hide();
+    if (e.ctrlKey || e.altKey) {
+        e.preventDefault();
+    } else {
+        var key = e.keyCode;
+
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+            e.preventDefault();
+        }
+    }
+});
+
+$('#FatherName').keydown(function (e) {
+
+    $("#err-name1").hide();
+    if (e.ctrlKey || e.altKey) {
+        e.preventDefault();
+    } else {
+        var key = e.keyCode;
+
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+            e.preventDefault();
+        }
+    }
+});
+
+function validateForm() {
+
+    let FileNo = document.forms["kyc-form"]["FileNo"].value;
+    let PropertyTypeId = document.forms["kyc-form"]["PropertyTypeId"].value;
+    let LeaseTypeId = document.forms["kyc-form"]["LeaseTypeId"].value;
+    let LicenseFrequency = document.forms["kyc-form"]["LicenseFrequency"].value;
+    let LeaseGroundRentDepositFrequency = document.forms["kyc-form"]["LeaseGroundRentDepositFrequency"].value;
+    let PossessionDate = document.forms["kyc-form"]["PossessionDate"].value;
+
+    if (FileNo == "") {
+        $("#file-error").show();
+        // return false;
+    }
+
+    if (PropertyTypeId == "") {
+        $("#propertytype-error").show();
+        // return false;
+    }
+
+    if (LeaseTypeId == "") {
+        $("#LeaseType-error").show();
+        //return false;
+    }
+
+    if (LicenseFrequency == "") {
+        $("#LicenseFrequency-error").show();
+        // return false;
+    }
+
+    if (LeaseGroundRentDepositFrequency == "") {
+        $("#LeaseGroundRent-error").show();
+        // return false;
+    }
+
+
+    if (PossessionDate == "") {
+        $("#PossessionDate-error").show();
+        return false;
+    }
+
+
+
+
+
+
+
+}
