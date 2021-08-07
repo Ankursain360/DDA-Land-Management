@@ -86,7 +86,8 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.ApprovedStatusNavigation)
                                        .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
-
+                                       && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                       
                                        )
                                        .GetPaged<Kycform>(model.PageNumber, model.PageSize);
 
@@ -108,8 +109,9 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.Zone)
                                                    .Include(x => x.ApprovedStatusNavigation)
                                                    .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
-                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
 
+                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
                                        ).OrderBy(x => x.Property)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                             break;
@@ -124,6 +126,7 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.ApprovedStatusNavigation)
                                                  .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
 
                                        ).OrderByDescending(x => x.IsActive)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
@@ -146,6 +149,7 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.ApprovedStatusNavigation)
                                                    .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
 
                                        ).OrderByDescending(x => x.Property)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
@@ -161,6 +165,7 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.ApprovedStatusNavigation)
                                                  .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
 
                                        ).OrderBy(x => x.IsActive)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);

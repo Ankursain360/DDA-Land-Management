@@ -11,6 +11,7 @@ namespace Dto.Search
     {
         public string property { get; set; }
         public string Mobileno { get; set; }
+        public string Fileno { get; set; }
     }
 
 }

@@ -330,6 +330,7 @@ namespace LeaseForPublic.Controllers
 
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", checkemail[0].EmailId);
+           HttpContext.Session.SetString("ID", checkemail[0].Id.ToString());
             //  var mobile = HttpContext.Session.GetString("Mobile");
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");

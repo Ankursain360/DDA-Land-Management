@@ -13,6 +13,7 @@ $("#btnSearch").click(function () {
 $("#btnReset").click(function () {
 
     $('#txtName').val('');
+    $('#txtFileNo').val('');
 
     Getkyc(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -47,12 +48,15 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         Mobileno: (''),
         property: $('#txtName').val(),
+        Fileno: $('#txtFileNo').val(),
+    
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
     return model;
+    alert(JSON.stringify(model));
 }
 
 function onPaging(pageNo) {
