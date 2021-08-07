@@ -20,6 +20,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Utility.Helper;
 
+
+
+
 namespace LeaseForPublic.Controllers
 {
     public class DemandDetailsController : BaseController
@@ -98,12 +101,14 @@ namespace LeaseForPublic.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(int id,LeasePublicDemandPaymentDetailsDto dto)
         {
+            FileHelper fileHelper = new FileHelper();
             var Data = await _kycformService.FetchKYCSingleResult(id);
             Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
+            string PaymentProof = _configuration.GetSection("FilePaths:DemandDetailsProof:PaymentProofpdf").Value.ToString();
 
             Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
             try
@@ -288,8 +293,7 @@ namespace LeaseForPublic.Controllers
                                         PaymentType = dto.PaymentType[i],
                                         Period = dto.Period[i],
                                         ChallanNo = dto.ChallanNoForPayment[i],   
-                                        Amount = dto.Amount[i],
-                                        Proofinpdf = dto.Proofinpdf[i],
+                                        Amount = dto.Amount[i],                                        
                                         DateofPaymentByAllottee = dto.DateofPaymentByAllottee[i],
                                         Ddabankcredit = dto.Ddabankcredit[i],
                                         CreatedBy=dto.Id,
@@ -297,6 +301,12 @@ namespace LeaseForPublic.Controllers
                                          CreatedDate=DateTime.Now,
                                          KycId=oKycdemandpaymentdetails.KycId,
                                         DemandPaymentId = oKycdemandpaymentdetails.Id,
+
+                                        UploadFilePath = dto.Proofinpdf != null ?
+                                                                    dto.Proofinpdf.Count <= i ? string.Empty :
+                                                                    fileHelper.SaveFile(PaymentProof, dto.Proofinpdf[i]) :
+                                                                    dto.UploadFilePath[i] != null || dto.UploadFilePath[i] != "" ?
+                                                                    dto.UploadFilePath[i] : string.Empty,
                                     });
                                 }
                                 foreach (var item in okycdemandpaymentdetailstablec)

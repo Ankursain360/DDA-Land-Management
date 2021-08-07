@@ -44,9 +44,9 @@ function GetCalculation() {
     {
         amount = 0;
     }
-    document.getElementById("TotalPayable").value = TotalChallanAmount + TotalDemandAmount;
+    document.getElementById("TotalPayable").value = TotalDemandAmount - TotalChallanAmount-amount;
    // Here Table A-Table B -Table C
-    document.getElementById("TotalDues").value = TotalDemandAmount- TotalChallanAmount-amount;
+    document.getElementById("TotalDues").value = TotalDemandAmount + TotalPayableInterest- TotalChallanAmount - amount;
 }
 
 

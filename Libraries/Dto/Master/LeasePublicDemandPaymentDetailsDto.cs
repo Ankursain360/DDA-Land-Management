@@ -2,6 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+
+
 namespace Dto.Master
 {
    public class LeasePublicDemandPaymentDetailsDto
@@ -42,7 +46,7 @@ namespace Dto.Master
 
         public List<DateTime> DateofPaymentByAllottee { get; set; }
         [NotMapped]
-        public List<string> Proofinpdf { get; set; }
+        public List<IFormFile> Proofinpdf { get; set; }
         [NotMapped]
         public List<string> Ddabankcredit { get; set; }
 

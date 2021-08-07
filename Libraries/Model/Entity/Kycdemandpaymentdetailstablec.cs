@@ -24,6 +24,11 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
     
         public Kycdemandpaymentdetails DemandPayment { get; set; }
+
+       
+
+        [NotMapped]
+        public string UploadFilePath { get; set; }
         public Kycform Kyc { get; set; }
     }
 }
