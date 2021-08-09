@@ -4,6 +4,7 @@ using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Notification;
@@ -59,19 +60,19 @@ namespace LeaseForPublic.Controllers
             _kycformService = kycform;
             __kycdemandpaymentdetailstableaService = kycdemandpaymentdetailstableaService;
             _kycdemandpaymentdetailstablebService = kycdemandpaymentdetailstablebService;
-            _kycdemandpaymentdetailstablecService=kycdemandpaymentdetailstablecService;
+            _kycdemandpaymentdetailstablecService = kycdemandpaymentdetailstablecService;
 
             _kycPaymentApprovalService = kycPaymentApprovalService;
             _userProfileService = userProfileService;
             _approvalproccessService = approvalproccessService;
             _kycformApprovalService = kycformApprovalService;
-           _userNotificationService = userNotificationService;
+            _userNotificationService = userNotificationService;
             _hostingEnvironment = hostingEnvironment;
             ChallanProof = _configuration.GetSection("FilePaths:KycFiles:ChallanProofDocument").Value.ToString();
         }
 
         public IActionResult Index()
-        
+
         {
             return View();
         }
@@ -80,9 +81,9 @@ namespace LeaseForPublic.Controllers
         public async Task<IActionResult> Create(int Id)
         {
             LeasePublicDemandPaymentDetailsDto dto = new LeasePublicDemandPaymentDetailsDto();
-            var data= await _kycformService.FetchSingleResult(Id);
+            var data = await _kycformService.FetchSingleResult(Id);
             dto.KycId = data.Id;
-            dto.FileNo = data.FileNo;           
+            dto.FileNo = data.FileNo;
             return View(dto);
 
         }
@@ -95,12 +96,12 @@ namespace LeaseForPublic.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);            
+            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             return PartialView("_KYCFormView", Data);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int id,LeasePublicDemandPaymentDetailsDto dto)
+        public async Task<IActionResult> Create(int id, LeasePublicDemandPaymentDetailsDto dto)
         {
             FileHelper fileHelper = new FileHelper();
             var Data = await _kycformService.FetchKYCSingleResult(id);
@@ -109,7 +110,7 @@ namespace LeaseForPublic.Controllers
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
-           
+
             Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
             try
             {
@@ -134,7 +135,7 @@ namespace LeaseForPublic.Controllers
                                     return View(dto);
                                 }
 
-                               // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                                // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
                             }
                             if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
                             {
@@ -150,21 +151,21 @@ namespace LeaseForPublic.Controllers
                                         ViewBag.Message = Alert.Show("No User is available for selected Branch , Without User application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
                                         return View(dto);
                                     }
-                                    else 
-                                    { 
+                                    else
+                                    {
                                         StringBuilder multouserszonewise = new StringBuilder();
                                         int col = 0;
-                                      if (UserListRoleBasis != null)
-                                      {
-                                        for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                        if (UserListRoleBasis != null)
                                         {
-                                            if (col > 0)
-                                                multouserszonewise.Append(",");
-                                            multouserszonewise.Append(UserListRoleBasis[h].UserId);
-                                            col++;
+                                            for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                            {
+                                                if (col > 0)
+                                                    multouserszonewise.Append(",");
+                                                multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                                col++;
+                                            }
+                                            approvalproccess.SendTo = multouserszonewise.ToString();
                                         }
-                                        approvalproccess.SendTo = multouserszonewise.ToString();
-                                      }
                                     }
 
                                 }
@@ -202,7 +203,7 @@ namespace LeaseForPublic.Controllers
                     oKycdemandpaymentdetails.KycId = dto.KycId;
                     oKycdemandpaymentdetails.PendingAt = dto.PendingAt;
                     oKycdemandpaymentdetails.TotalPayable = dto.TotalPayable;
-                    oKycdemandpaymentdetails.TotalDues=dto.TotalDues;
+                    oKycdemandpaymentdetails.TotalDues = dto.TotalDues;
                     oKycdemandpaymentdetails.IsPaymentAgreed = dto.IsPaymentAgreed;
                     oKycdemandpaymentdetails.CreatedBy = dto.Id;
                     oKycdemandpaymentdetails.IsActive = 1;
@@ -228,13 +229,13 @@ namespace LeaseForPublic.Controllers
                                     DemandPeriod = result1[i].DemandPeriod,
                                     GroundRent = result1[i].GroundRentLeaseRent,
                                     InterestRate = result1[i].InterestAmount,
-                                    TotdalDues = result1[i].TotalDues,                                
-                                    KycId= oKycdemandpaymentdetails.KycId,
+                                    TotdalDues = result1[i].TotalDues,
+                                    KycId = oKycdemandpaymentdetails.KycId,
                                     DemandPaymentId = oKycdemandpaymentdetails.Id,
                                     IsActive = 1,
-                                    CreatedBy =dto.Id,
-                                    CreatedDate= DateTime.Now,
-                            });
+                                    CreatedBy = dto.Id,
+                                    CreatedDate = DateTime.Now,
+                                });
                             }
 
                             foreach (var item in data)
@@ -262,12 +263,12 @@ namespace LeaseForPublic.Controllers
                                             {
                                                 ChallanNo = result2.cargo[i].CHLLN_NMBR,
                                                 ChallanAmount = result2.cargo[i].CHLLN_AMNT.ToString(),
-                                                DepositeDate =Convert.ToDateTime(result2.cargo[i].DPST_DT),
+                                                DepositeDate = Convert.ToDateTime(result2.cargo[i].DPST_DT),
                                                 KycId = oKycdemandpaymentdetails.KycId,
                                                 DemandPaymentId = oKycdemandpaymentdetails.Id,
-                                                CreatedBy=dto.Id,
-                                                CreatedDate=DateTime.Now,
-                                                IsActive=1,
+                                                CreatedBy = dto.Id,
+                                                CreatedDate = DateTime.Now,
+                                                IsActive = 1,
                                             });
                                         }
 
@@ -285,37 +286,38 @@ namespace LeaseForPublic.Controllers
                         //********************************** Save Payment Challan Details  ********************************************  
 
                         if (oKycdemandpaymentdetails.IsPaymentAgreed == "N")
-                        { List<Kycdemandpaymentdetailstablec> okycdemandpaymentdetailstablec = new List<Kycdemandpaymentdetailstablec>();
-                                for (int i = 0; i < dto.PaymentType.Count; i++)
+                        {
+                            List<Kycdemandpaymentdetailstablec> okycdemandpaymentdetailstablec = new List<Kycdemandpaymentdetailstablec>();
+                            for (int i = 0; i < dto.PaymentType.Count; i++)
+                            {
+                                okycdemandpaymentdetailstablec.Add(new Kycdemandpaymentdetailstablec
                                 {
-                                    okycdemandpaymentdetailstablec.Add(new Kycdemandpaymentdetailstablec
-                                    {
-                                        PaymentType = dto.PaymentType[i],
-                                        Period = dto.Period[i],
-                                        ChallanNo = dto.ChallanNoForPayment[i],   
-                                        Amount = dto.Amount[i],                                        
-                                        DateofPaymentByAllottee = dto.DateofPaymentByAllottee[i],
-                                        Ddabankcredit = dto.Ddabankcredit[i],
-                                        CreatedBy=dto.Id,
-                                        IsActive=1,
-                                        CreatedDate=DateTime.Now,
-                                        KycId=oKycdemandpaymentdetails.KycId,
-                                        DemandPaymentId = oKycdemandpaymentdetails.Id,
+                                    PaymentType = dto.PaymentType[i],
+                                    Period = dto.Period[i],
+                                    ChallanNo = dto.ChallanNoForPayment[i],
+                                    Amount = dto.Amount[i],
+                                    DateofPaymentByAllottee = dto.DateofPaymentByAllottee[i],
+                                    Ddabankcredit = dto.Ddabankcredit[i],
+                                    CreatedBy = dto.Id,
+                                    IsActive = 1,
+                                    CreatedDate = DateTime.Now,
+                                    KycId = oKycdemandpaymentdetails.KycId,
+                                    DemandPaymentId = oKycdemandpaymentdetails.Id,
 
-                                        Proofinpdf = dto.Proofinpdf1 != null ?
-                                                                    dto.Proofinpdf1.Count <= i ? string.Empty :
-                                                                    fileHelper.SaveFile1(ChallanProof, dto.Proofinpdf1[i]) :
-                                                                    dto.UploadFilePath[i] != null || dto.UploadFilePath[i] != "" ?
-                                                                    dto.UploadFilePath[i] : string.Empty,
-                                       
-                                    });
-                                }
-                                foreach (var item in okycdemandpaymentdetailstablec)
-                                {
-                                    var result4 = await _kycdemandpaymentdetailstablecService.SaveKycChallanDetails(item);
-                                }
+                                    Proofinpdf = dto.Proofinpdf1 != null ?
+                                                                dto.Proofinpdf1.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile1(ChallanProof, dto.Proofinpdf1[i]) :
+                                                                dto.UploadFilePath[i] != null || dto.UploadFilePath[i] != "" ?
+                                                                dto.UploadFilePath[i] : string.Empty,
 
+                                });
                             }
+                            foreach (var item in okycdemandpaymentdetailstablec)
+                            {
+                                var result4 = await _kycdemandpaymentdetailstablecService.SaveKycChallanDetails(item);
+                            }
+
+                        }
 
 
                         #region Approval Proccess At 1st level start Added by Ishu 21 April 2021
@@ -332,7 +334,7 @@ namespace LeaseForPublic.Controllers
                                 oKycdemandpaymentdetails.PendingAt = approvalproccess.SendTo;
 
                                 result = await _demandDetailsService.UpdateBeforeApproval(oKycdemandpaymentdetails.Id, oKycdemandpaymentdetails);  //Update Kycdemandpaymentdetails  Table details 
-                               
+
                                 if (result)
                                 {
                                     approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
@@ -372,7 +374,7 @@ namespace LeaseForPublic.Controllers
                                     if (result)
                                     {
                                         var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKycPayment").Value);
-                                       // var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                        // var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                         Usernotification usernotification = new Usernotification();
                                         var replacement = notificationtemplate.Template.Replace("{proccess name}", "Lease").Replace("{from user}", Data.Name).Replace("{datetime}", DateTime.Now.ToString());
                                         usernotification.Message = replacement;
@@ -404,7 +406,7 @@ namespace LeaseForPublic.Controllers
                             string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
                             string linkhref = (_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value).ToString();
 
-                          //  var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                            //  var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                             StringBuilder multousermailId = new StringBuilder();
                             if (approvalproccess.SendTo != null)
                             {
@@ -486,11 +488,11 @@ namespace LeaseForPublic.Controllers
             return View(dto);
         }
 
-    
+
 
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
-          
+
             var result = await _demandDetailsService.GetPaymentDetails(Id);
 
             return PartialView("_PaymentDetails", result);
@@ -499,36 +501,51 @@ namespace LeaseForPublic.Controllers
 
         public async Task<PartialViewResult> PaymentFromBhoomi(string FileNo)
         {
-            using (var httpClient = new HttpClient())
+            try
             {
-                using (var response = await httpClient.GetAsync(_configuration.GetSection("BhoomiApi").Value + FileNo))
+
+
+                using (var httpClient = new HttpClient())
                 {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    using (var response = await httpClient.GetAsync(_configuration.GetSection("BhoomiApi").Value + FileNo))
                     {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                        var data1 = JsonSerializer.Deserialize<ApiResponseBhoomiApiFileWise>(apiResponse);                      
-                        return PartialView("_PaymentFromBhoomi", data1);
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            var data1 = JsonSerializer.Deserialize<ApiResponseBhoomiApiFileWise>(apiResponse);
+                            return PartialView("_PaymentFromBhoomi", data1);
+
+                        }
+                        else
+                        {
+                            ApiResponseBhoomiApiFileWise data1 = new ApiResponseBhoomiApiFileWise();
+                            List<BhoomiApiFileNowiseDto> cargo = new List<BhoomiApiFileNowiseDto>();
+                            data1.cargo = cargo;
+                            return PartialView("_PaymentFromBhoomi", data1);
+                        }
 
                     }
-                    else
-                    {
-                        ApiResponseBhoomiApiFileWise data1 = new ApiResponseBhoomiApiFileWise();
-                        List<BhoomiApiFileNowiseDto> cargo = new List<BhoomiApiFileNowiseDto>();
-                        data1.cargo = cargo;                       
-                        return PartialView("_PaymentFromBhoomi", data1);
-                    }
-
                 }
             }
-
+            catch (Exception ex)
+            {
+                ApiResponseBhoomiApiFileWise data1 = new ApiResponseBhoomiApiFileWise();
+                List<BhoomiApiFileNowiseDto> cargo = new List<BhoomiApiFileNowiseDto>();
+                data1.cargo = cargo;
+                return PartialView("_PaymentFromBhoomi", data1);
+            }
         }
-
 
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemandDetailsSearchDto model)
         {
-            var result = await _demandDetailsService.GetPagedDemandDetails(model, "8506092802");
+            var mobile = HttpContext.Session.GetString("Mobile");
+            if (mobile == null)
+            {
+                mobile = "";
+            }
+            var result = await _demandDetailsService.GetPagedDemandDetails(model, mobile);
 
             return PartialView("_List", result);
         }
