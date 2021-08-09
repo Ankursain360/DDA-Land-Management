@@ -47,7 +47,7 @@ namespace Libraries.Model.Entity
        // [Required(ErrorMessage = " Plot Description is mandatory")]
         public string PlotDescription { get; set; }
 
-       // [Required(ErrorMessage = " Zone is mandatory")]
+        [Required(ErrorMessage = " Zone is required")]
         public int? ZoneId { get; set; }
       //  [Required(ErrorMessage = " Locality is mandatory")]
         public int? LocalityId { get; set; }

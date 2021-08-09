@@ -297,14 +297,14 @@ namespace LeaseForPublic.Controllers
                                         DateofPaymentByAllottee = dto.DateofPaymentByAllottee[i],
                                         Ddabankcredit = dto.Ddabankcredit[i],
                                         CreatedBy=dto.Id,
-                                         IsActive=1,
-                                         CreatedDate=DateTime.Now,
-                                         KycId=oKycdemandpaymentdetails.KycId,
+                                        IsActive=1,
+                                        CreatedDate=DateTime.Now,
+                                        KycId=oKycdemandpaymentdetails.KycId,
                                         DemandPaymentId = oKycdemandpaymentdetails.Id,
 
-                                        Proofinpdf = dto.Proofinpdf != null ?
-                                                                    dto.Proofinpdf.Count <= i ? string.Empty :
-                                                                    fileHelper.SaveFile(ChallanProof, dto.Proofinpdf[i]) :
+                                        Proofinpdf = dto.Proofinpdf1 != null ?
+                                                                    dto.Proofinpdf1.Count <= i ? string.Empty :
+                                                                    fileHelper.SaveFile1(ChallanProof, dto.Proofinpdf1[i]) :
                                                                     dto.UploadFilePath[i] != null || dto.UploadFilePath[i] != "" ?
                                                                     dto.UploadFilePath[i] : string.Empty,
                                        
@@ -464,7 +464,7 @@ namespace LeaseForPublic.Controllers
 
 
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-
+                        return View("Index");
                     }
                     else
                     {

@@ -279,6 +279,7 @@ function validateForm() {
     let LicenseFrequency = document.forms["kyc-form"]["LicenseFrequency"].value;
     let LeaseGroundRentDepositFrequency = document.forms["kyc-form"]["LeaseGroundRentDepositFrequency"].value;
     let PossessionDate = document.forms["kyc-form"]["PossessionDate"].value;
+    let ZoneId = document.forms["kyc-form"]["ZoneId"].value;
 
     if (FileNo == "") {
         $("#file-error").show();
@@ -308,9 +309,13 @@ function validateForm() {
 
     if (PossessionDate == "") {
         $("#PossessionDate-error").show();
-        return false;
+       // return false;
     }
 
+    if (ZoneId == "") {
+        $("#ZoneId-error").show();
+        // return false;
+    }
 
 
 
