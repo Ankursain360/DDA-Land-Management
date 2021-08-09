@@ -1,0 +1,15 @@
+﻿using Dto.Common;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Dto.Search
+{
+    public class KycApplicationSearchDto : BaseSearchDto
+    {
+        public int KycApplicaionPending { get; set; }
+        public int KycApplicaionApprove { get; set; }
+        public int KycApplicaionInProcess { get; set; }
+     
+    }
+}
