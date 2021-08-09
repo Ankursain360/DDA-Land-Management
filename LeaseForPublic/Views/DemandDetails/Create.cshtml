@@ -102,7 +102,7 @@
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
-                                <th>Payment Type (Ground Rent/License Fee/Interest etc.)</th>
+                                <th>Payment Type</th>
                                 <th>Period From –To Ex-(dd-mm-yyyy)-(dd-mm-yyyy)</th>
                                 <th>Challan No./Transaction No./UTR No.</th>
                                 <th>Amount</th>
@@ -122,7 +122,7 @@
                                 <td>
                                    
 
-                                    <select asp-for="PaymentType" required class="floating-label-field floating-label-field--s3">
+                                    <select asp-for="PaymentType" required  class="floating-label-field floating-label-field--s3">
                                         <option value="">---Select---</option>
                                         <option value="Ground Rent">Ground Rent</option>
                                         <option value="License fee">License fee</option>
@@ -158,8 +158,8 @@
                                 <td>
                                     <input type="hidden" asp-for="UploadFilePath" />
 
-                                    <input asp-for="Proofinpdf" required type="file" class="floating-label-field floating-label-field--s3 " />
-                                    <span asp-validation-for="Proofinpdf" class="d-block text-danger field-validation-valid msg"></span>
+                                    <input asp-for="Proofinpdf1" required type="file" class="floating-label-field floating-label-field--s3 " />
+                                    <span asp-validation-for="Proofinpdf1" class="d-block text-danger field-validation-valid msg"></span>
 
 
                                 </td>

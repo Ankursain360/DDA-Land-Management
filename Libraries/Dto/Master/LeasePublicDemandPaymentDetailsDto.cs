@@ -46,7 +46,7 @@ namespace Dto.Master
 
         public List<DateTime> DateofPaymentByAllottee { get; set; }
         [NotMapped]
-        public List<IFormFile> Proofinpdf { get; set; }
+        public List<IFormFile> Proofinpdf1 { get; set; }
         [NotMapped]
         public List<string> Ddabankcredit { get; set; }
 
