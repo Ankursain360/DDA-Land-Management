@@ -219,6 +219,7 @@ namespace LeaseForPublic.Controllers
 
                 kyc.CreatedBy = Convert.ToInt32( id);
                 kyc.IsActive = 1;
+                kyc.KycStatus = "F";
                 var result = await _kycformService.Create(kyc);
                 if (result == true)
                 {
