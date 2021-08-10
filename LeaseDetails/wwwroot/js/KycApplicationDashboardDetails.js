@@ -19,7 +19,7 @@ function KycApplicationDetails() {
                 labels: ['Pending', 'Approve', 'InProcess'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [response[0].KycApplicaionPending,response[0].KycApplicaionApprove,response[0].KycApplicaionInProcess],
+                    data: [response[0].kycApplicaionPending, response[0].kycApplicaionApprove, response[0].kycApplicaionInProcess],
                     label: "Kyc Application",
                     backgroundColor: [
                         "Red",
@@ -65,7 +65,7 @@ function KycDemandPaymentDetails() {
                 labels: ['Pending', 'Approve', 'InProcess'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [response[0].KycDemandPaymentPending,response[0].KycDemandPaymentApprove,response[0].KycDemandPaymentInProcess],
+                    data: [response[0].kycDemandPaymentPending, response[0].kycDemandPaymentApprove, response[0].kycDemandPaymentInProcess],
                 
                     label: "Kyc Demand Payment Application",
                     backgroundColor: [
