@@ -1,6 +1,7 @@
 ﻿
 
 $(document).ready(function () {
+
     if ($('#AllotteeApplicantDetailsSame').val() == "yes") {
         $('input[name="chksame"]').attr("checked", "checked");
         //$("#chk1").is(":checked")
