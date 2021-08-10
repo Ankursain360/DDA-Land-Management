@@ -272,51 +272,68 @@ $('#FatherName').keydown(function (e) {
 });
 
 function validateForm() {
-
+   
     let FileNo = document.forms["kyc-form"]["FileNo"].value;
     let PropertyTypeId = document.forms["kyc-form"]["PropertyTypeId"].value;
     let LeaseTypeId = document.forms["kyc-form"]["LeaseTypeId"].value;
     let LicenseFrequency = document.forms["kyc-form"]["LicenseFrequency"].value;
     let LeaseGroundRentDepositFrequency = document.forms["kyc-form"]["LeaseGroundRentDepositFrequency"].value;
     let PossessionDate = document.forms["kyc-form"]["PossessionDate"].value;
-    let ZoneId = document.forms["kyc-form"]["ZoneId"].value;
-
+    let Property = document.forms["kyc-form"]["Property"].value;
+    
+    var status = 1; 
     if (FileNo == "") {
+     
         $("#file-error").show();
+        status = 2;
         // return false;
     }
 
     if (PropertyTypeId == "") {
+       
         $("#propertytype-error").show();
+        status = 2;
         // return false;
     }
-
-    if (LeaseTypeId == "") {
-        $("#LeaseType-error").show();
-        //return false;
+    if (Property == "Lease") {
+        if (LeaseTypeId == "") {
+           
+            $("#LeaseType-error").show();
+            //return false;
+            status = 2;
+        }
     }
-
-    if (LicenseFrequency == "") {
-        $("#LicenseFrequency-error").show();
-        // return false;
+  
+    if (Property == "License") {
+        if (LicenseFrequency == "") {
+           
+            $("#LicenseFrequency-error").show();
+            status = 2;
+            // return false;
+        }
     }
-
-    if (LeaseGroundRentDepositFrequency == "") {
-        $("#LeaseGroundRent-error").show();
-        // return false;
+    if (Property == "Lease") {
+        
+        if (LeaseGroundRentDepositFrequency == "") {
+        
+            $("#LeaseGroundRent-error").show();
+            status = 2;
+            // return false;
+        }
     }
-
 
     if (PossessionDate == "") {
+      
         $("#PossessionDate-error").show();
+        status = 2;
        // return false;
     }
 
-    if (ZoneId == "") {
-        $("#ZoneId-error").show();
-        // return false;
+    
+ 
+    if (status == 2) {
+        return false;
     }
-
 
 
 
