@@ -476,11 +476,7 @@ namespace LeaseDetails.Controllers
                             int col = 0;
                             string[] multiTo = approvalproccess.SendTo.Split(',');
                             foreach (string MultiUserId in multiTo)
-                            {
-                                if (MultiUserId == "")
-                                {
-                                    MultiUserId = "0";
-                                }
+                            { 
                                 if (col > 0)
                                     multousermailId.Append(",");
                                 var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
