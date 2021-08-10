@@ -210,8 +210,6 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-
-
                 var data = await _dbContext.LoadStoredProcedure("GetPaymentDemandLetterDetails")
                                             .WithSqlParams(("P_Id", Id))
                                             .ExecuteStoredProcedureAsync<LeasePaymentDemandLetterDetailsSearchDto>();

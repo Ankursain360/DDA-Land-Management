@@ -66,7 +66,7 @@ namespace Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Proofinpdf)
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.HasOne(d => d.DemandPayment)
