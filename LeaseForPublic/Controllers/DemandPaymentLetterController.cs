@@ -20,6 +20,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Utility.Helper;
+using Microsoft.AspNetCore.Http;
 
 namespace LeaseForPublic.Controllers
 {
@@ -44,7 +45,12 @@ namespace LeaseForPublic.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemandDetailsSearchDto model)
         {
-            var result = await _demandDetailsService.GetDemandPaymentDetails(model, "8506092802");
+            var mobile = HttpContext.Session.GetString("Mobile");
+            if (mobile == null)
+            {
+                mobile = "";
+            }
+            var result = await _demandDetailsService.GetDemandPaymentDetails(model, mobile);
 
             return PartialView("_List", result);
         }

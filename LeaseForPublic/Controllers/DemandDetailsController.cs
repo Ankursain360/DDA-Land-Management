@@ -464,7 +464,11 @@ namespace LeaseForPublic.Controllers
                         }
                         #endregion
 
-
+                        if(dto.TotalDues>0)
+                        {
+                            var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + dto.FileNo + "&Locality=0&Amount=" + dto.TotalPayable.ToString() + "&Interest=" + dto.TotalPayableInterest.ToString();
+                            return Redirect(paymentLink);
+                        }
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         return View("Index");
                     }
