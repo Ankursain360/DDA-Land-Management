@@ -351,7 +351,7 @@ namespace LeaseDetails.Controllers
                                                     kyc.PendingAt = approvalproccess.SendTo;
                                                 }
                                             }
-                                            result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
+                                            result = await _kycformService.UpdateBeforeApproval1(kyc.Id, kyc);  //Update kycform Table details 
                                                                                                                //if(result && kyc.ApprovedStatusNavigation.SentStatusName == "Deficiency")
                                             if (result && kyc.ApprovedStatus == 18)
 

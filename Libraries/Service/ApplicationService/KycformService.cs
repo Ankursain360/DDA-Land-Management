@@ -191,6 +191,18 @@ namespace Service.ApplicationService
 
             model.ApprovedStatus = kyc.ApprovedStatus;
             model.PendingAt = kyc.PendingAt;
+           
+            _kycformRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        public async Task<bool> UpdateBeforeApproval1(int id, Kycform kyc) //in case of approved
+        {
+            var result = await _kycformRepository.FindBy(a => a.Id == id);
+            Kycform model = result.FirstOrDefault();
+
+            model.ApprovedStatus = kyc.ApprovedStatus;
+            model.PendingAt = kyc.PendingAt;
+            model.KycStatus = kyc.KycStatus;
             _kycformRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
