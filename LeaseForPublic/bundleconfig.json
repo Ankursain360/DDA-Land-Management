@@ -82,5 +82,11 @@
     "inputFiles": [
       "wwwroot/js/DemandDetailsIndex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/LeaseDemandPaymentDetails.min.js",
+    "inputFiles": [
+      "wwwroot/js/LeaseDemandPaymentDetails.js"
+    ]
   }
 ]
