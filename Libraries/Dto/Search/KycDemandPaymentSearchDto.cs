@@ -10,5 +10,9 @@ namespace Dto.Search
         public int KycDemandPaymentPending { get; set; }
         public int  KycDemandPaymentApprove { get; set; }
         public int KycDemandPaymentInProcess { get; set; }
+
+        public int KycDemandPaymentInDeficiency { get; set; }
+
+        public int KycDemandPaymentRejected { get; set; }
     }
 }

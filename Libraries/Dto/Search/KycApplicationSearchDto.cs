@@ -10,6 +10,9 @@ namespace Dto.Search
         public int KycApplicaionPending { get; set; }
         public int KycApplicaionApprove { get; set; }
         public int KycApplicaionInProcess { get; set; }
-     
+
+        public int KycApplicationDeficiency { get; set; }
+
+        public int KycApplicationInRejected { get; set; }
     }
 }

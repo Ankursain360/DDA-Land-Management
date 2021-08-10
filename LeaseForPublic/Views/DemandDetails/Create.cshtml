@@ -10,7 +10,7 @@
     </div>
 
     <br>
-   
+
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -48,7 +48,7 @@
             <div class=" col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text" 
+                    <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span class="text-danger"></span>
                     <label class="floating-label">Total Payable interest (Provisional)Rs.<span style="color:red">*</span>  </label>
@@ -57,7 +57,7 @@
             <div class=" col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="TotalDues" placeholder="Total dues" type="text" 
+                    <input asp-for="TotalDues" placeholder="Total dues" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span class="text-danger"></span>
                     <label class="floating-label">Total dues (Provisional)Rs. <span style="color:red">*</span>  </label>
@@ -116,11 +116,11 @@
                         <tbody id="tbl_posts2_body">
                         </tbody>
                         <tbody class="tbody" id="add2">
-                           
+
                             <tr>
                                 <td style="text-align:center;"><span class="sn2">1</span></td>
                                 <td>
-                                   
+
 
                                     <select asp-for="PaymentType" required class="floating-label-field floating-label-field--s3">
                                         <option value="">---Select---</option>
@@ -191,16 +191,21 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Submit</button>
+                <button class="btn btn-theme " type="submit">Pay & Submit</button>
                 @Html.ActionLink("Back", "Index", "DemandDetails", null, new { @class = "btn btn-theme" })
             </div>
         </div>
     </form>
 </div>
-    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/DemandDetailsCreate.js"></script>
-    </environment>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/DemandDetailsCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/DemandDetailsCreate.min.js" asp-append-version="true"></script>
+</environment> 
+ 
+
 <script>
     $('#PaymentType').removeAttr('multiple');
 

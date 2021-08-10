@@ -9,7 +9,7 @@ namespace Dto.Search
 
         public string AllotteeAddress { get; set; }
 
-        public string PropertyNo { get; set; }
+        public string Property { get; set; }
 
         public int DatePeriodBy { get; set; }
 
@@ -17,8 +17,10 @@ namespace Dto.Search
         public string DatePeriod { get; set; }
 
         public decimal? GroundRentLicense { get; set; }
+        public decimal? TotalPayable { get; set; }
+        public decimal? TotalDues { get; set; }
+        public decimal? TotalPayableInterest { get; set; }
 
-       
 
     }
 }

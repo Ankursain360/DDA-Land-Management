@@ -116,7 +116,7 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.Locality)
                                        .Include(x => x.PropertyType)
                                        .Include(x => x.Zone)
-                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo && x.KycStatus == "T" && x.ApprovedStatus == 3)
+                                       .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo  && x.ApprovedStatus == 3)
                                        .GetPaged<Kycform>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -132,7 +132,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
-                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo && x.KycStatus == "T" && x.ApprovedStatus == 3)
+                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo  && x.ApprovedStatus == 3)
                                                .OrderBy(x => x.Property)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                         break;
@@ -144,7 +144,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
-                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo && x.KycStatus == "T" && x.ApprovedStatus == 3)
+                                               .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo && x.ApprovedStatus == 3)
                                                .OrderByDescending(x => x.IsActive)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                         break;
@@ -163,7 +163,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
-                                             .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo && x.KycStatus == "T" && x.ApprovedStatus == 3)
+                                             .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo && x.ApprovedStatus == 3)
                                                .OrderByDescending(x => x.Property)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                         break;
@@ -175,7 +175,7 @@ namespace Libraries.Repository.EntityRepository
                                                .Include(x => x.Locality)
                                                .Include(x => x.PropertyType)
                                                .Include(x => x.Zone)
-                                              .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo && x.KycStatus == "T" && x.ApprovedStatus == 3)
+                                              .Where(x => (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property)) && x.MobileNo == MobileNo  && x.ApprovedStatus == 3)
                                                .OrderBy(x => x.IsActive)
                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                         break;
@@ -210,8 +210,6 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-
-
                 var data = await _dbContext.LoadStoredProcedure("GetPaymentDemandLetterDetails")
                                             .WithSqlParams(("P_Id", Id))
                                             .ExecuteStoredProcedureAsync<LeasePaymentDemandLetterDetailsSearchDto>();
