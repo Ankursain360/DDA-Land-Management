@@ -1,7 +1,7 @@
 ﻿@*@model Libraries.Model.Entity.Kycdemandpaymentdetails*@
 @model IEnumerable<Libraries.Model.Entity.Kycdemandpaymentdetailstablec>
 
-<div class="permission mt-2 accordion list-unstyled m-0 ">
+@*<div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
         <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapsePaymentRpt" role="button" aria-expanded="true"
            aria-controls="collapsePaymentRpt">
@@ -9,12 +9,12 @@
             <span class="text ml-1 mr-auto">If Allottee not agreed with the amount deposited shown in DDA record, He/she can enter the challan</span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePaymentRpt">
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePaymentRpt">*@
 
             <div id="details">
                 <div class="table-section bg-white border shadow rounded">
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered mb-0 table-striped" id="Challan1">
+                        <table class="table table-sm table-bordered mb-0 table-striped calculation" id="Challan1">
                             <thead class="text-nowrap">
 
                                 <tr>
@@ -122,9 +122,9 @@
             <br />
             <br />
 
-        </div>
+        @*</div>
     </div>
-</div>
+</div>*@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 

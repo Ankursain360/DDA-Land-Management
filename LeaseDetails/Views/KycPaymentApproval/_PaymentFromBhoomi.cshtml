@@ -1,6 +1,6 @@
 ﻿@model Dto.Master.ApiResponseBhoomiApiFileWise
 
-<div class="permission mt-2 accordion list-unstyled m-0 ">
+@*<div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
         <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
            aria-controls="collapseApprroval">
@@ -8,7 +8,7 @@
             <span class="text ml-1 mr-auto">View Payment Details From Bhoomi Application</span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">
+        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">*@
           
             <div id="details">
                 <div class="table-section bg-white border shadow rounded">
@@ -17,13 +17,12 @@
                         <thead class="text-nowrap">
                             <tr>
 
+                                @*<th>File Id</th>*@
 
                                 <th>Sr.No</th>
                                 <th>Challan No</th>
-                                <th>Challan Amount</th>
                                 <th>Deposite Date</th>
-                                <th>File Id</th>
-
+                                <th>Challan Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,14 +31,17 @@
                                 @foreach (var item in Model.cargo)
                                 {
 
-                                    <tr>
-                                        <td>@(rowNo += 1)</td>
-                                        <td>@item.CHLLN_NMBR</td>
-                                        <td align="right">@item.CHLLN_AMNT</td>
-                                        <td align="right">@item.DPST_DT</td>
-                                        <td align="right">@item.FL_ID</td>
+                            <tr>
+                               
+                                @*<td align="right">@item.FL_ID</td>*@
 
-                                    </tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>@item.CHLLN_NMBR</td>
+
+                                <td align="right">@item.DPST_DT</td>
+                                <td align="right">@item.CHLLN_AMNT</td>
+
+                            </tr>
                                 }
                             }
                             else
@@ -49,13 +51,31 @@
                                 </tr>
                             }
                         </tbody>
+                        <tfoot>
+                            @if (Model != null)
+                            {
+                                <tr>
+                                    <td colspan="3" align="right" style="font-weight:bolder"><b>Grand Total</b></td>
+                                    <td style="font-weight:bolder" align="right" id="tdtotalChallanAmount">@Model.cargo.Sum(x => x.CHLLN_AMNT)</td>
+
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
+                                    <td style="font-weight:bolder">0</td>
+
+                                </tr>
+                            }
+                        </tfoot>
 
 
                     </table>
                 </div>
             </div>
-            <br />
+            @*<br />
 
             </div>
     </div>
-</div>
+</div>*@

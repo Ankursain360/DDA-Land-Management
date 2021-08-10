@@ -32,26 +32,86 @@
 
     </div>
 
-    <div id="divPayment">
+    @*<div id="divPayment">
 
-    </div>
+    </div>*@
+
+    <div class="permission mt-2 accordion list-unstyled m-0 ">
+        <div class="card">
+            <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="true"
+               aria-controls="collapsePayment">
+                <i class="ri-arrow-right-s-fill"></i>
+                <span class="text ml-1 mr-auto">Payment Details</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePayment">
+
+                <h3 class="my-3 sub-heading">Demand Details as per DDA records (System Generated) </h3>
+                <div id="divPayment">
+
+                </div>
+                <br />
+                <h3 class="my-3 sub-heading">View Payment Details From Bhoomi Application </h3>
+                <div id="divPaymentFromBhoomi">
+
+                </div>
+                
+                <div class="row pt-4">
+                    <div class=" col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input asp-for="TotalPayable" placeholder="Total payable" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="text-danger"></span>
+                            <label class="floating-label">Total payable (Provisional)Rs. <span style="color:red">*</span>  </label>
+                        </div>
+                    </div>
+
+                    <div class=" col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="text-danger"></span>
+                            <label class="floating-label">Total Payable interest (Provisional)Rs.<span style="color:red">*</span>  </label>
+                        </div>
+                    </div>
+                    <div class=" col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input asp-for="TotalDues" placeholder="Total dues" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="text-danger"></span>
+                            <label class="floating-label">Total dues (Provisional)Rs. <span style="color:red">*</span>  </label>
+                        </div>
+                    </div>
+                </div>
+
+                @if (Model.IsPaymentAgreed == "Y")
+                {
+
+                }
+                else
+                {
+                    <h3 class="my-3 sub-heading">If Allottee not agreed with the amount deposited shown in DDA record, He/she can enter the challan </h3>
+
+                    <div id="divChallan" class="pt-4">
+
+                    </div>
+                }
 
 
-    <div id="divPaymentFromBhoomi">
+            </div>
 
-    </div>
 
-    @if (Model.IsPaymentAgreed == "Y")
-    {
-
-    }
-    else
-    {
-        <div id="divChallan">
 
         </div>
-    }
+    </div>
+    @*<div id="divPaymentFromBhoomi">
 
+    </div>*@
+
+   
 
 
     <div id="divHistoryDetails">
