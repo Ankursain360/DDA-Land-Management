@@ -10,6 +10,11 @@ using Repository.IEntityRepository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Libraries.Repository.IEntityRepository;
+using Microsoft.EntityFrameworkCore.Internal;
+using System;
+
+
 
 namespace Repository.EntityRepository
 {
@@ -345,6 +350,49 @@ namespace Repository.EntityRepository
                                     .Include(a => a.District)
                                     .Where(a => a.IsActive == 1 && a.User.Id == userId)
                                     .FirstOrDefaultAsync();
+        }
+
+
+        public async Task<List<Jaraiowner>> GetAllOwner(int id)
+        {
+            return await _dbContext.Jaraiowner.Where(x => x.JaraiDetailId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<KycApplicationSearchDto>> KycApplicationDetails(int userId)
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("GetKycApplicationDetailsForChart")
+                                            .WithSqlParams(("User_Id", userId))
+                                            .ExecuteStoredProcedureAsync<KycApplicationSearchDto>();
+
+                return (List<KycApplicationSearchDto >)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<List<KycDemandPaymentSearchDto>> KycDemandPaymentDetails(int userId)
+        {
+            try
+            {
+
+
+                var data = await _dbContext.LoadStoredProcedure("GetKycDemandPaymentDetailsForChart")
+                                            .WithSqlParams(("User_Id", userId))
+                                            .ExecuteStoredProcedureAsync<KycDemandPaymentSearchDto>();
+
+                return (List<KycDemandPaymentSearchDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task<List<ApplicationRole>> GetRole()

@@ -5,6 +5,7 @@ using LeaseDetails.Helper;
 using LeaseDetails.Models;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace LeaseDetails.Controllers
 {
@@ -19,6 +20,37 @@ namespace LeaseDetails.Controllers
             _siteContext = siteContext;
             _userProfileService = userProfileService;
         }
+
+        [HttpGet]
+        public async Task<JsonResult> KycApplicationDetails(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _userProfileService.KycApplicationDetails(_siteContext.UserId);
+            return Json(data.Select(x => new
+            {
+                x.KycApplicaionPending,
+                x.KycApplicaionApprove,
+                x.KycApplicaionInProcess,
+                
+            }));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> KycDemandPaymentDetails(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _userProfileService.KycDemandPaymentDetails(_siteContext.UserId);
+            return Json(data.Select(x => new
+            {
+                x.KycDemandPaymentPending,
+                x.KycDemandPaymentApprove,
+                x.KycDemandPaymentInProcess,               
+            }));
+        }
+
+
+        
+
 
         public async Task<IActionResult> Index()
         {

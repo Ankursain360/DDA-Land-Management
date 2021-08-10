@@ -82,6 +82,18 @@ namespace Service.ApplicationService
             return result;
         }
 
+       
+
+
+        public async Task<List<KycApplicationSearchDto>> KycApplicationDetails(int id)
+        {
+            return await _userProfileRepository.KycApplicationDetails(id);
+        }
+
+        public async Task<List<KycDemandPaymentSearchDto>> KycDemandPaymentDetails(int id)
+        {
+            return await _userProfileRepository.KycDemandPaymentDetails(id);
+        }
         public async Task<bool> UpdateRole(RoleDto roleDto)
         {
             var role = await _roleManager.FindByIdAsync(roleDto.Id.ToString());

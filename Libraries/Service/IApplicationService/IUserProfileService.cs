@@ -18,6 +18,9 @@ namespace Service.IApplicationService
         Task<bool> UpdateRole(RoleDto model);
         Task<List<UserProfileDto>> GetUser();
         Task<UserProfileDto> GetUserById(int userId);
+        Task<List<KycApplicationSearchDto>> KycApplicationDetails(int userId);
+
+        Task<List<KycDemandPaymentSearchDto>> KycDemandPaymentDetails(int userId);
         Task<List<RoleDto>> GetRole();
         Task<List<RoleDto>> GetActiveRole();
         Task<bool> CreateUser(AddUserDto userDto);

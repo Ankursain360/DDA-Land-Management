@@ -16,6 +16,11 @@ namespace Repository.IEntityRepository
         Task<List<Userprofile>> GetUser();
         Task<List<ApplicationRole>> GetRole();
         Task<Userprofile> GetUserById(int userId);
+
+
+        Task<List<KycApplicationSearchDto>> KycApplicationDetails(int id);
+
+        Task<List<KycDemandPaymentSearchDto>> KycDemandPaymentDetails(int id);
         Task<List<ApplicationRole>> GetActiveRole();
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<bool> ValidateUniqueRoleName(int id, string name);

@@ -490,5 +490,11 @@
     "inputFiles": [
       "wwwroot/js/kycpaymentapprovalindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/KycApplicationDashboardDetails.min.js",
+    "inputFiles": [
+      "wwwroot/js/KycApplicationDashboardDetails.js"
+    ]
   }
 ]
