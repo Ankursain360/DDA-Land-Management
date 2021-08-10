@@ -29,9 +29,11 @@ namespace LeaseDetails.Controllers
             return Json(data.Select(x => new
             {
                 x.KycApplicaionPending,
-                x.KycApplicaionApprove,
-                x.KycApplicaionInProcess,
-                
+                x.KycApplicaionApprove,               
+                x.KycApplicationDeficiency,
+                x.KycApplicationInRejected,
+                x.KycApplicationInTotal,
+
             }));
         }
 
@@ -43,8 +45,10 @@ namespace LeaseDetails.Controllers
             return Json(data.Select(x => new
             {
                 x.KycDemandPaymentPending,
-                x.KycDemandPaymentApprove,
-                x.KycDemandPaymentInProcess,               
+                x.KycDemandPaymentApprove,              
+                x.KycDemandPaymentInDeficiency,
+                x.KycDemandPaymentRejected,
+                x.KycDemandPaymenTotal
             }));
         }
 

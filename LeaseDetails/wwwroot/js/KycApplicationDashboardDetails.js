@@ -16,19 +16,23 @@ function KycApplicationDetails() {
         var ChartForKycForm = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Pending', 'Approve', 'InProcess'],
+                labels: ['Total', 'Pending', 'Approved', 'Deficiency','Rejected'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [response[0].kycApplicaionPending, response[0].kycApplicaionApprove, response[0].kycApplicaionInProcess],
+                    data: [response[0].kycApplicationInTotal, response[0].kycApplicaionPending, response[0].kycApplicaionApprove, response[0].kycApplicationDeficiency, response[0].kycApplicationInRejected],
                     label: "Kyc Application",
                     backgroundColor: [
-                        "Red",
+                        "Blue",
+                        'Red',
                         'Green',
-                        'Blue',
+                        'Yellow',
+                        'Black',
                     ],
                     borderColor: [
 
                         'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
@@ -62,21 +66,25 @@ function KycDemandPaymentDetails() {
         var ChartForKycPaymentForm = new Chart(ctx1, {
             type: 'bar',
             data: {
-                labels: ['Pending', 'Approve', 'InProcess'],
+                labels: ['Total', 'Pending', 'Approved', 'Deficiency', 'Rejected'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [response[0].kycDemandPaymentPending, response[0].kycDemandPaymentApprove, response[0].kycDemandPaymentInProcess],
-                
+                    data: [response[0].kycDemandPaymenTotal, response[0].kycDemandPaymentPending, response[0].kycDemandPaymentApprove, response[0].kycDemandPaymentInDeficiency, response[0].kycDemandPaymentRejected],
+                     
                     label: "Kyc Demand Payment Application",
                     backgroundColor: [
-                        "Red",
+                        "Blue",
+                        'Red',
                         'Green',
-                        'Blue',
+                        'Yellow',
+                        'Black',
 
                     ],
                     borderColor: [
 
                         'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
