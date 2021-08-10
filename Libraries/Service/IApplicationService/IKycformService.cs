@@ -36,6 +36,7 @@ namespace Libraries.Service.IApplicationService
         Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
         Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
         Task<bool> UpdateBeforeApproval(int id, Kycform kyc);
+        Task<bool> UpdateBeforeApproval1(int id, Kycform kyc); //in case of approved
         Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval, int userId);
     }
 }
