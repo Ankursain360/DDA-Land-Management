@@ -14,5 +14,7 @@ namespace Dto.Search
         public int KycApplicationDeficiency { get; set; }
 
         public int KycApplicationInRejected { get; set; }
+
+        public int KycApplicationInTotal { get; set; }
     }
 }
