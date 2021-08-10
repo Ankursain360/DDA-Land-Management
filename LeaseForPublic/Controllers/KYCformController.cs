@@ -442,7 +442,7 @@ namespace LeaseForPublic.Controllers
                                 approvalproccess.Status = ApprovalStatus.Id;   //1
                                 //approvalproccess.Level = i + 1;
                                 approvalproccess.Version = workflowtemplatedata.Version;
-                                approvalproccess.Remarks = "Record Resubmitted by "+kyc.Name;///May be Uncomment
+                                approvalproccess.Remarks = "Record Resubmitted by Applicant";///May be Uncomment
                                 //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
                                 result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in approvalproccess Table
 
@@ -450,9 +450,9 @@ namespace LeaseForPublic.Controllers
                                 if (result)
                                 {
                                     var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
-                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                   // var user = await _userProfileService.GetUserById(SiteContext.UserId);
                                     Usernotification usernotification = new Usernotification();
-                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
+                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name == ""?"Applicant": kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
                                     usernotification.Message = replacement;
                                     usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
                                     usernotification.ProcessGuid = approvalproccess.ProcessGuid;
