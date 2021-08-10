@@ -303,7 +303,7 @@ function validateForm() {
             status = 2;
         }
     }
-    alert(Property);
+  
     if (Property == "License") {
         if (LicenseFrequency == "") {
            
