@@ -884,16 +884,15 @@ namespace LeaseDetails.Controllers
                 
                 if (result1 == true)
                 {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-
+                    ViewBag.Message = Alert.Show("Record updated successfully", "", AlertType.Success);
+                    return Json("Record updated successfully");
                     
-                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
-
+                 
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
+                    return Json("Record Not Updated");
 
 
                 }
@@ -901,8 +900,7 @@ namespace LeaseDetails.Controllers
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
-
+                return Json("Record Not Updated");
 
             }
 
@@ -942,25 +940,22 @@ namespace LeaseDetails.Controllers
 
                 if (result1 == true)
                 {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    ViewBag.Message = Alert.Show("Record updated successfully", "", AlertType.Success);
 
 
-                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
-
+                    return Json("Record updated successfully");
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
-
+                    return Json("Record Not Updated");
 
                 }
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return RedirectToAction("Create", "KycPaymentApproval", new { id = jsondata[0].DemandPaymentId });
-
+                return Json("Record Not Updated");
 
             }
 

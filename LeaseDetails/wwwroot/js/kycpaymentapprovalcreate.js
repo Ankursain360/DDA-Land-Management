@@ -16,7 +16,7 @@
     //    $('input[name="Verifychk"]').attr("checked", "checked");
     //} $('input[name="Verifychk"]').removeAttr("checked");
 
-   
+
 });
 
 
@@ -46,14 +46,14 @@ function GetPaymentFromBhoomi() {
 
         $('#divPaymentFromBhoomi').html("");
         $('#divPaymentFromBhoomi').html(response);
-        GetCalculation();
+        //GetCalculation();
     });
 
 }
 
 
 function GetApplicantChallan() {
-   
+
     HttpGet(`/KycPaymentApproval/GetChallanDetails/?Id=${$("#Id").val()}`, 'html', function (response) {
         debugger;
         $('#divChallan').html("");
@@ -69,7 +69,7 @@ function GetApplicantChallan() {
                 $(this).find('input[name="Verifychk"]').prop('checked', false);
             }
         });
-      
+
     });
 }
 
@@ -335,11 +335,12 @@ $("#btnCreate").click(function () {
 });
 
 
-function UpdatePaymentDetails() {  
+function UpdatePaymentDetails() {
     var param = GetUpdatedPaymentParam();
     HttpPostAsync(`/KycPaymentApproval/UpdatePayment/`, 'json', param, function (response) {
-         //check status here and show message based on that
-        window.location.href = '/KycPaymentApproval/Index';
+        //check status here and show message based on that
+        SuccessMessage(response);
+       
     });
 };
 
@@ -358,7 +359,7 @@ function GetUpdatedPaymentParam() {
         }
         list.push(model);
     });
-    
+
     console.log(list);
     return (list);
 }
@@ -369,7 +370,7 @@ function UpdateChallanDetails() {
     HttpPostAsync(`/KycPaymentApproval/UpdateChallan/`, 'json', param, function (response) {
         debugger;
         //check status here and show message based on that
-        window.location.href = '/KycPaymentApproval/Index';
+        SuccessMessage(response);
     });
 };
 
@@ -378,11 +379,11 @@ function GetUpdatedChallanParam() {
     var list = [];
     $('#Challan1').find('tbody').find('tr').each(function (i) {
         model = {
-            
+
             KycId: parseInt($(this).find('#item_KycId').val()),
             DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
-           
-            IsVerified: $(this).find('#Verifychk1').is(':checked') == true?'T':'F',
+
+            IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
             PaymentType: $(this).find('#item_PaymentType').val(),
             Period: $(this).find('#item_Period').val(),
             ChallanNo: $(this).find('#item_ChallanNo').val(),
@@ -400,15 +401,13 @@ function GetUpdatedChallanParam() {
 }
 
 
-function chkmsg(input)
-{
-    if ($(input).is(":checked"))
-    {
+function chkmsg(input) {
+    if ($(input).is(":checked")) {
         return confirm("Are you sure you want to mark this records as verified? it means this record will be saved in Bhoomi application as verified payment record.");
     }
-    
+
     return confirm("Are you sure you want to mark this records as unverified?");
-   
+
 }
 
 
@@ -423,7 +422,7 @@ function GetCalculation() {
     var amount = 0;
 
     $('.calculation').find('tbody').find('tr').each(function (i) {
-        amount = amount + Number($(this).find('#Amount').val());
+        amount = amount + Number($(this).find('#item_Amount').val());
     });
 
     if (TotalChallanAmount == '') {
@@ -446,7 +445,7 @@ function GetCalculation() {
 }
 
 
-$('#Amount').change(function () {
+$('#item_Amount').change(function () {
     debugger;
     GetCalculation();
 
