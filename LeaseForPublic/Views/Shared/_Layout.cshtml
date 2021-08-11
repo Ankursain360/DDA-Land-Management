@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@*@model Libraries.Model.Entity.Leasesignup*@
+
+<!DOCTYPE html>
 <html>
 <head id="divPrintRef">
     <meta charset="utf-8">
@@ -92,7 +94,7 @@
                                     <img src="~/images/favicon.png" alt="user-image" class="rounded-circle" width="34" height="34" />
                                 </figure>
                                 <strong class="text-img rounded-circle d-block">
-                                  
+
                                 </strong>
                                 <span class="ml-2 d-none d-md-block"></span>
                             </div>
@@ -103,12 +105,24 @@
                                 <figure class="m-0">
                                     <img class="rounded-circle shadow-sm border" src="~/images/face.jpg">
                                 </figure>
-                                <h3></h3>
+                                <strong class="text-img rounded-circle d-block">
+                                    @*@HttpContext.Session.GetString("Name");*@
+                                    @*<span  value="@Model.Name" class="text-danger"></span>*@
+                                    @*@Model.User.UserName.Substring(0, 1)*@
+                               
+                                </strong>
+                                <span class="ml-2 d-none d-md-block">
+
+                                   
+
+                                </span>
+
                                 <p class="text-muted px-3"></p>
                                 <p class="text-muted px-3"></p>
                                 <ul class="list-unstyled m-0 p-0">
-                                  
+
                                     <li>
+                                        @*<p> @ViewBag.Title ="Nikita"</p>*@  
                                         <a href="/SignupForm/Create" class="d-flex align-items-center">
                                             <i class="ri-logout-circle-line mr-3"></i>
                                             Log Out
@@ -170,16 +184,16 @@
     </section>
     <footer class="footer slow">
         @*<div class="container-fluid">
-            <p class="my-0 py-2">
-                <a href="#">Terms & Conditions</a>
-                | <a href="#">Privacy Policy</a>
-                | <a href="#">Copyright Policy</a>
-                | <a href="#">Hyperlink policy</a>
-                | <a href="#">Accessibility Statement</a>
-                | <a href="#">Help</a><br>
-                &copy; Content Owned by DDA, Government of India.
-            </p>
-        </div>*@
+                <p class="my-0 py-2">
+                    <a href="#">Terms & Conditions</a>
+                    | <a href="#">Privacy Policy</a>
+                    | <a href="#">Copyright Policy</a>
+                    | <a href="#">Hyperlink policy</a>
+                    | <a href="#">Accessibility Statement</a>
+                    | <a href="#">Help</a><br>
+                    &copy; Content Owned by DDA, Government of India.
+                </p>
+            </div>*@
     </footer>
 
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -194,5 +208,6 @@
     </environment>
     @RenderSection("Scripts", required: false)
     @Html.Raw(ViewBag.Message)
+    @Html.Raw(ViewBag.Title)
 </body>
 </html>

@@ -76,6 +76,7 @@ $("#signup2").click(function () {
     var model = {
         MobileNo: mobile,
         EmailId: email
+      
     }
    
     if (name != "" && mobile != "" && email != "") {

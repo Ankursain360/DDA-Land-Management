@@ -100,9 +100,9 @@ namespace LeaseForPublic.Controllers
             return View(leasesignup);
         }
 
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create()
         {
-            var Data = await _kycformService.FetchSingleResult(id);
+           
             Leasesignup leasesignup = new Leasesignup();
 
 
@@ -175,6 +175,7 @@ namespace LeaseForPublic.Controllers
             SMS.GenerateSendSMS(Action, Mobile);
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", model.EmailId);
+           
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
             JsonMsg.Add(otp.ToString());
@@ -191,11 +192,15 @@ namespace LeaseForPublic.Controllers
             {
                 var mobile = HttpContext.Session.GetString("Mobile");
                 var email = HttpContext.Session.GetString("Email");
+                
 
                 if (ModelState.IsValid)
                 {
                     var result = await _leasesignupService.Create(leasesignup);
                     HttpContext.Session.SetString("ID", leasesignup.Id.ToString());
+                    HttpContext.Session.SetString("Name", leasesignup.Name.ToString());
+                    var Name = HttpContext.Session.GetString("Name");
+                    ViewBag.Title = Name;
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);

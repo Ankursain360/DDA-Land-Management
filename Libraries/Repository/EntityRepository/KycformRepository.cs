@@ -128,7 +128,7 @@ namespace Libraries.Repository.EntityRepository
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
                                         && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
 
-                                       ).OrderByDescending(x => x.IsActive)
+                                       ).OrderByDescending(x => x.ApprovedStatus)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                             break;
 
@@ -167,7 +167,7 @@ namespace Libraries.Repository.EntityRepository
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
                                         && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
 
-                                       ).OrderBy(x => x.IsActive)
+                                       ).OrderBy(x => x.ApprovedStatus)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                             break;
                     }

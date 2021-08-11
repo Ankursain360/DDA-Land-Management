@@ -141,7 +141,7 @@ $("input[name='chksame']").click(function () {/* -----------Added by Ishu  -----
     if ($("#chk1").is(":checked")) {
         $("#AllotteeApplicantDetailsSame").val("yes");
 
-        $('#AllotteeLicenseeName').val($('#Name').val());
+        $('#AllotteeLicenseeName').val($('#name1').val());
         $('#AllotteeLicenseeAddress').val($('#Address').val());
         $('#AllotteeLicenseeMobileNo').val($('#MobileNo').val());
         $('#AllotteeLicenseeEmailId').val($('#EmailId').val());

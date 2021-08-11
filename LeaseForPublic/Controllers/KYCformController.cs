@@ -566,5 +566,44 @@ namespace LeaseForPublic.Controllers
             return Json(await _kycformService.GetLocalityList(Convert.ToInt32(zoneid)));
         }
 
+
+
+        public async Task<IActionResult> KycFormDetailsList()
+        {
+            var result = await _kycformService.GetAllKycform();
+            List<KycformListDto> data = new List<KycformListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new KycformListDto()
+                    {
+                        Id = result[i].Id,
+                        PlotNo = result[i].PlotNo,
+                        Area = result[i].Area == null ? "" : result[i].Area.ToString(),
+                        PropertyType = result[i].Property == null ? "" : result[i].Property.ToString(),
+                       
+                        NatureOfProperty = result[i].PropertyType == null ? "" : result[i].PropertyType.Name.ToString(),
+                        FileNo = result[i].FileNo,
+                        Branch = result[i].Branch == null ? "" : result[i].Branch.Name.ToString(),
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
+                   
+                        DateofAllotmentLetter = Convert.ToDateTime(result[i].AllotmentLetterDate).ToString("dd-MMM-yyyy"),
+                        DateofPossession = Convert.ToDateTime(result[i].PossessionDate).ToString("dd-MMM-yyyy"),
+                        //Status = result[i].ApprovedStatus == 1 ? se : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+
+
     }
 }
