@@ -3,92 +3,88 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_LayoutApproval.cshtml";
 }
-<div class="row mt-md-3">
-    <div class="col-md-12">
-        <div class="col-md-12">
-            <h6 class="pull-left" style="color:#007bff;margin-top:5px;">KYC Form Approval</h6>
-        </div>
-    </div>
-</div>
-<form asp-action="Back" method="post">
-    <div class="row pt-3 mb-2">
-        <div class="col-md-12" align="right">
-            <button type="submit" class="btn btn-primary">Go To Main Approval Process</button>
-        </div>
-    </div>
-</form>
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Filter</h3>
-
-    <div class="row mt-md-3">
-
-        <div class="col-md-3">
-            <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="0" checked>
-                <label class="form-check-label" for="radio">
-                    Inprocess
-                </label>
+<div class="pt-3">
+    @await Component.InvokeAsync("PageHeader", new { pageName = "KYC Form Approval" })
+    <form asp-action="Back" method="post" style="display:none;">
+        <div class="row pt-3 mb-2">
+            <div class="col-md-12" align="right">
+                <button type="submit" class="btn btn-primary">Go To Main Approval Process</button>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
-                <label class="form-check-label" for="radio">
-                    All
-                </label>
-            </div>
-        </div>
+    </form>
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Filter</h3>
 
-    </div>
-    <div class="row mt-md-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap">
-                
-                <select class="floating-label-field floating-label-field--s3" 
-                asp-for="ApprovalStatus" asp-items="@(new SelectList(Model.ApprovalStatusList, "Id","Name"))">
-            <option value="0">All</option>
-        </select>
-        <label class="floating-label" asp-for="ApprovalStatus">Status</label>
-            </div>
-        </div>
-    </div>
+        <div class="row mt-md-3">
 
-</div>
-<div class="table-section bg-white border shadow rounded">
-    <div class="short-section d-md-flex align-items-center">
-        <div class="p-3 d-flex align-items-end mr-auto">
-            <div class="floating-label-wrap">
-                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                    <option value="Name">Property </option>
-                </select>
-                <label for="field-1" class="floating-label">Sort by</label>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="0" checked>
+                    <label class="form-check-label" for="radio">
+                        Inprocess
+                    </label>
+                </div>
             </div>
-            <div class="short-btn d-flex align-items-center">
-                <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
-                <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
+                    <label class="form-check-label" for="radio">
+                        All
+                    </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="ApprovalStatus" asp-items="@(new SelectList(Model.ApprovalStatusList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                    <label class="floating-label" asp-for="ApprovalStatus">Status</label>
+                </div>
             </div>
         </div>
 
-        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
-                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                <small>Download</small>
-            </a>
+    </div>
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="Name">Property </option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive px-2" id="divTable">
+
         </div>
     </div>
-    <div class="table-responsive px-2" id="divTable">
 
+    <br />
+    <br />
     </div>
-</div>
-
-<br />
-<br />
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/kycformapprovalindex.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/kycformapprovalindex.min.js" asp-append-version="true"></script>
-</environment>
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/kycformapprovalindex.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/kycformapprovalindex.min.js" asp-append-version="true"></script>
+    </environment>
 
 

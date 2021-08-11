@@ -496,5 +496,11 @@
     "inputFiles": [
       "wwwroot/js/KycApplicationDashboardDetails.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemandPaymentCalculation.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemandPaymentCalculation.js"
+    ]
   }
 ]

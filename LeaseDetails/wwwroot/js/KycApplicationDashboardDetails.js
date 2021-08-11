@@ -20,7 +20,7 @@ function KycApplicationDetails() {
                 datasets: [{
                     label: '# of Votes',
                     data: [response[0].kycApplicationInTotal, response[0].kycApplicaionPending, response[0].kycApplicaionApprove, response[0].kycApplicationDeficiency, response[0].kycApplicationInRejected],
-                    label: "Kyc Application",
+                    //label: "Kyc Application",
                     backgroundColor: [
                         "Blue",
                         'Red',
@@ -41,6 +41,7 @@ function KycApplicationDetails() {
             },
             options: {
                 responsive: false,
+                legend:false,
                 scales: {
                     y: {
                         beginAtZero: true
@@ -71,7 +72,7 @@ function KycDemandPaymentDetails() {
                     label: '# of Votes',
                     data: [response[0].kycDemandPaymenTotal, response[0].kycDemandPaymentPending, response[0].kycDemandPaymentApprove, response[0].kycDemandPaymentInDeficiency, response[0].kycDemandPaymentRejected],
                      
-                    label: "Kyc Demand Payment Application",
+                    //label: "Kyc Demand Payment Application",
                     backgroundColor: [
                         "Blue",
                         'Red',
@@ -92,7 +93,8 @@ function KycDemandPaymentDetails() {
                 }]
             },
             options: {
-                responsive: false,
+                responsive: false,  
+                legend: false,
                 scales: {
                     y: {
                         beginAtZero: true
