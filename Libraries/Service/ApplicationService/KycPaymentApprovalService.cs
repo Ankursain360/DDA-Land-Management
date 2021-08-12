@@ -36,6 +36,22 @@ namespace Service.ApplicationService
         {
             return await _kycPaymentApprovalRepository.FetchSingleResult(id);
         }
+        public async Task<bool> UpdateDetails(int id, Kycdemandpaymentdetails pay,int userId)
+        {
+            var result = await _kycPaymentApprovalRepository.FindBy(a => a.Id == id);
+            Kycdemandpaymentdetails model = result.FirstOrDefault();
+            model.TotalPayable = pay.TotalPayable;
+            model.TotalPayableInterest = pay.TotalPayableInterest;
+            model.TotalDues = pay.TotalDues;
+            // model.TotalPayable = dto.Name;
+
+            model.IsActive = 1;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = userId;
+            
+            _kycPaymentApprovalRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
         public async Task<bool> UpdatePaymentDetails(int id, DemandPaymentDetailsDto dto)
         {
             var result = await _kycPaymentApprovalRepository.FindBy(a => a.Id == id);

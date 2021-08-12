@@ -339,8 +339,12 @@ function UpdatePaymentDetails() {
     var param = GetUpdatedPaymentParam();
     HttpPostAsync(`/KycPaymentApproval/UpdatePayment/`, 'json', param, function (response) {
         //check status here and show message based on that
-        SuccessMessage(response);
-       
+        //check status here and show message based on that
+        if (response.trim() == 'Record Not Updated') {
+            DisplayErrorMessages(response);
+        } else {
+            SuccessMessage(response);
+        }       
     });
 };
 
@@ -356,6 +360,9 @@ function GetUpdatedPaymentParam() {
             GroundRent: parseFloat($(this).find('#item_GroundRent').val()),
             InterestRate: parseFloat($(this).find('#item_InterestRate').val()),
             TotdalDues: parseFloat($(this).find('#item_TotdalDues').val()),
+            TotalPayable: parseFloat($('#TotalPayable').val()),
+            TotalPayableInterest: parseFloat($('#TotalPayableInterest').val()),
+            TotalPayableDues: parseFloat($('#TotalDues').val())
         }
         list.push(model);
     });
@@ -370,7 +377,11 @@ function UpdateChallanDetails() {
     HttpPostAsync(`/KycPaymentApproval/UpdateChallan/`, 'json', param, function (response) {
         debugger;
         //check status here and show message based on that
-        SuccessMessage(response);
+        if (response.trim() == 'Record Not Updated') {
+            DisplayErrorMessages(response);
+        } else {
+            SuccessMessage(response);
+        }
     });
 };
 
@@ -387,11 +398,13 @@ function GetUpdatedChallanParam() {
             PaymentType: $(this).find('#item_PaymentType').val(),
             Period: $(this).find('#item_Period').val(),
             ChallanNo: $(this).find('#item_ChallanNo').val(),
-            Amount: parseFloat($(this).find('#item_Amount').val()),
+            Amount: parseFloat($(this).find('#Amount').val()),
             DateofPaymentByAllottee: $(this).find('#item_DateofPaymentByAllottee').val(),
             Proofinpdf: $(this).find('#item_Proofinpdf').val(),
             Ddabankcredit: $(this).find('#item_Ddabankcredit').val(),
-
+            TotalPayable: parseFloat($('#TotalPayable').val()),
+            TotalPayableInterest: parseFloat($('#TotalPayableInterest').val()),
+            TotalPayableDues: parseFloat($('#TotalDues').val())
         }
         list.push(model);
     });
@@ -410,57 +423,47 @@ function chkmsg(input) {
 
 }
 
+// insert verified challan records in lims payment API
 
-
-// Demand Calculation Details
-
-function GetCalculation() {
+function GetChallanParamForAPI() {
+    
+    var list = [];
     debugger;
-    var TotalChallanAmount = Number($('#tdtotalChallanAmount').text());
-    var TotalDemandAmount = Number($('#tdtotalDemandAmount').text());
-    var TotalPayableInterest = Number($('#TotalPayableInterest').text());
-    var amount = 0;
+    $('#Challan1').find('tbody').find('tr').each(function (i) {
+        var IsVerified = $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F';
+        var model = null;
+        if (IsVerified == "T") {
+            model = {
 
-    $('.calculation').find('tbody').find('tr').each(function (i) {
-        amount = amount + Number($(this).find('#item_Amount').val());
+                // IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
+                CHLLN_NO: $(this).find('#item_ChallanNo').val(),
+                CHLLN_AMNT: parseFloat($(this).find('#Amount').val()),
+                DPST_DT: "0",
+                USR_ID: "0",
+                SCHM_ID: "0",
+                FL_NMBR: $("#FileNo").val()
+            }
+
+            list.push(model);
+        }
+
+       
     });
 
-    if (TotalChallanAmount == '') {
-        TotalChallanAmount = 0;
-    }
-    if (TotalDemandAmount == '') {
-        TotalDemandAmount = 0;
-    }
-
-    if (TotalPayableInterest == '') {
-        TotalPayableInterest = 0;
-    }
-
-    if (amount == '') {
-        amount = 0;
-    }
-    document.getElementById("TotalPayable").value = TotalDemandAmount - TotalChallanAmount - amount;
-    // Here Table A-Table B -Table C
-    document.getElementById("TotalDues").value = TotalDemandAmount + TotalPayableInterest - TotalChallanAmount - amount;
+    console.log(list);
+    return (list);
 }
 
 
-$('#item_Amount').change(function () {
-    debugger;
-    GetCalculation();
-
-});
-
-//$('#GRent').change(function () {
-//    debugger;
-//    var TotalDues = 0;
-//    $('#pay1').find('tbody').find('tr').each(function (i) {
-//        var GroundRent = parseFloat($(this).find('#item_GroundRent').val());
-//        var InterestRate = parseFloat($(this).find('#item_InterestRate').val());
-//        TotalDues = GroundRent + InterestRate;
-//        // document.getElementById("item_TotdalDues").value = TotdalDues;
-//        $(this).find('#item_TotdalDues').value = TotalDues;
-//        //  $(this).find('#item_TotdalDues').val(GroundRent + InterestRate);
-//        Console.log(TotalDues);
-//    });
-//});
+function UpdateDetailsInBhoomi() {
+    var param = GetChallanParamForAPI();
+    HttpPostAsync(`/KycPaymentApproval/UpdateBhoomi/`, 'json', param, function (response) {
+        debugger;
+        //check status here and show message based on that
+        if (response.trim() == 'Record Not Updated') {
+            DisplayErrorMessages(response);
+        } else {
+            SuccessMessage(response);
+        }
+    });
+};

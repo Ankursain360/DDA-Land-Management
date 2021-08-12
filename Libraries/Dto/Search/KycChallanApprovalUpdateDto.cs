@@ -19,6 +19,10 @@ namespace Dto.Search
         public DateTime? DateofPaymentByAllottee { get; set; }
         public string Proofinpdf { get; set; }
         public string Ddabankcredit { get; set; }
+        public decimal? TotalPayable { get; set; }
+        public decimal? TotalPayableInterest { get; set; }
+        public decimal? TotalPayableDues { get; set; }
+
 
     }
 }
