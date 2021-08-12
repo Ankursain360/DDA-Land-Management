@@ -32,16 +32,16 @@ function GetHistoryDetails(id) {
 
 function callSelect2() {
     $("select").select2({
-        placeholder: "Select",
-        allowClear: true
+       // placeholder: "Select",
+       // allowClear: true
     });
 }
 
 $("#collapse").click(function () {
     $('#collapseApprroval').collapse("toggle").promise().done(function () {
         $("select").select2({
-            placeholder: "Select",
-            allowClear: true
+          //  placeholder: "Select",
+           // allowClear: true
         });
     });
 });

@@ -274,21 +274,16 @@ $('#FatherName').keydown(function (e) {
 
 function validateForm() {
    
-    let FileNo = document.forms["kyc-form"]["FileNo"].value;
+  //  let FileNo = document.forms["kyc-form"]["FileNo"].value;
     let PropertyTypeId = document.forms["kyc-form"]["PropertyTypeId"].value;
     let LeaseTypeId = document.forms["kyc-form"]["LeaseTypeId"].value;
     let LicenseFrequency = document.forms["kyc-form"]["LicenseFrequency"].value;
     let LeaseGroundRentDepositFrequency = document.forms["kyc-form"]["LeaseGroundRentDepositFrequency"].value;
-    let PossessionDate = document.forms["kyc-form"]["PossessionDate"].value;
+   let PossessionDate = document.forms["kyc-form"]["PossessionDate"].value;
     let Property = document.forms["kyc-form"]["Property"].value;
     
     var status = 1; 
-    if (FileNo == "") {
-     
-        $("#file-error").show();
-        status = 2;
-        // return false;
-    }
+   
 
     if (PropertyTypeId == "") {
        
@@ -304,8 +299,8 @@ function validateForm() {
             status = 2;
         }
     }
-  
-    if (Property == "License") {
+
+    if (Property == "License" || Property==0) {
         if (LicenseFrequency == "") {
            
             $("#LicenseFrequency-error").show();
