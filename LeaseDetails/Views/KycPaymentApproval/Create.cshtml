@@ -55,8 +55,22 @@
                 <div id="divPaymentFromBhoomi">
 
                 </div>
-                
-                <div class="row pt-4">
+
+
+                @if (Model.IsPaymentAgreed == "Y")
+                {
+
+                }
+                else
+                {
+                    <h3 class="my-3 sub-heading">If Allottee not agreed with the amount deposited shown in DDA record, He/she can enter the challan </h3>
+
+                    <div id="divChallan" class="pt-4">
+
+                    </div>
+                }
+
+                <div class="row pt-2">
                     <div class=" col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -87,20 +101,7 @@
                     </div>
                 </div>
 
-                @if (Model.IsPaymentAgreed == "Y")
-                {
-
-                }
-                else
-                {
-                    <h3 class="my-3 sub-heading">If Allottee not agreed with the amount deposited shown in DDA record, He/she can enter the challan </h3>
-
-                    <div id="divChallan" class="pt-4">
-
-                    </div>
-                }
-
-
+                <br /><br />
             </div>
 
 
@@ -171,7 +172,7 @@
     </div>
 
 
-    <div class="row pt-3">
+    <div class="row pt-3 pb-4">
         <div class="col-md-12">
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <textarea asp-for="ApprovalRemarks" type="text" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>

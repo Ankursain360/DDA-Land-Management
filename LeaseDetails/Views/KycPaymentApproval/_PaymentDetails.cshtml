@@ -1,7 +1,6 @@
 ﻿@*@model IEnumerable<Dto.Search.DemandPaymentDetailsDto>*@
 @*@model Dto.Search.DemandPaymentDetailsDto*@
-@model  IEnumerable<Libraries.Model.Entity.Kycdemandpaymentdetailstablea>
-
+@model IEnumerable<Libraries.Model.Entity.Kycdemandpaymentdetailstablea>
 @*<div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
         <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="true"
@@ -11,85 +10,93 @@
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
         <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePayment">*@
-                <div id="details">
-                    <div class="table-section bg-white border shadow rounded">
+<div id="details">
+    <div class="table-section bg-white border shadow rounded">
 
-                        <table class="table table-sm table-bordered mb-0 table-striped" id="pay1">
-                            <thead class="text-nowrap">
+        <table class="table table-sm table-bordered mb-0 table-striped" id="pay1">
+            <thead class="text-nowrap">
 
-                                <tr>
+                <tr>
 
-                                    <th>Demand Period</th>
-                                    <th>Ground Rent </th>
-                                    <th>Interest  </th>
-                                    <th>Total Dues </th>
+                    <th>Demand Period</th>
+                    <th>Ground Rent </th>
+                    <th>Interest  </th>
+                    <th>Total Dues </th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null && Model.Count() > 0)
-                                {
-                                    @foreach (var item in Model)
-                                    {
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
 
-                                        <tr>
+                        <tr>
 
-                                            <td>
-                                                <input asp-for="@item.KycId" type="hidden" />
-                                                <input asp-for="@item.DemandPaymentId" type="hidden" />
-                                                <input asp-for="@item.DemandPeriod" type="text" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.GroundRent" type="text" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.InterestRate" type="text" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.TotdalDues" type="text" class="floating-label-field floating-label-field--s3" />
-                                            </td>
+                            <td>
+                                <input asp-for="@item.KycId" type="hidden" />
+                                <input asp-for="@item.DemandPaymentId" type="hidden" />
+                                <input asp-for="@item.DemandPeriod" type="text" class="floating-label-field floating-label-field--s3" />
+                            </td>
+                            <td>
+                                <input asp-for="@item.GroundRent" id="txtGroundRent" type="text" class="floating-label-field floating-label-field--s3" />
+                            </td>
+                            <td>
+                                <input asp-for="@item.InterestRate" id="txtInterestRate" type="text" class="floating-label-field floating-label-field--s3" />
+                            </td>
+                            <td>
+                                <input asp-for="@item.TotdalDues" id="txtTotdalDues" type="text" class="floating-label-field total floating-label-field--s3" />
+                            </td>
 
 
-                                        </tr>
-                                    }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <th colspan="13" style="text-align:center"> Data Not Available </th>
-                                    </tr>
-                                }
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <th colspan="13" style="text-align:center"> Data Not Available </th>
+                    </tr>
+                }
 
-                            </tbody>
-                            <tfoot>
-                                @if (Model != null)
-                                {
-                                    <tr>
-                                        <td colspan="3" align="right" style="font-weight:bolder"><b>Total Dues Total</b></td>
-                                        <td style="font-weight:bolder" align="right" id="tdtotalDemandAmount">@Model.Sum(x => x.TotdalDues)</td>
-                                    </tr>
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
-                                        <td style="font-weight:bolder">0</td>
+            </tbody>
+            <tfoot>
+                @if (Model != null)
+                {
+                    <tr>
+                        <td colspan="3" align="right" style="font-weight:bolder"><b>Total Dues Total</b></td>
+                        <td style="font-weight:bolder" align="right" id="tdtotalDemandAmount">@Model.Sum(x => x.TotdalDues)</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="3" align="right" style="font-weight:bolder"><b>Total</b></td>
+                        <td style="font-weight:bolder">0</td>
 
-                                    </tr>
-                                }
-                            </tfoot>
+                    </tr>
+                }
+            </tfoot>
 
-                        </table>
-                    </div>
-                </div>
-                <br />
-
-                <div class="row pt-3">
-                    <div class="col-md-12">
-                        <input class="btn btn-theme" type="button" id="btnUpdatePaymentDetails" value="Update Payment Details" onclick="UpdatePaymentDetails();"/>
-                    </div>
-                </div>
-                <br />
-        @*</div>
+        </table>
     </div>
-</div>*@
+</div>
+<br />
+
+<div class="row pt-3">
+    <div class="col-md-12">
+        <input class="btn btn-theme" type="button" id="btnUpdatePaymentDetails" value="Update Payment Details" onclick="UpdatePaymentDetails();" />
+    </div>
+</div>
+<br />
+@*</div>
+        </div>
+    </div>*@
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/kycpaymentapprovalcalculation.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/kycpaymentapprovalcalculation.min.js" asp-append-version="true"></script>
+</environment>
