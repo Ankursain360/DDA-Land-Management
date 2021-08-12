@@ -450,3 +450,17 @@ $('#item_Amount').change(function () {
     GetCalculation();
 
 });
+
+//$('#GRent').change(function () {
+//    debugger;
+//    var TotalDues = 0;
+//    $('#pay1').find('tbody').find('tr').each(function (i) {
+//        var GroundRent = parseFloat($(this).find('#item_GroundRent').val());
+//        var InterestRate = parseFloat($(this).find('#item_InterestRate').val());
+//        TotalDues = GroundRent + InterestRate;
+//        // document.getElementById("item_TotdalDues").value = TotdalDues;
+//        $(this).find('#item_TotdalDues').value = TotalDues;
+//        //  $(this).find('#item_TotdalDues').val(GroundRent + InterestRate);
+//        Console.log(TotalDues);
+//    });
+//});
