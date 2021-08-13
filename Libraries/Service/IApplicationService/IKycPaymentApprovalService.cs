@@ -24,6 +24,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails payment);
 
+        Task<bool> UpdateDetails(int id, Kycdemandpaymentdetails pay, int userId);
+
         //********* rpt ! Allottee challan  Details  repeter**********
         Task<bool> SaveChallan(List<Kycdemandpaymentdetailstablec> challan);
         Task<List<Kycdemandpaymentdetailstablec>> GetAllChallan(int id);

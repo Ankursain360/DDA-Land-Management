@@ -903,5 +903,41 @@ namespace LeaseDetails.Controllers
             }
             return View(Data);
         }
+
+
+        public async Task<IActionResult> KycFormApprovalDetailsList()
+        {
+            var result = await _kycformService.GetAllKycform();
+            List<KycformApprovalListDto> data = new List<KycformApprovalListDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Count; i++)
+                {
+                    data.Add(new KycformApprovalListDto()
+                    {
+                        Id = result[i].Id,
+                        Property = result[i].Property == null ? "" : result[i].Property.ToString(),
+
+                        NatureOfProperty = result[i].PropertyType == null ? "" : result[i].PropertyType.Name.ToString(),
+                          FileNo = result[i].FileNo,
+                        Branch = result[i].Branch == null ? "" : result[i].Branch.Name.ToString(),
+                        Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
+
+                        DateofAllotmentLetter = Convert.ToDateTime(result[i].AllotmentLetterDate).ToString("dd-MMM-yyyy"),
+                        DateofPossession = Convert.ToDateTime(result[i].PossessionDate).ToString("dd-MMM-yyyy"),
+                        //Status = result[i].ApprovedStatus == 1 ? se : "Inactive",
+                    }); ;
+                }
+            }
+
+            var memory = ExcelHelper.CreateExcel(data);
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+
+
+
+
+
     }
 }

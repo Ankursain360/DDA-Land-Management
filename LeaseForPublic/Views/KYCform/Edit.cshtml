@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name">
+                        <input limit="100" type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name">
                         <span asp-validation-for="FileNo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">File No.<span style="color:red">*</span></label>
                         <label id="file-error" style="color:red;display:none;"> File No is Mandatory</label>
@@ -183,14 +183,14 @@
                 <div class="row mt-md-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="PlotNo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                            <input type="text" limit="100" asp-for="PlotNo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
                             <span asp-validation-for="PlotNo" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Plot No/ Khasra No </label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea type="text" asp-for="PlotDescription" class="floating-label-field floating-label-field--s3" placeholder="PlotDescription"></textarea>
+                            <textarea type="text" limit="500" asp-for="PlotDescription" class="floating-label-field floating-label-field--s3" placeholder="PlotDescription"></textarea>
                             <span asp-validation-for="PlotDescription" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Plot Description </label>
                         </div>
@@ -222,14 +222,14 @@
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="Phase" class="floating-label-field floating-label-field--s3" placeholder="Phase">
+                            <input type="text" limit="45" asp-for="Phase" class="floating-label-field floating-label-field--s3" placeholder="Phase">
                             <span asp-validation-for="Phase" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Phase</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="Sector" class="floating-label-field floating-label-field--s3" placeholder="Sector">
+                            <input type="text" asp-for="Sector" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Sector">
                             <span asp-validation-for="Sector" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Sector </label>
                         </div>
@@ -241,14 +241,14 @@
 
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="Block" class="floating-label-field floating-label-field--s3" placeholder="Block">
+                            <input type="text" asp-for="Block" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Block">
                             <span asp-validation-for="Block" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Block </label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="Pocket" class="floating-label-field floating-label-field--s3" placeholder="Pocket">
+                            <input type="text" asp-for="Pocket" limit="45" class="floating-label-field floating-label-field--s3" placeholder="Pocket">
                             <span asp-validation-for="Pocket" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Pocket</label>
                         </div>
@@ -267,14 +267,14 @@
                 <div class="row mt-md-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="Name" class="floating-label-field floating-label-field--s3" placeholder="First Name">
+                            <input type="text" asp-for="Name" limit="100" class="floating-label-field floating-label-field--s3" placeholder="First Name">
                             <span asp-validation-for="Name" class="text-danger"></span>
                             <label for="field-1" class="floating-label"> Name  </label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="FatherName" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
+                            <input type="text" asp-for="FatherName" limit="100" class="floating-label-field floating-label-field--s3" placeholder="Middle Name">
                             <span asp-validation-for="FatherName" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Father Name</label>
                         </div>
@@ -298,21 +298,21 @@
                 <div class="row mt-md-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="Email" asp-for="EmailId" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
+                            <input type="Email" asp-for="EmailId" limit="50" class="floating-label-field floating-label-field--s3" placeholder="Last Name">
                             <span asp-validation-for="EmailId" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Email ID</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="MobileNo" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="mobileno">
+                            <input asp-for="MobileNo" limit="10" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="mobileno">
                             <span asp-validation-for="MobileNo" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Mobile No.[Not add +91]</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea type="text" asp-for="Address" class="floating-label-field floating-label-field--s3" placeholder="address"></textarea>
+                            <textarea type="text" asp-for="Address" limit="500" class="floating-label-field floating-label-field--s3" placeholder="address"></textarea>
                             <span asp-validation-for="Address" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Correspondence Address</label>
                         </div>
@@ -323,7 +323,7 @@
 
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="AadhaarNo" class="floating-label-field floating-label-field--s3" placeholder="AadharNo">
+                            <input type="text" asp-for="AadhaarNo" limit="12" class="floating-label-field floating-label-field--s3 numbers" placeholder="AadharNo">
                             <span asp-validation-for="AadhaarNo" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Aadhaar No.</label>
                         </div>
@@ -361,28 +361,28 @@
                 <div class="row mt-md-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="AllotteeLicenseeName" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <input type="text" limit="100" asp-for="AllotteeLicenseeName" class="floating-label-field floating-label-field--s3" placeholder="Name">
                             <span asp-validation-for="AllotteeLicenseeName" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Name of the Allottee/Lessee </label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <textarea class="floating-label-field floating-label-field--s3" asp-for="AllotteeLicenseeAddress" placeholder="Address"> </textarea>
+                            <textarea limit="500" class="floating-label-field floating-label-field--s3" asp-for="AllotteeLicenseeAddress" placeholder="Address"> </textarea>
                             <span asp-validation-for="AllotteeLicenseeAddress" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Correspondence Address </label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="AllotteeLicenseeMobileNo" class="floating-label-field floating-label-field--s3 numbers" placeholder="PIN Code">
+                            <input type="text" limit="10" asp-for="AllotteeLicenseeMobileNo" class="floating-label-field floating-label-field--s3 numbers" placeholder="PIN Code">
                             <span asp-validation-for="AllotteeLicenseeMobileNo" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Mobile No.[Not add +91]</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="email" asp-for="AllotteeLicenseeEmailId" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
+                            <input type="email"  limit="50" asp-for="AllotteeLicenseeEmailId" class="floating-label-field floating-label-field--s3" placeholder="Email ID">
                             <span asp-validation-for="AllotteeLicenseeEmailId" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Email ID</label>
                         </div>

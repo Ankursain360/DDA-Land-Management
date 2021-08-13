@@ -20,7 +20,8 @@ using Dto.Master;
 using System.Text;
 using System.Net.Http;
 using System.Text.Json;
-
+using System.Net;
+using System.Xml.Serialization;
 
 namespace LeaseDetails.Controllers
 {
@@ -854,10 +855,11 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdatePayment([FromBody]List<KycPaymentApprovalUpdateDto> jsondata)
         {
-            
             if (jsondata != null)
             {
-
+                decimal totalPayableAmount = jsondata[0].TotalPayable ?? 0;
+                decimal totalPayableInterest = jsondata[0].TotalPayableInterest ?? 0;
+                decimal totalPayableDues = jsondata[0].TotalPayableDues ?? 0;
                 List<Kycdemandpaymentdetailstablea> payment = new List<Kycdemandpaymentdetailstablea>();
               var  result = await _kycPaymentApprovalService.DeletePayment(jsondata[0].DemandPaymentId);
                 for (int i = 0; i < jsondata.Count; i++)
@@ -881,6 +883,11 @@ namespace LeaseDetails.Controllers
                 
                 if (result1 == true)
                 {
+                    Kycdemandpaymentdetails kycpayment = new Kycdemandpaymentdetails();
+                    kycpayment.TotalPayable = totalPayableAmount;
+                    kycpayment.TotalPayableInterest = totalPayableInterest;
+                    kycpayment.TotalDues = totalPayableDues;
+                    var result2 =  await _kycPaymentApprovalService.UpdateDetails(jsondata[0].DemandPaymentId, kycpayment,SiteContext.UserId);
                     ViewBag.Message = Alert.Show("Record updated successfully", "", AlertType.Success);
                     return Json("Record updated successfully");
                     
@@ -909,7 +916,9 @@ namespace LeaseDetails.Controllers
 
             if (jsondata != null)
             {
-
+                decimal totalPayableAmount = jsondata[0].TotalPayable??0;
+                decimal totalPayableInterest = jsondata[0].TotalPayableInterest??0;
+                decimal totalPayableDues = jsondata[0].TotalPayableDues??0;
                 List<Kycdemandpaymentdetailstablec> challan = new List<Kycdemandpaymentdetailstablec>();
                 var result = await _kycPaymentApprovalService.DeleteChallan(jsondata[0].DemandPaymentId);
                 for (int i = 0; i < jsondata.Count; i++)
@@ -937,6 +946,12 @@ namespace LeaseDetails.Controllers
 
                 if (result1 == true)
                 {
+                    Kycdemandpaymentdetails kycpayment = new Kycdemandpaymentdetails();
+                    kycpayment.TotalPayable = totalPayableAmount;
+                    kycpayment.TotalPayableInterest = totalPayableInterest;
+                    kycpayment.TotalDues = totalPayableDues;
+                    var result2 = await _kycPaymentApprovalService.UpdateDetails(jsondata[0].DemandPaymentId, kycpayment, SiteContext.UserId);
+
                     ViewBag.Message = Alert.Show("Record updated successfully", "", AlertType.Success);
 
 
@@ -953,6 +968,44 @@ namespace LeaseDetails.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return Json("Record Not Updated");
+
+            }
+
+        }
+
+
+        [HttpPost]
+        public  Task<IActionResult> UpdateBhoomi([FromBody] List<InsertIntoLIMSPaymentApidto> jsondata)
+        {
+            if (jsondata != null)
+            {
+                WebServiceHelper api = new WebServiceHelper();
+                 for (int i = 0; i < jsondata.Count; i++)
+                 {
+                  
+                    api.XMLDataProcess("http://119.226.139.196/lmispayment/LMIS_Insert.asmx/AddChallanDtls", jsondata[i], "POST");
+                    
+                 }
+                return null;
+
+
+                //if (result1 == true)
+                //{
+                //       return Json("Record updated successfully");
+
+                //}
+                //else
+                //{
+                //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                //    return Json("Record Not Updated");
+
+
+                //}
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return null;
 
             }
 

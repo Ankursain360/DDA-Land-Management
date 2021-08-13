@@ -26,7 +26,7 @@ namespace Libraries.Model.Entity
         public string Property { get; set; }
        // [Required(ErrorMessage = " Nature of Property is mandatory")]
         public int? PropertyTypeId { get; set; }
-      //  [Required(ErrorMessage = " File No is mandatory")]
+        [Required(ErrorMessage = " File No is mandatory")]
         public string FileNo { get; set; }
         [Required(ErrorMessage = " Branch is Mandatory")]
         public int? BranchId { get; set; }
@@ -84,7 +84,7 @@ namespace Libraries.Model.Entity
       //  [Required(ErrorMessage = "Area Unit  is mandatory")]
         public string AreaUnit { get; set; }
         public DateTime? AllotmentLetterDate { get; set; }
-      //  [Required(ErrorMessage = "Date of Possession is mandatory")]
+    //    [Required(ErrorMessage = "Date of Possession is mandatory")]
         public DateTime? PossessionDate { get; set; }
         public DateTime? LeaseLicenseExecutionDate { get; set; }
         public decimal? LandPremiumAmount { get; set; }

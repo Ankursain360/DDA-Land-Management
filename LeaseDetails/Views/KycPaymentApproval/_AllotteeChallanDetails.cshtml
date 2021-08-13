@@ -117,6 +117,8 @@
             <div class="row pt-3">
                 <div class="col-md-12">
                     <input class="btn btn-theme" type="button" id="btnUpdateChallanDetails" value="Update Challan Details" onclick="UpdateChallanDetails();" />
+                    <input class="btn btn-theme" type="button" id="btnUpdateBhoomiDetails" value="Update Verified Challan Details in Bhoomi Application" onclick="UpdateDetailsInBhoomi();" />
+
                 </div>
             </div>
             <br />
@@ -135,23 +137,3 @@
         <script src="~/js/DemandPaymentCalculation.min.js" asp-append-version="true"></script>
     </environment>
 
-
-<script>
-    $(document).ready(function () {
-        //$('#Challan1').find('tbody').find('tr').each(function (i) {
-        //    debugger;
-        //     if ($(this).find('#item.IsVerified').val() == "T") {
-        //       //  $('input[name="Verifychk"]').attr("checked", true);
-        //         $(this).find('input[name="Verifychk"]').attr("checked", "checked");
-        //     } else {
-        //         //$('input[name="Verifychk"]').attr("checked", false);
-        //         $(this).find('input[name="Verifychk"]').removeattr("checked", "checked");
-        //     }
-        // }
-
-        //if ($('#item.IsVerified').val() == "T") {
-        //    $('input[name="Verifychk"]').attr("checked", "checked");
-        //} $('input[name="Verifychk"]').removeAttr("checked");
-    });
-
-</script>

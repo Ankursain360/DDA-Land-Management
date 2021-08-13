@@ -14,6 +14,9 @@ namespace Dto.Search
         public decimal? GroundRent { get; set; }
         public decimal? InterestRate { get; set; }
         public decimal? TotdalDues { get; set; }
+        public decimal? TotalPayable{ get; set; }
+        public decimal? TotalPayableInterest { get; set; }
+        public decimal? TotalPayableDues { get; set; }
 
     } 
 }
