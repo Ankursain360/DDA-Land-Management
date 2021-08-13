@@ -460,7 +460,7 @@ namespace LeaseDetails.Controllers
 
                     var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(kyc.ApprovalStatus));
 
-                    if (approvalproccess.SendTo != null)
+                    if (approvalproccess.SendTo != null && approvalproccess.Status != 18)
                     {
                         #region Mail Generate
                         //At successfull completion send mail and sms
