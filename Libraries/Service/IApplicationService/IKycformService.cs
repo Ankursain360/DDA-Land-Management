@@ -38,5 +38,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdateBeforeApproval(int id, Kycform kyc);
         Task<bool> UpdateBeforeApproval1(int id, Kycform kyc); //in case of approved
         Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval, int userId);
+
+
+        Task<List<KycFormApprovalDetailsSearchDto>> GetKycFormApprovalDetails(int Id, string ApprovalType);
     }
 }

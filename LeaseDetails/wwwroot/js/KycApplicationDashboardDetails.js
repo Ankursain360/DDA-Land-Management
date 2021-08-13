@@ -49,31 +49,28 @@ function KycApplicationDetails() {
             }
         });   
 
+        $("#chartForKycForm").click(
+            function (event) {
+                debugger;
+                var activepoints = chartForKycForm.getElementAtEvent(event);
 
+                if (activepoints.length > 0) {
+                    var clickedIndex = activepoints[0]["_index"];
+                    var approvalType = chartForKycForm.data.labels[clickedIndex];
+                    var approvalCount = chartForKycForm.data.datasets[0].data[clickedIndex];
+                    //window.location.href = "KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
+                    var url = "KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
+                    window.open(url, "_blank");
+                 
+                }
+                else {
+
+                }
+            });
     });
-    
+   
+
 }
-
-$("#chartForKycForm").click(
-    function (event) {
-        debugger;
-        var activepoints = chartForKycForm.getElementAtEvent(event);
-        
-        if (activepoints.length > 0)
-        {
-            var clickedIndex = activepoints[0]["_index"];
-            var socialMedia = chartForKycForm.data.labels[clickedIndex];
-            var users = chartForKycForm.data.datasets[0].data[clickedIndex];
-           // window.location.href = "DemandLetter/Index" + socialMedia + "&User=" + users;
-            alert(socialMedia);
-            alert(users);
-        }
-        else {
-
-        }
-    });
-
-
 
 function KycDemandPaymentDetails() {
     debugger;
