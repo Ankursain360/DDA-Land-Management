@@ -42,6 +42,13 @@ namespace LeaseDetails.Controllers
 
         }
 
+
+        public IActionResult IndexForDemandPayment()
+        {
+            return View();
+
+        }
+
         public async Task<PartialViewResult> KycFromApproval (string ApprovalType)
         {
             
@@ -49,6 +56,16 @@ namespace LeaseDetails.Controllers
 
             return PartialView("_List", result);
         }
+
+        public async Task<PartialViewResult> KycFromDemandPaymantApproval(string ApprovalType)
+        {
+
+            var result = await _kycformService.GetKycFromDemandPaymantApproval(_siteContext.UserId, ApprovalType);
+
+            return PartialView("_KycDemandPayment", result);
+        }
+
+
 
 
     }

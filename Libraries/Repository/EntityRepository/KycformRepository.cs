@@ -251,6 +251,24 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<List<KycFormDemandPaymentApprovalSearchDto>> GetKycFromDemandPaymantApproval(int Id, string ApprovalType)
+        {
+            try
+            {
+
+                var data = await _dbContext.LoadStoredProcedure("GetKycDemandPaymentFormApprovalDetailsForChart")
+                                         .WithSqlParams(("User_Id", Id), ("ApprovalType", ApprovalType)
+                                            )
+                                            .ExecuteStoredProcedureAsync<KycFormDemandPaymentApprovalSearchDto>();
+
+                return (List<KycFormDemandPaymentApprovalSearchDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
 
     }
 }

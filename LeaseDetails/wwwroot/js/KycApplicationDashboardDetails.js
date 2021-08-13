@@ -117,7 +117,24 @@ function KycDemandPaymentDetails() {
             }
         });
 
+        $("#chartForKycPaymentForm").click(
+            function (event) {
+                debugger;
+                var activepoints = chartForKycPaymentForm.getElementAtEvent(event);
 
+                if (activepoints.length > 0) {
+                    var clickedIndex = activepoints[0]["_index"];
+                    var dpapprovalType = chartForKycPaymentForm.data.labels[clickedIndex];
+                    var dpapprovalCount = chartForKycPaymentForm.data.datasets[0].data[clickedIndex];
+                    //window.location.href = "KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
+                    var url = "KycFormDetails/IndexForDemandPayment?DPApprovalType=" + dpapprovalType + "&DPApprovalCount=" + dpapprovalCount;
+                    window.open(url, "_blank");
+
+                }
+                else {
+
+                }
+            });
 
     });
 

@@ -219,6 +219,13 @@ namespace Service.ApplicationService
         {
             return await _kycformRepository.GetKycFormApprovalDetails(Id,ApprovalType);
         }
+        public async Task<List<KycFormDemandPaymentApprovalSearchDto>> GetKycFromDemandPaymantApproval(int Id, string ApprovalType)
+        {
+            return await _kycformRepository.GetKycFromDemandPaymantApproval(Id, ApprovalType);
+        }
+
+
+
 
     }
 }

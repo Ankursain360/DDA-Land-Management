@@ -1,9 +1,8 @@
-﻿@model Dto.Search.KycFormApprovalDetailsSearchDto
+﻿@model Dto.Search.KycFormDemandPaymentApprovalSearchDto
 @await Component.InvokeAsync("PageHeader", new { pageName = "Kyc Approval Details" })
 <div class="pt-3">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>  
-    <input type="hidden" asp-for="approvalType" />
-    <input type="hidden" asp-for="approvalNo" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  
 
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
@@ -48,18 +47,17 @@
             </div>
         </div>
 
-        <div class="table-responsive px-2">
-            <div id="divkycTable"></div>
-        </div>
-
       
+        <div class="table-responsive px-2">
+            <div id="divkycDemandPaymentTable"></div>
+        </div>
     </div>
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/KycFormApprovalDetails.js"></script>
+    <script src="~/js/KycFormDemandPaymentApprovalDetails.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/KycFormApprovalDetails.min.js" asp-append-version="true"></script>
+    <script src="~/js/KycFormDemandPaymentApprovalDetails.min.js" asp-append-version="true"></script>
 </environment>
