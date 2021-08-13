@@ -7,13 +7,12 @@
 });
 
 function KycApplicationDetails() {
-
     debugger;
     HttpGet(`/Home/KycApplicationDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (response) {
      
-        var ctx = document.getElementById('ChartForKycForm').getContext('2d');       
+        var ctx = document.getElementById('chartForKycForm').getContext('2d');       
 
-        var ChartForKycForm = new Chart(ctx, {
+        var chartForKycForm = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Total', 'Pending', 'Approved', 'Deficiency','Rejected'],
@@ -40,7 +39,7 @@ function KycApplicationDetails() {
                 }]
             },
             options: {
-                responsive: false,
+                responsive: false,              
                 legend:false,
                 scales: {
                     y: {
@@ -48,23 +47,41 @@ function KycApplicationDetails() {
                     }
                 }
             }
-        });    
+        });   
 
 
     });
-
     
 }
 
+$("#chartForKycForm").click(
+    function (event) {
+        debugger;
+        var activepoints = chartForKycForm.getElementAtEvent(event);
+        
+        if (activepoints.length > 0)
+        {
+            var clickedIndex = activepoints[0]["_index"];
+            var socialMedia = chartForKycForm.data.labels[clickedIndex];
+            var users = chartForKycForm.data.datasets[0].data[clickedIndex];
+           // window.location.href = "DemandLetter/Index" + socialMedia + "&User=" + users;
+            alert(socialMedia);
+            alert(users);
+        }
+        else {
+
+        }
+    });
+
+
 
 function KycDemandPaymentDetails() {
-
     debugger;
     HttpGet(`/Home/KycDemandPaymentDetails/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (response) {
 
-        var ctx1 = document.getElementById('ChartForKycPaymentForm').getContext('2d');
+        var ctx1 = document.getElementById('chartForKycPaymentForm').getContext('2d');
 
-        var ChartForKycPaymentForm = new Chart(ctx1, {
+        var chartForKycPaymentForm = new Chart(ctx1, {
             type: 'bar',
             data: {
                 labels: ['Total', 'Pending', 'Approved', 'Deficiency', 'Rejected'],

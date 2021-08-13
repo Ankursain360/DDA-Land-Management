@@ -528,11 +528,7 @@ namespace LeaseDetails.Controllers
 
                 return RedirectToAction("Index");
             }
-
-
         }
-
-
 
         #region Approval Status Dropdown Bind on User rights Basis Code Added By ishu 29 july 2021
         async Task BindApprovalStatusDropdown(Kycdemandpaymentdetails Data)
@@ -721,6 +717,7 @@ namespace LeaseDetails.Controllers
         {
             return Redirect(_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value.ToString());
         }
+
 
         [HttpGet]
         public async Task<JsonResult> GetApprvoalStatus(string value)
