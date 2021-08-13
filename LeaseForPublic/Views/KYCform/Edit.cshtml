@@ -267,9 +267,11 @@
                 <div class="row mt-md-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" asp-for="Name" limit="100" class="floating-label-field floating-label-field--s3" placeholder="First Name">
+                            <input type="text" id="name1" asp-for="Name" limit="100" class="floating-label-field floating-label-field--s3" placeholder="First Name">
                             <span asp-validation-for="Name" class="text-danger"></span>
                             <label for="field-1" class="floating-label"> Name  </label>
+                            <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Valid Name</label>
+
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -584,3 +586,32 @@
     <environment exclude="Development">
         <script src="~/js/kycform.min.js" asp-append-version="true"></script>
     </environment>
+<script>
+    $('#name1').keydown(function (e) {
+
+        $("#err-name").hide();
+        if (e.ctrlKey || e.altKey) {
+            e.preventDefault();
+        } else {
+            var key = e.keyCode;
+
+            if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+        }
+    });
+
+    $('#FatherName').keydown(function (e) {
+
+        $("#err-name1").hide();
+        if (e.ctrlKey || e.altKey) {
+            e.preventDefault();
+        } else {
+            var key = e.keyCode;
+
+            if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+                e.preventDefault();
+            }
+        }
+    });
+</script>

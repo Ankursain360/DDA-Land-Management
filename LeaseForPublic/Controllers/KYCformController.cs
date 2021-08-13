@@ -570,7 +570,8 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> KycFormDetailsList()
         {
-            var result = await _kycformService.GetAllKycform();
+            var mobile = HttpContext.Session.GetString("Mobile");
+            var result = await _kycformService.GetAlldownloadKycform(mobile);
             List<KycformListDto> data = new List<KycformListDto>();
             if (result != null)
             {

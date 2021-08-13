@@ -61,6 +61,20 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => x.IsActive == 1)
                                    .ToListAsync();
         }
+
+
+        public async Task<List<Kycform>> GetAlldownloadKycform(string mobileno)
+        {
+            return await _dbContext.Kycform
+                                   .Include(x => x.Branch)
+                                   .Include(x => x.LeaseType)
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.PropertyType)
+                                   .Include(x => x.Zone)
+                                   .Include(x => x.ApprovedStatusNavigation)
+                                   .Where(x => x.IsActive == 1 && x.MobileNo==mobileno)
+                                   .ToListAsync();
+        }
         public async Task<Kycform> FetchKYCSingleResult(int id)
         {
             var data = await _dbContext.Kycform
