@@ -28,5 +28,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuid(string processguid);
         Task<bool> CreatekycApproval(Kycapprovalproccess kycapproval);
         Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
+
+        Task<List<KycFormApprovalDetailsSearchDto>> GetKycFormApprovalDetails(int Id, string ApprovalType);
     }
 }

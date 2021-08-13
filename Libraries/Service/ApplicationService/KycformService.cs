@@ -221,5 +221,11 @@ namespace Service.ApplicationService
             return  await _kycformRepository.CreatekycApproval(kycapproval);
            //await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<KycFormApprovalDetailsSearchDto>> GetKycFormApprovalDetails(int Id, string ApprovalType)
+        {
+            return await _kycformRepository.GetKycFormApprovalDetails(Id,ApprovalType);
+        }
+
     }
 }

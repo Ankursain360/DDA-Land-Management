@@ -4,6 +4,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using Repository.Common;
 using Repository.IEntityRepository;
 using System;
 using System.Collections.Generic;
@@ -242,5 +243,28 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+
+        public async Task<List<KycFormApprovalDetailsSearchDto>> GetKycFormApprovalDetails(int Id, string ApprovalType)
+        {
+            try
+            {
+                
+
+                var data = await _dbContext.LoadStoredProcedure("GetKycFormApprovalDetailsForChart")
+                                         .WithSqlParams(("User_Id",Id),("ApprovalType", ApprovalType)
+                                            )
+                                            .ExecuteStoredProcedureAsync<KycFormApprovalDetailsSearchDto>();
+
+                return (List<KycFormApprovalDetailsSearchDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+
     }
 }

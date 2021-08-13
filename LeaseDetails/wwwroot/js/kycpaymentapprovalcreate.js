@@ -438,7 +438,7 @@ function GetChallanParamForAPI() {
                 // IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
                 CHLLN_NO: $(this).find('#item_ChallanNo').val(),
                 CHLLN_AMNT: parseFloat($(this).find('#Amount').val()),
-                DPST_DT: "0",
+                DPST_DT: $(this).find('#item_DateofPaymentByAllottee').val(),
                 USR_ID: "0",
                 SCHM_ID: "0",
                 FL_NMBR: $("#FileNo").val()

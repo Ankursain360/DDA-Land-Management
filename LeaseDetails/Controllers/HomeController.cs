@@ -53,9 +53,6 @@ namespace LeaseDetails.Controllers
         }
 
 
-        
-
-
         public async Task<IActionResult> Index()
         {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
