@@ -978,37 +978,43 @@ namespace LeaseDetails.Controllers
 
 
         [HttpPost]
-        public  Task<IActionResult> UpdateBhoomi([FromBody] List<InsertIntoLIMSPaymentApidto> jsondata)
+        public async Task<IActionResult> UpdateBhoomi([FromBody] List<InsertIntoLIMSPaymentApidto> jsondata)
         {
             if (jsondata != null)
             {
-                WebServiceHelper api = new WebServiceHelper();
-                 for (int i = 0; i < jsondata.Count; i++)
-                 {
-                  
-                    api.XMLDataProcess("http://119.226.139.196/lmispayment/LMIS_Insert.asmx/AddChallanDtls", jsondata[i], "POST");
-                    
-                 }
-                return null;
+                for (int i = 0; i < jsondata.Count; i++)
+                {
+
+                    HttpWebRequest request = (HttpWebRequest)System.Net.WebRequest.Create(_configuration.GetSection("InsertInLIMSpaymentApi").Value);
+                    request.Method = "POST";
+                    string json = "CHLLN_NO=" + jsondata[i].CHLLN_NO + "&CHLLN_AMNT=" + jsondata[i].CHLLN_AMNT + "&DPST_DT=" + jsondata[i].DPST_DT + "&USR_ID=" + jsondata[i].USR_ID + "&SCHM_ID=" + jsondata[i].SCHM_ID + "&FL_NMBR=" + jsondata[i].FL_NMBR;
+                    request.Timeout = 1000 * 30;
+                    request.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
+                    request.PreAuthenticate = true;
+                    request.Credentials = CredentialCache.DefaultCredentials;
+
+                    byte[] byteArray = Encoding.UTF8.GetBytes(json);
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.ContentLength = byteArray.Length;
+                    Stream dataStream = request.GetRequestStream();
+                    dataStream.Write(byteArray, 0, byteArray.Length);
+                    dataStream.Close();
+                    WebResponse response = request.GetResponse();
+                    using (var streamReader = new StreamReader(response.GetResponseStream()))
+                    {
+                        var result = streamReader.ReadToEnd();
+                    }
+                }
+               
+               return Json("Data updated"); 
 
 
-                //if (result1 == true)
-                //{
-                //       return Json("Record updated successfully");
-
-                //}
-                //else
-                //{
-                //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                //    return Json("Record Not Updated");
-
-
-                //}
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return null;
+                return Json("No Data Available to update");
+
 
             }
 
