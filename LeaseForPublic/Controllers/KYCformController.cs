@@ -583,7 +583,6 @@ namespace LeaseForPublic.Controllers
                         PlotNo = result[i].PlotNo,
                         Area = result[i].Area == null ? "" : result[i].Area.ToString(),
                         PropertyType = result[i].Property == null ? "" : result[i].Property.ToString(),
-                       
                         NatureOfProperty = result[i].PropertyType == null ? "" : result[i].PropertyType.Name.ToString(),
                         FileNo = result[i].FileNo,
                         Branch = result[i].Branch == null ? "" : result[i].Branch.Name.ToString(),
