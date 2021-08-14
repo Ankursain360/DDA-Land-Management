@@ -94,8 +94,7 @@ function GetKYCDetails(id) {
 $(document).delegate('a.add-record2', 'click', function (e) {
     debugger;
 
-    if ($("#tbl_posts2 #add2 #PaymentType").val() != ''
-        && $("#tbl_posts2 #add2 #Period").val() != ''
+    if ($("#tbl_posts2 #add2 #PaymentType").val() != ''        
         && $("#tbl_posts2 #add2 #ChallanNoForPayment").val() != ''
         && $("#tbl_posts2 #add2 #Amount").val() != ''
         && $("#tbl_posts2 #add2 #DateofPaymentByAllottee").val() != ''
