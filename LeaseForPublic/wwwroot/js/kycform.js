@@ -5,6 +5,7 @@ $(document).ready(function () {
     if ($('#AllotteeApplicantDetailsSame').val() == "yes") {
         $('input[name="chksame"]').attr("checked", "checked");
         //$("#chk1").is(":checked")
+        $("#AllotteeLicenseeName").removeAttr("limit");
         $('#AllotteeLicenseeName').attr("readonly", true);
         $('#AllotteeLicenseeAddress').attr("readonly", true);
         $('#AllotteeLicenseeMobileNo').attr("readonly", true);
@@ -15,6 +16,8 @@ $(document).ready(function () {
         $('#AllotteeLicenseeAddress').attr("readonly", false);
         $('#AllotteeLicenseeMobileNo').attr("readonly", false);
         $('#AllotteeLicenseeEmailId').attr("readonly", false);
+        $("#AllotteeLicenseeName").attr("limit", "100");
+
     }
   
 });
@@ -140,7 +143,7 @@ $('#LeaseTypeId').change(function () {
 $("input[name='chksame']").click(function () {/* -----------Added by Ishu  --------------- */
     if ($("#chk1").is(":checked")) {
         $("#AllotteeApplicantDetailsSame").val("yes");
-
+        $("#AllotteeLicenseeName").removeAttr("limit");
         $('#AllotteeLicenseeName').val($('#name1').val());
         $('#AllotteeLicenseeAddress').val($('#Address').val());
         $('#AllotteeLicenseeMobileNo').val($('#MobileNo').val());
@@ -153,6 +156,7 @@ $("input[name='chksame']").click(function () {/* -----------Added by Ishu  -----
     }
     else {
         $("#AllotteeApplicantDetailsSame").val("");
+        $("#AllotteeLicenseeName").attr("limit", "100");
 
         $('#AllotteeLicenseeName').val("");
         $('#AllotteeLicenseeAddress').val("");
