@@ -12,9 +12,11 @@ $(document).ready(function () {
     GetPayment();
     GetPaymentFromBhoomi();
     GetKYCDetails();
-   
+    $('#PaymentType').removeAttr('multiple');
 
 });
+
+
 
 // Demand Calculation Details
 
@@ -100,6 +102,7 @@ $(document).delegate('a.add-record2', 'click', function (e) {
         && $("#tbl_posts2 #add2 #Proofinpdf").val() != ''
       
     ) {
+        var Gender = $("#tbl_posts2 #add2 #PaymentType").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts2 #add2 tr'),
             size = jQuery('#tbl_posts2 >tbody >tr').length,
@@ -107,10 +110,13 @@ $(document).delegate('a.add-record2', 'click', function (e) {
             element = content.clone();
         element.attr('id', 'rec-' + size);
         element.find('.delete-record2').attr('data-id', size);
-        element.appendTo('#tbl_posts2_body');     
+        element.appendTo('#tbl_posts2_body'); 
+
+        $('#tbl_posts2_body #rec-' + size + ' #PaymentType').val(Gender);
         element.find('.sn2').html(size);
         $("#tbl_posts2 #add2 .sn2").text($('#tbl_posts2 >tbody >tr').length);
-        $("#tbl_posts2 #add2 .add").remove();    
+        $("#tbl_posts2 #add2 .add").remove();   
+        $("#tbl_posts2 #add2 #PaymentType").select2('val', '');
         $("#tbl_posts2 #tbl_posts2_body .floating-label-field").attr("readonly", true);
         element.find(".add-record2").hide();
         element.find(".delete-record2").show();
