@@ -173,9 +173,7 @@
     }
 
     .select2-container--default .select2-selection--single .select2-selection__clear {
-        cursor: pointer;
-        float: right;
-        font-weight: bold;
+        visibility: hidden;
     }
 
     .select2-container--default .select2-selection--single .select2-selection__placeholder {
