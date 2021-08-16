@@ -135,16 +135,17 @@
             <div class="row mt-md-3">
                 <div class=" col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="date" asp-for="TenureFrom" class="floating-label-field floating-label-field--s3" placeholder="Period From">
+                        <input type="date" id="tenurefrom" asp-for="TenureFrom" class="floating-label-field floating-label-field--s3" placeholder="Period From">
                         <span asp-validation-for="TenureFrom" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Tenure Period From </label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="date" asp-for="TenureTo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
+                        <input type="date" id="tenureto" asp-for="TenureTo" class="floating-label-field floating-label-field--s3" placeholder="Period to">
                         <span asp-validation-for="TenureTo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Tenure Period To </label>
+                        <span id="tenurefrom1-error" style="color:red" class=""></span>
                     </div>
                 </div>
 
