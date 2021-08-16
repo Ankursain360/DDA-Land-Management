@@ -57,7 +57,11 @@
                 <a href="#" class="btn actionBtn slow" title="Print" onclick="printMaps();" id="printDocMob">
                     <i class="ri-printer-line"></i>
                 </a>
+                <a href="#" class="btn actionBtn slow" title="North Direction">
+                    <img src="~/img/north-arrow.png" width="50" height="50" />
+                </a>
             </div>
+           
             <!--top buttons end-->
             <div id="leftSection" class="leftSection slow">
                 <div class="MenuToggle">
@@ -133,8 +137,8 @@
                                                         </select>
                                                     </div>
                                                     @*<div class="mt-3 text-center">
-                                                            <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
-                                                        </div>*@
+                                                    <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
+                                                </div>*@
                                                 </form>
                                             </div>
 
@@ -142,56 +146,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--                            Query accordion end-->
-                            <!--                            Find Routes accordion-->
-                            @*<div class="accordion-item">
-                                    <h5 class="accordion-header" id="Routes1">
-                                        <button class="accordion-button collapsed  py-2 bg-primary text-white" type="button" data-bs-toggle="collapse" data-bs-target="#Routes" aria-expanded="true" aria-controls="Routes">
-                                            <i class="ri-road-map-line text-white"></i>Find Routes
-                                        </button>
-                                    </h5>
-                                    <div id="Routes" class="accordion-collapse collapse" aria-labelledby="Routes1" data-bs-parent="#navQueryData">
-                                        <div class="p-3">
-                                            <form id="searchWise">
-                                                <div class="mb-2">
-                                                    <label for="TravelList" class="form-label mb-1 small">Travel :</label>
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <div class="form-check position-relative d-flex-align-items-center">
-                                                                <input class="form-check-input" type="radio" name="Travel" id="Driving1">
-                                                                <label class="form-check-label" for="Driving1">
-                                                                    <i class="ri-roadster-line position-relative" style="left: -2px"></i> Driving
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <div class="form-check position-relative d-flex-align-items-center">
-                                                                <input class=" form-check-input" type="radio" name="Travel" id="Transit2">
-                                                                <label class="form-check-label" for="Transit2">
-                                                                    <i class="ri-bus-2-line position-relative" style="left: -2px"></i> Transit
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="mb-2">
-                                                    <label for="Source" class="form-label mb-1 small">Source :</label>
-                                                    <input class="form-control form-control-sm" id="Source" type="text" placeholder="Source" aria-label="Source" />
-                                                </div>
-                                                <div class="mb-2">
-                                                    <label for="Source" class="form-label mb-1 small">Destination :</label>
-                                                    <input class="form-control form-control-sm" id="Destination" type="text" placeholder="Destination" aria-label="Destination" />
-                                                </div>
-                                                <div class="mt-3 text-center">
-                                                    <a href="javascript:;" id="RouteDetail" class="btn d-block w-100 small btn-sm btn-info text-white">Get Route</a>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>*@
-                            <!--                            Find Routes accordion end-->
-
-
                         </div>
                     </div>
 
@@ -237,7 +191,7 @@
                     State : <strong class="text-dark">Delhi</strong><br />
                     <strong class="text-dark" id="spanVillage"></strong><br />
                     @*No of Zones : <strong class="text-dark">18</strong><br />
-                        Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
+                Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
                     Lat & Long : <strong class="text-dark" id="tdCursor"></strong>
                 </p>
             </div>
@@ -267,22 +221,15 @@
                                 </figure>
                             </a>
                             @*<a href="#" class="d-block" title="Satallite Map">
-                                <figure class="rounded" id="mapsatellite">
-                                    <img src="~/img/satelite.jpg" alt="Satallite Map" />
-                                    <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
-                                </figure>
-                            </a>*@
+                            <figure class="rounded" id="mapsatellite">
+                                <img src="~/img/satelite.jpg" alt="Satallite Map" />
+                                <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
+                            </figure>
+                        </a>*@
                         </div>
                     </div>
                 </div>
-                @*<div class="btn actionBtn p-0">
-                        <a href="#" class="btn actionBtn m-0">
-                            <i class="ri-subtract-line"></i>
-                        </a>|
-                        <a href="#" class="btn actionBtn m-0">
-                            <i class="ri-add-fill"></i>
-                        </a>
-                    </div>*@
+                
             </div>
             <!--bottom btns end-->
         </div>

@@ -119,6 +119,14 @@ MapLabel.prototype.onAdd = function() {
   if (panes) {
     panes.mapPane.appendChild(canvas);
   }
+
+    //google.maps.event.addDomListener(this.canvas, 'click', function () {
+    //    if (me.get('clickable')) {
+    //        google.maps.event.trigger(me, 'click');
+    //    }
+    //});
+
+
 };
 MapLabel.prototype['onAdd'] = MapLabel.prototype.onAdd;
 
@@ -204,3 +212,6 @@ MapLabel.prototype.onRemove = function() {
   }
 };
 MapLabel.prototype['onRemove'] = MapLabel.prototype.onRemove;
+
+
+ 

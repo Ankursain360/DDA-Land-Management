@@ -1,11 +1,25 @@
 ﻿//common function
-
+//On Zoom Change Set or remove layers
 function Zoom_change(map) {
     var mapzoom = map.getZoom();
-    if (mapzoom <= 8) {
-        //for (var pp = 0; pp < zoomZone.length; pp++) {
-        //    zoomZone[pp].setMap(null);
-        //}
+    if (mapzoom >= 13) {
+        // Remove State Layer
+        for (h = 0; h < STATE_LAYER.length; h++) {
+            STATE_LAYER[h].setMap(null);
+        }
+        //Remove Zoom Zone Boundary
+        $.each(zoomZone, function (index, value) {
+            value.setMap(null);
+        });
+        // Reset Layers
+        zoomZone = [];
+        STATE_LAYER = [];
+    }
+    else {
+        //Set State Boundary
+        if (STATE_LAYER.length == 0) {
+            getStateboundary();
+        }
     }
 }
 function createPolygon(_path) {
@@ -216,4 +230,25 @@ function displayCoordinates(pnt) {
     var lng = pnt.lng();
     lng = lng.toFixed(6);
     coordsLabel.innerHTML = lng + "," + lat;
+}
+
+var lineSymbol = {
+    path: 'M 0,-1 0,1',
+    strokeOpacity: 1,
+    scale: 2,
+    strokeColor:'#C2C0BF'
+};
+
+function createDashedLine(_path) {
+    var tmpLines = new google.maps.Polyline({
+        strokeOpacity: 0,
+        icons: [{
+            icon: lineSymbol,
+            offset: '0',
+            repeat: '20px'
+        }],
+        map: map,
+        path: _path
+    });
+    return tmpLines;
 }
