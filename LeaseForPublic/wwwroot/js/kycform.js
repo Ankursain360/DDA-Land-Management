@@ -5,7 +5,7 @@ $(document).ready(function () {
     if ($('#AllotteeApplicantDetailsSame').val() == "yes") {
         $('input[name="chksame"]').attr("checked", "checked");
         //$("#chk1").is(":checked")
-        $("#AllotteeLicenseeName").removeAttr("limit");
+        
         $('#AllotteeLicenseeName').attr("readonly", true);
         $('#AllotteeLicenseeAddress').attr("readonly", true);
         $('#AllotteeLicenseeMobileNo').attr("readonly", true);
@@ -16,11 +16,14 @@ $(document).ready(function () {
         $('#AllotteeLicenseeAddress').attr("readonly", false);
         $('#AllotteeLicenseeMobileNo').attr("readonly", false);
         $('#AllotteeLicenseeEmailId').attr("readonly", false);
-        $("#AllotteeLicenseeName").attr("limit", "100");
+       
 
     }
   
 });
+
+
+
     $(function () {
         var value = $('#Property option:selected').val();  //property dropdown value
         if (value == "Lease") {
@@ -142,8 +145,12 @@ $('#LeaseTypeId').change(function () {
 
 $("input[name='chksame']").click(function () {/* -----------Added by Ishu  --------------- */
     if ($("#chk1").is(":checked")) {
+        $("#AllotteeLicenseeName").siblings("div").hide();
+        $("#AllotteeLicenseeAddress").siblings("div").hide();
+        $("#AllotteeLicenseeMobileNo").siblings("div").hide();
+        $("#AllotteeLicenseeEmailId").siblings("div").hide();
         $("#AllotteeApplicantDetailsSame").val("yes");
-        $("#AllotteeLicenseeName").removeAttr("limit");
+        
         $('#AllotteeLicenseeName').val($('#name1').val());
         $('#AllotteeLicenseeAddress').val($('#Address').val());
         $('#AllotteeLicenseeMobileNo').val($('#MobileNo').val());
@@ -155,6 +162,10 @@ $("input[name='chksame']").click(function () {/* -----------Added by Ishu  -----
         $('#AllotteeLicenseeEmailId').attr("readonly", true);
     }
     else {
+        $("#AllotteeLicenseeName").siblings("div").show();
+        $("#AllotteeLicenseeAddress").siblings("div").show();
+        $("#AllotteeLicenseeMobileNo").siblings("div").show();
+        $("#AllotteeLicenseeEmailId").siblings("div").show();
         $("#AllotteeApplicantDetailsSame").val("");
         $("#AllotteeLicenseeName").attr("limit", "100");
 
@@ -223,6 +234,67 @@ $("#fromlicense").change(function () {
     //alert(fromlicense);
     //tolicense-error
 });
+
+
+
+
+
+
+
+$("#tenureto").change(function () {
+    $("#tenurefrom1-error").html("");
+
+    var tolicense = $("#tenureto").val();
+    var fromlicense = $("#tenurefrom").val();
+
+    if (fromlicense) {
+        if (tolicense) {
+            if (fromlicense > tolicense) {
+                $("#tenurefrom1-error").html("to date should be greater and equal from date");
+            }
+        } else {
+            $("#tenurefrom1-error").html("Please Select To Date1");
+        }
+    } else {
+
+        $("#tenurefrom1-error").html("Please Select From Date");
+    }
+    // alert(tolicense);
+    //alert(fromlicense);
+    //tolicense-error
+});
+$("#tenurefrom").change(function () {
+    $("#tenurefrom1-error").html("");
+
+    var tolicense = $("#tenureto").val();
+    var fromlicense = $("#tenurefrom").val();
+
+    if (fromlicense) {
+        if (tolicense) {
+            if (fromlicense > tolicense) {
+                $("#tenurefrom1-error").html("to date should be greater and equal from date");
+            }
+        } else {
+            $("#tenurefrom1-error").html("Please Select To Date");
+        }
+    } else {
+
+        $("#tenurefrom1-error").html("Please Select From Date");
+    }
+    // alert(tolicense);
+    //alert(fromlicense);
+    //tolicense-error
+});
+
+
+
+
+
+
+
+
+
+
 
 
 
