@@ -259,10 +259,21 @@ function GetUserList(id) {
     });
 };
 
+function GetParam() {
+    var model = {
+        Id1: parseInt($("#Id").val()),
+        statusId: parseInt( $('#ApprovalStatus option:selected').val())
+    }
+    return model;
+}
 function GetForwardedUserList() {
     debugger;
-    HttpGet(`/KycPaymentApproval/GetForwardedUserList/?value=${parseInt($("#Id").val())}`, 'json', function (response) {
-        if (response != null) {
+    var param = GetParam();
+   
+   // HttpGet(`/KycPaymentApproval/GetForwardedUserList/?value=${Id1}&&status = ${$('#ApprovalStatus option:selected').val()}`, 'json', function (response) {
+    HttpPostAsync(`/KycPaymentApproval/GetForwardedUserList/`, 'json', param, function (response) {
+
+    if (response != null) {
             if (response[0] == "false") {
                 WarningMessage(response[1]);
             }
