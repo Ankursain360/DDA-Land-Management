@@ -46,7 +46,7 @@ $(document).ready(function () {
             }
         }
     });
-    var forbiddenWords = ['iframe', 'Script', 'Video', 'Audio', 'Alert', '<', '>', '/>'];
+    var forbiddenWords = ['iframe', 'Video', 'Audio', 'Alert', '<', '>', '/>'];
     var Bool = "False";
     $('input,textarea').on('keyup', function (e) {
         forbiddenWords.forEach(function (val, index) {
