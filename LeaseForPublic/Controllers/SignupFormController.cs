@@ -66,31 +66,37 @@ namespace LeaseForPublic.Controllers
             _approvalproccessService = approvalproccessService;
 
         }
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+
+        //    var mobile = HttpContext.Session.GetString("Mobile");
+
+        //    return View();
+        //}
+        public async Task<IActionResult> Index()
         {
 
-           // string str;
-           // str = TempData["data1"].ToString();
-          //  ViewBag.Message = TempData["data1"] as string;
-           // ViewBag.Message = TempData["Message"] as string;
-            //var Id = HttpContext.Session.GetString("Id");
-            var mobile = HttpContext.Session.GetString("Mobile");
-            return View();
+            Leasesignup leasesignup = new Leasesignup();
+
+
+            return View(leasesignup);
+
         }
 
-     
 
 
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] Leasesignuplist model)
         {
-
+          
 
             var mobile = HttpContext.Session.GetString("Mobile");
+           
             model.Mobileno = mobile;
             var result = await _leasesignupService.AllKycformList(model);
             return PartialView("_List", result);
+           
         }
 
         public async Task<IActionResult> CreateLogin()
@@ -175,7 +181,8 @@ namespace LeaseForPublic.Controllers
             SMS.GenerateSendSMS(Action, Mobile);
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", model.EmailId);
-           
+            
+
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
             JsonMsg.Add(otp.ToString());
@@ -345,8 +352,8 @@ namespace LeaseForPublic.Controllers
         }
 
 
+    
 
 
-
-    }
+        }
 }

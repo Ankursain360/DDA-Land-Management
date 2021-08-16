@@ -54,13 +54,18 @@ namespace LeaseForPublic.Controllers
         }
         public IActionResult Index()
         {
+            
+            
             var mobile = HttpContext.Session.GetString("Mobile");
-            if (mobile != null)
+            
+            if (mobile != "")
             {
+
                 return View();
             }
             else
             {
+               
                 return RedirectToAction("Create", "SignupForm");
             }
                
@@ -69,11 +74,12 @@ namespace LeaseForPublic.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
         {
+           
             var mobile = HttpContext.Session.GetString("Mobile");
            
             ////  if (mobile!=null)
             // {
-            model.Mobileno = mobile.ToString();
+                model.Mobileno = mobile.ToString();
                 var result = await _kycformService.GetPagedKycform(model);
                 return PartialView("_List", result);
           //  }
@@ -85,7 +91,7 @@ namespace LeaseForPublic.Controllers
         {
             var mobile = HttpContext.Session.GetString("Mobile");
             var email = HttpContext.Session.GetString("Email");
-            if(mobile != null) { 
+            if(mobile != null ) { 
             Kycform kyc = new Kycform();
             kyc.MobileNo = mobile;
             kyc.EmailId = email;
@@ -601,7 +607,14 @@ namespace LeaseForPublic.Controllers
 
 
 
-
+        public IActionResult Logout()
+        {
+        HttpContext.Session.SetString("Mobile", "");
+        HttpContext.Session.SetString("Email", "");
+           
+           // return RedirectToAction("Create", "SignupForm");
+            return Redirect("/SignupForm/Create");
+        }
 
 
 
