@@ -24,6 +24,10 @@ namespace Utility.Helper
                     startPage = endPage - 9;
                 }
             }
+            //if (pageSize > totalItems)
+            //{
+            //    PageSize = 1;
+            //}
 
             TotalItems = totalItems;
             CurrentPage = currentPage;
