@@ -39,7 +39,9 @@ $('#name').keydown(function (e) {
     }
 });
 $("#signup2").click(function () {
+   
     $("#err-comm").hide();
+   
     var name = $("#name").val();
     var mobile = $("#mobile").val();
     var email = $("#email").val();
@@ -57,6 +59,7 @@ $("#signup2").click(function () {
         status = 2;
     }
     if (status == 2) {
+       $("#loader-wrapper").css("display", "none");
         return false;
     }
     if (!mobile.match('[0-9]{10}') || mobile.length > 10) {
@@ -73,6 +76,7 @@ $("#signup2").click(function () {
     } else {
         $("#err-email").hide();
     }
+    //$("#loader-wrapper").css("display", "block");
     var model = {
         MobileNo: mobile,
         EmailId: email
@@ -80,15 +84,29 @@ $("#signup2").click(function () {
     }
    
     if (name != "" && mobile != "" && email != "") {
+      
+       // beforeSend: function() {
+           
+       
+    //    }
+      
         HttpPost(`/SignupForm/sendotp`, 'json', model, function (response) {
+           // setTimeout(function () {
+            $("#loader-wrapper").css("display", "block");
+         //   }, 2000);
             //alert(response);
             if (response[0] == "true") {
+                setTimeout(function () {
+                    $("#loader-wrapper").css("display", "none");
+                }, 3000);
+               
                 localStorage.setItem("otp", response[2]);
 
                 $("#sinupshow").hide();
                 $("#shomsgsuccess").show();
                 $("#sotp").show();
                 $("#sotp").val(response.otp);
+              //  $("#loader-wrapper").css("display", "none");
             } else {
                 $("#err-comm").show();
             }
@@ -101,11 +119,13 @@ $("#signup2").click(function () {
 $("#otp-button").click(function () {
     $("#suc-comm").hide();
     $("#err-otp").hide();
+  
     var otp = $("#otp").val();
     var rotp = localStorage.getItem("otp");
     if (otp == rotp) {
         $("#suc-comm").show();
         $("#form").submit();
+      
     } else {
         $("#otp").val('');
         $("#err-otp").show();

@@ -10,7 +10,11 @@
 
 
 
-
+<div id="loader-wrapper" style="display:none">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
 
 
 <div class="container d-flex">
@@ -131,3 +135,15 @@
 <environment exclude="Development">
     <script src="~/js/signupregister.min.js" asp-append-version="true"></script>
 </environment>
+@*<script>
+    //For Loader
+    $(window).on('load', function () {
+      
+        $("#loader-wrapper").css("display", "none");
+    });
+    $(window).on('beforeunload', function () {
+      
+        $("#loader-wrapper").css("display", "block");
+    });
+
+</script>*@
