@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
         public string IsPaymentAgreed { get; set; }
         public int? ApprovedStatus { get; set; }
         public string PendingAt { get; set; }
+        public string WorkFlowTemplate { get; set; }
         public decimal TotalPayable { get; set; }
         public decimal TotalPayableInterest { get; set; }
         public decimal TotalDues { get; set; }

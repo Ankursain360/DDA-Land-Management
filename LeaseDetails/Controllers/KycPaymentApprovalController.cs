@@ -164,25 +164,38 @@ namespace LeaseDetails.Controllers
             var IsApplicationPendingAtUserEnd = await _kycPaymentApprovalService.IsApplicationPendingAtUserEnd(id, SiteContext.UserId);
             if (IsApplicationPendingAtUserEnd)
             {
+
                 var Data = await _kycPaymentApprovalService.FetchSingleResult(id);
                 FileHelper fileHelper = new FileHelper();
                 var Msgddl = payment.ApprovalStatus;
-
+                
 
                 #region Approval Proccess At Further level start Added by ishu 30 july 2021
-               
-                var BackIdGuid1 = _configuration.GetSection("workflowProccessGuidKYCPayment2").Value;
-                var BackIdGuid2 = _configuration.GetSection("workflowProccessGuidKYCPayment").Value;
-              
+
+                var BackIdGuid1 = _configuration.GetSection("workflowProccessGuidKYCPayment").Value;
+                var BackIdGuid2 = _configuration.GetSection("workflowProccessGuidKYCPayment2").Value;
+                
                 var FirstApprovalProcessData = await _approvalproccessService.FirstkycApprovalProcessData((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), payment.Id);
-                var ApprovalProccessBackId = (SiteContext.RoleId == 31 || SiteContext.RoleId == 32) ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, payment.Id): _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, payment.Id);
+                //var ApprovalProccessBackId = (SiteContext.RoleId == 31 || SiteContext.RoleId == 32||(SiteContext.RoleId == 29 && payment.ApprovalStatus=="24") || (SiteContext.RoleId == 33 && payment.ApprovalStatus == "25") || (SiteContext.RoleId == 34 && payment.ApprovalStatus == "24")) ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, payment.Id): _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, payment.Id);
+                //var ApprovalProcessBackData = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId);
+                var ApprovalProccessBackId = (Data.WorkFlowTemplate=="WF1") ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, payment.Id) : _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, payment.Id);
                 var ApprovalProcessBackData = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId);
+
                 var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
 
 
                 //var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
-                var DataFlow = (SiteContext.RoleId == 31|| SiteContext.RoleId == 32) ? await DataAsync1(ApprovalProcessBackData.Version): await DataAsync(ApprovalProcessBackData.Version);
-                
+                //var DataFlow = (SiteContext.RoleId == 31|| SiteContext.RoleId == 32 || (SiteContext.RoleId == 29 && payment.ApprovalStatus == "24") || (SiteContext.RoleId == 33 && payment.ApprovalStatus == "25") || (SiteContext.RoleId == 34 && payment.ApprovalStatus == "24")) ? await DataAsync1(ApprovalProcessBackData.Version): await DataAsync(ApprovalProcessBackData.Version);
+                var DataFlow = (Data.WorkFlowTemplate == "WF1")?await DataAsync(ApprovalProcessBackData.Version): await DataAsync1(ApprovalProcessBackData.Version);
+
+                if (Data.ApprovedStatus == 20 && payment.ApprovalStatus == "22")
+                {
+
+                    payment.WorkFlowTemplate = "WF2";
+                    result = await _kycPaymentApprovalService.UpdateworkflowinfoAtlevel2(payment.Id, payment);
+                }
+                else { }
+
                 Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
 
                 /*Check if branchwise then aprovee user must have branchid*/
@@ -236,38 +249,40 @@ namespace LeaseDetails.Controllers
                     result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
 
                     /*Now New row added in kycApprovalprocess table*/
-                    if(ApprovalProcessBackData.Level==2 && payment.ApprovalStatus == "22") 
-                    {
-                        approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                        approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment2").Value);
-                        approvalproccess.ServiceId = payment.Id;
-                        approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                        approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
-                        approvalproccess.PendingStatus = 1;
-                        approvalproccess.Remarks = payment.ApprovalRemarks; ///May be comment
-                        approvalproccess.Status = Convert.ToInt32(payment.ApprovalStatus);
-                        approvalproccess.Version = "V1(2097090378)";
-                        approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
+                   // if(ApprovalProcessBackData.Level==2 && payment.ApprovalStatus == "22") 
+                   // {
+                   //     approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                   //     approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment2").Value);
+                   //     approvalproccess.ServiceId = payment.Id;
+                   //     approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                   //     approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                   //     approvalproccess.PendingStatus = 1;
+                   //     approvalproccess.Remarks = payment.ApprovalRemarks; ///May be comment
+                   //     approvalproccess.Status = Convert.ToInt32(payment.ApprovalStatus);
+                   //     approvalproccess.Version = "V1(2097090378)";
+                   //     approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
 
-                    }
-                   else if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32)
-                    {
-                        approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                        approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment2").Value);
-                        approvalproccess.ServiceId = payment.Id;
-                        approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                        approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
-                        approvalproccess.PendingStatus = 1;
-                        approvalproccess.Remarks = payment.ApprovalRemarks; ///May be comment
-                        approvalproccess.Status = Convert.ToInt32(payment.ApprovalStatus);
-                        approvalproccess.Version = "V1(2097090378)";
-                        approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
+                   // }
+                   //else if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32 || (SiteContext.RoleId == 29 && payment.ApprovalStatus == "24") || (SiteContext.RoleId == 33 && payment.ApprovalStatus == "25") || (SiteContext.RoleId == 34 && payment.ApprovalStatus == "24"))
+                   // {
+                   //     approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                   //     approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment2").Value);
+                   //     approvalproccess.ServiceId = payment.Id;
+                   //     approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                   //     approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                   //     approvalproccess.PendingStatus = 1;
+                   //     approvalproccess.Remarks = payment.ApprovalRemarks; ///May be comment
+                   //     approvalproccess.Status = Convert.ToInt32(payment.ApprovalStatus);
+                   //     approvalproccess.Version = "V1(2097090378)";
+                   //     approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
 
-                    }
-                    else
-                    {
+                   // }
+                   //if(payment.WorkFlowTemplate=="WF1")
+                   
+                    //{
                     approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                    approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment").Value);
+                        // approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment").Value);
+                    approvalproccess.ProcessGuid = payment.WorkFlowTemplate == "WF1"? BackIdGuid1: BackIdGuid2;
                     approvalproccess.ServiceId = payment.Id;
                     approvalproccess.SendFrom = SiteContext.UserId.ToString();
                     approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
@@ -276,7 +291,8 @@ namespace LeaseDetails.Controllers
                     approvalproccess.Status = Convert.ToInt32(payment.ApprovalStatus);
                     approvalproccess.Version = ApprovalProcessBackData.Version;
                     approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
-                    }
+                   // }
+                    
 
                     if (checkLastApprovalStatuscode.StatusCode == ((int)ApprovalActionStatus.QueryForward)) // check islast approvalrow is of query type then return to the same user
                     {
@@ -567,11 +583,18 @@ namespace LeaseDetails.Controllers
         #region Approval Status Dropdown Bind on User rights Basis Code Added By ishu 29 july 2021
         async Task BindApprovalStatusDropdown(Kycdemandpaymentdetails Data)
         {
-            if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32) 
+            //if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32||(SiteContext.RoleId == 29 && Data.ApprovedStatus==20) || (SiteContext.RoleId == 33 && Data.ApprovedStatus == 24) || (SiteContext.RoleId == 34 && Data.ApprovedStatus == 25))
+            //{
+            //    var dropdownValue = await GetApprovalStatusDropdownList1(Data.Id);
+            //    List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
+            //    Data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
+            //}
+            if (Data.WorkFlowTemplate != "WF1")
             {
                 var dropdownValue = await GetApprovalStatusDropdownList1(Data.Id);
                 List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
                 Data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
+
             }
             else
             {
@@ -947,7 +970,7 @@ namespace LeaseDetails.Controllers
                     return Json(dropdown);
                 }
 
-                if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32)
+                if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32 || (SiteContext.RoleId == 29 && Status == 24) || (SiteContext.RoleId == 33 && Status == 25) || (SiteContext.RoleId == 34 && Status == 24))
                 {
                     var ApprovalProccessBackId1 = _approvalproccessService.GetPreviouskycApprovalId((_configuration.GetSection("workflowProccessGuidKYCPayment2").Value), serviceid);
                     var ApprovalProcessBackData1 = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId1);

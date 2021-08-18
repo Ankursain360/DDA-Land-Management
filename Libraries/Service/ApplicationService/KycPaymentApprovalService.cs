@@ -74,10 +74,22 @@ namespace Service.ApplicationService
 
             model.ApprovedStatus = payment.ApprovedStatus;
             model.PendingAt = payment.PendingAt;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
             _kycPaymentApprovalRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> UpdateworkflowinfoAtlevel2(int id, Kycdemandpaymentdetails payment)
+        {
+            var result = await _kycPaymentApprovalRepository.FindBy(a => a.Id == id);
+            Kycdemandpaymentdetails model = result.FirstOrDefault();
 
+            model.WorkFlowTemplate = payment.WorkFlowTemplate;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _kycPaymentApprovalRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
         public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
         {
             return await _kycPaymentApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);

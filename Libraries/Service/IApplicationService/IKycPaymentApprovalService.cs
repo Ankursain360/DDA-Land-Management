@@ -23,7 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails payment);
-
+        Task<bool> UpdateworkflowinfoAtlevel2(int id, Kycdemandpaymentdetails payment);
         Task<bool> UpdateDetails(int id, Kycdemandpaymentdetails pay, int userId);
 
         //********* rpt ! Allottee challan  Details  repeter**********
