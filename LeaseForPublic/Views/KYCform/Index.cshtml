@@ -68,13 +68,15 @@
                     </a>
                 </div>
             </div>
+            @*@if(Model=null)*@
+            @*@if (Model != null && Model.Count() > 0)
+            {*@
+                <div class="table-responsive px-2">
+                    <div id="divkycTable"></div>
+                </div>
+           @*}*@
 
-            <div class="table-responsive px-2">
-                <div id="divkycTable"></div>
             </div>
-
-
-        </div>
 
     </div>
 </div>

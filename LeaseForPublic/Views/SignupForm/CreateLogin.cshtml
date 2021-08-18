@@ -3,9 +3,16 @@
     ViewData["Title"] = "CreateLogin";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
+<script>
+ function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };</script>
 
-
-
+<div id="loader-wrapper" style="display:none">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
 
 
 <div class="container d-flex">

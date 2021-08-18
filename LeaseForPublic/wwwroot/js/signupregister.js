@@ -1,4 +1,11 @@
-﻿$('#email').keyup(function () {
+﻿
+    
+
+
+ 
+
+
+$('#email').keyup(function () {
     $("#err-email").hide();
     var email = $('#email').val();
 

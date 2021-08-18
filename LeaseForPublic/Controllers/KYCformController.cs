@@ -77,12 +77,14 @@ namespace LeaseForPublic.Controllers
            
             var mobile = HttpContext.Session.GetString("Mobile");
            
-            ////  if (mobile!=null)
+            //  if (mobile!=null)
             // {
                 model.Mobileno = mobile.ToString();
                 var result = await _kycformService.GetPagedKycform(model);
                 return PartialView("_List", result);
-          //  }
+         // }
+
+            
            
         }
 
@@ -613,7 +615,7 @@ namespace LeaseForPublic.Controllers
         HttpContext.Session.SetString("Email", "");
            
            // return RedirectToAction("Create", "SignupForm");
-            return Redirect("/SignupForm/Create");
+            return Redirect("/SignupForm/CreateLogin");
         }
 
 
