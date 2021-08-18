@@ -32,21 +32,28 @@ namespace Dto.Master
         public string ChallanAmount { get; set; }
 
         [NotMapped]
+        [Required(ErrorMessage = "PaymentType is Mandatory ")]
         public List<string> PaymentType { get; set; }
 
         [NotMapped]
         public List<string> Period { get; set; }
 
         [NotMapped]
+        [Required(ErrorMessage = "Challan No is Mandatory ")]
         public List<string> ChallanNoForPayment { get; set; }
-        [NotMapped]
 
+        [NotMapped]
+        [Required(ErrorMessage = "Amount is Mandatory ")]
         public List<Decimal> Amount { get; set; }
+        
         [NotMapped]
-
+        [Required(ErrorMessage = "Date is Mandatory ")]
         public List<DateTime> DateofPaymentByAllottee { get; set; }
+        
         [NotMapped]
+        [Required(ErrorMessage = "Proof in .Pdf is Mandatory ")]
         public List<IFormFile> Proofinpdf1 { get; set; }
+       
         [NotMapped]
         public List<string> Ddabankcredit { get; set; }
 
