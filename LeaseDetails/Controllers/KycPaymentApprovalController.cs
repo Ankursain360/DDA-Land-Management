@@ -170,18 +170,22 @@ namespace LeaseDetails.Controllers
 
 
                 #region Approval Proccess At Further level start Added by ishu 30 july 2021
-
+               
+                var BackIdGuid1 = _configuration.GetSection("workflowProccessGuidKYCPayment2").Value;
+                var BackIdGuid2 = _configuration.GetSection("workflowProccessGuidKYCPayment").Value;
+              
                 var FirstApprovalProcessData = await _approvalproccessService.FirstkycApprovalProcessData((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), payment.Id);
-                var ApprovalProccessBackId = _approvalproccessService.GetPreviouskycApprovalId((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), payment.Id);
+                var ApprovalProccessBackId = (SiteContext.RoleId == 31 || SiteContext.RoleId == 32) ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, payment.Id): _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, payment.Id);
                 var ApprovalProcessBackData = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId);
                 var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
 
 
-                var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
-
+                //var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
+                var DataFlow = (SiteContext.RoleId == 31|| SiteContext.RoleId == 32) ? await DataAsync1(ApprovalProcessBackData.Version): await DataAsync(ApprovalProcessBackData.Version);
+                
                 Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
 
-                /*Check if zonewise then aprovee user must have zoneid*/
+                /*Check if branchwise then aprovee user must have branchid*/
 
                 if (payment.ApprovalStatusCode == ((int)ApprovalActionStatus.Forward) && checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
                 {
@@ -246,8 +250,22 @@ namespace LeaseDetails.Controllers
                         approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
 
                     }
-                    else 
-                    { 
+                   else if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32)
+                    {
+                        approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                        approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment2").Value);
+                        approvalproccess.ServiceId = payment.Id;
+                        approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                        approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                        approvalproccess.PendingStatus = 1;
+                        approvalproccess.Remarks = payment.ApprovalRemarks; ///May be comment
+                        approvalproccess.Status = Convert.ToInt32(payment.ApprovalStatus);
+                        approvalproccess.Version = "V1(2097090378)";
+                        approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
+
+                    }
+                    else
+                    {
                     approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
                     approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCPayment").Value);
                     approvalproccess.ServiceId = payment.Id;
@@ -549,7 +567,7 @@ namespace LeaseDetails.Controllers
         #region Approval Status Dropdown Bind on User rights Basis Code Added By ishu 29 july 2021
         async Task BindApprovalStatusDropdown(Kycdemandpaymentdetails Data)
         {
-            if (SiteContext.RoleId == 31) 
+            if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32) 
             {
                 var dropdownValue = await GetApprovalStatusDropdownList1(Data.Id);
                 List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
@@ -811,7 +829,7 @@ namespace LeaseDetails.Controllers
                 var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
 
                 var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
-               
+
                 if (ApprovalProcessBackData.Level == 2 && Status == 22) //when forwarding to aao cash housing
                 {
                     var DataFlow1 = await DataAsync1("V1(2097090378)");
@@ -929,7 +947,7 @@ namespace LeaseDetails.Controllers
                     return Json(dropdown);
                 }
 
-                if (SiteContext.RoleId==31)
+                if (SiteContext.RoleId == 31 || SiteContext.RoleId == 32)
                 {
                     var ApprovalProccessBackId1 = _approvalproccessService.GetPreviouskycApprovalId((_configuration.GetSection("workflowProccessGuidKYCPayment2").Value), serviceid);
                     var ApprovalProcessBackData1 = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId1);
@@ -1054,116 +1072,116 @@ namespace LeaseDetails.Controllers
                 //else
                 //{
                 List<string> JsonMsg = new List<string>();
-                    if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
+                if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
+                {
+                    for (int i = 0; i < DataFlow.Count; i++)
                     {
-                        for (int i = 0; i < DataFlow.Count; i++)
+                        if (!DataFlow[i].parameterSkip)
                         {
-                            if (!DataFlow[i].parameterSkip)
+                            if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
                             {
-                                if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
+                                for (int d = i + 1; d < DataFlow.Count; d++)
                                 {
-                                    for (int d = i + 1; d < DataFlow.Count; d++)
+                                    if (!DataFlow[d].parameterSkip)
                                     {
-                                        if (!DataFlow[d].parameterSkip)
+                                        if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
                                         {
-                                            if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                            if (SiteContext.BranchId == null)
                                             {
-                                                if (SiteContext.BranchId == null)
-                                                {
-                                                    JsonMsg.Add("false");
-                                                    JsonMsg.Add("Branch Id not available for next level, untill then Submittion is not possible");
-                                                    return Json(JsonMsg);
-                                                }
-
+                                                JsonMsg.Add("false");
+                                                JsonMsg.Add("Branch Id not available for next level, untill then Submittion is not possible");
+                                                return Json(JsonMsg);
                                             }
-                                            if (DataFlow[d].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+
+                                        }
+                                        if (DataFlow[d].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                                        {
+                                            for (int b = 0; b < DataFlow[d].parameterName.Count; b++)
                                             {
-                                                for (int b = 0; b < DataFlow[d].parameterName.Count; b++)
-                                                {
-                                                    List<kycUserProfileInfoDetailsDto> UserListRoleBasis = null;
-                                                    if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
-                                                        //{
-                                                        //if (SiteContext.RoleId==29 && DataFlow[d].parameterLevel == "2" && DataFlow[d].parameterAction == [22])
-                                                        //{
-                                                        //    var DataFlow1 = await DataAsync1("V1(2097090378)");
-
-
-                                                        //    UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]), SiteContext.BranchId ?? 0);
-
-                                                        //}
-
-
-                                                        UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]), SiteContext.BranchId ?? 0);
-                                                    // }
-                                                    else
-                                                        UserListRoleBasis = await _userProfileService.GetkycUserOnRoleBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]));
-
-                                                    if (UserListRoleBasis.Count == 0)
-                                                    {
-                                                        JsonMsg.Add("false");
-                                                        JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
-                                                        return Json(JsonMsg);
-                                                    }
-                                                    else
-                                                    {
-                                                        return Json(UserListRoleBasis);
-                                                    }
-
-                                                }
-                                            }
-                                            else
-                                            {
-                                                string SendTo = String.Join(",", (DataFlow[d].parameterName));
+                                                List<kycUserProfileInfoDetailsDto> UserListRoleBasis = null;
                                                 if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
-                                                {
-                                                    StringBuilder multouserszonewise = new StringBuilder();
-                                                    int col = 0;
-                                                    if (SendTo != null)
-                                                    {
-                                                        string[] multiTo = SendTo.Split(',');
-                                                        foreach (string MultiUserId in multiTo)
-                                                        {
-                                                            var UserProfile = await _userProfileService.GetUserByIdBranchConcatedName(Convert.ToInt32(MultiUserId), SiteContext.BranchId ?? 0);
-                                                            if (UserProfile != null)
-                                                            {
-                                                                if (col > 0)
-                                                                    multouserszonewise.Append(",");
-                                                                multouserszonewise.Append(UserProfile.UserId);
-                                                            }
-                                                            col++;
-                                                        }
-                                                        SendTo = multouserszonewise.ToString();
-                                                    }
-                                                }
+                                                    //{
+                                                    //if (SiteContext.RoleId==29 && DataFlow[d].parameterLevel == "2" && DataFlow[d].parameterAction == [22])
+                                                    //{
+                                                    //    var DataFlow1 = await DataAsync1("V1(2097090378)");
 
-                                                if (SendTo != "")
-                                                {
-                                                    int[] nums = Array.ConvertAll(SendTo.Split(','), int.Parse);
-                                                    var data = await _userProfileService.UserListSkippingmultiusersConcatedName(nums);
-                                                    return Json(data);
-                                                }
+
+                                                    //    UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]), SiteContext.BranchId ?? 0);
+
+                                                    //}
+
+
+                                                    UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]), SiteContext.BranchId ?? 0);
+                                                // }
                                                 else
+                                                    UserListRoleBasis = await _userProfileService.GetkycUserOnRoleBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]));
+
+                                                if (UserListRoleBasis.Count == 0)
                                                 {
                                                     JsonMsg.Add("false");
                                                     JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
                                                     return Json(JsonMsg);
                                                 }
+                                                else
+                                                {
+                                                    return Json(UserListRoleBasis);
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            string SendTo = String.Join(",", (DataFlow[d].parameterName));
+                                            if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                            {
+                                                StringBuilder multouserszonewise = new StringBuilder();
+                                                int col = 0;
+                                                if (SendTo != null)
+                                                {
+                                                    string[] multiTo = SendTo.Split(',');
+                                                    foreach (string MultiUserId in multiTo)
+                                                    {
+                                                        var UserProfile = await _userProfileService.GetUserByIdBranchConcatedName(Convert.ToInt32(MultiUserId), SiteContext.BranchId ?? 0);
+                                                        if (UserProfile != null)
+                                                        {
+                                                            if (col > 0)
+                                                                multouserszonewise.Append(",");
+                                                            multouserszonewise.Append(UserProfile.UserId);
+                                                        }
+                                                        col++;
+                                                    }
+                                                    SendTo = multouserszonewise.ToString();
+                                                }
                                             }
 
-                                            break;
+                                            if (SendTo != "")
+                                            {
+                                                int[] nums = Array.ConvertAll(SendTo.Split(','), int.Parse);
+                                                var data = await _userProfileService.UserListSkippingmultiusersConcatedName(nums);
+                                                return Json(data);
+                                            }
+                                            else
+                                            {
+                                                JsonMsg.Add("false");
+                                                JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
+                                                return Json(JsonMsg);
+                                            }
                                         }
+
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
-                    else
-                    {
-                        int[] nums = Array.ConvertAll(ApprovalProcessBackData.SendFrom.Split(','), int.Parse);
-                        var data = await _userProfileService.kycUserListSkippingmultiusersConcatedName(nums);
-                        return Json(data);
-                    }
-                    return Json(dropdown);
+                }
+                else
+                {
+                    int[] nums = Array.ConvertAll(ApprovalProcessBackData.SendFrom.Split(','), int.Parse);
+                    var data = await _userProfileService.kycUserListSkippingmultiusersConcatedName(nums);
+                    return Json(data);
+                }
+                return Json(dropdown);
                 //}
             }
             else return Json("No data available");
@@ -1324,7 +1342,7 @@ namespace LeaseDetails.Controllers
                     }
                 }
                
-               return Json("Data updated"); 
+               return  Json("Data updated"); 
 
 
             }
