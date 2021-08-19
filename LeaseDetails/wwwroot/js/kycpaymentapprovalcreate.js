@@ -366,12 +366,13 @@ function GetUpdatedPaymentParam() {
     var list = [];
     $('#pay1').find('tbody').find('tr').each(function (i) {
         model = {
+              
             KycId: parseInt($(this).find('#item_KycId').val()),
             DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
             DemandPeriod: $(this).find('#item_DemandPeriod').val(),
-            GroundRent: parseFloat($(this).find('#item_GroundRent').val()),
-            InterestRate: parseFloat($(this).find('#item_InterestRate').val()),
-            TotdalDues: parseFloat($(this).find('#item_TotdalDues').val()),
+            GroundRent: parseFloat($(this).find('#txtGroundRent').val()),
+            InterestRate: parseFloat($(this).find('#txtInterestRate').val()),
+            TotdalDues: parseFloat($(this).find('#txtTotdalDues').val()),
             TotalPayable: parseFloat($('#TotalPayable').val()),
             TotalPayableInterest: parseFloat($('#TotalPayableInterest').val()),
             TotalPayableDues: parseFloat($('#TotalDues').val())
@@ -448,11 +449,11 @@ function GetChallanParamForAPI() {
             model = {
 
                 // IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
-                CHLLN_NO: $(this).find('#item_ChallanNo').val(),
-                CHLLN_AMNT: parseFloat($(this).find('#Amount').val()),
+                CHLLN_NO: parseInt($(this).find('#item_ChallanNo').val()),
+                CHLLN_AMNT: parseInt($(this).find('#Amount').val()),
                 DPST_DT: $(this).find('#item_DateofPaymentByAllottee').val(),
-                USR_ID: "0",
-                SCHM_ID: "0",
+                USR_ID: "NA",
+                SCHM_ID: "NA",
                 FL_NMBR: $("#FileNo").val()
             }
 

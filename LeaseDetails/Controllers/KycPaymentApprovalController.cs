@@ -145,6 +145,7 @@ namespace LeaseDetails.Controllers
             var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
             Data.FileNo = Data2.FileNo;
             ViewBag.Items = await _userProfileService.GetRole();
+            ViewBag.Role = SiteContext.RoleId;
             await BindApprovalStatusDropdown(Data);
             if (Data == null)
             {

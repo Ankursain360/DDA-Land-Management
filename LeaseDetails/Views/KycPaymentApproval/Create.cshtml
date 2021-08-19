@@ -18,11 +18,11 @@
         Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
     </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id"/>
-    <input type="hidden" asp-for="KycId"/>
-    <input type="hidden" asp-for="IsPaymentAgreed"/>
-    <input type="hidden" asp-for="FileNo"/>
-    <input type="hidden" asp-for="WorkFlowTemplate"/>
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="KycId" />
+    <input type="hidden" asp-for="IsPaymentAgreed" />
+    <input type="hidden" asp-for="FileNo" />
+    <input type="hidden" asp-for="WorkFlowTemplate" />
     <input type="hidden" id="RevertCode" value="@ViewBag.RevertCodeValue" />
     <input type="hidden" id="ApprovedCode" value="@ViewBag.ApprovedCodeValue" />
     <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
@@ -32,7 +32,7 @@
     <div id="KYCFormDetailsDiv">
 
     </div>
-
+    
     @*<div id="divPayment">
 
         </div>*@
@@ -51,7 +51,21 @@
                 <div id="divPayment">
 
                 </div>
-                <br />
+
+                @if (ViewBag.Role == 33 || ViewBag.Role == 34)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <input class="btn btn-theme" type="button" id="btnUpdatePaymentDetails" value="Update Payment Details" onclick="UpdatePaymentDetails();" />
+
+                        </div>
+                    </div>
+                }
+                else
+                {
+                }
+
                 <h3 class="my-3 sub-heading">View Payment Details From Bhoomi Application </h3>
                 <div id="divPaymentFromBhoomi">
 
@@ -69,9 +83,23 @@
                     <div id="divChallan" class="pt-4">
 
                     </div>
+                    @if (ViewBag.Role == 33 || ViewBag.Role == 34)
+                    {
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <input class="btn btn-theme" type="button" id="btnUpdateChallanDetails" value="Update Challan Details" onclick="UpdateChallanDetails();" />
+                                <input class="btn btn-theme" type="button" id="btnUpdateBhoomiDetails" value="Update Verified Challan Details in Bhoomi Application" onclick="UpdateDetailsInBhoomi();" />
+
+                            </div>
+
+                        </div>
+                    }
+                    else { }
                 }
 
-                <div class="row pt-2">
+                <br />
+                <div class="row pt-4">
                     <div class=" col-md-4">
                         <div class="floating-label-wrap mb-3 mb-md-0">
 

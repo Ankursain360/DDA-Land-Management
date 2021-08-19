@@ -1,6 +1,5 @@
 ﻿@*@model Libraries.Model.Entity.Kycdemandpaymentdetails*@
 @model IEnumerable<Libraries.Model.Entity.Kycdemandpaymentdetailstablec>
-
 @*<div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
         <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapsePaymentRpt" role="button" aria-expanded="true"
@@ -11,126 +10,131 @@
         </a>
         <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePaymentRpt">*@
 
-            <div id="details">
-                <div class="table-section bg-white border shadow rounded">
-                    <div class="table-responsive">
-                        <table class="table table-sm table-bordered mb-0 table-striped calculation" id="Challan1">
-                            <thead class="text-nowrap">
+<div id="details">
+    <div class="table-section bg-white border shadow rounded">
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered mb-0 table-striped calculation" id="Challan1">
+                <thead class="text-nowrap">
 
-                                <tr>
+                    <tr>
 
-                                    <th>Verify</th>
-                                    <th>Payment Type (Ground Rent/License Fee/Interest etc.)</th>
-                                    <th>Period From –To Ex-(dd-mm-yyyy)-(dd-mm-yyyy)</th>
-                                    <th>Challan No./Transaction No./UTR No.</th>
-                                    <th style="min-width:100px;">Amount</th>
-                                    <th>Date of Payment by the allottee</th>
-                                    <th>Proof of Payment in pdf</th>
-                                    <th>
-                                        DDA Bank in which credited
-                                        (Optional)
-                                    </th>
+                        <th>Verify</th>
+                        <th>Payment Type (Ground Rent/License Fee/Interest etc.)</th>
+                        <th>Period From –To Ex-(dd-mm-yyyy)-(dd-mm-yyyy)</th>
+                        <th>Challan No./Transaction No./UTR No.</th>
+                        <th style="min-width:100px;">Amount</th>
+                        <th>Date of Payment by the allottee</th>
+                        <th>Proof of Payment in pdf</th>
+                        <th>
+                            DDA Bank in which credited
+                            (Optional)
+                        </th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (Model != null && Model.Count() > 0)
-                                {
-                                    @foreach (var item in Model)
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+
+                                <td>
+                                    <input asp-for="@item.Id" type="hidden" />
+                                    <input asp-for="@item.KycId" type="hidden" />
+                                    <input asp-for="@item.DemandPaymentId" type="hidden" />
+                                    <input asp-for="@item.IsVerified" type="hidden" />
+                                    <div class="form-check theme">
+                                        <input id="verify" type="hidden" />
+                                        <input class="form-check-input" type="checkbox" name="Verifychk" id="Verifychk1" onclick="return chkmsg(this);" />
+
+                                        <label class="form-check-label" for="checkbox">
+                                            Verify
+                                        </label>
+                                    </div>
+
+                                </td>
+                                <td>
+                                    <input asp-for="@item.PaymentType" type="text" class="floating-label-field floating-label-field--s3" />
+
+                                </td>
+                                <td>
+                                    <input asp-for="@item.Period" type="text" class="floating-label-field floating-label-field--s3" />
+
+                                </td>
+                                <td>
+                                    <input asp-for="@item.ChallanNo" type="text" class="floating-label-field floating-label-field--s3" />
+
+                                </td>
+                                <td>
+                                    <input asp-for="@item.Amount" id="Amount" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+
+                                </td>
+                                <td>
+                                    <input asp-for="@item.DateofPaymentByAllottee" type="Date" class="floating-label-field floating-label-field--s3" />
+
+                                </td>
+                                <td>
+                                    <input asp-for="@item.Proofinpdf" type="hidden" />
+                                    @if (item.Proofinpdf != null && item.Proofinpdf != "")
                                     {
-
-                                        <tr>
-
-                                            <td>
-                                                <input asp-for="@item.Id" type="hidden" />
-                                                <input asp-for="@item.KycId" type="hidden" />
-                                                <input asp-for="@item.DemandPaymentId" type="hidden" />
-                                                <input asp-for="@item.IsVerified" type="hidden" />
-                                                <div class="form-check theme">
-                                                    <input id="verify" type="hidden" />
-                                                    <input class="form-check-input" type="checkbox" name="Verifychk" id="Verifychk1" onclick="return chkmsg(this);" />
-
-                                                    <label class="form-check-label" for="checkbox">
-                                                        Verify
-                                                    </label>
-                                                </div>
-
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.PaymentType" type="text" class="floating-label-field floating-label-field--s3" />
-
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.Period" type="text" class="floating-label-field floating-label-field--s3" />
-
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.ChallanNo" type="text" class="floating-label-field floating-label-field--s3" />
-
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.Amount" id="Amount" type="number" class="floating-label-field floating-label-field--s3" />
-
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.DateofPaymentByAllottee" type="Date" class="floating-label-field floating-label-field--s3" />
-
-                                            </td>
-                                            <td>
-                                                <input asp-for="@item.Proofinpdf" type="hidden" />
-                                                @if (item.Proofinpdf != null && item.Proofinpdf != "" )
-                                                {
-                                            <a class="badge badge-primary px-2" asp-action="DownloadChallanProof" asp-route-id="@item.Id" target="_blank">
-                                                View File - (@item.Proofinpdf.Split('\\')?.LastOrDefault()?.Remove(0, 37))
-                                            </a>
-                                                }
-                                                else
-                                                { <b>No Document Available</b>}
-
-                                            </td>
-
-                                            <td>
-                                                <input asp-for="@item.Ddabankcredit" type="text" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-
-
-
-                                        </tr>
+                                        <a class="badge badge-primary px-2" asp-action="DownloadChallanProof" asp-route-id="@item.Id" target="_blank">
+                                            View File - (@item.Proofinpdf.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                        </a>
                                     }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <th colspan="13" style="text-align:center"> Data Not Available </th>
-                                    </tr>
-                                }
+                                    else
+                                    { <b>No Document Available</b>}
 
-                            </tbody>
+                                </td>
 
-                        </table>
+                                <td>
+                                    <input asp-for="@item.Ddabankcredit" type="text" class="floating-label-field floating-label-field--s3" />
+                                </td>
 
-                    </div>
-                </div>
-            </div>
-            <br />
 
-            <div class="row pt-3">
-                <div class="col-md-12">
-                    <input class="btn btn-theme" type="button" id="btnUpdateChallanDetails" value="Update Challan Details" onclick="UpdateChallanDetails();" />
-                    <input class="btn btn-theme" type="button" id="btnUpdateBhoomiDetails" value="Update Verified Challan Details in Bhoomi Application" onclick="UpdateDetailsInBhoomi();" />
 
-                </div>
-            </div>
-            <br />
-            <br />
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="13" style="text-align:center"> Data Not Available </th>
+                        </tr>
+                    }
 
-        @*</div>
+                </tbody>
+
+            </table>
+
+        </div>
     </div>
-</div>*@
+</div>
+<br />
+@*@if (ViewBag.Role == 33 || ViewBag.Role == 34)
+{
+    <div class="row pt-3">
 
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+        <div class="col-md-12">
+            <input class="btn btn-theme" type="button" id="btnUpdateChallanDetails" value="Update Challan Details" onclick="UpdateChallanDetails();" />
+            <input class="btn btn-theme" type="button" id="btnUpdateBhoomiDetails" value="Update Verified Challan Details in Bhoomi Application" onclick="UpdateDetailsInBhoomi();" />
 
-<environment include="Development">
+        </div>
+        
+    </div>
+}
+else { }*@
+    <br />
+    <br />
+
+    @*</div>
+            </div>
+        </div>*@
+
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+    <environment include="Development">
         <script src="~/js/DemandPaymentCalculation.js"></script>
     </environment>
     <environment exclude="Development">
