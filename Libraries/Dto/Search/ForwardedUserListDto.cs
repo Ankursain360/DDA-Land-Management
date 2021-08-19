@@ -10,7 +10,7 @@ namespace Dto.Search
     {
         public int Id1 { get; set; }
         public int statusId { get; set; }
-        
+        public string WorkFlowTemplate { get; set; }
 
     }
 }
