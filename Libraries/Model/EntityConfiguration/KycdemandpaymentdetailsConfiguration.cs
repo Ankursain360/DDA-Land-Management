@@ -41,6 +41,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.PendingAt)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            builder.Property(e => e.WorkFlowTemplate)
+                .HasMaxLength(20)
+                .IsUnicode(false);
 
             builder.Property(e => e.TotalDues)
                 .HasColumnType("decimal(20,2)")

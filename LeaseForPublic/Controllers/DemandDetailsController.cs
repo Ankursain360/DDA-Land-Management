@@ -202,6 +202,7 @@ namespace LeaseForPublic.Controllers
 
                     oKycdemandpaymentdetails.KycId = dto.KycId;
                     oKycdemandpaymentdetails.PendingAt = dto.PendingAt;
+                    oKycdemandpaymentdetails.WorkFlowTemplate = "WF1";
                     oKycdemandpaymentdetails.TotalPayable = dto.TotalPayable;
                     oKycdemandpaymentdetails.TotalDues = dto.TotalDues;
                     oKycdemandpaymentdetails.IsPaymentAgreed = dto.IsPaymentAgreed;
