@@ -47,7 +47,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Jointsurvey jointsurvey = new Jointsurvey();
             jointsurvey.IsActive = 1;
-            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
+            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra(jointsurvey.VillageId);
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
             return View(jointsurvey);
         }
@@ -62,7 +62,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
 
-                jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
+                jointsurvey.KhasraList = await _jointsurveyService.BindKhasra(jointsurvey.VillageId);
                 jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
 
                 if (ModelState.IsValid)
@@ -124,7 +124,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Jointsurvey jointsurvey = new Jointsurvey();
             jointsurvey = await _jointsurveyService.FetchSingleResult(id);
 
-            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
+            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra(jointsurvey.VillageId);
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
             if (jointsurvey.SitePosition != "")
             {
@@ -241,7 +241,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Jointsurvey jointsurvey = new Jointsurvey();
             jointsurvey = await _jointsurveyService.FetchSingleResult(id);
 
-            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
+            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra(jointsurvey.ZoneId);
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
             if (jointsurvey.SitePosition != "")
             {
@@ -295,5 +295,17 @@ namespace AcquiredLandInformationManagement.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
+
+
+
+
+        [HttpGet]
+        public async Task<JsonResult> AllKhasraList(int? villageid)
+        {
+            villageid = villageid ?? 0;
+            return Json(await _jointsurveyService.BindKhasra(Convert.ToInt32(villageid)));
+        }
+
+
     }
 }

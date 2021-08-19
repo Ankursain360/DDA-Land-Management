@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Jointsurvey>> GetAllJointSurvey();
        
         Task<List<Acquiredlandvillage>> GetAllVillage();
-        Task<List<Khasra>> BindKhasra();
+        Task<List<Khasra>> BindKhasra(int villageid);
         Task<PagedResult<Jointsurvey>> GetPagedJointsurvey(JointSurveySearchDto model);
     }
 }

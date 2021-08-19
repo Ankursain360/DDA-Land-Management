@@ -12,7 +12,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Jointsurvey>> GetAllJointSurvey();
 
-        Task<List<Khasra>> BindKhasra();
+        Task<List<Khasra>> BindKhasra(int villageid);
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Jointsurvey>> GetJointSurveyUsingRepo();
         Task<bool> Update(int id, Jointsurvey jointsurvey);

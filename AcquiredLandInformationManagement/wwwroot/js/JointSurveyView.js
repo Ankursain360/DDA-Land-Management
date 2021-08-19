@@ -49,3 +49,20 @@ $("input[name='IsBoundary']").click(function () {/* -----------Added by Renu  --
     });
 });
 
+$("#VillageId").change(function () {
+    // alert(ZoneId);
+    var ids = $(this).val();
+    if (ids) {
+        HttpGet(`/JointSurvey/AllKhasraList/?villageid=${ids}`, 'json', function (response) {
+            var html = '<option value="">Select</option>';
+            for (var i = 0; i < response.length; i++) {
+                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+            }
+            $("#KhasraId").select2('val', '')
+            $("#KhasraId").html(html);
+
+            //  alert(JSON.stringify(response));
+        });
+
+    }
+});

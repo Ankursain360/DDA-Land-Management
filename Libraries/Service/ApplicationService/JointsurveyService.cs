@@ -44,9 +44,9 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> BindKhasra(int villageid)
         {
-            List<Khasra> khasraList = await _JointsurveyRepository.BindKhasra();
+            List<Khasra> khasraList = await _JointsurveyRepository.BindKhasra(villageid);
             return khasraList;
         }
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
