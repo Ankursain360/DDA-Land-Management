@@ -394,5 +394,11 @@
     "inputFiles": [
       "wwwroot/js/surveyuserindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/NewLandNotificationTypeIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/NewLandNotificationTypeIndex.js"
+    ]
   }
 ]

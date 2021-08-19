@@ -262,7 +262,8 @@ function GetUserList(id) {
 function GetParam() {
     var model = {
         Id1: parseInt($("#Id").val()),
-        statusId: parseInt( $('#ApprovalStatus option:selected').val())
+        statusId: parseInt($('#ApprovalStatus option:selected').val()),
+        WorkFlowTemplate: $("#WorkFlowTemplate").val()
     }
     return model;
 }

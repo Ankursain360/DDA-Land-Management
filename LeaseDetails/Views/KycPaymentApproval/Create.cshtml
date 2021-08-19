@@ -18,10 +18,11 @@
         Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
     </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
-    <input type="hidden" asp-for="KycId" />
-    <input type="hidden" asp-for="IsPaymentAgreed" />
-    <input type="hidden" asp-for="FileNo" />
+    <input type="hidden" asp-for="Id"/>
+    <input type="hidden" asp-for="KycId"/>
+    <input type="hidden" asp-for="IsPaymentAgreed"/>
+    <input type="hidden" asp-for="FileNo"/>
+    <input type="hidden" asp-for="WorkFlowTemplate"/>
     <input type="hidden" id="RevertCode" value="@ViewBag.RevertCodeValue" />
     <input type="hidden" id="ApprovedCode" value="@ViewBag.ApprovedCodeValue" />
     <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
@@ -34,7 +35,7 @@
 
     @*<div id="divPayment">
 
-    </div>*@
+        </div>*@
 
     <div class="permission mt-2 accordion list-unstyled m-0 ">
         <div class="card">
@@ -110,9 +111,9 @@
     </div>
     @*<div id="divPaymentFromBhoomi">
 
-    </div>*@
+        </div>*@
 
-   
+
 
 
     <div id="divHistoryDetails">
