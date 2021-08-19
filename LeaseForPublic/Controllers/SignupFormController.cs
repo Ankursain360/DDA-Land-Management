@@ -208,6 +208,9 @@ namespace LeaseForPublic.Controllers
                     HttpContext.Session.SetString("Name", leasesignup.Name.ToString());
                     var Name = HttpContext.Session.GetString("Name");
                     ViewBag.Title = Name;
+
+                 //   ViewBag.Message
+
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);

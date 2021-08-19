@@ -214,7 +214,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Otherlandnotification>> GetAllOtherLandNotification()
         {
-            List<Otherlandnotification> List = await _dbContext.Otherlandnotification.Where(x => (x.IsActive == 1) && (x.LandType == "BOOKTRANSFER LAND")).ToListAsync();
+            List<Otherlandnotification> List = await _dbContext.Otherlandnotification.Where(x => (x.IsActive == 1) && (x.LandType == "BOK")).ToListAsync();
             return List;
         }
         public async Task<List<Khasra>> BindKhasra(int? villageId)
