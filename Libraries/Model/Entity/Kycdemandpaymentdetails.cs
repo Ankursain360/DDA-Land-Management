@@ -24,6 +24,7 @@ namespace Libraries.Model.Entity
         public decimal TotalPayable { get; set; }
         public decimal TotalPayableInterest { get; set; }
         public decimal TotalDues { get; set; }
+        public string OutStandingDuesDocument { get; set; }
         public byte IsActive { get; set; }
 
         #region Approval Related Fields
@@ -80,7 +81,8 @@ namespace Libraries.Model.Entity
         public List<string> Proofinpdf { get; set; }
         [NotMapped]
         public List<string> Ddabankcredit { get; set; }
+        [NotMapped]
+        public IFormFile outstandingduesDoc { get; set; }
 
-       
     }
 }

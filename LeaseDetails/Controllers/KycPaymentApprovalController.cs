@@ -43,6 +43,7 @@ namespace LeaseDetails.Controllers
         string LetterDoc = "";
         string ApplicantDoc = "";
         string ChallanProof = "";
+        string OustandingDeusDoc = "";
         public KycPaymentApprovalController(IConfiguration configuration,
             IKycPaymentApprovalService kycPaymentApprovalService,
              IUserNotificationService userNotificationService,
@@ -72,6 +73,7 @@ namespace LeaseDetails.Controllers
             LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
             ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
             ChallanProof = _configuration.GetSection("FilePaths:KycFiles:ChallanProofDocument").Value.ToString();
+            OustandingDeusDoc= _configuration.GetSection("FilePaths:KycFiles:OustandingDuesDocUploadedByAAOAccounts").Value.ToString();
         }
         public async Task<IActionResult> Index()
         {
@@ -103,7 +105,10 @@ namespace LeaseDetails.Controllers
         }
         public async Task<PartialViewResult> PaymentFromBhoomi(string FileNo)
         {
-            using (var httpClient = new HttpClient())
+            try
+            {
+
+                using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(_configuration.GetSection("BhoomiApi").Value + FileNo))
                 {
@@ -123,6 +128,14 @@ namespace LeaseDetails.Controllers
                     }
 
                 }
+            }
+            }
+            catch (Exception ex)
+            {
+                ApiResponseBhoomiApiFileWise data1 = new ApiResponseBhoomiApiFileWise();
+                List<BhoomiApiFileNowiseDto> cargo = new List<BhoomiApiFileNowiseDto>();
+                data1.cargo = cargo;
+                return PartialView("_PaymentFromBhoomi", data1);
             }
 
         }
@@ -429,6 +442,14 @@ namespace LeaseDetails.Controllers
                                                 }
                                             }
                                             result = await _kycPaymentApprovalService.UpdateBeforeApproval(payment.Id, payment);  //Update Table details 
+
+                                            if (payment.outstandingduesDoc != null) //to upload outstanding dues doc by aao Accounts
+                                            {
+                                                payment.OutStandingDuesDocument = payment.outstandingduesDoc == null ? null : fileHelper.SaveFile1(OustandingDeusDoc, payment.outstandingduesDoc);
+
+                                                var result1 = await _kycPaymentApprovalService.UpdateDetails(payment.Id, payment,SiteContext.UserId);
+                                            }
+                                            else { }
                                         }
                                     }
                                     break;
@@ -741,7 +762,7 @@ namespace LeaseDetails.Controllers
             return PartialView("_KYCFormView", Data);
         }
 
-        //***************** Download kyc form accordian Files  ********************
+        //***************** Download all form accordian Files  ********************
 
         public async Task<IActionResult> DownloadAadharNo(int Id)
         {
@@ -772,6 +793,13 @@ namespace LeaseDetails.Controllers
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
 
+        public async Task<IActionResult> DownloadOutstandingDuesDoc(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Kycdemandpaymentdetails Data = await _kycPaymentApprovalService.FetchSingleResult(Id);
+            string filename = OustandingDeusDoc + Data.OutStandingDuesDocument;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
         #endregion
 
 

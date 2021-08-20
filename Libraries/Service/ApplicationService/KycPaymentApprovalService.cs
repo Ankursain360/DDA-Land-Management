@@ -43,6 +43,7 @@ namespace Service.ApplicationService
             model.TotalPayable = pay.TotalPayable;
             model.TotalPayableInterest = pay.TotalPayableInterest;
             model.TotalDues = pay.TotalDues;
+            model.OutStandingDuesDocument = pay.OutStandingDuesDocument;
             // model.TotalPayable = dto.Name;
 
             model.IsActive = 1;

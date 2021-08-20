@@ -45,6 +45,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(20)
                 .IsUnicode(false);
 
+            builder.Property(e => e.OutStandingDuesDocument).HasColumnType("longtext");
+
             builder.Property(e => e.TotalDues)
                 .HasColumnType("decimal(20,2)")
                 .HasDefaultValueSql("0.00");
