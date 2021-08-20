@@ -1,6 +1,9 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
@@ -8,6 +11,7 @@ namespace Libraries.Model.Entity
     {
       
         public int DamagePayeeRegisterTempId { get; set; }
+        [Required(ErrorMessage = "Name is mandatory")]
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string Gender { get; set; }

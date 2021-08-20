@@ -18,10 +18,11 @@ namespace Libraries.Model.Entity
         }
         public string RefNo { get; set; }
 
-        [Required(ErrorMessage = "File No is mandatory feild")]
+        [Required(ErrorMessage = "File No is mandatory")]
         public string FileNo { get; set; }
         public string TypeOfDamageAssessee { get; set; }
         [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
+        [Required(ErrorMessage = "Property No is mandatory")]
         public string PropertyNo { get; set; }
         [Required(ErrorMessage = "Locality is mandatory")]
         public int? LocalityId { get; set; }
@@ -30,21 +31,26 @@ namespace Libraries.Model.Entity
         [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
         public string StreetNo { get; set; }
         [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
-       
+        [Required(ErrorMessage = "Pincode is mandatory")]
         public string PinCode { get; set; }
         [Required(ErrorMessage = "District is mandatory")]
         public int? DistrictId { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        [Required(ErrorMessage = "Plot Area in Sq.yds is mandatory")]
         public decimal? PlotAreaSqYard { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        [Required(ErrorMessage = "Floor Area in Sq. yds is mandatory")]
         public decimal? FloorAreaSqYard { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        [Required(ErrorMessage = "Plot Area in Sq.yds is mandatory")]
+
         public decimal? PlotAreaSqMt { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        [Required(ErrorMessage = "Floor Area in Sq. yds is mandatory")]
         public decimal? FloorAreaSqMt { get; set; }
         public string UseOfProperty { get; set; }
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]

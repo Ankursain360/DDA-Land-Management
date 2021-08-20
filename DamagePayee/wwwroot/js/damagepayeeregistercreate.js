@@ -4,7 +4,27 @@
 
 });
 
+$('#email').keyup(function () {
+    $("#err-email").hide();
+    var email = $('#email').val();
 
+    var testEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!testEmail.test(email)) {
+        $("#err-email").show();
+        return;
+    } else {
+        $("#err-email").hide();
+    }
+
+});
+
+
+
+function fileCheck(obj) {
+    var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+    if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1)
+        alert("Only '.jpeg','.jpg', '.png', '.gif', '.bmp' formats are allowed.");
+}
 
 //    <script>
 
