@@ -173,6 +173,30 @@ namespace Utility.Helper
             return body;
         }
 
+        public string PopulateBodyOutstandingDueskycPayment(kycOutstandingDuesMailBodyDto element)//kycPayment Outstanding Dues mail
+        {
+            string body = string.Empty;
+            using (StreamReader reader = new StreamReader(element.path))
+            {
+                body = reader.ReadToEnd();
+            }
+           
+            body = body.Replace("{FileNo}", element.FileNo);
+            body = body.Replace("{Date}", element.Date);
+            body = body.Replace("{AllotteeName}", element.AllotteeName);
+            body = body.Replace("{Address}", element.Address);
+            body = body.Replace("{PropertyNo}", element.PropertyNo);
+            body = body.Replace("{DatePeriod}", element.DatePeriod);
+            body = body.Replace("{DueDate}", element.DueDate);
+            body = body.Replace("{Amount}", element.Amount);
+            body = body.Replace("{GrountRent}", element.GrountRent);
+            //body = body.Replace("{UserName}", element.UserName);
+            //body = body.Replace("{UserEmail}", element.UserEmail);
+            //body = body.Replace("{UserNo}", element.UserNo);
+
+            return body;
+        }
+
         #endregion
         public bool SendMail(string toEmailId, string toCCEmailId, string toBCCEmailId, string mailSubject, string mailContent)
         {

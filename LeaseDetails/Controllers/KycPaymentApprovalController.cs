@@ -180,6 +180,7 @@ namespace LeaseDetails.Controllers
             {
 
                 var Data = await _kycPaymentApprovalService.FetchSingleResult(id);
+                var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
                 FileHelper fileHelper = new FileHelper();
                 var Msgddl = payment.ApprovalStatus;
                 
@@ -354,12 +355,24 @@ namespace LeaseDetails.Controllers
                                                 {
                                                     if (!DataFlow[d].parameterSkip)
                                                     {
-                                                        approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                                        if(payment.ApprovedStatus == 28)
+                                                        {
+                                                            approvalproccess.Level = 0;
+                                                            approvalproccess.PendingStatus = 0;
+                                                            approvalproccess.SendTo = null;
+                                                        } else 
+                                                        {
+                                                            approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                                            approvalproccess.PendingStatus = 0;
+                                                            approvalproccess.SendTo = payment.ApprovalUserId.ToString();
+                                                        }
+                                                        
+                                                        
                                                         break;
                                                     }
                                                 }
-                                                approvalproccess.SendTo = payment.ApprovalUserId.ToString();
-
+                                              //  approvalproccess.SendTo = payment.ApprovalUserId.ToString();
+                                                //approvalproccess.SendTo = null;
                                             }
                                         }
 
@@ -438,18 +451,60 @@ namespace LeaseDetails.Controllers
                                                 else
                                                 {
                                                     payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
-                                                    payment.PendingAt = approvalproccess.SendTo;
+                                                    // payment.PendingAt = approvalproccess.SendTo;
+                                                    payment.PendingAt = "0";
                                                 }
                                             }
                                             result = await _kycPaymentApprovalService.UpdateBeforeApproval(payment.Id, payment);  //Update Table details 
-
                                             if (payment.outstandingduesDoc != null) //to upload outstanding dues doc by aao Accounts
                                             {
                                                 payment.OutStandingDuesDocument = payment.outstandingduesDoc == null ? null : fileHelper.SaveFile1(OustandingDeusDoc, payment.outstandingduesDoc);
 
-                                                var result1 = await _kycPaymentApprovalService.UpdateDetails(payment.Id, payment,SiteContext.UserId);
+                                                var result1 = await _kycPaymentApprovalService.UpdateDetails(payment.Id, payment, SiteContext.UserId);
                                             }
                                             else { }
+                                            if (result && payment.ApprovedStatus == 28) //send mail to applicant if outstanding dues
+                                            {
+                                                #region Mail Generation Added By Ishu
+                                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "KycPaymentApprovalMail.html");
+                                                MailSMSHelper mailG = new MailSMSHelper();
+
+                                                #region HTML Body Generation
+                                                kycOutstandingDuesMailBodyDto bodyDTO = new kycOutstandingDuesMailBodyDto();
+                                                bodyDTO.FileNo = Data2.FileNo;
+                                                bodyDTO.Date = DateTime.Now.ToString("dd-MMM-yyyy");
+                                                bodyDTO.AllotteeName = Data2.Name;
+                                                bodyDTO.Address = Data2.Address;
+                                                bodyDTO.PropertyNo = Data2.PlotNo;
+                                                bodyDTO.DatePeriod = DateTime.Now.ToString("dd-MMM-yyyy");
+                                                bodyDTO.DueDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                                                bodyDTO.Amount = Data.TotalDues.ToString();
+                                                bodyDTO.GrountRent = payment.ApprovalRemarks;
+                                                bodyDTO.path = path;
+                                                string strBodyMsg = mailG.PopulateBodyOutstandingDueskycPayment(bodyDTO);
+                                                #endregion
+
+                                                //string strMailSubject = "Pending Lease Application Approval Request Details ";
+                                                //string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                                                //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                               
+                                                #region Common Mail Genration
+                                                SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                                maildto.strMailSubject = "Payment of Outstanding Dues";
+                                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                                maildto.strBodyMsg = strBodyMsg;
+                                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                                maildto.strMailTo = Data2.EmailId;
+                                                var sendMailResult1 = mailG.SendMailWithAttachment(maildto);
+                                                #endregion
+                                                #endregion
+                                            }
+
                                         }
                                     }
                                     break;

@@ -112,7 +112,7 @@
 
                 <br />
                 @if (ViewBag.Role != 33)
-                {
+                 {
                     <div class="row pt-4">
                         <div class=" col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -143,34 +143,41 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row pt-4">
-                        <div class="col-md-4" >
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                @{ if (Model.OutStandingDuesDocument != null)
+                    @if (ViewBag.Role == 34)
+                    {
+                        <div class="row pt-4">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    @if (Model.OutStandingDuesDocument != null || Model.OutStandingDuesDocument != string.Empty)
                                     {
 
 
-                                        <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
-                                               asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                            <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                                   asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
-                                        <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
-                                        <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" asp-route-id="@Model.Id">
-                                            View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
-                                        </a>
-                                        }
+                                            <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
+                                            <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
+                                                View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                            </a>
+                                    }
                                     else
                                     {
-                                        <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
-                                               asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                            <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                                   asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
-                                        <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
+                                            <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
 
-                                    } }
-                                <label for="field-1" class="floating-label">Outstanding Dues Document</label>
+                                    } 
+                                    <label for="field-1" class="floating-label">Outstanding Dues Document</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                }
+
+                    }
+                    else
+                    {
+                    }
+                 }
                 else
                 {
                     <div class="row pt-4">
@@ -206,21 +213,21 @@
                     <div class="row pt-4">
                         <div class=" col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                @{ if (Model.OutStandingDuesDocument != null)
+                                @{ if (Model.OutStandingDuesDocument != null || Model.OutStandingDuesDocument != string.Empty)
                                     {
 
 
-                                        <input  type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                        <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
                                                asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                         <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
-                                        <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" asp-route-id="@Model.Id">
+                                        <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
                                             View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                         </a>
                                     }
                                     else
                                     {
-                                        <input  type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                        <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
                                                asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                         <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
@@ -230,9 +237,9 @@
                             </div>
                         </div>
                     </div>
-                        }
-                        <br /><br />
-                    </div>
+                                    }
+                <br /><br />
+            </div>
 
 
 
