@@ -23,9 +23,7 @@ namespace Dto.Search
         public decimal? TotalPayable { get; set; }
         public decimal? TotalPayableInterest { get; set; }
         public decimal? TotalPayableDues { get; set; }
-       // public IFormFile outstandingduesDoc { get; set; }
-
-
+       
     }
 }
 

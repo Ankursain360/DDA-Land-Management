@@ -514,5 +514,11 @@
     "inputFiles": [
       "wwwroot/js/KycFormDemandPaymentApprovalDetails.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycpaymentapprovalcalculation.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycpaymentapprovalcalculation.js"
+    ]
   }
 ]

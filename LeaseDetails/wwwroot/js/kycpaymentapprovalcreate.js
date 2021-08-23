@@ -386,7 +386,7 @@ function GetUpdatedPaymentParam() {
 
 
 function UpdateChallanDetails() {
-    var param = JSON.stringify(GetUpdatedChallanParam());
+    var param = GetUpdatedChallanParam();
     HttpPostAsync(`/KycPaymentApproval/UpdateChallan/`, 'json', param, function (response) {
         debugger;
         //check status here and show message based on that
@@ -418,7 +418,7 @@ function GetUpdatedChallanParam() {
             TotalPayable: parseFloat($('#TotalPayable').val()),
             TotalPayableInterest: parseFloat($('#TotalPayableInterest').val()),
             TotalPayableDues: parseFloat($('#TotalDues').val())
-            //outstandingduesDoc: $('#outstandingduesDoc')[0].files[0]
+            
         }
         list.push(model);
     });

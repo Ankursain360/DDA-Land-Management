@@ -150,7 +150,20 @@ namespace LeaseDetails.Controllers
             return PartialView("_AllotteeChallanDetails");
         }
 
-
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _kycPaymentApprovalService.FetchSingleResult(id);
+            var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
+            Data.FileNo = Data2.FileNo;
+            ViewBag.Items = await _userProfileService.GetRole();
+            ViewBag.Role = SiteContext.RoleId;
+            await BindApprovalStatusDropdown(Data);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
         // [AuthorizeContext(ViewAction.Add)]
 
         public async Task<IActionResult> Create(int id)
