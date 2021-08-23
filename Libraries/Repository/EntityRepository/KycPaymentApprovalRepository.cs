@@ -6,6 +6,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using Model.Entity;
 using Repository.IEntityRepository;
 using System;
 using System.Collections.Generic;
@@ -128,7 +129,15 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => x.Id == id)
                                    .FirstOrDefaultAsync();
         }
-
+        public async Task<Userprofile> FetchDDofBranch(int? BranchId)//DD info of particular branch to display in outstanding dues mail
+        {
+            return await _dbContext.Userprofile
+                                   .Include(x => x.User)
+                                   .Include(x => x.Role)
+                                   .Where(x => x.BranchId == BranchId && x.RoleId==25 && x.DepartmentId==50 && x.IsActive==1)
+                                   .FirstOrDefaultAsync();
+        }
+       
         public async Task<bool> IsApplicationPendingAtUserEnd(int id, int userId)
         {
             var result = false;

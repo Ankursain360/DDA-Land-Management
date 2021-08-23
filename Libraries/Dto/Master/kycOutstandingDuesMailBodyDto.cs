@@ -17,9 +17,9 @@ namespace Dto.Master
         public string DueDate { get; set; }
         public string Amount { get; set; }
         public string GrountRent { get; set; }
-        //public string UserName { get; set; }
-        //public string UserEmail { get; set; }
-        //public string UserNo { get; set; }
+        public string UserName { get; set; }
+        public string UserEmail { get; set; }
+        public string UserNo { get; set; }
         public string path { get; set; }
     }
 }
