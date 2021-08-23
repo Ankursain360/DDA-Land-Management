@@ -22,6 +22,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Net;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace LeaseDetails.Controllers
 {
@@ -1282,7 +1283,7 @@ namespace LeaseDetails.Controllers
 
                     HttpWebRequest request = (HttpWebRequest)System.Net.WebRequest.Create(_configuration.GetSection("InsertInLIMSpaymentApi").Value);
                     request.Method = "POST";
-                    string json = "CHLLN_NO=" + jsondata[i].CHLLN_NO + "&CHLLN_AMNT=" + jsondata[i].CHLLN_AMNT + "&DPST_DT=" + jsondata[i].DPST_DT + "&USR_ID=" + jsondata[i].USR_ID + "&SCHM_ID=" + jsondata[i].SCHM_ID + "&FL_NMBR=" + jsondata[i].FL_NMBR;
+                    string json = "CHLLN_NO=" + jsondata[i].CHLLN_NO + "&CHLLN_AMNT=" + jsondata[i].CHLLN_AMNT + "&DPST_DT=" + Convert.ToDateTime(jsondata[i].DPST_DT).ToString("dd/MM/yyyy") + "&USR_ID=" + jsondata[i].USR_ID + "&SCHM_ID=" + jsondata[i].SCHM_ID + "&FL_NMBR=" + jsondata[i].FL_NMBR;
                     request.Timeout = 1000 * 30;
                     request.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
                     request.PreAuthenticate = true;
@@ -1298,10 +1299,19 @@ namespace LeaseDetails.Controllers
                     using (var streamReader = new StreamReader(response.GetResponseStream()))
                     {
                         var result = streamReader.ReadToEnd();
+                        if (result == "{\"cargo\":1}")
+                        {
+                            return Json("Data updated in Bhoomi Application");
+                        }
+                        else
+                        {
+                            return Json("Not able to update data in Bhoomi Application");
+                        }
                     }
+                    
                 }
-               
-               return  Json("Data updated"); 
+            
+               return  null; 
 
 
             }
