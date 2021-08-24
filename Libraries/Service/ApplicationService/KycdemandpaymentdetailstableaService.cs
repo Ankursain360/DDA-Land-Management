@@ -37,6 +37,12 @@ namespace Libraries.Service.ApplicationService
             Kycdemandpaymentdetailstablea model = result.FirstOrDefault();
             return model;
         }
+        public async Task<Kycdemandpaymentdetailstablea> FetchSingleResultonDemandId(int id)
+        {
+            var result = await _kycdemandpaymentdetailstableaRespository.FindBy(a => a.DemandPaymentId == id);
+            Kycdemandpaymentdetailstablea model = result.FirstOrDefault();
+            return model;
+        }
         public async Task<List<Kycdemandpaymentdetailstablea>> FetchResultOnDemandId(int id)
         {
             var result = await _kycdemandpaymentdetailstableaRespository.FetchResult(id);

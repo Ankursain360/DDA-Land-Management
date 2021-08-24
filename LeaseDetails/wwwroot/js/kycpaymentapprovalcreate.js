@@ -452,9 +452,10 @@ function GetChallanParamForAPI() {
                 // IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
                 CHLLN_NO: parseInt($(this).find('#item_ChallanNo').val()),
                 CHLLN_AMNT: parseInt($(this).find('#Amount').val()),
+               // DPST_DT: $(this).find('#item_DateofPaymentByAllottee').val(),
                 DPST_DT: $(this).find('#item_DateofPaymentByAllottee').val(),
-                USR_ID: "NA",
-                SCHM_ID: "NA",
+                USR_ID: "Online",
+                SCHM_ID: "LM",
                 FL_NMBR: $("#FileNo").val()
             }
 
@@ -471,13 +472,14 @@ function GetChallanParamForAPI() {
 
 function UpdateDetailsInBhoomi() {
     var param = GetChallanParamForAPI();
-    HttpPostAsync(`/KycPaymentApproval/UpdateBhoomi/`, 'json', param, function (response) {
+    HttpPost(`/KycPaymentApproval/UpdateBhoomi/`, 'json', param, function (response) {
         debugger;
         //check status here and show message based on that
-        if (response.trim() == 'Record Not Updated') {
-            DisplayErrorMessages(response);
-        } else {
+        if (response.trim() == 'Data updated in Bhoomi Application') {
             SuccessMessage(response);
+          
+        } else {
+            DisplayErrorMessages(response);
         }
     });
 };

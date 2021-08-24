@@ -7,6 +7,7 @@ using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Identity;
+using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,11 @@ namespace Service.ApplicationService
         {
             return await _kycPaymentApprovalRepository.FetchSingleResult(id);
         }
+        public async Task<Userprofile> FetchDDofBranch(int? BranchId)//DD info of particular branch
+        {
+            return await _kycPaymentApprovalRepository.FetchDDofBranch(BranchId);
+        }
+        
         public async Task<bool> UpdateDetails(int id, Kycdemandpaymentdetails pay,int userId)
         {
             var result = await _kycPaymentApprovalRepository.FindBy(a => a.Id == id);

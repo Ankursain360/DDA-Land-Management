@@ -22,6 +22,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Net;
 using System.Xml.Serialization;
+using System.Globalization;
 
 namespace LeaseDetails.Controllers
 {
@@ -181,6 +182,8 @@ namespace LeaseDetails.Controllers
 
                 var Data = await _kycPaymentApprovalService.FetchSingleResult(id);
                 var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
+                var Data3 = await _kycdemandpaymentdetailstableaService.FetchSingleResultonDemandId(id);
+                var DDInfo= await _kycPaymentApprovalService.FetchDDofBranch(Data2.BranchId);
                 FileHelper fileHelper = new FileHelper();
                 var Msgddl = payment.ApprovalStatus;
                 
@@ -355,7 +358,7 @@ namespace LeaseDetails.Controllers
                                                 {
                                                     if (!DataFlow[d].parameterSkip)
                                                     {
-                                                        if(payment.ApprovedStatus == 28)
+                                                        if(payment.ApprovedStatus == 28 || payment.ApprovalStatus == "28")
                                                         {
                                                             approvalproccess.Level = 0;
                                                             approvalproccess.PendingStatus = 0;
@@ -363,7 +366,7 @@ namespace LeaseDetails.Controllers
                                                         } else 
                                                         {
                                                             approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
-                                                            approvalproccess.PendingStatus = 0;
+                                                          //  approvalproccess.PendingStatus = 0;
                                                             approvalproccess.SendTo = payment.ApprovalUserId.ToString();
                                                         }
                                                         
@@ -450,9 +453,19 @@ namespace LeaseDetails.Controllers
                                                 }
                                                 else
                                                 {
-                                                    payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
-                                                    // payment.PendingAt = approvalproccess.SendTo;
-                                                    payment.PendingAt = "0";
+                                                    //payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
+                                                    //payment.PendingAt = approvalproccess.SendTo;
+                                                    
+                                                    if (payment.ApprovedStatus == 28 || payment.ApprovalStatus == "28")
+                                                    {
+                                                        payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
+                                                        payment.PendingAt = "0";
+                                                    }
+                                                    else 
+                                                    {
+                                                        payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
+                                                        payment.PendingAt = approvalproccess.SendTo;
+                                                    }
                                                 }
                                             }
                                             result = await _kycPaymentApprovalService.UpdateBeforeApproval(payment.Id, payment);  //Update Table details 
@@ -476,10 +489,14 @@ namespace LeaseDetails.Controllers
                                                 bodyDTO.AllotteeName = Data2.Name;
                                                 bodyDTO.Address = Data2.Address;
                                                 bodyDTO.PropertyNo = Data2.PlotNo;
-                                                bodyDTO.DatePeriod = DateTime.Now.ToString("dd-MMM-yyyy");
-                                                bodyDTO.DueDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                                                bodyDTO.DatePeriod = Data3.DemandPeriod;
+                                                bodyDTO.DueDate = (DateTime.Now.AddDays(15)).ToString("dd-MMM-yyyy");
                                                 bodyDTO.Amount = Data.TotalDues.ToString();
-                                                bodyDTO.GrountRent = payment.ApprovalRemarks;
+                                                bodyDTO.GrountRent = Data2.Property == "Lease"? "GrountRent":"License Fee";
+                                                bodyDTO.UserName = DDInfo.User.UserName == null?"NA": DDInfo.User.UserName;
+                                                bodyDTO.UserEmail = DDInfo.User.Email == null ? "NA" : DDInfo.User.Email;
+                                                bodyDTO.UserNo = DDInfo.User.PhoneNumber == null ? "NA" : DDInfo.User.PhoneNumber;
+
                                                 bodyDTO.path = path;
                                                 string strBodyMsg = mailG.PopulateBodyOutstandingDueskycPayment(bodyDTO);
                                                 #endregion
@@ -626,20 +643,21 @@ namespace LeaseDetails.Controllers
         async Task BindApprovalStatusDropdown(Kycdemandpaymentdetails Data)
         {
             
-            if (Data.WorkFlowTemplate != "WF1")
+            if (Data.WorkFlowTemplate == "WF1")
             {
-                var dropdownValue = await GetApprovalStatusDropdownList1(Data.Id);
+                var dropdownValue = await GetApprovalStatusDropdownList(Data.Id);
                 List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
                 Data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
 
             }
             else
             {
-                var dropdownValue = await GetApprovalStatusDropdownList(Data.Id);
+                var dropdownValue = await GetApprovalStatusDropdownList1(Data.Id);
                 List<int> dropdownValue1 = ConvertStringListToIntList(dropdownValue);
                 Data.ApprovalStatusList = await _approvalproccessService.BindDropdownApprovalStatus(dropdownValue1.ToArray());
+
             }
-           
+
             for (int i = 0; i < Data.ApprovalStatusList.Count; i++)
             {
                 if (Data.ApprovalStatusList[i].StatusCode == (int)ApprovalActionStatus.Revert)
@@ -1265,7 +1283,7 @@ namespace LeaseDetails.Controllers
 
                     HttpWebRequest request = (HttpWebRequest)System.Net.WebRequest.Create(_configuration.GetSection("InsertInLIMSpaymentApi").Value);
                     request.Method = "POST";
-                    string json = "CHLLN_NO=" + jsondata[i].CHLLN_NO + "&CHLLN_AMNT=" + jsondata[i].CHLLN_AMNT + "&DPST_DT=" + jsondata[i].DPST_DT + "&USR_ID=" + jsondata[i].USR_ID + "&SCHM_ID=" + jsondata[i].SCHM_ID + "&FL_NMBR=" + jsondata[i].FL_NMBR;
+                    string json = "CHLLN_NO=" + jsondata[i].CHLLN_NO + "&CHLLN_AMNT=" + jsondata[i].CHLLN_AMNT + "&DPST_DT=" + Convert.ToDateTime(jsondata[i].DPST_DT).ToString("dd/MM/yyyy") + "&USR_ID=" + jsondata[i].USR_ID + "&SCHM_ID=" + jsondata[i].SCHM_ID + "&FL_NMBR=" + jsondata[i].FL_NMBR;
                     request.Timeout = 1000 * 30;
                     request.UserAgent = "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)";
                     request.PreAuthenticate = true;
@@ -1281,10 +1299,19 @@ namespace LeaseDetails.Controllers
                     using (var streamReader = new StreamReader(response.GetResponseStream()))
                     {
                         var result = streamReader.ReadToEnd();
+                        if (result == "{\"cargo\":1}")
+                        {
+                            return Json("Data updated in Bhoomi Application");
+                        }
+                        else
+                        {
+                            return Json("Not able to update data in Bhoomi Application");
+                        }
                     }
+                    
                 }
-               
-               return  Json("Data updated"); 
+            
+               return  null; 
 
 
             }

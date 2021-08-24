@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Model.Entity;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -25,6 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> UpdateBeforeApproval(int id, Kycdemandpaymentdetails payment);
         Task<bool> UpdateworkflowinfoAtlevel2(int id, Kycdemandpaymentdetails payment);
         Task<bool> UpdateDetails(int id, Kycdemandpaymentdetails pay, int userId);
+        Task<Userprofile> FetchDDofBranch(int? BranchId);//DD info of particular branch to display in outstanding dues mail
 
         //********* rpt ! Allottee challan  Details  repeter**********
         Task<bool> SaveChallan(List<Kycdemandpaymentdetailstablec> challan);

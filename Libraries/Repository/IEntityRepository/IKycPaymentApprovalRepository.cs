@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Model.Entity;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -19,6 +20,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId);
         Task<Kycdemandpaymentdetails> FetchSingleResult(int id);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
+        Task<Userprofile> FetchDDofBranch(int? BranchId);//DD info of particular branch to display in outstanding dues mail
 
         //********* rpt ! Allottee challan  Details  repeter**********
         Task<bool> SaveChallan(List<Kycdemandpaymentdetailstablec> challan);

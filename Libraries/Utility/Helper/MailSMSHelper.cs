@@ -190,9 +190,9 @@ namespace Utility.Helper
             body = body.Replace("{DueDate}", element.DueDate);
             body = body.Replace("{Amount}", element.Amount);
             body = body.Replace("{GrountRent}", element.GrountRent);
-            //body = body.Replace("{UserName}", element.UserName);
-            //body = body.Replace("{UserEmail}", element.UserEmail);
-            //body = body.Replace("{UserNo}", element.UserNo);
+            body = body.Replace("{UserName}", element.UserName);
+            body = body.Replace("{UserEmail}", element.UserEmail);
+            body = body.Replace("{UserNo}", element.UserNo);
 
             return body;
         }
