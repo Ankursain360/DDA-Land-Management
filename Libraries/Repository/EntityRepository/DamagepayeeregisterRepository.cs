@@ -46,7 +46,7 @@ namespace Libraries.Repository.EntityRepository
                                             .OrderByDescending(s => s.IsActive)
                                             .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
                 }
-                elseTypeOfAssessee
+                else
                 {
                     data = null;
                     data = await _dbContext.Damagepayeeregister
