@@ -63,6 +63,11 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DamagepayeeregistertempSearchDto model)
+        
+        
+        
+        
+        
         {
             var result = await _damagepayeeregisterService.GetPagedDamagepayeeregister(model);
             return PartialView("_List", result);
@@ -565,8 +570,8 @@ namespace DamagePayee.Controllers
                         }
                         ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
 
-                        var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
-                        return View("Index", result1);
+                     //   var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                        return View("Index");
                     }
                     else
                     {

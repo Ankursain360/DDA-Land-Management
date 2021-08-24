@@ -458,7 +458,8 @@ $(function () {
 $(function () {
     $('#AadharNo').on('change', function () {
         debugger;
-        var input = $(this);
+        var input = $(this).val();
+       
         var re = /^([2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4})$/;
         var is_valid = re.test(input.val());
         //alert('Please enter valid email id');
@@ -477,7 +478,7 @@ $(function () {
 $(function () {
     $('#PanNo').on('change', function () {
         debugger;
-        var input = $(this);
+        var input = $(this).val();
 
         /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
         var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;

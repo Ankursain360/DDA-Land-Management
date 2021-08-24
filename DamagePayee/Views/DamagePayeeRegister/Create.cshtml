@@ -52,7 +52,7 @@
                                 <tr id="">
                                     <td style="text-align:center;"><span class="sn">1</span></td>
                                     <td>
-                                        <input asp-for="payeeName" limit="45" id="name1" required maxlength="45"  type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
+                                        <input asp-for="payeeName" limit="45" id="name1"  maxlength="45"  type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
                                         <span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>
                                     </td>
                                     <td>
@@ -61,7 +61,7 @@
 
                                     </td>
                                     <td>
-                                        <select asp-for="Gender" required class="floating-label-field floating-label-field--s3">
+                                        <select asp-for="Gender"  class="floating-label-field floating-label-field--s3">
                                             <option value="">---Select---</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
@@ -90,7 +90,7 @@
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" limit="15" required type="text" maxlength="15" class="floating-label-field floating-label-field--s3 numbers" />
+                                        <input asp-for="AadharNo" limit="12" required type="text" maxlength="15" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
                                         <input type="hidden" asp-for="AadharNoFilePath" />
