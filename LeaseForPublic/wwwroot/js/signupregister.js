@@ -8,7 +8,7 @@ function resetCaptchaImage() {
 }
 
 
- 
+
 
 
 $('#email').keyup(function () {
@@ -39,26 +39,27 @@ $('#mobile').keyup(function () {
 });
 
 $('#name').keydown(function (e) {
-    
+
     $("#err-name").hide();
     if (e.ctrlKey || e.altKey) {
         e.preventDefault();
     } else {
         var key = e.keyCode;
-      
-        if(!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
+
+        if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90))) {
             e.preventDefault();
         }
     }
 });
 $("#signup2").click(function () {
-   
+
     $("#err-comm").hide();
-   
+
     var name = $("#name").val();
     var mobile = $("#mobile").val();
     var email = $("#email").val();
-    var status = 1; 
+    var code = $("#CaptchaCode").val();
+    var status = 1;
     if (name == "") {
         $("#err-name").show();
         status = 2;
@@ -71,8 +72,16 @@ $("#signup2").click(function () {
         $("#err-email").show();
         status = 2;
     }
+    if (code == "") {
+        $("#err-captcha").show();
+        status = 2;
+    }
+    else {
+        $("#err-captcha").hide();
+    }
+
     if (status == 2) {
-       $("#loader-wrapper").css("display", "none");
+        $("#loader-wrapper").css("display", "none");
         return false;
     }
     if (!mobile.match('[0-9]{10}') || mobile.length > 10) {
@@ -89,39 +98,43 @@ $("#signup2").click(function () {
     } else {
         $("#err-email").hide();
     }
+
+
     //$("#loader-wrapper").css("display", "block");
     var model = {
         MobileNo: mobile,
-        EmailId: email
-      
+        EmailId: email,
+        CaptchaCode: code
     }
-   
+
     if (name != "" && mobile != "" && email != "") {
-      
-       // beforeSend: function() {
-           
-       
-    //    }
-      
+
+        // beforeSend: function() {
+
+
+        //    }
+
         HttpPost(`/SignupForm/sendotp`, 'json', model, function (response) {
-           // setTimeout(function () {
+            // setTimeout(function () {
             $("#loader-wrapper").css("display", "block");
-         //   }, 2000);
+            //   }, 2000);
             //alert(response);
             if (response[0] == "true") {
                 setTimeout(function () {
                     $("#loader-wrapper").css("display", "none");
                 }, 3000);
-               
+
                 localStorage.setItem("otp", response[2]);
 
                 $("#sinupshow").hide();
                 $("#shomsgsuccess").show();
                 $("#sotp").show();
                 $("#sotp").val(response.otp);
-              //  $("#loader-wrapper").css("display", "none");
+                //  $("#loader-wrapper").css("display", "none");
             } else {
-                $("#err-comm").show();
+                resetCaptchaImage();
+                $("#loader-wrapper").css("display", "none");
+                $("#err-comm").text(response[1]).show();
             }
         });
 
@@ -132,13 +145,13 @@ $("#signup2").click(function () {
 $("#otp-button").click(function () {
     $("#suc-comm").hide();
     $("#err-otp").hide();
-  
+
     var otp = $("#otp").val();
     var rotp = localStorage.getItem("otp");
     if (otp == rotp) {
         $("#suc-comm").show();
         $("#form").submit();
-      
+
     } else {
         $("#otp").val('');
         $("#err-otp").show();

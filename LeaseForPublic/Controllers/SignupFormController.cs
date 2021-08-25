@@ -118,16 +118,18 @@ namespace LeaseForPublic.Controllers
         [HttpPost]
         public async Task<IActionResult> sendotp([FromBody] Leasesignup model)
         {
+            List<string> JsonMsg = new List<string>();
 
-             // Validate Captcha Code
+            // Validate Captcha Code
 
             if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext))
             {
-                ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
-                return View(model);
+                JsonMsg.Add("false");
+                JsonMsg.Add("Invalid Catacha");
+                return Json(JsonMsg);                
             }
             //End 
-            List<string> JsonMsg = new List<string>();
+        
             var IsEmailExist = await _leasesignupService.ValidateMobileEmail(model.MobileNo, model.EmailId);
             if (IsEmailExist)
             {
