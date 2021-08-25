@@ -223,7 +223,12 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-
-
+       
+        public async Task<List<Kycdemandpaymentdetails>> FetchResultOnKycId(int kycId)//added by ishu
+        {
+            return await _dbContext.Kycdemandpaymentdetails
+                                   .Include(x => x.Kyc)
+                                   .Where(x => x.KycId == kycId && x.PendingAt != null && x.PendingAt != "0" ).ToListAsync();
+        }
     }
 }

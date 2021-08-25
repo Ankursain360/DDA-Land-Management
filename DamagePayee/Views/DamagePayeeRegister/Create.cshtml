@@ -71,26 +71,26 @@
 
                                     </td>
                                     <td>
-                                        <textarea asp-for="Address" limit="100" required maxlength="100"  type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                                        <textarea asp-for="Address" limit="100"  maxlength="100"  type="text" class="floating-label-field floating-label-field--s3"></textarea>
 
                                         @*<input asp-for="Address" maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />*@
                                         <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo" limit="10" required maxlength="12"  type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                        <input asp-for="MobileNo" limit="10"  maxlength="12"  type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" limit="30" id="email" required maxlength="30" type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
+                                        <input asp-for="EmailId" limit="30" id="email"  maxlength="30" type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
                                         <label style="color:red;display:none; font-size:13px" id="err-email">Please Enter Valid Email</label>
 
                                     </td>
                                     <td>
 
-                                        <input asp-for="AadharNo" limit="12" required type="text" maxlength="15" class="floating-label-field floating-label-field--s3 numbers" />
+                                        <input asp-for="AadharNo" limit="12"  type="text" maxlength="15" class="floating-label-field floating-label-field--s3 numbers" />
                                         <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
                                         <input type="hidden" asp-for="AadharNoFilePath" />
@@ -120,7 +120,7 @@
                     </figure>
                 </div>
             </div>*@
-                                        <input asp-for="Aadhar" required type="file" class="floating-label-field floating-label-field--s3 " />
+                                        <input asp-for="Aadhar"  type="file" class="floating-label-field floating-label-field--s3 " />
                                         <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
 
