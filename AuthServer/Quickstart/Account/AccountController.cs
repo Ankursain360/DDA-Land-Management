@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using AuthServer.Models;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -14,8 +15,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace IdentityServerHost.Quickstart.UI
@@ -30,14 +34,15 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
-
+        public IConfiguration _configuration;
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
-            IEventService events)
+            IEventService events,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,6 +50,7 @@ namespace IdentityServerHost.Quickstart.UI
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -101,7 +107,12 @@ namespace IdentityServerHost.Quickstart.UI
                     return Redirect("~/");
                 }
             }
-
+            string ss = Request.Form["g-recaptcha-response"];
+            CaptchaResponse response = ValidateCaptcha(ss);
+            if (!response.Success)
+            {
+                ModelState.AddModelError("captcha", "Error From Google ReCaptcha: "+ response.ErrorMessage[0].ToString());
+            }
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberLogin, lockoutOnFailure: true);
@@ -139,7 +150,7 @@ namespace IdentityServerHost.Quickstart.UI
                     }
                 }
 
-                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId:context?.Client.ClientId));
+                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId: context?.Client.ClientId));
                 ModelState.AddModelError(string.Empty, AccountOptions.InvalidCredentialsErrorMessage);
             }
 
@@ -148,7 +159,7 @@ namespace IdentityServerHost.Quickstart.UI
             return View(vm);
         }
 
-        
+
         /// <summary>
         /// Show logout page
         /// </summary>
@@ -338,6 +349,14 @@ namespace IdentityServerHost.Quickstart.UI
             }
 
             return vm;
+        }
+
+        public CaptchaResponse ValidateCaptcha(string response)
+        {
+            string secret = _configuration.GetSection("googleReCaptcha:SecretKey").Value;
+            var client = new WebClient();
+            var jsonResult = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
+            return JsonConvert.DeserializeObject<CaptchaResponse>(jsonResult.ToString());
         }
     }
 }

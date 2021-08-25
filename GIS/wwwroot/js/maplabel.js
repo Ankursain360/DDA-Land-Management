@@ -113,20 +113,18 @@ MapLabel.prototype.onAdd = function() {
   ctx.lineJoin = 'round';
   ctx.textBaseline = 'top';
 
-  this.drawCanvas_();
-
+    this.drawCanvas_();
+   
+    // Ensures the label is redrawn if the text or position is changed.
+    var map = this.getMap();
+    canvas.addEventListener('click', function (e) {
+        alert('Hi');
+    });
   var panes = this.getPanes();
   if (panes) {
     panes.mapPane.appendChild(canvas);
   }
-
-    //google.maps.event.addDomListener(this.canvas, 'click', function () {
-    //    if (me.get('clickable')) {
-    //        google.maps.event.trigger(me, 'click');
-    //    }
-    //});
-
-
+   
 };
 MapLabel.prototype['onAdd'] = MapLabel.prototype.onAdd;
 
@@ -151,7 +149,7 @@ MapLabel.prototype.getMarginLeft_ = function(textWidth) {
  */
 MapLabel.prototype.draw = function() {
   var projection = this.getProjection();
-
+    
   if (!projection) {
     // The map projection is not ready yet so do nothing
     return;
