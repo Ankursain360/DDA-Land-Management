@@ -19,6 +19,6 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<DemandPaymentDetailsDto>> GetPaymentDetails(int Id);
         Task<List<LeasePaymentDemandLetterDetailsSearchDto>> GetPaymentDemandLetter(int Id);
-
+        Task<List<Kycdemandpaymentdetails>> FetchResultOnKycId(int kycId);//added by ishu
     }
 }

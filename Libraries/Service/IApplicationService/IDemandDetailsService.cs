@@ -26,5 +26,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<LeasePaymentDemandLetterDetailsSearchDto>> GetPaymentDemandLetter(int Id);
 
+        Task<List<Kycdemandpaymentdetails>> FetchResultOnKycId(int kycId);//added by ishu
+
     }
 }

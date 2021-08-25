@@ -80,12 +80,20 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Create(int Id)
         {
+            var data1 = await _demandDetailsService.FetchResultOnKycId(Id);
+            if (data1.Count == 0) 
+            { 
             LeasePublicDemandPaymentDetailsDto dto = new LeasePublicDemandPaymentDetailsDto();
             var data = await _kycformService.FetchSingleResult(Id);
             dto.KycId = data.Id;
             dto.FileNo = data.FileNo;
             return View(dto);
-
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.payduesError, "", AlertType.Info);
+                return View("Index");
+            }
         }
 
 
@@ -470,7 +478,7 @@ namespace LeaseForPublic.Controllers
                             var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + dto.FileNo + "&Locality=0&Amount=" + dto.TotalPayable.ToString() + "&Interest=" + dto.TotalPayableInterest.ToString();
                             return Redirect(paymentLink);
                         }
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         return View("Index");
                     }
                     else

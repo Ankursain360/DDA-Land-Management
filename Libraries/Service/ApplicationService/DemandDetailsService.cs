@@ -70,7 +70,10 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
+        public async Task<List<Kycdemandpaymentdetails>> FetchResultOnKycId(int kycId)//added by ishu
+        {
+            return await _demandDetailsRepository.FetchResultOnKycId(kycId);
+        }
 
 
     }

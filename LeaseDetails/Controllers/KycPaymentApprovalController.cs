@@ -501,7 +501,7 @@ namespace LeaseDetails.Controllers
                                                 bodyDTO.Date = DateTime.Now.ToString("dd-MMM-yyyy");
                                                 bodyDTO.AllotteeName = Data2.Name == null ? "NA" : Data2.Name;
                                                 bodyDTO.Address = Data2.Address == null ? "NA" : Data2.Address;
-                                                bodyDTO.PropertyNo = Data2.PlotNo == null?"NA": Data2.PlotNo;
+                                                bodyDTO.PropertyNo = Data2.PlotNo == null?"Property": Data2.PlotNo;
                                                 bodyDTO.DatePeriod = Data3 == null?"NA": Data3.DemandPeriod;
                                                 bodyDTO.DueDate = (DateTime.Now.AddDays(15)).ToString("dd-MMM-yyyy");
                                                 bodyDTO.Amount = Data.TotalDues.ToString();

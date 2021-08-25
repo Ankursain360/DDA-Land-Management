@@ -16,5 +16,7 @@ namespace Notification.Constants
         public const string UnVerifysuccesfuly = "Record Unverified successfully.";
         public const string Forwardsuccesfuly = "Record forwareded successfully.";
         public const string Approvedsuccesfuly = "Record approved successfully.";
+        public const string payduesError = "Dear User, One of your Application is already in Progress. meanwhile, you can not submit a new request. kindly wait till your application get approved or reject.";
+
     }
 }
