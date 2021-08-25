@@ -11,28 +11,34 @@ using LandingPage.Helper;
 using Service.IApplicationService;
 using Dto.Master;
 using Libraries.Model.Entity;
+using Microsoft.AspNetCore.Http;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace LandingPage.Controllers
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public class HomeController : BaseController
     {
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
         private readonly IModuleService _moduleService;
         private readonly IModuleCategoryService _modulecategoryService;
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
 
         public HomeController(ISiteContext siteContext,
-          IUserProfileService userProfileService, IModuleService moduleService, IModuleCategoryService modulecategoryService)
+          IUserProfileService userProfileService, IModuleService moduleService, IModuleCategoryService modulecategoryService, IHttpContextAccessor httpContextAccessor)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
             _moduleService = moduleService;
             _modulecategoryService = modulecategoryService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         #region changes regarding dynamic categorization of landing page based on module category   Renu added by 7 May 2021
+       
         public async Task<IActionResult> Index()
         {
             var moduleCategoryData = await _moduleService.GetModuleCategory();
@@ -51,7 +57,48 @@ namespace LandingPage.Controllers
                 }
             }
             var mdoulecatlisting = GetModuleListing(data, result);
+            //#region session value change for security
+            //HttpContext.Session.Clear();
+            //if (_httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"] != null)
+            //{
+            //    string any = _httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"];
+            //    HttpContext.Response.Cookies.Append("ASP.NET_SessionId", string.Empty);
+            //    var Value = GenerateHashKey();
+            //    HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Value);
+            //}
+            //if (_httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null)
+            //{
+            //    string any = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
+            //    HttpContext.Response.Cookies.Append(".AspNetCore.Session", string.Empty);
+            //    var Value = GenerateHashKey();
+            //    HttpContext.Response.Cookies.Append(".AspNetCore.Session", Value);
+            //}
+            //if (_httpContextAccessor.HttpContext.Request.Cookies["AuthToken"] != null)
+            //{
+            //    HttpContext.Response.Cookies.Append("AuthToken", string.Empty);
+            //    CookieOptions options = new CookieOptions();
+            //    options.Expires = DateTime.Now.AddDays(-20);
+            //}
+            //if (_httpContextAccessor.HttpContext.Request.Cookies["__AntiXsrfToken"] != null)
+            //{
+            //    HttpContext.Response.Cookies.Append("__AntiXsrfToken", string.Empty);
+            //}
+            //string newSessionID = _httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"];
+            //string newCoreSessionID = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
+            //#endregion
             return View(mdoulecatlisting);
+        }
+        private string GenerateHashKey()
+        {
+            StringBuilder myStr = new StringBuilder();
+            myStr.Append(Request.Headers["User-Agent"].ToString());
+            //myStr.Append(Request.Browser.Platform);
+            //myStr.Append(Request.Browser.MajorVersion);
+            //myStr.Append(Request.Browser.MinorVersion);
+            //myStr.Append(Request.LogonUserIdentity.User.Value);
+            SHA1 sha = new SHA1CryptoServiceProvider();
+            byte[] hashdata = sha.ComputeHash(Encoding.UTF8.GetBytes(myStr.ToString()));
+            return Convert.ToBase64String(hashdata);
         }
 
         private IList<RoleWiseModuleMappingDto> GetModuleListing(IList<RoleWiseModuleMappingDto> modulecatList, IList<Menuactionrolemap> result)
@@ -84,8 +131,19 @@ namespace LandingPage.Controllers
         {
             return View();
         }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Logout()
         {
+            
+            _httpContextAccessor.HttpContext.Response.Clear();
+            //Clear cookies
+            var cookies = _httpContextAccessor.HttpContext.Request.Cookies;
+            foreach (var cookie in cookies)
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Delete(cookie.Key);
+            }             
+            //
             return SignOut("Cookies", "oidc");
         }
 

@@ -1,4 +1,5 @@
 ﻿using Dto.Master;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
 using SiteMaster.Helper;
@@ -12,12 +13,13 @@ namespace SiteMaster.Controllers
     {
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public HomeController(ISiteContext siteContext,
-           IUserProfileService userProfileService)
+           IUserProfileService userProfileService, IHttpContextAccessor httpContextAccessor)
         {
             _siteContext = siteContext;
             _userProfileService = userProfileService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index()
@@ -35,6 +37,14 @@ namespace SiteMaster.Controllers
 
         public IActionResult Logout()
         {
+            _httpContextAccessor.HttpContext.Response.Clear();
+            //Clear cookies
+            var cookies = _httpContextAccessor.HttpContext.Request.Cookies;
+            foreach (var cookie in cookies)
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Delete(cookie.Key);
+            }
+            //
             return SignOut("Cookies", "oidc");
         }
 

@@ -6,21 +6,32 @@
 
     @if (Model.EnableLocalLogin)
     {
+        
     <form asp-route="Login" class="input-form">
         <input type="hidden" asp-for="ReturnUrl" />
-
+        <input type="hidden" asp-for="Data" id="hdnvals" />
         <div class="form-group icon">
             <i class="ri-user-line"></i>
             <label asp-for="Username"></label>
-            <input class="form-control" placeholder="Username" asp-for="Username" maxlength="30" autofocus>
+            <input class="form-control" placeholder="Username" asp-for="Username" autocomplete="off" maxlength="30" autofocus>
         </div>
         <div class="form-group icon">
             <i class="ri-lock-line"></i>
             <label asp-for="Password"></label>
             <input type="password" class="form-control" placeholder="Password" asp-for="Password" maxlength="30" autocomplete="off">
         </div>
-        <br />
-        <div class="g-recaptcha" data-sitekey="6LefphwcAAAAAKO6RQ0G3yTAKzwEyQn3zfbjviHX"></div>
+        <div class="form-group icon">
+            <i class="ri-code-s-slash-line"></i>
+            <label asp-for="CaptchaCode"></label>
+            <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="10" autocomplete="off" required>
+        </div>
+        <div class="codeImg">
+            <img src="~/get-captcha-image" id="img-captcha">
+            <i class="ri-refresh-line" id="refreshcaptcha"></i>
+        </div>
+
+
+
         @if (Model.AllowRememberLogin)
         {
             <div class="d-flex align-items-center">
@@ -34,7 +45,7 @@
             </div>
         }
 
-        <button class="btn btn-theme px-4" name="button" value="login">Login</button>
+        <button class="btn btn-theme px-4" name="button" id="btnlogin" value="login">Login</button>
         <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
         <div class="container-fluid">
             <p class="my-0 py-2">
@@ -83,4 +94,17 @@
         </div>
     }
 </div>
-<script src='https://www.google.com/recaptcha/api.js'></script>  
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<environment include="Development">
+    <script src="~/js/aes.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/aes.min.js" asp-append-version="true"></script>
+</environment>
+<environment include="Development">
+    <script src="~/js/login.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/login.min.js" asp-append-version="true"></script>
+</environment>

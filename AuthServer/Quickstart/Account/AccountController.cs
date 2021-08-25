@@ -16,11 +16,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
+using Utility.Helper;
 
 namespace IdentityServerHost.Quickstart.UI
 {
@@ -35,6 +38,7 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
         public IConfiguration _configuration;
+
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -59,6 +63,15 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
+            //Reset Session added by sachin for audit points
+
+            CookieOptions options = new CookieOptions();
+            options.Expires = DateTime.Now.AddDays(-30);
+            HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString());
+            HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString());
+
+            //
+
             // build a model so we know what to show on the login page
             var vm = await BuildLoginViewModelAsync(returnUrl);
 
@@ -67,7 +80,7 @@ namespace IdentityServerHost.Quickstart.UI
                 // we only have one option for logging in and it's an external provider
                 return RedirectToAction("Challenge", "External", new { scheme = vm.ExternalLoginScheme, returnUrl });
             }
-
+            vm.Data = SetEncriptionKey();
             return View(vm);
         }
 
@@ -107,14 +120,25 @@ namespace IdentityServerHost.Quickstart.UI
                     return Redirect("~/");
                 }
             }
-            string ss = Request.Form["g-recaptcha-response"];
-            CaptchaResponse response = ValidateCaptcha(ss);
-            if (!response.Success)
+            if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext))
             {
-                ModelState.AddModelError("captcha", "Error From Google ReCaptcha: "+ response.ErrorMessage[0].ToString());
+                ModelState.AddModelError("captcha", "Invalid Captcha.");
             }
+
+            if (model.Data != "")
+            {
+                string key = model.Data;
+                model.Password = DecryptStringAES(model.Password, key);
+                model.Username = DecryptStringAES(model.Username, key);
+            }
+            else
+            {
+                ModelState.AddModelError("Decryption", "Decryption program failed.Kindly Referesh the page and try again.");
+            }
+
             if (ModelState.IsValid)
             {
+
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberLogin, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
@@ -286,6 +310,7 @@ namespace IdentityServerHost.Quickstart.UI
             var vm = await BuildLoginViewModelAsync(model.ReturnUrl);
             vm.Username = model.Username;
             vm.RememberLogin = model.RememberLogin;
+            vm.Data = SetEncriptionKey();
             return vm;
         }
 
@@ -351,12 +376,101 @@ namespace IdentityServerHost.Quickstart.UI
             return vm;
         }
 
-        public CaptchaResponse ValidateCaptcha(string response)
+        #region Security Audit Points added by sachin
+        [Route("get-captcha-image")]
+        public IActionResult GetCaptchaImage()
         {
-            string secret = _configuration.GetSection("googleReCaptcha:SecretKey").Value;
-            var client = new WebClient();
-            var jsonResult = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
-            return JsonConvert.DeserializeObject<CaptchaResponse>(jsonResult.ToString());
+            int width = 150;
+            int height = 50;
+            var captchaCode = Captcha.GenerateCaptchaCode();
+            var result = Captcha.GenerateCaptchaImage(width, height, captchaCode);
+            HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);
+            Stream s = new MemoryStream(result.CaptchaByteData);
+            return new FileStreamResult(s, "image/png");
+
         }
+        private string SetEncriptionKey()
+        {
+            Random random = new Random();
+            string combination = "0123456789ABCDEFGHIJKMNOPQRSTUVWXYZabcdefghijkmnopqrstuvxyz";
+            StringBuilder captcha = new StringBuilder();
+            for (int i = 0; i < 16; i++)
+                captcha.Append(combination[random.Next(combination.Length)]);
+            string key = captcha.ToString();
+            HttpContext.Session.SetString("haskey", captcha.ToString());
+            return key;
+        }
+
+        public static string DecryptStringAES(string cipherText, string keys)
+        {
+            var keybytes = Encoding.UTF8.GetBytes(keys);
+            var iv = Encoding.UTF8.GetBytes(keys);
+
+            var encrypted = Convert.FromBase64String(cipherText);
+            var decriptedFromJavascript = DecryptStringFromBytes(encrypted, keybytes, iv);
+            return string.Format(decriptedFromJavascript);
+        }
+        private static string DecryptStringFromBytes(byte[] cipherText, byte[] key, byte[] iv)
+        {
+            if (cipherText == null || cipherText.Length <= 0)
+            {
+                throw new ArgumentNullException("cipherText");
+            }
+            if (key == null || key.Length <= 0)
+            {
+                throw new ArgumentNullException("key");
+            }
+            if (iv == null || iv.Length <= 0)
+            {
+                throw new ArgumentNullException("key");
+            }
+
+            // Declare the string used to hold  
+            // the decrypted text.  
+            string plaintext = null;
+
+            // Create an RijndaelManaged object  
+            // with the specified key and IV.  
+            using (var rijAlg = new RijndaelManaged())
+            {
+                //Settings  
+                rijAlg.Mode = CipherMode.CBC;
+                rijAlg.Padding = PaddingMode.PKCS7;
+                rijAlg.FeedbackSize = 128;
+
+                rijAlg.Key = key;
+                rijAlg.IV = iv;
+
+                // Create a decrytor to perform the stream transform.  
+                var decryptor = rijAlg.CreateDecryptor(rijAlg.Key, rijAlg.IV);
+
+                try
+                {
+                    // Create the streams used for decryption.  
+                    using (var msDecrypt = new MemoryStream(cipherText))
+                    {
+                        using (var csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+
+                            using (var srDecrypt = new StreamReader(csDecrypt))
+                            {
+                                // Read the decrypted bytes from the decrypting stream  
+                                // and place them in a string.  
+                                plaintext = srDecrypt.ReadToEnd();
+
+                            }
+
+                        }
+                    }
+                }
+                catch
+                {
+                    plaintext = "keyError";
+                }
+            }
+
+            return plaintext;
+        }
+        #endregion
     }
 }

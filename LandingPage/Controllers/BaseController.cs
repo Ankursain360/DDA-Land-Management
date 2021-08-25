@@ -5,6 +5,7 @@ using LandingPage.Helper;
 
 namespace LandingPage.Controllers
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public abstract class BaseController : Controller
     {
         private ISiteContext _siteContext;
