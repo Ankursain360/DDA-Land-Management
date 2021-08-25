@@ -10,7 +10,8 @@
     <div class="row">
         <div class="form-group icon">
             <i class="ri-user-line"></i>
-            <input type="text" class="form-control" placeholder="Enter Username" asp-for="Username" autofocus>
+            <input type="text" class="form-control" autocomplete="off" placeholder="Enter Username" asp-for="Username">
+            <span asp-validation-for="Username"  class="d-block text-danger field-validation-valid msg"></span>
         </div>
     </div>
 
@@ -24,9 +25,8 @@
     <div class="row">
         <div>
             <div class="codeImg">
-                <img src="~/get-captcha-image" id="img-captcha">
-                <i class="ri-refresh-line" id="refreshcaptcha" style="font-size:26px;"></i>
-                @* <span class="ri-refresh-line" style="font-size:26px;" id="refreshcaptcha"></span>*@
+                <img src="~/get-captcha-image" id="img-captcha">               
+                <i class="ri-refresh-line" id="refreshcaptcha" style="font-size:26px;"></i>            
             </div>
         </div>
     </div>
