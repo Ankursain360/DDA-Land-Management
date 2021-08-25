@@ -499,12 +499,12 @@ namespace LeaseDetails.Controllers
                                                 kycOutstandingDuesMailBodyDto bodyDTO = new kycOutstandingDuesMailBodyDto();
                                                 bodyDTO.FileNo = Data2.FileNo;
                                                 bodyDTO.Date = DateTime.Now.ToString("dd-MMM-yyyy");
-                                                bodyDTO.AllotteeName = Data2.Name == null ? "NA" : Data2.Name;
+                                                bodyDTO.AllotteeName = Data2.Name == null ? "Applicant" : Data2.Name;
                                                 bodyDTO.Address = Data2.Address == null ? "NA" : Data2.Address;
-                                                bodyDTO.PropertyNo = Data2.PlotNo == null?"Property": Data2.PlotNo;
+                                                bodyDTO.PropertyNo = Data2.PlotNo == null?"NA": Data2.PlotNo;
                                                 bodyDTO.DatePeriod = Data3 == null?"NA": Data3.DemandPeriod;
                                                 bodyDTO.DueDate = (DateTime.Now.AddDays(15)).ToString("dd-MMM-yyyy");
-                                                bodyDTO.Amount = Data.TotalDues.ToString();
+                                                bodyDTO.Amount = Data.TotalDues == 0?"NA": Data.TotalDues.ToString(); 
                                                 bodyDTO.GrountRent = Data2.Property == "Lease"? "GrountRent":"License Fee";
                                                 bodyDTO.UserName = DDInfo.User.UserName == null?"NA": DDInfo.User.UserName;
                                                 bodyDTO.UserEmail = DDInfo.User.Email == null ? "NA" : DDInfo.User.Email;
@@ -1316,6 +1316,14 @@ namespace LeaseDetails.Controllers
                         {
                             return Json("Data updated in Bhoomi Application");
                         }
+                        else if (result == "{\"cargo\":0}")
+                        {
+                            return Json("Challna No" + jsondata[i].CHLLN_NO + " already updated in Bhoomi Application");
+                        }
+                        else if (result == "{\"cargo\":2}")
+                        {
+                            return Json("Not able to update data as Challna No" + jsondata[i].CHLLN_NO + " Is not valid ");
+                        }
                         else
                         {
                             return Json("Not able to update data in Bhoomi Application");
@@ -1332,7 +1340,6 @@ namespace LeaseDetails.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return Json("No Data Available to update");
-
 
             }
 
