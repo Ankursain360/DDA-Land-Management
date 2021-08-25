@@ -11,6 +11,7 @@ namespace Dto.Master
     {
         public int? Id { get; set; }
 
+        [StringLength(30, ErrorMessage = "Maximum 30 characters allowed ")]
         [Required(ErrorMessage = "Username is mandatory")]
         public string Username { get; set; }
 

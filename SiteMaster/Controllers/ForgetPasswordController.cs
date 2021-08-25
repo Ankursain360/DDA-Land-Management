@@ -66,6 +66,8 @@ namespace SiteMaster.Controllers
                         ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
                         return View(model);
                     }
+
+
                     var user = await _userManager.FindByNameAsync(model.Username);
                     if (user == null)
                     {
@@ -179,7 +181,7 @@ namespace SiteMaster.Controllers
                             ModelState.TryAddModelError(error.Code, error.Description);
                             ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
                         }
-                        return View(resetPasswordDto);
+                       // return View(resetPasswordDto);
                     }
                     return RedirectToAction(nameof(ResetPasswordConfirmation));
                 }
@@ -203,6 +205,7 @@ namespace SiteMaster.Controllers
             var model = new ResetPasswordDto { Token = token, Username = username };
             return View(model);
         }
+
 
         [Route("get-captcha-image")]
         public IActionResult GetCaptchaImage(Payeeregistration payeeregistration)

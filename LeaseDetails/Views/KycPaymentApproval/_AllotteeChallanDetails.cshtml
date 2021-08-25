@@ -65,7 +65,7 @@
                                 </td>
                                 <td>
                                     <input asp-for="@item.ChallanNo" maxlength="10" type="text" class="floating-label-field floating-label-field--s3 numbers" />
-
+                                    <span class="text-danger"></span>
                                 </td>
                                 <td>
                                     <input asp-for="@item.Amount" id="Amount" type="text" class="floating-label-field floating-label-field--s3 numbers" />
@@ -113,31 +113,41 @@
 </div>
 <br />
 @*@if (ViewBag.Role == 33 || ViewBag.Role == 34)
-{
-    <div class="row pt-3">
+    {
+        <div class="row pt-3">
 
-        <div class="col-md-12">
-            <input class="btn btn-theme" type="button" id="btnUpdateChallanDetails" value="Update Challan Details" onclick="UpdateChallanDetails();" />
-            <input class="btn btn-theme" type="button" id="btnUpdateBhoomiDetails" value="Update Verified Challan Details in Bhoomi Application" onclick="UpdateDetailsInBhoomi();" />
+            <div class="col-md-12">
+                <input class="btn btn-theme" type="button" id="btnUpdateChallanDetails" value="Update Challan Details" onclick="UpdateChallanDetails();" />
+                <input class="btn btn-theme" type="button" id="btnUpdateBhoomiDetails" value="Update Verified Challan Details in Bhoomi Application" onclick="UpdateDetailsInBhoomi();" />
+
+            </div>
 
         </div>
-        
-    </div>
-}
-else { }*@
-    <br />
-    <br />
+    }
+    else { }*@
+<br />
+<br />
 
-    @*</div>
-            </div>
-        </div>*@
+@*</div>
+        </div>
+    </div>*@
 
-    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
-    <environment include="Development">
-        <script src="~/js/DemandPaymentCalculation.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/DemandPaymentCalculation.min.js" asp-append-version="true"></script>
-    </environment>
-
+<environment include="Development">
+    <script src="~/js/DemandPaymentCalculation.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/DemandPaymentCalculation.min.js" asp-append-version="true"></script>
+</environment>
+<script>
+    $(document).ready(function () {
+    $('.numbers').keyup(function () {
+        this.value = this.value.replace(/[^0-9\.]/g, '');
+    });
+    $('.onlynumbers').keyup(function () {
+        var $th = $(this);
+        $th.val($th.val().replace(/[^0-9]/g, ''));
+    });
+    });
+</script>

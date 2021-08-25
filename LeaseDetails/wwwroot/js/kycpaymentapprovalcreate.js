@@ -369,10 +369,10 @@ function GetUpdatedPaymentParam() {
               
             KycId: parseInt($(this).find('#item_KycId').val()),
             DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
-            DemandPeriod: $(this).find('#item_DemandPeriod').val(),
-            GroundRent: parseFloat($(this).find('#txtGroundRent').val()),
-            InterestRate: parseFloat($(this).find('#txtInterestRate').val()),
-            TotdalDues: parseFloat($(this).find('#txtTotdalDues').val()),
+            DemandPeriod: $(this).find('#item_DemandPeriod').val() == "" ? "NA" : $(this).find('#item_DemandPeriod').val(),
+            GroundRent: parseFloat($(this).find('#txtGroundRent').val() == "" ? 0 : $(this).find('#txtGroundRent').val()),
+            InterestRate: parseFloat($(this).find('#txtInterestRate').val() == "" ? 0 : $(this).find('#txtInterestRate').val()),
+            TotdalDues: parseFloat($(this).find('#txtTotdalDues').val() == "" ? 0 : $(this).find('#txtTotdalDues').val()),
             TotalPayable: parseFloat($('#TotalPayable').val()),
             TotalPayableInterest: parseFloat($('#TotalPayableInterest').val()),
             TotalPayableDues: parseFloat($('#TotalDues').val())
@@ -408,13 +408,14 @@ function GetUpdatedChallanParam() {
             DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
 
             IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
-            PaymentType: $(this).find('#item_PaymentType').val(),
-            Period: $(this).find('#item_Period').val(),
-            ChallanNo: $(this).find('#item_ChallanNo').val(),
-            Amount: parseFloat($(this).find('#Amount').val()),
+            PaymentType: $(this).find('#item_PaymentType').val() == "" ? "NA" :$(this).find('#item_PaymentType').val(),
+            Period: $(this).find('#item_Period').val() == "" ? "NA" : $(this).find('#item_Period').val(),
+            ChallanNo: $(this).find('#item_ChallanNo').val() == "" ? 0 : $(this).find('#item_ChallanNo').val(),
+           
+            Amount: parseFloat($(this).find('#Amount').val() == "" ? 0 : $(this).find('#Amount').val()),
             DateofPaymentByAllottee: $(this).find('#item_DateofPaymentByAllottee').val(),
             Proofinpdf: $(this).find('#item_Proofinpdf').val(),
-            Ddabankcredit: $(this).find('#item_Ddabankcredit').val(),
+            Ddabankcredit: $(this).find('#item_Ddabankcredit').val() == "" ? "NA" : $(this).find('#item_Ddabankcredit').val(),
             TotalPayable: parseFloat($('#TotalPayable').val()),
             TotalPayableInterest: parseFloat($('#TotalPayableInterest').val()),
             TotalPayableDues: parseFloat($('#TotalDues').val())
@@ -475,11 +476,25 @@ function UpdateDetailsInBhoomi() {
     HttpPost(`/KycPaymentApproval/UpdateBhoomi/`, 'json', param, function (response) {
         debugger;
         //check status here and show message based on that
-        if (response.trim() == 'Data updated in Bhoomi Application') {
+        if (response.trim() == 'Data updated in Bhoomi Application')
+        {
             SuccessMessage(response);
           
-        } else {
+        }
+        else
+        if (response.trim() == 'Not able to update data in Bhoomi Application')
+        {
             DisplayErrorMessages(response);
+        }
+        else
+        {
+           
+            InfoMessage(response);
         }
     });
 };
+
+
+//x > y ? "x is greater than y" :
+//    x < y ? "x is less than y" :
+//        x == y ? "x is equal to y" : "No result";

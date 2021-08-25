@@ -14,19 +14,11 @@ using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
-
 using Dto.Master;
 using Dto.Common;
-
-
-
 using Service.IApplicationService;
 using System.Text;
-
-
-
 using Microsoft.AspNetCore.Http;
-
 using Dto.Search;
 
 
@@ -66,13 +58,7 @@ namespace LeaseForPublic.Controllers
             _approvalproccessService = approvalproccessService;
 
         }
-        //public IActionResult Index()
-        //{
-
-        //    var mobile = HttpContext.Session.GetString("Mobile");
-
-        //    return View();
-        //}
+       
         public async Task<IActionResult> Index()
         {
 
@@ -116,14 +102,31 @@ namespace LeaseForPublic.Controllers
 
         }
 
-      
-     
+        [Route("get-captcha-image")]
+        public IActionResult GetCaptchaImage(Payeeregistration payeeregistration)
+        {
+            int width = 170;
+            int height = 75;
+            var captchaCode = Captcha.GenerateCaptchaCode();
+            var result = Captcha.GenerateCaptchaImage(width, height, captchaCode);
+            HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);
+            Stream s = new MemoryStream(result.CaptchaByteData);
+            return new FileStreamResult(s, "image/png");
 
+        }
         // SingnUp Otp
         [HttpPost]
         public async Task<IActionResult> sendotp([FromBody] Leasesignup model)
         {
 
+             // Validate Captcha Code
+
+            if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext))
+            {
+                ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                return View(model);
+            }
+            //End 
             List<string> JsonMsg = new List<string>();
             var IsEmailExist = await _leasesignupService.ValidateMobileEmail(model.MobileNo, model.EmailId);
             if (IsEmailExist)
@@ -203,6 +206,11 @@ namespace LeaseForPublic.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (!Captcha.ValidateCaptchaCode(leasesignup.CaptchaCode, HttpContext))
+                    {
+                        ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        return View(leasesignup);
+                    }
                     var result = await _leasesignupService.Create(leasesignup);
                     HttpContext.Session.SetString("ID", leasesignup.Id.ToString());
                     HttpContext.Session.SetString("Name", leasesignup.Name.ToString());
