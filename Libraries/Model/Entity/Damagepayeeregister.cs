@@ -149,7 +149,7 @@ namespace Libraries.Model.Entity
 
 
         //****** ALLOTTE temp TYPE *****
-
+   
         [NotMapped]
 
         public List<string> Name { get; set; }
@@ -164,24 +164,31 @@ namespace Libraries.Model.Entity
         public List<string> ATSGPAFilePath { get; set; }
 
         //****** Damage payee personal info temp *****
+        [Required(ErrorMessage = "Name is mandatory")]
         [NotMapped]
       
         public List<string> payeeName { get; set; }
+        [Required(ErrorMessage = "Father/Husband Name is mandatory")]
         [NotMapped]
       
         public List<string> payeeFatherName { get; set; }
+        [Required(ErrorMessage = "Gender is mandatory")]
         [NotMapped]
       
         public List<string> Gender { get; set; }
+        [Required(ErrorMessage = "Address is mandatory")]
         [NotMapped]
       
         public List<string> Address { get; set; }
+        [Required(ErrorMessage = "Mobile No is mandatory")]
         [NotMapped]
       
         public List<string> MobileNo { get; set; }
+        [Required(ErrorMessage = "Email is mandatory")]
         [NotMapped]
       
         public List<string> EmailId { get; set; }
+        [Required(ErrorMessage = "Aadhar No is mandatory")]
         [NotMapped]
      
         public List<string> AadharNo { get; set; }
@@ -198,11 +205,12 @@ namespace Libraries.Model.Entity
         public List<IFormFile> Pan { get; set; }
         [NotMapped]
         public List<IFormFile> Photograph { get; set; }
+        [Required(ErrorMessage = "Photo is mandatory")]
         [NotMapped]
         public List<string> PhotographFilePath { get; set; }
         [NotMapped]
         public List<IFormFile> SignatureFile { get; set; }
-
+        [Required(ErrorMessage = "Signature is mandatory")]
         [NotMapped]
         public List<string> SignatureFilePath { get; set; }
         //[NotMapped]
@@ -210,11 +218,12 @@ namespace Libraries.Model.Entity
 
         //[NotMapped]
         //public List<string> OtherDocFilePath { get; set; }
-        
+
 
         //****** Damagepaymenthistory temp ***
-        [NotMapped]
       
+        [NotMapped]
+
         public List<string> PaymntName { get; set; }
         [NotMapped]
        

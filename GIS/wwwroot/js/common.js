@@ -166,6 +166,10 @@ $(function () {
         select: function (event, ui) {
             event.preventDefault();
             $("#txtSearch").val(ui.item.label);
+            //Show Village Name
+            $('#spanVillageName').empty().append(ui.item.label.toUpperCase());
+            $('#spanVillage').empty().append('Village : ' + ui.item.label.toUpperCase())
+            $('#aVillageName').show();
             HttpGet(`/GIS/GetVillageDetails?VillageId=${parseInt(ui.item.value)}`, 'json', function (response) {
                 showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
             });

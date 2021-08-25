@@ -302,7 +302,7 @@ namespace LeaseForPublic.Controllers
 
                     #endregion
 
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                      
                     var list = await _kycformService.GetAllKycform();
                     return View("Index", list);
