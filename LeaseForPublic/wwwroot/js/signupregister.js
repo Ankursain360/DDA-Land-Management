@@ -124,7 +124,7 @@ $("#signup2").click(function () {
                     $("#loader-wrapper").css("display", "none");
                 }, 3000);
 
-                localStorage.setItem("otp", response[2]);
+              //  localStorage.setItem("otp", response[2]);
 
                 $("#sinupshow").hide();
                 $("#shomsgsuccess").show();
@@ -145,16 +145,22 @@ $("#signup2").click(function () {
 $("#otp-button").click(function () {
     $("#suc-comm").hide();
     $("#err-otp").hide();
-
-    var otp = $("#otp").val();
-    var rotp = localStorage.getItem("otp");
-    if (otp == rotp) {
-        $("#suc-comm").show();
-        $("#form").submit();
-
-    } else {
-        $("#otp").val('');
-        $("#err-otp").show();
-        alert("Please Enter Correct OTP");
+    var model = { 
+        CaptchaCode: $("#otp").val()
     }
+     
+    HttpPost(`/SignupForm/verifyOTP`, 'json', model, function (response) {
+        debugger;
+        var otp = $("#otp").val();
+        var rotp = localStorage.getItem("otp");
+        if (response[0] == "true")  {
+            $("#suc-comm").show();
+            $("#form").submit();
+
+        } else {
+            $("#otp").val('');
+            $("#err-otp").text(response[1]).show();            
+        }
+    });
+  
 });

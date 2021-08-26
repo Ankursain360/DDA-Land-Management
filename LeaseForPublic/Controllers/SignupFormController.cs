@@ -58,7 +58,7 @@ namespace LeaseForPublic.Controllers
             _approvalproccessService = approvalproccessService;
 
         }
-       
+
         public async Task<IActionResult> Index()
         {
 
@@ -75,14 +75,14 @@ namespace LeaseForPublic.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] Leasesignuplist model)
         {
-          
+
 
             var mobile = HttpContext.Session.GetString("Mobile");
-           
+
             model.Mobileno = mobile;
             var result = await _leasesignupService.AllKycformList(model);
             return PartialView("_List", result);
-           
+
         }
 
         public async Task<IActionResult> CreateLogin()
@@ -94,7 +94,7 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Create()
         {
-           
+
             Leasesignup leasesignup = new Leasesignup();
 
 
@@ -125,11 +125,11 @@ namespace LeaseForPublic.Controllers
             if (!Captcha.ValidateCaptchaCode(model.CaptchaCode, HttpContext))
             {
                 JsonMsg.Add("false");
-                JsonMsg.Add("Invalid Catacha");
-                return Json(JsonMsg);                
+                JsonMsg.Add("Invalid Captcha");
+                return Json(JsonMsg);
             }
             //End 
-        
+
             var IsEmailExist = await _leasesignupService.ValidateMobileEmail(model.MobileNo, model.EmailId);
             if (IsEmailExist)
             {
@@ -186,11 +186,11 @@ namespace LeaseForPublic.Controllers
             SMS.GenerateSendSMS(Action, Mobile);
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", model.EmailId);
-            
+            HttpContext.Session.SetString("OTP", otp.ToString());
 
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
-            JsonMsg.Add(otp.ToString());
+            //JsonMsg.Add(otp.ToString());
             return Json(JsonMsg);
 
         }
@@ -200,11 +200,11 @@ namespace LeaseForPublic.Controllers
 
         public async Task<IActionResult> Create(Leasesignup leasesignup)
         {
-           try
+            try
             {
                 var mobile = HttpContext.Session.GetString("Mobile");
                 var email = HttpContext.Session.GetString("Email");
-                
+
 
                 if (ModelState.IsValid)
                 {
@@ -219,7 +219,7 @@ namespace LeaseForPublic.Controllers
                     var Name = HttpContext.Session.GetString("Name");
                     ViewBag.Title = Name;
 
-                 //   ViewBag.Message
+                    //   ViewBag.Message
 
                     if (result == true)
                     {
@@ -261,7 +261,7 @@ namespace LeaseForPublic.Controllers
                     var result = await _leasesignupService.Create(leasesignup);
                     if (result == true)
                     {
-                        
+
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
 
                         return View("Index");
@@ -347,7 +347,7 @@ namespace LeaseForPublic.Controllers
             SMS.GenerateSendSMS(Action, Mobile);
 
             //TempData["data1"] = model.MobileNo;
-          //  TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + model.MobileNo, "", AlertType.Success);
+            //  TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + model.MobileNo, "", AlertType.Success);
 
 
             // return str;
@@ -355,18 +355,40 @@ namespace LeaseForPublic.Controllers
 
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", checkemail[0].EmailId);
-           HttpContext.Session.SetString("ID", checkemail[0].Id.ToString());
-            //  var mobile = HttpContext.Session.GetString("Mobile");
+            HttpContext.Session.SetString("ID", checkemail[0].Id.ToString());
+            HttpContext.Session.SetString("OTP", otp.ToString());
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
-            JsonMsg.Add(otp.ToString());
+            //  JsonMsg.Add(otp.ToString());
             return Json(JsonMsg);
 
         }
 
+        [HttpPost]
+        public JsonResult verifyOTP([FromBody] Leasesignup model)
+        {
+            List<string> JsonMsg = new List<string>();
+            if (HttpContext.Session.GetString("OTP") != null)
+            {
+                string otp = HttpContext.Session.GetString("OTP").ToString();
+                if (otp == model.CaptchaCode)
+                {
+                    JsonMsg.Add("true");
+                }
+                else
+                {
+                    JsonMsg.Add("false");
+                    JsonMsg.Add("Invaild OTP");
+                }
+            }
+            else
+            {
+                JsonMsg.Add("false");
+                JsonMsg.Add("Due to some technical issue unable to matach OTP. Kindly Regenerate OTP.");
+            }
 
-    
-
-
+            return Json(JsonMsg);
         }
+
+    }
 }
