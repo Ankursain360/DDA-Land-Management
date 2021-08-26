@@ -5,6 +5,7 @@ using EncroachmentDemolition.Helper;
 
 namespace EncroachmentDemolition.Controllers
 {
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public abstract class BaseController:Controller
     {
         private ISiteContext _siteContext;
