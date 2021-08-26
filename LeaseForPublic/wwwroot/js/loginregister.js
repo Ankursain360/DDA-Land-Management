@@ -32,7 +32,6 @@ $("#signup2").click(function () {
         MobileNo: mobile,
         EmailId: ""
 
-
     }
 
     if (mobile != "") {
