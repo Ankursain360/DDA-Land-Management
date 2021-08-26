@@ -1,4 +1,4 @@
-﻿@model Dto.Master.GISDtoProfile
+﻿@model Dto.Master.UserProfileDto
 @{Layout = null;}
 <!doctype html>
 <html lang="en">
@@ -57,11 +57,14 @@
                 <a href="#" class="btn actionBtn slow" title="Print" onclick="printMaps();" id="printDocMob">
                     <i class="ri-printer-line"></i>
                 </a>
+                <a href="/Home/Logout" class="btn actionBtn slow" title="Logout">
+                    <i class="ri-logout-circle-line"></i>
+                </a>
                 <a href="#" class="btn actionBtn slow" title="North Direction">
                     <img src="~/img/north-arrow.png" width="50" height="50" />
                 </a>
             </div>
-           
+
             <!--top buttons end-->
             <div id="leftSection" class="leftSection slow">
                 <div class="MenuToggle">
@@ -137,8 +140,8 @@
                                                         </select>
                                                     </div>
                                                     @*<div class="mt-3 text-center">
-                                                    <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
-                                                </div>*@
+                                                            <button type="submit" class="btn d-block w-100 small btn-sm btn-primary">Find</button>
+                                                        </div>*@
                                                 </form>
                                             </div>
 
@@ -191,8 +194,9 @@
                     State : <strong class="text-dark">Delhi</strong><br />
                     <strong class="text-dark" id="spanVillage"></strong><br />
                     @*No of Zones : <strong class="text-dark">18</strong><br />
-                Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
-                    Lat & Long : <strong class="text-dark" id="tdCursor"></strong>
+                        Total Area : <strong class="text-dark">366704 Acres</strong><br />*@
+                    Lat & Long : <strong class="text-dark" id="tdCursor"></strong><br />
+                    User: <strong>@Model.User.Name (@Model.Role.Name)</strong>
                 </p>
             </div>
             <!--bottom btns-->
@@ -221,15 +225,15 @@
                                 </figure>
                             </a>
                             @*<a href="#" class="d-block" title="Satallite Map">
-                            <figure class="rounded" id="mapsatellite">
-                                <img src="~/img/satelite.jpg" alt="Satallite Map" />
-                                <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
-                            </figure>
-                        </a>*@
+                                    <figure class="rounded" id="mapsatellite">
+                                        <img src="~/img/satelite.jpg" alt="Satallite Map" />
+                                        <figcaption class="text-center py-1 w-100 d-block bg-primary text-white">Satallite Map</figcaption>
+                                    </figure>
+                                </a>*@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <!--bottom btns end-->
         </div>

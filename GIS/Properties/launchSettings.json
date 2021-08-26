@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:58245",
+      "applicationUrl": "https://localhost:2001",
       "sslPort": 44308
     }
   },
@@ -18,7 +18,7 @@
     "GIS": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:58245",
+      "applicationUrl": "https://localhost:2001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

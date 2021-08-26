@@ -1,7 +1,9 @@
 ﻿using Dto.Master;
+using GIS.Helper;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Service.IApplicationService;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,16 +12,22 @@ namespace GIS.Controllers
     public class GISController : BaseController
     {
         private readonly IGISService _GISService;
-
-        public GISController(IGISService GISService)
+        private readonly ISiteContext _siteContext;
+        private readonly IUserProfileService _userProfileService;
+        public GISController(IGISService GISService, IUserProfileService userProfileService, ISiteContext siteContext)
         {
+            _siteContext = siteContext;
+            _userProfileService = userProfileService;
             _GISService = GISService;
         }
         public async Task<IActionResult> Index()
         {
-            GISDtoProfile gis = new GISDtoProfile();
+            //GISDtoProfile gis = new GISDtoProfile();
             ViewBag.ZoneList = await _GISService.GetZoneList();
-            return View(gis);
+            //return View(gis);
+
+            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            return View(user);
         }
         public IActionResult Privacy()
         {

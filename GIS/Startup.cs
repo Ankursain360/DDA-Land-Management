@@ -17,6 +17,9 @@ using Service.Common;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
 
 namespace GIS
 {
@@ -79,6 +82,25 @@ namespace GIS
             });
             //end of  Response Compression
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+           .AddCookie("Cookies")
+           .AddOpenIdConnect("oidc", options =>
+           {
+               options.SignInScheme = "Cookies";
+               options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+               options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
+               options.ClientId = "mvc";
+               options.ClientSecret = "secret";
+               options.ResponseType = "code";
+               options.Scope.Add("api1");
+               options.SaveTokens = true;
+           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,16 +123,14 @@ namespace GIS
             app.UseStaticFiles();
 
             app.UseRouting();
-
-            app.UseAuthorization();
-
+            app.UseAuthentication();
+            app.UseAuthorization(); 
+            app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=GIS}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
-            
+
         }
     }
 }
