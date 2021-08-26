@@ -186,6 +186,7 @@ namespace LeaseForPublic.Controllers
             SMS.GenerateSendSMS(Action, Mobile);
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", model.EmailId);
+            HttpContext.Session.SetString("Name", model.Name);
             HttpContext.Session.SetString("OTP", otp.ToString());
 
             JsonMsg.Add("true");
@@ -355,6 +356,7 @@ namespace LeaseForPublic.Controllers
 
             HttpContext.Session.SetString("Mobile", model.MobileNo);
             HttpContext.Session.SetString("Email", checkemail[0].EmailId);
+            HttpContext.Session.SetString("Name", checkemail[0].Name);
             HttpContext.Session.SetString("ID", checkemail[0].Id.ToString());
             HttpContext.Session.SetString("OTP", otp.ToString());
             JsonMsg.Add("true");

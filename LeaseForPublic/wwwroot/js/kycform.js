@@ -357,6 +357,9 @@ function validateForm() {
     let LeaseGroundRentDepositFrequency = document.forms["kyc-form"]["LeaseGroundRentDepositFrequency"].value;
    let PossessionDate = document.forms["kyc-form"]["PossessionDate"].value;
     let Property = document.forms["kyc-form"]["Property"].value;
+    let name1 = document.forms["kyc-form"]["name1"].value;
+    let LandPremiumAmount = document.forms["kyc-form"]["LandPremiumAmount"].value;
+    let LicenseFeePayable = document.forms["kyc-form"]["LicenseFeePayable"].value;
     
     var status = 1; 
    
@@ -401,7 +404,26 @@ function validateForm() {
        // return false;
     }
 
-    
+    if (name1 == "") {
+
+        $("#name1-error").show();
+        status = 2;
+        // return false;
+    }
+
+    if (LandPremiumAmount == "") {
+
+        $("#LandPremiumamount-error").show();
+        status = 2;
+        // return false;
+    }
+
+    if (LicenseFeePayable == "") {
+
+        $("#LicenseFeePayable-error").show();
+        status = 2;
+        // return false;
+    }
  
     if (status == 2) {
         return false;

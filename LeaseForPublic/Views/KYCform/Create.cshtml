@@ -266,10 +266,11 @@
             <div class="row mt-md-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" id="name1" asp-for="Name" limit="100" class="floating-label-field floating-label-field--s3" placeholder="First Name">
+                        <input type="text" id="name1" value="@Model.Name" asp-for="Name" limit="100" class="floating-label-field floating-label-field--s3" placeholder="First Name">
                         <span asp-validation-for="Name" class="text-danger"></span>
                         <label for="field-1" class="floating-label"> Name </label>
                         <label style="color:red;display:none; font-size:13px" id="err-name">Please Enter Valid Name</label>
+                        <label id="name1-error" style="color:red;display:none;">Name is Mandatory</label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -453,6 +454,8 @@
                         <input type="text" asp-for="LandPremiumAmount" class="floating-label-field floating-label-field--s3 numbers" placeholder="Period From">
                         <span asp-validation-for="LandPremiumAmount" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Land Premium Amount Rs.</label>
+                        <label id="LandPremiumamount-error" style="color:red;display:none;">Land Premium Amount is Mandatory</label>
+
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -475,6 +478,8 @@
                         <input type="text" asp-for="LicenseFeePayable" class="floating-label-field floating-label-field--s3 numbers" placeholder="Period to">
                         <span asp-validation-for="LicenseFeePayable" class="text-danger"></span>
                         <label for="field-1" class="floating-label">License Fee Payable Rs. </label>
+                        <label id="LicenseFeePayable-error" style="color:red;display:none;">License Fee Payable is Mandatory</label>
+
                     </div>
                 </div>
 

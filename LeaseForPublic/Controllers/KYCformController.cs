@@ -92,10 +92,12 @@ namespace LeaseForPublic.Controllers
         {
             var mobile = HttpContext.Session.GetString("Mobile");
             var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
             if(mobile != null ) { 
             Kycform kyc = new Kycform();
             kyc.MobileNo = mobile;
             kyc.EmailId = email;
+            kyc.Name = name;
             kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
             kyc.BranchList = await _kycformService.GetAllBranchList();
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
