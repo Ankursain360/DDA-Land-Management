@@ -1,4 +1,7 @@
-﻿
+﻿8950612352
+
+
+
 
 $('#mobile').keyup(function () {
 
@@ -14,30 +17,32 @@ $('#mobile').keyup(function () {
 
 
 $("#signup2").click(function () {
-    $("#loader-wrapper").css("display", "block");
+    //$("#loader-wrapper").css("display", "block");
     $("#err-comm").hide();
-  
+
     var mobile = $("#mobile").val();
 
- 
+
     if (mobile == "") {
+
         $("#err-mob").show();
     }
-   
+
     var model = {
         MobileNo: mobile,
-        EmailId:""
+        EmailId: ""
 
-       
+
     }
-   
+
     if (mobile != "") {
+
         HttpPost(`/SignupForm/sendotp1`, 'json', model, function (response) {
-          
+
             //alert(response[2]);
             if (response[0] == "true") {
                 setTimeout(function () {
-                    $("#loader-wrapper").css("display", "none");
+                    //  $("#loader-wrapper").css("display", "none");
                 }, 3000);
                 localStorage.setItem("otp", response[2]);
                 $("#login-div").hide();
@@ -45,7 +50,10 @@ $("#signup2").click(function () {
                 $("#sotp").show();
                 $("#sotp").val(response.otp);
             } else {
+
+                $("#loader-wrapper").css("display", "none");
                 $("#err-comm").show();
+
             }
         });
 
@@ -54,18 +62,18 @@ $("#signup2").click(function () {
 
 });
 $("#otp-button").click(function () {
-   
+
     $("#suc-comm").hide();
     $("#err-otp").hide();
     var otp = $("#otp").val();
     var rotp = '123456';//localStorage.getItem("otp");
     if (otp == rotp) {
-     
+
         $("#suc-comm").show();
-       window.location = "/KYCform/Index";
+        window.location = "/KYCform/Index";
     } else {
-         $("#otp").val('');
-       // $("#err-otp").show();
+        $("#otp").val('');
+        // $("#err-otp").show();
         alert("Please Enter Correct OTP");
     }
 });
