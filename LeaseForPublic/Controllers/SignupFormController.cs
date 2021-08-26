@@ -208,11 +208,11 @@ namespace LeaseForPublic.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (!Captcha.ValidateCaptchaCode(leasesignup.CaptchaCode, HttpContext))
-                    {
-                        ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
-                        return View(leasesignup);
-                    }
+                    //if (!Captcha.ValidateCaptchaCode(leasesignup.CaptchaCode, HttpContext))
+                    //{
+                    //    ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                    //    return View(leasesignup);
+                    //}
                     var result = await _leasesignupService.Create(leasesignup);
                     HttpContext.Session.SetString("ID", leasesignup.Id.ToString());
                     HttpContext.Session.SetString("Name", leasesignup.Name.ToString());

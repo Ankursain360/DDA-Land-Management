@@ -1,5 +1,6 @@
 ﻿using GIS.Models;
 using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -9,14 +10,16 @@ namespace GIS.Controllers
     public class HomeController : BaseController
     {
         private readonly IGISService _GISService;
-
-        public HomeController(IGISService GISService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public HomeController(IGISService GISService, IHttpContextAccessor httpContextAccessor)
         {
             _GISService = GISService;
+            _httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "GIS");
+            //return View();
         }
         public IActionResult Privacy()
         {
@@ -48,6 +51,18 @@ namespace GIS.Controllers
         public IActionResult ExceptionLog()
         {
             return View();
+        }
+        public IActionResult Logout()
+        {
+            _httpContextAccessor.HttpContext.Response.Clear();
+            //Clear cookies
+            var cookies = _httpContextAccessor.HttpContext.Request.Cookies;
+            foreach (var cookie in cookies)
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Delete(cookie.Key);
+            }
+            //
+            return SignOut("Cookies", "oidc");
         }
     }
 }
