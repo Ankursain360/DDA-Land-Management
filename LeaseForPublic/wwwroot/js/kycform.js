@@ -37,7 +37,8 @@ $(document).ready(function () {
             $('#divApplicantDoc').show();
             $('#licenseheading').text();
             $('#labellease').text("Date of Lease Execution");
-
+            $('#NameLB').text("Name of Allottee/Lessee");
+            
             $('#aadharlb').text("Aadhaar No. of Allottee/Lessee");
             $('#letterlb').text("Possession Letter /Allotment Letter /Executed Lease deed (Any One )");
 
@@ -55,7 +56,7 @@ $(document).ready(function () {
             $('#licenseheading').text("Details of Licensee as per License Agreement");
             $('#labellease').text(" Date of License Execution");
             $('#chk1').text(" If the License Details are same as Applicant Details then  tick the checkbox");
-
+            $('#NameLB').text("Name of Licensee");
             $('#aadharlb').text("Aadhaar No. of Licensee");
             $('#letterlb').text("Possession Letter /Allotment Letter /Executed License agreement (Any One )");
 
@@ -89,6 +90,7 @@ $('#Property').change(function () {
             $('#licenseheading').text("Details of Lessee as per Allotment Letter/Lease deed");
             $('#labellease').text("Date of Lease Execution");
             $('#chk2').text(" If the Allottee Details are same as Applicant Details then tick the checkbox");
+            $('#NameLB').text("Name of Allottee/Lessee");
 
             $('#aadharlb').text("Aadhaar No./PAN of Allottee/Lessee ");
             $('#letterlb').text("Possession Letter /Allotment Letter /Executed Lease deed (Any One )");
@@ -111,7 +113,7 @@ $('#Property').change(function () {
             $('#chk2').text(" If the License Details are same as Applicant Details then  tick the checkbox");
             $('#licenseheading').text("Details of Licensee as per License Agreement");
             $('#labellease').text(" Date of License Execution");
-
+            $('#NameLB').text("Name of Licensee");
             $('#aadharlb').text("Aadhaar No. of Licensee");
             $('#letterlb').text("Possession Letter /Allotment Letter /Executed License agreement (Any One )");
 
@@ -360,7 +362,8 @@ function validateForm() {
     let name1 = document.forms["kyc-form"]["name1"].value;
     let LandPremiumAmount = document.forms["kyc-form"]["LandPremiumAmount"].value;
     let LicenseFeePayable = document.forms["kyc-form"]["LicenseFeePayable"].value;
-    
+    let GroundRent = document.forms["kyc-form"]["GroundRentAmount"].value;
+
     var status = 1; 
    
 
@@ -414,6 +417,12 @@ function validateForm() {
     if (LandPremiumAmount == "") {
 
         $("#LandPremiumamount-error").show();
+        status = 2;
+        // return false;
+    }
+    if (GroundRent == "") {
+
+        $("#GroundRentAmount-error").show();
         status = 2;
         // return false;
     }

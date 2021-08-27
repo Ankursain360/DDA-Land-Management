@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
 
        [Required(ErrorMessage = " Property field is Mandatory")]
         public string Property { get; set; }
-       // [Required(ErrorMessage = " Nature of Property is mandatory")]
+        [Required(ErrorMessage = " Nature of Property is mandatory")]
         public int? PropertyTypeId { get; set; }
         [Required(ErrorMessage = " File No is mandatory")]
         public string FileNo { get; set; }
@@ -49,7 +49,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = " Zone is Mandatory")]
         public int? ZoneId { get; set; }
-      //  [Required(ErrorMessage = " Locality is mandatory")]
+        [Required(ErrorMessage = " Locality is mandatory")]
         public int? LocalityId { get; set; }
       //  [Required(ErrorMessage = " Phase is mandatory")]
         public string Phase { get; set; }
@@ -66,6 +66,7 @@ namespace Libraries.Model.Entity
         public string Gender { get; set; }
         public string EmailId { get; set; }
         public string MobileNo { get; set; }
+        [Required(ErrorMessage = " This field is mandatory")]
         public string Address { get; set; }
      //   [Required(ErrorMessage = " Aadhaar No is mandatory")]
         public string AadhaarNo { get; set; }

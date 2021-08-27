@@ -353,7 +353,7 @@ namespace LeaseDetails.Controllers
                                         else if (payment.ApprovalStatusCode == ((int)ApprovalActionStatus.Rejected))
                                         {
                                             approvalproccess.Level = ApprovalProcessBackData.Level;
-                                            approvalproccess.SendTo = null;
+                                            approvalproccess.SendTo = "0";
                                             approvalproccess.PendingStatus = 0;
                                         }
                                         else  // Forward Check
@@ -361,7 +361,7 @@ namespace LeaseDetails.Controllers
                                             if (i == DataFlow.Count - 1)
                                             {
                                                 approvalproccess.Level = 0;
-                                                approvalproccess.SendTo = null;
+                                                approvalproccess.SendTo = "0";
                                                 approvalproccess.PendingStatus = 0;
                                             }
                                             else
@@ -375,7 +375,7 @@ namespace LeaseDetails.Controllers
                                                         {
                                                             approvalproccess.Level = 0;
                                                             approvalproccess.PendingStatus = 0;
-                                                            approvalproccess.SendTo = null;
+                                                            approvalproccess.SendTo = "0";
                                                         } else 
                                                         {
                                                             approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
@@ -398,7 +398,7 @@ namespace LeaseDetails.Controllers
 
                                         StringBuilder multouserprofileid = new StringBuilder();
                                         int col = 0;
-                                        if (approvalproccess.SendTo != null)
+                                        if (approvalproccess.SendTo != null && approvalproccess.SendTo != "0")
                                         {
                                             string[] multiTo = approvalproccess.SendTo.Split(',');
                                             foreach (string MultiUserId in multiTo)
@@ -549,7 +549,7 @@ namespace LeaseDetails.Controllers
 
                     var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(payment.ApprovalStatus));
 
-                    if (approvalproccess.SendTo != null)
+                    if (approvalproccess.SendTo != null && approvalproccess.SendTo != "0")
                     {
                         #region Mail Generate
 
@@ -561,7 +561,7 @@ namespace LeaseDetails.Controllers
 
                         var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
                         StringBuilder multousermailId = new StringBuilder();
-                        if (approvalproccess.SendTo != null)
+                        if (approvalproccess.SendTo != null && approvalproccess.SendTo != "0")
                         {
                             int col = 0;
                             string[] multiTo = approvalproccess.SendTo.Split(',');

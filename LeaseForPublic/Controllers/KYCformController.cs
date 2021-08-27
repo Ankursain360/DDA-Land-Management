@@ -57,7 +57,7 @@ namespace LeaseForPublic.Controllers
             
             var mobile = HttpContext.Session.GetString("Mobile");
             
-            if (mobile != "")
+            if (mobile != "" && mobile != null)
             {
 
                 return View();
@@ -75,16 +75,12 @@ namespace LeaseForPublic.Controllers
         {
            
             var mobile = HttpContext.Session.GetString("Mobile");
-           
-            //  if (mobile!=null)
-            // {
+
                 model.Mobileno = mobile.ToString();
                 var result = await _kycformService.GetPagedKycform(model);
                 return PartialView("_List", result);
-         // }
-
-            
            
+
         }
 
         // [AuthorizeContext(ViewAction.Add)]
