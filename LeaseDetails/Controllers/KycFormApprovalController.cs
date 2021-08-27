@@ -56,6 +56,7 @@ namespace LeaseDetails.Controllers
             ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
         }
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Kycform kyc = new Kycform();
@@ -73,7 +74,7 @@ namespace LeaseDetails.Controllers
             return PartialView("_List", result);
         }
 
-        // [AuthorizeContext(ViewAction.Add)]
+         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _kycformApprovalService.FetchSingleResult(id);
@@ -87,7 +88,8 @@ namespace LeaseDetails.Controllers
         }
 
         [HttpPost]
-        // [AuthorizeContext(ViewAction.Add)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Kycform kyc)
         {
             var result = false;
@@ -889,6 +891,7 @@ namespace LeaseDetails.Controllers
         }
         #endregion
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _kycformService.FetchSingleResult(id);
@@ -919,7 +922,7 @@ namespace LeaseDetails.Controllers
                         Property = result[i].Property == null ? "" : result[i].Property.ToString(),
 
                         NatureOfProperty = result[i].PropertyType == null ? "" : result[i].PropertyType.Name.ToString(),
-                          FileNo = result[i].FileNo,
+                        FileNo = result[i].FileNo,
                         Branch = result[i].Branch == null ? "" : result[i].Branch.Name.ToString(),
                         Zone = result[i].Zone == null ? "" : result[i].Zone.Name.ToString(),
 
