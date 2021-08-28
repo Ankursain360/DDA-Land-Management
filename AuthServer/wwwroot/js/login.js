@@ -4,11 +4,11 @@
     var txtUserName = document.getElementById("Username").value.trim();
     
     if (txtpassword == "") {
-        alert('Please enter password.');
+        toastr.error('Please Enter Password', 'Error', { timeOut: 3000, "progressBar": true });
         return false;
     }
     if (txtUserName == "") {
-        alert('Please enter UserName.');
+        toastr.error('Please Enter Username', 'Error', { timeOut: 3000, "progressBar": true });
         return false;
     }
     else {

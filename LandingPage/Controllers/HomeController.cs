@@ -163,5 +163,85 @@ namespace LandingPage.Controllers
         {
             return View();
         }
+
+        #region  Session Fixation added by Sachin 27 Aug 21
+        //public ActionResult SessionFixation()
+        //{
+        //    string _sessionIPAdress = string.Empty;
+        //    string _sessionBrowserInfo = string.Empty;
+
+        //    if (HttpContext.Session != null)
+        //    {
+               
+        //        string _encryptedString = HttpContext.Session.GetString("encryptedSession").ToString();
+        //        byte[] _encodedAsBytes = System.Convert.FromBase64String(_encryptedString);
+        //        string _decryptedString = System.Text.ASCIIEncoding.ASCII.GetString(_encodedAsBytes);
+        //        char[] _separator = new char[] { '^' };
+        //        if (_decryptedString != string.Empty && _decryptedString != "" && _decryptedString != null)
+        //        {
+        //            string[] _splitStrings = _decryptedString.Split(_separator);
+        //            if (_splitStrings.Count() > 0)
+        //            {
+        //                if (_splitStrings[1].Count() > 0)
+        //                {
+        //                    string[] _userBrowserInfo = _splitStrings[2].Split('~');
+        //                    if (_userBrowserInfo.Count() > 0)
+        //                    {
+        //                        _sessionBrowserInfo = _userBrowserInfo[0];
+        //                        _sessionIPAdress = _userBrowserInfo[1];
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        string _currentuseripAddress;
+        //        if (string.IsNullOrEmpty(Request.ServerVariables["HTTP_X_FORWARD_FOR"]))
+        //        {
+        //            _currentuseripAddress = Request.ServerVariables["REMOTE_ADDR"];
+        //        }
+        //        else
+        //        {
+        //            _currentuseripAddress = Request.ServerVariables["HTTP_X_FORWARD_FOR"].Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+        //        }
+        //        System.Net.IPAddress result;
+        //        if (!System.Net.IPAddress.TryParse(_currentuseripAddress, out result))
+        //        {
+        //            result = System.Net.IPAddress.None;
+        //        }
+
+        //        string _currentBrowserInfo = Request.Browser.Browser + Request.Browser.Version + Request.UserAgent;
+
+        //        if (_sessionIPAdress != "" && _sessionIPAdress != string.Empty)
+        //        {
+        //            if (_sessionIPAdress != _currentuseripAddress || _sessionBrowserInfo != _currentBrowserInfo)
+        //            {
+        //                Session.RemoveAll();
+        //                Session.Clear();
+        //                Session.Abandon();
+        //                Response.Cookies["ASP.Net_Session_Id"].Expires = DateTime.Now.AddSeconds(-30);
+        //                Response.Cookies.Add(new HttpCookie("ASP.Net_Session_Id", ""));
+        //            }
+        //            else
+        //            {
+
+        //            }
+
+        //        }
+        //        else
+        //        {
+        //            TempData["SaveResultOTP"] = 1;
+        //            TempData["SaveUpdateMessageOTP"] = "Invalid User....Please Try Again";
+        //            return (RedirectToAction("Index", "Login", new { UserValid = "" }));
+        //        }
+        //        return View();
+        //    }
+        //    else
+        //    {
+        //        TempData["SaveResultOTP"] = 1;
+        //        TempData["SaveUpdateMessageOTP"] = "Invalid User....Please Try Again";
+        //        return (RedirectToAction("Index", "Login", new { UserValid = "" }));
+        //    }
+
+        //}
+        #endregion Session Fixation added by Sachin 27 Aug 21
     }
 }

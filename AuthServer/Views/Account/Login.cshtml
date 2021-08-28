@@ -6,7 +6,7 @@
 
     @if (Model.EnableLocalLogin)
     {
-        
+
     <form asp-route="Login" class="input-form">
         <input type="hidden" asp-for="ReturnUrl" />
         <input type="hidden" asp-for="Data" id="hdnvals" />
@@ -14,16 +14,19 @@
             <i class="ri-user-line"></i>
             <label asp-for="Username"></label>
             <input class="form-control" placeholder="Username" asp-for="Username" autocomplete="off" maxlength="30" autofocus>
+            <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <div class="form-group icon">
             <i class="ri-lock-line"></i>
             <label asp-for="Password"></label>
             <input type="password" class="form-control" placeholder="Password" asp-for="Password" maxlength="30" autocomplete="off">
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="form-group icon">
             <i class="ri-code-s-slash-line"></i>
-            <label asp-for="CaptchaCode"></label>
-            <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="10" autocomplete="off" required>
+            <label>Captcha Code</label>
+            <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="4" autocomplete="off">
+            <span asp-validation-for="CaptchaCode" class="text-danger"></span>
         </div>
         <div class="codeImg">
             <img src="~/get-captcha-image" id="img-captcha">
@@ -34,15 +37,15 @@
 
         @if (Model.AllowRememberLogin)
         {
-            <div class="d-flex align-items-center">
-                <div class="form-group form-check">
-                    <input class="form-check-input" asp-for="RememberLogin">
-                    <label class="form-check-label" asp-for="RememberLogin">Remember Me</label>
-                </div>
-                <div class="form-group ml-auto">
-                    <a href="https://master.managemybusinessess.com/ForgetPassword/create" id="ForgotPassword" class="text-primary">Forgot Password?</a>
-                </div>
+        <div class="d-flex align-items-center">
+            <div class="form-group form-check">
+                <input class="form-check-input" asp-for="RememberLogin">
+                <label class="form-check-label" asp-for="RememberLogin">Remember Me</label>
             </div>
+            <div class="form-group ms-auto">
+                <a href="https://master.managemybusinessess.com/ForgetPassword/create" id="ForgotPassword" class="text-primary">Forgot Password?</a>
+            </div>
+        </div>
         }
 
         <button class="btn btn-theme px-4" name="button" id="btnlogin" value="login">Login</button>
@@ -61,41 +64,43 @@
 
     @if (Model.VisibleExternalProviders.Any())
     {
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-header">
-                    <h2>External Account</h2>
-                </div>
-                <div class="card-body">
-                    <ul class="list-inline">
-                        @foreach (var provider in Model.VisibleExternalProviders)
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h2>External Account</h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-inline">
+                    @foreach (var provider in Model.VisibleExternalProviders)
                         {
-                            <li class="list-inline-item">
-                                <a class="btn btn-secondary"
-                                   asp-controller="External"
-                                   asp-action="Challenge"
-                                   asp-route-scheme="@provider.AuthenticationScheme"
-                                   asp-route-returnUrl="@Model.ReturnUrl">
-                                    @provider.DisplayName
-                                </a>
-                            </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-secondary"
+                           asp-controller="External"
+                           asp-action="Challenge"
+                           asp-route-scheme="@provider.AuthenticationScheme"
+                           asp-route-returnUrl="@Model.ReturnUrl">
+                            @provider.DisplayName
+                        </a>
+                    </li>
                         }
-                    </ul>
-                </div>
+                </ul>
             </div>
         </div>
+    </div>
     }
 
     @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
     {
-        <div class="alert alert-warning">
-            <strong>Invalid login request</strong>
-            There are no login schemes configured for this request.
-        </div>
+    <div class="alert alert-warning">
+        <strong>Invalid login request</strong>
+        There are no login schemes configured for this request.
+    </div>
     }
 </div>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 <environment include="Development">
     <script src="~/js/aes.js"></script>
 </environment>

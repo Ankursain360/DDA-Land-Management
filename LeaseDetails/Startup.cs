@@ -19,6 +19,8 @@ using Model.Entity;
 using Microsoft.AspNetCore.Identity;
 using Service.Common;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Threading.Tasks;
+
 namespace LeaseDetails
 {
     public class Startup
@@ -77,9 +79,14 @@ namespace LeaseDetails
             {
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;                
             })
-            .AddCookie("Cookies")
+            .AddCookie("Cookies", options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.SlidingExpiration = false;
+                options.Cookie.Name = "Auth-cookie";
+            })
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -90,7 +97,12 @@ namespace LeaseDetails
                 options.ResponseType = "code";
                 options.Scope.Add("api1");
                 options.SaveTokens = true;
-
+                options.UseTokenLifetime = true;
+                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                {                                                        // <- HERE
+                    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                    return Task.CompletedTask;                           // <- HERE
+                };                                                       // <- HERE
             });
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(20);//You can set Time   

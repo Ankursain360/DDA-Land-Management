@@ -38,7 +38,7 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
         public IConfiguration _configuration;
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -46,7 +46,7 @@ namespace IdentityServerHost.Quickstart.UI
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            IConfiguration configuration)
+            IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -55,6 +55,7 @@ namespace IdentityServerHost.Quickstart.UI
             _schemeProvider = schemeProvider;
             _events = events;
             _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         /// <summary>
@@ -65,11 +66,36 @@ namespace IdentityServerHost.Quickstart.UI
         {
             //Reset Session added by sachin for audit points
 
-            CookieOptions options = new CookieOptions();
-            options.Expires = DateTime.Now.AddDays(-30);
-            HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString());
-            HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString());
+            HttpContext.Session.Clear();
+            if (_httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"] != null)
+            {
+                string any = _httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"];
+                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", string.Empty);
+                var Value = GenerateHashKey();
+                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Value);
+            }
+            if (_httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null)
+            {
+                string any = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
+                HttpContext.Response.Cookies.Append(".AspNetCore.Session", string.Empty);
+                var Value = GenerateHashKey();
+                HttpContext.Response.Cookies.Append(".AspNetCore.Session", Value);
+            }
+            if (_httpContextAccessor.HttpContext.Request.Cookies["AuthToken"] != null)
+            {
+                HttpContext.Response.Cookies.Append("AuthToken", string.Empty);
+                CookieOptions optionss = new CookieOptions();
+                optionss.Expires = DateTime.Now.AddDays(-20);
+            }
+            if (_httpContextAccessor.HttpContext.Request.Cookies["__AntiXsrfToken"] != null)
+            {
+                HttpContext.Response.Cookies.Append("__AntiXsrfToken", string.Empty);
+            }
+            string newSessionID = _httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"];
+            string newCoreSessionID = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
 
+
+          
             //
 
             // build a model so we know what to show on the login page
@@ -144,7 +170,44 @@ namespace IdentityServerHost.Quickstart.UI
                 {
                     var user = await _userManager.FindByNameAsync(model.Username);
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
-
+                    #region session fixation
+                    CookieOptions options = new CookieOptions();
+                    options.Expires = DateTime.Now.AddDays(-30);
+                    HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString());
+                    HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString());                   
+                    // Start Added By Renu For Session Fixation on 27 Jan 2020
+                    string guid = Guid.NewGuid().ToString();
+                    HttpContext.Session.SetString("AuthToken", guid);
+                    // now create a new cookie with this guid value
+                    HttpContext.Response.Cookies.Append("AuthToken", guid);
+                    
+                    string sessionauth = HttpContext.Session.GetString("AuthToken").ToString();
+                    string cookeauth = HttpContext.Request.Cookies["AuthToken"];
+                    if (HttpContext.Session.GetString("AuthToken") != null && Request.Cookies["AuthToken"] != null)
+                    {
+                        if (Request.Cookies[".AspNetCore.Session"] != null && Request.Cookies[".AspNetCore.Session"] != null)
+                        {
+                            string newSessionID = Request.Cookies[".AspNetCore.Session"];
+                            HttpContext.Response.Cookies.Append(".AspNetCore.Session", newSessionID.Substring(0, 24)); 
+                            string _browserInfo = Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+                            string _sessionValue = user.Id.ToString() + "^" + DateTime.Now.Ticks + "^" + _browserInfo + "^" + System.Guid.NewGuid();
+                            byte[] _encodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(_sessionValue);
+                            string _encryptedString = System.Convert.ToBase64String(_encodeAsBytes);
+                            HttpContext.Session.SetString("encryptedSession", guid);  
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("session", "Invalid Session. Please try again");
+                            var vms = await BuildLoginViewModelAsync(model);
+                            return View(vms);
+                        }
+                    }
+                    else
+                    {
+                        var vms = await BuildLoginViewModelAsync(model);
+                        return View(vms); 
+                    }
+                    #endregion
                     if (context != null)
                     {
                         if (context.IsNativeClient())
@@ -308,7 +371,8 @@ namespace IdentityServerHost.Quickstart.UI
         private async Task<LoginViewModel> BuildLoginViewModelAsync(LoginInputModel model)
         {
             var vm = await BuildLoginViewModelAsync(model.ReturnUrl);
-            vm.Username = model.Username;
+            vm.Username = string.Empty; //model.Username;
+            vm.CaptchaCode = string.Empty;
             vm.RememberLogin = model.RememberLogin;
             vm.Data = SetEncriptionKey();
             return vm;
@@ -470,6 +534,19 @@ namespace IdentityServerHost.Quickstart.UI
             }
 
             return plaintext;
+        }
+
+        private string GenerateHashKey()
+        {
+            StringBuilder myStr = new StringBuilder();
+            myStr.Append(Request.Headers["User-Agent"].ToString());
+            myStr.Append(Guid.NewGuid().ToString());
+            //myStr.Append(Request.Browser.MajorVersion);
+            //myStr.Append(Request.Browser.MinorVersion);
+            //myStr.Append(Request.LogonUserIdentity.User.Value);
+            SHA1 sha = new SHA1CryptoServiceProvider();
+            byte[] hashdata = sha.ComputeHash(Encoding.UTF8.GetBytes(myStr.ToString()));
+            return Convert.ToBase64String(hashdata);
         }
         #endregion
     }

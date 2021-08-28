@@ -85,7 +85,12 @@ namespace DamagePayeePublicInterface
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
 
-            .AddCookie("Cookies")
+           .AddCookie("Cookies", options =>
+           {
+               options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+               options.SlidingExpiration = false;
+               options.Cookie.Name = "Auth-cookie";
+           })
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -93,11 +98,15 @@ namespace DamagePayeePublicInterface
                 options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";
-                options.ResponseType = "code";
-
-                options.Scope.Add("api1");
-
+                options.ResponseType = "code"; 
+                options.Scope.Add("api1"); 
                 options.SaveTokens = true;
+                options.UseTokenLifetime = true;
+                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                {                                                        // <- HERE
+                    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                    return System.Threading.Tasks.Task.CompletedTask;                           // <- HERE
+                };                                                       // <- HERE
             });
         }
 
