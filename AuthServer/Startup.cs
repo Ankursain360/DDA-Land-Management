@@ -42,7 +42,7 @@ namespace AuthServer
                 .AddDefaultTokenProviders();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.IdleTimeout = TimeSpan.FromMinutes(5);
                 options.Cookie.HttpOnly = true;
             });
 
@@ -53,6 +53,8 @@ namespace AuthServer
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
+                options.Authentication.CookieLifetime = TimeSpan.FromMinutes(5);
+                options.Authentication.CookieSlidingExpiration = true;                
             })
             .AddConfigurationStore(options =>
             {

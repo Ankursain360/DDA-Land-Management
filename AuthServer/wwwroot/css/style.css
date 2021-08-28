@@ -110,7 +110,9 @@ Color: #ffffff
 Font-size: 0.80rem
 Font-Family: Open Sans Regular*/
 
-
+.container {
+    position: relative;
+}
 
 body,
 html {
@@ -246,7 +248,7 @@ figcaption h6 {
 .icon i {
     position: absolute;
     z-index: 1;
-    top: 32px;
+    top: 20px;
     bottom: 0;
     margin: auto;
     font-size: 1rem;

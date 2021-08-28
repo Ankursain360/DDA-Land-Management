@@ -290,19 +290,6 @@ $("#tenurefrom").change(function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 $("#ZoneId").change(function () {
     // alert(ZoneId);
     var ids = $(this).val();
@@ -351,8 +338,8 @@ $('#FatherName').keydown(function (e) {
 });
 
 function validateForm() {
-   
-  //  let FileNo = document.forms["kyc-form"]["FileNo"].value;
+    debugger;
+   // let FileNo = document.forms["kyc-form"]["FileNo"].value;
     let PropertyTypeId = document.forms["kyc-form"]["PropertyTypeId"].value;
     let LeaseTypeId = document.forms["kyc-form"]["LeaseTypeId"].value;
     let LicenseFrequency = document.forms["kyc-form"]["LicenseFrequency"].value;
@@ -362,7 +349,7 @@ function validateForm() {
     let name1 = document.forms["kyc-form"]["name1"].value;
     let LandPremiumAmount = document.forms["kyc-form"]["LandPremiumAmount"].value;
     let LicenseFeePayable = document.forms["kyc-form"]["LicenseFeePayable"].value;
-    let GroundRent = document.forms["kyc-form"]["GroundRentAmount"].value;
+   // let GroundRent = document.forms["kyc-form"]["GroundRentAmount"].value;
 
     var status = 1; 
    
@@ -413,25 +400,27 @@ function validateForm() {
         status = 2;
         // return false;
     }
+    if (Property == "Lease") {
+        if (LandPremiumAmount == "") {
 
-    if (LandPremiumAmount == "") {
-
-        $("#LandPremiumamount-error").show();
-        status = 2;
-        // return false;
+            $("#LandPremiumamount-error").show();
+            status = 2;
+            // return false;
+        }
     }
-    if (GroundRent == "") {
+    //if (GroundRent == "") {
 
-        $("#GroundRentAmount-error").show();
-        status = 2;
-        // return false;
-    }
+    //    $("#GroundRentAmount-error").show();
+    //    status = 2;
+    //    // return false;
+    //}
+    if (Property == "License" || Property == 0) {
+        if (LicenseFeePayable == "") {
 
-    if (LicenseFeePayable == "") {
-
-        $("#LicenseFeePayable-error").show();
-        status = 2;
-        // return false;
+            $("#LicenseFeePayable-error").show();
+            status = 2;
+            // return false;
+        }
     }
  
     if (status == 2) {

@@ -17,6 +17,7 @@ using Service.Common;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace EncroachmentDemolition
 {
@@ -79,7 +80,12 @@ namespace EncroachmentDemolition
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddCookie("Cookies")
+             .AddCookie("Cookies", options =>
+             {
+                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                 options.SlidingExpiration = false;
+                 options.Cookie.Name = "Auth-cookie";
+             })
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -87,11 +93,15 @@ namespace EncroachmentDemolition
                 options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";
-                options.ResponseType = "code";
-
-                options.Scope.Add("api1");
-
+                options.ResponseType = "code"; 
+                options.Scope.Add("api1"); 
                 options.SaveTokens = true;
+                options.UseTokenLifetime = true;
+                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                {                                                        // <- HERE
+                    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                    return Task.CompletedTask;                           // <- HERE
+                };                                                       // <- HERE
             });
         }
 

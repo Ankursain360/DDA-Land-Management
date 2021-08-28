@@ -37,6 +37,7 @@ namespace SiteMaster.Controllers
 
         public IActionResult Logout()
         {
+            _httpContextAccessor.HttpContext.Session.Clear();
             _httpContextAccessor.HttpContext.Response.Clear();
             //Clear cookies
             var cookies = _httpContextAccessor.HttpContext.Request.Cookies;
