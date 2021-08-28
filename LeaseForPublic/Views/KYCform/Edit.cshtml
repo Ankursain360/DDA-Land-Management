@@ -13,7 +13,7 @@
 
         </script>
 
-        <form asp-action="Edit" onsubmit="return validateForm()" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+        <form  asp-action="Edit" id="kyc-form" onsubmit="return validateForm()" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
             <h3 class="mb-3 d-flex">KYC (Know your Customer) Form<span style="margin-left:600px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -50,6 +50,8 @@
                         </select>
                         <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Nature of Property <span style="color:red">*</span></label>
+                        <label id="propertytype-error" style="color:red;display:none;"> Nature of Property is Mandatory</label>
+
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -57,7 +59,7 @@
                         <input limit="100" type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name">
                         <span asp-validation-for="FileNo" class="text-danger"></span>
                         <label for="field-1" class="floating-label">File No.<span style="color:red">*</span></label>
-                        @*<label id="file-error" style="color:red;display:none;"> File No is Mandatory</label>*@
+                        <label id="file-error" style="color:red;display:none;"> File No is Mandatory</label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -213,6 +215,7 @@
                             </select>
                             <span asp-validation-for="ZoneId" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Zone <span style="color:red">*</span></label>
+                            <span id="ZoneId-error" style="color:red" class=""></span>
                         </div>
                     </div>
 
@@ -442,6 +445,8 @@
                             <input type="date" asp-for="PossessionDate" class="floating-label-field floating-label-field--s3" placeholder="PIN Code">
                             <span asp-validation-for="PossessionDate" class="text-danger"></span>
                             <label for="field-1" class="floating-label">Date of Possession <span style="color:red">*</span></label>
+                            <label id="PossessionDate-error" style="color:red;display:none;"> Possession Date is Mandatory</label>
+
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -463,7 +468,8 @@
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input type="text" asp-for="LandPremiumAmount" class="floating-label-field floating-label-field--s3 numbers" placeholder="Period From">
                             <span asp-validation-for="LandPremiumAmount" class="text-danger"></span>
-                            <label for="field-1" class="floating-label">Land Premium Amount Rs. </label>
+                            <label for="field-1" class="floating-label">Land Premium Amount Rs.<span style="color:red">*</span></label>
+                            <label id="LandPremiumamount-error" style="color:red;display:none;">Land Premium Amount is Mandatory</label>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -485,7 +491,9 @@
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input type="text" asp-for="LicenseFeePayable" class="floating-label-field floating-label-field--s3 numbers" placeholder="Period to">
                             <span asp-validation-for="LicenseFeePayable" class="text-danger"></span>
-                            <label for="field-1" class="floating-label">License Fee Payable Rs. </label>
+                            <label for="field-1" class="floating-label">License Fee Payable Rs. <span style="color:red">*</span></label>
+                            <label id="LicenseFeePayable-error" style="color:red;display:none;">License Fee Payable is Mandatory</label>
+
                         </div>
                     </div>
 
@@ -595,7 +603,8 @@
     <environment exclude="Development">
         <script src="~/js/kycform.min.js" asp-append-version="true"></script>
     </environment>
-<script>
+
+@*<script>
     $('#name1').keydown(function (e) {
 
         $("#err-name").hide();
@@ -623,4 +632,4 @@
             }
         }
     });
-</script>
+</script>*@
