@@ -14,5 +14,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Kycdemandpaymentdetailstablea payment);
         Task<List<Kycdemandpaymentdetailstablea>> FetchResultOnDemandId(int id);
         Task<bool> SaveDemandPaymentDetails(Kycdemandpaymentdetailstablea kycDemandPayment);
+        Task<bool> RollBackEntry(int Id);//added by ishu
     }
 }

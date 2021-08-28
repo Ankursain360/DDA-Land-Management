@@ -26,5 +26,11 @@ namespace Libraries.Repository.EntityRepository
                                      .Where(x => x.DemandPaymentId == id)
                                      .ToListAsync();
         }
+        public async Task<bool> RollBackEntry(int Id)//added by ishu
+        {
+            _dbContext.RemoveRange(_dbContext.Kycdemandpaymentdetailstablea.Where(x => x.DemandPaymentId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 }

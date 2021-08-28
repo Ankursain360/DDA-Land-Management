@@ -129,6 +129,11 @@ namespace Libraries.Service.ApplicationService
                 return true;
             }
         }
+        public async Task<bool> KycRollBackEntry(string processguid, int serviceid)//added by ishu
+        {
+            return await _approvalproccessRepository.KycRollBackEntry(processguid, serviceid);
+            
+        }
         public async Task<Approvalproccess> FirstApprovalProcessData(string processguid, int serviceid)
         {
             return await _approvalproccessRepository.FirstApprovalProcessData(processguid, serviceid);

@@ -210,11 +210,41 @@ namespace Libraries.Repository.EntityRepository
                                       .Take(1)
                                       .FirstOrDefaultAsync();
         }
+        public async Task<Kycapprovalproccess> FetchKycapprovalrecord(string processguid, int serviceid)//added by ishu 27/7/2021
+        {
+            return await _dbContext.Kycapprovalproccess
+                                      .Where(x => x.ProcessGuid == processguid && x.ServiceId == serviceid
+                                     
+                                      )
+                                      .OrderBy(x => x.Id)
+                                      .Take(1)
+                                      .FirstOrDefaultAsync();
+        }
         public async Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid)
         {
             return await _dbContext.ApplicationNotificationTemplate
                                      .Where(x => x.UserNotificationGuid == guid && x.IsActive == 1)
                                      .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> KycRollBackEntry(string processguid, int serviceid)
+        {
+            var result = await FetchKycapprovalrecord(processguid, serviceid);
+            Kycapprovalproccess model = result;
+            if (model != null)
+            {
+                _dbContext.Remove(model);
+                var Result1= await _dbContext.SaveChangesAsync();
+                
+                return Result1 > 0 ? true : false;
+                //_approvalproccessRepository.Delete(model);
+                //return await _unitOfWork.CommitAsync() > 0;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
+    
 }

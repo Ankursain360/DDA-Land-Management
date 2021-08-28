@@ -27,7 +27,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Kycform kyc);
 
         Task<PagedResult<Kycform>> GetPagedKycform(KycformSearchDto model);
-
+        Task<bool> RollBackEntry(int id);
         Task<bool> Delete(int id);
         Task<bool> Saveleasepayment(Kycleasepaymentrpt payment);
         Task<bool> Savelicensepayment(Kyclicensepaymentrpt payment);

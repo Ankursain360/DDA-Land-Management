@@ -34,6 +34,6 @@ namespace Libraries.Service.IApplicationService
         Task<Approvalproccess> CheckLastUserForRevert(string processguid, int serviceid, int level);
         Task<ApplicationNotificationTemplate> FetchSingleNotificationTemplate(string guid);
         Task<List<ApprovalHistoryListDataDto>> GetKYCHistoryDetails(string proccessguid, int id);///for kycapproval history added by ishu
-
+        Task<bool> KycRollBackEntry(string processguid, int serviceid);//added by ishu
     }
 }

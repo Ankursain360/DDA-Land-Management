@@ -63,6 +63,11 @@ namespace Libraries.Service.ApplicationService
             _kycdemandpaymentdetailstableaRespository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> RollBackEntry(int Id)//added by ishu
+        {
+            var result = await _kycdemandpaymentdetailstableaRespository.RollBackEntry(Id);
 
+            return result;
+        }
     }
 }

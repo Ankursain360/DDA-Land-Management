@@ -472,8 +472,8 @@ namespace LeaseForPublic.Controllers
                             #endregion
                         }
                         #endregion
-
-                        if(dto.TotalDues>0)
+                       
+                        if (dto.TotalDues>0)
                         {
                             var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + dto.FileNo + "&Locality=0&Amount=" + dto.TotalPayable.ToString() + "&Interest=" + dto.TotalPayableInterest.ToString();
                             return Redirect(paymentLink);
@@ -495,6 +495,21 @@ namespace LeaseForPublic.Controllers
             }
             catch (Exception ex)
             {
+                #region Roll Back of Transaction Added by Renu 26 April  2021 
+                var deleteResult = false;
+                if (oKycdemandpaymentdetails.Id != 0)
+                {
+
+
+                    deleteResult = await _userNotificationService.RollBackEntry((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), oKycdemandpaymentdetails.Id);
+                    deleteResult = await _approvalproccessService.KycRollBackEntry((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), oKycdemandpaymentdetails.Id);
+                    deleteResult = await _demandDetailsService.RollBackEntry(oKycdemandpaymentdetails.Id);
+                    //deleteResult = await __kycdemandpaymentdetailstableaService.RollBackEntry(oKycdemandpaymentdetails.Id);
+
+                }
+
+                #endregion
+
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(dto);
             }

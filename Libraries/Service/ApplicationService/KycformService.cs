@@ -156,7 +156,20 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
+        public async Task<bool> RollBackEntry(int id)
+        {
+            var result = await _kycformRepository.FindBy(a => a.Id == id);
+            Kycform model = result.FirstOrDefault();
+            if (model != null)
+            {
+                _kycformRepository.Delete(model);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         //********* rpt ! Kycleasepaymentrpt Details **********
 

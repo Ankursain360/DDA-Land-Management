@@ -75,6 +75,20 @@ namespace Libraries.Service.ApplicationService
             return await _demandDetailsRepository.FetchResultOnKycId(kycId);
         }
 
+        public async Task<bool> RollBackEntry(int id)//added by ishu
+        {
+            var result = await _demandDetailsRepository.FindBy(a => a.Id == id);
+            Kycdemandpaymentdetails model = result.FirstOrDefault();
+            if (model != null)
+            {
+                _demandDetailsRepository.Delete(model);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
     }
 }
