@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
 
        [Required(ErrorMessage = " Property field is Mandatory")]
         public string Property { get; set; }
-        [Required(ErrorMessage = " Nature of Property is mandatory")]
+       // [Required(ErrorMessage = " Nature of Property is mandatory")]
         public int? PropertyTypeId { get; set; }
         [Required(ErrorMessage = " File No is mandatory")]
         public string FileNo { get; set; }

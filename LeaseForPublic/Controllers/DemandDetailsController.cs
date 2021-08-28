@@ -376,7 +376,7 @@ namespace LeaseForPublic.Controllers
                                     approvalproccess.Status = ApprovalStatus.Id;   //1
                                     approvalproccess.Level = i + 1;
                                     approvalproccess.Version = workflowtemplatedata.Version;
-                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    approvalproccess.Remarks = "Record Added and Sent for Approval";///May be Uncomment
                                     result = await _kycformService.CreatekycApproval(approvalproccess, oKycdemandpaymentdetails.Id); //Create a row in kycapprovalproccess Table
 
                                     #region Insert Into usernotification table Added By Renu 18 June 2021
