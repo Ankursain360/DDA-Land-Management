@@ -35,12 +35,12 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <select class="floating-label-field floating-label-field--s3" asp-for="PropertyTypeId"
                             asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
-                        <option disabled="disabled" selected value="">Select</option>
+                        <option disabled="disabled" selected value="0">Select</option>
 
                     </select>
                     <span asp-validation-for="PropertyTypeId" class="text-danger"></span>
                     <label for="field-1" class="floating-label">Nature of Property <span style="color:red">*</span></label>
-                    @*<label id="propertytype-error" style="color:red;display:none;"> Nature of Property is Mandatory</label>*@
+                    <label id="propertytype-error" style="color:red;display:none;"> Nature of Property is Mandatory</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -48,7 +48,7 @@
                     <input type="text" class="floating-label-field floating-label-field--s3" asp-for="FileNo" placeholder="Name" limit="100">
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label for="field-1" class="floating-label">File No.<span style="color:red">*</span></label>
-                    @*<label id="file-error" style="color:red;display:none;"> File No is Mandatory</label>*@
+                    <label id="file-error" style="color:red;display:none;"> File No is Mandatory</label>
                 </div>
             </div>
             <div class="col-md-4">
@@ -202,7 +202,7 @@
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Zone <span style="color:red">*</span></label>
-                        @*<span id="ZoneId-error" style="color:red" class=""></span>*@
+                        <span id="ZoneId-error" style="color:red" class=""></span>
                     </div>
                 </div>
 
@@ -216,7 +216,7 @@
 
                         </select>
                         <span asp-validation-for="LocalityId" class="text-danger "></span>
-                        <label class="floating-label">Locality </label>
+                        <label class="floating-label">Locality <span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -463,7 +463,7 @@
                         <input type="text" asp-for="GroundRentAmount" readonly class="floating-label-field floating-label-field--s3 numbers" placeholder="Period to">
                         <span asp-validation-for="GroundRentAmount" class="text-danger"></span>
                         <label for="field-1" class="floating-label">Ground Rent Amount per annum Rs.<span style="color:red">*</span> </label>
-                        <label id="GroundRentAmount-error" style="color:red;display:none;">Ground Rent Amount per annum is Mandatory</label>
+                        @*<label id="GroundRentAmount-error" style="color:red;display:none;">Ground Rent Amount per annum is Mandatory</label>*@
 
                     </div>
                 </div>
@@ -479,7 +479,7 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="text" asp-for="LicenseFeePayable" class="floating-label-field floating-label-field--s3 numbers" placeholder="Period to">
                         <span asp-validation-for="LicenseFeePayable" class="text-danger"></span>
-                        <label for="field-1" class="floating-label">License Fee Payable Rs. </label>
+                        <label for="field-1" class="floating-label">License Fee Payable Rs. <span style="color:red">*</span></label>
                         <label id="LicenseFeePayable-error" style="color:red;display:none;">License Fee Payable is Mandatory</label>
 
                     </div>
