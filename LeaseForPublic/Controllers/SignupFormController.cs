@@ -147,7 +147,8 @@ namespace LeaseForPublic.Controllers
             var otp = random.Next(111111, 999999);
 
 
-            string Action = "Otp is " + otp;
+            //string Action = "Otp is " + otp;
+            string Action = otp.ToString();
             String Mobile = model.MobileNo;
             String EmailID = model.EmailId;
 
@@ -308,8 +309,8 @@ namespace LeaseForPublic.Controllers
             Random random = new Random();
             var otp = random.Next(111111, 999999);
 
-
-            string Action = "Otp is " + otp;
+            string Action = otp.ToString();
+           // string Action = "Otp is " + otp;
             String Mobile = model.MobileNo;
             String EmailID = model.EmailId;
 
@@ -361,7 +362,7 @@ namespace LeaseForPublic.Controllers
             HttpContext.Session.SetString("OTP", otp.ToString());
             JsonMsg.Add("true");
             JsonMsg.Add("Otp send successfully!");
-            //  JsonMsg.Add(otp.ToString());
+              JsonMsg.Add(otp.ToString());
             return Json(JsonMsg);
 
         }

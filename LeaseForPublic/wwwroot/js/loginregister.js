@@ -37,8 +37,8 @@ $("#signup2").click(function () {
     if (mobile != "") {
 
         HttpPost(`/SignupForm/sendotp1`, 'json', model, function (response) {
-
-            //alert(response[2]);
+          //  alert(JSON.stringify(response));
+          //alert(response[2]);
             if (response[0] == "true") {
                 setTimeout(function () {
                     //  $("#loader-wrapper").css("display", "none");
@@ -65,7 +65,8 @@ $("#otp-button").click(function () {
     $("#suc-comm").hide();
     $("#err-otp").hide();
     var otp = $("#otp").val();
-    var rotp = '123456';//localStorage.getItem("otp");
+ //   var rotp = '123456';//localStorage.getItem("otp");
+    var rotp = localStorage.getItem("otp");
     if (otp == rotp) {
 
         $("#suc-comm").show();
