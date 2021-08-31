@@ -44,6 +44,9 @@ namespace AuthServer
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(5);
                 options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = ".managemybusinessess.com";
+                //options.Cookie.Path = "/Home";
+                // options.Cookie.IsEssential = true;
             });
 
             var builder = services.AddIdentityServer(options =>
@@ -54,7 +57,7 @@ namespace AuthServer
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
                 options.Authentication.CookieLifetime = TimeSpan.FromMinutes(5);
-                options.Authentication.CookieSlidingExpiration = true;                
+                options.Authentication.CookieSlidingExpiration = true;
             })
             .AddConfigurationStore(options =>
             {

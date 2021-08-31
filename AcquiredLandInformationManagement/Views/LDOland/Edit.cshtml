@@ -34,7 +34,7 @@
                         @if (Model.GOINotificationDocumentName != null)
                         {
                             <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <a class="badge badge-primary px-2" asp-action="ViewGOINotificationDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            <a class="badge  bg-primary px-2" asp-action="ViewGOINotificationDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
@@ -173,7 +173,7 @@
                         @if (Model.OrderDocumentName != null)
                         {
                             <input type="file" asp-for="OrderDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <a class="badge badge-primary px-2" asp-action="ViewOrderDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            <a class="badge  bg-primary px-2" asp-action="ViewOrderDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
@@ -194,7 +194,7 @@
                         @if (Model.PossessionDocumentName != null)
                         {
                             <input type="file" asp-for="PossessionDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <a class="badge badge-primary px-2" asp-action="ViewPossessionDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            <a class="badge  bg-primary px-2" asp-action="ViewPossessionDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {

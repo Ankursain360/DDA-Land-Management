@@ -35,7 +35,7 @@
                         @if (Model.ENMDocumentName != null)
                         {
                             <input disabled type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View File)</label>
+                            <label class="badge  bg-primary px-2">(View File)</label>
                         }
                         else
                         {
@@ -448,7 +448,7 @@
                         @if (Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName != null)
                         {
                             <input disabled type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <a class="badge badge-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Paymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
+                            <a class="badge  bg-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Paymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
                         else
                         {
                             <input disabled type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }

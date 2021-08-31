@@ -18,7 +18,7 @@
                     @if (@menu.URL == "#")
                     {
                         <a href="@menu.URL" class="d-flex align-items-center py-2 my-1" onclick="NoNotification()">
-                            <img src="https://auth.managemybusinessess.com/login/logo-circle.png" class="rounded-circle mr-2" width="52" height="52">
+                            <img src="https://auth.managemybusinessess.com/login/logo-circle.png" class="rounded-circle me-2" width="52" height="52">
                             <div class="pl-1">
                                 <p class="mb-0 text-left" style="line-height:1.4;">
                                     @menu.Message
@@ -33,7 +33,7 @@
                     else
                     {
                         <a class="d-flex align-items-center py-2 my-1" asp-action="UpdateUserNotification" asp-controller="UserNotification" asp-route-id="@menu.Id" asp-route-url="@menu.URL" onclick="RefreshNotification()" target="_blank">
-                            <img src="https://auth.managemybusinessess.com/login/logo-circle.png" class="rounded-circle mr-2" width="52" height="52">
+                            <img src="https://auth.managemybusinessess.com/login/logo-circle.png" class="rounded-circle me-2" width="52" height="52">
                             <div class="pl-1">
                                 <p class="mb-0 text-left" style="line-height:1.4;">
                                     @menu.Message
