@@ -196,6 +196,11 @@ function InfoMessage(message) {
 	toastr.info(message, 'Warning', { timeOut: 3000, "progressBar": true });
 }
 
+
+function InfoMessage1(message) {
+	toastr.info(message, 'Update Details', { timeOut: 3000, "progressBar": true });
+}
+
 function DisplayLoader(show) {
 	var styleValue = show === true ? "block" : "none";
 	$("#loader-wrapper").css("display", styleValue);

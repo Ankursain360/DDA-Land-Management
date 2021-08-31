@@ -1780,3 +1780,11 @@ textarea.floating-label-field--s3 {
         border-left: 0;
     }
 }
+
+.pointerNone {
+    pointer-events: none;
+}
+
+.pointerAuto {
+    pointer-events: auto;
+}

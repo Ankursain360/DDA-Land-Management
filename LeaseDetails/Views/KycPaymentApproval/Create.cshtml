@@ -28,11 +28,11 @@
     <input type="hidden" id="ForwardCode" value="@ViewBag.ForwardCodeValue" />
     <input type="hidden" id="QueryForwardCode" value="@ViewBag.QueryForwardCodeValue" />
     <input type="hidden" asp-for="ApprovalStatusCode" value="0" />
-
+    <input type="hidden" id="Role" value="@ViewBag.Role" />
     <div id="KYCFormDetailsDiv">
 
     </div>
-    
+
     @*<div id="divPayment">
 
         </div>*@
@@ -96,7 +96,7 @@
                         </div>
                     }
 
-                    else if ( ViewBag.Role == 30|| ViewBag.Role == 32 || ViewBag.Role == 34 )
+                    else if (ViewBag.Role == 30 || ViewBag.Role == 32 || ViewBag.Role == 34)
                     {
                         <div class="row">
 
@@ -111,140 +111,140 @@
                 }
 
                 <br />
-               
-                @if(ViewBag.Role == 33)
-                {
-                <div class="row pt-4">
-                    <div class=" col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
 
-                            <input asp-for="TotalPayable" placeholder="Total payable" type="text"
-                                   class="floating-label-field floating-label-field--s3" />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Total payable (Rs.) <span style="color:red">*</span>  </label>
-                        </div>
-                    </div>
-
-                    <div class=" col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text"
-                                   class="floating-label-field floating-label-field--s3" />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Total Payable interest (Rs.)<span style="color:red">*</span>  </label>
-                        </div>
-                    </div>
-                    <div class=" col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="TotalDues" placeholder="Total dues" type="text"
-                                   class="floating-label-field floating-label-field--s3" />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Total dues(Rs.) <span style="color:red">*</span>  </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pt-4">
-                    <div class=" col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            @{ if (Model.OutStandingDuesDocument == null || Model.OutStandingDuesDocument == string.Empty)
-                                {
-                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
-                                           asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-
-                                    <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
-
-
-
-                                }
-                                else
-                                {
-                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
-                                           asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-
-                                    <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
-                                    <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
-                                        View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
-                                    </a>
-                                } }
-                            <label for="field-1" class="floating-label">Outstanding Dues Document</label>
-                        </div>
-                    </div>
-                </div>
-                }
-                else 
-                {  
-                   <div class="row pt-4">
-                    <div class=" col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="TotalPayable" placeholder="Total payable" type="text"
-                                   class="floating-label-field floating-label-field--s3" />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Total payable (Provisional)Rs. <span style="color:red">*</span>  </label>
-                        </div>
-                    </div>
-
-                    <div class=" col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text"
-                                   class="floating-label-field floating-label-field--s3" />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Total Payable interest (Provisional)Rs.<span style="color:red">*</span>  </label>
-                        </div>
-                    </div>
-                    <div class=" col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="TotalDues" placeholder="Total dues" type="text"
-                                   class="floating-label-field floating-label-field--s3" />
-                            <span class="text-danger"></span>
-                            <label class="floating-label">Total dues (Provisional)Rs. <span style="color:red">*</span>  </label>
-                        </div>
-                    </div>
-                </div>
-                @if (ViewBag.Role == 34)
+                @if (ViewBag.Role == 33)
                 {
                     <div class="row pt-4">
-                        <div class="col-md-4">
+                        <div class=" col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                @if (Model.OutStandingDuesDocument == null || Model.OutStandingDuesDocument == string.Empty)
-                                {
-                                    <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
-                                           asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
-                                    <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
+                                <input asp-for="TotalPayable" placeholder="Total payable" type="text"
+                                       class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Total payable (Rs.) <span style="color:red">*</span>  </label>
+                            </div>
+                        </div>
+
+                        <div class=" col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text"
+                                       class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Total Payable interest (Rs.)<span style="color:red">*</span>  </label>
+                            </div>
+                        </div>
+                        <div class=" col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input asp-for="TotalDues" placeholder="Total dues" type="text"
+                                       class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Total dues(Rs.) <span style="color:red">*</span>  </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt-4">
+                        <div class=" col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                @{ if (Model.OutStandingDuesDocument == null || Model.OutStandingDuesDocument == string.Empty)
+                                    {
+                                        <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                               asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+
+                                        <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
 
 
 
-                                }
-                                else
-                                {
-                                    <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
-                                           asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    }
+                                    else
+                                    {
+                                        <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                               asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
-                                    <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
-                                    <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
-                                        View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
-                                    </a>
-                                }
+                                        <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
+                                        <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
+                                            View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                        </a>
+                                    } }
                                 <label for="field-1" class="floating-label">Outstanding Dues Document</label>
                             </div>
                         </div>
                     </div>
-
                 }
                 else
-                   {
-                   }
+                {
+                    <div class="row pt-4">
+                        <div class=" col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input asp-for="TotalPayable" placeholder="Total payable" type="text"
+                                       class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Total payable (Provisional)Rs. <span style="color:red">*</span>  </label>
+                            </div>
+                        </div>
+
+                        <div class=" col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input asp-for="TotalPayableInterest" placeholder="Total interest" type="text"
+                                       class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Total Payable interest (Provisional)Rs.<span style="color:red">*</span>  </label>
+                            </div>
+                        </div>
+                        <div class=" col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input asp-for="TotalDues" placeholder="Total dues" type="text"
+                                       class="floating-label-field floating-label-field--s3" />
+                                <span class="text-danger"></span>
+                                <label class="floating-label">Total dues (Provisional)Rs. <span style="color:red">*</span>  </label>
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag.Role == 34)
+                    {
+                        <div class="row pt-4">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    @if (Model.OutStandingDuesDocument == null || Model.OutStandingDuesDocument == string.Empty)
+                                    {
+                                        <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                               asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+
+                                        <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
+
+
+
+                                    }
+                                    else
+                                    {
+                                        <input disabled type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                               asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+
+                                        <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
+                                        <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
+                                            View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                        </a>
+                                    }
+                                    <label for="field-1" class="floating-label">Outstanding Dues Document</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                    }
                 }
                 <br /><br />
             </div>
 
 
 
-            </div>
+        </div>
     </div>
     @*<div id="divPaymentFromBhoomi">
 
