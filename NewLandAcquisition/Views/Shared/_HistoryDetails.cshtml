@@ -2,7 +2,7 @@
 
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseHistoryApprroval" role="button" aria-expanded="true"
+        <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseHistoryApprroval" role="button" aria-expanded="true"
            aria-controls="collapseHistoryApprroval">
             <i class="ri-arrow-right-s-fill"></i>
             <span class="text ml-1 me-auto">Approval History Details</span>
@@ -16,7 +16,7 @@
                         @foreach (var item in Model)
                         {
                             <div class="tracking-item d-md-flex align-items-top w-100">
-                                <div class="tracking-date text-md-right mr-3 text-nowrap py-2 pr-2">
+                                <div class="tracking-date text-md-right me-3 text-nowrap py-2 pe-2">
                                     <small class="d-block" style="color: #00d8ba;font-weight: 800;">Received on</small>
                                     <strong> @item.SubmitDate</strong>
                                     <small class="d-block text-muted"></small>

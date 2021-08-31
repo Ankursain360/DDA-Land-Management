@@ -1,7 +1,7 @@
 ﻿@model Libraries.Model.Entity.Request
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseWatchWardApprroval" role="button" aria-expanded="true"
+        <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseWatchWardApprroval" role="button" aria-expanded="true"
            aria-controls="collapseWatchWardApprroval">
             <i class="ri-arrow-right-s-fill"></i>
             <span class="text ml-1 me-auto">View Request Details</span>
@@ -121,7 +121,7 @@
 
                             <input asp-for="RequestPhotos" id="Photo" type="file" class="floating-label-field floating-label-field--s3" disabled multiple />
 
-                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                            <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
                            "> (View Photo )</a>
 
 
