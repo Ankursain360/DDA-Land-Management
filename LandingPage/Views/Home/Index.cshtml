@@ -15,19 +15,19 @@
                     @if (menu.ParentId == 0)
                     {
                         <a class="p-2 no-dec d-flex align-items-center"
-                           data-toggle="collapse"
+                           data-bs-toggle="collapse"
                            href="#per_@menu.ModuleCategoryId"
                            role="button"
                            aria-expanded="true"
                            aria-controls="per_@menu.ModuleCategoryId">
                             <i class="ri-arrow-right-s-fill"></i>
-                            <span class="text ml-1 me-auto">@menu.ModuleCategoryName</span>
+                            <span class="text ms-1 me-auto">@menu.ModuleCategoryName</span>
                             <i class="arrow ri-arrow-drop-down-line slow"></i>
                         </a>
                     }
                     @if (menu.ParentId == 0)
                     {
-                        <ul class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse show" id="per_@menu.ModuleCategoryId" data-parent="#permission_@menu.ModuleCategoryId">
+                        <ul class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse show" id="per_@menu.ModuleCategoryId" data-parent="#permission_@menu.ModuleCategoryId">
                             <li>
                                 <div class="pt-3">
                                     <div class="row">
@@ -42,7 +42,7 @@
                                                         <div class="card-header d-flex">
                                                             <i class="@item.Icon project-img rounded-circle"></i>
 
-                                                            <small class="badge badge-primary px-2 py-0 slow"> Open</small>
+                                                            <small class="badge bg-primary px-2 py-0 slow"> Open</small>
                                                         </div>
                                                         <div class="card-body">
                                                             <p class="name"></p>

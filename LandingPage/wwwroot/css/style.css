@@ -111,7 +111,17 @@ Font-size: 0.80rem
 Font-Family: Open Sans Regular*/
 
 
+.container {
+    position: relative;
+}
 
+a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
 body,
 html {
     font-family: 'Open Sans', sans-serif;

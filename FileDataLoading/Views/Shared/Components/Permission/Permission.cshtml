@@ -9,38 +9,38 @@
                 @if (menu.ParentId == 0)
                 {
                     <a class="p-2 no-dec d-flex align-items-center" 
-                       data-toggle="collapse" 
+                        data-bs-toggle="collapse" 
                        href="#p_@menu.Id" 
                        role="button" 
                        aria-expanded="true" 
                        aria-controls="p_@menu.Id">
                         <i class="ri-arrow-right-s-fill"></i>
-                        <span class="text ml-1 me-auto">@menu.Name</span>
+                        <span class="text ms-1 me-auto">@menu.Name</span>
                         <i class="arrow ri-arrow-drop-down-line slow"></i>
                     </a>
                 }
                 else
                 {
                     <a class="p-2 no-dec d-flex align-items-center" 
-                       data-toggle="collapse" 
+                        data-bs-toggle="collapse" 
                        href="#p_@menu.Id" 
                        role="button" 
                        aria-expanded="true" 
                        aria-controls="p_@menu.Id">
                         <i class="ri-arrow-right-s-fill"></i>
-                        <span class="text ml-1 me-auto">@menu.Name</span>
+                        <span class="text ms-1 me-auto">@menu.Name</span>
                         <i class="arrow ri-arrow-drop-down-line slow"></i>
                     </a>
                 }
                 @if (menu.ParentId == 0)
                 {
-                    <ul class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse show">
+                    <ul class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse show">
                         <partial name="Components/Permission/Permission" model="menu.Children" />
                     </ul>
                 }
                 else
                 {
-                    <ul class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse show">
+                    <ul class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse show">
                         <partial name="Components/Permission/Permission" model="menu.Children" />
                     </ul>
                 }
@@ -75,12 +75,12 @@
                 else
                 {
                     <a class="p-2 no-dec d-flex align-items-center"
-                       data-toggle="collapse" href="#p_@menu.Id"
+                        data-bs-toggle="collapse" href="#p_@menu.Id"
                        role="button"
                        aria-expanded="true"
                        aria-controls="p_@menu.Id">
                         <i class="ri-arrow-right-s-fill"></i>
-                        <span class="text ml-1 me-auto">@menu.Name</span>
+                        <span class="text ms-1 me-auto">@menu.Name</span>
                         <i class="arrow ri-arrow-drop-down-line slow"></i>
                     </a>
                 }
