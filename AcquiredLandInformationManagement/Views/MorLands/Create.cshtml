@@ -36,9 +36,9 @@
         <div class="row pt-3">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                    <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf, image/png, image/jpeg">
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="GOINotificationDocumentIFormFile"></span>
-                    <label class="floating-label">Upload GOI Notification(MOR)</label>
+                    <label class="floating-label">Upload GOI Notification(MOR)<span style="color:red">(Only PDF)</span></label>
                 </div>
             </div>
             <div class="col-md-6">
