@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
-
+   
     var id = parseInt($('#Id').val());
-
+   
     GetKYCDetails(id);
     GetHistoryDetails(id);
     GetPayment();
@@ -11,6 +11,7 @@
 
 
     $("#ApprovalStatus").val('0').trigger('change');
+    
 
     //if ($('#item.IsVerified').val() == "T") {
     //    $('input[name="Verifychk"]').attr("checked", "checked");
@@ -408,14 +409,14 @@ function GetUpdatedChallanParam() {
             DemandPaymentId: parseInt($(this).find('#item_DemandPaymentId').val()),
 
             IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
-            PaymentType: $(this).find('#item_PaymentType').val() == "" ? "NA" :$(this).find('#item_PaymentType').val(),
-            Period: $(this).find('#item_Period').val() == "" ? "NA" : $(this).find('#item_Period').val(),
-            ChallanNo: $(this).find('#item_ChallanNo').val() == "" ? 0 : $(this).find('#item_ChallanNo').val(),
+            PaymentType: $(this).find('#CHPaymentType').val() == "" ? "NA" : $(this).find('#CHPaymentType').val(),
+            Period: $(this).find('#CHPeriod').val() == "" ? "NA" : $(this).find('#CHPeriod').val(),
+            ChallanNo: $(this).find('#CHChallanNo').val() == "" ? 0 : $(this).find('#CHChallanNo').val(),
            
             Amount: parseFloat($(this).find('#Amount').val() == "" ? 0 : $(this).find('#Amount').val()),
-            DateofPaymentByAllottee: $(this).find('#item_DateofPaymentByAllottee').val(),
+            DateofPaymentByAllottee: $(this).find('#CHDateofPaymentByAllottee').val(),
             Proofinpdf: $(this).find('#item_Proofinpdf').val(),
-            Ddabankcredit: $(this).find('#item_Ddabankcredit').val() == "" ? "NA" : $(this).find('#item_Ddabankcredit').val(),
+            Ddabankcredit: $(this).find('#CHDdabankcredit').val() == "" ? "NA" : $(this).find('#CHDdabankcredit').val(),
             TotalPayable: parseFloat($('#TotalPayable').val()),
             TotalPayableInterest: parseFloat($('#TotalPayableInterest').val()),
             TotalPayableDues: parseFloat($('#TotalDues').val())
@@ -451,10 +452,10 @@ function GetChallanParamForAPI() {
             model = {
 
                 // IsVerified: $(this).find('#Verifychk1').is(':checked') == true ? 'T' : 'F',
-                CHLLN_NO: parseInt($(this).find('#item_ChallanNo').val()),
+                CHLLN_NO: parseInt($(this).find('#CHChallanNo').val()),
                 CHLLN_AMNT: parseInt($(this).find('#Amount').val()),
                // DPST_DT: $(this).find('#item_DateofPaymentByAllottee').val(),
-                DPST_DT: $(this).find('#item_DateofPaymentByAllottee').val(),
+                DPST_DT: $(this).find('#CHDateofPaymentByAllottee').val(),
                 USR_ID: "Online",
                 SCHM_ID: "LM",
                 FL_NMBR: $("#FileNo").val()
@@ -476,25 +477,10 @@ function UpdateDetailsInBhoomi() {
     HttpPost(`/KycPaymentApproval/UpdateBhoomi/`, 'json', param, function (response) {
         debugger;
         //check status here and show message based on that
-        if (response.trim() == 'Data updated in Bhoomi Application')
-        {
-            SuccessMessage(response);
-          
-        }
-        else
-        if (response.trim() == 'Not able to update data in Bhoomi Application')
-        {
-            DisplayErrorMessages(response);
-        }
-        else
-        {
-           
-            InfoMessage(response);
-        }
+       
+            InfoMessage1(response);
+        GetPaymentFromBhoomi();
     });
+    
 };
 
-
-//x > y ? "x is greater than y" :
-//    x < y ? "x is less than y" :
-//        x == y ? "x is equal to y" : "No result";

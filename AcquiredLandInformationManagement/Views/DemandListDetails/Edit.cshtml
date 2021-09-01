@@ -6,7 +6,7 @@
 <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
     <h3 class="mb-3 d-flex">
         Edit Details
-        <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+        <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
     </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -34,13 +34,13 @@
                     @{
                                     @if (Model.ENMDocumentName != null)
                                     {
-                        <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
-                                        <a class="badge badge-primary px-2" asp-action="ViewENMDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a> }
+                        <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                        <a class="badge  bg-primary px-2" asp-action="ViewENMDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a> }
                                     else
                                     {
-                        <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">} }
+                        <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ENMDocumentName"></span>
-                    <label class="floating-label">Upload ENM Document<span style="color:red">(Only PDF)</span></label>
+                    <label class="floating-label">Upload ENM Document</label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -444,7 +444,7 @@
                                     @if (Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName != null)
                                     {
                         <input type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                                        <a class="badge badge-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Paymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
+                                        <a class="badge  bg-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Paymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
                                     else
                                     {
                         <input type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }

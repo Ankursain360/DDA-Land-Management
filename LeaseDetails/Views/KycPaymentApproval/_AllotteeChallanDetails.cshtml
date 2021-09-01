@@ -2,15 +2,16 @@
 @model IEnumerable<Libraries.Model.Entity.Kycdemandpaymentdetailstablec>
 @*<div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapsePaymentRpt" role="button" aria-expanded="true"
+        <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapsePaymentRpt" role="button" aria-expanded="true"
            aria-controls="collapsePaymentRpt">
             <i class="ri-arrow-right-s-fill"></i>
-            <span class="text ml-1 mr-auto">If Allottee not agreed with the amount deposited shown in DDA record, He/she can enter the challan</span>
+            <span class="text ms-1 me-auto">If Allottee not agreed with the amount deposited shown in DDA record, He/she can enter the challan</span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePaymentRpt">*@
+        <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapsePaymentRpt">*@
 
 <div id="details">
+    <input type="hidden"id="CHRole" value="@ViewBag.Role" />
     <div class="table-section bg-white border shadow rounded">
         <div class="table-responsive">
             <table class="table table-sm table-bordered mb-0 table-striped calculation" id="Challan1">
@@ -38,63 +39,126 @@
                         @foreach (var item in Model)
                         {
 
-                            <tr>
+                    <tr>
 
-                                <td>
-                                    <input asp-for="@item.Id" type="hidden" />
-                                    <input asp-for="@item.KycId" type="hidden" />
-                                    <input asp-for="@item.DemandPaymentId" type="hidden" />
-                                    <input asp-for="@item.IsVerified" type="hidden" />
-                                    <div class="form-check theme">
-                                        <input id="verify" type="hidden" />
-                                        <input class="form-check-input" type="checkbox" name="Verifychk" id="Verifychk1" onclick="return chkmsg(this);" />
+                        <td>
+                            <input asp-for="@item.Id" type="hidden" />
+                            <input asp-for="@item.KycId" type="hidden" />
+                            <input asp-for="@item.DemandPaymentId" type="hidden" />
+                            <input asp-for="@item.IsVerified" type="hidden" />
 
-                                        <label class="form-check-label" for="checkbox">
-                                            Verify
-                                        </label>
-                                    </div>
+                            <div class="form-check theme">
+                                <input id="verify" type="hidden" />
+                                @if (ViewBag.Role == 30 || ViewBag.Role == 32)
+                                {
+                                    <input class="form-check-input" type="checkbox" name="Verifychk" id="Verifychk1" onclick="return chkmsg(this);" />
 
-                                </td>
-                                <td>
-                                    <input asp-for="@item.PaymentType" type="text" class="floating-label-field floating-label-field--s3" />
+                                }
+                                else
+                                {
+                                    <input class="form-check-input pointerNone" type="checkbox" name="Verifychk" id="Verifychk1" onclick="return chkmsg(this);" />
 
-                                </td>
-                                <td>
-                                    <input asp-for="@item.Period" type="text" class="floating-label-field floating-label-field--s3" />
+                                }
 
-                                </td>
-                                <td>
-                                    <input asp-for="@item.ChallanNo" maxlength="10" type="text" class="floating-label-field floating-label-field--s3 numbers" />
-                                    <span class="text-danger"></span>
-                                </td>
-                                <td>
-                                    <input asp-for="@item.Amount" id="Amount" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                                <label class="form-check-label" for="checkbox">
+                                    Verify
+                                </label>
+                            </div>
 
-                                </td>
-                                <td>
-                                    <input asp-for="@item.DateofPaymentByAllottee" type="Date" class="floating-label-field floating-label-field--s3" />
+                        </td>
+                        @if (ViewBag.Role == 34)
+                         {
+                            <td>
+                                @*<input asp-for="@item.PaymentType" type="text" class="floating-label-field floating-label-field--s3" />*@
+                                <select class="floating-label-field floating-label-field--s3" id="CHPaymentType" asp-for="@item.PaymentType">
+                                    <option selected disabled="disabled" value="">--Select-- </option>
+                                    <option value="Ground Rent">Ground Rent</option>
+                                    <option value="License fee">License Fee</option>
+                                    <option value="Interest">Interest</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input  asp-for="@item.Period" id="CHPeriod" type="text" class="floating-label-field floating-label-field--s3" />
 
-                                </td>
-                                <td>
-                                    <input asp-for="@item.Proofinpdf" type="hidden" />
-                                    @if (item.Proofinpdf != null && item.Proofinpdf != "")
-                                    {
-                                        <a class="badge badge-primary px-2" asp-action="DownloadChallanProof" asp-route-id="@item.Id" target="_blank">
-                                            View File - (@item.Proofinpdf.Split('\\')?.LastOrDefault()?.Remove(0, 37))
-                                        </a>
-                                    }
-                                    else
-                                    { <b>No Document Available</b>}
+                            </td>
+                            <td>
+                                <input  asp-for="@item.ChallanNo" id="CHChallanNo" maxlength="10" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                                <span class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input  asp-for="@item.Amount" id="Amount" type="text" class="floating-label-field floating-label-field--s3 numbers" />
 
-                                </td>
+                            </td>
+                            <td>
+                                <input  asp-for="@item.DateofPaymentByAllottee" id="CHDateofPaymentByAllottee" type="Date" class="floating-label-field floating-label-field--s3" />
 
-                                <td>
-                                    <input asp-for="@item.Ddabankcredit" type="text" class="floating-label-field floating-label-field--s3" />
-                                </td>
+                            </td>
+                            <td>
+                                <input asp-for="@item.Proofinpdf" type="hidden" />
+                                @if (item.Proofinpdf != null && item.Proofinpdf != "")
+                                {
+                                    <a class="badge bg-primary px-2" asp-action="DownloadChallanProof" asp-route-id="@item.Id" target="_blank">
+                                        View File - (@item.Proofinpdf.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                    </a>
+                                }
+                                else
+                                { <b>No Document Available</b>}
+
+                            </td>
+
+                            <td>
+                                <input  asp-for="@item.Ddabankcredit" id="CHDdabankcredit" type="text" class="floating-label-field floating-label-field--s3" />
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @*<input asp-for="@item.PaymentType" type="text" class="floating-label-field floating-label-field--s3" />*@
+                                <select class="floating-label-field floating-label-field--s3 pointerNone" id="CHPaymentType" asp-for="@item.PaymentType">
+                                    <option selected disabled="disabled" value="">--Select-- </option>
+                                    <option value="Ground Rent">Ground Rent</option>
+                                    <option value="License fee">License Fee</option>
+                                    <option value="Interest">Interest</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input readonly asp-for="@item.Period" id="CHPeriod" type="text" class="floating-label-field floating-label-field--s3" />
+
+                            </td>
+                            <td>
+                                <input readonly asp-for="@item.ChallanNo" id="CHChallanNo" maxlength="10" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+                                <span class="text-danger"></span>
+                            </td>
+                            <td>
+                                <input readonly asp-for="@item.Amount" id="Amount" type="text" class="floating-label-field floating-label-field--s3 numbers" />
+
+                            </td>
+                            <td>
+                                <input readonly asp-for="@item.DateofPaymentByAllottee" id="CHDateofPaymentByAllottee" type="Date" class="floating-label-field floating-label-field--s3" />
+
+                            </td>
+                            <td>
+                                <input asp-for="@item.Proofinpdf" type="hidden" />
+                                @if (item.Proofinpdf != null && item.Proofinpdf != "")
+                                {
+                                    <a class="badge bg-primary px-2" asp-action="DownloadChallanProof" asp-route-id="@item.Id" target="_blank">
+                                        View File - (@item.Proofinpdf.Split('\\')?.LastOrDefault()?.Remove(0, 37))
+                                    </a>
+                                }
+                                else
+                                { <b>No Document Available</b>}
+
+                            </td>
+
+                            <td>
+                                <input readonly asp-for="@item.Ddabankcredit" id="CHDdabankcredit" type="text" class="floating-label-field floating-label-field--s3" />
+                            </td>
+                        }
 
 
 
-                            </tr>
+
+                    </tr>
                         }
                     }
                     else

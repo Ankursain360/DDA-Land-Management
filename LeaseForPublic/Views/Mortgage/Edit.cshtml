@@ -3,7 +3,7 @@
 <div class="pt-3">
     <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">
-            Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+            Edit Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
         </h3>
         <input asp-for="Id" type="hidden" />
         <div class="row mt-md-3">
@@ -100,11 +100,11 @@
                 @{ if (Model.DemandLetter != null)
                     {
                         <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="DemandLetterPhoto"   accept="application/pdf" />
-                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
+                        <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id"> (View File )</a>
                     }
                     else
                     {
-                        <label class="badge badge-primary px-2">No File</label>
+                        <label class="badge bg-primary px-2">No File</label>
                         <input type="file" asp-for="DemandLetterPhoto"  class="floating-label-field floating-label-field--s3"  accept="application/pdf" >
 
                     }
@@ -118,11 +118,11 @@
                 @{ if (Model.Noc != null)
                     {
                         <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="NocPhoto"   accept="application/pdf" />
-                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter1" asp-route-id="@Model.Id"> (View File )</a>
+                        <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter1" asp-route-id="@Model.Id"> (View File )</a>
                     }
                     else
                     {
-                        <label class="badge badge-primary px-2">No File</label>
+                        <label class="badge bg-primary px-2">No File</label>
                         <input type="file" asp-for="NocPhoto" class="floating-label-field floating-label-field--s3"  accept="application/pdf" >
 
                     }
@@ -141,11 +141,11 @@
                 @{ if (Model.CancellationOrder != null)
                     {
                         <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="CancellationPhoto" accept="application/pdf" />
-                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter2" asp-route-id="@Model.Id"> (View File )</a>
+                        <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter2" asp-route-id="@Model.Id"> (View File )</a>
                     }
                     else
                     {
-                        <label class="badge badge-primary px-2">No File</label>
+                        <label class="badge bg-primary px-2">No File</label>
                         <input type="file" asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf">
 
                     }

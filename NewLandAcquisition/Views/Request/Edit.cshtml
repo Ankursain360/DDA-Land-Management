@@ -8,7 +8,7 @@
 
     <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
 
-        <h3 class="mb-3 d-flex">Edit Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+        <h3 class="mb-3 d-flex">Edit Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -135,7 +135,7 @@
 
                             <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="RequestPhotos" />
                             <label for="field-1" class="floating-label">Layout Plan/Zonal Plan/Master Plan </label>
-                            <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
+                            <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
                    "> (View Photo )</a>
                         }
                         else

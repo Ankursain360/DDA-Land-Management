@@ -9,26 +9,26 @@
                 @if (menu.ParentId == 0)
                 {
                     <a class="p-2 no-dec d-flex align-items-center" 
-                       data-toggle="collapse" 
+                       data-bs-toggle="collapse" 
                        href="#per_@menu.Id" 
                        role="button" 
                        aria-expanded="true" 
                        aria-controls="per_@menu.Id">
                         <i class="ri-arrow-right-s-fill"></i>
-                        <span class="text ml-1 mr-auto">@menu.Name</span>
+                        <span class="text ml-1 me-auto">@menu.Name</span>
                         <i class="arrow ri-arrow-drop-down-line slow"></i>
                     </a>
                 }
                 else
                 {
                     <a class="p-2 no-dec d-flex align-items-center" 
-                       data-toggle="collapse" 
+                       data-bs-toggle="collapse" 
                        href="#per_@menu.Id" 
                        role="button" 
                        aria-expanded="true" 
                        aria-controls="per_@menu.Id">
                         <i class="ri-arrow-right-s-fill"></i>
-                        <span class="text ml-1 mr-auto">@menu.Name</span>
+                        <span class="text ml-1 me-auto">@menu.Name</span>
                         <i class="arrow ri-arrow-drop-down-line slow"></i>
                     </a>
                 }
@@ -53,7 +53,7 @@
             @{
                 if (menu.Children.Count == 0)
                 {
-                    <a class="d-block no-dec p-2 mr-auto">@menu.Name</a>
+                    <a class="d-block no-dec p-2 me-auto">@menu.Name</a>
                     <ul class="list-unstyled m-0 p-0 d-lg-flex align-items-center" >
                         @foreach (var item in menu.Actions)
                         {
@@ -75,12 +75,12 @@
                 else
                 {
                     <a class="p-2 no-dec d-flex align-items-center"
-                       data-toggle="collapse" href="#per_@menu.Id"
+                       data-bs-toggle="collapse" href="#per_@menu.Id"
                        role="button"
                        aria-expanded="true"
                        aria-controls="per_@menu.Id">
                         <i class="ri-arrow-right-s-fill"></i>
-                        <span class="text ml-1 mr-auto">@menu.Name</span>
+                        <span class="text ml-1 me-auto">@menu.Name</span>
                         <i class="arrow ri-arrow-drop-down-line slow"></i>
                     </a>
                 }

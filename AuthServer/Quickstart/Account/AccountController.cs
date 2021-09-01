@@ -69,17 +69,24 @@ namespace IdentityServerHost.Quickstart.UI
             HttpContext.Session.Clear();
             if (_httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"] != null)
             {
+                CookieOptions optionss2 = new CookieOptions();
+                optionss2.Path = "/Home";
                 string any = _httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"];
-                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", string.Empty);
+                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", string.Empty, optionss2);
                 var Value = GenerateHashKey();
-                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Value);
+                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Value, optionss2);
             }
             if (_httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null)
             {
                 string any = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
-                HttpContext.Response.Cookies.Append(".AspNetCore.Session", string.Empty);
+                CookieOptions optionss1 = new CookieOptions();
+               // optionss1.Expires = DateTime.Now.AddDays(-20);
+                optionss1.Path = "/Home";
+                HttpContext.Response.Cookies.Append(".AspNetCore.Session", string.Empty, optionss1);
                 var Value = GenerateHashKey();
-                HttpContext.Response.Cookies.Append(".AspNetCore.Session", Value);
+                CookieOptions optionss2 = new CookieOptions();
+                optionss2.Path = "/Home";
+                HttpContext.Response.Cookies.Append(".AspNetCore.Session", Value, optionss2);
             }
             if (_httpContextAccessor.HttpContext.Request.Cookies["AuthToken"] != null)
             {
@@ -173,8 +180,10 @@ namespace IdentityServerHost.Quickstart.UI
                     #region session fixation
                     CookieOptions options = new CookieOptions();
                     options.Expires = DateTime.Now.AddDays(-30);
-                    HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString());
-                    HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString());                   
+                    CookieOptions optionss2 = new CookieOptions();
+                    optionss2.Path = "/Home";
+                    HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString(), optionss2);
+                    HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString(), optionss2);                   
                     // Start Added By Renu For Session Fixation on 27 Jan 2020
                     string guid = Guid.NewGuid().ToString();
                     HttpContext.Session.SetString("AuthToken", guid);
@@ -188,7 +197,7 @@ namespace IdentityServerHost.Quickstart.UI
                         if (Request.Cookies[".AspNetCore.Session"] != null && Request.Cookies[".AspNetCore.Session"] != null)
                         {
                             string newSessionID = Request.Cookies[".AspNetCore.Session"];
-                            HttpContext.Response.Cookies.Append(".AspNetCore.Session", newSessionID.Substring(0, 24)); 
+                            HttpContext.Response.Cookies.Append(".AspNetCore.Session", newSessionID.Substring(0, 24), optionss2); 
                             string _browserInfo = Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
                             string _sessionValue = user.Id.ToString() + "^" + DateTime.Now.Ticks + "^" + _browserInfo + "^" + System.Guid.NewGuid();
                             byte[] _encodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(_sessionValue);

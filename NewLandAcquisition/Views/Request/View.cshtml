@@ -8,7 +8,7 @@
 
     <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
 
-        <h3 class="mb-3 d-flex">View Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+        <h3 class="mb-3 d-flex">View Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -124,7 +124,7 @@
 
                     <input asp-for="RequestPhotos" id="Photo" type="file" class="floating-label-field floating-label-field--s3" multiple disabled />
 
-                    <a class="badge badge-primary px-2" asp-action="ViewLetter" target="_blank" asp-route-id="@Model.Id
+                    <a class="badge bg-primary px-2" asp-action="ViewLetter" target="_blank" asp-route-id="@Model.Id
                            "> (View Photo )</a>
 
 

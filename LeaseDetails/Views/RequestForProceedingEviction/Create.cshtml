@@ -4,7 +4,7 @@
 <div class="pt-3">
     <form asp-action="Create" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">
-            Create <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+            Create <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
         </h3>
         <input asp-for="AllotmentId" type="hidden" />
         <input asp-for="CancellationId" type="hidden" />
@@ -104,8 +104,8 @@
                     Demand Letter <span style="color:red"> (Only Upload 10 Mb File)</span>
                 </label>
                 <input type="hidden" asp-for="DemandLetter" />
-                <label class="badge badge-primary px-2" id="NoFileDemandLetterId">No File</label>
-                <a id="viewDemandLetterId" asp-action="ViewLetter" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                <label class="badge bg-primary px-2" id="NoFileDemandLetterId">No File</label>
+                <a id="viewDemandLetterId" asp-action="ViewLetter" asp-route-id="@Model.Id" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
 
             </div>
             <div class="col-md-6">
@@ -113,17 +113,17 @@
                     NOC <span style="color:red"> (Only Upload 10 Mb File)</span>
                 </label>
                 <input type="hidden" asp-for="Noc" />
-                <label class="badge badge-primary px-2" id="NoFileNOCId">No File</label>
-                <a id="viewNOCId" asp-action="ViewLetter1" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                <label class="badge bg-primary px-2" id="NoFileNOCId">No File</label>
+                <a id="viewNOCId" asp-action="ViewLetter1" asp-route-id="@Model.Id" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
 
                 @*@{ if (Model.Noc != null)
                     {
                         <input type="file" disabled onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="NocPhoto" accept="application/pdf" />
-                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter1" asp-route-id="@Model.Id"> (View File )</a>
+                        <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter1" asp-route-id="@Model.Id"> (View File )</a>
                     }
                     else
                     {
-                        <label class="badge badge-primary px-2">No File</label>
+                        <label class="badge bg-primary px-2">No File</label>
                         <input type="file" disabled asp-for="NocPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf">
 
                     }
@@ -138,17 +138,17 @@
                     Cancellation Order <span style="color:red"> (Only Upload 10 Mb File)</span>
                 </label>
                 <input type="hidden" asp-for="CancellationOrder" value="" />
-                <label class="badge badge-primary px-2" id="NoFileCancelOrderId">No File</label>
-                <a id="viewCancelOrderId" asp-action="ViewLetter2" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                <label class="badge bg-primary px-2" id="NoFileCancelOrderId">No File</label>
+                <a id="viewCancelOrderId" asp-action="ViewLetter2" asp-route-id="@Model.Id" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
 
                 @*@{ if (Model.CancellationOrder != null)
                     {
                         <input type="file" disabled onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="CancellationPhoto" accept="application/pdf" />
-                        <a class="badge badge-primary px-2" target="_blank" asp-action="ViewLetter2" asp-route-id="@Model.Id"> (View File )</a>
+                        <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter2" asp-route-id="@Model.Id"> (View File )</a>
                     }
                     else
                     {
-                        <label class="badge badge-primary px-2">No File</label>
+                        <label class="badge bg-primary px-2">No File</label>
                         <input type="file" disabled asp-for="CancellationPhoto" class="floating-label-field floating-label-field--s3" accept="application/pdf">
 
                     }

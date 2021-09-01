@@ -15,7 +15,7 @@
 <br />
 <form id="myForm" asp-action="View" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex">
-        Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+        Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
     </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -39,13 +39,13 @@
 
     <div class="permission mt-2 accordion list-unstyled m-0 ">
         <div class="card">
-            <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="true"
+            <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapsePayment" role="button" aria-expanded="true"
                aria-controls="collapsePayment">
                 <i class="ri-arrow-right-s-fill"></i>
-                <span class="text ml-1 mr-auto">Payment Details</span>
+                <span class="text ms-1 me-auto">Payment Details</span>
                 <i class="arrow ri-arrow-drop-down-line slow"></i>
             </a>
-            <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapsePayment">
+            <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapsePayment">
 
                 <h3 class="my-3 sub-heading">Demand Details as per DDA records (System Generated) </h3>
                 <div id="divPayment">
@@ -163,7 +163,7 @@
                                                asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                         <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
-                                        <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
+                                        <a class="badge bg-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
                                             View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                         </a>
                                     } }
@@ -223,7 +223,7 @@
                                                asp-for="outstandingduesDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                         <span asp-validation-for="outstandingduesDoc" class="d-block text-danger field-validation-valid"></span>
-                                        <a class="badge badge-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
+                                        <a class="badge bg-primary px-2" asp-action="DownloadOutstandingDuesDoc" target="_blank" asp-route-id="@Model.Id">
                                             View File - (@Model.OutStandingDuesDocument.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                         </a>
                                     }

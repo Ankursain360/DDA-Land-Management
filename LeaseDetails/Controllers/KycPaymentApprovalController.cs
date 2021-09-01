@@ -74,7 +74,7 @@ namespace LeaseDetails.Controllers
             LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
             ApplicantDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantDocument").Value.ToString();
             ChallanProof = _configuration.GetSection("FilePaths:KycFiles:ChallanProofDocument").Value.ToString();
-            OustandingDeusDoc= _configuration.GetSection("FilePaths:KycFiles:OustandingDuesDocUploadedByAAOAccounts").Value.ToString();
+            OustandingDeusDoc = _configuration.GetSection("FilePaths:KycFiles:OustandingDuesDocUploadedByAAOAccounts").Value.ToString();
         }
         public async Task<IActionResult> Index()
         {
@@ -95,13 +95,13 @@ namespace LeaseDetails.Controllers
         public async Task<PartialViewResult> GetChallanDetails(int Id)
         {
             var result = await _kycPaymentApprovalService.GetAllChallan(Id);
-
+            ViewBag.Role = SiteContext.RoleId;
             return PartialView("_AllotteeChallanDetails", result);
         }
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
             var result = await _kycdemandpaymentdetailstableaService.FetchResultOnDemandId(Id);
-           
+
             return PartialView("_PaymentDetails", result);
         }
         public async Task<PartialViewResult> PaymentFromBhoomi(string FileNo)
@@ -110,26 +110,26 @@ namespace LeaseDetails.Controllers
             {
 
                 using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(_configuration.GetSection("BhoomiApi").Value + FileNo))
                 {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    using (var response = await httpClient.GetAsync(_configuration.GetSection("BhoomiApi").Value + FileNo))
                     {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                        var data1 = JsonSerializer.Deserialize<ApiResponseBhoomiApiFileWise>(apiResponse);
-                        return PartialView("_PaymentFromBhoomi", data1);
+                        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            string apiResponse = await response.Content.ReadAsStringAsync();
+                            var data1 = JsonSerializer.Deserialize<ApiResponseBhoomiApiFileWise>(apiResponse);
+                            return PartialView("_PaymentFromBhoomi", data1);
+
+                        }
+                        else
+                        {
+                            ApiResponseBhoomiApiFileWise data1 = new ApiResponseBhoomiApiFileWise();
+                            List<BhoomiApiFileNowiseDto> cargo = new List<BhoomiApiFileNowiseDto>();
+                            data1.cargo = cargo;
+                            return PartialView("_PaymentFromBhoomi", data1);
+                        }
 
                     }
-                    else
-                    {
-                        ApiResponseBhoomiApiFileWise data1 = new ApiResponseBhoomiApiFileWise();
-                        List<BhoomiApiFileNowiseDto> cargo = new List<BhoomiApiFileNowiseDto>();
-                        data1.cargo = cargo;
-                        return PartialView("_PaymentFromBhoomi", data1);
-                    }
-
                 }
-            }
             }
             catch (Exception ex)
             {
@@ -143,7 +143,7 @@ namespace LeaseDetails.Controllers
 
         public PartialViewResult ApplicantChallanDetails(int Id)
         {
-
+            ViewBag.Role = SiteContext.RoleId;
             // var result = await _demandDetailsService.GetPaymentDetails(Id);
 
             // return PartialView("_PaymentDetails", result);
@@ -196,26 +196,26 @@ namespace LeaseDetails.Controllers
                 var Data = await _kycPaymentApprovalService.FetchSingleResult(id);
                 var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
                 var Data3 = await _kycdemandpaymentdetailstableaService.FetchSingleResultonDemandId(id);
-                var DDInfo= await _kycPaymentApprovalService.FetchDDofBranch(Data2.BranchId);
+                var DDInfo = await _kycPaymentApprovalService.FetchDDofBranch(Data2.BranchId);
                 FileHelper fileHelper = new FileHelper();
                 var Msgddl = payment.ApprovalStatus;
-                
+
 
                 #region Approval Proccess At Further level start Added by ishu 30 july 2021
 
                 var BackIdGuid1 = _configuration.GetSection("workflowProccessGuidKYCPayment").Value;
                 var BackIdGuid2 = _configuration.GetSection("workflowProccessGuidKYCPayment2").Value;
-                
+
                 var FirstApprovalProcessData = await _approvalproccessService.FirstkycApprovalProcessData((_configuration.GetSection("workflowProccessGuidKYCPayment").Value), payment.Id);
-                var ApprovalProccessBackId = (Data.WorkFlowTemplate=="WF1") ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, payment.Id) : _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, payment.Id);
+                var ApprovalProccessBackId = (Data.WorkFlowTemplate == "WF1") ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, payment.Id) : _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, payment.Id);
                 var ApprovalProcessBackData = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId);
 
                 var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
 
 
-                var DataFlow = (Data.WorkFlowTemplate == "WF1")?await DataAsync(ApprovalProcessBackData.Version): await DataAsync1(ApprovalProcessBackData.Version);
+                var DataFlow = (Data.WorkFlowTemplate == "WF1") ? await DataAsync(ApprovalProcessBackData.Version) : await DataAsync1(ApprovalProcessBackData.Version);
 
-                if (Data.ApprovedStatus == 20 && payment.ApprovalStatus == "22" &&SiteContext.RoleId==29) //at 2nd level if forwarded to cash housing thn update workflow template used infoin main table
+                if (Data.ApprovedStatus == 20 && payment.ApprovalStatus == "22" && SiteContext.RoleId == 29) //at 2nd level if forwarded to cash housing thn update workflow template used infoin main table
                 {
 
                     payment.WorkFlowTemplate = "WF2";
@@ -275,9 +275,9 @@ namespace LeaseDetails.Controllers
 
                     result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, SiteContext.UserId);
 
-                   
+
                     approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                    approvalproccess.ProcessGuid = payment.WorkFlowTemplate == "WF1"? BackIdGuid1: BackIdGuid2;
+                    approvalproccess.ProcessGuid = payment.WorkFlowTemplate == "WF1" ? BackIdGuid1 : BackIdGuid2;
                     approvalproccess.ServiceId = payment.Id;
                     approvalproccess.SendFrom = SiteContext.UserId.ToString();
                     approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
@@ -287,8 +287,8 @@ namespace LeaseDetails.Controllers
                     // approvalproccess.Version = ApprovalProcessBackData.Version;
                     approvalproccess.Version = payment.WorkFlowTemplate == "WF1" ? ApprovalProcessBackData.Version : "V1(2097090378)";
                     approvalproccess.DocumentName = payment.ApprovalDocument == null ? null : fileHelper.SaveFile1(ApprovalDocumentPath, payment.ApprovalDocument);
-                   
-                    
+
+
 
                     if (checkLastApprovalStatuscode.StatusCode == ((int)ApprovalActionStatus.QueryForward)) // check islast approvalrow is of query type then return to the same user
                     {
@@ -371,23 +371,24 @@ namespace LeaseDetails.Controllers
                                                 {
                                                     if (!DataFlow[d].parameterSkip)
                                                     {
-                                                        if(payment.ApprovedStatus == 28 || payment.ApprovalStatus == "28")
+                                                        if (payment.ApprovedStatus == 28 || payment.ApprovalStatus == "28")
                                                         {
                                                             approvalproccess.Level = 0;
                                                             approvalproccess.PendingStatus = 0;
                                                             approvalproccess.SendTo = "0";
-                                                        } else 
+                                                        }
+                                                        else
                                                         {
                                                             approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
-                                                          //  approvalproccess.PendingStatus = 0;
+                                                            //  approvalproccess.PendingStatus = 0;
                                                             approvalproccess.SendTo = payment.ApprovalUserId.ToString();
                                                         }
-                                                        
-                                                        
+
+
                                                         break;
                                                     }
                                                 }
-                                              //  approvalproccess.SendTo = payment.ApprovalUserId.ToString();
+                                                //  approvalproccess.SendTo = payment.ApprovalUserId.ToString();
                                                 //approvalproccess.SendTo = null;
                                             }
                                         }
@@ -468,13 +469,13 @@ namespace LeaseDetails.Controllers
                                                 {
                                                     //payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
                                                     //payment.PendingAt = approvalproccess.SendTo;
-                                                    
+
                                                     if (payment.ApprovedStatus == 28 || payment.ApprovalStatus == "28")
                                                     {
                                                         payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
                                                         payment.PendingAt = "0";
                                                     }
-                                                    else 
+                                                    else
                                                     {
                                                         payment.ApprovedStatus = Convert.ToInt32(payment.ApprovalStatus);
                                                         payment.PendingAt = approvalproccess.SendTo;
@@ -501,12 +502,12 @@ namespace LeaseDetails.Controllers
                                                 bodyDTO.Date = DateTime.Now.ToString("dd-MMM-yyyy");
                                                 bodyDTO.AllotteeName = Data2.Name == null ? "Applicant" : Data2.Name;
                                                 bodyDTO.Address = Data2.Address == null ? "NA" : Data2.Address;
-                                                bodyDTO.PropertyNo = Data2.PlotNo == null?"NA": Data2.PlotNo;
-                                                bodyDTO.DatePeriod = Data3 == null?"NA": Data3.DemandPeriod;
+                                                bodyDTO.PropertyNo = Data2.PlotNo == null ? "NA" : Data2.PlotNo;
+                                                bodyDTO.DatePeriod = Data3 == null ? "NA" : Data3.DemandPeriod;
                                                 bodyDTO.DueDate = (DateTime.Now.AddDays(15)).ToString("dd-MMM-yyyy");
-                                                bodyDTO.Amount = Data.TotalDues == 0?"NA": Data.TotalDues.ToString(); 
-                                                bodyDTO.GrountRent = Data2.Property == "Lease"? "GrountRent":"License Fee";
-                                                bodyDTO.UserName = DDInfo.User.UserName == null?"NA": DDInfo.User.UserName;
+                                                bodyDTO.Amount = Data.TotalDues == 0 ? "NA" : Data.TotalDues.ToString();
+                                                bodyDTO.GrountRent = Data2.Property == "Lease" ? "GrountRent" : "License Fee";
+                                                bodyDTO.UserName = DDInfo.User.UserName == null ? "NA" : DDInfo.User.UserName;
                                                 bodyDTO.UserEmail = DDInfo.User.Email == null ? "NA" : DDInfo.User.Email;
                                                 bodyDTO.UserNo = DDInfo.User.PhoneNumber == null ? "NA" : DDInfo.User.PhoneNumber;
 
@@ -517,7 +518,7 @@ namespace LeaseDetails.Controllers
                                                 //string strMailSubject = "Pending Lease Application Approval Request Details ";
                                                 //string strMailCC = "", strMailBCC = "", strAttachPath = "";
                                                 //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
-                                               
+
                                                 #region Common Mail Genration
                                                 SentMailGenerationDto maildto = new SentMailGenerationDto();
                                                 maildto.strMailSubject = "Payment of Outstanding Dues";
@@ -655,7 +656,7 @@ namespace LeaseDetails.Controllers
         #region Approval Status Dropdown Bind on User rights Basis Code Added By ishu 29 july 2021
         async Task BindApprovalStatusDropdown(Kycdemandpaymentdetails Data)
         {
-            
+
             if (Data.WorkFlowTemplate == "WF1")
             {
                 var dropdownValue = await GetApprovalStatusDropdownList(Data.Id);
@@ -843,7 +844,7 @@ namespace LeaseDetails.Controllers
             Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-           Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
+            Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             // Data.Leasedocuments = await _leaseApplicationFormService.LeaseApplicationDocumentDetails(id);
             return PartialView("_KYCFormView", Data);
         }
@@ -930,16 +931,16 @@ namespace LeaseDetails.Controllers
 
                 //var ApprovalProccessBackId = (Data.WorkFlowTemplate == "WF1") ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, payment.Id) : _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, payment.Id);
 
-                
 
-                var ApprovalProccessBackId = (WF == "WF1") ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, serviceid): _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, serviceid);
+
+                var ApprovalProccessBackId = (WF == "WF1") ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, serviceid) : _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, serviceid);
                 var ApprovalProcessBackData = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId);
                 var checkLastApprovalStatuscode = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalProcessBackData.Status));
 
                 //var DataFlow = await DataAsync(ApprovalProcessBackData.Version);
                 var DataFlow = (WF == "WF1") ? await DataAsync(ApprovalProcessBackData.Version) : await DataAsync1(ApprovalProcessBackData.Version);
 
-                if (ApprovalProcessBackData.Level == 2 && Status == 22 && SiteContext.RoleId==29) //when forwarding to aao cash housing
+                if (ApprovalProcessBackData.Level == 2 && Status == 22 && SiteContext.RoleId == 29) //when forwarding to aao cash housing
                 {
                     var DataFlow1 = await DataAsync1("V1(2097090378)");
 
@@ -972,11 +973,11 @@ namespace LeaseDetails.Controllers
                                                 {
                                                     List<kycUserProfileInfoDetailsDto> UserListRoleBasis = null;
                                                     if (DataFlow1[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
-                                                       
+
 
 
                                                         UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow1[d].parameterName[b]), SiteContext.BranchId ?? 0);
-                                                   
+
                                                     else
                                                         UserListRoleBasis = await _userProfileService.GetkycUserOnRoleBasisConcatedName(Convert.ToInt32(DataFlow1[d].parameterName[b]));
 
@@ -1048,113 +1049,113 @@ namespace LeaseDetails.Controllers
                     return Json(dropdown);
                 }
 
-               
+
 
                 else
                 {
                     List<string> JsonMsg = new List<string>();
-                if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
-                {
-                    for (int i = 0; i < DataFlow.Count; i++)
+                    if (checkLastApprovalStatuscode.StatusCode != ((int)ApprovalActionStatus.QueryForward))
                     {
-                        if (!DataFlow[i].parameterSkip)
+                        for (int i = 0; i < DataFlow.Count; i++)
                         {
-                            if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
+                            if (!DataFlow[i].parameterSkip)
                             {
-                                for (int d = i + 1; d < DataFlow.Count; d++)
+                                if (i == ApprovalProcessBackData.Level - 1 && Convert.ToInt32(DataFlow[i].parameterLevel) == ApprovalProcessBackData.Level)
                                 {
-                                    if (!DataFlow[d].parameterSkip)
+                                    for (int d = i + 1; d < DataFlow.Count; d++)
                                     {
-                                        if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                        if (!DataFlow[d].parameterSkip)
                                         {
-                                            if (SiteContext.BranchId == null)
+                                            if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
                                             {
-                                                JsonMsg.Add("false");
-                                                JsonMsg.Add("Branch Id not available for next level, untill then Submittion is not possible");
-                                                return Json(JsonMsg);
+                                                if (SiteContext.BranchId == null)
+                                                {
+                                                    JsonMsg.Add("false");
+                                                    JsonMsg.Add("Branch Id not available for next level, untill then Submittion is not possible");
+                                                    return Json(JsonMsg);
+                                                }
+
                                             }
-
-                                        }
-                                        if (DataFlow[d].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
-                                        {
-                                            for (int b = 0; b < DataFlow[d].parameterName.Count; b++)
+                                            if (DataFlow[d].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
                                             {
-                                                List<kycUserProfileInfoDetailsDto> UserListRoleBasis = null;
+                                                for (int b = 0; b < DataFlow[d].parameterName.Count; b++)
+                                                {
+                                                    List<kycUserProfileInfoDetailsDto> UserListRoleBasis = null;
+                                                    if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+
+
+
+                                                        UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]), SiteContext.BranchId ?? 0);
+
+                                                    else
+                                                        UserListRoleBasis = await _userProfileService.GetkycUserOnRoleBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]));
+
+                                                    if (UserListRoleBasis.Count == 0)
+                                                    {
+                                                        JsonMsg.Add("false");
+                                                        JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
+                                                        return Json(JsonMsg);
+                                                    }
+                                                    else
+                                                    {
+                                                        return Json(UserListRoleBasis);
+                                                    }
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                string SendTo = String.Join(",", (DataFlow[d].parameterName));
                                                 if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
-                                                   
+                                                {
+                                                    StringBuilder multouserszonewise = new StringBuilder();
+                                                    int col = 0;
+                                                    if (SendTo != null)
+                                                    {
+                                                        string[] multiTo = SendTo.Split(',');
+                                                        foreach (string MultiUserId in multiTo)
+                                                        {
+                                                            var UserProfile = await _userProfileService.GetUserByIdBranchConcatedName(Convert.ToInt32(MultiUserId), SiteContext.BranchId ?? 0);
+                                                            if (UserProfile != null)
+                                                            {
+                                                                if (col > 0)
+                                                                    multouserszonewise.Append(",");
+                                                                multouserszonewise.Append(UserProfile.UserId);
+                                                            }
+                                                            col++;
+                                                        }
+                                                        SendTo = multouserszonewise.ToString();
+                                                    }
+                                                }
 
-
-                                                    UserListRoleBasis = await _userProfileService.kycGetUserOnRoleZoneBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]), SiteContext.BranchId ?? 0);
-                                                
+                                                if (SendTo != "")
+                                                {
+                                                    int[] nums = Array.ConvertAll(SendTo.Split(','), int.Parse);
+                                                    var data = await _userProfileService.UserListSkippingmultiusersConcatedName(nums);
+                                                    return Json(data);
+                                                }
                                                 else
-                                                    UserListRoleBasis = await _userProfileService.GetkycUserOnRoleBasisConcatedName(Convert.ToInt32(DataFlow[d].parameterName[b]));
-
-                                                if (UserListRoleBasis.Count == 0)
                                                 {
                                                     JsonMsg.Add("false");
                                                     JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
                                                     return Json(JsonMsg);
                                                 }
-                                                else
-                                                {
-                                                    return Json(UserListRoleBasis);
-                                                }
-
                                             }
+
+                                            break;
                                         }
-                                        else
-                                        {
-                                            string SendTo = String.Join(",", (DataFlow[d].parameterName));
-                                            if (DataFlow[d].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
-                                            {
-                                                StringBuilder multouserszonewise = new StringBuilder();
-                                                int col = 0;
-                                                if (SendTo != null)
-                                                {
-                                                    string[] multiTo = SendTo.Split(',');
-                                                    foreach (string MultiUserId in multiTo)
-                                                    {
-                                                        var UserProfile = await _userProfileService.GetUserByIdBranchConcatedName(Convert.ToInt32(MultiUserId), SiteContext.BranchId ?? 0);
-                                                        if (UserProfile != null)
-                                                        {
-                                                            if (col > 0)
-                                                                multouserszonewise.Append(",");
-                                                            multouserszonewise.Append(UserProfile.UserId);
-                                                        }
-                                                        col++;
-                                                    }
-                                                    SendTo = multouserszonewise.ToString();
-                                                }
-                                            }
-
-                                            if (SendTo != "")
-                                            {
-                                                int[] nums = Array.ConvertAll(SendTo.Split(','), int.Parse);
-                                                var data = await _userProfileService.UserListSkippingmultiusersConcatedName(nums);
-                                                return Json(data);
-                                            }
-                                            else
-                                            {
-                                                JsonMsg.Add("false");
-                                                JsonMsg.Add("No user found at the next approval level, In this case, the system is unable to process your request. Please contact to the system administrator.");
-                                                return Json(JsonMsg);
-                                            }
-                                        }
-
-                                        break;
                                     }
                                 }
                             }
                         }
                     }
-                }
-                else
-                {
-                    int[] nums = Array.ConvertAll(ApprovalProcessBackData.SendFrom.Split(','), int.Parse);
-                    var data = await _userProfileService.kycUserListSkippingmultiusersConcatedName(nums);
-                    return Json(data);
-                }
-                return Json(dropdown);
+                    else
+                    {
+                        int[] nums = Array.ConvertAll(ApprovalProcessBackData.SendFrom.Split(','), int.Parse);
+                        var data = await _userProfileService.kycUserListSkippingmultiusersConcatedName(nums);
+                        return Json(data);
+                    }
+                    return Json(dropdown);
                 }
             }
             else return Json("No data available");
@@ -1165,7 +1166,7 @@ namespace LeaseDetails.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePayment([FromBody]List<KycPaymentApprovalUpdateDto> jsondata)
+        public async Task<IActionResult> UpdatePayment([FromBody] List<KycPaymentApprovalUpdateDto> jsondata)
         {
             if (jsondata != null)
             {
@@ -1173,37 +1174,37 @@ namespace LeaseDetails.Controllers
                 decimal totalPayableInterest = jsondata[0].TotalPayableInterest ?? 0;
                 decimal totalPayableDues = jsondata[0].TotalPayableDues ?? 0;
                 List<Kycdemandpaymentdetailstablea> payment = new List<Kycdemandpaymentdetailstablea>();
-              var  result = await _kycPaymentApprovalService.DeletePayment(jsondata[0].DemandPaymentId);
+                var result = await _kycPaymentApprovalService.DeletePayment(jsondata[0].DemandPaymentId);
                 for (int i = 0; i < jsondata.Count; i++)
                 {
                     payment.Add(new Kycdemandpaymentdetailstablea
                     {
 
-                         KycId = jsondata[i].KycId,
-                         DemandPaymentId = jsondata[i].DemandPaymentId,
-                         DemandPeriod = jsondata[i].DemandPeriod,
-                         GroundRent = jsondata[i].GroundRent,
-                         InterestRate = jsondata[i].InterestRate,
-                         TotdalDues = jsondata[i].TotdalDues,
-                      
+                        KycId = jsondata[i].KycId,
+                        DemandPaymentId = jsondata[i].DemandPaymentId,
+                        DemandPeriod = jsondata[i].DemandPeriod,
+                        GroundRent = jsondata[i].GroundRent,
+                        InterestRate = jsondata[i].InterestRate,
+                        TotdalDues = jsondata[i].TotdalDues,
+
 
                     });
                 }
 
-              var  result1 = await _kycPaymentApprovalService.SavePayment(payment);
+                var result1 = await _kycPaymentApprovalService.SavePayment(payment);
 
-                
+
                 if (result1 == true)
                 {
                     Kycdemandpaymentdetails kycpayment = new Kycdemandpaymentdetails();
                     kycpayment.TotalPayable = totalPayableAmount;
                     kycpayment.TotalPayableInterest = totalPayableInterest;
                     kycpayment.TotalDues = totalPayableDues;
-                    var result2 =  await _kycPaymentApprovalService.UpdateDetails(jsondata[0].DemandPaymentId, kycpayment,SiteContext.UserId);
+                    var result2 = await _kycPaymentApprovalService.UpdateDetails(jsondata[0].DemandPaymentId, kycpayment, SiteContext.UserId);
                     ViewBag.Message = Alert.Show("Record updated successfully", "", AlertType.Success);
                     return Json("Record updated successfully");
-                    
-                 
+
+
                 }
                 else
                 {
@@ -1226,11 +1227,11 @@ namespace LeaseDetails.Controllers
         public async Task<IActionResult> UpdateChallan([FromBody] List<KycChallanApprovalUpdateDto> jsondata)
         {
 
-            if (jsondata != null)
+            if (jsondata.Count != 0)
             {
-                decimal totalPayableAmount = jsondata[0].TotalPayable??0;
-                decimal totalPayableInterest = jsondata[0].TotalPayableInterest??0;
-                decimal totalPayableDues = jsondata[0].TotalPayableDues??0;
+                decimal totalPayableAmount = jsondata[0].TotalPayable ?? 0;
+                decimal totalPayableInterest = jsondata[0].TotalPayableInterest ?? 0;
+                decimal totalPayableDues = jsondata[0].TotalPayableDues ?? 0;
                 List<Kycdemandpaymentdetailstablec> challan = new List<Kycdemandpaymentdetailstablec>();
                 var result = await _kycPaymentApprovalService.DeleteChallan(jsondata[0].DemandPaymentId);
                 for (int i = 0; i < jsondata.Count; i++)
@@ -1279,7 +1280,7 @@ namespace LeaseDetails.Controllers
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return Json("Record Not Updated");
+                return Json("No Data Available to update");
 
             }
 
@@ -1289,8 +1290,10 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateBhoomi([FromBody] List<InsertIntoLIMSPaymentApidto> jsondata)
         {
-            if (jsondata != null)
+            string msg = string.Empty;
+            if (jsondata.Count != 0)
             {
+
                 for (int i = 0; i < jsondata.Count; i++)
                 {
 
@@ -1314,25 +1317,56 @@ namespace LeaseDetails.Controllers
                         var result = streamReader.ReadToEnd();
                         if (result == "{\"cargo\":1}")
                         {
-                            return Json("Data updated in Bhoomi Application");
+                            if (msg == string.Empty)
+                            {
+                                msg = "<ul><li>Data for Challna No <b>" + jsondata[i].CHLLN_NO + "</b> updated in Bhoomi Application</li>";
+                            }
+                            else
+                            {
+                                msg = msg + "<li>Data for Challna No <b>" + jsondata[i].CHLLN_NO + "</b> updated in Bhoomi Application</li>";
+                            }
+
                         }
                         else if (result == "{\"cargo\":0}")
                         {
-                            return Json("Challna No" + jsondata[i].CHLLN_NO + " already updated in Bhoomi Application");
+                            if (msg == string.Empty)
+                            {
+                                msg = "<ul><li>Challna No <b>" + jsondata[i].CHLLN_NO + "</b> already updated in Bhoomi Application</li>";
+                            }
+                            else
+                            {
+                                msg = msg + "<li>Challna No <b>" + jsondata[i].CHLLN_NO + "</b> already updated in Bhoomi Application</li>";
+                            }
+
                         }
                         else if (result == "{\"cargo\":2}")
                         {
-                            return Json("Not able to update data as Challna No" + jsondata[i].CHLLN_NO + " Is not valid ");
+                            if (msg == string.Empty)
+                            {
+                                msg = "<ul><li>Not able to update data as Challna No <b>" + jsondata[i].CHLLN_NO + "</b> is not valid </li>";
+                            }
+                            else
+                            {
+                                msg = msg + "<li>Not able to update data as Challna No <b>" + jsondata[i].CHLLN_NO + "</b> is not valid </li>";
+                            }
+
                         }
                         else
                         {
-                            return Json("Not able to update data in Bhoomi Application");
+                            if (msg == string.Empty)
+                            {
+                                msg = "<ul><li>Not able to update data for Challna No <b>" + jsondata[i].CHLLN_NO + "</b> in Bhoomi Application</li>";
+                            }
+                            else
+                            {
+                                msg = msg + "<li>Not able to update data for Challna No <b>" + jsondata[i].CHLLN_NO + "</b> in Bhoomi Application</li>";
+                            }
                         }
                     }
-                    
+
                 }
-            
-               return  null; 
+                msg = msg + "</ul>";
+                return Json(msg);
 
 
             }

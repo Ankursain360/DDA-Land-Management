@@ -1,13 +1,13 @@
 ﻿@model Libraries.Model.Entity.Kycform
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
+        <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseApprroval" role="button" aria-expanded="true"
            aria-controls="collapseApprroval">
             <i class="ri-arrow-right-s-fill"></i>
-            <span class="text ml-1 mr-auto">View KYC Application Form Details</span>
+            <span class="text ms-1 me-auto">View KYC Application Form Details</span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseApprroval">
+        <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapseApprroval">
             <div id="allDetails">
 
                 @*<form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
@@ -492,7 +492,7 @@
                                                asp-for="Aadhar" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                         <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
-                                        <a class="badge badge-primary px-2" asp-action="DownloadAadharNo" asp-route-id="@Model.Id">
+                                        <a class="badge bg-primary px-2" asp-action="DownloadAadharNo" asp-route-id="@Model.Id">
                                             View File - (@Model.AadhaarNoPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                         </a>}
                                     else
@@ -513,7 +513,7 @@
                                                asp-for="Letter" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                         <span asp-validation-for="Letter" class="d-block text-danger field-validation-valid"></span>
-                                        <a class="badge badge-primary px-2" asp-action="DownloadLetter" asp-route-id="@Model.Id">
+                                        <a class="badge bg-primary px-2" asp-action="DownloadLetter" asp-route-id="@Model.Id">
                                             View File - (@Model.LetterPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                         </a>}
                                     else
@@ -539,7 +539,7 @@
                                                asp-for="ApplicantPan" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                         <span asp-validation-for="ApplicantPan" class="d-block text-danger field-validation-valid"></span>
-                                        <a class="badge badge-primary px-2" asp-action="DownloadPANofApplicant" asp-route-id="@Model.Id">
+                                        <a class="badge bg-primary px-2" asp-action="DownloadPANofApplicant" asp-route-id="@Model.Id">
                                             View File - (@Model.AadhaarPanapplicantPath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
                                         </a>}
                                     else

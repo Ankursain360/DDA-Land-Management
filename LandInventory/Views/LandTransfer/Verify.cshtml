@@ -4,7 +4,7 @@
 @{int rowNo = 0;}
     <form asp-action="Verify" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">
-            Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+            Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
 
         </h3>
         @if (@Model.Id > 0)
@@ -15,13 +15,13 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
-                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                    aria-controls="collapseExample">
                     <i class="ri-arrow-right-s-fill"></i>
-                    <span class="text ml-1 mr-auto">Property Inventory Details</span>
+                    <span class="text ms-1 me-auto">Property Inventory Details</span>
                     <i class="arrow ri-arrow-drop-down-line slow"></i>
                 </a>
-                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseExample">
+                <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapseExample">
                     <div id="allDetails">
 
                         <div class="row">
@@ -489,13 +489,13 @@
         </div>
         <div class="permission mt-2 accordion list-unstyled m-0 ">
             <div class="card">
-                <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
+                <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false"
                    aria-controls="collapseExample2">
                     <i class="ri-arrow-right-s-fill"></i>
-                    <span class="text ml-1 mr-auto">Hand Over / Taken Over History</span>
+                    <span class="text ms-1 me-auto">Hand Over / Taken Over History</span>
                     <i class="arrow ri-arrow-drop-down-line slow"></i>
                 </a>
-                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseExample2">
+                <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapseExample2">
                     <div id="allDetails">
                         <div class="table-section bg-white border shadow rounded">
                             <div class="table-responsive ">

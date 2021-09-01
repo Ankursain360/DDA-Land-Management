@@ -2,13 +2,13 @@
 
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseRequestProceeding" role="button" aria-expanded="true"
+        <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseRequestProceeding" role="button" aria-expanded="true"
            aria-controls="collapseRequestProceeding">
             <i class="ri-arrow-right-s-fill"></i>
-            <span class="text ml-1 mr-auto">View Request Proceeding For Eviction Details </span>
+            <span class="text ms-1 me-auto">View Request Proceeding For Eviction Details </span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseRequestProceeding">
+        <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapseRequestProceeding">
             <div id="allDetails">
                 <div class="row mt-md-3">
                     <div class="col-md-6">
@@ -104,8 +104,8 @@
                             Demand Letter <span style="color:red"> (Only Upload 10 Mb File)</span>
                         </label>
                         <input type="hidden" asp-for="DemandLetter" />
-                        <label class="badge badge-primary px-2" id="NoFileDemandLetterId">No File</label>
-                        <a id="viewDemandLetterId" asp-action="ViewLetter" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <label class="badge bg-primary px-2" id="NoFileDemandLetterId">No File</label>
+                        <a id="viewDemandLetterId" asp-action="ViewLetter" asp-route-id="@Model.Id" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
 
                     </div>
                     <div class="col-md-6">
@@ -113,7 +113,7 @@
                             NOC <span style="color:red"> (Only Upload 10 Mb File)</span>
                         </label>
                         <input type="hidden" asp-for="Noc" />
-                        <label class="badge badge-primary px-2" id="NoFileNOCId">No File</label>
+                        <label class="badge bg-primary px-2" id="NoFileNOCId">No File</label>
 
                     </div>
                 </div>
@@ -125,8 +125,8 @@
                             Cancellation Order <span style="color:red"> (Only Upload 10 Mb File)</span>
                         </label>
                         <input type="hidden" asp-for="CancellationOrder" value="" />
-                        <label class="badge badge-primary px-2" id="NoFileCancelOrderId">No File</label>
-                        <a id="viewCancelOrderId" asp-action="ViewLetter2" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                        <label class="badge bg-primary px-2" id="NoFileCancelOrderId">No File</label>
+                        <a id="viewCancelOrderId" asp-action="ViewLetter2" asp-route-id="@Model.Id" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
 
                     </div>
                     <div class=" col-md-6">

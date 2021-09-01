@@ -26,7 +26,7 @@ namespace LeaseForPublic.Controllers
         {
             //UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
             // var Data = await _userProfileService.GetAllotteeDetails(_siteContext.UserId);
-            return RedirectToAction("Create", "SignupForm");
+            return RedirectToAction("CreateLogin", "SignupForm");
         }
 
         public IActionResult Privacy()

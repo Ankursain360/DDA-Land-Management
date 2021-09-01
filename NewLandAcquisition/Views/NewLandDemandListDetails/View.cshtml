@@ -4,7 +4,7 @@
 <br />
 <br />
 <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
-    <h3 class="mb-3 d-flex">View Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+    <h3 class="mb-3 d-flex">View Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -33,7 +33,7 @@
                         @if (Model.ENMDocumentName != null)
                         {
                             <input disabled type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View File)</label>
+                            <label class="badge bg-primary px-2">(View File)</label>
                         }
                         else
                         {
@@ -447,7 +447,7 @@
                         @if (Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentName != null)
                         {
                             <input disabled  type="file" asp-for="@Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <a class="badge badge-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Newlandpaymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
+                            <a class="badge bg-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Newlandpaymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
                         else
                         {
                             <input disabled  type="file" asp-for="@Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }

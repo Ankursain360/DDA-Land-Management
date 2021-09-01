@@ -4,7 +4,7 @@
 
 <div class="pt-3">
     <form asp-action="View" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">View Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
+        <h3 class="mb-3 d-flex">View Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -106,7 +106,7 @@
                         @if (Model.DocumentName != null)
                         {
                             <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View File)</label>
+                            <label class="badge  bg-primary px-2">(View File)</label>
                         }
                         else
                         {
@@ -124,7 +124,7 @@
                         @if (Model.DocumentNameSizra != null)
                         {
                             <input disabled type="file" asp-for="DocumentSizraIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <a class="badge badge-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            <a class="badge  bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
@@ -142,7 +142,7 @@
                         @if (Model.DocumentNameSizra != null)
                         {
                             <input disabled type="file" asp-for="DocumentSizraIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View File)</label>
+                            <label class="badge  bg-primary px-2">(View File)</label>
                         }
                         else
                         {

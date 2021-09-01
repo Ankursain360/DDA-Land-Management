@@ -110,7 +110,17 @@ Color: #ffffff
 Font-size: 0.80rem
 Font-Family: Open Sans Regular*/
 
+.container {
+    position: relative;
+}
 
+a {
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
 
 body,
 html {
@@ -1779,4 +1789,12 @@ textarea.floating-label-field--s3 {
     .left-menu .sub-menu {
         border-left: 0;
     }
+}
+
+.pointerNone {
+    pointer-events: none;
+}
+
+.pointerAuto {
+    pointer-events: auto;
 }

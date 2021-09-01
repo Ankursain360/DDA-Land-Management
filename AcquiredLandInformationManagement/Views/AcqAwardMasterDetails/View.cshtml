@@ -6,7 +6,7 @@
     <form asp-action="Edit" disabled="disabled" id="myForm" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">
             View Details
-            <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+            <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
         </h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -195,7 +195,7 @@
                         @if (Model.DocumentName != null)
                         {
                             <input disabled type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View File)</label>
+                            <label class="badge  bg-primary px-2">(View File)</label>
                         }
                         else
                         {

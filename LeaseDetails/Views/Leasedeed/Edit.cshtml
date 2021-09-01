@@ -4,7 +4,7 @@
 <div class="pt-3">
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <h3 class="mb-3 d-flex">
-            Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
+            Edit Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span>
         </h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -47,7 +47,7 @@
 
                     @{ if (Model.DocumentPath != null)
                         {
-                            <a class="badge badge-primary px-2" asp-action="DownloadFile" asp-route-id="@Model.Id" target="_blank"> (View Document)</a>
+                            <a class="badge bg-primary px-2" asp-action="DownloadFile" asp-route-id="@Model.Id" target="_blank"> (View Document)</a>
                             <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
                             <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
                         }

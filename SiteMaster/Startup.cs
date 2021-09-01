@@ -95,6 +95,7 @@ namespace SiteMaster
                  options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                  options.SlidingExpiration = false;
                  options.Cookie.Name = "Auth-cookie";
+                // options.Cookie.Path = "/Home";
              })
             .AddOpenIdConnect("oidc", options =>
             {

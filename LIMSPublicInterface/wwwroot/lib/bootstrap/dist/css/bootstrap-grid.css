@@ -1986,7 +1986,7 @@ html {
   margin-top: 1rem !important;
 }
 
-.mr-3,
+.me-3,
 .mx-3 {
   margin-right: 1rem !important;
 }
@@ -2108,7 +2108,7 @@ html {
   padding-top: 0.5rem !important;
 }
 
-.pr-2,
+.pe-2,
 .px-2 {
   padding-right: 0.5rem !important;
 }
@@ -2332,7 +2332,7 @@ html {
   margin-top: auto !important;
 }
 
-.mr-auto,
+.me-auto,
 .mx-auto {
   margin-right: auto !important;
 }
@@ -2776,7 +2776,7 @@ html {
   .my-md-4 {
     margin-top: 1.5rem !important;
   }
-  .mr-md-4,
+  .me-md-4,
   .mx-md-4 {
     margin-right: 1.5rem !important;
   }
@@ -3023,7 +3023,7 @@ html {
   .my-md-auto {
     margin-top: auto !important;
   }
-  .mr-md-auto,
+  .me-md-auto,
   .mx-md-auto {
     margin-right: auto !important;
   }
@@ -3064,7 +3064,7 @@ html {
   .my-lg-1 {
     margin-top: 0.25rem !important;
   }
-  .mr-lg-1,
+  .me-lg-1,
   .mx-lg-1 {
     margin-right: 0.25rem !important;
   }
