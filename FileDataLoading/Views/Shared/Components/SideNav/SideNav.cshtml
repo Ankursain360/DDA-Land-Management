@@ -7,7 +7,7 @@
         <li>
             @if (menu.ParentId == 0)
             {
-                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
+                <a class="no-dec d-flex align-items-center collapsed"  data-bs-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
                     <i class="main-icon  ri-windy-fill"></i>
                     <span class="text me-auto">@menu.Name</span>
                     <i class="arrow ri-arrow-drop-down-line slow"></i>
@@ -15,7 +15,7 @@
             }
             else
             {
-                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
+                <a class="no-dec d-flex align-items-center collapsed"  data-bs-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
                     <i class="main-icon  ri-windy-fill"></i>
                     <span class="me-auto">@menu.Name</span>
                     <i class="arrow ri-arrow-drop-down-line slow" style="min-width:20px"></i>
