@@ -9,7 +9,7 @@
 <br />
 
 <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex"> Edit Details<span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
+    <h3 class="mb-3 d-flex"> Edit Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div id="WatchWardDetailsDiv">
 
@@ -321,7 +321,7 @@
 
                         foreach (var item in Model.EncroachmentFirFileDetails)
                         {
-                            <a class="badge badge-primary px-2" asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View Existing Document @(FirFile += 1) )</a>
+                            <a class="badge bg-primary px-2" asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View Existing Document @(FirFile += 1) )</a>
 
                         }
                         <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
@@ -363,7 +363,7 @@
 
                         foreach (var item in Model.EncroachmentLocationMapFileDetails)
                         {
-                            <a asp-action="DownloadLocationMapFile" class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
+                            <a asp-action="DownloadLocationMapFile" class="badge bg-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
 
                         }
                         <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
@@ -388,7 +388,7 @@
 
                         foreach (var item in Model.EncroachmentPhotoFileDetails)
                         {
-                            <a asp-action="DownloadPhotoFile" class="badge badge-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(PhotoFile += 1 ))</a>
+                            <a asp-action="DownloadPhotoFile" class="badge bg-primary px-2" asp-route-id="@item.Id"> (View Existing Document @(PhotoFile += 1 ))</a>
 
                         }
                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />

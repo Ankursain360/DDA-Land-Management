@@ -4,13 +4,13 @@
 
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseWatchWardApprroval" role="button" aria-expanded="true"
+        <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseWatchWardApprroval" role="button" aria-expanded="true"
            aria-controls="collapseWatchWardApprroval">
             <i class="ri-arrow-right-s-fill"></i>
-            <span class="text ml-1 me-auto">View Watch & Ward Details</span>
+            <span class="text ms-1 me-auto">View Watch & Ward Details</span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseWatchWardApprroval">
+        <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapseWatchWardApprroval">
 
             <div id="allDetails">
 
@@ -89,11 +89,11 @@
                                             {
                                                 <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="image/png, image/jpeg, image/gif" multiple />
                                                 <span asp-validation-for="Photo" class="text-danger"></span>
-                                                <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id" target="_blank"> (View Photo @(Photo += 1 ))</a>
+                                                <a class="badge bg-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id" target="_blank"> (View Photo @(Photo += 1 ))</a>
 
                                                 if (item.LattLongUrl != null)
                                                 {
-                                                    <a target="_blank" class="badge badge-primary px-2" href="@item.LattLongUrl">View Location on Map</a>
+                                                    <a target="_blank" class="badge bg-primary px-2" href="@item.LattLongUrl">View Location on Map</a>
                                                 }
                                                 <br />
                                             }

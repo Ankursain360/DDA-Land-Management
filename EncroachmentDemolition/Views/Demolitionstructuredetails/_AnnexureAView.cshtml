@@ -2,13 +2,13 @@
 @{ int recNo = 0;}
 <div class="permission mt-2 accordion list-unstyled m-0 ">
     <div class="card">
-        <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseAnnexureA" role="button" aria-expanded="false"
+        <a class="p-2 no-dec d-flex align-items-center" data-bs-toggle="collapse" href="#collapseAnnexureA" role="button" aria-expanded="false"
            aria-controls="collapseAnnexureA">
             <i class="ri-arrow-right-s-fill"></i>
-            <span class="text ml-1 me-auto">View Request For Fixing of Demolition Programme Details</span>
+            <span class="text ms-1 me-auto">View Request For Fixing of Demolition Programme Details</span>
             <i class="arrow ri-arrow-drop-down-line slow"></i>
         </a>
-        <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse" id="collapseAnnexureA">
+        <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapseAnnexureA">
             <div id="allDetails">
                 <input type="hidden" asp-for="Id" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -103,7 +103,7 @@
 
                                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                                    <a class="badge badge-primary px-2" asp-action="ViewDocumentAnnexureA" asp-route-id="@item.FixingdemolitionId" target="_blank"> (View Document)</a>
+                                                    <a class="badge bg-primary px-2" asp-action="ViewDocumentAnnexureA" asp-route-id="@item.FixingdemolitionId" target="_blank"> (View Document)</a>
 
                                                 </div>
                                             </td>
