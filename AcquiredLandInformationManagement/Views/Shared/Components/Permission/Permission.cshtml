@@ -9,7 +9,7 @@
                 @if (menu.ParentId == 0)
                 {
                     <a class="p-2 no-dec d-flex align-items-center" 
-                       data-toggle="collapse" 
+                       data-bs-toggle="collapse" 
                        href="#per_@menu.Id" 
                        role="button" 
                        aria-expanded="true" 
@@ -22,7 +22,7 @@
                 else
                 {
                     <a class="p-2 no-dec d-flex align-items-center" 
-                       data-toggle="collapse" 
+                       data-bs-toggle="collapse" 
                        href="#per_@menu.Id" 
                        role="button" 
                        aria-expanded="true" 
@@ -34,13 +34,13 @@
                 }
                 @if (menu.ParentId == 0)
                 {
-                    <ul class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse show" id="per_@menu.Id" data-parent="#permission_@menu.Id">
+                    <ul class="list-unstyled m-0 pl-2 pe-1 pl-md-4 pe-md-3 collapse show" id="per_@menu.Id" data-parent="#permission_@menu.Id">
                         <partial name="Components/Permission/Permission" model="menu.Children" />
                     </ul>
                 }
                 else
                 {
-                    <ul class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse show" id="per_@menu.Id" data-parent="#permission_@menu.Id">
+                    <ul class="list-unstyled m-0 pl-2 pe-1 pl-md-4 pe-md-3 collapse show" id="per_@menu.Id" data-parent="#permission_@menu.Id">
                         <partial name="Components/Permission/Permission" model="menu.Children" />
                     </ul>
                 }
@@ -75,7 +75,7 @@
                 else
                 {
                     <a class="p-2 no-dec d-flex align-items-center"
-                       data-toggle="collapse" href="#per_@menu.Id"
+                       data-bs-toggle="collapse" href="#per_@menu.Id"
                        role="button"
                        aria-expanded="true"
                        aria-controls="per_@menu.Id">
