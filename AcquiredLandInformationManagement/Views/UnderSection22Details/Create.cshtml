@@ -31,7 +31,7 @@
         <div class="row mt-md-3">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                    <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf, image/png, image/jpeg">
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentIFormFile"></span>
                     <label class="floating-label"> Upload Gazette Notification</label>
                 </div>

@@ -15,6 +15,10 @@ using Utility.Helper;
 using Dto.Master;
 using Microsoft.Extensions.Configuration;
 
+using Microsoft.AspNetCore.Http;
+
+using System.IO;
+
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class GramSabhaLandController : BaseController
@@ -27,6 +31,8 @@ namespace AcquiredLandInformationManagement.Controllers
         string Us22otherNoDocumentlayout = string.Empty;
         string UpTssSurveyReportlayout = string.Empty;
         string KabzaProceedingDocumentlayout = string.Empty;
+        public object JsonRequestBehavior { get; private set; }
+
 
         public GramSabhaLandController(IGramsabhalandService gramsabhalandService, IConfiguration configuration)
         {
@@ -358,6 +364,79 @@ namespace AcquiredLandInformationManagement.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+                string FilePath = Path.Combine(GztNoUs507documentlayout, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(GztNoUs507documentlayout))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(GztNoUs507documentlayout);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
         }
 
 

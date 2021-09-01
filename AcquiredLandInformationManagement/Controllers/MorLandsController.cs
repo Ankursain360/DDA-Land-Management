@@ -16,6 +16,9 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
+using Microsoft.AspNetCore.Http;
+
+using System.IO;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -24,6 +27,8 @@ namespace AcquiredLandInformationManagement.Controllers
         private readonly IMorlandService _morlandService;
         public IConfiguration _configuration;
         string GOINotificationDocumentFilePath = "";
+        public object JsonRequestBehavior { get; private set; }
+
 
 
         public MorLandsController(IMorlandService morlandService, IConfiguration configuration)
@@ -242,6 +247,82 @@ namespace AcquiredLandInformationManagement.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, file.GetContentType(filename));
         }
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            GOINotificationDocumentFilePath = _configuration.GetSection("FilePaths:MorLands:GOINotificationDocumentFIlePath").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                GOINotificationDocumentFilePath = _configuration.GetSection("FilePaths:MorLands:GOINotificationDocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(GOINotificationDocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(GOINotificationDocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(GOINotificationDocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:MorLands:GOINotificationDocumentFIlePath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
 
     }
 }
