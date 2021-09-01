@@ -47,7 +47,7 @@
                                 <td>
                                     @if (item.NoticeFileName != null)
                                     {
-                                        <a class="badge badge-primary px-2" asp-action="ViewNotice" asp-route-id="@item.Id" target="_blank"> (View)</a>
+                                        <a class="badge bg-primary px-2" asp-action="ViewNotice" asp-route-id="@item.Id" target="_blank"> (View)</a>
                                     }
                                     else
                                     {
@@ -153,7 +153,7 @@
                 {*@
                     <div class="col-md-3 mt-2">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <a id="viewId" asp-action="ViewNotice" asp-route-id="@Model.Id" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                            <a id="viewId" asp-action="ViewNotice" asp-route-id="@Model.Id" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                         </div>
                     </div>
                 @*}

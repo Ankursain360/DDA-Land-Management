@@ -148,7 +148,7 @@
                                     {
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <a class="badge badge-primary px-2" asp-action="ViewExtensionDocument" asp-route-id="@item.Id" target="_blank">(View File)</a>
+                                                <a class="badge bg-primary px-2" asp-action="ViewExtensionDocument" asp-route-id="@item.Id" target="_blank">(View File)</a>
                                                 <input type="hidden" asp-for="IsMandatory" value="@(item.DocumentChecklist.IsMandatory)" />
                                                 <input type="hidden" asp-for="DocumentChecklistId" value="@(item.DocumentChecklist.Id)" />
                                                 <input type="hidden" asp-for="ServiceId" value="@(item.ServiceTypeId)" />
@@ -161,7 +161,7 @@
                                     {
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <label class="badge badge-primary px-2">No Document</label>
+                                                <label class="badge bg-primary px-2">No Document</label>
                                                 <input type="hidden" asp-for="IsMandatory" value="@(item.DocumentChecklist.IsMandatory)" />
                                                 <input type="hidden" asp-for="DocumentChecklistId" value="@(item.DocumentChecklist.Id)" />
                                                 <input type="hidden" asp-for="ServiceId" value="@(item.ServiceTypeId)" />

@@ -19,7 +19,7 @@
                     @{
                         if (Model.ProcedingLetter != null)
                         {
-                            <a class="badge badge-primary px-2" asp-action="ViewProceedingLetter" asp-route-id="@Model.Id" target="_blank"> (View Letter)</a>
+                            <a class="badge bg-primary px-2" asp-action="ViewProceedingLetter" asp-route-id="@Model.Id" target="_blank"> (View Letter)</a>
                             <input asp-for="ProcedingLetterDocument" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
                             <span asp-validation-for="ProcedingLetterDocument" class="text-danger"></span>
                             @*<label class="floating-label">Upload Document</label>*@

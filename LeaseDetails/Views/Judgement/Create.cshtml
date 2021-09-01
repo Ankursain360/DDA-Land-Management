@@ -29,10 +29,10 @@
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval1" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
                     <i class="ri-arrow-right-s-fill"></i>
-                    <span class="text ml-1 mr-auto"> View Notice Generations Details </span>
+                    <span class="text ms-1 me-auto"> View Notice Generations Details </span>
                     <i class="arrow ri-arrow-drop-down-line slow"></i>
                 </a>
-                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval1">
+                <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse py-4" id="collapseApprroval1">
                     <div id="NoticeGenerationDiv">
 
                     </div>
@@ -49,10 +49,10 @@
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval2" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
                     <i class="ri-arrow-right-s-fill"></i>
-                    <span class="text ml-1 mr-auto">View Allottee Evidance Document Details  </span>
+                    <span class="text ms-1 me-auto">View Allottee Evidance Document Details  </span>
                     <i class="arrow ri-arrow-drop-down-line slow"></i>
                 </a>
-                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval2">
+                <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse py-4" id="collapseApprroval2">
 
                     <div id="AllotteeEvidenceDiv">
 
@@ -68,10 +68,10 @@
                 <a class="p-2 no-dec d-flex align-items-center" data-toggle="collapse" href="#collapseApprroval3" role="button" aria-expanded="true"
                    aria-controls="collapseApprroval">
                     <i class="ri-arrow-right-s-fill"></i>
-                    <span class="text ml-1 mr-auto">View Hearing Details </span>
+                    <span class="text ms-1 me-auto">View Hearing Details </span>
                     <i class="arrow ri-arrow-drop-down-line slow"></i>
                 </a>
-                <div class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse py-4" id="collapseApprroval3">
+                <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse py-4" id="collapseApprroval3">
                     <div id="HearingDetailsDiv">
 
                     </div>
@@ -102,7 +102,7 @@
 
                     @{ if (Model.FilePath != null)
                         {
-                            <a class="badge badge-primary px-2" asp-action="DownloadJudgementFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
+                            <a class="badge bg-primary px-2" asp-action="DownloadJudgementFile" asp-route-id="@Model.RequestForProceedingId"> (View Existing Document)</a>
                             <input type="file" asp-for="File" class="floating-label-field floating-label-field--s3" placeholder="Name">
                             <span asp-validation-for="File" class="d-block text-danger field-validation-valid"></span>
                         }
