@@ -59,7 +59,7 @@
 
                                 </td>
                                 <td>
-                                    <a id="viewATSGPAId" asp-action="ViewATSGPAFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                    <a id="viewATSGPAId" asp-action="ViewATSGPAFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                     <input readonly="readonly" asp-for="DamagePayeeRegister.ATSGPA" type="file" class="floating-label-field floating-label-field--s3" />
                                     <span asp-validation-for="DamagePayeeRegister.ATSGPA" class="d-block text-danger field-validation-valid"></span>
 
@@ -139,7 +139,7 @@
                                         <input readonly="readonly" asp-for="DamagePayeeRegister.AadharNo" type="text" maxlength="15" placeholder="Aadhar No." class=" floating-label-field--s3" />
                                         <span asp-validation-for="DamagePayeeRegister.AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
-                                        <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                       
                                         <input readonly="readonly" asp-for="DamagePayeeRegister.Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
                                         <span asp-validation-for="DamagePayeeRegister.Aadhar" class="d-block text-danger field-validation-valid"></span>
@@ -151,7 +151,7 @@
                                         <input readonly="readonly" asp-for="DamagePayeeRegister.PanNo" maxlength="15" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="DamagePayeeRegister.PanNo" class="d-block text-danger field-validation-valid"></span>
 
-                                        <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                        <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input readonly="readonly" asp-for="DamagePayeeRegister.Pan" type="file" class="floating-label-field floating-label-field--s3 " />
                                       
                                         <span asp-validation-for="DamagePayeeRegister.Pan" class="d-block text-danger field-validation-valid msg4"></span>
@@ -159,14 +159,14 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                    <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                     <input readonly="readonly" asp-for="DamagePayeeRegister.Photograph" type="file" class="floating-label-field floating-label-field--s3" />
                                   
                                     <span asp-validation-for="DamagePayeeRegister.Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                 </td>
                                 <td>
-                                    <a id="viewSignatureId" asp-action="ViewPersonelInfoSignautreFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                    <a id="viewSignatureId" asp-action="ViewPersonelInfoSignautreFile" class="badge bg-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                     <input readonly="readonly" asp-for="DamagePayeeRegister.SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
                                    
                                     <span asp-validation-for="DamagePayeeRegister.SignatureFile" class="d-block text-danger field-validation-valid"></span>
@@ -282,7 +282,7 @@
                         @{
                             if (Model.DamagePayeeRegister.PropertyPhotoPath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
 
                                 <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" readonly="readonly" asp-for="DamagePayeeRegister.PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="DamagePayeeRegister.PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
@@ -348,7 +348,7 @@
                         @{
                             if (Model.AtsfilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewAtsFileMutation" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="ViewAtsFileMutation" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"  class="floating-label-field floating-label-field--s3" asp-for="AtsfilePathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="AtsfilePathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -374,7 +374,7 @@
                         @{
                             if (Model.GpafilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadGPAFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="DownloadGPAFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"  class="floating-label-field floating-label-field--s3" asp-for="GpafilePathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="GpafilePathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -400,7 +400,7 @@
                         @{
                             if (Model.MoneyRecieptFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadMoneyReceiptFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="DownloadMoneyReceiptFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"   class="floating-label-field floating-label-field--s3" asp-for="MoneyfilePathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="MoneyfilePathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -426,7 +426,7 @@
                         @{
                             if (Model.SignatureSpecimenFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadSignSpecFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="DownloadSignSpecFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"   class="floating-label-field floating-label-field--s3" asp-for="SignSpecPathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="SignSpecPathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -455,7 +455,7 @@
                         @{
                             if (Model.DeathCertificatePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewDeathCertificate" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="ViewDeathCertificate" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"  class="floating-label-field floating-label-field--s3" asp-for="DeathCertificatePathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="DeathCertificatePathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -482,7 +482,7 @@
                             @{
                                 if (Model.RelationshipUploadPath != null)
                                 {
-                                    <a class="badge badge-primary px-2" asp-action="ViewRelationshipUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                    <a class="badge bg-primary px-2" asp-action="ViewRelationshipUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                     <input type="file"  class="floating-label-field floating-label-field--s3" asp-for="RelationshipUploadPathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     <span asp-validation-for="RelationshipUploadPathNew" class="d-block text-danger field-validation-valid"></span>
                                 }
@@ -510,7 +510,7 @@
                         @{
                             if (Model.AffidevitLegalUploadPath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewAffidevitLegalUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="ViewAffidevitLegalUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"  class="floating-label-field floating-label-field--s3" asp-for="AffidevitLegalUploadPathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="AffidevitLegalUploadPathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -536,7 +536,7 @@
                         @{
                             if (Model.NonObjectHeirUploadPath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewNonObjectHeirUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="ViewNonObjectHeirUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"  class="floating-label-field floating-label-field--s3" asp-for="NonObjectUploadPathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="NonObjectUploadPathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -562,7 +562,7 @@
                         @{
                             if (Model.SpecimenSignLegalUpload != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewSpecimenSignLegalUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="ViewSpecimenSignLegalUpload" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"  class="floating-label-field floating-label-field--s3" asp-for="SpecimenSignLegalUploadNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="SpecimenSignLegalUploadNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -626,7 +626,7 @@
                     @{
                         if (Model.AddressProofFilePath != null)
                         {
-                            <a class="badge badge-primary px-2" asp-action="DownloadAddressProofFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                            <a class="badge bg-primary px-2" asp-action="DownloadAddressProofFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             <input type="file"   class="floating-label-field floating-label-field--s3" asp-for="AddressProofPathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             <span asp-validation-for="AddressProofPathNew" class="d-block text-danger field-validation-valid"></span>
                         }
@@ -655,7 +655,7 @@
                         @{
                             if (Model.AffidavitFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadAffitDevitFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="DownloadAffitDevitFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"   class="floating-label-field floating-label-field--s3" asp-for="AffidavitPathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="AffidavitPathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -674,7 +674,7 @@
                 </div>
                 <br />
                 <div class="col-md-3">
-                    <a class="badge badge-primary px-2" href="url">click for Download Affidavit Format</a>
+                    <a class="badge bg-primary px-2" href="url">click for Download Affidavit Format</a>
                 </div>
             </div>
         </div>
@@ -688,7 +688,7 @@
                         @{
                             if (Model.IndemnityFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadIndemnityFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                <a class="badge bg-primary px-2" asp-action="DownloadIndemnityFile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file"   class="floating-label-field floating-label-field--s3" asp-for="IndemnityPathNew" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 <span asp-validation-for="IndemnityPathNew" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -707,7 +707,7 @@
                 </div>
                 <br />
                 <div class="col-md-3">
-                    <a class="badge badge-primary px-2" href="url">click for Download Indemnity Bond Format</a>
+                    <a class="badge bg-primary px-2" href="url">click for Download Indemnity Bond Format</a>
                 </div>
             </div>
         </div>

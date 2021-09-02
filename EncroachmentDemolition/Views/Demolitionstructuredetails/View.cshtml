@@ -154,7 +154,7 @@
                             <input type="file" class="floating-label-field floating-label-field--s3" asp-for="BeforePhotoFile" id="BPhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                             foreach (var item in Model.Demolitionstructurebeforedemolitionphotofiledetails)
                             {
-                                <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(BeforePhotoFile += 1 ))</a>
+                                <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(BeforePhotoFile += 1 ))</a>
 
                             }
                             <span asp-validation-for="BeforePhotoFile" class="d-block text-danger field-validation-valid"></span>
@@ -190,7 +190,7 @@
 
                             foreach (var item in Model.Demolitionstructureafterdemolitionphotofiledetails)
                             {
-                                <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
+                                <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
 
                             }
                             <span asp-validation-for="AfterPhotoFile" class="d-block text-danger field-validation-valid"></span>
@@ -216,7 +216,7 @@
                         @if (Model.DemilitionReportPath != null)
                         {
                             <input disabled type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            <label class="badge badge-primary px-2">(View Report)</label>
+                            <label class="badge bg-primary px-2">(View Report)</label>
                         }
                         else
                         {

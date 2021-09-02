@@ -153,7 +153,7 @@
                             <input type="file" class="floating-label-field floating-label-field--s3" asp-for="BeforePhotoFile" id="BPhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                             foreach (var item in Model.Demolitionstructurebeforedemolitionphotofiledetails)
                             {
-                                <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(BeforePhotoFile += 1 ))</a>
+                                <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(BeforePhotoFile += 1 ))</a>
 
                             }
                             <span asp-validation-for="BeforePhotoFile" class="d-block text-danger field-validation-valid"></span>
@@ -188,7 +188,7 @@
                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         foreach (var item in Model.Demolitionstructureafterdemolitionphotofiledetails)
                         {
-                            <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
+                            <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge bg-primary px-2"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
 
                         }
                         <span asp-validation-for="AfterPhotoFile" class="d-block text-danger field-validation-valid"></span>
@@ -212,8 +212,8 @@
                         @if (Model.DemilitionReportPath != null)
                         {
                             <input type="file" asp-for="DemolitionReportFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
-                            @*@Html.ActionLink("(View Report)", "ViewDemolitionReport", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })*@
-                            <a class="badge badge-primary px-2" asp-action="ViewDemolitionReport" asp-route-id="@Model.Id" target="_blank"> (View Report)</a>
+                            @*@Html.ActionLink("(View Report)", "ViewDemolitionReport", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })*@
+                            <a class="badge bg-primary px-2" asp-action="ViewDemolitionReport" asp-route-id="@Model.Id" target="_blank"> (View Report)</a>
                         }
                         else
                         {
