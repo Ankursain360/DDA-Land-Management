@@ -337,6 +337,18 @@ $('#FatherName').keydown(function (e) {
     }
 });
 
+$('#AadhaarNo').keyup(function () {
+
+    var mob = $('#AadhaarNo').val();
+    if (!mob.match('[0-9]{12}') || mob.length > 12) {
+        $("#err-aadhar").show();
+        return;
+    } else {
+        $("#err-aadhar").hide();
+    }
+
+});
+
 function validateForm() {
     debugger;
    // let FileNo = document.forms["kyc-form"]["FileNo"].value;
