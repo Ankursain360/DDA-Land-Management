@@ -56,7 +56,11 @@ namespace LeaseForPublic.Controllers
             
             
             var mobile = HttpContext.Session.GetString("Mobile");
-            
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
+
             if (mobile != "" && mobile != null)
             {
 
