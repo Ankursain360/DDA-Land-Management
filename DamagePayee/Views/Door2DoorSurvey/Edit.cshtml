@@ -4,7 +4,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
 
 <form asp-action="Edit" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Edit Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+    <h3 class="mb-3 d-flex">Edit Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <div class="row">
@@ -143,7 +143,7 @@
 
                         foreach (var item in Model.Doortodoorsurveyidentityproof)
                         {
-                            <a class="badge badge-primary px-2" asp-action="ViewIdentityProof" asp-route-id="@item.Id" target="_blank"> (View Photo @(Identity += 1 ))</a>
+                            <a class="badge bg-primary px-2" asp-action="ViewIdentityProof" asp-route-id="@item.Id" target="_blank"> (View Photo @(Identity += 1 ))</a>
                             <br />
                         }
                     }
@@ -178,7 +178,7 @@
 
                         foreach (var item in Model.Doortodoorsurveypropertyproof)
                         {
-                            <a class="badge badge-primary px-2" asp-action="ViewPropertyFile" asp-route-id="@item.Id" target="_blank"> (View Photo @(Property += 1 ))</a>
+                            <a class="badge bg-primary px-2" asp-action="ViewPropertyFile" asp-route-id="@item.Id" target="_blank"> (View Photo @(Property += 1 ))</a>
                             <br />
                         }
                     }

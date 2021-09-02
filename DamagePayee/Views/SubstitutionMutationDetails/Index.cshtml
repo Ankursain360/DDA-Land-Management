@@ -66,15 +66,15 @@
                                 <td>
                                     @if (Convert.ToInt32(item.Gender) == 1)
                                     {
-                                        <span class="badge badge-primary px-2 py-1">Male</span>
+                                        <span class="badge bg-primary px-2 py-1">Male</span>
                                     }
                                     else if (Convert.ToInt32(item.Gender) == 2)
                                     {
-                                        <span class="badge badge-danger px-2 py-1">Female</span>
+                                        <span class="badge bg-danger px-2 py-1">Female</span>
                                     }
                                     else
                                     {
-                                        <span class="badge badge-danger px-2 py-1">Other</span>
+                                        <span class="badge bg-danger px-2 py-1">Other</span>
                                     }
                                 </td>
 
@@ -96,7 +96,7 @@
                                             {
                                                 foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                                 {
-                                                    <a asp-action="DownloadAadharPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AadharNoFilePath += 1 ))</a>
+                                                    <a asp-action="DownloadAadharPathFile" asp-route-id="@data.Id" class="badge bg-primary px-2"> (View Existing Document @(AadharNoFilePath += 1 ))</a>
 
                                                 }
                                             }
@@ -117,7 +117,7 @@
                                             {
                                                 foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                                 {
-                                                    <a asp-action="DownloadPanPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PanNoFilePath += 1 ))</a>
+                                                    <a asp-action="DownloadPanPathFile" asp-route-id="@data.Id" class="badge bg-primary px-2"> (View Existing Document @(PanNoFilePath += 1 ))</a>
 
                                                 }
                                             }
@@ -136,7 +136,7 @@
                                         {
                                             foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                             {
-                                                <a asp-action="DownloadPhotographPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PhotographPath += 1 ))</a>
+                                                <a asp-action="DownloadPhotographPathFile" asp-route-id="@data.Id" class="badge bg-primary px-2"> (View Existing Document @(PhotographPath += 1 ))</a>
 
                                             }
                                         }
@@ -154,7 +154,7 @@
                                         {
                                             foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                             {
-                                                <a asp-action="DownloadSignaturePathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(SignaturePath += 1 ))</a>
+                                                <a asp-action="DownloadSignaturePathFile" asp-route-id="@data.Id" class="badge bg-primary px-2"> (View Existing Document @(SignaturePath += 1 ))</a>
 
                                             }
                                         }
@@ -240,7 +240,7 @@
                                         {
                                             foreach (var data in Model.DamagePayeeRegister.Allottetype)
                                             {
-                                                <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AtsgpadocumentPath += 1 ))</a>
+                                                <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge bg-primary px-2"> (View Existing Document @(AtsgpadocumentPath += 1 ))</a>
 
                                             }
                                         }
@@ -358,7 +358,7 @@
                         {
                             foreach (var data in Model.DamagePayeeRegister.DamagePayeeRegisterList)
                             {
-                                <a asp-action="DownloadPropertyPhotoFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PropertyPhotoPath += 1 ))</a>
+                                <a asp-action="DownloadPropertyPhotoFile" asp-route-id="@data.Id" class="badge bg-primary px-2"> (View Existing Document @(PropertyPhotoPath += 1 ))</a>
 
                             }
                             <input type="file" asp-for="DamagePayeeRegister.PropertyPhotoPath"  class="floating-label-field floating-label-field--s3" placeholder="Name">

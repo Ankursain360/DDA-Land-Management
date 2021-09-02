@@ -5,7 +5,7 @@
 <div class="pt-3">
     <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
        
-        <h3 class="mb-3 d-flex">View Details <span style="margin-left:800px"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
+        <h3 class="mb-3 d-flex">View Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
@@ -195,7 +195,7 @@
                         {
 
                             <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                            @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
                         }
                         else
                         {
@@ -234,7 +234,7 @@
                         {
 
                             <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            @Html.ActionLink("(View File)", "DocDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                            @Html.ActionLink("(View File)", "DocDownload", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
                         }
                         else
                         {
@@ -255,7 +255,7 @@
                         {
 
                             <input type="file" class="floating-label-field floating-label-field--s3" id="AssignJfile" name="AssignJfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            @Html.ActionLink(" (View File)", "JDocDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                            @Html.ActionLink(" (View File)", "JDocDownload", new { id = Model.Id }, new { @class = "badge bg-primary px-2" })
                         }
                         else
                         {

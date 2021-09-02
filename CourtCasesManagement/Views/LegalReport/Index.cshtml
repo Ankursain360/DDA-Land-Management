@@ -5,8 +5,8 @@
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="Id"
@@ -18,7 +18,7 @@
                     <label  class="floating-label">Legal File No </label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="Id" id="CaseNO">
                             
@@ -28,7 +28,7 @@
                     <label  class="floating-label">Case No </label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="ContemptOfCourt">
                            
@@ -42,8 +42,8 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="CourtTypeId"
                             asp-items="@(new SelectList(Model.CourttypeList, "Id","CourtType"))">
@@ -55,7 +55,7 @@
                     <label  class="floating-label">Court Type</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="CaseStatusId"
                              asp-items="@(new SelectList(Model.CasestatusList, "Id","CaseStatus"))">
@@ -67,7 +67,7 @@
                     <label  class="floating-label">Case Status </label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ZoneId"
@@ -82,8 +82,8 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" >
                         <option value="0">All</option>
@@ -92,7 +92,7 @@
                     <label  class="floating-label">Locality (Village) Name </label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="StayInterimGranted">
                         
@@ -104,7 +104,7 @@
                     <label class="floating-label">Stay Interim Granted </label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"  asp-for="Judgement">
                            
@@ -118,16 +118,16 @@
             </div>
 
         </div>
-        <div class="row">
+        <div class="row mt-md-3">
 
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="CreatedDate" type="date"  placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
                     <label class="floating-label">From Date</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="CreatedDate" type="date"  placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
@@ -170,7 +170,7 @@
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
               
                 <a href="/LegalReport/LegalReportList" class="d-flex align-items-center btn btn-success">
-                    <i class="ri-download-2-line me-2 mr-lg-1"></i>
+                    <i class="ri-download-2-line me-2 me-lg-1"></i>
                     <small>Download</small>
                 </a>
             </div>
