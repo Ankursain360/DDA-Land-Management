@@ -127,7 +127,7 @@ function KycDemandPaymentDetails() {
                     var dpapprovalType = chartForKycPaymentForm.data.labels[clickedIndex];
                     var dpapprovalCount = chartForKycPaymentForm.data.datasets[0].data[clickedIndex];
                     //window.location.href = "KycFormDetails/Index?ApprovalType=" + approvalType + "&ApprovalCount=" + approvalCount;
-                    var url = "KycFormDetails/IndexForDemandPayment?DPApprovalType=" + dpapprovalType + "&DPApprovalCount=" + dpapprovalCount;
+                    var url = "../KycFormDetails/IndexForDemandPayment?DPApprovalType=" + dpapprovalType + "&DPApprovalCount=" + dpapprovalCount;
                     window.open(url, "_blank");
 
                 }
