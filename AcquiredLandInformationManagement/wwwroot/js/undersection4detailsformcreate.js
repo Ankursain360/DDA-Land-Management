@@ -14,13 +14,15 @@ $('#boundary_id').click(function () {
 
 
 $('.checkExtension').on('change', function (e) {
+  
  
     debugger;
     var flag = false;
     var result = $(this).val();
+   
     var file = result;
     if (file != null) {
-    
+       
         var multi = file.split(".");
         if (multi.length > 2) {
          
@@ -29,8 +31,9 @@ $('.checkExtension').on('change', function (e) {
             return;
         }
         var extension = file.substr((file.lastIndexOf('.') + 1));
-        
+    
         switch (extension) {
+            
             case 'pdf':
                 flag = true;
                 $('#error').empty();
@@ -43,13 +46,14 @@ $('.checkExtension').on('change', function (e) {
                 alert("You can upload only pdf extension file Only")
                 $(this).val('');
                 flag = false;
+             
         }
-
-
+      
+     
         if (flag == true) {
-            
+        
             var FileID = $(this).attr('id');
-            alert(FileID);
+           
             var size = ValidateFileSize(FileID, $(this));
 
             if (size > 5) {
@@ -57,19 +61,21 @@ $('.checkExtension').on('change', function (e) {
                 $(this).val('');
             }
             else {
-                alert("tt");
+             
+               
                 filecontrol = $(this);
                 var myformData = new FormData();
                 myformData.append('file', $(this)[0].files[0]);
+               
                 $.ajax({
                     async: false,
                     type: "POST",
-                    url: "../UnderSection4DetailsForm/CheckFile",
+                    url: "/UnderSection4DetailsForm/CheckFile",
                     contentType: false,
                     processData: false,
                     data: myformData,
                     success: function (response) {
-
+                 
                         showResult(response, filecontrol)
 
                     },

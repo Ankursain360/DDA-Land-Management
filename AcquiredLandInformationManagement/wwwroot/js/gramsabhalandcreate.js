@@ -82,7 +82,7 @@ $('.checkExtension').on('change', function (e) {
                 $.ajax({
                     async: false,
                     type: "POST",
-                    url: "../GramSabhaLand/CheckFile",
+                    url: "/GramSabhaLand/CheckFile",
                     contentType: false,
                     processData: false,
                     data: myformData,
