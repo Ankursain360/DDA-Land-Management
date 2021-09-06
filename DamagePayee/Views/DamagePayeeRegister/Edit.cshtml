@@ -752,7 +752,7 @@
                         @{ if (Model.MutationFilePath != null)
                             {
 
-                                <input type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <input type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
                                 <span asp-validation-for="MutationFile" class="d-block text-danger field-validation-valid"></span>
                                 <a class="badge bg-primary px-2" asp-action="DownloadMutation" asp-route-id="@Model.Id">
                                     View File - (@Model.MutationFilePath.Split('\\')?.LastOrDefault()?.Remove(0, 37))
@@ -760,14 +760,14 @@
                             }
                             else
                             {
-                                <input type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                                <input type="file" asp-for="MutationFile" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Name">
                                 <span asp-validation-for="MutationFile" class="d-block text-danger field-validation-valid"></span>
 
                             }
                         }
 
 
-                        <label for="field-1" class="floating-label">  Mutation Document </label>
+                        <label for="field-1" class="floating-label">  Mutation Document <span style="color:red">(.pdf only)</span></label>
 
                     </div>
                 </div>
@@ -777,16 +777,16 @@
                         @{
                             @if (Model.DocumentName != null)
                             {
-                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                                 <a class="badge bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             }
                             else
                             {
-                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                             }
                         }
                         <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
-                        <label class="floating-label"> Other Document</label>
+                        <label class="floating-label"> Other Document<span style="color:red">(.pdf only)</span></label>
                     </div>
                 </div>
             </div>

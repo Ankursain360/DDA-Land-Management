@@ -39,16 +39,16 @@
                     @{
                         @if (Model.GOINotificationDocumentName != null)
                         {
-                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                             <a class="badge  bg-primary px-2" asp-action="ViewGOINotificationDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
-                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                         }
                     }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="GOINotificationDocumentName"></span>
-                    <label class="floating-label">Upload GOI Notification(MOR)</label>
+                    <label class="floating-label">Upload GOI Notification(MOR)<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
             <div class="col-md-6">

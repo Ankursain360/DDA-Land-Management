@@ -218,8 +218,7 @@ namespace LeaseForPublic.Controllers
                     var result = await _leasesignupService.Create(leasesignup);
                     HttpContext.Session.SetString("ID", leasesignup.Id.ToString());
                     HttpContext.Session.SetString("Name", leasesignup.Name.ToString());
-                    var Name = HttpContext.Session.GetString("Name");
-                    ViewBag.Title = Name;
+                   
 
                     //   ViewBag.Message
 
