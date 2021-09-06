@@ -11,6 +11,7 @@ using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -179,30 +180,32 @@ namespace IdentityServerHost.Quickstart.UI
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
                     #region session fixation
                     CookieOptions options = new CookieOptions();
-                    options.Expires = DateTime.Now.AddDays(-30);
+                    options.Expires = DateTime.Now.AddMinutes(15);
                     CookieOptions optionss2 = new CookieOptions();
-                    optionss2.Path = "/Home";
-                    HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString(), optionss2);
-                    HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString(), optionss2);                   
+                    optionss2.HttpOnly =true;
+                    optionss2.Secure = true;
+                    _httpContextAccessor.HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString(), optionss2);
+                    _httpContextAccessor.HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString(), optionss2);                   
                     // Start Added By Renu For Session Fixation on 27 Jan 2020
                     string guid = Guid.NewGuid().ToString();
-                    HttpContext.Session.SetString("AuthToken", guid);
+                    _httpContextAccessor.HttpContext.Session.SetString("AuthToken", guid);
                     // now create a new cookie with this guid value
-                    HttpContext.Response.Cookies.Append("AuthToken", guid);
+                    _httpContextAccessor.HttpContext.Response.Cookies.Append("AuthToken", guid);
                     
-                    string sessionauth = HttpContext.Session.GetString("AuthToken").ToString();
-                    string cookeauth = HttpContext.Request.Cookies["AuthToken"];
-                    if (HttpContext.Session.GetString("AuthToken") != null && Request.Cookies["AuthToken"] != null)
+                    string sessionauth = _httpContextAccessor.HttpContext.Session.GetString("AuthToken").ToString();
+                    string cookeauth = _httpContextAccessor.HttpContext.Request.Cookies["AuthToken"];
+                    if (_httpContextAccessor.HttpContext.Session.GetString("AuthToken") != null && Request.Cookies["AuthToken"] != null)
                     {
-                        if (Request.Cookies[".AspNetCore.Session"] != null && Request.Cookies[".AspNetCore.Session"] != null)
+                        if (_httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null && _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null)
                         {
-                            string newSessionID = Request.Cookies[".AspNetCore.Session"];
-                            HttpContext.Response.Cookies.Append(".AspNetCore.Session", newSessionID.Substring(0, 24), optionss2); 
-                            string _browserInfo = Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+                            string newSessionID = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
+                            _httpContextAccessor.HttpContext.Response.Cookies.Append(".AspNetCore.Session", newSessionID.Substring(0, 24), optionss2); 
+                            string _browserInfo = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
                             string _sessionValue = user.Id.ToString() + "^" + DateTime.Now.Ticks + "^" + _browserInfo + "^" + System.Guid.NewGuid();
                             byte[] _encodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(_sessionValue);
                             string _encryptedString = System.Convert.ToBase64String(_encodeAsBytes);
-                            HttpContext.Session.SetString("encryptedSession", guid);  
+                            _httpContextAccessor.HttpContext.Session.SetString("encryptedSession", _encryptedString);
+                            _httpContextAccessor.HttpContext.Response.Cookies.Append("AuthToken", _encryptedString, options);
                         }
                         else
                         {
@@ -289,11 +292,20 @@ namespace IdentityServerHost.Quickstart.UI
             {
                 // delete local authentication cookie
                 await _signInManager.SignOutAsync();
+                await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+                await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);   
 
                 // raise the logout event
                 await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
             }
-
+            // delete local authentication cookie
+            Response.Cookies.Delete(".AspNetCore.Identity.Application");
+            Response.Cookies.Delete("idserv.external");
+            Response.Cookies.Delete("idserv.session");
+            Response.Cookies.Delete("AuthToken");
+            Response.Cookies.Delete("ASP.NET_SessionId");
+            Response.Cookies.Delete("encryptedSession");
+            Response.Cookies.Delete(".AspNetCore.Session");
             // check if we need to trigger sign-out at an upstream identity provider
             if (vm.TriggerExternalSignout)
             {

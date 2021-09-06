@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
 using SiteMaster.Helper;
 using SiteMaster.Models;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -37,13 +38,20 @@ namespace SiteMaster.Controllers
 
         public IActionResult Logout()
         {
-            _httpContextAccessor.HttpContext.Session.Clear();
-            _httpContextAccessor.HttpContext.Response.Clear();
+            _httpContextAccessor.HttpContext.Session.Clear(); 
             //Clear cookies
             var cookies = _httpContextAccessor.HttpContext.Request.Cookies;
             foreach (var cookie in cookies)
             {
                 _httpContextAccessor.HttpContext.Response.Cookies.Delete(cookie.Key);
+            }
+            var myCookies = Request.Cookies.Keys;
+            foreach (string cookie in myCookies)
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Delete(cookie, new CookieOptions()
+                {
+                    Domain = "auth.managemybusinessess.com"
+                });
             }
             //
             return SignOut("Cookies", "oidc");

@@ -37,14 +37,19 @@ namespace AuthServer
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySQL(lmsConnection));
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            { 
+                options.Lockout.MaxFailedAccessAttempts = (3);
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1); 
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(5);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.Domain = ".managemybusinessess.com";
+                options.Cookie.HttpOnly = true;                
+                //options.Cookie.Domain = ".managemybusinessess.com";
                 //options.Cookie.Path = "/Home";
                 // options.Cookie.IsEssential = true;
             });
@@ -57,7 +62,8 @@ namespace AuthServer
                 options.Events.RaiseSuccessEvents = true;
                 options.EmitStaticAudienceClaim = true;
                 options.Authentication.CookieLifetime = TimeSpan.FromMinutes(5);
-                options.Authentication.CookieSlidingExpiration = true;
+                options.Authentication.CookieSlidingExpiration = true;               
+
             })
             .AddConfigurationStore(options =>
             {
