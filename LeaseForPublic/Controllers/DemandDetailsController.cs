@@ -74,12 +74,20 @@ namespace LeaseForPublic.Controllers
         public IActionResult Index()
 
         {
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
             return View();
         }
 
 
         public async Task<IActionResult> Create(int Id)
         {
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
             var data1 = await _demandDetailsService.FetchResultOnKycId(Id);
             if (data1.Count == 0) 
             { 
@@ -99,6 +107,10 @@ namespace LeaseForPublic.Controllers
 
         public async Task<PartialViewResult> KYCFormView(int id)
         {
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
             var Data = await _kycformService.FetchKYCSingleResult(id);
             Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
             Data.BranchList = await _kycformService.GetAllBranchList();

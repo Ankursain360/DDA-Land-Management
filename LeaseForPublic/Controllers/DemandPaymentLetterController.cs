@@ -38,6 +38,10 @@ namespace LeaseForPublic.Controllers
         }
         public IActionResult Index()
         {
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
             return View();
         }
 
@@ -60,7 +64,10 @@ namespace LeaseForPublic.Controllers
       
         public async Task<IActionResult> View(int id)
         {
-           
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
             var Data = await _demandDetailsService.GetPaymentDemandLetter(id);
            
             if (Data == null)
