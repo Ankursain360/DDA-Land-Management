@@ -133,6 +133,12 @@ namespace LeaseForPublic.Controllers
                 kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
                 kyc.ZoneList = await _kycformService.GetAllZoneList();
                 kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
+
+                var email = HttpContext.Session.GetString("Email");
+                var name = HttpContext.Session.GetString("Name");
+                ViewBag.Title = name;
+                ViewBag.Title1 = email;
+
                 var id = HttpContext.Session.GetString("ID");
                 string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
                 string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
@@ -361,6 +367,12 @@ namespace LeaseForPublic.Controllers
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
+
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
+
             if (Data == null)
             {
                 return NotFound();
