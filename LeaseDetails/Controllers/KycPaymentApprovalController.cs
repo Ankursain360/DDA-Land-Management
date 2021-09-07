@@ -168,11 +168,19 @@ namespace LeaseDetails.Controllers
 
         public async Task<IActionResult> Create(int id)
         {
+            
             var Data = await _kycPaymentApprovalService.FetchSingleResult(id);
             var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
             Data.FileNo = Data2.FileNo;
             ViewBag.Items = await _userProfileService.GetRole();
             ViewBag.Role = SiteContext.RoleId;
+            var BackIdGuid1 = _configuration.GetSection("workflowProccessGuidKYCPayment").Value;
+            var BackIdGuid2 = _configuration.GetSection("workflowProccessGuidKYCPayment2").Value;
+            var ApprovalProccessBackId = (Data.WorkFlowTemplate == "WF1") ? _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid1, id) : _approvalproccessService.GetPreviouskycApprovalId(BackIdGuid2, id);
+            var ApprovalProcessBackData = await _approvalproccessService.FetchKYCApprovalProcessDocumentDetails(ApprovalProccessBackId);
+
+            ViewBag.Level = ApprovalProcessBackData.Level;
+
             await BindApprovalStatusDropdown(Data);
             if (Data == null)
             {
