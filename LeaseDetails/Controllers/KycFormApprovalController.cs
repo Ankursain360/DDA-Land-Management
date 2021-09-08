@@ -529,11 +529,11 @@ namespace LeaseDetails.Controllers
                     if (result)
                     {
                         if (sendMailResult)
-                            ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  and Information Sent on emailid and Mobile No", "", AlertType.Success);
+                            ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  and information sent on Email-Id and Mobile No", "", AlertType.Success);
                         else if (approvalproccess.PendingStatus == 0)
                             ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully", "", AlertType.Success);
                         else
-                            ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  But Unable to Sent information on emailid or mobile no. due to network issue", "", AlertType.Info);
+                            ViewBag.Message = Alert.Show("Record " + DataApprovalSatatusMsg.SentStatusName + " Successfully  but unable to send information on Email-Id and Mobile No due to network issue", "", AlertType.Info);
 
                         Kycform data = new Kycform();
                         var dropdownValue = await GetApprovalStatusDropdownListAtIndex();

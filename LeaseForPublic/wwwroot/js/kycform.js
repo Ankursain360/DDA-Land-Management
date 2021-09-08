@@ -362,7 +362,7 @@ function validateForm() {
     let LandPremiumAmount = document.forms["kyc-form"]["LandPremiumAmount"].value;
     let LicenseFeePayable = document.forms["kyc-form"]["LicenseFeePayable"].value;
    // let GroundRent = document.forms["kyc-form"]["GroundRentAmount"].value;
-
+    let ApplicantPan = document.forms["kyc-form"]["ApplicantPan"].value;
     var status = 1; 
    
 
@@ -426,6 +426,14 @@ function validateForm() {
     //    status = 2;
     //    // return false;
     //}
+    if (Property == "Lease") {
+        if (ApplicantPan == "" || ApplicantPan == null) {
+
+            $("#ApplicantPan-error").show();
+            status = 2;
+            // return false;
+        }
+    }
     if (Property == "License" || Property == 0) {
         if (LicenseFeePayable == "") {
 

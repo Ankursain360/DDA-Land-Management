@@ -92,7 +92,9 @@ namespace Libraries.Model.Entity
         public decimal? GroundRentAmount { get; set; }
       //  [Required(ErrorMessage = "License Fee is mandatory")]
         public decimal? LicenseFeePayable { get; set; }
+        
         public string AadhaarNoPath { get; set; }
+      
         public string LetterPath { get; set; }
         public string AadhaarPanapplicantPath { get; set; }
         public int? ApprovedStatus { get; set; }
@@ -163,8 +165,10 @@ namespace Libraries.Model.Entity
         //******
 
         [NotMapped]
+        [Required(ErrorMessage = "This field is mandatory")]
         public IFormFile Aadhar { get; set; }
         [NotMapped]
+        [Required(ErrorMessage = "This field is mandatory")]
         public IFormFile Letter { get; set; }
         [NotMapped]
         public IFormFile ApplicantPan { get; set; }

@@ -15,6 +15,7 @@
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="KycId" />
+        <input type="hidden" asp-for="Property" />
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="FileNo" />
         <h3 class="mb-3 d-flex">Demand Details </h3>
@@ -91,9 +92,14 @@
 
 
         <div id="DivForSubsequentPurchaser" style="display:none">
-
-            <h3 class="my-3 d-flex sub-heading">Details to be entered by Applicant in the Lease Ground rent/license application when chosen to update the payments at applicant’s level)</h3>
-
+            @if (Model.Property == "Lease")
+            {
+                <h3 class="my-3 d-flex sub-heading">Details to be entered by Applicant in the Lease Ground rent application when chosen to update the payments at applicant’s level)</h3>
+            }
+            else
+            {
+                <h3 class="my-3 d-flex sub-heading">Details to be entered by Applicant in the License application when chosen to update the payments at applicant’s level)</h3>
+            }
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive">
                     <table class="table table-sm table-bordered mb-0 table-striped calculation" id="tbl_posts2">
@@ -103,12 +109,13 @@
                                 <th>Payment Type</th>
                                 <th>Period From –To Ex-(DD-MM-YYYY)-(DD-MM-YYYY)</th>
                                 <th>Challan No./Transaction No./UTR No.</th>
-                                <th>Amount</th>
+                                <th>Amount (Rs.)</th>
                                 <th>Date of Payment by the allottee</th>
                                 <th>Proof of Payment in pdf</th>
                                 <th>
                                     DDA Bank in which credited
                                 </th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody id="tbl_posts2_body">
@@ -136,13 +143,13 @@
                                     <input asp-for="ChallanNoForPayment" maxlength="10" required type="text" class="floating-label-field floating-label-field--s3 numbers" />
                                     <span asp-validation-for="ChallanNoForPayment" class="d-block text-danger field-validation-valid msg"></span>
 
-                                   
+
                                 </td>
                                 <td>
-                                        <input type="text" required id="Amount" asp-for="Amount" class="floating-label-field floating-label-field--s3 numbers" onpaste="return false;" />
-                                        <span asp-validation-for="Amount" class="text-danger"></span>
-                                     
-                               
+                                    <input type="text" required id="Amount" asp-for="Amount" class="floating-label-field floating-label-field--s3 numbers" onpaste="return false;" />
+                                    <span asp-validation-for="Amount" class="text-danger"></span>
+
+
                                 </td>
                                 <td>
                                     <input asp-for="DateofPaymentByAllottee" required type="Date" class="floating-label-field floating-label-field--s3" />
@@ -153,7 +160,7 @@
                                 <td>
                                     <input type="hidden" asp-for="UploadFilePath" />
 
-                      <input asp-for="Proofinpdf1" required type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
+                                    <input asp-for="Proofinpdf1" required type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
                                     <span asp-validation-for="Proofinpdf1" class="d-block text-danger field-validation-valid msg"></span>
 
 
@@ -203,5 +210,15 @@
 
 <script>
     $('#PaymentType').removeAttr('multiple');
-
+    var value = $('#Property').val();
+   /* var value = $('#Property option:selected').val();*/
+    if (value == "Lease")
+    {
+        $('#PaymentType').val("Ground Rent").trigger('change');
+    }
+    else if (value == "License")
+    {
+        $('#PaymentType').val("License fee").trigger('change');
+    }
+    else { }
 </script>

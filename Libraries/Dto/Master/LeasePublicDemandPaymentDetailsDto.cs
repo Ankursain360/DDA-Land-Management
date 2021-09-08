@@ -11,7 +11,7 @@ namespace Dto.Master
    public class LeasePublicDemandPaymentDetailsDto
     {
         public int Id { get; set; }
-
+        public string Property { get; set; }
         public string FileNo { get; set; }
         public int KycId { get; set; }
         public string IsPaymentAgreed { get; set; }

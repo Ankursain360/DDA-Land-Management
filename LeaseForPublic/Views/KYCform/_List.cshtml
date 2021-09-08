@@ -9,13 +9,14 @@
 
             <th> Plot No </th>
             <th> Area </th>
+            <th> Area Unit </th>
             <th> Property Type (Lease/License) </th>
             <th>Nature of Property </th>
             <th> File No </th>
             <th> Branch </th>
             <th> Zone </th>
 
-            <th> Date Of Allotment letter </th>
+            @*<th> Date Of Allotment letter </th>*@
             <th> Date Of Possession </th>
             <th style="min-width:180px;"> Status</th>
             <th>Operations</th>
@@ -27,40 +28,41 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@item.PlotNo</td>
-                    <td>@item.Area</td>
-                    <td>@item.Property</td>
+        <tr>
+            <td>@item.PlotNo</td>
+            <td>@item.Area</td>
+            <td>@item.AreaUnit</td>
+            <td>@item.Property</td>
 
-                    <td> @(item.PropertyType == null?"": item.PropertyType.Name) </td>
-                    <td>@item.FileNo</td>
-                    <td> @(item.Branch == null?"": item.Branch.Name)  </td>
-                    <td> @(item.Zone == null?"": item.Zone.Name) </td>
+            <td> @(item.PropertyType == null?"": item.PropertyType.Name) </td>
+            <td>@item.FileNo</td>
+            <td> @(item.Branch == null?"": item.Branch.Name)  </td>
+            <td> @(item.Zone == null?"": item.Zone.Name) </td>
 
-                    <td>@(item.AllotmentLetterDate == null ? "" : (Convert.ToDateTime(item.AllotmentLetterDate)).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(item.PossessionDate == null ? "" : (Convert.ToDateTime(item.PossessionDate)).ToString("dd-MMM-yyyy"))</td>
-                    <td>
-                        @if (item.ApprovedStatus == 1)
-                            @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName +  " By Applicant")
-                            else
-                                @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
+            @*<td>@(item.AllotmentLetterDate == null ? "" : (Convert.ToDateTime(item.AllotmentLetterDate)).ToString("dd-MMM-yyyy"))</td>*@
+            <td>@(item.PossessionDate == null ? "" : (Convert.ToDateTime(item.PossessionDate)).ToString("dd-MMM-yyyy"))</td>
+            <td>
+                @if (item.ApprovedStatus == 1)
+                    @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName +  " By Applicant")
+                    else
+                        @(item.ApprovedStatusNavigation == null ? "" : item.ApprovedStatusNavigation.SentStatusName)
 
-                    </td>
+            </td>
 
 
-                    <td>
-                        <div class="action-btns">
-                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-                            @if (item.ApprovedStatus == 18 && item.PendingAt == "0")
-                            {
-                                <a asp-action="Edit" asp-route-id="@item.Id" title="resubmit application" class="edit"> <i class="ri-edit-line"></i> </a>
-                            }
-                            else { }
-                        </div>
+            <td>
+                <div class="action-btns">
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                    @if (item.ApprovedStatus == 18 && item.PendingAt == "0")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="resubmit application" class="edit"> <i class="ri-edit-line"></i> </a>
+                    }
+                    else { }
+                </div>
 
-                    </td>
+            </td>
 
-                </tr>
+        </tr>
             }
         }
         else

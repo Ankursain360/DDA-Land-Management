@@ -95,6 +95,7 @@ namespace LeaseForPublic.Controllers
             var data = await _kycformService.FetchSingleResult(Id);
             dto.KycId = data.Id;
             dto.FileNo = data.FileNo;
+            dto.Property = data.Property;
             return View(dto);
             }
             else
