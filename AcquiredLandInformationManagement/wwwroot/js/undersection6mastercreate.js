@@ -78,7 +78,7 @@ $('.checkExtension').on('change', function (e) {
                 $.ajax({
                     async: false,
                     type: "POST",
-                    url: "../UnderSection6Master/CheckFile",
+                    url: "/UnderSection6Master/CheckFile",
                     contentType: false,
                     processData: false,
                     data: myformData,

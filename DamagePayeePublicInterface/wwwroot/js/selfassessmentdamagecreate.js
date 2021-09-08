@@ -769,7 +769,7 @@ $('.checkExtension').on('change', function (e) {
                 $.ajax({
                     async: false,
                     type: "POST",
-                    url: "../SelfAssessmentDamage/CheckFile",
+                    url: "/SelfAssessmentDamage/CheckFile",
                     contentType: false,
                     processData: false,
                     data: myformData,

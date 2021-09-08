@@ -507,16 +507,16 @@
                                 @if (ViewBag.LayoutDocView != null)
                                 {
 
-                                    <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    <input type="file" class="floating-label-field floating-label-field--s3 checkExtension" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
                                 }
                                 else
                                 {
-                                    <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    <input type="file" class="floating-label-field floating-label-field--s3 checkExtension" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                             }
                             <span asp-validation-for="FileData" class="d-block text-danger field-validation-valid"></span>
-                            <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
+                            <label class="floating-label" asp-for="FileData">Upload Layout Plan<span style="color:red">(.pdf only)</span></label>
 
                         </div>
 

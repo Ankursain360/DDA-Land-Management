@@ -33,16 +33,16 @@
                     @{
                         @if (Model.GOINotificationDocumentName != null)
                         {
-                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                             <a class="badge  bg-primary px-2" asp-action="ViewGOINotificationDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
-                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="GOINotificationDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                         }
                     }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="GOINotificationDocumentName"></span>
-                    <label class="floating-label">Upload GOI Notification(L&DO)</label>
+                    <label class="floating-label">Upload GOI Notification(L&DO)<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -172,16 +172,16 @@
                     @{
                         @if (Model.OrderDocumentName != null)
                         {
-                            <input type="file" asp-for="OrderDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="OrderDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                             <a class="badge  bg-primary px-2" asp-action="ViewOrderDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
-                            <input type="file" asp-for="OrderDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="OrderDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                         }
                     }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="OrderDocumentName"></span>
-                    <label class="floating-label">Upload Order</label>
+                    <label class="floating-label">Upload Order<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
         </div>
@@ -193,16 +193,16 @@
                     @{
                         @if (Model.PossessionDocumentName != null)
                         {
-                            <input type="file" asp-for="PossessionDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="PossessionDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                             <a class="badge  bg-primary px-2" asp-action="ViewPossessionDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
-                            <input type="file" asp-for="PossessionDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="PossessionDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                         }
                     }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="PossessionDocumentName"></span>
-                    <label class="floating-label">Upload Possession proceedings</label>
+                    <label class="floating-label">Upload Possession proceedings<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
 

@@ -89,13 +89,23 @@ namespace SiteMaster
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+              
             })
              .AddCookie("Cookies", options =>
              {
                  options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                  options.SlidingExpiration = false;
                  options.Cookie.Name = "Auth-cookie";
-                // options.Cookie.Path = "/Home";
+                 options.Cookie.SameSite = SameSiteMode.None;
+                 // options.Cookie.Path = "/Home";
+                 options.Events = new CookieAuthenticationEvents
+                 {
+                     OnRedirectToLogin = redirectContext =>
+                     {
+                         redirectContext.HttpContext.Response.StatusCode = 401;
+                         return Task.CompletedTask;
+                     }
+                 };
              })
             .AddOpenIdConnect("oidc", options =>
             {
@@ -129,7 +139,7 @@ namespace SiteMaster
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -137,6 +147,9 @@ namespace SiteMaster
             app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseSession();
+            //prevent session hijacking
+            app.preventSessionHijacking();
+            //
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

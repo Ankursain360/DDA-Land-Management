@@ -1,4 +1,5 @@
-﻿@model Dto.Master.UserProfileDto
+﻿
+@model Libraries.Model.Entity.Leasesignup
 
 <div class="dropdown user text-white order-md-4">
     <a href="#" role="button" id="profile"
@@ -9,9 +10,9 @@
                 <img src="~/images/favicon.png" alt="user-image" class="rounded-circle" width="34" height="34" />
             </figure>
             <strong class="text-img rounded-circle d-block">
-                @Model.User.UserName.Substring(0, 1)
+                @ViewBag.Title.Substring(0, 1)
             </strong>
-            <span class="ms-2 d-none d-md-block">Hi @Model.User.Name</span>
+            <span class="ms-2 d-none d-md-block">Hi @ViewBag.Title</span>
         </div>
     </a>
 
@@ -20,9 +21,9 @@
             <figure class="m-0">
                 <img class="rounded-circle shadow-sm border" src="~/images/face.jpg">
             </figure>
-            <h3>@Model.User.Name</h3>
-            <p class="text-muted px-3">@Model.User.UserName</p>
-            <p class="text-muted px-3">@Model.User.Email</p>
+            <h3>@ViewBag.Title</h3>
+            @*<p class="text-muted px-3">@Model.User.UserName</p>*@
+        <p class="text-muted px-3">@ViewBag.Title1</p>
             <ul class="list-unstyled m-0 p-0">
                 <li>
                     <a href="javascript:void(0)" class="d-flex align-items-center">

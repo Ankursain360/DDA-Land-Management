@@ -150,7 +150,7 @@ $('.checkExtension').on('change', function (e) {
                 $.ajax({
                     async: false,
                     type: "POST",
-                    url: "../PossessionDetail/CheckFile",
+                    url: "/PossessionDetail/CheckFile",
                     contentType: false,
                     processData: false,
                     data: myformData,

@@ -24,6 +24,8 @@ using Utility.Helper;
 using Dto.Master;
 
 
+
+
 namespace LandInventory.Controllers
 {
     public class PropertyRegistrationController : BaseController
@@ -38,6 +40,8 @@ namespace LandInventory.Controllers
         string targetPathDisposal = "";
         string targetPathHandedOverCopyOfOrder = "";
         string targetPathATR = "";
+        public object JsonRequestBehavior { get; private set; }
+
         public PropertyRegistrationController(IPropertyRegistrationService propertyregistrationService, IConfiguration configuration)
         {
             _propertyregistrationService = propertyregistrationService;
@@ -892,6 +896,86 @@ namespace LandInventory.Controllers
             var memory = ExcelHelper.CreateExcel(data);
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         }
+
+
+
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+                string FilePath = Path.Combine(targetPathLayout, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(targetPathLayout))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+
 
 
     }

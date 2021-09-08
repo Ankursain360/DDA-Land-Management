@@ -18,7 +18,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input class="floating-label-field floating-label-field--s3" placeholder="Scheme Name" asp-for="PproposalName" />
+                    <input class="floating-label-field floating-label-field--s3 " placeholder="Scheme Name" asp-for="PproposalName" />
                     <span asp-validation-for="PproposalName" class="text-danger"></span>
                     <label class="floating-label">Scheme/Proposal Name<span style="color:red">*</span>  </label>
                 </div>
@@ -124,10 +124,10 @@
                 </label>
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input type="file" onchange="upload_check();" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="RequestPhotos" />
+                    <input type="file" onchange="upload_check1();" id="file_id1" class="floating-label-field floating-label-field--s3 checkExtension" asp-for="RequestPhotos" />
 
 
-                    <label class="floating-label">Layout Plan/Zonal Plan/Master Plan  </label>
+                    <label class="floating-label">Layout Plan/Zonal Plan/Master Plan <span style="color:red">(.pdf only)</span> </label>
 
                 </div>
             </div>
@@ -175,6 +175,148 @@
 
 
 <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $('.checkExtension').on('change', function (e) {
+
+        debugger;
+        var flag = false;
+        var result = $(this).val();
+        var file = result;
+        if (file != null) {
+
+            var multi = file.split(".");
+            if (multi.length > 2) {
+
+                alert("Please upload proper file with single dot in filename");
+                $(this).val('');
+                return;
+            }
+            var extension = file.substr((file.lastIndexOf('.') + 1));
+
+            switch (extension) {
+                case 'pdf':
+                    flag = true;
+                    $('#error').empty();
+                    break;
+                case 'PDF':
+                    flag = true;
+                    $('#error').empty();
+                    break;
+                default:
+                    alert("You can upload only pdf extension file Only")
+                    $(this).val('');
+                    flag = false;
+            }
+
+
+            if (flag == true) {
+
+                var FileID = $(this).attr('id');
+
+                var size = ValidateFileSize(FileID, $(this));
+
+                if (size > 5) {
+                    alert("You Can Upload file Size Up to 5 MB.");
+                    $(this).val('');
+                }
+                else {
+
+                    filecontrol = $(this);
+                    var myformData = new FormData();
+                    myformData.append('file', $(this)[0].files[0]);
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url: "/Request/CheckFile",
+                        contentType: false,
+                        processData: false,
+                        data: myformData,
+                        success: function (response) {
+
+                            showResult(response, filecontrol)
+
+                        },
+                        failure: function (response) {
+                            //alert(response.d);
+                            return false;
+                        }
+                    });
+                    function showResult(response, filecontrol) {
+                        debugger;
+                        if (response == false) {
+                            alert("Please select vaild pdf file.");
+                            filecontrol.val('');
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+    });
+
+
+
+    function ValidateFileSize(fileid, file) {
+        try {
+            var fileSize = 0;
+            if (navigator.userAgent.match(/msie/i)) {
+                var obaxo = new ActiveXObject("Scripting.FileSystemObject");
+                var filePath = file[0].value;
+                var objFile = obaxo.getFile(filePath);
+                var fileSize = objFile.size;
+                fileSize = fileSize / 1048576;
+            }
+            else {
+                fileSize = file[0].files[0].size
+                fileSize = fileSize / 1048576;
+            }
+
+            return fileSize;
+        }
+        catch (e) {
+            alert("Error is :" + e);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     function upload_check() {

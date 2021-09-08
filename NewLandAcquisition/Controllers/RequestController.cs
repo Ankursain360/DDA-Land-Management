@@ -25,6 +25,8 @@ using Service.IApplicationService;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
 
+using Microsoft.AspNetCore.Http;
+
 namespace NewLandAcquisition.Controllers
 {
     public class RequestController : BaseController
@@ -37,6 +39,7 @@ namespace NewLandAcquisition.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IUserNotificationService _userNotificationService;
+        public object JsonRequestBehavior { get; private set; }
 
 
         public RequestController(IRequestService requestService, IConfiguration configuration, 
@@ -491,5 +494,86 @@ namespace NewLandAcquisition.Controllers
             return ObjList;
         }
         #endregion
+
+
+
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+
+                documentPhotoPathLayout = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
+                string FilePath = Path.Combine(documentPhotoPathLayout, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(documentPhotoPathLayout))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(documentPhotoPathLayout);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:RequestPhoto:Photo").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+
     }
 }

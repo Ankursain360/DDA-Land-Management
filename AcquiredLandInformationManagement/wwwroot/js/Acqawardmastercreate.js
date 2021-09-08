@@ -106,7 +106,7 @@ $('.checkExtension').on('change', function (e) {
                 $.ajax({
                     async: false,
                     type: "POST",
-                    url: "../AcqAwardMasterDetails/CheckFile",
+                    url: "/AcqAwardMasterDetails/CheckFile",
                     contentType: false,
                     processData: false,
                     data: myformData,

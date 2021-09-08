@@ -43,7 +43,7 @@
                         }
                     }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ENMDocumentName"></span>
-                    <label class="floating-label">Upload ENM Document</label>
+                    <label class="floating-label">Upload ENM Document<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -453,7 +453,7 @@
                         {
                             <input disabled type="file" asp-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="@Model.Paymentdetail.FirstOrDefault().PaymentProofDocumentName"></span>
-                    <label class="floating-label">Upload Copy of Payment Proof</label>
+                    <label class="floating-label">Upload Copy of Payment Proof<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
         </div>

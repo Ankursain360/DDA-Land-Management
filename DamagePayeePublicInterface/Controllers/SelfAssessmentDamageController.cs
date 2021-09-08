@@ -904,13 +904,13 @@ namespace DamagePayeePublicInterface.Controllers
             string fullpath = string.Empty;
             //   string fullpath = string.Empty;
             string extension = string.Empty;
-            DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:Will").Value.ToString();
+            DocumentFilePath = _configuration.GetSection("FilePaths:SA:DocumentFIlePath").Value.ToString();
             IFormFile files = Request.Form.Files["file"];
             if (files != null)
             {
                 extension = System.IO.Path.GetExtension(files.FileName);
                 string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
-                DocumentFilePath = _configuration.GetSection("FilePaths:DamagePayeeFiles:Will").Value.ToString();
+                DocumentFilePath = _configuration.GetSection("FilePaths:SA:DocumentFIlePath").Value.ToString();
                 string FilePath = Path.Combine(DocumentFilePath, FileName);
                 if (files.Length > 0)
                 {
@@ -932,7 +932,7 @@ namespace DamagePayeePublicInterface.Controllers
 
                                 iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
                                 oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:DamagePayeeFiles:Will").Value.ToString();
+                                fullpath = _configuration.GetSection("FilePaths:SA:DocumentFIlePath").Value.ToString();
 
                                 FileInfo doc = new FileInfo(fullpath);
                                 if (doc.Exists)

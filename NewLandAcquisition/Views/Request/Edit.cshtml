@@ -133,16 +133,16 @@
                         {
 
 
-                            <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3" asp-for="RequestPhotos" />
-                            <label for="field-1" class="floating-label">Layout Plan/Zonal Plan/Master Plan </label>
+                            <input type="file" onchange="upload_check();" placeholder="Layout Plan" id="file_id" class="floating-label-field floating-label-field--s3 checkExtension" asp-for="RequestPhotos" />
+                            <label for="field-1" class="floating-label">Layout Plan/Zonal Plan/Master Plan<span style="color:red">(.pdf only)</span> </label>
                             <a class="badge bg-primary px-2" target="_blank" asp-action="ViewLetter" asp-route-id="@Model.Id
                    "> (View Photo )</a>
                         }
                         else
                         {
-                            <input type="file" asp-for="RequestPhotos" class="floating-label-field floating-label-field--s3">
+                            <input type="file" asp-for="RequestPhotos" class="floating-label-field floating-label-field--s3 checkExtension">
 
-                            <label for="field-1" class="floating-label">Layout Plan/Zonal Plan/Master Plan </label> } }
+                            <label for="field-1" class="floating-label">Layout Plan/Zonal Plan/Master Plan<span style="color:red">(.pdf only)</span> </label> } }
 
                 </div>
             </div>

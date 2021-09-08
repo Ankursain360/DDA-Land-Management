@@ -93,7 +93,15 @@ namespace LeaseForPublic.Controllers
             var mobile = HttpContext.Session.GetString("Mobile");
             var email = HttpContext.Session.GetString("Email");
             var name = HttpContext.Session.GetString("Name");
-            if(mobile != null ) { 
+
+
+         
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
+
+
+
+            if (mobile != null ) { 
             Kycform kyc = new Kycform();
             kyc.MobileNo = mobile;
             kyc.EmailId = email;
@@ -118,11 +126,19 @@ namespace LeaseForPublic.Controllers
         {
             try
             {
+
+                
                 kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
                 kyc.BranchList = await _kycformService.GetAllBranchList();
                 kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
                 kyc.ZoneList = await _kycformService.GetAllZoneList();
                 kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
+
+                var email = HttpContext.Session.GetString("Email");
+                var name = HttpContext.Session.GetString("Name");
+                ViewBag.Title = name;
+                ViewBag.Title1 = email;
+
                 var id = HttpContext.Session.GetString("ID");
                 string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
                 string LetterDoc = _configuration.GetSection("FilePaths:KycFiles:LetterDocument").Value.ToString();
@@ -351,6 +367,12 @@ namespace LeaseForPublic.Controllers
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
+
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
+
             if (Data == null)
             {
                 return NotFound();
@@ -363,6 +385,10 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Kycform kyc)
         {
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
             var Data = await _kycformService.FetchSingleResult(id);
             kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
             kyc.BranchList = await _kycformService.GetAllBranchList();
@@ -536,6 +562,10 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
             var Data = await _kycformService.FetchSingleResult(id);
             Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
             Data.BranchList = await _kycformService.GetAllBranchList();
