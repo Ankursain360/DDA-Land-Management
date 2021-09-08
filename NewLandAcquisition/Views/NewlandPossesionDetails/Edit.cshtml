@@ -223,16 +223,16 @@
                         @{
                             @if (Model.DocumentName != null)
                             {
-                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                                 <a class="badge bg-primary px-2" asp-action="ViewUploadedDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                             }
                             else
                             {
-                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                                <input type="file" asp-for="DocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                             }
                         }
                         <span class="d-block text-danger field-validation-valid" asp-validation-for="DocumentName"></span>
-                        <label class="floating-label">Upload Copy Of Possession/Kabza Proceeding</label>
+                        <label class="floating-label">Upload Copy Of Possession/Kabza Proceeding<span style="color:red">(.pdf only)</span></label>
                     </div>
                 </div>
             </div>

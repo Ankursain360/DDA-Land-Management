@@ -15,6 +15,14 @@ using Utility.Helper;
 using Dto.Master;
 using Microsoft.Extensions.Configuration;
 
+
+
+
+using Microsoft.AspNetCore.Http;
+
+using System.IO;
+
+
 namespace NewLandAcquisition.Controllers
 {
     public class AwardMasterDetailsController : BaseController
@@ -22,6 +30,8 @@ namespace NewLandAcquisition.Controllers
         public readonly INewlandawardmasterdetailService _newlandawardmasterdetailService;
         public IConfiguration _configuration;
         string DocumentFilePath = "";
+
+        public object JsonRequestBehavior { get; private set; }
         public AwardMasterDetailsController(INewlandawardmasterdetailService newlandawardmasterdetailsService, IConfiguration configuration)
         {
             _newlandawardmasterdetailService = newlandawardmasterdetailsService;
@@ -241,5 +251,85 @@ namespace NewLandAcquisition.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, file.GetContentType(filename));
         }
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            DocumentFilePath = _configuration.GetSection("FilePaths:AwardMaster:DocumentFIlePath").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePath = _configuration.GetSection("FilePaths:AwardMaster:DocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:AwardMaster:DocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+
+
+
+
     }
 }

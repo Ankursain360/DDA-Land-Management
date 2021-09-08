@@ -4,7 +4,7 @@
 <div class="pt-3">
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
-       
+
         <h3 class="mb-3 d-flex">Add Details <span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span> </h3>
 
 
@@ -41,9 +41,9 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input  asp-for="NewlandNotificationFile" class="floating-label-field floating-label-field--s3" type="file" multiple />
+                    <input asp-for="NewlandNotificationFile" class="floating-label-field floating-label-field--s3 checkExtension" type="file" multiple />
                     <span asp-validation-for="NewlandNotificationFile" class="text-danger"></span>
-                    <label class="floating-label" asp-for="NewlandNotificationFile"> Upload Gazette Notification</label>
+                    <label class="floating-label" asp-for="NewlandNotificationFile"> Upload Gazette Notification<span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
         </div>
@@ -84,8 +84,118 @@
 
     </form>
 </div>
-    
 
 
 
+<script>
 
+
+    $('.checkExtension').on('change', function (e) {
+
+        debugger;
+        var flag = false;
+        var result = $(this).val();
+        var file = result;
+        if (file != null) {
+
+            var multi = file.split(".");
+            if (multi.length > 2) {
+
+                alert("Please upload proper file with single dot in filename");
+                $(this).val('');
+                return;
+            }
+            var extension = file.substr((file.lastIndexOf('.') + 1));
+
+            switch (extension) {
+                case 'pdf':
+                    flag = true;
+                    $('#error').empty();
+                    break;
+                case 'PDF':
+                    flag = true;
+                    $('#error').empty();
+                    break;
+                default:
+                    alert("You can upload only pdf extension file Only")
+                    $(this).val('');
+                    flag = false;
+            }
+
+
+            if (flag == true) {
+
+                var FileID = $(this).attr('id');
+
+                var size = ValidateFileSize(FileID, $(this));
+
+                if (size > 5) {
+                    alert("You Can Upload file Size Up to 5 MB.");
+                    $(this).val('');
+                }
+                else {
+
+                    filecontrol = $(this);
+                    var myformData = new FormData();
+                    myformData.append('file', $(this)[0].files[0]);
+                    $.ajax({
+                        async: false,
+                        type: "POST",
+                        url: "/NewlandNotification/CheckFile",
+                        contentType: false,
+                        processData: false,
+                        data: myformData,
+                        success: function (response) {
+
+                            showResult(response, filecontrol)
+
+                        },
+                        failure: function (response) {
+                            //alert(response.d);
+                            return false;
+                        }
+                    });
+                    function showResult(response, filecontrol) {
+                        debugger;
+                        if (response == false) {
+                            alert("Please select vaild pdf file.");
+                            filecontrol.val('');
+                        }
+                        else {
+                            return true;
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+    });
+
+
+
+    function ValidateFileSize(fileid, file) {
+        try {
+            var fileSize = 0;
+            if (navigator.userAgent.match(/msie/i)) {
+                var obaxo = new ActiveXObject("Scripting.FileSystemObject");
+                var filePath = file[0].value;
+                var objFile = obaxo.getFile(filePath);
+                var fileSize = objFile.size;
+                fileSize = fileSize / 1048576;
+            }
+            else {
+                fileSize = file[0].files[0].size
+                fileSize = fileSize / 1048576;
+            }
+
+            return fileSize;
+        }
+        catch (e) {
+            alert("Error is :" + e);
+        }
+    }
+
+
+</script>

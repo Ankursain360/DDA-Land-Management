@@ -14,6 +14,12 @@ using System.Threading.Tasks;
 using Utility.Helper;
 
 
+
+using Microsoft.AspNetCore.Http;
+
+using System.IO;
+
+
 namespace NewLandAcquisition.Controllers
 {
     public class NewlandNotificationController : BaseController
@@ -21,6 +27,7 @@ namespace NewLandAcquisition.Controllers
         public IConfiguration _configuration;
         public readonly INewlandnotificationService _newlandnotificationService;
         string NewlandNotificationFilePath = string.Empty;
+        public object JsonRequestBehavior { get; private set; }
 
 
         public NewlandNotificationController(INewlandnotificationService newlandnotificationService, IConfiguration configuration)
@@ -60,7 +67,7 @@ namespace NewLandAcquisition.Controllers
             try
             {
                 newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
-                string NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles1:NewlandNotificationFilePath1").Value.ToString();
+                string NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
 
                 if (ModelState.IsValid)
                 {
@@ -205,5 +212,91 @@ namespace NewLandAcquisition.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
             return File(FileBytes, fileHelper.GetContentType(filename));
         }
+
+
+
+
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+                string FilePath = Path.Combine(NewlandNotificationFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(NewlandNotificationFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(NewlandNotificationFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+
+
+
+
+
     }
 }
