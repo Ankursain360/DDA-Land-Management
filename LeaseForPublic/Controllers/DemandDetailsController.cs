@@ -131,6 +131,11 @@ namespace LeaseForPublic.Controllers
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
 
+            var email = HttpContext.Session.GetString("Email");
+            var name = HttpContext.Session.GetString("Name");
+            ViewBag.Title = name;
+            ViewBag.Title1 = email;
+
             Kycdemandpaymentdetails oKycdemandpaymentdetails = new Kycdemandpaymentdetails();
             try
             {
