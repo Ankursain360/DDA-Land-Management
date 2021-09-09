@@ -3,15 +3,18 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-
+            <th> Plot No </th>
+            <th> Area </th>
+            <th> Area Unit </th>
             <th> Property </th>
             <th>Nature of Property </th>
             <th> File No </th>
             <th> Branch </th>
             <th> Zone </th>
             <th> Locality </th>
-            <th> Date Of Allotment letter </th>
+            <th> Date Of Allotment  </th>
             <th> Date Of Possession </th>
+            <th> Date Of Submission </th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -22,6 +25,9 @@
             @foreach (var item in Model.Results)
             {
         <tr>
+            <td>@item.Kyc.PlotNo</td>
+            <td>@item.Kyc.Area</td>
+            <td>@item.Kyc.AreaUnit</td>
             <td>@item.Kyc.Property</td>
 
             <td> @(item.Kyc.PropertyType == null?"": item.Kyc.PropertyType.Name) </td>
@@ -31,6 +37,7 @@
             <td> @(item.Kyc.Locality == null?"": item.Kyc.Locality.Name) </td>
             <td>@(item.Kyc.AllotmentLetterDate == null ? "" : (Convert.ToDateTime(item.Kyc.AllotmentLetterDate)).ToString("dd-MMM-yyyy"))</td>
             <td>@(item.Kyc.PossessionDate == null ? "" : (Convert.ToDateTime(item.Kyc.PossessionDate)).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.CreatedDate == null ? "" : (Convert.ToDateTime(item.CreatedDate)).ToString("dd-MMM-yyyy"))</td>
 
 
             <td>

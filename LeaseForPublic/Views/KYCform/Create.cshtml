@@ -501,6 +501,8 @@
                         <input type="file" asp-for="Aadhar" class="floating-label-field floating-label-field--s3" placeholder="file">
                         <span asp-validation-for="Aadhar" class="text-danger"></span>
                         <label id="aadharlb" for="field-1" class="floating-label">Aadhaar No. /Pan of Allottee/Lessee <span style="color:red">*</span></label>
+                        <label id="Aadhar-error" style="color:red;display:none;">This field is Mandatory</label>
+
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -508,6 +510,8 @@
                         <input type="file" asp-for="Letter" class="floating-label-field floating-label-field--s3" placeholder="file">
                         <span asp-validation-for="Letter" class="text-danger"></span>
                         <label id="letterlb" for="field-1" class="floating-label">Possession Letter /Allotment Letter /Executed Lease deed (Any One )<span style="color:red">*</span></label>
+                        <label id="Letter-error" style="color:red;display:none;">This field is Mandatory</label>
+
                     </div>
                 </div>
             </div>

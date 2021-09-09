@@ -175,6 +175,10 @@ h6 {
 
 /*login page css*/
 
+.hcolor{
+      color:white !important;
+}
+
 #LoginPage {
     min-height: 100vh;
     width: 100%;

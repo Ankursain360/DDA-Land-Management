@@ -165,10 +165,10 @@ namespace Libraries.Model.Entity
         //******
 
         [NotMapped]
-        [Required(ErrorMessage = "This field is mandatory")]
+       // [Required(ErrorMessage = "This field is mandatory")]
         public IFormFile Aadhar { get; set; }
         [NotMapped]
-        [Required(ErrorMessage = "This field is mandatory")]
+       // [Required(ErrorMessage = "This field is mandatory")]
         public IFormFile Letter { get; set; }
         [NotMapped]
         public IFormFile ApplicantPan { get; set; }
