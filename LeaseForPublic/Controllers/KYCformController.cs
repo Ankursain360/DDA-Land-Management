@@ -662,9 +662,12 @@ namespace LeaseForPublic.Controllers
         {
         HttpContext.Session.SetString("Mobile", "");
         HttpContext.Session.SetString("Email", "");
-           
-           // return RedirectToAction("Create", "SignupForm");
-            return Redirect("/SignupForm/CreateLogin");
+
+            ViewBag.Message = Alert.Show("Logout Successfully", "", AlertType.Warning);
+
+
+            // return RedirectToAction("Create", "SignupForm");
+            return View("../SignupForm/CreateLogin");
         }
 
 
