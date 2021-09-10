@@ -452,3 +452,53 @@ function validateForm() {
 
 
 }
+
+/*** Date Validation ****/
+
+$(function () {
+    $('#AllotmentLetterDate').on('change', function () {
+        debugger;
+        var GivenDate = $("#AllotmentLetterDate").val();
+        // var CurrentDate = $("#CurrentDate").val().split(' ')[0];
+        var CurrentDate = (new Date()).toISOString().split('T')[0];
+        if (GivenDate > CurrentDate) {
+            $('#AllotmentLetterDate').val(' ');
+            $('.msg1').empty().html('Date must not be greater than current date');
+        } else {
+            $('#AllotmentLetterDate').val($("#AllotmentLetterDate").val());
+            $('.msg1').empty()
+        }
+    });
+});
+
+$(function () {
+    $('#PossessionDate').on('change', function () {
+        debugger;
+        var GivenDate = $("#PossessionDate").val();
+        // var CurrentDate = $("#CurrentDate").val().split(' ')[0];
+        var CurrentDate = (new Date()).toISOString().split('T')[0];
+        if (GivenDate > CurrentDate) {
+            $('#PossessionDate').val(' ');
+            $('.msg2').empty().html('Date must not be greater than current date');
+        } else {
+            $('#PossessionDate').val($("#PossessionDate").val());
+            $('.msg2').empty()
+        }
+    });
+});
+
+$(function () {
+    $('#LeaseLicenseExecutionDate').on('change', function () {
+        debugger;
+        var GivenDate = $("#LeaseLicenseExecutionDate").val();
+        // var CurrentDate = $("#CurrentDate").val().split(' ')[0];
+        var CurrentDate = (new Date()).toISOString().split('T')[0];
+        if (GivenDate > CurrentDate) {
+            $('#LeaseLicenseExecutionDate').val(' ');
+            $('.msg3').empty().html('Date must not be greater than current date');
+        } else {
+            $('#LeaseLicenseExecutionDate').val($("#LeaseLicenseExecutionDate").val());
+            $('.msg3').empty()
+        }
+    });
+});

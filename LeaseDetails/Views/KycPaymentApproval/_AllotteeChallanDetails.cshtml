@@ -20,7 +20,7 @@
                     <tr>
 
                         <th>Verify</th>
-                        <th>Payment Type (Ground Rent/License Fee/Interest etc.)</th>
+                        <th>Payment Type </th>
                         <th>Period From –To Ex-(dd-mm-yyyy)-(dd-mm-yyyy)</th>
                         <th>Challan No./Transaction No./UTR No.</th>
                         <th style="min-width:100px;">Amount (Rs.)</th>
@@ -72,9 +72,16 @@
                                 @*<input asp-for="@item.PaymentType" type="text" class="floating-label-field floating-label-field--s3" />*@
                                 <select class="floating-label-field floating-label-field--s3" id="CHPaymentType" asp-for="@item.PaymentType">
                                     <option selected disabled="disabled" value="">--Select-- </option>
-                                    <option value="Ground Rent">Ground Rent</option>
-                                    <option value="License fee">License Fee</option>
-                                    <option value="Interest">Interest</option>
+                                    @if (ViewBag.Property == "Lease")
+                                    {
+                                        <option value="Ground Rent">Ground Rent</option>
+                                        <option value="Interest">Interest</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="License fee">License Fee</option>
+                                        <option value="Interest">Interest</option>
+                                    }
                                 </select>
                             </td>
                             <td>
