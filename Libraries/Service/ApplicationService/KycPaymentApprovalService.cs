@@ -101,9 +101,9 @@ namespace Service.ApplicationService
         {
             return await _kycPaymentApprovalRepository.IsApplicationPendingAtUserEnd(id, userId);
         }
-        public async Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId,int? BranchId)
         {
-            var data = await _kycPaymentApprovalRepository.GetPagedKycPaymentDetails(model, userId);
+            var data = await _kycPaymentApprovalRepository.GetPagedKycPaymentDetails(model, userId, BranchId);
             return data;
         }
 

@@ -15,7 +15,7 @@ namespace Libraries.Service.IApplicationService
     public interface IKycformApprovalService : IEntityService<Kycform>
     {
 
-        Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId);
+        Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId, int? BranchId);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<Kycworkflowtemplate> FetchSingleResultOnProcessGuidWithVersion(string processguid, string version);
         Task<Kycform> FetchSingleResult(int id);

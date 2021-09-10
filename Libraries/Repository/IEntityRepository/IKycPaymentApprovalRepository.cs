@@ -17,7 +17,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IKycPaymentApprovalRepository : IGenericRepository<Kycdemandpaymentdetails>
     {
         Task<List<Kycworkflowtemplate>> GetWorkFlowDataOnGuid(string processguid);
-        Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId);
+        Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId,int? BranchId);
         Task<Kycdemandpaymentdetails> FetchSingleResult(int id);
         Task<bool> IsApplicationPendingAtUserEnd(int id, int userId);
         Task<Userprofile> FetchDDofBranch(int? BranchId);//DD info of particular branch to display in outstanding dues mail

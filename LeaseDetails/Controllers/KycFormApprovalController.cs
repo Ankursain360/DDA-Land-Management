@@ -69,7 +69,7 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] KycFormApprovalSearchDto model)
         {
-            var result = await _kycformApprovalService.GetPagedKycFormDetails(model, SiteContext.UserId);
+            var result = await _kycformApprovalService.GetPagedKycFormDetails(model, SiteContext.UserId, SiteContext.BranchId);
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }

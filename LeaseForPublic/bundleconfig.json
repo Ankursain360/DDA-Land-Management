@@ -88,5 +88,11 @@
     "inputFiles": [
       "wwwroot/js/LeaseDemandPaymentDetails.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/kycformedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/kycformedit.js"
+    ]
   }
 ]

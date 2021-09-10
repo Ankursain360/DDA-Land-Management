@@ -1,5 +1,6 @@
 ﻿
 @model IEnumerable<Dto.Search.DemandPaymentDetailsDto>
+<input type="hidden" value="@ViewBag.Property"/>
     <div class="table-section bg-white border shadow rounded">
         <table class="table table-sm table-bordered mb-0 table-striped">
             <thead class="text-nowrap">
@@ -7,7 +8,14 @@
                 <tr>
 
                     <th>Demand Period</th>
-                    <th>Ground Rent /License Fee (Rs.) </th>
+                    @if(ViewBag.Property== "Lease") 
+                     {
+                        <th>Ground Rent (Rs.) </th> 
+                     } else 
+                     { 
+                        <th>License Fee (Rs.) </th>
+                     }
+                    
                     <th>Interest (Rs.)</th>
                     <th>Total Dues (Rs.)</th>
 

@@ -538,7 +538,8 @@ namespace LeaseForPublic.Controllers
 
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
-
+            var data = await _kycformService.FetchSingleResult(Id);
+            ViewBag.Property = data.Property;
             var result = await _demandDetailsService.GetPaymentDetails(Id);
 
             return PartialView("_PaymentDetails", result);

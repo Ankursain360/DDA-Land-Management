@@ -33,7 +33,7 @@ namespace Libraries.Repository.EntityRepository
                                      .OrderByDescending(x => x.Id)
                                      .ToListAsync();
         }
-        public async Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Kycdemandpaymentdetails>> GetPagedKycPaymentDetails(KycPaymentApprovalSearchDto model, int userId,int? BranchId)
         {
             var AllDataList = await _dbContext.Kycdemandpaymentdetails.ToListAsync();
             var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
@@ -54,7 +54,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Kyc.Zone)
                                         .Include(x => x.Kyc.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
-                                        .Where(x => x.IsActive == 1
+                                        .Where(x => x.IsActive == 1 && x.Kyc.BranchId == BranchId
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
@@ -75,12 +75,12 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Kyc.Zone)
                                         .Include(x => x.Kyc.Locality)
                                         .Include(x => x.ApprovedStatusNavigation)
-                                        .Where(x => x.IsActive == 1
+                                        .Where(x => x.IsActive == 1 && x.Kyc.BranchId == BranchId
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
-                                        )
-                                        .OrderBy(a => a.TotalDues)
+                                         )
+                                        .OrderBy(a => a.CreatedDate)
                                         .GetPaged<Kycdemandpaymentdetails>(model.PageNumber, model.PageSize);
 
                                               
@@ -104,12 +104,12 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Kyc.Zone)
                                         .Include(x => x.Kyc.Locality)
                                        .Include(x => x.ApprovedStatusNavigation)
-                                       .Where(x => x.IsActive == 1
+                                       .Where(x => x.IsActive == 1 && x.Kyc.BranchId == BranchId
                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                        && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
                                        )
-                                       .OrderByDescending(a => a.TotalDues)
+                                       .OrderByDescending(a => a.CreatedDate)
                                        .GetPaged<Kycdemandpaymentdetails>(model.PageNumber, model.PageSize);
 
                         break;

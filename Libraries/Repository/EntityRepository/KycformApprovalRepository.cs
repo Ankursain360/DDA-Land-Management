@@ -21,7 +21,7 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId,int? BranchId)
         {
             var AllDataList = await _dbContext.Kycform.ToListAsync();
             var UserWiseDataList = AllDataList.Where(x => x.PendingAt.Split(',').Contains(userId.ToString()));
@@ -42,7 +42,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Locality)
                                         .Include(x => x.PropertyType)
                                         .Include(x => x.Zone)
-                                        .Where(x => x.IsActive == 1
+                                        .Where(x => x.IsActive == 1 && x.BranchId == BranchId
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
@@ -54,6 +54,24 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("DATE"):
+                        data = null;
+                        data = await _dbContext.Kycform
+                                                .Include(x => x.ApprovedStatusNavigation)
+                                                .Include(x => x.Branch)
+                                                .Include(x => x.LeaseType)
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.PropertyType)
+                                                .Include(x => x.Zone)
+                                                .Where(x => x.IsActive == 1 && x.BranchId == BranchId
+                                                && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                                && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                                && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                                )
+                                                .OrderBy(a => a.CreatedDate)
+
+                                                .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
                     case ("NAME"):
                         data = null;
                         data = await _dbContext.Kycform
@@ -63,7 +81,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.PropertyType)
                                                 .Include(x => x.Zone)
-                                                .Where(x => x.IsActive == 1
+                                                .Where(x => x.IsActive == 1 && x.BranchId == BranchId
                                                 && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                                 && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                                 && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
@@ -81,6 +99,25 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("DATE"):
+
+                        data = null;
+                        data = await _dbContext.Kycform
+                                                .Include(x => x.ApprovedStatusNavigation)
+                                                .Include(x => x.Branch)
+                                                .Include(x => x.LeaseType)
+                                                .Include(x => x.Locality)
+                                                .Include(x => x.PropertyType)
+                                                .Include(x => x.Zone)
+                                                .Where(x => x.IsActive == 1 && x.BranchId == BranchId
+                                                && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
+                                                && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
+                                                && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                                )
+                                                .OrderByDescending(x => x.CreatedDate)
+
+                                               .GetPaged<Kycform>(model.PageNumber, model.PageSize);
+                        break;
                     case ("NAME"):
 
                         data = null;
@@ -91,7 +128,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .Include(x => x.Locality)
                                                 .Include(x => x.PropertyType)
                                                 .Include(x => x.Zone)
-                                                .Where(x => x.IsActive == 1
+                                                .Where(x => x.IsActive == 1 && x.BranchId == BranchId
                                                 && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                                 && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                                 && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))

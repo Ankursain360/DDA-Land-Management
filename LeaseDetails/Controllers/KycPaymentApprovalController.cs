@@ -88,18 +88,25 @@ namespace LeaseDetails.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] KycPaymentApprovalSearchDto model)
         {
-            var result = await _kycPaymentApprovalService.GetPagedKycPaymentDetails(model, SiteContext.UserId);
+            var result = await _kycPaymentApprovalService.GetPagedKycPaymentDetails(model, SiteContext.UserId,SiteContext.BranchId);
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }
         public async Task<PartialViewResult> GetChallanDetails(int Id)
         {
+            var Data = await _kycPaymentApprovalService.FetchSingleResult(Id);
+            var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
+            ViewBag.Property = Data2.Property;
+
             var result = await _kycPaymentApprovalService.GetAllChallan(Id);
             ViewBag.Role = SiteContext.RoleId;
             return PartialView("_AllotteeChallanDetails", result);
         }
         public async Task<PartialViewResult> PaymentDetails(int Id)
         {
+            var Data = await _kycPaymentApprovalService.FetchSingleResult(Id);
+            var Data2 = await _kycformService.FetchSingleResult(Data.KycId);
+            ViewBag.Property = Data2.Property;
             var result = await _kycdemandpaymentdetailstableaService.FetchResultOnDemandId(Id);
 
             return PartialView("_PaymentDetails", result);

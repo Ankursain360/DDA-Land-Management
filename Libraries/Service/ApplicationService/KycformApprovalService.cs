@@ -28,9 +28,9 @@ namespace Service.ApplicationService
 
         }
 
-        public async Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId)
+        public async Task<PagedResult<Kycform>> GetPagedKycFormDetails(KycFormApprovalSearchDto model, int userId,int? BranchId)
         {
-            var data = await _kycformApprovalRepository.GetPagedKycFormDetails(model, userId);
+            var data = await _kycformApprovalRepository.GetPagedKycFormDetails(model, userId, BranchId);
             return data;
         }
 
