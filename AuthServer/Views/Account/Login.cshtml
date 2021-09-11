@@ -26,8 +26,8 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group icon">
-                <i class="ri-code-s-slash-line"></i>
-                <label>Captcha Code</label>
+                @*<i class="ri-code-s-slash-line"></i>*@
+                <label>Captcha Code (<span class="text-danger">Case-Sensitive</span>)</label>
                 <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="4" autocomplete="off">
                 <span asp-validation-for="CaptchaCode" class="text-danger"></span>
             </div>

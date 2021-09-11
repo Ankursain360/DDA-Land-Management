@@ -484,3 +484,26 @@ function UpdateDetailsInBhoomi() {
     
 };
 
+
+$('#outstandingduesDoc').change(function () {
+    var fileInput = document.getElementById('outstandingduesDoc');
+    var filePath = fileInput.value;
+    const size = (outstandingduesDoc.files[0].size);
+    fileValidation1(filePath, fileInput, size);
+});
+
+
+function fileValidation1(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf|\.PDF|\.xlsx|\.docx|\.pptx)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}

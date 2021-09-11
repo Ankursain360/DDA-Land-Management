@@ -519,3 +519,42 @@ $(function () {
         }
     });
 });
+
+/***documents size validation*/
+
+$('#Aadhar').change(function () {
+    var fileInput = document.getElementById('Aadhar');
+    var filePath = fileInput.value;
+    const size = (Aadhar.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+$('#Letter').change(function () {
+    var fileInput = document.getElementById('Letter');
+    var filePath = fileInput.value;
+    const size = (Letter.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+$('#ApplicantPan').change(function () {
+    var fileInput = document.getElementById('ApplicantPan');
+    var filePath = fileInput.value;
+    const size = (ApplicantPan.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf|\.PDF|\.xlsx|\.docx|\.pptx)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}

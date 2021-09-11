@@ -179,17 +179,19 @@ function GetUserList(id) {
 function GetForwardedUserList() {
     debugger;
     HttpGet(`/KycFormApproval/GetForwardedUserList/?value=${parseInt($("#Id").val())}`, 'json', function (response) {
+        console.log(response);
         if (response != null) {
             if (response[0] == "false") {
                 WarningMessage(response[1]);
             }
             else {
-                var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
-                for (var i = 0; i < response.length; i++) {
-                    html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
-                }
-                $("#ApprovalUserId").val(null).trigger('change');
-                $("#ApprovalUserId").html(html);
+                    var html = '<option selected="selected" disabled="disabled" value="0">--Select-- </option>';
+                    for (var i = 0; i < response.length; i++) {
+                        html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
+                    }
+                    $("#ApprovalUserId").val(null).trigger('change');
+                    $("#ApprovalUserId").html(html);
+                
             }
         }
     });
