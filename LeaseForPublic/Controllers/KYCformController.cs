@@ -18,10 +18,7 @@ using Dto.Master;
 using Service.IApplicationService;
 using System.Text;
 using Microsoft.AspNetCore.Http;
-
-
-
-
+using Microsoft.AspNetCore.Hosting;
 
 namespace LeaseForPublic.Controllers
 {
@@ -32,6 +29,7 @@ namespace LeaseForPublic.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IUserNotificationService _userNotificationService;
+        private readonly IHostingEnvironment _hostingEnvironment;
         string AadharDoc = "";
         string LetterDoc = "";
         string ApplicantDoc = "";
@@ -39,9 +37,11 @@ namespace LeaseForPublic.Controllers
              IUserNotificationService userNotificationService,
             IKycformService KycformService,
             IUserProfileService userProfileService,
-             IApprovalProccessService approvalproccessService )
-          
+             IApprovalProccessService approvalproccessService,
+             IHostingEnvironment hostingEnvironment)
+
         {
+            _hostingEnvironment = hostingEnvironment;
             _configuration = configuration;
             _kycformService = KycformService;
             _userNotificationService = userNotificationService;
@@ -293,7 +293,7 @@ namespace LeaseForPublic.Controllers
                                     approvalproccess.Status = ApprovalStatus.Id;   //1
                                     approvalproccess.Level = i + 1;
                                     approvalproccess.Version = workflowtemplatedata.Version;
-                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    approvalproccess.Remarks = "Applicant Submitted For E-KYC Approval";///May be Uncomment
                                     //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
                                     result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in kycapprovalproccess Table
 
@@ -314,6 +314,53 @@ namespace LeaseForPublic.Controllers
                                         result = await _userNotificationService.Create(usernotification, kyc.Id);
                                     }
                                     #endregion
+
+
+                                    if (result)//mail sent to applicant on successful submission of form
+                                    {
+                                        var sendMailResult1 = false;
+                                        #region Mail Generate
+                                        //At successfull completion send mail and sms
+                                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
+                                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApplicantKycMailDetailsContent.html");
+                                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                        // string linkhref = "https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create";
+                                        string linkhref = _configuration.GetSection("KycPaymentLink").Value;
+                                       // var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+
+
+                                        #region Mail Generation Added By ishu
+
+                                        MailSMSHelper mailG = new MailSMSHelper();
+
+                                        #region HTML Body Generation
+                                        KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
+                                        bodyDTO.ApplicantName = kyc.Name;
+                                        bodyDTO.Remarks = "Your KYC Application with Reference No.- " + kyc.Id + "  and File No - " + kyc.FileNo + "  is successfully sent for E-KYC Approval. To Check Application details you can login into the portal by clicking on the click here link below.";
+                                        bodyDTO.Link = linkhref;
+                                        bodyDTO.path = path;
+                                        string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
+                                        #endregion
+
+                                        #region Common Mail Genration
+                                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                        maildto.strMailSubject = "Applicant submitted for E-KYC Approval ";
+                                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                        maildto.strBodyMsg = strBodyMsg;
+                                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                        maildto.strMailTo = kyc.EmailId; /*multousermailId.ToString();*/
+                                        sendMailResult1 = mailG.SendMailWithAttachment(maildto);
+                                        #endregion
+                                        #endregion
+
+
+                                        #endregion
+                                    }
                                 }
 
                                 break;
@@ -321,8 +368,77 @@ namespace LeaseForPublic.Controllers
                         }
 
                         #endregion
-                       
-                        ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
+                        #region Approval Proccess  Mail Generation Added by ishu 11sept 2021
+                        var sendMailResult = false;
+                        var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
+                        if (approvalproccess.SendTo != null)
+                        {
+                            #region Mail Generate
+                            //At successfull completion send mail and sms
+                            Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
+                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                            string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                            string linkhref = (_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value).ToString();
+
+                            //  var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                            StringBuilder multousermailId = new StringBuilder();
+                            if (approvalproccess.SendTo != null)
+                            {
+                                int col = 0;
+                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                foreach (string MultiUserId in multiTo)
+                                {
+                                    if (col > 0)
+                                        multousermailId.Append(",");
+                                    var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                    multousermailId.Append(RecevierUsers.User.Email);
+                                    col++;
+                                }
+                            }
+
+                            #region Mail Generation Added By ishu
+
+                            MailSMSHelper mailG = new MailSMSHelper();
+
+                            #region HTML Body Generation
+                            ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                            bodyDTO.ApplicationName = "KYC Approval";
+                            bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                            bodyDTO.SenderName = kyc.Name;
+                            // bodyDTO.SenderName = senderUser.User.Name;
+                            bodyDTO.Link = linkhref;
+                            bodyDTO.AppRefNo = kyc.Id.ToString();
+                            bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                            bodyDTO.Remarks = approvalproccess.Remarks;
+                            bodyDTO.path = path;
+                            string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                            #endregion
+
+                            //string strMailSubject = "Pending Lease Application Approval Request Details ";
+                            //string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                            //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                            #region Common Mail Genration
+                            SentMailGenerationDto maildto = new SentMailGenerationDto();
+                            maildto.strMailSubject = "Pending KYC Approval Request Details ";
+                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                            maildto.strBodyMsg = strBodyMsg;
+                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                            maildto.strMailTo = multousermailId.ToString();
+                            sendMailResult = mailG.SendMailWithAttachment(maildto);
+                            #endregion
+                            #endregion
+
+
+                            #endregion
+                        }
+                        #endregion
+
+                        ViewBag.Message = Alert.Show("Applicant Submitted For E-KYC Approval", "", AlertType.Success);
 
                         var list = await _kycformService.GetAllKycform();
                         return View("Index", list);
