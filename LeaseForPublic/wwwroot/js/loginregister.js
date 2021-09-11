@@ -77,3 +77,11 @@ $("#otp-button").click(function () {
         alert("Please Enter Correct OTP");
     }
 });
+
+function preventBack() {
+    window.history.forward();
+}
+
+setTimeout("preventBack()", 0);
+
+window.onunload = function () { null };
