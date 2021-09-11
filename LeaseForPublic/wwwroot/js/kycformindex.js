@@ -11,9 +11,12 @@ $("#btnSearch").click(function () {
 });
 
 $("#btnReset").click(function () {
-
+    $('#txtId').val('');
     $('#txtName').val('');
     $('#txtFileNo').val('');
+    $('#txtZone').val('');
+    $('#txtLocality').val('');
+    $('#txtPlot').val('');
 
     Getkyc(currentPageNumber, currentPageSize, sortOrder);
 });
@@ -25,7 +28,6 @@ $("#btnAscending").click(function () {
     sortOrder = 1;//for Ascending
     Getkyc(currentPageNumber, currentPageSize, sortOrder);
 });
-
 
 $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
@@ -47,8 +49,12 @@ function Getkyc(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         Mobileno: (''),
+        Id: $('#txtId').val(),
         property: $('#txtName').val(),
         Fileno: $('#txtFileNo').val(),
+        zone: $('#txtZone').val(),
+        locality: $('#txtLocality').val(),
+        PlotNo: $('#txtPlot').val(),
     
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),

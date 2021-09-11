@@ -100,9 +100,12 @@ namespace Libraries.Repository.EntityRepository
                                        .Include(x => x.Zone)
                                        .Include(x => x.ApprovedStatusNavigation)
                                        .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                       && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
                                        && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
-                                       
+                                       && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                       && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                       && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
                                        )
                                        .GetPaged<Kycform>(model.PageNumber, model.PageSize);
 
@@ -124,10 +127,13 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.Zone)
                                                    .Include(x => x.ApprovedStatusNavigation)
                                                    .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
-
-                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
-                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
-                                       ).OrderBy(x => x.Property)
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderBy(x => x.Property)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                             break;
                         case ("STATUS"):
@@ -139,11 +145,14 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.PropertyType)
                                                    .Include(x => x.Zone)
                                                    .Include(x => x.ApprovedStatusNavigation)
-                                                 .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
-                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
-                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
-
-                                       ).OrderByDescending(x => x.ApprovedStatus)
+                                                   .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderByDescending(x => x.ApprovedStatus)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                             break;
 
@@ -163,10 +172,13 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.Zone)
                                                    .Include(x => x.ApprovedStatusNavigation)
                                                    .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
-                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
-                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
-
-                                       ).OrderByDescending(x => x.Property)
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderByDescending(x => x.Property)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                             break;
                         case ("STATUS"):
@@ -178,11 +190,14 @@ namespace Libraries.Repository.EntityRepository
                                                    .Include(x => x.PropertyType)
                                                    .Include(x => x.Zone)
                                                    .Include(x => x.ApprovedStatusNavigation)
-                                                 .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
-                                       && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
-                                        && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
-
-                                       ).OrderBy(x => x.ApprovedStatus)
+                                                   .Where(x => x.IsActive == 1 && x.MobileNo == model.Mobileno.ToString()
+                                                    && (string.IsNullOrEmpty(model.Id) || x.Id.ToString().Contains(model.Id))
+                                                   && (string.IsNullOrEmpty(model.property) || x.Property.Contains(model.property))
+                                                   && (string.IsNullOrEmpty(model.Fileno) || x.FileNo.Contains(model.Fileno))
+                                                   && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                                   && (string.IsNullOrEmpty(model.PlotNo) || x.PlotNo.Contains(model.PlotNo))
+                                                   ).OrderBy(x => x.ApprovedStatus)
                                                    .GetPaged<Kycform>(model.PageNumber, model.PageSize);
                             break;
                     }

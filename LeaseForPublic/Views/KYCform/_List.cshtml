@@ -6,7 +6,7 @@
 
         <tr>
 
-
+            <th> Reference No. </th>
             <th> Plot No </th>
             <th> Area </th>
             <th> Area Unit </th>
@@ -15,7 +15,7 @@
             <th> File No </th>
             <th> Branch </th>
             <th> Zone </th>
-
+            <th> Locality </th>
             @*<th> Date Of Allotment letter </th>*@
             <th> Date Of Possession </th>
             <th> Date Of Submission </th>
@@ -30,6 +30,7 @@
             @foreach (var item in Model.Results)
             {
         <tr>
+            <td>@item.Id</td>
             <td>@item.PlotNo</td>
             <td>@item.Area</td>
             <td>@item.AreaUnit</td>
@@ -39,7 +40,7 @@
             <td>@item.FileNo</td>
             <td> @(item.Branch == null?"": item.Branch.Name)  </td>
             <td> @(item.Zone == null?"": item.Zone.Name) </td>
-
+            <td> @(item.Locality == null?"": item.Locality.Name) </td>
             @*<td>@(item.AllotmentLetterDate == null ? "" : (Convert.ToDateTime(item.AllotmentLetterDate)).ToString("dd-MMM-yyyy"))</td>*@
             <td>@(item.PossessionDate == null ? "" : (Convert.ToDateTime(item.PossessionDate)).ToString("dd-MMM-yyyy"))</td>
             <td>@(item.CreatedDate == null ? "" : (Convert.ToDateTime(item.CreatedDate)).ToString("dd-MMM-yyyy"))</td>
