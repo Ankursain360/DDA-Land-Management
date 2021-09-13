@@ -3,6 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
+            <th> Reference No. </th>
             <th> Plot No </th>
             <th> Area </th>
             <th> Area Unit </th>
@@ -25,6 +26,7 @@
             @foreach (var item in Model.Results)
             {
         <tr>
+            <td>@item.Id</td>
             <td>@item.PlotNo</td>
             <td>@item.Area</td>
             <td>@item.AreaUnit</td>

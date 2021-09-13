@@ -376,7 +376,7 @@ namespace LeaseDetails.Controllers
                                                 #region HTML Body Generation
                                                 KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
                                                 bodyDTO.ApplicantName = Data.Name;
-                                                bodyDTO.Remarks = " Your KYC details against File No"+ Data.FileNo+" are not complete. Now you are requested to login into the portal and fill the missing details and resubmit the application.";
+                                                bodyDTO.Remarks = " Your KYC details with Reference No.- " + Data.Id + "  and File No - " + Data.FileNo + " are not complete. Now you are requested to login into the portal and fill the missing details and resubmit the application.";
                                                 bodyDTO.Link = linkhref;
                                                 bodyDTO.path = path;
                                                 string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
@@ -423,7 +423,7 @@ namespace LeaseDetails.Controllers
                                                 #region HTML Body Generation
                                                 KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
                                                 bodyDTO.ApplicantName = Data.Name;
-                                                bodyDTO.Remarks = "Your KYC details for" + Data.FileNo + "  are verified. Now you are requested to login into the portal and pay the Outstanding Dues if any.";
+                                                bodyDTO.Remarks = "Your KYC details with Reference No.- " + kyc.Id + "  and File No - " + kyc.FileNo +  " are verified. Now you are requested to login into the portal and pay the Outstanding Dues if any.";
                                                 bodyDTO.Link = linkhref;
                                                 bodyDTO.path = path;
                                                 string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
