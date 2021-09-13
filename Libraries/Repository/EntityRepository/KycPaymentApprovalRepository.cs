@@ -58,6 +58,11 @@ namespace Libraries.Repository.EntityRepository
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
+                                        && (string.IsNullOrEmpty(model.property) || x.Kyc.Property.Contains(model.property))
+                                       && (string.IsNullOrEmpty(model.Fileno) || x.Kyc.FileNo.Contains(model.Fileno))
+                                       && (string.IsNullOrEmpty(model.zone) || x.Kyc.Zone.Name.Contains(model.zone))
+                                       && (string.IsNullOrEmpty(model.locality) || x.Kyc.Locality.Name.Contains(model.locality))
+                                       && (string.IsNullOrEmpty(model.PlotNo) || x.Kyc.PlotNo.Contains(model.PlotNo))
                                         )
                                         .GetPaged<Kycdemandpaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -79,7 +84,13 @@ namespace Libraries.Repository.EntityRepository
                                         && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                         && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                         && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
-                                         )
+                                        && (string.IsNullOrEmpty(model.property) || x.Kyc.Property.Contains(model.property))
+                                       && (string.IsNullOrEmpty(model.Fileno) || x.Kyc.FileNo.Contains(model.Fileno))
+                                       && (string.IsNullOrEmpty(model.zone) || x.Kyc.Zone.Name.Contains(model.zone))
+                                       && (string.IsNullOrEmpty(model.locality) || x.Kyc.Locality.Name.Contains(model.locality))
+                                       && (string.IsNullOrEmpty(model.PlotNo) || x.Kyc.PlotNo.Contains(model.PlotNo))
+
+                                        )
                                         .OrderBy(a => a.CreatedDate)
                                         .GetPaged<Kycdemandpaymentdetails>(model.PageNumber, model.PageSize);
 
@@ -108,7 +119,12 @@ namespace Libraries.Repository.EntityRepository
                                        && (model.StatusId == 0 ? x.PendingAt != "0" : x.PendingAt == "0")
                                        && (model.StatusId == 0 ? (myIdArray).Contains(x.Id) : x.PendingAt == "0")
                                        && (model.approvalstatusId == 0 ? (x.ApprovedStatus == x.ApprovedStatus) : (x.ApprovedStatus == model.approvalstatusId))
-                                       )
+                                       && (string.IsNullOrEmpty(model.property) || x.Kyc.Property.Contains(model.property))
+                                       && (string.IsNullOrEmpty(model.Fileno) || x.Kyc.FileNo.Contains(model.Fileno))
+                                       && (string.IsNullOrEmpty(model.zone) || x.Kyc.Zone.Name.Contains(model.zone))
+                                       && (string.IsNullOrEmpty(model.locality) || x.Kyc.Locality.Name.Contains(model.locality))
+                                       && (string.IsNullOrEmpty(model.PlotNo) || x.Kyc.PlotNo.Contains(model.PlotNo))
+                                      )
                                        .OrderByDescending(a => a.CreatedDate)
                                        .GetPaged<Kycdemandpaymentdetails>(model.PageNumber, model.PageSize);
 

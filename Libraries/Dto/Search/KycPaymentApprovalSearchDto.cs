@@ -13,6 +13,11 @@ namespace Dto.Search
         public string name { get; set; }
         public int StatusId { get; set; }
         public int approvalstatusId { get; set; }
+        public string PlotNo { get; set; }
+        public string property { get; set; }
+        public string Fileno { get; set; }
+        public string zone { get; set; }
+        public string locality { get; set; }
     }
 }
 

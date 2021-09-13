@@ -7,6 +7,16 @@ $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
 });
 
+$("#btnReset").click(function () {
+    
+    $('#txtName').val('');
+    $('#txtFileNo').val('');
+    $('#txtZone').val('');
+    $('#txtLocality').val('');
+    $('#txtPlot').val('');
+    $('#ApprovalStatus').val('0').trigger('change');
+    GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+});
 $("#btnSearch").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
 });
@@ -61,6 +71,12 @@ function GetDetails(pageNumber, pageSize, sortOrder, StatusId) {
 function GetSearchParam(pageNumber, pageSize, sortOrder, StatusId) {
     var model = {
         name: "test",
+        property: $('#txtName').val(),
+        Fileno: $('#txtFileNo').val(),
+        zone: $('#txtZone').val(),
+        locality: $('#txtLocality').val(),
+        PlotNo: $('#txtPlot').val(),
+
         StatusId: parseInt(StatusId),
         approvalstatusId: parseInt($("#ApprovalStatus option:selected").val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
@@ -110,6 +126,68 @@ $("input[name='radioStatus']").click(function () {
 
 });
 $('#ApprovalStatus').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
+
+
+
+$('#txtName').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
+
+$('#txtFileNo').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
+
+$('#txtZone').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
+
+$('#txtLocality').change(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
+    }
+});
+
+$('#txtPlot').change(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
         GetDetails(currentPageNumber, currentPageSize, sortOrder, StatusId);
