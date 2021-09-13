@@ -286,6 +286,9 @@ function GetForwardedUserList() {
                 }
                 $("#ApprovalUserId").val(null).trigger('change');
                 $("#ApprovalUserId").html(html);
+                if (response.length == 1) {
+                    $("#ApprovalUserId").val(response[0].userId).trigger('change');
+                }
             }
         }
     });

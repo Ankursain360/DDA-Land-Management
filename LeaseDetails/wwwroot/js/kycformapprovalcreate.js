@@ -190,7 +190,10 @@ function GetForwardedUserList() {
                         html = html + '<option value=' + response[i].userId + '>' + response[i].name + '</option>';
                     }
                     $("#ApprovalUserId").val(null).trigger('change');
-                    $("#ApprovalUserId").html(html);
+                $("#ApprovalUserId").html(html);
+                if (response.length == 1) {
+                    $("#ApprovalUserId").val(response[0].userId).trigger('change');
+                }
                 
             }
         }
