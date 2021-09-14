@@ -175,8 +175,8 @@ h6 {
 
 /*login page css*/
 
-.hcolor{
-      color:white !important;
+.hcolor {
+    color: white !important;
 }
 
 #LoginPage {
@@ -186,22 +186,22 @@ h6 {
     position: relative;
 }
 
-#LoginPage::before {
-    content: '';
-    display: block;
-    position: absolute;
-    height: 100%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgb(75, 80, 162);
-    background: -moz-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
-    background: -webkit-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
-    background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
-    opacity: .95;
-    z-index: 0z;
-}
+    #LoginPage::before {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgb(75, 80, 162);
+        background: -moz-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+        background: -webkit-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+        background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
+        opacity: .95;
+        z-index: 0z;
+    }
 
 .login {
     position: relative;
@@ -221,13 +221,13 @@ figcaption h6 {
     position: relative;
 }
 
-.input-form .form-group small {
-    position: absolute;
-    color: #f00;
-    font-size: .7rem;
-    bottom: -14px;
-    font-weight: 600;
-}
+    .input-form .form-group small {
+        position: absolute;
+        color: #f00;
+        font-size: .7rem;
+        bottom: -14px;
+        font-weight: 600;
+    }
 
 .input-form .form-control {
     font-size: .9rem;
@@ -235,6 +235,8 @@ figcaption h6 {
 
 .input-form .form-group {
     margin-bottom: 1.2rem;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 .input-form {
@@ -249,18 +251,18 @@ figcaption h6 {
     position: relative;
 }
 
-.icon i {
-    position: absolute;
-    z-index: 1;
-    top: 20px;
-    bottom: 0;
-    margin: auto;
-    font-size: 1rem;
-    color: #707070;
-    height: 30px;
-    line-height: 30px;
-    left: 10px;
-}
+    .icon i {
+        position: absolute;
+        z-index: 1;
+        top: 20px;
+        bottom: 0;
+        margin: auto;
+        font-size: 1rem;
+        color: #707070;
+        height: 30px;
+        line-height: 30px;
+        left: 20px !important;
+    }
 
 .is-invalid i,
 .is-invalid .form-control,
@@ -307,11 +309,11 @@ figcaption h6 {
     right: 35px;
 }
 
-.code .codeImg img {
-    height: 20px;
-    width: 50px;
-    display: block;
-}
+    .code .codeImg img {
+        height: 20px;
+        width: 50px;
+        display: block;
+    }
 
 .overflow-hidden {
     overflow: hidden;

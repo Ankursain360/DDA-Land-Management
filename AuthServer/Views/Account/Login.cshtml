@@ -11,48 +11,57 @@
     {
 
         <form asp-route="Login" class="input-form">
+
             <input type="hidden" asp-for="ReturnUrl" />
             <input type="hidden" asp-for="Data" id="hdnvals" />
-            <div class="form-group icon">
-                <i class="ri-user-line"></i>
-                <label asp-for="Username"></label>
-                <input class="form-control" placeholder="Username" asp-for="Username" autocomplete="off" maxlength="30" autofocus>
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group icon">
-                <i class="ri-lock-line"></i>
-                <label asp-for="Password"></label>
-                <input type="password" class="form-control" placeholder="Password" asp-for="Password" maxlength="30" autocomplete="off">
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group icon">
-                @*<i class="ri-code-s-slash-line"></i>*@
-                <label>Captcha Code (<span class="text-danger">Case-Sensitive</span>)</label>
-                <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="4" autocomplete="off">
-                <span asp-validation-for="CaptchaCode" class="text-danger"></span>
-            </div>
-            <div class="codeImg">
-                <img src="~/get-captcha-image" id="img-captcha">
-                <i class="ri-refresh-line" id="refreshcaptcha"></i>
-            </div>
-
-
-
-            @if (Model.AllowRememberLogin)
-            {
-                <div class="d-flex align-items-center">
-                    <div class="form-group form-check">
-                        <input class="form-check-input" asp-for="RememberLogin">
-                        <label class="form-check-label" asp-for="RememberLogin">Remember Me</label>
-                    </div>
-                    <div class="form-group ms-auto">
-                        <a href="https://master.managemybusinessess.com/ForgetPassword/create" id="ForgotPassword" class="text-primary">Forgot Password?</a>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <strong> Authority Login</strong>
                 </div>
-            }
+                <div class="form-group icon mt-2">
+                    <i class="ri-user-line"></i>
+                    <label asp-for="Username"></label>
+                    <input class="form-control" placeholder="Username" asp-for="Username" autocomplete="off" maxlength="30" autofocus>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group icon">
+                    <i class="ri-lock-line"></i>
+                    <label asp-for="Password"></label>
+                    <input type="password" class="form-control" placeholder="Password" asp-for="Password" maxlength="30" autocomplete="off">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group icon ">
+                    @*<i class="ri-code-s-slash-line"></i>*@
+                    <label>Captcha Code (<span class="text-danger">Case-Sensitive</span>)</label>
+                    <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Enter Captcha *" maxlength="4" autocomplete="off">
+                    <span asp-validation-for="CaptchaCode" class="text-danger"></span>
+                </div>
+                <div class="codeImg ms-3">
+                    <img src="~/get-captcha-image" id="img-captcha">
+                    <i class="ri-refresh-line" id="refreshcaptcha"></i>
+                </div>
 
-            <button class="btn btn-theme px-4" name="button" id="btnlogin" value="login">Login</button>
-            <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
+
+
+                @if (Model.AllowRememberLogin)
+                {
+                    <div class="d-flex align-items-center pt-1">
+                        <div class="form-group form-check">
+                            <input class="form-check-input ms-1" asp-for="RememberLogin">
+                            <label class="form-check-label" asp-for="RememberLogin">Remember Me</label>
+                        </div>
+                        <div class="form-group ms-auto">
+                            <a href="https://master.managemybusinessess.com/ForgetPassword/create" id="ForgotPassword" class="text-primary">Forgot Password?</a>
+                        </div>
+                    </div>
+                }
+                <div class="pb-3">
+                    <button class="btn btn-theme ms-2 px-4" name="button" id="btnlogin" value="login">Login</button>
+                    <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>
+                </div>
+                @*<button class="btn btn-theme px-4" name="button" id="btnlogin" value="login">Login</button>
+                    <button class="btn btn-theme px-4" name="button" value="cancel">Cancel</button>*@
+            </div>
             @*<div class="container-fluid">
                     <p class="my-0 py-2">
                         <a href="https://damagepayee.managemybusinessess.com/">Damage Payee Public Interface</a>

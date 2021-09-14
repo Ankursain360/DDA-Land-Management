@@ -50,8 +50,8 @@ namespace Dto.Master
         [Required(ErrorMessage = "Date is Mandatory ")]
         public List<DateTime> DateofPaymentByAllottee { get; set; }
         
-        [NotMapped]
-        [Required(ErrorMessage = "Proof in .Pdf is Mandatory ")]
+       // [NotMapped]
+       // [Required(ErrorMessage = "Proof in .Pdf is Mandatory ")]
         public List<IFormFile> Proofinpdf1 { get; set; }
        
         [NotMapped]
