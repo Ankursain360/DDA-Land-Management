@@ -107,8 +107,10 @@ namespace LeaseForPublic.Controllers
             kyc.EmailId = email;
             kyc.Name = name;
             kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-            kyc.BranchList = await _kycformService.GetAllBranchList();
+            
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            // kyc.BranchList = await _kycformService.GetAllBranchList();
+            kyc.BranchList = await _kycformService.GetAllBranch(kyc.PropertyTypeId);
             kyc.ZoneList = await _kycformService.GetAllZoneList();
             kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
             return View(kyc);
@@ -129,8 +131,9 @@ namespace LeaseForPublic.Controllers
 
                 
                 kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-                kyc.BranchList = await _kycformService.GetAllBranchList();
+                //kyc.BranchList = await _kycformService.GetAllBranchList();
                 kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+                kyc.BranchList = await _kycformService.GetAllBranch(kyc.PropertyTypeId);
                 kyc.ZoneList = await _kycformService.GetAllZoneList();
                 kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
 
@@ -479,11 +482,11 @@ namespace LeaseForPublic.Controllers
         {
             var Data = await _kycformService.FetchSingleResult(id);
             Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-            Data.BranchList = await _kycformService.GetAllBranchList();
+           // Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
-
+            Data.BranchList = await _kycformService.GetAllBranch(Data.PropertyTypeId);
             var email = HttpContext.Session.GetString("Email");
             var name = HttpContext.Session.GetString("Name");
             ViewBag.Title = name;
@@ -507,8 +510,9 @@ namespace LeaseForPublic.Controllers
             ViewBag.Title1 = email;
             var Data = await _kycformService.FetchSingleResult(id);
             kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-            kyc.BranchList = await _kycformService.GetAllBranchList();
+           // kyc.BranchList = await _kycformService.GetAllBranchList();
             kyc.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
+            kyc.BranchList = await _kycformService.GetAllBranch(kyc.PropertyTypeId);
             kyc.ZoneList = await _kycformService.GetAllZoneList();
             kyc.LocalityList = await _kycformService.GetLocalityList(kyc.ZoneId);
             string AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
@@ -684,10 +688,10 @@ namespace LeaseForPublic.Controllers
             ViewBag.Title1 = email;
             var Data = await _kycformService.FetchSingleResult(id);
             Data.LeasetypeList = await _kycformService.GetAllLeasetypeList();
-            Data.BranchList = await _kycformService.GetAllBranchList();
+            //Data.BranchList = await _kycformService.GetAllBranchList();
             Data.PropertyTypeList = await _kycformService.GetAllPropertyTypeList();
             Data.ZoneList = await _kycformService.GetAllZoneList();
-           
+            Data.BranchList = await _kycformService.GetAllBranch(Data.PropertyTypeId);
             Data.LocalityList = await _kycformService.GetLocalityList(Data.ZoneId);
             if (Data == null)
             {
@@ -786,7 +790,12 @@ namespace LeaseForPublic.Controllers
             return View("../SignupForm/CreateLogin");
         }
 
-
+        [HttpGet]
+        public async Task<JsonResult> GetBranchList(int? propertyTypeId)
+        {
+            propertyTypeId = propertyTypeId ?? 0;
+            return Json(await _kycformService.GetAllBranch(Convert.ToInt32(propertyTypeId)));
+        }
 
     }
 }

@@ -47,8 +47,14 @@ namespace Libraries.Repository.EntityRepository
             List<Locality> List = await _dbContext.Locality.Where(x => x.ZoneId == zoneid && x.IsActive == 1).ToListAsync();
             return List;
         }
+        public async Task<List<Branch>> GetAllBranch(int? propertyTypeId)
+        {
+            List<Branch> List = await _dbContext.Branch.Where(x => x.PropertytypeId == propertyTypeId && x.IsActive == 1 && x.DepartmentId == 50).ToListAsync();
+            return List;
+        }
+        
 
-      
+
         public async Task<List<Kycform>> GetAllKycform()
         {
             return await _dbContext.Kycform

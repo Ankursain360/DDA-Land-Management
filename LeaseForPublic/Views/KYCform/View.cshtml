@@ -35,7 +35,8 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <select disabled class="floating-label-field floating-label-field--s3" asp-for="PropertyTypeId"
-                            asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
+                            asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
                         <option disabled="disabled" selected value="">Select</option>
 
                     </select>

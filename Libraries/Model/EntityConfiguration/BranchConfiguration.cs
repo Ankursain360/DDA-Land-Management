@@ -18,6 +18,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("fk_branchdept_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.HasIndex(e => e.PropertytypeId)
+               .HasName("fk_propertytype_idx");
 
             builder.Property(e => e.Code)
                 .HasMaxLength(10)
@@ -43,6 +45,11 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Branch)
                 .HasForeignKey(d => d.DepartmentId)
                 .HasConstraintName("fk_branchdept");
+
+            builder.HasOne(d => d.Propertytype)
+                .WithMany(p => p.Branch)
+                .HasForeignKey(d => d.PropertytypeId)
+                .HasConstraintName("fk_propertytype");
         }
     }
 }
