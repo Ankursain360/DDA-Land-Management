@@ -100,8 +100,10 @@ namespace LeaseForPublic.Controllers
             }
             else
             {
-                ViewBag.Message = Alert.Show(Messages.payduesError, "", AlertType.Info);
-                return View("Index");
+               ViewBag.Message = Alert.Show(Messages.payduesError, "", AlertType.Info);
+                // return View("Index");
+                // return RedirectToAction("Index", "KYCform");
+                return View("../KYCform/Index");
             }
         }
 
@@ -497,7 +499,9 @@ namespace LeaseForPublic.Controllers
                             return Redirect(paymentLink);
                         }
                         ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
-                        return View("Index");
+                        //return View("Index");
+                        // return RedirectToAction("Index", "KYCform");
+                        return View("../KYCform/Index");
                     }
                     else
                     {
