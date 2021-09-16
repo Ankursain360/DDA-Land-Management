@@ -40,15 +40,17 @@ namespace AuthServer
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySQL(lmsConnection));
-
-            services.Configure<CookiePolicyOptions>(options =>
+            if (HostEnvironment.IsProduction())
             {
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.Lax;
-                options.HttpOnly = HttpOnlyPolicy.Always;
-                options.Secure = CookieSecurePolicy.Always;
-            });
+                services.Configure<CookiePolicyOptions>(options =>
+                                                    {
+                                                        options.CheckConsentNeeded = context => false;
+                                                        options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                                                        options.HttpOnly = HttpOnlyPolicy.Always;
+                                                        options.Secure = CookieSecurePolicy.Always;
+                                                    });
 
+            }
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Lockout.MaxFailedAccessAttempts = (3);
@@ -61,7 +63,7 @@ namespace AuthServer
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                 options.Cookie.HttpOnly = true;
-                options.Cookie.Domain = (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString();
+                options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
                 //options.Cookie.Path = "/Home";
                 options.Cookie.IsEssential = true;
 
@@ -103,15 +105,18 @@ namespace AuthServer
             }
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseCookiePolicy(new CookiePolicyOptions
+            if (env.IsProduction())
             {
-                HttpOnly = HttpOnlyPolicy.Always,
-                Secure = CookieSecurePolicy.Always,
-                MinimumSameSitePolicy = SameSiteMode.Lax
-            });
+                app.UseCookiePolicy(new CookiePolicyOptions
+                {
+                    HttpOnly = HttpOnlyPolicy.Always,
+                    Secure = CookieSecurePolicy.Always,
+                    MinimumSameSitePolicy = SameSiteMode.Lax
+                });
+            }
             app.UseIdentityServer();
             app.UseAuthorization();
-            app.UseSession();  
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
