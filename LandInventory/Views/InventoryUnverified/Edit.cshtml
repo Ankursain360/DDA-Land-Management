@@ -876,14 +876,14 @@
         </div>
       
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <label class="control-label lb-sm">Validate</label>
                 <input type="checkbox" asp-for="IsValidateData" />
             </div>
         </div>
        
     </div>
-    <div class="form-row ">
+    <div class="row ">
         <div class="form-group col-md-12" style="margin-bottom:40px;">
             <input type="submit" value="Update" class="btn btn-theme " onclick="return ValidateForm();" />
             @Html.ActionLink("Back", "Create", "InventoryUnverified", null, new { @class = "btn btn-theme " })

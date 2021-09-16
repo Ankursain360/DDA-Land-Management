@@ -18,6 +18,7 @@ using Service.IApplicationService;
 using Dto.Master;
 using System.Text;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -39,6 +40,7 @@ namespace EncroachmentDemolition.Controllers
         string LocationMapFilePath = "";
         string FirfilePath = "";
         string ApprovalDocumentPath = "";
+        public object JsonRequestBehavior { get; private set; }
 
         public EncroachmentRegisterApprovalController(IEncroachmentRegisterationApprovalService encroachmentRegisterationApprovalService, IEncroachmentRegisterationService encroachmentRegisterationService,
             IConfiguration configuration, IWatchandwardService watchandwardService,
@@ -854,5 +856,88 @@ namespace EncroachmentDemolition.Controllers
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
         }
+
+
+
+
+
+
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            ApprovalDocumentPath = _configuration.GetSection("FilePaths:WatchAndWard:ApprovalDocumentPath").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                ApprovalDocumentPath = _configuration.GetSection("FilePaths:WatchAndWard:ApprovalDocumentPath").Value.ToString();
+                string FilePath = Path.Combine(ApprovalDocumentPath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(ApprovalDocumentPath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(ApprovalDocumentPath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:WatchAndWard:ApprovalDocumentPath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+
     }
 }
