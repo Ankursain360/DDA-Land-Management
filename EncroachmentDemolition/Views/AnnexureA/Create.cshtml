@@ -23,7 +23,7 @@
 
                         <input type="hidden" asp-for="Encroachment.Id" id="hdnId" />
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3" disabled
                                             asp-for="Encroachment.DepartmentId"
@@ -34,7 +34,7 @@
                                     <label class="floating-label">Department</label>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3" disabled
                                             asp-for="Encroachment.ZoneId"
@@ -47,8 +47,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3" disabled
                                             asp-items="@(new SelectList(Model.Encroachment.DivisionList,"Id","Name"))"
@@ -59,7 +59,7 @@
                                     <label class="floating-label">Division</label>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3" disabled
                                             asp-for="Encroachment.LocalityId"
@@ -71,14 +71,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input asp-for="Encroachment.KhasraNo" placeholder="Khasra No" disabled class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Khasra No.</label>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input type="Date" asp-for="Encroachment.EncrochmentDate" placeholder="Date" disabled class="floating-label-field floating-label-field--s3" />
                                     <label class="floating-label">Date</label>
@@ -157,7 +157,7 @@
                         </div>
 
                         <div class="row mt-md-3">
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <textarea asp-for="Encroachment.LocationAddressWithLandMark" placeholder="Location/Address with land mark" disabled
                                               class="floating-label-field floating-label-field--s3 "></textarea>
@@ -286,7 +286,7 @@
                         </div>
                         <br /> <br />
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3" disabled
                                             asp-for="Encroachment.StatusOfLand"
@@ -301,7 +301,7 @@
                         </div>
                         <div id="divForLandStatus">
                             <div class="row">
-                                <div class="form-group col-md-6">
+                                <div class="col-md-6">
                                     <div class="floating-label-wrap">
                                         <select class="floating-label-field floating-label-field--s3" asp-for="Encroachment.IsPossession"
                                                 disabled style="width:100%;">
@@ -350,7 +350,7 @@
                             </div>
                         </div>
                         <div class="row pt-3">
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     @{
                                         if (Model.Encroachment.EncroachmentFirFileDetails != null && Model.Encroachment.EncroachmentFirFileDetails.Count > 0)
@@ -375,7 +375,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input type="text" asp-for="Encroachment.PoliceStation" placeholder="Police Station" disabled class="floating-label-field floating-label-field--s3" />
                                     <span asp-validation-for="Encroachment.PoliceStation" class="text-danger"></span>
@@ -384,8 +384,8 @@
 
                             </div>
                         </div>
-                        <div class="row ">
-                            <div class="form-group col-md-6">
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input type="text" asp-for="Encroachment.SecurityGuardOnDuty" placeholder="Security Guard on Duty" disabled class="floating-label-field floating-label-field--s3" />
                                     <span asp-validation-for="Encroachment.SecurityGuardOnDuty" class="text-danger"></span>
@@ -393,7 +393,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                                     @{
@@ -418,8 +418,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                                     @{
@@ -443,7 +443,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-md-3">
                             <div class="form-group col-md-12">
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <textarea type="text" asp-for="Encroachment.Remarks" placeholder="Remarks" disabled class="floating-label-field floating-label-field--s3"></textarea>

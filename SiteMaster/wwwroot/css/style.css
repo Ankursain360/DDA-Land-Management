@@ -182,6 +182,20 @@ a.no-dec {
     border-color: transparent;
 }
 
+.theme {
+    /*font-size: .9rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 1rem;*/
+    background: rgb(140, 31, 71);
+    background: -moz-linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    background: -webkit-linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    background: linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8c1f47", endColorstr="#362c85", GradientType=1);
+    border-color: transparent;
+}
+
 
 
 /*login page css*/

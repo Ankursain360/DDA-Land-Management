@@ -9,7 +9,7 @@
   
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
-        <div class="form-group col-md-6">
+        <div class="col-md-6">
             <div class="floating-label-wrap">
                 <select id="KhasraNo" class="floating-label-field floating-label-field--s3"
                         asp-items="@(new SelectList(Model.PropertyRegistrationList,"Id","KhasraNo"))">
@@ -19,8 +19,8 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="form-group col-md-12 ">
+    <div class="row mt-md-3">
+        <div class="col-md-12 ">
             <input type="button" value="Generate" id="btnGenerate" class="btn btn-theme" />
             <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
         </div>

@@ -10,7 +10,7 @@
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div class="row">
-            <div class="form-group col-md-6">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
                             asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
@@ -20,7 +20,7 @@
                     <label asp-for="LocalityId" class="floating-label">Locality Name(Village)<span style="color:red">*</span> </label>
                 </div>
             </div>
-            <div class="form-group col-md-6">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="Date" asp-for="EncrochmentDate" value="" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Date"></span>
@@ -28,8 +28,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-6">
+        <div class="row mt-md-3">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="Date" asp-for="EncrochmentDate" value="" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Date"></span>

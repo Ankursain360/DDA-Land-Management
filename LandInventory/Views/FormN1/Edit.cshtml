@@ -28,13 +28,13 @@
 
 
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                         <label class="control-label lb-sm">Khasra No.</label>
                         <input asp-for="KhasraNo" type="text" class="form-control" />
                         <span asp-validation-for="KhasraNo" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="col-md-6">
                         <label class="control-label lb-sm">Land Area Acquired</label>
                         <input asp-for="LandAreaAcquired" type="text" class="form-control" />
                         <span asp-validation-for="LandAreaAcquired" class="text-danger"></span>
@@ -43,8 +43,8 @@
 
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
                         <label class="control-label lb-sm">Award No.</label>
                         <input asp-for="AwardNo" type="text" class="form-control" />
                         <span asp-validation-for="AwardNo" class="text-danger"></span>
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date of Possession</label>
                         <input asp-for="DateOfPossession" type="date" class="form-control" />
@@ -69,7 +69,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date on which possession taken over</label>
                         <input asp-for="DateOnWhichPossessionTakenOver" type="date" class="form-control" />
@@ -82,7 +82,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Amount of Award</label>
                         <input asp-for="AmountOfAward" type="text" class="form-control" />
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">ADI Court</label>
@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Certificate by Land Record Officer to the correctness of entry</label>
                         <input asp-for="CertificateToCorrectnessOfEntry" type="text" class="form-control" />
@@ -140,14 +140,14 @@
                         <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date of Transfer</label>
                         <input asp-for="DateOfTransfer" type="date" class="form-control" />
                         <span asp-validation-for="DateOfTransfer" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row">
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
@@ -158,7 +158,7 @@
                         <span asp-validation-for="IsActive" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
                         <textarea asp-for="Remarks" type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
@@ -167,7 +167,7 @@
                 </div>
 
 
-                <div class="form-row ">
+                <div class="row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "FormN1", null, new { @class = "btn btn-primary dda-pageheading" })
