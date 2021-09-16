@@ -17,6 +17,7 @@ namespace Libraries.Model.Entity
             Userprofile = new HashSet<Userprofile>();
             Kycform = new HashSet<Kycform>();
         }
+        public int? PropertytypeId { get; set; }
 
         [Required(ErrorMessage = "Branch Name is mandatory")]
         [Remote(action: "Exist", controller: "Branch", AdditionalFields = "Id")]
@@ -29,6 +30,7 @@ namespace Libraries.Model.Entity
         public int? DepartmentId { get; set; }
         public byte? IsActive { get; set; }
         public Department Department { get; set; }
+        public virtual PropertyType Propertytype { get; set; }
         [NotMapped]
         public string DepartmentName { get; set; }
         [NotMapped]

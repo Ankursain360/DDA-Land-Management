@@ -1,4 +1,15 @@
-﻿
+﻿function onChange(id) {
+
+    HttpGet(`/KYCform/GetBranchList/?propertyTypeId=${id}`, 'json', function (response) {
+        var html = '<option  value="">Select</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+
+        $("#BranchId").select2('val', '')
+        $("#BranchId").html(html);
+    });
+};
 
 $(document).ready(function () {
 

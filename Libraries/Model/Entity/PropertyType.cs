@@ -10,6 +10,7 @@ namespace Libraries.Model.Entity
     {
         public PropertyType()
         {
+            Branch = new HashSet<Branch>();
             Interest = new HashSet<Interest>();
             Rate = new HashSet<Rate>();
             //Premiumrate = new HashSet<Premiumrate>();
@@ -36,5 +37,6 @@ namespace Libraries.Model.Entity
         //public ICollection<Documentcharges> Documentcharges { get; set; }
         ////public ICollection<Licencefees> Licencefees { get; set; }
         public ICollection<Kycform> Kycform { get; set; }
+        public virtual ICollection<Branch> Branch { get; set; }
     }
 }

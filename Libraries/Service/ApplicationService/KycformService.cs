@@ -51,7 +51,11 @@ namespace Service.ApplicationService
             List<Locality> List = await _kycformRepository.GetLocalityList(zoneid);
             return List;
         }
-
+        public async Task<List<Branch>> GetAllBranch(int? propertyTypeId)
+        {
+            List<Branch> List = await _kycformRepository.GetAllBranch(propertyTypeId);
+            return List;
+        }
         public async Task<List<Kycform>> GetAlldownloadKycform(string mobileno)
         {
             List<Kycform> List = await _kycformRepository.GetAlldownloadKycform(mobileno);
