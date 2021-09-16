@@ -100,7 +100,7 @@
         <div class="row mt-md-3">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="file" asp-for="PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf, image/png, image/jpeg">
+                    <input type="file" asp-for="PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf, image/png, image/jpeg">
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="PaymentProofDocumentIFormFile"></span>
                     <label class="floating-label">Upload Copy of Payment Proof<span style="color:red">(.pdf only)</span></label>
                 </div>

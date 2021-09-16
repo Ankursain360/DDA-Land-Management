@@ -148,4 +148,41 @@ $(document).delegate('a.delete-record2', 'click', function (e) {
 });
 
 
+$('#Proofinpdf1').change(function () {
+    var fileInput = document.getElementById('Proofinpdf1');
+    var filePath = fileInput.value;
+    const size = (Proofinpdf1.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
 
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.PDF|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}
+
+
+$("#btnCreate").click(function () {
+    if ($("#rSubsequent").is(":checked")) {
+        var checkresult = false;
+        var Proof = $('#Proofinpdf1').val();
+        if (Proof == null || Proof == "") {
+            checkresult = false;
+            $("#msg").show();
+        } else {
+            checkresult = true;
+            $("#msg").hide();
+        }
+        return checkresult
+    } else {}
+});

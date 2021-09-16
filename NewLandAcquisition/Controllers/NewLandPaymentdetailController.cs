@@ -17,9 +17,7 @@ using Core.Enum;
 using Dto.Master;
 using Utility.Helper;
 using Microsoft.Extensions.Configuration;
-
 using Microsoft.AspNetCore.Http;
-
 using System.IO;
 
 namespace NewLandAcquisition.Controllers

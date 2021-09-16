@@ -65,47 +65,6 @@ namespace IdentityServerHost.Quickstart.UI
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
         {
-            //Reset Session added by sachin for audit points
-
-            HttpContext.Session.Clear();
-            if (_httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"] != null)
-            {
-                CookieOptions optionss2 = new CookieOptions();
-                optionss2.Path = "/Home";
-                string any = _httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"];
-                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", string.Empty, optionss2);
-                var Value = GenerateHashKey();
-                HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Value, optionss2);
-            }
-            if (_httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null)
-            {
-                string any = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
-                CookieOptions optionss1 = new CookieOptions();
-               // optionss1.Expires = DateTime.Now.AddDays(-20);
-                optionss1.Path = "/Home";
-                HttpContext.Response.Cookies.Append(".AspNetCore.Session", string.Empty, optionss1);
-                var Value = GenerateHashKey();
-                CookieOptions optionss2 = new CookieOptions();
-                optionss2.Path = "/Home";
-                HttpContext.Response.Cookies.Append(".AspNetCore.Session", Value, optionss2);
-            }
-            if (_httpContextAccessor.HttpContext.Request.Cookies["AuthToken"] != null)
-            {
-                HttpContext.Response.Cookies.Append("AuthToken", string.Empty);
-                CookieOptions optionss = new CookieOptions();
-                optionss.Expires = DateTime.Now.AddDays(-20);
-            }
-            if (_httpContextAccessor.HttpContext.Request.Cookies["__AntiXsrfToken"] != null)
-            {
-                HttpContext.Response.Cookies.Append("__AntiXsrfToken", string.Empty);
-            }
-            string newSessionID = _httpContextAccessor.HttpContext.Request.Cookies["ASP.NET_SessionId"];
-            string newCoreSessionID = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
-
-
-          
-            //
-
             // build a model so we know what to show on the login page
             var vm = await BuildLoginViewModelAsync(returnUrl);
 
@@ -178,47 +137,23 @@ namespace IdentityServerHost.Quickstart.UI
                 {
                     var user = await _userManager.FindByNameAsync(model.Username);
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
-                    #region session fixation
+                    #region cookie based session fixation added by sachin bhatt
+
                     CookieOptions options = new CookieOptions();
-                    options.Expires = DateTime.Now.AddMinutes(15);
-                    CookieOptions optionss2 = new CookieOptions();
-                    optionss2.HttpOnly =true;
-                    optionss2.Secure = true;
-                    _httpContextAccessor.HttpContext.Response.Cookies.Append("ASP.NET_SessionId", Guid.NewGuid().ToString(), optionss2);
-                    _httpContextAccessor.HttpContext.Response.Cookies.Append(".AspNetCore.Session", Guid.NewGuid().ToString(), optionss2);                   
-                    // Start Added By Renu For Session Fixation on 27 Jan 2020
-                    string guid = Guid.NewGuid().ToString();
-                    _httpContextAccessor.HttpContext.Session.SetString("AuthToken", guid);
-                    // now create a new cookie with this guid value
-                    _httpContextAccessor.HttpContext.Response.Cookies.Append("AuthToken", guid);
-                    
-                    string sessionauth = _httpContextAccessor.HttpContext.Session.GetString("AuthToken").ToString();
-                    string cookeauth = _httpContextAccessor.HttpContext.Request.Cookies["AuthToken"];
-                    if (_httpContextAccessor.HttpContext.Session.GetString("AuthToken") != null && Request.Cookies["AuthToken"] != null)
-                    {
-                        if (_httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null && _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"] != null)
-                        {
-                            string newSessionID = _httpContextAccessor.HttpContext.Request.Cookies[".AspNetCore.Session"];
-                            _httpContextAccessor.HttpContext.Response.Cookies.Append(".AspNetCore.Session", newSessionID.Substring(0, 24), optionss2); 
-                            string _browserInfo = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
-                            string _sessionValue = user.Id.ToString() + "^" + DateTime.Now.Ticks + "^" + _browserInfo + "^" + System.Guid.NewGuid();
-                            byte[] _encodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(_sessionValue);
-                            string _encryptedString = System.Convert.ToBase64String(_encodeAsBytes);
-                            _httpContextAccessor.HttpContext.Session.SetString("encryptedSession", _encryptedString);
-                            _httpContextAccessor.HttpContext.Response.Cookies.Append("AuthToken", _encryptedString, options);
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("session", "Invalid Session. Please try again");
-                            var vms = await BuildLoginViewModelAsync(model);
-                            return View(vms);
-                        }
-                    }
-                    else
-                    {
-                        var vms = await BuildLoginViewModelAsync(model);
-                        return View(vms); 
-                    }
+                    options.Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                    options.HttpOnly = true;
+                    options.Secure = true;
+                    options.Domain = _configuration.GetSection("CookiesSettings:CookiesDomain").Value.ToString();
+                    options.SameSite = SameSiteMode.Lax;
+                    options.Path = new PathString(_configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString());
+
+                    string _browserInfo = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+                    string _sessionValue = user.Id.ToString() + "^" + DateTime.Now.Ticks + "^" + _browserInfo + "^" + System.Guid.NewGuid();
+                    byte[] _encodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes(_sessionValue);
+                    string _encryptedString = System.Convert.ToBase64String(_encodeAsBytes);
+                    _httpContextAccessor.HttpContext.Response.Cookies.Append("AuthToken", _encryptedString, options);
+
+
                     #endregion
                     if (context != null)
                     {
@@ -247,6 +182,16 @@ namespace IdentityServerHost.Quickstart.UI
                         // user might have clicked on a malicious link - should be logged
                         throw new Exception("invalid return URL");
                     }
+                }
+                else if (result.IsLockedOut)
+                {
+                    //var forgotPassLink = Url.Action(nameof(ForgotPassword), "Account", new { }, Request.Scheme);
+                    //var content = string.Format("Your account is locked out, to reset your password, please click this link: {0}", forgotPassLink);
+                    //var message = new Message(new string[] { userModel.Email }, "Locked out account information", content, null);
+                    //await _emailSender.SendEmailAsync(message);
+                    ModelState.AddModelError("", "The account is locked out");
+                    var vms = await BuildLoginViewModelAsync(model);
+                    return View(vms);
                 }
 
                 await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId: context?.Client.ClientId));
@@ -292,20 +237,23 @@ namespace IdentityServerHost.Quickstart.UI
             {
                 // delete local authentication cookie
                 await _signInManager.SignOutAsync();
-                await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-                await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);   
-
+                await _httpContextAccessor.HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+                await _httpContextAccessor.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+                await _httpContextAccessor.HttpContext.SignOutAsync("Cookies");
+                await _httpContextAccessor.HttpContext.SignOutAsync("oidc");
                 // raise the logout event
                 await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));
             }
             // delete local authentication cookie
-            Response.Cookies.Delete(".AspNetCore.Identity.Application");
-            Response.Cookies.Delete("idserv.external");
-            Response.Cookies.Delete("idserv.session");
-            Response.Cookies.Delete("AuthToken");
-            Response.Cookies.Delete("ASP.NET_SessionId");
-            Response.Cookies.Delete("encryptedSession");
-            Response.Cookies.Delete(".AspNetCore.Session");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Identity.Application");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("idserv.external");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("idserv.session");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("AuthToken");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("ASP.NET_SessionId");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("encryptedSession");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Session");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete(".AspNetCore.Cookies");
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("Auth-cookie");
             // check if we need to trigger sign-out at an upstream identity provider
             if (vm.TriggerExternalSignout)
             {
@@ -316,6 +264,7 @@ namespace IdentityServerHost.Quickstart.UI
 
                 // this triggers a redirect to the external provider for sign-out
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
+
             }
 
             return View("LoggedOut", vm);

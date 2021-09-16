@@ -32,16 +32,16 @@
                     @{
                         @if (Model.ENMDocumentName != null)
                         {
-                            <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                             <a class="badge bg-primary px-2" asp-action="ViewENMDocument" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                         }
                         else
                         {
-                            <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="ENMDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension" accept="application/pdf,  image/png, image/jpeg">
                         }
                     }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="ENMDocumentName"></span>
-                    <label class="floating-label">Upload ENM Document</label>
+                    <label class="floating-label">Upload ENM Document <span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
             <div class="col-md-6">
@@ -448,13 +448,13 @@
                     @{
                         @if (Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentName != null)
                         {
-                            <input type="file" asp-for="@Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">
+                            <input type="file" asp-for="@Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension1" accept="application/pdf,  image/png, image/jpeg">
                             <a class="badge bg-primary px-2" asp-action="ViewPaymentProofDocument" asp-route-id="@Model.Newlandpaymentdetail.FirstOrDefault().Id" target="_blank"> (View File)</a> }
                         else
                         {
-                            <input type="file" asp-for="@Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3" accept="application/pdf,  image/png, image/jpeg">} }
+                            <input type="file" asp-for="@Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentIFormFile" class="floating-label-field floating-label-field--s3 checkExtension1" accept="application/pdf,  image/png, image/jpeg">} }
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="@Model.Newlandpaymentdetail.FirstOrDefault().PaymentProofDocumentName"></span>
-                    <label class="floating-label">Upload Copy of Payment Proof</label>
+                    <label class="floating-label">Upload Copy of Payment Proof <span style="color:red">(.pdf only)</span></label>
                 </div>
             </div>
         </div>
