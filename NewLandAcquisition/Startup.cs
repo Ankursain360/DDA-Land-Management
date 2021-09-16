@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Identity;
 using Service.Common;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace NewLandAcquisition
 {
@@ -51,14 +52,19 @@ namespace NewLandAcquisition
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                options.HttpOnly = HttpOnlyPolicy.Always;
+                options.Secure = CookieSecurePolicy.Always;
             });
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                 options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString();
+                //options.Cookie.Path = "/Home";
+                options.Cookie.IsEssential = true;
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -100,12 +106,12 @@ namespace NewLandAcquisition
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddCookie("Cookies", options =>
-            {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                options.SlidingExpiration = false;
-                options.Cookie.Name = "Auth-cookie";
-            })
+             .AddCookie("Cookies", options =>
+             {
+                 options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                 options.SlidingExpiration = true;
+                 options.Cookie.Name = "Auth-cookie";
+             })
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -147,6 +153,9 @@ namespace NewLandAcquisition
             app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseSession();
+            //prevent session hijacking
+            app.preventSessionHijacking();
+            // 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

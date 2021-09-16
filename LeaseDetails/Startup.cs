@@ -83,7 +83,7 @@ namespace LeaseDetails
             })
             .AddCookie("Cookies", options =>
             {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 options.SlidingExpiration = false;
                 options.Cookie.Name = "Auth-cookie";
             })

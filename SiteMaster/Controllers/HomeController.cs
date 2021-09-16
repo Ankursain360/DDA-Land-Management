@@ -1,4 +1,5 @@
 ﻿using Dto.Master;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
         private readonly ISiteContext _siteContext;

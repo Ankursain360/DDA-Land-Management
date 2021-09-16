@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System; 
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using SiteMaster.Helper;
+using System.Threading.Tasks; 
+using Microsoft.AspNetCore.Http; 
 
 namespace SiteMaster.Middleware
 {
@@ -18,6 +15,11 @@ namespace SiteMaster.Middleware
         }
         public async Task Invoke(HttpContext context)
         {
+            if (context.User == null || !context.User.Identity.IsAuthenticated)
+            {
+                await context.Response.WriteAsync("You're not logged in. "); 
+                return;
+            }
 
             string _sessionIPAdress = string.Empty;
             string _sessionBrowserInfo = string.Empty;
@@ -82,34 +84,34 @@ namespace SiteMaster.Middleware
                             optionss.Secure = true;
                             context.Response.Cookies.Append(".AspNetCore.Session", "", optionss);
                             context.Response.StatusCode = 401; //Bad Request                
-                            await context.Response.WriteAsync("Invalid Session");
+                            await context.Response.WriteAsync("Dear User,You're not logged in. Error 401 Invalid Session");
                             return;
                         }
                     }
                     else
                     {
                         context.Response.StatusCode = 401; //Bad Request                
-                        await context.Response.WriteAsync("Invalid Session");
-                        return;
+                            await context.Response.WriteAsync("Dear User,You're not logged in. Error 401 Invalid Session");
+                            return;
                     }
                 }else
                 {
                     context.Response.StatusCode = 401; //Bad Request                
-                    await context.Response.WriteAsync("Invalid Session");
-                    return;
+                        await context.Response.WriteAsync("Dear User,You're not logged in. Error 401 Invalid Session");
+                        return;
                 }
                 }
                 else
                 {
-                    //context.Response.StatusCode = 401; //Bad Request                
-                    //await context.Response.WriteAsync("Invalid Session");
-                    //return;
+                    context.Response.StatusCode = 401; //Bad Request                
+                    await context.Response.WriteAsync("Dear User,You're not logged in. Error 401 Invalid Session");
+                    return;
                 }
             }
             else
             {
                 context.Response.StatusCode = 401; //Bad Request                
-                await context.Response.WriteAsync("Invalid Session");
+                await context.Response.WriteAsync("Dear User,You're not logged in. Error 401 Invalid Session");
                 return;
             }
 
