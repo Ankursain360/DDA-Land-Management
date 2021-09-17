@@ -70,6 +70,8 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandkhasraRepository,NewlandkhasraRepository>();
             services.AddScoped<INewlandawardmasterdetailRepository, NewlandawardmasterdetailRepository>();
             services.AddScoped<INewLandDemandListDetailsRepository, NewLandDemandListDetailsRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -119,6 +121,7 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<INewlandkhasraService, NewlandkhasraService>();
             services.AddScoped<INewlandawardmasterdetailService, NewlandawardmasterdetailsService>();
             services.AddScoped<INewLandDemandListDetailsService, NewLandDemandListDetailsService>();
+            services.AddScoped<IAuditService, AuditService>();
 
         }
     }

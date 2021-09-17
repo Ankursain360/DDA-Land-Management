@@ -338,6 +338,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Kycdemandpaymentdetails> Kycdemandpaymentdetails { get; set; }
 
+        public virtual DbSet<AuditModel> AuditModel { get;set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -570,7 +571,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisLayerConfiguration());
             modelBuilder.ApplyConfiguration(new Newlandannexure2Configuration());
             modelBuilder.ApplyConfiguration(new NewlandnotificationdetailsConfiguration());
-
+            modelBuilder.ApplyConfiguration(new AuditTrailConfiguration());
 
             // Lease Details module
 
