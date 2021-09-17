@@ -1,28 +1,30 @@
-using FileDataLoading.Filters;
-using FileDataLoading.Infrastructure.Extensions;
-using Libraries.Model;
-using Libraries.Model.Entity;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Model.Entity;
-using Service.Common;
-using System;
+using Libraries.Model;
+using FileDataLoading.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
-using System.IO;
+using FileDataLoading.Filters;
+using Service.Common;
+using Libraries.Model.Entity;
+using Model.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace FileDataLoading
 {
     public class Startup
-    { 
+    {
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
@@ -32,10 +34,8 @@ namespace FileDataLoading
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment HostEnvironment { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             if (HostEnvironment.IsDevelopment())
             {
                 services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
@@ -49,41 +49,48 @@ namespace FileDataLoading
                 );
             }
 
-
-            services.Configure<CookiePolicyOptions>(options =>
+            if (HostEnvironment.IsProduction())
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.HttpOnly = true;
-            });
+                services.Configure<CookiePolicyOptions>(options =>
+                {
+                    options.CheckConsentNeeded = context => false;
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    options.HttpOnly = HttpOnlyPolicy.Always;
+                    options.Secure = CookieSecurePolicy.Always;
+                });
+            }
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+            services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
+            {
+                opt.Password.RequiredLength = 7;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+                opt.User.RequireUniqueEmail = true;
+            })
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
-              .AddEntityFrameworkStores<DataContext>()
-              .AddDefaultTokenProviders();
-
-            services.RegisterDependency();
-            services.AddAutoMapperSetup();
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+            opt.TokenLifespan = TimeSpan.FromHours(2));
 
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
             });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
+                //options.Cookie.Path = "/Home";
+                options.Cookie.IsEssential = true;
+            });
+            services.RegisterDependency();
+            services.AddAutoMapperSetup();
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
@@ -95,28 +102,28 @@ namespace FileDataLoading
             })
             .AddCookie("Cookies", options =>
             {
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                options.SlidingExpiration = false;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = true;
                 options.Cookie.Name = "Auth-cookie";
             })
-           .AddOpenIdConnect("oidc", options =>
-           {
-               options.SignInScheme = "Cookies";
-               options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
-               options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
-               options.ClientId = "mvc";
-               options.ClientSecret = "secret";
-               options.ResponseType = "code"; 
-               options.Scope.Add("api1"); 
-               options.SaveTokens = true;
-               options.UseTokenLifetime = true;
-               options.Events.OnRedirectToIdentityProvider = context => // <- HERE
-               {                                                        // <- HERE
-                   context.ProtocolMessage.Prompt = "login";            // <- HERE
-                   return Task.CompletedTask;                           // <- HERE
-               };                                                       // <- HERE
-           });
 
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.SignInScheme = "Cookies";
+                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+                options.Scope.Add("api1");
+                options.SaveTokens = true;
+                options.UseTokenLifetime = true;
+                options.Events.OnRedirectToIdentityProvider = context => // <- HERE
+                {                                                        // <- HERE
+                    context.ProtocolMessage.Prompt = "login";            // <- HERE
+                    return Task.CompletedTask;                           // <- HERE
+                };                                                       // <- HERE
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -132,27 +139,29 @@ namespace FileDataLoading
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            if (env.IsProduction())
+            {
+                app.UseCookiePolicy(new CookiePolicyOptions
+                {
+                    HttpOnly = HttpOnlyPolicy.Always,
+                    Secure = CookieSecurePolicy.Always,
+                    MinimumSameSitePolicy = SameSiteMode.Lax
+                });
+            }
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCookiePolicy();
             app.UseSession();
+            //prevent session hijacking
+            app.preventSessionHijacking();
+            // 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
-
         }
-
-
-
-
-
-
-
     }
 }

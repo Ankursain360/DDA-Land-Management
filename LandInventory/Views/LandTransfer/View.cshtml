@@ -26,7 +26,7 @@
             <div class="list-unstyled m-0 ps-2 pe-1 ps-md-4 pe-md-3 collapse" id="collapseExample">
                 <div id="allDetails">
 
-                    <div class="row">
+                    <div class="row mt-md-3">
                         <div class="col-md-4">
                             <div class="floating-label-wrap">
                                 <select class="floating-label-field floating-label-field--s3" disabled asp-for="Propertyregistration.InventoriedInId">
@@ -163,7 +163,7 @@
                     </div>
                     <div id="DivArea">
                         <h2 class="my-3 sub-heading">Area</h2>
-                        <div class="row">
+                        <div class="row mt-md-3">
                             <div class="col-md-4">
                                 <div class="floating-label-wrap">
 
@@ -182,7 +182,7 @@
                         <div class="row pt-3">
                             <div class="col-md-4">
                                 <div id="bighabis">
-                                    <div class="row">
+                                    <div class="row mt-md-3">
                                         <div class="col-md-4">
                                             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -246,7 +246,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="col-md-4">
                                     <label class="control-label lb-sm lb-sm">Area Unit</label>
                                     <select class="form-control dda-dropdown" asp-for="PropertyRegistration.AreaUnit">
                                         <option value="0">Bigha-Biswa-Biswansi</option>
@@ -254,11 +254,11 @@
                                         <option value="2">Acre</option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="col-md-4">
                                     <label class="control-label lb-sm lb-sm">Total Area(In Bigha-Biswa-Biswansi/Sq Yd./Acre)</label>
                                     <input asp-for="Propertyregistration.TotalAreaInBigha" type="text" class="form-control" limit="200" />
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="col-md-4">
                                     <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
                                     <input asp-for="Propertyregistration.TotalArea" class="form-control numbers" required="required" requiredmsg="Total Area is Mandatory" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="Propertyregistration.TotalArea" class="text-danger lb-sm"></span>
@@ -349,7 +349,7 @@
                     <div id="divFencingBoundaryWall">
                         <h2 class="my-3 sub-heading">Boundary Wall/Fencing</h2>
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="col-md-4">
                                 <div class="floating-label-wrap">
                                     <select class="floating-label-field floating-label-field--s3"
                                             asp-for="Propertyregistration.Boundary" disabled>
@@ -632,8 +632,8 @@
 
     <div id="DivHandedOver">
         <h2 class="my-3 sub-heading">Handed Over</h2>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="HandedOverDepartmentId"
@@ -645,7 +645,7 @@
                     <label asp-for="HandedOverDepartmentId" class="floating-label">Department</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="HandedOverZoneId"
@@ -658,7 +658,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-items="@(new SelectList(Model.HandedOverDivisionList, "Id","Name"))"
@@ -670,22 +670,22 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="HandedOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="HandedOverByNameDesingnation" class="text-danger lb-sm"></span>
                     <label class="floating-label">Name/Designation</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="HandedOverDate" type="date" placeholder="Date" class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="HandedOverDate" class="text-danger lb-sm"></span>
                     <label class="floating-label">Date</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="HandedOverEmailId" type="email" placeholder="Email Id" class="floating-label-field floating-label-field--s3 numbers" />
                     <span asp-validation-for="HandedOverEmailId" class="text-danger lb-sm"></span>
@@ -693,22 +693,22 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="HandedOverMobileNo" placeholder="Mobile No." class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="HandedOverMobileNo" class="text-danger lb-sm"></span>
                     <label class="floating-label">Mobile No.</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="HandedOverLandLineNo" placeholder="Land Line No." class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="HandedOverLandLineNo" class="text-danger lb-sm"></span>
                     <label class="floating-label">Land Line No.</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" asp-for="OrderNo" placeholder="Order No." class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="OrderNo" class="text-danger lb-sm"></span>
@@ -716,8 +716,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
@@ -729,14 +729,14 @@
                     <a target="_blank" href="/LandTransfer/ViewDocument?path=@(Model.CopyofOrderDocPath)">@(Model.CopyofOrderDocPath == "" || Model.CopyofOrderDocPath == string.Empty || Model.CopyofOrderDocPath == null ? "": "View Document")</a>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" asp-for="TransferorderIssueAuthority" placeholder="Transfer order Issue Authority" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="TransferorderIssueAuthority" class="text-danger lb-sm"></span>
                     <label class="floating-label">Transfer order Issue Authority </label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
@@ -751,8 +751,8 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-12">
+        <div class="row mt-md-3">
+            <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea asp-for="HandedOverCommments" placeholder="Comments" class="floating-label-field floating-label-field--s3 pt-3"></textarea>
                     <span asp-validation-for="HandedOverCommments" class="text-danger lb-sm"></span>
@@ -764,8 +764,8 @@
     </div>
     <div id="DivTakenOver">
         <h2 class="my-3 sub-heading">Taken Over</h2>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="TakenOverDepartmentId"
@@ -777,7 +777,7 @@
                     <label asp-for="TakenOverDepartmentId" class="floating-label">Department</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="TakenOverZoneId"
@@ -789,7 +789,7 @@
                     <label asp-for="TakenOverZoneId" class="floating-label">Zone</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="TakenOverDivisionId"
@@ -801,22 +801,22 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="TakenOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="TakenOverByNameDesingnation" class="text-danger lb-sm"></span>
                     <label class="floating-label">Name/Designation</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="DateofTakenOver" placeholder="Date" type="date" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="DateofTakenOver" class="text-danger lb-sm"></span>
                     <label class="floating-label">Date</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="TakenOverEmailId" placeholder="Email Id" type="email" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="TakenOverEmailId" class="text-danger lb-sm"></span>
@@ -824,22 +824,22 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="row mt-md-3">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="TakenOverMobileNo" placeholder="Mobile No." class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
                     <span asp-validation-for="TakenOverMobileNo" class="text-danger lb-sm"></span>
                     <label class="floating-label">Mobile No.</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="TakenOverLandLineNo" placeholder="Land Line No." class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
                     <span asp-validation-for="TakenOverLandLineNo" class="text-danger lb-sm"></span>
                     <label class="floating-label">Land Line No.</label>
                 </div>
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
@@ -882,7 +882,7 @@
 
         <div id="divEncroachmentYesSelectionForLandTransfer" style="display:none;">
             <div class="row pt-3">
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3" asp-for="EncroachmentStatus">
                             <option value="0">Fully Encroached</option>
@@ -892,7 +892,7 @@
                         <label class="floating-label">Encroachment Status </label>
                     </div>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="EncroachementArea" placeholder="Encroched Area(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers"
                                onchange="return ComapareTotalArea(this);"
@@ -901,7 +901,7 @@
                         <label class="floating-label">Encroched Area(in sq. mt.)</label>
                     </div>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="BuildUpInEncroachementArea" placeholder="Builtup in Encroachment Area(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers"
                                id="BuiltupEncroachmentArea" onchange="return ComapareTotalArea(this);"
@@ -911,8 +911,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-4">
+            <div class="row mt-md-3">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="EncroachementArea" placeholder="Vacant(in sq. mt.)" class="floating-label-field floating-label-field--s3 numbers"
                                onkeypress="return numericDecimal(this);" onpaste="return false;"
@@ -921,14 +921,14 @@
                         <label class="floating-label">Vacant(in sq. mt.)</label>
                     </div>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <textarea placeholder="Action On Encroachment" type="text" class="floating-label-field floating-label-field--s3 pt-3" asp-for="ActionOnEncroachment"></textarea>
                         <span asp-validation-for="ActionOnEncroachment" class="text-danger lb-sm"></span>
                         <label class="floating-label">Action On Encroachment</label>
                     </div>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         <input type="file" placeholder="Action Taken Report(ATR)" class="floating-label-field floating-label-field--s3 "
@@ -955,7 +955,7 @@
         @if (ViewBag.IsValidateUser == 2 && Model.Id > 0)
         {*@
     <div class="row pt-3">
-        <div class="form-group col-md-4">
+        <div class="col-md-4">
             <label class="control-label lb-sm">Validate</label>
             @if (@Model.IsValidateData)
             {

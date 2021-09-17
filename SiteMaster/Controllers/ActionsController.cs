@@ -57,11 +57,10 @@ namespace SiteMaster.Controllers
                 if (ModelState.IsValid)
                 {
                     var result = await _actionsService.Create(actions);
-
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                       
+
                         var list = await _actionsService.GetAllActions();
                         return View("Index", list);
                     }
@@ -146,7 +145,7 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            
+
             var result = await _actionsService.Delete(id);
             if (result == true)
             {
@@ -191,7 +190,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-       
+
 
         [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> ActionsList()

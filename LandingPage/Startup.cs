@@ -18,6 +18,9 @@ using Model.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.CookiePolicy;
+
 
 namespace LandingPage
 {
@@ -47,26 +50,46 @@ namespace LandingPage
                 );
             }
 
-            services.Configure<CookiePolicyOptions>(options =>
+            if (HostEnvironment.IsProduction())
             {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
+                services.Configure<CookiePolicyOptions>(options =>
+                {
+                    options.CheckConsentNeeded = context => false;
+                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    options.HttpOnly = HttpOnlyPolicy.Always;
+                    options.Secure = CookieSecurePolicy.Always;
+                });
+            }
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
+            {
+                opt.Password.RequiredLength = 7;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+                opt.User.RequireUniqueEmail = true;
+            })
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+            opt.TokenLifespan = TimeSpan.FromHours(2));
 
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
             });
-
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
+                //options.Cookie.Path = "/Home";
+                options.Cookie.IsEssential = true;
+            });
             services.RegisterDependency();
             services.AddAutoMapperSetup();
 
@@ -78,12 +101,13 @@ namespace LandingPage
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
-           .AddCookie("Cookies", options =>
-           {
-               options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-               options.SlidingExpiration = false;
-               options.Cookie.Name = "Auth-cookie";
-           })
+            .AddCookie("Cookies", options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = true;
+                options.Cookie.Name = "Auth-cookie";
+            })
+
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -120,9 +144,21 @@ namespace LandingPage
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            if (env.IsProduction())
+            {
+                app.UseCookiePolicy(new CookiePolicyOptions
+                {
+                    HttpOnly = HttpOnlyPolicy.Always,
+                    Secure = CookieSecurePolicy.Always,
+                    MinimumSameSitePolicy = SameSiteMode.Lax
+                });
+            }
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCookiePolicy();
+            app.UseSession();
+            //prevent session hijacking
+            app.preventSessionHijacking();
+            // 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

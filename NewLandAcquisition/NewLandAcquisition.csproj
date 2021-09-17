@@ -3,16 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>b818242d-0eed-4b3d-b626-18075a6e1a79</UserSecretsId>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\js\newlandawardplotdetailsedit.min.js" />
-    <Content Remove="wwwroot\js\Newlandnotificationdetailscreate.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Views\Newlandus22plot\Edit.cshtml~RF5e5314f4.TMP" />
-  </ItemGroup>
+  </PropertyGroup> 
 
 	<ItemGroup> 
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" /> 
@@ -32,45 +23,6 @@
 		<ProjectReference Include="..\Libraries\Service\Service.csproj" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
-    <Content Update="wwwroot\images\pdf.png">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\images\png.png">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\images\ppt.png">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\images\xls.png">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\images\zip.png">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\AwardMasterDetails\_List.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\AwardMasterDetails\_List.cshtml" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\newlandawardplotdetailsedit.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\Newlandnotificationdetailscreate.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\newlandschemeindex.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\newus6plotcreate.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\newlandawardplotdetailsedit.min.js" />
-    <None Include="wwwroot\js\Newlandnotificationdetailscreate.min.js" />
-  </ItemGroup>
+   
 
 </Project>

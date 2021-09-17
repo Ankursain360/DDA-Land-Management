@@ -118,7 +118,7 @@
                                 <th>Challan No./Transaction No./UTR No.</th>
                                 <th>Amount (Rs.)</th>
                                 <th>Date of Payment by the allottee</th>
-                                <th>Proof of Payment in pdf</th>
+                                <th>Proof of Payment in pdf (max size : 10 mb)<span style="color:red">*</span></th>
                                 <th>
                                     DDA Bank in which credited
                                 </th>
@@ -177,8 +177,10 @@
                                     <input type="hidden" asp-for="UploadFilePath" />
 
                                     <input asp-for="Proofinpdf1" required type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf" />
-                                    <span asp-validation-for="Proofinpdf1" class="d-block text-danger field-validation-valid msg"></span>
-
+                                    @*<span asp-validation-for="Proofinpdf1" class="d-block text-danger field-validation-valid msg"></span>*@
+                                <span asp-validation-for="Proofinpdf1" class="text-danger" style="display:none;" id="msg">
+                                    Proof in .Pdf is Mandatory
+                                </span>
 
                                 </td>
 
@@ -209,8 +211,8 @@
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Pay & Submit</button>
-                @Html.ActionLink("Back", "Index", "DemandDetails", null, new { @class = "btn btn-theme" })
+                <button class="btn btn-theme " type="submit" id="btnCreate">Pay & Submit</button>
+                @Html.ActionLink("Back", "Index", "KYCform", null, new { @class = "btn btn-theme" })
             </div>
         </div>
     </form>

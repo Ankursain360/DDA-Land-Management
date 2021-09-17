@@ -18,6 +18,8 @@ using Model.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.CookiePolicy;
 
 namespace SiteMaster
 {
@@ -47,11 +49,16 @@ namespace SiteMaster
                 );
             }
 
-            services.Configure<CookiePolicyOptions>(options =>
+            if (HostEnvironment.IsProduction())
+            {
+                services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                options.HttpOnly = HttpOnlyPolicy.Always;
+                options.Secure = CookieSecurePolicy.Always;
             });
+            }
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
@@ -76,8 +83,11 @@ namespace SiteMaster
             });
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                 options.Cookie.HttpOnly = true;
+                options.Cookie.Domain = HostEnvironment.IsProduction() ? (Configuration.GetSection("CookiesSettings:CookiesDomain").Value).ToString() : "localhost";
+                //options.Cookie.Path = "/Home";
+                options.Cookie.IsEssential = true;
             });
             services.RegisterDependency();
             services.AddAutoMapperSetup();
@@ -89,24 +99,31 @@ namespace SiteMaster
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-              
             })
-             .AddCookie("Cookies", options =>
-             {
-                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-                 options.SlidingExpiration = false;
-                 options.Cookie.Name = "Auth-cookie";
-                 options.Cookie.SameSite = SameSiteMode.None;
-                 // options.Cookie.Path = "/Home";
-                 options.Events = new CookieAuthenticationEvents
-                 {
-                     OnRedirectToLogin = redirectContext =>
-                     {
-                         redirectContext.HttpContext.Response.StatusCode = 401;
-                         return Task.CompletedTask;
-                     }
-                 };
-             })
+            .AddCookie("Cookies", options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
+                options.SlidingExpiration = true;
+                options.Cookie.Name = "Auth-cookie";
+            })
+            //.AddCookie("Cookies", options =>
+            //{
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(2);
+            //    options.SlidingExpiration = true;
+            //    options.Cookie.Name = "Auth-cookie";
+            //    options.Cookie.SameSite = SameSiteMode.None;
+            //    options.LoginPath = "/Account/Login";
+            //    options.AccessDeniedPath = "/Account/AccessDenied";
+            //    // options.Cookie.Path = "/Home";
+            //    options.Events = new CookieAuthenticationEvents
+            //    {
+            //        OnRedirectToLogin = redirectContext =>
+            //        {
+            //            redirectContext.HttpContext.Response.StatusCode = 401;
+            //            return Task.CompletedTask;
+            //        }
+            //    };
+            //})
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
@@ -139,17 +156,25 @@ namespace SiteMaster
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-           
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            if (env.IsProduction())
+            {
+                app.UseCookiePolicy(new CookiePolicyOptions
+                {
+                    HttpOnly = HttpOnlyPolicy.Always,
+                    Secure = CookieSecurePolicy.Always,
+                    MinimumSameSitePolicy = SameSiteMode.Lax
+                });
+            }
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseCookiePolicy();
             app.UseSession();
             //prevent session hijacking
             app.preventSessionHijacking();
-            //
+            // 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

@@ -5,7 +5,7 @@
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details<span class="ms-auto"><span style="color:red">*&nbsp;</span>Marked are mandatory fields</span></h3>
         <div class="row">
-            <div class="form-group col-md-6">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select asp-for="DepartmentId" class="floating-label-field floating-label-field--s3" required="required" requiredMsg="Please Select Department" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
                         <option value="0">All</option>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
