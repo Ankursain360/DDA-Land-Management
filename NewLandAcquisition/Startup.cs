@@ -66,7 +66,7 @@ namespace NewLandAcquisition
                 //options.Cookie.Path = "/Home";
                 options.Cookie.IsEssential = true;
             });
-
+            services.AddScoped<AuditFilterAttribute>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -80,6 +80,7 @@ namespace NewLandAcquisition
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+                option.Filters.Add(typeof(AuditFilterAttribute));
             });
 
             services.RegisterDependency();
