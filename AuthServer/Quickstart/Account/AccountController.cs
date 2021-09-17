@@ -13,6 +13,7 @@ using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +40,7 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
         public IConfiguration _configuration;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor; 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
@@ -47,7 +48,8 @@ namespace IdentityServerHost.Quickstart.UI
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
-            IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+            IConfiguration configuration, 
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -142,10 +144,9 @@ namespace IdentityServerHost.Quickstart.UI
                     CookieOptions options = new CookieOptions();
                     options.Expires = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
                     options.HttpOnly = true;
-                    options.Secure = true;
-                    options.Domain = _configuration.GetSection("CookiesSettings:CookiesDomain").Value.ToString();
-                    options.SameSite = SameSiteMode.Lax;
-                    options.Path = new PathString(_configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString());
+                    //options.Secure = true;
+                     options.Domain = _configuration.GetSection("CookiesSettings:CookiesDomain").Value.ToString();                   
+                    // options.Path = new PathString(_configuration.GetSection("CookiesSettings:CookiesPath").Value.ToString());
 
                     string _browserInfo = _httpContextAccessor.HttpContext.Request.Headers["User-Agent"].ToString() + "~" + _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
                     string _sessionValue = user.Id.ToString() + "^" + DateTime.Now.Ticks + "^" + _browserInfo + "^" + System.Guid.NewGuid();
