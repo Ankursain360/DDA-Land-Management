@@ -39,6 +39,7 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IDataStorageRepository, DataStorageRepository>();
             services.AddScoped<IIssueReturnFileRepository, IssueReturnFileRepository>();
             services.AddScoped<IDepartmenttargetRepository,DepartmenttargetRepository>();
+            services.AddScoped<IAuditRepository,AuditRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -58,6 +59,7 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IDataStorageService,DatastorageService>();
             services.AddScoped<IIssueReturnFileService, IssueReturnFileService>();
             services.AddScoped<IDepartmenttargetService, DepartmenttargetService>();
+            services.AddScoped<IAuditService, AuditService>();
                    }
 
 

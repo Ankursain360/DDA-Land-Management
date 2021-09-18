@@ -21,6 +21,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+
+
 namespace SiteMaster
 {
     public class Startup
@@ -59,7 +64,7 @@ namespace SiteMaster
                 options.Secure = CookieSecurePolicy.Always;
             });
             }
-
+            //services.AddScoped<AuditFilterAttribute>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -80,6 +85,7 @@ namespace SiteMaster
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+                option.Filters.Add(typeof(AuditFilterAttribute));
             });
             services.AddSession(options =>
             {

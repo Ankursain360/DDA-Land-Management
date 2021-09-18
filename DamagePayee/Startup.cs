@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 
+
 namespace DamagePayee
 {
     public class Startup
@@ -59,7 +60,7 @@ namespace DamagePayee
                     options.Secure = CookieSecurePolicy.Always;
                 });
             }
-
+         //   services.AddScoped<AuditFilterAttribute>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -80,6 +81,7 @@ namespace DamagePayee
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+                option.Filters.Add(typeof(AuditFilterAttribute));
             });
             services.AddSession(options =>
             {

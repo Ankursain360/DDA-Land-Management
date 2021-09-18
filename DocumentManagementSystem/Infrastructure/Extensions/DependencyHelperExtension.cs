@@ -30,6 +30,7 @@ namespace DocumentManagementSystem.Infrastructure.Extensions
 
             services.AddScoped<IUserRightRepository, UserRightRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
 
 
             /* Application Services */
@@ -43,6 +44,7 @@ namespace DocumentManagementSystem.Infrastructure.Extensions
 
             services.AddScoped<IUserRightService, UserRightService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IAuditService, AuditService>();
 
         }
     }

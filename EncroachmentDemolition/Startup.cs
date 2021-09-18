@@ -80,6 +80,7 @@ namespace EncroachmentDemolition
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+                option.Filters.Add(typeof(AuditFilterAttribute));
             });
             services.AddSession(options =>
             {

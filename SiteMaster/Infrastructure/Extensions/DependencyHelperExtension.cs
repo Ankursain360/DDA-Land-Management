@@ -62,6 +62,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILawyerRepository, LawyerRespository>();
             services.AddScoped<ISurveyuserdetailRepository, SurveyuserdetailRepository>();
             services.AddScoped<INewLandNotificationTypeRepository, NewLandNotificationTypeRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
 
             // new land acquisition masters
 
@@ -190,6 +191,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IHonbleService, HonbleService>();
             services.AddScoped<ILeasePaymentTypeService, LeasePaymentTypeService>();
             services.AddScoped<IDamageRateListService, DamageRateListService>();
+            services.AddScoped<IAuditService, AuditService>();
 
         }
     }

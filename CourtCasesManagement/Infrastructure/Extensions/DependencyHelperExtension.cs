@@ -36,6 +36,7 @@ namespace CourtCasesManagement.Infrastructure.Extensions
             services.AddScoped<ILegalmanagementsystemRepository, LegalmanagementsystemRepository>();
             services.AddScoped<ICasenatureRepository, CasenatureRepository>();
             services.AddScoped<ICaseyearRepository, CaseyearRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -52,6 +53,7 @@ namespace CourtCasesManagement.Infrastructure.Extensions
             services.AddScoped<ILegalmanagementsystemservice, Legalmanagementsystemservice>();
             services.AddScoped<ICasenatureService, CasenatureService>();
             services.AddScoped<ICaseyearService, CaseyearService>();
+            services.AddScoped<IAuditService, AuditService>();
         }
     }
 }

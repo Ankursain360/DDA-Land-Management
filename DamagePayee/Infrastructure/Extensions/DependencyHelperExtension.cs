@@ -52,6 +52,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IMutationDetailsRepository, MutationDetailsRepository>();
             services.AddScoped<IPaymentverificationRepository, PaymentverificationRepository>();
             services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -84,6 +85,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IMutationDetailsService, MutationDetailsService>();
             services.AddScoped<IPaymentverificationService, PaymentverificationService>();
             services.AddScoped<IUserNotificationService, UserNotificationService>();
+            services.AddScoped<IAuditService, AuditService>();
         }
     }
 }
