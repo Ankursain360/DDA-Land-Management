@@ -163,6 +163,10 @@ $(function () {
                 }
             });
         },
+        focus: function (event, ui) {
+            $("#txtSearch").val(ui.item.label);
+            return false;
+        },
         select: function (event, ui) {
             event.preventDefault();
             $("#txtSearch").val(ui.item.label);

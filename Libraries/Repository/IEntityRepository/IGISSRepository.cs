@@ -46,8 +46,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Village>> GetVillageAutoCompleteDetails(string prefix);
         Task<List<gisDataTemp>> GetInfrastructureDetails(int villageId);
         Task<List<Gisdata>> GetGisDataLayersDetails(int villageId);
-        Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetails(int villageId, string khasraNo);
-        Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo);
+        Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetails(int villageId, string khasraNo, string RectNo);
+        Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo, string RectNo);
         Task<List<Gisdata>> GetKhasraList(int villageId);
         Task<List<Gisdata>> GetKhasraNoPolygon(int gisDataId);
     }

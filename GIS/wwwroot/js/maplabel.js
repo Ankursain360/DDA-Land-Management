@@ -116,13 +116,20 @@ MapLabel.prototype.onAdd = function() {
     this.drawCanvas_();
    
     // Ensures the label is redrawn if the text or position is changed.
-    var map = this.getMap();
-    canvas.addEventListener('click', function (e) {
-        alert('Hi');
+    var map = this.getMap(); 
+    var me = this; 
+    canvas.addEventListener("click", function (event) {
+        console.log("click");      
+    });
+    google.maps.event.addDomListener(this.canvas_, 'dblclick', function (event) { 
+        if (me.get('clickable')) {
+            google.maps.event.trigger(me, 'dblclick');
+        }
+        
     });
   var panes = this.getPanes();
   if (panes) {
-    panes.mapPane.appendChild(canvas);
+      panes.overlayMouseTarget.appendChild(canvas);
   }
    
 };

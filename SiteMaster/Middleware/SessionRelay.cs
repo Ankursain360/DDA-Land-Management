@@ -17,6 +17,7 @@ namespace SiteMaster.Middleware
         {
             if (context.User == null || !context.User.Identity.IsAuthenticated)
             {
+                 context.Response.Redirect("Home/Logout");
                 await context.Response.WriteAsync("You're not logged in. "); 
                 return;
             }

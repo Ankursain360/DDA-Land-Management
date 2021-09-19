@@ -220,14 +220,14 @@ namespace GIS.Controllers
             return result;
         }
 
-        public async Task<JsonResult> GetKhasraBasisOtherDetails(int VillageId, string KhasraNo)
+        public async Task<JsonResult> GetKhasraBasisOtherDetails(int VillageId, string KhasraNo,string RectNo)
         {
-            var data = await _GISService.GetKhasraBasisOtherDetails(VillageId, KhasraNo);
+            var data = await _GISService.GetKhasraBasisOtherDetails(VillageId, KhasraNo, RectNo);
             return Json(data);
         }
-        public async Task<JsonResult> GetKhasraBasisOtherDetailsForCourtCases(int VillageId, string KhasraNo)
+        public async Task<JsonResult> GetKhasraBasisOtherDetailsForCourtCases(int VillageId, string KhasraNo,string RectNo)
         {
-            var data = await _GISService.GetKhasraBasisOtherDetailsForCourtCases(VillageId, KhasraNo);
+            var data = await _GISService.GetKhasraBasisOtherDetailsForCourtCases(VillageId, KhasraNo, RectNo);
             return Json(data);
         }
         public async Task<JsonResult> GetKhasraList(int? VillageId)

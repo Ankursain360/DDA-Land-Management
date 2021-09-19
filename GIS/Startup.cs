@@ -92,8 +92,8 @@ namespace GIS
             })
           .AddCookie("Cookies", options =>
           {
-              options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-              options.SlidingExpiration = false;
+              options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+              options.SlidingExpiration = true;
               options.Cookie.Name = "Auth-cookie";
           })
            .AddOpenIdConnect("oidc", options =>
@@ -135,9 +135,10 @@ namespace GIS
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseAuthorization(); 
-            app.UseCookiePolicy();
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

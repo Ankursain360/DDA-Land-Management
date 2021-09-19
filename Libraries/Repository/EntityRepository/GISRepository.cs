@@ -187,12 +187,12 @@ namespace Libraries.Repository.EntityRepository
                                      .ToListAsync();
         }
 
-        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetails(int villageId, string khasraNo)
+        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetails(int villageId, string khasraNo, string RectNo)
         {
             try
             {
                 var data = await _dbContext.LoadStoredProcedure("GISKhasraBasisOtherDetails")
-                                            .WithSqlParams(("P_villageid", villageId), ("P_KhasraNo", khasraNo)
+                                            .WithSqlParams(("P_villageid", villageId), ("P_KhasraNo", khasraNo), ("P_RectNo", RectNo)
                                             )
                                             .ExecuteStoredProcedureAsync<GISKhasraBasisOtherDetailsDto>();
 
@@ -204,12 +204,12 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo)
+        public async Task<List<GISKhasraBasisOtherDetailsDto>> GetKhasraBasisOtherDetailsForCourtCases(int villageId, string khasraNo, string RectNo)
         {
             try
             {
                 var data = await _dbContext.LoadStoredProcedure("GISKhasraBasisCourtCasesDetails")
-                                            .WithSqlParams(("P_villageid", villageId), ("P_KhasraNo", khasraNo)
+                                            .WithSqlParams(("P_villageid", villageId), ("P_KhasraNo", khasraNo), ("P_RectNo", RectNo)
                                             )
                                             .ExecuteStoredProcedureAsync<GISKhasraBasisOtherDetailsDto>();
 
@@ -238,7 +238,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Gisdata>> GetKhasraList(int villageId)
         {
             return await _dbContext.Gisdata
-                                    .Where(x => x.VillageId == villageId && x.IsActive == 1 && x.GisLayerId == 29)
+                                    .Where(x => x.VillageId == villageId && x.IsActive == 1 && x.GisLayerId == 30)
                                     .ToListAsync();
         }
 

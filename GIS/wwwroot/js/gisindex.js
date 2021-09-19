@@ -1,4 +1,4 @@
-﻿ 
+﻿
 
 var zoomZone = [];
 var map;
@@ -47,8 +47,8 @@ var LINE_LAYER = [];
 
 
 $(document).ready(function () {
-     
-     $(document).ajaxStart(function () {
+
+    $(document).ajaxStart(function () {
         var styleValue = "block";
         $("#loader-wrapper").css("display", styleValue);
     });
@@ -57,7 +57,7 @@ $(document).ready(function () {
         var styleValue = "none";
         $("#loader-wrapper").css("display", styleValue);
     });
-     
+
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
         var html = '';
         for (var i = 0; i < response.length; i++) {
@@ -66,8 +66,8 @@ $(document).ready(function () {
             if (response[i].village.length > 0) {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
-                       // html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
-                        html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\''+ response[i].village[j].name +'\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
+                        // html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id)"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
+                        html = html + '<div class="form-check" style="border-bottom: 1px solid rgba(0, 0, 0, .125);"><input class="form-check-input"  type="checkbox" id="V' + response[i].village[j].id + '" onchange="showVillage(this.id)"> <label class="form-check-label" for="V' + response[i].village[j].id + '">' + response[i].village[j].name + '</label> <span id="z' + response[i].village[j].id + '" class="ri-zoom-in-line" style="display:none" onclick="ZoomtoVillage(' + response[i].village[j].ycoordinate + ',' + response[i].village[j].xcoordinate + ',\'' + response[i].village[j].name + '\');" title="Click here Zoom to ' + response[i].village[j].name + '"></span></div> ';
                         check++;
                     }
                 }
@@ -130,7 +130,7 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     map.mapTypes.set('coordinate', coordinateMapType);
-     
+
     map.addListener('zoom_changed', function () {
         Zoom_change(map);
     });
@@ -171,7 +171,7 @@ function setStateboundary(response) {
     var arr = $.map(response, function (el) { return el; })
 
     for (i = 0; i < arr.length; i++) {
-       var ln = createPolygon(getLatLongArr(arr[i].polygon));
+        var ln = createPolygon(getLatLongArr(arr[i].polygon));
         var lns = createDashedLine(getLatLongArr(arr[i].polygon));
         ln.setOptions({ visibleZoom: 7, fillColor: arr[i].colorcode, hideZoom: 9, visible: true, map: map, strokeWeight: 0, strokeColor: '#47C4C8', fillOpacity: 0.3, clickable: !1 });
         var lp = new google.maps.LatLng(parseFloat(arr[i].ycoordinate), parseFloat(arr[i].xcoordinate));
@@ -214,11 +214,11 @@ function showVillage(maxima) {
         var villageid = maxima.replace('V', '');
         HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
             //Show Village Name
-            $('#spanVillageName').empty().append(response[0].name.toUpperCase() );
-            $('#spanVillage').empty().append('Village : ' + response[0].name.toUpperCase() )
+            $('#spanVillageName').empty().append(response[0].name.toUpperCase());
+            $('#spanVillage').empty().append('Village : ' + response[0].name.toUpperCase())
             $('#aVillageName').show();
             //Show Zoom to Icon
-            $('#z' + response[0].id).show();  
+            $('#z' + response[0].id).show();
             //
             showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
         });
@@ -226,19 +226,17 @@ function showVillage(maxima) {
     else {
         var villageid = maxima.replace('V', '');
         //hide zoom to icon
-       $('#z' + villageid).hide();
+        $('#z' + villageid).hide();
         //
         //Remove all layers of perticular village
-      RemoveAllVillageLayer(villageid);
+        RemoveAllVillageLayer(villageid);
+        VILLAGEID_UNIVERSAL.splice($.inArray(villageid, VILLAGEID_UNIVERSAL), 1);
+
     }
-    //$.each(VILLAGEID_UNIVERSAL, function (index, value) {
-    //    RemoveAllVillageLayer(value);
-    //});
-    
 }
 function ZoomtoVillage(yaixis, xaixis, villagename) {
-    $('#spanVillageName').empty().append(villagename.toUpperCase() );
-    $('#spanVillage').empty().append('Village : ' + villagename.toUpperCase() )
+    $('#spanVillageName').empty().append(villagename.toUpperCase());
+    $('#spanVillage').empty().append('Village : ' + villagename.toUpperCase())
     $('#aVillageName').show();
     map.setZoom(15);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
@@ -250,7 +248,7 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
     //}
     var sl = createPolygon(getLatLongArr(ploygn));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#FF5733', fillOpacity: 0, clickable: !1 });
-    zoomvillage.push({ "villageid": villageid,"layer": sl });
+    zoomvillage.push({ "villageid": villageid, "layer": sl });
     map.setZoom(15);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
 
@@ -263,8 +261,8 @@ function showvillagelayers(villageid) {
 
     HttpGet("/GIS/GetGisDataLayersDetails?VillageId=" + parseInt(villageid), 'json', function (response, villageid) {
         //sessionStorage.clear();
-       // localStorage.setItem('alldata', JSON.stringify(response)); //data added to local storage
-       // sessionStorage.setItem('alldata', JSON.stringify(response)); //data added to session storage
+        // localStorage.setItem('alldata', JSON.stringify(response)); //data added to local storage
+        // sessionStorage.setItem('alldata', JSON.stringify(response)); //data added to session storage
         DisplayLoader(true);
         alljsondata = [];
         alljsondata = JSON.stringify(response);
@@ -450,7 +448,7 @@ function showDisBoundariesBurji(response) {
             var ln = createLine(getLatLongArr(burji[e].polygon));
             ln.setOptions({ strokeWeight: 3, strokeColor: burji[e].fillColor });
             BURJI_LAYER.push({ "villageid": burji[e].villageId, "layer": ln });
-           // BURJI_LAYER.push(ln);
+            // BURJI_LAYER.push(ln);
             Polys.push(ln);
         }
 
@@ -468,7 +466,7 @@ function showDisBoundariesClean(response, villageid) {
 }
 function showDisBoundariesDim(response, villageid) {
     var dim = $.map(response, function (el) { return el; })
-    
+
     $.each(DIM_LAYER, function (index, value) {
         value.layer.setMap(null);
     });
@@ -477,7 +475,7 @@ function showDisBoundariesDim(response, villageid) {
         poly.setOptions({ strokeWeight: 1, strokeColor: dim[h].fillColor, fillOpacity: 0, clickable: !0 });
         DIM_LAYER.push({ "villageid": dim[h].villageId, "layer": poly });
         //DIM_LAYER.push(poly);
-       // map.panTo(new google.maps.LatLng(dim[h].ycoordinate, dim[h].xcoordinate));
+        // map.panTo(new google.maps.LatLng(dim[h].ycoordinate, dim[h].xcoordinate));
     }
 }
 function showDisBoundariesEncroachment(response, villageid) {
@@ -496,7 +494,7 @@ function showDisBoundariesGrid(response, villageid) {
         var ln = createLine(getLatLongArr(grid[k].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: grid[k].fillColor });
         GRID_LAYER.push({ "villageid": grid[k].villageId, "layer": ln });
-       // GRID_LAYER.push(ln);
+        // GRID_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -506,7 +504,7 @@ function showDisBoundariesNala(response, villageid) {
         var ln = createLine(getLatLongArr(nala[m].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: nala[m].fillColor });
         NALA_LAYER.push({ "villageid": nala[m].villageId, "layer": ln });
-       // NALA_LAYER.push(ln);
+        // NALA_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -536,7 +534,7 @@ function showDisBoundariesNali(response, villageid) {
         var ln = createLine(getLatLongArr(nali[p].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: nali[p].fillColor });
         NALI_LAYER.push({ "villageid": nali[p].villageId, "layer": ln });
-       // NALI_LAYER.push(ln);
+        // NALI_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -556,7 +554,7 @@ function showDisBoundariesFieldBoun(response, villageid) {
         var ln = createLine(getLatLongArr(fieldboun[r].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: fieldboun[r].fillColor });
         FIELDBOUN_LAYER.push({ "villageid": fieldboun[r].villageId, "layer": ln });
-       // FIELDBOUN_LAYER.push(ln);
+        // FIELDBOUN_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -586,7 +584,7 @@ function showDisBoundariesSaheda(response, villageid) {
         var ln = createLine(getLatLongArr(saheda[u].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: saheda[u].fillColor });
         SAHEDA_LAYER.push({ "villageid": saheda[u].villageId, "layer": ln });
-       // SAHEDA_LAYER.push(ln);
+        // SAHEDA_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -616,7 +614,7 @@ function showDisBoundariesKhasraBoundary(response, villageid) {
         var ln = createLine(getLatLongArr(khasraboundary[x].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: khasraboundary[x].fillColor });
         KHASRABOUNDARY_LAYER.push({ "villageid": khasraboundary[x].villageId, "layer": ln });
-       // KHASRABOUNDARY_LAYER.push(ln);
+        // KHASRABOUNDARY_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -666,7 +664,7 @@ function showDisBoundariesDashed(response, villageid) {
         var ln = createLine(getLatLongArr(dashed[z].polygon));
         ln.setOptions({ strokeWeight: 3, strokeColor: dashed[z].fillColor });
         DASHED_LAYER.push({ "villageid": dashed[z].villageId, "layer": ln });
-       // DASHED_LAYER.push(ln);
+        // DASHED_LAYER.push(ln);
         Polys.push(ln);
     }
 }
@@ -731,7 +729,7 @@ function showDisBoundariesDimentionText(response, villageid) {
         var lp = new google.maps.LatLng(parseFloat(dimentiontext[ag].ycoordinate), parseFloat(dimentiontext[ag].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 60, visible: true, map: map, cssName: 'nlLabelDimentionText', position: lp, text: dimentiontext[ag].label });
         DIMENTIONTEXT_LAYER.push({ "villageid": dimentiontext[ag].villageId, "layer": _label });
-       // DIMENTIONTEXT_LAYER.push(_label);
+        // DIMENTIONTEXT_LAYER.push(_label);
 
         Polys.push(_label);
     }
@@ -753,7 +751,7 @@ function showDisBoundariesVillageText(response, villageid) {
         var lp = new google.maps.LatLng(parseFloat(villagetext[ai].ycoordinate), parseFloat(villagetext[ai].xcoordinate));
         var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelVillageText', position: lp, text: villagetext[ai].label });
         VILLAGETEXT_LAYER.push({ "villageid": villagetext[ai].villageId, "layer": _label });
-       // VILLAGETEXT_LAYER.push(_label);
+        // VILLAGETEXT_LAYER.push(_label);
 
         Polys.push(_label);
     }
@@ -762,11 +760,7 @@ function showDisBoundariesKhasraNo(response, villageid) {
     var khasrano = $.map(response, function (el) { return el; })
     for (aj = 0; aj < khasrano.length; aj++) {
         var lp = new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate));
-        
-        //var _label = new google.maps.Label({ visibleZoom: 25, hideZoom: 10, visibility: false, map: map, cssName: 'nlLabelKhasraNo', position: lp, text: khasrano[aj].label, color: khasrano[aj].fillColor, clickable: !0 });
-        //_label.khasrano = khasrano[aj].label;
-        //_label.villageid = VILLAGEID_UNIVERSAL[0];
-
+  
         var mapLabel = new MapLabel({
             text: khasrano[aj].label,
             position: lp,//new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)),
@@ -779,24 +773,32 @@ function showDisBoundariesKhasraNo(response, villageid) {
             clickable: 1
         });
         mapLabel.set('position', new google.maps.LatLng(parseFloat(khasrano[aj].ycoordinate), parseFloat(khasrano[aj].xcoordinate)));
-        mapLabel.khasrano = khasrano[aj].label;
-        mapLabel.villageid = VILLAGEID_UNIVERSAL[0];
-       // google.maps.event.addListener(_label, 'click', function () {
-        google.maps.event.addListener(mapLabel, 'click', function () {
-            getInfo(this.villageid, this.khasrano);
+        
+        var khasradata = khasrano[aj].label.split('//');
+        if (khasradata.length > 1) {
+            mapLabel.khasrano = khasradata[1];
+            mapLabel.Rectno = khasradata[0];
+        }
+        else {
+
+            mapLabel.khasrano = khasradata[0];
+            mapLabel.Rectno = "";
+        }
+        mapLabel.villageid = khasrano[aj].villageId;
+
+        google.maps.event.addListener(mapLabel, 'click', function () { 
+            getInfo(this.villageid, this.khasrano, this.Rectno);
         });
-       // KHASRANO_LAYER.push(_label);
-        KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": mapLabel });
-       // KHASRANO_LAYER.push(mapLabel);
-        Polys.push(mapLabel);
-       // Polys.push(_label);
+       
+        KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": mapLabel }); 
+        Polys.push(mapLabel); 
     }
 }
 function showDisBoundariesRectWithKhasraNo(response, villageid) {
     var rectkhasrano = $.map(response, function (el) { return el; })
     for (ak = 0; ak < rectkhasrano.length; ak++) {
         var lp = new google.maps.LatLng(parseFloat(rectkhasrano[ak].ycoordinate), parseFloat(rectkhasrano[ak].xcoordinate));
-      //  var _label = new google.maps.Label({ visibleZoom: 16, hideZoom: 22, visible: true, map: map, cssName: 'nlLabelRectWithKhasraNo', position: lp, text: rectkhasrano[ak].label, color: rectkhasrano[ak].fillColor });
+      
 
         var mapLabel = new MapLabel({
             text: rectkhasrano[ak].label,
@@ -810,11 +812,23 @@ function showDisBoundariesRectWithKhasraNo(response, villageid) {
             clickable: 1
         });
         mapLabel.set('position', new google.maps.LatLng(parseFloat(rectkhasrano[ak].ycoordinate), parseFloat(rectkhasrano[ak].xcoordinate)));
-        mapLabel.khasrano = rectkhasrano[ak].label;
+        var khasradata = rectkhasrano[ak].label.split('//');
+        if (khasradata.length > 1) {
+            mapLabel.khasrano = khasradata[1];
+            mapLabel.Rectno = khasradata[0];
+        }
+        else {
+
+            mapLabel.khasrano = khasradata[0];
+            mapLabel.Rectno = "";
+        }
         mapLabel.villageid = rectkhasrano[ak].villageId;
 
-        RECTWITHKHASRANO_LAYER.push({ "villageid": rectkhasrano[ak].villageId, "layer": mapLabel });
-        //RECTWITHKHASRANO_LAYER.push(_label);
+        google.maps.event.addListener(mapLabel, 'dblclick', function () {
+            getInfo(this.villageid, this.khasrano, this.Rectno);
+        });
+
+        RECTWITHKHASRANO_LAYER.push({ "villageid": rectkhasrano[ak].villageId, "layer": mapLabel }); 
 
         Polys.push(mapLabel);
     }
@@ -826,20 +840,20 @@ function showDisBoundariesWell(response, villageid) {
         var ln = createLine(getLatLongArr(well[al].polygon));
         ln.setOptions({ strokeWeight: 1, strokeColor: well[al].fillColor });
         WELL_LAYER.push({ "villageid": well[al].villageId, "layer": ln });
-       // WELL_LAYER.push(ln);
+        // WELL_LAYER.push(ln);
         Polys.push(ln);
     }
 }
 
 /*Village Boundary End*/
 
-function getInfo(villageid, khasrano) {
+function getInfo(villageid, khasrano,RectNo) {
 
-    HttpGet("/GIS/GetKhasraBasisOtherDetails?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano, 'json', function (response) {
+    HttpGet("/GIS/GetKhasraBasisOtherDetails?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano + "&RectNo=" + RectNo, 'json', function (response) {
         showKhasraBasisOtherDetails(response);
     });
 
-    HttpGet("/GIS/GetKhasraBasisOtherDetailsForCourtCases?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano, 'json', function (response) {
+    HttpGet("/GIS/GetKhasraBasisOtherDetailsForCourtCases?VillageId=" + parseInt(villageid) + "&KhasraNo=" + khasrano + "&RectNo=" + RectNo, 'json', function (response) {
         showKhasraBasisOtherDetailsForCourtCases(response);
     });
 }
@@ -907,7 +921,7 @@ function showKhasraBasisOtherDetailsForCourtCases(resp) {
         $('#RouteDetailShow').show();
     }
     else {
-        $('#RouteDetailShow').hide();
+      //  $('#RouteDetailShow').hide();
     }
 
 }
@@ -944,7 +958,7 @@ $(function () {
 
 $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functionality added by renu */
     e.preventDefault();
-   // var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
+    // var data = JSON.parse(localStorage.getItem('alldata'));  //get data from local storage
     var data = JSON.parse(alljsondata);  //get data from local storage
     $(this).closest('table').find('td input[type="checkbox"]').prop('checked', $(this).prop('checked'));
     if (this.checked) {
@@ -1095,238 +1109,238 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
         if (Abadi.length > 0) {
             $.each(ABADI_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Burji = data.filter((x) => x.gisLayerId === 2);//burji
         if (Burji.length > 0) {
             $.each(BURJI_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });            
+            });
         }
 
         var Clean = data.filter((x) => x.gisLayerId === 3);//clean
         if (Clean.length > 0) {
             $.each(CLEAN_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });           
+            });
         }
 
         var Dim = data.filter((x) => x.gisLayerId === 4);//Dimension
         if (Dim.length > 0) {
             $.each(DIM_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });            
+            });
         }
 
         var Encroachment = data.filter((x) => x.gisLayerId === 5);//Encroachment
         if (Encroachment.length > 0) {
             $.each(ENCROACHMENT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var Grid = data.filter((x) => x.gisLayerId === 6);//Grid
         if (Grid.length > 0) {
             $.each(GRID_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Nala = data.filter((x) => x.gisLayerId === 7);//Nala
         if (Nala.length > 0) {
             $.each(NALA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var TriJunction = data.filter((x) => x.gisLayerId === 8);//TriJunction
         if (TriJunction.length > 0) {
             $.each(TRIJUNCTION_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var Zero = data.filter((x) => x.gisLayerId === 9);//Zero
         if (Zero.length > 0) {
             $.each(ZERO_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Nali = data.filter((x) => x.gisLayerId === 10);//Nali
         if (Nali.length > 0) {
             $.each(NALI_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var RailwayLine = data.filter((x) => x.gisLayerId === 11);//RailwayLine
         if (RailwayLine.length > 0) {
             $.each(RAILWAYLINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var FieldBoun = data.filter((x) => x.gisLayerId === 12);//FieldBoun
         if (FieldBoun.length > 0) {
             $.each(FIELDBOUN_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var Killa = data.filter((x) => x.gisLayerId === 13);//Killa
         if (Killa.length > 0) {
             $.each(KILLA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Close = data.filter((x) => x.gisLayerId === 14);//Close
         if (Close.length > 0) {
             $.each(CLOSE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Saheda = data.filter((x) => x.gisLayerId === 15);//Saheda
         if (Saheda.length > 0) {
             $.each(SAHEDA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var KachaPakaLine = data.filter((x) => x.gisLayerId === 16);//KachaPakaLine
         if (KachaPakaLine.length > 0) {
             $.each(KACHAPAKALINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var KhasraLine = data.filter((x) => x.gisLayerId === 17);//KhasraLine
         if (KhasraLine.length > 0) {
             $.each(KHASRALINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var KhasraBoundary = data.filter((x) => x.gisLayerId === 18);//KhasraBoundary
         if (KhasraBoundary.length > 0) {
             $.each(KHASRABOUNDARY_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Road = data.filter((x) => x.gisLayerId === 19);//Road
         if (Road.length > 0) {
             $.each(ROAD_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var Dashed = data.filter((x) => x.gisLayerId === 20);//Dashed
         if (Dashed.length > 0) {
             $.each(DASHED_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Inner = data.filter((x) => x.gisLayerId === 21);//Inner
         if (Inner.length > 0) {
             $.each(INNER_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var VillageBoundary = data.filter((x) => x.VillageBoundary === 22);//VillageBoundary
         if (VillageBoundary.length > 0) {
             $.each(VillageBoundary, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Cleantext = data.filter((x) => x.gisLayerId === 23);//Cleantext
         if (Cleantext.length > 0) {
             $.each(CLEANTEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var Gosha = data.filter((x) => x.gisLayerId === 24);//Gosha
         if (Gosha.length > 0) {
             $.each(GOSHA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Text = data.filter((x) => x.gisLayerId === 25);//Text
         if (Text.length > 0) {
             $.each(TEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var DimentionText = data.filter((x) => x.gisLayerId === 26);//DimentionText
         if (DimentionText.length > 0) {
             $.each(DIMENTIONTEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var CloseText = data.filter((x) => x.gisLayerId === 27);//CloseText
         if (CloseText.length > 0) {
             $.each(CLOSETEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var VillageText = data.filter((x) => x.gisLayerId === 28);//VillageText
         if (VillageText.length > 0) {
             $.each(VILLAGETEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var KhasraNo = data.filter((x) => x.gisLayerId === 29);//KhasraNo
         if (KhasraNo.length > 0) {
             $.each(KHASRANO_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var RectWithKhasraNo = data.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
         if (RectWithKhasraNo.length > 0) {
             $.each(RECTWITHKHASRANO_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var Well = data.filter((x) => x.gisLayerId === 31);//clean
         if (Well.length > 0) {
             $.each(WELL_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
         if (Calvert.length > 0) {
             $.each(CALVERT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
         var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
         if (Mick.length > 0) {
             $.each(MICK_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Line = data.filter((x) => x.gisLayerId === 35);//Line
         if (Line.length > 0) {
             $.each(LINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            });  
+            });
         }
 
 
@@ -1334,6 +1348,10 @@ $(document).on('change', '#chkAllImpInfra', function (e) {   /*Select all Functi
 });
 
 $('#navLayerstab').on('click', function (e) {    /*on layer click functionality added by renu */
+    if (VILLAGEID_UNIVERSAL.length == 0) {
+        $("#chkSelectAll").hide();
+        $("#infrastructureData").html('<b>Please select at least one village from village list</b>');
+    }
     for (i = 0; i < VILLAGEID_UNIVERSAL.length; i++) {
         var villageid = VILLAGEID_UNIVERSAL[i];
         GetInfrastructureDetails(villageid);
@@ -1508,238 +1526,238 @@ $('#infrastructureData').on('change', '.checkUncheckInfra', function (e) {  /*ch
             $.each(ABADI_LAYER, function (index, value) {
                 value.layer.setMap(null);
             });
-            
+
         }
 
         var Burji = data.filter((x) => x.gisLayerId === 2);//burji
         if (Burji.length > 0 && Burji[0].code == id) {
             $.each(BURJI_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Clean = data.filter((x) => x.gisLayerId === 3);//clean
         if (Clean.length > 0 && Clean[0].code == id) {
             $.each(CLEAN_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Dim = data.filter((x) => x.gisLayerId === 4);//Dimension
         if (Dim.length > 0 && Dim[0].code == id) {
             $.each(DIM_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Encroachment = data.filter((x) => x.gisLayerId === 5);//Encroachment
         if (Encroachment.length > 0 && Encroachment[0].code == id) {
             $.each(ENCROACHMENT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Grid = data.filter((x) => x.gisLayerId === 6);//Grid
         if (Grid.length > 0 && Grid[0].code == id) {
             $.each(GRID_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Nala = data.filter((x) => x.gisLayerId === 7);//Nala
         if (Nala.length > 0 && Nala[0].code == id) {
             $.each(NALA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var TriJunction = data.filter((x) => x.gisLayerId === 8);//TriJunction
         if (TriJunction.length > 0 && TriJunction[0].code == id) {
             $.each(TRIJUNCTION_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Zero = data.filter((x) => x.gisLayerId === 9);//Zero
         if (Zero.length > 0 && Zero[0].code == id) {
             $.each(ZERO_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Nali = data.filter((x) => x.gisLayerId === 10);//Nali
         if (Nali.length > 0 && Nali[0].code == id) {
             $.each(NALI_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var RailwayLine = data.filter((x) => x.gisLayerId === 11);//RailwayLine
         if (RailwayLine.length > 0 && RailwayLine[0].code == id) {
             $.each(RAILWAYLINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var FieldBoun = data.filter((x) => x.gisLayerId === 12);//FieldBoun
         if (FieldBoun.length > 0 && FieldBoun[0].code == id) {
             $.each(FIELDBOUN_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Killa = data.filter((x) => x.gisLayerId === 13);//Killa
         if (Killa.length > 0 && Killa[0].code == id) {
             $.each(KILLA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Close = data.filter((x) => x.gisLayerId === 14);//Close
         if (Close.length > 0 && Close[0].code == id) {
             $.each(CLOSE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Saheda = data.filter((x) => x.gisLayerId === 15);//Saheda
         if (Saheda.length > 0 && Saheda[0].code == id) {
             $.each(SAHEDA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var KachaPakaLine = data.filter((x) => x.gisLayerId === 16);//KachaPakaLine
         if (KachaPakaLine.length > 0 && KachaPakaLine[0].code == id) {
             $.each(KACHAPAKALINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var KhasraLine = data.filter((x) => x.gisLayerId === 17);//KhasraLine
         if (KhasraLine.length > 0 && KhasraLine[0].code == id) {
             $.each(KHASRALINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var KhasraBoundary = data.filter((x) => x.gisLayerId === 18);//KhasraBoundary
         if (KhasraBoundary.length > 0 && KhasraBoundary[0].code == id) {
             $.each(KHASRABOUNDARY_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Road = data.filter((x) => x.gisLayerId === 19);//Road
         if (Road.length > 0 && Road[0].code == id) {
             $.each(ROAD_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Dashed = data.filter((x) => x.gisLayerId === 20);//Dashed
         if (Dashed.length > 0 && Dashed[0].code == id) {
             $.each(DASHED_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Inner = data.filter((x) => x.gisLayerId === 21);//Inner
         if (Inner.length > 0 && Inner[0].code == id) {
             $.each(INNER_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var VillageBoundary = data.filter((x) => x.VillageBoundary === 22);//VillageBoundary
         if (VillageBoundary.length > 0 && VillageBoundary[0].code == id) {
             $.each(VILLAGEBOUNDARY_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Cleantext = data.filter((x) => x.gisLayerId === 23);//Cleantext
         if (Cleantext.length > 0 && Cleantext[0].code == id) {
             $.each(CLEANTEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Gosha = data.filter((x) => x.gisLayerId === 24);//Gosha
         if (Gosha.length > 0 && Gosha[0].code == id) {
             $.each(GOSHA_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Text = data.filter((x) => x.gisLayerId === 25);//Text
         if (Text.length > 0 && Text[0].code == id) {
             $.each(TEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var DimentionText = data.filter((x) => x.gisLayerId === 26);//DimentionText
         if (DimentionText.length > 0 && DimentionText[0].code == id) {
             $.each(DIMENTIONTEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var CloseText = data.filter((x) => x.gisLayerId === 27);//CloseText
         if (CloseText.length > 0 && CloseText[0].code == id) {
             $.each(CLOSETEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var VillageText = data.filter((x) => x.gisLayerId === 28);//VillageText
         if (VillageText.length > 0 && VillageText[0].code == id) {
             $.each(VILLAGETEXT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var KhasraNo = data.filter((x) => x.gisLayerId === 29);//KhasraNo
         if (KhasraNo.length > 0 && KhasraNo[0].code == id) {
             $.each(KHASRANO_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var RectWithKhasraNo = data.filter((x) => x.gisLayerId === 30);//RectWithKhasraNo
         if (RectWithKhasraNo.length > 0 && RectWithKhasraNo[0].code == id) {
             $.each(RECTWITHKHASRANO_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Well = data.filter((x) => x.gisLayerId === 31);//Well
         if (Well.length > 0 && Well[0].code == id) {
             $.each(WELL_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Calvert = data.filter((x) => x.gisLayerId === 34);//Calvert
         if (Calvert.length > 0 && Calvert[0].code == id) {
             $.each(CALVERT_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Mick = data.filter((x) => x.gisLayerId === 33);//Mick
         if (Mick.length > 0 && Mick[0].code == id) {
             $.each(MICK_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
         var Line = data.filter((x) => x.gisLayerId === 35);//Line
         if (Line.length > 0 && Line[0].code == id) {
             $.each(LINE_LAYER, function (index, value) {
                 value.layer.setMap(null);
-            }); 
+            });
         }
 
 
@@ -1814,10 +1832,19 @@ function ShowKhasraNo(id) {
                         fontWeight: "bold"
                     }
                 });
-                marker.khasrano = khasrano[aj].label;
+                var khasradata = khasrano[aj].label.split("//");
+                if (khasradata.length > 1) {
+                    marker.khasrano = khasradata[1];
+                    marker.Rectno = khasradata[0];
+                }
+                else {
+
+                    marker.khasrano = khasradata[0];
+                    marker.Rectno = "";
+                } 
                 marker.villageid = khasrano[aj].villageId;
                 google.maps.event.addListener(marker, 'click', function () {
-                    getInfo(this.villageid, this.khasrano);
+                    getInfo(this.villageid, this.khasrano, this.Rectno);
                 });
                 KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": marker });
                 KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": measle });
@@ -1867,10 +1894,20 @@ $(document).on('change', '#KhasraId', function (e) {
                         fontWeight: "bold"
                     }
                 });
-                marker.khasrano = khasrano[aj].label;
+                var khasradata = khasrano[aj].label.split("//");
+                if (khasradata.length > 1) {
+                    marker.khasrano = khasradata[1];
+                    marker.Rectno = khasradata[0];
+                }
+                else {
+
+                    marker.khasrano = khasradata[0];
+                    marker.Rectno = "";
+                } 
+                
                 marker.villageid = khasrano[aj].villageId;
                 google.maps.event.addListener(marker, 'click', function () {
-                    getInfo(this.villageid, this.khasrano);
+                    getInfo(this.villageid, this.khasrano, this.Rectno);
                 });
                 KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": marker });
                 KHASRANO_LAYER.push({ "villageid": khasrano[aj].villageId, "layer": measle });
@@ -1884,7 +1921,7 @@ $(document).on('change', '#KhasraId', function (e) {
     }
 });
 
-function SetMapNull() { 
+function SetMapNull() {
     $.each(KHASRANO_LAYER, function (index, value) {
         value.layer.setMap(null);
     });
@@ -1893,11 +1930,11 @@ function SetMapNull() {
 function callSelect2() {
     $("select").select2();
 }
-$('#Query1').on('click', function (e) {  
+$('#Query1').on('click', function (e) {
 
     e.preventDefault();
     callSelect2();
-    
+
 });
 function RemoveAllVillageLayer(villageids) {
     var villageid = parseInt(villageids);
