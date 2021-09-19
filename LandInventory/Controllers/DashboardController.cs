@@ -10,6 +10,7 @@ namespace LandInventory.Controllers
 {
     public class DashboardController : Controller
     {
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {

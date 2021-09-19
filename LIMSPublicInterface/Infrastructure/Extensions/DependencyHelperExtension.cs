@@ -39,6 +39,7 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
             services.AddScoped<IUndersection17plotdetailRepository, Undersection17plotdetailRepository>();
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -59,6 +60,7 @@ namespace LIMSPublicInterface.Infrastructure.Extensions
             services.AddScoped<IUndersection6plotService, Undersection6plotService>();
             services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
+            services.AddScoped<IAuditService, AuditService>();
         }
     }
 }

@@ -63,6 +63,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IKycPaymentApprovalRepository, KycPaymentApprovalRepository>();
             services.AddScoped<IKycformApprovalRepository, KycformApprovalRepository>();
             services.AddScoped<IKycdemandpaymentdetailstableaRespository, KycdemandpaymentdetailstableaRepository>();
+            services.AddScoped<IAuditRepository, AuditRepository>();
            
             
             /* Application Services */
@@ -110,6 +111,7 @@ namespace LeaseForPublic.Infrastructure.Extensions
             services.AddScoped<IKycPaymentApprovalService, KycPaymentApprovalService>();
             services.AddScoped<IKycformApprovalService, KycformApprovalService>();
             services.AddScoped<IKycdemandpaymentdetailstableaService, KycdemandpaymentdetailstableaService>();
+            services.AddScoped<IAuditService, AuditService>();
 
         }
     }

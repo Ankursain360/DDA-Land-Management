@@ -7,10 +7,13 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 
+using SiteMaster.Filters;
+
 namespace SiteMaster.Controllers
 {
     public class DashboardController : Controller
     {
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public IActionResult Index()
         {
             

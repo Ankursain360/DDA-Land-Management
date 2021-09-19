@@ -80,6 +80,7 @@ namespace AcquiredLandInformationManagement
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+                option.Filters.Add(typeof(AuditFilterAttribute));
             });
             services.AddSession(options =>
             {
@@ -91,7 +92,7 @@ namespace AcquiredLandInformationManagement
             });
             services.RegisterDependency();
             services.AddAutoMapperSetup();
-
+            services.AddScoped<AuditFilterAttribute>();
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
             services.AddAuthentication(options =>

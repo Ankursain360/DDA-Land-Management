@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using AcquiredLandInformationManagement.Filters;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class DashboardController : Controller
     {
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public IActionResult Index()
         {
            
