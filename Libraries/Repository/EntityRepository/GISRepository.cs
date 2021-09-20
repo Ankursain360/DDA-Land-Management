@@ -321,7 +321,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Village>> GetVillageAutoCompleteDetails(string prefix)
         {
-            var data = await _dbContext.Village.Where(x => x.Name.Contains(prefix)).ToListAsync();
+            var data = await _dbContext.Village.Where(x => x.Name.Contains(prefix)).OrderBy(p => p.Name).ToListAsync();
             return data;
 
         }
@@ -336,13 +336,13 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Village>> GetVillageDetails(int villageId)
         {
             return await _dbContext.Village
-                                    .Where(x =>  x.IsActive == 1 && x.Id == villageId)
+                                    .Where(x =>  x.IsActive == 1 && x.Id == villageId).OrderBy(p => p.Name)
                                     .ToListAsync();
         }
 
         public async Task<List<Village>> GetVillageList(int ZoneId)
         {
-            return await _dbContext.Village.Where(x => x.ZoneId == ZoneId && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Village.Where(x => x.ZoneId == ZoneId && x.IsActive == 1).OrderBy(p=> p.Name).ToListAsync();
         }
 
         public async Task<List<Gisvillagetext>> GetVillageTextDetails(int villageId)
@@ -366,7 +366,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Zone>> GetZoneList()
         {
-            return await _dbContext.Zone.Include(x => x.Village).Where(x => x.IsActive == 1 && x.Xcoordinate !=null).ToListAsync();
+                        
+            var data= await _dbContext.Zone.Include(x => x.Village)
+                                        .Where(x => x.IsActive == 1 
+                                                 && x.Xcoordinate !=null).OrderBy(z => z.Name)
+                                                                         .ToListAsync(); 
+            data.ForEach(t => t.Village = t.Village.OrderBy(n => n.Name).ToList());
+            return data;
         }
     }
 }
