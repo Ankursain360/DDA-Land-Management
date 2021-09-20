@@ -1,7 +1,9 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http; 
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,12 +11,17 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Libraries.Model;
-using LIMSPublicInterface.Infrastructure.Extensions; 
+using LIMSPublicInterface.Infrastructure.Extensions;
+using System.IdentityModel.Tokens.Jwt;
 using LIMSPublicInterface.Filters;
 using Libraries.Model.Entity;
 using Model.Entity;
 using Microsoft.AspNetCore.Identity;
-using Service.Common; 
+using Service.Common;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.CookiePolicy;
+
 namespace LIMSPublicInterface
 {
     public class Startup
@@ -49,6 +56,7 @@ namespace LIMSPublicInterface
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+          
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -62,6 +70,8 @@ namespace LIMSPublicInterface
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+               
+             
             });
 
             services.RegisterDependency();

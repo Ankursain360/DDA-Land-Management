@@ -12,7 +12,7 @@ namespace LIMSPublicInterface.Controllers
 {
     public class DashboardController : BaseController
     {
-        [ServiceFilter(typeof(AuditFilterAttribute))]
+   
         public IActionResult Index()
         {
             
