@@ -9,7 +9,7 @@ namespace LeaseForPublic.Controllers
 {
     public class DashboardController : Controller
     {
-        [ServiceFilter(typeof(AuditFilterAttribute))]
+      
         public IActionResult Index()
         {
             return View();

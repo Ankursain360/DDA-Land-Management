@@ -38,10 +38,20 @@ namespace LeaseForPublic.Filters
                 objaudit.ControllerName = filterContext.ActionDescriptor.RouteValues["controller"];
                 objaudit.ActionName = filterContext.ActionDescriptor.RouteValues["action"];
                 objaudit.UrlReferrer = "/" + objaudit.ControllerName + "/";
-                objaudit.UserId = _siteContext.UserId.ToString();
-                objaudit.RoleId = _siteContext.RoleId.ToString();
+
+                string mobile = filterContext.HttpContext.Session.GetString("Mobile");
+                if (mobile != null || mobile != "" || mobile != "")
+                {
+                    objaudit.UserId = mobile;
+                }
+                else
+                {
+                    objaudit.UserId = "NA";
+                }
+             
+                objaudit.RoleId = "External Client";
                 objaudit.LoginStatus = "A";
-                objaudit.Area = "Lease for public";
+                objaudit.Area = "Lease for Public";
                 var actionDescriptorRouteValues = ((ControllerBase)filterContext.Controller)
                 .ControllerContext.ActionDescriptor.RouteValues;
                
@@ -66,7 +76,8 @@ namespace LeaseForPublic.Filters
                     objaudit.Userbrowser = "NA";
                 }
 
-                objaudit.SessionId = filterContext.HttpContext.Session.Id; ; // Application SessionID // User IPAddress 
+                //objaudit.SessionId = filterContext.HttpContext.Session.Id; ; // Application SessionID // User IPAddress
+                objaudit.SessionId= "N/A"; 
                 if (_httpContextAccessor.HttpContext != null)
                     objaudit.IpAddress = Convert.ToString(_httpContextAccessor.HttpContext.Connection.RemoteIpAddress);
 
