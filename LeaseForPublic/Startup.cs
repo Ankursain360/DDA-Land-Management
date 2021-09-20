@@ -53,6 +53,7 @@ namespace LeaseForPublic
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped<AuditFilterAttribute>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
@@ -66,6 +67,7 @@ namespace LeaseForPublic
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
+                //option.Filters.Add(typeof(AuditFilterAttribute));
             });
 
             services.AddSession(options =>

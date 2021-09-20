@@ -51,6 +51,8 @@ namespace LeaseForPublic.Controllers
             _userProfileService = userProfileService;
             _approvalproccessService = approvalproccessService;
         }
+
+      
         public IActionResult Index()
         {
             
@@ -74,6 +76,7 @@ namespace LeaseForPublic.Controllers
                
         }
 
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] KycformSearchDto model)
         {
