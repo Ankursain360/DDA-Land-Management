@@ -66,13 +66,16 @@ namespace NewLandAcquisition.Controllers
         {
             try
             {
+                bool IsValidpdf = CheckMimeType(newlandnotification);
                 newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
                 string NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
 
                 if (ModelState.IsValid)
                 {
+                    if (IsValidpdf == true)
+                    { 
 
-                    FileHelper fileHelper = new FileHelper();
+                        FileHelper fileHelper = new FileHelper();
 
                     if (newlandnotification.NewlandNotificationFile != null)
                     {
@@ -80,49 +83,26 @@ namespace NewLandAcquisition.Controllers
 
                     }
 
-
-
-
                     newlandnotification.CreatedBy = SiteContext.UserId;
                     var result = await _newlandnotificationService.Create(newlandnotification);
-
                     if (result)
                     {
-                       
-                        ///for notification file:
-
-
-                        //if (newlandnotification.NewlandNotificationFile != null && newlandnotification.NewlandNotificationFile.Count > 0)
-                        //{
-                        //    List<Newlandnotificationfilepath> newlandnotificationfilepath = new List<Newlandnotificationfilepath>();
-                        //    for (int i = 0; i < newlandnotification.NewlandNotificationFile.Count; i++)
-                        //    {
-                        //        string FilePath = fileHelper.SaveFile(NewlandNotificationFilePath, newlandnotification.NewlandNotificationFile[i]);
-                        //        newlandnotificationfilepath.Add(new Newlandnotificationfilepath
-                        //        {
-                        //            NewlandNotificationId = newlandnotification.Id,
-                        //            FilePath = FilePath
-                        //        });
-                        //    }
-                        //    foreach (var item in newlandnotificationfilepath)
-                        //    {
-                        //        result = await _newlandnotificationService.Savefiledetails(item);
-                        //    }
-                        //}
-                    }
-
-                        if (result)
-                        {
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _newlandnotificationService.GetAllNewlandNotification();
-                          
-                        return View("Index",list);
+
+                        return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(newlandnotification);
                     }
+                }
+                else 
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(newlandnotification);
+                }
                 }
                 else
                 {
@@ -159,24 +139,33 @@ namespace NewLandAcquisition.Controllers
         public async Task<IActionResult> Edit(int id, Newlandnotification newlandnotification)
         {
             newlandnotification.notificationtypeList = await _newlandnotificationService.GetAllNotificationType();
-
+            bool IsValidpdf = CheckMimeType(newlandnotification);
             if (ModelState.IsValid)
             {
-                newlandnotification.ModifiedBy = SiteContext.UserId;
-                var result = await _newlandnotificationService.Update(id, newlandnotification);
-                if (result == true)
+                if (IsValidpdf == true)
                 {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var list = await _newlandnotificationService.GetAllNewlandNotification();
-                    return View("Index", list);
+                    newlandnotification.ModifiedBy = SiteContext.UserId;
+                    var result = await _newlandnotificationService.Update(id, newlandnotification);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var list = await _newlandnotificationService.GetAllNewlandNotification();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(newlandnotification);
+
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(newlandnotification);
 
                 }
-
             }
             return View(newlandnotification);
         }
@@ -192,15 +181,7 @@ namespace NewLandAcquisition.Controllers
             }
             return View(Data);
         }
-        //public async Task<IActionResult> ViewPaymentProofDocument(int Id)
-        //{
-        //    FileHelper file = new FileHelper();
-        //    Newlandpaymentdetail Data = await _newlandnotificationService.FetchSingleResult(Id);
-        //    string filename = PaymentProofDocumentFilePath + Data.PaymentProofDocumentName;
-        //    byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
-        //    return File(FileBytes, file.GetContentType(filename));
-        //}
-
+        
 
 
         public async Task<IActionResult> ViewDocumenbtsdG(int Id)
@@ -293,6 +274,78 @@ namespace NewLandAcquisition.Controllers
 
 
 
+      
+        public bool CheckMimeType(Newlandnotification data)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+            IFormFile files = data.NewlandNotificationFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                NewlandNotificationFilePath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+                string FilePath = Path.Combine(NewlandNotificationFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(NewlandNotificationFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(NewlandNotificationFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:NewlandNotificationMasterFiles:NewlandNotificationFilePath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                      
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
 

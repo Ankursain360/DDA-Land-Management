@@ -80,7 +80,7 @@ namespace NewLandAcquisition
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
-                option.Filters.Add(typeof(AuditFilterAttribute));
+                //option.Filters.Add(typeof(AuditFilterAttribute));
             });
 
             services.RegisterDependency();

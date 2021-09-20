@@ -79,6 +79,7 @@ namespace NewLandAcquisition.Controllers
         {
             try
             {
+                bool IsValidpdf = CheckMimeType(newlandpossessiondetails);
 
                 newlandpossessiondetails.KhasraList = await _Possessiondetailservice.BindKhasra(newlandpossessiondetails.VillageId);
                 newlandpossessiondetails.VillageList = await _Possessiondetailservice.GetAllVillage();
@@ -89,33 +90,42 @@ namespace NewLandAcquisition.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (IsValidpdf == true)
+                    {
 
-                    FileHelper fileHelper = new FileHelper();
-                    newlandpossessiondetails.DocumentName = newlandpossessiondetails.DocumentIFormFile == null ? newlandpossessiondetails.DocumentName : fileHelper.SaveFile1(DocumentFilePath, newlandpossessiondetails.DocumentIFormFile);
-                    StringBuilder str = new StringBuilder();
-                    if (newlandpossessiondetails.IsVacant == true)
-                    {
-                        str.Append("Vacant");
-                    }
-                    if (newlandpossessiondetails.IsBuiltup == true)
-                    {
-                        if (str.Length != 0)
-                            str.Append("|");
-                        str.Append("Built Up");
-                    }
-                    newlandpossessiondetails.PossType = str.ToString();
-                    var result = await _Possessiondetailservice.Create(newlandpossessiondetails);
+                        FileHelper fileHelper = new FileHelper();
+                        newlandpossessiondetails.DocumentName = newlandpossessiondetails.DocumentIFormFile == null ? newlandpossessiondetails.DocumentName : fileHelper.SaveFile1(DocumentFilePath, newlandpossessiondetails.DocumentIFormFile);
+                        StringBuilder str = new StringBuilder();
+                        if (newlandpossessiondetails.IsVacant == true)
+                        {
+                            str.Append("Vacant");
+                        }
+                        if (newlandpossessiondetails.IsBuiltup == true)
+                        {
+                            if (str.Length != 0)
+                                str.Append("|");
+                            str.Append("Built Up");
+                        }
+                        newlandpossessiondetails.PossType = str.ToString();
+                        var result = await _Possessiondetailservice.Create(newlandpossessiondetails);
 
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _Possessiondetailservice.GetAllPossessiondetails();
-                        return View("Index", list);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _Possessiondetailservice.GetAllPossessiondetails();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(newlandpossessiondetails);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(newlandpossessiondetails);
+
                     }
                 }
                 else
@@ -167,7 +177,7 @@ namespace NewLandAcquisition.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandpossessiondetails newlandpossessiondetails)
         {
-
+            bool IsValidpdf = CheckMimeType(newlandpossessiondetails);
             newlandpossessiondetails.KhasraList = await _Possessiondetailservice.BindKhasra(newlandpossessiondetails.VillageId);
             newlandpossessiondetails.VillageList = await _Possessiondetailservice.GetAllVillage();
             newlandpossessiondetails.PossKhasraList = await _Possessiondetailservice.GetAllPossKhasra();
@@ -176,41 +186,49 @@ namespace NewLandAcquisition.Controllers
             newlandpossessiondetails.us6List = await _Possessiondetailservice.GetAllus6();
             if (ModelState.IsValid)
             {
-               
-                try
+                if (IsValidpdf == true)
                 {
-                    StringBuilder str = new StringBuilder();
-                    if (newlandpossessiondetails.IsVacant == true)
+                    try
                     {
-                        str.Append("Vacant");
+                        StringBuilder str = new StringBuilder();
+                        if (newlandpossessiondetails.IsVacant == true)
+                        {
+                            str.Append("Vacant");
+                        }
+                        if (newlandpossessiondetails.IsBuiltup == true)
+                        {
+                            if (str.Length != 0)
+                                str.Append("|");
+                            str.Append("Built Up");
+                        }
+                        FileHelper fileHelper = new FileHelper();
+                        newlandpossessiondetails.DocumentName = newlandpossessiondetails.DocumentIFormFile == null ? newlandpossessiondetails.DocumentName : fileHelper.SaveFile1(DocumentFilePath, newlandpossessiondetails.DocumentIFormFile);
+                        newlandpossessiondetails.PossType = str.ToString();
+                        var result = await _Possessiondetailservice.Update(id, newlandpossessiondetails);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            var list = await _Possessiondetailservice.GetAllPossessiondetails();
+                            return View("Index", list);
+                            // return View("Index");
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(newlandpossessiondetails);
+                        }
                     }
-                    if (newlandpossessiondetails.IsBuiltup == true)
-                    {
-                        if (str.Length != 0)
-                            str.Append("|");
-                        str.Append("Built Up");
-                    }
-                    FileHelper fileHelper = new FileHelper();
-                    newlandpossessiondetails.DocumentName = newlandpossessiondetails.DocumentIFormFile == null ? newlandpossessiondetails.DocumentName : fileHelper.SaveFile1(DocumentFilePath, newlandpossessiondetails.DocumentIFormFile);
-                    newlandpossessiondetails.PossType = str.ToString();
-                    var result = await _Possessiondetailservice.Update(id, newlandpossessiondetails);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _Possessiondetailservice.GetAllPossessiondetails();
-                        return View("Index", list);
-                        // return View("Index");
-                    }
-                    else
+                    catch (Exception ex)
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(newlandpossessiondetails);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(newlandpossessiondetails);
+
                 }
             }
             else
@@ -398,7 +416,76 @@ namespace NewLandAcquisition.Controllers
         }
 
 
+        public bool CheckMimeType(Newlandpossessiondetails newlandpossessiondetails)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            DocumentFilePath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
+            IFormFile files = newlandpossessiondetails.DocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
 
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                     
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
 

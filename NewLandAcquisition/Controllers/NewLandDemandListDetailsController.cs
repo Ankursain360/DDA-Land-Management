@@ -71,90 +71,110 @@ namespace NewLandAcquisition.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Create(Newlanddemandlistdetails newlanddemandlistdetails)
         {
+            bool IsValidpdf = CheckMimeType(newlanddemandlistdetails);
+            bool IsValidpdf1= CheckMimeType1(newlanddemandlistdetails);
             await BindDropDown(newlanddemandlistdetails);
             newlanddemandlistdetails.VillageList = await _newLandDemandListDetailsService.GetVillageList();
 
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
-                newlanddemandlistdetails.ENMDocumentName = newlanddemandlistdetails.ENMDocumentIFormFile == null ? newlanddemandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, newlanddemandlistdetails.ENMDocumentIFormFile);
-                newlanddemandlistdetails.CreatedBy = SiteContext.UserId;
-                var result = await _newLandDemandListDetailsService.Create(newlanddemandlistdetails);
-
-                if (result == true)
-                {
-                    //************ Save Appeal  ************  
-
-                    if (
-                        newlanddemandlistdetails.AppealNo != null
-
-                        //demandlistdetails.AppealByDept != null &&
-                        //demandlistdetails.Department != null &&
-                        // demandlistdetails.DateOfAppeal != null &&
-                        //demandlistdetails.PanelLawer != null
-
-                        )
+                if (IsValidpdf == true)
                     {
-                        Newlandappealdetail newlandappealdetail = new Newlandappealdetail();
 
-                        //item.PropertyType == null ? "" : item.PropertyType.Name
-                        //appealdetail.AppealNo = demandlistdetails.AppealNo == null ? "0" : demandlistdetails.AppealNo;
-                        newlandappealdetail.AppealNo = newlanddemandlistdetails.AppealNo;
-                        newlandappealdetail.AppealByDept = newlanddemandlistdetails.AppealByDept;
-                        newlandappealdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
-                        newlandappealdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
-                        newlandappealdetail.Department = newlanddemandlistdetails.Department;
-                        newlandappealdetail.DateOfAppeal = newlanddemandlistdetails.DateOfAppeal;
-                        newlandappealdetail.PanelLawer = newlanddemandlistdetails.PanelLawer;
-                        newlandappealdetail.IsActive = 1;
-
-                        newlandappealdetail.DemandListId = newlanddemandlistdetails.Id;
-                        newlandappealdetail.CreatedBy = SiteContext.UserId;
-                        result = await _newLandDemandListDetailsService.SaveAppeal(newlandappealdetail);
-                    }
-                    //************ Save Payment  ************  
-
-                    if (
-                        //demandlistdetails.AmountPaid != null &&
-                        //demandlistdetails.ChequeDate != null &&
-                        //demandlistdetails.ChequeNo != null &&
-                        // demandlistdetails.BankName != null &&
-                        newlanddemandlistdetails.VoucherNo != null
-                        //  demandlistdetails.PercentPaid != null &&
-                        //  //demandlistdetails.PaymentProofDocumentIFormFile != null &&
-                        //demandlistdetails.PercentPaid != null
-
-                        )
+                    if (IsValidpdf1 == true)
                     {
-                        Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
-                        newlandpaymentdetail.PaymentProofDocumentName = newlanddemandlistdetails.PaymentProofDocumentIFormFile == null ?
-                       newlanddemandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                       newlanddemandlistdetails.PaymentProofDocumentIFormFile);
+                        FileHelper fileHelper = new FileHelper();
+                        newlanddemandlistdetails.ENMDocumentName = newlanddemandlistdetails.ENMDocumentIFormFile == null ? newlanddemandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, newlanddemandlistdetails.ENMDocumentIFormFile);
+                        newlanddemandlistdetails.CreatedBy = SiteContext.UserId;
+                        var result = await _newLandDemandListDetailsService.Create(newlanddemandlistdetails);
 
-                        newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
-                        newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
-                        newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
-                        newlandpaymentdetail.ChequeDate = newlanddemandlistdetails.ChequeDate;
-                        newlandpaymentdetail.ChequeNo = newlanddemandlistdetails.ChequeNo;
-                        newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
-                        newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
-                        newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
+                        if (result == true)
+                        {
+                            //************ Save Appeal  ************  
 
-                        newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
-                        newlandpaymentdetail.CreatedBy = SiteContext.UserId;
-                        result = await _newLandDemandListDetailsService.SavePayment(newlandpaymentdetail);
+                            if (
+                                newlanddemandlistdetails.AppealNo != null
+
+                                //demandlistdetails.AppealByDept != null &&
+                                //demandlistdetails.Department != null &&
+                                // demandlistdetails.DateOfAppeal != null &&
+                                //demandlistdetails.PanelLawer != null
+
+                                )
+                            {
+                                Newlandappealdetail newlandappealdetail = new Newlandappealdetail();
+
+                                //item.PropertyType == null ? "" : item.PropertyType.Name
+                                //appealdetail.AppealNo = demandlistdetails.AppealNo == null ? "0" : demandlistdetails.AppealNo;
+                                newlandappealdetail.AppealNo = newlanddemandlistdetails.AppealNo;
+                                newlandappealdetail.AppealByDept = newlanddemandlistdetails.AppealByDept;
+                                newlandappealdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
+                                newlandappealdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
+                                newlandappealdetail.Department = newlanddemandlistdetails.Department;
+                                newlandappealdetail.DateOfAppeal = newlanddemandlistdetails.DateOfAppeal;
+                                newlandappealdetail.PanelLawer = newlanddemandlistdetails.PanelLawer;
+                                newlandappealdetail.IsActive = 1;
+
+                                newlandappealdetail.DemandListId = newlanddemandlistdetails.Id;
+                                newlandappealdetail.CreatedBy = SiteContext.UserId;
+                                result = await _newLandDemandListDetailsService.SaveAppeal(newlandappealdetail);
+                            }
+                            //************ Save Payment  ************  
+
+                            if (
+                                //demandlistdetails.AmountPaid != null &&
+                                //demandlistdetails.ChequeDate != null &&
+                                //demandlistdetails.ChequeNo != null &&
+                                // demandlistdetails.BankName != null &&
+                                newlanddemandlistdetails.VoucherNo != null
+                                //  demandlistdetails.PercentPaid != null &&
+                                //  //demandlistdetails.PaymentProofDocumentIFormFile != null &&
+                                //demandlistdetails.PercentPaid != null
+
+                                )
+                            {
+                                Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
+                                newlandpaymentdetail.PaymentProofDocumentName = newlanddemandlistdetails.PaymentProofDocumentIFormFile == null ?
+                               newlanddemandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                               newlanddemandlistdetails.PaymentProofDocumentIFormFile);
+
+                                newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
+                                newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
+                                newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
+                                newlandpaymentdetail.ChequeDate = newlanddemandlistdetails.ChequeDate;
+                                newlandpaymentdetail.ChequeNo = newlanddemandlistdetails.ChequeNo;
+                                newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
+                                newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
+                                newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
+                                newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
+
+                                newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
+                                newlandpaymentdetail.CreatedBy = SiteContext.UserId;
+                                result = await _newLandDemandListDetailsService.SavePayment(newlandpaymentdetail);
+                            }
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            ViewBag.VillageList = await _newLandDemandListDetailsService.GetVillageList();
+                            return View("Index");
+
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            await BindDropDown(newlanddemandlistdetails);
+                            return View(newlanddemandlistdetails);
+
+                        }
                     }
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    ViewBag.VillageList = await _newLandDemandListDetailsService.GetVillageList();
-                    return View("Index");
-                }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                        return View(newlanddemandlistdetails);
+                    }
+              }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    await BindDropDown(newlanddemandlistdetails);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(newlanddemandlistdetails);
-
                 }
             }
             else
@@ -200,113 +220,133 @@ namespace NewLandAcquisition.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Edit(int id, Newlanddemandlistdetails newlanddemandlistdetails)
         {
+            bool IsValidpdf = CheckMimeType(newlanddemandlistdetails);
+            bool IsValidpdf1 = CheckMimeType1(newlanddemandlistdetails);
             await BindDropDown(newlanddemandlistdetails);
             newlanddemandlistdetails.VillageList = await _newLandDemandListDetailsService.GetVillageList();
 
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
-                newlanddemandlistdetails.ENMDocumentName = newlanddemandlistdetails.ENMDocumentIFormFile == null ? newlanddemandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, newlanddemandlistdetails.ENMDocumentIFormFile);
-                newlanddemandlistdetails.ModifiedBy = SiteContext.UserId;
-                var result = await _newLandDemandListDetailsService.Update(id, newlanddemandlistdetails);
-
-                if (result == true)
+                if (IsValidpdf == true)
                 {
-                    //************ Save Appeal  ************  
-                    var data = await _newLandDemandListDetailsService.FetchSingleAppeal(id);
-
-                    if (data != null)
-
+                    if (IsValidpdf1 == true)
                     {
 
+                        FileHelper fileHelper = new FileHelper();
+                        newlanddemandlistdetails.ENMDocumentName = newlanddemandlistdetails.ENMDocumentIFormFile == null ? newlanddemandlistdetails.ENMDocumentName : fileHelper.SaveFile1(ENMDocumentFilePath, newlanddemandlistdetails.ENMDocumentIFormFile);
+                        newlanddemandlistdetails.ModifiedBy = SiteContext.UserId;
+                        var result = await _newLandDemandListDetailsService.Update(id, newlanddemandlistdetails);
 
-                        Newlandappealdetail newlandappealdetail = new Newlandappealdetail();
+                        if (result == true)
+                        {
+                            //************ Save Appeal  ************  
+                            var data = await _newLandDemandListDetailsService.FetchSingleAppeal(id);
+
+                            if (data != null)
+
+                            {
 
 
-                        newlandappealdetail.AppealNo = newlanddemandlistdetails.AppealNo;
-                        newlandappealdetail.AppealByDept = newlanddemandlistdetails.AppealByDept;
-                        newlandappealdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
-                        newlandappealdetail.Department = newlanddemandlistdetails.Department;
-                        newlandappealdetail.Department = newlanddemandlistdetails.Department;
-                        newlandappealdetail.DateOfAppeal = newlanddemandlistdetails.DateOfAppeal;
-                        newlandappealdetail.PanelLawer = newlanddemandlistdetails.PanelLawer;
+                                Newlandappealdetail newlandappealdetail = new Newlandappealdetail();
 
-                        newlandappealdetail.DemandListId = newlanddemandlistdetails.Id;
-                        newlandappealdetail.CreatedBy = SiteContext.UserId;
-                        newlandappealdetail.IsActive = 1;
-                        result = await _newLandDemandListDetailsService.UpdateAppeal(id, newlandappealdetail);
+
+                                newlandappealdetail.AppealNo = newlanddemandlistdetails.AppealNo;
+                                newlandappealdetail.AppealByDept = newlanddemandlistdetails.AppealByDept;
+                                newlandappealdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
+                                newlandappealdetail.Department = newlanddemandlistdetails.Department;
+                                newlandappealdetail.Department = newlanddemandlistdetails.Department;
+                                newlandappealdetail.DateOfAppeal = newlanddemandlistdetails.DateOfAppeal;
+                                newlandappealdetail.PanelLawer = newlanddemandlistdetails.PanelLawer;
+
+                                newlandappealdetail.DemandListId = newlanddemandlistdetails.Id;
+                                newlandappealdetail.CreatedBy = SiteContext.UserId;
+                                newlandappealdetail.IsActive = 1;
+                                result = await _newLandDemandListDetailsService.UpdateAppeal(id, newlandappealdetail);
+                            }
+                            else
+                            {
+
+                                Newlandappealdetail newlandappealdetail = new Newlandappealdetail();
+
+                                newlandappealdetail.AppealNo = newlanddemandlistdetails.AppealNo;
+                                newlandappealdetail.AppealByDept = newlanddemandlistdetails.AppealByDept;
+                                newlandappealdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
+                                newlandappealdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
+                                newlandappealdetail.Department = newlanddemandlistdetails.Department;
+                                newlandappealdetail.DateOfAppeal = newlanddemandlistdetails.DateOfAppeal;
+                                newlandappealdetail.PanelLawer = newlanddemandlistdetails.PanelLawer;
+
+                                newlandappealdetail.DemandListId = newlanddemandlistdetails.Id;
+                                newlandappealdetail.CreatedBy = SiteContext.UserId;
+                                newlandappealdetail.IsActive = 1;
+                                result = await _newLandDemandListDetailsService.SaveAppeal(newlandappealdetail);
+
+                            }
+                            //************ Save Payment  ************  
+                            var dataa = await _newLandDemandListDetailsService.FetchSinglePayment(id);
+
+                            if (dataa != null)
+
+                            {
+
+                                Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
+                                newlandpaymentdetail.PaymentProofDocumentName = newlanddemandlistdetails.PaymentProofDocumentIFormFile == null ?
+                               newlanddemandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                               newlanddemandlistdetails.PaymentProofDocumentIFormFile);
+
+                                newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
+                                newlandpaymentdetail.ChequeDate = newlanddemandlistdetails.ChequeDate;
+                                newlandpaymentdetail.ChequeNo = newlanddemandlistdetails.ChequeNo;
+                                newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
+                                newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
+                                newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
+                                newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
+                                newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
+                                newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
+                                newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
+                                newlandpaymentdetail.IsActive = 1;
+                                result = await _newLandDemandListDetailsService.UpdatePayment(id, newlandpaymentdetail);
+                            }
+                            else
+                            {
+                                Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
+                                newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
+                                newlandpaymentdetail.ChequeDate = newlanddemandlistdetails.ChequeDate;
+                                newlandpaymentdetail.ChequeNo = newlanddemandlistdetails.ChequeNo;
+                                newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
+                                newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
+                                newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
+                                newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
+                                newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
+                                newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
+                                newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
+                                newlandpaymentdetail.CreatedBy = SiteContext.UserId;
+                                newlandpaymentdetail.IsActive = 1;
+                                result = await _newLandDemandListDetailsService.SavePayment(newlandpaymentdetail);
+
+                            }
+
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            ViewBag.VillageList = await _newLandDemandListDetailsService.GetVillageList();
+                            return View("Index");
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            await BindDropDown(newlanddemandlistdetails);
+                            return View(newlanddemandlistdetails);
+
+                        }
                     }
                     else
                     {
-
-                        Newlandappealdetail newlandappealdetail = new Newlandappealdetail();
-
-                        newlandappealdetail.AppealNo = newlanddemandlistdetails.AppealNo;
-                        newlandappealdetail.AppealByDept = newlanddemandlistdetails.AppealByDept;
-                        newlandappealdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
-                        newlandappealdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
-                        newlandappealdetail.Department = newlanddemandlistdetails.Department;
-                        newlandappealdetail.DateOfAppeal = newlanddemandlistdetails.DateOfAppeal;
-                        newlandappealdetail.PanelLawer = newlanddemandlistdetails.PanelLawer;
-
-                        newlandappealdetail.DemandListId = newlanddemandlistdetails.Id;
-                        newlandappealdetail.CreatedBy = SiteContext.UserId;
-                        newlandappealdetail.IsActive = 1;
-                        result = await _newLandDemandListDetailsService.SaveAppeal(newlandappealdetail);
-
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                        return View(newlanddemandlistdetails);
                     }
-                    //************ Save Payment  ************  
-                    var dataa = await _newLandDemandListDetailsService.FetchSinglePayment(id);
-
-                    if (dataa != null)
-
-                    {
-
-                        Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
-                        newlandpaymentdetail.PaymentProofDocumentName = newlanddemandlistdetails.PaymentProofDocumentIFormFile == null ?
-                       newlanddemandlistdetails.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                       newlanddemandlistdetails.PaymentProofDocumentIFormFile);
-
-                        newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
-                        newlandpaymentdetail.ChequeDate = newlanddemandlistdetails.ChequeDate;
-                        newlandpaymentdetail.ChequeNo = newlanddemandlistdetails.ChequeNo;
-                        newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
-                        newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
-                        newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
-                        newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
-                        newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
-                        newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
-                        newlandpaymentdetail.IsActive = 1;
-                        result = await _newLandDemandListDetailsService.UpdatePayment(id, newlandpaymentdetail);
-                    }
-                    else
-                    {
-                        Newlandpaymentdetail newlandpaymentdetail = new Newlandpaymentdetail();
-                        newlandpaymentdetail.AmountPaid = (decimal)newlanddemandlistdetails.AmountPaid;
-                        newlandpaymentdetail.ChequeDate = newlanddemandlistdetails.ChequeDate;
-                        newlandpaymentdetail.ChequeNo = newlanddemandlistdetails.ChequeNo;
-                        newlandpaymentdetail.BankName = newlanddemandlistdetails.BankName;
-                        newlandpaymentdetail.VoucherNo = newlanddemandlistdetails.VoucherNo;
-                        newlandpaymentdetail.PercentPaid = (decimal)newlanddemandlistdetails.PercentPaid;
-                        newlandpaymentdetail.PaymentProofDocumentIFormFile = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
-                        newlandpaymentdetail.EnmSno = newlanddemandlistdetails.Enmsno.ToString();
-                        newlandpaymentdetail.DemandListNo = newlanddemandlistdetails.DemandListNo.ToString();
-                        newlandpaymentdetail.DemandListId = newlanddemandlistdetails.Id;
-                        newlandpaymentdetail.CreatedBy = SiteContext.UserId;
-                        newlandpaymentdetail.IsActive = 1;
-                        result = await _newLandDemandListDetailsService.SavePayment(newlandpaymentdetail);
-
-                    }
-
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    ViewBag.VillageList = await _newLandDemandListDetailsService.GetVillageList();
-                    return View("Index");
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    await BindDropDown(newlanddemandlistdetails);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(newlanddemandlistdetails);
 
                 }
@@ -545,6 +585,149 @@ namespace NewLandAcquisition.Controllers
             return Json(IsImg, JsonRequestBehavior);
         }
 
+
+
+        public bool CheckMimeType(Newlanddemandlistdetails newlanddemandlistdetails)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            ENMDocumentFilePath = _Configuration.GetSection("FilePaths:NewLandDemandListDetails:DocumentFIlePath").Value.ToString();
+            IFormFile files = newlanddemandlistdetails.ENMDocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                ENMDocumentFilePath = _Configuration.GetSection("FilePaths:NewLandDemandListDetails:DocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(PaymentProofDocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(PaymentProofDocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(PaymentProofDocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _Configuration.GetSection("FilePaths:NewLandDemandListDetails:DocumentFIlePath").Value.ToString(); ;
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+        public bool CheckMimeType1(Newlanddemandlistdetails newlanddemandlistdetails)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            PaymentProofDocumentFilePath = _Configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+            IFormFile files = newlanddemandlistdetails.PaymentProofDocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                PaymentProofDocumentFilePath = _Configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(PaymentProofDocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(PaymentProofDocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(PaymentProofDocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _Configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
     }
 
 }

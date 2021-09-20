@@ -64,24 +64,34 @@ namespace NewLandAcquisition.Controllers
             try
             {
 
-
+                bool IsValidpdf = CheckMimeType(newlandpaymentdetail);
                 if (ModelState.IsValid)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    newlandpaymentdetail.PaymentProofDocumentName = newlandpaymentdetail.PaymentProofDocumentIFormFile == null ? newlandpaymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, newlandpaymentdetail.PaymentProofDocumentIFormFile);
-                    newlandpaymentdetail.CreatedBy = SiteContext.UserId;
-                    var result = await _newLandPaymentdetailService.Create(newlandpaymentdetail);
-
-                    if (result == true)
+                    if (IsValidpdf == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
-                        return View("Index", list);
+
+                        FileHelper fileHelper = new FileHelper();
+                        newlandpaymentdetail.PaymentProofDocumentName = newlandpaymentdetail.PaymentProofDocumentIFormFile == null ? newlandpaymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, newlandpaymentdetail.PaymentProofDocumentIFormFile);
+                        newlandpaymentdetail.CreatedBy = SiteContext.UserId;
+                        var result = await _newLandPaymentdetailService.Create(newlandpaymentdetail);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(newlandpaymentdetail);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(newlandpaymentdetail);
+
                     }
                 }
                 else
@@ -115,30 +125,41 @@ namespace NewLandAcquisition.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Newlandpaymentdetail newlandpaymentdetail)
         {
+            bool IsValidpdf = CheckMimeType(newlandpaymentdetail);
             if (ModelState.IsValid)
             {
-                try
+                if (IsValidpdf == true)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    newlandpaymentdetail.PaymentProofDocumentName = newlandpaymentdetail.PaymentProofDocumentIFormFile == null ? newlandpaymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, newlandpaymentdetail.PaymentProofDocumentIFormFile);
-                    newlandpaymentdetail.ModifiedBy = SiteContext.UserId;
-                    var result = await _newLandPaymentdetailService.Update(id, newlandpaymentdetail);
-                    if (result == true)
+
+                    try
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        newlandpaymentdetail.PaymentProofDocumentName = newlandpaymentdetail.PaymentProofDocumentIFormFile == null ? newlandpaymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath, newlandpaymentdetail.PaymentProofDocumentIFormFile);
+                        newlandpaymentdetail.ModifiedBy = SiteContext.UserId;
+                        var result = await _newLandPaymentdetailService.Update(id, newlandpaymentdetail);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            var list = await _newLandPaymentdetailService.GetAllPaymentdetail();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(_newLandPaymentdetailService);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(_newLandPaymentdetailService);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(_newLandPaymentdetailService);
+
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(newlandpaymentdetail);
                 }
             }
             else
@@ -296,6 +317,77 @@ namespace NewLandAcquisition.Controllers
         }
 
 
+
+        public bool CheckMimeType(Newlandpaymentdetail newlandpaymentdetail)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            PaymentProofDocumentFilePath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+            IFormFile files = newlandpaymentdetail.PaymentProofDocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                PaymentProofDocumentFilePath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(PaymentProofDocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(PaymentProofDocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(PaymentProofDocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
 
