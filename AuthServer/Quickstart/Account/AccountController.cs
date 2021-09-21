@@ -3,6 +3,7 @@
 
 
 using AuthServer.Models;
+using Dto.Master;
 using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -27,12 +28,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Utility.Helper;
 
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+
 namespace IdentityServerHost.Quickstart.UI
 {
     [SecurityHeaders]
     [AllowAnonymous]
     public class AccountController : Controller
     {
+        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
@@ -49,7 +55,8 @@ namespace IdentityServerHost.Quickstart.UI
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
             IConfiguration configuration, 
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor, IHostingEnvironment en)
+           
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -59,6 +66,8 @@ namespace IdentityServerHost.Quickstart.UI
             _events = events;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
+            _hostingEnvironment = en;
+            
         }
 
         /// <summary>
@@ -66,6 +75,7 @@ namespace IdentityServerHost.Quickstart.UI
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> Login(string returnUrl)
+        
         {
             // build a model so we know what to show on the login page
             var vm = await BuildLoginViewModelAsync(returnUrl);
@@ -138,6 +148,57 @@ namespace IdentityServerHost.Quickstart.UI
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByNameAsync(model.Username);
+
+                    if (user.ChangePasswordStatus == "T") 
+                    {
+                        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                        var callback = Url.Action(nameof(ResetPassword), "Account", new { token, username = user.UserName }, Request.Scheme);
+
+                        //At successfull completion send mail and sms
+                        string DisplayName = model.Username.ToString();
+                        string EmailID = user.Email.ToString();
+                       // string Id = "";
+                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
+
+                        #region Mail Generation Added By Renu
+
+                        MailSMSHelper mailG = new MailSMSHelper();
+
+                        #region HTML Body Generation
+                        RegisterationBodyDTO bodyDTO = new RegisterationBodyDTO();
+                        bodyDTO.displayName = DisplayName;
+                        bodyDTO.loginName = DisplayName;
+                        bodyDTO.password = "";
+                        bodyDTO.link = callback;
+                        bodyDTO.action = "";
+                        bodyDTO.path = path;
+                        string strBodyMsg = mailG.PopulateBody(bodyDTO);
+                        #endregion
+
+                        #region Common Mail Genration
+                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                        maildto.strMailSubject = "Reset Password";
+                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                        maildto.strBodyMsg = strBodyMsg;
+                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                        maildto.strMailTo = EmailID;
+                        var sendMailResult = mailG.SendMailWithAttachment(maildto);
+                        #endregion
+                        #endregion
+                        if (sendMailResult)
+                        {
+                            return RedirectToAction("MailSentMsg", "Account", new { username = user.UserName });
+
+                        }
+
+                        
+                    }
+
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id.ToString(), user.UserName, clientId: context?.Client.ClientId));
                     #region cookie based session fixation added by sachin bhatt
 
@@ -518,6 +579,79 @@ namespace IdentityServerHost.Quickstart.UI
             SHA1 sha = new SHA1CryptoServiceProvider();
             byte[] hashdata = sha.ComputeHash(Encoding.UTF8.GetBytes(myStr.ToString()));
             return Convert.ToBase64String(hashdata);
+        }
+        #endregion
+        #region Reset password on first login ,code added by ishu 20/9/2021
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token, string username)
+        {
+            var model = new ResetPasswordDto { Token = token, Username = username };
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //    // Validate Captcha Code
+                    if (!Captcha.ValidateCaptchaCode(resetPasswordDto.CaptchaCode, HttpContext))
+                    {
+                        ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        return View(resetPasswordDto);
+                    }
+                    var user = await _userManager.FindByNameAsync(resetPasswordDto.Username);
+                    if (user == null)
+                    {
+                        ViewBag.Message = Alert.Show("No Authenticated User", "", AlertType.Error);
+                        return View(resetPasswordDto);
+                    }
+                    var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDto.Token, resetPasswordDto.Password);
+                    if (!resetPassResult.Succeeded)
+                    {
+                        foreach (var error in resetPassResult.Errors)
+                        {
+                            ModelState.TryAddModelError(error.Code, error.Description);
+                            ViewBag.Message = Alert.Show(error.Description, "", AlertType.Error);
+                        }
+                         return View(resetPasswordDto);
+                    }
+                    user.ChangePasswordStatus = "F";
+                    IdentityResult result = await _userManager.UpdateAsync(user);
+                    var res= result.Succeeded ? true : false;
+                    return RedirectToAction(nameof(ResetPasswordConfirmation));
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Please Enter fields correctly", "", AlertType.Error);
+                    return View(resetPasswordDto);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(resetPasswordDto);
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation(string token, string username)
+        {
+            var model = new ResetPasswordDto { Token = token, Username = username };
+            return View(model);
+        }
+
+        public IActionResult MailSentMsg(string username)
+        {
+            ViewBag.name = username;
+            return View();
         }
         #endregion
     }

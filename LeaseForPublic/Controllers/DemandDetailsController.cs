@@ -495,6 +495,17 @@ namespace LeaseForPublic.Controllers
                        
                         if (dto.TotalDues>0)
                         {
+                            //var EnFile = (new EncryptionHelper()).Base64Encode(Data.FileNo);
+                            //var EnName = (new EncryptionHelper()).Base64Encode(Data.Name);
+                            //var EnProperty = (new EncryptionHelper()).Base64Encode(Data.Property);
+                            //var EnZone = (new EncryptionHelper()).Base64Encode(Data.Zone.Name);
+                            //var EnLocality = (new EncryptionHelper()).Base64Encode(Data.Locality.Name);
+                            //var EnEmail = (new EncryptionHelper()).Base64Encode(Data.EmailId);
+                            //var EnMobile = (new EncryptionHelper()).Base64Encode(Data.MobileNo);
+                            //var EnAmount = (new EncryptionHelper()).Base64Encode(dto.TotalPayable.ToString());
+                            //var EnInterest = (new EncryptionHelper()).Base64Encode(dto.TotalPayableInterest.ToString());
+                            //var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + EnFile + "&Locality=" + EnLocality + "&Zone=" + EnZone + "&Name=" + EnName + "&Property=" + EnProperty + "&Email=" + EnEmail + "&Mobile=" + EnMobile + "&Amount=" + EnAmount + "&Interest=" + EnInterest;
+
                             var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + dto.FileNo + "&Locality=0&Amount=" + dto.TotalPayable.ToString() + "&Interest=" + dto.TotalPayableInterest.ToString();
                             return Redirect(paymentLink);
                         }

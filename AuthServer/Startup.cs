@@ -56,9 +56,17 @@ namespace AuthServer
                 options.Lockout.MaxFailedAccessAttempts = (3);
                 options.Lockout.AllowedForNewUsers = true;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:DefaultLockoutTimeSpan").Value));
+                options.Password.RequiredLength = 7;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.User.RequireUniqueEmail = true;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+          opt.TokenLifespan = TimeSpan.FromHours(2));
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(Convert.ToInt32(Configuration.GetSection("CookiesSettings:CookiesTimeout").Value));
