@@ -510,9 +510,7 @@
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             @{ if (Model.AadhaarNoPath != null)
                                 {
-
-
-                                    <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3"
+                                    <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3 checkExtension"
                                            asp-for="Aadhar" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                     <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
@@ -521,7 +519,7 @@
                                     </a>}
                                 else
                                 {
-                                    <input type="file" asp-for="Aadhar" class="floating-label-field floating-label-field--s3" placeholder="Property Photo">
+                                    <input type="file" asp-for="Aadhar" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Property Photo">
                                     <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
                                 } }
 
@@ -534,7 +532,7 @@
                                 {
 
 
-                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3 checkExtension"
                                            asp-for="Letter" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                     <span asp-validation-for="Letter" class="d-block text-danger field-validation-valid"></span>
@@ -543,7 +541,7 @@
                                     </a>}
                                 else
                                 {
-                                    <input type="file" asp-for="Letter" class="floating-label-field floating-label-field--s3" placeholder="Photo">
+                                    <input type="file" asp-for="Letter" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Photo">
                                     <span asp-validation-for="Letter" class="d-block text-danger field-validation-valid"></span>
                                 } }
 
@@ -562,7 +560,7 @@
                                 {
 
 
-                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3"
+                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3 checkExtension"
                                            asp-for="ApplicantPan" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                                     <span asp-validation-for="ApplicantPan" class="d-block text-danger field-validation-valid"></span>
@@ -571,7 +569,7 @@
                                     </a>}
                                 else
                                 {
-                                    <input type="file" asp-for="ApplicantPan" class="floating-label-field floating-label-field--s3" placeholder="Photo">
+                                    <input type="file" asp-for="ApplicantPan" class="floating-label-field floating-label-field--s3 checkExtension" placeholder="Photo">
                                     <span asp-validation-for="ApplicantPan" class="d-block text-danger field-validation-valid"></span>
                                 } }
 

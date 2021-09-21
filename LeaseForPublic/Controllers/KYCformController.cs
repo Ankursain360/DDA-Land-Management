@@ -20,10 +20,15 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 
+
 namespace LeaseForPublic.Controllers
 {
+    
+
     public class KYCformController : BaseController
     {
+        public object JsonRequestBehavior { get; private set; }
+
         private readonly IKycformService _kycformService;
         public IConfiguration _configuration;
         private readonly IUserProfileService _userProfileService;
@@ -129,9 +134,11 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Kycform kyc)
         {
+            bool IsValidpdf = CheckMimeTypeAAdharDocument(kyc);
+            bool IsValidpdf1 = CheckMimeTypeLetter(kyc);
+            bool IsValidpdf2 = CheckMimeTypeApplicantPan(kyc);
             try
             {
-
                 
                 kyc.LeasetypeList = await _kycformService.GetAllLeasetypeList();
                 //kyc.BranchList = await _kycformService.GetAllBranchList();
@@ -153,204 +160,286 @@ namespace LeaseForPublic.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    #region Approval Proccess At 1st level Check Initial Before Creating Record
-
-                    Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
-                    var DataFlow = await dataAsync();
-                    for (int i = 0; i < DataFlow.Count; i++)
+                    if (IsValidpdf == true)
                     {
-                        if (!DataFlow[i].parameterSkip)
+                        if (IsValidpdf1 == true)
                         {
-                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                            if (IsValidpdf2 == true)
                             {
-                                if (kyc.BranchId == null)
-                                {
-                                    ViewBag.Message = Alert.Show("Your Branch is not available , Without branch application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
-                                    return View(kyc);
-                                }
 
-                                // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
-                            }
-                            if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
-                            {
-                                for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                                #region Approval Proccess At 1st level Check Initial Before Creating Record
+
+                                Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
+                                var DataFlow = await dataAsync();
+                                for (int i = 0; i < DataFlow.Count; i++)
                                 {
-                                    List<UserProfileDto> UserListRoleBasis = null;
-                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
-                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleBranchBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), kyc.BranchId ?? 0);
-                                    else
-                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
-                                    if (UserListRoleBasis.Count == 0)
+                                    if (!DataFlow[i].parameterSkip)
                                     {
-                                        ViewBag.Message = Alert.Show("No User is available for selected Branch , Without User application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
-                                        return View(kyc);
-                                    }
-                                    else
-                                    {
-                                        StringBuilder multouserszonewise = new StringBuilder();
-                                        int col = 0;
-                                        if (UserListRoleBasis != null)
+                                        if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
                                         {
-                                            for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                            if (kyc.BranchId == null)
                                             {
-                                                if (col > 0)
-                                                    multouserszonewise.Append(",");
-                                                multouserszonewise.Append(UserListRoleBasis[h].UserId);
-                                                col++;
+                                                ViewBag.Message = Alert.Show("Your Branch is not available , Without branch application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                                return View(kyc);
                                             }
-                                            approvalproccess.SendTo = multouserszonewise.ToString();
+
+                                            // leaseapplication.ApprovalZoneId = SiteContext.ZoneId;
+                                        }
+                                        if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                                        {
+                                            for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                                            {
+                                                List<UserProfileDto> UserListRoleBasis = null;
+                                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                                    UserListRoleBasis = await _userProfileService.GetUserOnRoleBranchBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), kyc.BranchId ?? 0);
+                                                else
+                                                    UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
+                                                if (UserListRoleBasis.Count == 0)
+                                                {
+                                                    ViewBag.Message = Alert.Show("No User is available for selected Branch , Without User application cannot be processed further, Please contact system administrator", "", AlertType.Warning);
+                                                    return View(kyc);
+                                                }
+                                                else
+                                                {
+                                                    StringBuilder multouserszonewise = new StringBuilder();
+                                                    int col = 0;
+                                                    if (UserListRoleBasis != null)
+                                                    {
+                                                        for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                                        {
+                                                            if (col > 0)
+                                                                multouserszonewise.Append(",");
+                                                            multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                                            col++;
+                                                        }
+                                                        approvalproccess.SendTo = multouserszonewise.ToString();
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
+                                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
+                                            {
+                                                StringBuilder multousersbranchwise = new StringBuilder();
+                                                int col = 0;
+                                                if (approvalproccess.SendTo != null)
+                                                {
+                                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                    foreach (string MultiUserId in multiTo)
+                                                    {
+                                                        if (col > 0)
+                                                            multousersbranchwise.Append(",");
+                                                        var UserProfile = await _userProfileService.GetUserByIdBranch(Convert.ToInt32(MultiUserId), kyc.BranchId ?? 0);
+                                                        multousersbranchwise.Append(UserProfile.UserId);
+                                                        col++;
+                                                    }
+                                                    approvalproccess.SendTo = multousersbranchwise.ToString();
+                                                }
+                                            }
+                                        }
+
+
+                                        break;
+                                    }
+                                }
+                                #endregion
+
+
+
+                                FileHelper fileHelper = new FileHelper();
+
+                                if (kyc.Aadhar != null)
+                                {
+                                    kyc.AadhaarNoPath = fileHelper.SaveFile1(AadharDoc, kyc.Aadhar);
+                                }
+                                if (kyc.Letter != null)
+                                {
+                                    kyc.LetterPath = fileHelper.SaveFile1(LetterDoc, kyc.Letter);
+                                }
+                                if (kyc.ApplicantPan != null)
+                                {
+                                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
+                                }
+
+                                kyc.CreatedBy = Convert.ToInt32(id);
+                                kyc.IsActive = 1;
+                                kyc.KycStatus = "F";
+                                var result = await _kycformService.Create(kyc);
+                                if (result == true)
+                                {
+
+                                    #region Approval Proccess At 1st level start Added by ishu  20 july 2021
+                                    var workflowtemplatedata = await _kycformService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProccessGuidKYCForm").Value));
+
+                                    var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+
+                                    for (int i = 0; i < DataFlow.Count; i++)
+                                    {
+                                        if (!DataFlow[i].parameterSkip)
+                                        {
+                                            kyc.ApprovedStatus = ApprovalStatus.Id;
+                                            kyc.PendingAt = approvalproccess.SendTo;
+                                            result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
+                                            if (result)
+                                            {
+                                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
+                                                approvalproccess.ServiceId = kyc.Id;
+                                                //approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                                //approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                                approvalproccess.SendFrom = kyc.Id.ToString();
+                                                approvalproccess.SendFromProfileId = "0";
+                                                #region set sendto and sendtoprofileid 
+                                                StringBuilder multouserprofileid = new StringBuilder();
+                                                int col = 0;
+                                                if (approvalproccess.SendTo != null)
+                                                {
+                                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                    foreach (string MultiUserId in multiTo)
+                                                    {
+                                                        if (col > 0)
+                                                            multouserprofileid.Append(",");
+                                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                        multouserprofileid.Append(UserProfile.Id);
+                                                        col++;
+                                                    }
+                                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                                }
+                                                #endregion
+                                                approvalproccess.PendingStatus = 1;   //1
+                                                approvalproccess.Status = ApprovalStatus.Id;   //1
+                                                approvalproccess.Level = i + 1;
+                                                approvalproccess.Version = workflowtemplatedata.Version;
+                                                approvalproccess.Remarks = "Applicant Submitted For E-KYC Approval";///May be Uncomment
+                                                //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                                result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in kycapprovalproccess Table
+
+                                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                                if (result)
+                                                {
+                                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                                    //   var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                    Usernotification usernotification = new Usernotification();
+                                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
+                                                    usernotification.Message = replacement;
+                                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                                    usernotification.SendTo = approvalproccess.SendTo;
+                                                    //result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                                    result = await _userNotificationService.Create(usernotification, kyc.Id);
+                                                }
+                                                #endregion
+
+
+                                                if (result)//mail sent to applicant on successful submission of form
+                                                {
+                                                    var sendMailResult1 = false;
+                                                    #region Mail Generate
+                                                    //At successfull completion send mail and sms
+                                                    Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
+                                                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApplicantKycMailDetailsContent.html");
+                                                    string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                                    // string linkhref = "https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create";
+                                                    string linkhref = _configuration.GetSection("KycPaymentLink").Value;
+                                                    // var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+
+
+                                                    #region Mail Generation Added By ishu
+
+                                                    MailSMSHelper mailG = new MailSMSHelper();
+
+                                                    #region HTML Body Generation
+                                                    KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
+                                                    bodyDTO.ApplicantName = kyc.Name;
+                                                    bodyDTO.Remarks = "Your KYC Application with Reference No.- " + kyc.Id + "  and File No - " + kyc.FileNo + "  is successfully sent for E-KYC Approval. To Check Application details you can login into the portal by clicking on the click here link below.";
+                                                    bodyDTO.Link = linkhref;
+                                                    bodyDTO.path = path;
+                                                    string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
+                                                    #endregion
+
+                                                    #region Common Mail Genration
+                                                    SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                                    maildto.strMailSubject = "Applicant submitted for E-KYC Approval ";
+                                                    maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                                    maildto.strBodyMsg = strBodyMsg;
+                                                    maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                                    maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                                    maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                                    maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                                    maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                                    maildto.strMailTo = kyc.EmailId; /*multousermailId.ToString();*/
+                                                    sendMailResult1 = mailG.SendMailWithAttachment(maildto);
+                                                    #endregion
+                                                    #endregion
+
+
+                                                    #endregion
+                                                }
+                                            }
+
+                                            break;
                                         }
                                     }
 
-                                }
-                            }
-                            else
-                            {
-                                approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
-                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalBranchWise").Value))
-                                {
-                                    StringBuilder multousersbranchwise = new StringBuilder();
-                                    int col = 0;
+                                    #endregion
+                                    #region Approval Proccess  Mail Generation Added by ishu 11sept 2021
+                                    var sendMailResult = false;
+                                    var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
                                     if (approvalproccess.SendTo != null)
                                     {
-                                        string[] multiTo = approvalproccess.SendTo.Split(',');
-                                        foreach (string MultiUserId in multiTo)
-                                        {
-                                            if (col > 0)
-                                                multousersbranchwise.Append(",");
-                                            var UserProfile = await _userProfileService.GetUserByIdBranch(Convert.ToInt32(MultiUserId), kyc.BranchId ?? 0);
-                                            multousersbranchwise.Append(UserProfile.UserId);
-                                            col++;
-                                        }
-                                        approvalproccess.SendTo = multousersbranchwise.ToString();
-                                    }
-                                }
-                            }
-
-
-                            break;
-                        }
-                    }
-                    #endregion
-
-
-
-                    FileHelper fileHelper = new FileHelper();
-
-                    if (kyc.Aadhar != null)
-                    {
-                        kyc.AadhaarNoPath = fileHelper.SaveFile1(AadharDoc, kyc.Aadhar);
-                    }
-                    if (kyc.Letter != null)
-                    {
-                        kyc.LetterPath = fileHelper.SaveFile1(LetterDoc, kyc.Letter);
-                    }
-                    if (kyc.ApplicantPan != null)
-                    {
-                        kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
-                    }
-
-                    kyc.CreatedBy = Convert.ToInt32(id);
-                    kyc.IsActive = 1;
-                    kyc.KycStatus = "F";
-                    var result = await _kycformService.Create(kyc);
-                    if (result == true)
-                    {
-
-                        #region Approval Proccess At 1st level start Added by ishu  20 july 2021
-                        var workflowtemplatedata = await _kycformService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProccessGuidKYCForm").Value));
-
-                        var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
-
-                        for (int i = 0; i < DataFlow.Count; i++)
-                        {
-                            if (!DataFlow[i].parameterSkip)
-                            {
-                                kyc.ApprovedStatus = ApprovalStatus.Id;
-                                kyc.PendingAt = approvalproccess.SendTo;
-                                result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
-                                if (result)
-                                {
-                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                    approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
-                                    approvalproccess.ServiceId = kyc.Id;
-                                    //approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                                    //approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
-                                    approvalproccess.SendFrom = kyc.Id.ToString();
-                                    approvalproccess.SendFromProfileId = "0";
-                                    #region set sendto and sendtoprofileid 
-                                    StringBuilder multouserprofileid = new StringBuilder();
-                                    int col = 0;
-                                    if (approvalproccess.SendTo != null)
-                                    {
-                                        string[] multiTo = approvalproccess.SendTo.Split(',');
-                                        foreach (string MultiUserId in multiTo)
-                                        {
-                                            if (col > 0)
-                                                multouserprofileid.Append(",");
-                                            var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                            multouserprofileid.Append(UserProfile.Id);
-                                            col++;
-                                        }
-                                        approvalproccess.SendToProfileId = multouserprofileid.ToString();
-                                    }
-                                    #endregion
-                                    approvalproccess.PendingStatus = 1;   //1
-                                    approvalproccess.Status = ApprovalStatus.Id;   //1
-                                    approvalproccess.Level = i + 1;
-                                    approvalproccess.Version = workflowtemplatedata.Version;
-                                    approvalproccess.Remarks = "Applicant Submitted For E-KYC Approval";///May be Uncomment
-                                    //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                    result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in kycapprovalproccess Table
-
-                                    #region Insert Into usernotification table Added By Renu 18 June 2021
-                                    if (result)
-                                    {
-                                        var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
-                                        //   var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                        Usernotification usernotification = new Usernotification();
-                                        var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
-                                        usernotification.Message = replacement;
-                                        usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
-                                        usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                        usernotification.ServiceId = approvalproccess.ServiceId;
-                                        usernotification.SendFrom = approvalproccess.SendFrom;
-                                        usernotification.SendTo = approvalproccess.SendTo;
-                                        //result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                                        result = await _userNotificationService.Create(usernotification, kyc.Id);
-                                    }
-                                    #endregion
-
-
-                                    if (result)//mail sent to applicant on successful submission of form
-                                    {
-                                        var sendMailResult1 = false;
                                         #region Mail Generate
                                         //At successfull completion send mail and sms
-                                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");//this is correct
-                                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApplicantKycMailDetailsContent.html");
+                                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
+                                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
                                         string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                                        // string linkhref = "https://leaseallottee.managemybusinessess.com/PaymentofProperties/Create";
-                                        string linkhref = _configuration.GetSection("KycPaymentLink").Value;
-                                       // var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                        string linkhref = (_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value).ToString();
 
+                                        //  var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                        StringBuilder multousermailId = new StringBuilder();
+                                        if (approvalproccess.SendTo != null)
+                                        {
+                                            int col = 0;
+                                            string[] multiTo = approvalproccess.SendTo.Split(',');
+                                            foreach (string MultiUserId in multiTo)
+                                            {
+                                                if (col > 0)
+                                                    multousermailId.Append(",");
+                                                var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                multousermailId.Append(RecevierUsers.User.Email);
+                                                col++;
+                                            }
+                                        }
 
                                         #region Mail Generation Added By ishu
 
                                         MailSMSHelper mailG = new MailSMSHelper();
 
                                         #region HTML Body Generation
-                                        KycApplicantMailBodyDto bodyDTO = new KycApplicantMailBodyDto();
-                                        bodyDTO.ApplicantName = kyc.Name;
-                                        bodyDTO.Remarks = "Your KYC Application with Reference No.- " + kyc.Id + "  and File No - " + kyc.FileNo + "  is successfully sent for E-KYC Approval. To Check Application details you can login into the portal by clicking on the click here link below.";
+                                        ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                                        bodyDTO.ApplicationName = "KYC Approval";
+                                        bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                                        bodyDTO.SenderName = kyc.Name;
+                                        // bodyDTO.SenderName = senderUser.User.Name;
                                         bodyDTO.Link = linkhref;
+                                        bodyDTO.AppRefNo = kyc.Id.ToString();
+                                        bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                                        bodyDTO.Remarks = approvalproccess.Remarks;
                                         bodyDTO.path = path;
-                                        string strBodyMsg = mailG.PopulateBodyApplicantMailDetails(bodyDTO);
+                                        string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
                                         #endregion
 
+                                        //string strMailSubject = "Pending Lease Application Approval Request Details ";
+                                        //string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                                        //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
                                         #region Common Mail Genration
                                         SentMailGenerationDto maildto = new SentMailGenerationDto();
-                                        maildto.strMailSubject = "Applicant submitted for E-KYC Approval ";
+                                        maildto.strMailSubject = "Pending KYC Approval Request Details ";
                                         maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
                                         maildto.strBodyMsg = strBodyMsg;
                                         maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
@@ -359,101 +448,44 @@ namespace LeaseForPublic.Controllers
                                         maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
                                         maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
 
-                                        maildto.strMailTo = kyc.EmailId; /*multousermailId.ToString();*/
-                                        sendMailResult1 = mailG.SendMailWithAttachment(maildto);
+                                        maildto.strMailTo = multousermailId.ToString();
+                                        sendMailResult = mailG.SendMailWithAttachment(maildto);
                                         #endregion
                                         #endregion
 
 
                                         #endregion
                                     }
+                                    #endregion
+
+                                    ViewBag.Message = Alert.Show("Applicant Submitted For E-KYC Approval", "", AlertType.Success);
+
+                                    var list = await _kycformService.GetAllKycform();
+                                    return View("Index", list);
                                 }
-
-                                break;
-                            }
-                        }
-
-                        #endregion
-                        #region Approval Proccess  Mail Generation Added by ishu 11sept 2021
-                        var sendMailResult = false;
-                        var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
-                        if (approvalproccess.SendTo != null)
-                        {
-                            #region Mail Generate
-                            //At successfull completion send mail and sms
-                            Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
-                            string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                            string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                            string linkhref = (_configuration.GetSection("ApprovalProccessPath:SiteMaster").Value).ToString();
-
-                            //  var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
-                            StringBuilder multousermailId = new StringBuilder();
-                            if (approvalproccess.SendTo != null)
-                            {
-                                int col = 0;
-                                string[] multiTo = approvalproccess.SendTo.Split(',');
-                                foreach (string MultiUserId in multiTo)
+                                else
                                 {
-                                    if (col > 0)
-                                        multousermailId.Append(",");
-                                    var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                    multousermailId.Append(RecevierUsers.User.Email);
-                                    col++;
+                                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                    return View(kyc);
+
                                 }
                             }
-
-                            #region Mail Generation Added By ishu
-
-                            MailSMSHelper mailG = new MailSMSHelper();
-
-                            #region HTML Body Generation
-                            ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                            bodyDTO.ApplicationName = "KYC Approval";
-                            bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
-                            bodyDTO.SenderName = kyc.Name;
-                            // bodyDTO.SenderName = senderUser.User.Name;
-                            bodyDTO.Link = linkhref;
-                            bodyDTO.AppRefNo = kyc.Id.ToString();
-                            bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
-                            bodyDTO.Remarks = approvalproccess.Remarks;
-                            bodyDTO.path = path;
-                            string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
-                            #endregion
-
-                            //string strMailSubject = "Pending Lease Application Approval Request Details ";
-                            //string strMailCC = "", strMailBCC = "", strAttachPath = "";
-                            //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
-                            #region Common Mail Genration
-                            SentMailGenerationDto maildto = new SentMailGenerationDto();
-                            maildto.strMailSubject = "Pending KYC Approval Request Details ";
-                            maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                            maildto.strBodyMsg = strBodyMsg;
-                            maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                            maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                            maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                            maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                            maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
-
-                            maildto.strMailTo = multousermailId.ToString();
-                            sendMailResult = mailG.SendMailWithAttachment(maildto);
-                            #endregion
-                            #endregion
-
-
-                            #endregion
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                                return View(kyc);
+                            }
                         }
-                        #endregion
-
-                        ViewBag.Message = Alert.Show("Applicant Submitted For E-KYC Approval", "", AlertType.Success);
-
-                        var list = await _kycformService.GetAllKycform();
-                        return View("Index", list);
+                        else 
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                            return View(kyc);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(kyc);
-
                     }
                 }
                 else
@@ -507,6 +539,9 @@ namespace LeaseForPublic.Controllers
         //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Kycform kyc)
         {
+            bool IsValidpdf = CheckMimeTypeAAdharDocument(kyc);
+            bool IsValidpdf1 = CheckMimeTypeLetter(kyc);
+            bool IsValidpdf2 = CheckMimeTypeApplicantPan(kyc);
             var email = HttpContext.Session.GetString("Email");
             var name = HttpContext.Session.GetString("Name");
             ViewBag.Title = name;
@@ -525,143 +560,169 @@ namespace LeaseForPublic.Controllers
 
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
-
-                if (kyc.Aadhar != null)
+                if (IsValidpdf == true)
                 {
-                    kyc.AadhaarNoPath = fileHelper.SaveFile1(AadharDoc, kyc.Aadhar);
-                }
-                else
-                {
-                    kyc.AadhaarNoPath = Data.AadhaarNoPath;
-                }
-
-                if (kyc.Letter != null)
-                {
-                    kyc.LetterPath = fileHelper.SaveFile1(LetterDoc, kyc.Letter);
-                }
-                else
-                {
-                    kyc.LetterPath = Data.LetterPath;
-                }
-                if (kyc.ApplicantPan != null)
-                {
-                    kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
-                }
-                else
-                {
-                    kyc.AadhaarPanapplicantPath = Data.AadhaarPanapplicantPath;
-                }
-
-                kyc.IsActive = 1;
-                kyc.ModifiedBy = kyc.Id;
-                var result = await _kycformService.Update(id, kyc);
-                    if (result == true)
+                    if (IsValidpdf1 == true)
                     {
-                    Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
-                    var DataFlow = await dataAsync();
-
-                    #region Resubmitting form Approval Proccess At last level start Added by ishu  27 july 2021
-                   
-                    var workflowtemplatedata = await _kycformService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProccessGuidKYCForm").Value));
-
-                    var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
-
-                    for (int i = 0; i < DataFlow.Count; i++)
-                    {
-                        if (!DataFlow[i].parameterSkip)
+                        if (IsValidpdf2 == true)
                         {
-                            
-                                    var CheckLastUserForRevert = await _approvalproccessService.KycUserResubmitForApproval((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
-                                    approvalproccess.SendTo = CheckLastUserForRevert.SendTo;
-                                    // approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
-                                    approvalproccess.Level = 3;
-                          
 
-                            kyc.ApprovedStatus = ApprovalStatus.Id;
-                            kyc.PendingAt = approvalproccess.SendTo;
-                            result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
-                            if (result)
+                            FileHelper fileHelper = new FileHelper();
+
+                            if (kyc.Aadhar != null)
                             {
-
-
-                                /* Update last record pending status in Approval Process Table*/
-                                var ApprovalProccessBackId = _approvalproccessService.GetPreviouskycApprovalId((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id);                                
-                                approvalproccess.PendingStatus = 0;
-                                result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, kyc.Id);
-                                /*end of Code*/
-
-
-                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
-                                approvalproccess.ServiceId = kyc.Id;
-                               
-                                approvalproccess.SendFrom = kyc.Id.ToString();
-                                approvalproccess.SendFromProfileId = "0";
-                                #region set sendto and sendtoprofileid 
-                                StringBuilder multouserprofileid = new StringBuilder();
-                                int col = 0;
-                                if (approvalproccess.SendTo != null)
-                                {
-                                    string[] multiTo = approvalproccess.SendTo.Split(',');
-                                    foreach (string MultiUserId in multiTo)
-                                    {
-                                        if (col > 0)
-                                            multouserprofileid.Append(",");
-                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                        multouserprofileid.Append(UserProfile.Id);
-                                        col++;
-                                    }
-                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
-                                }
-                                #endregion
-                                approvalproccess.PendingStatus = 1;   //1
-                                approvalproccess.Status = ApprovalStatus.Id;   //1
-                                //approvalproccess.Level = i + 1;
-                                approvalproccess.Version = workflowtemplatedata.Version;
-                                approvalproccess.Remarks = "Record Resubmitted by Applicant";///May be Uncomment
-                                //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in approvalproccess Table
-
-                                #region Insert Into usernotification table Added By ishu 18 June 2021
-                                if (result)
-                                {
-                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
-                                   // var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                    Usernotification usernotification = new Usernotification();
-                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name == ""?"Applicant": kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
-                                    usernotification.Message = replacement;
-                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
-                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                    usernotification.ServiceId = approvalproccess.ServiceId;
-                                    usernotification.SendFrom = approvalproccess.SendFrom;
-                                    usernotification.SendTo = approvalproccess.SendTo;
-                                    //result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                                    result = await _userNotificationService.Create(usernotification, kyc.Id);
-                                }
-                                #endregion
+                                kyc.AadhaarNoPath = fileHelper.SaveFile1(AadharDoc, kyc.Aadhar);
+                            }
+                            else
+                            {
+                                kyc.AadhaarNoPath = Data.AadhaarNoPath;
                             }
 
-                            break;
+                            if (kyc.Letter != null)
+                            {
+                                kyc.LetterPath = fileHelper.SaveFile1(LetterDoc, kyc.Letter);
+                            }
+                            else
+                            {
+                                kyc.LetterPath = Data.LetterPath;
+                            }
+                            if (kyc.ApplicantPan != null)
+                            {
+                                kyc.AadhaarPanapplicantPath = fileHelper.SaveFile1(ApplicantDoc, kyc.ApplicantPan);
+                            }
+                            else
+                            {
+                                kyc.AadhaarPanapplicantPath = Data.AadhaarPanapplicantPath;
+                            }
+
+                            kyc.IsActive = 1;
+                            kyc.ModifiedBy = kyc.Id;
+                            var result = await _kycformService.Update(id, kyc);
+                            if (result == true)
+                            {
+                                Kycapprovalproccess approvalproccess = new Kycapprovalproccess();
+                                var DataFlow = await dataAsync();
+
+                                #region Resubmitting form Approval Proccess At last level start Added by ishu  27 july 2021
+
+                                var workflowtemplatedata = await _kycformService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowProccessGuidKYCForm").Value));
+
+                                var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+
+                                for (int i = 0; i < DataFlow.Count; i++)
+                                {
+                                    if (!DataFlow[i].parameterSkip)
+                                    {
+
+                                        var CheckLastUserForRevert = await _approvalproccessService.KycUserResubmitForApproval((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id, Convert.ToInt32(DataFlow[i].parameterLevel));
+                                        approvalproccess.SendTo = CheckLastUserForRevert.SendTo;
+                                        // approvalproccess.Level = Convert.ToInt32(DataFlow[d].parameterLevel);
+                                        approvalproccess.Level = 3;
+
+
+                                        kyc.ApprovedStatus = ApprovalStatus.Id;
+                                        kyc.PendingAt = approvalproccess.SendTo;
+                                        result = await _kycformService.UpdateBeforeApproval(kyc.Id, kyc);  //Update kycform Table details 
+                                        if (result)
+                                        {
+
+
+                                            /* Update last record pending status in Approval Process Table*/
+                                            var ApprovalProccessBackId = _approvalproccessService.GetPreviouskycApprovalId((_configuration.GetSection("workflowProccessGuidKYCForm").Value), kyc.Id);
+                                            approvalproccess.PendingStatus = 0;
+                                            result = await _approvalproccessService.UpdatePreviouskycApprovalProccess(ApprovalProccessBackId, approvalproccess, kyc.Id);
+                                            /*end of Code*/
+
+
+                                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                            approvalproccess.ProcessGuid = (_configuration.GetSection("workflowProccessGuidKYCForm").Value);
+                                            approvalproccess.ServiceId = kyc.Id;
+
+                                            approvalproccess.SendFrom = kyc.Id.ToString();
+                                            approvalproccess.SendFromProfileId = "0";
+                                            #region set sendto and sendtoprofileid 
+                                            StringBuilder multouserprofileid = new StringBuilder();
+                                            int col = 0;
+                                            if (approvalproccess.SendTo != null)
+                                            {
+                                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                foreach (string MultiUserId in multiTo)
+                                                {
+                                                    if (col > 0)
+                                                        multouserprofileid.Append(",");
+                                                    var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                    multouserprofileid.Append(UserProfile.Id);
+                                                    col++;
+                                                }
+                                                approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                            }
+                                            #endregion
+                                            approvalproccess.PendingStatus = 1;   //1
+                                            approvalproccess.Status = ApprovalStatus.Id;   //1
+                                                                                           //approvalproccess.Level = i + 1;
+                                            approvalproccess.Version = workflowtemplatedata.Version;
+                                            approvalproccess.Remarks = "Record Resubmitted by Applicant";///May be Uncomment
+                                            //result = await _kycformService.CreatekycApproval(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                            result = await _kycformService.CreatekycApproval(approvalproccess, kyc.Id); //Create a row in approvalproccess Table
+
+                                            #region Insert Into usernotification table Added By ishu 18 June 2021
+                                            if (result)
+                                            {
+                                                var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                                // var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                Usernotification usernotification = new Usernotification();
+                                                var replacement = notificationtemplate.Template.Replace("{proccess name}", "KYC Form").Replace("{from user}", kyc.Name == "" ? "Applicant" : kyc.Name).Replace("{datetime}", DateTime.Now.ToString());
+                                                usernotification.Message = replacement;
+                                                usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidKYCForm").Value);
+                                                usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                                usernotification.ServiceId = approvalproccess.ServiceId;
+                                                usernotification.SendFrom = approvalproccess.SendFrom;
+                                                usernotification.SendTo = approvalproccess.SendTo;
+                                                //result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                                result = await _userNotificationService.Create(usernotification, kyc.Id);
+                                            }
+                                            #endregion
+                                        }
+
+                                        break;
+                                    }
+                                }
+
+                                #endregion
+
+                                ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
+
+                                var list = await _kycformService.GetAllKycform();
+                                return View("Index", list);
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                            return View(kyc);
+
                         }
                     }
-
-                    #endregion
-
-                    ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
-
-                        var list = await _kycformService.GetAllKycform();
-                        return View("Index", list);
-                    }
-                    else
+                    else 
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(kyc);
-
                     }
-               
-            }
-            return View(kyc);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(kyc);
+                }
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(kyc);
+
+                }
+            
+              return View(kyc);
         }
 
         //[AuthorizeContext(ViewAction.Delete)]
@@ -798,6 +859,296 @@ namespace LeaseForPublic.Controllers
         {
             propertyTypeId = propertyTypeId ?? 0;
             return Json(await _kycformService.GetAllBranch(Convert.ToInt32(propertyTypeId)));
+        }
+
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+                string FilePath = Path.Combine(AadharDoc, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(AadharDoc))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+      
+
+        public bool CheckMimeTypeAAdharDocument(Kycform kycform)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+            IFormFile files = kycform.Aadhar;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+                string FilePath = Path.Combine(AadharDoc, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(AadharDoc))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:KycFiles:AadharDocument").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+        public bool CheckMimeTypeLetter(Kycform kycform)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:Letter").Value.ToString();
+            IFormFile files = kycform.Aadhar;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:Letter").Value.ToString();
+                string FilePath = Path.Combine(AadharDoc, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(AadharDoc))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:KycFiles:Letter").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+        public bool CheckMimeTypeApplicantPan(Kycform kycform)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            AadharDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantPan").Value.ToString();
+            IFormFile files = kycform.Aadhar;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                AadharDoc = _configuration.GetSection("FilePaths:KycFiles:ApplicantPan").Value.ToString();
+                string FilePath = Path.Combine(AadharDoc, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(AadharDoc))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(AadharDoc);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:KycFiles:ApplicantPan").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
         }
 
     }
