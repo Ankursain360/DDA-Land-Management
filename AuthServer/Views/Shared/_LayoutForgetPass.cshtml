@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+
+    <title>DDA Land Management</title>
+
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+</head>
+<body>
+    @*<partial name="_Nav" />*@
+
+    <section id="LoginPage" class="d-flex fixed-bg">
+        <div class="container m-auto">
+            <div class="row  justify-content-center">
+                <div class="col-xl-10">
+                    <div class="bg-white rounded overflow-hidden">
+                        <div class="row no-gutters">
+                            <div class="col-md-6 col-lg-5 col-xl-5">
+                                <div class="login-container">
+                                    <figure class="mx-auto my-0 d-block mb-4">
+                                        <img src="~/login/logo-circle.png" alt="DDA logo" class="d-block mx-auto mb-2">
+                                        <figcaption class="text-center">
+                                            <h6 class="m-0">Delhi Development Authority<br>Government of India</h6>
+                                        </figcaption>
+                                    </figure>
+                                    @RenderBody()
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-7 col-xl-7 d-none d-md-block">
+                                <figure class="m-0 d-block overflow-hidden">
+                                    <img src="~/login/login-img.jpg" alt="DDA login">
+                                </figure>
+                            </div>
+                        </div>
+                        @*<div class="row justify-content-center mb-md-3">
+                            <div class="col-md-11">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong> Online Public Services</strong>
+                                    </div>
+                                    <ul>
+                                        <li> <a href="https://damagepayee.managemybusinessess.com/">Damage Payee Public Interface</a></li>
+                                        <li><a href="https://publiclims.managemybusinessess.com/">LIMS Public Interface</a></li>
+                                        <li><a href="https://leaseallottee.managemybusinessess.com/SignupForm/CreateLogin/">Lease/Licence User Login  </a></li>
+                                        <li> <a href="https://leaseallottee.managemybusinessess.com/SignupForm/Create/">Lease/Licence User SignUp</a> </li>
+                                        <li> <a href="https://damage.managemybusinessess.com/DamagePayeeRegistration/Create/">Damage Payee Registration</a> </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
