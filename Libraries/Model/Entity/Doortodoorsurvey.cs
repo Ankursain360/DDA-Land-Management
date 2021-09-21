@@ -81,7 +81,12 @@ namespace Libraries.Model.Entity
 
 
 
+        [NotMapped]
+        public IFormFile DocumentPhoto1 { get; set; }
 
+
+        [NotMapped]
+        public IFormFile PropertyPhoto1 { get; set; }
 
     }
 }
