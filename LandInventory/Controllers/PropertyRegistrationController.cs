@@ -94,6 +94,7 @@ namespace LandInventory.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Create(Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
+            bool IsValidpdf = CheckMimeType(propertyregistration);
             await BindDropDown(propertyregistration);
             propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
             propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
@@ -101,214 +102,224 @@ namespace LandInventory.Controllers
 
             if (ModelState.IsValid)
             {
-                propertyregistration.IsValidate = 0;
-                propertyregistration.IsDeleted = 1;
+                if (IsValidpdf == true)
+                {
 
-                if (propertyregistration.MainLandUseId == 0)
-                {
-                    propertyregistration.MainLandUseId = 1;
-                }
-                if (propertyregistration.DisposalTypeId == 0)
-                {
-                    propertyregistration.DisposalTypeId = 1;
-                }
-                if (propertyregistration.PlannedUnplannedLand == "Unplanned Land")
-                {
-                    if (propertyregistration.LocalityId.ToString() == "")
+
+                    propertyregistration.IsValidate = 0;
+                    propertyregistration.IsDeleted = 1;
+
+                    if (propertyregistration.MainLandUseId == 0)
                     {
-                        ViewBag.Message = Alert.Show("Locality is Mandatory in case of Unplanned Land", "", AlertType.Warning);
+                        propertyregistration.MainLandUseId = 1;
+                    }
+                    if (propertyregistration.DisposalTypeId == 0)
+                    {
+                        propertyregistration.DisposalTypeId = 1;
+                    }
+                    if (propertyregistration.PlannedUnplannedLand == "Unplanned Land")
+                    {
+                        if (propertyregistration.LocalityId.ToString() == "")
+                        {
+                            ViewBag.Message = Alert.Show("Locality is Mandatory in case of Unplanned Land", "", AlertType.Warning);
+                            return View(propertyregistration);
+                        }
+                    }
+                    if (propertyregistration.Encroached != null)
+                    {
+                        if (propertyregistration.Encroached > propertyregistration.TotalArea)
+                        {
+                            ViewBag.Message = Alert.Show("Encroached Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                            return View(propertyregistration);
+                        }
+                    }
+                    if (propertyregistration.BuiltUpEncraochmentArea != null)
+                    {
+                        if (propertyregistration.BuiltUpEncraochmentArea > propertyregistration.TotalArea)
+                        {
+                            ViewBag.Message = Alert.Show("Built Up Encraochment Area Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                            return View(propertyregistration);
+                        }
+                    }
+                    if (propertyregistration.Vacant != null)
+                    {
+                        if (propertyregistration.Vacant > propertyregistration.TotalArea)
+                        {
+                            ViewBag.Message = Alert.Show("Vacant Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                            return View(propertyregistration);
+                        }
+                    }
+                    #region File Upload  Added by Renu 16 Sep 2020
+                    /* For Layout Plan File Upload*/
+                    string FileName = "";
+                    string filePath = "";
+                    propertyregistration.FileData = Assignfile;
+                    targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+                    if (propertyregistration.FileData != null)
+                    {
+                        if (!Directory.Exists(targetPathLayout))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);
+                        }
+                        FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
+                        filePath = Path.Combine(targetPathLayout, FileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            propertyregistration.FileData.CopyTo(stream);
+                        }
+                        propertyregistration.LayoutFilePath = filePath;
+                    }
+
+                    /* For GeoReferncing File Upload*/
+                    string GeoFileName = "";
+                    string GeofilePath = "";
+                    propertyregistration.GeoFileData = GeoAssignfile;
+                    targetPathGeo = _Configuration.GetSection("FilePaths:PropertyRegistration:GeoReferencingDocs").Value.ToString();
+                    if (propertyregistration.GeoFileData != null)
+                    {
+                        if (!Directory.Exists(targetPathGeo))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathGeo);
+                        }
+                        GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                        GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
+                        using (var stream = new FileStream(GeofilePath, FileMode.Create))
+                        {
+                            propertyregistration.GeoFileData.CopyTo(stream);
+                        }
+                        propertyregistration.GeoFilePath = GeofilePath;
+                    }
+
+                    /* For Taken Over File Upload*/
+                    string TakenOverFileName = "";
+                    string TakenOverfilePath = "";
+                    propertyregistration.TakenOverFileData = TakenOverAssignFile;
+                    targetPathTakenOver = _Configuration.GetSection("FilePaths:PropertyRegistration:TakenOverDocs").Value.ToString();
+                    if (propertyregistration.TakenOverFileData != null)
+                    {
+                        if (!Directory.Exists(targetPathTakenOver))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathTakenOver);
+                        }
+                        TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
+                        TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
+                        using (var stream = new FileStream(TakenOverfilePath, FileMode.Create))
+                        {
+                            propertyregistration.TakenOverFileData.CopyTo(stream);
+                        }
+                        propertyregistration.TakenOverFilePath = TakenOverfilePath;
+                    }
+
+                    /* For Handed Over File Upload*/
+                    string HandedOverFileName = "";
+                    string HandedOverfilePath = "";
+                    propertyregistration.HandedOverFileData = HandedOverAssignFile;
+                    targetPathHandedOver = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverDocs").Value.ToString();
+                    if (propertyregistration.HandedOverFileData != null)
+                    {
+                        if (!Directory.Exists(targetPathHandedOver))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOver);
+                        }
+                        HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
+                        HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
+                        using (var stream = new FileStream(HandedOverfilePath, FileMode.Create))
+                        {
+                            propertyregistration.HandedOverFileData.CopyTo(stream);
+                        }
+                        propertyregistration.HandedOverFilePath = HandedOverfilePath;
+                    }
+
+                    /* For Disposal Type File Upload*/
+                    string DisposalTypeFileName = "";
+                    string DisposalTypefilePath = "";
+                    propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
+                    targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
+                    if (propertyregistration.DisposalTypeFileData != null)
+                    {
+                        if (!Directory.Exists(targetPathDisposal))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
+                        }
+                        DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
+                        DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
+                        using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
+                        {
+                            propertyregistration.DisposalTypeFileData.CopyTo(stream);
+                        }
+                        propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
+                    }
+
+                    /* For Handed Over Copy of Order*/
+                    string HandedOverCopyOrderFileName = "";
+                    string HandedOverCopyOrderfilePath = "";
+                    targetPathHandedOverCopyOfOrder = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverCopyofOrderDocs").Value.ToString();
+                    if (propertyregistration.HandedOverCopyofOrderDoc != null)
+                    {
+                        if (!Directory.Exists(targetPathHandedOverCopyOfOrder))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOverCopyOfOrder);
+                        }
+                        HandedOverCopyOrderFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverCopyofOrderDoc.FileName;
+                        HandedOverCopyOrderfilePath = Path.Combine(targetPathHandedOverCopyOfOrder, HandedOverCopyOrderFileName);
+                        using (var stream = new FileStream(HandedOverCopyOrderfilePath, FileMode.Create))
+                        {
+                            propertyregistration.HandedOverCopyofOrderDoc.CopyTo(stream);
+                        }
+                        propertyregistration.HandedOverCopyofOrderFilepath = HandedOverCopyOrderfilePath;
+                    }
+
+                    string ATRFileName = "";
+                    string ATRfilePath = "";
+                    targetPathATR = _Configuration.GetSection("FilePaths:PropertyRegistration:EcroachedATRDocs").Value.ToString();
+                    if (propertyregistration.EncroachAtrDoc != null)
+                    {
+                        if (!Directory.Exists(targetPathATR))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathATR);
+                        }
+                        ATRFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.EncroachAtrDoc.FileName;
+                        ATRfilePath = Path.Combine(targetPathATR, ATRFileName);
+                        using (var stream = new FileStream(ATRfilePath, FileMode.Create))
+                        {
+                            propertyregistration.EncroachAtrDoc.CopyTo(stream);
+                        }
+                        propertyregistration.EncroachAtrfilepath = ATRfilePath;
+                    }
+                    #endregion
+
+                    propertyregistration.CreatedBy = SiteContext.UserId;
+                    var result = await _propertyregistrationService.Create(propertyregistration);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                        ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                        ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                        ViewBag.IsUserCreation = SiteContext.UserId;
+                        ViewBag.IsDisposedRightsUser = SiteContext.UserId;
+                        return View("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        await BindDropDown(propertyregistration);
                         return View(propertyregistration);
-                    }
-                }
-                if (propertyregistration.Encroached != null)
-                {
-                    if (propertyregistration.Encroached > propertyregistration.TotalArea)
-                    {
-                        ViewBag.Message = Alert.Show("Encroached Value Must Not be Greater than Total Area", "", AlertType.Warning);
-                        return View(propertyregistration);
-                    }
-                }
-                if (propertyregistration.BuiltUpEncraochmentArea != null)
-                {
-                    if (propertyregistration.BuiltUpEncraochmentArea > propertyregistration.TotalArea)
-                    {
-                        ViewBag.Message = Alert.Show("Built Up Encraochment Area Value Must Not be Greater than Total Area", "", AlertType.Warning);
-                        return View(propertyregistration);
-                    }
-                }
-                if (propertyregistration.Vacant != null)
-                {
-                    if (propertyregistration.Vacant > propertyregistration.TotalArea)
-                    {
-                        ViewBag.Message = Alert.Show("Vacant Value Must Not be Greater than Total Area", "", AlertType.Warning);
-                        return View(propertyregistration);
-                    }
-                }
-                #region File Upload  Added by Renu 16 Sep 2020
-                /* For Layout Plan File Upload*/
-                string FileName = "";
-                string filePath = "";
-                propertyregistration.FileData = Assignfile;
-                targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
-                if (propertyregistration.FileData != null)
-                {
-                    if (!Directory.Exists(targetPathLayout))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);
-                    }
-                    FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
-                    filePath = Path.Combine(targetPathLayout, FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        propertyregistration.FileData.CopyTo(stream);
-                    }
-                    propertyregistration.LayoutFilePath = filePath;
-                }
 
-                /* For GeoReferncing File Upload*/
-                string GeoFileName = "";
-                string GeofilePath = "";
-                propertyregistration.GeoFileData = GeoAssignfile;
-                targetPathGeo = _Configuration.GetSection("FilePaths:PropertyRegistration:GeoReferencingDocs").Value.ToString();
-                if (propertyregistration.GeoFileData != null)
-                {
-                    if (!Directory.Exists(targetPathGeo))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathGeo);
                     }
-                    GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
-                    GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
-                    using (var stream = new FileStream(GeofilePath, FileMode.Create))
-                    {
-                        propertyregistration.GeoFileData.CopyTo(stream);
-                    }
-                    propertyregistration.GeoFilePath = GeofilePath;
-                }
-
-                /* For Taken Over File Upload*/
-                string TakenOverFileName = "";
-                string TakenOverfilePath = "";
-                propertyregistration.TakenOverFileData = TakenOverAssignFile;
-                targetPathTakenOver = _Configuration.GetSection("FilePaths:PropertyRegistration:TakenOverDocs").Value.ToString();
-                if (propertyregistration.TakenOverFileData != null)
-                {
-                    if (!Directory.Exists(targetPathTakenOver))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathTakenOver);
-                    }
-                    TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
-                    TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
-                    using (var stream = new FileStream(TakenOverfilePath, FileMode.Create))
-                    {
-                        propertyregistration.TakenOverFileData.CopyTo(stream);
-                    }
-                    propertyregistration.TakenOverFilePath = TakenOverfilePath;
-                }
-
-                /* For Handed Over File Upload*/
-                string HandedOverFileName = "";
-                string HandedOverfilePath = "";
-                propertyregistration.HandedOverFileData = HandedOverAssignFile;
-                targetPathHandedOver = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverDocs").Value.ToString();
-                if (propertyregistration.HandedOverFileData != null)
-                {
-                    if (!Directory.Exists(targetPathHandedOver))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOver);
-                    }
-                    HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
-                    HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
-                    using (var stream = new FileStream(HandedOverfilePath, FileMode.Create))
-                    {
-                        propertyregistration.HandedOverFileData.CopyTo(stream);
-                    }
-                    propertyregistration.HandedOverFilePath = HandedOverfilePath;
-                }
-
-                /* For Disposal Type File Upload*/
-                string DisposalTypeFileName = "";
-                string DisposalTypefilePath = "";
-                propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
-                targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
-                if (propertyregistration.DisposalTypeFileData != null)
-                {
-                    if (!Directory.Exists(targetPathDisposal))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
-                    }
-                    DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
-                    DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
-                    using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
-                    {
-                        propertyregistration.DisposalTypeFileData.CopyTo(stream);
-                    }
-                    propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
-                }
-
-                /* For Handed Over Copy of Order*/
-                string HandedOverCopyOrderFileName = "";
-                string HandedOverCopyOrderfilePath = "";
-                targetPathHandedOverCopyOfOrder = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverCopyofOrderDocs").Value.ToString();
-                if (propertyregistration.HandedOverCopyofOrderDoc != null)
-                {
-                    if (!Directory.Exists(targetPathHandedOverCopyOfOrder))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOverCopyOfOrder);
-                    }
-                    HandedOverCopyOrderFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverCopyofOrderDoc.FileName;
-                    HandedOverCopyOrderfilePath = Path.Combine(targetPathHandedOverCopyOfOrder, HandedOverCopyOrderFileName);
-                    using (var stream = new FileStream(HandedOverCopyOrderfilePath, FileMode.Create))
-                    {
-                        propertyregistration.HandedOverCopyofOrderDoc.CopyTo(stream);
-                    }
-                    propertyregistration.HandedOverCopyofOrderFilepath = HandedOverCopyOrderfilePath;
-                }
-
-                string ATRFileName = "";
-                string ATRfilePath = "";
-                targetPathATR = _Configuration.GetSection("FilePaths:PropertyRegistration:EcroachedATRDocs").Value.ToString();
-                if (propertyregistration.EncroachAtrDoc != null)
-                {
-                    if (!Directory.Exists(targetPathATR))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathATR);
-                    }
-                    ATRFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.EncroachAtrDoc.FileName;
-                    ATRfilePath = Path.Combine(targetPathATR, ATRFileName);
-                    using (var stream = new FileStream(ATRfilePath, FileMode.Create))
-                    {
-                        propertyregistration.EncroachAtrDoc.CopyTo(stream);
-                    }
-                    propertyregistration.EncroachAtrfilepath = ATRfilePath;
-                }
-                #endregion
-
-                propertyregistration.CreatedBy = SiteContext.UserId;
-                var result = await _propertyregistrationService.Create(propertyregistration);
-
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    ViewBag.IsUserCreation = SiteContext.UserId;
-                    ViewBag.IsDisposedRightsUser = SiteContext.UserId;
-                    return View("Index");
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    await BindDropDown(propertyregistration);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(propertyregistration);
-
                 }
             }
             else
@@ -353,6 +364,7 @@ namespace LandInventory.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Edit(int id, Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
+            bool IsValidpdf = CheckMimeType(propertyregistration);
             await BindDropDown(propertyregistration);
             propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
             propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
@@ -369,222 +381,231 @@ namespace LandInventory.Controllers
             ViewBag.IsValidateUser = SiteContext.UserId;
             if (ModelState.IsValid)
             {
-                if (propertyregistration.IsValidate == 1)
+                if (IsValidpdf == true)
                 {
-                    propertyregistration.IsValidate = 1;
-                }
-                else
-                {
-                    if (propertyregistration.IsValidateData == true)
+                    if (propertyregistration.IsValidate == 1)
                     {
                         propertyregistration.IsValidate = 1;
                     }
                     else
                     {
-                        propertyregistration.IsValidate = 0;
+                        if (propertyregistration.IsValidateData == true)
+                        {
+                            propertyregistration.IsValidate = 1;
+                        }
+                        else
+                        {
+                            propertyregistration.IsValidate = 0;
+                        }
                     }
-                }
 
-                if (propertyregistration.MainLandUseId == 0)
-                {
-                    propertyregistration.MainLandUseId = 1;
-                }
-                if (propertyregistration.DisposalTypeId == 0)
-                {
-                    propertyregistration.DisposalTypeId = 1;
-                }
-                if (propertyregistration.Encroached != null)
-                {
-                    if (propertyregistration.Encroached > propertyregistration.TotalArea)
+                    if (propertyregistration.MainLandUseId == 0)
                     {
-                        ViewBag.Message = Alert.Show("Encroached Value Must Not be Greater than Total Area", "", AlertType.Warning);
-                        return View(propertyregistration);
+                        propertyregistration.MainLandUseId = 1;
                     }
-                }
-                if (propertyregistration.BuiltUpEncraochmentArea != null)
-                {
-                    if (propertyregistration.BuiltUpEncraochmentArea > propertyregistration.TotalArea)
+                    if (propertyregistration.DisposalTypeId == 0)
                     {
-                        ViewBag.Message = Alert.Show("Built Up Encraochment Area Value Must Not be Greater than Total Area", "", AlertType.Warning);
-                        return View(propertyregistration);
+                        propertyregistration.DisposalTypeId = 1;
                     }
-                }
-                if (propertyregistration.Vacant != null)
-                {
-                    if (propertyregistration.Vacant > propertyregistration.TotalArea)
+                    if (propertyregistration.Encroached != null)
                     {
-                        ViewBag.Message = Alert.Show("Vacant Value Must Not be Greater than Total Area", "", AlertType.Warning);
-                        return View(propertyregistration);
+                        if (propertyregistration.Encroached > propertyregistration.TotalArea)
+                        {
+                            ViewBag.Message = Alert.Show("Encroached Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                            return View(propertyregistration);
+                        }
                     }
-                }
-                #region File Upload  Added by Renu 16 Sep 2020
-                /* For Layout Plan File Upload*/
-                string FileName = "";
-                string filePath = "";
-                propertyregistration.FileData = Assignfile;
-                targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
-                if (propertyregistration.FileData != null)
-                {
-                    if (!Directory.Exists(targetPathLayout))
+                    if (propertyregistration.BuiltUpEncraochmentArea != null)
                     {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);
+                        if (propertyregistration.BuiltUpEncraochmentArea > propertyregistration.TotalArea)
+                        {
+                            ViewBag.Message = Alert.Show("Built Up Encraochment Area Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                            return View(propertyregistration);
+                        }
                     }
-                    FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
-                    filePath = Path.Combine(targetPathLayout, FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    if (propertyregistration.Vacant != null)
                     {
-                        propertyregistration.FileData.CopyTo(stream);
+                        if (propertyregistration.Vacant > propertyregistration.TotalArea)
+                        {
+                            ViewBag.Message = Alert.Show("Vacant Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                            return View(propertyregistration);
+                        }
                     }
-                    propertyregistration.LayoutFilePath = filePath;
-                }
+                    #region File Upload  Added by Renu 16 Sep 2020
+                    /* For Layout Plan File Upload*/
+                    string FileName = "";
+                    string filePath = "";
+                    propertyregistration.FileData = Assignfile;
+                    targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+                    if (propertyregistration.FileData != null)
+                    {
+                        if (!Directory.Exists(targetPathLayout))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);
+                        }
+                        FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
+                        filePath = Path.Combine(targetPathLayout, FileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            propertyregistration.FileData.CopyTo(stream);
+                        }
+                        propertyregistration.LayoutFilePath = filePath;
+                    }
 
-                /* For GeoReferncing File Upload*/
-                string GeoFileName = "";
-                string GeofilePath = "";
-                propertyregistration.GeoFileData = GeoAssignfile;
-                targetPathGeo = _Configuration.GetSection("FilePaths:PropertyRegistration:GeoReferencingDocs").Value.ToString();
-                if (propertyregistration.GeoFileData != null)
-                {
-                    if (!Directory.Exists(targetPathGeo))
+                    /* For GeoReferncing File Upload*/
+                    string GeoFileName = "";
+                    string GeofilePath = "";
+                    propertyregistration.GeoFileData = GeoAssignfile;
+                    targetPathGeo = _Configuration.GetSection("FilePaths:PropertyRegistration:GeoReferencingDocs").Value.ToString();
+                    if (propertyregistration.GeoFileData != null)
                     {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathGeo);
+                        if (!Directory.Exists(targetPathGeo))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathGeo);
+                        }
+                        GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                        GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
+                        using (var stream = new FileStream(GeofilePath, FileMode.Create))
+                        {
+                            propertyregistration.GeoFileData.CopyTo(stream);
+                        }
+                        propertyregistration.GeoFilePath = GeofilePath;
                     }
-                    GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
-                    GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
-                    using (var stream = new FileStream(GeofilePath, FileMode.Create))
-                    {
-                        propertyregistration.GeoFileData.CopyTo(stream);
-                    }
-                    propertyregistration.GeoFilePath = GeofilePath;
-                }
 
-                /* For Taken Over File Upload*/
-                string TakenOverFileName = "";
-                string TakenOverfilePath = "";
-                propertyregistration.TakenOverFileData = TakenOverAssignFile;
-                targetPathTakenOver = _Configuration.GetSection("FilePaths:PropertyRegistration:TakenOverDocs").Value.ToString();
-                if (propertyregistration.TakenOverFileData != null)
-                {
-                    if (!Directory.Exists(targetPathTakenOver))
+                    /* For Taken Over File Upload*/
+                    string TakenOverFileName = "";
+                    string TakenOverfilePath = "";
+                    propertyregistration.TakenOverFileData = TakenOverAssignFile;
+                    targetPathTakenOver = _Configuration.GetSection("FilePaths:PropertyRegistration:TakenOverDocs").Value.ToString();
+                    if (propertyregistration.TakenOverFileData != null)
                     {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathTakenOver);
+                        if (!Directory.Exists(targetPathTakenOver))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathTakenOver);
+                        }
+                        TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
+                        TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
+                        using (var stream = new FileStream(TakenOverfilePath, FileMode.Create))
+                        {
+                            propertyregistration.TakenOverFileData.CopyTo(stream);
+                        }
+                        propertyregistration.TakenOverFilePath = TakenOverfilePath;
                     }
-                    TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
-                    TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
-                    using (var stream = new FileStream(TakenOverfilePath, FileMode.Create))
-                    {
-                        propertyregistration.TakenOverFileData.CopyTo(stream);
-                    }
-                    propertyregistration.TakenOverFilePath = TakenOverfilePath;
-                }
 
-                /* For Handed Over File Upload*/
-                string HandedOverFileName = "";
-                string HandedOverfilePath = "";
-                propertyregistration.HandedOverFileData = HandedOverAssignFile;
-                targetPathHandedOver = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverDocs").Value.ToString();
-                if (propertyregistration.HandedOverFileData != null)
-                {
-                    if (!Directory.Exists(targetPathHandedOver))
+                    /* For Handed Over File Upload*/
+                    string HandedOverFileName = "";
+                    string HandedOverfilePath = "";
+                    propertyregistration.HandedOverFileData = HandedOverAssignFile;
+                    targetPathHandedOver = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverDocs").Value.ToString();
+                    if (propertyregistration.HandedOverFileData != null)
                     {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOver);
+                        if (!Directory.Exists(targetPathHandedOver))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOver);
+                        }
+                        HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
+                        HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
+                        using (var stream = new FileStream(HandedOverfilePath, FileMode.Create))
+                        {
+                            propertyregistration.HandedOverFileData.CopyTo(stream);
+                        }
+                        propertyregistration.HandedOverFilePath = HandedOverfilePath;
                     }
-                    HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
-                    HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
-                    using (var stream = new FileStream(HandedOverfilePath, FileMode.Create))
-                    {
-                        propertyregistration.HandedOverFileData.CopyTo(stream);
-                    }
-                    propertyregistration.HandedOverFilePath = HandedOverfilePath;
-                }
 
-                /* For Disposal Type File Upload*/
-                string DisposalTypeFileName = "";
-                string DisposalTypefilePath = "";
-                propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
-                targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
-                if (propertyregistration.DisposalTypeFileData != null)
-                {
-                    if (!Directory.Exists(targetPathDisposal))
+                    /* For Disposal Type File Upload*/
+                    string DisposalTypeFileName = "";
+                    string DisposalTypefilePath = "";
+                    propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
+                    targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
+                    if (propertyregistration.DisposalTypeFileData != null)
                     {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
+                        if (!Directory.Exists(targetPathDisposal))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
+                        }
+                        DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
+                        DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
+                        using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
+                        {
+                            propertyregistration.DisposalTypeFileData.CopyTo(stream);
+                        }
+                        propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
                     }
-                    DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
-                    DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
-                    using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
+                    /* For Handed Over Copy of Order*/
+                    string HandedOverCopyOrderFileName = "";
+                    string HandedOverCopyOrderfilePath = "";
+                    targetPathHandedOverCopyOfOrder = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverCopyofOrderDocs").Value.ToString();
+                    if (propertyregistration.HandedOverCopyofOrderDoc != null)
                     {
-                        propertyregistration.DisposalTypeFileData.CopyTo(stream);
+                        if (!Directory.Exists(targetPathHandedOverCopyOfOrder))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOverCopyOfOrder);
+                        }
+                        HandedOverCopyOrderFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverCopyofOrderDoc.FileName;
+                        HandedOverCopyOrderfilePath = Path.Combine(targetPathHandedOverCopyOfOrder, HandedOverCopyOrderFileName);
+                        using (var stream = new FileStream(HandedOverCopyOrderfilePath, FileMode.Create))
+                        {
+                            propertyregistration.HandedOverCopyofOrderDoc.CopyTo(stream);
+                        }
+                        propertyregistration.HandedOverCopyofOrderFilepath = HandedOverCopyOrderfilePath;
                     }
-                    propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
-                }
-                /* For Handed Over Copy of Order*/
-                string HandedOverCopyOrderFileName = "";
-                string HandedOverCopyOrderfilePath = "";
-                targetPathHandedOverCopyOfOrder = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverCopyofOrderDocs").Value.ToString();
-                if (propertyregistration.HandedOverCopyofOrderDoc != null)
-                {
-                    if (!Directory.Exists(targetPathHandedOverCopyOfOrder))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOverCopyOfOrder);
-                    }
-                    HandedOverCopyOrderFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverCopyofOrderDoc.FileName;
-                    HandedOverCopyOrderfilePath = Path.Combine(targetPathHandedOverCopyOfOrder, HandedOverCopyOrderFileName);
-                    using (var stream = new FileStream(HandedOverCopyOrderfilePath, FileMode.Create))
-                    {
-                        propertyregistration.HandedOverCopyofOrderDoc.CopyTo(stream);
-                    }
-                    propertyregistration.HandedOverCopyofOrderFilepath = HandedOverCopyOrderfilePath;
-                }
 
-                string ATRFileName = "";
-                string ATRfilePath = "";
-                targetPathATR = _Configuration.GetSection("FilePaths:PropertyRegistration:EcroachedATRDocs").Value.ToString();
-                if (propertyregistration.EncroachAtrDoc != null)
-                {
-                    if (!Directory.Exists(targetPathATR))
+                    string ATRFileName = "";
+                    string ATRfilePath = "";
+                    targetPathATR = _Configuration.GetSection("FilePaths:PropertyRegistration:EcroachedATRDocs").Value.ToString();
+                    if (propertyregistration.EncroachAtrDoc != null)
                     {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(targetPathATR);
+                        if (!Directory.Exists(targetPathATR))
+                        {
+                            // Try to create the directory.
+                            DirectoryInfo di = Directory.CreateDirectory(targetPathATR);
+                        }
+                        ATRFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.EncroachAtrDoc.FileName;
+                        ATRfilePath = Path.Combine(targetPathATR, ATRFileName);
+                        using (var stream = new FileStream(ATRfilePath, FileMode.Create))
+                        {
+                            propertyregistration.EncroachAtrDoc.CopyTo(stream);
+                        }
+                        propertyregistration.EncroachAtrfilepath = ATRfilePath;
                     }
-                    ATRFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.EncroachAtrDoc.FileName;
-                    ATRfilePath = Path.Combine(targetPathATR, ATRFileName);
-                    using (var stream = new FileStream(ATRfilePath, FileMode.Create))
+                    #endregion
+
+
+                    propertyregistration.ModifiedBy = SiteContext.UserId;
+                    var result = await _propertyregistrationService.Update(id, propertyregistration);
+                    if (result == true)
                     {
-                        propertyregistration.EncroachAtrDoc.CopyTo(stream);
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+
+                        ViewBag.IsUserCreation = SiteContext.UserId;
+                        ViewBag.IsDisposedRightsUser = SiteContext.UserId;
+                        ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                        ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                        return View("Index");
                     }
-                    propertyregistration.EncroachAtrfilepath = ATRfilePath;
-                }
-                #endregion
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        //return View(propertyregistration);
+                        //  var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                        ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                        ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                        return View("Index");
 
-
-                propertyregistration.ModifiedBy = SiteContext.UserId;
-                var result = await _propertyregistrationService.Update(id, propertyregistration);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
-
-                    ViewBag.IsUserCreation = SiteContext.UserId;
-                    ViewBag.IsDisposedRightsUser = SiteContext.UserId;
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    //return View(propertyregistration);
-                    //  var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
 
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(propertyregistration);
                 }
 
             }
@@ -976,6 +997,75 @@ namespace LandInventory.Controllers
 
 
 
+        public bool CheckMimeType(Propertyregistration propertyregistration)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;           
+            string extension = string.Empty;
+            targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+            IFormFile files = propertyregistration.FileData;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+                string FilePath = Path.Combine(targetPathLayout, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(targetPathLayout))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
     }

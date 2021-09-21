@@ -196,5 +196,11 @@
     "inputFiles": [
       "wwwroot/js/doortodoorsurveyreportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Doortodoor.min.js",
+    "inputFiles": [
+      "wwwroot/js/Doortodoor.js"
+    ]
   }
 ]

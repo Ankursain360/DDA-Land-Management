@@ -78,6 +78,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Possessiondetails undersection4plot)
         {
+            bool IsValidpdf = CheckMimeType(undersection4plot);
             try
             {
              
@@ -97,21 +98,31 @@ namespace AcquiredLandInformationManagement.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    undersection4plot.DocumentName = undersection4plot.DocumentIFormFile == null ? undersection4plot.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection4plot.DocumentIFormFile);
-                    undersection4plot.PossType = str.ToString();
-                    var result = await _Possessiondetailservice.Create(undersection4plot);
-
-                    if (result == true)
+                    if (IsValidpdf == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _Possessiondetailservice.GetAllPossessiondetails();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        undersection4plot.DocumentName = undersection4plot.DocumentIFormFile == null ? undersection4plot.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection4plot.DocumentIFormFile);
+                        undersection4plot.PossType = str.ToString();
+                        var result = await _Possessiondetailservice.Create(undersection4plot);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _Possessiondetailservice.GetAllPossessiondetails();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(undersection4plot);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(undersection4plot);
+
                     }
                 }
                 else
@@ -157,6 +168,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Possessiondetails undersection4plot)
         {
+            bool IsValidpdf = CheckMimeType(undersection4plot);
 
             undersection4plot.KhasraList = await _Possessiondetailservice.BindKhasra(undersection4plot.VillageId);
             undersection4plot.VillageList = await _Possessiondetailservice.GetAllVillage();
@@ -174,29 +186,38 @@ namespace AcquiredLandInformationManagement.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    FileHelper fileHelper = new FileHelper();
-                    undersection4plot.DocumentName = undersection4plot.DocumentIFormFile == null ? undersection4plot.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection4plot.DocumentIFormFile);
-                    undersection4plot.PossType = str.ToString();
-                    var result = await _Possessiondetailservice.Update(id, undersection4plot);
-                    if (result == true)
+                if (IsValidpdf == true)
+                { 
+                    try
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _Possessiondetailservice.GetAllPossessiondetails();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        undersection4plot.DocumentName = undersection4plot.DocumentIFormFile == null ? undersection4plot.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection4plot.DocumentIFormFile);
+                        undersection4plot.PossType = str.ToString();
+                        var result = await _Possessiondetailservice.Update(id, undersection4plot);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            var list = await _Possessiondetailservice.GetAllPossessiondetails();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(undersection4plot);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(undersection4plot);
                     }
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(undersection4plot);
-                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                return View(undersection4plot);
+
+            }
             }
             else
             {
@@ -380,7 +401,75 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        public bool CheckMimeType(Possessiondetails possessiondetails)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;           
+            string extension = string.Empty;
+            DocumentFilePath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
+            IFormFile files = possessiondetails.DocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
 
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:Possesion:DocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
     }
 }

@@ -71,29 +71,39 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Paymentdetail paymentdetail)
         {
+            bool IsValidpdf = CheckMimeType(paymentdetail);
             try
             {
 
 
                 if (ModelState.IsValid)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
-                        paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                        paymentdetail.PaymentProofDocumentIFormFile);
-                    paymentdetail.CreatedBy = SiteContext.UserId;
-                    var result = await _paymentdetailService.Create(paymentdetail);
-
-                    if (result == true)
+                    if (IsValidpdf == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _paymentdetailService.GetAllPaymentdetail();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
+                            paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                            paymentdetail.PaymentProofDocumentIFormFile);
+                        paymentdetail.CreatedBy = SiteContext.UserId;
+                        var result = await _paymentdetailService.Create(paymentdetail);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _paymentdetailService.GetAllPaymentdetail();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(paymentdetail);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(paymentdetail);
+
                     }
                 }
                 else
@@ -127,39 +137,53 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Paymentdetail paymentdetail)
         {
+            bool IsValidpdf = CheckMimeType(paymentdetail);
             if (ModelState.IsValid)
             {
-                try
+                if (IsValidpdf == true)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
-                        paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
-                        paymentdetail.PaymentProofDocumentIFormFile);
-                    paymentdetail.ModifiedBy = SiteContext.UserId;
-                    var result = await _paymentdetailService.Update(id, paymentdetail);
-                    if (result == true)
+
+                    try
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _paymentdetailService.GetAllPaymentdetail();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        paymentdetail.PaymentProofDocumentName = paymentdetail.PaymentProofDocumentIFormFile == null ?
+                            paymentdetail.PaymentProofDocumentName : fileHelper.SaveFile1(PaymentProofDocumentFilePath,
+                            paymentdetail.PaymentProofDocumentIFormFile);
+                        paymentdetail.ModifiedBy = SiteContext.UserId;
+                        var result = await _paymentdetailService.Update(id, paymentdetail);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            var list = await _paymentdetailService.GetAllPaymentdetail();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(paymentdetail);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(paymentdetail);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(paymentdetail);
                 }
+            
             }
             else
             {
                 return View(paymentdetail);
             }
         }
+
+
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
@@ -317,6 +341,77 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
+
+
+        public bool CheckMimeType(Paymentdetail paymentdetail)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;            
+            string extension = string.Empty;
+            PaymentProofDocumentFilePath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+            IFormFile files = paymentdetail.PaymentProofDocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                PaymentProofDocumentFilePath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(PaymentProofDocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(PaymentProofDocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(PaymentProofDocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
 
