@@ -70,25 +70,43 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-
+                bool IsValidpdf = CheckMimeType(nazul);
+                bool IsValidpdf1 = CheckMimeType1(nazul);
                 nazul.VillageList = await _nazulService.GetAllVillageList();
 
                 if (ModelState.IsValid)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    nazul.DocumentName = nazul.DocumentIFormFile == null ? nazul.DocumentName : fileHelper.SaveFile1(DocumentFilePath, nazul.DocumentIFormFile);
-                    nazul.DocumentNameSizra = nazul.DocumentSizraIFormFile == null ? nazul.DocumentNameSizra : fileHelper.SaveFile1(DocumentSizraFilePath, nazul.DocumentSizraIFormFile);
-                    var result = await _nazulService.Create(nazul);
-
-                    if (result == true)
+                    if (IsValidpdf == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _nazulService.GetAllNazul();
-                        return View("Index", list);
+                        if (IsValidpdf1 == true)
+                        {
+
+                            FileHelper fileHelper = new FileHelper();
+                        nazul.DocumentName = nazul.DocumentIFormFile == null ? nazul.DocumentName : fileHelper.SaveFile1(DocumentFilePath, nazul.DocumentIFormFile);
+                        nazul.DocumentNameSizra = nazul.DocumentSizraIFormFile == null ? nazul.DocumentNameSizra : fileHelper.SaveFile1(DocumentSizraFilePath, nazul.DocumentSizraIFormFile);
+                        var result = await _nazulService.Create(nazul);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _nazulService.GetAllNazul();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(nazul);
+                         }
+                      }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                            return View(nazul);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(nazul);
                     }
                 }
@@ -120,30 +138,49 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Nazul nazul)
         {
+            bool IsValidpdf = CheckMimeType(nazul);
+            bool IsValidpdf1 = CheckMimeType1(nazul);
             nazul.VillageList = await _nazulService.GetAllVillageList();
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
-                nazul.DocumentName = nazul.DocumentIFormFile == null ? nazul.DocumentName : fileHelper.SaveFile1(DocumentFilePath, nazul.DocumentIFormFile);
-                nazul.DocumentNameSizra = nazul.DocumentSizraIFormFile == null ? nazul.DocumentNameSizra : fileHelper.SaveFile1(DocumentSizraFilePath, nazul.DocumentSizraIFormFile);
-                try
+                if (IsValidpdf == true)
                 {
-                    var result = await _nazulService.Update(id, nazul);
-                    if (result == true)
+                    if (IsValidpdf1 == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _nazulService.GetAllNazul();
-                        return View("Index", result1);
+                        FileHelper fileHelper = new FileHelper();
+                        nazul.DocumentName = nazul.DocumentIFormFile == null ? nazul.DocumentName : fileHelper.SaveFile1(DocumentFilePath, nazul.DocumentIFormFile);
+                        nazul.DocumentNameSizra = nazul.DocumentSizraIFormFile == null ? nazul.DocumentNameSizra : fileHelper.SaveFile1(DocumentSizraFilePath, nazul.DocumentSizraIFormFile);
+                        try
+                        {
+                            var result = await _nazulService.Update(id, nazul);
+                            if (result == true)
+                            {
+                                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                                var result1 = await _nazulService.GetAllNazul();
+                                return View("Index", result1);
+                            }
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(nazul);
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(nazul);
-
                     }
                 }
-                catch (Exception ex)
+                else
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(nazul);
 
                 }
             }
@@ -265,7 +302,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
                                 iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
                                 oPdfReader.Close();
-                                fullpath = _configuration.GetSection("FilePaths:PaymentDetail:PaymentProofDocumentFIlePath").Value.ToString();
+                                fullpath = _configuration.GetSection("FilePaths:Nazul:DocumentFIlePath").Value.ToString();
                                 FileInfo doc = new FileInfo(fullpath);
                                 if (doc.Exists)
                                 {
@@ -374,6 +411,151 @@ namespace AcquiredLandInformationManagement.Controllers
 
             return Json(IsImg, JsonRequestBehavior);
         }
+
+
+
+        public bool CheckMimeType(Nazul nazul)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+          
+            string extension = string.Empty;
+            DocumentFilePath = _configuration.GetSection("FilePaths:Nazul:DocumentFIlePath").Value.ToString();
+            IFormFile files = nazul.DocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePath = _configuration.GetSection("FilePaths:Nazul:DocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:Nazul:DocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+        public bool CheckMimeType1(Nazul nazul)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            DocumentSizraFilePath = _configuration.GetSection("FilePaths:SizraNazul:DocumentFIlesPath").Value.ToString();
+            IFormFile files = nazul.DocumentSizraIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentSizraFilePath = _configuration.GetSection("FilePaths:SizraNazul:DocumentFIlesPath").Value.ToString();
+                string FilePath = Path.Combine(DocumentSizraFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentSizraFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentSizraFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:SizraNazul:DocumentFIlesPath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
     }
 
 }

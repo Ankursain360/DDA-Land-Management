@@ -74,53 +74,63 @@ namespace AcquiredLandInformationManagement.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Create(Mutation mutation)
         {
+            bool IsValidpdf = CheckMimeType(mutation);
             await BindDropDown(mutation);
             mutation.VillageList = await _mutationService.GetVillageList();
 
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
-                mutation.DocumentName = mutation.DocumentIFormFile == null ? mutation.DocumentName : fileHelper.SaveFile1(DocumentFilePath, mutation.DocumentIFormFile);
-                mutation.CreatedBy = SiteContext.UserId;
-                var result = await _mutationService.Create(mutation);
-
-                if (result)
+                if (IsValidpdf == true)
                 {
-                    //****** code for saving  Mutation Particulars *****
-                    if (mutation.Name[0] == null && mutation.FatherName[0] == null && mutation.Address[0] == null && mutation.Share[0] == null)
+                    FileHelper fileHelper = new FileHelper();
+                    mutation.DocumentName = mutation.DocumentIFormFile == null ? mutation.DocumentName : fileHelper.SaveFile1(DocumentFilePath, mutation.DocumentIFormFile);
+                    mutation.CreatedBy = SiteContext.UserId;
+                    var result = await _mutationService.Create(mutation);
+
+                    if (result)
                     {
+                        //****** code for saving  Mutation Particulars *****
+                        if (mutation.Name[0] == null && mutation.FatherName[0] == null && mutation.Address[0] == null && mutation.Share[0] == null)
+                        {
+                        }
+                        else
+                        {
+                            List<Mutationparticulars> mutationparticulars = new List<Mutationparticulars>();
+                            for (int i = 0; i < mutation.Name.Count; i++)
+                            {
+                                mutationparticulars.Add(new Mutationparticulars
+                                {
+                                    Name = mutation.Name.Count <= i ? string.Empty : mutation.Name[i],
+                                    FatherName = mutation.FatherName.Count <= i ? string.Empty : mutation.FatherName[i],
+                                    Share = mutation.Address.Count <= i ? string.Empty : mutation.Share[i],
+                                    Address = mutation.Share.Count <= i ? string.Empty : mutation.Address[i],
+                                    CreatedBy = SiteContext.UserId,
+                                    MutationId = mutation.Id
+                                });
+                            }
+                            result = await _mutationService.SaveMutationParticulars(mutationparticulars);
+                        }
+
+                    }
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        ViewBag.VillageList = await _mutationService.GetVillageList();
+                        return View("Index");
                     }
                     else
                     {
-                        List<Mutationparticulars> mutationparticulars = new List<Mutationparticulars>();
-                        for (int i = 0; i < mutation.Name.Count; i++)
-                        {
-                            mutationparticulars.Add(new Mutationparticulars
-                            {
-                                Name = mutation.Name.Count <= i ? string.Empty : mutation.Name[i],
-                                FatherName = mutation.FatherName.Count <= i ? string.Empty : mutation.FatherName[i],
-                                Share = mutation.Address.Count <= i ? string.Empty : mutation.Share[i],
-                                Address = mutation.Share.Count <= i ? string.Empty : mutation.Address[i],
-                                CreatedBy = SiteContext.UserId,
-                                MutationId = mutation.Id
-                            });
-                        }
-                        result = await _mutationService.SaveMutationParticulars(mutationparticulars);
-                    }
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        await BindDropDown(mutation);
+                        return View(mutation);
 
-                }
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    ViewBag.VillageList = await _mutationService.GetVillageList();
-                    return View("Index");
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    await BindDropDown(mutation);
-                    return View(mutation);
 
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(mutation);
                 }
             }
             else
@@ -151,55 +161,65 @@ namespace AcquiredLandInformationManagement.Controllers
         [DisableRequestSizeLimit]
         public async Task<IActionResult> Edit(int id, Mutation mutation)
         {
+            bool IsValidpdf = CheckMimeType(mutation);
             await BindDropDown(mutation);
             mutation.VillageList = await _mutationService.GetVillageList();
 
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
-                mutation.DocumentName = mutation.DocumentIFormFile == null ? mutation.DocumentName : fileHelper.SaveFile1(DocumentFilePath, mutation.DocumentIFormFile);
-                mutation.ModifiedBy = SiteContext.UserId;
-                var result = await _mutationService.Update(id, mutation);
-
-                if (result)
+                if (IsValidpdf == true)
                 {
-                    //****** code for saving  Mutation Particulars *****
-                    if (mutation.Name[0] == null && mutation.FatherName[0] == null && mutation.Address[0] == null && mutation.Share[0] == null)
+
+                    FileHelper fileHelper = new FileHelper();
+                    mutation.DocumentName = mutation.DocumentIFormFile == null ? mutation.DocumentName : fileHelper.SaveFile1(DocumentFilePath, mutation.DocumentIFormFile);
+                    mutation.ModifiedBy = SiteContext.UserId;
+                    var result = await _mutationService.Update(id, mutation);
+
+                    if (result)
                     {
+                        //****** code for saving  Mutation Particulars *****
+                        if (mutation.Name[0] == null && mutation.FatherName[0] == null && mutation.Address[0] == null && mutation.Share[0] == null)
+                        {
+                        }
+                        else
+                        {
+                            List<Mutationparticulars> mutationparticulars = new List<Mutationparticulars>();
+                            for (int i = 0; i < mutation.Name.Count; i++)
+                            {
+                                mutationparticulars.Add(new Mutationparticulars
+                                {
+                                    Name = mutation.Name.Count <= i ? string.Empty : mutation.Name[i],
+                                    FatherName = mutation.FatherName.Count <= i ? string.Empty : mutation.FatherName[i],
+                                    Share = mutation.Address.Count <= i ? string.Empty : mutation.Share[i],
+                                    Address = mutation.Share.Count <= i ? string.Empty : mutation.Address[i],
+                                    CreatedBy = SiteContext.UserId,
+                                    MutationId = mutation.Id
+                                });
+                            }
+
+                            result = await _mutationService.DeleteMutationParticulars(mutation.Id);
+                            result = await _mutationService.SaveMutationParticulars(mutationparticulars);
+                        }
+
+                    }
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        ViewBag.VillageList = await _mutationService.GetVillageList();
+                        return View("Index");
                     }
                     else
                     {
-                        List<Mutationparticulars> mutationparticulars = new List<Mutationparticulars>();
-                        for (int i = 0; i < mutation.Name.Count; i++)
-                        {
-                            mutationparticulars.Add(new Mutationparticulars
-                            {
-                                Name = mutation.Name.Count <= i ? string.Empty : mutation.Name[i],
-                                FatherName = mutation.FatherName.Count <= i ? string.Empty : mutation.FatherName[i],
-                                Share = mutation.Address.Count <= i ? string.Empty : mutation.Share[i],
-                                Address = mutation.Share.Count <= i ? string.Empty : mutation.Address[i],
-                                CreatedBy = SiteContext.UserId,
-                                MutationId = mutation.Id
-                            });
-                        }
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        await BindDropDown(mutation);
+                        return View(mutation);
 
-                        result = await _mutationService.DeleteMutationParticulars(mutation.Id);
-                        result = await _mutationService.SaveMutationParticulars(mutationparticulars);
                     }
-
-                }
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    ViewBag.VillageList = await _mutationService.GetVillageList();
-                    return View("Index");
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    await BindDropDown(mutation);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(mutation);
-
                 }
             }
             else
@@ -373,6 +393,79 @@ namespace AcquiredLandInformationManagement.Controllers
             }
 
             return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+        public bool CheckMimeType(Mutation mutation)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            DocumentFilePath = _Configuration.GetSection("FilePaths:Mutation:DocumentFIlePath").Value.ToString();
+            IFormFile files = mutation.DocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePath = _Configuration.GetSection("FilePaths:Mutation:DocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _Configuration.GetSection("FilePaths:Mutation:DocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
         }
     }
 

@@ -69,33 +69,42 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Ldoland ldoland)
         {
+            bool IsValidpdf = CheckMimeType(ldoland);
             try
             {
                 ldoland.OtherlandnotificationList = await _ldolandService.GetAllOtherLandNotification();
             
                 if (ModelState.IsValid)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    ldoland.GOINotificationDocumentName = ldoland.GOINotificationDocumentIFormFile == null ? ldoland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, ldoland.GOINotificationDocumentIFormFile);
-                    ldoland.OrderDocumentName = ldoland.OrderDocumentIFormFile == null ? ldoland.OrderDocumentName : fileHelper.SaveFile1(OrderDocumentFilePath, ldoland.OrderDocumentIFormFile);
-                    ldoland.PossessionDocumentName = ldoland.PossessionDocumentIFormFile == null ? ldoland.PossessionDocumentName : fileHelper.SaveFile1(PossessionDocumentFilePath, ldoland.PossessionDocumentIFormFile);
-
-
-                    ldoland.IsActive = 1;
-                    ldoland.CreatedBy = SiteContext.UserId;
-                    var result = await _ldolandService.Create(ldoland);
-
-                    if (result == true)
+                    if (IsValidpdf == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _ldolandService.GetAllLdoland();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        ldoland.GOINotificationDocumentName = ldoland.GOINotificationDocumentIFormFile == null ? ldoland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, ldoland.GOINotificationDocumentIFormFile);
+                        ldoland.OrderDocumentName = ldoland.OrderDocumentIFormFile == null ? ldoland.OrderDocumentName : fileHelper.SaveFile1(OrderDocumentFilePath, ldoland.OrderDocumentIFormFile);
+                        ldoland.PossessionDocumentName = ldoland.PossessionDocumentIFormFile == null ? ldoland.PossessionDocumentName : fileHelper.SaveFile1(PossessionDocumentFilePath, ldoland.PossessionDocumentIFormFile);
+
+
+                        ldoland.IsActive = 1;
+                        ldoland.CreatedBy = SiteContext.UserId;
+                        var result = await _ldolandService.Create(ldoland);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _ldolandService.GetAllLdoland();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(ldoland);
+
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(ldoland);
-
                     }
                 }
                 else
@@ -127,33 +136,44 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Ldoland ldoland)
         {
+            bool IsValidpdf = CheckMimeType(ldoland);
+
             ldoland.OtherlandnotificationList = await _ldolandService.GetAllOtherLandNotification();
             if (ModelState.IsValid)
             {
-                try
+                if (IsValidpdf == true)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    ldoland.GOINotificationDocumentName = ldoland.GOINotificationDocumentIFormFile == null ? ldoland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, ldoland.GOINotificationDocumentIFormFile);
-                    ldoland.OrderDocumentName = ldoland.OrderDocumentIFormFile == null ? ldoland.OrderDocumentName : fileHelper.SaveFile1(OrderDocumentFilePath, ldoland.OrderDocumentIFormFile);
-                    ldoland.PossessionDocumentName = ldoland.PossessionDocumentIFormFile == null ? ldoland.PossessionDocumentName : fileHelper.SaveFile1(PossessionDocumentFilePath, ldoland.PossessionDocumentIFormFile);
+                    try
+                    {
+                        FileHelper fileHelper = new FileHelper();
+                        ldoland.GOINotificationDocumentName = ldoland.GOINotificationDocumentIFormFile == null ? ldoland.GOINotificationDocumentName : fileHelper.SaveFile1(GOINotificationDocumentFilePath, ldoland.GOINotificationDocumentIFormFile);
+                        ldoland.OrderDocumentName = ldoland.OrderDocumentIFormFile == null ? ldoland.OrderDocumentName : fileHelper.SaveFile1(OrderDocumentFilePath, ldoland.OrderDocumentIFormFile);
+                        ldoland.PossessionDocumentName = ldoland.PossessionDocumentIFormFile == null ? ldoland.PossessionDocumentName : fileHelper.SaveFile1(PossessionDocumentFilePath, ldoland.PossessionDocumentIFormFile);
 
-                    ldoland.ModifiedBy = SiteContext.UserId;
-                    var result = await _ldolandService.Update(id, ldoland);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _ldolandService.GetAllLdoland();
-                        return View("Index", list);
+                        ldoland.ModifiedBy = SiteContext.UserId;
+                        var result = await _ldolandService.Update(id, ldoland);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            var list = await _ldolandService.GetAllLdoland();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(ldoland);
+
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(ldoland);
 
                     }
                 }
-                catch (Exception ex)
+                else
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(ldoland);
 
                 }
             }
@@ -322,12 +342,80 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-    
-    
-    
-    
-    
-    
+
+        public bool CheckMimeType(Ldoland ldoland)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;          
+            string extension = string.Empty;
+            GOINotificationDocumentFilePath = _configuration.GetSection("FilePaths:LDOLands:GOINotificationDocumentFIlePath").Value.ToString();
+            IFormFile files = ldoland.GOINotificationDocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                GOINotificationDocumentFilePath = _configuration.GetSection("FilePaths:LDOLands:GOINotificationDocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(GOINotificationDocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(GOINotificationDocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(GOINotificationDocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:LDOLands:GOINotificationDocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                      
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+
+
+
     }
 
 

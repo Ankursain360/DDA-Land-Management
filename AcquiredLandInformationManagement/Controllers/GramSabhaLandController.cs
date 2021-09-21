@@ -70,61 +70,63 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Gramsabhaland gramsabhaland)
         {
+            bool IsValidpdf = CheckMimeType(gramsabhaland);
             try
             {
                 gramsabhaland.ZoneList = await _gramsabhalandService.GetAllZone();
                 gramsabhaland.VillageList = await _gramsabhalandService.GetAllVillage(gramsabhaland.ZoneId);
                
-
-
                 if (ModelState.IsValid)
                 {
-
-
-                    FileHelper file = new FileHelper();
-                    if (gramsabhaland.GNus507Document1 != null)
+                    if (IsValidpdf == true)
                     {
-                        gramsabhaland.GazzetteNotificationUs507document = file.SaveFile1(GztNoUs507documentlayout, gramsabhaland.GNus507Document1);
 
-                    }
-                    if (gramsabhaland.Us22Document2 != null)
-                    {
-                        gramsabhaland.Us22notificationDocument = file.SaveFile1(Us22NoDocumentlayout, gramsabhaland.Us22Document2);
+                        FileHelper file = new FileHelper();
+                        if (gramsabhaland.GNus507Document1 != null)
+                        {
+                            gramsabhaland.GazzetteNotificationUs507document = file.SaveFile1(GztNoUs507documentlayout, gramsabhaland.GNus507Document1);
 
-                    }
-                    if (gramsabhaland.Us22OtherDocument3 != null)
-                    {
-                        gramsabhaland.Us22otherNotificationDocument = file.SaveFile1(Us22otherNoDocumentlayout, gramsabhaland.Us22OtherDocument3);
+                        }
+                        if (gramsabhaland.Us22Document2 != null)
+                        {
+                            gramsabhaland.Us22notificationDocument = file.SaveFile1(Us22NoDocumentlayout, gramsabhaland.Us22Document2);
 
-                    }
-                    if (gramsabhaland.TssSurveyDocument4 != null)
-                    {
-                        gramsabhaland.UploadTssSurveyReport = file.SaveFile1(UpTssSurveyReportlayout, gramsabhaland.TssSurveyDocument4);
+                        }
+                        if (gramsabhaland.Us22OtherDocument3 != null)
+                        {
+                            gramsabhaland.Us22otherNotificationDocument = file.SaveFile1(Us22otherNoDocumentlayout, gramsabhaland.Us22OtherDocument3);
 
-                    }
-                    if (gramsabhaland.KabzaDocument5 != null)
-                    {
-                        gramsabhaland.KabzaProceeding = file.SaveFile1(KabzaProceedingDocumentlayout, gramsabhaland.KabzaDocument5);
+                        }
+                        if (gramsabhaland.TssSurveyDocument4 != null)
+                        {
+                            gramsabhaland.UploadTssSurveyReport = file.SaveFile1(UpTssSurveyReportlayout, gramsabhaland.TssSurveyDocument4);
 
-                    }
+                        }
+                        if (gramsabhaland.KabzaDocument5 != null)
+                        {
+                            gramsabhaland.KabzaProceeding = file.SaveFile1(KabzaProceedingDocumentlayout, gramsabhaland.KabzaDocument5);
 
+                        }
+                        var result = await _gramsabhalandService.Create(gramsabhaland);
 
-
-
-
-                    var result = await _gramsabhalandService.Create(gramsabhaland);
-
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _gramsabhalandService.GetAllGramsabhaland();
-                        return View("Index");
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _gramsabhalandService.GetAllGramsabhaland();
+                            return View("Index");
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(gramsabhaland);
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(gramsabhaland);
                     }
+              
                 }
                 else
                 {
@@ -210,21 +212,6 @@ namespace AcquiredLandInformationManagement.Controllers
                     gramsabhaland.KabzaProceeding = file.SaveFile1(KabzaProceedingDocumentlayout, gramsabhaland.KabzaDocument5);
 
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 try
                 {
@@ -440,6 +427,77 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+
+        public bool CheckMimeType(Gramsabhaland gramsabhaland)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+           
+            string extension = string.Empty;
+            GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+            IFormFile files = gramsabhaland.GNus507Document1;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                GztNoUs507documentlayout = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+                string FilePath = Path.Combine(GztNoUs507documentlayout, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(GztNoUs507documentlayout))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(GztNoUs507documentlayout);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:Gramsabhaland:GazzetteNoUs507documentpath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
     }
 }

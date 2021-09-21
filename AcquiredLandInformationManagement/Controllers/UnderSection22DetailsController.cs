@@ -66,28 +66,37 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Undersection22 undersection22)
         {
+            bool IsValidpdf = CheckMimeType(undersection22);
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    undersection22.DocumentName = undersection22.DocumentIFormFile == null ? undersection22.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection22.DocumentIFormFile);
-                   
-                    undersection22.CreatedBy = SiteContext.UserId;
-                    var result = await _undersection22Service.Create(undersection22);
-
-                    if (result == true)
+                    if (IsValidpdf == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection22Service.GetAllUndersection22();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        undersection22.DocumentName = undersection22.DocumentIFormFile == null ? undersection22.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection22.DocumentIFormFile);
+
+                        undersection22.CreatedBy = SiteContext.UserId;
+                        var result = await _undersection22Service.Create(undersection22);
+
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _undersection22Service.GetAllUndersection22();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(undersection22);
+
+                        }
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(undersection22);
-
                     }
                 }
                 else
@@ -115,32 +124,42 @@ namespace AcquiredLandInformationManagement.Controllers
         [HttpPost]
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Undersection22 undersection22)
-        {
+        {  
+            bool IsValidpdf = CheckMimeType(undersection22);
             if (ModelState.IsValid)
             {
-                try
+                if (IsValidpdf == true)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    undersection22.DocumentName = undersection22.DocumentIFormFile == null ? undersection22.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection22.DocumentIFormFile);
-                    undersection22.ModifiedBy = SiteContext.UserId;
 
-                    var result = await _undersection22Service.Update(id, undersection22);
-                    if (result == true)
+                    try
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection22Service.GetAllUndersection22();
-                        return View("Index", list);
+                        FileHelper fileHelper = new FileHelper();
+                        undersection22.DocumentName = undersection22.DocumentIFormFile == null ? undersection22.DocumentName : fileHelper.SaveFile1(DocumentFilePath, undersection22.DocumentIFormFile);
+                        undersection22.ModifiedBy = SiteContext.UserId;
+
+                        var result = await _undersection22Service.Update(id, undersection22);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            var list = await _undersection22Service.GetAllUndersection22();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(undersection22);
+
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(undersection22);
 
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(undersection22);
                 }
             }
             return View(undersection22);
@@ -292,7 +311,75 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
+       public bool CheckMimeType(Undersection22 undersection22)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;          
+            string extension = string.Empty;
+            DocumentFilePath = _configuration.GetSection("FilePaths:US22:DocumentFIlePath").Value.ToString();
+            IFormFile files = undersection22.DocumentIFormFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DocumentFilePath = _configuration.GetSection("FilePaths:US22:DocumentFIlePath").Value.ToString();
+                string FilePath = Path.Combine(DocumentFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DocumentFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DocumentFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
 
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:US22:DocumentFIlePath").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
 
