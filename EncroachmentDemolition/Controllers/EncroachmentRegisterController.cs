@@ -23,6 +23,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 
 
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+
+
+
 namespace EncroachmentDemolition.Controllers
 {
     public class EncroachmentRegisterController : BaseController
@@ -116,7 +124,8 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(EncroachmentRegisteration encroachmentRegisterations)
         {
-
+            bool IsValidpdf = CheckMimeType(encroachmentRegisterations);
+            bool IsValidpdf1 = CheckMimeType1(encroachmentRegisterations);
             ViewBag.PrimaryId = 0;
             try
             {
@@ -133,325 +142,349 @@ namespace EncroachmentDemolition.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
-
-                    Approvalproccess approvalproccess = new Approvalproccess();
-                    var DataFlow = await dataAsync();
-                    for (int i = 0; i < DataFlow.Count; i++)
+                    if (IsValidpdf == true)
                     {
-                        if (!DataFlow[i].parameterSkip)
+
+                        if (IsValidpdf1 == true)
                         {
-                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                            {
-                                if (SiteContext.ZoneId == null)
-                                {
-                                    ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
-                                    return View(encroachmentRegisterations);
-                                }
-
-                                encroachmentRegisterations.ApprovalZoneId = SiteContext.ZoneId;
-                            }
-                            if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
-                            {
-                                for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
-                                {
-                                    List<UserProfileDto> UserListRoleBasis = null;
-                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
-                                    else
-                                        UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
-
-                                    StringBuilder multouserszonewise = new StringBuilder();
-                                    int col = 0;
-                                    if (UserListRoleBasis != null)
-                                    {
-                                        for (int h = 0; h < UserListRoleBasis.Count; h++)
-                                        {
-                                            if (col > 0)
-                                                multouserszonewise.Append(",");
-                                            multouserszonewise.Append(UserListRoleBasis[h].UserId);
-                                            col++;
-                                        }
-                                        approvalproccess.SendTo = multouserszonewise.ToString();
-                                    }
-
-                                }
-                            }
-                            else
-                            {
-                                approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
-                                if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
-                                {
-                                    StringBuilder multouserszonewise = new StringBuilder();
-                                    int col = 0;
-                                    if (approvalproccess.SendTo != null)
-                                    {
-                                        string[] multiTo = approvalproccess.SendTo.Split(',');
-                                        foreach (string MultiUserId in multiTo)
-                                        {
-                                            var UserProfile = await _userProfileService.GetUserByIdZoneConcatedName(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
-                                            if (UserProfile != null)
-                                            {
-                                                if (col > 0)
-                                                    multouserszonewise.Append(",");
-                                                multouserszonewise.Append(UserProfile.UserId);
-                                            }
-                                            col++;
-                                        }
-                                        approvalproccess.SendTo = multouserszonewise.ToString();
-                                    }
-                                }
-                            }
 
 
-                            break;
-                        }
-                    }
-                    #endregion
-                    encroachmentRegisterations.IsActive = 1;
-                    encroachmentRegisterations.WatchWardId = encroachmentRegisterations.WatchWardId == 0 ? null : encroachmentRegisterations.WatchWardId;
-                    encroachmentRegisterations.CreatedBy = SiteContext.UserId;
-                    encroachmentRegisterations.OtherDepartment = encroachmentRegisterations.OtherDepartment == 0 ? null : encroachmentRegisterations.OtherDepartment;
-                    var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
-                    if (result)
-                    {
-                        FileHelper fileHelper = new FileHelper();
-                        if (encroachmentRegisterations.NameOfStructure != null &&
-                            encroachmentRegisterations.AreaApprox != null &&
-                            encroachmentRegisterations.Type != null &&
-                            encroachmentRegisterations.DateOfEncroachment != null &&
-                            encroachmentRegisterations.CountOfStructure != null &&
-                            encroachmentRegisterations.ReferenceNoOnLocation != null &&
-                            encroachmentRegisterations.ConstructionStatus != null &&
-                            encroachmentRegisterations.NameOfStructure.Count > 0 &&
-                            encroachmentRegisterations.AreaApprox.Count > 0 &&
-                            encroachmentRegisterations.Type.Count > 0 &&
-                            encroachmentRegisterations.DateOfEncroachment.Count > 0 &&
-                            encroachmentRegisterations.CountOfStructure.Count > 0 &&
-                            encroachmentRegisterations.ConstructionStatus.Count > 0 &&
-                            encroachmentRegisterations.ReferenceNoOnLocation.Count > 0)
-                        {
-                            List<DetailsOfEncroachment> detailsOfEncroachment = new List<DetailsOfEncroachment>();
-                            for (int i = 0; i < encroachmentRegisterations.NameOfStructure.Count; i++)
-                            {
-                                detailsOfEncroachment.Add(new DetailsOfEncroachment
-                                {
-                                    Area = encroachmentRegisterations.AreaApprox.Count <= i ? 0 : encroachmentRegisterations.AreaApprox[i],
-                                    CountOfStructure = encroachmentRegisterations.CountOfStructure.Count <= i ? 0 : encroachmentRegisterations.CountOfStructure[i],
-                                    DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment.Count <= i ? 0 : encroachmentRegisterations.DateOfEncroachment[i],
-                                    ReligiousStructure = encroachmentRegisterations.ReligiousStructure.Count <= i ? "" : encroachmentRegisterations.ReligiousStructure[i],
-                                    ConstructionStatus = encroachmentRegisterations.ConstructionStatus.Count <= i ? "" : encroachmentRegisterations.ConstructionStatus[i],
-                                    NameOfStructure = encroachmentRegisterations.NameOfStructure.Count <= i ? "" : encroachmentRegisterations.NameOfStructure[i],
-                                    ReferenceNoOnLocation = encroachmentRegisterations.ReferenceNoOnLocation.Count <= i ? "" : encroachmentRegisterations.ReferenceNoOnLocation[i],
-                                    Type = encroachmentRegisterations.Type.Count <= i ? "" : encroachmentRegisterations.Type[i],
-                                    EncroachmentRegisterationId = encroachmentRegisterations.Id
-                                });
-                            }
-                            foreach (var item in detailsOfEncroachment)
-                            {
-                                result = await _encroachmentRegisterationService.SaveDetailsOfEncroachment(item);
-                            }
-                        }
-                        if (encroachmentRegisterations.Firfile != null && encroachmentRegisterations.Firfile.Count > 0)
-                        {
-                            List<EncroachmentFirFileDetails> encroachmentFirFileDetails = new List<EncroachmentFirFileDetails>();
-                            for (int i = 0; i < encroachmentRegisterations.Firfile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile1(FirfilePath, encroachmentRegisterations.Firfile[i]);
-                                encroachmentFirFileDetails.Add(new EncroachmentFirFileDetails
-                                {
-                                    EncroachmentRegistrationId = encroachmentRegisterations.Id,
-                                    FirFilePath = FilePath
-                                });
-                            }
-                            foreach (var item in encroachmentFirFileDetails)
-                            {
-                                result = await _encroachmentRegisterationService.SaveEncroachmentFirFileDetails(item);
-                            }
-                        }
-                        if (encroachmentRegisterations.PhotoFile != null && encroachmentRegisterations.PhotoFile.Count > 0)
-                        {
-                            List<EncroachmentPhotoFileDetails> encroachmentPhotoFileDetails = new List<EncroachmentPhotoFileDetails>();
-                            for (int i = 0; i < encroachmentRegisterations.PhotoFile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile1(PhotoFilePath, encroachmentRegisterations.PhotoFile[i]);
-                                encroachmentPhotoFileDetails.Add(new EncroachmentPhotoFileDetails
-                                {
-                                    EncroachmentRegistrationId = encroachmentRegisterations.Id,
-                                    PhotoFilePath = FilePath
-                                });
-                            }
-                            foreach (var item in encroachmentPhotoFileDetails)
-                            {
-                                result = await _encroachmentRegisterationService.SaveEncroachmentPhotoFileDetails(item);
-                            }
-                        }
-                        if (encroachmentRegisterations.LocationMapFile != null && encroachmentRegisterations.LocationMapFile.Count > 0)
-                        {
-                            List<EncroachmentLocationMapFileDetails> encroachmentLocationMapFileDetails = new List<EncroachmentLocationMapFileDetails>();
-                            for (int i = 0; i < encroachmentRegisterations.LocationMapFile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile1(LocationMapFilePath, encroachmentRegisterations.LocationMapFile[i]);
-                                encroachmentLocationMapFileDetails.Add(new EncroachmentLocationMapFileDetails
-                                {
-                                    EncroachmentRegistrationId = encroachmentRegisterations.Id,
-                                    LocationMapFilePath = FilePath
-                                });
-                            }
-                            foreach (var item in encroachmentLocationMapFileDetails)
-                            {
-                                result = await _encroachmentRegisterationService.SaveEncroachmentLocationMapFileDetails(item);
-                            }
-                        }
-                        if (result)
-                        {
-                            #region Approval Proccess At 1st level start Added by Renu 21 April 2021
-                            var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidInspection").Value));
-                            var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+                            #region Approval Proccess At 1st level Check Initial Before Creating Record  Added by Renu 21 April 2021
+
+                            Approvalproccess approvalproccess = new Approvalproccess();
+                            var DataFlow = await dataAsync();
                             for (int i = 0; i < DataFlow.Count; i++)
                             {
                                 if (!DataFlow[i].parameterSkip)
                                 {
-                                    encroachmentRegisterations.ApprovedStatus = ApprovalStatus.Id;
-                                    encroachmentRegisterations.PendingAt = approvalproccess.SendTo;
-                                    result = await _encroachmentRegisterationService.UpdateBeforeApproval(encroachmentRegisterations.Id, encroachmentRegisterations);  //Update Table details 
-                                    if (result)
+                                    if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
                                     {
-                                        approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                        approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidInspection").Value);
-                                        approvalproccess.ServiceId = encroachmentRegisterations.Id;
-                                        approvalproccess.SendFrom = SiteContext.UserId.ToString();
-                                        approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
-                                        #region set sendto and sendtoprofileid 
-                                        StringBuilder multouserprofileid = new StringBuilder();
-                                        int col = 0;
-                                        if (approvalproccess.SendTo != null)
+                                        if (SiteContext.ZoneId == null)
                                         {
-                                            string[] multiTo = approvalproccess.SendTo.Split(',');
-                                            foreach (string MultiUserId in multiTo)
-                                            {
-                                                if (col > 0)
-                                                    multouserprofileid.Append(",");
-                                                var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                                multouserprofileid.Append(UserProfile.Id);
-                                                col++;
-                                            }
-                                            approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                            ViewBag.Message = Alert.Show("Without Zone application cannot be submitted, Please Contact System Administrator", "", AlertType.Warning);
+                                            return View(encroachmentRegisterations);
                                         }
-                                        #endregion
-                                        approvalproccess.PendingStatus = 1;   //1
-                                        approvalproccess.Status = ApprovalStatus.Id;   //1
-                                        approvalproccess.Level = i + 1;
-                                        approvalproccess.Version = workflowtemplatedata.Version;
-                                        approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                        result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
-                                        #region Insert Into usernotification table Added By Renu 18 June 2021
-                                        if (result == true && approvalproccess.SendTo != null)
-                                        {
-                                            var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidInspection").Value);
-                                            var user = await _userProfileService.GetUserById(SiteContext.UserId);
-                                            Usernotification usernotification = new Usernotification();
-                                            var replacement = notificationtemplate.Template.Replace("{proccess name}", "Inspection/Encroachment Register").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
-                                            usernotification.Message = replacement;
-                                            usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidInspection").Value);
-                                            usernotification.ProcessGuid = approvalproccess.ProcessGuid;
-                                            usernotification.ServiceId = approvalproccess.ServiceId;
-                                            usernotification.SendFrom = approvalproccess.SendFrom;
-                                            usernotification.SendTo = approvalproccess.SendTo;
-                                            result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
-                                        }
-                                        #endregion
-
+                                        encroachmentRegisterations.ApprovalZoneId = SiteContext.ZoneId;
                                     }
+                                    if (DataFlow[i].parameterValue == (_configuration.GetSection("ApprovalRoleType").Value))
+                                    {
+                                        for (int j = 0; j < DataFlow[i].parameterName.Count; j++)
+                                        {
+                                            List<UserProfileDto> UserListRoleBasis = null;
+                                            if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                                UserListRoleBasis = await _userProfileService.GetUserOnRoleZoneBasis(Convert.ToInt32(DataFlow[i].parameterName[j]), SiteContext.ZoneId ?? 0);
+                                            else
+                                                UserListRoleBasis = await _userProfileService.GetUserOnRoleBasis(Convert.ToInt32(DataFlow[i].parameterName[j]));
+
+                                            StringBuilder multouserszonewise = new StringBuilder();
+                                            int col = 0;
+                                            if (UserListRoleBasis != null)
+                                            {
+                                                for (int h = 0; h < UserListRoleBasis.Count; h++)
+                                                {
+                                                    if (col > 0)
+                                                        multouserszonewise.Append(",");
+                                                    multouserszonewise.Append(UserListRoleBasis[h].UserId);
+                                                    col++;
+                                                }
+                                                approvalproccess.SendTo = multouserszonewise.ToString();
+                                            }
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        approvalproccess.SendTo = String.Join(",", (DataFlow[i].parameterName));
+                                        if (DataFlow[i].parameterConditional == (_configuration.GetSection("ApprovalZoneWise").Value))
+                                        {
+                                            StringBuilder multouserszonewise = new StringBuilder();
+                                            int col = 0;
+                                            if (approvalproccess.SendTo != null)
+                                            {
+                                                string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                foreach (string MultiUserId in multiTo)
+                                                {
+                                                    var UserProfile = await _userProfileService.GetUserByIdZoneConcatedName(Convert.ToInt32(MultiUserId), SiteContext.ZoneId ?? 0);
+                                                    if (UserProfile != null)
+                                                    {
+                                                        if (col > 0)
+                                                            multouserszonewise.Append(",");
+                                                        multouserszonewise.Append(UserProfile.UserId);
+                                                    }
+                                                    col++;
+                                                }
+                                                approvalproccess.SendTo = multouserszonewise.ToString();
+                                            }
+                                        }
+                                    }
+
 
                                     break;
                                 }
                             }
-
                             #endregion
-
-                            #region Approval Proccess  Mail Generation Added by Renu 07 May 2021
-                            var sendMailResult = false;
-                            var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
-                            if (approvalproccess.SendTo != null)
+                            encroachmentRegisterations.IsActive = 1;
+                            encroachmentRegisterations.WatchWardId = encroachmentRegisterations.WatchWardId == 0 ? null : encroachmentRegisterations.WatchWardId;
+                            encroachmentRegisterations.CreatedBy = SiteContext.UserId;
+                            encroachmentRegisterations.OtherDepartment = encroachmentRegisterations.OtherDepartment == 0 ? null : encroachmentRegisterations.OtherDepartment;
+                            var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
+                            if (result)
                             {
-                                #region Mail Generate
-                                //At successfull completion send mail and sms
-                                Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
-                                string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
-                                string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
-                                string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
-
-                                var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
-                                StringBuilder multousermailId = new StringBuilder();
-                                if (approvalproccess.SendTo != null)
+                                FileHelper fileHelper = new FileHelper();
+                                if (encroachmentRegisterations.NameOfStructure != null &&
+                                    encroachmentRegisterations.AreaApprox != null &&
+                                    encroachmentRegisterations.Type != null &&
+                                    encroachmentRegisterations.DateOfEncroachment != null &&
+                                    encroachmentRegisterations.CountOfStructure != null &&
+                                    encroachmentRegisterations.ReferenceNoOnLocation != null &&
+                                    encroachmentRegisterations.ConstructionStatus != null &&
+                                    encroachmentRegisterations.NameOfStructure.Count > 0 &&
+                                    encroachmentRegisterations.AreaApprox.Count > 0 &&
+                                    encroachmentRegisterations.Type.Count > 0 &&
+                                    encroachmentRegisterations.DateOfEncroachment.Count > 0 &&
+                                    encroachmentRegisterations.CountOfStructure.Count > 0 &&
+                                    encroachmentRegisterations.ConstructionStatus.Count > 0 &&
+                                    encroachmentRegisterations.ReferenceNoOnLocation.Count > 0)
                                 {
-                                    int col = 0;
-                                    string[] multiTo = approvalproccess.SendTo.Split(',');
-                                    foreach (string MultiUserId in multiTo)
+                                    List<DetailsOfEncroachment> detailsOfEncroachment = new List<DetailsOfEncroachment>();
+                                    for (int i = 0; i < encroachmentRegisterations.NameOfStructure.Count; i++)
                                     {
-                                        if (col > 0)
-                                            multousermailId.Append(",");
-                                        var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
-                                        multousermailId.Append(RecevierUsers.User.Email);
-                                        col++;
+                                        detailsOfEncroachment.Add(new DetailsOfEncroachment
+                                        {
+                                            Area = encroachmentRegisterations.AreaApprox.Count <= i ? 0 : encroachmentRegisterations.AreaApprox[i],
+                                            CountOfStructure = encroachmentRegisterations.CountOfStructure.Count <= i ? 0 : encroachmentRegisterations.CountOfStructure[i],
+                                            DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment.Count <= i ? 0 : encroachmentRegisterations.DateOfEncroachment[i],
+                                            ReligiousStructure = encroachmentRegisterations.ReligiousStructure.Count <= i ? "" : encroachmentRegisterations.ReligiousStructure[i],
+                                            ConstructionStatus = encroachmentRegisterations.ConstructionStatus.Count <= i ? "" : encroachmentRegisterations.ConstructionStatus[i],
+                                            NameOfStructure = encroachmentRegisterations.NameOfStructure.Count <= i ? "" : encroachmentRegisterations.NameOfStructure[i],
+                                            ReferenceNoOnLocation = encroachmentRegisterations.ReferenceNoOnLocation.Count <= i ? "" : encroachmentRegisterations.ReferenceNoOnLocation[i],
+                                            Type = encroachmentRegisterations.Type.Count <= i ? "" : encroachmentRegisterations.Type[i],
+                                            EncroachmentRegisterationId = encroachmentRegisterations.Id
+                                        });
+                                    }
+                                    foreach (var item in detailsOfEncroachment)
+                                    {
+                                        result = await _encroachmentRegisterationService.SaveDetailsOfEncroachment(item);
                                     }
                                 }
+                                if (encroachmentRegisterations.Firfile != null && encroachmentRegisterations.Firfile.Count > 0)
+                                {
+                                    List<EncroachmentFirFileDetails> encroachmentFirFileDetails = new List<EncroachmentFirFileDetails>();
+                                    for (int i = 0; i < encroachmentRegisterations.Firfile.Count; i++)
+                                    {
+                                        string FilePath = fileHelper.SaveFile1(FirfilePath, encroachmentRegisterations.Firfile[i]);
+                                        encroachmentFirFileDetails.Add(new EncroachmentFirFileDetails
+                                        {
+                                            EncroachmentRegistrationId = encroachmentRegisterations.Id,
+                                            FirFilePath = FilePath
+                                        });
+                                    }
+                                    foreach (var item in encroachmentFirFileDetails)
+                                    {
+                                        result = await _encroachmentRegisterationService.SaveEncroachmentFirFileDetails(item);
+                                    }
+                                }
+                                if (encroachmentRegisterations.PhotoFile != null && encroachmentRegisterations.PhotoFile.Count > 0)
+                                {
+                                    List<EncroachmentPhotoFileDetails> encroachmentPhotoFileDetails = new List<EncroachmentPhotoFileDetails>();
+                                    for (int i = 0; i < encroachmentRegisterations.PhotoFile.Count; i++)
+                                    {
+                                        string FilePath = fileHelper.SaveFile1(PhotoFilePath, encroachmentRegisterations.PhotoFile[i]);
+                                        encroachmentPhotoFileDetails.Add(new EncroachmentPhotoFileDetails
+                                        {
+                                            EncroachmentRegistrationId = encroachmentRegisterations.Id,
+                                            PhotoFilePath = FilePath
+                                        });
+                                    }
+                                    foreach (var item in encroachmentPhotoFileDetails)
+                                    {
+                                        result = await _encroachmentRegisterationService.SaveEncroachmentPhotoFileDetails(item);
+                                    }
+                                }
+                                if (encroachmentRegisterations.LocationMapFile != null && encroachmentRegisterations.LocationMapFile.Count > 0)
+                                {
+                                    List<EncroachmentLocationMapFileDetails> encroachmentLocationMapFileDetails = new List<EncroachmentLocationMapFileDetails>();
+                                    for (int i = 0; i < encroachmentRegisterations.LocationMapFile.Count; i++)
+                                    {
+                                        string FilePath = fileHelper.SaveFile1(LocationMapFilePath, encroachmentRegisterations.LocationMapFile[i]);
+                                        encroachmentLocationMapFileDetails.Add(new EncroachmentLocationMapFileDetails
+                                        {
+                                            EncroachmentRegistrationId = encroachmentRegisterations.Id,
+                                            LocationMapFilePath = FilePath
+                                        });
+                                    }
+                                    foreach (var item in encroachmentLocationMapFileDetails)
+                                    {
+                                        result = await _encroachmentRegisterationService.SaveEncroachmentLocationMapFileDetails(item);
+                                    }
+                                }
+                                if (result)
+                                {
+                                    #region Approval Proccess At 1st level start Added by Renu 21 April 2021
+                                    var workflowtemplatedata = await _workflowtemplateService.FetchSingleResultOnProcessGuid((_configuration.GetSection("workflowPreccessGuidInspection").Value));
+                                    var ApprovalStatus = await _approvalproccessService.GetStatusIdFromStatusCode((int)ApprovalActionStatus.Forward);
+                                    for (int i = 0; i < DataFlow.Count; i++)
+                                    {
+                                        if (!DataFlow[i].parameterSkip)
+                                        {
+                                            encroachmentRegisterations.ApprovedStatus = ApprovalStatus.Id;
+                                            encroachmentRegisterations.PendingAt = approvalproccess.SendTo;
+                                            result = await _encroachmentRegisterationService.UpdateBeforeApproval(encroachmentRegisterations.Id, encroachmentRegisterations);  //Update Table details 
+                                            if (result)
+                                            {
+                                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                                approvalproccess.ProcessGuid = (_configuration.GetSection("workflowPreccessGuidInspection").Value);
+                                                approvalproccess.ServiceId = encroachmentRegisterations.Id;
+                                                approvalproccess.SendFrom = SiteContext.UserId.ToString();
+                                                approvalproccess.SendFromProfileId = SiteContext.ProfileId.ToString();
+                                                #region set sendto and sendtoprofileid 
+                                                StringBuilder multouserprofileid = new StringBuilder();
+                                                int col = 0;
+                                                if (approvalproccess.SendTo != null)
+                                                {
+                                                    string[] multiTo = approvalproccess.SendTo.Split(',');
+                                                    foreach (string MultiUserId in multiTo)
+                                                    {
+                                                        if (col > 0)
+                                                            multouserprofileid.Append(",");
+                                                        var UserProfile = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                        multouserprofileid.Append(UserProfile.Id);
+                                                        col++;
+                                                    }
+                                                    approvalproccess.SendToProfileId = multouserprofileid.ToString();
+                                                }
+                                                #endregion
+                                                approvalproccess.PendingStatus = 1;   //1
+                                                approvalproccess.Status = ApprovalStatus.Id;   //1
+                                                approvalproccess.Level = i + 1;
+                                                approvalproccess.Version = workflowtemplatedata.Version;
+                                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
-                                #region Mail Generation Added By Renu
+                                                #region Insert Into usernotification table Added By Renu 18 June 2021
+                                                if (result == true && approvalproccess.SendTo != null)
+                                                {
+                                                    var notificationtemplate = await _approvalproccessService.FetchSingleNotificationTemplate(_configuration.GetSection("userNotificationGuidInspection").Value);
+                                                    var user = await _userProfileService.GetUserById(SiteContext.UserId);
+                                                    Usernotification usernotification = new Usernotification();
+                                                    var replacement = notificationtemplate.Template.Replace("{proccess name}", "Inspection/Encroachment Register").Replace("{from user}", user.User.UserName).Replace("{datetime}", DateTime.Now.ToString());
+                                                    usernotification.Message = replacement;
+                                                    usernotification.UserNotificationGuid = (_configuration.GetSection("userNotificationGuidInspection").Value);
+                                                    usernotification.ProcessGuid = approvalproccess.ProcessGuid;
+                                                    usernotification.ServiceId = approvalproccess.ServiceId;
+                                                    usernotification.SendFrom = approvalproccess.SendFrom;
+                                                    usernotification.SendTo = approvalproccess.SendTo;
+                                                    result = await _userNotificationService.Create(usernotification, SiteContext.UserId);
+                                                }
+                                                #endregion
 
-                                MailSMSHelper mailG = new MailSMSHelper();
+                                            }
 
-                                #region HTML Body Generation
-                                ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
-                                bodyDTO.ApplicationName = "Inspection/Encroachment Register Application";
-                                bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
-                                bodyDTO.SenderName = senderUser.User.Name;
-                                bodyDTO.Link = linkhref;
-                                bodyDTO.AppRefNo = encroachmentRegisterations.RefNo;
-                                bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
-                                bodyDTO.Remarks = approvalproccess.Remarks;
-                                bodyDTO.path = path;
-                                string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
-                                #endregion
+                                            break;
+                                        }
+                                    }
 
-                                //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
-                                #region Common Mail Genration
-                                SentMailGenerationDto maildto = new SentMailGenerationDto();
-                                maildto.strMailSubject = "Pending Inspection/Encroachment Register Application Approval Request Details ";
-                                maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
-                                maildto.strBodyMsg = strBodyMsg;
-                                maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
-                                maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
-                                maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
-                                maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
-                                maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+                                    #endregion
 
-                                maildto.strMailTo = multousermailId.ToString();
-                                sendMailResult = mailG.SendMailWithAttachment(maildto);
-                                #endregion
-                                #endregion
+                                    #region Approval Proccess  Mail Generation Added by Renu 07 May 2021
+                                    var sendMailResult = false;
+                                    var DataApprovalSatatusMsg = await _approvalproccessService.FetchSingleApprovalStatus(Convert.ToInt32(ApprovalStatus.Id));
+                                    if (approvalproccess.SendTo != null)
+                                    {
+                                        #region Mail Generate
+                                        //At successfull completion send mail and sms
+                                        Uri uri = new Uri("https://master.managemybusinessess.com/ApprovalProcess/Index");
+                                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "ApprovalMailDetailsContent.html");
+                                        string link = "<a target=\"_blank\" href=\"" + uri + "\">Click Here</a>";
+                                        string linkhref = "https://master.managemybusinessess.com/ApprovalProcess/Index";
+
+                                        var senderUser = await _userProfileService.GetUserById(SiteContext.UserId);
+                                        StringBuilder multousermailId = new StringBuilder();
+                                        if (approvalproccess.SendTo != null)
+                                        {
+                                            int col = 0;
+                                            string[] multiTo = approvalproccess.SendTo.Split(',');
+                                            foreach (string MultiUserId in multiTo)
+                                            {
+                                                if (col > 0)
+                                                    multousermailId.Append(",");
+                                                var RecevierUsers = await _userProfileService.GetUserById(Convert.ToInt32(MultiUserId));
+                                                multousermailId.Append(RecevierUsers.User.Email);
+                                                col++;
+                                            }
+                                        }
+
+                                        #region Mail Generation Added By Renu
+
+                                        MailSMSHelper mailG = new MailSMSHelper();
+
+                                        #region HTML Body Generation
+                                        ApprovalMailBodyDto bodyDTO = new ApprovalMailBodyDto();
+                                        bodyDTO.ApplicationName = "Inspection/Encroachment Register Application";
+                                        bodyDTO.Status = DataApprovalSatatusMsg.SentStatusName;
+                                        bodyDTO.SenderName = senderUser.User.Name;
+                                        bodyDTO.Link = linkhref;
+                                        bodyDTO.AppRefNo = encroachmentRegisterations.RefNo;
+                                        bodyDTO.SubmitDate = DateTime.Now.ToString("dd-MMM-yyyy");
+                                        bodyDTO.Remarks = approvalproccess.Remarks;
+                                        bodyDTO.path = path;
+                                        string strBodyMsg = mailG.PopulateBodyApprovalMailDetails(bodyDTO);
+                                        #endregion
+
+                                        //sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, multousermailId.ToString(), strMailCC, strMailBCC, strAttachPath);
+                                        #region Common Mail Genration
+                                        SentMailGenerationDto maildto = new SentMailGenerationDto();
+                                        maildto.strMailSubject = "Pending Inspection/Encroachment Register Application Approval Request Details ";
+                                        maildto.strMailCC = ""; maildto.strMailBCC = ""; maildto.strAttachPath = "";
+                                        maildto.strBodyMsg = strBodyMsg;
+                                        maildto.defaultPswd = (_configuration.GetSection("EmailConfiguration:defaultPswd").Value).ToString();
+                                        maildto.fromMail = (_configuration.GetSection("EmailConfiguration:fromMail").Value).ToString();
+                                        maildto.fromMailPwd = (_configuration.GetSection("EmailConfiguration:fromMailPwd").Value).ToString();
+                                        maildto.mailHost = (_configuration.GetSection("EmailConfiguration:mailHost").Value).ToString();
+                                        maildto.port = Convert.ToInt32(_configuration.GetSection("EmailConfiguration:port").Value);
+
+                                        maildto.strMailTo = multousermailId.ToString();
+                                        sendMailResult = mailG.SendMailWithAttachment(maildto);
+                                        #endregion
+                                        #endregion
 
 
-                                #endregion
+                                        #endregion
+                                    }
+                                    #endregion
+                                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                                    var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
+                                    return View("Index", result1);
+                                }
+                                else
+                                {
+                                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                    return View(encroachmentRegisterations);
+                                }
                             }
-                            #endregion
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
-                            return View("Index", result1);
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(encroachmentRegisterations);
+                            }
                         }
                         else
                         {
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                             return View(encroachmentRegisterations);
                         }
+
                     }
+
+
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(encroachmentRegisterations);
                     }
+
+
                 }
                 else
                 {
@@ -523,116 +556,139 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, EncroachmentRegisteration encroachmentRegisterations)
         {
+            bool IsValidpdf = CheckMimeType(encroachmentRegisterations);
+            bool IsValidpdf1 = CheckMimeType1(encroachmentRegisterations);
             var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
             Data.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
             Data.ZoneList = await _encroachmentRegisterationService.GetAllZone(Data.DepartmentId);
             Data.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(Data.ZoneId);
             Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.DivisionId);
             Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
-           
+
             if (ModelState.IsValid)
             {
-                encroachmentRegisterations.ModifiedBy = SiteContext.UserId;
-                var result = await _encroachmentRegisterationService.Update(id, encroachmentRegisterations);
-                if (result)
+                if (IsValidpdf == true)
                 {
-                    FileHelper fileHelper = new FileHelper();
-                    if (encroachmentRegisterations.NameOfStructure != null && encroachmentRegisterations.AreaApprox != null && encroachmentRegisterations.Type != null && encroachmentRegisterations.DateOfEncroachment != null && encroachmentRegisterations.CountOfStructure != null && encroachmentRegisterations.ReferenceNoOnLocation != null && encroachmentRegisterations.NameOfStructure.Count > 0 && encroachmentRegisterations.AreaApprox.Count > 0 && encroachmentRegisterations.Type.Count > 0 && encroachmentRegisterations.DateOfEncroachment.Count > 0 && encroachmentRegisterations.CountOfStructure.Count > 0 && encroachmentRegisterations.ReferenceNoOnLocation.Count > 0)
+
+                    if (IsValidpdf1 == true)
                     {
-                        List<DetailsOfEncroachment> detailsOfEncroachment = new List<DetailsOfEncroachment>();
-                        result = await _encroachmentRegisterationService.DeleteDetailsOfEncroachment(id);
-                        for (int i = 0; i < encroachmentRegisterations.NameOfStructure.Count; i++)
+
+
+                        encroachmentRegisterations.ModifiedBy = SiteContext.UserId;
+                        var result = await _encroachmentRegisterationService.Update(id, encroachmentRegisterations);
+                        if (result)
                         {
-                            detailsOfEncroachment.Add(new DetailsOfEncroachment
+                            FileHelper fileHelper = new FileHelper();
+                            if (encroachmentRegisterations.NameOfStructure != null && encroachmentRegisterations.AreaApprox != null && encroachmentRegisterations.Type != null && encroachmentRegisterations.DateOfEncroachment != null && encroachmentRegisterations.CountOfStructure != null && encroachmentRegisterations.ReferenceNoOnLocation != null && encroachmentRegisterations.NameOfStructure.Count > 0 && encroachmentRegisterations.AreaApprox.Count > 0 && encroachmentRegisterations.Type.Count > 0 && encroachmentRegisterations.DateOfEncroachment.Count > 0 && encroachmentRegisterations.CountOfStructure.Count > 0 && encroachmentRegisterations.ReferenceNoOnLocation.Count > 0)
                             {
-                                Area = encroachmentRegisterations.AreaApprox[i],
-                                CountOfStructure = encroachmentRegisterations.CountOfStructure[i],
-                                ReligiousStructure = encroachmentRegisterations.ReligiousStructure[i],
-                                DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment[i],
-                                ConstructionStatus = encroachmentRegisterations.ConstructionStatus[i],
-                                NameOfStructure = encroachmentRegisterations.NameOfStructure[i],
-                                ReferenceNoOnLocation = encroachmentRegisterations.ReferenceNoOnLocation[i],
-                                Type = encroachmentRegisterations.Type[i],
-                                EncroachmentRegisterationId = encroachmentRegisterations.Id
-                            });
-                        }
-                        foreach (var item in detailsOfEncroachment)
-                        {
-                            result = await _encroachmentRegisterationService.SaveDetailsOfEncroachment(item);
-                        }
-                    }
-                    if (encroachmentRegisterations.Firfile != null && encroachmentRegisterations.Firfile.Count > 0)
-                    {
-                        List<EncroachmentFirFileDetails> encroachmentFirFileDetails = new List<EncroachmentFirFileDetails>();
-                        result = await _encroachmentRegisterationService.DeleteEncroachmentFirFileDetails(id);
-                        for (int i = 0; i < encroachmentRegisterations.Firfile.Count; i++)
-                        {
-                            string FilePath = fileHelper.SaveFile1(FirfilePath, encroachmentRegisterations.Firfile[i]);
-                            encroachmentFirFileDetails.Add(new EncroachmentFirFileDetails
+                                List<DetailsOfEncroachment> detailsOfEncroachment = new List<DetailsOfEncroachment>();
+                                result = await _encroachmentRegisterationService.DeleteDetailsOfEncroachment(id);
+                                for (int i = 0; i < encroachmentRegisterations.NameOfStructure.Count; i++)
+                                {
+                                    detailsOfEncroachment.Add(new DetailsOfEncroachment
+                                    {
+                                        Area = encroachmentRegisterations.AreaApprox[i],
+                                        CountOfStructure = encroachmentRegisterations.CountOfStructure[i],
+                                        ReligiousStructure = encroachmentRegisterations.ReligiousStructure[i],
+                                        DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment[i],
+                                        ConstructionStatus = encroachmentRegisterations.ConstructionStatus[i],
+                                        NameOfStructure = encroachmentRegisterations.NameOfStructure[i],
+                                        ReferenceNoOnLocation = encroachmentRegisterations.ReferenceNoOnLocation[i],
+                                        Type = encroachmentRegisterations.Type[i],
+                                        EncroachmentRegisterationId = encroachmentRegisterations.Id
+                                    });
+                                }
+                                foreach (var item in detailsOfEncroachment)
+                                {
+                                    result = await _encroachmentRegisterationService.SaveDetailsOfEncroachment(item);
+                                }
+                            }
+                            if (encroachmentRegisterations.Firfile != null && encroachmentRegisterations.Firfile.Count > 0)
                             {
-                                EncroachmentRegistrationId = encroachmentRegisterations.Id,
-                                FirFilePath = FilePath
-                            });
-                        }
-                        foreach (var item in encroachmentFirFileDetails)
-                        {
-                            result = await _encroachmentRegisterationService.SaveEncroachmentFirFileDetails(item);
-                        }
-                    }
-                    if (encroachmentRegisterations.PhotoFile != null && encroachmentRegisterations.PhotoFile.Count > 0)
-                    {
-                        List<EncroachmentPhotoFileDetails> encroachmentPhotoFileDetails = new List<EncroachmentPhotoFileDetails>();
-                        result = await _encroachmentRegisterationService.DeleteEncroachmentPhotoFileDetails(id);
-                        for (int i = 0; i < encroachmentRegisterations.PhotoFile.Count; i++)
-                        {
-                            string FilePath = fileHelper.SaveFile1(PhotoFilePath, encroachmentRegisterations.PhotoFile[i]);
-                            encroachmentPhotoFileDetails.Add(new EncroachmentPhotoFileDetails
+                                List<EncroachmentFirFileDetails> encroachmentFirFileDetails = new List<EncroachmentFirFileDetails>();
+                                result = await _encroachmentRegisterationService.DeleteEncroachmentFirFileDetails(id);
+                                for (int i = 0; i < encroachmentRegisterations.Firfile.Count; i++)
+                                {
+                                    string FilePath = fileHelper.SaveFile1(FirfilePath, encroachmentRegisterations.Firfile[i]);
+                                    encroachmentFirFileDetails.Add(new EncroachmentFirFileDetails
+                                    {
+                                        EncroachmentRegistrationId = encroachmentRegisterations.Id,
+                                        FirFilePath = FilePath
+                                    });
+                                }
+                                foreach (var item in encroachmentFirFileDetails)
+                                {
+                                    result = await _encroachmentRegisterationService.SaveEncroachmentFirFileDetails(item);
+                                }
+                            }
+                            if (encroachmentRegisterations.PhotoFile != null && encroachmentRegisterations.PhotoFile.Count > 0)
                             {
-                                EncroachmentRegistrationId = encroachmentRegisterations.Id,
-                                PhotoFilePath = FilePath
-                            });
-                        }
-                        foreach (var item in encroachmentPhotoFileDetails)
-                        {
-                            result = await _encroachmentRegisterationService.SaveEncroachmentPhotoFileDetails(item);
-                        }
-                    }
-                    if (encroachmentRegisterations.LocationMapFile != null && encroachmentRegisterations.LocationMapFile.Count > 0)
-                    {
-                        List<EncroachmentLocationMapFileDetails> encroachmentLocationMapFileDetails = new List<EncroachmentLocationMapFileDetails>();
-                        result = await _encroachmentRegisterationService.DeleteEncroachmentLocationMapFileDetails(id);
-                        for (int i = 0; i < encroachmentRegisterations.LocationMapFile.Count; i++)
-                        {
-                            string FilePath = fileHelper.SaveFile1(LocationMapFilePath, encroachmentRegisterations.LocationMapFile[i]);
-                            encroachmentLocationMapFileDetails.Add(new EncroachmentLocationMapFileDetails
+                                List<EncroachmentPhotoFileDetails> encroachmentPhotoFileDetails = new List<EncroachmentPhotoFileDetails>();
+                                result = await _encroachmentRegisterationService.DeleteEncroachmentPhotoFileDetails(id);
+                                for (int i = 0; i < encroachmentRegisterations.PhotoFile.Count; i++)
+                                {
+                                    string FilePath = fileHelper.SaveFile1(PhotoFilePath, encroachmentRegisterations.PhotoFile[i]);
+                                    encroachmentPhotoFileDetails.Add(new EncroachmentPhotoFileDetails
+                                    {
+                                        EncroachmentRegistrationId = encroachmentRegisterations.Id,
+                                        PhotoFilePath = FilePath
+                                    });
+                                }
+                                foreach (var item in encroachmentPhotoFileDetails)
+                                {
+                                    result = await _encroachmentRegisterationService.SaveEncroachmentPhotoFileDetails(item);
+                                }
+                            }
+                            if (encroachmentRegisterations.LocationMapFile != null && encroachmentRegisterations.LocationMapFile.Count > 0)
                             {
-                                EncroachmentRegistrationId = encroachmentRegisterations.Id,
-                                LocationMapFilePath = FilePath
-                            });
+                                List<EncroachmentLocationMapFileDetails> encroachmentLocationMapFileDetails = new List<EncroachmentLocationMapFileDetails>();
+                                result = await _encroachmentRegisterationService.DeleteEncroachmentLocationMapFileDetails(id);
+                                for (int i = 0; i < encroachmentRegisterations.LocationMapFile.Count; i++)
+                                {
+                                    string FilePath = fileHelper.SaveFile1(LocationMapFilePath, encroachmentRegisterations.LocationMapFile[i]);
+                                    encroachmentLocationMapFileDetails.Add(new EncroachmentLocationMapFileDetails
+                                    {
+                                        EncroachmentRegistrationId = encroachmentRegisterations.Id,
+                                        LocationMapFilePath = FilePath
+                                    });
+                                }
+                                foreach (var item in encroachmentLocationMapFileDetails)
+                                {
+                                    result = await _encroachmentRegisterationService.SaveEncroachmentLocationMapFileDetails(item);
+                                }
+                            }
+                            if (result)
+                            {
+                                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                                var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
+                                return View("Index", result1);
+                            }
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(encroachmentRegisterations);
+                            }
+
                         }
-                        foreach (var item in encroachmentLocationMapFileDetails)
+                        else
                         {
-                            result = await _encroachmentRegisterationService.SaveEncroachmentLocationMapFileDetails(item);
+                            return View(encroachmentRegisterations);
                         }
-                    }
-                    if (result)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
-                        return View("Index", result1);
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                         return View(encroachmentRegisterations);
                     }
 
                 }
                 else
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(encroachmentRegisterations);
                 }
             }
+
             else
             {
                 return View(encroachmentRegisterations);
@@ -807,6 +863,155 @@ namespace EncroachmentDemolition.Controllers
 
             return Json(IsImg, JsonRequestBehavior);
         }
+
+
+
+
+
+
+        public bool CheckMimeType(EncroachmentRegisteration encroachmentRegisteration)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
+            IFormFile files = encroachmentRegisteration.Firfile1;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
+                string FilePath = Path.Combine(FirfilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(FirfilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(FirfilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+        public bool CheckMimeType1(EncroachmentRegisteration encroachmentRegisteration)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            LocationMapFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:LocationMapFilePath").Value.ToString();
+            IFormFile files = encroachmentRegisteration.LocationMapFile1;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                LocationMapFilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:LocationMapFilePath").Value.ToString();
+                string FilePath = Path.Combine(LocationMapFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(LocationMapFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(LocationMapFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath =_configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:LocationMapFilePath").Value.ToString();
+
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
 
 
     }

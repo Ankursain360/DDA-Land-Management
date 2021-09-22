@@ -18,6 +18,14 @@ using Core.Enum;
 using Dto.Master;
 using Microsoft.AspNetCore.Hosting;
 
+using Service.IApplicationService;
+using System.Text;
+
+
+using Microsoft.AspNetCore.Http;
+
+
+
 namespace EncroachmentDemolition.Controllers
 {
     public class DemolitionstructuredetailsController : BaseController
@@ -36,7 +44,8 @@ namespace EncroachmentDemolition.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
         private readonly IHostingEnvironment _hostingEnvironment;
-        
+        public object JsonRequestBehavior { get; private set; }
+
 
         public DemolitionstructuredetailsController(IDemolitionstructuredetailsService demolitionstructuredetailsService,
              IEncroachmentRegisterationApprovalService encroachmentRegisterationApprovalService,
@@ -129,6 +138,7 @@ namespace EncroachmentDemolition.Controllers
         {
             var result = false;
             ViewBag.PrimaryId = demolitionstructuredetails.Id;
+            bool IsValidpdf = CheckMimeType(demolitionstructuredetails);
             var Data1 = await _demolitionstructuredetailsService.FetchSingleResultOfFixingDemolition(demolitionstructuredetails.FixingDemolitionId);
 
             ViewBag.EncroachmentId = Data1.EncroachmentId;
@@ -142,122 +152,130 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
 
 
-          
+
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
-                demolitionstructuredetails.DemilitionReportPath = demolitionstructuredetails.DemolitionReportFile == null ? demolitionstructuredetails.DemilitionReportPath : fileHelper.SaveFile1(DemolitionReportFilePath, demolitionstructuredetails.DemolitionReportFile);
-                demolitionstructuredetails.CreatedBy = SiteContext.UserId;
-               // var result = await _demolitionstructuredetailsService.Create(demolitionstructuredetails);
-
-
-                var DiaryData = await _demolitionstructuredetailsService.FetchSingleResultonId(demolitionstructuredetails.FixingDemolitionId);
-                if (DiaryData == null)
+                if (IsValidpdf == true)
                 {
+                    FileHelper fileHelper = new FileHelper();
+                    demolitionstructuredetails.DemilitionReportPath = demolitionstructuredetails.DemolitionReportFile == null ? demolitionstructuredetails.DemilitionReportPath : fileHelper.SaveFile1(DemolitionReportFilePath, demolitionstructuredetails.DemolitionReportFile);
                     demolitionstructuredetails.CreatedBy = SiteContext.UserId;
-                    result = await _demolitionstructuredetailsService.Create(demolitionstructuredetails);
-                    if (result)
+                    // var result = await _demolitionstructuredetailsService.Create(demolitionstructuredetails);
+
+
+                    var DiaryData = await _demolitionstructuredetailsService.FetchSingleResultonId(demolitionstructuredetails.FixingDemolitionId);
+                    if (DiaryData == null)
                     {
-                        ///for after file:
-
-                        if (demolitionstructuredetails.AfterPhotoFile != null && demolitionstructuredetails.AfterPhotoFile.Count > 0)
-                        {
-                            List<Demolitionstructureafterdemolitionphotofiledetails> demolitionstructureafterdemolitionphotofiledetails = new List<Demolitionstructureafterdemolitionphotofiledetails>();
-                            for (int i = 0; i < demolitionstructuredetails.AfterPhotoFile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile1(AfterPhotoFilePath, demolitionstructuredetails.AfterPhotoFile[i]);
-                                demolitionstructureafterdemolitionphotofiledetails.Add(new Demolitionstructureafterdemolitionphotofiledetails
-                                {
-                                    DemolitionStructureDetailsId = demolitionstructuredetails.Id,
-                                    AfterPhotoFilePath = FilePath
-                                });
-                            }
-                            foreach (var item in demolitionstructureafterdemolitionphotofiledetails)
-                            {
-                                result = await _demolitionstructuredetailsService.SaveDemolitionstructureafterdemolitionphotofiledetails(item);
-                            }
-                        }
-
-                        //for before file:
-
-                        if (demolitionstructuredetails.BeforePhotoFile != null && demolitionstructuredetails.BeforePhotoFile.Count > 0)
-                        {
-                            List<Demolitionstructurebeforedemolitionphotofiledetails> demolitionstructurebeforedemolitionphotofiledetails = new List<Demolitionstructurebeforedemolitionphotofiledetails>();
-                            for (int i = 0; i < demolitionstructuredetails.BeforePhotoFile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile1(BeforePhotoFilePath, demolitionstructuredetails.BeforePhotoFile[i]);
-                                demolitionstructurebeforedemolitionphotofiledetails.Add(new Demolitionstructurebeforedemolitionphotofiledetails
-                                {
-                                    DemolitionStructureId = demolitionstructuredetails.Id,
-                                    BeforePhotoFilePath = FilePath
-                                });
-                            }
-                            foreach (var item in demolitionstructurebeforedemolitionphotofiledetails)
-                            {
-                                result = await _demolitionstructuredetailsService.SaveDemolitionstructurebeforedemolitionphotofiledetails(item);
-                            }
-                        }
-
-
-
-                        //************ Save Demolishedstructurerpt  ************  
-
-                        if (demolitionstructuredetails.Date1 != null &&
-                            demolitionstructuredetails.StructureId1 != null)
-
-                        {
-                            if (demolitionstructuredetails.StructureId1.Count > 0)
-
-                            {
-                                List<Demolishedstructurerpt> rpt1 = new List<Demolishedstructurerpt>();
-                                for (int i = 0; i < demolitionstructuredetails.StructureId1.Count; i++)
-                                {
-                                    rpt1.Add(new Demolishedstructurerpt
-                                    {
-                                        DemolitionDate = demolitionstructuredetails.Date1.Count <= i ? null : demolitionstructuredetails.Date1[i],
-                                        StructureId = demolitionstructuredetails.StructureId1.Count <= i ? null : demolitionstructuredetails.StructureId1[i],
-                                        NoOfStructureDemolished = demolitionstructuredetails.NoOfStructureDemolished.Count <= i ? null : demolitionstructuredetails.NoOfStructureDemolished[i],
-                                        NoOfStructureRemaining = demolitionstructuredetails.NoOfStructureRemaining.Count <= i ? null : demolitionstructuredetails.NoOfStructureRemaining[i],
-                                        DemolitionStructureDetailsId = demolitionstructuredetails.Id,
-                                        CreatedBy = SiteContext.UserId
-                                    });
-                                }
-                                foreach (var item in rpt1)
-                                {
-                                    result = await _demolitionstructuredetailsService.SaveDemolishedstructurerpt(item);
-                                }
-                            }
-                        }
-                        //************ Save Areareclaimedrpt  ************  
-                        if (demolitionstructuredetails.Date2 != null &&
-                            demolitionstructuredetails.Area1 != null)
-
-                        {
-                            if (demolitionstructuredetails.Area1.Count > 0)
-
-                            {
-                                List<Areareclaimedrpt> rpt1 = new List<Areareclaimedrpt>();
-                                for (int i = 0; i < demolitionstructuredetails.Area1.Count; i++)
-                                {
-                                    rpt1.Add(new Areareclaimedrpt
-                                    {
-                                        DemolitionDate = demolitionstructuredetails.Date2.Count <= i ? null : demolitionstructuredetails.Date2[i],
-                                        AreaReclaimed = demolitionstructuredetails.Area1.Count <= i ? null : demolitionstructuredetails.Area1[i],
-                                        AreaToBeReclaimed = demolitionstructuredetails.AreaToBeReclaimed.Count <= i ? null : demolitionstructuredetails.AreaToBeReclaimed[i],
-                                        DemolitionStructureDetailsId = demolitionstructuredetails.Id,
-                                        CreatedBy = SiteContext.UserId
-                                    });
-                                }
-                                foreach (var item in rpt1)
-                                {
-                                    result = await _demolitionstructuredetailsService.SaveAreareclaimedrpt(item);
-                                }
-                            }
-                        }
+                        demolitionstructuredetails.CreatedBy = SiteContext.UserId;
+                        result = await _demolitionstructuredetailsService.Create(demolitionstructuredetails);
                         if (result)
                         {
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                           return View("Index1");
+                            ///for after file:
+
+                            if (demolitionstructuredetails.AfterPhotoFile != null && demolitionstructuredetails.AfterPhotoFile.Count > 0)
+                            {
+                                List<Demolitionstructureafterdemolitionphotofiledetails> demolitionstructureafterdemolitionphotofiledetails = new List<Demolitionstructureafterdemolitionphotofiledetails>();
+                                for (int i = 0; i < demolitionstructuredetails.AfterPhotoFile.Count; i++)
+                                {
+                                    string FilePath = fileHelper.SaveFile1(AfterPhotoFilePath, demolitionstructuredetails.AfterPhotoFile[i]);
+                                    demolitionstructureafterdemolitionphotofiledetails.Add(new Demolitionstructureafterdemolitionphotofiledetails
+                                    {
+                                        DemolitionStructureDetailsId = demolitionstructuredetails.Id,
+                                        AfterPhotoFilePath = FilePath
+                                    });
+                                }
+                                foreach (var item in demolitionstructureafterdemolitionphotofiledetails)
+                                {
+                                    result = await _demolitionstructuredetailsService.SaveDemolitionstructureafterdemolitionphotofiledetails(item);
+                                }
+                            }
+
+                            //for before file:
+
+                            if (demolitionstructuredetails.BeforePhotoFile != null && demolitionstructuredetails.BeforePhotoFile.Count > 0)
+                            {
+                                List<Demolitionstructurebeforedemolitionphotofiledetails> demolitionstructurebeforedemolitionphotofiledetails = new List<Demolitionstructurebeforedemolitionphotofiledetails>();
+                                for (int i = 0; i < demolitionstructuredetails.BeforePhotoFile.Count; i++)
+                                {
+                                    string FilePath = fileHelper.SaveFile1(BeforePhotoFilePath, demolitionstructuredetails.BeforePhotoFile[i]);
+                                    demolitionstructurebeforedemolitionphotofiledetails.Add(new Demolitionstructurebeforedemolitionphotofiledetails
+                                    {
+                                        DemolitionStructureId = demolitionstructuredetails.Id,
+                                        BeforePhotoFilePath = FilePath
+                                    });
+                                }
+                                foreach (var item in demolitionstructurebeforedemolitionphotofiledetails)
+                                {
+                                    result = await _demolitionstructuredetailsService.SaveDemolitionstructurebeforedemolitionphotofiledetails(item);
+                                }
+                            }
+
+
+
+                            //************ Save Demolishedstructurerpt  ************  
+
+                            if (demolitionstructuredetails.Date1 != null &&
+                                demolitionstructuredetails.StructureId1 != null)
+
+                            {
+                                if (demolitionstructuredetails.StructureId1.Count > 0)
+
+                                {
+                                    List<Demolishedstructurerpt> rpt1 = new List<Demolishedstructurerpt>();
+                                    for (int i = 0; i < demolitionstructuredetails.StructureId1.Count; i++)
+                                    {
+                                        rpt1.Add(new Demolishedstructurerpt
+                                        {
+                                            DemolitionDate = demolitionstructuredetails.Date1.Count <= i ? null : demolitionstructuredetails.Date1[i],
+                                            StructureId = demolitionstructuredetails.StructureId1.Count <= i ? null : demolitionstructuredetails.StructureId1[i],
+                                            NoOfStructureDemolished = demolitionstructuredetails.NoOfStructureDemolished.Count <= i ? null : demolitionstructuredetails.NoOfStructureDemolished[i],
+                                            NoOfStructureRemaining = demolitionstructuredetails.NoOfStructureRemaining.Count <= i ? null : demolitionstructuredetails.NoOfStructureRemaining[i],
+                                            DemolitionStructureDetailsId = demolitionstructuredetails.Id,
+                                            CreatedBy = SiteContext.UserId
+                                        });
+                                    }
+                                    foreach (var item in rpt1)
+                                    {
+                                        result = await _demolitionstructuredetailsService.SaveDemolishedstructurerpt(item);
+                                    }
+                                }
+                            }
+                            //************ Save Areareclaimedrpt  ************  
+                            if (demolitionstructuredetails.Date2 != null &&
+                                demolitionstructuredetails.Area1 != null)
+
+                            {
+                                if (demolitionstructuredetails.Area1.Count > 0)
+
+                                {
+                                    List<Areareclaimedrpt> rpt1 = new List<Areareclaimedrpt>();
+                                    for (int i = 0; i < demolitionstructuredetails.Area1.Count; i++)
+                                    {
+                                        rpt1.Add(new Areareclaimedrpt
+                                        {
+                                            DemolitionDate = demolitionstructuredetails.Date2.Count <= i ? null : demolitionstructuredetails.Date2[i],
+                                            AreaReclaimed = demolitionstructuredetails.Area1.Count <= i ? null : demolitionstructuredetails.Area1[i],
+                                            AreaToBeReclaimed = demolitionstructuredetails.AreaToBeReclaimed.Count <= i ? null : demolitionstructuredetails.AreaToBeReclaimed[i],
+                                            DemolitionStructureDetailsId = demolitionstructuredetails.Id,
+                                            CreatedBy = SiteContext.UserId
+                                        });
+                                    }
+                                    foreach (var item in rpt1)
+                                    {
+                                        result = await _demolitionstructuredetailsService.SaveAreareclaimedrpt(item);
+                                    }
+                                }
+                            }
+                            if (result)
+                            {
+                                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                                return View("Index1");
+                            }
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(demolitionstructuredetails);
+                            }
                         }
                         else
                         {
@@ -267,140 +285,140 @@ namespace EncroachmentDemolition.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(demolitionstructuredetails);
+                        demolitionstructuredetails.ModifiedBy = SiteContext.UserId;
+                        result = await _demolitionstructuredetailsService.Update(demolitionstructuredetails.Id, demolitionstructuredetails);
+                        if (result)
+                        {
+                            //for after file:
+
+                            if (demolitionstructuredetails.AfterPhotoFile != null && demolitionstructuredetails.AfterPhotoFile.Count > 0)
+                            {
+                                List<Demolitionstructureafterdemolitionphotofiledetails> demolitionstructureafterdemolitionphotofiledetails = new List<Demolitionstructureafterdemolitionphotofiledetails>();
+                                result = await _demolitionstructuredetailsService.DeleteDemolitionstructureafterdemolitionphotofiledetails(demolitionstructuredetails.Id);
+                                for (int i = 0; i < demolitionstructuredetails.AfterPhotoFile.Count; i++)
+                                {
+                                    string FilePath = fileHelper.SaveFile1(AfterPhotoFilePath, demolitionstructuredetails.AfterPhotoFile[i]);
+                                    demolitionstructureafterdemolitionphotofiledetails.Add(new Demolitionstructureafterdemolitionphotofiledetails
+                                    {
+                                        DemolitionStructureDetailsId = demolitionstructuredetails.Id,
+                                        AfterPhotoFilePath = FilePath
+                                    });
+                                }
+
+
+                                foreach (var item in demolitionstructureafterdemolitionphotofiledetails)
+                                {
+                                    result = await _demolitionstructuredetailsService.SaveDemolitionstructureafterdemolitionphotofiledetails(item);
+                                }
+                            }
+
+                            //for before file:
+
+                            if (demolitionstructuredetails.BeforePhotoFile != null && demolitionstructuredetails.BeforePhotoFile.Count > 0)
+                            {
+                                List<Demolitionstructurebeforedemolitionphotofiledetails> demolitionstructurebeforedemolitionphotofiledetails = new List<Demolitionstructurebeforedemolitionphotofiledetails>();
+                                result = await _demolitionstructuredetailsService.DeleteDemolitionstructurebeforedemolitionphotofiledetails(demolitionstructuredetails.Id);
+                                for (int i = 0; i < demolitionstructuredetails.BeforePhotoFile.Count; i++)
+                                {
+                                    string FilePath = fileHelper.SaveFile1(BeforePhotoFilePath, demolitionstructuredetails.BeforePhotoFile[i]);
+                                    demolitionstructurebeforedemolitionphotofiledetails.Add(new Demolitionstructurebeforedemolitionphotofiledetails
+                                    {
+                                        DemolitionStructureId = demolitionstructuredetails.Id,
+                                        BeforePhotoFilePath = FilePath
+                                    });
+                                }
+                                foreach (var item in demolitionstructurebeforedemolitionphotofiledetails)
+                                {
+                                    result = await _demolitionstructuredetailsService.SaveDemolitionstructurebeforedemolitionphotofiledetails(item);
+                                }
+                            }
+
+
+                            //************ Save Demolishedstructurerpt  ************  
+
+                            if (demolitionstructuredetails.Date1 != null &&
+                             demolitionstructuredetails.StructureId1 != null)
+
+                            {
+                                if (demolitionstructuredetails.StructureId1.Count > 0)
+
+                                {
+                                    List<Demolishedstructurerpt> rpt1 = new List<Demolishedstructurerpt>();
+                                    result = await _demolitionstructuredetailsService.Deletedemolitionrptdetails(demolitionstructuredetails.Id);
+                                    for (int i = 0; i < demolitionstructuredetails.StructureId1.Count; i++)
+                                    {
+                                        rpt1.Add(new Demolishedstructurerpt
+                                        {
+                                            DemolitionDate = demolitionstructuredetails.Date1.Count <= i ? null : demolitionstructuredetails.Date1[i],
+                                            StructureId = demolitionstructuredetails.StructureId1.Count <= i ? null : demolitionstructuredetails.StructureId1[i],
+                                            NoOfStructureDemolished = demolitionstructuredetails.NoOfStructureDemolished.Count <= i ? null : demolitionstructuredetails.NoOfStructureDemolished[i],
+                                            NoOfStructureRemaining = demolitionstructuredetails.NoOfStructureRemaining.Count <= i ? null : demolitionstructuredetails.NoOfStructureRemaining[i],
+                                            DemolitionStructureDetailsId = demolitionstructuredetails.Id,
+                                            CreatedBy = SiteContext.UserId
+                                        });
+                                    }
+                                    foreach (var item in rpt1)
+                                    {
+                                        result = await _demolitionstructuredetailsService.SaveDemolishedstructurerpt(item);
+                                    }
+                                }
+                            }
+
+                            //************ Save Areareclaimedrpt  ************  
+
+                            if (demolitionstructuredetails.Date2 != null &&
+                                demolitionstructuredetails.Area1 != null)
+
+                            {
+                                if (demolitionstructuredetails.Area1.Count > 0)
+
+                                {
+                                    List<Areareclaimedrpt> rpt1 = new List<Areareclaimedrpt>();
+                                    result = await _demolitionstructuredetailsService.Deletedearearptdetails(demolitionstructuredetails.Id);
+                                    for (int i = 0; i < demolitionstructuredetails.Area1.Count; i++)
+                                    {
+                                        rpt1.Add(new Areareclaimedrpt
+                                        {
+                                            DemolitionDate = demolitionstructuredetails.Date2.Count <= i ? null : demolitionstructuredetails.Date2[i],
+                                            AreaReclaimed = demolitionstructuredetails.Area1.Count <= i ? null : demolitionstructuredetails.Area1[i],
+                                            AreaToBeReclaimed = demolitionstructuredetails.AreaToBeReclaimed.Count <= i ? null : demolitionstructuredetails.AreaToBeReclaimed[i],
+                                            DemolitionStructureDetailsId = demolitionstructuredetails.Id,
+                                            CreatedBy = SiteContext.UserId
+                                        });
+                                    }
+                                    foreach (var item in rpt1)
+                                    {
+                                        result = await _demolitionstructuredetailsService.SaveAreareclaimedrpt(item);
+                                    }
+                                }
+                            }
+
+
+                            if (result)
+                            {
+                                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                                return View("Index1");
+                            }
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(demolitionstructuredetails);
+                            }
+
+                        }
+                        else
+                        {
+                            return View(demolitionstructuredetails);
+                        }
+
                     }
+                  
                 }
                 else
                 {
-                    demolitionstructuredetails.ModifiedBy = SiteContext.UserId;
-                    result = await _demolitionstructuredetailsService.Update(demolitionstructuredetails.Id, demolitionstructuredetails);
-                    if (result)
-                    {
-                        //for after file:
-
-                        if (demolitionstructuredetails.AfterPhotoFile != null && demolitionstructuredetails.AfterPhotoFile.Count > 0)
-                        {
-                            List<Demolitionstructureafterdemolitionphotofiledetails> demolitionstructureafterdemolitionphotofiledetails = new List<Demolitionstructureafterdemolitionphotofiledetails>();
-                            result = await _demolitionstructuredetailsService.DeleteDemolitionstructureafterdemolitionphotofiledetails(demolitionstructuredetails.Id);
-                            for (int i = 0; i < demolitionstructuredetails.AfterPhotoFile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile1(AfterPhotoFilePath, demolitionstructuredetails.AfterPhotoFile[i]);
-                                demolitionstructureafterdemolitionphotofiledetails.Add(new Demolitionstructureafterdemolitionphotofiledetails
-                                {
-                                    DemolitionStructureDetailsId = demolitionstructuredetails.Id,
-                                    AfterPhotoFilePath = FilePath
-                                });
-                            }
-
-
-                            foreach (var item in demolitionstructureafterdemolitionphotofiledetails)
-                            {
-                                result = await _demolitionstructuredetailsService.SaveDemolitionstructureafterdemolitionphotofiledetails(item);
-                            }
-                        }
-
-                        //for before file:
-
-                        if (demolitionstructuredetails.BeforePhotoFile != null && demolitionstructuredetails.BeforePhotoFile.Count > 0)
-                        {
-                            List<Demolitionstructurebeforedemolitionphotofiledetails> demolitionstructurebeforedemolitionphotofiledetails = new List<Demolitionstructurebeforedemolitionphotofiledetails>();
-                            result = await _demolitionstructuredetailsService.DeleteDemolitionstructurebeforedemolitionphotofiledetails(demolitionstructuredetails.Id);
-                            for (int i = 0; i < demolitionstructuredetails.BeforePhotoFile.Count; i++)
-                            {
-                                string FilePath = fileHelper.SaveFile1(BeforePhotoFilePath, demolitionstructuredetails.BeforePhotoFile[i]);
-                                demolitionstructurebeforedemolitionphotofiledetails.Add(new Demolitionstructurebeforedemolitionphotofiledetails
-                                {
-                                    DemolitionStructureId = demolitionstructuredetails.Id,
-                                    BeforePhotoFilePath = FilePath
-                                });
-                            }
-                            foreach (var item in demolitionstructurebeforedemolitionphotofiledetails)
-                            {
-                                result = await _demolitionstructuredetailsService.SaveDemolitionstructurebeforedemolitionphotofiledetails(item);
-                            }
-                        }
-                       
-
-                        //************ Save Demolishedstructurerpt  ************  
-
-                        if (demolitionstructuredetails.Date1 != null &&
-                         demolitionstructuredetails.StructureId1 != null)
-
-                        {
-                            if (demolitionstructuredetails.StructureId1.Count > 0)
-
-                            {
-                                List<Demolishedstructurerpt> rpt1 = new List<Demolishedstructurerpt>();
-                                result = await _demolitionstructuredetailsService.Deletedemolitionrptdetails(demolitionstructuredetails.Id);
-                                for (int i = 0; i < demolitionstructuredetails.StructureId1.Count; i++)
-                                {
-                                    rpt1.Add(new Demolishedstructurerpt
-                                    {
-                                        DemolitionDate = demolitionstructuredetails.Date1.Count <= i ? null : demolitionstructuredetails.Date1[i],
-                                        StructureId = demolitionstructuredetails.StructureId1.Count <= i ? null : demolitionstructuredetails.StructureId1[i],
-                                        NoOfStructureDemolished = demolitionstructuredetails.NoOfStructureDemolished.Count <= i ? null : demolitionstructuredetails.NoOfStructureDemolished[i],
-                                        NoOfStructureRemaining = demolitionstructuredetails.NoOfStructureRemaining.Count <= i ? null : demolitionstructuredetails.NoOfStructureRemaining[i],
-                                        DemolitionStructureDetailsId = demolitionstructuredetails.Id,
-                                        CreatedBy = SiteContext.UserId
-                                    });
-                                }
-                                foreach (var item in rpt1)
-                                {
-                                    result = await _demolitionstructuredetailsService.SaveDemolishedstructurerpt(item);
-                                }
-                            }
-                        }
-
-                        //************ Save Areareclaimedrpt  ************  
-
-                        if (demolitionstructuredetails.Date2 != null &&
-                            demolitionstructuredetails.Area1 != null)
-
-                        {
-                            if (demolitionstructuredetails.Area1.Count > 0)
-
-                            {
-                                List<Areareclaimedrpt> rpt1 = new List<Areareclaimedrpt>();
-                                result = await _demolitionstructuredetailsService.Deletedearearptdetails(demolitionstructuredetails.Id);
-                                for (int i = 0; i < demolitionstructuredetails.Area1.Count; i++)
-                                {
-                                    rpt1.Add(new Areareclaimedrpt
-                                    {
-                                        DemolitionDate = demolitionstructuredetails.Date2.Count <= i ? null : demolitionstructuredetails.Date2[i],
-                                        AreaReclaimed = demolitionstructuredetails.Area1.Count <= i ? null : demolitionstructuredetails.Area1[i],
-                                        AreaToBeReclaimed = demolitionstructuredetails.AreaToBeReclaimed.Count <= i ? null : demolitionstructuredetails.AreaToBeReclaimed[i],
-                                        DemolitionStructureDetailsId = demolitionstructuredetails.Id,
-                                        CreatedBy = SiteContext.UserId
-                                    });
-                                }
-                                foreach (var item in rpt1)
-                                {
-                                    result = await _demolitionstructuredetailsService.SaveAreareclaimedrpt(item);
-                                }
-                            }
-                        }
-
-
-                        if (result)
-                        {
-                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                           return View("Index1");
-                        }
-                        else
-                        {
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                            return View(demolitionstructuredetails);
-                        }
-
-                    }
-                    else
-                    {
-                        return View(demolitionstructuredetails);
-                    }
-
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(demolitionstructuredetails);
                 }
-               
             }
             else
             {
@@ -593,6 +611,7 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Demolitionstructuredetails demolitionstructuredetails)
         {
+            bool IsValidpdf = CheckMimeType(demolitionstructuredetails);
             var Data = await _demolitionstructuredetailsService.FetchSingleResult(id);
             demolitionstructuredetails.DepartmentList = await _demolitionstructuredetailsService.GetAllDepartment();
             demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
@@ -600,16 +619,18 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
             demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
-           
+
             if (ModelState.IsValid)
             {
-                FileHelper fileHelper = new FileHelper();
+                if (IsValidpdf == true)
+                {
+                    FileHelper fileHelper = new FileHelper();
                 demolitionstructuredetails.DemilitionReportPath = demolitionstructuredetails.DemolitionReportFile == null ? demolitionstructuredetails.DemilitionReportPath : fileHelper.SaveFile1(DemolitionReportFilePath, demolitionstructuredetails.DemolitionReportFile);
                 demolitionstructuredetails.ModifiedBy = SiteContext.UserId;
 
                 var result = await _demolitionstructuredetailsService.Update(id, demolitionstructuredetails);
                 if (result)
-                {                   
+                {
                     //for after file:
 
                     if (demolitionstructuredetails.AfterPhotoFile != null && demolitionstructuredetails.AfterPhotoFile.Count > 0)
@@ -749,6 +770,15 @@ namespace EncroachmentDemolition.Controllers
                 {
                     return View(demolitionstructuredetails);
                 }
+            }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                    return View(demolitionstructuredetails);
+                }
+            
+            
+            
             }
             else
             {
@@ -1027,6 +1057,158 @@ namespace EncroachmentDemolition.Controllers
         }
 
         #endregion
+
+
+
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            DemolitionReportFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DemolitionReportFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
+                string FilePath = Path.Combine(DemolitionReportFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DemolitionReportFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DemolitionReportFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath =_configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
+
+
+
+        public bool CheckMimeType(Demolitionstructuredetails demolitionstructuredetails)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            DemolitionReportFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
+            IFormFile files = demolitionstructuredetails.DemolitionReportFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                DemolitionReportFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
+                string FilePath = Path.Combine(DemolitionReportFilePath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(DemolitionReportFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(DemolitionReportFilePath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:DemolitionReportFilePath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+
+
+
 
     }
 }

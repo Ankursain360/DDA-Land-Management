@@ -32,6 +32,8 @@ namespace LandInventory.Controllers
         string handedOverFile = string.Empty;
         string takenOverFile = string.Empty;
         string actionTakenReport = string.Empty;
+        public object JsonRequestBehavior { get; private set; }
+
         public LandTransferController(ILandTransferService landTransferService, IPropertyRegistrationService propertyregistrationService, IConfiguration configuration)
         {
             _landTransferService = landTransferService;
@@ -334,75 +336,113 @@ namespace LandInventory.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(Landtransfer landtransfer)
         {
+            bool IsValidpdf = CheckMimeType(landtransfer);
+            bool IsValidpdf1 = CheckMimeType1(landtransfer);
+            bool IsValidpdf2 = CheckMimeType2(landtransfer);
             //var Data = await _landTransferService.FetchSingleResult(landtransfer.Id);
             landtransfer.HandedOverZoneList = await _landTransferService.GetAllZone(landtransfer.HandedOverDepartmentId ?? 0);
             landtransfer.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(landtransfer == null ? 0 : landtransfer.HandedOverZoneId);
             landtransfer.TakenOverZoneList = await _landTransferService.GetAllZone(landtransfer.TakenOverDepartmentId ?? 0);
             landtransfer.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(landtransfer == null ? 0 : landtransfer.HandedOverZoneId);
 
-
-         
-
-
             landtransfer.LandTransferList = await _landTransferService.GetAllLandTransfer(landtransfer.PropertyRegistrationId);
             if (ModelState.IsValid)
             {
-                if (!landtransfer.IsValidateData)
+
+                if (IsValidpdf == true)
                 {
-                    landtransfer.IsValidate = 0;
+
+                    if (IsValidpdf1 == true)
+                    {
+                        if (IsValidpdf2 == true)
+                        {
+
+
+                            if (!landtransfer.IsValidateData)
+                            {
+                                landtransfer.IsValidate = 0;
+                            }
+                            else
+                            {
+                                landtransfer.IsValidate = 1;
+                            }
+                            copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
+                            actionTakenReport = _configuration.GetSection("FilePaths:LandTransfer:ActionTakenReport").Value.ToString();
+                            takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
+                            handedOverFile = _configuration.GetSection("FilePaths:LandTransfer:HandedOverFile").Value.ToString();
+                            if (landtransfer.CopyofOrder != null)
+                            {
+                                FileHelper file = new FileHelper();
+                                landtransfer.CopyofOrderDocPath = file.SaveFile(copyOfOrderDoc, landtransfer.CopyofOrder);
+                            }
+                            actionTakenReport = _configuration.GetSection("FilePaths:LandTransfer:ActionTakenReport").Value.ToString();
+                            if (landtransfer.ActionTakenReport != null)
+                            {
+                                FileHelper file = new FileHelper();
+                                landtransfer.ActionTakenReportPath = file.SaveFile(actionTakenReport, landtransfer.ActionTakenReport);
+                            }
+                            takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
+                            if (landtransfer.TakenOverFile != null)
+                            {
+                                FileHelper file = new FileHelper();
+                                landtransfer.TakenOverDocument = file.SaveFile(takenOverFile, landtransfer.TakenOverFile);
+                            }
+                            handedOverFile = _configuration.GetSection("FilePaths:LandTransfer:HandedOverFile").Value.ToString();
+                            if (landtransfer.HandedOverFiles != null)
+                            {
+                                FileHelper file = new FileHelper();
+                                landtransfer.HandedOverFile = file.SaveFile(handedOverFile, landtransfer.HandedOverFiles);
+                            }
+                            landtransfer.Id = 0;
+                            var result = await _landTransferService.Create(landtransfer);
+                            if (result)
+                            {
+                                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                                Landtransfer landtransferForIndex = new Landtransfer();
+                                Propertyregistration propertyRegistration = new Propertyregistration();
+                                propertyRegistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListReport();
+                                propertyRegistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
+                                propertyRegistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+                                propertyRegistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                                propertyRegistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
+                                landtransferForIndex.Propertyregistration = propertyRegistration;
+                                return View("Index", landtransferForIndex);
+                            }
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(landtransfer);
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                            return View(landtransfer);
+                        }
+                    }
+
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                        return View(landtransfer);
+                    }
                 }
+
                 else
                 {
-                    landtransfer.IsValidate = 1;
-                }   
-                copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
-                actionTakenReport = _configuration.GetSection("FilePaths:LandTransfer:ActionTakenReport").Value.ToString();
-                takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
-                handedOverFile = _configuration.GetSection("FilePaths:LandTransfer:HandedOverFile").Value.ToString();
-                if (landtransfer.CopyofOrder != null)
-                {
-                    FileHelper file = new FileHelper();
-                    landtransfer.CopyofOrderDocPath = file.SaveFile(copyOfOrderDoc, landtransfer.CopyofOrder);
-                }
-                actionTakenReport = _configuration.GetSection("FilePaths:LandTransfer:ActionTakenReport").Value.ToString();
-                if (landtransfer.ActionTakenReport != null)
-                {
-                    FileHelper file = new FileHelper();
-                    landtransfer.ActionTakenReportPath = file.SaveFile(actionTakenReport, landtransfer.ActionTakenReport);
-                }
-                takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
-                if (landtransfer.TakenOverFile != null)
-                {
-                    FileHelper file = new FileHelper();
-                    landtransfer.TakenOverDocument = file.SaveFile(takenOverFile, landtransfer.TakenOverFile);
-                }
-                handedOverFile = _configuration.GetSection("FilePaths:LandTransfer:HandedOverFile").Value.ToString();
-                if (landtransfer.HandedOverFiles != null)
-                {
-                    FileHelper file = new FileHelper();
-                    landtransfer.HandedOverFile = file.SaveFile(handedOverFile, landtransfer.HandedOverFiles);
-                }
-                landtransfer.Id = 0;
-                var result = await _landTransferService.Create(landtransfer);
-                if (result)
-                {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    Landtransfer landtransferForIndex = new Landtransfer();
-                    Propertyregistration propertyRegistration = new Propertyregistration();
-                    propertyRegistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListReport();
-                    propertyRegistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
-                    propertyRegistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
-                    propertyRegistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    propertyRegistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
-                    landtransferForIndex.Propertyregistration = propertyRegistration;
-                    return View("Index", landtransferForIndex);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
                     return View(landtransfer);
                 }
+
+
+
+
             }
+
+
+
+
+
             else
             {
                 return View(landtransfer);
@@ -536,8 +576,298 @@ namespace LandInventory.Controllers
 
 
 
+        [HttpPost]
+        public JsonResult CheckFile()
+        {
+            bool IsImg = true;
+            string fullpath = string.Empty;
+            //   string fullpath = string.Empty;
+            string extension = string.Empty;
+            copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
+            IFormFile files = Request.Form.Files["file"];
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
+                string FilePath = Path.Combine(copyOfOrderDoc, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(copyOfOrderDoc))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(copyOfOrderDoc);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                IsImg = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        IsImg = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Json(IsImg, JsonRequestBehavior);
+        }
 
 
+
+
+        public bool CheckMimeType(Landtransfer landtransfer)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
+            IFormFile files = landtransfer.CopyofOrder;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
+                string FilePath = Path.Combine(copyOfOrderDoc, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(copyOfOrderDoc))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(copyOfOrderDoc);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+
+        public bool CheckMimeType1(Landtransfer landtransfer)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
+            IFormFile files = landtransfer.TakenOverFile;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
+                string FilePath = Path.Combine(takenOverFile, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(takenOverFile))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(takenOverFile);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
+
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
+
+
+
+        public bool CheckMimeType2(Landtransfer landtransfer)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            handedOverFile = _configuration.GetSection("FilePaths:LandTransfer:HandedOverFile").Value.ToString();
+            IFormFile files = landtransfer.HandedOverFiles;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                handedOverFile = _configuration.GetSection("FilePaths:LandTransfer:HandedOverFile").Value.ToString();
+                string FilePath = Path.Combine(handedOverFile, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(handedOverFile))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(handedOverFile);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:LandTransfer:HandedOverFile").Value.ToString();
+
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
     }

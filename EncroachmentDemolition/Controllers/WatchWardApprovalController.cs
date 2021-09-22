@@ -110,12 +110,14 @@ namespace EncroachmentDemolition.Controllers
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Watchandward watchandward)
         {
+            bool IsValidpdf = CheckMimeType(watchandward);
             var result = false;
             int initiallyLevel = 0;
             var IsApplicationPendingAtUserEnd = await _watchAndWardApprovalService.IsApplicationPendingAtUserEnd(id, SiteContext.UserId);
             if (IsApplicationPendingAtUserEnd)
             {
-                var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
+                if (IsValidpdf == true) { 
+                    var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
                 Data.LocalityList = await _watchandwardService.GetAllLocality();
                 Data.KhasraList = await _watchandwardService.GetAllKhasra();
                 Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
@@ -497,6 +499,22 @@ namespace EncroachmentDemolition.Controllers
                 #endregion
 
             }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "Invalid Pdf", AlertType.Warning);
+                return View(watchandward);
+            }
+
+            }
+          
+            
+            
+            
+            
+            
+            
+            
+            
             else
             {
                 ViewBag.Message = Alert.Show("Application Already Submited ", "", AlertType.Warning);
@@ -902,6 +920,77 @@ namespace EncroachmentDemolition.Controllers
 
 
 
+
+        public bool CheckMimeType(Watchandward watchandward)
+        {
+            bool Flag = true;
+            string fullpath = string.Empty;
+            string extension = string.Empty;
+            ApprovalDocumentPath = _configuration.GetSection("FilePaths:WatchAndWard:ApprovalDocumentPath").Value.ToString();
+            IFormFile files = watchandward.ApprovalDocument;
+            if (files != null)
+            {
+                extension = System.IO.Path.GetExtension(files.FileName);
+                string FileName = Guid.NewGuid().ToString() + "_" + files.FileName;
+                ApprovalDocumentPath = _configuration.GetSection("FilePaths:WatchAndWard:ApprovalDocumentPath").Value.ToString();
+                string FilePath = Path.Combine(ApprovalDocumentPath, FileName);
+                if (files.Length > 0)
+                {
+                    if (!Directory.Exists(ApprovalDocumentPath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(ApprovalDocumentPath);// Try to create the directory.
+                    }
+                    try
+                    {
+                        if (extension.ToLower() == ".pdf")
+                        {
+                            try
+                            {
+                                using (var stream = new FileStream(FilePath, FileMode.Create))
+                                {
+                                    files.CopyTo(stream);
+
+                                }
+
+                                iTextSharp.text.pdf.PdfReader oPdfReader = new iTextSharp.text.pdf.PdfReader(FilePath);
+                                oPdfReader.Close();
+                                fullpath = _configuration.GetSection("FilePaths:WatchAndWard:ApprovalDocumentPath").Value.ToString();
+
+                                FileInfo doc = new FileInfo(fullpath);
+                                if (doc.Exists)
+                                {
+                                    doc.Delete();
+                                }
+                            }
+                            catch (iTextSharp.text.exceptions.InvalidPdfException)
+                            {
+                                Flag = false;
+                            }
+
+                        }
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        Flag = false;
+
+                        if (System.IO.File.Exists(fullpath))
+                        {
+                            try
+                            {
+                                System.IO.File.Delete(fullpath);
+                            }
+                            catch (Exception exs)
+                            {
+                            }
+                        }
+                        // Image.FromFile will throw this if file is invalid.  
+                    }
+
+                }
+            }
+
+            return Flag;
+        }
 
 
 
